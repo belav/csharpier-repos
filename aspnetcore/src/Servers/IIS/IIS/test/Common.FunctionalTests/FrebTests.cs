@@ -112,9 +112,8 @@ public class FrebTests : IISFunctionalTestBase
                 "",
                 ""
             );
-            await result.HttpClient.RetryRequestAsync(
-                "/WaitingRequestCount",
-                async message => await message.Content.ReadAsStringAsync() == "1"
+            await result.HttpClient.RetryRequestAsync("/WaitingRequestCount", async message =>
+                await message.Content.ReadAsStringAsync() == "1"
             );
         }
 

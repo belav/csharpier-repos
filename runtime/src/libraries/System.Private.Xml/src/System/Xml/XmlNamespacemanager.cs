@@ -50,9 +50,7 @@ namespace System.Xml
         // Constants
         private const int MinDeclsCountForHashtable = 16;
 
-        internal XmlNamespaceManager()
-        {
-        }
+        internal XmlNamespaceManager() { }
 
         public XmlNamespaceManager(XmlNameTable nameTable)
         {
@@ -71,10 +69,7 @@ namespace System.Xml
 
         public virtual XmlNameTable? NameTable
         {
-            get
-            {
-                return _nameTable;
-            }
+            get { return _nameTable; }
         }
 
         public virtual string DefaultNamespace
@@ -118,7 +113,10 @@ namespace System.Xml
             return true;
         }
 
-        public virtual void AddNamespace(string prefix, [StringSyntax(StringSyntaxAttribute.Uri)] string uri)
+        public virtual void AddNamespace(
+            string prefix,
+            [StringSyntax(StringSyntaxAttribute.Uri)] string uri
+        )
         {
             ArgumentNullException.ThrowIfNull(prefix);
             ArgumentNullException.ThrowIfNull(uri);
@@ -185,7 +183,10 @@ namespace System.Xml
             }
         }
 
-        public virtual void RemoveNamespace(string prefix, [StringSyntax(StringSyntaxAttribute.Uri)] string uri)
+        public virtual void RemoveNamespace(
+            string prefix,
+            [StringSyntax(StringSyntaxAttribute.Uri)] string uri
+        )
         {
             ArgumentNullException.ThrowIfNull(prefix);
             ArgumentNullException.ThrowIfNull(uri);
@@ -195,7 +196,10 @@ namespace System.Xml
             int declIndex = LookupNamespaceDecl(prefix);
             while (declIndex != -1)
             {
-                if (string.Equals(_nsdecls[declIndex].uri, uri) && _nsdecls[declIndex].scopeId == _scopeId)
+                if (
+                    string.Equals(_nsdecls[declIndex].uri, uri)
+                    && _nsdecls[declIndex].scopeId == _scopeId
+                )
                 {
                     _nsdecls[declIndex].uri = null;
                 }
@@ -299,7 +303,10 @@ namespace System.Xml
                 // First assume that prefix is atomized
                 for (int thisDecl = _lastDecl; thisDecl >= 0; thisDecl--)
                 {
-                    if ((object)_nsdecls[thisDecl].prefix == (object)prefix && _nsdecls[thisDecl].uri != null)
+                    if (
+                        (object)_nsdecls[thisDecl].prefix == (object)prefix
+                        && _nsdecls[thisDecl].uri != null
+                    )
                     {
                         return thisDecl;
                     }
@@ -308,7 +315,10 @@ namespace System.Xml
                 // Non-atomized lookup
                 for (int thisDecl = _lastDecl; thisDecl >= 0; thisDecl--)
                 {
-                    if (string.Equals(_nsdecls[thisDecl].prefix, prefix) && _nsdecls[thisDecl].uri != null)
+                    if (
+                        string.Equals(_nsdecls[thisDecl].prefix, prefix)
+                        && _nsdecls[thisDecl].uri != null
+                    )
                     {
                         return thisDecl;
                     }
@@ -343,7 +353,10 @@ namespace System.Xml
             // Don't assume that prefix is atomized
             for (int thisDecl = _lastDecl; _nsdecls[thisDecl].scopeId == _scopeId; thisDecl--)
             {
-                if (string.Equals(_nsdecls[thisDecl].prefix, prefix) && _nsdecls[thisDecl].uri != null)
+                if (
+                    string.Equals(_nsdecls[thisDecl].prefix, prefix)
+                    && _nsdecls[thisDecl].uri != null
+                )
                 {
                     if (prefix.Length > 0 || _nsdecls[thisDecl].uri!.Length > 0)
                     {
@@ -355,7 +368,11 @@ namespace System.Xml
             return false;
         }
 
-        internal bool GetNamespaceDeclaration(int idx, [NotNullWhen(true)] out string? prefix, out string? uri)
+        internal bool GetNamespaceDeclaration(
+            int idx,
+            [NotNullWhen(true)] out string? prefix,
+            out string? uri
+        )
         {
             idx = _lastDecl - idx;
             if (idx < 0)

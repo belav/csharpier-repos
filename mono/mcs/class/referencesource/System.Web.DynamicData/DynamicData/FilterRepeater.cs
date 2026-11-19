@@ -1,4 +1,5 @@
-﻿namespace System.Web.DynamicData {
+﻿namespace System.Web.DynamicData
+{
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -17,7 +18,8 @@
     /// </summary>
     [ToolboxItem(false)]
     [ParseChildren(true)]
-    public class FilterRepeater : Repeater, IWhereParametersProvider {
+    public class FilterRepeater : Repeater, IWhereParametersProvider
+    {
         private string _contextTypeName;
         private string _dynamicFilterContainerId;
         private List<FilterUserControlBase> _filters = new List<FilterUserControlBase>();
@@ -27,16 +29,15 @@
         /// <summary>
         /// The context that the filtered table belongs to
         /// </summary>
-        [Category("Data"),
-        DefaultValue((string)null),
-        Themeable(false)]
-        // 
-        public string ContextTypeName {
-            get {
-                return _contextTypeName ?? String.Empty;
-            }
-            set {
-                if (!ContextTypeName.Equals(value)) {
+        [Category("Data"), DefaultValue((string)null), Themeable(false)]
+        //
+        public string ContextTypeName
+        {
+            get { return _contextTypeName ?? String.Empty; }
+            set
+            {
+                if (!ContextTypeName.Equals(value))
+                {
                     _contextTypeName = value;
                     _table = null;
                 }
@@ -46,29 +47,35 @@
         /// <summary>
         /// ID of the filter control in the ItemTemplate. By default, it's "DynamicFilter".
         /// </summary>
-        [Category("Behavior"),
-        DefaultValue("DynamicFilter"),
-        Themeable(false),
-        IDReferenceProperty(typeof(FilterUserControlBase)),
-        ResourceDescription("DynamicFilterRepeater_DynamicFilterContainerId")]
-        public string DynamicFilterContainerId {
-            get {
-                if (String.IsNullOrEmpty(_dynamicFilterContainerId)) {
+        [
+            Category("Behavior"),
+            DefaultValue("DynamicFilter"),
+            Themeable(false),
+            IDReferenceProperty(typeof(FilterUserControlBase)),
+            ResourceDescription("DynamicFilterRepeater_DynamicFilterContainerId")
+        ]
+        public string DynamicFilterContainerId
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(_dynamicFilterContainerId))
+                {
                     _dynamicFilterContainerId = "DynamicFilter";
                 }
                 return _dynamicFilterContainerId;
             }
-            set {
-                _dynamicFilterContainerId = value;
-            }
+            set { _dynamicFilterContainerId = value; }
         }
 
         /// <summary>
         /// Returns the table associated with this filter repeater.
         /// </summary>
-        public MetaTable Table {
-            get {
-                if (_table == null) {
+        public MetaTable Table
+        {
+            get
+            {
+                if (_table == null)
+                {
                     _table = GetTable();
                 }
                 return _table;
@@ -78,38 +85,41 @@
         /// <summary>
         /// Name of the table being filtered
         /// </summary>
-        [Category("Data"),
-        DefaultValue((string)null),
-        Themeable(false),
-        ResourceDescription("FilterRepeater_TableName")]
-        public string TableName {
-            get {
-                return _tableName ?? String.Empty;
-            }
-            set {
-                if (!TableName.Equals(value)) {
+        [
+            Category("Data"),
+            DefaultValue((string)null),
+            Themeable(false),
+            ResourceDescription("FilterRepeater_TableName")
+        ]
+        public string TableName
+        {
+            get { return _tableName ?? String.Empty; }
+            set
+            {
+                if (!TableName.Equals(value))
+                {
                     _tableName = value;
                     _table = null;
                 }
             }
         }
 
-        public override bool Visible {
-            get {
-                // 
-
+        public override bool Visible
+        {
+            get
+            {
+                //
 
                 return base.Visible && _filters.Count > 0;
             }
-            set {
-                base.Visible = value;
-            }
+            set { base.Visible = value; }
         }
 
         /// <summary>
         /// same as base.
         /// </summary>
-        public override void DataBind() {
+        public override void DataBind()
+        {
             // Start with an empty filters list when DataBinding. This is needed when DataBind()
             // gets called multiple times.
             _filters.Clear();
@@ -123,98 +133,157 @@
         /// that are scaffoldable
         /// </summary>
         /// <returns></returns>
-        protected internal virtual IEnumerable<MetaColumn> GetFilteredColumns() {
+        protected internal virtual IEnumerable<MetaColumn> GetFilteredColumns()
+        {
             return Table.Columns.Where(c => IsFilterableColumn(c));
         }
 
-        internal IEnumerable<FilterUserControlBase> GetFilterControls() {
+        internal IEnumerable<FilterUserControlBase> GetFilterControls()
+        {
             return _filters;
         }
 
-        private MetaTable GetTable() {
-            if (!String.IsNullOrEmpty(ContextTypeName) || !String.IsNullOrEmpty(TableName)) {
+        private MetaTable GetTable()
+        {
+            if (!String.IsNullOrEmpty(ContextTypeName) || !String.IsNullOrEmpty(TableName))
+            {
                 // get table from control properties
 
                 string contextTypeName = ContextTypeName;
                 string tableName = TableName;
 
-                if (String.IsNullOrEmpty(ContextTypeName)) {
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
-                        DynamicDataResources.FilterRepeater_MissingContextTypeName,
-                        ID));
-                } else if (String.IsNullOrEmpty(tableName)) {
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
-                        DynamicDataResources.FilterRepeater_MissingTableName,
-                        ID));
+                if (String.IsNullOrEmpty(ContextTypeName))
+                {
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            DynamicDataResources.FilterRepeater_MissingContextTypeName,
+                            ID
+                        )
+                    );
+                }
+                else if (String.IsNullOrEmpty(tableName))
+                {
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            DynamicDataResources.FilterRepeater_MissingTableName,
+                            ID
+                        )
+                    );
                 }
 
                 Type contextType = null;
-                if (!String.IsNullOrEmpty(ContextTypeName)) {
-                    try {
-                        contextType = BuildManager.GetType(contextTypeName, /*throwOnError*/ true, /*ignoreCase*/ true);
-                    } catch (Exception e) {
-                        throw new InvalidOperationException(String.Format(
-                            CultureInfo.CurrentCulture,
-                            DynamicDataResources.FilterRepeater_InvalidContextTypeName,
-                            ID,
-                            contextTypeName), e);
+                if (!String.IsNullOrEmpty(ContextTypeName))
+                {
+                    try
+                    {
+                        contextType = BuildManager.GetType(
+                            contextTypeName, /*throwOnError*/
+                            true, /*ignoreCase*/
+                            true
+                        );
+                    }
+                    catch (Exception e)
+                    {
+                        throw new InvalidOperationException(
+                            String.Format(
+                                CultureInfo.CurrentCulture,
+                                DynamicDataResources.FilterRepeater_InvalidContextTypeName,
+                                ID,
+                                contextTypeName
+                            ),
+                            e
+                        );
                     }
                 }
                 MetaModel model;
-                try {
-                     model = MetaModel.GetModel(contextType);
-                } catch (InvalidOperationException e) {
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
-                        DynamicDataResources.FilterRepeater_UnknownContextTypeName,
-                        ID,
-                        contextType.FullName), e);
+                try
+                {
+                    model = MetaModel.GetModel(contextType);
                 }
-                try {
+                catch (InvalidOperationException e)
+                {
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            DynamicDataResources.FilterRepeater_UnknownContextTypeName,
+                            ID,
+                            contextType.FullName
+                        ),
+                        e
+                    );
+                }
+                try
+                {
                     return model.GetTable(tableName);
-                } catch (ArgumentException e) {
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
-                        DynamicDataResources.FilterRepeater_InvalidTableName,
-                        ID,
-                        tableName), e);
                 }
-            } else {
+                catch (ArgumentException e)
+                {
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            DynamicDataResources.FilterRepeater_InvalidTableName,
+                            ID,
+                            tableName
+                        ),
+                        e
+                    );
+                }
+            }
+            else
+            {
                 MetaTable table = DynamicDataRouteHandler.GetRequestMetaTable(HttpContext.Current);
-                if (table == null) {
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
-                        DynamicDataResources.FilterRepeater_CantInferInformationFromUrl,
-                        ID));
+                if (table == null)
+                {
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            DynamicDataResources.FilterRepeater_CantInferInformationFromUrl,
+                            ID
+                        )
+                    );
                 }
                 return table;
             }
         }
 
-        internal static bool IsFilterableColumn(MetaColumn column) {
-            if (!column.Scaffold) return false;
+        internal static bool IsFilterableColumn(MetaColumn column)
+        {
+            if (!column.Scaffold)
+                return false;
 
-            if (column.IsCustomProperty) return false;
+            if (column.IsCustomProperty)
+                return false;
 
-            if (column is MetaForeignKeyColumn) return true;
+            if (column is MetaForeignKeyColumn)
+                return true;
 
-            if (column.ColumnType == typeof(bool)) return true;
+            if (column.ColumnType == typeof(bool))
+                return true;
 
             return false;
         }
-
 
         /// <summary>
         /// gets called for every item and alternating item template being instantiated by this
         /// repeater during databinding
         /// </summary>
         /// <param name="item"></param>
-        protected virtual void OnFilterItemCreated(RepeaterItem item) {
+        protected virtual void OnFilterItemCreated(RepeaterItem item)
+        {
             var filter = item.FindControl(DynamicFilterContainerId) as FilterUserControlBase;
-            if (filter == null) {
+            if (filter == null)
+            {
                 throw new InvalidOperationException(
-                    String.Format(CultureInfo.CurrentCulture,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
                         DynamicDataResources.FilterRepeater_CouldNotFindControlInTemplate,
                         ID,
                         typeof(FilterUserControlBase).FullName,
-                        DynamicFilterContainerId));
+                        DynamicFilterContainerId
+                    )
+                );
             }
 
             var column = (MetaColumn)item.DataItem;
@@ -230,11 +299,13 @@
         /// See base class documentation
         /// </summary>
         [SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers")]
-        protected override void OnInit(EventArgs e) {
+        protected override void OnInit(EventArgs e)
+        {
             base.OnInit(e);
 
             // Don't do anything in Design mode
-            if (DesignMode) {
+            if (DesignMode)
+            {
                 return;
             }
 
@@ -245,20 +316,24 @@
         /// See base class documentation
         /// </summary>
         [SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers")]
-        protected override void OnItemCreated(RepeaterItemEventArgs e) {
+        protected override void OnItemCreated(RepeaterItemEventArgs e)
+        {
             base.OnItemCreated(e);
 
-            if (DesignMode) {
+            if (DesignMode)
+            {
                 return;
             }
 
             ListItemType listItemType = e.Item.ItemType;
-            if (listItemType == ListItemType.Item || listItemType == ListItemType.AlternatingItem) {
+            if (listItemType == ListItemType.Item || listItemType == ListItemType.AlternatingItem)
+            {
                 OnFilterItemCreated(e.Item);
             }
         }
 
-        private void Page_InitComplete(object sender, EventArgs e) {
+        private void Page_InitComplete(object sender, EventArgs e)
+        {
             // We need to do this in InitComplete rather than Init to allow the user to set the
             // TableName in Page_Init
             DataSource = GetFilteredColumns();
@@ -270,11 +345,14 @@
         /// <summary>
         /// See IWhereParametersProvider
         /// </summary>
-        public virtual IEnumerable<Parameter> GetWhereParameters(IDynamicDataSource dataSource) {
+        public virtual IEnumerable<Parameter> GetWhereParameters(IDynamicDataSource dataSource)
+        {
             // Add all the specific filters as where parameters
-            return GetFilterControls().Select(filter => (Parameter)new DynamicControlParameter(filter.UniqueID) {
-                Name = filter.DataField,
-            });
+            return GetFilterControls()
+                .Select(filter =>
+                    (Parameter)
+                        new DynamicControlParameter(filter.UniqueID) { Name = filter.DataField }
+                );
         }
 
         #endregion

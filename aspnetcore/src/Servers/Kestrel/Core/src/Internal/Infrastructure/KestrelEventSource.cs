@@ -364,10 +364,8 @@ internal sealed class KestrelEventSource : EventSource
                 DisplayRateTimeScale = TimeSpan.FromSeconds(1),
             };
 
-            _totalConnectionsCounter ??= new PollingCounter(
-                "total-connections",
-                this,
-                () => Volatile.Read(ref _totalConnections)
+            _totalConnectionsCounter ??= new PollingCounter("total-connections", this, () =>
+                Volatile.Read(ref _totalConnections)
             )
             {
                 DisplayName = "Total Connections",
@@ -383,10 +381,8 @@ internal sealed class KestrelEventSource : EventSource
                 DisplayRateTimeScale = TimeSpan.FromSeconds(1),
             };
 
-            _totalTlsHandshakesCounter ??= new PollingCounter(
-                "total-tls-handshakes",
-                this,
-                () => Volatile.Read(ref _totalTlsHandshakes)
+            _totalTlsHandshakesCounter ??= new PollingCounter("total-tls-handshakes", this, () =>
+                Volatile.Read(ref _totalTlsHandshakes)
             )
             {
                 DisplayName = "Total TLS Handshakes",
@@ -401,19 +397,15 @@ internal sealed class KestrelEventSource : EventSource
                 DisplayName = "Current TLS Handshakes",
             };
 
-            _failedTlsHandshakesCounter ??= new PollingCounter(
-                "failed-tls-handshakes",
-                this,
-                () => Volatile.Read(ref _failedTlsHandshakes)
+            _failedTlsHandshakesCounter ??= new PollingCounter("failed-tls-handshakes", this, () =>
+                Volatile.Read(ref _failedTlsHandshakes)
             )
             {
                 DisplayName = "Failed TLS Handshakes",
             };
 
-            _currentConnectionsCounter ??= new PollingCounter(
-                "current-connections",
-                this,
-                () => Volatile.Read(ref _currentConnections)
+            _currentConnectionsCounter ??= new PollingCounter("current-connections", this, () =>
+                Volatile.Read(ref _currentConnections)
             )
             {
                 DisplayName = "Current Connections",

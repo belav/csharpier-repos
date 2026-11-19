@@ -10,7 +10,8 @@ namespace System.Runtime.Serialization
     /// <summary>The structure for holding all of the data needed for object serialization and deserialization.</summary>
     public sealed partial class SerializationInfo
     {
-        internal static AsyncLocal<bool> AsyncDeserializationInProgress { get; } = new AsyncLocal<bool>();
+        internal static AsyncLocal<bool> AsyncDeserializationInProgress { get; } =
+            new AsyncLocal<bool>();
 
         [ThreadStatic]
         private static DeserializationTracker? t_deserializationTracker;
@@ -40,14 +41,20 @@ namespace System.Runtime.Serialization
         // 0: No value cached
         // 1: The switch is true
         // -1: The switch is false
-        internal static void ThrowIfDeserializationInProgress(string switchSuffix, ref int cachedValue)
+        internal static void ThrowIfDeserializationInProgress(
+            string switchSuffix,
+            ref int cachedValue
+        )
         {
             const string SwitchPrefix = "Switch.System.Runtime.Serialization.SerializationGuard.";
             Debug.Assert(!string.IsNullOrWhiteSpace(switchSuffix));
 
             if (cachedValue == 0)
             {
-                if (AppContext.TryGetSwitch(SwitchPrefix + switchSuffix, out bool isEnabled) && isEnabled)
+                if (
+                    AppContext.TryGetSwitch(SwitchPrefix + switchSuffix, out bool isEnabled)
+                    && isEnabled
+                )
                 {
                     cachedValue = 1;
                 }
@@ -65,7 +72,12 @@ namespace System.Runtime.Serialization
             {
                 if (DeserializationInProgress)
                 {
-                    throw new SerializationException(SR.Format(SR.Serialization_DangerousDeserialization_Switch, SwitchPrefix + switchSuffix));
+                    throw new SerializationException(
+                        SR.Format(
+                            SR.Serialization_DangerousDeserialization_Switch,
+                            SwitchPrefix + switchSuffix
+                        )
+                    );
                 }
             }
             else

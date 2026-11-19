@@ -11,7 +11,12 @@ namespace System.Reflection.Emit.Tests
         public void CreateGlobalFunctions_SingleGlobalMethod()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            MethodBuilder method = module.DefineGlobalMethod("TestMethod", MethodAttributes.Static | MethodAttributes.Public, null, null);
+            MethodBuilder method = module.DefineGlobalMethod(
+                "TestMethod",
+                MethodAttributes.Static | MethodAttributes.Public,
+                null,
+                null
+            );
             ILGenerator ilGenerator = method.GetILGenerator();
             ilGenerator.EmitWriteLine("Hello World from global method.");
             ilGenerator.Emit(OpCodes.Ret);
@@ -24,13 +29,22 @@ namespace System.Reflection.Emit.Tests
         public void CreateGlobalFunctions_MultipleGlobalMethods()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            MethodBuilder method = module.DefineGlobalMethod("TestMethod", MethodAttributes.Static | MethodAttributes.Public, null, null);
+            MethodBuilder method = module.DefineGlobalMethod(
+                "TestMethod",
+                MethodAttributes.Static | MethodAttributes.Public,
+                null,
+                null
+            );
             ILGenerator ilGenerator = method.GetILGenerator();
             ilGenerator.EmitWriteLine("Hello World from global method.");
             ilGenerator.Emit(OpCodes.Ret);
 
-            method = module.DefineGlobalMethod("MyMethod2", MethodAttributes.Static | MethodAttributes.Public,
-             null, null);
+            method = module.DefineGlobalMethod(
+                "MyMethod2",
+                MethodAttributes.Static | MethodAttributes.Public,
+                null,
+                null
+            );
             ilGenerator = method.GetILGenerator();
             ilGenerator.EmitWriteLine("Hello World from global method again!");
 
@@ -42,7 +56,12 @@ namespace System.Reflection.Emit.Tests
         public void CreateGlobalFunctions_CalledMultipleTimes_ThrowsInvalidOperationException()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            MethodBuilder method = module.DefineGlobalMethod("TestMethod", MethodAttributes.Static | MethodAttributes.Public, null, null);
+            MethodBuilder method = module.DefineGlobalMethod(
+                "TestMethod",
+                MethodAttributes.Static | MethodAttributes.Public,
+                null,
+                null
+            );
             ILGenerator ilGenerator = method.GetILGenerator();
             ilGenerator.EmitWriteLine("Hello World from global method.");
             ilGenerator.Emit(OpCodes.Ret);

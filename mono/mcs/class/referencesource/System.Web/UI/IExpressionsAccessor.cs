@@ -4,19 +4,14 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
     using System.Collections;
 
-    public interface IExpressionsAccessor {
+    public interface IExpressionsAccessor
+    {
+        bool HasExpressions { get; }
 
-
-        bool HasExpressions {
-            get;
-        }
-
-
-        ExpressionBindingCollection Expressions {
-            get;
-        }
+        ExpressionBindingCollection Expressions { get; }
     }
 }

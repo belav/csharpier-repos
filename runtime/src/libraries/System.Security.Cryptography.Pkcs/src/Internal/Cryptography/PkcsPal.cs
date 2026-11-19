@@ -12,26 +12,190 @@ namespace Internal.Cryptography
     internal abstract partial class PkcsPal
     {
         private protected static readonly byte[] s_rsaOaepSha1Parameters = { 0x30, 0x00 };
-        private protected static readonly byte[] s_rsaOaepSha256Parameters = { 0x30, 0x2f, 0xa0, 0x0f, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01, 0x05, 0x00, 0xa1, 0x1c, 0x30, 0x1a, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01, 0x08, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01, 0x05, 0x00 };
-        private protected static readonly byte[] s_rsaOaepSha384Parameters = { 0x30, 0x2f, 0xa0, 0x0f, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x02, 0x05, 0x00, 0xa1, 0x1c, 0x30, 0x1a, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01, 0x08, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x02, 0x05, 0x00 };
-        private protected static readonly byte[] s_rsaOaepSha512Parameters = { 0x30, 0x2f, 0xa0, 0x0f, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x03, 0x05, 0x00, 0xa1, 0x1c, 0x30, 0x1a, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01, 0x08, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x03, 0x05, 0x00 };
+        private protected static readonly byte[] s_rsaOaepSha256Parameters =
+        {
+            0x30,
+            0x2f,
+            0xa0,
+            0x0f,
+            0x30,
+            0x0d,
+            0x06,
+            0x09,
+            0x60,
+            0x86,
+            0x48,
+            0x01,
+            0x65,
+            0x03,
+            0x04,
+            0x02,
+            0x01,
+            0x05,
+            0x00,
+            0xa1,
+            0x1c,
+            0x30,
+            0x1a,
+            0x06,
+            0x09,
+            0x2a,
+            0x86,
+            0x48,
+            0x86,
+            0xf7,
+            0x0d,
+            0x01,
+            0x01,
+            0x08,
+            0x30,
+            0x0d,
+            0x06,
+            0x09,
+            0x60,
+            0x86,
+            0x48,
+            0x01,
+            0x65,
+            0x03,
+            0x04,
+            0x02,
+            0x01,
+            0x05,
+            0x00,
+        };
+        private protected static readonly byte[] s_rsaOaepSha384Parameters =
+        {
+            0x30,
+            0x2f,
+            0xa0,
+            0x0f,
+            0x30,
+            0x0d,
+            0x06,
+            0x09,
+            0x60,
+            0x86,
+            0x48,
+            0x01,
+            0x65,
+            0x03,
+            0x04,
+            0x02,
+            0x02,
+            0x05,
+            0x00,
+            0xa1,
+            0x1c,
+            0x30,
+            0x1a,
+            0x06,
+            0x09,
+            0x2a,
+            0x86,
+            0x48,
+            0x86,
+            0xf7,
+            0x0d,
+            0x01,
+            0x01,
+            0x08,
+            0x30,
+            0x0d,
+            0x06,
+            0x09,
+            0x60,
+            0x86,
+            0x48,
+            0x01,
+            0x65,
+            0x03,
+            0x04,
+            0x02,
+            0x02,
+            0x05,
+            0x00,
+        };
+        private protected static readonly byte[] s_rsaOaepSha512Parameters =
+        {
+            0x30,
+            0x2f,
+            0xa0,
+            0x0f,
+            0x30,
+            0x0d,
+            0x06,
+            0x09,
+            0x60,
+            0x86,
+            0x48,
+            0x01,
+            0x65,
+            0x03,
+            0x04,
+            0x02,
+            0x03,
+            0x05,
+            0x00,
+            0xa1,
+            0x1c,
+            0x30,
+            0x1a,
+            0x06,
+            0x09,
+            0x2a,
+            0x86,
+            0x48,
+            0x86,
+            0xf7,
+            0x0d,
+            0x01,
+            0x01,
+            0x08,
+            0x30,
+            0x0d,
+            0x06,
+            0x09,
+            0x60,
+            0x86,
+            0x48,
+            0x01,
+            0x65,
+            0x03,
+            0x04,
+            0x02,
+            0x03,
+            0x05,
+            0x00,
+        };
         private protected static readonly byte[] s_rsaPkcsParameters = { 0x05, 0x00 };
 
-        protected PkcsPal()
-        {
-        }
+        protected PkcsPal() { }
 
         /// <summary>
         /// Encrypt and encode a CMS. Return value is the RFC-compliant representation of the CMS that can be transmitted "on the wire."
         /// </summary>
-        public abstract byte[] Encrypt(CmsRecipientCollection recipients, ContentInfo contentInfo, AlgorithmIdentifier contentEncryptionAlgorithm, X509Certificate2Collection originatorCerts, CryptographicAttributeObjectCollection unprotectedAttributes);
+        public abstract byte[] Encrypt(
+            CmsRecipientCollection recipients,
+            ContentInfo contentInfo,
+            AlgorithmIdentifier contentEncryptionAlgorithm,
+            X509Certificate2Collection originatorCerts,
+            CryptographicAttributeObjectCollection unprotectedAttributes
+        );
 
         /// <summary>
         /// Decode an encoded CMS.
         ///    Call RecipientInfos on the returned pal object to get the recipients.
         ///    Call TryDecrypt() on the returned pal object to attempt a decrypt for a single recipient.
         /// </summary>
-        public abstract DecryptorPal Decode(ReadOnlySpan<byte> encodedMessage, out int version, out ContentInfo contentInfo, out AlgorithmIdentifier contentEncryptionAlgorithm, out X509Certificate2Collection originatorCerts, out CryptographicAttributeObjectCollection unprotectedAttributes);
+        public abstract DecryptorPal Decode(
+            ReadOnlySpan<byte> encodedMessage,
+            out int version,
+            out ContentInfo contentInfo,
+            out AlgorithmIdentifier contentEncryptionAlgorithm,
+            out X509Certificate2Collection originatorCerts,
+            out CryptographicAttributeObjectCollection unprotectedAttributes
+        );
 
         /// <summary>
         /// Implements the ContentInfo.GetContentType() behavior.
@@ -76,12 +240,14 @@ namespace Internal.Cryptography
         /// <summary>
         /// Retrieve a private key object for the certificate to use with signing.
         /// </summary>
-        public abstract T? GetPrivateKeyForSigning<T>(X509Certificate2 certificate, bool silent) where T : AsymmetricAlgorithm;
+        public abstract T? GetPrivateKeyForSigning<T>(X509Certificate2 certificate, bool silent)
+            where T : AsymmetricAlgorithm;
 
         /// <summary>
         /// Retrieve a private key object for the certificate to use with decryption.
         /// </summary>
-        public abstract T? GetPrivateKeyForDecryption<T>(X509Certificate2 certificate, bool silent) where T : AsymmetricAlgorithm;
+        public abstract T? GetPrivateKeyForDecryption<T>(X509Certificate2 certificate, bool silent)
+            where T : AsymmetricAlgorithm;
 
         /// <summary>
         /// Get the one instance of PkcsPal.

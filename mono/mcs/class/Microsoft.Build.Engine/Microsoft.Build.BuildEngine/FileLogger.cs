@@ -4,7 +4,7 @@
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
 //   Ankit Jain (jankit@novell.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 // Copyright 2011 Novell, Inc (http://www.novell.com)
 //
@@ -38,117 +38,133 @@ namespace Microsoft.Build.Logging
 namespace Microsoft.Build.BuildEngine
 #endif
 {
-	public class FileLogger : ConsoleLogger {
-		StreamWriter sw;
-		string logfile;
-		string encoding = null;
-		IEventSource eventSource;
+    public class FileLogger : ConsoleLogger
+    {
+        StreamWriter sw;
+        string logfile;
+        string encoding = null;
+        IEventSource eventSource;
 
-		public FileLogger ()
-		{
-			base.Verbosity = LoggerVerbosity.Detailed;
-		}
+        public FileLogger()
+        {
+            base.Verbosity = LoggerVerbosity.Detailed;
+        }
 
-		public override void Initialize (IEventSource eventSource)
-		{
-			this.eventSource = eventSource;
-			logfile = "msbuild.log";
+        public override void Initialize(IEventSource eventSource)
+        {
+            this.eventSource = eventSource;
+            logfile = "msbuild.log";
 
-			bool append = false;
-			string key, value;
-			string[] splittedParameters = Parameters.Split (new char [] {';'}, StringSplitOptions.RemoveEmptyEntries);
-			foreach (string s in splittedParameters) {
-				if (String.Compare (s, "Append") == 0) {
-					append = true;
-					continue;
-				}
+            bool append = false;
+            string key,
+                value;
+            string[] splittedParameters = Parameters.Split(
+                new char[] { ';' },
+                StringSplitOptions.RemoveEmptyEntries
+            );
+            foreach (string s in splittedParameters)
+            {
+                if (String.Compare(s, "Append") == 0)
+                {
+                    append = true;
+                    continue;
+                }
 
-				if (s.StartsWith ("Encoding")) {
-					if (!TrySplitKeyValuePair (s, out key, out value))
-						throw new LoggerException ("Encoding should be specified as: Encoding=<encoding>, eg. Encoding=UTF-8");
+                if (s.StartsWith("Encoding"))
+                {
+                    if (!TrySplitKeyValuePair(s, out key, out value))
+                        throw new LoggerException(
+                            "Encoding should be specified as: Encoding=<encoding>, eg. Encoding=UTF-8"
+                        );
 
-					if (String.IsNullOrEmpty (value))
-						throw new LoggerException ("Encoding must be non-empty");
+                    if (String.IsNullOrEmpty(value))
+                        throw new LoggerException("Encoding must be non-empty");
 
-					encoding = value;
-					continue;
-				}
+                    encoding = value;
+                    continue;
+                }
 
-				if (s.StartsWith ("LogFile")) {
-					if (!TrySplitKeyValuePair (s, out key, out value))
-						throw new LoggerException ("LogFile should be specified as: LogFile=<encoding>, eg. LogFile=foo.log");
+                if (s.StartsWith("LogFile"))
+                {
+                    if (!TrySplitKeyValuePair(s, out key, out value))
+                        throw new LoggerException(
+                            "LogFile should be specified as: LogFile=<encoding>, eg. LogFile=foo.log"
+                        );
 
-					if (String.IsNullOrEmpty (value))
-						throw new LoggerException ("LogFile value must be non-empty");
+                    if (String.IsNullOrEmpty(value))
+                        throw new LoggerException("LogFile value must be non-empty");
 
-					logfile = value;
-					continue;
-				}
-			}
+                    logfile = value;
+                    continue;
+                }
+            }
 
-			// Attach *our* HandleBuildStarted as the first one,
-			// as it needs to create the writer!
-			eventSource.BuildStarted += HandleBuildStarted;
-			base.Initialize (eventSource);
-			// Attach *our* HandleBuildFinished as the last one,
-			// as it needs to close the writer!
-			eventSource.BuildFinished += HandleBuildFinished;
+            // Attach *our* HandleBuildStarted as the first one,
+            // as it needs to create the writer!
+            eventSource.BuildStarted += HandleBuildStarted;
+            base.Initialize(eventSource);
+            // Attach *our* HandleBuildFinished as the last one,
+            // as it needs to close the writer!
+            eventSource.BuildFinished += HandleBuildFinished;
 
-			CreateWriter (append);
-		}
+            CreateWriter(append);
+        }
 
-		void CreateWriter (bool append_to)
-		{
-			if (sw != null)
-				return;
+        void CreateWriter(bool append_to)
+        {
+            if (sw != null)
+                return;
 
-			if (!String.IsNullOrEmpty (encoding))
-				sw = new StreamWriter (logfile, append_to, Encoding.GetEncoding (encoding));
-			else
-				sw = new StreamWriter (logfile, append_to, Encoding.Default);
-			WriteHandler = sw.WriteLine;
-		}
+            if (!String.IsNullOrEmpty(encoding))
+                sw = new StreamWriter(logfile, append_to, Encoding.GetEncoding(encoding));
+            else
+                sw = new StreamWriter(logfile, append_to, Encoding.Default);
+            WriteHandler = sw.WriteLine;
+        }
 
-		void HandleBuildStarted (object sender, BuildStartedEventArgs args)
-		{
-			CreateWriter (true);
-		}
+        void HandleBuildStarted(object sender, BuildStartedEventArgs args)
+        {
+            CreateWriter(true);
+        }
 
-		void HandleBuildFinished (object sender, BuildFinishedEventArgs args)
-		{
-			base.WriteHandler = null;
-			if (sw != null) {
-				sw.Close ();
-				sw = null;
-			}
-		}
+        void HandleBuildFinished(object sender, BuildFinishedEventArgs args)
+        {
+            base.WriteHandler = null;
+            if (sw != null)
+            {
+                sw.Close();
+                sw = null;
+            }
+        }
 
-		bool TrySplitKeyValuePair (string pair, out string key, out string value)
-		{
-			key = value = null;
-			string[] parts = pair.Split ('=');
-			if (parts.Length != 2)
-				return false;
+        bool TrySplitKeyValuePair(string pair, out string key, out string value)
+        {
+            key = value = null;
+            string[] parts = pair.Split('=');
+            if (parts.Length != 2)
+                return false;
 
-			key = parts [0];
-			value = parts [1];
-			return true;
-		}
+            key = parts[0];
+            value = parts[1];
+            return true;
+        }
 
-		public override void Shutdown ()
-		{
-			base.WriteHandler = null;
-			if (sw != null) {
-				sw.Close ();
-				sw = null;
-			}
+        public override void Shutdown()
+        {
+            base.WriteHandler = null;
+            if (sw != null)
+            {
+                sw.Close();
+                sw = null;
+            }
 
-			if (eventSource != null) {
-				eventSource.BuildStarted -= HandleBuildStarted;
-				eventSource.BuildFinished -= HandleBuildFinished;
-			}
+            if (eventSource != null)
+            {
+                eventSource.BuildStarted -= HandleBuildStarted;
+                eventSource.BuildFinished -= HandleBuildFinished;
+            }
 
-			base.Shutdown ();
-		}
-	}
+            base.Shutdown();
+        }
+    }
 }

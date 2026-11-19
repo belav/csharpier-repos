@@ -45,7 +45,10 @@ namespace System.CodeDom.Tests
         {
             var typeDelegate = new CodeTypeDelegate();
             typeDelegate.ReturnType = value;
-            Assert.Equal((value ?? new CodeTypeReference("")).BaseType, typeDelegate.ReturnType.BaseType);
+            Assert.Equal(
+                (value ?? new CodeTypeReference("")).BaseType,
+                typeDelegate.ReturnType.BaseType
+            );
         }
 
         [Fact]
@@ -53,13 +56,25 @@ namespace System.CodeDom.Tests
         {
             var typeDelegate = new CodeTypeDelegate();
 
-            CodeParameterDeclarationExpression parameter1 = new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(int)), "name1");
+            CodeParameterDeclarationExpression parameter1 = new CodeParameterDeclarationExpression(
+                new CodeTypeReference(typeof(int)),
+                "name1"
+            );
             typeDelegate.Parameters.Add(parameter1);
-            Assert.Equal(new CodeParameterDeclarationExpression[] { parameter1 }, typeDelegate.Parameters.Cast<CodeParameterDeclarationExpression>());
+            Assert.Equal(
+                new CodeParameterDeclarationExpression[] { parameter1 },
+                typeDelegate.Parameters.Cast<CodeParameterDeclarationExpression>()
+            );
 
-            CodeParameterDeclarationExpression parameter2 = new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(int)), "name2");
+            CodeParameterDeclarationExpression parameter2 = new CodeParameterDeclarationExpression(
+                new CodeTypeReference(typeof(int)),
+                "name2"
+            );
             typeDelegate.Parameters.Add(parameter2);
-            Assert.Equal(new CodeParameterDeclarationExpression[] { parameter1, parameter2 }, typeDelegate.Parameters.Cast<CodeParameterDeclarationExpression>());
+            Assert.Equal(
+                new CodeParameterDeclarationExpression[] { parameter1, parameter2 },
+                typeDelegate.Parameters.Cast<CodeParameterDeclarationExpression>()
+            );
         }
     }
 }

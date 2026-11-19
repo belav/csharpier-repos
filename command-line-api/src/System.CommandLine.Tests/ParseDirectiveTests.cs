@@ -1,9 +1,9 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using FluentAssertions;
 using System.IO;
 using System.Threading.Tasks;
+using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -30,10 +30,7 @@ namespace System.CommandLine.Tests
             subcommand.Options.Add(option);
             subcommand.TreatUnmatchedTokensAsErrors = treatUnmatchedTokensAsErrors;
 
-            CliConfiguration config = new(rootCommand)
-            {
-                Output = new StringWriter()
-            };
+            CliConfiguration config = new(rootCommand) { Output = new StringWriter() };
 
             var result = rootCommand.Parse("[diagram] subcommand -c 34 --nonexistent wat", config);
 
@@ -42,27 +39,20 @@ namespace System.CommandLine.Tests
             await result.InvokeAsync();
 
             string expected = treatUnmatchedTokensAsErrors
-                                  ? $"[ {CliRootCommand.ExecutableName} ![ subcommand [ -c <34> ] ] ]   ???--> --nonexistent wat" + Environment.NewLine
-                                  : $"[ {CliRootCommand.ExecutableName} [ subcommand [ -c <34> ] ] ]   ???--> --nonexistent wat" + Environment.NewLine;
+                ? $"[ {CliRootCommand.ExecutableName} ![ subcommand [ -c <34> ] ] ]   ???--> --nonexistent wat"
+                    + Environment.NewLine
+                : $"[ {CliRootCommand.ExecutableName} [ subcommand [ -c <34> ] ] ]   ???--> --nonexistent wat"
+                    + Environment.NewLine;
 
-            config.Output
-                  .ToString()
-                  .Should()
-                  .Be(expected);
+            config.Output.ToString().Should().Be(expected);
         }
 
         [Fact]
         public async Task When_diagram_directive_is_used_the_help_is_not_displayed()
         {
-            CliRootCommand rootCommand = new()
-            {
-                new DiagramDirective()
-            };
+            CliRootCommand rootCommand = new() { new DiagramDirective() };
 
-            CliConfiguration config = new(rootCommand)
-            {
-                Output = new StringWriter(),
-            };
+            CliConfiguration config = new(rootCommand) { Output = new StringWriter() };
 
             var result = rootCommand.Parse("[diagram] --help", config);
 
@@ -70,24 +60,18 @@ namespace System.CommandLine.Tests
 
             await result.InvokeAsync();
 
-            config.Output
-                   .ToString()
-                   .Should()
-                   .Be($"[ {CliRootCommand.ExecutableName} [ --help ] ]" + Environment.NewLine);
+            config
+                .Output.ToString()
+                .Should()
+                .Be($"[ {CliRootCommand.ExecutableName} [ --help ] ]" + Environment.NewLine);
         }
 
         [Fact]
         public async Task When_diagram_directive_is_used_the_version_is_not_displayed()
         {
-            CliRootCommand rootCommand = new()
-            {
-                new DiagramDirective()
-            };
+            CliRootCommand rootCommand = new() { new DiagramDirective() };
 
-            CliConfiguration config = new(rootCommand)
-            {
-                Output = new StringWriter()
-            };
+            CliConfiguration config = new(rootCommand) { Output = new StringWriter() };
 
             var result = rootCommand.Parse("[diagram] --version", config);
 
@@ -95,25 +79,18 @@ namespace System.CommandLine.Tests
 
             await result.InvokeAsync();
 
-            config.Output
-                  .ToString()
-                  .Should()
-                  .Be($"[ {CliRootCommand.ExecutableName} [ --version ] ]" + Environment.NewLine);
+            config
+                .Output.ToString()
+                .Should()
+                .Be($"[ {CliRootCommand.ExecutableName} [ --version ] ]" + Environment.NewLine);
         }
 
         [Fact]
         public async Task When_there_are_no_errors_then_diagram_directive_sets_exit_code_0()
         {
-            CliRootCommand command = new ()
-            {
-                new CliOption<int>("-x"),
-                new DiagramDirective()
-            };
+            CliRootCommand command = new() { new CliOption<int>("-x"), new DiagramDirective() };
 
-            CliConfiguration config = new(command)
-            {
-                Output = new StringWriter(),
-            };
+            CliConfiguration config = new(command) { Output = new StringWriter() };
 
             var exitCode = await command.Parse("[diagram] -x 123", config).InvokeAsync();
 
@@ -123,16 +100,9 @@ namespace System.CommandLine.Tests
         [Fact]
         public async Task When_there_are_errors_then_diagram_directive_sets_exit_code_1()
         {
-            CliRootCommand command = new()
-            {
-                new CliOption<int>("-x"),
-                new DiagramDirective()
-            };
+            CliRootCommand command = new() { new CliOption<int>("-x"), new DiagramDirective() };
 
-            CliConfiguration config = new(command)
-            {
-                Output = new StringWriter(),
-            };
+            CliConfiguration config = new(command) { Output = new StringWriter() };
 
             var exitCode = await command.Parse("[diagram] -x not-an-int", config).InvokeAsync();
 
@@ -145,16 +115,10 @@ namespace System.CommandLine.Tests
             CliRootCommand command = new()
             {
                 new CliOption<int>("-x"),
-                new DiagramDirective
-                {
-                    ParseErrorReturnValue = 42
-                }
+                new DiagramDirective { ParseErrorReturnValue = 42 },
             };
 
-            CliConfiguration config = new(command)
-            {
-                Output = new StringWriter()
-            };
+            CliConfiguration config = new(command) { Output = new StringWriter() };
 
             int exitCode = await config.InvokeAsync("[diagram] -x not-an-int");
 

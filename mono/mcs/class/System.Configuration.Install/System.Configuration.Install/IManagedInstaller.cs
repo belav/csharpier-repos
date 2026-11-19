@@ -4,7 +4,7 @@
 // 	Alejandro Sánchez Acosta
 //
 // (C) Alejandro Sánchez Acosta
-// 
+//
 
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,18 +31,15 @@ using System.Runtime.InteropServices;
 
 namespace System.Configuration.Install
 {
-	[Guid("1E233FE7-C16D-4512-8C3B-2E9988F08D38")]
-	[InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport]
-	public interface IManagedInstaller
-	{
-		[return: MarshalAs(UnmanagedType.I4)] 
-		int ManagedInstall (
-			[MarshalAs(UnmanagedType.BStr)] 
-			[In]
-			string commandLine, 
-			[MarshalAs(UnmanagedType.I4)] 
-			[In]
-			int hInstall);
-	}
+    [Guid("1E233FE7-C16D-4512-8C3B-2E9988F08D38")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport]
+    public interface IManagedInstaller
+    {
+        [return: MarshalAs(UnmanagedType.I4)]
+        int ManagedInstall(
+            [MarshalAs(UnmanagedType.BStr)] [In] string commandLine,
+            [MarshalAs(UnmanagedType.I4)] [In] int hInstall
+        );
+    }
 }

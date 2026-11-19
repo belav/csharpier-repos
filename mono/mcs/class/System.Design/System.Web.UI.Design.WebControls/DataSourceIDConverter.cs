@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,50 +32,54 @@ using System.Globalization;
 
 namespace System.Web.UI.Design.WebControls
 {
-	public class DataSourceIDConverter : TypeConverter
-	{
-		public DataSourceIDConverter ()
-		{
-		}
-		
-		public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
-		{
-			return sourceType == typeof (string);
-		}
+    public class DataSourceIDConverter : TypeConverter
+    {
+        public DataSourceIDConverter() { }
 
-		public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
-		{
-			if (value == null)
-				return String.Empty;
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        {
+            return sourceType == typeof(string);
+        }
 
-			if (value is string)
-				return (string)value;
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
+        {
+            if (value == null)
+                return String.Empty;
 
-			throw GetConvertFromException (value);
-		}
+            if (value is string)
+                return (string)value;
 
-		[MonoTODO]
-		public override TypeConverter.StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
-		{
-			throw new NotImplementedException ();
-		}
+            throw GetConvertFromException(value);
+        }
 
-		public override bool GetStandardValuesExclusive (ITypeDescriptorContext context)
-		{
-			return false;
-		}
+        [MonoTODO]
+        public override TypeConverter.StandardValuesCollection GetStandardValues(
+            ITypeDescriptorContext context
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
-		{
-			return true;
-		}
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
+        {
+            return false;
+        }
 
-		protected virtual bool IsValidDataSource (IComponent component)
-		{
-			if (component == null)
-				return false;
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+        {
+            return true;
+        }
 
-			return component is IDataSource;
-		}
-	}
+        protected virtual bool IsValidDataSource(IComponent component)
+        {
+            if (component == null)
+                return false;
+
+            return component is IDataSource;
+        }
+    }
 }

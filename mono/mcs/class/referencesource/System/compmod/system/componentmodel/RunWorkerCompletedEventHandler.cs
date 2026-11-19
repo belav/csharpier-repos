@@ -4,11 +4,13 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel 
+namespace System.ComponentModel
 {
     using System.Security.Permissions;
 
     [HostProtection(SharedState = true)]
-    public delegate void RunWorkerCompletedEventHandler(object sender,
-                                                        RunWorkerCompletedEventArgs e);
+    public delegate void RunWorkerCompletedEventHandler(
+        object sender,
+        RunWorkerCompletedEventArgs e
+    );
 }

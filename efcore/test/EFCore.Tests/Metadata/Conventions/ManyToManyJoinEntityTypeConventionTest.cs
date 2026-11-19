@@ -20,23 +20,36 @@ public class ManyToManyJoinEntityTypeConventionTest
     public void Join_entity_type_is_created_for_self_join()
     {
         var modelBuilder = CreateInternalModeBuilder();
-        var manyToManySelf = modelBuilder.Entity(typeof(ManyToManySelf), ConfigurationSource.Convention);
+        var manyToManySelf = modelBuilder.Entity(
+            typeof(ManyToManySelf),
+            ConfigurationSource.Convention
+        );
 
-        manyToManySelf.PrimaryKey(new[] { nameof(ManyToManySelf.Id) }, ConfigurationSource.Convention);
+        manyToManySelf.PrimaryKey(
+            new[] { nameof(ManyToManySelf.Id) },
+            ConfigurationSource.Convention
+        );
 
         var firstSkipNav = manyToManySelf.HasSkipNavigation(
-            new MemberIdentity(typeof(ManyToManySelf).GetProperty(nameof(ManyToManySelf.ManyToManySelf1))),
+            new MemberIdentity(
+                typeof(ManyToManySelf).GetProperty(nameof(ManyToManySelf.ManyToManySelf1))
+            ),
             manyToManySelf.Metadata,
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
         var secondSkipNav = manyToManySelf.HasSkipNavigation(
-            new MemberIdentity(typeof(ManyToManySelf).GetProperty(nameof(ManyToManySelf.ManyToManySelf2))),
+            new MemberIdentity(
+                typeof(ManyToManySelf).GetProperty(nameof(ManyToManySelf.ManyToManySelf2))
+            ),
             manyToManySelf.Metadata,
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
         firstSkipNav.HasInverse(secondSkipNav.Metadata, ConfigurationSource.Convention);
 
         RunConvention(firstSkipNav);
 
-        var joinEntityType = manyToManySelf.Metadata.Model.GetEntityTypes()
+        var joinEntityType = manyToManySelf
+            .Metadata.Model.GetEntityTypes()
             .Single(et => et.IsImplicitlyCreatedJoinEntityType);
         Assert.Equal("ManyToManySelfManyToManySelf", joinEntityType.Name);
     }
@@ -45,107 +58,195 @@ public class ManyToManyJoinEntityTypeConventionTest
     public void Join_entity_type_is_not_created_when_no_inverse_skip_navigation()
     {
         var modelBuilder = CreateInternalModeBuilder();
-        var manyToManyFirst = modelBuilder.Entity(typeof(ManyToManyFirst), ConfigurationSource.Convention);
-        var manyToManySecond = modelBuilder.Entity(typeof(ManyToManySecond), ConfigurationSource.Convention);
-        var manyToManyJoin = modelBuilder.Entity(typeof(ManyToManyJoin), ConfigurationSource.Convention);
+        var manyToManyFirst = modelBuilder.Entity(
+            typeof(ManyToManyFirst),
+            ConfigurationSource.Convention
+        );
+        var manyToManySecond = modelBuilder.Entity(
+            typeof(ManyToManySecond),
+            ConfigurationSource.Convention
+        );
+        var manyToManyJoin = modelBuilder.Entity(
+            typeof(ManyToManyJoin),
+            ConfigurationSource.Convention
+        );
 
-        var manyToManyFirstPK = manyToManyFirst.PrimaryKey(new[] { nameof(ManyToManyFirst.Id) }, ConfigurationSource.Convention);
-        var manyToManySecondPK = manyToManySecond.PrimaryKey(new[] { nameof(ManyToManySecond.Id) }, ConfigurationSource.Convention);
+        var manyToManyFirstPK = manyToManyFirst.PrimaryKey(
+            new[] { nameof(ManyToManyFirst.Id) },
+            ConfigurationSource.Convention
+        );
+        var manyToManySecondPK = manyToManySecond.PrimaryKey(
+            new[] { nameof(ManyToManySecond.Id) },
+            ConfigurationSource.Convention
+        );
 
         var skipNavOnFirst = manyToManyFirst.HasSkipNavigation(
-            new MemberIdentity(typeof(ManyToManyFirst).GetProperty(nameof(ManyToManyFirst.ManyToManySeconds))),
+            new MemberIdentity(
+                typeof(ManyToManyFirst).GetProperty(nameof(ManyToManyFirst.ManyToManySeconds))
+            ),
             manyToManySecond.Metadata,
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
         var skipNavOnSecond = manyToManySecond.HasSkipNavigation(
-            new MemberIdentity(typeof(ManyToManySecond).GetProperty(nameof(ManyToManySecond.ManyToManyFirsts))),
+            new MemberIdentity(
+                typeof(ManyToManySecond).GetProperty(nameof(ManyToManySecond.ManyToManyFirsts))
+            ),
             manyToManyFirst.Metadata,
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
         // do not set SkipNav's as inverses of one another
 
         RunConvention(skipNavOnFirst);
 
         Assert.Empty(
-            manyToManyFirst.Metadata.Model.GetEntityTypes()
-                .Where(et => et.IsImplicitlyCreatedJoinEntityType));
+            manyToManyFirst
+                .Metadata.Model.GetEntityTypes()
+                .Where(et => et.IsImplicitlyCreatedJoinEntityType)
+        );
     }
 
     [ConditionalFact]
     public void Join_entity_type_is_not_created_when_skip_navigation_is_not_collection()
     {
         var modelBuilder = CreateInternalModeBuilder();
-        var manyToManyFirst = modelBuilder.Entity(typeof(ManyToManyFirst), ConfigurationSource.Convention);
-        var manyToManySecond = modelBuilder.Entity(typeof(ManyToManySecond), ConfigurationSource.Convention);
-        var manyToManyJoin = modelBuilder.Entity(typeof(ManyToManyJoin), ConfigurationSource.Convention);
+        var manyToManyFirst = modelBuilder.Entity(
+            typeof(ManyToManyFirst),
+            ConfigurationSource.Convention
+        );
+        var manyToManySecond = modelBuilder.Entity(
+            typeof(ManyToManySecond),
+            ConfigurationSource.Convention
+        );
+        var manyToManyJoin = modelBuilder.Entity(
+            typeof(ManyToManyJoin),
+            ConfigurationSource.Convention
+        );
 
-        var manyToManyFirstPK = manyToManyFirst.PrimaryKey(new[] { nameof(ManyToManyFirst.Id) }, ConfigurationSource.Convention);
-        var manyToManySecondPK = manyToManySecond.PrimaryKey(new[] { nameof(ManyToManySecond.Id) }, ConfigurationSource.Convention);
+        var manyToManyFirstPK = manyToManyFirst.PrimaryKey(
+            new[] { nameof(ManyToManyFirst.Id) },
+            ConfigurationSource.Convention
+        );
+        var manyToManySecondPK = manyToManySecond.PrimaryKey(
+            new[] { nameof(ManyToManySecond.Id) },
+            ConfigurationSource.Convention
+        );
 
         var skipNavOnFirst = manyToManyFirst.HasSkipNavigation(
             new MemberIdentity(typeof(ManyToManyFirst).GetProperty(nameof(ManyToManyFirst.Second))),
             manyToManySecond.Metadata,
             ConfigurationSource.Convention,
-            collection: false);
+            collection: false
+        );
         var skipNavOnSecond = manyToManySecond.HasSkipNavigation(
-            new MemberIdentity(typeof(ManyToManySecond).GetProperty(nameof(ManyToManySecond.ManyToManyFirsts))),
+            new MemberIdentity(
+                typeof(ManyToManySecond).GetProperty(nameof(ManyToManySecond.ManyToManyFirsts))
+            ),
             manyToManyFirst.Metadata,
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
         skipNavOnFirst.HasInverse(skipNavOnSecond.Metadata, ConfigurationSource.Convention);
 
         RunConvention(skipNavOnFirst);
 
         Assert.Empty(
-            manyToManyFirst.Metadata.Model.GetEntityTypes()
-                .Where(et => et.IsImplicitlyCreatedJoinEntityType));
+            manyToManyFirst
+                .Metadata.Model.GetEntityTypes()
+                .Where(et => et.IsImplicitlyCreatedJoinEntityType)
+        );
     }
 
     [ConditionalFact]
     public void Join_entity_type_is_not_created_when_inverse_skip_navigation_is_not_collection()
     {
         var modelBuilder = CreateInternalModeBuilder();
-        var manyToManyFirst = modelBuilder.Entity(typeof(ManyToManyFirst), ConfigurationSource.Convention);
-        var manyToManySecond = modelBuilder.Entity(typeof(ManyToManySecond), ConfigurationSource.Convention);
-        var manyToManyJoin = modelBuilder.Entity(typeof(ManyToManyJoin), ConfigurationSource.Convention);
+        var manyToManyFirst = modelBuilder.Entity(
+            typeof(ManyToManyFirst),
+            ConfigurationSource.Convention
+        );
+        var manyToManySecond = modelBuilder.Entity(
+            typeof(ManyToManySecond),
+            ConfigurationSource.Convention
+        );
+        var manyToManyJoin = modelBuilder.Entity(
+            typeof(ManyToManyJoin),
+            ConfigurationSource.Convention
+        );
 
-        var manyToManyFirstPK = manyToManyFirst.PrimaryKey(new[] { nameof(ManyToManyFirst.Id) }, ConfigurationSource.Convention);
-        var manyToManySecondPK = manyToManySecond.PrimaryKey(new[] { nameof(ManyToManySecond.Id) }, ConfigurationSource.Convention);
+        var manyToManyFirstPK = manyToManyFirst.PrimaryKey(
+            new[] { nameof(ManyToManyFirst.Id) },
+            ConfigurationSource.Convention
+        );
+        var manyToManySecondPK = manyToManySecond.PrimaryKey(
+            new[] { nameof(ManyToManySecond.Id) },
+            ConfigurationSource.Convention
+        );
 
         var skipNavOnFirst = manyToManyFirst.HasSkipNavigation(
-            new MemberIdentity(typeof(ManyToManyFirst).GetProperty(nameof(ManyToManyFirst.ManyToManySeconds))),
+            new MemberIdentity(
+                typeof(ManyToManyFirst).GetProperty(nameof(ManyToManyFirst.ManyToManySeconds))
+            ),
             manyToManySecond.Metadata,
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
         var skipNavOnSecond = manyToManySecond.HasSkipNavigation(
-            new MemberIdentity(typeof(ManyToManySecond).GetProperty(nameof(ManyToManySecond.First))),
+            new MemberIdentity(
+                typeof(ManyToManySecond).GetProperty(nameof(ManyToManySecond.First))
+            ),
             manyToManyFirst.Metadata,
             ConfigurationSource.Convention,
-            collection: false);
+            collection: false
+        );
         skipNavOnFirst.HasInverse(skipNavOnSecond.Metadata, ConfigurationSource.Convention);
 
         RunConvention(skipNavOnFirst);
 
         Assert.Empty(
-            manyToManyFirst.Metadata.Model.GetEntityTypes()
-                .Where(et => et.IsImplicitlyCreatedJoinEntityType));
+            manyToManyFirst
+                .Metadata.Model.GetEntityTypes()
+                .Where(et => et.IsImplicitlyCreatedJoinEntityType)
+        );
     }
 
     [ConditionalFact]
     public void Join_entity_type_is_not_created_when_skip_navigation_already_in_use()
     {
         var modelBuilder = CreateInternalModeBuilder();
-        var manyToManyFirst = modelBuilder.Entity(typeof(ManyToManyFirst), ConfigurationSource.Convention);
-        var manyToManySecond = modelBuilder.Entity(typeof(ManyToManySecond), ConfigurationSource.Convention);
-        var manyToManyJoin = modelBuilder.Entity(typeof(ManyToManyJoin), ConfigurationSource.Convention);
+        var manyToManyFirst = modelBuilder.Entity(
+            typeof(ManyToManyFirst),
+            ConfigurationSource.Convention
+        );
+        var manyToManySecond = modelBuilder.Entity(
+            typeof(ManyToManySecond),
+            ConfigurationSource.Convention
+        );
+        var manyToManyJoin = modelBuilder.Entity(
+            typeof(ManyToManyJoin),
+            ConfigurationSource.Convention
+        );
 
-        var manyToManyFirstPK = manyToManyFirst.PrimaryKey(new[] { nameof(ManyToManyFirst.Id) }, ConfigurationSource.Convention);
-        var manyToManySecondPK = manyToManySecond.PrimaryKey(new[] { nameof(ManyToManySecond.Id) }, ConfigurationSource.Convention);
+        var manyToManyFirstPK = manyToManyFirst.PrimaryKey(
+            new[] { nameof(ManyToManyFirst.Id) },
+            ConfigurationSource.Convention
+        );
+        var manyToManySecondPK = manyToManySecond.PrimaryKey(
+            new[] { nameof(ManyToManySecond.Id) },
+            ConfigurationSource.Convention
+        );
 
         var skipNavOnFirst = manyToManyFirst.HasSkipNavigation(
-            new MemberIdentity(typeof(ManyToManyFirst).GetProperty(nameof(ManyToManyFirst.ManyToManySeconds))),
+            new MemberIdentity(
+                typeof(ManyToManyFirst).GetProperty(nameof(ManyToManyFirst.ManyToManySeconds))
+            ),
             manyToManySecond.Metadata,
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
         var skipNavOnSecond = manyToManySecond.HasSkipNavigation(
-            new MemberIdentity(typeof(ManyToManySecond).GetProperty(nameof(ManyToManySecond.ManyToManyFirsts))),
+            new MemberIdentity(
+                typeof(ManyToManySecond).GetProperty(nameof(ManyToManySecond.ManyToManyFirsts))
+            ),
             manyToManyFirst.Metadata,
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
         skipNavOnFirst.HasInverse(skipNavOnSecond.Metadata, ConfigurationSource.Convention);
 
         // assign a non-null foreign key to skipNavOnFirst to make it appear to be "in use"
@@ -153,35 +254,59 @@ public class ManyToManyJoinEntityTypeConventionTest
             manyToManyFirst.Metadata.Name,
             new[] { nameof(ManyToManyJoin.LeftId) },
             manyToManyFirstPK.Metadata,
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
         skipNavOnFirst.Metadata.SetForeignKey(leftFK.Metadata, ConfigurationSource.Convention);
 
         RunConvention(skipNavOnFirst);
 
         Assert.Empty(
-            manyToManyFirst.Metadata.Model.GetEntityTypes()
-                .Where(et => et.IsImplicitlyCreatedJoinEntityType));
+            manyToManyFirst
+                .Metadata.Model.GetEntityTypes()
+                .Where(et => et.IsImplicitlyCreatedJoinEntityType)
+        );
     }
 
     [ConditionalFact]
     public void Join_entity_type_is_not_created_when_inverse_skip_navigation_already_in_use()
     {
         var modelBuilder = CreateInternalModeBuilder();
-        var manyToManyFirst = modelBuilder.Entity(typeof(ManyToManyFirst), ConfigurationSource.Convention);
-        var manyToManySecond = modelBuilder.Entity(typeof(ManyToManySecond), ConfigurationSource.Convention);
-        var manyToManyJoin = modelBuilder.Entity(typeof(ManyToManyJoin), ConfigurationSource.Convention);
+        var manyToManyFirst = modelBuilder.Entity(
+            typeof(ManyToManyFirst),
+            ConfigurationSource.Convention
+        );
+        var manyToManySecond = modelBuilder.Entity(
+            typeof(ManyToManySecond),
+            ConfigurationSource.Convention
+        );
+        var manyToManyJoin = modelBuilder.Entity(
+            typeof(ManyToManyJoin),
+            ConfigurationSource.Convention
+        );
 
-        var manyToManyFirstPK = manyToManyFirst.PrimaryKey(new[] { nameof(ManyToManyFirst.Id) }, ConfigurationSource.Convention);
-        var manyToManySecondPK = manyToManySecond.PrimaryKey(new[] { nameof(ManyToManySecond.Id) }, ConfigurationSource.Convention);
+        var manyToManyFirstPK = manyToManyFirst.PrimaryKey(
+            new[] { nameof(ManyToManyFirst.Id) },
+            ConfigurationSource.Convention
+        );
+        var manyToManySecondPK = manyToManySecond.PrimaryKey(
+            new[] { nameof(ManyToManySecond.Id) },
+            ConfigurationSource.Convention
+        );
 
         var skipNavOnFirst = manyToManyFirst.HasSkipNavigation(
-            new MemberIdentity(typeof(ManyToManyFirst).GetProperty(nameof(ManyToManyFirst.ManyToManySeconds))),
+            new MemberIdentity(
+                typeof(ManyToManyFirst).GetProperty(nameof(ManyToManyFirst.ManyToManySeconds))
+            ),
             manyToManySecond.Metadata,
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
         var skipNavOnSecond = manyToManySecond.HasSkipNavigation(
-            new MemberIdentity(typeof(ManyToManySecond).GetProperty(nameof(ManyToManySecond.ManyToManyFirsts))),
+            new MemberIdentity(
+                typeof(ManyToManySecond).GetProperty(nameof(ManyToManySecond.ManyToManyFirsts))
+            ),
             manyToManyFirst.Metadata,
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
         skipNavOnFirst.HasInverse(skipNavOnSecond.Metadata, ConfigurationSource.Convention);
 
         // assign a non-null foreign key to skipNavOnSecond to make it appear to be "in use"
@@ -189,39 +314,61 @@ public class ManyToManyJoinEntityTypeConventionTest
             manyToManySecond.Metadata.Name,
             new[] { nameof(ManyToManyJoin.RightId) },
             manyToManySecondPK.Metadata,
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
         skipNavOnSecond.Metadata.SetForeignKey(rightFK.Metadata, ConfigurationSource.Convention);
 
         RunConvention(skipNavOnFirst);
 
         Assert.Empty(
-            manyToManyFirst.Metadata.Model.GetEntityTypes()
-                .Where(et => et.IsImplicitlyCreatedJoinEntityType));
+            manyToManyFirst
+                .Metadata.Model.GetEntityTypes()
+                .Where(et => et.IsImplicitlyCreatedJoinEntityType)
+        );
     }
 
     [ConditionalFact]
     public void Join_entity_type_is_created()
     {
         var modelBuilder = CreateInternalModeBuilder();
-        var manyToManyFirst = modelBuilder.Entity(typeof(ManyToManyFirst), ConfigurationSource.Convention);
-        var manyToManySecond = modelBuilder.Entity(typeof(ManyToManySecond), ConfigurationSource.Convention);
+        var manyToManyFirst = modelBuilder.Entity(
+            typeof(ManyToManyFirst),
+            ConfigurationSource.Convention
+        );
+        var manyToManySecond = modelBuilder.Entity(
+            typeof(ManyToManySecond),
+            ConfigurationSource.Convention
+        );
 
-        manyToManyFirst.PrimaryKey(new[] { nameof(ManyToManyFirst.Id) }, ConfigurationSource.Convention);
-        manyToManySecond.PrimaryKey(new[] { nameof(ManyToManySecond.Id) }, ConfigurationSource.Convention);
+        manyToManyFirst.PrimaryKey(
+            new[] { nameof(ManyToManyFirst.Id) },
+            ConfigurationSource.Convention
+        );
+        manyToManySecond.PrimaryKey(
+            new[] { nameof(ManyToManySecond.Id) },
+            ConfigurationSource.Convention
+        );
 
         var skipNavOnFirst = manyToManyFirst.HasSkipNavigation(
-            new MemberIdentity(typeof(ManyToManyFirst).GetProperty(nameof(ManyToManyFirst.ManyToManySeconds))),
+            new MemberIdentity(
+                typeof(ManyToManyFirst).GetProperty(nameof(ManyToManyFirst.ManyToManySeconds))
+            ),
             manyToManySecond.Metadata,
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
         var skipNavOnSecond = manyToManySecond.HasSkipNavigation(
-            new MemberIdentity(typeof(ManyToManySecond).GetProperty(nameof(ManyToManySecond.ManyToManyFirsts))),
+            new MemberIdentity(
+                typeof(ManyToManySecond).GetProperty(nameof(ManyToManySecond.ManyToManyFirsts))
+            ),
             manyToManyFirst.Metadata,
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
         skipNavOnFirst.HasInverse(skipNavOnSecond.Metadata, ConfigurationSource.Convention);
 
         RunConvention(skipNavOnSecond);
 
-        var joinEntityType = manyToManyFirst.Metadata.Model.GetEntityTypes()
+        var joinEntityType = manyToManyFirst
+            .Metadata.Model.GetEntityTypes()
             .Single(et => et.IsImplicitlyCreatedJoinEntityType);
 
         Assert.Equal("ManyToManyFirstManyToManySecond", joinEntityType.Name);
@@ -242,8 +389,8 @@ public class ManyToManyJoinEntityTypeConventionTest
         Assert.Equal(manyToManySecondForeignKey.DeclaringEntityType, joinEntityType);
     }
 
-    public ListLoggerFactory ListLoggerFactory { get; }
-        = new(l => l == DbLoggerCategory.Model.Name);
+    public ListLoggerFactory ListLoggerFactory { get; } =
+        new(l => l == DbLoggerCategory.Model.Name);
 
     private DiagnosticsLogger<DbLoggerCategory.Model> CreateLogger()
     {
@@ -254,30 +401,36 @@ public class ManyToManyJoinEntityTypeConventionTest
             options,
             new DiagnosticListener("Fake"),
             new TestLoggingDefinitions(),
-            new NullDbContextLogger());
+            new NullDbContextLogger()
+        );
         return modelLogger;
     }
 
-    private InternalSkipNavigationBuilder RunConvention(InternalSkipNavigationBuilder skipNavBuilder)
+    private InternalSkipNavigationBuilder RunConvention(
+        InternalSkipNavigationBuilder skipNavBuilder
+    )
     {
         var context = new ConventionContext<IConventionSkipNavigationBuilder>(
-            skipNavBuilder.Metadata.DeclaringEntityType.Model.ConventionDispatcher);
+            skipNavBuilder.Metadata.DeclaringEntityType.Model.ConventionDispatcher
+        );
         CreateManyToManyConvention().ProcessSkipNavigationAdded(skipNavBuilder, context);
-        return context.ShouldStopProcessing() ? (InternalSkipNavigationBuilder)context.Result : skipNavBuilder;
+        return context.ShouldStopProcessing()
+            ? (InternalSkipNavigationBuilder)context.Result
+            : skipNavBuilder;
     }
 
-    private ManyToManyJoinEntityTypeConvention CreateManyToManyConvention()
-        => new(CreateDependencies());
+    private ManyToManyJoinEntityTypeConvention CreateManyToManyConvention() =>
+        new(CreateDependencies());
 
-    private ProviderConventionSetBuilderDependencies CreateDependencies()
-        => InMemoryTestHelpers.Instance.CreateContextServices().GetRequiredService<ProviderConventionSetBuilderDependencies>()
-            with
-            {
-                Logger = CreateLogger()
-            };
+    private ProviderConventionSetBuilderDependencies CreateDependencies() =>
+        InMemoryTestHelpers
+            .Instance.CreateContextServices()
+            .GetRequiredService<ProviderConventionSetBuilderDependencies>() with
+        {
+            Logger = CreateLogger(),
+        };
 
-    private InternalModelBuilder CreateInternalModeBuilder()
-        => new Model().Builder;
+    private InternalModelBuilder CreateInternalModeBuilder() => new Model().Builder;
 
     private class ManyToManyFirst
     {

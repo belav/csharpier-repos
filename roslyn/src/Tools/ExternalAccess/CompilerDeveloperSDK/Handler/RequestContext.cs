@@ -8,12 +8,16 @@ internal readonly struct RequestContext(LspRequestContext context)
 {
     /// <inheritdoc cref="LspRequestContext.Workspace"/>
     internal Workspace? Workspace => context.Workspace;
+
     /// <inheritdoc cref="LspRequestContext.Solution"/>
     internal Solution? Solution => context.Solution;
+
     /// <inheritdoc cref="LspRequestContext.Document"/>
     internal Document? Document => context.Document;
+
     /// <inheritdoc cref="LspRequestContext.GetRequiredDocument()"/>
     internal Document GetRequiredDocument() => context.GetRequiredDocument();
 
-    internal T GetRequiredService<T>() where T : class => context.GetRequiredService<T>();
+    internal T GetRequiredService<T>()
+        where T : class => context.GetRequiredService<T>();
 }

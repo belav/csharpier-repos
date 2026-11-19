@@ -15,15 +15,25 @@ namespace System.Reflection.Emit.Tests
         public void GetILGenerator_Int_Owner(bool skipVisibility)
         {
             IDClass target = new IDClass();
-            FieldInfo field = typeof(IDClass).GetField(FieldName, BindingFlags.Instance | BindingFlags.NonPublic);
+            FieldInfo field = typeof(IDClass).GetField(
+                FieldName,
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
 
             Type[] paramTypes = new Type[] { typeof(IDClass), typeof(int) };
-            DynamicMethod method = new DynamicMethod("Method", typeof(int), paramTypes, typeof(IDClass), skipVisibility);
+            DynamicMethod method = new DynamicMethod(
+                "Method",
+                typeof(int),
+                paramTypes,
+                typeof(IDClass),
+                skipVisibility
+            );
 
             ILGenerator ilGenerator = method.GetILGenerator(8);
             Helpers.EmitMethodBody(ilGenerator, field);
 
-            IntDelegate instanceCallBack = (IntDelegate)method.CreateDelegate(typeof(IntDelegate), target);
+            IntDelegate instanceCallBack = (IntDelegate)
+                method.CreateDelegate(typeof(IntDelegate), target);
             VerifyILGenerator(instanceCallBack, target, 0);
         }
 
@@ -40,15 +50,25 @@ namespace System.Reflection.Emit.Tests
         {
             Module module = typeof(IDClass).GetTypeInfo().Module;
             IDClass target = new IDClass();
-            FieldInfo field = typeof(IDClass).GetField(FieldName, BindingFlags.Instance | BindingFlags.NonPublic);
+            FieldInfo field = typeof(IDClass).GetField(
+                FieldName,
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
 
             Type[] paramTypes = new Type[] { typeof(IDClass), typeof(int) };
-            DynamicMethod method = new DynamicMethod("Method", typeof(int), paramTypes, module, skipVisibility);
+            DynamicMethod method = new DynamicMethod(
+                "Method",
+                typeof(int),
+                paramTypes,
+                module,
+                skipVisibility
+            );
 
             ILGenerator ilGenerator = method.GetILGenerator(8);
             Helpers.EmitMethodBody(ilGenerator, field);
 
-            IntDelegate instanceCallBack = (IntDelegate)method.CreateDelegate(typeof(IntDelegate), target);
+            IntDelegate instanceCallBack = (IntDelegate)
+                method.CreateDelegate(typeof(IntDelegate), target);
             VerifyILGenerator(instanceCallBack, target, 0);
         }
 
@@ -58,16 +78,26 @@ namespace System.Reflection.Emit.Tests
         public void GetILGenerator_Owner(bool skipVisibility)
         {
             IDClass target = new IDClass();
-            FieldInfo field = typeof(IDClass).GetField(FieldName, BindingFlags.Instance | BindingFlags.NonPublic);
+            FieldInfo field = typeof(IDClass).GetField(
+                FieldName,
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
 
             Type[] paramTypes = new Type[] { typeof(IDClass), typeof(int) };
 
-            DynamicMethod method = new DynamicMethod("MethodName", typeof(int), paramTypes, typeof(IDClass), skipVisibility);
+            DynamicMethod method = new DynamicMethod(
+                "MethodName",
+                typeof(int),
+                paramTypes,
+                typeof(IDClass),
+                skipVisibility
+            );
 
             ILGenerator ilGenerator = method.GetILGenerator();
             Helpers.EmitMethodBody(ilGenerator, field);
 
-            IntDelegate instanceCallBack = (IntDelegate)method.CreateDelegate(typeof(IntDelegate), target);
+            IntDelegate instanceCallBack = (IntDelegate)
+                method.CreateDelegate(typeof(IntDelegate), target);
             VerifyILGenerator(instanceCallBack, target, 0);
         }
 
@@ -84,15 +114,25 @@ namespace System.Reflection.Emit.Tests
         {
             Module module = typeof(TestClass).GetTypeInfo().Module;
             IDClass target = new IDClass();
-            FieldInfo field = typeof(IDClass).GetField(FieldName, BindingFlags.Instance | BindingFlags.NonPublic);
+            FieldInfo field = typeof(IDClass).GetField(
+                FieldName,
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
 
             Type[] paramTypes = new Type[] { typeof(IDClass), typeof(int) };
-            DynamicMethod method = new DynamicMethod("Method", typeof(int), paramTypes, module, skipVisibility);
+            DynamicMethod method = new DynamicMethod(
+                "Method",
+                typeof(int),
+                paramTypes,
+                module,
+                skipVisibility
+            );
 
             ILGenerator ilGenerator = method.GetILGenerator();
             Helpers.EmitMethodBody(ilGenerator, field);
 
-            IntDelegate instanceCallBack = (IntDelegate)method.CreateDelegate(typeof(IntDelegate), target);
+            IntDelegate instanceCallBack = (IntDelegate)
+                method.CreateDelegate(typeof(IntDelegate), target);
             VerifyILGenerator(instanceCallBack, target, 0);
         }
 

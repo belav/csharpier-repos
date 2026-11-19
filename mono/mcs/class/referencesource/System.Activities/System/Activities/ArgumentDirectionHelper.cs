@@ -11,7 +11,11 @@ namespace System.Activities
     {
         internal static bool IsDefined(ArgumentDirection direction)
         {
-            return (direction == ArgumentDirection.In || direction == ArgumentDirection.Out || direction == ArgumentDirection.InOut);
+            return (
+                direction == ArgumentDirection.In
+                || direction == ArgumentDirection.Out
+                || direction == ArgumentDirection.InOut
+            );
         }
 
         public static void Validate(ArgumentDirection direction, string argumentName)
@@ -19,7 +23,12 @@ namespace System.Activities
             if (!IsDefined(direction))
             {
                 throw FxTrace.Exception.AsError(
-                    new InvalidEnumArgumentException(argumentName, (int)direction, typeof(ArgumentDirection)));
+                    new InvalidEnumArgumentException(
+                        argumentName,
+                        (int)direction,
+                        typeof(ArgumentDirection)
+                    )
+                );
             }
         }
 

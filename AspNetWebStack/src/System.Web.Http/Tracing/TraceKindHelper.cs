@@ -7,9 +7,9 @@ namespace System.Web.Http.Tracing
     {
         public static bool IsDefined(TraceKind traceKind)
         {
-            return traceKind == TraceKind.Trace ||
-                   traceKind == TraceKind.Begin ||
-                   traceKind == TraceKind.End;
+            return traceKind == TraceKind.Trace
+                || traceKind == TraceKind.Begin
+                || traceKind == TraceKind.End;
         }
 
         public static void Validate(TraceKind value, string parameterValue)

@@ -42,7 +42,7 @@ namespace System.ServiceModel.Discovery.Version11
                 throw FxTrace.Exception.ArgumentNull("schemaSet");
             }
 
-            return SchemaUtility.EnsureProbeSchema(DiscoveryVersion.WSDiscovery11, schemaSet);                        
+            return SchemaUtility.EnsureProbeSchema(DiscoveryVersion.WSDiscovery11, schemaSet);
         }
 
         public FindCriteria ToFindCriteria()

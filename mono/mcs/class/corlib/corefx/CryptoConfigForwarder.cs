@@ -6,17 +6,17 @@ using System.Reflection;
 
 namespace System.Security.Cryptography
 {
-	internal static class CryptoConfigForwarder
-	{
-		internal static object CreateFromName (string name) => CryptoConfig.CreateFromName (name);
+    internal static class CryptoConfigForwarder
+    {
+        internal static object CreateFromName(string name) => CryptoConfig.CreateFromName(name);
 
-		internal static HashAlgorithm CreateDefaultHashAlgorithm ()
-		{
+        internal static HashAlgorithm CreateDefaultHashAlgorithm()
+        {
 #if FULL_AOT_RUNTIME
-			return new System.Security.Cryptography.SHA1CryptoServiceProvider ();
+            return new System.Security.Cryptography.SHA1CryptoServiceProvider();
 #else
-			return (HashAlgorithm)CreateFromName ("System.Security.Cryptography.HashAlgorithm");
+            return (HashAlgorithm)CreateFromName("System.Security.Cryptography.HashAlgorithm");
 #endif
-		}
-	}
+        }
+    }
 }

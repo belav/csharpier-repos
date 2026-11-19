@@ -27,7 +27,7 @@ namespace System.DirectoryServices.ActiveDirectory
         AccessPointDN = 19,
         ORName = 20,
         PresentationAddress = 21,
-        ReplicaLink = 22
+        ReplicaLink = 22,
     }
 
     internal sealed class OMObjectClass
@@ -74,16 +74,24 @@ namespace System.DirectoryServices.ActiveDirectory
         public bool Equals(Syntax syntax)
         {
             bool result = true;
-            if ((!syntax.attributeSyntax.Equals(this.attributeSyntax))
-                || (syntax.oMSyntax != this.oMSyntax))
+            if (
+                (!syntax.attributeSyntax.Equals(this.attributeSyntax))
+                || (syntax.oMSyntax != this.oMSyntax)
+            )
             {
                 result = false;
             }
             else
             {
-                if (((this.oMObjectClass != null) && (syntax.oMObjectClass == null))
+                if (
+                    ((this.oMObjectClass != null) && (syntax.oMObjectClass == null))
                     || ((this.oMObjectClass == null) && (syntax.oMObjectClass != null))
-                    || ((this.oMObjectClass != null) && (syntax.oMObjectClass != null) && (!this.oMObjectClass.Equals(syntax.oMObjectClass))))
+                    || (
+                        (this.oMObjectClass != null)
+                        && (syntax.oMObjectClass != null)
+                        && (!this.oMObjectClass.Equals(syntax.oMObjectClass))
+                    )
+                )
                 {
                     result = false;
                 }

@@ -15,14 +15,11 @@ namespace Microsoft.Data.Sqlite
 
         protected abstract int GetSqliteType(int ordinal);
 
-        public virtual bool IsDBNull(int ordinal)
-            => GetSqliteType(ordinal) == SQLITE_NULL;
+        public virtual bool IsDBNull(int ordinal) => GetSqliteType(ordinal) == SQLITE_NULL;
 
-        public virtual bool GetBoolean(int ordinal)
-            => GetInt64(ordinal) != 0;
+        public virtual bool GetBoolean(int ordinal) => GetInt64(ordinal) != 0;
 
-        public virtual byte GetByte(int ordinal)
-            => checked((byte)GetInt64(ordinal));
+        public virtual byte GetByte(int ordinal) => checked((byte)GetInt64(ordinal));
 
         public virtual char GetChar(int ordinal)
         {
@@ -82,22 +79,25 @@ namespace Microsoft.Data.Sqlite
             }
         }
 
-        public virtual TimeOnly GetTimeOnly(int ordinal)
-            => TimeOnly.Parse(GetString(ordinal), CultureInfo.InvariantCulture);
+        public virtual TimeOnly GetTimeOnly(int ordinal) =>
+            TimeOnly.Parse(GetString(ordinal), CultureInfo.InvariantCulture);
 #endif
 
-        public virtual decimal GetDecimal(int ordinal)
-            => decimal.Parse(GetString(ordinal), NumberStyles.Number | NumberStyles.AllowExponent, CultureInfo.InvariantCulture);
+        public virtual decimal GetDecimal(int ordinal) =>
+            decimal.Parse(
+                GetString(ordinal),
+                NumberStyles.Number | NumberStyles.AllowExponent,
+                CultureInfo.InvariantCulture
+            );
 
-        public virtual double GetDouble(int ordinal)
-            => IsDBNull(ordinal)
+        public virtual double GetDouble(int ordinal) =>
+            IsDBNull(ordinal)
                 ? throw new InvalidOperationException(GetOnNullErrorMsg(ordinal))
                 : GetDoubleCore(ordinal);
 
         protected abstract double GetDoubleCore(int ordinal);
 
-        public virtual float GetFloat(int ordinal)
-            => (float)GetDouble(ordinal);
+        public virtual float GetFloat(int ordinal) => (float)GetDouble(ordinal);
 
         public virtual Guid GetGuid(int ordinal)
         {
@@ -128,21 +128,19 @@ namespace Microsoft.Data.Sqlite
             }
         }
 
-        public virtual short GetInt16(int ordinal)
-            => checked((short)GetInt64(ordinal));
+        public virtual short GetInt16(int ordinal) => checked((short)GetInt64(ordinal));
 
-        public virtual int GetInt32(int ordinal)
-            => checked((int)GetInt64(ordinal));
+        public virtual int GetInt32(int ordinal) => checked((int)GetInt64(ordinal));
 
-        public virtual long GetInt64(int ordinal)
-            => IsDBNull(ordinal)
+        public virtual long GetInt64(int ordinal) =>
+            IsDBNull(ordinal)
                 ? throw new InvalidOperationException(GetOnNullErrorMsg(ordinal))
                 : GetInt64Core(ordinal);
 
         protected abstract long GetInt64Core(int ordinal);
 
-        public virtual string GetString(int ordinal)
-            => IsDBNull(ordinal)
+        public virtual string GetString(int ordinal) =>
+            IsDBNull(ordinal)
                 ? throw new InvalidOperationException(GetOnNullErrorMsg(ordinal))
                 : GetStringCore(ordinal);
 
@@ -368,8 +366,8 @@ namespace Microsoft.Data.Sqlite
             return (T)GetValue(ordinal)!;
         }
 
-        public virtual object? GetValue(int ordinal)
-            => GetSqliteType(ordinal) switch
+        public virtual object? GetValue(int ordinal) =>
+            GetSqliteType(ordinal) switch
             {
                 SQLITE_INTEGER => GetInt64(ordinal),
                 SQLITE_FLOAT => GetDouble(ordinal),
@@ -377,7 +375,9 @@ namespace Microsoft.Data.Sqlite
                 SQLITE_NULL => GetNull<object>(ordinal),
                 SQLITE_BLOB => GetBlob(ordinal),
 
-                _ => throw new ArgumentOutOfRangeException("Unexpected column type: " + GetSqliteType(ordinal))
+                _ => throw new ArgumentOutOfRangeException(
+                    "Unexpected column type: " + GetSqliteType(ordinal)
+                ),
             };
 
         public virtual int GetValues(object?[] values)
@@ -391,20 +391,18 @@ namespace Microsoft.Data.Sqlite
             return i;
         }
 
-        protected virtual byte[]? GetBlob(int ordinal)
-            => IsDBNull(ordinal)
+        protected virtual byte[]? GetBlob(int ordinal) =>
+            IsDBNull(ordinal)
                 ? GetNull<byte[]>(ordinal)
                 : GetBlobCore(ordinal) ?? Array.Empty<byte>();
 
         protected abstract byte[] GetBlobCore(int ordinal);
 
-        protected virtual T? GetNull<T>(int ordinal)
-            => typeof(T) == typeof(DBNull)
-                ? (T)(object)DBNull.Value
-                : default;
+        protected virtual T? GetNull<T>(int ordinal) =>
+            typeof(T) == typeof(DBNull) ? (T)(object)DBNull.Value : default;
 
-        protected virtual string GetOnNullErrorMsg(int ordinal)
-            => Resources.CalledOnNullValue(ordinal);
+        protected virtual string GetOnNullErrorMsg(int ordinal) =>
+            Resources.CalledOnNullValue(ordinal);
 
         private static DateTime FromJulianDate(double julianDate)
         {

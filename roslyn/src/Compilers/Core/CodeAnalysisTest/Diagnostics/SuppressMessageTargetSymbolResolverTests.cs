@@ -4,6 +4,8 @@
 
 #nullable disable
 
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
@@ -13,8 +15,6 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.UnitTests;
 using Roslyn.Test.Utilities;
 using Xunit;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
 {
@@ -29,16 +29,21 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
         [Fact]
         public void TestResolveGlobalNamespace2()
         {
-            VerifyNamespaceResolution(@"
+            VerifyNamespaceResolution(
+                @"
 Namespace $$N 
 End Namespace",
-                LanguageNames.VisualBasic, false, "N");
+                LanguageNames.VisualBasic,
+                false,
+                "N"
+            );
         }
 
         [Fact]
         public void TestResolveNestedNamespace1()
         {
-            VerifyNamespaceResolution(@"
+            VerifyNamespaceResolution(
+                @"
 namespace A
 {
     namespace B.$$C
@@ -46,25 +51,33 @@ namespace A
     }
 }
 ",
-                LanguageNames.CSharp, false, "A.B.C");
+                LanguageNames.CSharp,
+                false,
+                "A.B.C"
+            );
         }
 
         [Fact]
         public void TestResolveNestedNamespace2()
         {
-            VerifyNamespaceResolution(@"
+            VerifyNamespaceResolution(
+                @"
 Namespace A
     Namespace B.$$C
     End Namespace
 End Namespace
 ",
-                LanguageNames.VisualBasic, false, "A.B.C");
+                LanguageNames.VisualBasic,
+                false,
+                "A.B.C"
+            );
         }
 
         [Fact]
         public void TestResolveNamespaceWithSameNameAsGenericInterface1()
         {
-            VerifyNamespaceResolution(@"
+            VerifyNamespaceResolution(
+                @"
 namespace $$IGoo
 {
 }
@@ -72,25 +85,33 @@ interface IGoo<T>
 {
 }
 ",
-                LanguageNames.CSharp, false, "IGoo");
+                LanguageNames.CSharp,
+                false,
+                "IGoo"
+            );
         }
 
         [Fact]
         public void TestResolveNamespaceWithSameNameAsGenericInterface2()
         {
-            VerifyNamespaceResolution(@"
+            VerifyNamespaceResolution(
+                @"
 Namespace $$IGoo
 End Namespace
 Interface IGoo(Of T)
 End Interface
 ",
-                LanguageNames.VisualBasic, false, "IGoo");
+                LanguageNames.VisualBasic,
+                false,
+                "IGoo"
+            );
         }
 
         [Fact]
         public void TestDontPartiallyResolveNamespace1()
         {
-            VerifyNoNamespaceResolution(@"
+            VerifyNoNamespaceResolution(
+                @"
 namespace A
 {
     namespace B
@@ -98,19 +119,28 @@ namespace A
     }
 }
 ",
-                LanguageNames.CSharp, false, "A+B", "A#B");
+                LanguageNames.CSharp,
+                false,
+                "A+B",
+                "A#B"
+            );
         }
 
         [Fact]
         public void TestDontPartiallyResolveNamespace2()
         {
-            VerifyNoNamespaceResolution(@"
+            VerifyNoNamespaceResolution(
+                @"
 Namespace A
     Namespace B
     End Namespace
 End Namespace
 ",
-                LanguageNames.VisualBasic, false, "A+B", "A#B");
+                LanguageNames.VisualBasic,
+                false,
+                "A+B",
+                "A#B"
+            );
         }
 
         [Fact]
@@ -122,60 +152,81 @@ End Namespace
         [Fact]
         public void TestResolveGlobalType2()
         {
-            VerifyTypeResolution(@"
+            VerifyTypeResolution(
+                @"
 Class $$C
 End Class",
-                LanguageNames.VisualBasic, false, "C");
+                LanguageNames.VisualBasic,
+                false,
+                "C"
+            );
         }
 
         [Fact]
         public void TestResolveModule()
         {
-            VerifyTypeResolution(@"
+            VerifyTypeResolution(
+                @"
 Module $$C
 End Module",
-                LanguageNames.VisualBasic, false, "C");
+                LanguageNames.VisualBasic,
+                false,
+                "C"
+            );
         }
 
         [Fact]
         public void TestResolveTypeInModule()
         {
-            VerifyTypeResolution(@"
+            VerifyTypeResolution(
+                @"
 Module M
     Class $$C
     End Class
 End Module",
-                LanguageNames.VisualBasic, false, "M+C");
+                LanguageNames.VisualBasic,
+                false,
+                "M+C"
+            );
         }
 
         [Fact]
         public void TestDontPartiallyResolveTypeInModule()
         {
-            VerifyNoTypeResolution(@"
+            VerifyNoTypeResolution(
+                @"
 Module M
     Class C
     End Class
 End Module",
-                LanguageNames.VisualBasic, false, "M.C");
+                LanguageNames.VisualBasic,
+                false,
+                "M.C"
+            );
         }
 
         [Fact]
         public void TestNestedTypesInModule()
         {
-            VerifyTypeResolution(@"
+            VerifyTypeResolution(
+                @"
 Module M
     Class C
         Structure $$D
         End Structure
     End Class
 End Module",
-                LanguageNames.VisualBasic, false, "M+C+D");
+                LanguageNames.VisualBasic,
+                false,
+                "M+C+D"
+            );
         }
 
         [Fact]
         public void TestResolveTypeInNamespace1()
         {
-            VerifyTypeResolution(@"
+            VerifyTypeResolution(
+                @"
 namespace N1.N2
 {
     class $$C
@@ -183,25 +234,33 @@ namespace N1.N2
     }
 }
 ",
-                LanguageNames.CSharp, false, "N1.N2.C");
+                LanguageNames.CSharp,
+                false,
+                "N1.N2.C"
+            );
         }
 
         [Fact]
         public void TestResolveTypeInNamespace2()
         {
-            VerifyTypeResolution(@"
+            VerifyTypeResolution(
+                @"
 Namespace N1.N2
     Class $$C
     End Class
 End Namespace
 ",
-                LanguageNames.VisualBasic, false, "N1.N2.C");
+                LanguageNames.VisualBasic,
+                false,
+                "N1.N2.C"
+            );
         }
 
         [Fact]
         public void TestResolveTypeNestedInGlobalType1()
         {
-            VerifyTypeResolution(@"
+            VerifyTypeResolution(
+                @"
 class C
 {
     interface $$D
@@ -209,24 +268,32 @@ class C
     }
 }
 ",
-                LanguageNames.CSharp, false, "C+D");
+                LanguageNames.CSharp,
+                false,
+                "C+D"
+            );
         }
 
         [Fact]
         public void TestResolveTypeNestedInGlobalType2()
         {
-            VerifyTypeResolution(@"
+            VerifyTypeResolution(
+                @"
 Class C
      Public Delegate Sub $$D()
 End Class
 ",
-                LanguageNames.VisualBasic, false, "C+D");
+                LanguageNames.VisualBasic,
+                false,
+                "C+D"
+            );
         }
 
         [Fact]
         public void TestResolveNestedType1()
         {
-            VerifyTypeResolution(@"
+            VerifyTypeResolution(
+                @"
 namespace N
 {
     class C
@@ -239,13 +306,17 @@ namespace N
     }
 }
 ",
-                LanguageNames.CSharp, false, "N.C+D+E");
+                LanguageNames.CSharp,
+                false,
+                "N.C+D+E"
+            );
         }
 
         [Fact]
         public void TestResolveNestedType2()
         {
-            VerifyTypeResolution(@"
+            VerifyTypeResolution(
+                @"
 Namespace N
     Class C
         Class D
@@ -255,13 +326,17 @@ Namespace N
     End Class
 End Namespace
 ",
-                LanguageNames.VisualBasic, false, "N.C+D+E");
+                LanguageNames.VisualBasic,
+                false,
+                "N.C+D+E"
+            );
         }
 
         [Fact]
         public void TestResolveGenericType1()
         {
-            VerifyTypeResolution(@"
+            VerifyTypeResolution(
+                @"
 class D<T>
 {
 }
@@ -269,58 +344,78 @@ class $$D<T1, T2, T3>
 {
 }
 ",
-                LanguageNames.CSharp, false, "D`3");
+                LanguageNames.CSharp,
+                false,
+                "D`3"
+            );
         }
 
         [Fact]
         public void TestResolveGenericType2()
         {
-            VerifyTypeResolution(@"
+            VerifyTypeResolution(
+                @"
 Class D(Of T)
 End Class
 Class $$D(Of T1, T2, T3)
 End Class
 ",
-                LanguageNames.VisualBasic, false, "D`3");
+                LanguageNames.VisualBasic,
+                false,
+                "D`3"
+            );
         }
 
         [Fact]
         public void TestDontResolveGenericType1()
         {
-            VerifyNoTypeResolution(@"
+            VerifyNoTypeResolution(
+                @"
 class D<T1, T2, T3>
 {
 }
 ",
-                LanguageNames.CSharp, false, "D");
+                LanguageNames.CSharp,
+                false,
+                "D"
+            );
         }
 
         [Fact]
         public void TestDontResolveGenericType2()
         {
-            VerifyNoTypeResolution(@"
+            VerifyNoTypeResolution(
+                @"
 Class D(Of T1, T2, T3)
 End Class
 ",
-                LanguageNames.VisualBasic, false, "D");
+                LanguageNames.VisualBasic,
+                false,
+                "D"
+            );
         }
 
         [Fact]
         public void TestResolveRootNamespace()
         {
-            VerifyTypeResolution(@"
+            VerifyTypeResolution(
+                @"
 Module M
     Class $$C
     End Class
 End Module
 ",
-                LanguageNames.VisualBasic, true, "RootNamespace.M+C");
+                LanguageNames.VisualBasic,
+                true,
+                "RootNamespace.M+C"
+            );
         }
 
         [Fact]
         public void TestDontPartiallyResolveType1()
         {
-            VerifyNoTypeResolution(@"
+            VerifyNoTypeResolution(
+                @"
 class A
 {
     class B
@@ -328,52 +423,66 @@ class A
     }
 }
 ",
-                LanguageNames.CSharp, false, "A.B");
+                LanguageNames.CSharp,
+                false,
+                "A.B"
+            );
         }
 
         [Fact]
         public void TestDontPartiallyResolveType2()
         {
-            VerifyNoTypeResolution(@"
+            VerifyNoTypeResolution(
+                @"
 Class A
     Class B
     End Class
 End Class
 ",
-                LanguageNames.VisualBasic, false, "A.B");
+                LanguageNames.VisualBasic,
+                false,
+                "A.B"
+            );
         }
 
         [Fact]
         public void TestResolveField1()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class C
 {
     string $$s;
 }
 ",
-                LanguageNames.CSharp, false,
+                LanguageNames.CSharp,
+                false,
                 "C.#s",
-                "C.s");
+                "C.s"
+            );
         }
 
         [Fact]
         public void TestResolveField2()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Class C
     Dim $$s As String
 End Class
 ",
-                LanguageNames.VisualBasic, false,
+                LanguageNames.VisualBasic,
+                false,
                 "C.#s",
-                "C.s");
+                "C.s"
+            );
         }
 
         [Fact, WorkItem(1141257, "https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1141257")]
         public void TestResolveEnumFieldWithoutName()
         {
-            var source = @"
+            var source =
+                @"
 enum E
 {
     $$,
@@ -381,27 +490,35 @@ enum E
 ";
             var syntaxTree = CreateSyntaxTree(source, LanguageNames.CSharp);
             var compilation = CreateCompilation(syntaxTree, LanguageNames.CSharp, "");
-            _ = SuppressMessageAttributeState.ResolveTargetSymbols(compilation, "E.", SuppressMessageAttributeState.TargetScope.Member);
+            _ = SuppressMessageAttributeState.ResolveTargetSymbols(
+                compilation,
+                "E.",
+                SuppressMessageAttributeState.TargetScope.Member
+            );
         }
 
         [Fact]
         public void TestResolveProperty1()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class C
 {
     public string $$StringProperty { get; set; }
 }
 ",
-                LanguageNames.CSharp, false,
+                LanguageNames.CSharp,
+                false,
                 "C.#StringProperty",
-                "C.StringProperty");
+                "C.StringProperty"
+            );
         }
 
         [Fact]
         public void TestResolveProperty2()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Class C
     Public Property $$StringProperty 
         Get 
@@ -411,79 +528,99 @@ Class C
     End Property
 End Class
 ",
-                LanguageNames.VisualBasic, false,
+                LanguageNames.VisualBasic,
+                false,
                 "C.#StringProperty",
-                "C.StringProperty");
+                "C.StringProperty"
+            );
         }
 
         [Fact]
         public void TestResolveEvent1()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class C
 {
     public event System.EventHandler<int> $$E;
 }
 ",
-                LanguageNames.CSharp, false,
+                LanguageNames.CSharp,
+                false,
                 "e:C.#E",
-                "C.E");
+                "C.E"
+            );
         }
 
         [Fact]
         public void TestResolveEvent2()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Class C
     Public Event $$E As System.EventHandler(Of Integer)
 End Class
 ",
-                LanguageNames.VisualBasic, false,
+                LanguageNames.VisualBasic,
+                false,
                 "e:C.#E",
-                "C.E");
+                "C.E"
+            );
         }
 
         [Fact]
         public void TestDontResolveNonEvent1()
         {
-            VerifyNoMemberResolution(@"
+            VerifyNoMemberResolution(
+                @"
 public class C
 {
     public int E;
 }
 ",
-               LanguageNames.CSharp, false, "e:C.E");
+                LanguageNames.CSharp,
+                false,
+                "e:C.E"
+            );
         }
 
         [Fact]
         public void TestDontResolveNonEvent2()
         {
-            VerifyNoMemberResolution(@"
+            VerifyNoMemberResolution(
+                @"
 Public Class C
     Public Dim E As Integer
 End Class
 ",
-               LanguageNames.VisualBasic, false, "e:C.E");
+                LanguageNames.VisualBasic,
+                false,
+                "e:C.E"
+            );
         }
 
         [Fact]
         public void TestResolvePropertySetMethod1()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class C
 {
     public string StringProperty { get; $$set; }
 }
 ",
-                LanguageNames.CSharp, false,
+                LanguageNames.CSharp,
+                false,
                 "C.#set_StringProperty(System.String)",
-                "C.set_StringProperty(System.String):System.Void");
+                "C.set_StringProperty(System.String):System.Void"
+            );
         }
 
         [Fact]
         public void TestResolvePropertySetMethod2()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Class C
     Public Property StringProperty As String
         Get
@@ -493,15 +630,18 @@ Class C
     End Property
 End Class
 ",
-                LanguageNames.VisualBasic, false,
+                LanguageNames.VisualBasic,
+                false,
                 "C.#set_StringProperty(System.String)",
-                "C.set_StringProperty(System.String):System.Void");
+                "C.set_StringProperty(System.String):System.Void"
+            );
         }
 
         [Fact]
         public void TestResolveEventAddMethod()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class C
 {
     public delegate void Del(int x);
@@ -512,15 +652,18 @@ class C
     }
 }
 ",
-                LanguageNames.CSharp, false,
+                LanguageNames.CSharp,
+                false,
                 "C.#add_E(C.Del)",
-                "C.add_E(C.Del):System.Void");
+                "C.add_E(C.Del):System.Void"
+            );
         }
 
         [Fact]
         public void TestResolveEventRemoveMethod()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class C
 {
     public delegate void Del(int x);
@@ -531,15 +674,18 @@ class C
     }
 }
 ",
-                LanguageNames.CSharp, false,
+                LanguageNames.CSharp,
+                false,
                 "C.#remove_E(C.Del)",
-                "C.remove_E(C.Del):System.Void");
+                "C.remove_E(C.Del):System.Void"
+            );
         }
 
         [Fact]
         public void TestResolveVoidMethod1()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class C
 {
     void Goo() {}
@@ -547,15 +693,18 @@ class C
     void Goo(string x) {}
 }
 ",
-            LanguageNames.CSharp, false,
-            "C.#Goo(System.Int32)",
-            "C.Goo(System.Int32):System.Void");
+                LanguageNames.CSharp,
+                false,
+                "C.#Goo(System.Int32)",
+                "C.Goo(System.Int32):System.Void"
+            );
         }
 
         [Fact]
         public void TestResolveVoidMethod2()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Class C
     Sub Goo() 
     End Sub
@@ -565,15 +714,18 @@ Class C
     End Sub
 End Class
 ",
-            LanguageNames.VisualBasic, false,
-            "C.#Goo(System.Int32)",
-            "C.Goo(System.Int32):System.Void");
+                LanguageNames.VisualBasic,
+                false,
+                "C.#Goo(System.Int32)",
+                "C.Goo(System.Int32):System.Void"
+            );
         }
 
         [Fact]
         public void TestResolveMethod1()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class C
 {
     void Goo() {}
@@ -581,15 +733,18 @@ class C
     string $$Goo(string x) {}
 }
 ",
-            LanguageNames.CSharp, false,
-            "C.#Goo(System.String)",
-            "C.Goo(System.String):System.String");
+                LanguageNames.CSharp,
+                false,
+                "C.#Goo(System.String)",
+                "C.Goo(System.String):System.String"
+            );
         }
 
         [Fact]
         public void TestResolveMethod2()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Class C
     Sub Goo() 
     End Sub
@@ -599,39 +754,49 @@ Class C
     End Function
 End Class
 ",
-            LanguageNames.VisualBasic, false,
-            "C.#Goo(System.String)",
-            "C.Goo(System.String):System.String");
+                LanguageNames.VisualBasic,
+                false,
+                "C.#Goo(System.String)",
+                "C.Goo(System.String):System.String"
+            );
         }
 
         [Fact]
         public void TestResolveOverloadedGenericMethod1()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class C
 {
     int Goo<T>(T x) {}
     int $$Goo<T>(T x, params T[] y) {}
 }
 ",
-                LanguageNames.CSharp, false,
+                LanguageNames.CSharp,
+                false,
                 "C.#Goo`1(!!0,!!0[])",
-                "C.Goo(T,T[]):System.Int32");
+                "C.Goo(T,T[]):System.Int32"
+            );
 
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class C
 {
     int [|Goo|]<T>(T x) {}
     int [|Goo|]<T>(T x, T y) {}
 }
 ",
-                LanguageNames.CSharp, false, "C.Goo():System.Int32");
+                LanguageNames.CSharp,
+                false,
+                "C.Goo():System.Int32"
+            );
         }
 
         [Fact]
         public void TestResolveOverloadedGenericMethod2()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Class C
     Function Goo(Of T)(ByVal x As T) As Integer
     End Function
@@ -639,11 +804,14 @@ Class C
     End Function
 End Class
 ",
-                LanguageNames.VisualBasic, false,
+                LanguageNames.VisualBasic,
+                false,
                 "C.#Goo`1(!!0,!!0[])",
-                "C.Goo(T,T[]):System.Int32");
+                "C.Goo(T,T[]):System.Int32"
+            );
 
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Class C
     Function [|Goo|](Of T)(ByVal x As T) As Integer
     End Function
@@ -651,111 +819,143 @@ Class C
     End Function
 End Class
 ",
-                LanguageNames.VisualBasic, false, "C.Goo():System.Int32");
+                LanguageNames.VisualBasic,
+                false,
+                "C.Goo():System.Int32"
+            );
         }
 
         [Fact]
         public void TestResolveMethodOverloadedOnArity1()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 interface I
 {
     void M<T>();
     void $$M<T1, T2>();
 }
 ",
-                LanguageNames.CSharp, false, "I.#M`2()");
+                LanguageNames.CSharp,
+                false,
+                "I.#M`2()"
+            );
 
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 interface I
 {
     void [|M|]<T>();
     void [|M|]<T1, T2>();
 }
 ",
-                LanguageNames.CSharp, false, "I.M():System.Void");
+                LanguageNames.CSharp,
+                false,
+                "I.M():System.Void"
+            );
         }
 
         [Fact]
         public void TestResolveMethodOverloadedOnArity2()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Interface I
     Sub M(Of T)
     Sub $$M(Of T1, T2)
 End Interface
 ",
-                LanguageNames.VisualBasic, false, "I.#M`2()");
+                LanguageNames.VisualBasic,
+                false,
+                "I.#M`2()"
+            );
 
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Interface I
     Sub [|M|](Of T)
     Sub [|M|](Of T1, T2)
 End Interface
 ",
-                LanguageNames.VisualBasic, false, "I.M():System.Void");
+                LanguageNames.VisualBasic,
+                false,
+                "I.M():System.Void"
+            );
         }
 
         [Fact]
         public void TestResolveConstructor1()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class C
 {
     $$C() {}
 }
 ",
-                LanguageNames.CSharp, false,
+                LanguageNames.CSharp,
+                false,
                 "C.#.ctor()",
-                "C..ctor()");
+                "C..ctor()"
+            );
         }
 
         [Fact]
         public void TestResolveConstructor2()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Class C
     Sub $$New()
     End Sub
 End Class
 ",
-                LanguageNames.VisualBasic, false,
+                LanguageNames.VisualBasic,
+                false,
                 "C.#.ctor()",
-                "C..ctor()");
+                "C..ctor()"
+            );
         }
 
         [Fact]
         public void TestResolveStaticConstructor1()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class C
 {
     static $$C() {}
 }
 ",
-                LanguageNames.CSharp, false,
+                LanguageNames.CSharp,
+                false,
                 "C.#.cctor()",
-                "C..cctor()");
+                "C..cctor()"
+            );
         }
 
         [Fact]
         public void TestResolveStaticConstructor2()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Class C
     Shared Sub $$New()
     End Sub
 End Class
 ",
-                LanguageNames.VisualBasic, false,
+                LanguageNames.VisualBasic,
+                false,
                 "C.#.cctor()",
-                "C..cctor()");
+                "C..cctor()"
+            );
         }
 
         [Fact]
         public void TestResolveSimpleOperator1()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class C
 {
     public static bool operator $$==(C a, C b)
@@ -764,30 +964,36 @@ class C
     }
 }
 ",
-                LanguageNames.CSharp, false,
+                LanguageNames.CSharp,
+                false,
                 "C.#op_Equality(C,C)",
-                "C.op_Equality(C,C):System.Boolean");
+                "C.op_Equality(C,C):System.Boolean"
+            );
         }
 
         [Fact]
         public void TestResolveSimpleOperator2()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Class C
     Public Shared Operator $$+(a as C, b as C) As Boolean
         return true
     End Operator
 End Class
 ",
-                LanguageNames.VisualBasic, false,
+                LanguageNames.VisualBasic,
+                false,
                 "C.#op_Addition(C,C)",
-                "C.op_Addition(C,C):System.Boolean");
+                "C.op_Addition(C,C):System.Boolean"
+            );
         }
 
         [Fact]
         public void TestResolveIndexer1()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class C
 {
     public C $$this[int i, string j]
@@ -801,15 +1007,18 @@ class C
     }
 }
 ",
-                LanguageNames.CSharp, false,
+                LanguageNames.CSharp,
+                false,
                 "C.#Item[System.Int32,System.String]",
-                "C.Item[System.Int32,System.String]");
+                "C.Item[System.Int32,System.String]"
+            );
         }
 
         [Fact]
         public void TestResolveIndexer2()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Class C
 	Public Default ReadOnly Property $$Item(i As Integer, j As String) As C
 		Get
@@ -824,15 +1033,18 @@ Class C
 	End Property
 End Class
 ",
-                LanguageNames.VisualBasic, false,
+                LanguageNames.VisualBasic,
+                false,
                 "C.#Item[System.Int32,System.String]",
-                "C.Item[System.Int32,System.String]");
+                "C.Item[System.Int32,System.String]"
+            );
         }
 
         [Fact]
         public void TestResolveIndexerAccessorMethod()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class C
 {
     public C this[int i]
@@ -846,15 +1058,18 @@ class C
     }
 }
 ",
-                LanguageNames.CSharp, false,
+                LanguageNames.CSharp,
+                false,
                 "C.#get_Item(System.String)",
-                "C.get_Item(System.String):C");
+                "C.get_Item(System.String):C"
+            );
         }
 
         [Fact]
         public void TestResolveExplicitOperator()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class C
 {
     public static explicit operator $$bool(C c)
@@ -868,15 +1083,18 @@ class C
     }
 }
 ",
-                LanguageNames.CSharp, false,
+                LanguageNames.CSharp,
+                false,
                 "C.#op_Explicit(C):System.Boolean",
-                "C.op_Explicit(C):System.Boolean");
+                "C.op_Explicit(C):System.Boolean"
+            );
         }
 
         [Fact]
         public void TestResolveMethodWithComplexParameterTypes1()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class C
 {
     public unsafe static bool $$IsComplex<T0, T1>(int* a, ref int b, ref T0 c, T1[] d)
@@ -885,29 +1103,35 @@ class C
     }
 }
 ",
-                LanguageNames.CSharp, false,
+                LanguageNames.CSharp,
+                false,
                 "C.#IsComplex`2(System.Int32*,System.Int32&,!!0&,!!1[])",
-                "C.IsComplex(System.Int32*,System.Int32&,T0&,T1[]):System.Boolean");
+                "C.IsComplex(System.Int32*,System.Int32&,T0&,T1[]):System.Boolean"
+            );
         }
 
         [Fact]
         public void TestResolveMethodWithComplexParameterTypes2()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Class C
 	Public Shared Function $$IsComplex(Of T0, T1)(a As Integer, ByRef b As Integer, ByRef c As T0, d As T1()) As Boolean
 		Return True
 	End Function
 End Class",
-                LanguageNames.VisualBasic, false,
+                LanguageNames.VisualBasic,
+                false,
                 "C.#IsComplex`2(System.Int32,System.Int32&,!!0&,!!1[])",
-                "C.IsComplex(System.Int32,System.Int32&,T0&,T1[]):System.Boolean");
+                "C.IsComplex(System.Int32,System.Int32&,T0&,T1[]):System.Boolean"
+            );
         }
 
         [Fact]
         public void TestFinalize1()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class A
 {
     ~$$A()
@@ -915,15 +1139,18 @@ class A
     }
 }
 ",
-                LanguageNames.CSharp, false,
+                LanguageNames.CSharp,
+                false,
                 "A.#Finalize()",
-                "A.Finalize():System.Void");
+                "A.Finalize():System.Void"
+            );
         }
 
         [Fact]
         public void TestFinalize2()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Class A
 	Protected Overrides Sub $$Finalize()
 		Try
@@ -933,15 +1160,18 @@ Class A
 	End Sub
 End Class
 ",
-                LanguageNames.VisualBasic, false,
+                LanguageNames.VisualBasic,
+                false,
                 "A.#Finalize()",
-                "A.Finalize():System.Void");
+                "A.Finalize():System.Void"
+            );
         }
 
         [Fact]
         public void TestResolveMethodWithComplexReturnType1()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class C
 {
     public static T[][][,,][,] $$GetComplex<T>()
@@ -950,30 +1180,36 @@ class C
     }
 }
 ",
-                LanguageNames.CSharp, false,
+                LanguageNames.CSharp,
+                false,
                 "C.#GetComplex`1()",
-                "C.GetComplex():T[,][,,][][]");
+                "C.GetComplex():T[,][,,][][]"
+            );
         }
 
         [Fact]
         public void TestResolveMethodWithComplexReturnType2()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Class C
 	Public Shared Function $$GetComplex(Of T)() As T()()(,,)(,)
 		Return Nothing
 	End Function
 End Class
 ",
-                LanguageNames.VisualBasic, false,
+                LanguageNames.VisualBasic,
+                false,
                 "C.#GetComplex`1()",
-                "C.GetComplex():T[,][,,][][]");
+                "C.GetComplex():T[,][,,][][]"
+            );
         }
 
         [Fact]
         public void TestResolveMethodWithGenericParametersAndReturnTypeFromContainingClass1()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 public class C<T0>
 {
     public class D<T1>
@@ -985,15 +1221,18 @@ public class C<T0>
     }
 }
 ",
-                LanguageNames.CSharp, false,
+                LanguageNames.CSharp,
+                false,
                 "C`1+D`1.#M`2(!0,!1,!!0)",
-                "C`1+D`1.M(T0,T1,T2):T3");
+                "C`1+D`1.M(T0,T1,T2):T3"
+            );
         }
 
         [Fact]
         public void TestResolveMethodWithGenericParametersAndReturnTypeFromContainingClass2()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Public Class C(Of T0)
 	Public Class D(Of T1)
 		Public Function $$M(Of T2, T3)(a As T0, b As T1, c As T2) As T3
@@ -1002,15 +1241,18 @@ Public Class C(Of T0)
 	End Class
 End Class
 ",
-                LanguageNames.VisualBasic, false,
+                LanguageNames.VisualBasic,
+                false,
                 "C`1+D`1.#M`2(!0,!1,!!0)",
-                "C`1+D`1.M(T0,T1,T2):T3");
+                "C`1+D`1.M(T0,T1,T2):T3"
+            );
         }
 
         [Fact]
         public void TestResolveIndexerWithGenericParametersTypeFromContainingClass1()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 public class C<T0>
 {
     public class D<T1>
@@ -1022,15 +1264,18 @@ public class C<T0>
     }
 }
 ",
-                LanguageNames.CSharp, false,
+                LanguageNames.CSharp,
+                false,
                 "C`1+D`1.#Item[!1]",
-                "C`1+D`1.Item[!1]:!0");
+                "C`1+D`1.Item[!1]:!0"
+            );
         }
 
         [Fact]
         public void TestResolveIndexerWithGenericParametersTypeFromContainingClass2()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Public Class C(Of T0)
 	Public Class D(Of T1)
 		Public Default ReadOnly Property $$Item(a As T1) As T0
@@ -1041,15 +1286,18 @@ Public Class C(Of T0)
 	End Class
 End Class
 ",
-                LanguageNames.VisualBasic, false,
+                LanguageNames.VisualBasic,
+                false,
                 "C`1+D`1.#Item[!1]",
-                "C`1+D`1.Item[!1]:!0");
+                "C`1+D`1.Item[!1]:!0"
+            );
         }
 
         [Fact]
         public void TestResolveMethodOnOutParameter1()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class C
 {
     void M0(int x)
@@ -1062,15 +1310,18 @@ class C
     }
 }
 ",
-                LanguageNames.CSharp, false,
+                LanguageNames.CSharp,
+                false,
                 "C.#M1(System.Int32&)",
-                "C.M1(System.Int32&):System.Void");
+                "C.M1(System.Int32&):System.Void"
+            );
         }
 
         [Fact]
         public void TestResolveMethodOnOutParameter2()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Class C
 	Private Sub M0(x As Integer)
 	End Sub
@@ -1080,15 +1331,18 @@ Class C
 	End Sub
 End Class
 ",
-                LanguageNames.VisualBasic, false,
+                LanguageNames.VisualBasic,
+                false,
                 "C.#M1(System.Int32&)",
-                "C.M1(System.Int32&):System.Void");
+                "C.M1(System.Int32&):System.Void"
+            );
         }
 
         [Fact]
         public void TestResolveMethodWithInstantiatedGenericParameterAndReturnType1()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class G<T0,T1>
 {
 }
@@ -1100,15 +1354,18 @@ class C<T3>
     }
 }
 ",
-                LanguageNames.CSharp, false,
+                LanguageNames.CSharp,
+                false,
                 "C.#M`1(G`2<System.Double,System.Double>,G`2<!0,!!0[]>)",
-                "C.M(G`2<System.Double,System.Double>,G`2<T3,T4[]>):G`2<System.Int32,System.Int32>");
+                "C.M(G`2<System.Double,System.Double>,G`2<T3,T4[]>):G`2<System.Int32,System.Int32>"
+            );
         }
 
         [Fact]
         public void TestResolveMethodWithInstantiatedGenericParameterAndReturnType2()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Class G(Of T0, T1)
 End Class
 
@@ -1117,15 +1374,18 @@ Class C(Of T3)
 	End Function
 End Class
 ",
-                LanguageNames.VisualBasic, false,
+                LanguageNames.VisualBasic,
+                false,
                 "C.#M`1(G`2<System.Double,System.Double>,G`2<!0,!!0[]>)",
-                "C.M(G`2<System.Double,System.Double>,G`2<T3,T4[]>):G`2<System.Int32,System.Int32>");
+                "C.M(G`2<System.Double,System.Double>,G`2<T3,T4[]>):G`2<System.Int32,System.Int32>"
+            );
         }
 
         [Fact]
         public void TestResolveEscapedName1()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 namespace @namespace
 {
     class @class
@@ -1134,62 +1394,74 @@ namespace @namespace
     }
 }
 ",
-                LanguageNames.CSharp, false,
-                "namespace.class.if");
+                LanguageNames.CSharp,
+                false,
+                "namespace.class.if"
+            );
         }
 
         [Fact]
         public void TestResolveEscapedName2()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Namespace [Namespace]
 	Class [Class]
 		Private $$[If] As Integer
 	End Class
 End Namespace
 ",
-                LanguageNames.VisualBasic, false,
-                "Namespace.Class.If");
+                LanguageNames.VisualBasic,
+                false,
+                "Namespace.Class.If"
+            );
         }
 
         [Fact]
         public void TestResolveMethodIgnoresConvention1()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 class C
 {
     string $$Goo(string x) {}
 }
 ",
-            LanguageNames.CSharp, false,
-            "C.#[vararg]Goo(System.String)",
-            "C.#[cdecl]Goo(System.String)",
-            "C.#[fastcall]Goo(System.String)",
-            "C.#[stdcall]Goo(System.String)",
-            "C.#[thiscall]Goo(System.String)");
+                LanguageNames.CSharp,
+                false,
+                "C.#[vararg]Goo(System.String)",
+                "C.#[cdecl]Goo(System.String)",
+                "C.#[fastcall]Goo(System.String)",
+                "C.#[stdcall]Goo(System.String)",
+                "C.#[thiscall]Goo(System.String)"
+            );
         }
 
         [Fact]
         public void TestResolveMethodIgnoresConvention2()
         {
-            VerifyMemberResolution(@"
+            VerifyMemberResolution(
+                @"
 Class C
     Private Function $$Goo(x As String) As String
 End Function
 End Class
 ",
-            LanguageNames.VisualBasic, false,
-            "C.#[vararg]Goo(System.String)",
-            "C.#[cdecl]Goo(System.String)",
-            "C.#[fastcall]Goo(System.String)",
-            "C.#[stdcall]Goo(System.String)",
-            "C.#[thiscall]Goo(System.String)");
+                LanguageNames.VisualBasic,
+                false,
+                "C.#[vararg]Goo(System.String)",
+                "C.#[cdecl]Goo(System.String)",
+                "C.#[fastcall]Goo(System.String)",
+                "C.#[stdcall]Goo(System.String)",
+                "C.#[thiscall]Goo(System.String)"
+            );
         }
 
         [Fact]
         public void TestNoResolutionForMalformedNames1()
         {
-            VerifyNoMemberResolution(@"
+            VerifyNoMemberResolution(
+                @"
 public class C<T0>
 {
     public class D<T4>
@@ -1203,20 +1475,23 @@ public class C<T0>
     }
 }
 ",
-                LanguageNames.CSharp, false,
+                LanguageNames.CSharp,
+                false,
                 "C`1+D`1.#M`2(!0,!1,!!0", // Missing close paren
                 "C`1+D`1.M`2(T0,T4,T2):", // Missing return type
                 "C`1+D`1.M`2(T0,T4,T2", // Missing close paren
                 "C`1+D`1+M`2(T0,T4,T2)", // '+' instead of '.' delimiter
                 "C`1.D`1.M`2(T0,T4,T2)", // '.' instead of '+' delimiter
                 "C`1+D`1.@namespace", // Escaped name
-                "C`1+D`1.#[blah]M`2(!0,!1,!!0)"); // Invalid calling convention
+                "C`1+D`1.#[blah]M`2(!0,!1,!!0)"
+            ); // Invalid calling convention
         }
 
         [Fact]
         public void TestNoResolutionForMalformedNames2()
         {
-            VerifyNoMemberResolution(@"
+            VerifyNoMemberResolution(
+                @"
 Public Class C(Of T0)
 	Public Class D(Of T1)
 		Private [Namespace] As Integer
@@ -1227,14 +1502,16 @@ Public Class C(Of T0)
 	End Class
 End Class
 ",
-                LanguageNames.VisualBasic, false,
-                "C`1+D`1.#M`2(!0,!1,!!0", // Missing close paren 
+                LanguageNames.VisualBasic,
+                false,
+                "C`1+D`1.#M`2(!0,!1,!!0", // Missing close paren
                 "C`1+D`1.M`2(T0,T1,T2):", // Missing return type
                 "C`1+D`1.M`2(T0,T1,T2", // Missing close paren
                 "C`1+D`1+M`2(T0,T1,T2)", // '+' instead of '.' delimiter
                 "C`1.D`1.M`2(T0,T1,T2)", // '.' instead of '+' delimiter
                 "C`1+D`1.[Namespace]", // Escaped name
-                "C`1+D`1.#[blah]M`2(!0,!1,!!0)"); // Invalid calling convention
+                "C`1+D`1.#[blah]M`2(!0,!1,!!0)"
+            ); // Invalid calling convention
         }
 
         [Fact, WorkItem(65396, "https://github.com/dotnet/roslyn/issues/65396")]
@@ -1246,16 +1523,21 @@ End Class
                 "C.#M`1(G`2<!0,!!1[]>)", // Wrong method type index
             };
 
-            VerifyNoMemberResolution("""
+            VerifyNoMemberResolution(
+                """
                 class G<T0,T1> { }
                 class C<T3>
                 {
                     G<int,int> M<T4>(G<T3, T4[]> g) { }
                 }
                 """,
-                LanguageNames.CSharp, false, names);
+                LanguageNames.CSharp,
+                false,
+                names
+            );
 
-            VerifyNoMemberResolution("""
+            VerifyNoMemberResolution(
+                """
                 Class G(Of T0, T1)
                 End Class
                 Class C(Of T3)
@@ -1263,10 +1545,18 @@ End Class
                 	End Function
                 End Class
                 """,
-                LanguageNames.VisualBasic, false, names);
+                LanguageNames.VisualBasic,
+                false,
+                names
+            );
         }
 
-        private static void VerifyNamespaceResolution(string markup, string language, bool rootNamespace, params string[] fxCopFullyQualifiedNames)
+        private static void VerifyNamespaceResolution(
+            string markup,
+            string language,
+            bool rootNamespace,
+            params string[] fxCopFullyQualifiedNames
+        )
         {
             string rootNamespaceName = "";
             if (rootNamespace)
@@ -1274,10 +1564,21 @@ End Class
                 rootNamespaceName = "RootNamespace";
             }
 
-            VerifyResolution(markup, fxCopFullyQualifiedNames, SuppressMessageAttributeState.TargetScope.Namespace, language, rootNamespaceName);
+            VerifyResolution(
+                markup,
+                fxCopFullyQualifiedNames,
+                SuppressMessageAttributeState.TargetScope.Namespace,
+                language,
+                rootNamespaceName
+            );
         }
 
-        private static void VerifyNoNamespaceResolution(string markup, string language, bool rootNamespace, params string[] fxCopFullyQualifiedNames)
+        private static void VerifyNoNamespaceResolution(
+            string markup,
+            string language,
+            bool rootNamespace,
+            params string[] fxCopFullyQualifiedNames
+        )
         {
             string rootNamespaceName = "";
             if (rootNamespace)
@@ -1285,10 +1586,21 @@ End Class
                 rootNamespaceName = "RootNamespace";
             }
 
-            VerifyNoResolution(markup, fxCopFullyQualifiedNames, SuppressMessageAttributeState.TargetScope.Namespace, language, rootNamespaceName);
+            VerifyNoResolution(
+                markup,
+                fxCopFullyQualifiedNames,
+                SuppressMessageAttributeState.TargetScope.Namespace,
+                language,
+                rootNamespaceName
+            );
         }
 
-        private static void VerifyTypeResolution(string markup, string language, bool rootNamespace, params string[] fxCopFullyQualifiedNames)
+        private static void VerifyTypeResolution(
+            string markup,
+            string language,
+            bool rootNamespace,
+            params string[] fxCopFullyQualifiedNames
+        )
         {
             string rootNamespaceName = "";
             if (rootNamespace)
@@ -1296,10 +1608,21 @@ End Class
                 rootNamespaceName = "RootNamespace";
             }
 
-            VerifyResolution(markup, fxCopFullyQualifiedNames, SuppressMessageAttributeState.TargetScope.Type, language, rootNamespaceName);
+            VerifyResolution(
+                markup,
+                fxCopFullyQualifiedNames,
+                SuppressMessageAttributeState.TargetScope.Type,
+                language,
+                rootNamespaceName
+            );
         }
 
-        private static void VerifyNoTypeResolution(string markup, string language, bool rootNamespace, params string[] fxCopFullyQualifiedNames)
+        private static void VerifyNoTypeResolution(
+            string markup,
+            string language,
+            bool rootNamespace,
+            params string[] fxCopFullyQualifiedNames
+        )
         {
             string rootNamespaceName = "";
             if (rootNamespace)
@@ -1307,10 +1630,21 @@ End Class
                 rootNamespaceName = "RootNamespace";
             }
 
-            VerifyNoResolution(markup, fxCopFullyQualifiedNames, SuppressMessageAttributeState.TargetScope.Type, language, rootNamespaceName);
+            VerifyNoResolution(
+                markup,
+                fxCopFullyQualifiedNames,
+                SuppressMessageAttributeState.TargetScope.Type,
+                language,
+                rootNamespaceName
+            );
         }
 
-        private static void VerifyMemberResolution(string markup, string language, bool rootNamespace, params string[] fxCopFullyQualifiedNames)
+        private static void VerifyMemberResolution(
+            string markup,
+            string language,
+            bool rootNamespace,
+            params string[] fxCopFullyQualifiedNames
+        )
         {
             string rootNamespaceName = "";
             if (rootNamespace)
@@ -1318,10 +1652,21 @@ End Class
                 rootNamespaceName = "RootNamespace";
             }
 
-            VerifyResolution(markup, fxCopFullyQualifiedNames, SuppressMessageAttributeState.TargetScope.Member, language, rootNamespaceName);
+            VerifyResolution(
+                markup,
+                fxCopFullyQualifiedNames,
+                SuppressMessageAttributeState.TargetScope.Member,
+                language,
+                rootNamespaceName
+            );
         }
 
-        private static void VerifyNoMemberResolution(string markup, string language, bool rootNamespace, params string[] fxCopFullyQualifiedNames)
+        private static void VerifyNoMemberResolution(
+            string markup,
+            string language,
+            bool rootNamespace,
+            params string[] fxCopFullyQualifiedNames
+        )
         {
             string rootNamespaceName = "";
             if (rootNamespace)
@@ -1329,16 +1674,35 @@ End Class
                 rootNamespaceName = "RootNamespace";
             }
 
-            VerifyNoResolution(markup, fxCopFullyQualifiedNames, SuppressMessageAttributeState.TargetScope.Member, language, rootNamespaceName);
+            VerifyNoResolution(
+                markup,
+                fxCopFullyQualifiedNames,
+                SuppressMessageAttributeState.TargetScope.Member,
+                language,
+                rootNamespaceName
+            );
         }
 
-        private static void VerifyResolution(string markup, string[] fxCopFullyQualifiedNames, SuppressMessageAttributeState.TargetScope scope, string language, string rootNamespace)
+        private static void VerifyResolution(
+            string markup,
+            string[] fxCopFullyQualifiedNames,
+            SuppressMessageAttributeState.TargetScope scope,
+            string language,
+            string rootNamespace
+        )
         {
             // Parse out the span containing the declaration of the expected symbol
-            MarkupTestFile.GetPositionAndSpans(markup,
-                out var source, out var pos, out IDictionary<string, ImmutableArray<TextSpan>> spans);
+            MarkupTestFile.GetPositionAndSpans(
+                markup,
+                out var source,
+                out var pos,
+                out IDictionary<string, ImmutableArray<TextSpan>> spans
+            );
 
-            Assert.True(pos != null || spans.Count > 0, "Must specify a position or spans marking expected symbols for resolution");
+            Assert.True(
+                pos != null || spans.Count > 0,
+                "Must specify a position or spans marking expected symbols for resolution"
+            );
 
             // Get the expected symbol from the given position
             var syntaxTree = CreateSyntaxTree(source, language);
@@ -1362,7 +1726,11 @@ End Class
             // Resolve the symbol based on each given FxCop fully-qualified name
             foreach (var fxCopName in fxCopFullyQualifiedNames)
             {
-                var symbols = SuppressMessageAttributeState.ResolveTargetSymbols(compilation, fxCopName, scope);
+                var symbols = SuppressMessageAttributeState.ResolveTargetSymbols(
+                    compilation,
+                    fxCopName,
+                    scope
+                );
 
                 if (shouldResolveSingleSymbol)
                 {
@@ -1370,23 +1738,41 @@ End Class
 
                     if (symbols.Count() > 1)
                     {
-                        Assert.True(false,
-                            string.Format("Expected to resolve FxCop fully-qualified name '{0}' to '{1}': got multiple symbols:\r\n{2}",
-                                fxCopName, expectedSymbol, string.Join("\r\n", symbols)));
+                        Assert.True(
+                            false,
+                            string.Format(
+                                "Expected to resolve FxCop fully-qualified name '{0}' to '{1}': got multiple symbols:\r\n{2}",
+                                fxCopName,
+                                expectedSymbol,
+                                string.Join("\r\n", symbols)
+                            )
+                        );
                     }
 
                     var symbol = symbols.SingleOrDefault();
-                    Assert.True(expectedSymbol == symbol,
-                        string.Format("Failed to resolve FxCop fully-qualified name '{0}' to symbol '{1}': got '{2}'",
-                            fxCopName, expectedSymbol, symbol));
+                    Assert.True(
+                        expectedSymbol == symbol,
+                        string.Format(
+                            "Failed to resolve FxCop fully-qualified name '{0}' to symbol '{1}': got '{2}'",
+                            fxCopName,
+                            expectedSymbol,
+                            symbol
+                        )
+                    );
                 }
                 else
                 {
                     foreach (var symbol in symbols)
                     {
-                        Assert.True(expectedSymbols.Contains(symbol),
-                            string.Format("Failed to resolve FxCop fully-qualified name '{0}' to symbols:\r\n{1}\r\nResolved to unexpected symbol '{2}'",
-                                fxCopName, string.Join("\r\n", expectedSymbols), symbol));
+                        Assert.True(
+                            expectedSymbols.Contains(symbol),
+                            string.Format(
+                                "Failed to resolve FxCop fully-qualified name '{0}' to symbols:\r\n{1}\r\nResolved to unexpected symbol '{2}'",
+                                fxCopName,
+                                string.Join("\r\n", expectedSymbols),
+                                symbol
+                            )
+                        );
                     }
                 }
             }
@@ -1398,31 +1784,51 @@ End Class
             Assert.NotNull(token.Parent);
 
             var location = token.GetLocation();
-            var q = from node in token.Parent.AncestorsAndSelf()
-                    let candidate = model.GetDeclaredSymbol(node)
-                    where candidate != null && candidate.Locations.Contains(location)
-                    select candidate;
+            var q =
+                from node in token.Parent.AncestorsAndSelf()
+                let candidate = model.GetDeclaredSymbol(node)
+                where candidate != null && candidate.Locations.Contains(location)
+                select candidate;
 
             var symbol = q.FirstOrDefault();
             Assert.NotNull(symbol);
             return symbol;
         }
 
-        private static void VerifyNoResolution(string source, string[] fxCopFullyQualifiedNames, SuppressMessageAttributeState.TargetScope scope, string language, string rootNamespace)
+        private static void VerifyNoResolution(
+            string source,
+            string[] fxCopFullyQualifiedNames,
+            SuppressMessageAttributeState.TargetScope scope,
+            string language,
+            string rootNamespace
+        )
         {
             var compilation = CreateCompilation(source, language, rootNamespace);
 
             foreach (var fxCopName in fxCopFullyQualifiedNames)
             {
-                var symbols = SuppressMessageAttributeState.ResolveTargetSymbols(compilation, fxCopName, scope);
+                var symbols = SuppressMessageAttributeState.ResolveTargetSymbols(
+                    compilation,
+                    fxCopName,
+                    scope
+                );
 
-                Assert.True(symbols.FirstOrDefault() == null,
-                    string.Format("Did not expect FxCop fully-qualified name '{0}' to resolve to any symbol: resolved to:\r\n{1}",
-                        fxCopName, string.Join("\r\n", symbols)));
+                Assert.True(
+                    symbols.FirstOrDefault() == null,
+                    string.Format(
+                        "Did not expect FxCop fully-qualified name '{0}' to resolve to any symbol: resolved to:\r\n{1}",
+                        fxCopName,
+                        string.Join("\r\n", symbols)
+                    )
+                );
             }
         }
 
-        private static Compilation CreateCompilation(SyntaxTree syntaxTree, string language, string rootNamespace)
+        private static Compilation CreateCompilation(
+            SyntaxTree syntaxTree,
+            string language,
+            string rootNamespace
+        )
         {
             string projectName = "TestProject";
 
@@ -1431,19 +1837,28 @@ End Class
                 return CSharpCompilation.Create(
                     projectName,
                     syntaxTrees: new[] { syntaxTree },
-                    references: new[] { TestBase.MscorlibRef });
+                    references: new[] { TestBase.MscorlibRef }
+                );
             }
             else
             {
                 return VisualBasicCompilation.Create(
                     projectName,
-                    options: new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, rootNamespace: rootNamespace),
+                    options: new VisualBasicCompilationOptions(
+                        OutputKind.DynamicallyLinkedLibrary,
+                        rootNamespace: rootNamespace
+                    ),
                     syntaxTrees: new[] { syntaxTree },
-                    references: new[] { TestBase.MscorlibRef });
+                    references: new[] { TestBase.MscorlibRef }
+                );
             }
         }
 
-        private static Compilation CreateCompilation(string source, string language, string rootNamespace)
+        private static Compilation CreateCompilation(
+            string source,
+            string language,
+            string rootNamespace
+        )
         {
             return CreateCompilation(CreateSyntaxTree(source, language), language, rootNamespace);
         }
@@ -1452,9 +1867,9 @@ End Class
         {
             string fileName = language == LanguageNames.CSharp ? "Test.cs" : "Test.vb";
 
-            return language == LanguageNames.CSharp ?
-                CSharpTestSource.Parse(source, path: fileName) :
-                BasicTestSource.Parse(source, path: fileName);
+            return language == LanguageNames.CSharp
+                ? CSharpTestSource.Parse(source, path: fileName)
+                : BasicTestSource.Parse(source, path: fileName);
         }
     }
 }

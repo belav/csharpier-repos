@@ -67,23 +67,38 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        public static ConstantValueTypeDiscriminator GetConstantValueTypeDiscriminator(this Cci.PrimitiveTypeCode type)
+        public static ConstantValueTypeDiscriminator GetConstantValueTypeDiscriminator(
+            this Cci.PrimitiveTypeCode type
+        )
         {
             switch (type)
             {
-                case Cci.PrimitiveTypeCode.Int8: return ConstantValueTypeDiscriminator.SByte;
-                case Cci.PrimitiveTypeCode.UInt8: return ConstantValueTypeDiscriminator.Byte;
-                case Cci.PrimitiveTypeCode.Int16: return ConstantValueTypeDiscriminator.Int16;
-                case Cci.PrimitiveTypeCode.UInt16: return ConstantValueTypeDiscriminator.UInt16;
-                case Cci.PrimitiveTypeCode.Int32: return ConstantValueTypeDiscriminator.Int32;
-                case Cci.PrimitiveTypeCode.UInt32: return ConstantValueTypeDiscriminator.UInt32;
-                case Cci.PrimitiveTypeCode.Int64: return ConstantValueTypeDiscriminator.Int64;
-                case Cci.PrimitiveTypeCode.UInt64: return ConstantValueTypeDiscriminator.UInt64;
-                case Cci.PrimitiveTypeCode.Char: return ConstantValueTypeDiscriminator.Char;
-                case Cci.PrimitiveTypeCode.Boolean: return ConstantValueTypeDiscriminator.Boolean;
-                case Cci.PrimitiveTypeCode.Float32: return ConstantValueTypeDiscriminator.Single;
-                case Cci.PrimitiveTypeCode.Float64: return ConstantValueTypeDiscriminator.Double;
-                case Cci.PrimitiveTypeCode.String: return ConstantValueTypeDiscriminator.String;
+                case Cci.PrimitiveTypeCode.Int8:
+                    return ConstantValueTypeDiscriminator.SByte;
+                case Cci.PrimitiveTypeCode.UInt8:
+                    return ConstantValueTypeDiscriminator.Byte;
+                case Cci.PrimitiveTypeCode.Int16:
+                    return ConstantValueTypeDiscriminator.Int16;
+                case Cci.PrimitiveTypeCode.UInt16:
+                    return ConstantValueTypeDiscriminator.UInt16;
+                case Cci.PrimitiveTypeCode.Int32:
+                    return ConstantValueTypeDiscriminator.Int32;
+                case Cci.PrimitiveTypeCode.UInt32:
+                    return ConstantValueTypeDiscriminator.UInt32;
+                case Cci.PrimitiveTypeCode.Int64:
+                    return ConstantValueTypeDiscriminator.Int64;
+                case Cci.PrimitiveTypeCode.UInt64:
+                    return ConstantValueTypeDiscriminator.UInt64;
+                case Cci.PrimitiveTypeCode.Char:
+                    return ConstantValueTypeDiscriminator.Char;
+                case Cci.PrimitiveTypeCode.Boolean:
+                    return ConstantValueTypeDiscriminator.Boolean;
+                case Cci.PrimitiveTypeCode.Float32:
+                    return ConstantValueTypeDiscriminator.Single;
+                case Cci.PrimitiveTypeCode.Float64:
+                    return ConstantValueTypeDiscriminator.Double;
+                case Cci.PrimitiveTypeCode.String:
+                    return ConstantValueTypeDiscriminator.String;
                 default:
                     throw ExceptionUtilities.UnexpectedValue(type);
             }

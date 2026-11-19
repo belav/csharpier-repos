@@ -47,7 +47,8 @@ public sealed record RelationalShapedQueryCompilingExpressionVisitorDependencies
     [EntityFrameworkInternal]
     public RelationalShapedQueryCompilingExpressionVisitorDependencies(
         IQuerySqlGeneratorFactory querySqlGeneratorFactory,
-        IRelationalParameterBasedSqlProcessorFactory relationalParameterBasedSqlProcessorFactory)
+        IRelationalParameterBasedSqlProcessorFactory relationalParameterBasedSqlProcessorFactory
+    )
     {
         QuerySqlGeneratorFactory = querySqlGeneratorFactory;
         RelationalParameterBasedSqlProcessorFactory = relationalParameterBasedSqlProcessorFactory;

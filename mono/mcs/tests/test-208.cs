@@ -2,33 +2,30 @@ using System;
 
 interface A
 {
-	string this [string s] { get; }
+    string this[string s] { get; }
 }
 
 interface B : A
 {
-	void Test ();
+    void Test();
 }
 
 class X : B
 {
-	public string this [string s] {
-		get {
-			return s;
-		}
-	}
+    public string this[string s]
+    {
+        get { return s; }
+    }
 
-	public void Test ()
-	{ }
+    public void Test() { }
 }
 
 public class Y
 {
-	public static void Main ()
-	{
-		B b = new X ();
+    public static void Main()
+    {
+        B b = new X();
 
-		string s = b ["test"];
-	}
+        string s = b["test"];
+    }
 }
-

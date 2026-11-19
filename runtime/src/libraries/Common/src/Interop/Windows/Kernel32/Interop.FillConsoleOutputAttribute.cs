@@ -10,6 +10,12 @@ internal static partial class Interop
     {
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool FillConsoleOutputAttribute(IntPtr hConsoleOutput, short wColorAttribute, int numCells, COORD startCoord, out int pNumBytesWritten);
+        internal static partial bool FillConsoleOutputAttribute(
+            IntPtr hConsoleOutput,
+            short wColorAttribute,
+            int numCells,
+            COORD startCoord,
+            out int pNumBytesWritten
+        );
     }
 }

@@ -8,16 +8,8 @@ namespace System.Activities.XamlIntegration
 
     public class ActivityXamlServicesSettings
     {
-        public bool CompileExpressions
-        {
-            get;
-            set;
-        }
+        public bool CompileExpressions { get; set; }
 
-        public LocationReferenceEnvironment LocationReferenceEnvironment
-        {
-            get;
-            set;
-        }
+        public LocationReferenceEnvironment LocationReferenceEnvironment { get; set; }
     }
 }

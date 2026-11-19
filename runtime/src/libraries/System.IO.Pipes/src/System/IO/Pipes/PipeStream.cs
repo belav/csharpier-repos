@@ -32,32 +32,59 @@ namespace System.IO.Pipes
         {
             if (direction < PipeDirection.In || direction > PipeDirection.InOut)
             {
-                throw new ArgumentOutOfRangeException(nameof(direction), SR.ArgumentOutOfRange_DirectionModeInOutOrInOut);
+                throw new ArgumentOutOfRangeException(
+                    nameof(direction),
+                    SR.ArgumentOutOfRange_DirectionModeInOutOrInOut
+                );
             }
             ArgumentOutOfRangeException.ThrowIfNegative(bufferSize);
 
             Init(direction, PipeTransmissionMode.Byte, (uint)bufferSize);
         }
 
-        protected PipeStream(PipeDirection direction, PipeTransmissionMode transmissionMode, int outBufferSize)
+        protected PipeStream(
+            PipeDirection direction,
+            PipeTransmissionMode transmissionMode,
+            int outBufferSize
+        )
         {
             if (direction < PipeDirection.In || direction > PipeDirection.InOut)
             {
-                throw new ArgumentOutOfRangeException(nameof(direction), SR.ArgumentOutOfRange_DirectionModeInOutOrInOut);
+                throw new ArgumentOutOfRangeException(
+                    nameof(direction),
+                    SR.ArgumentOutOfRange_DirectionModeInOutOrInOut
+                );
             }
-            if (transmissionMode < PipeTransmissionMode.Byte || transmissionMode > PipeTransmissionMode.Message)
+            if (
+                transmissionMode < PipeTransmissionMode.Byte
+                || transmissionMode > PipeTransmissionMode.Message
+            )
             {
-                throw new ArgumentOutOfRangeException(nameof(transmissionMode), SR.ArgumentOutOfRange_TransmissionModeByteOrMsg);
+                throw new ArgumentOutOfRangeException(
+                    nameof(transmissionMode),
+                    SR.ArgumentOutOfRange_TransmissionModeByteOrMsg
+                );
             }
             ArgumentOutOfRangeException.ThrowIfNegative(outBufferSize);
 
             Init(direction, transmissionMode, (uint)outBufferSize);
         }
 
-        private void Init(PipeDirection direction, PipeTransmissionMode transmissionMode, uint outBufferSize)
+        private void Init(
+            PipeDirection direction,
+            PipeTransmissionMode transmissionMode,
+            uint outBufferSize
+        )
         {
-            Debug.Assert(direction >= PipeDirection.In && direction <= PipeDirection.InOut, "invalid pipe direction");
-            Debug.Assert(transmissionMode >= PipeTransmissionMode.Byte && transmissionMode <= PipeTransmissionMode.Message, "transmissionMode is out of range");
+            Debug.Assert(
+                direction >= PipeDirection.In && direction <= PipeDirection.InOut,
+                "invalid pipe direction"
+            );
+            Debug.Assert(
+                transmissionMode >= PipeTransmissionMode.Byte
+                    && transmissionMode <= PipeTransmissionMode.Message,
+                "transmissionMode is out of range"
+            );
             Debug.Assert(outBufferSize >= 0, "outBufferSize is negative");
 
             // always defaults to this until overridden
@@ -170,14 +197,8 @@ namespace System.IO.Pipes
         // intended to be called by custom PipeStream concrete children
         public bool IsConnected
         {
-            get
-            {
-                return State == PipeState.Connected;
-            }
-            protected set
-            {
-                _state = (value) ? PipeState.Connected : PipeState.Disconnected;
-            }
+            get { return State == PipeState.Connected; }
+            protected set { _state = (value) ? PipeState.Connected : PipeState.Disconnected; }
         }
 
         public bool IsAsync
@@ -247,62 +268,38 @@ namespace System.IO.Pipes
 
         internal SafePipeHandle? InternalHandle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         }
 
         protected bool IsHandleExposed
         {
-            get
-            {
-                return _isHandleExposed;
-            }
+            get { return _isHandleExposed; }
         }
 
         public override bool CanRead
         {
-            get
-            {
-                return _canRead;
-            }
+            get { return _canRead; }
         }
 
         public override bool CanWrite
         {
-            get
-            {
-                return _canWrite;
-            }
+            get { return _canWrite; }
         }
 
         public override bool CanSeek
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override long Length
         {
-            get
-            {
-                throw Error.GetSeekNotSupported();
-            }
+            get { throw Error.GetSeekNotSupported(); }
         }
 
         public override long Position
         {
-            get
-            {
-                throw Error.GetSeekNotSupported();
-            }
-            set
-            {
-                throw Error.GetSeekNotSupported();
-            }
+            get { throw Error.GetSeekNotSupported(); }
+            set { throw Error.GetSeekNotSupported(); }
         }
 
         public override void SetLength(long value)
@@ -388,26 +385,14 @@ namespace System.IO.Pipes
 
         internal PipeState State
         {
-            get
-            {
-                return _state;
-            }
-            set
-            {
-                _state = value;
-            }
+            get { return _state; }
+            set { _state = value; }
         }
 
         internal bool IsCurrentUserOnly
         {
-            get
-            {
-                return _isCurrentUserOnly;
-            }
-            set
-            {
-                _isCurrentUserOnly = value;
-            }
+            get { return _isCurrentUserOnly; }
+            set { _isCurrentUserOnly = value; }
         }
     }
 }

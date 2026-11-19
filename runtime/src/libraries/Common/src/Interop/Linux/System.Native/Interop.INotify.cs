@@ -10,13 +10,26 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_INotifyInit", SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_INotifyInit",
+            SetLastError = true
+        )]
         internal static partial SafeFileHandle INotifyInit();
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_INotifyAddWatch", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_INotifyAddWatch",
+            StringMarshalling = StringMarshalling.Utf8,
+            SetLastError = true
+        )]
         internal static partial int INotifyAddWatch(SafeFileHandle fd, string pathName, uint mask);
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_INotifyRemoveWatch", SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_INotifyRemoveWatch",
+            SetLastError = true
+        )]
         private static partial int INotifyRemoveWatch_private(SafeFileHandle fd, int wd);
 
         internal static int INotifyRemoveWatch(SafeFileHandle fd, int wd)
@@ -44,19 +57,19 @@ internal static partial class Interop
         [Flags]
         internal enum NotifyEvents
         {
-            IN_ACCESS      = 0x00000001,
-            IN_MODIFY      = 0x00000002,
-            IN_ATTRIB      = 0x00000004,
-            IN_MOVED_FROM  = 0x00000040,
-            IN_MOVED_TO    = 0x00000080,
-            IN_CREATE      = 0x00000100,
-            IN_DELETE      = 0x00000200,
-            IN_Q_OVERFLOW  = 0x00004000,
-            IN_IGNORED     = 0x00008000,
-            IN_ONLYDIR     = 0x01000000,
+            IN_ACCESS = 0x00000001,
+            IN_MODIFY = 0x00000002,
+            IN_ATTRIB = 0x00000004,
+            IN_MOVED_FROM = 0x00000040,
+            IN_MOVED_TO = 0x00000080,
+            IN_CREATE = 0x00000100,
+            IN_DELETE = 0x00000200,
+            IN_Q_OVERFLOW = 0x00004000,
+            IN_IGNORED = 0x00008000,
+            IN_ONLYDIR = 0x01000000,
             IN_DONT_FOLLOW = 0x02000000,
             IN_EXCL_UNLINK = 0x04000000,
-            IN_ISDIR       = 0x40000000,
+            IN_ISDIR = 0x40000000,
         }
     }
 }

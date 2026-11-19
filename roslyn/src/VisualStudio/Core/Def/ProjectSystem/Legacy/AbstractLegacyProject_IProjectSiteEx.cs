@@ -17,8 +17,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
     {
         private readonly Stack<ProjectSystemProject.BatchScope> _batchScopes = new();
 
-        public void StartBatch()
-            => _batchScopes.Push(ProjectSystemProject.CreateBatchScope());
+        public void StartBatch() => _batchScopes.Push(ProjectSystemProject.CreateBatchScope());
 
         public void EndBatch()
         {
@@ -27,7 +26,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
             scope.Dispose();
         }
 
-        public void AddFileEx([MarshalAs(UnmanagedType.LPWStr)] string filePath, [MarshalAs(UnmanagedType.LPWStr)] string linkMetadata)
+        public void AddFileEx(
+            [MarshalAs(UnmanagedType.LPWStr)] string filePath,
+            [MarshalAs(UnmanagedType.LPWStr)] string linkMetadata
+        )
         {
             // TODO: uncomment when fixing https://github.com/dotnet/roslyn/issues/5325
             //var sourceCodeKind = extension.Equals(".csx", StringComparison.OrdinalIgnoreCase)
@@ -36,7 +38,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
             AddFile(filePath, linkMetadata, SourceCodeKind.Regular);
         }
 
-        public void SetProperty([MarshalAs(UnmanagedType.LPWStr)] string property, [MarshalAs(UnmanagedType.LPWStr)] string value)
+        public void SetProperty(
+            [MarshalAs(UnmanagedType.LPWStr)] string property,
+            [MarshalAs(UnmanagedType.LPWStr)] string value
+        )
         {
             // TODO: Handle the properties we care about.
         }

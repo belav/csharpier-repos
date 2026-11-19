@@ -32,16 +32,18 @@ namespace System.ServiceModel
 
         public static TimeSpan SpnLookupTime
         {
-            get
-            {
-                return spnLookupTime;
-            }
+            get { return spnLookupTime; }
             set
             {
                 if (value.Ticks < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value.Ticks,
-                                                    SR.GetString(SR.ValueMustBeNonNegative)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value.Ticks,
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 }
                 spnLookupTime = value;
             }
@@ -63,7 +65,13 @@ namespace System.ServiceModel
             // PreSharp Bug: Parameter 'identity.ResourceType' to this public method must be validated: A null-dereference can occur here.
 #pragma warning suppress 56506 // Claim.ClaimType will never return null
             if (!identity.ClaimType.Equals(ClaimTypes.Spn))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.UnrecognizedClaimTypeForIdentity, identity.ClaimType, ClaimTypes.Spn));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(
+                        SR.UnrecognizedClaimTypeForIdentity,
+                        identity.ClaimType,
+                        ClaimTypes.Spn
+                    )
+                );
 
             base.Initialize(identity);
         }
@@ -73,12 +81,20 @@ namespace System.ServiceModel
             if (writer == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("writer");
 
-            writer.WriteElementString(XD.AddressingDictionary.Spn, XD.AddressingDictionary.IdentityExtensionNamespace, (string)this.IdentityClaim.Resource);
+            writer.WriteElementString(
+                XD.AddressingDictionary.Spn,
+                XD.AddressingDictionary.IdentityExtensionNamespace,
+                (string)this.IdentityClaim.Resource
+            );
         }
 
         internal SecurityIdentifier GetSpnSid()
         {
-            Fx.Assert(ClaimTypes.Spn.Equals(this.IdentityClaim.ClaimType) || ClaimTypes.Dns.Equals(this.IdentityClaim.ClaimType), "");
+            Fx.Assert(
+                ClaimTypes.Spn.Equals(this.IdentityClaim.ClaimType)
+                    || ClaimTypes.Dns.Equals(this.IdentityClaim.ClaimType),
+                ""
+            );
             if (!hasSpnSidBeenComputed)
             {
                 lock (thisLock)
@@ -88,7 +104,6 @@ namespace System.ServiceModel
                         string spn = null;
                         try
                         {
-
                             if (ClaimTypes.Dns.Equals(this.IdentityClaim.ClaimType))
                             {
                                 spn = "host/" + (string)this.IdentityClaim.Resource;
@@ -100,7 +115,9 @@ namespace System.ServiceModel
                             // canonicalize SPN for use in LDAP filter following RFC 1960:
                             if (spn != null)
                             {
-                                spn = spn.Replace("*", @"\*").Replace("(", @"\(").Replace(")", @"\)");
+                                spn = spn.Replace("*", @"\*")
+                                    .Replace("(", @"\(")
+                                    .Replace(")", @"\)");
                             }
 
                             DirectoryEntry de = GetDirectoryEntry();
@@ -108,17 +125,24 @@ namespace System.ServiceModel
                             {
                                 searcher.CacheResults = true;
                                 searcher.ClientTimeout = SpnLookupTime;
-                                searcher.Filter = "(&(objectCategory=Computer)(objectClass=computer)(servicePrincipalName=" + spn + "))";
+                                searcher.Filter =
+                                    "(&(objectCategory=Computer)(objectClass=computer)(servicePrincipalName="
+                                    + spn
+                                    + "))";
                                 searcher.PropertiesToLoad.Add("objectSid");
                                 SearchResult result = searcher.FindOne();
                                 if (result != null)
                                 {
-                                    byte[] sidBinaryForm = (byte[])result.Properties["objectSid"][0];
+                                    byte[] sidBinaryForm = (byte[])
+                                        result.Properties["objectSid"][0];
                                     this.spnSid = new SecurityIdentifier(sidBinaryForm, 0);
                                 }
                                 else
                                 {
-                                    SecurityTraceRecordHelper.TraceSpnToSidMappingFailure(spn, null);
+                                    SecurityTraceRecordHelper.TraceSpnToSidMappingFailure(
+                                        spn,
+                                        null
+                                    );
                                 }
                             }
                         }
@@ -126,7 +150,8 @@ namespace System.ServiceModel
                         catch (Exception e)
                         {
                             // Always immediately rethrow fatal exceptions.
-                            if (Fx.IsFatal(e)) throw;
+                            if (Fx.IsFatal(e))
+                                throw;
 
                             if (e is NullReferenceException || e is SEHException)
                                 throw;
@@ -151,7 +176,9 @@ namespace System.ServiceModel
                 {
                     if (directoryEntry == null)
                     {
-                        DirectoryEntry tmp = new DirectoryEntry(@"LDAP://" + SecurityUtils.GetPrimaryDomain());
+                        DirectoryEntry tmp = new DirectoryEntry(
+                            @"LDAP://" + SecurityUtils.GetPrimaryDomain()
+                        );
                         tmp.RefreshCache(new string[] { "name" });
                         directoryEntry = tmp;
                     }
@@ -160,5 +187,4 @@ namespace System.ServiceModel
             return directoryEntry;
         }
     }
-
 }

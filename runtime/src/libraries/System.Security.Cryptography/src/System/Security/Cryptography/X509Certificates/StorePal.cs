@@ -12,21 +12,25 @@ namespace System.Security.Cryptography.X509Certificates
         internal static partial ILoaderPal FromBlob(
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
-            X509KeyStorageFlags keyStorageFlags);
+            X509KeyStorageFlags keyStorageFlags
+        );
 
         internal static partial ILoaderPal FromFile(
             string fileName,
             SafePasswordHandle password,
-            X509KeyStorageFlags keyStorageFlags);
+            X509KeyStorageFlags keyStorageFlags
+        );
 
         internal static partial IExportPal FromCertificate(ICertificatePalCore cert);
 
         internal static partial IExportPal LinkFromCertificateCollection(
-            X509Certificate2Collection certificates);
+            X509Certificate2Collection certificates
+        );
 
         internal static partial IStorePal FromSystemStore(
             string storeName,
             StoreLocation storeLocation,
-            OpenFlags openFlags);
+            OpenFlags openFlags
+        );
     }
 }

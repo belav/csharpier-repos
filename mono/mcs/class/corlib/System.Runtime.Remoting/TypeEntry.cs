@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,26 +31,26 @@
 
 using System;
 
-namespace System.Runtime.Remoting {
+namespace System.Runtime.Remoting
+{
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public class TypeEntry
+    {
+        string assembly_name;
+        string type_name;
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class TypeEntry
-	{
-		string assembly_name;
-		string type_name;
-		
-		protected TypeEntry ()
-		{
-		}
+        protected TypeEntry() { }
 
-		public string AssemblyName {
-			get { return assembly_name; }
-			set { assembly_name = value; }
-		}
+        public string AssemblyName
+        {
+            get { return assembly_name; }
+            set { assembly_name = value; }
+        }
 
-		public string TypeName {
-			get { return type_name; }
-			set { type_name = value; }
-		}
-	}
+        public string TypeName
+        {
+            get { return type_name; }
+            set { type_name = value; }
+        }
+    }
 }

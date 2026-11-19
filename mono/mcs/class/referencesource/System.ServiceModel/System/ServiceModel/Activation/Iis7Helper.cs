@@ -29,8 +29,10 @@ namespace System.ServiceModel.Activation
             get { return isIis7; }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses SecurityCritical method to get version info from registry.",
-            Safe = "Processes registry info into a safe bool for return.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses SecurityCritical method to get version info from registry.",
+            Safe = "Processes registry info into a safe bool for return."
+        )]
         [SecuritySafeCritical]
         static bool GetIsIis7()
         {
@@ -45,7 +47,9 @@ namespace System.ServiceModel.Activation
 
         const string subKey = @"Software\Microsoft\InetSTP";
 
-        [Fx.Tag.SecurityNote(Critical = "Asserts registry access to get a single value from the registry, caller should not leak value.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Asserts registry access to get a single value from the registry, caller should not leak value."
+        )]
         [SecurityCritical]
         [RegistryPermission(SecurityAction.Assert, Read = @"HKEY_LOCAL_MACHINE\" + subKey)]
         static object UnsafeGetMajorVersionFromRegistry()

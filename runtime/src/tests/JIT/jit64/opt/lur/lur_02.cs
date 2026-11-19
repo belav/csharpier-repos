@@ -21,19 +21,12 @@ inc, assignment, adding, double inc.
 
 *********************************************/
 
-
-
-
-
-
-
 public class test
 {
     [Fact]
     public static int TestEntryPoint()
     {
         int failed_tests = 0;
-
 
         // Test 01
         if (test_01(3) != 67)
@@ -119,8 +112,6 @@ public class test
             failed_tests++;
         }
 
-
-
         // Test 01
         if (test_01(5) != 69)
         {
@@ -205,8 +196,6 @@ public class test
             failed_tests++;
         }
 
-
-
         return (failed_tests == 0) ? 100 : 1;
     }
 
@@ -269,7 +258,6 @@ public class test
             b++;
         }
 
-
         return b;
     }
 
@@ -279,63 +267,72 @@ public class test
 
         for (int i = 0; i < 0; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 1; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 2; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 3; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 4; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 5; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 7; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 8; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 9; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 12; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 13; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
-
 
         return b;
     }
-
 
     public static int test_03(int a)
     {
@@ -343,59 +340,69 @@ public class test
 
         for (int i = 0; i < 0; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 1; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 2; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 3; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 4; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 5; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 7; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 8; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 9; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 12; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 13; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
-
 
         return b;
     }
@@ -406,67 +413,72 @@ public class test
 
         for (int i = 0; i < 0; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 1; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 2; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 3; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 4; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 5; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 7; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 8; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 9; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 12; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 13; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
-
 
         return b;
     }
-
-
-
-
-
 
     public static uint test_05(uint a)
     {
@@ -527,7 +539,6 @@ public class test
             b++;
         }
 
-
         return b;
     }
 
@@ -537,63 +548,72 @@ public class test
 
         for (int i = 0; i < 0; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 1; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 2; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 3; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 4; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 5; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 7; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 8; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 9; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 12; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 13; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
-
 
         return b;
     }
-
 
     public static uint test_07(uint a)
     {
@@ -601,59 +621,69 @@ public class test
 
         for (int i = 0; i < 0; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 1; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 2; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 3; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 4; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 5; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 7; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 8; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 9; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 12; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 13; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
-
 
         return b;
     }
@@ -664,65 +694,72 @@ public class test
 
         for (int i = 0; i < 0; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 1; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 2; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 3; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 4; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 5; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 7; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 8; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 9; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 12; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 13; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
-
 
         return b;
     }
-
-
-
 
     public static long test_09(long a)
     {
@@ -783,7 +820,6 @@ public class test
             b++;
         }
 
-
         return b;
     }
 
@@ -793,63 +829,72 @@ public class test
 
         for (int i = 0; i < 0; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 1; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 2; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 3; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 4; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 5; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 7; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 8; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 9; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 12; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
 
         for (int i = 0; i < 13; i++)
         {
-            b++; b++;
+            b++;
+            b++;
         }
-
 
         return b;
     }
-
 
     public static long test_11(long a)
     {
@@ -857,59 +902,69 @@ public class test
 
         for (int i = 0; i < 0; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 1; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 2; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 3; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 4; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 5; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 7; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 8; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 9; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 12; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
 
         for (int i = 0; i < 13; i++)
         {
-            b++; b = b * a;
+            b++;
+            b = b * a;
         }
-
 
         return b;
     }
@@ -920,61 +975,70 @@ public class test
 
         for (int i = 0; i < 0; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 1; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 2; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 3; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 4; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 5; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 7; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 8; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 9; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 12; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
 
         for (int i = 0; i < 13; i++)
         {
-            b++; b = b + a * 3;
+            b++;
+            b = b + a * 3;
         }
-
 
         return b;
     }
 }
-

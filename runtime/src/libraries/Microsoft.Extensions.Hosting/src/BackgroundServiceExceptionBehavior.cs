@@ -24,6 +24,6 @@ namespace Microsoft.Extensions.Hosting
         /// If a <see cref="BackgroundService"/> throws an exception, the <see cref="IHost"/> will log the error, but otherwise ignore it.
         /// The <see cref="BackgroundService"/> is not restarted.
         /// </remarks>
-        Ignore = 1
+        Ignore = 1,
     }
 }

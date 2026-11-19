@@ -16,7 +16,12 @@ namespace System.Workflow.ComponentModel.Compiler
         #region Members and Constructors
         private CodeTypeReference codeParameterType;
         private bool isRef = false;
-        internal DesignTimeParameterInfo(CodeParameterDeclarationExpression codeParameter, int position, MemberInfo member)
+
+        internal DesignTimeParameterInfo(
+            CodeParameterDeclarationExpression codeParameter,
+            int position,
+            MemberInfo member
+        )
         {
             this.MemberImpl = member;
             this.NameImpl = Helper.EnsureTypeName(codeParameter.Name);
@@ -36,7 +41,6 @@ namespace System.Workflow.ComponentModel.Compiler
             this.PositionImpl = -1;
         }
 
-
         #endregion
 
         #region Pararmeter Info overrides
@@ -45,7 +49,10 @@ namespace System.Workflow.ComponentModel.Compiler
         {
             get
             {
-                string type = DesignTimeType.GetTypeNameFromCodeTypeReference(this.codeParameterType, (this.Member.DeclaringType as DesignTimeType));
+                string type = DesignTimeType.GetTypeNameFromCodeTypeReference(
+                    this.codeParameterType,
+                    (this.Member.DeclaringType as DesignTimeType)
+                );
                 if ((this.AttrsImpl & ParameterAttributes.Out) > 0 || this.isRef)
                     type += '&'; // Append with & for (ref & out) parameter types
                 this.ClassImpl = (this.Member.DeclaringType as DesignTimeType).ResolveType(type);

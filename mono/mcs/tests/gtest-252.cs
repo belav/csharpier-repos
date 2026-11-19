@@ -2,19 +2,17 @@ using System;
 
 public static class EqualityComparer<T>
 {
-	readonly static Type sequencedequalityComparer = typeof (SequencedEqualityComparer<,>);
+    static readonly Type sequencedequalityComparer = typeof(SequencedEqualityComparer<,>);
 
-	public static void Test ()
-	{ }
+    public static void Test() { }
 }
 
-public class SequencedEqualityComparer<T,W>
-{ }
+public class SequencedEqualityComparer<T, W> { }
 
 class X
 {
-	public static void Main ()
-	{
-		EqualityComparer<int>.Test ();
-	}
+    public static void Main()
+    {
+        EqualityComparer<int>.Test();
+    }
 }

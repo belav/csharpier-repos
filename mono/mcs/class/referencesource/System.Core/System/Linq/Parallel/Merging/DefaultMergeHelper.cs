@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -12,9 +12,9 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Diagnostics.Contracts;
 
 namespace System.Linq.Parallel
 {
@@ -23,7 +23,7 @@ namespace System.Linq.Parallel
     /// merging. Namely, for synchronous merges, the input data is yielded from the
     /// input data streams in "depth first" left-to-right order. For asynchronous merges,
     /// on the other hand, we use a biased choice algorithm to favor input channels in
-    /// a "fair" way. No order preservation is carried out by this helper. 
+    /// a "fair" way. No order preservation is carried out by this helper.
     /// </summary>
     /// <typeparam name="TInputOutput"></typeparam>
     /// <typeparam name="TIgnoreKey"></typeparam>
@@ -46,8 +46,14 @@ namespace System.Linq.Parallel
         //     pipeline     - whether to use a pipelined merge.
         //
 
-        internal DefaultMergeHelper(PartitionedStream<TInputOutput, TIgnoreKey> partitions, bool ignoreOutput, ParallelMergeOptions options, 
-            TaskScheduler taskScheduler, CancellationState cancellationState, int queryId)
+        internal DefaultMergeHelper(
+            PartitionedStream<TInputOutput, TIgnoreKey> partitions,
+            bool ignoreOutput,
+            ParallelMergeOptions options,
+            TaskScheduler taskScheduler,
+            CancellationState cancellationState,
+            int queryId
+        )
         {
             Contract.Assert(partitions != null);
 
@@ -57,7 +63,9 @@ namespace System.Linq.Parallel
             m_ignoreOutput = ignoreOutput;
             IntValueEvent consumerEvent = new IntValueEvent();
 
-            TraceHelpers.TraceInfo("DefaultMergeHelper::.ctor(..): creating a default merge helper");
+            TraceHelpers.TraceInfo(
+                "DefaultMergeHelper::.ctor(..): creating a default merge helper"
+            );
 
             // If output won't be ignored, we need to manufacture a set of channels for the consumer.
             // Otherwise, when the merge is executed, we'll just invoke the activities themselves.
@@ -68,27 +76,48 @@ namespace System.Linq.Parallel
                 {
                     if (partitions.PartitionCount > 1)
                     {
-                        m_asyncChannels =
-                            MergeExecutor<TInputOutput>.MakeAsynchronousChannels(partitions.PartitionCount, options, consumerEvent, cancellationState.MergedCancellationToken);
-                        m_channelEnumerator = new AsynchronousChannelMergeEnumerator<TInputOutput>(m_taskGroupState, m_asyncChannels, consumerEvent);
+                        m_asyncChannels = MergeExecutor<TInputOutput>.MakeAsynchronousChannels(
+                            partitions.PartitionCount,
+                            options,
+                            consumerEvent,
+                            cancellationState.MergedCancellationToken
+                        );
+                        m_channelEnumerator = new AsynchronousChannelMergeEnumerator<TInputOutput>(
+                            m_taskGroupState,
+                            m_asyncChannels,
+                            consumerEvent
+                        );
                     }
                     else
                     {
                         // If there is only one partition, we don't need to create channels. The only producer enumerator
                         // will be used as the result enumerator.
-                        m_channelEnumerator = ExceptionAggregator.WrapQueryEnumerator(partitions[0], m_taskGroupState.CancellationState).GetEnumerator();
+                        m_channelEnumerator = ExceptionAggregator
+                            .WrapQueryEnumerator(partitions[0], m_taskGroupState.CancellationState)
+                            .GetEnumerator();
                     }
                 }
                 else
                 {
-                    m_syncChannels =
-                        MergeExecutor<TInputOutput>.MakeSynchronousChannels(partitions.PartitionCount);
-                    m_channelEnumerator = new SynchronousChannelMergeEnumerator<TInputOutput>(m_taskGroupState, m_syncChannels);
+                    m_syncChannels = MergeExecutor<TInputOutput>.MakeSynchronousChannels(
+                        partitions.PartitionCount
+                    );
+                    m_channelEnumerator = new SynchronousChannelMergeEnumerator<TInputOutput>(
+                        m_taskGroupState,
+                        m_syncChannels
+                    );
                 }
 
-                Contract.Assert(m_asyncChannels == null || m_asyncChannels.Length == partitions.PartitionCount);
-                Contract.Assert(m_syncChannels == null || m_syncChannels.Length == partitions.PartitionCount);
-                Contract.Assert(m_channelEnumerator != null, "enumerator can't be null if we're not ignoring output");
+                Contract.Assert(
+                    m_asyncChannels == null || m_asyncChannels.Length == partitions.PartitionCount
+                );
+                Contract.Assert(
+                    m_syncChannels == null || m_syncChannels.Length == partitions.PartitionCount
+                );
+                Contract.Assert(
+                    m_channelEnumerator != null,
+                    "enumerator can't be null if we're not ignoring output"
+                );
             }
         }
 
@@ -103,15 +132,29 @@ namespace System.Linq.Parallel
         {
             if (m_asyncChannels != null)
             {
-                SpoolingTask.SpoolPipeline<TInputOutput, TIgnoreKey>(m_taskGroupState, m_partitions, m_asyncChannels, m_taskScheduler);
+                SpoolingTask.SpoolPipeline<TInputOutput, TIgnoreKey>(
+                    m_taskGroupState,
+                    m_partitions,
+                    m_asyncChannels,
+                    m_taskScheduler
+                );
             }
             else if (m_syncChannels != null)
             {
-                SpoolingTask.SpoolStopAndGo<TInputOutput, TIgnoreKey>(m_taskGroupState, m_partitions, m_syncChannels, m_taskScheduler);
+                SpoolingTask.SpoolStopAndGo<TInputOutput, TIgnoreKey>(
+                    m_taskGroupState,
+                    m_partitions,
+                    m_syncChannels,
+                    m_taskScheduler
+                );
             }
             else if (m_ignoreOutput)
             {
-                SpoolingTask.SpoolForAll<TInputOutput, TIgnoreKey>(m_taskGroupState, m_partitions, m_taskScheduler);
+                SpoolingTask.SpoolForAll<TInputOutput, TIgnoreKey>(
+                    m_taskGroupState,
+                    m_partitions,
+                    m_taskScheduler
+                );
             }
             else
             {
@@ -135,10 +178,6 @@ namespace System.Linq.Parallel
         // Returns the results as an array.
         //
         // @
-
-
-
-
 
         public TInputOutput[] GetResultsAsArray()
         {
@@ -164,7 +203,11 @@ namespace System.Linq.Parallel
             else
             {
                 List<TInputOutput> output = new List<TInputOutput>();
-                using (IEnumerator<TInputOutput> enumerator = ((IMergeHelper<TInputOutput>)this).GetEnumerator())
+                using (
+                    IEnumerator<TInputOutput> enumerator = (
+                        (IMergeHelper<TInputOutput>)this
+                    ).GetEnumerator()
+                )
                 {
                     while (enumerator.MoveNext())
                     {
@@ -173,7 +216,7 @@ namespace System.Linq.Parallel
                 }
 
                 return output.ToArray();
-            }            
+            }
         }
     }
 }

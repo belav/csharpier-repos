@@ -20,7 +20,9 @@ namespace Microsoft.Web.Mvc
                 return null;
             }
 
-            Dictionary<string, object> backingStore = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+            Dictionary<string, object> backingStore = new Dictionary<string, object>(
+                StringComparer.OrdinalIgnoreCase
+            );
             foreach (string key in session)
             {
                 if (key != null)

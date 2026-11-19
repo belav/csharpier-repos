@@ -44,8 +44,7 @@ public class Program
             else
             {
                 // Also check "server.urls" for back-compat.
-                var urls =
-                    webHostBuilder.GetSetting(WebHostDefaults.ServerUrlsKey)
+                var urls = webHostBuilder.GetSetting(WebHostDefaults.ServerUrlsKey)
                     ?? webHostBuilder.GetSetting("server.urls");
                 webHostBuilder.UseSetting(WebHostDefaults.ServerUrlsKey, string.Empty);
 
@@ -62,28 +61,24 @@ public class Program
 
                 webHostBuilder.UseKestrel(options =>
                 {
-                    options.Listen(
-                        IPAddress.Loopback,
-                        uri.Port,
-                        listenOptions =>
+                    options.Listen(IPAddress.Loopback, uri.Port, listenOptions =>
+                    {
+                        if (uri.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase))
                         {
-                            if (uri.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase))
-                            {
-                                scenarioName = "Kestrel(SSL)";
-                                var certPath = Path.Combine(
-                                    AppContext.BaseDirectory,
-                                    "TestResources",
-                                    "testCert.pfx"
-                                );
-                                Console.WriteLine($"Using SSL with certificate: {certPath}");
-                                listenOptions.UseHttps(certPath, "testPassword");
-                            }
-                            else
-                            {
-                                scenarioName = "Kestrel(NonSSL)";
-                            }
+                            scenarioName = "Kestrel(SSL)";
+                            var certPath = Path.Combine(
+                                AppContext.BaseDirectory,
+                                "TestResources",
+                                "testCert.pfx"
+                            );
+                            Console.WriteLine($"Using SSL with certificate: {certPath}");
+                            listenOptions.UseHttps(certPath, "testPassword");
                         }
-                    );
+                        else
+                        {
+                            scenarioName = "Kestrel(NonSSL)";
+                        }
+                    });
                 });
             }
         });

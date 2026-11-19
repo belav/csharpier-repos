@@ -19,19 +19,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal abstract class LocalSymbol : Symbol, ILocalSymbolInternal
     {
-        protected LocalSymbol()
-        {
-        }
+        protected LocalSymbol() { }
 
-        internal abstract LocalDeclarationKind DeclarationKind
-        {
-            get;
-        }
+        internal abstract LocalDeclarationKind DeclarationKind { get; }
 
-        internal abstract SynthesizedLocalKind SynthesizedKind
-        {
-            get;
-        }
+        internal abstract SynthesizedLocalKind SynthesizedKind { get; }
 
         /// <summary>
         /// Syntax node that is used as the scope designator. Otherwise, null.
@@ -39,33 +31,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal abstract SyntaxNode ScopeDesignatorOpt { get; }
 
         internal abstract LocalSymbol WithSynthesizedLocalKindAndSyntax(
-            SynthesizedLocalKind kind, SyntaxNode syntax
+            SynthesizedLocalKind kind,
+            SyntaxNode syntax
 #if DEBUG
             ,
             [CallerLineNumber] int createdAtLineNumber = 0,
             [CallerFilePath] string createdAtFilePath = null
 #endif
-            );
+        );
 
-        internal abstract bool IsImportedFromMetadata
-        {
-            get;
-        }
+        internal abstract bool IsImportedFromMetadata { get; }
 
         internal virtual bool CanScheduleToStack => !IsConst && !IsPinned;
 
-        internal abstract SyntaxToken IdentifierToken
-        {
-            get;
-        }
+        internal abstract SyntaxToken IdentifierToken { get; }
 
         /// <summary>
         /// Gets the type of this local along with its annotations.
         /// </summary>
-        public abstract TypeWithAnnotations TypeWithAnnotations
-        {
-            get;
-        }
+        public abstract TypeWithAnnotations TypeWithAnnotations { get; }
 
         /// <summary>
         /// Gets the type of this local.
@@ -74,7 +58,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// WARN WARN WARN: If you access this via the semantic model, things will break (since the initializer may not have been bound).
-        /// 
+        ///
         /// Whether or not this local is pinned (i.e. the type will be emitted with the "pinned" modifier).
         /// </summary>
         /// <remarks>
@@ -82,30 +66,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Unfortunately, when we fix a string expression, it is not the declared local (e.g. char*) but a synthesized temp (string)
         /// that is pinned.
         /// </remarks>
-        internal abstract bool IsPinned
-        {
-            get;
-        }
+        internal abstract bool IsPinned { get; }
 
         /// <summary>
         /// This property is used to avoid creating unnecessary
         /// copies of reference type receivers for
         /// constrained calls.
         /// </summary>
-        internal abstract bool IsKnownToReferToTempIfReferenceType
-        {
-            get;
-        }
+        internal abstract bool IsKnownToReferToTempIfReferenceType { get; }
 
         /// <summary>
         /// Returns false because local variable can't be defined externally.
         /// </summary>
         public sealed override bool IsExtern
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -113,10 +88,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsSealed
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -124,10 +96,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsAbstract
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -135,10 +104,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsOverride
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -146,10 +112,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsVirtual
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -157,10 +120,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsStatic
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -177,10 +137,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override Accessibility DeclaredAccessibility
         {
-            get
-            {
-                return Accessibility.NotApplicable;
-            }
+            get { return Accessibility.NotApplicable; }
         }
 
         /// <summary>
@@ -188,15 +145,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override SymbolKind Kind
         {
-            get
-            {
-                return SymbolKind.Local;
-            }
+            get { return SymbolKind.Local; }
         }
 
         internal abstract ScopedKind Scope { get; }
 
-        internal sealed override TResult Accept<TArgument, TResult>(CSharpSymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        internal sealed override TResult Accept<TArgument, TResult>(
+            CSharpSymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitLocal(this, argument);
         }
@@ -212,14 +169,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns true if this local variable was declared in a catch clause. 
+        /// Returns true if this local variable was declared in a catch clause.
         /// </summary>
         public bool IsCatch
         {
-            get
-            {
-                return this.DeclarationKind == LocalDeclarationKind.CatchVariable;
-            }
+            get { return this.DeclarationKind == LocalDeclarationKind.CatchVariable; }
         }
 
         /// <summary>
@@ -227,10 +181,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public bool IsConst
         {
-            get
-            {
-                return this.DeclarationKind == LocalDeclarationKind.Constant;
-            }
+            get { return this.DeclarationKind == LocalDeclarationKind.Constant; }
         }
 
         /// <summary>
@@ -239,15 +190,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         /// <example>
         /// <code>
-        ///     using (var localVariable = new StreamReader("C:\\Temp\\MyFile.txt")) { ... } 
+        ///     using (var localVariable = new StreamReader("C:\\Temp\\MyFile.txt")) { ... }
         /// </code>
         /// </example>
         public bool IsUsing
         {
-            get
-            {
-                return this.DeclarationKind == LocalDeclarationKind.UsingVariable;
-            }
+            get { return this.DeclarationKind == LocalDeclarationKind.UsingVariable; }
         }
 
         /// <summary>
@@ -255,10 +203,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public bool IsFixed
         {
-            get
-            {
-                return this.DeclarationKind == LocalDeclarationKind.FixedVariable;
-            }
+            get { return this.DeclarationKind == LocalDeclarationKind.FixedVariable; }
         }
 
         /// <summary>
@@ -266,10 +211,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public bool IsForEach
         {
-            get
-            {
-                return this.DeclarationKind == LocalDeclarationKind.ForEachIterationVariable;
-            }
+            get { return this.DeclarationKind == LocalDeclarationKind.ForEachIterationVariable; }
         }
 
         /// <summary>
@@ -277,10 +219,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// cref="HasSourceLocation"/> returns <see langword="true"/>.  May throw if it returns <see langword="false"/>.
         /// </summary>
         /// <remarks>
-        /// All user-defined and long-lived synthesized variables must return a reference to a node that is 
+        /// All user-defined and long-lived synthesized variables must return a reference to a node that is
         /// tracked by the EnC diffing algorithm. For example, for <see cref="LocalDeclarationKind.CatchVariable"/> variable
         /// the declarator is the <see cref="CatchClauseSyntax"/> node.
-        /// 
+        ///
         /// The location of the declarator is used to calculate <see cref="LocalDebugId.SyntaxOffset"/> during emit.
         /// </remarks>
         internal abstract SyntaxNode GetDeclaratorSyntax();
@@ -353,21 +295,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <summary>
         /// Returns true if the local symbol was compiler generated.
         /// </summary>
-        internal abstract bool IsCompilerGenerated
-        {
-            get;
-        }
+        internal abstract bool IsCompilerGenerated { get; }
 
-        internal abstract ConstantValue GetConstantValue(SyntaxNode node, LocalSymbol inProgress, BindingDiagnosticBag diagnostics = null);
+        internal abstract ConstantValue GetConstantValue(
+            SyntaxNode node,
+            LocalSymbol inProgress,
+            BindingDiagnosticBag diagnostics = null
+        );
 
-        internal abstract ImmutableBindingDiagnostic<AssemblySymbol> GetConstantValueDiagnostics(BoundExpression boundInitValue);
+        internal abstract ImmutableBindingDiagnostic<AssemblySymbol> GetConstantValueDiagnostics(
+            BoundExpression boundInitValue
+        );
 
         public bool IsRef => RefKind != RefKind.None;
 
-        public abstract RefKind RefKind
-        {
-            get;
-        }
+        public abstract RefKind RefKind { get; }
 
         /// <summary>
         /// When a local variable's type is inferred, it may not be used in the
@@ -380,7 +322,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// The diagnostic code to be reported when an inferred variable is used
         /// in its forbidden zone.
         /// </summary>
-        internal virtual ErrorCode ForbiddenDiagnostic => ErrorCode.ERR_VariableUsedBeforeDeclaration;
+        internal virtual ErrorCode ForbiddenDiagnostic =>
+            ErrorCode.ERR_VariableUsedBeforeDeclaration;
 
         protected sealed override ISymbol CreateISymbol()
         {
@@ -391,18 +334,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         SynthesizedLocalKind ILocalSymbolInternal.SynthesizedKind
         {
-            get
-            {
-                return this.SynthesizedKind;
-            }
+            get { return this.SynthesizedKind; }
         }
 
         bool ILocalSymbolInternal.IsImportedFromMetadata
         {
-            get
-            {
-                return this.IsImportedFromMetadata;
-            }
+            get { return this.IsImportedFromMetadata; }
         }
 
         SyntaxNode ILocalSymbolInternal.GetDeclaratorSyntax()

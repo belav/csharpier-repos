@@ -5,8 +5,7 @@ namespace System.Numerics
 {
     /// <summary>Defines support for logarithmic functions.</summary>
     /// <typeparam name="TSelf">The type that implements this interface.</typeparam>
-    public interface ILogarithmicFunctions<TSelf>
-        : IFloatingPointConstants<TSelf>
+    public interface ILogarithmicFunctions<TSelf> : IFloatingPointConstants<TSelf>
         where TSelf : ILogarithmicFunctions<TSelf>?
     {
         /// <summary>Computes the natural (<c>base-E</c>) logarithm of a value.</summary>

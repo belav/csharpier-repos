@@ -1,11 +1,12 @@
-public interface IFoo<T> where T : IFoo<T> { }
-public interface IBaz<T> where T : IFoo<T> { }
+public interface IFoo<T>
+    where T : IFoo<T> { }
 
-class Foo : IFoo<Foo>
-{ }
+public interface IBaz<T>
+    where T : IFoo<T> { }
+
+class Foo : IFoo<Foo> { }
 
 class X
 {
-	public static void Main ()
-	{ }
+    public static void Main() { }
 }

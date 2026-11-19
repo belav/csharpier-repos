@@ -20,10 +20,10 @@ namespace System.Xml.Schema
     // this one needn't change, even the parameter in methods
     internal sealed class AxisElement
     {
-        internal DoubleLinkAxis curNode;                // current under-checking node during navigating
-        internal int rootDepth;                         // root depth -- contextDepth + 1 if ! isDss; context + {1...} if isDss
-        internal int curDepth;                          // current depth
-        internal bool isMatch;                          // current is already matching or waiting for matching
+        internal DoubleLinkAxis curNode; // current under-checking node during navigating
+        internal int rootDepth; // root depth -- contextDepth + 1 if ! isDss; context + {1...} if isDss
+        internal int curDepth; // current depth
+        internal bool isMatch; // current is already matching or waiting for matching
 
         internal DoubleLinkAxis CurNode
         {
@@ -62,25 +62,26 @@ namespace System.Xml.Schema
                     return;
                 }
                 else if (this.curNode.Input != null)
-                {      // else cur-depth --, cur-node change
+                { // else cur-depth --, cur-node change
                     this.curNode = (DoubleLinkAxis)(this.curNode.Input);
                     this.curDepth--;
                     return;
                 }
-                else return;
+                else
+                    return;
             }
             // "a/b/c", trying to match b (current node), but meet the end of x (another child of a)
             // or maybe i matched, now move out the current node
             // or move out after failing to match attribute
             // the node i m next expecting is still the current node
             else if (depth == this.curDepth)
-            {              // after matched or [2] failed in matching attribute
+            { // after matched or [2] failed in matching attribute
                 if (this.isMatch)
                 {
                     this.isMatch = false;
                 }
             }
-            return;                                         // this node is still what i am expecting
+            return; // this node is still what i am expecting
             // ignore
         }
 
@@ -126,7 +127,7 @@ namespace System.Xml.Schema
             DoubleLinkAxis nowNode = (DoubleLinkAxis)(this.curNode.Next!);
             if (Asttree.IsAttribute(nowNode))
             {
-                this.isMatch = true;                    // for attribute
+                this.isMatch = true; // for attribute
                 return false;
             }
 
@@ -139,8 +140,8 @@ namespace System.Xml.Schema
     internal sealed class AxisStack
     {
         // property
-        private readonly ArrayList _stack;                            // of AxisElement
-        private readonly ForwardAxis _subtree;                        // reference to the corresponding subtree
+        private readonly ArrayList _stack; // of AxisElement
+        private readonly ForwardAxis _subtree; // reference to the corresponding subtree
         private readonly ActiveAxis _parent;
 
         internal ForwardAxis Subtree
@@ -149,7 +150,7 @@ namespace System.Xml.Schema
         }
 
         internal int Length
-        {                               // stack length
+        { // stack length
             get { return _stack.Count; }
         }
 
@@ -158,14 +159,14 @@ namespace System.Xml.Schema
         {
             _subtree = faxis;
             _stack = new ArrayList();
-            _parent = parent;       // need to use its contextdepth each time....
+            _parent = parent; // need to use its contextdepth each time....
 
             // improvement:
             // if ! isDss, there has nothing to do with Push/Pop, only one copy each time will be kept
             // if isDss, push and pop each time....
             if (!faxis.IsDss)
-            {                // keep an instance
-                this.Push(1);              // context depth + 1
+            { // keep an instance
+                this.Push(1); // context depth + 1
             }
             // else just keep stack empty
         }
@@ -225,7 +226,7 @@ namespace System.Xml.Schema
             if (_subtree.IsDss && Equal(_subtree.RootNode.Name, _subtree.RootNode.Urn, name, URN))
             {
                 Pop();
-            }   // only the last one
+            } // only the last one
         }
 
         // "a/b/c"     pointer from a move to b
@@ -288,11 +289,12 @@ namespace System.Xml.Schema
     {
         // consider about reactivating....  the stack should be clear right??
         // just reset contextDepth & isActive....
-        private int _currentDepth;                       // current depth, trace the depth by myself... movetochild, movetoparent, movetoattribute
-        private bool _isActive;                          // not active any more after moving out context node
-        private readonly Asttree _axisTree;                       // reference to the whole tree
+        private int _currentDepth; // current depth, trace the depth by myself... movetochild, movetoparent, movetoattribute
+        private bool _isActive; // not active any more after moving out context node
+        private readonly Asttree _axisTree; // reference to the whole tree
+
         // for each subtree i need to keep a stack...
-        private readonly ArrayList _axisStack;                    // of AxisStack
+        private readonly ArrayList _axisStack; // of AxisStack
 
         public int CurrentDepth
         {
@@ -309,10 +311,10 @@ namespace System.Xml.Schema
 
         internal ActiveAxis(Asttree axisTree)
         {
-            _axisTree = axisTree;                                               // only a pointer.  do i need it?
-            _currentDepth = -1;                                                 // context depth is 0 -- enforce moveToChild for the context node
-                                                                                // otherwise can't deal with "." node
-            _axisStack = new ArrayList(axisTree.SubtreeArray.Count);            // defined length
+            _axisTree = axisTree; // only a pointer.  do i need it?
+            _currentDepth = -1; // context depth is 0 -- enforce moveToChild for the context node
+            // otherwise can't deal with "." node
+            _axisStack = new ArrayList(axisTree.SubtreeArray.Count); // defined length
             // new one stack element for each one
             for (int i = 0; i < axisTree.SubtreeArray.Count; ++i)
             {
@@ -344,7 +346,8 @@ namespace System.Xml.Schema
                 }
 
                 // otherwise if it's context node then return false
-                if (this.CurrentDepth == 0) continue;
+                if (this.CurrentDepth == 0)
+                    continue;
 
                 if (stack.MoveToChild(localname, URN, _currentDepth))
                 {
@@ -362,7 +365,7 @@ namespace System.Xml.Schema
         {
             // need to think if the early quitting will affect reactivating....
             if (_currentDepth == 0)
-            {          // leave context node
+            { // leave context node
                 _isActive = false;
                 _currentDepth--;
             }
@@ -390,7 +393,7 @@ namespace System.Xml.Schema
             for (int i = 0; i < _axisStack.Count; ++i)
             {
                 if (((AxisStack)_axisStack[i]!).MoveToAttribute(localname, URN, _currentDepth + 1))
-                {  // don't change depth for attribute, but depth is add 1
+                { // don't change depth for attribute, but depth is add 1
                     result = true;
                 }
             }
@@ -440,20 +443,18 @@ namespace System.Xml.Schema
         }
     }
 
-
-
     // only keep axis, rootNode, isAttribute, isDss inside
     // act as an element tree for the Asttree
     internal sealed class ForwardAxis
     {
         // Axis tree
         private readonly DoubleLinkAxis _topNode;
-        private readonly DoubleLinkAxis _rootNode;                // the root for reverse Axis
+        private readonly DoubleLinkAxis _rootNode; // the root for reverse Axis
 
         // Axis tree property
-        private readonly bool _isAttribute;                       // element or attribute?      "@"?
-        private readonly bool _isDss;                             // has ".//" in front of it?
-        private readonly bool _isSelfAxis;                        // only one node in the tree, and it's "." (self) node
+        private readonly bool _isAttribute; // element or attribute?      "@"?
+        private readonly bool _isDss; // has ".//" in front of it?
+        private readonly bool _isSelfAxis; // only one node in the tree, and it's "." (self) node
 
         internal DoubleLinkAxis RootNode
         {
@@ -502,7 +503,7 @@ namespace System.Xml.Schema
         // set private then give out only get access, to keep it intact all along
         private ArrayList _fAxisArray = null!;
         private readonly string _xpathexpr;
-        private readonly bool _isField;                                   // field or selector
+        private readonly bool _isField; // field or selector
         private readonly XmlNamespaceManager _nsmgr;
 
         internal ArrayList SubtreeArray
@@ -517,7 +518,7 @@ namespace System.Xml.Schema
             _isField = isField;
             _nsmgr = nsmgr;
             // checking grammar... and build fAxisArray
-            this.CompileXPath(xPath, isField, nsmgr);          // might throw exception in the middle
+            this.CompileXPath(xPath, isField, nsmgr); // might throw exception in the middle
         }
 
         // this part is for parsing restricted xpath from grammar
@@ -525,22 +526,35 @@ namespace System.Xml.Schema
         {
             // Type = Element, abbrAxis = false
             // all are the same, has child:: or not
-            return ((ast.TypeOfAxis == Axis.AxisType.Child) && (ast.NodeType == XPathNodeType.Element));
+            return (
+                (ast.TypeOfAxis == Axis.AxisType.Child) && (ast.NodeType == XPathNodeType.Element)
+            );
         }
 
         internal static bool IsAttribute(Axis ast)
         {
-            return ((ast.TypeOfAxis == Axis.AxisType.Attribute) && (ast.NodeType == XPathNodeType.Attribute));
+            return (
+                (ast.TypeOfAxis == Axis.AxisType.Attribute)
+                && (ast.NodeType == XPathNodeType.Attribute)
+            );
         }
 
         private static bool IsDescendantOrSelf(Axis ast)
         {
-            return ((ast.TypeOfAxis == Axis.AxisType.DescendantOrSelf) && (ast.NodeType == XPathNodeType.All) && (ast.AbbrAxis));
+            return (
+                (ast.TypeOfAxis == Axis.AxisType.DescendantOrSelf)
+                && (ast.NodeType == XPathNodeType.All)
+                && (ast.AbbrAxis)
+            );
         }
 
         internal static bool IsSelf(Axis ast)
         {
-            return ((ast.TypeOfAxis == Axis.AxisType.Self) && (ast.NodeType == XPathNodeType.All) && (ast.AbbrAxis));
+            return (
+                (ast.TypeOfAxis == Axis.AxisType.Self)
+                && (ast.NodeType == XPathNodeType.All)
+                && (ast.AbbrAxis)
+            );
         }
 
         // don't return true or false, if it's invalid path, just throw exception during the process
@@ -642,10 +656,12 @@ namespace System.Xml.Schema
                 // trim the rest part, but need compile the rest part first
                 top.Input = null;
                 if (stepAst == null)
-                {      // top "." and has other element beneath, trim this "." node too
+                { // top "." and has other element beneath, trim this "." node too
                     if (IsSelf(ast) && (ast.Input != null))
                     {
-                        _fAxisArray.Add(new ForwardAxis(DoubleLinkAxis.ConvertTree((Axis)(ast.Input)), false));
+                        _fAxisArray.Add(
+                            new ForwardAxis(DoubleLinkAxis.ConvertTree((Axis)(ast.Input)), false)
+                        );
                     }
                     else
                     {
@@ -673,7 +689,9 @@ namespace System.Xml.Schema
                 // trim top "." if it's not the only node
                 if (IsSelf(ast) && (ast.Input != null))
                 {
-                    _fAxisArray.Add(new ForwardAxis(DoubleLinkAxis.ConvertTree((Axis)(ast.Input)), true));
+                    _fAxisArray.Add(
+                        new ForwardAxis(DoubleLinkAxis.ConvertTree((Axis)(ast.Input)), true)
+                    );
                 }
                 else
                 {
@@ -693,7 +711,7 @@ namespace System.Xml.Schema
         private static void SetURN(Axis axis, XmlNamespaceManager nsmgr)
         {
             if (axis.Prefix.Length != 0)
-            {      // (1) (4)
+            { // (1) (4)
                 axis.Urn = nsmgr.LookupNamespace(axis.Prefix);
 
                 if (axis.Urn == null)
@@ -706,9 +724,9 @@ namespace System.Xml.Schema
                 axis.Urn = null;
             }
             else
-            {                            // (3)
+            { // (3)
                 axis.Urn = "";
             }
         }
-    }// Asttree
+    } // Asttree
 }

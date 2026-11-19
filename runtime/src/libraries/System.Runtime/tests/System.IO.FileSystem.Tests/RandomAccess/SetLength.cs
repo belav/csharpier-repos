@@ -10,7 +10,11 @@ namespace System.IO.Tests
     {
         private const long FileSize = 123;
 
-        protected override long MethodUnderTest(SafeFileHandle handle, byte[] bytes, long fileOffset)
+        protected override long MethodUnderTest(
+            SafeFileHandle handle,
+            byte[] bytes,
+            long fileOffset
+        )
         {
             RandomAccess.SetLength(handle, fileOffset);
 
@@ -23,7 +27,14 @@ namespace System.IO.Tests
         [MemberData(nameof(GetSyncAsyncOptions))]
         public void ModifiesTheActualFileSize(FileOptions options)
         {
-            using (SafeFileHandle handle = File.OpenHandle(GetTestFilePath(), FileMode.CreateNew, FileAccess.Write, options: options))
+            using (
+                SafeFileHandle handle = File.OpenHandle(
+                    GetTestFilePath(),
+                    FileMode.CreateNew,
+                    FileAccess.Write,
+                    options: options
+                )
+            )
             {
                 RandomAccess.SetLength(handle, FileSize);
 
@@ -35,7 +46,14 @@ namespace System.IO.Tests
         [MemberData(nameof(GetSyncAsyncOptions))]
         public void AllowsForShrinking(FileOptions options)
         {
-            using (SafeFileHandle handle = File.OpenHandle(GetTestFilePath(), FileMode.CreateNew, FileAccess.Write, options: options))
+            using (
+                SafeFileHandle handle = File.OpenHandle(
+                    GetTestFilePath(),
+                    FileMode.CreateNew,
+                    FileAccess.Write,
+                    options: options
+                )
+            )
             {
                 RandomAccess.SetLength(handle, FileSize);
                 Assert.Equal(FileSize, RandomAccess.GetLength(handle));
@@ -52,7 +70,14 @@ namespace System.IO.Tests
         [MemberData(nameof(GetSyncAsyncOptions))]
         public void ZeroesTheFileContentsWhenExtendingTheFile(FileOptions options)
         {
-            using (SafeFileHandle handle = File.OpenHandle(GetTestFilePath(), FileMode.CreateNew, FileAccess.Write, options: options))
+            using (
+                SafeFileHandle handle = File.OpenHandle(
+                    GetTestFilePath(),
+                    FileMode.CreateNew,
+                    FileAccess.Write,
+                    options: options
+                )
+            )
             {
                 RandomAccess.SetLength(handle, FileSize);
 

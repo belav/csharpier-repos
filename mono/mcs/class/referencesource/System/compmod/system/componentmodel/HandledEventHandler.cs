@@ -4,9 +4,10 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
+namespace System.ComponentModel
+{
     using System.Security.Permissions;
-    
+
     [HostProtection(SharedState = true)]
     public delegate void HandledEventHandler(object sender, HandledEventArgs e);
 }

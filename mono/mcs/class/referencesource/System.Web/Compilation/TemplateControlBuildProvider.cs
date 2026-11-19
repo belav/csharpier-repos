@@ -4,45 +4,48 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
+namespace System.Web.Compilation
+{
+    using System;
+    using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.IO;
+    using System.Web.UI;
+    using System.Web.Util;
 
+    internal abstract class TemplateControlBuildProvider : BaseTemplateBuildProvider
+    {
+        internal virtual DependencyParser CreateDependencyParser()
+        {
+            return null;
+        }
 
-namespace System.Web.Compilation {
+        internal override ICollection GetBuildResultVirtualPathDependencies()
+        {
+            DependencyParser parser = CreateDependencyParser();
+            if (parser == null)
+                return null;
 
-using System;
-using System.IO;
-using System.Collections;
-using System.CodeDom.Compiler;
-using System.Web.Util;
-using System.Web.UI;
+            parser.Init(VirtualPathObject);
+            return parser.GetVirtualPathDependencies();
+        }
 
-internal abstract class TemplateControlBuildProvider: BaseTemplateBuildProvider {
+        internal override BuildResult CreateBuildResult(CompilerResults results)
+        {
+            // If the page is compiled, use the default base class logic
+            if (Parser.RequiresCompilation)
+                return base.CreateBuildResult(results);
 
-    internal virtual DependencyParser CreateDependencyParser() { return null; }
+            return CreateNoCompileBuildResult();
+        }
 
-    internal override ICollection GetBuildResultVirtualPathDependencies() {
-        DependencyParser parser = CreateDependencyParser();
-        if (parser == null) return null;
+        public override Type GetGeneratedType(CompilerResults results)
+        {
+            // Use the DelayLoadType for templates, so that we can avoid
+            // loading assemblies during compilation where possible.
+            return GetGeneratedType(results, useDelayLoadTypeIfEnabled: true);
+        }
 
-        parser.Init(VirtualPathObject);
-        return parser.GetVirtualPathDependencies();
+        internal abstract BuildResultNoCompileTemplateControl CreateNoCompileBuildResult();
     }
-
-    internal override BuildResult CreateBuildResult(CompilerResults results) {
-
-        // If the page is compiled, use the default base class logic
-        if (Parser.RequiresCompilation)
-            return base.CreateBuildResult(results);
-
-        return CreateNoCompileBuildResult();
-    }
-
-    public override Type GetGeneratedType(CompilerResults results) {
-        // Use the DelayLoadType for templates, so that we can avoid 
-        // loading assemblies during compilation where possible.
-        return GetGeneratedType(results, useDelayLoadTypeIfEnabled: true);
-    }
-
-    internal abstract BuildResultNoCompileTemplateControl CreateNoCompileBuildResult();
-}
-
 }

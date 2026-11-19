@@ -23,6 +23,14 @@ namespace Microsoft.CodeAnalysis.DecompiledSource
         /// <param name="assemblyLocation">The location of the implementation assembly to decompile</param>
         /// <param name="cancellationToken">To cancel document operations</param>
         /// <returns>The updated document, or null if the decompilation could not be performed</returns>
-        Task<Document?> AddSourceToAsync(Document document, Compilation symbolCompilation, ISymbol symbol, MetadataReference? metadataReference, string? assemblyLocation, SyntaxFormattingOptions formattingOptions, CancellationToken cancellationToken);
+        Task<Document?> AddSourceToAsync(
+            Document document,
+            Compilation symbolCompilation,
+            ISymbol symbol,
+            MetadataReference? metadataReference,
+            string? assemblyLocation,
+            SyntaxFormattingOptions formattingOptions,
+            CancellationToken cancellationToken
+        );
     }
 }

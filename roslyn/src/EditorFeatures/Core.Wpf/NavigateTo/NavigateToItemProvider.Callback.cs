@@ -21,7 +21,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
             private readonly INavigateToItemDisplayFactory _displayFactory;
             private readonly INavigateToCallback _callback;
 
-            public NavigateToItemProviderCallback(INavigateToItemDisplayFactory displayFactory, INavigateToCallback callback)
+            public NavigateToItemProviderCallback(
+                INavigateToItemDisplayFactory displayFactory,
+                INavigateToCallback callback
+            )
             {
                 _displayFactory = displayFactory;
                 _callback = callback;
@@ -39,7 +42,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
                 }
             }
 
-            public Task AddItemAsync(Project project, INavigateToSearchResult result, CancellationToken cancellationToken)
+            public Task AddItemAsync(
+                Project project,
+                INavigateToSearchResult result,
+                CancellationToken cancellationToken
+            )
             {
                 ReportMatchResult(project, result);
                 return Task.CompletedTask;
@@ -50,9 +57,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
                 _callback.ReportProgress(current, maximum);
             }
 
-            public void ReportIncomplete()
-            {
-            }
+            public void ReportIncomplete() { }
 
             private void ReportMatchResult(Project project, INavigateToSearchResult result)
             {
@@ -62,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
                     GetPatternMatchKind(result.MatchKind),
                     punctuationStripped: false,
                     result.IsCaseSensitive,
-                    matchedSpans);
+                    matchedSpans
+                );
 
                 var navigateToItem = new NavigateToItem(
                     result.Name,
@@ -71,13 +77,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
                     result.SecondarySort,
                     result,
                     patternMatch,
-                    _displayFactory);
+                    _displayFactory
+                );
 
                 try
                 {
                     _callback.AddItem(navigateToItem);
                 }
-                catch (InvalidOperationException ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical))
+                catch (InvalidOperationException ex)
+                    when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical))
                 {
                     // Mitigation for race condition in platform https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1534364
                     //
@@ -86,8 +94,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
                 }
             }
 
-            private static PatternMatchKind GetPatternMatchKind(NavigateToMatchKind matchKind)
-                => matchKind switch
+            private static PatternMatchKind GetPatternMatchKind(NavigateToMatchKind matchKind) =>
+                matchKind switch
                 {
                     NavigateToMatchKind.Exact => PatternMatchKind.Exact,
                     NavigateToMatchKind.Prefix => PatternMatchKind.Prefix,
@@ -96,9 +104,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
                     NavigateToMatchKind.None => PatternMatchKind.Fuzzy,
                     NavigateToMatchKind.CamelCaseExact => PatternMatchKind.CamelCaseExact,
                     NavigateToMatchKind.CamelCasePrefix => PatternMatchKind.CamelCasePrefix,
-                    NavigateToMatchKind.CamelCaseNonContiguousPrefix => PatternMatchKind.CamelCaseNonContiguousPrefix,
+                    NavigateToMatchKind.CamelCaseNonContiguousPrefix =>
+                        PatternMatchKind.CamelCaseNonContiguousPrefix,
                     NavigateToMatchKind.CamelCaseSubstring => PatternMatchKind.CamelCaseSubstring,
-                    NavigateToMatchKind.CamelCaseNonContiguousSubstring => PatternMatchKind.CamelCaseNonContiguousSubstring,
+                    NavigateToMatchKind.CamelCaseNonContiguousSubstring =>
+                        PatternMatchKind.CamelCaseNonContiguousSubstring,
                     NavigateToMatchKind.Fuzzy => PatternMatchKind.Fuzzy,
                     _ => throw ExceptionUtilities.UnexpectedValue(matchKind),
                 };
@@ -108,8 +118,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
             /// </summary>
             /// <remarks> It turns out this string is used for sorting and for some SQM data, so it's best
             /// to keep it unchanged.</remarks>
-            private static string GetNavigateToLanguage(string languageName)
-                => languageName switch
+            private static string GetNavigateToLanguage(string languageName) =>
+                languageName switch
                 {
                     LanguageNames.CSharp => "csharp",
                     LanguageNames.VisualBasic => "vb",

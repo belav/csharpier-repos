@@ -16,7 +16,11 @@ namespace System.ComponentModel
         /// </summary>
         public ProvidePropertyAttribute(
             string propertyName,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type receiverType)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type receiverType
+        )
         {
             ArgumentNullException.ThrowIfNull(receiverType);
 
@@ -29,7 +33,11 @@ namespace System.ComponentModel
         /// </summary>
         public ProvidePropertyAttribute(
             string propertyName,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] string receiverTypeName)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                string receiverTypeName
+        )
         {
             PropertyName = propertyName;
             ReceiverTypeName = receiverTypeName;

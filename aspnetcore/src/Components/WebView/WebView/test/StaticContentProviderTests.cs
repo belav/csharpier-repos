@@ -85,8 +85,7 @@ public class StaticContentProviderTests
                 string subPath
             )
             {
-                _inMemoryFileProvider =
-                    inMemoryFileProvider
+                _inMemoryFileProvider = inMemoryFileProvider
                     ?? throw new ArgumentNullException(nameof(inMemoryFileProvider));
                 _subPath = subPath ?? throw new ArgumentNullException(nameof(inMemoryFileProvider));
             }

@@ -84,7 +84,11 @@ namespace System.Xml.XmlWriterApiTests
             XmlWriter w = utils.CreateWriter(ConformanceLevel.Auto);
             w.WriteDocType("ROOT", "publicid", "sysid", "<!ENTITY e 'abc'>");
             // PROLOG
-            CError.Compare(w.Settings.ConformanceLevel, ConformanceLevel.Document, "Should switch to Document from Auto when you write top level DTD");
+            CError.Compare(
+                w.Settings.ConformanceLevel,
+                ConformanceLevel.Document,
+                "Should switch to Document from Auto when you write top level DTD"
+            );
             w.WriteStartElement("Root");
             w.WriteEndElement();
 
@@ -249,7 +253,8 @@ namespace System.Xml.XmlWriterApiTests
             XmlReader xr = ReaderHelper.Create(new StringReader(strxml));
 
             CError.Compare(w.Settings.ConformanceLevel, ConformanceLevel.Auto, "Error");
-            xr.Read(); xr.Read();
+            xr.Read();
+            xr.Read();
             CError.Compare(xr.NodeType.ToString(), "Text", "Error");
             w.WriteNode(xr, false);
             CError.Compare(w.Settings.ConformanceLevel, ConformanceLevel.Fragment, "Error");

@@ -27,7 +27,12 @@ namespace System
         // Takes in isQuery because iri restrictions for query are different
         // This method implements the ABNF checks per https://tools.ietf.org/html/rfc3987#section-2.2
         //
-        internal static bool CheckIriUnicodeRange(char highSurr, char lowSurr, out bool isSurrogatePair, bool isQuery)
+        internal static bool CheckIriUnicodeRange(
+            char highSurr,
+            char lowSurr,
+            out bool isSurrogatePair,
+            bool isQuery
+        )
         {
             Debug.Assert(char.IsHighSurrogate(highSurr));
 
@@ -66,8 +71,8 @@ namespace System
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsInInclusiveRange(uint value, uint min, uint max)
-            => (value - min) <= (max - min);
+        public static bool IsInInclusiveRange(uint value, uint min, uint max) =>
+            (value - min) <= (max - min);
 
         //
         // Check reserved chars according to RFC 3987 in a specific component
@@ -86,12 +91,18 @@ namespace System
         // IRI normalization for strings containing characters that are not allowed or
         // escaped characters that should be unescaped in the context of the specified Uri component.
         //
-        internal static unsafe string EscapeUnescapeIri(char* pInput, int start, int end, UriComponents component)
+        internal static unsafe string EscapeUnescapeIri(
+            char* pInput,
+            int start,
+            int end,
+            UriComponents component
+        )
         {
             int size = end - start;
-            var dest = size <= Uri.StackallocThreshold
-                ? new ValueStringBuilder(stackalloc char[Uri.StackallocThreshold])
-                : new ValueStringBuilder(size);
+            var dest =
+                size <= Uri.StackallocThreshold
+                    ? new ValueStringBuilder(stackalloc char[Uri.StackallocThreshold])
+                    : new ValueStringBuilder(size);
 
             Span<byte> maxUtf8EncodedSpan = stackalloc byte[4];
 
@@ -105,7 +116,12 @@ namespace System
                         ch = UriHelper.DecodeHexChars(pInput[i + 1], pInput[i + 2]);
 
                         // Do not unescape a reserved char
-                        if (ch == Uri.c_DummyChar || ch == '%' || CheckIsReserved(ch, component) || UriHelper.IsNotSafeForUnescape(ch))
+                        if (
+                            ch == Uri.c_DummyChar
+                            || ch == '%'
+                            || CheckIsReserved(ch, component)
+                            || UriHelper.IsNotSafeForUnescape(ch)
+                        )
                         {
                             // keep as is
                             dest.Append(pInput[i++]);
@@ -124,12 +140,14 @@ namespace System
                         else
                         {
                             // possibly utf8 encoded sequence of unicode
-                            int charactersRead = PercentEncodingHelper.UnescapePercentEncodedUTF8Sequence(
-                                pInput + i,
-                                end - i,
-                                ref dest,
-                                component == UriComponents.Query,
-                                iriParsing: true);
+                            int charactersRead =
+                                PercentEncodingHelper.UnescapePercentEncodedUTF8Sequence(
+                                    pInput + i,
+                                    end - i,
+                                    ref dest,
+                                    component == UriComponents.Query,
+                                    iriParsing: true
+                                );
 
                             Debug.Assert(charactersRead > 0);
                             i += charactersRead - 1; // -1 as i will be incremented in the loop
@@ -152,11 +170,19 @@ namespace System
                     if ((char.IsHighSurrogate(ch)) && (i + 1 < end))
                     {
                         ch2 = pInput[i + 1];
-                        isInIriUnicodeRange = CheckIriUnicodeRange(ch, ch2, out surrogatePair, component == UriComponents.Query);
+                        isInIriUnicodeRange = CheckIriUnicodeRange(
+                            ch,
+                            ch2,
+                            out surrogatePair,
+                            component == UriComponents.Query
+                        );
                     }
                     else
                     {
-                        isInIriUnicodeRange = CheckIriUnicodeRange(ch, component == UriComponents.Query);
+                        isInIriUnicodeRange = CheckIriUnicodeRange(
+                            ch,
+                            component == UriComponents.Query
+                        );
                     }
 
                     if (isInIriUnicodeRange)

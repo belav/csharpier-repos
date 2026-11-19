@@ -15,15 +15,17 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xml.Xsl
 {
-	[TestFixture]
-	public class MsxslScriptTests
-	{
-		// PI calc stuff are one of MSDN samples.
+    [TestFixture]
+    public class MsxslScriptTests
+    {
+        // PI calc stuff are one of MSDN samples.
 
-		static XmlDocument doc;
-		static MsxslScriptTests ()
-		{
-			string inputxml = @"<?xml version='1.0'?>
+        static XmlDocument doc;
+
+        static MsxslScriptTests()
+        {
+            string inputxml =
+                @"<?xml version='1.0'?>
 <data>
   <circle>
     <radius>12</radius>
@@ -32,11 +34,12 @@ namespace MonoTests.System.Xml.Xsl
     <radius>37.5</radius>
   </circle>
 </data>";
-			doc = new XmlDocument ();
-			doc.LoadXml (inputxml);
-		}
+            doc = new XmlDocument();
+            doc.LoadXml(inputxml);
+        }
 
-		static string xslstring = @"<xsl:stylesheet version='1.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'
+        static string xslstring =
+            @"<xsl:stylesheet version='1.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'
     xmlns:msxsl='urn:schemas-microsoft-com:xslt'
     xmlns:user='urn:my-scripts'>
 
@@ -59,7 +62,8 @@ namespace MonoTests.System.Xml.Xsl
   </xsl:template>
 </xsl:stylesheet>";
 
-		string cs1 = @"<msxsl:script language='C#' implements-prefix='user'>
+        string cs1 =
+            @"<msxsl:script language='C#' implements-prefix='user'>
     <![CDATA[
         public string PadRight( string str, int padding) {
             return str.PadRight(padding);
@@ -71,7 +75,8 @@ namespace MonoTests.System.Xml.Xsl
         }
       ]]>
    </msxsl:script>";
-		string vb1 = @"<msxsl:script language='VB' implements-prefix='user'>
+        string vb1 =
+            @"<msxsl:script language='VB' implements-prefix='user'>
      <![CDATA[
      public function circumference(radius as double) as double
        dim pi as double = 3.14
@@ -83,7 +88,8 @@ namespace MonoTests.System.Xml.Xsl
      end function
       ]]>
    </msxsl:script>";
-		string js1 = @"<msxsl:script language='JScript' implements-prefix='user'>
+        string js1 =
+            @"<msxsl:script language='JScript' implements-prefix='user'>
      <![CDATA[
      function circumference(radius : double) : double {
        var pi : double = 3.14;
@@ -96,51 +102,51 @@ namespace MonoTests.System.Xml.Xsl
       ]]>
    </msxsl:script>";
 
+        XslTransform xslt;
 
-		XslTransform xslt;
+        [SetUp]
+        public void GetReady()
+        {
+            xslt = new XslTransform();
+        }
 
-		[SetUp]
-		public void GetReady ()
-		{
-			xslt = new XslTransform ();
-		}
+        [Test]
+        [Category("MobileNotWorking")]
+        public void TestCSharp()
+        {
+            string style = xslstring.Replace("***** rewrite here *****", cs1);
+            XmlTextReader xr = new XmlTextReader(style, XmlNodeType.Document, null);
+            xslt.Load(xr);
+            xslt.Transform(doc.CreateNavigator(), null, new XmlTextWriter(new StringWriter()));
+        }
 
-		[Test]
-    [Category ("MobileNotWorking")]
-		public void TestCSharp ()
-		{
-			string style = xslstring.Replace ("***** rewrite here *****", cs1);
-			XmlTextReader xr = new XmlTextReader (style, XmlNodeType.Document, null);
-			xslt.Load (xr);
-			xslt.Transform (doc.CreateNavigator (), null, new XmlTextWriter (new StringWriter ()));
-		}
+        [Test]
+        [Category("NotWorking")] // it depends on "mbas" existence
+        public void TestVB()
+        {
+            string style = xslstring.Replace("***** rewrite here *****", vb1);
+            XmlTextReader xr = new XmlTextReader(style, XmlNodeType.Document, null);
+            xslt.Load(xr);
+            xslt.Transform(doc.CreateNavigator(), null, new XmlTextWriter(new StringWriter()));
+        }
 
-		[Test]
-		[Category ("NotWorking")] // it depends on "mbas" existence
-		public void TestVB ()
-		{
-			string style = xslstring.Replace ("***** rewrite here *****", vb1);
-			XmlTextReader xr = new XmlTextReader (style, XmlNodeType.Document, null);
-			xslt.Load (xr);
-			xslt.Transform (doc.CreateNavigator (), null, new XmlTextWriter (new StringWriter ()));
-		}
+        [Test]
+        [Category("NotWorking")] // it depends on "mjs" existence
+        public void TestJScript()
+        {
+            string style = xslstring.Replace("***** rewrite here *****", js1);
+            XmlTextReader xr = new XmlTextReader(style, XmlNodeType.Document, null);
+            xslt.Load(xr);
+            xslt.Transform(doc.CreateNavigator(), null, new XmlTextWriter(new StringWriter()));
+        }
 
-		[Test]
-		[Category ("NotWorking")] // it depends on "mjs" existence
-		public void TestJScript ()
-		{
-			string style = xslstring.Replace ("***** rewrite here *****", js1);
-			XmlTextReader xr = new XmlTextReader (style, XmlNodeType.Document, null);
-			xslt.Load (xr);
-			xslt.Transform (doc.CreateNavigator (), null, new XmlTextWriter (new StringWriter ()));
-		}
-
-		[Test]
-		[ExpectedException (typeof (XsltException))]
-    [Category ("MobileNotWorking")]
-		public void InvalidScript ()
-		{
-			string script = @"<xsl:stylesheet version='1.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform' xmlns:user='urn:my-scripts'
+        [Test]
+        [ExpectedException(typeof(XsltException))]
+        [Category("MobileNotWorking")]
+        public void InvalidScript()
+        {
+            string script =
+                @"<xsl:stylesheet version='1.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform' xmlns:user='urn:my-scripts'
     xmlns:msxsl='urn:schemas-microsoft-com:xslt'>
     <!-- -->
     <xsl:output method='html' indent='no' />
@@ -158,13 +164,14 @@ namespace MonoTests.System.Xml.Xsl
     </msxsl:script>
     <!-- -->
 </xsl:stylesheet>";
-			xslt.Load (new XmlTextReader (script, XmlNodeType.Document, null));
-		}
+            xslt.Load(new XmlTextReader(script, XmlNodeType.Document, null));
+        }
 
-		[Test]
-		public void CompilerWarningsShouldBeIgnored ()
-		{
-			string script = @"<xslt:stylesheet xmlns:xslt='http://www.w3.org/1999/XSL/Transform' version='1.0' xmlns:msxsl='urn:schemas-microsoft-com:xslt'
+        [Test]
+        public void CompilerWarningsShouldBeIgnored()
+        {
+            string script =
+                @"<xslt:stylesheet xmlns:xslt='http://www.w3.org/1999/XSL/Transform' version='1.0' xmlns:msxsl='urn:schemas-microsoft-com:xslt'
     xmlns:stringutils='urn:schemas-sourceforge.net-blah'>
     <xslt:output method='text' />
     <msxsl:script language='C#' implements-prefix='stringutils'>
@@ -184,15 +191,16 @@ namespace MonoTests.System.Xml.Xsl
         <xslt:value-of select='@description' />
     </xslt:template>
 </xslt:stylesheet>";
-			xslt.Load (new XmlTextReader (script, XmlNodeType.Document, null));
-			xslt.Transform (doc.CreateNavigator (), null, new XmlTextWriter (TextWriter.Null));
-		}
+            xslt.Load(new XmlTextReader(script, XmlNodeType.Document, null));
+            xslt.Transform(doc.CreateNavigator(), null, new XmlTextWriter(TextWriter.Null));
+        }
 
-		[Test]
-		public void CompileNoLineInfoSource ()
-		{
-			// bug #76116
-			string xslt = @"<xslt:stylesheet xmlns:xslt='http://www.w3.org/1999/XSL/Transform' version='1.0' xmlns:msxsl='urn:schemas-microsoft-com:xslt' xmlns:stringutils='urn:schemas-sourceforge.net-blah' xmlns:nant='unknown-at-this-time'>
+        [Test]
+        public void CompileNoLineInfoSource()
+        {
+            // bug #76116
+            string xslt =
+                @"<xslt:stylesheet xmlns:xslt='http://www.w3.org/1999/XSL/Transform' version='1.0' xmlns:msxsl='urn:schemas-microsoft-com:xslt' xmlns:stringutils='urn:schemas-sourceforge.net-blah' xmlns:nant='unknown-at-this-time'>
     <xslt:output method='text' />
     <msxsl:script language='C#' implements-prefix='stringutils'>
     <![CDATA[
@@ -205,11 +213,11 @@ namespace MonoTests.System.Xml.Xsl
         <foo/>
     </xslt:template>
 </xslt:stylesheet>";
-			XmlDocument doc = new XmlDocument ();
-			doc.LoadXml (xslt);
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xslt);
 
-			XslTransform t = new XslTransform ();
-			t.Load (doc);
-		}
-	}
+            XslTransform t = new XslTransform();
+            t.Load(doc);
+        }
+    }
 }

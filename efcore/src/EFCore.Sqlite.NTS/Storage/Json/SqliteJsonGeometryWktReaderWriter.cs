@@ -20,15 +20,15 @@ public sealed class SqliteJsonGeometryWktReaderWriter : JsonValueReaderWriter<Ge
     /// </summary>
     public static SqliteJsonGeometryWktReaderWriter Instance { get; } = new();
 
-    private SqliteJsonGeometryWktReaderWriter()
-    {
-    }
+    private SqliteJsonGeometryWktReaderWriter() { }
 
     /// <inheritdoc />
-    public override Geometry FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
-        => WktReader.Read(manager.CurrentReader.GetString());
+    public override Geometry FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    ) => WktReader.Read(manager.CurrentReader.GetString());
 
     /// <inheritdoc />
-    public override void ToJsonTyped(Utf8JsonWriter writer, Geometry value)
-        => writer.WriteStringValue(value.ToText());
+    public override void ToJsonTyped(Utf8JsonWriter writer, Geometry value) =>
+        writer.WriteStringValue(value.ToText());
 }

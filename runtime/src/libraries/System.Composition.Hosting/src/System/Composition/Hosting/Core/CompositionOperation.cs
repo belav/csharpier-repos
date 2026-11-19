@@ -28,7 +28,10 @@ namespace System.Composition.Hosting.Core
         /// to the parents of the context if required).</param>
         /// <param name="compositionRootActivator">Activator that will drive the operation.</param>
         /// <returns>The composed object graph.</returns>
-        public static object Run(LifetimeContext outermostLifetimeContext, CompositeActivator compositionRootActivator)
+        public static object Run(
+            LifetimeContext outermostLifetimeContext,
+            CompositeActivator compositionRootActivator
+        )
         {
             if (outermostLifetimeContext is null)
             {

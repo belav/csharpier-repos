@@ -9,9 +9,7 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class SimpleQuerySqlServerTest : SimpleQueryRelationalTestBase
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqlServerTestStoreFactory.Instance;
-
+    protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
     #region 27427
 
@@ -21,12 +19,15 @@ public class SimpleQuerySqlServerTest : SimpleQueryRelationalTestBase
     {
         var contextFactory = await InitializeAsync<Context27427>();
         using var context = contextFactory.CreateContext();
-        var query = context.DemoEntities
-            .FromSqlRaw("SELECT * FROM DemoEntities WHERE Id = {0}", new SqlParameter { Value = 1 })
+        var query = context
+            .DemoEntities.FromSqlRaw(
+                "SELECT * FROM DemoEntities WHERE Id = {0}",
+                new SqlParameter { Value = 1 }
+            )
             .Select(e => e.Id);
 
-        var query2 = context.DemoEntities
-            .Where(e => query.Contains(e.Id))
+        var query2 = context
+            .DemoEntities.Where(e => query.Contains(e.Id))
             .GroupBy(e => e.Id)
             .Select(g => new { g.Key, Aggregate = g.Count() });
 
@@ -52,15 +53,14 @@ WHERE [d].[Id] IN (
     ) AS [m]
 )
 GROUP BY [d].[Id]
-""");
+"""
+        );
     }
 
     protected class Context27427 : DbContext
     {
         public Context27427(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public DbSet<DemoEntity> DemoEntities { get; set; }
     }
@@ -82,19 +82,18 @@ GROUP BY [d].[Id]
         using var context = contextFactory.CreateContext();
         var query = context.Entities.TemporalAsOf(new DateTime(2010, 1, 1));
 
-        var result = async
-            ? await query.ToListAsync()
-            : query.ToList();
+        var result = async ? await query.ToListAsync() : query.ToList();
 
         Assert.Equal(2, result.Count);
         Assert.True(result.All(x => x.Reference != null));
         Assert.True(result.All(x => x.Collection.Count > 0));
 
         AssertSql(
-"""
+            """
 SELECT [e].[Id], [e].[Name], [e].[PeriodEnd], [e].[PeriodStart], [e].[Collection], [e].[Reference]
 FROM [Entities] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]
-""");
+"""
+        );
     }
 
     [ConditionalTheory]
@@ -105,19 +104,18 @@ FROM [Entities] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]
         using var context = contextFactory.CreateContext();
         var query = context.Entities.TemporalAll();
 
-        var result = async
-            ? await query.ToListAsync()
-            : query.ToList();
+        var result = async ? await query.ToListAsync() : query.ToList();
 
         Assert.Equal(2, result.Count);
         Assert.True(result.All(x => x.Reference != null));
         Assert.True(result.All(x => x.Collection.Count > 0));
 
         AssertSql(
-"""
+            """
 SELECT [e].[Id], [e].[Name], [e].[PeriodEnd], [e].[PeriodStart], [e].[Collection], [e].[Reference]
 FROM [Entities] FOR SYSTEM_TIME ALL AS [e]
-""");
+"""
+        );
     }
 
     [ConditionalTheory]
@@ -126,20 +124,21 @@ FROM [Entities] FOR SYSTEM_TIME ALL AS [e]
     {
         var contextFactory = await InitializeAsync<Context30478>(seed: x => x.Seed());
         using var context = contextFactory.CreateContext();
-        var query = context.Entities.TemporalAsOf(new DateTime(2010, 1, 1)).Select(x => x.Reference);
+        var query = context
+            .Entities.TemporalAsOf(new DateTime(2010, 1, 1))
+            .Select(x => x.Reference);
 
-        var result = async
-            ? await query.ToListAsync()
-            : query.ToList();
+        var result = async ? await query.ToListAsync() : query.ToList();
 
         Assert.Equal(2, result.Count);
         Assert.True(result.All(x => x != null));
 
         AssertSql(
-"""
+            """
 SELECT [e].[Reference], [e].[Id]
 FROM [Entities] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]
-""");
+"""
+        );
     }
 
     [ConditionalTheory]
@@ -148,28 +147,27 @@ FROM [Entities] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]
     {
         var contextFactory = await InitializeAsync<Context30478>(seed: x => x.Seed());
         using var context = contextFactory.CreateContext();
-        var query = context.Entities.TemporalAsOf(new DateTime(2010, 1, 1)).Select(x => x.Collection);
+        var query = context
+            .Entities.TemporalAsOf(new DateTime(2010, 1, 1))
+            .Select(x => x.Collection);
 
-        var result = async
-            ? await query.ToListAsync()
-            : query.ToList();
+        var result = async ? await query.ToListAsync() : query.ToList();
 
         Assert.Equal(2, result.Count);
         Assert.True(result.All(x => x.Count > 0));
 
         AssertSql(
-"""
+            """
 SELECT [e].[Collection], [e].[Id]
 FROM [Entities] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]
-""");
+"""
+        );
     }
 
     protected class Context30478 : DbContext
     {
         public Context30478(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public DbSet<Entity30478> Entities { get; set; }
 
@@ -177,17 +175,27 @@ FROM [Entities] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]
         {
             modelBuilder.Entity<Entity30478>().Property(x => x.Id).ValueGeneratedNever();
             modelBuilder.Entity<Entity30478>().ToTable("Entities", tb => tb.IsTemporal());
-            modelBuilder.Entity<Entity30478>().OwnsOne(x => x.Reference, nb =>
-            {
-                nb.ToJson();
-                nb.OwnsOne(x => x.Nested);
-            });
+            modelBuilder
+                .Entity<Entity30478>()
+                .OwnsOne(
+                    x => x.Reference,
+                    nb =>
+                    {
+                        nb.ToJson();
+                        nb.OwnsOne(x => x.Nested);
+                    }
+                );
 
-            modelBuilder.Entity<Entity30478>().OwnsMany(x => x.Collection, nb =>
-            {
-                nb.ToJson();
-                nb.OwnsOne(x => x.Nested);
-            });
+            modelBuilder
+                .Entity<Entity30478>()
+                .OwnsMany(
+                    x => x.Collection,
+                    nb =>
+                    {
+                        nb.ToJson();
+                        nb.OwnsOne(x => x.Nested);
+                    }
+                );
         }
 
         public void Seed()
@@ -199,26 +207,26 @@ FROM [Entities] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]
                 Reference = new Json30478
                 {
                     Name = "r1",
-                    Nested = new JsonNested30478 { Number = 1 }
+                    Nested = new JsonNested30478 { Number = 1 },
                 },
                 Collection = new List<Json30478>
                 {
                     new Json30478
                     {
                         Name = "c11",
-                        Nested = new JsonNested30478 { Number = 11 }
+                        Nested = new JsonNested30478 { Number = 11 },
                     },
                     new Json30478
                     {
                         Name = "c12",
-                        Nested = new JsonNested30478 { Number = 12 }
+                        Nested = new JsonNested30478 { Number = 12 },
                     },
                     new Json30478
                     {
                         Name = "c13",
-                        Nested = new JsonNested30478 { Number = 12 }
-                    }
-                }
+                        Nested = new JsonNested30478 { Number = 12 },
+                    },
+                },
             };
 
             var e2 = new Entity30478
@@ -228,21 +236,21 @@ FROM [Entities] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]
                 Reference = new Json30478
                 {
                     Name = "r2",
-                    Nested = new JsonNested30478 { Number = 2 }
+                    Nested = new JsonNested30478 { Number = 2 },
                 },
                 Collection = new List<Json30478>
                 {
                     new Json30478
                     {
                         Name = "c21",
-                        Nested = new JsonNested30478 { Number = 21 }
+                        Nested = new JsonNested30478 { Number = 21 },
                     },
                     new Json30478
                     {
                         Name = "c22",
-                        Nested = new JsonNested30478 { Number = 22 }
+                        Nested = new JsonNested30478 { Number = 22 },
                     },
-                }
+                },
             };
 
             AddRange(e1, e2);
@@ -251,15 +259,22 @@ FROM [Entities] FOR SYSTEM_TIME AS OF '2010-01-01T00:00:00.0000000' AS [e]
             RemoveRange(e1, e2);
             SaveChanges();
 
-
             Database.ExecuteSqlRaw($"ALTER TABLE [Entities] SET (SYSTEM_VERSIONING = OFF)");
             Database.ExecuteSqlRaw($"ALTER TABLE [Entities] DROP PERIOD FOR SYSTEM_TIME");
 
-            Database.ExecuteSqlRaw($"UPDATE [EntitiesHistory] SET PeriodStart = '2000-01-01T01:00:00.0000000Z'");
-            Database.ExecuteSqlRaw($"UPDATE [EntitiesHistory] SET PeriodEnd = '2020-07-01T07:00:00.0000000Z'");
+            Database.ExecuteSqlRaw(
+                $"UPDATE [EntitiesHistory] SET PeriodStart = '2000-01-01T01:00:00.0000000Z'"
+            );
+            Database.ExecuteSqlRaw(
+                $"UPDATE [EntitiesHistory] SET PeriodEnd = '2020-07-01T07:00:00.0000000Z'"
+            );
 
-            Database.ExecuteSqlRaw($"ALTER TABLE [Entities] ADD PERIOD FOR SYSTEM_TIME ([PeriodStart], [PeriodEnd])");
-            Database.ExecuteSqlRaw($"ALTER TABLE [Entities] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[EntitiesHistory]))");
+            Database.ExecuteSqlRaw(
+                $"ALTER TABLE [Entities] ADD PERIOD FOR SYSTEM_TIME ([PeriodStart], [PeriodEnd])"
+            );
+            Database.ExecuteSqlRaw(
+                $"ALTER TABLE [Entities] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[EntitiesHistory]))"
+            );
         }
     }
 
@@ -306,7 +321,8 @@ INNER JOIN [Staff] AS [s] ON [a].[StaffId] = [s].[Id]
 LEFT JOIN [Staff] AS [s0] ON [s].[ManagerId] = [s0].[Id]
 LEFT JOIN [Staff] AS [s1] ON [s].[SecondaryManagerId] = [s1].[Id]
 WHERE [a].[Id] = @__id_0
-""");
+"""
+        );
     }
 
     public override async Task Comparing_enum_casted_to_byte_with_int_parameter(bool async)
@@ -320,7 +336,8 @@ WHERE [a].[Id] = @__id_0
 SELECT [i].[IceCreamId], [i].[Name], [i].[Taste]
 FROM [IceCreams] AS [i]
 WHERE [i].[Taste] = @__bitterTaste_0
-""");
+"""
+        );
     }
 
     public override async Task Comparing_enum_casted_to_byte_with_int_constant(bool async)
@@ -332,7 +349,8 @@ WHERE [i].[Taste] = @__bitterTaste_0
 SELECT [i].[IceCreamId], [i].[Name], [i].[Taste]
 FROM [IceCreams] AS [i]
 WHERE [i].[Taste] = 1
-""");
+"""
+        );
     }
 
     public override async Task Comparing_byte_column_to_enum_in_vb_creating_double_cast(bool async)
@@ -344,7 +362,8 @@ WHERE [i].[Taste] = 1
 SELECT [f].[Id], [f].[Taste]
 FROM [Food] AS [f]
 WHERE [f].[Taste] = CAST(1 AS tinyint)
-""");
+"""
+        );
     }
 
     public override async Task Null_check_removal_in_ternary_maintain_appropriate_cast(bool async)
@@ -355,7 +374,8 @@ WHERE [f].[Taste] = CAST(1 AS tinyint)
             """
 SELECT CAST([f].[Taste] AS tinyint) AS [Bar]
 FROM [Food] AS [f]
-""");
+"""
+        );
     }
 
     public override async Task Bool_discriminator_column_works(bool async)
@@ -367,7 +387,8 @@ FROM [Food] AS [f]
 SELECT [a].[Id], [a].[BlogId], [b].[Id], [b].[IsPhotoBlog], [b].[Title], [b].[NumberOfPhotos]
 FROM [Authors] AS [a]
 LEFT JOIN [Blog] AS [b] ON [a].[BlogId] = [b].[Id]
-""");
+"""
+        );
     }
 
     public override async Task Count_member_over_IReadOnlyCollection_works(bool async)
@@ -381,7 +402,8 @@ SELECT (
     FROM [Books] AS [b]
     WHERE [a].[AuthorId] = [b].[AuthorId]) AS [BooksCount]
 FROM [Authors] AS [a]
-""");
+"""
+        );
     }
 
     public override async Task Multiple_different_entity_type_from_different_namespaces(bool async)
@@ -391,12 +413,17 @@ FROM [Authors] AS [a]
         AssertSql(
             """
 SELECT cast(null as int) AS MyValue
-""");
+"""
+        );
     }
 
-    public override async Task Unwrap_convert_node_over_projection_when_translating_contains_over_subquery(bool async)
+    public override async Task Unwrap_convert_node_over_projection_when_translating_contains_over_subquery(
+        bool async
+    )
     {
-        await base.Unwrap_convert_node_over_projection_when_translating_contains_over_subquery(async);
+        await base.Unwrap_convert_node_over_projection_when_translating_contains_over_subquery(
+            async
+        );
 
         AssertSql(
             """
@@ -416,12 +443,17 @@ SELECT CASE
     ELSE CAST(0 AS bit)
 END AS [HasAccess]
 FROM [Users] AS [u]
-""");
+"""
+        );
     }
 
-    public override async Task Unwrap_convert_node_over_projection_when_translating_contains_over_subquery_2(bool async)
+    public override async Task Unwrap_convert_node_over_projection_when_translating_contains_over_subquery_2(
+        bool async
+    )
     {
-        await base.Unwrap_convert_node_over_projection_when_translating_contains_over_subquery_2(async);
+        await base.Unwrap_convert_node_over_projection_when_translating_contains_over_subquery_2(
+            async
+        );
 
         AssertSql(
             """
@@ -443,12 +475,17 @@ SELECT CASE
     ELSE CAST(0 AS bit)
 END AS [HasAccess]
 FROM [Users] AS [u]
-""");
+"""
+        );
     }
 
-    public override async Task Unwrap_convert_node_over_projection_when_translating_contains_over_subquery_3(bool async)
+    public override async Task Unwrap_convert_node_over_projection_when_translating_contains_over_subquery_3(
+        bool async
+    )
     {
-        await base.Unwrap_convert_node_over_projection_when_translating_contains_over_subquery_3(async);
+        await base.Unwrap_convert_node_over_projection_when_translating_contains_over_subquery_3(
+            async
+        );
 
         AssertSql(
             """
@@ -467,7 +504,8 @@ SELECT CASE
     ELSE CAST(0 AS bit)
 END AS [HasAccess]
 FROM [Users] AS [u]
-""");
+"""
+        );
     }
 
     public override async Task GroupBy_aggregate_on_right_side_of_join(bool async)
@@ -491,7 +529,8 @@ INNER JOIN (
 ) AS [t] ON [o].[OrderId] = [t].[Key]
 WHERE [o].[OrderId] = @__orderId_0
 ORDER BY [o].[OrderId]
-""");
+"""
+        );
     }
 
     public override async Task Enum_with_value_converter_matching_take_value(bool async)
@@ -518,7 +557,8 @@ FROM (
 ) AS [t]
 INNER JOIN [Orders] AS [o1] ON [t].[Id] = [o1].[Id]
 ORDER BY [t].[Id]
-""");
+"""
+        );
     }
 
     public override async Task GroupBy_Aggregate_over_navigations_repeated(bool async)
@@ -545,7 +585,8 @@ SELECT (
 FROM [TimeSheets] AS [t]
 WHERE [t].[OrderId] IS NOT NULL
 GROUP BY [t].[OrderId]
-""");
+"""
+        );
     }
 
     public override async Task Aggregate_over_subquery_in_group_by_projection(bool async)
@@ -561,7 +602,8 @@ SELECT [o].[CustomerId], (
 FROM [Order] AS [o]
 WHERE [o].[Number] <> N'A1' OR [o].[Number] IS NULL
 GROUP BY [o].[CustomerId], [o].[Number]
-""");
+"""
+        );
     }
 
     public override async Task Aggregate_over_subquery_in_group_by_projection_2(bool async)
@@ -576,7 +618,8 @@ SELECT [t].[Value] AS [A], (
     WHERE [t0].[Value] = MAX([t].[Id]) * 6 OR ([t0].[Value] IS NULL AND MAX([t].[Id]) IS NULL)) AS [B]
 FROM [Table] AS [t]
 GROUP BY [t].[Value]
-""");
+"""
+        );
     }
 
     public override async Task Group_by_aggregate_in_subquery_projection_after_group_by(bool async)
@@ -592,7 +635,8 @@ SELECT [t].[Value] AS [A], COALESCE(SUM([t].[Id]), 0) AS [B], COALESCE((
     ORDER BY (SELECT 1)), 0) AS [C]
 FROM [Table] AS [t]
 GROUP BY [t].[Value]
-""");
+"""
+        );
     }
 
     public override async Task Group_by_multiple_aggregate_joining_different_tables(bool async)
@@ -627,10 +671,13 @@ FROM (
     FROM [Parents] AS [p]
 ) AS [t]
 GROUP BY [t].[Key]
-""");
+"""
+        );
     }
 
-    public override async Task Group_by_multiple_aggregate_joining_different_tables_with_query_filter(bool async)
+    public override async Task Group_by_multiple_aggregate_joining_different_tables_with_query_filter(
+        bool async
+    )
     {
         await base.Group_by_multiple_aggregate_joining_different_tables_with_query_filter(async);
 
@@ -670,7 +717,8 @@ FROM (
     FROM [Parents] AS [p]
 ) AS [t]
 GROUP BY [t].[Key]
-""");
+"""
+        );
     }
 
     public override async Task Subquery_first_member_compared_to_null(bool async)
@@ -693,7 +741,8 @@ WHERE EXISTS (
     FROM [Child26744] AS [c0]
     WHERE [p].[Id] = [c0].[ParentId] AND [c0].[SomeNullableDateTime] IS NULL
     ORDER BY [c0].[SomeInteger]) IS NOT NULL
-""");
+"""
+        );
     }
 
     public override async Task SelectMany_where_Select(bool async)
@@ -714,7 +763,8 @@ INNER JOIN (
     WHERE [t].[row] <= 1
 ) AS [t0] ON [p].[Id] = [t0].[ParentId]
 WHERE [t0].[SomeOtherNullableDateTime] IS NOT NULL
-""");
+"""
+        );
     }
 
     public override async Task StoreType_for_UDF_used(bool async)
@@ -736,10 +786,13 @@ WHERE [m].[SomeDate] = @__date_0
 SELECT [m].[Id], [m].[SomeDate]
 FROM [MyEntities] AS [m]
 WHERE [dbo].[ModifyDate]([m].[SomeDate]) = @__date_0
-""");
+"""
+        );
     }
 
-    public override async Task Pushdown_does_not_add_grouping_key_to_projection_when_distinct_is_applied(bool async)
+    public override async Task Pushdown_does_not_add_grouping_key_to_projection_when_distinct_is_applied(
+        bool async
+    )
     {
         await base.Pushdown_does_not_add_grouping_key_to_projection_when_distinct_is_applied(async);
 
@@ -758,7 +811,8 @@ INNER JOIN (
 ) AS [t0] ON [t].[ParcelNumber] = [t0].[Parcel]
 WHERE [t].[TableId] = 123
 ORDER BY [t].[ParcelNumber]
-""");
+"""
+        );
     }
 
     public override async Task Hierarchy_query_with_abstract_type_sibling(bool async)
@@ -770,7 +824,8 @@ ORDER BY [t].[ParcelNumber]
 SELECT [a].[Id], [a].[Discriminator], [a].[Species], [a].[Name], [a].[EdcuationLevel], [a].[FavoriteToy]
 FROM [Animals] AS [a]
 WHERE [a].[Discriminator] IN (N'Cat', N'Dog') AND [a].[Species] LIKE N'F%'
-""");
+"""
+        );
     }
 
     public override async Task Hierarchy_query_with_abstract_type_sibling_TPT(bool async)
@@ -788,7 +843,8 @@ LEFT JOIN [Pets] AS [p] ON [a].[Id] = [p].[Id]
 LEFT JOIN [Cats] AS [c] ON [a].[Id] = [c].[Id]
 LEFT JOIN [Dogs] AS [d] ON [a].[Id] = [d].[Id]
 WHERE ([d].[Id] IS NOT NULL OR [c].[Id] IS NOT NULL) AND [a].[Species] LIKE N'F%'
-""");
+"""
+        );
     }
 
     public override async Task Hierarchy_query_with_abstract_type_sibling_TPC(bool async)
@@ -806,15 +862,18 @@ FROM (
     FROM [Dogs] AS [d]
 ) AS [t]
 WHERE [t].[Species] LIKE N'F%'
-""");
+"""
+        );
     }
 
-    public override async Task Filter_on_nested_DTO_with_interface_gets_simplified_correctly(bool async)
+    public override async Task Filter_on_nested_DTO_with_interface_gets_simplified_correctly(
+        bool async
+    )
     {
         await base.Filter_on_nested_DTO_with_interface_gets_simplified_correctly(async);
 
         AssertSql(
-"""
+            """
 SELECT [c].[Id], [c].[CompanyId], CASE
     WHEN [c0].[Id] IS NOT NULL THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
@@ -826,6 +885,7 @@ WHERE CASE
     WHEN [c0].[Id] IS NOT NULL THEN [c1].[CountryName]
     ELSE NULL
 END = N'COUNTRY'
-""");
+"""
+        );
     }
 }

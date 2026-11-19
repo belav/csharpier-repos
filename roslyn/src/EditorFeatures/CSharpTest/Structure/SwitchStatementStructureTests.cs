@@ -11,57 +11,63 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
-public class SwitchStatementStructureTests : AbstractCSharpSyntaxNodeStructureTests<SwitchStatementSyntax>
+public class SwitchStatementStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<SwitchStatementSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new SwitchStatementStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new SwitchStatementStructureProvider();
 
     [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
     public async Task TestSwitchStatement1()
     {
         var code = """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
+                    {|hint:$$switch (expr){|textspan:
                     {
-                        {|hint:$$switch (expr){|textspan:
-                        {
-                        }|}|}
-                    }
+                    }|}|}
                 }
-                """;
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
     public async Task TestSwitchStatement2()
     {
         var code = """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
+                    {|hint1:$$switch (expr){|textspan1:
                     {
-                        {|hint1:$$switch (expr){|textspan1:
-                        {
-                            {|hint2:case 0:{|textspan2:
-                                if (true)
-                                {
-                                }
-                                break;|}|}
-                            {|hint3:default:{|textspan3:
-                                if (false)
-                                {
-                                }
-                                break;|}|}
-                        }|}|}
-                    }
+                        {|hint2:case 0:{|textspan2:
+                            if (true)
+                            {
+                            }
+                            break;|}|}
+                        {|hint3:default:{|textspan3:
+                            if (false)
+                            {
+                            }
+                            break;|}|}
+                    }|}|}
                 }
-                """;
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
+        await VerifyBlockSpansAsync(
+            code,
             Region("textspan1", "hint1", CSharpStructureHelpers.Ellipsis, autoCollapse: false),
             Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: false),
-            Region("textspan3", "hint3", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            Region("textspan3", "hint3", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 }

@@ -34,28 +34,30 @@ using Microsoft.Build.Tasks;
 using Microsoft.Build.Utilities;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Tasks {
+namespace MonoTests.Microsoft.Build.Tasks
+{
+    [TestFixture]
+    public class CreatePropertyTest
+    {
+        [Test]
+        public void TestAssignment()
+        {
+            CreateProperty cp = new CreateProperty();
 
-	[TestFixture]
-	public class CreatePropertyTest {
-		[Test]
-		public void TestAssignment ()
-		{
-			CreateProperty cp = new CreateProperty ();
+            cp.Value = new string[1] { "1" };
 
-			cp.Value = new string [1] { "1" };
+            Assert.AreEqual("1", cp.Value[0], "A1");
+            Assert.AreEqual("1", cp.ValueSetByTask[0], "A2");
+        }
 
-			Assert.AreEqual ("1", cp.Value [0], "A1");
-			Assert.AreEqual ("1", cp.ValueSetByTask [0], "A2");
-		}
+        [Test]
+        public void TestExecution1()
+        {
+            Engine engine;
+            Project project;
 
-		[Test]
-		public void TestExecution1 ()
-		{
-			Engine engine;
-			Project project;
-
-			string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<A>1</A>
@@ -76,23 +78,25 @@ namespace MonoTests.Microsoft.Build.Tasks {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-			Assert.IsTrue (project.Build ("1"), "A1");
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+            Assert.IsTrue(project.Build("1"), "A1");
 
-			Assert.AreEqual ("12", project.EvaluatedProperties ["Value"].Value, "A2");
-			Assert.AreEqual ("12", project.EvaluatedProperties ["Value"].FinalValue, "A3");
-			Assert.AreEqual ("12", project.EvaluatedProperties ["ValueSetByTask"].Value, "A4");
-			Assert.AreEqual ("12", project.EvaluatedProperties ["ValueSetByTask"].FinalValue, "A5");
-		}
+            Assert.AreEqual("12", project.EvaluatedProperties["Value"].Value, "A2");
+            Assert.AreEqual("12", project.EvaluatedProperties["Value"].FinalValue, "A3");
+            Assert.AreEqual("12", project.EvaluatedProperties["ValueSetByTask"].Value, "A4");
+            Assert.AreEqual("12", project.EvaluatedProperties["ValueSetByTask"].FinalValue, "A5");
+        }
 
-		[Test]
-		public void TestExecution2 () {
-			Engine engine;
-			Project project;
+        [Test]
+        public void TestExecution2()
+        {
+            Engine engine;
+            Project project;
 
-			string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 				<ItemGroup>
 					<Second Include=""Abc""/>
@@ -115,25 +119,26 @@ namespace MonoTests.Microsoft.Build.Tasks {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-			Assert.IsTrue (project.Build ("1"), "A1");
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+            Assert.IsTrue(project.Build("1"), "A1");
 
-			Assert.AreEqual ("Abc", project.EvaluatedProperties["Value"].Value, "A2");
-			Assert.AreEqual ("Abc", project.EvaluatedProperties["Value"].FinalValue, "A3");
-			Assert.AreEqual ("Abc", project.EvaluatedProperties["ValueSetByTask"].Value, "A4");
-			Assert.AreEqual ("Abc", project.EvaluatedProperties["ValueSetByTask"].FinalValue, "A5");
-			Assert.AreEqual ("@(IG)", project.EvaluatedProperties["C"].FinalValue, "A6");
-		}
+            Assert.AreEqual("Abc", project.EvaluatedProperties["Value"].Value, "A2");
+            Assert.AreEqual("Abc", project.EvaluatedProperties["Value"].FinalValue, "A3");
+            Assert.AreEqual("Abc", project.EvaluatedProperties["ValueSetByTask"].Value, "A4");
+            Assert.AreEqual("Abc", project.EvaluatedProperties["ValueSetByTask"].FinalValue, "A5");
+            Assert.AreEqual("@(IG)", project.EvaluatedProperties["C"].FinalValue, "A6");
+        }
 
-		[Test]
-		public void TestEmptyPropertyValue ()
-		{
-			Engine engine;
-			Project project;
+        [Test]
+        public void TestEmptyPropertyValue()
+        {
+            Engine engine;
+            Project project;
 
-			string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<A>1</A>
@@ -151,21 +156,22 @@ namespace MonoTests.Microsoft.Build.Tasks {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-			TestMessageLogger testLogger = new TestMessageLogger ();
-			engine.RegisterLogger (testLogger);
+            TestMessageLogger testLogger = new TestMessageLogger();
+            engine.RegisterLogger(testLogger);
 
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-			if (!project.Build ("1")) {
-				testLogger.DumpMessages ();
-				Assert.Fail ("Build failed");
-			}
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+            if (!project.Build("1"))
+            {
+                testLogger.DumpMessages();
+                Assert.Fail("Build failed");
+            }
 
-			testLogger.CheckLoggedMessageHead ("Before: 1", "A1");
-			testLogger.CheckLoggedMessageHead ("After: ", "A2");
-			Assert.AreEqual (0, testLogger.NormalMessageCount, "Unexpected messages found");
-		}
-	}
+            testLogger.CheckLoggedMessageHead("Before: 1", "A1");
+            testLogger.CheckLoggedMessageHead("After: ", "A2");
+            Assert.AreEqual(0, testLogger.NormalMessageCount, "Unexpected messages found");
+        }
+    }
 }

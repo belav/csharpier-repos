@@ -17,6 +17,6 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
         Interface,
         BaseClass,
         InnerClass,
-        MostDerivedClass
+        MostDerivedClass,
     }
 }

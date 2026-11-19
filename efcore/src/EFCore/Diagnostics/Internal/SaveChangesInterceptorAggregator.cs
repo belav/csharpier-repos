@@ -16,8 +16,9 @@ public class SaveChangesInterceptorAggregator : InterceptorAggregator<ISaveChang
     /// </summary>
     /// <param name="interceptors">The interceptors to combine.</param>
     /// <returns>The combined interceptor.</returns>
-    protected override ISaveChangesInterceptor CreateChain(IEnumerable<ISaveChangesInterceptor> interceptors)
-        => new CompositeSaveChangesInterceptor(interceptors);
+    protected override ISaveChangesInterceptor CreateChain(
+        IEnumerable<ISaveChangesInterceptor> interceptors
+    ) => new CompositeSaveChangesInterceptor(interceptors);
 
     private sealed class CompositeSaveChangesInterceptor : ISaveChangesInterceptor
     {
@@ -28,7 +29,10 @@ public class SaveChangesInterceptorAggregator : InterceptorAggregator<ISaveChang
             _interceptors = interceptors.ToArray();
         }
 
-        public InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
+        public InterceptionResult<int> SavingChanges(
+            DbContextEventData eventData,
+            InterceptionResult<int> result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -66,7 +70,8 @@ public class SaveChangesInterceptorAggregator : InterceptorAggregator<ISaveChang
 
         public InterceptionResult ThrowingConcurrencyException(
             ConcurrencyExceptionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -79,11 +84,14 @@ public class SaveChangesInterceptorAggregator : InterceptorAggregator<ISaveChang
         public async ValueTask<InterceptionResult<int>> SavingChangesAsync(
             DbContextEventData eventData,
             InterceptionResult<int> result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                result = await _interceptors[i].SavingChangesAsync(eventData, result, cancellationToken).ConfigureAwait(false);
+                result = await _interceptors[i]
+                    .SavingChangesAsync(eventData, result, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             return result;
@@ -92,11 +100,14 @@ public class SaveChangesInterceptorAggregator : InterceptorAggregator<ISaveChang
         public async ValueTask<int> SavedChangesAsync(
             SaveChangesCompletedEventData eventData,
             int result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                result = await _interceptors[i].SavedChangesAsync(eventData, result, cancellationToken).ConfigureAwait(false);
+                result = await _interceptors[i]
+                    .SavedChangesAsync(eventData, result, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             return result;
@@ -104,28 +115,35 @@ public class SaveChangesInterceptorAggregator : InterceptorAggregator<ISaveChang
 
         public async Task SaveChangesFailedAsync(
             DbContextErrorEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                await _interceptors[i].SaveChangesFailedAsync(eventData, cancellationToken).ConfigureAwait(false);
+                await _interceptors[i]
+                    .SaveChangesFailedAsync(eventData, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
 
         public async Task SaveChangesCanceledAsync(
             DbContextEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                await _interceptors[i].SaveChangesCanceledAsync(eventData, cancellationToken).ConfigureAwait(false);
+                await _interceptors[i]
+                    .SaveChangesCanceledAsync(eventData, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
 
         public async ValueTask<InterceptionResult> ThrowingConcurrencyExceptionAsync(
             ConcurrencyExceptionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {

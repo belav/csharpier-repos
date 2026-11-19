@@ -1,7 +1,6 @@
-public class outer {
-	public class inner {
-	}
+public class outer
+{
+    public class inner { }
 }
 
-public class gen <T> {
-}
+public class gen<T> { }

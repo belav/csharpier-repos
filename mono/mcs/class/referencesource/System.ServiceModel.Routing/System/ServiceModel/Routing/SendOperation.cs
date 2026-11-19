@@ -6,11 +6,11 @@ namespace System.ServiceModel.Routing
 {
     using System;
     using System.Collections.Generic;
+    using System.Configuration;
+    using System.Runtime;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.Transactions;
-    using System.Runtime;
-    using System.Configuration;
 
     class SendOperation
     {
@@ -21,7 +21,11 @@ namespace System.ServiceModel.Routing
         OperationContext operationContext;
         Type routerContract;
 
-        public SendOperation(IEnumerable<ServiceEndpoint> endpoints, Type routerContract, OperationContext operationContext)
+        public SendOperation(
+            IEnumerable<ServiceEndpoint> endpoints,
+            Type routerContract,
+            OperationContext operationContext
+        )
         {
             this.operationContext = operationContext;
             this.routerContract = routerContract;
@@ -29,12 +33,16 @@ namespace System.ServiceModel.Routing
             this.endpointTraits = new List<RoutingEndpointTrait>();
             foreach (ServiceEndpoint endpoint in endpoints)
             {
-                this.endpointTraits.Add(new RoutingEndpointTrait(routerContract, endpoint, operationContext));
+                this.endpointTraits.Add(
+                    new RoutingEndpointTrait(routerContract, endpoint, operationContext)
+                );
             }
 
             if (this.endpointTraits.Count == 0)
             {
-                throw FxTrace.Exception.AsError(new ConfigurationErrorsException(SR.BackupListEmpty));
+                throw FxTrace.Exception.AsError(
+                    new ConfigurationErrorsException(SR.BackupListEmpty)
+                );
             }
         }
 
@@ -42,7 +50,10 @@ namespace System.ServiceModel.Routing
         {
             get
             {
-                Fx.Assert(this.currentIndex < this.endpointTraits.Count, "CurrentEndpoint should not be accessed after TryMoveToAlternate returned false!");
+                Fx.Assert(
+                    this.currentIndex < this.endpointTraits.Count,
+                    "CurrentEndpoint should not be accessed after TryMoveToAlternate returned false!"
+                );
 
                 RoutingEndpointTrait trait = this.endpointTraits[this.currentIndex];
                 return trait;

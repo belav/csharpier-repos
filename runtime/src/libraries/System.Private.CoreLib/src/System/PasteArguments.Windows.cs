@@ -12,7 +12,10 @@ namespace System
         /// Repastes a set of arguments into a linear string that parses back into the originals under pre- or post-2008 VC parsing rules.
         /// The rules for parsing the executable name (argv[0]) are special, so you must indicate whether the first argument actually is argv[0].
         /// </summary>
-        internal static string Paste(IEnumerable<string> arguments, bool pasteFirstArgumentUsingArgV0Rules)
+        internal static string Paste(
+            IEnumerable<string> arguments,
+            bool pasteFirstArgumentUsingArgV0Rules
+        )
         {
             var stringBuilder = new ValueStringBuilder(stackalloc char[256]);
 

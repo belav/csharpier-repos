@@ -8,39 +8,27 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class SqlServerValueGenerationScenariosTest : SqlServerValueGenerationScenariosTestBase
 {
-    protected override string DatabaseName
-        => "SqlServerValueGenerationScenariosTest";
+    protected override string DatabaseName => "SqlServerValueGenerationScenariosTest";
 
-    protected override Guid GuidSentinel
-        => new();
+    protected override Guid GuidSentinel => new();
 
-    protected override int IntSentinel
-        => 0;
+    protected override int IntSentinel => 0;
 
-    protected override uint UIntSentinel
-        => 0;
+    protected override uint UIntSentinel => 0;
 
-    protected override IntKey IntKeySentinel
-        => IntKey.Zero;
+    protected override IntKey IntKeySentinel => IntKey.Zero;
 
-    protected override ULongKey ULongKeySentinel
-        => ULongKey.Zero;
+    protected override ULongKey ULongKeySentinel => ULongKey.Zero;
 
-    protected override int? NullableIntSentinel
-        => null;
+    protected override int? NullableIntSentinel => null;
 
-    protected override string StringSentinel
-        => null;
+    protected override string StringSentinel => null;
 
-    protected override DateTime DateTimeSentinel
-        => new();
+    protected override DateTime DateTimeSentinel => new();
 
-    protected override NeedsConverter NeedsConverterSentinel
-        => new(0);
+    protected override NeedsConverter NeedsConverterSentinel => new(0);
 
-    protected override GeometryCollection GeometryCollectionSentinel
-        => null;
+    protected override GeometryCollection GeometryCollectionSentinel => null;
 
-    protected override byte[] TimestampSentinel
-        => null;
+    protected override byte[] TimestampSentinel => null;
 }

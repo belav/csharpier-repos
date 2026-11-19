@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="RequestQueue.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 //
@@ -10,14 +10,16 @@
 //      making sure that there are always available threads to process requests
 //
 
-namespace System.Web {
-    using System.Threading;
+namespace System.Web
+{
     using System.Collections;
-    using System.Web.Util;
-    using System.Web.Hosting;
+    using System.Threading;
     using System.Web.Configuration;
+    using System.Web.Hosting;
+    using System.Web.Util;
 
-    internal class RequestQueue {
+    internal class RequestQueue
+    {
         // configuration params
         private int _minExternFreeThreads;
         private int _minLocalFreeThreads;
@@ -39,12 +41,12 @@ namespace System.Web {
         private bool _draining;
 
         // timer to drain the queue
-        private readonly TimeSpan   _timerPeriod = new TimeSpan(0, 0, 10); // 10 seconds
-        private Timer               _timer;
-
+        private readonly TimeSpan _timerPeriod = new TimeSpan(0, 0, 10); // 10 seconds
+        private Timer _timer;
 
         // helpers
-        private static bool IsLocal(HttpWorkerRequest wr) {
+        private static bool IsLocal(HttpWorkerRequest wr)
+        {
             String remoteAddress = wr.GetRemoteAddress();
 
             // check if localhost
@@ -62,12 +64,16 @@ namespace System.Web {
             return false;
         }
 
-        private void QueueRequest(HttpWorkerRequest wr, bool isLocal) {
-            lock (this) {
-                if (isLocal) {
+        private void QueueRequest(HttpWorkerRequest wr, bool isLocal)
+        {
+            lock (this)
+            {
+                if (isLocal)
+                {
                     _localQueue.Enqueue(wr);
                 }
-                else  {
+                else
+                {
                     _externQueue.Enqueue(wr);
                 }
 
@@ -76,40 +82,58 @@ namespace System.Web {
 
             PerfCounters.IncrementGlobalCounter(GlobalPerfCounter.REQUESTS_QUEUED);
             PerfCounters.IncrementCounter(AppPerfCounter.REQUESTS_IN_APPLICATION_QUEUE);
-            if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.Infrastructure)) EtwTrace.Trace(EtwTraceType.ETW_TYPE_REQ_QUEUED, wr);
+            if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.Infrastructure))
+                EtwTrace.Trace(EtwTraceType.ETW_TYPE_REQ_QUEUED, wr);
         }
 
-        private HttpWorkerRequest DequeueRequest(bool localOnly) {
+        private HttpWorkerRequest DequeueRequest(bool localOnly)
+        {
             HttpWorkerRequest wr = null;
 
-            while (_count > 0) {
-                lock (this) {
-                    if (_localQueue.Count > 0) {
+            while (_count > 0)
+            {
+                lock (this)
+                {
+                    if (_localQueue.Count > 0)
+                    {
                         wr = (HttpWorkerRequest)_localQueue.Dequeue();
                         _count--;
                     }
-                    else if (!localOnly && _externQueue.Count > 0) {
+                    else if (!localOnly && _externQueue.Count > 0)
+                    {
                         wr = (HttpWorkerRequest)_externQueue.Dequeue();
                         _count--;
                     }
                 }
 
-                if (wr == null) {
+                if (wr == null)
+                {
                     break;
                 }
-                else {
+                else
+                {
                     PerfCounters.DecrementGlobalCounter(GlobalPerfCounter.REQUESTS_QUEUED);
                     PerfCounters.DecrementCounter(AppPerfCounter.REQUESTS_IN_APPLICATION_QUEUE);
-                    if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.Infrastructure)) EtwTrace.Trace(EtwTraceType.ETW_TYPE_REQ_DEQUEUED, wr);
+                    if (
+                        EtwTrace.IsTraceEnabled(
+                            EtwTraceLevel.Information,
+                            EtwTraceFlags.Infrastructure
+                        )
+                    )
+                        EtwTrace.Trace(EtwTraceType.ETW_TYPE_REQ_DEQUEUED, wr);
 
-                    if (!CheckClientConnected(wr)) {
+                    if (!CheckClientConnected(wr))
+                    {
                         HttpRuntime.RejectRequestNow(wr, true);
                         wr = null;
 
-                        PerfCounters.IncrementGlobalCounter(GlobalPerfCounter.REQUESTS_DISCONNECTED);
+                        PerfCounters.IncrementGlobalCounter(
+                            GlobalPerfCounter.REQUESTS_DISCONNECTED
+                        );
                         PerfCounters.IncrementCounter(AppPerfCounter.APP_REQUEST_DISCONNECTED);
                     }
-                    else {
+                    else
+                    {
                         break;
                     }
                 }
@@ -121,7 +145,8 @@ namespace System.Web {
         // This method will check to see if the client is still connected.
         // The checks are only done if it's an in-proc Isapi request AND the request has been waiting
         // more than the configured clientConenctedCheck time.
-        private bool CheckClientConnected(HttpWorkerRequest wr) {
+        private bool CheckClientConnected(HttpWorkerRequest wr)
+        {
             if (DateTime.UtcNow - wr.GetStartTime() > _clientConnectedTime)
                 return wr.IsClientConnected();
             else
@@ -129,26 +154,42 @@ namespace System.Web {
         }
 
         // ctor
-        internal RequestQueue(int minExternFreeThreads, int minLocalFreeThreads, int queueLimit, TimeSpan clientConnectedTime) {
+        internal RequestQueue(
+            int minExternFreeThreads,
+            int minLocalFreeThreads,
+            int queueLimit,
+            TimeSpan clientConnectedTime
+        )
+        {
             _minExternFreeThreads = minExternFreeThreads;
             _minLocalFreeThreads = minLocalFreeThreads;
             _queueLimit = queueLimit;
             _clientConnectedTime = clientConnectedTime;
-            
+
             _workItemCallback = new WaitCallback(this.WorkItemCallback);
 
-            _timer = new Timer(new TimerCallback(this.TimerCompletionCallback), null, _timerPeriod, _timerPeriod);
+            _timer = new Timer(
+                new TimerCallback(this.TimerCompletionCallback),
+                null,
+                _timerPeriod,
+                _timerPeriod
+            );
             _iis6 = HostingEnvironment.IsUnderIIS6Process;
 
             // set the minimum number of requests that must be executing in order to detect a deadlock
-            int maxWorkerThreads, maxIoThreads;
+            int maxWorkerThreads,
+                maxIoThreads;
             ThreadPool.GetMaxThreads(out maxWorkerThreads, out maxIoThreads);
-            UnsafeNativeMethods.SetMinRequestsExecutingToDetectDeadlock(maxWorkerThreads - minExternFreeThreads);
+            UnsafeNativeMethods.SetMinRequestsExecutingToDetectDeadlock(
+                maxWorkerThreads - minExternFreeThreads
+            );
         }
 
         // method called from HttpRuntime for incoming requests
-        internal HttpWorkerRequest GetRequestToExecute(HttpWorkerRequest wr) {
-            int workerThreads, ioThreads;
+        internal HttpWorkerRequest GetRequestToExecute(HttpWorkerRequest wr)
+        {
+            int workerThreads,
+                ioThreads;
             ThreadPool.GetAvailableThreads(out workerThreads, out ioThreads);
 
             int freeThreads;
@@ -168,7 +209,8 @@ namespace System.Web {
                 return wr;
 
             // reject if queue limit exceeded
-            if (_count >= _queueLimit) {
+            if (_count >= _queueLimit)
+            {
                 HttpRuntime.RejectRequestNow(wr, false);
                 return null;
             }
@@ -177,14 +219,17 @@ namespace System.Web {
             QueueRequest(wr, isLocal);
 
             // maybe can execute a request previously queued
-            if (freeThreads >= _minExternFreeThreads) {
+            if (freeThreads >= _minExternFreeThreads)
+            {
                 wr = DequeueRequest(false); // enough threads to process even external requests
             }
-            else if (freeThreads >= _minLocalFreeThreads) {
-                wr = DequeueRequest(true);  // enough threads to process only local requests
+            else if (freeThreads >= _minLocalFreeThreads)
+            {
+                wr = DequeueRequest(true); // enough threads to process only local requests
             }
-            else {
-                wr = null;                  // not enough threads -> do nothing on this thread
+            else
+            {
+                wr = null; // not enough threads -> do nothing on this thread
                 ScheduleMoreWorkIfNeeded(); // try to schedule to worker thread
             }
 
@@ -192,7 +237,8 @@ namespace System.Web {
         }
 
         // method called from HttpRuntime at the end of request
-        internal void ScheduleMoreWorkIfNeeded() {
+        internal void ScheduleMoreWorkIfNeeded()
+        {
             // too late for more work if draining
             if (_draining)
                 return;
@@ -206,7 +252,8 @@ namespace System.Web {
                 return;
 
             // enough worker threads?
-            int workerThreads, ioThreads;
+            int workerThreads,
+                ioThreads;
             ThreadPool.GetAvailableThreads(out workerThreads, out ioThreads);
             if (workerThreads < _minLocalFreeThreads)
                 return;
@@ -217,12 +264,14 @@ namespace System.Web {
         }
 
         // is empty property
-        internal bool IsEmpty {
+        internal bool IsEmpty
+        {
             get { return (_count == 0); }
         }
 
         // method called to pick up more work
-        private void WorkItemCallback(Object state) {
+        private void WorkItemCallback(Object state)
+        {
             Interlocked.Decrement(ref _workItemCount);
 
             // too late for more work if draining
@@ -233,7 +282,8 @@ namespace System.Web {
             if (_count == 0)
                 return;
 
-            int workerThreads, ioThreads;
+            int workerThreads,
+                ioThreads;
             ThreadPool.GetAvailableThreads(out workerThreads, out ioThreads);
 
             // not enough worker threads to do anything
@@ -253,18 +303,21 @@ namespace System.Web {
         }
 
         // periodic timer to pick up more work
-        private void TimerCompletionCallback(Object state) {
+        private void TimerCompletionCallback(Object state)
+        {
             ScheduleMoreWorkIfNeeded();
         }
 
         // reject all requests
-        internal void Drain() {
+        internal void Drain()
+        {
             // set flag before killing timer to shorten the code path
             // in the callback after the timer is disposed
             _draining = true;
 
             // stop the timer
-            if (_timer != null) {
+            if (_timer != null)
+            {
                 ((IDisposable)_timer).Dispose();
                 _timer = null;
             }
@@ -278,7 +331,8 @@ namespace System.Web {
                 return;
 
             // reject the remaining requests
-            for (;;) {
+            for (; ; )
+            {
                 HttpWorkerRequest wr = DequeueRequest(false);
                 if (wr == null)
                     break;

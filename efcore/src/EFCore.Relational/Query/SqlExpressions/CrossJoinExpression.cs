@@ -19,18 +19,14 @@ public class CrossJoinExpression : JoinExpressionBase
     /// </summary>
     /// <param name="table">A table source to CROSS JOIN with.</param>
     public CrossJoinExpression(TableExpressionBase table)
-        : this(table, annotations: null)
-    {
-    }
+        : this(table, annotations: null) { }
 
     private CrossJoinExpression(TableExpressionBase table, IEnumerable<IAnnotation>? annotations)
-        : base(table, annotations)
-    {
-    }
+        : base(table, annotations) { }
 
     /// <inheritdoc />
-    protected override Expression VisitChildren(ExpressionVisitor visitor)
-        => Update((TableExpressionBase)visitor.Visit(Table));
+    protected override Expression VisitChildren(ExpressionVisitor visitor) =>
+        Update((TableExpressionBase)visitor.Visit(Table));
 
     /// <summary>
     ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
@@ -38,14 +34,13 @@ public class CrossJoinExpression : JoinExpressionBase
     /// </summary>
     /// <param name="table">The <see cref="JoinExpressionBase.Table" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public override CrossJoinExpression Update(TableExpressionBase table)
-        => table != Table
-            ? new CrossJoinExpression(table, GetAnnotations())
-            : this;
+    public override CrossJoinExpression Update(TableExpressionBase table) =>
+        table != Table ? new CrossJoinExpression(table, GetAnnotations()) : this;
 
     /// <inheritdoc />
-    protected override TableExpressionBase CreateWithAnnotations(IEnumerable<IAnnotation> annotations)
-        => new CrossJoinExpression(Table, annotations);
+    protected override TableExpressionBase CreateWithAnnotations(
+        IEnumerable<IAnnotation> annotations
+    ) => new CrossJoinExpression(Table, annotations);
 
     /// <inheritdoc />
     protected override void Print(ExpressionPrinter expressionPrinter)
@@ -56,16 +51,16 @@ public class CrossJoinExpression : JoinExpressionBase
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is CrossJoinExpression crossJoinExpression
-                && Equals(crossJoinExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is CrossJoinExpression crossJoinExpression && Equals(crossJoinExpression)
+        );
 
-    private bool Equals(CrossJoinExpression crossJoinExpression)
-        => base.Equals(crossJoinExpression);
+    private bool Equals(CrossJoinExpression crossJoinExpression) =>
+        base.Equals(crossJoinExpression);
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 }

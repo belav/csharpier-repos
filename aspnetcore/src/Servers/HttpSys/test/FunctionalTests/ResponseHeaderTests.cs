@@ -289,12 +289,11 @@ public class ResponseHeaderTests : LoggedTest
                     body.Flush();
                     Assert.True(response.HasStarted);
                     Assert.Throws<InvalidOperationException>(() => response.StatusCode = 404);
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            responseHeaders.Add(
-                                "Custom3",
-                                new string[] { "value3a, value3b", "value3c" }
-                            )
+                    Assert.Throws<InvalidOperationException>(() =>
+                        responseHeaders.Add(
+                            "Custom3",
+                            new string[] { "value3a, value3b", "value3c" }
+                        )
                     );
                     return Task.FromResult(0);
                 },
@@ -332,12 +331,11 @@ public class ResponseHeaderTests : LoggedTest
                     await body.FlushAsync();
                     Assert.True(response.HasStarted);
                     Assert.Throws<InvalidOperationException>(() => response.StatusCode = 404);
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            responseHeaders.Add(
-                                "Custom3",
-                                new string[] { "value3a, value3b", "value3c" }
-                            )
+                    Assert.Throws<InvalidOperationException>(() =>
+                        responseHeaders.Add(
+                            "Custom3",
+                            new string[] { "value3a, value3b", "value3c" }
+                        )
                     );
                 },
                 LoggerFactory

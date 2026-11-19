@@ -57,13 +57,21 @@ namespace System.Data.Common
             return StringComparer.Ordinal.Compare(_value, ((NameValuePermission?)a)?._value);
         }
 
-        internal static void AddEntry(NameValuePermission kvtree, ArrayList entries, DBConnectionString entry)
+        internal static void AddEntry(
+            NameValuePermission kvtree,
+            ArrayList entries,
+            DBConnectionString entry
+        )
         {
             Debug.Assert(null != entry, "null DBConnectionString");
 
             if (null != entry.KeyChain)
             {
-                for (NameValuePair? keychain = entry.KeyChain; null != keychain; keychain = keychain.Next)
+                for (
+                    NameValuePair? keychain = entry.KeyChain;
+                    null != keychain;
+                    keychain = keychain.Next
+                )
                 {
                     NameValuePermission? kv;
 
@@ -90,7 +98,10 @@ namespace System.Data.Common
                     { // shorter chain potential
                         if (null != kv._entry)
                         {
-                            Debug.Assert(entries.Contains(kv._entry), "entries doesn't contain entry");
+                            Debug.Assert(
+                                entries.Contains(kv._entry),
+                                "entries doesn't contain entry"
+                            );
                             entries.Remove(kv._entry);
                             kv._entry = kv._entry.Intersect(entry); // union new restrictions into existing tree
                         }
@@ -212,14 +223,19 @@ namespace System.Data.Common
                         {
                             string keyword = permitKey._value!;
 #if DEBUG
-                            Debug.Assert(null == permitKey._entry, "key member has no restrictions");
+                            Debug.Assert(
+                                null == permitKey._entry,
+                                "key member has no restrictions"
+                            );
 #endif
                             if (parsetable.ContainsKey(keyword))
                             {
                                 string? valueInQuestion = parsetable[keyword];
 
                                 // keyword is restricted to certain values
-                                NameValuePermission? permitValue = permitKey.CheckKeyForValue(valueInQuestion);
+                                NameValuePermission? permitValue = permitKey.CheckKeyForValue(
+                                    valueInQuestion
+                                );
                                 if (null != permitValue)
                                 {
                                     //value does match - continue the chain down that branch
@@ -269,7 +285,13 @@ namespace System.Data.Common
                 for (int i = 0; i < valuetree.Length; ++i)
                 {
                     NameValuePermission permitValue = valuetree[i];
-                    if (string.Equals(keyInQuestion, permitValue._value, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        string.Equals(
+                            keyInQuestion,
+                            permitValue._value,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         return permitValue;
                     }

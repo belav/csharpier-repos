@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="DesignerCommandAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System.Globalization;
@@ -13,11 +13,13 @@ using System.Web.UI.MobileControls.Adapters;
 
 namespace System.Web.UI.Design.MobileControls.Adapters
 {
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class DesignerCommandAdapter : HtmlCommandAdapter
     {
         // required width may differ a little bit from actual exact pixel value
@@ -25,10 +27,7 @@ namespace System.Web.UI.Design.MobileControls.Adapters
 
         public override MobileCapabilities Device
         {
-            get
-            {
-                return DesignerCapabilities.Instance;
-            }
+            get { return DesignerCapabilities.Instance; }
         }
 
         public override void Render(HtmlMobileTextWriter writer)
@@ -48,7 +47,10 @@ namespace System.Web.UI.Design.MobileControls.Adapters
             {
                 if (Control.Format == CommandFormat.Button)
                 {
-                    if (maxWidth == 0 && templateStatus == DesignerAdapterUtil.CONTROL_IN_TEMPLATE_NONEDIT)
+                    if (
+                        maxWidth == 0
+                        && templateStatus == DesignerAdapterUtil.CONTROL_IN_TEMPLATE_NONEDIT
+                    )
                     {
                         maxWidth = DesignerAdapterUtil.CONTROL_MAX_WIDTH_IN_TEMPLATE;
                     }
@@ -88,7 +90,8 @@ namespace System.Web.UI.Design.MobileControls.Adapters
                     {
                         if (templateStatus == DesignerAdapterUtil.CONTROL_IN_TEMPLATE_EDIT)
                         {
-                            int tmpRequiredWidth, allowedLength;
+                            int tmpRequiredWidth,
+                                allowedLength;
                             int captionLength = controlText.Length;
                             twTmp = new DesignerTextWriter();
                             twTmp.WriteBeginTag("input");
@@ -98,9 +101,21 @@ namespace System.Web.UI.Design.MobileControls.Adapters
                             twTmp.Write("/>");
                             htmlFragment = twTmp.ToString();
                             // At least 10 characters can fit into the caption of the command
-                            for (allowedLength = (captionLength < 10 ? captionLength : 10); allowedLength <= captionLength; allowedLength++)
+                            for (
+                                allowedLength = (captionLength < 10 ? captionLength : 10);
+                                allowedLength <= captionLength;
+                                allowedLength++
+                            )
                             {
-                                tmpRequiredWidth = MSHTMLHostUtil.GetHtmlFragmentWidth(String.Format(CultureInfo.CurrentCulture, htmlFragment, HttpUtility.HtmlEncode(controlText.Substring(0, allowedLength))));
+                                tmpRequiredWidth = MSHTMLHostUtil.GetHtmlFragmentWidth(
+                                    String.Format(
+                                        CultureInfo.CurrentCulture,
+                                        htmlFragment,
+                                        HttpUtility.HtmlEncode(
+                                            controlText.Substring(0, allowedLength)
+                                        )
+                                    )
+                                );
                                 if (tmpRequiredWidth + SAFETY_MARGIN > maxWidth)
                                 {
                                     break;
@@ -130,7 +145,11 @@ namespace System.Web.UI.Design.MobileControls.Adapters
                     writer.WriteBeginTag("input");
                     if (requiredWidth + SAFETY_MARGIN > maxWidth)
                     {
-                        additionalStyle = String.Format(CultureInfo.CurrentCulture, "width:{0};", width);
+                        additionalStyle = String.Format(
+                            CultureInfo.CurrentCulture,
+                            "width:{0};",
+                            width
+                        );
                     }
                     ((DesignerTextWriter)writer).WriteStyleAttribute(Style, additionalStyle);
                     writer.WriteAttribute("type", "submit");
@@ -143,7 +162,7 @@ namespace System.Web.UI.Design.MobileControls.Adapters
                 }
                 else
                 {
-                    Wrapping wrapping = (Wrapping) Style[Style.WrappingKey, true];
+                    Wrapping wrapping = (Wrapping)Style[Style.WrappingKey, true];
                     bool wrap = (wrapping == Wrapping.Wrap || wrapping == Wrapping.NotSet);
 
                     ((DesignerTextWriter)writer).EnterZeroFontSizeTag();
@@ -197,8 +216,7 @@ namespace System.Web.UI.Design.MobileControls.Adapters
                 writer.WriteAttribute("src", Control.ImageUrl, true);
 
                 // center alignment not part of HTML for images.
-                if (alignment == Alignment.Right ||
-                    alignment == Alignment.Left)
+                if (alignment == Alignment.Right || alignment == Alignment.Left)
                 {
                     writer.WriteAttribute("align", Enum.GetName(typeof(Alignment), alignment));
                 }

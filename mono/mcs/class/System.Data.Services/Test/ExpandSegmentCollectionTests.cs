@@ -30,76 +30,78 @@ using System.Data.Services;
 using System.Linq.Expressions;
 using NUnit.Framework;
 
-namespace MonoTests.System.Data.Services {
-	[TestFixture]
-	public class ExpandSegmentCollectionTests {
-		[Test]
-		public void CtorCapacity()
-		{
-			var esc = new ExpandSegmentCollection (20);
-			Assert.AreEqual (20, esc.Capacity);
-		}
+namespace MonoTests.System.Data.Services
+{
+    [TestFixture]
+    public class ExpandSegmentCollectionTests
+    {
+        [Test]
+        public void CtorCapacity()
+        {
+            var esc = new ExpandSegmentCollection(20);
+            Assert.AreEqual(20, esc.Capacity);
+        }
 
-		[Test]
-		public void HasFilterInit()
-		{
-			var esc = new ExpandSegmentCollection();
-			Assert.IsFalse (esc.HasFilter);
-		}
+        [Test]
+        public void HasFilterInit()
+        {
+            var esc = new ExpandSegmentCollection();
+            Assert.IsFalse(esc.HasFilter);
+        }
 
-		[Test]
-		public void HasFilterAddNull()
-		{
-			var esc = new ExpandSegmentCollection();
-			esc.Add (new ExpandSegment ("first", null));
-			Assert.IsFalse (esc.HasFilter);
-		}
+        [Test]
+        public void HasFilterAddNull()
+        {
+            var esc = new ExpandSegmentCollection();
+            esc.Add(new ExpandSegment("first", null));
+            Assert.IsFalse(esc.HasFilter);
+        }
 
-		[Test]
-		public void HasFilterAddWithFilter()
-		{
-			var esc = new ExpandSegmentCollection();
-			esc.Add (new ExpandSegment ("first", null));
+        [Test]
+        public void HasFilterAddWithFilter()
+        {
+            var esc = new ExpandSegmentCollection();
+            esc.Add(new ExpandSegment("first", null));
 
-			var param = Expression.Parameter (typeof (bool), "b");
-			var filter = Expression.Lambda (param, param);
-			var filteredSegment = new ExpandSegment ("second", filter);
-			esc.Add (filteredSegment);
-			Assert.IsTrue (esc.HasFilter);
-		}
+            var param = Expression.Parameter(typeof(bool), "b");
+            var filter = Expression.Lambda(param, param);
+            var filteredSegment = new ExpandSegment("second", filter);
+            esc.Add(filteredSegment);
+            Assert.IsTrue(esc.HasFilter);
+        }
 
-		[Test]
-		public void HasFilterRemoveFiltered()
-		{
-			var esc = new ExpandSegmentCollection();
-			esc.Add (new ExpandSegment ("first", null));
+        [Test]
+        public void HasFilterRemoveFiltered()
+        {
+            var esc = new ExpandSegmentCollection();
+            esc.Add(new ExpandSegment("first", null));
 
-			var param = Expression.Parameter (typeof (bool), "b");
-			var filter = Expression.Lambda (param, param);
-			var filteredSegment = new ExpandSegment ("second", filter);
-			esc.Add (filteredSegment);
-			esc.Remove (filteredSegment);
+            var param = Expression.Parameter(typeof(bool), "b");
+            var filter = Expression.Lambda(param, param);
+            var filteredSegment = new ExpandSegment("second", filter);
+            esc.Add(filteredSegment);
+            esc.Remove(filteredSegment);
 
-			Assert.IsFalse (esc.HasFilter);
-		}
+            Assert.IsFalse(esc.HasFilter);
+        }
 
-		[Test]
-		public void HasFilterRemoveFilteredMultiple()
-		{
-			var esc = new ExpandSegmentCollection();
-			esc.Add (new ExpandSegment ("first", null));
+        [Test]
+        public void HasFilterRemoveFilteredMultiple()
+        {
+            var esc = new ExpandSegmentCollection();
+            esc.Add(new ExpandSegment("first", null));
 
-			var param = Expression.Parameter (typeof (bool), "b");
-			var filter = Expression.Lambda (param, param);
-			var filteredSegment = new ExpandSegment ("second", filter);
-			esc.Add (filteredSegment);
-			esc.Add (filteredSegment);
+            var param = Expression.Parameter(typeof(bool), "b");
+            var filter = Expression.Lambda(param, param);
+            var filteredSegment = new ExpandSegment("second", filter);
+            esc.Add(filteredSegment);
+            esc.Add(filteredSegment);
 
-			esc.Remove (filteredSegment);
-			Assert.IsTrue (esc.HasFilter);
+            esc.Remove(filteredSegment);
+            Assert.IsTrue(esc.HasFilter);
 
-			esc.Remove (filteredSegment);
-			Assert.IsFalse (esc.HasFilter);
-		}
-	}
+            esc.Remove(filteredSegment);
+            Assert.IsFalse(esc.HasFilter);
+        }
+    }
 }

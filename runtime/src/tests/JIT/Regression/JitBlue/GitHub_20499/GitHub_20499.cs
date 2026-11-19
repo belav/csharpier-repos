@@ -13,14 +13,13 @@ struct S
 
 class Z
 {
-    virtual public S F()
+    public virtual S F()
     {
         S s = new S();
         s.x = 100;
         s.y = -1;
         return s;
     }
-
 }
 
 public class X
@@ -34,10 +33,12 @@ public class X
     public static int TestEntryPoint()
     {
         int result = Test();
-        if (result == 100) {
+        if (result == 100)
+        {
             Console.WriteLine("SUCCESS");
         }
-        else {
+        else
+        {
             Console.WriteLine("FAILURE");
         }
         return result;

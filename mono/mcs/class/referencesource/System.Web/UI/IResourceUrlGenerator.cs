@@ -4,11 +4,10 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-
-    public interface IResourceUrlGenerator {
-
-
+namespace System.Web.UI
+{
+    public interface IResourceUrlGenerator
+    {
         /// <devdoc>
         /// </devdoc>
         string GetResourceUrl(Type type, string resourceName);

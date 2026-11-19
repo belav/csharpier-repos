@@ -14,7 +14,7 @@ namespace System.Web.Http.Routing
     public interface IHttpRoute
     {
         /// <summary>
-        /// Gets the route template describing the URI pattern to match against. 
+        /// Gets the route template describing the URI pattern to match against.
         /// </summary>
         string RouteTemplate { get; }
 
@@ -53,6 +53,9 @@ namespace System.Web.Http.Routing
         /// <param name="request">The request message.</param>
         /// <param name="values">The values.</param>
         /// <returns></returns>
-        IHttpVirtualPathData GetVirtualPath(HttpRequestMessage request, IDictionary<string, object> values);
+        IHttpVirtualPathData GetVirtualPath(
+            HttpRequestMessage request,
+            IDictionary<string, object> values
+        );
     }
 }

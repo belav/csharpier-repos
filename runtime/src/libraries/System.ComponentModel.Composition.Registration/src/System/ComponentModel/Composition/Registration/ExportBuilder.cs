@@ -84,7 +84,8 @@ namespace System.ComponentModel.Composition.Registration
                 foreach (Tuple<string, Func<Type, object>> item in _metadataItemFuncs)
                 {
                     string name = item.Item1;
-                    object value = (item.Item2 != null) ? item.Item2(type.UnderlyingSystemType) : null;
+                    object value =
+                        (item.Item2 != null) ? item.Item2(type.UnderlyingSystemType) : null;
                     attributes.Add(new ExportMetadataAttribute(name, value));
                 }
             }

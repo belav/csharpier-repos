@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 //((a+b)+c)
 
 //permutations for  ((a+b)+c)
@@ -314,10 +315,8 @@ namespace CseTest
 {
     using System;
 
-
     public class Test_Main
     {
-
         [Fact]
         public static int TestEntryPoint()
         {
@@ -670,22 +669,37 @@ namespace CseTest
                 ret = ret + 1;
             }
             ad = return_int(false, 12);
-            v = (((a + (b * ((c * c) - (c + d)))) - (((a * a) + a) + (a * b))) * (((abc + c) - (a - (ad * a))) + r));
+            v = (
+                ((a + (b * ((c * c) - (c + d)))) - (((a * a) + a) + (a * b)))
+                * (((abc + c) - (a - (ad * a))) + r)
+            );
             if (v != 9758117)
             {
-                Console.WriteLine("test54: for (((a+(b*((c*c)-(c+d))))-(((a*a)+a)+(a*b)))*(((abc+c)-(a-(ad*a)))+r))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test54: for (((a+(b*((c*c)-(c+d))))-(((a*a)+a)+(a*b)))*(((abc+c)-(a-(ad*a)))+r))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
-            v = ((((abc + c) - (a - (ad * a))) + r) * ((a + (b * ((c * c) - (c + d)))) - (((a * a) + a) + (a * b))));
+            v = (
+                (((abc + c) - (a - (ad * a))) + r)
+                * ((a + (b * ((c * c) - (c + d)))) - (((a * a) + a) + (a * b)))
+            );
             if (v != 9758117)
             {
-                Console.WriteLine("test55: for ((((abc+c)-(a-(ad*a)))+r)*((a+(b*((c*c)-(c+d))))-(((a*a)+a)+(a*b))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test55: for ((((abc+c)-(a-(ad*a)))+r)*((a+(b*((c*c)-(c+d))))-(((a*a)+a)+(a*b))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = ((a + (b * ((c * c) - (c + d)))) - (((a * a) + a) + (a * b)));
             if (v != -21733)
             {
-                Console.WriteLine("test56: for ((a+(b*((c*c)-(c+d))))-(((a*a)+a)+(a*b)))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test56: for ((a+(b*((c*c)-(c+d))))-(((a*a)+a)+(a*b)))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = (a + (b * ((c * c) - (c + d))));
@@ -1037,27 +1051,39 @@ namespace CseTest
             v = (a + (b * ((c * c) - (c + d))));
             if (v != -19213)
             {
-                Console.WriteLine("test114: for (a+(b*((c*c)-(c+d))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test114: for (a+(b*((c*c)-(c+d))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             c = return_int(false, 32);
             v = ((a + (b * ((c * c) - (c + d)))) - (((a * a) + a) + (a * b)));
             if (v != -21733)
             {
-                Console.WriteLine("test115: for ((a+(b*((c*c)-(c+d))))-(((a*a)+a)+(a*b)))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test115: for ((a+(b*((c*c)-(c+d))))-(((a*a)+a)+(a*b)))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = (((abc + c) - (a - (ad * a))) + r);
             if (v != -848)
             {
-                Console.WriteLine("test116: for (((abc+c)-(a-(ad*a)))+r)  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test116: for (((abc+c)-(a-(ad*a)))+r)  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             s.c = return_int(false, 99);
             v = (r + ((abc + c) - (a - (ad * a))));
             if (v != -848)
             {
-                Console.WriteLine("test117: for (r+((abc+c)-(a-(ad*a))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test117: for (r+((abc+c)-(a-(ad*a))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             ar[0] = return_int(false, -13);
@@ -1143,67 +1169,125 @@ namespace CseTest
             v = (r + ((abc + c) - (a - (ad * a))));
             if (v != -848)
             {
-                Console.WriteLine("test131: for (r+((abc+c)-(a-(ad*a))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test131: for (r+((abc+c)-(a-(ad*a))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = (((abc + c) - (a - (ad * a))) + r);
             if (v != -848)
             {
-                Console.WriteLine("test132: for (((abc+c)-(a-(ad*a)))+r)  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test132: for (((abc+c)-(a-(ad*a)))+r)  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
-            v = ((((abc + c) - (a - (ad * a))) + r) * ((a + (b * ((c * c) - (c + d)))) - (((a * a) + a) + (a * b))));
+            v = (
+                (((abc + c) - (a - (ad * a))) + r)
+                * ((a + (b * ((c * c) - (c + d)))) - (((a * a) + a) + (a * b)))
+            );
             if (v != 18429584)
             {
-                Console.WriteLine("test133: for ((((abc+c)-(a-(ad*a)))+r)*((a+(b*((c*c)-(c+d))))-(((a*a)+a)+(a*b))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test133: for ((((abc+c)-(a-(ad*a)))+r)*((a+(b*((c*c)-(c+d))))-(((a*a)+a)+(a*b))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
-            v = (((a + (b * ((c * c) - (c + d)))) - (((a * a) + a) + (a * b))) * (((abc + c) - (a - (ad * a))) + r));
+            v = (
+                ((a + (b * ((c * c) - (c + d)))) - (((a * a) + a) + (a * b)))
+                * (((abc + c) - (a - (ad * a))) + r)
+            );
             if (v != 18429584)
             {
-                Console.WriteLine("test134: for (((a+(b*((c*c)-(c+d))))-(((a*a)+a)+(a*b)))*(((abc+c)-(a-(ad*a)))+r))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test134: for (((a+(b*((c*c)-(c+d))))-(((a*a)+a)+(a*b)))*(((abc+c)-(a-(ad*a)))+r))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
-            v = (a * (b - (c * ((d - e) + ((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab))))));
+            v = (
+                a
+                * (
+                    b
+                    - (
+                        c
+                        * ((d - e) + ((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab)))
+                    )
+                )
+            );
             if (v != 133723422)
             {
-                Console.WriteLine("test135: for (a*(b-(c*((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab))))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test135: for (a*(b-(c*((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab))))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
-            v = ((b - (c * ((d - e) + ((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab))))) * a);
+            v = (
+                (
+                    b
+                    - (
+                        c
+                        * ((d - e) + ((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab)))
+                    )
+                ) * a
+            );
             if (v != 133723422)
             {
-                Console.WriteLine("test136: for ((b-(c*((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab)))))*a)  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test136: for ((b-(c*((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab)))))*a)  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
-            v = (b - (c * ((d - e) + ((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab)))));
+            v = (
+                b - (c * ((d - e) + ((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab))))
+            );
             if (v != -3183891)
             {
-                Console.WriteLine("test137: for (b-(c*((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab)))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test137: for (b-(c*((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab)))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = (c * ((d - e) + ((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab))));
             if (v != 3183872)
             {
-                Console.WriteLine("test138: for (c*((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test138: for (c*((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = (((d - e) + ((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab))) * c);
             if (v != 3183872)
             {
-                Console.WriteLine("test139: for (((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab)))*c)  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test139: for (((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab)))*c)  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = ((d - e) + ((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab)));
             if (v != 99496)
             {
-                Console.WriteLine("test140: for ((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab)))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test140: for ((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab)))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = (((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab)) + (d - e));
             if (v != 99496)
             {
-                Console.WriteLine("test141: for (((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab))+(d-e))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test141: for (((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab))+(d-e))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = (d - e);
@@ -1221,31 +1305,46 @@ namespace CseTest
             v = ((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab));
             if (v != 99524)
             {
-                Console.WriteLine("test144: for ((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test144: for ((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = (((f - a) + (a * (b - (c * (d - (e * f)))))) + f);
             if (v != 96248)
             {
-                Console.WriteLine("test145: for (((f-a)+(a*(b-(c*(d-(e*f))))))+f)  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test145: for (((f-a)+(a*(b-(c*(d-(e*f))))))+f)  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = (f + ((f - a) + (a * (b - (c * (d - (e * f)))))));
             if (v != 96248)
             {
-                Console.WriteLine("test146: for (f+((f-a)+(a*(b-(c*(d-(e*f)))))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test146: for (f+((f-a)+(a*(b-(c*(d-(e*f)))))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = ((f - a) + (a * (b - (c * (d - (e * f))))));
             if (v != 96256)
             {
-                Console.WriteLine("test147: for ((f-a)+(a*(b-(c*(d-(e*f))))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test147: for ((f-a)+(a*(b-(c*(d-(e*f))))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = ((a * (b - (c * (d - (e * f))))) + (f - a));
             if (v != 96256)
             {
-                Console.WriteLine("test148: for ((a*(b-(c*(d-(e*f)))))+(f-a))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test148: for ((a*(b-(c*(d-(e*f)))))+(f-a))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = (f - a);
@@ -1263,13 +1362,19 @@ namespace CseTest
             v = (a * (b - (c * (d - (e * f)))));
             if (v != 96222)
             {
-                Console.WriteLine("test151: for (a*(b-(c*(d-(e*f)))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test151: for (a*(b-(c*(d-(e*f)))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = ((b - (c * (d - (e * f)))) * a);
             if (v != 96222)
             {
-                Console.WriteLine("test152: for ((b-(c*(d-(e*f))))*a)  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test152: for ((b-(c*(d-(e*f))))*a)  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = (b - (c * (d - (e * f))));
@@ -1348,61 +1453,91 @@ namespace CseTest
             v = ((b - (c * (d - (e * f)))) * a);
             if (v != 96222)
             {
-                Console.WriteLine("test165: for ((b-(c*(d-(e*f))))*a)  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test165: for ((b-(c*(d-(e*f))))*a)  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = (a * (b - (c * (d - (e * f)))));
             if (v != 96222)
             {
-                Console.WriteLine("test166: for (a*(b-(c*(d-(e*f)))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test166: for (a*(b-(c*(d-(e*f)))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = ((a * (b - (c * (d - (e * f))))) + (f - a));
             if (v != 96256)
             {
-                Console.WriteLine("test167: for ((a*(b-(c*(d-(e*f)))))+(f-a))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test167: for ((a*(b-(c*(d-(e*f)))))+(f-a))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = ((f - a) + (a * (b - (c * (d - (e * f))))));
             if (v != 96256)
             {
-                Console.WriteLine("test168: for ((f-a)+(a*(b-(c*(d-(e*f))))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test168: for ((f-a)+(a*(b-(c*(d-(e*f))))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = ((f - a) + ((a * (b - (c * (d - (e * f))))) + f));
             if (v != 96248)
             {
-                Console.WriteLine("test169: for ((f-a)+((a*(b-(c*(d-(e*f)))))+f))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test169: for ((f-a)+((a*(b-(c*(d-(e*f)))))+f))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = ((a * (b - (c * (d - (e * f))))) + ((f - a) + f));
             if (v != 96248)
             {
-                Console.WriteLine("test170: for ((a*(b-(c*(d-(e*f)))))+((f-a)+f))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test170: for ((a*(b-(c*(d-(e*f)))))+((f-a)+f))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = ((a * (b - (c * (d - (e * f))))) + f);
             if (v != 96214)
             {
-                Console.WriteLine("test171: for ((a*(b-(c*(d-(e*f)))))+f)  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test171: for ((a*(b-(c*(d-(e*f)))))+f)  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = (f + (a * (b - (c * (d - (e * f))))));
             if (v != 96214)
             {
-                Console.WriteLine("test172: for (f+(a*(b-(c*(d-(e*f))))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test172: for (f+(a*(b-(c*(d-(e*f))))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = (a * (b - (c * (d - (e * f)))));
             if (v != 96222)
             {
-                Console.WriteLine("test173: for (a*(b-(c*(d-(e*f)))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test173: for (a*(b-(c*(d-(e*f)))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = ((b - (c * (d - (e * f)))) * a);
             if (v != 96222)
             {
-                Console.WriteLine("test174: for ((b-(c*(d-(e*f))))*a)  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test174: for ((b-(c*(d-(e*f))))*a)  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = (b - (c * (d - (e * f))));
@@ -1484,25 +1619,37 @@ namespace CseTest
             v = ((b - (c * (d - (e * f)))) * a);
             if (v != 96222)
             {
-                Console.WriteLine("test187: for ((b-(c*(d-(e*f))))*a)  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test187: for ((b-(c*(d-(e*f))))*a)  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = (a * (b - (c * (d - (e * f)))));
             if (v != 96222)
             {
-                Console.WriteLine("test188: for (a*(b-(c*(d-(e*f)))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test188: for (a*(b-(c*(d-(e*f)))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = (f + (a * (b - (c * (d - (e * f))))));
             if (v != 96214)
             {
-                Console.WriteLine("test189: for (f+(a*(b-(c*(d-(e*f))))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test189: for (f+(a*(b-(c*(d-(e*f))))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = ((a * (b - (c * (d - (e * f))))) + f);
             if (v != 96214)
             {
-                Console.WriteLine("test190: for ((a*(b-(c*(d-(e*f)))))+f)  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test190: for ((a*(b-(c*(d-(e*f)))))+f)  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = ((f - a) + f);
@@ -1545,13 +1692,19 @@ namespace CseTest
             v = (f + ((f - a) + (a * (b - (c * (d - (e * f)))))));
             if (v != 805784)
             {
-                Console.WriteLine("test197: for (f+((f-a)+(a*(b-(c*(d-(e*f)))))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test197: for (f+((f-a)+(a*(b-(c*(d-(e*f)))))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = (((f - a) + (a * (b - (c * (d - (e * f)))))) + f);
             if (v != 805784)
             {
-                Console.WriteLine("test198: for (((f-a)+(a*(b-(c*(d-(e*f))))))+f)  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test198: for (((f-a)+(a*(b-(c*(d-(e*f))))))+f)  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             s.c = return_int(false, 2);
@@ -1582,56 +1735,102 @@ namespace CseTest
             v = (((f - a) + (a * (b - (c * (d - (e * f)))))) + f);
             if (v != 805784)
             {
-                Console.WriteLine("test203: for (((f-a)+(a*(b-(c*(d-(e*f))))))+f)  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test203: for (((f-a)+(a*(b-(c*(d-(e*f))))))+f)  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             ad = return_int(false, 16);
             v = ((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab));
             if (v != 809060)
             {
-                Console.WriteLine("test204: for ((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test204: for ((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = (((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab)) + (d - e));
             if (v != 809032)
             {
-                Console.WriteLine("test205: for (((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab))+(d-e))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test205: for (((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab))+(d-e))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = ((d - e) + ((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab)));
             if (v != 809032)
             {
-                Console.WriteLine("test206: for ((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab)))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test206: for ((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab)))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = (((d - e) + ((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab))) * c);
             if (v != 25889024)
             {
-                Console.WriteLine("test207: for (((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab)))*c)  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test207: for (((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab)))*c)  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             v = (c * ((d - e) + ((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab))));
             if (v != 25889024)
             {
-                Console.WriteLine("test208: for (c*((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test208: for (c*((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
-            v = (b - (c * ((d - e) + ((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab)))));
+            v = (
+                b - (c * ((d - e) + ((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab))))
+            );
             if (v != -25889043)
             {
-                Console.WriteLine("test209: for (b-(c*((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab)))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test209: for (b-(c*((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab)))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
-            v = ((b - (c * ((d - e) + ((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab))))) * a);
+            v = (
+                (
+                    b
+                    - (
+                        c
+                        * ((d - e) + ((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab)))
+                    )
+                ) * a
+            );
             if (v != 1087339806)
             {
-                Console.WriteLine("test210: for ((b-(c*((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab)))))*a)  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test210: for ((b-(c*((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab)))))*a)  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
-            v = (a * (b - (c * ((d - e) + ((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab))))));
+            v = (
+                a
+                * (
+                    b
+                    - (
+                        c
+                        * ((d - e) + ((((f - a) + (a * (b - (c * (d - (e * f)))))) + f) - (a * ab)))
+                    )
+                )
+            );
             if (v != 1087339806)
             {
-                Console.WriteLine("test211: for (a*(b-(c*((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab))))))  failed actual value {0} ", v);
+                Console.WriteLine(
+                    "test211: for (a*(b-(c*((d-e)+((((f-a)+(a*(b-(c*(d-(e*f))))))+f)-(a*ab))))))  failed actual value {0} ",
+                    v
+                );
                 ret = ret + 1;
             }
             return ret;
@@ -1657,7 +1856,6 @@ namespace CseTest
 
     public class class_s
     {
-
         public int a;
 
         public int b;
@@ -1665,4 +1863,3 @@ namespace CseTest
         public int c;
     }
 }
-

@@ -19,18 +19,27 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal sealed class EarlyWellKnownAttributeBinder : Binder
     {
         internal EarlyWellKnownAttributeBinder(Binder enclosing)
-            : base(enclosing, enclosing.Flags | BinderFlags.EarlyAttributeBinding)
-        {
-        }
+            : base(enclosing, enclosing.Flags | BinderFlags.EarlyAttributeBinding) { }
 
         internal (CSharpAttributeData, BoundAttribute) GetAttribute(
-            AttributeSyntax node, NamedTypeSymbol boundAttributeType,
+            AttributeSyntax node,
+            NamedTypeSymbol boundAttributeType,
             Action<AttributeSyntax> beforeAttributePartBound,
             Action<AttributeSyntax> afterAttributePartBound,
-            out bool generatedDiagnostics)
+            out bool generatedDiagnostics
+        )
         {
-            var dummyDiagnosticBag = BindingDiagnosticBag.GetInstance(withDiagnostics: true, withDependencies: false);
-            var result = base.GetAttribute(node, boundAttributeType, beforeAttributePartBound, afterAttributePartBound, dummyDiagnosticBag);
+            var dummyDiagnosticBag = BindingDiagnosticBag.GetInstance(
+                withDiagnostics: true,
+                withDependencies: false
+            );
+            var result = base.GetAttribute(
+                node,
+                boundAttributeType,
+                beforeAttributePartBound,
+                afterAttributePartBound,
+                dummyDiagnosticBag
+            );
             generatedDiagnostics = !dummyDiagnosticBag.DiagnosticBag.IsEmptyWithoutResolution;
             dummyDiagnosticBag.Free();
             return result;
@@ -38,16 +47,27 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         // Hide the GetAttribute overload which takes a diagnostic bag.
         // This ensures that diagnostics from the early bound attributes are never preserved.
-        [Obsolete("EarlyWellKnownAttributeBinder has a better overload - GetAttribute(AttributeSyntax, NamedTypeSymbol, out bool)", true)]
+        [Obsolete(
+            "EarlyWellKnownAttributeBinder has a better overload - GetAttribute(AttributeSyntax, NamedTypeSymbol, out bool)",
+            true
+        )]
         internal new (CSharpAttributeData, BoundAttribute) GetAttribute(
-            AttributeSyntax node, NamedTypeSymbol boundAttributeType,
+            AttributeSyntax node,
+            NamedTypeSymbol boundAttributeType,
             Action<AttributeSyntax> beforeAttributePartBound,
             Action<AttributeSyntax> afterAttributePartBound,
-            BindingDiagnosticBag diagnostics)
+            BindingDiagnosticBag diagnostics
+        )
         {
             Debug.Assert(false, "Don't call this overload.");
             diagnostics.Add(ErrorCode.ERR_InternalError, node.Location);
-            return base.GetAttribute(node, boundAttributeType, beforeAttributePartBound, afterAttributePartBound, diagnostics);
+            return base.GetAttribute(
+                node,
+                boundAttributeType,
+                beforeAttributePartBound,
+                afterAttributePartBound,
+                diagnostics
+            );
         }
 
         /// <remarks>
@@ -62,10 +82,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // ObjectCreationExpression for primitive types, such as "new int()", are treated as constants and allowed in attribute arguments.
                 case SyntaxKind.ObjectCreationExpression:
                 case SyntaxKind.ImplicitObjectCreationExpression:
-                    {
-                        var objectCreation = (BaseObjectCreationExpressionSyntax)node;
-                        return objectCreation.Initializer == null && (objectCreation.ArgumentList?.Arguments.Count ?? 0) == 0;
-                    }
+                {
+                    var objectCreation = (BaseObjectCreationExpressionSyntax)node;
+                    return objectCreation.Initializer == null
+                        && (objectCreation.ArgumentList?.Arguments.Count ?? 0) == 0;
+                }
 
                 // sizeof(int)
                 case SyntaxKind.SizeOfExpression:

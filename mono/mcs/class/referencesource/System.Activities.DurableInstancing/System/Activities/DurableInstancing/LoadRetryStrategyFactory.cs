@@ -8,7 +8,9 @@ namespace System.Activities.DurableInstancing
 
     static class LoadRetryStrategyFactory
     {
-        public static ILoadRetryStrategy CreateRetryStrategy(InstanceLockedExceptionAction instanceLockedExceptionAction)
+        public static ILoadRetryStrategy CreateRetryStrategy(
+            InstanceLockedExceptionAction instanceLockedExceptionAction
+        )
         {
             switch (instanceLockedExceptionAction)
             {

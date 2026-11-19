@@ -18,18 +18,14 @@ namespace System.Net.Http.Handlers
         /// <summary>
         /// Initializes a new instance of the <see cref="ProgressMessageHandler"/> class.
         /// </summary>
-        public ProgressMessageHandler()
-        {
-        }
+        public ProgressMessageHandler() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProgressMessageHandler"/> class.
         /// </summary>
         /// <param name="innerHandler">The inner handler to which this handler submits requests.</param>
         public ProgressMessageHandler(HttpMessageHandler innerHandler)
-            : base(innerHandler)
-        {
-        }
+            : base(innerHandler) { }
 
         /// <summary>
         /// Occurs every time the client sending data is making progress.
@@ -41,7 +37,10 @@ namespace System.Net.Http.Handlers
         /// </summary>
         public event EventHandler<HttpProgressEventArgs> HttpReceiveProgress;
 
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             AddRequestProgress(request);
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
@@ -60,7 +59,10 @@ namespace System.Net.Http.Handlers
         /// </summary>
         /// <param name="request">The request.</param>
         /// <param name="e">The <see cref="HttpProgressEventArgs"/> instance containing the event data.</param>
-        protected internal virtual void OnHttpRequestProgress(HttpRequestMessage request, HttpProgressEventArgs e)
+        protected internal virtual void OnHttpRequestProgress(
+            HttpRequestMessage request,
+            HttpProgressEventArgs e
+        )
         {
             if (HttpSendProgress != null)
             {
@@ -73,7 +75,10 @@ namespace System.Net.Http.Handlers
         /// </summary>
         /// <param name="request">The request.</param>
         /// <param name="e">The <see cref="HttpProgressEventArgs"/> instance containing the event data.</param>
-        protected internal virtual void OnHttpResponseProgress(HttpRequestMessage request, HttpProgressEventArgs e)
+        protected internal virtual void OnHttpResponseProgress(
+            HttpRequestMessage request,
+            HttpProgressEventArgs e
+        )
         {
             if (HttpReceiveProgress != null)
             {
@@ -90,7 +95,10 @@ namespace System.Net.Http.Handlers
             }
         }
 
-        private async Task<HttpResponseMessage> AddResponseProgressAsync(HttpRequestMessage request, HttpResponseMessage response)
+        private async Task<HttpResponseMessage> AddResponseProgressAsync(
+            HttpRequestMessage request,
+            HttpResponseMessage response
+        )
         {
             Stream stream = await response.Content.ReadAsStreamAsync();
             ProgressStream progressStream = new ProgressStream(stream, this, request, response);

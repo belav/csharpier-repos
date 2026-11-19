@@ -42,14 +42,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute()]
         public string Name
         {
-            get
-            {
-                return m_Name;
-            }
-            set
-            {
-                m_Name = value;
-            }
+            get { return m_Name; }
+            set { m_Name = value; }
         }
 
         /// <summary>
@@ -60,15 +54,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute()]
         public string Value
         {
-            get
-            {
-                return m_Value;
-            }
-            set
-            {
-                m_Value = value;
-            }
+            get { return m_Value; }
+            set { m_Value = value; }
         }
     }
 }
-

@@ -9,9 +9,8 @@ namespace Microsoft.Win32.SafeHandles
     // Class of safe handle which uses 0 or -1 as an invalid handle.
     public abstract class SafeHandleZeroOrMinusOneIsInvalid : SafeHandle
     {
-        protected SafeHandleZeroOrMinusOneIsInvalid(bool ownsHandle) : base(IntPtr.Zero, ownsHandle)
-        {
-        }
+        protected SafeHandleZeroOrMinusOneIsInvalid(bool ownsHandle)
+            : base(IntPtr.Zero, ownsHandle) { }
 
         public override bool IsInvalid => handle == IntPtr.Zero || handle == new IntPtr(-1);
     }

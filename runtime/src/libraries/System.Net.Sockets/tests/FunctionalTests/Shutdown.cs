@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Threading;
 using Xunit;
 using Xunit.Abstractions;
-using System.Threading;
 
 namespace System.Net.Sockets.Tests
 {
@@ -23,50 +23,50 @@ namespace System.Net.Sockets.Tests
             switch (args.LastOperation)
             {
                 case SocketAsyncOperation.Accept:
-                    {
-                        Socket client = args.AcceptSocket;
-                        args.SetBuffer(new byte[1], 0, 1);
-                        args.UserToken = client;
+                {
+                    Socket client = args.AcceptSocket;
+                    args.SetBuffer(new byte[1], 0, 1);
+                    args.UserToken = client;
 
-                        bool pending = client.ReceiveAsync(args);
-                        if (!pending)
-                        {
-                            OnOperationCompleted(null, args);
-                        }
-                        break;
+                    bool pending = client.ReceiveAsync(args);
+                    if (!pending)
+                    {
+                        OnOperationCompleted(null, args);
                     }
+                    break;
+                }
 
                 case SocketAsyncOperation.Receive:
+                {
+                    var client = (Socket)args.UserToken;
+                    if (args.BytesTransferred == 0)
                     {
-                        var client = (Socket)args.UserToken;
-                        if (args.BytesTransferred == 0)
-                        {
-                            client.Shutdown(SocketShutdown.Send);
-                            client.Dispose();
-                            break;
-                        }
-
-                        bool pending = client.SendAsync(args);
-                        if (!pending)
-                        {
-                            OnOperationCompleted(null, args);
-                        }
+                        client.Shutdown(SocketShutdown.Send);
+                        client.Dispose();
                         break;
                     }
+
+                    bool pending = client.SendAsync(args);
+                    if (!pending)
+                    {
+                        OnOperationCompleted(null, args);
+                    }
+                    break;
+                }
 
                 case SocketAsyncOperation.Send:
+                {
+                    var client = (Socket)args.UserToken;
+
+                    Assert.True(args.BytesTransferred == args.Buffer.Length);
+
+                    bool pending = client.ReceiveAsync(args);
+                    if (!pending)
                     {
-                        var client = (Socket)args.UserToken;
-
-                        Assert.True(args.BytesTransferred == args.Buffer.Length);
-
-                        bool pending = client.ReceiveAsync(args);
-                        if (!pending)
-                        {
-                            OnOperationCompleted(null, args);
-                        }
-                        break;
+                        OnOperationCompleted(null, args);
                     }
+                    break;
+                }
             }
         }
 

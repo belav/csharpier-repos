@@ -14,10 +14,14 @@ namespace Microsoft.CodeAnalysis
     public sealed class DllImportData : Cci.IPlatformInvokeInformation
     {
         private readonly string? _moduleName;
-        private readonly string? _entryPointName;            // null if unspecified, the name of the target method should be used
+        private readonly string? _entryPointName; // null if unspecified, the name of the target method should be used
         private readonly MethodImportAttributes _flags;
 
-        internal DllImportData(string? moduleName, string? entryPointName, MethodImportAttributes flags)
+        internal DllImportData(
+            string? moduleName,
+            string? entryPointName,
+            MethodImportAttributes flags
+        )
         {
             _moduleName = moduleName;
             _entryPointName = entryPointName;
@@ -46,15 +50,12 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Controls whether the <see cref="CharacterSet"/> field causes the common language runtime 
+        /// Controls whether the <see cref="CharacterSet"/> field causes the common language runtime
         /// to search an unmanaged DLL for entry-point names other than the one specified.
         /// </summary>
         public bool ExactSpelling
         {
-            get
-            {
-                return (_flags & MethodImportAttributes.ExactSpelling) != 0;
-            }
+            get { return (_flags & MethodImportAttributes.ExactSpelling) != 0; }
         }
 
         /// <summary>
@@ -88,10 +89,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public bool SetLastError
         {
-            get
-            {
-                return (_flags & MethodImportAttributes.SetLastError) != 0;
-            }
+            get { return (_flags & MethodImportAttributes.SetLastError) != 0; }
         }
 
         /// <summary>
@@ -165,7 +163,14 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        internal static MethodImportAttributes MakeFlags(bool exactSpelling, CharSet charSet, bool setLastError, CallingConvention callingConvention, bool? useBestFit, bool? throwOnUnmappable)
+        internal static MethodImportAttributes MakeFlags(
+            bool exactSpelling,
+            CharSet charSet,
+            bool setLastError,
+            CallingConvention callingConvention,
+            bool? useBestFit,
+            bool? throwOnUnmappable
+        )
         {
             MethodImportAttributes result = 0;
             if (exactSpelling)
@@ -187,7 +192,7 @@ namespace Microsoft.CodeAnalysis
                     result |= MethodImportAttributes.CharSetAuto;
                     break;
 
-                    // Dev10: use default without reporting an error
+                // Dev10: use default without reporting an error
             }
 
             if (setLastError)

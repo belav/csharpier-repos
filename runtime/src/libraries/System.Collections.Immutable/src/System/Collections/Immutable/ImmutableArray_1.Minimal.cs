@@ -33,7 +33,10 @@ namespace System.Collections.Immutable
     /// </devremarks>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     [NonVersionable] // Applies to field layout
-    public partial struct ImmutableArray<T> : IEnumerable<T>, IEquatable<ImmutableArray<T>>, IImmutableArray
+    public partial struct ImmutableArray<T>
+        : IEnumerable<T>,
+            IEquatable<ImmutableArray<T>>,
+            IImmutableArray
     {
         /// <summary>
         /// An empty (initialized) instance of <see cref="ImmutableArray{T}"/>.
@@ -333,9 +336,9 @@ namespace System.Collections.Immutable
         /// </remarks>
         public static ImmutableArray<
 #nullable disable
-            T
+        T
 #nullable restore
-            > CastUp<TDerived>(ImmutableArray<TDerived> items)
+        > CastUp<TDerived>(ImmutableArray<TDerived> items)
             where TDerived : class?, T
         {
             return new ImmutableArray<T>(items.array);
@@ -348,9 +351,10 @@ namespace System.Collections.Immutable
         /// <exception cref="InvalidCastException">Thrown if the cast is illegal.</exception>
         public ImmutableArray<
 #nullable disable
-            TOther
+        TOther
 #nullable restore
-            > CastArray<TOther>() where TOther : class?
+        > CastArray<TOther>()
+            where TOther : class?
         {
             return new ImmutableArray<TOther>((TOther[])(object)array!);
         }
@@ -372,9 +376,10 @@ namespace System.Collections.Immutable
         /// </remarks>
         public ImmutableArray<
 #nullable disable
-            TOther
+        TOther
 #nullable restore
-            > As<TOther>() where TOther : class?
+        > As<TOther>()
+            where TOther : class?
         {
             return new ImmutableArray<TOther>((this.array as TOther[]));
         }

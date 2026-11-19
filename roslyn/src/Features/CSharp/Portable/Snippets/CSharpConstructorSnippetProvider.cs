@@ -24,37 +24,53 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpConstructorSnippetProvider()
+        public CSharpConstructorSnippetProvider() { }
+
+        protected override async Task<bool> IsValidSnippetLocationAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
+            var semanticModel = await document
+                .ReuseExistingSpeculativeModelAsync(position, cancellationToken)
+                .ConfigureAwait(false);
+            var syntaxContext = (CSharpSyntaxContext)
+                document
+                    .GetRequiredLanguageService<ISyntaxContextService>()
+                    .CreateContext(document, semanticModel, position, cancellationToken);
+
+            return syntaxContext.IsMemberDeclarationContext(
+                validTypeDeclarations: SyntaxKindSet.ClassStructRecordTypeDeclarations,
+                canBePartial: true,
+                cancellationToken: cancellationToken
+            );
         }
 
-        protected override async Task<bool> IsValidSnippetLocationAsync(Document document, int position, CancellationToken cancellationToken)
-        {
-            var semanticModel = await document.ReuseExistingSpeculativeModelAsync(position, cancellationToken).ConfigureAwait(false);
-            var syntaxContext = (CSharpSyntaxContext)document.GetRequiredLanguageService<ISyntaxContextService>().CreateContext(document, semanticModel, position, cancellationToken);
-
-            return
-                syntaxContext.IsMemberDeclarationContext(
-                    validTypeDeclarations: SyntaxKindSet.ClassStructRecordTypeDeclarations,
-                    canBePartial: true,
-                    cancellationToken: cancellationToken);
-        }
-
-        protected override int GetTargetCaretPosition(ISyntaxFactsService syntaxFacts, SyntaxNode caretTarget, SourceText sourceText)
+        protected override int GetTargetCaretPosition(
+            ISyntaxFactsService syntaxFacts,
+            SyntaxNode caretTarget,
+            SourceText sourceText
+        )
         {
             return CSharpSnippetHelpers.GetTargetCaretPositionInBlock<ConstructorDeclarationSyntax>(
                 caretTarget,
                 static d => d.Body!,
-                sourceText);
+                sourceText
+            );
         }
 
-        protected override Task<Document> AddIndentationToDocumentAsync(Document document, CancellationToken cancellationToken)
+        protected override Task<Document> AddIndentationToDocumentAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             return CSharpSnippetHelpers.AddBlockIndentationToDocumentAsync<ConstructorDeclarationSyntax>(
                 document,
                 FindSnippetAnnotation,
                 static d => d.Body!,
-                cancellationToken);
+                cancellationToken
+            );
         }
     }
 }

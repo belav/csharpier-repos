@@ -22,12 +22,15 @@ namespace System.ComponentModel.Tests
         {
             var descriptors = new PropertyDescriptor[]
             {
-                new MockPropertyDescriptor("descriptor1")
+                new MockPropertyDescriptor("descriptor1"),
             };
 
             var collection = new PropertyDescriptorCollection(descriptors);
 
-            Assert.Equal(descriptors.Cast<PropertyDescriptor>(), collection.Cast<PropertyDescriptor>());
+            Assert.Equal(
+                descriptors.Cast<PropertyDescriptor>(),
+                collection.Cast<PropertyDescriptor>()
+            );
 
             // These methods are implemented as explicit properties so we need to ensure they are what we expect
             Assert.False(((IDictionary)collection).IsReadOnly);
@@ -41,12 +44,15 @@ namespace System.ComponentModel.Tests
         {
             var descriptors = new PropertyDescriptor[]
             {
-                new MockPropertyDescriptor("descriptor1")
+                new MockPropertyDescriptor("descriptor1"),
             };
 
             var collection = new PropertyDescriptorCollection(descriptors, true);
 
-            Assert.Equal(descriptors.Cast<PropertyDescriptor>(), collection.Cast<PropertyDescriptor>());
+            Assert.Equal(
+                descriptors.Cast<PropertyDescriptor>(),
+                collection.Cast<PropertyDescriptor>()
+            );
 
             // These methods are implemented as explicit properties so we need to ensure they are what we expect
             Assert.True(((IDictionary)collection).IsReadOnly);
@@ -98,13 +104,16 @@ namespace System.ComponentModel.Tests
                 new MockPropertyDescriptor("propertyDescriptor6"),
                 new MockPropertyDescriptor("propertyDescriptor7"),
                 new MockPropertyDescriptor("propertyDescriptor8"),
-                new MockPropertyDescriptor("propertyDescriptor9")
+                new MockPropertyDescriptor("propertyDescriptor9"),
             };
 
             // Must send in a copy to the constructor as the array itself is manipulated
             var collection = new PropertyDescriptorCollection(propertyDescriptors.ToArray());
 
-            Assert.True(index >= 0 && index < propertyDescriptors.Length, $"Index '{index}' is out of bounds");
+            Assert.True(
+                index >= 0 && index < propertyDescriptors.Length,
+                $"Index '{index}' is out of bounds"
+            );
 
             collection.Remove(propertyDescriptors[index]);
 
@@ -112,11 +121,17 @@ namespace System.ComponentModel.Tests
             {
                 if (i == index)
                 {
-                    Assert.False(collection.Contains(propertyDescriptors[index]), "Should have removed descriptor");
+                    Assert.False(
+                        collection.Contains(propertyDescriptors[index]),
+                        "Should have removed descriptor"
+                    );
                 }
                 else
                 {
-                    Assert.True(collection.Contains(propertyDescriptors[i]), $"Descriptor should be in collection: {i}");
+                    Assert.True(
+                        collection.Contains(propertyDescriptors[i]),
+                        $"Descriptor should be in collection: {i}"
+                    );
                 }
             }
         }
@@ -139,13 +154,16 @@ namespace System.ComponentModel.Tests
                 new MockPropertyDescriptor("propertyDescriptor6"),
                 new MockPropertyDescriptor("propertyDescriptor7"),
                 new MockPropertyDescriptor("propertyDescriptor8"),
-                new MockPropertyDescriptor("propertyDescriptor9")
+                new MockPropertyDescriptor("propertyDescriptor9"),
             };
 
             // Must send in a copy to the constructor as the array itself is manipulated
             var collection = new PropertyDescriptorCollection(propertyDescriptors.ToArray());
 
-            Assert.True(index >= 0 && index < propertyDescriptors.Length, $"Index '{index}' is out of bounds");
+            Assert.True(
+                index >= 0 && index < propertyDescriptors.Length,
+                $"Index '{index}' is out of bounds"
+            );
 
             collection.RemoveAt(index);
 
@@ -153,11 +171,17 @@ namespace System.ComponentModel.Tests
             {
                 if (i == index)
                 {
-                    Assert.False(collection.Contains(propertyDescriptors[index]), "Should have removed descriptor");
+                    Assert.False(
+                        collection.Contains(propertyDescriptors[index]),
+                        "Should have removed descriptor"
+                    );
                 }
                 else
                 {
-                    Assert.True(collection.Contains(propertyDescriptors[i]), $"Descriptor should be in collection: {i}");
+                    Assert.True(
+                        collection.Contains(propertyDescriptors[i]),
+                        $"Descriptor should be in collection: {i}"
+                    );
                 }
             }
         }
@@ -182,7 +206,7 @@ namespace System.ComponentModel.Tests
                 new MockPropertyDescriptor("propertyDescriptor6"),
                 new MockPropertyDescriptor("propertyDescriptor7"),
                 new MockPropertyDescriptor("propertyDescriptor8"),
-                new MockPropertyDescriptor("propertyDescriptor9")
+                new MockPropertyDescriptor("propertyDescriptor9"),
             };
 
             // Loop through as there is caching that occurs
@@ -195,8 +219,15 @@ namespace System.ComponentModel.Tests
                 {
                     Assert.NotNull(result);
 
-                    PropertyDescriptor expected = propertyDescriptors
-                        .First(p => string.Equals(p.Name, name, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal));
+                    PropertyDescriptor expected = propertyDescriptors.First(p =>
+                        string.Equals(
+                            p.Name,
+                            name,
+                            ignoreCase
+                                ? StringComparison.OrdinalIgnoreCase
+                                : StringComparison.Ordinal
+                        )
+                    );
 
                     Assert.Equal(expected, result);
                 }
@@ -210,32 +241,21 @@ namespace System.ComponentModel.Tests
         private class MockPropertyDescriptor : PropertyDescriptor
         {
             public MockPropertyDescriptor(string name)
-                : base(name, new Attribute[] { })
-            {
-            }
+                : base(name, new Attribute[] { }) { }
 
             public override Type ComponentType
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public override bool IsReadOnly
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public override Type PropertyType
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public override bool CanResetValue(object component)

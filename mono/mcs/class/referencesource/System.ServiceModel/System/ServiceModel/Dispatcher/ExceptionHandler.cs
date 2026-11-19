@@ -19,10 +19,7 @@ namespace System.ServiceModel.Dispatcher
 
         public static ExceptionHandler AlwaysHandle
         {
-            get
-            {
-                return alwaysHandle;
-            }
+            get { return alwaysHandle; }
         }
 
         public static ExceptionHandler AsynchronousThreadExceptionHandler
@@ -30,42 +27,38 @@ namespace System.ServiceModel.Dispatcher
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
             get
             {
-                // 
+                //
                 HandlerWrapper wrapper = (HandlerWrapper)Fx.AsynchronousThreadExceptionHandler;
                 return wrapper == null ? null : wrapper.Handler;
             }
-
-            [Fx.Tag.SecurityNote(Critical = "Calls a LinkDemanded method (Fx setter) and critical method (HandlerWrapper ctor)",
-                Safe = "protected with LinkDemand")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Calls a LinkDemanded method (Fx setter) and critical method (HandlerWrapper ctor)",
+                Safe = "protected with LinkDemand"
+            )]
             [SecuritySafeCritical]
             [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
             set
             {
-                Fx.AsynchronousThreadExceptionHandler = value == null ? null : new HandlerWrapper(value);
+                Fx.AsynchronousThreadExceptionHandler =
+                    value == null ? null : new HandlerWrapper(value);
             }
         }
 
         public static ExceptionHandler TransportExceptionHandler
         {
-            get
-            {
-                return transportExceptionHandler;
-            }
-
-            set
-            {
-                transportExceptionHandler = value;
-            }
+            get { return transportExceptionHandler; }
+            set { transportExceptionHandler = value; }
         }
 
         // Returns true if the exception has been handled.  If it returns false or
         // throws a different exception, the original exception will be rethrown.
         public abstract bool HandleException(Exception exception);
 
-
         class AlwaysHandleExceptionHandler : ExceptionHandler
         {
-            [Fx.Tag.SecurityNote(Miscellaneous = "this function can be called from within a CER, must not call into PT code")]
+            [Fx.Tag.SecurityNote(
+                Miscellaneous = "this function can be called from within a CER, must not call into PT code"
+            )]
             public override bool HandleException(Exception exception)
             {
                 return true;
@@ -107,14 +100,17 @@ namespace System.ServiceModel.Dispatcher
             return true;
         }
 
-
         class HandlerWrapper : Fx.ExceptionHandler
         {
-            [Fx.Tag.SecurityNote(Critical = "Cannot let PT code alter the handler wrapped by this class.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Cannot let PT code alter the handler wrapped by this class."
+            )]
             [SecurityCritical]
             readonly ExceptionHandler handler;
 
-            [Fx.Tag.SecurityNote(Critical = "Cannot let PT code alter the handler wrapped by this class.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Cannot let PT code alter the handler wrapped by this class."
+            )]
             [SecurityCritical]
             public HandlerWrapper(ExceptionHandler handler)
             {
@@ -124,17 +120,20 @@ namespace System.ServiceModel.Dispatcher
 
             public ExceptionHandler Handler
             {
-                [Fx.Tag.SecurityNote(Critical = "Access security-critical field.", Safe = "Ok to read field.")]
+                [Fx.Tag.SecurityNote(
+                    Critical = "Access security-critical field.",
+                    Safe = "Ok to read field."
+                )]
                 [SecuritySafeCritical]
                 [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-                get
-                {
-                    return this.handler;
-                }
+                get { return this.handler; }
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Access security-critical field.", Safe = "Ok to call handler.",
-                Miscellaneous = "Called in a CER, must not call into PT code.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Access security-critical field.",
+                Safe = "Ok to call handler.",
+                Miscellaneous = "Called in a CER, must not call into PT code."
+            )]
             [SecuritySafeCritical]
             public override bool HandleException(Exception exception)
             {

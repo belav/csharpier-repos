@@ -6,7 +6,6 @@ using ServerSimulator.Properties;
 
 namespace ServerSimulator
 {
-
     /// <summary>
     /// This class validates and stores parameters passed in from the command-line or config file
     /// </summary>
@@ -43,7 +42,10 @@ namespace ServerSimulator
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("value", "FinalizableRate must be >=0 and <=1");
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        "FinalizableRate must be >=0 and <=1"
+                    );
                 }
             }
         }
@@ -61,7 +63,10 @@ namespace ServerSimulator
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("value", "CacheReplacementRate must be >0 and <=1");
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        "CacheReplacementRate must be >0 and <=1"
+                    );
                 }
             }
         }
@@ -79,7 +84,10 @@ namespace ServerSimulator
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("value", "SurvivalRate must be >0 and <=1");
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        "SurvivalRate must be >0 and <=1"
+                    );
                 }
             }
         }
@@ -119,7 +127,7 @@ namespace ServerSimulator
         }
 
         //     the cache size in bytes
-        private int cacheSize = 1024*1024*100;
+        private int cacheSize = 1024 * 1024 * 100;
         public int CacheSize
         {
             get { return cacheSize; }
@@ -231,7 +239,12 @@ namespace ServerSimulator
                     else if (str.StartsWith("/finalizablerate:"))
                     {
                         float finalizableRate = 0;
-                        if (!float.TryParse(str.Substring("/finalizablerate:".Length), out finalizableRate))
+                        if (
+                            !float.TryParse(
+                                str.Substring("/finalizablerate:".Length),
+                                out finalizableRate
+                            )
+                        )
                         {
                             Console.WriteLine("Invalid finalizablerate");
                             return false;
@@ -245,7 +258,12 @@ namespace ServerSimulator
                     else if (str.StartsWith("/cachereplacementrate:"))
                     {
                         float cacheReplacementRate = 0;
-                        if (!float.TryParse(str.Substring("/cachereplacementrate:".Length), out cacheReplacementRate))
+                        if (
+                            !float.TryParse(
+                                str.Substring("/cachereplacementrate:".Length),
+                                out cacheReplacementRate
+                            )
+                        )
                         {
                             Console.WriteLine("Invalid cachereplacementrate");
                             return false;
@@ -259,7 +277,12 @@ namespace ServerSimulator
                     else if (str.StartsWith("/survivalrate:"))
                     {
                         float survivalRate = 0;
-                        if (!float.TryParse(str.Substring("/survivalrate:".Length), out survivalRate))
+                        if (
+                            !float.TryParse(
+                                str.Substring("/survivalrate:".Length),
+                                out survivalRate
+                            )
+                        )
                         {
                             Console.WriteLine("Invalid survivalrate");
                             return false;
@@ -287,7 +310,12 @@ namespace ServerSimulator
                     else if (str.StartsWith("/allocationvolume:"))
                     {
                         int allocationVolume = 0;
-                        if (!Int32.TryParse(str.Substring("/allocationvolume:".Length), out allocationVolume))
+                        if (
+                            !Int32.TryParse(
+                                str.Substring("/allocationvolume:".Length),
+                                out allocationVolume
+                            )
+                        )
                         {
                             Console.WriteLine("Invalid allocationvolume");
                             return false;
@@ -315,7 +343,12 @@ namespace ServerSimulator
                     else if (str.StartsWith("/steadystatefactor:"))
                     {
                         int steadyStateFactor = 0;
-                        if (!Int32.TryParse(str.Substring("/steadystatefactor:".Length), out steadyStateFactor))
+                        if (
+                            !Int32.TryParse(
+                                str.Substring("/steadystatefactor:".Length),
+                                out steadyStateFactor
+                            )
+                        )
                         {
                             Console.WriteLine("Invalid steadystatefactor");
                             return false;
@@ -343,7 +376,12 @@ namespace ServerSimulator
                     else if (str.StartsWith("/staticdatavolume:"))
                     {
                         int staticDataVolume = 0;
-                        if (!Int32.TryParse(str.Substring("/staticdatavolume:".Length), out staticDataVolume))
+                        if (
+                            !Int32.TryParse(
+                                str.Substring("/staticdatavolume:".Length),
+                                out staticDataVolume
+                            )
+                        )
                         {
                             Console.WriteLine("Invalid staticdatavolume");
                             return false;
@@ -405,7 +443,6 @@ namespace ServerSimulator
                         Console.WriteLine("Invalid parameter");
                         return false;
                     }
-
                 }
             }
             catch (ArgumentOutOfRangeException e)

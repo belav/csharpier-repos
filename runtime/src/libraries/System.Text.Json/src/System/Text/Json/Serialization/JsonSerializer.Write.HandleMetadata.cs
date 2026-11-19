@@ -9,15 +9,28 @@ namespace System.Text.Json
     public static partial class JsonSerializer
     {
         // Pre-encoded metadata properties.
-        internal static readonly JsonEncodedText s_metadataId = JsonEncodedText.Encode(IdPropertyName, encoder: null);
-        internal static readonly JsonEncodedText s_metadataRef = JsonEncodedText.Encode(RefPropertyName, encoder: null);
-        internal static readonly JsonEncodedText s_metadataType = JsonEncodedText.Encode(TypePropertyName, encoder: null);
-        internal static readonly JsonEncodedText s_metadataValues = JsonEncodedText.Encode(ValuesPropertyName, encoder: null);
+        internal static readonly JsonEncodedText s_metadataId = JsonEncodedText.Encode(
+            IdPropertyName,
+            encoder: null
+        );
+        internal static readonly JsonEncodedText s_metadataRef = JsonEncodedText.Encode(
+            RefPropertyName,
+            encoder: null
+        );
+        internal static readonly JsonEncodedText s_metadataType = JsonEncodedText.Encode(
+            TypePropertyName,
+            encoder: null
+        );
+        internal static readonly JsonEncodedText s_metadataValues = JsonEncodedText.Encode(
+            ValuesPropertyName,
+            encoder: null
+        );
 
         internal static MetadataPropertyName WriteMetadataForObject(
             JsonConverter jsonConverter,
             ref WriteStack state,
-            Utf8JsonWriter writer)
+            Utf8JsonWriter writer
+        )
         {
             Debug.Assert(jsonConverter.CanHaveMetadata);
             Debug.Assert(!state.IsContinuation);
@@ -36,8 +49,10 @@ namespace System.Text.Json
             {
                 Debug.Assert(state.PolymorphicTypeResolver != null);
 
-                JsonEncodedText propertyName =
-                    state.PolymorphicTypeResolver.CustomTypeDiscriminatorPropertyNameJsonEncoded is JsonEncodedText customPropertyName
+                JsonEncodedText propertyName = state
+                    .PolymorphicTypeResolver
+                    .CustomTypeDiscriminatorPropertyNameJsonEncoded
+                    is JsonEncodedText customPropertyName
                     ? customPropertyName
                     : s_metadataType;
 
@@ -62,11 +77,16 @@ namespace System.Text.Json
         internal static MetadataPropertyName WriteMetadataForCollection(
             JsonConverter jsonConverter,
             ref WriteStack state,
-            Utf8JsonWriter writer)
+            Utf8JsonWriter writer
+        )
         {
             // For collections with metadata, we nest the array payload within a JSON object.
             writer.WriteStartObject();
-            MetadataPropertyName writtenMetadata = WriteMetadataForObject(jsonConverter, ref state, writer);
+            MetadataPropertyName writtenMetadata = WriteMetadataForObject(
+                jsonConverter,
+                ref state,
+                writer
+            );
             writer.WritePropertyName(s_metadataValues); // property name containing nested array values.
             return writtenMetadata;
         }
@@ -74,11 +94,18 @@ namespace System.Text.Json
         /// <summary>
         /// Compute reference id for the next value to be serialized.
         /// </summary>
-        internal static bool TryGetReferenceForValue(object currentValue, ref WriteStack state, Utf8JsonWriter writer)
+        internal static bool TryGetReferenceForValue(
+            object currentValue,
+            ref WriteStack state,
+            Utf8JsonWriter writer
+        )
         {
             Debug.Assert(state.NewReferenceId == null);
 
-            string referenceId = state.ReferenceResolver.GetReference(currentValue, out bool alreadyExists);
+            string referenceId = state.ReferenceResolver.GetReference(
+                currentValue,
+                out bool alreadyExists
+            );
             Debug.Assert(referenceId != null);
 
             if (alreadyExists)

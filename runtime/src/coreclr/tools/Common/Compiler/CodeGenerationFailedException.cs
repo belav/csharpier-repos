@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using Internal.TypeSystem;
 
 namespace ILCompiler
@@ -14,9 +13,7 @@ namespace ILCompiler
         public MethodDesc Method { get; }
 
         public CodeGenerationFailedException(MethodDesc method)
-            : this(method, null)
-        {
-        }
+            : this(method, null) { }
 
         public CodeGenerationFailedException(MethodDesc method, Exception inner)
             : base(string.Format(MessageText, method), inner)

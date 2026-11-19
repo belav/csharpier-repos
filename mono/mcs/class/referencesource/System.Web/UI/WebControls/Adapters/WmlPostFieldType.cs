@@ -6,15 +6,17 @@
 
 #if WMLSUPPORT
 
-namespace System.Web.UI.Adapters {
+namespace System.Web.UI.Adapters
+{
     using System.Web.UI.WebControls;
 
-    public enum WmlPostFieldType {
+    public enum WmlPostFieldType
+    {
         Normal,
         Submit,
         Variable,
-        Raw
+        Raw,
     }
 }
 
-#endif 
+#endif

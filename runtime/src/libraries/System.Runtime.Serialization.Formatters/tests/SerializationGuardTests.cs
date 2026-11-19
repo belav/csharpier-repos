@@ -12,7 +12,10 @@ using Xunit;
 
 namespace System.Runtime.Serialization.Formatters.Tests
 {
-    [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported))]
+    [ConditionalClass(
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsBinaryFormatterSupported)
+    )]
     public static class SerializationGuardTests
     {
         [Fact]
@@ -47,7 +50,9 @@ namespace System.Runtime.Serialization.Formatters.Tests
             ms.Position = 0;
 
             BinaryFormatter reader = new BinaryFormatter();
-            SerializationException se = Assert.Throws<SerializationException>(() => reader.Deserialize(ms));
+            SerializationException se = Assert.Throws<SerializationException>(() =>
+                reader.Deserialize(ms)
+            );
             Assert.IsAssignableFrom<TargetInvocationException>(se.InnerException);
         }
     }
@@ -62,9 +67,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assembly.Load(new byte[1000]);
         }
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-        }
+        public void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }
 
     [Serializable]
@@ -77,9 +80,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Process.Start("calc.exe");
         }
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-        }
+        public void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }
 
     [Serializable]
@@ -91,12 +92,12 @@ namespace System.Runtime.Serialization.Formatters.Tests
         {
             string tempPath = Path.GetTempFileName();
             File.WriteAllText(tempPath, "This better not be written...");
-            throw new UnreachableException("Unreachable code (SerializationGuard should have kicked in)");
+            throw new UnreachableException(
+                "Unreachable code (SerializationGuard should have kicked in)"
+            );
         }
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-        }
+        public void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }
 
     [Serializable]
@@ -108,7 +109,10 @@ namespace System.Runtime.Serialization.Formatters.Tests
         {
             try
             {
-                Task t = Task.Factory.StartNew(LoadAssemblyOnBackgroundThread, TaskCreationOptions.LongRunning);
+                Task t = Task.Factory.StartNew(
+                    LoadAssemblyOnBackgroundThread,
+                    TaskCreationOptions.LongRunning
+                );
                 t.Wait();
             }
             catch (AggregateException ex)
@@ -122,8 +126,6 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assembly.Load(new byte[1000]);
         }
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-        }
+        public void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }
 }

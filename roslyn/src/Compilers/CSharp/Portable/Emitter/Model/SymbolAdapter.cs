@@ -20,10 +20,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal abstract partial class
 #if DEBUG
-        SymbolAdapter
+    SymbolAdapter
 #else
-        Symbol
-#endif 
+    Symbol
+#endif
         : Cci.IReference
     {
         Cci.IDefinition Cci.IReference.AsDefinition(EmitContext context)
@@ -48,11 +48,14 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
 #if DEBUG
         internal SymbolAdapter GetCciAdapter() => GetCciAdapterImpl();
-        protected virtual SymbolAdapter GetCciAdapterImpl() => throw ExceptionUtilities.Unreachable();
+
+        protected virtual SymbolAdapter GetCciAdapterImpl() =>
+            throw ExceptionUtilities.Unreachable();
 #else
         internal Symbol AdaptedSymbol => this;
+
         internal Symbol GetCciAdapter() => this;
-#endif 
+#endif
 
         /// <summary>
         /// Checks if this symbol is a definition and its containing module is a SourceModuleSymbol.
@@ -64,9 +67,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(this.IsDefinition);
 
             // must be declared in the module we are building
-            Debug.Assert(this.ContainingModule is SourceModuleSymbol ||
-                         (this.Kind == SymbolKind.Assembly && this is SourceAssemblySymbol) ||
-                         (this.Kind == SymbolKind.NetModule && this is SourceModuleSymbol));
+            Debug.Assert(
+                this.ContainingModule is SourceModuleSymbol
+                    || (this.Kind == SymbolKind.Assembly && this is SourceAssemblySymbol)
+                    || (this.Kind == SymbolKind.NetModule && this is SourceModuleSymbol)
+            );
         }
 
         Cci.IReference CodeAnalysis.Symbols.ISymbolInternal.GetCciAdapter() => GetCciAdapter();
@@ -78,18 +83,30 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         internal bool IsDefinitionOrDistinct()
         {
-            return this.IsDefinition || !this.Equals(this.OriginalDefinition, SymbolEqualityComparer.ConsiderEverything.CompareKind);
+            return this.IsDefinition
+                || !this.Equals(
+                    this.OriginalDefinition,
+                    SymbolEqualityComparer.ConsiderEverything.CompareKind
+                );
         }
 
-        internal virtual IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(PEModuleBuilder moduleBuilder)
+        internal virtual IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
+            PEModuleBuilder moduleBuilder
+        )
         {
             CheckDefinitionInvariant();
 
             Debug.Assert(this.Kind != SymbolKind.Assembly);
-            return GetCustomAttributesToEmit(moduleBuilder, emittingAssemblyAttributesInNetModule: false);
+            return GetCustomAttributesToEmit(
+                moduleBuilder,
+                emittingAssemblyAttributesInNetModule: false
+            );
         }
 
-        internal IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(PEModuleBuilder moduleBuilder, bool emittingAssemblyAttributesInNetModule)
+        internal IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
+            PEModuleBuilder moduleBuilder,
+            bool emittingAssemblyAttributesInNetModule
+        )
         {
             CheckDefinitionInvariant();
             Debug.Assert(this.Kind != SymbolKind.Assembly);
@@ -99,9 +116,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             userDefined = this.GetAttributes();
             this.AddSynthesizedAttributes(moduleBuilder, ref synthesized);
 
-            // Note that callers of this method (CCI and ReflectionEmitter) have to enumerate 
+            // Note that callers of this method (CCI and ReflectionEmitter) have to enumerate
             // all items of the returned iterator, otherwise the synthesized ArrayBuilder may leak.
-            return GetCustomAttributesToEmit(userDefined, synthesized, isReturnType: false, emittingAssemblyAttributesInNetModule: emittingAssemblyAttributesInNetModule);
+            return GetCustomAttributesToEmit(
+                userDefined,
+                synthesized,
+                isReturnType: false,
+                emittingAssemblyAttributesInNetModule: emittingAssemblyAttributesInNetModule
+            );
         }
 
         /// <summary>
@@ -112,7 +134,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<CSharpAttributeData> userDefined,
             ArrayBuilder<SynthesizedAttributeData> synthesized,
             bool isReturnType,
-            bool emittingAssemblyAttributesInNetModule)
+            bool emittingAssemblyAttributesInNetModule
+        )
         {
             CheckDefinitionInvariant();
 
@@ -122,14 +145,20 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return SpecializedCollections.EmptyEnumerable<CSharpAttributeData>();
             }
 
-            return GetCustomAttributesToEmitIterator(userDefined, synthesized, isReturnType, emittingAssemblyAttributesInNetModule);
+            return GetCustomAttributesToEmitIterator(
+                userDefined,
+                synthesized,
+                isReturnType,
+                emittingAssemblyAttributesInNetModule
+            );
         }
 
         private IEnumerable<CSharpAttributeData> GetCustomAttributesToEmitIterator(
             ImmutableArray<CSharpAttributeData> userDefined,
             ArrayBuilder<SynthesizedAttributeData> synthesized,
             bool isReturnType,
-            bool emittingAssemblyAttributesInNetModule)
+            bool emittingAssemblyAttributesInNetModule
+        )
         {
             CheckDefinitionInvariant();
 
@@ -138,7 +167,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 foreach (var attribute in synthesized)
                 {
                     // only synthesize attributes that are emitted:
-                    Debug.Assert(attribute.ShouldEmitAttribute(this, isReturnType, emittingAssemblyAttributesInNetModule));
+                    Debug.Assert(
+                        attribute.ShouldEmitAttribute(
+                            this,
+                            isReturnType,
+                            emittingAssemblyAttributesInNetModule
+                        )
+                    );
                     yield return attribute;
                 }
 
@@ -159,7 +194,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                 }
 
-                if (attribute.ShouldEmitAttribute(this, isReturnType, emittingAssemblyAttributesInNetModule))
+                if (
+                    attribute.ShouldEmitAttribute(
+                        this,
+                        isReturnType,
+                        emittingAssemblyAttributesInNetModule
+                    )
+                )
                 {
                     yield return attribute;
                 }
@@ -190,7 +231,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         [Conditional("DEBUG")]
-        protected internal void CheckDefinitionInvariant() => AdaptedSymbol.CheckDefinitionInvariant();
+        protected internal void CheckDefinitionInvariant() =>
+            AdaptedSymbol.CheckDefinitionInvariant();
 
         internal bool IsDefinitionOrDistinct()
         {

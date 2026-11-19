@@ -13,52 +13,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     /// <summary>
     /// Represents a method that is based on another method.
-    /// When inheriting from this class, one shouldn't assume that 
+    /// When inheriting from this class, one shouldn't assume that
     /// the default behavior it has is appropriate for every case.
     /// That behavior should be carefully reviewed and derived type
     /// should override behavior as appropriate.
     /// </summary>
     internal abstract class WrappedMethodSymbol : MethodSymbol
     {
-        public WrappedMethodSymbol()
-        {
-        }
+        public WrappedMethodSymbol() { }
 
-        public abstract MethodSymbol UnderlyingMethod
-        {
-            get;
-        }
+        public abstract MethodSymbol UnderlyingMethod { get; }
 
         public override bool IsVararg
         {
-            get
-            {
-                return UnderlyingMethod.IsVararg;
-            }
+            get { return UnderlyingMethod.IsVararg; }
         }
 
         public override bool IsGenericMethod
         {
-            get
-            {
-                return UnderlyingMethod.IsGenericMethod;
-            }
+            get { return UnderlyingMethod.IsGenericMethod; }
         }
 
         public override int Arity
         {
-            get
-            {
-                return UnderlyingMethod.Arity;
-            }
+            get { return UnderlyingMethod.Arity; }
         }
 
         public override RefKind RefKind
         {
-            get
-            {
-                return UnderlyingMethod.RefKind;
-            }
+            get { return UnderlyingMethod.RefKind; }
         }
 
         internal override int ParameterCount
@@ -68,122 +51,77 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override bool IsExtensionMethod
         {
-            get
-            {
-                return UnderlyingMethod.IsExtensionMethod;
-            }
+            get { return UnderlyingMethod.IsExtensionMethod; }
         }
 
         public override bool HidesBaseMethodsByName
         {
-            get
-            {
-                return UnderlyingMethod.HidesBaseMethodsByName;
-            }
+            get { return UnderlyingMethod.HidesBaseMethodsByName; }
         }
 
         public override bool AreLocalsZeroed
         {
-            get
-            {
-                return UnderlyingMethod.AreLocalsZeroed;
-            }
+            get { return UnderlyingMethod.AreLocalsZeroed; }
         }
 
         public override ImmutableArray<Location> Locations
         {
-            get
-            {
-                return UnderlyingMethod.Locations;
-            }
+            get { return UnderlyingMethod.Locations; }
         }
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get
-            {
-                return UnderlyingMethod.DeclaringSyntaxReferences;
-            }
+            get { return UnderlyingMethod.DeclaringSyntaxReferences; }
         }
 
         public override Accessibility DeclaredAccessibility
         {
-            get
-            {
-                return UnderlyingMethod.DeclaredAccessibility;
-            }
+            get { return UnderlyingMethod.DeclaredAccessibility; }
         }
 
         public override bool IsStatic
         {
-            get
-            {
-                return UnderlyingMethod.IsStatic;
-            }
+            get { return UnderlyingMethod.IsStatic; }
         }
 
         public override bool RequiresInstanceReceiver
         {
-            get
-            {
-                return UnderlyingMethod.RequiresInstanceReceiver;
-            }
+            get { return UnderlyingMethod.RequiresInstanceReceiver; }
         }
 
         public override bool IsVirtual
         {
-            get
-            {
-                return UnderlyingMethod.IsVirtual;
-            }
+            get { return UnderlyingMethod.IsVirtual; }
         }
 
         public override bool IsAsync
         {
-            get
-            {
-                return UnderlyingMethod.IsAsync;
-            }
+            get { return UnderlyingMethod.IsAsync; }
         }
 
         public override bool IsOverride
         {
-            get
-            {
-                return UnderlyingMethod.IsOverride;
-            }
+            get { return UnderlyingMethod.IsOverride; }
         }
 
         public override bool IsAbstract
         {
-            get
-            {
-                return UnderlyingMethod.IsAbstract;
-            }
+            get { return UnderlyingMethod.IsAbstract; }
         }
 
         public override bool IsSealed
         {
-            get
-            {
-                return UnderlyingMethod.IsSealed;
-            }
+            get { return UnderlyingMethod.IsSealed; }
         }
 
         public override bool IsExtern
         {
-            get
-            {
-                return UnderlyingMethod.IsExtern;
-            }
+            get { return UnderlyingMethod.IsExtern; }
         }
 
         public override bool IsImplicitlyDeclared
         {
-            get
-            {
-                return UnderlyingMethod.IsImplicitlyDeclared;
-            }
+            get { return UnderlyingMethod.IsImplicitlyDeclared; }
         }
 
         internal override bool IsMetadataVirtual(bool ignoreInterfaceImplementationChanges = false)
@@ -193,10 +131,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool IsMetadataFinal
         {
-            get
-            {
-                return UnderlyingMethod.IsMetadataFinal;
-            }
+            get { return UnderlyingMethod.IsMetadataFinal; }
         }
 
         internal override bool IsMetadataNewSlot(bool ignoreInterfaceImplementationChanges = false)
@@ -206,10 +141,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool RequiresSecurityObject
         {
-            get
-            {
-                return UnderlyingMethod.RequiresSecurityObject;
-            }
+            get { return UnderlyingMethod.RequiresSecurityObject; }
         }
 
         public override DllImportData GetDllImportData()
@@ -219,10 +151,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override MarshalPseudoCustomAttributeData ReturnValueMarshallingInformation
         {
-            get
-            {
-                return UnderlyingMethod.ReturnValueMarshallingInformation;
-            }
+            get { return UnderlyingMethod.ReturnValueMarshallingInformation; }
         }
 
         internal override bool HasDeclarativeSecurity
@@ -242,127 +171,108 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override ObsoleteAttributeData ObsoleteAttributeData
         {
-            get
-            {
-                return UnderlyingMethod.ObsoleteAttributeData;
-            }
+            get { return UnderlyingMethod.ObsoleteAttributeData; }
         }
 
         public override string Name
         {
-            get
-            {
-                return UnderlyingMethod.Name;
-            }
+            get { return UnderlyingMethod.Name; }
         }
 
         internal override bool HasSpecialName
         {
-            get
-            {
-                return UnderlyingMethod.HasSpecialName;
-            }
+            get { return UnderlyingMethod.HasSpecialName; }
         }
 
-        public override string GetDocumentationCommentXml(CultureInfo preferredCulture = null, bool expandIncludes = false, CancellationToken cancellationToken = default(CancellationToken))
+        public override string GetDocumentationCommentXml(
+            CultureInfo preferredCulture = null,
+            bool expandIncludes = false,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return UnderlyingMethod.GetDocumentationCommentXml(preferredCulture, expandIncludes, cancellationToken);
+            return UnderlyingMethod.GetDocumentationCommentXml(
+                preferredCulture,
+                expandIncludes,
+                cancellationToken
+            );
         }
 
         internal override System.Reflection.MethodImplAttributes ImplementationAttributes
         {
-            get
-            {
-                return UnderlyingMethod.ImplementationAttributes;
-            }
+            get { return UnderlyingMethod.ImplementationAttributes; }
         }
 
         public override MethodKind MethodKind
         {
-            get
-            {
-                return UnderlyingMethod.MethodKind;
-            }
+            get { return UnderlyingMethod.MethodKind; }
         }
 
         internal override Microsoft.Cci.CallingConvention CallingConvention
         {
-            get
-            {
-                return UnderlyingMethod.CallingConvention;
-            }
+            get { return UnderlyingMethod.CallingConvention; }
         }
 
         internal override bool IsAccessCheckedOnOverride
         {
-            get
-            {
-                return UnderlyingMethod.IsAccessCheckedOnOverride;
-            }
+            get { return UnderlyingMethod.IsAccessCheckedOnOverride; }
         }
 
         internal override bool IsExternal
         {
-            get
-            {
-                return UnderlyingMethod.IsExternal;
-            }
+            get { return UnderlyingMethod.IsExternal; }
         }
 
         internal override bool HasRuntimeSpecialName
         {
-            get
-            {
-                return UnderlyingMethod.HasRuntimeSpecialName;
-            }
+            get { return UnderlyingMethod.HasRuntimeSpecialName; }
         }
 
         public sealed override bool ReturnsVoid => UnderlyingMethod.ReturnsVoid;
 
-        public sealed override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations => UnderlyingMethod.ReturnTypeFlowAnalysisAnnotations;
+        public sealed override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations =>
+            UnderlyingMethod.ReturnTypeFlowAnalysisAnnotations;
 
-        public sealed override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull => UnderlyingMethod.ReturnNotNullIfParameterNotNull;
+        public sealed override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull =>
+            UnderlyingMethod.ReturnNotNullIfParameterNotNull;
 
-        public sealed override FlowAnalysisAnnotations FlowAnalysisAnnotations => UnderlyingMethod.FlowAnalysisAnnotations;
+        public sealed override FlowAnalysisAnnotations FlowAnalysisAnnotations =>
+            UnderlyingMethod.FlowAnalysisAnnotations;
 
-        internal sealed override ImmutableArray<string> NotNullMembers => UnderlyingMethod.NotNullMembers;
+        internal sealed override ImmutableArray<string> NotNullMembers =>
+            UnderlyingMethod.NotNullMembers;
 
-        internal sealed override ImmutableArray<string> NotNullWhenTrueMembers => UnderlyingMethod.NotNullWhenTrueMembers;
+        internal sealed override ImmutableArray<string> NotNullWhenTrueMembers =>
+            UnderlyingMethod.NotNullWhenTrueMembers;
 
-        internal sealed override ImmutableArray<string> NotNullWhenFalseMembers => UnderlyingMethod.NotNullWhenFalseMembers;
+        internal sealed override ImmutableArray<string> NotNullWhenFalseMembers =>
+            UnderlyingMethod.NotNullWhenFalseMembers;
 
         internal override bool ReturnValueIsMarshalledExplicitly
         {
-            get
-            {
-                return UnderlyingMethod.ReturnValueIsMarshalledExplicitly;
-            }
+            get { return UnderlyingMethod.ReturnValueIsMarshalledExplicitly; }
         }
 
         internal override ImmutableArray<byte> ReturnValueMarshallingDescriptor
         {
-            get
-            {
-                return UnderlyingMethod.ReturnValueMarshallingDescriptor;
-            }
+            get { return UnderlyingMethod.ReturnValueMarshallingDescriptor; }
         }
 
         internal override bool GenerateDebugInfo
         {
-            get
-            {
-                return UnderlyingMethod.GenerateDebugInfo;
-            }
+            get { return UnderlyingMethod.GenerateDebugInfo; }
         }
 
         internal override bool IsDeclaredReadOnly => UnderlyingMethod.IsDeclaredReadOnly;
 
         internal override bool IsInitOnly => UnderlyingMethod.IsInitOnly;
 
-        protected sealed override bool HasSetsRequiredMembersImpl => UnderlyingMethod.HasSetsRequiredMembers;
+        protected sealed override bool HasSetsRequiredMembersImpl =>
+            UnderlyingMethod.HasSetsRequiredMembers;
 
-        internal sealed override bool HasUnscopedRefAttribute => UnderlyingMethod.HasUnscopedRefAttribute;
+        internal sealed override bool HasUnscopedRefAttribute =>
+            UnderlyingMethod.HasUnscopedRefAttribute;
 
-        internal sealed override bool UseUpdatedEscapeRules => UnderlyingMethod.UseUpdatedEscapeRules;
+        internal sealed override bool UseUpdatedEscapeRules =>
+            UnderlyingMethod.UseUpdatedEscapeRules;
     }
 }

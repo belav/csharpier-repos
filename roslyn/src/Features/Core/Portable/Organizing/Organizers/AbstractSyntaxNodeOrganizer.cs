@@ -19,9 +19,15 @@ namespace Microsoft.CodeAnalysis.Organizing.Organizers
             get { return SpecializedCollections.SingletonEnumerable(typeof(TSyntaxNode)); }
         }
 
-        public SyntaxNode OrganizeNode(SemanticModel semanticModel, SyntaxNode node, CancellationToken cancellationToken)
-            => Organize((TSyntaxNode)node, cancellationToken);
+        public SyntaxNode OrganizeNode(
+            SemanticModel semanticModel,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        ) => Organize((TSyntaxNode)node, cancellationToken);
 
-        protected abstract TSyntaxNode Organize(TSyntaxNode node, CancellationToken cancellationToken);
+        protected abstract TSyntaxNode Organize(
+            TSyntaxNode node,
+            CancellationToken cancellationToken
+        );
     }
 }

@@ -59,13 +59,16 @@ namespace System.Linq.Parallel
             int partitionIndex,
             Queue<Pair<TKey, TOutput>>[] buffers,
             object bufferLock,
-            bool autoBuffered)
+            bool autoBuffered
+        )
             : base(partitionIndex, taskGroupState)
         {
             Debug.Assert(partition != null);
             Debug.Assert(taskGroupState != null);
             Debug.Assert(consumerWaiting != null);
-            Debug.Assert(producerWaiting != null && producerWaiting.Length == consumerWaiting.Length);
+            Debug.Assert(
+                producerWaiting != null && producerWaiting.Length == consumerWaiting.Length
+            );
             Debug.Assert(producerDone != null && producerDone.Length == consumerWaiting.Length);
             Debug.Assert(buffers != null && buffers.Length == consumerWaiting.Length);
             Debug.Assert(partitionIndex >= 0 && partitionIndex < consumerWaiting.Length);
@@ -93,7 +96,9 @@ namespace System.Linq.Parallel
             int chunkSize = _autoBuffered ? PRODUCER_BUFFER_AUTO_SIZE : 1;
             Pair<TKey, TOutput>[] chunk = new Pair<TKey, TOutput>[chunkSize];
             var partition = _partition;
-            CancellationToken cancelToken = _taskGroupState.CancellationState.MergedCancellationToken;
+            CancellationToken cancelToken = _taskGroupState
+                .CancellationState
+                .MergedCancellationToken;
 
             int lastChunkSize;
             do
@@ -105,7 +110,8 @@ namespace System.Linq.Parallel
                     lastChunkSize++;
                 }
 
-                if (lastChunkSize == 0) break;
+                if (lastChunkSize == 0)
+                    break;
 
                 lock (_bufferLock)
                 {
@@ -129,7 +135,10 @@ namespace System.Linq.Parallel
                     // If the producer buffer is too large, wait.
                     // Note: we already checked for cancellation after acquiring the lock on this producer.
                     // That guarantees that the consumer will eventually wake up the producer.
-                    if (_buffers[_partitionIndex].Count >= OrderPreservingPipeliningMergeHelper<TOutput, TKey>.MAX_BUFFER_SIZE)
+                    if (
+                        _buffers[_partitionIndex].Count
+                        >= OrderPreservingPipeliningMergeHelper<TOutput, TKey>.MAX_BUFFER_SIZE
+                    )
                     {
                         _producerWaiting[_partitionIndex] = true;
                         Monitor.Wait(_bufferLock);
@@ -138,15 +147,20 @@ namespace System.Linq.Parallel
             } while (lastChunkSize == chunkSize);
         }
 
-
         /// <summary>
         /// Creates and begins execution of a new set of spooling tasks.
         /// </summary>
         public static void Spool(
-            QueryTaskGroupState groupState, PartitionedStream<TOutput, TKey> partitions,
-            bool[] consumerWaiting, bool[] producerWaiting, bool[] producerDone,
-            Queue<Pair<TKey, TOutput>>[] buffers, object[] bufferLocks,
-            TaskScheduler taskScheduler, bool autoBuffered)
+            QueryTaskGroupState groupState,
+            PartitionedStream<TOutput, TKey> partitions,
+            bool[] consumerWaiting,
+            bool[] producerWaiting,
+            bool[] producerDone,
+            Queue<Pair<TKey, TOutput>>[] buffers,
+            object[] bufferLocks,
+            TaskScheduler taskScheduler,
+            bool autoBuffered
+        )
         {
             Debug.Assert(groupState != null);
             Debug.Assert(partitions != null);
@@ -159,24 +173,33 @@ namespace System.Linq.Parallel
             // Initialize the buffers and buffer locks.
             for (int i = 0; i < degreeOfParallelism; i++)
             {
-                buffers[i] = new Queue<Pair<TKey, TOutput>>(OrderPreservingPipeliningMergeHelper<TOutput, TKey>.INITIAL_BUFFER_SIZE);
+                buffers[i] = new Queue<Pair<TKey, TOutput>>(
+                    OrderPreservingPipeliningMergeHelper<TOutput, TKey>.INITIAL_BUFFER_SIZE
+                );
                 bufferLocks[i] = new object();
             }
 
             // Ensure all tasks in this query are parented under a common root. Because this
             // is a pipelined query, we detach it from the parent (to avoid blocking the calling
             // thread), and run the query on a separate thread.
-            Task rootTask = new Task(
-                () =>
+            Task rootTask = new Task(() =>
+            {
+                for (int i = 0; i < degreeOfParallelism; i++)
                 {
-                    for (int i = 0; i < degreeOfParallelism; i++)
-                    {
-                        QueryTask asyncTask = new OrderPreservingPipeliningSpoolingTask<TOutput, TKey>(
-                            partitions[i], groupState, consumerWaiting, producerWaiting,
-                            producerDone, i, buffers, bufferLocks[i], autoBuffered);
-                        asyncTask.RunAsynchronously(taskScheduler);
-                    }
-                });
+                    QueryTask asyncTask = new OrderPreservingPipeliningSpoolingTask<TOutput, TKey>(
+                        partitions[i],
+                        groupState,
+                        consumerWaiting,
+                        producerWaiting,
+                        producerDone,
+                        i,
+                        buffers,
+                        bufferLocks[i],
+                        autoBuffered
+                    );
+                    asyncTask.RunAsynchronously(taskScheduler);
+                }
+            });
 
             // Begin the query on the calling thread.
             groupState.QueryBegin(rootTask);

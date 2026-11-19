@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,69 +26,75 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.IO;
 using System.Reflection;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI {
+namespace MonoCasTests.System.Web.UI
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class Html32TextWriterCas : AspNetHostingMinimal
+    {
+        private StringWriter sw;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class Html32TextWriterCas : AspNetHostingMinimal {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            sw = new StringWriter();
+        }
 
-		private StringWriter sw;
+        private void Deny_Unrestricted(Html32TextWriter htw)
+        {
+            htw.ShouldPerformDivTableSubstitution = true;
+            Assert.IsTrue(
+                htw.ShouldPerformDivTableSubstitution,
+                "ShouldPerformDivTableSubstitution"
+            );
+            htw.SupportsBold = true;
+            Assert.IsTrue(htw.SupportsBold, "SupportsBold");
+            htw.SupportsItalic = true;
+            Assert.IsTrue(htw.SupportsItalic, "SupportsItalic");
+            htw.RenderBeginTag(HtmlTextWriterTag.Table);
+            htw.RenderBeginTag("<tr>");
+            htw.RenderEndTag();
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			sw = new StringWriter ();
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor1_Deny_Unrestricted()
+        {
+            Html32TextWriter htw = new Html32TextWriter(sw);
+            Deny_Unrestricted(htw);
+        }
 
-		private void Deny_Unrestricted (Html32TextWriter htw)
-		{
-			htw.ShouldPerformDivTableSubstitution = true;
-			Assert.IsTrue (htw.ShouldPerformDivTableSubstitution, "ShouldPerformDivTableSubstitution");
-			htw.SupportsBold = true;
-			Assert.IsTrue (htw.SupportsBold, "SupportsBold");
-			htw.SupportsItalic = true;
-			Assert.IsTrue (htw.SupportsItalic, "SupportsItalic");
-			htw.RenderBeginTag (HtmlTextWriterTag.Table);
-			htw.RenderBeginTag ("<tr>");
-			htw.RenderEndTag ();
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor2_Deny_Unrestricted()
+        {
+            Html32TextWriter htw = new Html32TextWriter(sw, String.Empty);
+            Deny_Unrestricted(htw);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Ctor1_Deny_Unrestricted ()
-		{
-			Html32TextWriter htw = new Html32TextWriter (sw);
-			Deny_Unrestricted (htw);
-		}
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Ctor2_Deny_Unrestricted ()
-		{
-			Html32TextWriter htw = new Html32TextWriter (sw, String.Empty);
-			Deny_Unrestricted (htw);
-		}
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
+        {
+            ConstructorInfo ci = this.Type.GetConstructor(new Type[1] { typeof(TextWriter) });
+            Assert.IsNotNull(ci, ".ctor(TextWriter)");
+            return ci.Invoke(new object[1] { sw });
+        }
 
-		// LinkDemand
-
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (TextWriter) });
-			Assert.IsNotNull (ci, ".ctor(TextWriter)");
-			return ci.Invoke (new object[1] { sw });
-		}
-
-		public override Type Type {
-			get { return typeof (Html32TextWriter); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(Html32TextWriter); }
+        }
+    }
 }

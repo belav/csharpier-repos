@@ -29,12 +29,10 @@ namespace Newtonsoft.Json.Tests.TestObjects
     [JsonObject(MemberSerialization.OptIn)]
     public class Component
     {
-        [JsonIgnore] // Ignore circular reference 
+        [JsonIgnore] // Ignore circular reference
         public GameObject GameObject { get; set; }
 
-        public Component()
-        {
-        }
+        public Component() { }
     }
 #endif
 }

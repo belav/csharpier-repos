@@ -186,8 +186,8 @@ public class ResponseCompressionProvider : IResponseCompressionProvider
     /// <inheritdoc />
     public virtual bool ShouldCompressResponse(HttpContext context)
     {
-        var httpsMode =
-            context.Features.Get<IHttpsCompressionFeature>()?.Mode ?? HttpsCompressionMode.Default;
+        var httpsMode = context.Features.Get<IHttpsCompressionFeature>()?.Mode
+            ?? HttpsCompressionMode.Default;
 
         // Check if the app has opted into or out of compression over HTTPS
         if (
@@ -230,8 +230,7 @@ public class ResponseCompressionProvider : IResponseCompressionProvider
             mimeType = mimeType.Trim();
         }
 
-        var shouldCompress =
-            ShouldCompressExact(mimeType) //check exact match type/subtype
+        var shouldCompress = ShouldCompressExact(mimeType) //check exact match type/subtype
             ?? ShouldCompressPartial(mimeType) //check partial match type/*
             ?? _mimeTypes.Contains("*/*"); //check wildcard */*
 

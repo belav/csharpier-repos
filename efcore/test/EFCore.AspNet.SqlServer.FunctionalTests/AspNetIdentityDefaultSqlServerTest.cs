@@ -7,19 +7,14 @@ public class AspNetIdentityDefaultSqlServerTest
     : AspNetIdentityDefaultTestBase<AspNetIdentityDefaultSqlServerTest.AspNetDefaultIdentitySqlServerFixture>
 {
     public AspNetIdentityDefaultSqlServerTest(AspNetDefaultIdentitySqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class AspNetDefaultIdentitySqlServerFixture : AspNetIdentityFixtureBase
     {
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
-        protected override string StoreName
-            => "AspNetDefaultIdentity";
+        protected override string StoreName => "AspNetDefaultIdentity";
     }
 }

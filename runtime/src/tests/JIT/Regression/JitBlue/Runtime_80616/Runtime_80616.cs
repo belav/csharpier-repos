@@ -23,7 +23,5 @@ public class Runtime_80616
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Expose(ref Vector<uint> f)
-    {
-    }
+    private static void Expose(ref Vector<uint> f) { }
 }

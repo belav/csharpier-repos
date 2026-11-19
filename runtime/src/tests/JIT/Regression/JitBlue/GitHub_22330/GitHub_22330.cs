@@ -21,7 +21,7 @@ public class X
         // Bug is here passing params to G: f gets trashed by g.
         return G(a, b, z, d, e, f, g);
     }
-    
+
     // loop here is just to make this method too big to inline
     // if we set [noinline] to effect this, we won't tail call it either.
     //

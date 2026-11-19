@@ -17,6 +17,7 @@ internal static partial class Interop
             IntPtr pvParameters,
             out IntPtr phCryptProvOrNCryptKey,
             out CryptKeySpec pdwKeySpec,
-            [MarshalAs(UnmanagedType.Bool)] out bool pfCallerFreeProvOrNCryptKey);
+            [MarshalAs(UnmanagedType.Bool)] out bool pfCallerFreeProvOrNCryptKey
+        );
     }
 }

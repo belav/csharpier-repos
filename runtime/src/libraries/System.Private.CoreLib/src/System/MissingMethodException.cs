@@ -11,7 +11,9 @@ namespace System
     /// The exception that is thrown when there is an attempt to dynamically access a method that does not exist.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class MissingMethodException : MissingMemberException
     {
         public MissingMethodException()
@@ -39,16 +41,18 @@ namespace System
             HResult = HResults.COR_E_MISSINGMETHOD;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected MissingMethodException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
 
         public override string Message =>
-            ClassName == null ?
-                base.Message :
-                SR.Format(SR.MissingMethod_Name, ClassName, MemberName);
+            ClassName == null
+                ? base.Message
+                : SR.Format(SR.MissingMethod_Name, ClassName, MemberName);
     }
 }

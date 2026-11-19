@@ -9,7 +9,7 @@
 /* The Computer Language Benchmarks Game
    http://benchmarksgame.alioth.debian.org/
  
-   contributed by Isaac Gouy 
+   contributed by Isaac Gouy
    modified by Josh Goldfoot, based on the Java version by The Anh Tran
 */
 
@@ -65,7 +65,8 @@ namespace BenchmarksGame
                 ap[i] = new Approximate(u, v, tmp, r1, r2, barrier);
             }
 
-            double vBv = 0, vv = 0;
+            double vBv = 0,
+                vv = 0;
             for (int i = 0; i < nthread; i++)
             {
                 ap[i].t.Wait();
@@ -75,7 +76,6 @@ namespace BenchmarksGame
 
             return Math.Sqrt(vBv / vv);
         }
-
     }
 
     public class Approximate
@@ -87,8 +87,10 @@ namespace BenchmarksGame
         private double[] _v;
         private double[] _tmp;
 
-        private int range_begin, range_end;
-        public double m_vBv, m_vv;
+        private int range_begin,
+            range_end;
+        public double m_vBv,
+            m_vv;
 
         public Approximate(double[] u, double[] v, double[] tmp, int rbegin, int rend, Barrier b)
         {
@@ -154,7 +156,6 @@ namespace BenchmarksGame
         /* multiply vector v by matrix A and then by matrix A transposed */
         private void MultiplyAtAv(double[] v, double[] tmp, double[] AtAv)
         {
-
             MultiplyAv(v, tmp);
             // all thread must syn at completion
             barrier.SignalAndWait();
@@ -162,6 +163,5 @@ namespace BenchmarksGame
             // all thread must syn at completion
             barrier.SignalAndWait();
         }
-
     }
 }

@@ -138,7 +138,11 @@ public class AndroidAppBuilderTask : Task
         apkBuilder.IsLibraryMode = IsLibraryMode;
         apkBuilder.NativeDependencies = NativeDependencies;
         apkBuilder.ExtraLinkerArguments = ExtraLinkerArguments;
-        (ApkBundlePath, ApkPackageId) = apkBuilder.BuildApk(RuntimeIdentifier, MainLibraryFileName, MonoRuntimeHeaders);
+        (ApkBundlePath, ApkPackageId) = apkBuilder.BuildApk(
+            RuntimeIdentifier,
+            MainLibraryFileName,
+            MonoRuntimeHeaders
+        );
 
         return true;
     }

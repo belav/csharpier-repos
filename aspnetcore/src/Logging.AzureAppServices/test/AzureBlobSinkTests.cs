@@ -34,13 +34,8 @@ public class AzureBlobSinkTests
 
         for (int i = 0; i < 5; i++)
         {
-            logger.Log(
-                _timestampOne,
-                LogLevel.Information,
-                0,
-                "Text " + i,
-                null,
-                (state, ex) => state
+            logger.Log(_timestampOne, LogLevel.Information, 0, "Text " + i, null, (state, ex) =>
+                state
             );
         }
 

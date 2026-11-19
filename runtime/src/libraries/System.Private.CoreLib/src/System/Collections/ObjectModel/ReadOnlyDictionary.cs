@@ -11,13 +11,20 @@ namespace System.Collections.ObjectModel
     [Serializable]
     [DebuggerTypeProxy(typeof(IDictionaryDebugView<,>))]
     [DebuggerDisplay("Count = {Count}")]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-    public class ReadOnlyDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary, IReadOnlyDictionary<TKey, TValue> where TKey : notnull
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
+    public class ReadOnlyDictionary<TKey, TValue>
+        : IDictionary<TKey, TValue>,
+            IDictionary,
+            IReadOnlyDictionary<TKey, TValue>
+        where TKey : notnull
     {
         private readonly IDictionary<TKey, TValue> m_dictionary; // Do not rename (binary serialization)
 
         [NonSerialized]
         private KeyCollection? _keys;
+
         [NonSerialized]
         private ValueCollection? _values;
 
@@ -31,7 +38,8 @@ namespace System.Collections.ObjectModel
         /// <summary>Gets an empty <see cref="ReadOnlyDictionary{TKey, TValue}"/>.</summary>
         /// <value>An empty <see cref="ReadOnlyDictionary{TKey, TValue}"/>.</value>
         /// <remarks>The returned instance is immutable and will always be empty.</remarks>
-        public static ReadOnlyDictionary<TKey, TValue> Empty { get; } = new ReadOnlyDictionary<TKey, TValue>(new Dictionary<TKey, TValue>());
+        public static ReadOnlyDictionary<TKey, TValue> Empty { get; } =
+            new ReadOnlyDictionary<TKey, TValue>(new Dictionary<TKey, TValue>());
 
         protected IDictionary<TKey, TValue> Dictionary => m_dictionary;
 
@@ -75,7 +83,10 @@ namespace System.Collections.ObjectModel
             return m_dictionary.Contains(item);
         }
 
-        void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
+        void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(
+            KeyValuePair<TKey, TValue>[] array,
+            int arrayIndex
+        )
         {
             m_dictionary.CopyTo(array, arrayIndex);
         }
@@ -194,7 +205,10 @@ namespace System.Collections.ObjectModel
                     object[]? objects = array as object[];
                     if (objects == null)
                     {
-                        throw new ArgumentException(SR.Argument_IncompatibleArrayType, nameof(array));
+                        throw new ArgumentException(
+                            SR.Argument_IncompatibleArrayType,
+                            nameof(array)
+                        );
                     }
 
                     try
@@ -206,7 +220,10 @@ namespace System.Collections.ObjectModel
                     }
                     catch (ArrayTypeMismatchException)
                     {
-                        throw new ArgumentException(SR.Argument_IncompatibleArrayType, nameof(array));
+                        throw new ArgumentException(
+                            SR.Argument_IncompatibleArrayType,
+                            nameof(array)
+                        );
                     }
                 }
             }
@@ -249,7 +266,10 @@ namespace System.Collections.ObjectModel
 
         [DebuggerTypeProxy(typeof(ICollectionDebugView<>))]
         [DebuggerDisplay("Count = {Count}")]
-        public sealed class KeyCollection : ICollection<TKey>, ICollection, IReadOnlyCollection<TKey>
+        public sealed class KeyCollection
+            : ICollection<TKey>,
+                ICollection,
+                IReadOnlyCollection<TKey>
         {
             private readonly ICollection<TKey> _collection;
 
@@ -305,7 +325,10 @@ namespace System.Collections.ObjectModel
 
         [DebuggerTypeProxy(typeof(ICollectionDebugView<>))]
         [DebuggerDisplay("Count = {Count}")]
-        public sealed class ValueCollection : ICollection<TValue>, ICollection, IReadOnlyCollection<TValue>
+        public sealed class ValueCollection
+            : ICollection<TValue>,
+                ICollection,
+                IReadOnlyCollection<TValue>
         {
             private readonly ICollection<TValue> _collection;
 
@@ -341,6 +364,7 @@ namespace System.Collections.ObjectModel
             {
                 throw new NotSupportedException(SR.NotSupported_ReadOnlyCollection);
             }
+
             public IEnumerator<TValue> GetEnumerator() => _collection.GetEnumerator();
 
             IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_collection).GetEnumerator();

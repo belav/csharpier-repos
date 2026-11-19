@@ -17,33 +17,15 @@ namespace Microsoft.Build.Tasks.Xaml
         List<string> generatedFiles;
         List<string> generatedResourceFiles;
 
-        internal BuildExtensionContext()
-        {
-        }
+        internal BuildExtensionContext() { }
 
-        public string AssemblyName
-        { 
-            get; 
-            internal set; 
-        }
+        public string AssemblyName { get; internal set; }
 
-        public bool IsInProcessXamlMarkupCompile
-        { 
-            get; 
-            internal set; 
-        }
+        public bool IsInProcessXamlMarkupCompile { get; internal set; }
 
-        public string Language
-        { 
-            get; 
-            internal set; 
-        }
+        public string Language { get; internal set; }
 
-        public string OutputPath
-        { 
-            get; 
-            internal set; 
-        }
+        public string OutputPath { get; internal set; }
 
         public ReadOnlyCollection<string> References
         {
@@ -57,11 +39,7 @@ namespace Microsoft.Build.Tasks.Xaml
             }
         }
 
-        public string RootNamespace
-        { 
-            get; 
-            internal set; 
-        }
+        public string RootNamespace { get; internal set; }
 
         public ReadOnlyCollection<string> SourceCodeFiles
         {
@@ -75,19 +53,9 @@ namespace Microsoft.Build.Tasks.Xaml
             }
         }
 
-       
+        public string LocalAssembly { get; internal set; }
 
-        public string LocalAssembly
-        {
-            get;
-            internal set;
-        }
-
-        public TaskLoggingHelper XamlBuildLogger
-        {
-            get;
-            internal set;
-        }
+        public TaskLoggingHelper XamlBuildLogger { get; internal set; }
 
         public ReadOnlyCollection<string> GeneratedFiles
         {
@@ -119,7 +87,7 @@ namespace Microsoft.Build.Tasks.Xaml
             {
                 this.generatedFiles = new List<string>();
             }
-            this.generatedFiles.Add(fileName);         
+            this.generatedFiles.Add(fileName);
         }
 
         public void AddGeneratedResourceFile(string fileName)

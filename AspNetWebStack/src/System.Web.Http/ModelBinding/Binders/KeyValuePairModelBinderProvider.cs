@@ -11,9 +11,10 @@ namespace System.Web.Http.ModelBinding.Binders
         public override IModelBinder GetBinder(HttpConfiguration configuration, Type modelType)
         {
             return ModelBindingHelper.GetPossibleBinderInstance(
-                closedModelType: modelType, 
-                openModelType: typeof(KeyValuePair<,>), 
-                openBinderType: typeof(KeyValuePairModelBinder<,>));
+                closedModelType: modelType,
+                openModelType: typeof(KeyValuePair<,>),
+                openBinderType: typeof(KeyValuePairModelBinder<,>)
+            );
         }
     }
 }

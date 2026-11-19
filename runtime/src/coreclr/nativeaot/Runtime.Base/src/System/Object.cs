@@ -3,7 +3,6 @@
 
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 using Internal.Runtime;
 
 namespace System
@@ -21,18 +20,14 @@ namespace System
 #pragma warning restore
 
         // Creates a new instance of an Object.
-        public Object()
-        {
-        }
+        public Object() { }
 
         // Allow an object to free resources before the object is reclaimed by the GC.
         // CONTRACT with runtime: This method's virtual slot number is hardcoded in the binder. It is an
         // implementation detail where it winds up at runtime.
         // **** Do not add any virtual methods in this class ahead of this ****
 
-        ~Object()
-        {
-        }
+        ~Object() { }
 
         internal MethodTable* MethodTable
         {

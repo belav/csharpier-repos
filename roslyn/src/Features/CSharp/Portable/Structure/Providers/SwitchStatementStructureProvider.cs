@@ -10,20 +10,30 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal class SwitchStatementStructureProvider : AbstractSyntaxNodeStructureProvider<SwitchStatementSyntax>
+    internal class SwitchStatementStructureProvider
+        : AbstractSyntaxNodeStructureProvider<SwitchStatementSyntax>
     {
         protected override void CollectBlockSpans(
             SyntaxToken previousToken,
             SwitchStatementSyntax node,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            spans.Add(new BlockSpan(
-                isCollapsible: true,
-                textSpan: TextSpan.FromBounds(node.CloseParenToken != default ? node.CloseParenToken.Span.End : node.Expression.Span.End, node.CloseBraceToken.Span.End),
-                hintSpan: node.Span,
-                type: BlockTypes.Conditional));
+            spans.Add(
+                new BlockSpan(
+                    isCollapsible: true,
+                    textSpan: TextSpan.FromBounds(
+                        node.CloseParenToken != default
+                            ? node.CloseParenToken.Span.End
+                            : node.Expression.Span.End,
+                        node.CloseBraceToken.Span.End
+                    ),
+                    hintSpan: node.Span,
+                    type: BlockTypes.Conditional
+                )
+            );
 
             foreach (var section in node.Sections)
             {
@@ -32,11 +42,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                     var start = section.Labels.Last().ColonToken.Span.End;
                     var end = section.Statements.Last().Span.End;
 
-                    spans.Add(new BlockSpan(
-                        isCollapsible: true,
-                        textSpan: TextSpan.FromBounds(start, end),
-                        hintSpan: section.Span,
-                        type: BlockTypes.Statement));
+                    spans.Add(
+                        new BlockSpan(
+                            isCollapsible: true,
+                            textSpan: TextSpan.FromBounds(start, end),
+                            hintSpan: section.Span,
+                            type: BlockTypes.Statement
+                        )
+                    );
                 }
             }
         }

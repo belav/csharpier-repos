@@ -56,16 +56,12 @@ public class RouteViewTest
         var routeData = new RouteData(typeof(ComponentWithLayout), routeParams);
 
         // Act
-        _renderer.Dispatcher.InvokeAsync(
-            () =>
-                _routeViewComponent.SetParametersAsync(
-                    ParameterView.FromDictionary(
-                        new Dictionary<string, object>
-                        {
-                            { nameof(RouteView.RouteData), routeData },
-                        }
-                    )
+        _renderer.Dispatcher.InvokeAsync(() =>
+            _routeViewComponent.SetParametersAsync(
+                ParameterView.FromDictionary(
+                    new Dictionary<string, object> { { nameof(RouteView.RouteData), routeData } }
                 )
+            )
         );
 
         // Assert: RouteView renders LayoutView
@@ -121,14 +117,8 @@ public class RouteViewTest
         // Assert: page itself is rendered, having received parameters from the original route data
         var pageComponentId = batch.GetComponentFrames<ComponentWithLayout>().Single().ComponentId;
         var pageFrames = _renderer.GetCurrentRenderTreeFrames(pageComponentId).AsEnumerable();
-        Assert.Collection(
-            pageFrames,
-            frame =>
-                AssertFrame.Text(
-                    frame,
-                    "Hello from the page with message 'Test message'",
-                    sequence: 0
-                )
+        Assert.Collection(pageFrames, frame =>
+            AssertFrame.Text(frame, "Hello from the page with message 'Test message'", sequence: 0)
         );
 
         // Assert: nothing else was rendered
@@ -143,17 +133,16 @@ public class RouteViewTest
         var routeData = new RouteData(typeof(ComponentWithoutLayout), routeParams);
 
         // Act
-        _renderer.Dispatcher.InvokeAsync(
-            () =>
-                _routeViewComponent.SetParametersAsync(
-                    ParameterView.FromDictionary(
-                        new Dictionary<string, object>
-                        {
-                            { nameof(RouteView.RouteData), routeData },
-                            { nameof(RouteView.DefaultLayout), typeof(OtherLayout) },
-                        }
-                    )
+        _renderer.Dispatcher.InvokeAsync(() =>
+            _routeViewComponent.SetParametersAsync(
+                ParameterView.FromDictionary(
+                    new Dictionary<string, object>
+                    {
+                        { nameof(RouteView.RouteData), routeData },
+                        { nameof(RouteView.DefaultLayout), typeof(OtherLayout) },
+                    }
                 )
+            )
         );
 
         // Assert: uses default layout
@@ -184,16 +173,12 @@ public class RouteViewTest
         var routeData = new RouteData(typeof(ComponentWithoutLayout), routeParams);
 
         // Act
-        _renderer.Dispatcher.InvokeAsync(
-            () =>
-                _routeViewComponent.SetParametersAsync(
-                    ParameterView.FromDictionary(
-                        new Dictionary<string, object>
-                        {
-                            { nameof(RouteView.RouteData), routeData },
-                        }
-                    )
+        _renderer.Dispatcher.InvokeAsync(() =>
+            _routeViewComponent.SetParametersAsync(
+                ParameterView.FromDictionary(
+                    new Dictionary<string, object> { { nameof(RouteView.RouteData), routeData } }
                 )
+            )
         );
 
         // Assert: uses no layout
@@ -219,17 +204,16 @@ public class RouteViewTest
         var routeData = new RouteData(typeof(ComponentWithLayout), routeParams);
 
         // Act
-        _renderer.Dispatcher.InvokeAsync(
-            () =>
-                _routeViewComponent.SetParametersAsync(
-                    ParameterView.FromDictionary(
-                        new Dictionary<string, object>
-                        {
-                            { nameof(RouteView.RouteData), routeData },
-                            { nameof(RouteView.DefaultLayout), typeof(OtherLayout) },
-                        }
-                    )
+        _renderer.Dispatcher.InvokeAsync(() =>
+            _routeViewComponent.SetParametersAsync(
+                ParameterView.FromDictionary(
+                    new Dictionary<string, object>
+                    {
+                        { nameof(RouteView.RouteData), routeData },
+                        { nameof(RouteView.DefaultLayout), typeof(OtherLayout) },
+                    }
                 )
+            )
         );
 
         // Assert: uses layout specified by page

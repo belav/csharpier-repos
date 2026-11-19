@@ -9,7 +9,6 @@ namespace System.Activities.Debugger
     public interface IDebuggableWorkflowTree
     {
         // Return the root of the workflow tree.
-        Activity GetWorkflowRoot(); 
+        Activity GetWorkflowRoot();
     }
-
 }

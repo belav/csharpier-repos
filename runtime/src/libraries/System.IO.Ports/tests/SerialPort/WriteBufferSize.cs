@@ -19,31 +19,43 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void WriteBufferSize_Default()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 Debug.WriteLine("Verifying default WriteBufferSize before Open");
                 serPortProp.SetAllPropertiesToDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
                 serPortProp.VerifyPropertiesAndPrint(com1);
 
                 Debug.WriteLine("Verifying default WriteBufferSize after Open");
                 com1.Open();
                 serPortProp = new SerialPortProperties();
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
                 serPortProp.VerifyPropertiesAndPrint(com1);
 
                 Debug.WriteLine("Verifying default WriteBufferSize after Close");
                 com1.Close();
                 serPortProp = new SerialPortProperties();
                 serPortProp.SetAllPropertiesToDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
                 serPortProp.VerifyPropertiesAndPrint(com1);
             }
         }
-
 
         [ConditionalFact(nameof(HasNullModem))]
         public void WriteBufferSize_AfterOpen()
@@ -54,19 +66,31 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void WriteBufferSize_NEG1()
         {
-            VerifyException(-1, typeof(ArgumentOutOfRangeException), typeof(ArgumentOutOfRangeException));
+            VerifyException(
+                -1,
+                typeof(ArgumentOutOfRangeException),
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void WriteBufferSize_Int32MinValue()
         {
-            VerifyException(int.MinValue, typeof(ArgumentOutOfRangeException), typeof(ArgumentOutOfRangeException));
+            VerifyException(
+                int.MinValue,
+                typeof(ArgumentOutOfRangeException),
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void WriteBufferSize_0()
         {
-            VerifyException(0, typeof(ArgumentOutOfRangeException), typeof(ArgumentOutOfRangeException));
+            VerifyException(
+                0,
+                typeof(ArgumentOutOfRangeException),
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
@@ -103,7 +127,12 @@ namespace System.IO.Ports.Tests
             using (var com = new SerialPort())
             {
                 int bufferSize = com.WriteBufferSize * 2 + 1;
-                VerifyException(bufferSize, typeof(IOException), typeof(InvalidOperationException), true);
+                VerifyException(
+                    bufferSize,
+                    typeof(IOException),
+                    typeof(InvalidOperationException),
+                    true
+                );
             }
         }
 
@@ -116,7 +145,6 @@ namespace System.IO.Ports.Tests
                 VerifyWriteBufferSize(com.WriteBufferSize * 2);
             }
         }
-
 
         [ConditionalFact(nameof(HasNullModem))]
         public void WriteBufferSize_Rnd()
@@ -138,20 +166,42 @@ namespace System.IO.Ports.Tests
         #endregion
 
         #region Verification for Test Cases
-        private void VerifyException(int newWriteBufferSize, Type expectedExceptionBeforeOpen, Type expectedExceptionAfterOpen)
+        private void VerifyException(
+            int newWriteBufferSize,
+            Type expectedExceptionBeforeOpen,
+            Type expectedExceptionAfterOpen
+        )
         {
-            VerifyException(newWriteBufferSize, expectedExceptionBeforeOpen, expectedExceptionAfterOpen, false);
+            VerifyException(
+                newWriteBufferSize,
+                expectedExceptionBeforeOpen,
+                expectedExceptionAfterOpen,
+                false
+            );
         }
 
-        private void VerifyException(int newWriteBufferSize, Type expectedExceptionBeforeOpen, Type expectedExceptionAfterOpen, bool throwAtOpen)
+        private void VerifyException(
+            int newWriteBufferSize,
+            Type expectedExceptionBeforeOpen,
+            Type expectedExceptionAfterOpen,
+            bool throwAtOpen
+        )
         {
             VerifyExceptionBeforeOpen(newWriteBufferSize, expectedExceptionBeforeOpen, throwAtOpen);
             VerifyExceptionAfterOpen(newWriteBufferSize, expectedExceptionAfterOpen);
         }
 
-        private void VerifyExceptionBeforeOpen(int newWriteBufferSize, Type expectedException, bool throwAtOpen)
+        private void VerifyExceptionBeforeOpen(
+            int newWriteBufferSize,
+            Type expectedException,
+            bool throwAtOpen
+        )
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 try
                 {
@@ -161,18 +211,29 @@ namespace System.IO.Ports.Tests
 
                     if (null != expectedException)
                     {
-                        Fail("Err_707278ahpa!!! expected exception {0} and nothing was thrown", expectedException);
+                        Fail(
+                            "Err_707278ahpa!!! expected exception {0} and nothing was thrown",
+                            expectedException
+                        );
                     }
                 }
                 catch (Exception e)
                 {
                     if (null == expectedException)
                     {
-                        Fail("Err_201890ioyun Expected no exception to be thrown and following was thrown \n{0}", e);
+                        Fail(
+                            "Err_201890ioyun Expected no exception to be thrown and following was thrown \n{0}",
+                            e
+                        );
                     }
                     else if (e.GetType() != expectedException)
                     {
-                        Fail("Err_545498ahpba!!! expected exception {0} and {1} was thrown: {2}", expectedException, e.GetType(), e);
+                        Fail(
+                            "Err_545498ahpba!!! expected exception {0} and {1} was thrown: {2}",
+                            expectedException,
+                            e.GetType(),
+                            e
+                        );
                     }
                 }
             }
@@ -180,7 +241,11 @@ namespace System.IO.Ports.Tests
 
         private void VerifyExceptionAfterOpen(int newWriteBufferSize, Type expectedException)
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 int originalWriteBufferSize = com.WriteBufferSize;
 
@@ -188,19 +253,34 @@ namespace System.IO.Ports.Tests
                 try
                 {
                     com.WriteBufferSize = newWriteBufferSize;
-                    Fail("Err_561567anhbp!!! expected exception {0} and nothing was thrown", expectedException);
+                    Fail(
+                        "Err_561567anhbp!!! expected exception {0} and nothing was thrown",
+                        expectedException
+                    );
                 }
                 catch (Exception e)
                 {
                     if (e.GetType() != expectedException)
                     {
-                        Fail("Err_21288ajpbam!!! expected exception {0} and {1} was thrown", expectedException, e.GetType());
+                        Fail(
+                            "Err_21288ajpbam!!! expected exception {0} and {1} was thrown",
+                            expectedException,
+                            e.GetType()
+                        );
                     }
                     else if (originalWriteBufferSize != com.WriteBufferSize)
                     {
-                        Fail("Err_454987ahbopa!!! expected WriteBufferSize={0} and actual={1}", originalWriteBufferSize, com.WriteBufferSize);
+                        Fail(
+                            "Err_454987ahbopa!!! expected WriteBufferSize={0} and actual={1}",
+                            originalWriteBufferSize,
+                            com.WriteBufferSize
+                        );
                     }
-                    else if (TCSupport.SufficientHardwareRequirements(TCSupport.SerialPortRequirements.NullModem))
+                    else if (
+                        TCSupport.SufficientHardwareRequirements(
+                            TCSupport.SerialPortRequirements.NullModem
+                        )
+                    )
                     {
                         VerifyWriteBufferSize(com, originalWriteBufferSize);
                     }
@@ -210,13 +290,20 @@ namespace System.IO.Ports.Tests
 
         private void VerifyWriteBufferSize(int newWriteBufferSize)
         {
-            Debug.WriteLine("Verifying setting WriteBufferSize={0} BEFORE a call to Open() has been made", newWriteBufferSize);
+            Debug.WriteLine(
+                "Verifying setting WriteBufferSize={0} BEFORE a call to Open() has been made",
+                newWriteBufferSize
+            );
             VerifyWriteBufferSizeBeforeOpen(newWriteBufferSize);
         }
 
         private void VerifyWriteBufferSizeBeforeOpen(int newWriteBufferSize)
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 Debug.WriteLine("Verifying setting WriteBufferSize to {0}", newWriteBufferSize);
 
@@ -229,13 +316,18 @@ namespace System.IO.Ports.Tests
 
         private void VerifyWriteBufferSize(SerialPort com1, int expectedWriteBufferSize)
         {
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
-                byte[] xmitBytes = new byte[Math.Max(expectedWriteBufferSize, com1.WriteBufferSize)];
+                byte[] xmitBytes = new byte[
+                    Math.Max(expectedWriteBufferSize, com1.WriteBufferSize)
+                ];
                 byte[] rcvBytes = new byte[xmitBytes.Length];
                 SerialPortProperties serPortProp = new SerialPortProperties();
                 Random rndGen = new Random(-55);
-
 
                 for (int i = 0; i < xmitBytes.Length; i++)
                 {
@@ -243,7 +335,10 @@ namespace System.IO.Ports.Tests
                 }
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
                 com2.ReadBufferSize = expectedWriteBufferSize;
                 serPortProp.SetProperty("WriteBufferSize", expectedWriteBufferSize);
 

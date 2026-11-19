@@ -155,9 +155,8 @@ public class ClientHandler : HttpMessageHandler
 
                     if (canHaveBody)
                     {
-                        req.Body = new AsyncStreamWrapper(
-                            reader.AsStream(),
-                            () => contextBuilder.AllowSynchronousIO
+                        req.Body = new AsyncStreamWrapper(reader.AsStream(), () =>
+                            contextBuilder.AllowSynchronousIO
                         );
                     }
                 }

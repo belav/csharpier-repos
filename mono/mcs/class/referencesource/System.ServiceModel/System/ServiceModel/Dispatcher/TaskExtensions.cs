@@ -26,9 +26,14 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (taskAsAsyncResultMethodInfo == null)
                 {
-                    taskAsAsyncResultMethodInfo = typeof(System.Runtime.TaskExtensions).GetMethods().Where(m =>
-                                                   m.IsGenericMethod && m.Name == TaskAsAsyncResultMethodName).First();
-                    Fx.Assert(taskAsAsyncResultMethodInfo != null, "taskAsAsyncResultMethodInfo should not be null.");
+                    taskAsAsyncResultMethodInfo = typeof(System.Runtime.TaskExtensions)
+                        .GetMethods()
+                        .Where(m => m.IsGenericMethod && m.Name == TaskAsAsyncResultMethodName)
+                        .First();
+                    Fx.Assert(
+                        taskAsAsyncResultMethodInfo != null,
+                        "taskAsAsyncResultMethodInfo should not be null."
+                    );
                 }
 
                 return taskAsAsyncResultMethodInfo;

@@ -40,18 +40,14 @@ public class AuthorizeViewTest
         Assert.Empty(diff.Edits);
 
         // Assert: The IAuthorizationService was given expected criteria
-        Assert.Collection(
-            authorizationService.AuthorizeCalls,
-            call =>
-            {
-                Assert.Null(call.user.Identity);
-                Assert.Null(call.resource);
-                Assert.Collection(
-                    call.requirements,
-                    req => Assert.IsType<DenyAnonymousAuthorizationRequirement>(req)
-                );
-            }
-        );
+        Assert.Collection(authorizationService.AuthorizeCalls, call =>
+        {
+            Assert.Null(call.user.Identity);
+            Assert.Null(call.resource);
+            Assert.Collection(call.requirements, req =>
+                Assert.IsType<DenyAnonymousAuthorizationRequirement>(req)
+            );
+        });
     }
 
     [Fact]
@@ -75,31 +71,24 @@ public class AuthorizeViewTest
 
         // Assert
         var diff = renderer.Batches.Single().GetComponentDiffs<AuthorizeView>().Single();
-        Assert.Collection(
-            diff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Text(
-                    renderer.Batches.Single().ReferenceFrames[edit.ReferenceFrameIndex],
-                    "You are not authorized, even though we know you are Nellie"
-                );
-            }
-        );
+        Assert.Collection(diff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            AssertFrame.Text(
+                renderer.Batches.Single().ReferenceFrames[edit.ReferenceFrameIndex],
+                "You are not authorized, even though we know you are Nellie"
+            );
+        });
 
         // Assert: The IAuthorizationService was given expected criteria
-        Assert.Collection(
-            authorizationService.AuthorizeCalls,
-            call =>
-            {
-                Assert.Equal("Nellie", call.user.Identity.Name);
-                Assert.Null(call.resource);
-                Assert.Collection(
-                    call.requirements,
-                    req => Assert.IsType<DenyAnonymousAuthorizationRequirement>(req)
-                );
-            }
-        );
+        Assert.Collection(authorizationService.AuthorizeCalls, call =>
+        {
+            Assert.Equal("Nellie", call.user.Identity.Name);
+            Assert.Null(call.resource);
+            Assert.Collection(call.requirements, req =>
+                Assert.IsType<DenyAnonymousAuthorizationRequirement>(req)
+            );
+        });
     }
 
     [Fact]
@@ -121,18 +110,14 @@ public class AuthorizeViewTest
         Assert.Empty(diff.Edits);
 
         // Assert: The IAuthorizationService was given expected criteria
-        Assert.Collection(
-            authorizationService.AuthorizeCalls,
-            call =>
-            {
-                Assert.Equal("Nellie", call.user.Identity.Name);
-                Assert.Null(call.resource);
-                Assert.Collection(
-                    call.requirements,
-                    req => Assert.IsType<DenyAnonymousAuthorizationRequirement>(req)
-                );
-            }
-        );
+        Assert.Collection(authorizationService.AuthorizeCalls, call =>
+        {
+            Assert.Equal("Nellie", call.user.Identity.Name);
+            Assert.Null(call.resource);
+            Assert.Collection(call.requirements, req =>
+                Assert.IsType<DenyAnonymousAuthorizationRequirement>(req)
+            );
+        });
     }
 
     [Fact]
@@ -154,31 +139,24 @@ public class AuthorizeViewTest
 
         // Assert
         var diff = renderer.Batches.Single().GetComponentDiffs<AuthorizeView>().Single();
-        Assert.Collection(
-            diff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Text(
-                    renderer.Batches.Single().ReferenceFrames[edit.ReferenceFrameIndex],
-                    "You are authenticated as Nellie"
-                );
-            }
-        );
+        Assert.Collection(diff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            AssertFrame.Text(
+                renderer.Batches.Single().ReferenceFrames[edit.ReferenceFrameIndex],
+                "You are authenticated as Nellie"
+            );
+        });
 
         // Assert: The IAuthorizationService was given expected criteria
-        Assert.Collection(
-            authorizationService.AuthorizeCalls,
-            call =>
-            {
-                Assert.Equal("Nellie", call.user.Identity.Name);
-                Assert.Null(call.resource);
-                Assert.Collection(
-                    call.requirements,
-                    req => Assert.IsType<DenyAnonymousAuthorizationRequirement>(req)
-                );
-            }
-        );
+        Assert.Collection(authorizationService.AuthorizeCalls, call =>
+        {
+            Assert.Equal("Nellie", call.user.Identity.Name);
+            Assert.Null(call.resource);
+            Assert.Collection(call.requirements, req =>
+                Assert.IsType<DenyAnonymousAuthorizationRequirement>(req)
+            );
+        });
     }
 
     [Fact]
@@ -200,31 +178,24 @@ public class AuthorizeViewTest
 
         // Assert
         var diff = renderer.Batches.Single().GetComponentDiffs<AuthorizeView>().Single();
-        Assert.Collection(
-            diff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Text(
-                    renderer.Batches.Single().ReferenceFrames[edit.ReferenceFrameIndex],
-                    "You are authenticated as Nellie"
-                );
-            }
-        );
+        Assert.Collection(diff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            AssertFrame.Text(
+                renderer.Batches.Single().ReferenceFrames[edit.ReferenceFrameIndex],
+                "You are authenticated as Nellie"
+            );
+        });
 
         // Assert: The IAuthorizationService was given expected criteria
-        Assert.Collection(
-            authorizationService.AuthorizeCalls,
-            call =>
-            {
-                Assert.Equal("Nellie", call.user.Identity.Name);
-                Assert.Null(call.resource);
-                Assert.Collection(
-                    call.requirements,
-                    req => Assert.IsType<DenyAnonymousAuthorizationRequirement>(req)
-                );
-            }
-        );
+        Assert.Collection(authorizationService.AuthorizeCalls, call =>
+        {
+            Assert.Equal("Nellie", call.user.Identity.Name);
+            Assert.Null(call.resource);
+            Assert.Collection(call.requirements, req =>
+                Assert.IsType<DenyAnonymousAuthorizationRequirement>(req)
+            );
+        });
     }
 
     [Fact]
@@ -260,31 +231,24 @@ public class AuthorizeViewTest
         Assert.Equal(2, renderer.Batches.Count);
         var batch = renderer.Batches.Last();
         var diff = batch.DiffsByComponentId[authorizeViewComponentId].Single();
-        Assert.Collection(
-            diff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                AssertFrame.Text(
-                    batch.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "You are authenticated as Ronaldo"
-                );
-            }
-        );
+        Assert.Collection(diff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+            AssertFrame.Text(
+                batch.ReferenceFrames[edit.ReferenceFrameIndex],
+                "You are authenticated as Ronaldo"
+            );
+        });
 
         // Assert: The IAuthorizationService was given expected criteria
-        Assert.Collection(
-            authorizationService.AuthorizeCalls,
-            call =>
-            {
-                Assert.Equal("Ronaldo", call.user.Identity.Name);
-                Assert.Null(call.resource);
-                Assert.Collection(
-                    call.requirements,
-                    req => Assert.IsType<DenyAnonymousAuthorizationRequirement>(req)
-                );
-            }
-        );
+        Assert.Collection(authorizationService.AuthorizeCalls, call =>
+        {
+            Assert.Equal("Ronaldo", call.user.Identity.Name);
+            Assert.Null(call.resource);
+            Assert.Collection(call.requirements, req =>
+                Assert.IsType<DenyAnonymousAuthorizationRequirement>(req)
+            );
+        });
     }
 
     [Fact]
@@ -342,17 +306,14 @@ public class AuthorizeViewTest
         Assert.Equal(2, renderer.Batches.Count);
         var batch2 = renderer.Batches[1];
         var diff2 = batch2.DiffsByComponentId[authorizeViewComponentId].Single();
-        Assert.Collection(
-            diff2.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Text(
-                    batch2.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "You are not authorized"
-                );
-            }
-        );
+        Assert.Collection(diff2.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            AssertFrame.Text(
+                batch2.ReferenceFrames[edit.ReferenceFrameIndex],
+                "You are not authorized"
+            );
+        });
     }
 
     [Fact]
@@ -381,17 +342,11 @@ public class AuthorizeViewTest
             .Single(batch1.GetComponentFrames<AuthorizeView>())
             .ComponentId;
         var diff1 = Assert.Single(batch1.DiffsByComponentId[authorizeViewComponentId]);
-        Assert.Collection(
-            diff1.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Text(
-                    batch1.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "Auth pending..."
-                );
-            }
-        );
+        Assert.Collection(diff1.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            AssertFrame.Text(batch1.ReferenceFrames[edit.ReferenceFrameIndex], "Auth pending...");
+        });
 
         // We need to do this because the continuation from the TCS might run asynchronously
         // (This wouldn't happen under the sync context or in wasm)
@@ -403,32 +358,22 @@ public class AuthorizeViewTest
         Assert.Equal(2, renderer.Batches.Count);
         var batch2 = renderer.Batches[1];
         var diff2 = Assert.Single(batch2.DiffsByComponentId[authorizeViewComponentId]);
-        Assert.Collection(
-            diff2.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                Assert.Equal(0, edit.SiblingIndex);
-                AssertFrame.Text(
-                    batch2.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "Hello, Monsieur!"
-                );
-            }
-        );
+        Assert.Collection(diff2.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+            Assert.Equal(0, edit.SiblingIndex);
+            AssertFrame.Text(batch2.ReferenceFrames[edit.ReferenceFrameIndex], "Hello, Monsieur!");
+        });
 
         // Assert: The IAuthorizationService was given expected criteria
-        Assert.Collection(
-            authorizationService.AuthorizeCalls,
-            call =>
-            {
-                Assert.Equal("Monsieur", call.user.Identity.Name);
-                Assert.Null(call.resource);
-                Assert.Collection(
-                    call.requirements,
-                    req => Assert.IsType<DenyAnonymousAuthorizationRequirement>(req)
-                );
-            }
-        );
+        Assert.Collection(authorizationService.AuthorizeCalls, call =>
+        {
+            Assert.Equal("Monsieur", call.user.Identity.Name);
+            Assert.Null(call.resource);
+            Assert.Collection(call.requirements, req =>
+                Assert.IsType<DenyAnonymousAuthorizationRequirement>(req)
+            );
+        });
     }
 
     [Fact]
@@ -460,17 +405,11 @@ public class AuthorizeViewTest
             .Single()
             .ComponentId;
         var diff1 = batch1.DiffsByComponentId[authorizeViewComponentId].Single();
-        Assert.Collection(
-            diff1.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Text(
-                    batch1.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "Auth pending..."
-                );
-            }
-        );
+        Assert.Collection(diff1.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            AssertFrame.Text(batch1.ReferenceFrames[edit.ReferenceFrameIndex], "Auth pending...");
+        });
 
         // Act/Assert 2: Auth process completes asynchronously
         @event.Reset();
@@ -482,32 +421,22 @@ public class AuthorizeViewTest
         Assert.Equal(2, renderer.Batches.Count);
         var batch2 = renderer.Batches[1];
         var diff2 = batch2.DiffsByComponentId[authorizeViewComponentId].Single();
-        Assert.Collection(
-            diff2.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                Assert.Equal(0, edit.SiblingIndex);
-                AssertFrame.Text(
-                    batch2.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "Hello, Monsieur!"
-                );
-            }
-        );
+        Assert.Collection(diff2.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+            Assert.Equal(0, edit.SiblingIndex);
+            AssertFrame.Text(batch2.ReferenceFrames[edit.ReferenceFrameIndex], "Hello, Monsieur!");
+        });
 
         // Assert: The IAuthorizationService was given expected criteria
-        Assert.Collection(
-            authorizationService.AuthorizeCalls,
-            call =>
-            {
-                Assert.Equal("Monsieur", call.user.Identity.Name);
-                Assert.Null(call.resource);
-                Assert.Collection(
-                    call.requirements,
-                    req => Assert.IsType<DenyAnonymousAuthorizationRequirement>(req)
-                );
-            }
-        );
+        Assert.Collection(authorizationService.AuthorizeCalls, call =>
+        {
+            Assert.Equal("Monsieur", call.user.Identity.Name);
+            Assert.Null(call.resource);
+            Assert.Collection(call.requirements, req =>
+                Assert.IsType<DenyAnonymousAuthorizationRequirement>(req)
+            );
+        });
     }
 
     [Fact]
@@ -524,18 +453,14 @@ public class AuthorizeViewTest
         rootComponent.TriggerRender();
 
         // Assert
-        Assert.Collection(
-            authorizationService.AuthorizeCalls,
-            call =>
-            {
-                Assert.Equal("Nellie", call.user.Identity.Name);
-                Assert.Null(call.resource);
-                Assert.Collection(
-                    call.requirements,
-                    req => Assert.Equal("MyTestPolicy", ((TestPolicyRequirement)req).PolicyName)
-                );
-            }
-        );
+        Assert.Collection(authorizationService.AuthorizeCalls, call =>
+        {
+            Assert.Equal("Nellie", call.user.Identity.Name);
+            Assert.Null(call.resource);
+            Assert.Collection(call.requirements, req =>
+                Assert.Equal("MyTestPolicy", ((TestPolicyRequirement)req).PolicyName)
+            );
+        });
     }
 
     [Fact]
@@ -552,22 +477,17 @@ public class AuthorizeViewTest
         rootComponent.TriggerRender();
 
         // Assert
-        Assert.Collection(
-            authorizationService.AuthorizeCalls,
-            call =>
-            {
-                Assert.Equal("Nellie", call.user.Identity.Name);
-                Assert.Null(call.resource);
-                Assert.Collection(
-                    call.requirements,
-                    req =>
-                        Assert.Equal(
-                            new[] { "SuperTestRole1", "SuperTestRole2" },
-                            ((RolesAuthorizationRequirement)req).AllowedRoles
-                        )
-                );
-            }
-        );
+        Assert.Collection(authorizationService.AuthorizeCalls, call =>
+        {
+            Assert.Equal("Nellie", call.user.Identity.Name);
+            Assert.Null(call.resource);
+            Assert.Collection(call.requirements, req =>
+                Assert.Equal(
+                    new[] { "SuperTestRole1", "SuperTestRole2" },
+                    ((RolesAuthorizationRequirement)req).AllowedRoles
+                )
+            );
+        });
     }
 
     [Fact]
@@ -585,18 +505,14 @@ public class AuthorizeViewTest
         rootComponent.TriggerRender();
 
         // Assert
-        Assert.Collection(
-            authorizationService.AuthorizeCalls,
-            call =>
-            {
-                Assert.Equal("Nellie", call.user.Identity.Name);
-                Assert.Same(resource, call.resource);
-                Assert.Collection(
-                    call.requirements,
-                    req => Assert.IsType<DenyAnonymousAuthorizationRequirement>(req)
-                );
-            }
-        );
+        Assert.Collection(authorizationService.AuthorizeCalls, call =>
+        {
+            Assert.Equal("Nellie", call.user.Identity.Name);
+            Assert.Same(resource, call.resource);
+            Assert.Collection(call.requirements, req =>
+                Assert.IsType<DenyAnonymousAuthorizationRequirement>(req)
+            );
+        });
     }
 
     [Fact]

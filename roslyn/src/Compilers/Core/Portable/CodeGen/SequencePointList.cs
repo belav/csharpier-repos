@@ -13,16 +13,16 @@ namespace Microsoft.CodeAnalysis.CodeGen
 {
     /// <summary>
     /// Maintains a list of sequence points in a space efficient way. Most of the time sequence points
-    /// occur in the same syntax tree, so optimize for that case. Store a sequence point as an offset, and 
+    /// occur in the same syntax tree, so optimize for that case. Store a sequence point as an offset, and
     /// position in a syntax tree, then translate to CCI format only on demand.
-    /// 
+    ///
     /// Use a ArrayBuilder{RawSequencePoint} to create.
     /// </summary>
     internal class SequencePointList
     {
         private readonly SyntaxTree _tree;
         private readonly OffsetAndSpan[] _points;
-        private SequencePointList _next;  // Linked list of all points.
+        private SequencePointList _next; // Linked list of all points.
 
         // No sequence points.
         private static readonly SequencePointList s_empty = new SequencePointList();
@@ -44,23 +44,33 @@ namespace Microsoft.CodeAnalysis.CodeGen
         /// Create a SequencePointList with the raw sequence points from an ArrayBuilder.
         /// A linked list of instances for each syntax tree is created (almost always of length one).
         /// </summary>
-        public static SequencePointList Create(ArrayBuilder<RawSequencePoint> seqPointBuilder, ILBuilder builder)
+        public static SequencePointList Create(
+            ArrayBuilder<RawSequencePoint> seqPointBuilder,
+            ILBuilder builder
+        )
         {
             if (seqPointBuilder.Count == 0)
             {
                 return SequencePointList.s_empty;
             }
 
-            SequencePointList first = null, current = null;
+            SequencePointList first = null,
+                current = null;
             int totalPoints = seqPointBuilder.Count;
             int last = 0;
 
             for (int i = 1; i <= totalPoints; ++i)
             {
-                if (i == totalPoints || seqPointBuilder[i].SyntaxTree != seqPointBuilder[i - 1].SyntaxTree)
+                if (
+                    i == totalPoints
+                    || seqPointBuilder[i].SyntaxTree != seqPointBuilder[i - 1].SyntaxTree
+                )
                 {
                     // Create a new list
-                    SequencePointList next = new SequencePointList(seqPointBuilder[i - 1].SyntaxTree, GetSubArray(seqPointBuilder, last, i - last, builder));
+                    SequencePointList next = new SequencePointList(
+                        seqPointBuilder[i - 1].SyntaxTree,
+                        GetSubArray(seqPointBuilder, last, i - last, builder)
+                    );
                     last = i;
 
                     // Link together with any additional.
@@ -81,13 +91,15 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         public bool IsEmpty
         {
-            get
-            {
-                return _next == null && _points.Length == 0;
-            }
+            get { return _next == null && _points.Length == 0; }
         }
 
-        private static OffsetAndSpan[] GetSubArray(ArrayBuilder<RawSequencePoint> seqPointBuilder, int start, int length, ILBuilder builder)
+        private static OffsetAndSpan[] GetSubArray(
+            ArrayBuilder<RawSequencePoint> seqPointBuilder,
+            int start,
+            int length,
+            ILBuilder builder
+        )
         {
             OffsetAndSpan[] result = new OffsetAndSpan[length];
             for (int i = 0; i < result.Length; i++)
@@ -109,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         /// <param name="builder">where sequence points should be deposited</param>
         public void GetSequencePoints(
             DebugDocumentProvider documentProvider,
-            ArrayBuilder<Cci.SequencePoint> builder)
+            ArrayBuilder<Cci.SequencePoint> builder
+        )
         {
             bool lastPathIsMapped = false;
             string lastPath = null;
@@ -122,7 +135,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
             }
             lastPath = firstReal.Value.Path;
             lastPathIsMapped = firstReal.Value.HasMappedPath;
-            lastDebugDocument = documentProvider(lastPath, basePath: lastPathIsMapped ? this._tree.FilePath : null);
+            lastDebugDocument = documentProvider(
+                lastPath,
+                basePath: lastPathIsMapped ? this._tree.FilePath : null
+            );
 
             SequencePointList current = this;
             while (current != null)
@@ -133,15 +149,18 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 {
                     TextSpan span = offsetAndSpan.Span;
 
-                    // if it's a hidden sequence point, or a sequence point with syntax that points to a position that is inside 
-                    // of a hidden region (can be defined with #line hidden (C#) or implicitly by #ExternalSource (VB), make it 
+                    // if it's a hidden sequence point, or a sequence point with syntax that points to a position that is inside
+                    // of a hidden region (can be defined with #line hidden (C#) or implicitly by #ExternalSource (VB), make it
                     // a hidden sequence point.
 
                     bool isHidden = span == RawSequencePoint.HiddenSequencePointSpan;
                     FileLinePositionSpan fileLinePositionSpan = default;
                     if (!isHidden)
                     {
-                        fileLinePositionSpan = currentTree.GetMappedLineSpanAndVisibility(span, out isHidden);
+                        fileLinePositionSpan = currentTree.GetMappedLineSpanAndVisibility(
+                            span,
+                            out isHidden
+                        );
                     }
 
                     if (isHidden)
@@ -154,28 +173,43 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
                         if (lastDebugDocument != null)
                         {
-                            builder.Add(new Cci.SequencePoint(
-                                lastDebugDocument,
-                                offset: offsetAndSpan.Offset,
-                                startLine: Cci.SequencePoint.HiddenLine,
-                                startColumn: 0,
-                                endLine: Cci.SequencePoint.HiddenLine,
-                                endColumn: 0));
+                            builder.Add(
+                                new Cci.SequencePoint(
+                                    lastDebugDocument,
+                                    offset: offsetAndSpan.Offset,
+                                    startLine: Cci.SequencePoint.HiddenLine,
+                                    startColumn: 0,
+                                    endLine: Cci.SequencePoint.HiddenLine,
+                                    endColumn: 0
+                                )
+                            );
                         }
                     }
                     else
                     {
-                        if (lastPath != fileLinePositionSpan.Path || lastPathIsMapped != fileLinePositionSpan.HasMappedPath)
+                        if (
+                            lastPath != fileLinePositionSpan.Path
+                            || lastPathIsMapped != fileLinePositionSpan.HasMappedPath
+                        )
                         {
                             lastPath = fileLinePositionSpan.Path;
                             lastPathIsMapped = fileLinePositionSpan.HasMappedPath;
-                            lastDebugDocument = documentProvider(lastPath, basePath: lastPathIsMapped ? currentTree.FilePath : null);
+                            lastDebugDocument = documentProvider(
+                                lastPath,
+                                basePath: lastPathIsMapped ? currentTree.FilePath : null
+                            );
                         }
 
                         if (lastDebugDocument != null)
                         {
-                            int startLine = (fileLinePositionSpan.StartLinePosition.Line == -1) ? 0 : fileLinePositionSpan.StartLinePosition.Line + 1;
-                            int endLine = (fileLinePositionSpan.EndLinePosition.Line == -1) ? 0 : fileLinePositionSpan.EndLinePosition.Line + 1;
+                            int startLine =
+                                (fileLinePositionSpan.StartLinePosition.Line == -1)
+                                    ? 0
+                                    : fileLinePositionSpan.StartLinePosition.Line + 1;
+                            int endLine =
+                                (fileLinePositionSpan.EndLinePosition.Line == -1)
+                                    ? 0
+                                    : fileLinePositionSpan.EndLinePosition.Line + 1;
                             int startColumn = fileLinePositionSpan.StartLinePosition.Character + 1;
                             int endColumn = fileLinePositionSpan.EndLinePosition.Character + 1;
 
@@ -195,14 +229,16 @@ namespace Microsoft.CodeAnalysis.CodeGen
                                 endColumn = MaxColumn;
                             }
 
-                            builder.Add(new Cci.SequencePoint(
-                                lastDebugDocument,
-                                offset: offsetAndSpan.Offset,
-                                startLine: startLine,
-                                startColumn: (ushort)startColumn,
-                                endLine: endLine,
-                                endColumn: (ushort)endColumn
-                            ));
+                            builder.Add(
+                                new Cci.SequencePoint(
+                                    lastDebugDocument,
+                                    offset: offsetAndSpan.Offset,
+                                    startLine: startLine,
+                                    startColumn: (ushort)startColumn,
+                                    endLine: endLine,
+                                    endColumn: (ushort)endColumn
+                                )
+                            );
                         }
                     }
                 }
@@ -225,7 +261,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                     bool isHidden = span == RawSequencePoint.HiddenSequencePointSpan;
                     if (!isHidden)
                     {
-                        FileLinePositionSpan fileLinePositionSpan = current._tree.GetMappedLineSpanAndVisibility(span, out isHidden);
+                        FileLinePositionSpan fileLinePositionSpan =
+                            current._tree.GetMappedLineSpanAndVisibility(span, out isHidden);
                         if (!isHidden)
                         {
                             return fileLinePositionSpan;

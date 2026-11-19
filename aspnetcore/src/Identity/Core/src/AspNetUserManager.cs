@@ -52,8 +52,7 @@ public class AspNetUserManager<TUser> : UserManager<TUser>, IDisposable
             logger
         )
     {
-        _cancel =
-            services?.GetService<IHttpContextAccessor>()?.HttpContext?.RequestAborted
+        _cancel = services?.GetService<IHttpContextAccessor>()?.HttpContext?.RequestAborted
             ?? CancellationToken.None;
     }
 

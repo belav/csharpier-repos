@@ -22,7 +22,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             _globalOptions = globalOptions;
         }
 
-        public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
+        public ILspService CreateILspService(
+            LspServices lspServices,
+            WellKnownLspServerKinds serverKind
+        )
         {
             var completionListCache = lspServices.GetRequiredService<CompletionListCache>();
             return new CompletionResolveHandler(_globalOptions, completionListCache);

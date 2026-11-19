@@ -19,33 +19,79 @@ namespace Microsoft.Web.Mvc
             return RadioButtonList(htmlHelper, name, (IDictionary<string, object>)null);
         }
 
-        public static MvcHtmlString[] RadioButtonList(this HtmlHelper htmlHelper, string name, object htmlAttributes)
+        public static MvcHtmlString[] RadioButtonList(
+            this HtmlHelper htmlHelper,
+            string name,
+            object htmlAttributes
+        )
         {
-            return RadioButtonList(htmlHelper, name, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+            return RadioButtonList(
+                htmlHelper,
+                name,
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes)
+            );
         }
 
-        public static MvcHtmlString[] RadioButtonList(this HtmlHelper htmlHelper, string name, IDictionary<string, object> htmlAttributes)
+        public static MvcHtmlString[] RadioButtonList(
+            this HtmlHelper htmlHelper,
+            string name,
+            IDictionary<string, object> htmlAttributes
+        )
         {
             IEnumerable<SelectListItem> selectList = htmlHelper.GetSelectData(name);
-            return htmlHelper.RadioButtonListInternal(name, selectList, true /* usedViewData */, htmlAttributes);
+            return htmlHelper.RadioButtonListInternal(
+                name,
+                selectList,
+                true /* usedViewData */
+                ,
+                htmlAttributes
+            );
         }
 
-        public static MvcHtmlString[] RadioButtonList(this HtmlHelper htmlHelper, string name, IEnumerable<SelectListItem> selectList)
+        public static MvcHtmlString[] RadioButtonList(
+            this HtmlHelper htmlHelper,
+            string name,
+            IEnumerable<SelectListItem> selectList
+        )
         {
             return RadioButtonList(htmlHelper, name, selectList, null);
         }
 
-        public static MvcHtmlString[] RadioButtonList(this HtmlHelper htmlHelper, string name, IEnumerable<SelectListItem> selectList, object htmlAttributes)
+        public static MvcHtmlString[] RadioButtonList(
+            this HtmlHelper htmlHelper,
+            string name,
+            IEnumerable<SelectListItem> selectList,
+            object htmlAttributes
+        )
         {
-            return RadioButtonList(htmlHelper, name, selectList, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+            return RadioButtonList(
+                htmlHelper,
+                name,
+                selectList,
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes)
+            );
         }
 
-        public static MvcHtmlString[] RadioButtonList(this HtmlHelper htmlHelper, string name, IEnumerable<SelectListItem> selectList, IDictionary<string, object> htmlAttributes)
+        public static MvcHtmlString[] RadioButtonList(
+            this HtmlHelper htmlHelper,
+            string name,
+            IEnumerable<SelectListItem> selectList,
+            IDictionary<string, object> htmlAttributes
+        )
         {
-            return htmlHelper.RadioButtonListInternal(name, selectList, false /* usedViewData */, htmlAttributes);
+            return htmlHelper.RadioButtonListInternal(
+                name,
+                selectList,
+                false /* usedViewData */
+                ,
+                htmlAttributes
+            );
         }
 
-        private static IEnumerable<SelectListItem> GetSelectData(this HtmlHelper htmlHelper, string name)
+        private static IEnumerable<SelectListItem> GetSelectData(
+            this HtmlHelper htmlHelper,
+            string name
+        )
         {
             object o = null;
             if (htmlHelper.ViewData != null)
@@ -59,7 +105,9 @@ namespace Microsoft.Web.Mvc
                         CultureInfo.CurrentCulture,
                         MvcResources.HtmlHelper_MissingSelectData,
                         name,
-                        typeof(IEnumerable<SelectListItem>)));
+                        typeof(IEnumerable<SelectListItem>)
+                    )
+                );
             }
             IEnumerable<SelectListItem> selectList = o as IEnumerable<SelectListItem>;
             if (selectList == null)
@@ -70,12 +118,20 @@ namespace Microsoft.Web.Mvc
                         MvcResources.HtmlHelper_WrongSelectDataType,
                         name,
                         o.GetType().FullName,
-                        typeof(IEnumerable<SelectListItem>)));
+                        typeof(IEnumerable<SelectListItem>)
+                    )
+                );
             }
             return selectList;
         }
 
-        private static MvcHtmlString[] RadioButtonListInternal(this HtmlHelper htmlHelper, string name, IEnumerable<SelectListItem> selectList, bool usedViewData, IDictionary<string, object> htmlAttributes)
+        private static MvcHtmlString[] RadioButtonListInternal(
+            this HtmlHelper htmlHelper,
+            string name,
+            IEnumerable<SelectListItem> selectList,
+            bool usedViewData,
+            IDictionary<string, object> htmlAttributes
+        )
         {
             if (String.IsNullOrEmpty(name))
             {
@@ -95,14 +151,21 @@ namespace Microsoft.Web.Mvc
                 if (defaultValue != null)
                 {
                     IEnumerable defaultValues = new[] { defaultValue };
-                    IEnumerable<string> values = from object value in defaultValues
-                                                 select Convert.ToString(value, CultureInfo.CurrentCulture);
-                    HashSet<string> selectedValues = new HashSet<string>(values, StringComparer.OrdinalIgnoreCase);
+                    IEnumerable<string> values =
+                        from object value in defaultValues
+                        select Convert.ToString(value, CultureInfo.CurrentCulture);
+                    HashSet<string> selectedValues = new HashSet<string>(
+                        values,
+                        StringComparer.OrdinalIgnoreCase
+                    );
                     List<SelectListItem> newSelectList = new List<SelectListItem>();
 
                     foreach (SelectListItem item in selectList)
                     {
-                        item.Selected = (item.Value != null) ? selectedValues.Contains(item.Value) : selectedValues.Contains(item.Text);
+                        item.Selected =
+                            (item.Value != null)
+                                ? selectedValues.Contains(item.Value)
+                                : selectedValues.Contains(item.Text);
                         newSelectList.Add(item);
                     }
 
@@ -110,7 +173,9 @@ namespace Microsoft.Web.Mvc
                 }
             }
 
-            IEnumerable<MvcHtmlString> radioButtons = selectList.Select(item => htmlHelper.RadioButton(name, item.Value, item.Selected, htmlAttributes));
+            IEnumerable<MvcHtmlString> radioButtons = selectList.Select(item =>
+                htmlHelper.RadioButton(name, item.Value, item.Selected, htmlAttributes)
+            );
 
             return radioButtons.ToArray();
         }

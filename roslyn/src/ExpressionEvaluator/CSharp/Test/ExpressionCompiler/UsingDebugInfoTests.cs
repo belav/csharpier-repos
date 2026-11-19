@@ -29,12 +29,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
 
     public class UsingDebugInfoTests : ExpressionCompilerTestBase
     {
-        #region Grouped import strings 
+        #region Grouped import strings
 
         [Fact]
         public void SimplestCase()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class C
@@ -47,17 +48,21 @@ class C
             var comp = CreateCompilation(source);
             WithRuntimeInstance(comp, runtime =>
             {
-                GetMethodDebugInfo(runtime, "C.M").ImportRecordGroups.Verify(@"
+                GetMethodDebugInfo(runtime, "C.M")
+                    .ImportRecordGroups.Verify(
+                        @"
                 {
                     Namespace: string='System'
-                }");
+                }"
+                    );
             });
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21386")]
         public void Gaps()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 namespace N1
@@ -76,7 +81,9 @@ namespace N1
             var comp = CreateCompilation(source);
             WithRuntimeInstance(comp, runtime =>
             {
-                GetMethodDebugInfo(runtime, "N1.N2.N3.C.M").ImportRecordGroups.Verify(@"
+                GetMethodDebugInfo(runtime, "N1.N2.N3.C.M")
+                    .ImportRecordGroups.Verify(
+                        @"
                 {
                 }
                 {
@@ -86,14 +93,16 @@ namespace N1
                 }
                 {
                     Namespace: string='System'
-                }");
+                }"
+                    );
             });
         }
 
         [Fact]
         public void NestedScopes()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class C
@@ -109,7 +118,10 @@ class C
 ";
             var comp = CreateCompilation(source, options: TestOptions.DebugDll);
 
-            CompileAndVerify(comp).VerifyIL("C.M", @"
+            CompileAndVerify(comp)
+                .VerifyIL(
+                    "C.M",
+                    @"
 {
   // Code size        8 (0x8)
   .maxstack  1
@@ -124,21 +136,26 @@ class C
   IL_0006:  nop
   IL_0007:  ret
 }
-");
+"
+                );
 
             WithRuntimeInstance(comp, runtime =>
             {
-                GetMethodDebugInfo(runtime, "C.M", ilOffset: 0x0004).ImportRecordGroups.Verify(@"
+                GetMethodDebugInfo(runtime, "C.M", ilOffset: 0x0004)
+                    .ImportRecordGroups.Verify(
+                        @"
                 {
                     Namespace: string='System'
-                }");
+                }"
+                    );
             });
         }
 
         [Fact]
         public void NestedNamespaces()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 namespace A
@@ -157,21 +174,25 @@ namespace A
             var comp = CreateCompilation(source);
             WithRuntimeInstance(comp, runtime =>
             {
-                GetMethodDebugInfo(runtime, "A.C.M").ImportRecordGroups.Verify(@"
+                GetMethodDebugInfo(runtime, "A.C.M")
+                    .ImportRecordGroups.Verify(
+                        @"
                 {
                     Namespace: string='System.IO'
                     Namespace: string='System.Text'
                 }
                 {
                     Namespace: string='System'
-                }");
+                }"
+                    );
             });
         }
 
         [Fact]
         public void Forward()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 namespace A
@@ -190,30 +211,37 @@ namespace A
             var comp = CreateCompilation(source);
             WithRuntimeInstance(comp, runtime =>
             {
-                GetMethodDebugInfo(runtime, "A.C.M1").ImportRecordGroups.Verify(@"
+                GetMethodDebugInfo(runtime, "A.C.M1")
+                    .ImportRecordGroups.Verify(
+                        @"
                 {
                     Namespace: string='System.IO'
                     Namespace: string='System.Text'
                 }
                 {
                     Namespace: string='System'
-                }");
+                }"
+                    );
 
-                GetMethodDebugInfo(runtime, "A.C.M2").ImportRecordGroups.Verify(@"
+                GetMethodDebugInfo(runtime, "A.C.M2")
+                    .ImportRecordGroups.Verify(
+                        @"
                 {
                     Namespace: string='System.IO'
                     Namespace: string='System.Text'
                 }
                 {
                     Namespace: string='System'
-                }");
+                }"
+                    );
             });
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30030")]
         public void ImportKinds()
         {
-            var source = @"
+            var source =
+                @"
 extern alias A;
 using S = System;
 
@@ -231,13 +259,19 @@ namespace B
 }
 ";
             var parseOptions = TestOptions.Regular.WithNoRefSafetyRulesAttribute();
-            var aliasedRef = CreateEmptyCompilation("", assemblyName: "Lib", parseOptions: parseOptions).EmitToImageReference(aliases: ImmutableArray.Create("A"));
+            var aliasedRef = CreateEmptyCompilation(
+                    "",
+                    assemblyName: "Lib",
+                    parseOptions: parseOptions
+                )
+                .EmitToImageReference(aliases: ImmutableArray.Create("A"));
             var comp = CreateCompilation(source, new[] { aliasedRef }, parseOptions: parseOptions);
             WithRuntimeInstance(comp, runtime =>
             {
                 var info = GetMethodDebugInfo(runtime, "B.C.M");
 
-                info.ImportRecordGroups.Verify(@"
+                info.ImportRecordGroups.Verify(
+                    @"
                 {
                     Namespace: string='System.Text'
                     Type: alias='F' type='System.IO.File'
@@ -245,17 +279,20 @@ namespace B
                 {
                     Assembly: alias='A'
                     Namespace: alias='S' string='System'
-                }");
+                }"
+                );
 
                 info.ExternAliasRecords.Verify(
-                    "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'");
+                    "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
+                );
             });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1084059")]
         public void ImportKinds_StaticType()
         {
-            var libSource = @"
+            var libSource =
+                @"
 namespace N
 {
     public static class Static
@@ -264,7 +301,8 @@ namespace N
 }
 ";
 
-            var source = @"
+            var source =
+                @"
 extern alias A;
 using static System.Math;
 
@@ -281,31 +319,40 @@ namespace B
 }
 ";
             var parseOptions = TestOptions.Regular.WithNoRefSafetyRulesAttribute();
-            var aliasedRef = CreateCompilation(libSource, assemblyName: "Lib", parseOptions: parseOptions).EmitToImageReference(aliases: ImmutableArray.Create("A"));
+            var aliasedRef = CreateCompilation(
+                    libSource,
+                    assemblyName: "Lib",
+                    parseOptions: parseOptions
+                )
+                .EmitToImageReference(aliases: ImmutableArray.Create("A"));
             var comp = CreateCompilation(source, new[] { aliasedRef }, parseOptions: parseOptions);
 
             WithRuntimeInstance(comp, runtime =>
             {
                 var info = GetMethodDebugInfo(runtime, "B.C.M");
 
-                info.ImportRecordGroups.Verify(@"
+                info.ImportRecordGroups.Verify(
+                    @"
                 {
                     Type: type='N.Static'
                 }
                 {
                     Assembly: alias='A'
                     Type: type='System.Math'
-                }");
+                }"
+                );
 
                 info.ExternAliasRecords.Verify(
-                    "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'");
+                    "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
+                );
             });
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30030")]
         public void ForwardToModule()
         {
-            var source = @"
+            var source =
+                @"
 extern alias A;
 
 namespace B
@@ -333,36 +380,47 @@ namespace D
 }
 ";
             var parseOptions = TestOptions.Regular.WithNoRefSafetyRulesAttribute();
-            var aliasedRef = CreateEmptyCompilation("", assemblyName: "Lib", parseOptions: parseOptions).EmitToImageReference(aliases: ImmutableArray.Create("A"));
+            var aliasedRef = CreateEmptyCompilation(
+                    "",
+                    assemblyName: "Lib",
+                    parseOptions: parseOptions
+                )
+                .EmitToImageReference(aliases: ImmutableArray.Create("A"));
             var comp = CreateCompilation(source, new[] { aliasedRef }, parseOptions: parseOptions);
 
             WithRuntimeInstance(comp, runtime =>
             {
                 var debugInfo1 = GetMethodDebugInfo(runtime, "B.C.M1");
 
-                debugInfo1.ImportRecordGroups.Verify(@"
+                debugInfo1.ImportRecordGroups.Verify(
+                    @"
                 {
                     Namespace: string='System'
                 }
                 {
                     Assembly: alias='A'
-                }");
+                }"
+                );
 
                 debugInfo1.ExternAliasRecords.Verify(
-                    "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'");
+                    "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
+                );
 
                 var debugInfo2 = GetMethodDebugInfo(runtime, "D.E.M2");
 
-                debugInfo2.ImportRecordGroups.Verify(@"
+                debugInfo2.ImportRecordGroups.Verify(
+                    @"
                 {
                     Namespace: string='System.Text'
                 }
                 {
                     Assembly: alias='A'
-                }");
+                }"
+                );
 
                 debugInfo2.ExternAliasRecords.Verify(
-                    "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'");
+                    "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
+                );
             });
         }
 
@@ -378,36 +436,72 @@ namespace D
             const int methodToken3 = 0x6000540; // Has a using
             const string importString = "USystem";
 
-            var getMethodCustomDebugInfo = new Func<int, int, byte[]>((token, _) =>
-            {
-                switch (token)
+            var getMethodCustomDebugInfo = new Func<int, int, byte[]>(
+                (token, _) =>
                 {
-                    case methodToken1: return new MethodDebugInfoBytes.Builder().AddForward(methodToken2).Build().Bytes.ToArray();
-                    case methodToken2: return new MethodDebugInfoBytes.Builder().AddForward(methodToken3).Build().Bytes.ToArray();
-                    case methodToken3: return new MethodDebugInfoBytes.Builder([new[] { importString }]).Build().Bytes.ToArray();
-                    default: throw null;
+                    switch (token)
+                    {
+                        case methodToken1:
+                            return new MethodDebugInfoBytes.Builder()
+                                .AddForward(methodToken2)
+                                .Build()
+                                .Bytes.ToArray();
+                        case methodToken2:
+                            return new MethodDebugInfoBytes.Builder()
+                                .AddForward(methodToken3)
+                                .Build()
+                                .Bytes.ToArray();
+                        case methodToken3:
+                            return new MethodDebugInfoBytes.Builder([new[] { importString }])
+                                .Build()
+                                .Bytes.ToArray();
+                        default:
+                            throw null;
+                    }
                 }
-            });
+            );
 
-            var getMethodImportStrings = new Func<int, int, ImmutableArray<string>>((token, _) =>
-            {
-                switch (token)
+            var getMethodImportStrings = new Func<int, int, ImmutableArray<string>>(
+                (token, _) =>
                 {
-                    case methodToken3: return ImmutableArray.Create(importString);
-                    default: throw null;
+                    switch (token)
+                    {
+                        case methodToken3:
+                            return ImmutableArray.Create(importString);
+                        default:
+                            throw null;
+                    }
                 }
-            });
+            );
 
             ImmutableArray<string> externAliasStrings;
-            var importStrings = CustomDebugInfoReader.GetCSharpGroupedImportStrings(methodToken1, 0, getMethodCustomDebugInfo, getMethodImportStrings, out externAliasStrings);
+            var importStrings = CustomDebugInfoReader.GetCSharpGroupedImportStrings(
+                methodToken1,
+                0,
+                getMethodCustomDebugInfo,
+                getMethodImportStrings,
+                out externAliasStrings
+            );
             Assert.True(importStrings.IsDefault);
             Assert.True(externAliasStrings.IsDefault);
 
-            importStrings = CustomDebugInfoReader.GetCSharpGroupedImportStrings(methodToken2, 0, getMethodCustomDebugInfo, getMethodImportStrings, out externAliasStrings);
+            importStrings = CustomDebugInfoReader.GetCSharpGroupedImportStrings(
+                methodToken2,
+                0,
+                getMethodCustomDebugInfo,
+                getMethodImportStrings,
+                out externAliasStrings
+            );
             Assert.Equal(importString, importStrings.Single().Single());
             Assert.Equal(0, externAliasStrings.Length);
 
-            importStrings = CustomDebugInfoReader.GetCSharpGroupedImportStrings(methodToken2, 0, getMethodCustomDebugInfo, getMethodImportStrings, out externAliasStrings);
+            importStrings = CustomDebugInfoReader.GetCSharpGroupedImportStrings(
+                methodToken2,
+                0,
+                getMethodCustomDebugInfo,
+                getMethodImportStrings,
+                out externAliasStrings
+            );
             Assert.Equal(importString, importStrings.Single().Single());
             Assert.Equal(0, externAliasStrings.Length);
         }
@@ -417,22 +511,37 @@ namespace D
         {
             const int methodToken1 = 0x600057a; // Forwards to itself
 
-            var getMethodCustomDebugInfo = new Func<int, int, byte[]>((token, _) =>
-            {
-                switch (token)
+            var getMethodCustomDebugInfo = new Func<int, int, byte[]>(
+                (token, _) =>
                 {
-                    case methodToken1: return new MethodDebugInfoBytes.Builder().AddForward(methodToken1).Build().Bytes.ToArray();
-                    default: throw null;
+                    switch (token)
+                    {
+                        case methodToken1:
+                            return new MethodDebugInfoBytes.Builder()
+                                .AddForward(methodToken1)
+                                .Build()
+                                .Bytes.ToArray();
+                        default:
+                            throw null;
+                    }
                 }
-            });
+            );
 
-            var getMethodImportStrings = new Func<int, int, ImmutableArray<string>>((token, _) =>
-            {
-                return ImmutableArray<string>.Empty;
-            });
+            var getMethodImportStrings = new Func<int, int, ImmutableArray<string>>(
+                (token, _) =>
+                {
+                    return ImmutableArray<string>.Empty;
+                }
+            );
 
             ImmutableArray<string> externAliasStrings;
-            var importStrings = CustomDebugInfoReader.GetCSharpGroupedImportStrings(methodToken1, 0, getMethodCustomDebugInfo, getMethodImportStrings, out externAliasStrings);
+            var importStrings = CustomDebugInfoReader.GetCSharpGroupedImportStrings(
+                methodToken1,
+                0,
+                getMethodCustomDebugInfo,
+                getMethodImportStrings,
+                out externAliasStrings
+            );
             Assert.True(importStrings.IsDefault);
             Assert.True(externAliasStrings.IsDefault);
         }
@@ -440,7 +549,8 @@ namespace D
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/999086")]
         public void BadPdb_InvalidAliasSyntax()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public static void Main()
@@ -456,7 +566,8 @@ public class C
                 "Main",
                 "USystem", // Valid.
                 "UACultureInfo TSystem.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089", // Invalid - skipped.
-                "ASI USystem.IO"); // Valid.
+                "ASI USystem.IO"
+            ); // Valid.
 
             var module = ModuleInstance.Create(peImage, symReader);
             var runtime = CreateRuntimeInstance(module, new[] { MscorlibRef });
@@ -471,7 +582,8 @@ public class C
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/999086")]
         public void BadPdb_DotInAlias()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public static void Main()
@@ -487,7 +599,8 @@ public class C
                 "Main",
                 "USystem", // Valid.
                 "AMy.Alias TSystem.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089", // Invalid - skipped.
-                "ASI USystem.IO"); // Valid.
+                "ASI USystem.IO"
+            ); // Valid.
 
             var module = ModuleInstance.Create(peImage, symReader);
             var runtime = CreateRuntimeInstance(module, new[] { MscorlibRef });
@@ -502,7 +615,8 @@ public class C
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1007917")]
         public void BadPdb_NestingLevel_TooMany()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public static void Main()
@@ -517,13 +631,28 @@ public class C
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
-                var methodHandle = metadataReader.MethodDefinitions.Single(h => metadataReader.StringComparer.Equals(metadataReader.GetMethodDefinition(h).Name, "Main"));
+                var methodHandle = metadataReader.MethodDefinitions.Single(h =>
+                    metadataReader.StringComparer.Equals(
+                        metadataReader.GetMethodDefinition(h).Name,
+                        "Main"
+                    )
+                );
                 var methodToken = metadataReader.GetToken(methodHandle);
 
-                symReader = new MockSymUnmanagedReader(new Dictionary<int, MethodDebugInfoBytes>
-                {
-                    { methodToken, new MethodDebugInfoBytes.Builder([new[] { "USystem", "USystem.IO" }], suppressUsingInfo: true).AddUsingInfo(1, 1).Build() },
-                }.ToImmutableDictionary());
+                symReader = new MockSymUnmanagedReader(
+                    new Dictionary<int, MethodDebugInfoBytes>
+                    {
+                        {
+                            methodToken,
+                            new MethodDebugInfoBytes.Builder(
+                                [new[] { "USystem", "USystem.IO" }],
+                                suppressUsingInfo: true
+                            )
+                                .AddUsingInfo(1, 1)
+                                .Build()
+                        },
+                    }.ToImmutableDictionary()
+                );
             }
 
             var module = ModuleInstance.Create(peImage, symReader);
@@ -531,7 +660,10 @@ public class C
             var evalContext = CreateMethodContext(runtime, "C.Main");
             var compContext = evalContext.CreateCompilationContext();
             var imports = compContext.NamespaceBinder.ImportChain.Single();
-            Assert.Equal("System.IO", imports.Usings.Single().NamespaceOrType.ToTestDisplayString()); // Note: some information is preserved.
+            Assert.Equal(
+                "System.IO",
+                imports.Usings.Single().NamespaceOrType.ToTestDisplayString()
+            ); // Note: some information is preserved.
             Assert.Equal(0, imports.UsingAliases.Count);
             Assert.Equal(0, imports.ExternAliases.Length);
         }
@@ -539,7 +671,8 @@ public class C
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1007917")]
         public void BadPdb_NestingLevel_TooFew()
         {
-            var source = @"
+            var source =
+                @"
 namespace N
 {
     public class C
@@ -557,13 +690,28 @@ namespace N
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
-                var methodHandle = metadataReader.MethodDefinitions.Single(h => metadataReader.StringComparer.Equals(metadataReader.GetMethodDefinition(h).Name, "Main"));
+                var methodHandle = metadataReader.MethodDefinitions.Single(h =>
+                    metadataReader.StringComparer.Equals(
+                        metadataReader.GetMethodDefinition(h).Name,
+                        "Main"
+                    )
+                );
                 var methodToken = metadataReader.GetToken(methodHandle);
 
-                symReader = new MockSymUnmanagedReader(new Dictionary<int, MethodDebugInfoBytes>
-                {
-                    { methodToken, new MethodDebugInfoBytes.Builder([new[] { "USystem" }], suppressUsingInfo: true).AddUsingInfo(1).Build() },
-                }.ToImmutableDictionary());
+                symReader = new MockSymUnmanagedReader(
+                    new Dictionary<int, MethodDebugInfoBytes>
+                    {
+                        {
+                            methodToken,
+                            new MethodDebugInfoBytes.Builder(
+                                [new[] { "USystem" }],
+                                suppressUsingInfo: true
+                            )
+                                .AddUsingInfo(1)
+                                .Build()
+                        },
+                    }.ToImmutableDictionary()
+                );
             }
 
             var module = ModuleInstance.Create(peImage, symReader);
@@ -579,7 +727,8 @@ namespace N
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1084059")]
         public void BadPdb_NonStaticTypeImport()
         {
-            var source = @"
+            var source =
+                @"
 namespace N
 {
     public class C
@@ -597,13 +746,33 @@ namespace N
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
-                var methodHandle = metadataReader.MethodDefinitions.Single(h => metadataReader.StringComparer.Equals(metadataReader.GetMethodDefinition(h).Name, "Main"));
+                var methodHandle = metadataReader.MethodDefinitions.Single(h =>
+                    metadataReader.StringComparer.Equals(
+                        metadataReader.GetMethodDefinition(h).Name,
+                        "Main"
+                    )
+                );
                 var methodToken = metadataReader.GetToken(methodHandle);
 
-                symReader = new MockSymUnmanagedReader(new Dictionary<int, MethodDebugInfoBytes>
-                {
-                    { methodToken, new MethodDebugInfoBytes.Builder([new[] { "TSystem.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" }], suppressUsingInfo: true).AddUsingInfo(1).Build() },
-                }.ToImmutableDictionary());
+                symReader = new MockSymUnmanagedReader(
+                    new Dictionary<int, MethodDebugInfoBytes>
+                    {
+                        {
+                            methodToken,
+                            new MethodDebugInfoBytes.Builder(
+                                [
+                                    new[]
+                                    {
+                                        "TSystem.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                                    },
+                                ],
+                                suppressUsingInfo: true
+                            )
+                                .AddUsingInfo(1)
+                                .Build()
+                        },
+                    }.ToImmutableDictionary()
+                );
             }
 
             var module = ModuleInstance.Create(peImage, symReader);
@@ -623,7 +792,8 @@ namespace N
         [Fact]
         public void ImportsForSimpleUsing()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class C
@@ -656,7 +826,8 @@ class C
         [Fact]
         public void ImportsForMultipleUsings()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.IO;
 using System.Text;
@@ -689,7 +860,10 @@ class C
                 {
                     var actualNamespace = usings[i];
                     Assert.Equal(SymbolKind.Namespace, actualNamespace.Kind);
-                    Assert.Equal(NamespaceKind.Module, ((NamespaceSymbol)actualNamespace).Extent.Kind);
+                    Assert.Equal(
+                        NamespaceKind.Module,
+                        ((NamespaceSymbol)actualNamespace).Extent.Kind
+                    );
                     Assert.Equal(expectedNames[i], actualNamespace.ToTestDisplayString());
                 }
             });
@@ -698,7 +872,8 @@ class C
         [Fact]
         public void ImportsForNestedNamespaces()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 namespace A
@@ -732,7 +907,10 @@ namespace A
 
                     var actualNamespace = imports.Usings.Single().NamespaceOrType;
                     Assert.Equal(SymbolKind.Namespace, actualNamespace.Kind);
-                    Assert.Equal(NamespaceKind.Module, ((NamespaceSymbol)actualNamespace).Extent.Kind);
+                    Assert.Equal(
+                        NamespaceKind.Module,
+                        ((NamespaceSymbol)actualNamespace).Extent.Kind
+                    );
                     Assert.Equal(expectedNames[i], actualNamespace.ToTestDisplayString());
                 }
             });
@@ -741,7 +919,8 @@ namespace A
         [Fact]
         public void ImportsForNamespaceAlias()
         {
-            var source = @"
+            var source =
+                @"
 using S = System;
 
 class C
@@ -782,7 +961,8 @@ class C
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1084059")]
         public void ImportsForStaticType()
         {
-            var source = @"
+            var source =
+                @"
 using static System.Math;
 
 class C
@@ -814,7 +994,8 @@ class C
         [Fact]
         public void ImportsForTypeAlias()
         {
-            var source = @"
+            var source =
+                @"
 using I = System.Int32;
 
 class C
@@ -854,7 +1035,8 @@ class C
         [Fact]
         public void ImportsForVerbatimIdentifiers()
         {
-            var source = @"
+            var source =
+                @"
 using @namespace;
 using @object = @namespace;
 using @string = @namespace.@class<@namespace.@interface>.@struct;
@@ -914,14 +1096,18 @@ class C
                 Assert.Equal(keyword2, typeAlias.Alias.Name);
                 var aliasedType = typeAlias.Alias.Target;
                 Assert.Equal(SymbolKind.NamedType, aliasedType.Kind);
-                Assert.Equal("@namespace.@class<@namespace.@interface>.@struct", aliasedType.ToTestDisplayString());
+                Assert.Equal(
+                    "@namespace.@class<@namespace.@interface>.@struct",
+                    aliasedType.ToTestDisplayString()
+                );
             });
         }
 
         [Fact]
         public void ImportsForGenericTypeAlias()
         {
-            var source = @"
+            var source =
+                @"
 using I = System.Collections.Generic.IEnumerable<string>;
 
 class C
@@ -954,14 +1140,18 @@ class C
 
                 var typeSymbol = aliasSymbol.Target;
                 Assert.Equal(SymbolKind.NamedType, typeSymbol.Kind);
-                Assert.Equal("System.Collections.Generic.IEnumerable<System.String>", typeSymbol.ToTestDisplayString());
+                Assert.Equal(
+                    "System.Collections.Generic.IEnumerable<System.String>",
+                    typeSymbol.ToTestDisplayString()
+                );
             });
         }
 
         [Fact]
         public void ImportsForExternAlias()
         {
-            var source = @"
+            var source =
+                @"
 extern alias X;
 
 class C
@@ -973,7 +1163,10 @@ class C
     }
 }
 ";
-            var comp = CreateCompilation(source, new[] { SystemXmlLinqRef.WithAliases(ImmutableArray.Create("X")) });
+            var comp = CreateCompilation(
+                source,
+                new[] { SystemXmlLinqRef.WithAliases(ImmutableArray.Create("X")) }
+            );
             comp.VerifyDiagnostics();
 
             WithRuntimeInstance(comp, runtime =>
@@ -1002,7 +1195,8 @@ class C
         [Fact]
         public void ImportsForUsingsConsumingExternAlias()
         {
-            var source = @"
+            var source =
+                @"
 extern alias X;
 using SXL = X::System.Xml.Linq;
 using LO = X::System.Xml.Linq.LoadOptions;
@@ -1017,7 +1211,10 @@ class C
     }
 }
 ";
-            var comp = CreateCompilation(source, new[] { SystemXmlLinqRef.WithAliases(ImmutableArray.Create("X")) });
+            var comp = CreateCompilation(
+                source,
+                new[] { SystemXmlLinqRef.WithAliases(ImmutableArray.Create("X")) }
+            );
             comp.GetDiagnostics().Where(d => d.Severity > DiagnosticSeverity.Info).Verify();
 
             WithRuntimeInstance(comp, runtime =>
@@ -1043,14 +1240,18 @@ class C
 
                 var namespaceAlias = usingAliases["LO"].Alias;
                 Assert.Equal("LO", namespaceAlias.Name);
-                Assert.Equal("System.Xml.Linq.LoadOptions", namespaceAlias.Target.ToTestDisplayString());
+                Assert.Equal(
+                    "System.Xml.Linq.LoadOptions",
+                    namespaceAlias.Target.ToTestDisplayString()
+                );
             });
         }
 
         [Fact]
         public void ImportsForUsingsConsumingExternAliasAndGlobal()
         {
-            var source = @"
+            var source =
+                @"
 extern alias X;
 using A = X::System.Xml.Linq;
 using B = global::System.Xml.Linq;
@@ -1065,7 +1266,10 @@ class C
     }
 }
 ";
-            var comp = CreateCompilation(source, new[] { SystemXmlLinqRef.WithAliases(ImmutableArray.Create("global", "X")) });
+            var comp = CreateCompilation(
+                source,
+                new[] { SystemXmlLinqRef.WithAliases(ImmutableArray.Create("global", "X")) }
+            );
             comp.GetDiagnostics().Where(d => d.Severity > DiagnosticSeverity.Info).Verify();
 
             WithRuntimeInstance(comp, runtime =>
@@ -1094,7 +1298,8 @@ class C
         [Fact]
         public void ImportsForUsingsToTypes()
         {
-            var source = @"
+            var source =
+                @"
 using A = int;
 using B = (int x, int y);
 
@@ -1145,7 +1350,7 @@ class C
         public void NoSymbols()
         {
             var source =
-@"using N;
+                @"using N;
 class A
 {
     static void M() { }
@@ -1168,7 +1373,8 @@ namespace N
                 expr: "typeof(B)",
                 resultProperties: out resultProperties,
                 error: out error,
-                includeSymbols: true);
+                includeSymbols: true
+            );
             Assert.Null(error);
 
             // Without symbols, type reference without namespace qualifier.
@@ -1179,8 +1385,12 @@ namespace N
                 expr: "typeof(B)",
                 resultProperties: out resultProperties,
                 error: out error,
-                includeSymbols: false);
-            Assert.Equal("error CS0246: The type or namespace name 'B' could not be found (are you missing a using directive or an assembly reference?)", error);
+                includeSymbols: false
+            );
+            Assert.Equal(
+                "error CS0246: The type or namespace name 'B' could not be found (are you missing a using directive or an assembly reference?)",
+                error
+            );
 
             // With symbols, type reference inside namespace.
             testData = Evaluate(
@@ -1190,7 +1400,8 @@ namespace N
                 expr: "typeof(B)",
                 resultProperties: out resultProperties,
                 error: out error,
-                includeSymbols: true);
+                includeSymbols: true
+            );
             Assert.Null(error);
 
             // Without symbols, type reference inside namespace.
@@ -1201,14 +1412,16 @@ namespace N
                 expr: "typeof(B)",
                 resultProperties: out resultProperties,
                 error: out error,
-                includeSymbols: false);
+                includeSymbols: false
+            );
             Assert.Null(error);
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/2441")]
         public void AssemblyQualifiedNameResolutionWithUnification()
         {
-            var source1 = @"
+            var source1 =
+                @"
 using SI = System.Int32;
 
 public class C1
@@ -1219,24 +1432,35 @@ public class C1
 }
 ";
 
-            var source2 = @"
+            var source2 =
+                @"
 public class C2 : C1
 {
 }
 ";
-            var comp1 = CreateEmptyCompilation(source1, new[] { MscorlibRef_v20 }, TestOptions.DebugDll);
+            var comp1 = CreateEmptyCompilation(
+                source1,
+                new[] { MscorlibRef_v20 },
+                TestOptions.DebugDll
+            );
             var module1 = comp1.ToModuleInstance();
 
-            var comp2 = CreateEmptyCompilation(source2, new[] { MscorlibRef_v4_0_30316_17626, module1.GetReference() }, TestOptions.DebugDll);
+            var comp2 = CreateEmptyCompilation(
+                source2,
+                new[] { MscorlibRef_v4_0_30316_17626, module1.GetReference() },
+                TestOptions.DebugDll
+            );
             var module2 = comp2.ToModuleInstance();
 
-            var runtime = CreateRuntimeInstance(new[]
-            {
-                module1,
-                module2,
-                MscorlibRef_v4_0_30316_17626.ToModuleInstance(),
-                ExpressionCompilerTestHelpers.IntrinsicAssemblyReference.ToModuleInstance()
-            });
+            var runtime = CreateRuntimeInstance(
+                new[]
+                {
+                    module1,
+                    module2,
+                    MscorlibRef_v4_0_30316_17626.ToModuleInstance(),
+                    ExpressionCompilerTestHelpers.IntrinsicAssemblyReference.ToModuleInstance(),
+                }
+            );
 
             var context = CreateMethodContext(runtime, "C1.M");
 
@@ -1245,7 +1469,10 @@ public class C2 : C1
             context.CompileExpression("typeof(SI)", out error, testData);
             Assert.Null(error);
 
-            testData.GetMethodData("<>x.<>m0").VerifyIL(@"
+            testData
+                .GetMethodData("<>x.<>m0")
+                .VerifyIL(
+                    @"
 {
 // Code size       11 (0xb)
 .maxstack  1
@@ -1253,7 +1480,8 @@ IL_0000:  ldtoken    ""int""
 IL_0005:  call       ""System.Type System.Type.GetTypeFromHandle(System.RuntimeTypeHandle)""
 IL_000a:  ret
 }
-");
+"
+                );
         }
     }
 

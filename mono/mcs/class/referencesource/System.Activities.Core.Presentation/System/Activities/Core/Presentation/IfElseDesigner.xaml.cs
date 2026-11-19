@@ -32,7 +32,11 @@ namespace System.Activities.Core.Presentation
             builder.AddCustomAttributes(type, type.GetProperty("Then"), BrowsableAttribute.No);
             builder.AddCustomAttributes(type, type.GetProperty("Else"), BrowsableAttribute.No);
 
-            builder.AddCustomAttributes(type, type.GetProperty("Condition"), new HidePropertyInOutlineViewAttribute());
+            builder.AddCustomAttributes(
+                type,
+                type.GetProperty("Condition"),
+                new HidePropertyInOutlineViewAttribute()
+            );
         }
 
         void OnExpressionEditorLoaded(object sender, RoutedEventArgs e)
@@ -41,23 +45,40 @@ namespace System.Activities.Core.Presentation
             Fx.Assert(expressionTextBox != null, "sender should be userControl");
             //bind ExpressionProperty of Expression textbox to ModelItem.Condition
             Binding b = new Binding();
-            ArgumentToExpressionConverter argumentToExpressionConverter = new ArgumentToExpressionConverter();
+            ArgumentToExpressionConverter argumentToExpressionConverter =
+                new ArgumentToExpressionConverter();
             b.Converter = argumentToExpressionConverter;
             b.Mode = BindingMode.TwoWay;
 
             b.Source = this.ModelItem;
             b.Path = new PropertyPath("Condition");
-            if (BindingOperations.GetBinding(expressionTextBox, ExpressionTextBox.ExpressionProperty) != null)
+            if (
+                BindingOperations.GetBinding(
+                    expressionTextBox,
+                    ExpressionTextBox.ExpressionProperty
+                ) != null
+            )
             {
-                BindingOperations.ClearBinding(expressionTextBox, ExpressionTextBox.ExpressionProperty);
+                BindingOperations.ClearBinding(
+                    expressionTextBox,
+                    ExpressionTextBox.ExpressionProperty
+                );
             }
             expressionTextBox.SetBinding(ExpressionTextBox.ExpressionProperty, b);
             //bind OwnerActivityProperty of Expression textbox to ModelItem
             Binding b1 = new Binding();
             b1.Source = this.ModelItem;
-            if (BindingOperations.GetBinding(expressionTextBox, ExpressionTextBox.OwnerActivityProperty) != null)
+            if (
+                BindingOperations.GetBinding(
+                    expressionTextBox,
+                    ExpressionTextBox.OwnerActivityProperty
+                ) != null
+            )
             {
-                BindingOperations.ClearBinding(expressionTextBox, ExpressionTextBox.OwnerActivityProperty);
+                BindingOperations.ClearBinding(
+                    expressionTextBox,
+                    ExpressionTextBox.OwnerActivityProperty
+                );
             }
             expressionTextBox.SetBinding(ExpressionTextBox.OwnerActivityProperty, b1);
         }

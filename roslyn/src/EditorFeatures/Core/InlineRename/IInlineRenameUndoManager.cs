@@ -17,16 +17,32 @@ namespace Microsoft.CodeAnalysis.Editor
     /// </summary>
     internal interface IInlineRenameUndoManager : IWorkspaceService
     {
-        void CreateInitialState(string replacementText, ITextSelection selection, SnapshotSpan startingSpan);
+        void CreateInitialState(
+            string replacementText,
+            ITextSelection selection,
+            SnapshotSpan startingSpan
+        );
 
-        void CreateStartRenameUndoTransaction(Workspace workspace, ITextBuffer subjectBuffer, IInlineRenameSession inlineRenameSession);
+        void CreateStartRenameUndoTransaction(
+            Workspace workspace,
+            ITextBuffer subjectBuffer,
+            IInlineRenameSession inlineRenameSession
+        );
         void CreateConflictResolutionUndoTransaction(ITextBuffer subjectBuffer, Action applyEdit);
 
         void UndoTemporaryEdits(ITextBuffer subjectBuffer, bool disconnect);
         void OnTextChanged(ITextSelection selection, SnapshotSpan singleTrackingSpanTouched);
 
-        void UpdateSelection(ITextView textView, ITextBuffer subjectBuffer, ITrackingSpan trackingSpan);
-        void ApplyCurrentState(ITextBuffer subjectBuffer, object propagateSpansEditTag, IEnumerable<ITrackingSpan> spans);
+        void UpdateSelection(
+            ITextView textView,
+            ITextBuffer subjectBuffer,
+            ITrackingSpan trackingSpan
+        );
+        void ApplyCurrentState(
+            ITextBuffer subjectBuffer,
+            object propagateSpansEditTag,
+            IEnumerable<ITrackingSpan> spans
+        );
 
         void Undo(ITextBuffer subjectBuffer);
         void Redo(ITextBuffer subjectBuffer);

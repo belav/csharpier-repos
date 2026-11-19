@@ -35,9 +35,7 @@ namespace System.Net.Security
         /// <summary>
         /// Initializes a new instance of the <see cref="NegotiateAuthenticationClientOptions" /> class.
         /// </summary>
-        public NegotiateAuthenticationClientOptions()
-        {
-        }
+        public NegotiateAuthenticationClientOptions() { }
 
         /// <summary>
         /// Specifies the GSSAPI authentication package used for the authentication.
@@ -49,7 +47,8 @@ namespace System.Net.Security
         /// The NetworkCredential that is used to establish the identity of the client.
         /// Default value is <see cref="CredentialCache.DefaultNetworkCredentials" />.
         /// </summary>
-        public NetworkCredential Credential { get; set; } = CredentialCache.DefaultNetworkCredentials;
+        public NetworkCredential Credential { get; set; } =
+            CredentialCache.DefaultNetworkCredentials;
 
         /// <summary>
         /// The Service Principal Name (SPN) that uniquely identifies the server to authenticate.
@@ -76,6 +75,7 @@ namespace System.Net.Security
         /// One of the <see cref="TokenImpersonationLevel" /> values, indicating how the server
         /// can use the client's credentials to access resources.
         /// </summary>
-        public TokenImpersonationLevel AllowedImpersonationLevel { get; set; } = TokenImpersonationLevel.None;
+        public TokenImpersonationLevel AllowedImpersonationLevel { get; set; } =
+            TokenImpersonationLevel.None;
     }
 }

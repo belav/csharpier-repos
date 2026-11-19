@@ -21,8 +21,7 @@ public class KeyPropagator : IKeyPropagator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public KeyPropagator(
-        IValueGeneratorSelector valueGeneratorSelector)
+    public KeyPropagator(IValueGeneratorSelector valueGeneratorSelector)
     {
         _valueGeneratorSelector = valueGeneratorSelector;
     }
@@ -33,26 +32,33 @@ public class KeyPropagator : IKeyPropagator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual InternalEntityEntry? PropagateValue(InternalEntityEntry entry, IProperty property)
+    public virtual InternalEntityEntry? PropagateValue(
+        InternalEntityEntry entry,
+        IProperty property
+    )
     {
         Check.DebugAssert(property.IsForeignKey(), $"property {property} is not part of an FK");
 
         var generationProperty = property.FindGenerationProperty();
         var principalEntry = TryPropagateValue(entry, property, generationProperty);
 
-        if (principalEntry == null
-            && property.IsKey()
-            && !property.IsForeignKeyToSelf())
+        if (principalEntry == null && property.IsKey() && !property.IsForeignKeyToSelf())
         {
             var valueGenerator = TryGetValueGenerator(
                 generationProperty,
                 generationProperty == property
                     ? entry.EntityType
-                    : generationProperty?.DeclaringType);
+                    : generationProperty?.DeclaringType
+            );
 
             if (valueGenerator != null)
             {
-                SetValue(entry, property, valueGenerator, valueGenerator.Next(new EntityEntry(entry)));
+                SetValue(
+                    entry,
+                    property,
+                    valueGenerator,
+                    valueGenerator.Next(new EntityEntry(entry))
+                );
             }
         }
 
@@ -68,22 +74,22 @@ public class KeyPropagator : IKeyPropagator
     public virtual async Task<InternalEntityEntry?> PropagateValueAsync(
         InternalEntityEntry entry,
         IProperty property,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         Check.DebugAssert(property.IsForeignKey(), $"property {property} is not part of an FK");
 
         var generationProperty = property.FindGenerationProperty();
         var principalEntry = TryPropagateValue(entry, property, generationProperty);
 
-        if (principalEntry == null
-            && property.IsKey()
-            && !property.IsForeignKeyToSelf())
+        if (principalEntry == null && property.IsKey() && !property.IsForeignKeyToSelf())
         {
             var valueGenerator = TryGetValueGenerator(
                 generationProperty,
                 generationProperty == property
                     ? entry.EntityType
-                    : generationProperty?.DeclaringType);
+                    : generationProperty?.DeclaringType
+            );
 
             if (valueGenerator != null)
             {
@@ -91,14 +97,22 @@ public class KeyPropagator : IKeyPropagator
                     entry,
                     property,
                     valueGenerator,
-                    await valueGenerator.NextAsync(new EntityEntry(entry), cancellationToken).ConfigureAwait(false));
+                    await valueGenerator
+                        .NextAsync(new EntityEntry(entry), cancellationToken)
+                        .ConfigureAwait(false)
+                );
             }
         }
 
         return principalEntry;
     }
 
-    private static void SetValue(InternalEntityEntry entry, IProperty property, ValueGenerator valueGenerator, object? value)
+    private static void SetValue(
+        InternalEntityEntry entry,
+        IProperty property,
+        ValueGenerator valueGenerator,
+        object? value
+    )
     {
         if (valueGenerator.GeneratesStableValues)
         {
@@ -111,28 +125,45 @@ public class KeyPropagator : IKeyPropagator
         }
     }
 
-    private static InternalEntityEntry? TryPropagateValue(InternalEntityEntry entry, IProperty property, IProperty? generationProperty)
+    private static InternalEntityEntry? TryPropagateValue(
+        InternalEntityEntry entry,
+        IProperty property,
+        IProperty? generationProperty
+    )
     {
         var entityType = entry.EntityType;
         var stateManager = entry.StateManager;
 
         foreach (var foreignKey in entityType.GetForeignKeys())
         {
-            for (var propertyIndex = 0; propertyIndex < foreignKey.Properties.Count; propertyIndex++)
+            for (
+                var propertyIndex = 0;
+                propertyIndex < foreignKey.Properties.Count;
+                propertyIndex++
+            )
             {
                 if (property == foreignKey.Properties[propertyIndex])
                 {
-                    var principal = foreignKey.DependentToPrincipal == null
-                        ? null
-                        : entry[foreignKey.DependentToPrincipal];
+                    var principal =
+                        foreignKey.DependentToPrincipal == null
+                            ? null
+                            : entry[foreignKey.DependentToPrincipal];
                     InternalEntityEntry? principalEntry = null;
                     if (principal != null)
                     {
-                        principalEntry = stateManager.GetOrCreateEntry(principal, foreignKey.PrincipalEntityType);
+                        principalEntry = stateManager.GetOrCreateEntry(
+                            principal,
+                            foreignKey.PrincipalEntityType
+                        );
                     }
                     else if (foreignKey.PrincipalToDependent != null)
                     {
-                        foreach (var (navigationBase, internalEntityEntry) in stateManager.GetRecordedReferrers(entry.Entity, clear: false))
+                        foreach (
+                            var (
+                                navigationBase,
+                                internalEntityEntry
+                            ) in stateManager.GetRecordedReferrers(entry.Entity, clear: false)
+                        )
                         {
                             if (navigationBase == foreignKey.PrincipalToDependent)
                             {
@@ -148,8 +179,10 @@ public class KeyPropagator : IKeyPropagator
 
                         if (principalProperty != property)
                         {
-                            if (generationProperty == null
-                                || principalEntry.HasExplicitValue(principalProperty))
+                            if (
+                                generationProperty == null
+                                || principalEntry.HasExplicitValue(principalProperty)
+                            )
                             {
                                 entry.PropagateValue(principalEntry, principalProperty, property);
 
@@ -166,8 +199,11 @@ public class KeyPropagator : IKeyPropagator
         return null;
     }
 
-    private ValueGenerator? TryGetValueGenerator(IProperty? generationProperty, ITypeBase? typeBase)
-        => generationProperty != null
+    private ValueGenerator? TryGetValueGenerator(
+        IProperty? generationProperty,
+        ITypeBase? typeBase
+    ) =>
+        generationProperty != null
             ? _valueGeneratorSelector.Select(generationProperty, typeBase!)
             : null;
 }

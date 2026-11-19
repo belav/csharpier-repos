@@ -42,7 +42,7 @@ public class InterlockedIncrement2
 
     public bool PosTest1()
     {
-        bool  retVal = true;
+        bool retVal = true;
         Int64 value;
         Int64 nwValue;
         Int64 exValue;
@@ -51,11 +51,11 @@ public class InterlockedIncrement2
 
         try
         {
-            for (int i=0; i<c_NUM_LOOPS; i++)
+            for (int i = 0; i < c_NUM_LOOPS; i++)
             {
-                value   = TestLibrary.Generator.GetInt64(-55);
-     
-                exValue = value+1;
+                value = TestLibrary.Generator.GetInt64(-55);
+
+                exValue = value + 1;
                 nwValue = Interlocked.Increment(ref value);
 
                 retVal = CheckValues(value, exValue, nwValue) && retVal;
@@ -72,7 +72,7 @@ public class InterlockedIncrement2
 
     public bool PosTest2()
     {
-        bool           retVal = true;
+        bool retVal = true;
         Int64 value;
         Int64 nwValue;
         Int64 exValue;
@@ -81,9 +81,9 @@ public class InterlockedIncrement2
 
         try
         {
-            value    = Int64.MaxValue;
-     
-            exValue = value+1;
+            value = Int64.MaxValue;
+
+            exValue = value + 1;
             nwValue = Interlocked.Increment(ref value);
 
             retVal = CheckValues(value, exValue, nwValue) && retVal;
@@ -101,16 +101,29 @@ public class InterlockedIncrement2
     {
         if (exValue != nwValue)
         {
-            TestLibrary.TestFramework.LogError("003", "Interlocked.Increment() returned wrong value. Expected(" + exValue + ") Got(" + nwValue + ")");
+            TestLibrary.TestFramework.LogError(
+                "003",
+                "Interlocked.Increment() returned wrong value. Expected("
+                    + exValue
+                    + ") Got("
+                    + nwValue
+                    + ")"
+            );
             return false;
         }
         if (exValue != value)
         {
-            TestLibrary.TestFramework.LogError("003", "Interlocked.Increment() did not update value. Expected(" + exValue + ") Got(" + value + ")");
+            TestLibrary.TestFramework.LogError(
+                "003",
+                "Interlocked.Increment() did not update value. Expected("
+                    + exValue
+                    + ") Got("
+                    + value
+                    + ")"
+            );
             return false;
         }
 
         return true;
     }
-
 }

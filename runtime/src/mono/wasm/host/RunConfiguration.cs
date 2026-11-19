@@ -26,26 +26,33 @@ internal sealed class RunConfiguration
         AppPath = Path.GetDirectoryName(runtimeConfigPath) ?? ".";
 
         RuntimeConfig? rconfig = JsonSerializer.Deserialize<RuntimeConfig>(
-                                                File.ReadAllText(runtimeConfigPath),
-                                                CommonConfiguration.JsonOptions);
+            File.ReadAllText(runtimeConfigPath),
+            CommonConfiguration.JsonOptions
+        );
         if (rconfig == null)
             throw new Exception($"Failed to deserialize {runtimeConfigPath}");
 
         if (rconfig.RuntimeOptions == null)
-            throw new Exception($"Failed to deserialize {runtimeConfigPath} - rconfig.RuntimeOptions");
+            throw new Exception(
+                $"Failed to deserialize {runtimeConfigPath} - rconfig.RuntimeOptions"
+            );
 
         HostProperties = rconfig.RuntimeOptions.WasmHostProperties;
         if (HostProperties == null)
-            throw new Exception($"Could not find any {nameof(RuntimeOptions.WasmHostProperties)} in {runtimeConfigPath}");
+            throw new Exception(
+                $"Could not find any {nameof(RuntimeOptions.WasmHostProperties)} in {runtimeConfigPath}"
+            );
 
         if (HostProperties.HostConfigs is null || HostProperties.HostConfigs.Count == 0)
             throw new Exception($"no perHostConfigs found");
 
         // read only if it wasn't overridden by command line option
         string desiredConfig = hostArg ?? HostProperties.DefaultConfig;
-        HostConfig? foundConfig = HostProperties.HostConfigs
-                                    .Where(hc => string.Equals(hc.Name, desiredConfig, StringComparison.InvariantCultureIgnoreCase))
-                                    .FirstOrDefault();
+        HostConfig? foundConfig = HostProperties
+            .HostConfigs.Where(hc =>
+                string.Equals(hc.Name, desiredConfig, StringComparison.InvariantCultureIgnoreCase)
+            )
+            .FirstOrDefault();
 
         HostConfig = foundConfig ?? HostProperties.HostConfigs.First();
         if (HostConfig == null)
@@ -53,7 +60,9 @@ internal sealed class RunConfiguration
 
         // FIXME: validate hostconfig
         if (!Enum.TryParse(HostConfig.HostString, ignoreCase: true, out WasmHost wasmHost))
-            throw new Exception($"Unknown host {HostConfig.HostString} in config named {HostConfig.Name}");
+            throw new Exception(
+                $"Unknown host {HostConfig.HostString} in config named {HostConfig.Name}"
+            );
         Host = wasmHost;
     }
 

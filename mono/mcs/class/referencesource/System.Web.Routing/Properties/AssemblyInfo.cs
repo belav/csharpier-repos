@@ -10,8 +10,8 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Security.Permissions;
 using System.Security;
+using System.Security.Permissions;
 using System.Web.Routing;
 
 [assembly: DependencyAttribute("System.Web,", LoadHint.Always)]
@@ -22,8 +22,11 @@ using System.Web.Routing;
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Execution = true)]
 #pragma warning restore 618
 
-[assembly: SuppressMessage("Microsoft.Design", "CA2210:AssembliesShouldHaveValidStrongNames",
-    Justification = "Assembly is delay-signed.")]
+[assembly: SuppressMessage(
+    "Microsoft.Design",
+    "CA2210:AssembliesShouldHaveValidStrongNames",
+    Justification = "Assembly is delay-signed."
+)]
 
 [assembly: TypeForwardedTo(typeof(HttpMethodConstraint))]
 [assembly: TypeForwardedTo(typeof(IRouteConstraint))]
@@ -46,7 +49,9 @@ using System.Web.Routing;
 [assembly: CLSCompliant(true)]
 [assembly: AssemblyVersion("99.0.0.0")]
 [assembly: NeutralResourcesLanguage("en-US")]
-[assembly: AllowPartiallyTrustedCallers(PartialTrustVisibilityLevel = PartialTrustVisibilityLevel.NotVisibleByDefault)]
+[assembly: AllowPartiallyTrustedCallers(
+    PartialTrustVisibilityLevel = PartialTrustVisibilityLevel.NotVisibleByDefault
+)]
 [assembly: SecurityRules(SecurityRuleSet.Level2, SkipVerificationInFullTrust = true)]
 [assembly: SecurityTransparent]
 #endif

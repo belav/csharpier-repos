@@ -46,16 +46,17 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            string json = @"[
+            string json =
+                @"[
               '7 December, 2009',
               '1 January, 2010',
               '10 February, 2010'
             ]";
 
-            IList<DateTime> dateList = JsonConvert.DeserializeObject<IList<DateTime>>(json, new JsonSerializerSettings
-            {
-                DateFormatString = "d MMMM, yyyy"
-            });
+            IList<DateTime> dateList = JsonConvert.DeserializeObject<IList<DateTime>>(
+                json,
+                new JsonSerializerSettings { DateFormatString = "d MMMM, yyyy" }
+            );
 
             foreach (DateTime dateTime in dateList)
             {

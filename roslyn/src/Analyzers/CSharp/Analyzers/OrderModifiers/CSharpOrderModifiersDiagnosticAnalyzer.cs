@@ -17,20 +17,22 @@ namespace Microsoft.CodeAnalysis.CSharp.OrderModifiers
     internal class CSharpOrderModifiersDiagnosticAnalyzer : AbstractOrderModifiersDiagnosticAnalyzer
     {
         public CSharpOrderModifiersDiagnosticAnalyzer()
-            : base(CSharpSyntaxFacts.Instance,
-                   CSharpCodeStyleOptions.PreferredModifierOrder,
-                   CSharpOrderModifiersHelper.Instance)
-        {
-        }
+            : base(
+                CSharpSyntaxFacts.Instance,
+                CSharpCodeStyleOptions.PreferredModifierOrder,
+                CSharpOrderModifiersHelper.Instance
+            ) { }
 
-        protected override CodeStyleOption2<string> GetPreferredOrderStyle(SyntaxTreeAnalysisContext context)
-            => context.GetCSharpAnalyzerOptions().PreferredModifierOrder;
+        protected override CodeStyleOption2<string> GetPreferredOrderStyle(
+            SyntaxTreeAnalysisContext context
+        ) => context.GetCSharpAnalyzerOptions().PreferredModifierOrder;
 
         protected override void Recurse(
             SyntaxTreeAnalysisContext context,
             Dictionary<int, int> preferredOrder,
             NotificationOption2 notificationOption,
-            SyntaxNode root)
+            SyntaxNode root
+        )
         {
             foreach (var child in root.ChildNodesAndTokens())
             {
@@ -39,11 +41,16 @@ namespace Microsoft.CodeAnalysis.CSharp.OrderModifiers
                     var node = child.AsNode();
                     if (node is MemberDeclarationSyntax memberDeclaration)
                     {
-                        CheckModifiers(context, preferredOrder, notificationOption, memberDeclaration);
+                        CheckModifiers(
+                            context,
+                            preferredOrder,
+                            notificationOption,
+                            memberDeclaration
+                        );
 
-                        // Recurse and check children.  Note: we only do this if we're on an actual 
-                        // member declaration.  Once we hit something that isn't, we don't need to 
-                        // keep recursing.  This prevents us from actually entering things like method 
+                        // Recurse and check children.  Note: we only do this if we're on an actual
+                        // member declaration.  Once we hit something that isn't, we don't need to
+                        // keep recursing.  This prevents us from actually entering things like method
                         // bodies.
                         Recurse(context, preferredOrder, notificationOption, node);
                     }

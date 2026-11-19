@@ -6,10 +6,10 @@ using System.Runtime.Serialization;
 
 namespace System
 {
-	[Serializable]
-	partial class TimeZone
-	{
-		// copied from old System/TimeZone.cs
-		internal static void ClearCachedData () => currentTimeZone = null;
-	}
+    [Serializable]
+    partial class TimeZone
+    {
+        // copied from old System/TimeZone.cs
+        internal static void ClearCachedData() => currentTimeZone = null;
+    }
 }

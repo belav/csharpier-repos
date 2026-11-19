@@ -8,11 +8,14 @@ namespace System.Threading.Channels
     {
         /// <summary>Wait for space to be available in order to complete the write operation.</summary>
         Wait,
+
         /// <summary>Remove and ignore the newest item in the channel in order to make room for the item being written.</summary>
         DropNewest,
+
         /// <summary>Remove and ignore the oldest item in the channel in order to make room for the item being written.</summary>
         DropOldest,
+
         /// <summary>Drop the item being written.</summary>
-        DropWrite
+        DropWrite,
     }
 }

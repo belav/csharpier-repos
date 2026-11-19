@@ -12,7 +12,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType, IRuntimeComplexType
+public class ComplexType
+    : TypeBase,
+        IMutableComplexType,
+        IConventionComplexType,
+        IRuntimeComplexType
 {
     private InternalComplexTypeBuilder? _builder;
 
@@ -38,7 +42,8 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
         string name,
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] Type type,
         ComplexProperty property,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
         : base(name, type, property.DeclaringType.Model, configurationSource)
     {
         if (!type.IsValidComplexType())
@@ -46,11 +51,14 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
             throw new ArgumentException(CoreStrings.InvalidComplexType(type));
         }
 
-        if (EntityType.DynamicProxyGenAssemblyName.Equals(
-                type.Assembly.GetName().Name, StringComparison.Ordinal))
+        if (
+            EntityType.DynamicProxyGenAssemblyName.Equals(
+                type.Assembly.GetName().Name,
+                StringComparison.Ordinal
+            )
+        )
         {
-            throw new ArgumentException(
-                CoreStrings.AddingProxyTypeAsEntityType(type.FullName));
+            throw new ArgumentException(CoreStrings.AddingProxyTypeAsEntityType(type.FullName));
         }
 
         ComplexProperty = property;
@@ -68,7 +76,9 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     public new virtual InternalComplexTypeBuilder Builder
     {
         [DebuggerStepThrough]
-        get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel(Name));
+        get =>
+            _builder
+            ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel(Name));
     }
 
     /// <summary>
@@ -97,12 +107,12 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual EntityType ContainingEntityType
-        => ComplexProperty.DeclaringType switch
+    public virtual EntityType ContainingEntityType =>
+        ComplexProperty.DeclaringType switch
         {
             EntityType entityType => entityType,
             ComplexType declaringComplexType => declaringComplexType.ContainingEntityType,
-            _ => throw new NotImplementedException()
+            _ => throw new NotImplementedException(),
         };
 
     /// <summary>
@@ -111,9 +121,7 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool IsInModel
-        => _builder is not null
-            && ComplexProperty.IsInModel;
+    public override bool IsInModel => _builder is not null && ComplexProperty.IsInModel;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -134,8 +142,7 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public new virtual ComplexType? BaseType
-        => (ComplexType?)base.BaseType;
+    public new virtual ComplexType? BaseType => (ComplexType?)base.BaseType;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -143,7 +150,10 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ComplexType? SetBaseType(ComplexType? newBaseType, ConfigurationSource configurationSource)
+    public virtual ComplexType? SetBaseType(
+        ComplexType? newBaseType,
+        ConfigurationSource configurationSource
+    )
     {
         EnsureMutable();
         Check.DebugAssert(IsInModel, "The entity type has been removed from the model");
@@ -171,23 +181,32 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
             {
                 throw new InvalidOperationException(
                     CoreStrings.NotAssignableClrBaseType(
-                        DisplayName(), newBaseType.DisplayName(), ClrType.ShortDisplayName(),
-                        newBaseType.ClrType.ShortDisplayName()));
+                        DisplayName(),
+                        newBaseType.DisplayName(),
+                        ClrType.ShortDisplayName(),
+                        newBaseType.ClrType.ShortDisplayName()
+                    )
+                );
             }
 
             if (newBaseType.InheritsFrom(this))
             {
-                throw new InvalidOperationException(CoreStrings.CircularInheritance(DisplayName(), newBaseType.DisplayName()));
+                throw new InvalidOperationException(
+                    CoreStrings.CircularInheritance(DisplayName(), newBaseType.DisplayName())
+                );
             }
 
-            var conflictingMember = newBaseType.GetMembers()
+            var conflictingMember = newBaseType
+                .GetMembers()
                 .Select(p => p.Name)
                 .SelectMany(FindMembersInHierarchy)
                 .FirstOrDefault();
 
             if (conflictingMember != null)
             {
-                var baseProperty = newBaseType.FindMembersInHierarchy(conflictingMember.Name).Single();
+                var baseProperty = newBaseType
+                    .FindMembersInHierarchy(conflictingMember.Name)
+                    .Single();
                 throw new InvalidOperationException(
                     CoreStrings.DuplicatePropertiesOnBase(
                         DisplayName(),
@@ -195,7 +214,9 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
                         conflictingMember.DeclaringType.DisplayName(),
                         conflictingMember.Name,
                         baseProperty.DeclaringType.DisplayName(),
-                        baseProperty.Name));
+                        baseProperty.Name
+                    )
+                );
             }
 
             base.BaseType = newBaseType;
@@ -216,12 +237,12 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    public virtual ConfigurationSource? GetBaseTypeConfigurationSource()
-        => _baseTypeConfigurationSource;
+    public virtual ConfigurationSource? GetBaseTypeConfigurationSource() =>
+        _baseTypeConfigurationSource;
 
     [DebuggerStepThrough]
-    private void UpdateBaseTypeConfigurationSource(ConfigurationSource configurationSource)
-        => _baseTypeConfigurationSource = configurationSource.Max(_baseTypeConfigurationSource);
+    private void UpdateBaseTypeConfigurationSource(ConfigurationSource configurationSource) =>
+        _baseTypeConfigurationSource = configurationSource.Max(_baseTypeConfigurationSource);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -230,8 +251,8 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    public virtual IEnumerable<ComplexType> GetDirectlyDerivedTypes()
-        => base.DirectlyDerivedTypes.Cast<ComplexType>();
+    public virtual IEnumerable<ComplexType> GetDirectlyDerivedTypes() =>
+        base.DirectlyDerivedTypes.Cast<ComplexType>();
 
     private bool InheritsFrom(ComplexType type)
     {
@@ -243,8 +264,7 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
             {
                 return true;
             }
-        }
-        while ((currentType = currentType.BaseType) != null);
+        } while ((currentType = currentType.BaseType) != null);
 
         return false;
     }
@@ -290,8 +310,7 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    public virtual ComplexType GetRootType()
-        => BaseType?.GetRootType() ?? this;
+    public virtual ComplexType GetRootType() => BaseType?.GetRootType() ?? this;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -299,8 +318,7 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    private string DisplayName()
-        => ((IReadOnlyComplexType)this).DisplayName();
+    private string DisplayName() => ((IReadOnlyComplexType)this).DisplayName();
 
     /// <summary>
     ///     Runs the conventions when an annotation was set or removed.
@@ -312,8 +330,14 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     protected override IConventionAnnotation? OnAnnotationSet(
         string name,
         IConventionAnnotation? annotation,
-        IConventionAnnotation? oldAnnotation)
-        => Model.ConventionDispatcher.OnComplexTypeAnnotationChanged(Builder, name, annotation, oldAnnotation);
+        IConventionAnnotation? oldAnnotation
+    ) =>
+        Model.ConventionDispatcher.OnComplexTypeAnnotationChanged(
+            Builder,
+            name,
+            annotation,
+            oldAnnotation
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -321,9 +345,8 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override IEnumerable<PropertyBase> GetMembers()
-        => GetProperties()
-            .Concat<PropertyBase>(GetComplexProperties());
+    public override IEnumerable<PropertyBase> GetMembers() =>
+        GetProperties().Concat<PropertyBase>(GetComplexProperties());
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -331,9 +354,8 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override IEnumerable<PropertyBase> GetDeclaredMembers()
-        => GetDeclaredProperties()
-            .Concat<PropertyBase>(GetDeclaredComplexProperties());
+    public override IEnumerable<PropertyBase> GetDeclaredMembers() =>
+        GetDeclaredProperties().Concat<PropertyBase>(GetDeclaredComplexProperties());
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -341,9 +363,8 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override PropertyBase? FindMember(string name)
-        => FindProperty(name)
-            ?? ((PropertyBase?)FindComplexProperty(name));
+    public override PropertyBase? FindMember(string name) =>
+        FindProperty(name) ?? ((PropertyBase?)FindComplexProperty(name));
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -351,8 +372,8 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override IEnumerable<PropertyBase> FindMembersInHierarchy(string name)
-        => FindPropertiesInHierarchy(name)
+    public override IEnumerable<PropertyBase> FindMembersInHierarchy(string name) =>
+        FindPropertiesInHierarchy(name)
             .Concat<PropertyBase>(FindComplexPropertiesInHierarchy(name));
 
     /// <summary>
@@ -361,15 +382,17 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IReadOnlyList<IProperty> ForeignKeyProperties
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _foreignKeyProperties, this,
+    public virtual IReadOnlyList<IProperty> ForeignKeyProperties =>
+        NonCapturingLazyInitializer.EnsureInitialized(
+            ref _foreignKeyProperties,
+            this,
             static entityType =>
             {
                 entityType.EnsureReadOnly();
 
                 return entityType.GetProperties().Where(p => p.IsForeignKey()).ToArray();
-            });
+            }
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -377,15 +400,17 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IReadOnlyList<IProperty> ValueGeneratingProperties
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _valueGeneratingProperties, this,
+    public virtual IReadOnlyList<IProperty> ValueGeneratingProperties =>
+        NonCapturingLazyInitializer.EnsureInitialized(
+            ref _valueGeneratingProperties,
+            this,
             static complexType =>
             {
                 complexType.EnsureReadOnly();
 
                 return complexType.GetProperties().Where(p => p.RequiresValueGenerator()).ToArray();
-            });
+            }
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -393,8 +418,8 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string? OnTypeMemberIgnored(string name)
-        => Model.ConventionDispatcher.OnComplexTypeMemberIgnored(Builder, name);
+    public override string? OnTypeMemberIgnored(string name) =>
+        Model.ConventionDispatcher.OnComplexTypeMemberIgnored(Builder, name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -404,17 +429,23 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     /// </summary>
     public override InstantiationBinding? ConstructorBinding
     {
-        get => IsReadOnly && !ClrType.IsAbstract
-            ? NonCapturingLazyInitializer.EnsureInitialized(
-                ref _constructorBinding, this, static complexType =>
-                {
-                    ((IModel)complexType.Model).GetModelDependencies().ConstructorBindingFactory.GetBindings(
-                        (IReadOnlyEntityType)complexType,
-                        out complexType._constructorBinding,
-                        out complexType._serviceOnlyConstructorBinding);
-                })
-            : _constructorBinding;
-
+        get =>
+            IsReadOnly && !ClrType.IsAbstract
+                ? NonCapturingLazyInitializer.EnsureInitialized(
+                    ref _constructorBinding,
+                    this,
+                    static complexType =>
+                    {
+                        ((IModel)complexType.Model)
+                            .GetModelDependencies()
+                            .ConstructorBindingFactory.GetBindings(
+                                (IReadOnlyEntityType)complexType,
+                                out complexType._constructorBinding,
+                                out complexType._serviceOnlyConstructorBinding
+                            );
+                    }
+                )
+                : _constructorBinding;
         set => SetConstructorBinding(value, ConfigurationSource.Explicit);
     }
 
@@ -426,7 +457,8 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     /// </summary>
     public virtual InstantiationBinding? SetConstructorBinding(
         InstantiationBinding? constructorBinding,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         EnsureMutable();
 
@@ -450,11 +482,15 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetConstructorBindingConfigurationSource()
-        => _constructorBindingConfigurationSource;
+    public virtual ConfigurationSource? GetConstructorBindingConfigurationSource() =>
+        _constructorBindingConfigurationSource;
 
-    private void UpdateConstructorBindingConfigurationSource(ConfigurationSource configurationSource)
-        => _constructorBindingConfigurationSource = configurationSource.Max(_constructorBindingConfigurationSource);
+    private void UpdateConstructorBindingConfigurationSource(
+        ConfigurationSource configurationSource
+    ) =>
+        _constructorBindingConfigurationSource = configurationSource.Max(
+            _constructorBindingConfigurationSource
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -476,7 +512,8 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     /// </summary>
     public virtual InstantiationBinding? SetServiceOnlyConstructorBinding(
         InstantiationBinding? constructorBinding,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         EnsureMutable();
 
@@ -500,12 +537,15 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetServiceOnlyConstructorBindingConfigurationSource()
-        => _serviceOnlyConstructorBindingConfigurationSource;
+    public virtual ConfigurationSource? GetServiceOnlyConstructorBindingConfigurationSource() =>
+        _serviceOnlyConstructorBindingConfigurationSource;
 
-    private void UpdateServiceOnlyConstructorBindingConfigurationSource(ConfigurationSource configurationSource)
-        => _serviceOnlyConstructorBindingConfigurationSource =
-            configurationSource.Max(_serviceOnlyConstructorBindingConfigurationSource);
+    private void UpdateServiceOnlyConstructorBindingConfigurationSource(
+        ConfigurationSource configurationSource
+    ) =>
+        _serviceOnlyConstructorBindingConfigurationSource = configurationSource.Max(
+            _serviceOnlyConstructorBindingConfigurationSource
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -513,10 +553,11 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IReadOnlyComplexType)this).ToDebugString(),
-            () => ((IReadOnlyComplexType)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () => ((IReadOnlyComplexType)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -524,8 +565,8 @@ public class ComplexType : TypeBase, IMutableComplexType, IConventionComplexType
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IReadOnlyComplexType)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IReadOnlyComplexType)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     #region Explicit interface implementations
 

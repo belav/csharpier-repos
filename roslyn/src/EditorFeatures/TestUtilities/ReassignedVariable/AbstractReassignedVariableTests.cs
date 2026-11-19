@@ -35,7 +35,11 @@ public abstract class AbstractReassignedVariableTests
 
             var service = document.GetRequiredLanguageService<IReassignedVariableService>();
             var textSpans = ImmutableArray.Create(new TextSpan(0, text.Length));
-            var result = await service.GetLocationsAsync(document, textSpans, CancellationToken.None);
+            var result = await service.GetLocationsAsync(
+                document,
+                textSpans,
+                CancellationToken.None
+            );
 
             var expectedSpans = workspace.Documents[i].SelectedSpans.OrderBy(s => s.Start);
             var actualSpans = result.OrderBy(s => s.Start);

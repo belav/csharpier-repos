@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 //
 // Hash
@@ -13,8 +13,8 @@
 //
 
 using System;
-using System.Diagnostics.Contracts;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
@@ -45,13 +45,15 @@ namespace System.Security.Policy
             // We have three serialization formats that we might be deserializing, the Whidbey format which
             // contains hash values directly, the Whidbey format which contains a pointer to a PEImage, and
             // the v4 format which contains a dictionary of calculated hashes.
-            // 
+            //
             // If we have the Whidbey version that has built in hash values, we can convert that, but we
             // cannot do anything with the PEImage format since that is a serialized pointer into another
             // runtime's VM.
-            // 
+            //
 
-            Dictionary<Type, byte[]> hashes = info.GetValueNoThrow("Hashes", typeof(Dictionary<Type, byte[]>)) as Dictionary<Type, byte[]>;
+            Dictionary<Type, byte[]> hashes =
+                info.GetValueNoThrow("Hashes", typeof(Dictionary<Type, byte[]>))
+                as Dictionary<Type, byte[]>;
             if (hashes != null)
             {
                 m_hashes = hashes;
@@ -91,13 +93,19 @@ namespace System.Security.Policy
                 throw new ArgumentNullException("assembly");
             Contract.EndContractBlock();
             if (assembly.IsDynamic)
-                throw new ArgumentException(Environment.GetResourceString("Security_CannotGenerateHash"), "assembly");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Security_CannotGenerateHash"),
+                    "assembly"
+                );
 
             m_hashes = new Dictionary<Type, byte[]>();
             m_assembly = assembly as RuntimeAssembly;
 
             if (m_assembly == null)
-                throw new ArgumentException(Environment.GetResourceString("Argument_MustBeRuntimeAssembly"), "assembly");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_MustBeRuntimeAssembly"),
+                    "assembly"
+                );
         }
 
         /// <summary>
@@ -208,9 +216,9 @@ namespace System.Security.Policy
             {
                 info.AddValue("Sha1", sha1Hash);
             }
-            
+
             // For perf, don't serialize the assembly binary content.
-            // This has the side-effect that the Whidbey runtime will not be able to compute any 
+            // This has the side-effect that the Whidbey runtime will not be able to compute any
             // hashes besides the provided MD5 and SHA1.
             info.AddValue("RawData", null);
             // It doesn't make sense to serialize a memory pointer cross-runtime.
@@ -220,7 +228,7 @@ namespace System.Security.Policy
             // Current implementation
             //
 
-            // Add all the computed hashes. While this can duplicate the MD5 and SHA1 hashes, 
+            // Add all the computed hashes. While this can duplicate the MD5 and SHA1 hashes,
             // it allows for a clean separation between legacy support and the current implementation.
             info.AddValue("Hashes", m_hashes);
         }
@@ -235,7 +243,9 @@ namespace System.Security.Policy
                 byte[] sha1 = null;
                 if (!m_hashes.TryGetValue(typeof(SHA1), out sha1))
                 {
-                    sha1 = GenerateHash(GetDefaultHashImplementationOrFallback(typeof(SHA1), typeof(SHA1)));
+                    sha1 = GenerateHash(
+                        GetDefaultHashImplementationOrFallback(typeof(SHA1), typeof(SHA1))
+                    );
                 }
 
                 byte[] returnHash = new byte[sha1.Length];
@@ -254,7 +264,9 @@ namespace System.Security.Policy
                 byte[] sha256 = null;
                 if (!m_hashes.TryGetValue(typeof(SHA256), out sha256))
                 {
-                    sha256 = GenerateHash(GetDefaultHashImplementationOrFallback(typeof(SHA256), typeof(SHA256)));
+                    sha256 = GenerateHash(
+                        GetDefaultHashImplementationOrFallback(typeof(SHA256), typeof(SHA256))
+                    );
                 }
 
                 byte[] returnHash = new byte[sha256.Length];
@@ -273,7 +285,9 @@ namespace System.Security.Policy
                 byte[] md5 = null;
                 if (!m_hashes.TryGetValue(typeof(MD5), out md5))
                 {
-                    md5 = GenerateHash(GetDefaultHashImplementationOrFallback(typeof(MD5), typeof(MD5)));
+                    md5 = GenerateHash(
+                        GetDefaultHashImplementationOrFallback(typeof(MD5), typeof(MD5))
+                    );
                 }
 
                 byte[] returnHash = new byte[md5.Length];
@@ -306,7 +320,10 @@ namespace System.Security.Policy
         /// </summary>
         private byte[] GenerateHash(Type hashType)
         {
-            Contract.Assert(hashType != null && typeof(HashAlgorithm).IsAssignableFrom(hashType), "Expected a hash algorithm");
+            Contract.Assert(
+                hashType != null && typeof(HashAlgorithm).IsAssignableFrom(hashType),
+                "Expected a hash algorithm"
+            );
 
             Type indexType = GetHashIndexType(hashType);
             byte[] hashValue = null;
@@ -315,7 +332,9 @@ namespace System.Security.Policy
                 // If we're not attached to an assembly, then we cannot generate hashes on demand
                 if (m_assembly == null)
                 {
-                    throw new InvalidOperationException(Environment.GetResourceString("Security_CannotGenerateHash"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString("Security_CannotGenerateHash")
+                    );
                 }
 
                 hashValue = GenerateHash(hashType, GetRawData());
@@ -330,7 +349,10 @@ namespace System.Security.Policy
         /// </summary>
         private static byte[] GenerateHash(Type hashType, byte[] assemblyBytes)
         {
-            Contract.Assert(hashType != null && typeof(HashAlgorithm).IsAssignableFrom(hashType), "Expected a hash algorithm");
+            Contract.Assert(
+                hashType != null && typeof(HashAlgorithm).IsAssignableFrom(hashType),
+                "Expected a hash algorithm"
+            );
             Contract.Assert(assemblyBytes != null);
 
             using (HashAlgorithm hash = HashAlgorithm.Create(hashType.FullName))
@@ -338,7 +360,6 @@ namespace System.Security.Policy
                 return hash.ComputeHash(assemblyBytes);
             }
         }
-
 
         /// <summary>
         ///     Build the default set of hash values that will be available for all assemblies
@@ -365,7 +386,7 @@ namespace System.Security.Policy
             {
                 GetHashIndexType(typeof(SHA1)),
                 GetHashIndexType(typeof(SHA256)),
-                GetHashIndexType(typeof(MD5))
+                GetHashIndexType(typeof(MD5)),
             };
 
             foreach (Type defaultHashType in defaultHashTypes)
@@ -375,7 +396,10 @@ namespace System.Security.Policy
                 {
                     if (!m_hashes.ContainsKey(defaultHashType))
                     {
-                        m_hashes[defaultHashType] = GenerateHash(hashImplementationType, assemblyBytes);
+                        m_hashes[defaultHashType] = GenerateHash(
+                            hashImplementationType,
+                            assemblyBytes
+                        );
                     }
                 }
             }
@@ -388,11 +412,18 @@ namespace System.Security.Policy
         ///     algorithm than to just return null.  (For instance, throwing a FIPS not supported exception
         ///     when trying to get the MD5 hash evidence).
         /// </summary>
-        private static Type GetDefaultHashImplementationOrFallback(Type hashAlgorithm,
-                                                                   Type fallbackImplementation)
+        private static Type GetDefaultHashImplementationOrFallback(
+            Type hashAlgorithm,
+            Type fallbackImplementation
+        )
         {
-            Contract.Assert(hashAlgorithm != null && typeof(HashAlgorithm).IsAssignableFrom(hashAlgorithm));
-            Contract.Assert(fallbackImplementation != null && GetHashIndexType(hashAlgorithm).IsAssignableFrom(fallbackImplementation));
+            Contract.Assert(
+                hashAlgorithm != null && typeof(HashAlgorithm).IsAssignableFrom(hashAlgorithm)
+            );
+            Contract.Assert(
+                fallbackImplementation != null
+                    && GetHashIndexType(hashAlgorithm).IsAssignableFrom(fallbackImplementation)
+            );
 
             Type defaultImplementation = GetDefaultHashImplementation(hashAlgorithm);
             return defaultImplementation != null ? defaultImplementation : fallbackImplementation;
@@ -405,7 +436,9 @@ namespace System.Security.Policy
         /// </summary>
         private static Type GetDefaultHashImplementation(Type hashAlgorithm)
         {
-            Contract.Assert(hashAlgorithm != null && typeof(HashAlgorithm).IsAssignableFrom(hashAlgorithm));
+            Contract.Assert(
+                hashAlgorithm != null && typeof(HashAlgorithm).IsAssignableFrom(hashAlgorithm)
+            );
 
             if (hashAlgorithm.IsAssignableFrom(typeof(MD5)))
             {
@@ -425,7 +458,10 @@ namespace System.Security.Policy
             {
                 // The managed SHA256 implementation is not a FIPS certified implementation, however on
                 // we have a FIPS alternative.
-                return Type.GetType("System.Security.Cryptography.SHA256CryptoServiceProvider, " + AssemblyRef.SystemCore);
+                return Type.GetType(
+                    "System.Security.Cryptography.SHA256CryptoServiceProvider, "
+                        + AssemblyRef.SystemCore
+                );
             }
             else
             {
@@ -456,7 +492,10 @@ namespace System.Security.Policy
             // further up our inheritence tree.
             if (currentType == null)
             {
-                BCLDebug.Assert(hashType == typeof(HashAlgorithm), "hashType == typeof(HashAlgorithm)");
+                BCLDebug.Assert(
+                    hashType == typeof(HashAlgorithm),
+                    "hashType == typeof(HashAlgorithm)"
+                );
                 currentType = typeof(HashAlgorithm);
             }
 
@@ -495,9 +534,12 @@ namespace System.Security.Policy
             GenerateDefaultHashes();
 
             SecurityElement root = new SecurityElement("System.Security.Policy.Hash");
-            // If you hit this assert then most likely you are trying to change the name of this class. 
+            // If you hit this assert then most likely you are trying to change the name of this class.
             // This is ok as long as you change the hard coded string above and change the assert below.
-            BCLDebug.Assert(this.GetType().FullName.Equals("System.Security.Policy.Hash"), "Class name changed!");
+            BCLDebug.Assert(
+                this.GetType().FullName.Equals("System.Security.Policy.Hash"),
+                "Class name changed!"
+            );
 
             root.AddAttribute("version", "2");
             foreach (KeyValuePair<Type, byte[]> hashValue in m_hashes)

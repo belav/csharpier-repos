@@ -15,12 +15,19 @@ namespace System.Net.NetworkInformation
             _linuxNetworkInterface = linuxNetworkInterface;
         }
 
-        public override int Mtu { get { return _linuxNetworkInterface._mtu; } }
+        public override int Mtu
+        {
+            get { return _linuxNetworkInterface._mtu; }
+        }
 
         public override long GetScopeId(ScopeLevel scopeLevel)
         {
-            if (scopeLevel == ScopeLevel.None || scopeLevel == ScopeLevel.Interface ||
-                scopeLevel == ScopeLevel.Link || scopeLevel == ScopeLevel.Subnet)
+            if (
+                scopeLevel == ScopeLevel.None
+                || scopeLevel == ScopeLevel.Interface
+                || scopeLevel == ScopeLevel.Link
+                || scopeLevel == ScopeLevel.Subnet
+            )
             {
                 return _linuxNetworkInterface.Index;
             }

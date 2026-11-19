@@ -9,7 +9,13 @@ namespace System.Web.Razor.Test.Tokenizer
 {
     public abstract class VBTokenizerTestBase : TokenizerTestBase<VBSymbol, VBSymbolType>
     {
-        private static VBSymbol _ignoreRemaining = new VBSymbol(0, 0, 0, String.Empty, VBSymbolType.Unknown);
+        private static VBSymbol _ignoreRemaining = new VBSymbol(
+            0,
+            0,
+            0,
+            String.Empty,
+            VBSymbolType.Unknown
+        );
 
         protected override VBSymbol IgnoreRemaining
         {

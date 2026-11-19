@@ -41,7 +41,8 @@ namespace System.Text.Json.Nodes
         /// <exception cref="ArgumentNullException">
         ///   The property name of <paramref name="property"/> is <see langword="null"/>.
         /// </exception>
-        public void Add(KeyValuePair<string, JsonNode?> property) => Add(property.Key, property.Value);
+        public void Add(KeyValuePair<string, JsonNode?> property) =>
+            Add(property.Key, property.Value);
 
         /// <summary>
         ///   Removes all elements from the <see cref="JsonObject"/>.
@@ -114,7 +115,9 @@ namespace System.Text.Json.Nodes
         /// <returns>
         ///   <see langword="true"/> if the <see cref="JsonObject"/> contains an element with the property name; otherwise, <see langword="false"/>.
         /// </returns>
-        bool ICollection<KeyValuePair<string, JsonNode?>>.Contains(KeyValuePair<string, JsonNode?> item) => Dictionary.Contains(item);
+        bool ICollection<KeyValuePair<string, JsonNode?>>.Contains(
+            KeyValuePair<string, JsonNode?> item
+        ) => Dictionary.Contains(item);
 
         /// <summary>
         ///   Copies the elements of the <see cref="JsonObject"/> to an array of type KeyValuePair starting at the specified array index.
@@ -133,7 +136,10 @@ namespace System.Text.Json.Nodes
         ///   The number of elements in the source ICollection is greater than the available space from <paramref name="index"/>
         ///   to the end of the destination <paramref name="array"/>.
         /// </exception>
-        void ICollection<KeyValuePair<string, JsonNode?>>.CopyTo(KeyValuePair<string, JsonNode?>[] array, int index) => Dictionary.CopyTo(array, index);
+        void ICollection<KeyValuePair<string, JsonNode?>>.CopyTo(
+            KeyValuePair<string, JsonNode?>[] array,
+            int index
+        ) => Dictionary.CopyTo(array, index);
 
         /// <summary>
         ///   Returns an enumerator that iterates through the <see cref="JsonObject"/>.
@@ -141,7 +147,8 @@ namespace System.Text.Json.Nodes
         /// <returns>
         ///   An enumerator that iterates through the <see cref="JsonObject"/>.
         /// </returns>
-        public IEnumerator<KeyValuePair<string, JsonNode?>> GetEnumerator() => Dictionary.GetEnumerator();
+        public IEnumerator<KeyValuePair<string, JsonNode?>> GetEnumerator() =>
+            Dictionary.GetEnumerator();
 
         /// <summary>
         ///   Removes a key and value from the <see cref="JsonObject"/>.
@@ -152,7 +159,9 @@ namespace System.Text.Json.Nodes
         /// <returns>
         ///   <see langword="true"/> if the element is successfully removed; otherwise, <see langword="false"/>.
         /// </returns>
-        bool ICollection<KeyValuePair<string, JsonNode?>>.Remove(KeyValuePair<string, JsonNode?> item) => Remove(item.Key);
+        bool ICollection<KeyValuePair<string, JsonNode?>>.Remove(
+            KeyValuePair<string, JsonNode?> item
+        ) => Remove(item.Key);
 
         /// <summary>
         ///   Gets a collection containing the property names in the <see cref="JsonObject"/>.
@@ -178,7 +187,10 @@ namespace System.Text.Json.Nodes
         /// <exception cref="ArgumentNullException">
         ///   <paramref name="propertyName"/> is <see langword="null"/>.
         /// </exception>
-        bool IDictionary<string, JsonNode?>.TryGetValue(string propertyName, out JsonNode? jsonNode) => Dictionary.TryGetValue(propertyName, out jsonNode);
+        bool IDictionary<string, JsonNode?>.TryGetValue(
+            string propertyName,
+            out JsonNode? jsonNode
+        ) => Dictionary.TryGetValue(propertyName, out jsonNode);
 
         /// <summary>
         ///   Returns <see langword="false"/>.
@@ -195,11 +207,16 @@ namespace System.Text.Json.Nodes
 
         private JsonPropertyDictionary<JsonNode?> InitializeDictionary()
         {
-            GetUnderlyingRepresentation(out JsonPropertyDictionary<JsonNode?>? dictionary, out JsonElement? jsonElement);
+            GetUnderlyingRepresentation(
+                out JsonPropertyDictionary<JsonNode?>? dictionary,
+                out JsonElement? jsonElement
+            );
 
             if (dictionary is null)
             {
-                bool caseInsensitive = Options.HasValue ? Options.Value.PropertyNameCaseInsensitive : false;
+                bool caseInsensitive = Options.HasValue
+                    ? Options.Value.PropertyNameCaseInsensitive
+                    : false;
                 dictionary = new JsonPropertyDictionary<JsonNode?>(caseInsensitive);
                 if (jsonElement.HasValue)
                 {
@@ -211,7 +228,9 @@ namespace System.Text.Json.Nodes
                             node.Parent = this;
                         }
 
-                        dictionary.Add(new KeyValuePair<string, JsonNode?>(jElementProperty.Name, node));
+                        dictionary.Add(
+                            new KeyValuePair<string, JsonNode?>(jElementProperty.Name, node)
+                        );
                     }
                 }
 
@@ -228,7 +247,10 @@ namespace System.Text.Json.Nodes
         /// Provides a coherent view of the underlying representation of the current node.
         /// The jsonElement value should be consumed if and only if dictionary value is null.
         /// </summary>
-        private void GetUnderlyingRepresentation(out JsonPropertyDictionary<JsonNode?>? dictionary, out JsonElement? jsonElement)
+        private void GetUnderlyingRepresentation(
+            out JsonPropertyDictionary<JsonNode?>? dictionary,
+            out JsonElement? jsonElement
+        )
         {
             // Because JsonElement cannot be read atomically there might be torn reads,
             // however the order of read/write operations guarantees that that's only

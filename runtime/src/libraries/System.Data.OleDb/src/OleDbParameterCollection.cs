@@ -6,56 +6,36 @@ using System.Data.Common;
 
 namespace System.Data.OleDb
 {
-    [Editor("Microsoft.VSDesigner.Data.Design.DBParametersEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [Editor(
+        "Microsoft.VSDesigner.Data.Design.DBParametersEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+        "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public sealed partial class OleDbParameterCollection : DbParameterCollection
     {
         private int _changeID;
 
         private static readonly Type s_itemType = typeof(OleDbParameter);
 
-        internal OleDbParameterCollection() : base()
-        {
-        }
+        internal OleDbParameterCollection()
+            : base() { }
 
         internal int ChangeID
         {
-            get
-            {
-                return _changeID;
-            }
+            get { return _changeID; }
         }
 
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new OleDbParameter this[int index]
         {
-            get
-            {
-                return (OleDbParameter)GetParameter(index);
-            }
-            set
-            {
-                SetParameter(index, value);
-            }
+            get { return (OleDbParameter)GetParameter(index); }
+            set { SetParameter(index, value); }
         }
 
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new OleDbParameter this[string parameterName]
         {
-            get
-            {
-                return (OleDbParameter)GetParameter(parameterName);
-            }
-            set
-            {
-                SetParameter(parameterName, value);
-            }
+            get { return (OleDbParameter)GetParameter(parameterName); }
+            set { SetParameter(parameterName, value); }
         }
 
         public OleDbParameter Add(OleDbParameter value)
@@ -65,7 +45,9 @@ namespace System.Data.OleDb
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("Add(String parameterName, Object value) has been deprecated. Use AddWithValue(String parameterName, Object value) instead.")]
+        [Obsolete(
+            "Add(String parameterName, Object value) has been deprecated. Use AddWithValue(String parameterName, Object value) instead."
+        )]
         public OleDbParameter Add(string? parameterName, object? value)
         {
             return Add(new OleDbParameter(parameterName, value));
@@ -86,7 +68,12 @@ namespace System.Data.OleDb
             return Add(new OleDbParameter(parameterName, oleDbType, size));
         }
 
-        public OleDbParameter Add(string? parameterName, OleDbType oleDbType, int size, string? sourceColumn)
+        public OleDbParameter Add(
+            string? parameterName,
+            OleDbType oleDbType,
+            int size,
+            string? sourceColumn
+        )
         {
             return Add(new OleDbParameter(parameterName, oleDbType, size, sourceColumn));
         }
@@ -124,13 +111,14 @@ namespace System.Data.OleDb
         private void OnChange()
         {
             unchecked
-            { _changeID++; }
+            {
+                _changeID++;
+            }
         }
 
         public void Remove(OleDbParameter value)
         {
             Remove((object)value);
         }
-
     }
 }

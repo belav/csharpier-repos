@@ -14,15 +14,39 @@ namespace System.Text.Tests
         public void GetMaxByteCount(int charCount)
         {
             int expected = (charCount + 1) * 2;
-            Assert.Equal(expected, new UnicodeEncoding(false, true, false).GetMaxByteCount(charCount));
-            Assert.Equal(expected, new UnicodeEncoding(false, false, false).GetMaxByteCount(charCount));
-            Assert.Equal(expected, new UnicodeEncoding(true, true, false).GetMaxByteCount(charCount));
-            Assert.Equal(expected, new UnicodeEncoding(true, false, false).GetMaxByteCount(charCount));
+            Assert.Equal(
+                expected,
+                new UnicodeEncoding(false, true, false).GetMaxByteCount(charCount)
+            );
+            Assert.Equal(
+                expected,
+                new UnicodeEncoding(false, false, false).GetMaxByteCount(charCount)
+            );
+            Assert.Equal(
+                expected,
+                new UnicodeEncoding(true, true, false).GetMaxByteCount(charCount)
+            );
+            Assert.Equal(
+                expected,
+                new UnicodeEncoding(true, false, false).GetMaxByteCount(charCount)
+            );
 
-            Assert.Equal(expected, new UnicodeEncoding(false, true, true).GetMaxByteCount(charCount));
-            Assert.Equal(expected, new UnicodeEncoding(false, false, true).GetMaxByteCount(charCount));
-            Assert.Equal(expected, new UnicodeEncoding(true, true, true).GetMaxByteCount(charCount));
-            Assert.Equal(expected, new UnicodeEncoding(true, false, true).GetMaxByteCount(charCount));
+            Assert.Equal(
+                expected,
+                new UnicodeEncoding(false, true, true).GetMaxByteCount(charCount)
+            );
+            Assert.Equal(
+                expected,
+                new UnicodeEncoding(false, false, true).GetMaxByteCount(charCount)
+            );
+            Assert.Equal(
+                expected,
+                new UnicodeEncoding(true, true, true).GetMaxByteCount(charCount)
+            );
+            Assert.Equal(
+                expected,
+                new UnicodeEncoding(true, false, true).GetMaxByteCount(charCount)
+            );
         }
     }
 }

@@ -6,45 +6,45 @@
 //
 // (C) 2005 John Luke
 //
-using NUnit.Framework;
 using System;
 using System.IO;
 using System.Net.Mail;
 using System.Net.Mime;
+using NUnit.Framework;
 
 namespace MonoTests.System.Net.Mail
 {
-	[TestFixture]
-	public class MailAddressCollectionTest
-	{
-		MailAddressCollection ac;
-		MailAddress a;
-		
-		[SetUp]
-		public void GetReady ()
-		{
-			ac = new MailAddressCollection ();
-			a = new MailAddress ("foo@bar.com");
-		}
+    [TestFixture]
+    public class MailAddressCollectionTest
+    {
+        MailAddressCollection ac;
+        MailAddress a;
 
-		[Test]
-		public void InitialCount ()
-		{
-			Assert.IsTrue (ac.Count == 0);
-		}
+        [SetUp]
+        public void GetReady()
+        {
+            ac = new MailAddressCollection();
+            a = new MailAddress("foo@bar.com");
+        }
 
-		[Test]
-		public void AddCount ()
-		{
-			ac.Add (a);
-			Assert.IsTrue (ac.Count == 1);
-		}
+        [Test]
+        public void InitialCount()
+        {
+            Assert.IsTrue(ac.Count == 0);
+        }
 
-		[Test]
-		public void RemoveCount ()
-		{
-			ac.Remove (a);
-			Assert.IsTrue (ac.Count == 0);
-		}
-	}
+        [Test]
+        public void AddCount()
+        {
+            ac.Add(a);
+            Assert.IsTrue(ac.Count == 1);
+        }
+
+        [Test]
+        public void RemoveCount()
+        {
+            ac.Remove(a);
+            Assert.IsTrue(ac.Count == 0);
+        }
+    }
 }

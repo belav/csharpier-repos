@@ -7,10 +7,9 @@ namespace System.IO.Tests
     {
         protected override bool GetThrowsWhenDoesntExist => true;
 
-        protected override UnixFileMode GetMode(string path)
-            => File.GetUnixFileMode(path);
+        protected override UnixFileMode GetMode(string path) => File.GetUnixFileMode(path);
 
-        protected override void SetMode(string path, UnixFileMode mode)
-            => File.SetUnixFileMode(path, mode);
+        protected override void SetMode(string path, UnixFileMode mode) =>
+            File.SetUnixFileMode(path, mode);
     }
 }

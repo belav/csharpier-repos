@@ -1,19 +1,19 @@
 #region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,26 +21,24 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 using System;
-using System.Data.Common;
-using System.Linq;
 using System.Collections.Generic;
-using System.Text;
-using System.Data.Linq.Mapping;
-using System.Reflection;
 using System.Data;
-
+using System.Data.Common;
+using System.Data.Linq.Mapping;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using DbLinq.Data.Linq.SqlClient;
+using DbLinq.Util;
+using DbLinq.Vendor;
 #if MONO_STRICT
 using System.Data.Linq;
 #else
 using DbLinq.Data.Linq;
 #endif
-
-using DbLinq.Data.Linq.SqlClient;
-using DbLinq.Util;
-using DbLinq.Vendor;
 
 namespace DbLinq.Firebird
 {
@@ -50,17 +48,26 @@ namespace DbLinq.Firebird
 #endif
     class FirebirdVendor : Vendor.Implementation.Vendor
     {
-        public override string VendorName { get { return "FirebirdSql"; } }
+        public override string VendorName
+        {
+            get { return "FirebirdSql"; }
+        }
 
         protected readonly FirebirdSqlProvider sqlProvider = new FirebirdSqlProvider();
-        public override ISqlProvider SqlProvider { get { return sqlProvider; } }
+        public override ISqlProvider SqlProvider
+        {
+            get { return sqlProvider; }
+        }
 
         /// <summary>
-        /// call mysql stored proc or stored function, 
+        /// call mysql stored proc or stored function,
         /// optionally return DataSet, and collect return params.
         /// </summary>
-        public override System.Data.Linq.IExecuteResult ExecuteMethodCall(DataContext context, MethodInfo method
-                                                                 , params object[] inputValues)
+        public override System.Data.Linq.IExecuteResult ExecuteMethodCall(
+            DataContext context,
+            MethodInfo method,
+            params object[] inputValues
+        )
         {
             if (method == null)
                 throw new ArgumentNullException("L56 Null 'method' parameter");
@@ -89,7 +96,10 @@ namespace DbLinq.Firebird
                     ParameterInfo paramInfo = paramInfos[i];
 
                     //TODO: check to make sure there is exactly one [Parameter]?
-                    ParameterAttribute paramAttrib = paramInfo.GetCustomAttributes(false).OfType<ParameterAttribute>().Single();
+                    ParameterAttribute paramAttrib = paramInfo
+                        .GetCustomAttributes(false)
+                        .OfType<ParameterAttribute>()
+                        .Single();
 
                     string paramName = "@" + paramAttrib.Name; //eg. '@param1'
                     paramNames.Add(paramName);
@@ -99,7 +109,10 @@ namespace DbLinq.Firebird
                     IDbDataParameter cmdParam = command.CreateParameter();
                     cmdParam.ParameterName = paramName;
                     //cmdParam.Direction = System.Data.ParameterDirection.Input;
-                    if (direction == System.Data.ParameterDirection.Input || direction == System.Data.ParameterDirection.InputOutput)
+                    if (
+                        direction == System.Data.ParameterDirection.Input
+                        || direction == System.Data.ParameterDirection.InputOutput
+                    )
                     {
                         object inputValue = inputValues[currInputIndex++];
                         cmdParam.Value = inputValue;
@@ -120,8 +133,12 @@ namespace DbLinq.Firebird
                 else
                 {
                     //functions: 'SELECT * FROM myFunction()' or 'SELECT * FROM hello(?s)'
-                    command.CommandText = "SELECT * FROM " + command.CommandText + "("
-                        + string.Join(",", paramNames.ToArray()) + ")";
+                    command.CommandText =
+                        "SELECT * FROM "
+                        + command.CommandText
+                        + "("
+                        + string.Join(",", paramNames.ToArray())
+                        + ")";
                 }
 
                 if (method.ReturnType == typeof(DataSet))
@@ -144,7 +161,10 @@ namespace DbLinq.Firebird
             }
         }
 
-        static System.Data.ParameterDirection GetDirection(ParameterInfo paramInfo, ParameterAttribute paramAttrib)
+        static System.Data.ParameterDirection GetDirection(
+            ParameterInfo paramInfo,
+            ParameterAttribute paramAttrib
+        )
         {
             //strange hack to determine what's a ref, out parameter:
             //http://lists.ximian.com/pipermain/mono-list/2003-March/012751.html
@@ -159,7 +179,10 @@ namespace DbLinq.Firebird
         /// <summary>
         /// Collect all Out or InOut param values, casting them to the correct .net type.
         /// </summary>
-        private List<object> CopyOutParams(ParameterInfo[] paramInfos, IDataParameterCollection paramSet)
+        private List<object> CopyOutParams(
+            ParameterInfo[] paramInfos,
+            IDataParameterCollection paramSet
+        )
         {
             List<object> outParamValues = new List<object>();
             //Type type_t = typeof(T);

@@ -14,20 +14,30 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     internal interface ILspSymbolInformationCreationService : IWorkspaceService
     {
         SymbolInformation Create(
-            string name, string? containerName, LSP.SymbolKind kind, LSP.Location location, Glyph glyph);
+            string name,
+            string? containerName,
+            LSP.SymbolKind kind,
+            LSP.Location location,
+            Glyph glyph
+        );
     }
 
     [ExportWorkspaceService(typeof(ILspSymbolInformationCreationService)), Shared]
-    internal sealed class DefaultLspSymbolInformationCreationService : ILspSymbolInformationCreationService
+    internal sealed class DefaultLspSymbolInformationCreationService
+        : ILspSymbolInformationCreationService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultLspSymbolInformationCreationService()
-        {
-        }
+        public DefaultLspSymbolInformationCreationService() { }
 
-        public SymbolInformation Create(string name, string? containerName, LSP.SymbolKind kind, LSP.Location location, Glyph glyph)
-            => new()
+        public SymbolInformation Create(
+            string name,
+            string? containerName,
+            LSP.SymbolKind kind,
+            LSP.Location location,
+            Glyph glyph
+        ) =>
+            new()
             {
                 Name = name,
                 ContainerName = containerName,

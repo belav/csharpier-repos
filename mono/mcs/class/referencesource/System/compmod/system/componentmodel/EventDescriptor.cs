@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="EventDescriptor.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel {
-
+namespace System.ComponentModel
+{
     using System;
     using System.Diagnostics;
     using System.Reflection;
@@ -21,7 +21,8 @@ namespace System.ComponentModel {
     /// </devdoc>
     [HostProtection(SharedState = true)]
     [System.Runtime.InteropServices.ComVisible(true)]
-    public abstract class EventDescriptor : MemberDescriptor {
+    public abstract class EventDescriptor : MemberDescriptor
+    {
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of the <see cref='System.ComponentModel.EventDescriptor'/> class with the
@@ -30,8 +31,8 @@ namespace System.ComponentModel {
         ///    </para>
         /// </devdoc>
         protected EventDescriptor(string name, Attribute[] attrs)
-            : base(name, attrs) {
-        }
+            : base(name, attrs) { }
+
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of the <see cref='System.ComponentModel.EventDescriptor'/> class with the name and attributes in
@@ -40,8 +41,8 @@ namespace System.ComponentModel {
         ///    </para>
         /// </devdoc>
         protected EventDescriptor(MemberDescriptor descr)
-            : base(descr) {
-        }
+            : base(descr) { }
+
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of the <see cref='System.ComponentModel.EventDescriptor'/> class with
@@ -51,8 +52,7 @@ namespace System.ComponentModel {
         ///    </para>
         /// </devdoc>
         protected EventDescriptor(MemberDescriptor descr, Attribute[] attrs)
-            : base(descr, attrs) {
-        }
+            : base(descr, attrs) { }
 
         /// <devdoc>
         ///    <para>

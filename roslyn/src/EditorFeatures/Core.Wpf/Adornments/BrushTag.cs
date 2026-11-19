@@ -24,12 +24,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
 
         private Brush? _brush;
 
-        protected BrushTag(IEditorFormatMap editorFormatMap)
-            => _editorFormatMap = editorFormatMap;
+        protected BrushTag(IEditorFormatMap editorFormatMap) => _editorFormatMap = editorFormatMap;
 
         public Brush GetBrush(IWpfTextView view)
             // If we can't get the color for some reason, fall back to a hard-coded value the editor has for outlining.
-            => _brush ??= new SolidColorBrush(this.GetColor(view, _editorFormatMap) ?? s_lightGray);
+            =>
+            _brush ??= new SolidColorBrush(this.GetColor(view, _editorFormatMap) ?? s_lightGray);
 
         protected abstract Color? GetColor(IWpfTextView view, IEditorFormatMap editorFormatMap);
     }

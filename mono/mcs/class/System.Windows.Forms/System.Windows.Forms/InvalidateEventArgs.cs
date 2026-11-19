@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,27 +23,28 @@
 //	Peter Bartok	pbartok@novell.com
 //
 
-
 // COMPLETE
 
 using System.Drawing;
 
-namespace System.Windows.Forms {
-	public class InvalidateEventArgs : EventArgs {
-		private Rectangle	invalidated_rectangle;
+namespace System.Windows.Forms
+{
+    public class InvalidateEventArgs : EventArgs
+    {
+        private Rectangle invalidated_rectangle;
 
-		#region Public Constructors
-		public InvalidateEventArgs(System.Drawing.Rectangle invalidRect) {
-			this.invalidated_rectangle=invalidRect;
-		}
-		#endregion	// Public Constructors
+        #region Public Constructors
+        public InvalidateEventArgs(System.Drawing.Rectangle invalidRect)
+        {
+            this.invalidated_rectangle = invalidRect;
+        }
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
-		public Rectangle InvalidRect {
-			get {
-				return this.invalidated_rectangle;
-			}
-		}
-		#endregion	// Public Instance Properties
-	}
+        #region Public Instance Properties
+        public Rectangle InvalidRect
+        {
+            get { return this.invalidated_rectangle; }
+        }
+        #endregion	// Public Instance Properties
+    }
 }

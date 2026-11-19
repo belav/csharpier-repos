@@ -5,13 +5,27 @@ namespace System.Collections.Specialized.Tests
 {
     public partial class MyNameObjectCollection : NameObjectCollectionBase
     {
-        public MyNameObjectCollection() : base() { }
-        public MyNameObjectCollection(int capacity) : base(capacity) { }
-        public MyNameObjectCollection(IEqualityComparer comparer) : base(comparer) { }
-        public MyNameObjectCollection(int capacity, IEqualityComparer comparer) : base(capacity, comparer) { }
+        public MyNameObjectCollection()
+            : base() { }
+
+        public MyNameObjectCollection(int capacity)
+            : base(capacity) { }
+
+        public MyNameObjectCollection(IEqualityComparer comparer)
+            : base(comparer) { }
+
+        public MyNameObjectCollection(int capacity, IEqualityComparer comparer)
+            : base(capacity, comparer) { }
 #pragma warning disable CS0618 // Type or member is obsolete
-        public MyNameObjectCollection(IHashCodeProvider hashProvider, IComparer comparer) : base(hashProvider, comparer) { }
-        public MyNameObjectCollection(int capacity, IHashCodeProvider hashProvider, IComparer comparer) : base(capacity, hashProvider, comparer) { }
+        public MyNameObjectCollection(IHashCodeProvider hashProvider, IComparer comparer)
+            : base(hashProvider, comparer) { }
+
+        public MyNameObjectCollection(
+            int capacity,
+            IHashCodeProvider hashProvider,
+            IComparer comparer
+        )
+            : base(capacity, hashProvider, comparer) { }
 #pragma warning restore CS0618 // Type or member is obsolete
 
         public new bool IsReadOnly
@@ -22,7 +36,7 @@ namespace System.Collections.Specialized.Tests
 
         public bool HasKeys() => BaseHasKeys();
 
-        public void Add(string name, Foo value) =>  BaseAdd(name, value);
+        public void Add(string name, Foo value) => BaseAdd(name, value);
 
         public void Remove(string name) => BaseRemove(name);
 

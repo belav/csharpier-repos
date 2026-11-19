@@ -80,7 +80,9 @@ namespace System.Speech.Internal.SrgsCompiler
                     sb.Append(s);
                 }
                 _symbols.Add(sb.ToString(), out semanticInterpretationGlobals);
-                semanticInterpretationGlobals = _symbols.OffsetFromId(semanticInterpretationGlobals);
+                semanticInterpretationGlobals = _symbols.OffsetFromId(
+                    semanticInterpretationGlobals
+                );
                 if (semanticInterpretationGlobals > ushort.MaxValue)
                 {
                     throw new OverflowException(SR.Get(SRID.TooManyRulesWithSemanticsGlobals));
@@ -93,20 +95,32 @@ namespace System.Speech.Internal.SrgsCompiler
                 _symbols.Add(script._sMethod, out script._idSymbol);
             }
             // get the header
-            CfgGrammar.CfgSerializedHeader header = BuildHeader(sortedStates, cBasePath, unchecked((ushort)semanticInterpretationGlobals), out cArcs, out pWeights);
+            CfgGrammar.CfgSerializedHeader header = BuildHeader(
+                sortedStates,
+                cBasePath,
+                unchecked((ushort)semanticInterpretationGlobals),
+                out cArcs,
+                out pWeights
+            );
             streamBuffer.WriteStream(header);
 
             //
             //  For the string blobs, we must explicitly report I/O error since the blobs don't
             //  use the error log facility.
             //
-            System.Diagnostics.Debug.Assert(streamBuffer.Stream.Position - startStreamPosition == header.pszWords);
+            System.Diagnostics.Debug.Assert(
+                streamBuffer.Stream.Position - startStreamPosition == header.pszWords
+            );
             streamBuffer.WriteArrayChar(_words.SerializeData(), _words.SerializeSize());
 
-            System.Diagnostics.Debug.Assert(streamBuffer.Stream.Position - startStreamPosition == header.pszSymbols);
+            System.Diagnostics.Debug.Assert(
+                streamBuffer.Stream.Position - startStreamPosition == header.pszSymbols
+            );
             streamBuffer.WriteArrayChar(_symbols.SerializeData(), _symbols.SerializeSize());
 
-            System.Diagnostics.Debug.Assert(streamBuffer.Stream.Position - startStreamPosition == header.pRules);
+            System.Diagnostics.Debug.Assert(
+                streamBuffer.Stream.Position - startStreamPosition == header.pRules
+            );
             foreach (Rule rule in _rules)
             {
                 rule.Serialize(streamBuffer);
@@ -129,25 +143,38 @@ namespace System.Speech.Internal.SrgsCompiler
             //
             CfgArc dummyArc = new();
 
-            System.Diagnostics.Debug.Assert(streamBuffer.Stream.Position - startStreamPosition == header.pArcs);
+            System.Diagnostics.Debug.Assert(
+                streamBuffer.Stream.Position - startStreamPosition == header.pArcs
+            );
             streamBuffer.WriteStream(dummyArc);
 
             int ulWeightOffset = 1;
             uint arcOffset = 1;
 
-            bool semanticInterpretation = (GrammarOptions & GrammarOptions.MssV1) == GrammarOptions.MssV1;
+            bool semanticInterpretation =
+                (GrammarOptions & GrammarOptions.MssV1) == GrammarOptions.MssV1;
             foreach (State state in sortedStates)
             {
-                state.SerializeStateEntries(streamBuffer, semanticInterpretation, pWeights, ref arcOffset, ref ulWeightOffset);
+                state.SerializeStateEntries(
+                    streamBuffer,
+                    semanticInterpretation,
+                    pWeights,
+                    ref arcOffset,
+                    ref ulWeightOffset
+                );
             }
 
-            System.Diagnostics.Debug.Assert(streamBuffer.Stream.Position - startStreamPosition == header.pWeights);
+            System.Diagnostics.Debug.Assert(
+                streamBuffer.Stream.Position - startStreamPosition == header.pWeights
+            );
             if (_fNeedWeightTable)
             {
                 streamBuffer.WriteArray<float>(pWeights, cArcs);
             }
 
-            System.Diagnostics.Debug.Assert(streamBuffer.Stream.Position - startStreamPosition == header.tags);
+            System.Diagnostics.Debug.Assert(
+                streamBuffer.Stream.Position - startStreamPosition == header.tags
+            );
             if (!semanticInterpretation)
             {
                 foreach (State state in sortedStates)
@@ -178,7 +205,10 @@ namespace System.Speech.Internal.SrgsCompiler
 
             // Write the script references and the IL write after the header so getting it for the grammar
             // Does not require a seek to the end of the file
-            System.Diagnostics.Debug.Assert(header.pScripts == 0 || streamBuffer.Stream.Position - startStreamPosition == header.pScripts);
+            System.Diagnostics.Debug.Assert(
+                header.pScripts == 0
+                    || streamBuffer.Stream.Position - startStreamPosition == header.pScripts
+            );
             foreach (ScriptRef script in _scriptRefs)
             {
                 script.Serialize(_symbols, streamBuffer);
@@ -253,10 +283,25 @@ namespace System.Speech.Internal.SrgsCompiler
         /// </summary>
         internal Rule CreateRule(string name, SPCFGRULEATTRIBUTES attributes)
         {
+            SPCFGRULEATTRIBUTES allFlags =
+                SPCFGRULEATTRIBUTES.SPRAF_TopLevel
+                | SPCFGRULEATTRIBUTES.SPRAF_Active
+                | SPCFGRULEATTRIBUTES.SPRAF_Export
+                | SPCFGRULEATTRIBUTES.SPRAF_Import
+                | SPCFGRULEATTRIBUTES.SPRAF_Interpreter
+                | SPCFGRULEATTRIBUTES.SPRAF_Dynamic
+                | SPCFGRULEATTRIBUTES.SPRAF_Root;
 
-            SPCFGRULEATTRIBUTES allFlags = SPCFGRULEATTRIBUTES.SPRAF_TopLevel | SPCFGRULEATTRIBUTES.SPRAF_Active | SPCFGRULEATTRIBUTES.SPRAF_Export | SPCFGRULEATTRIBUTES.SPRAF_Import | SPCFGRULEATTRIBUTES.SPRAF_Interpreter | SPCFGRULEATTRIBUTES.SPRAF_Dynamic | SPCFGRULEATTRIBUTES.SPRAF_Root;
-
-            if (attributes != 0 && ((attributes & ~allFlags) != 0 || ((attributes & SPCFGRULEATTRIBUTES.SPRAF_Import) != 0 && (attributes & SPCFGRULEATTRIBUTES.SPRAF_Export) != 0)))
+            if (
+                attributes != 0
+                && (
+                    (attributes & ~allFlags) != 0
+                    || (
+                        (attributes & SPCFGRULEATTRIBUTES.SPRAF_Import) != 0
+                        && (attributes & SPCFGRULEATTRIBUTES.SPRAF_Export) != 0
+                    )
+                )
+            )
             {
                 throw new ArgumentException(SR.Get(SRID.InvalidFlagsSet), nameof(attributes));
             }
@@ -265,9 +310,20 @@ namespace System.Speech.Internal.SrgsCompiler
             // - To maintain maximal backwards compatibility, if a rule is marked as Import, we will unmark TopLevel/Active/Root.
             // - This changes the behavior when application tries to activate this rule.  However, given that it is already
             //   broken/fragile, we believe it is better to change the behavior.
-            if ((attributes & SPCFGRULEATTRIBUTES.SPRAF_Import) != 0 && ((attributes & SPCFGRULEATTRIBUTES.SPRAF_TopLevel) != 0 || (attributes & SPCFGRULEATTRIBUTES.SPRAF_Active) != 0 || (attributes & SPCFGRULEATTRIBUTES.SPRAF_Root) != 0))
+            if (
+                (attributes & SPCFGRULEATTRIBUTES.SPRAF_Import) != 0
+                && (
+                    (attributes & SPCFGRULEATTRIBUTES.SPRAF_TopLevel) != 0
+                    || (attributes & SPCFGRULEATTRIBUTES.SPRAF_Active) != 0
+                    || (attributes & SPCFGRULEATTRIBUTES.SPRAF_Root) != 0
+                )
+            )
             {
-                attributes &= ~(SPCFGRULEATTRIBUTES.SPRAF_TopLevel | SPCFGRULEATTRIBUTES.SPRAF_Active | SPCFGRULEATTRIBUTES.SPRAF_Root);
+                attributes &= ~(
+                    SPCFGRULEATTRIBUTES.SPRAF_TopLevel
+                    | SPCFGRULEATTRIBUTES.SPRAF_Active
+                    | SPCFGRULEATTRIBUTES.SPRAF_Root
+                );
             }
 
             if ((attributes & SPCFGRULEATTRIBUTES.SPRAF_Import) != 0 && (name[0] == '\0'))
@@ -291,7 +347,16 @@ namespace System.Speech.Internal.SrgsCompiler
 
             int idString;
             int cImportedRule = 0;
-            Rule rule = new(this, name, _symbols.Add(name, out idString), attributes, _ruleIndex, 0, _grammarOptions & GrammarOptions.TagFormat, ref cImportedRule);
+            Rule rule = new(
+                this,
+                name,
+                _symbols.Add(name, out idString),
+                attributes,
+                _ruleIndex,
+                0,
+                _grammarOptions & GrammarOptions.TagFormat,
+                ref cImportedRule
+            );
 
             rule._iSerialize2 = _ruleIndex++;
 
@@ -340,9 +405,15 @@ namespace System.Speech.Internal.SrgsCompiler
                 {
                     int dwSymbolOffset = _symbols.OffsetFromId(iWord);
 
-                    System.Diagnostics.Debug.Assert(dwSymbolOffset == 0 || _symbols[iWord] == sRule);
+                    System.Diagnostics.Debug.Assert(
+                        dwSymbolOffset == 0 || _symbols[iWord] == sRule
+                    );
 
-                    rule = dwSymbolOffset > 0 && _nameOffsetRules.TryGetValue(dwSymbolOffset, out Rule value) ? value : null;
+                    rule =
+                        dwSymbolOffset > 0
+                        && _nameOffsetRules.TryGetValue(dwSymbolOffset, out Rule value)
+                            ? value
+                            : null;
                 }
             }
 
@@ -352,7 +423,18 @@ namespace System.Speech.Internal.SrgsCompiler
 
                 // at least one of the 2 arguments matched
                 // names either match or they are both null!
-                if (!((string.IsNullOrEmpty(sRule) || (!string.IsNullOrEmpty(sRule) && !string.IsNullOrEmpty(sRuleFound) && sRuleFound == sRule))))
+                if (
+                    !(
+                        (
+                            string.IsNullOrEmpty(sRule)
+                            || (
+                                !string.IsNullOrEmpty(sRule)
+                                && !string.IsNullOrEmpty(sRuleFound)
+                                && sRuleFound == sRule
+                            )
+                        )
+                    )
+                )
                 {
                     LogError(sRule, SRID.RuleNameIdConflict);
                 }
@@ -379,7 +461,16 @@ namespace System.Speech.Internal.SrgsCompiler
             // Performs white space normalization in place
             text = NormalizeTokenWhiteSpace(text);
 
-            return new Arc(text, null, _words, 1.0f, CfgGrammar.SP_NORMAL_CONFIDENCE, null, matchMode, ref _fNeedWeightTable);
+            return new Arc(
+                text,
+                null,
+                _words,
+                1.0f,
+                CfgGrammar.SP_NORMAL_CONFIDENCE,
+                null,
+                matchMode,
+                ref _fNeedWeightTable
+            );
         }
 
         /// <summary>
@@ -403,7 +494,11 @@ namespace System.Speech.Internal.SrgsCompiler
 
             Rule specialRuleTrans = null;
 
-            if (rule == CfgGrammar.SPRULETRANS_WILDCARD || rule == CfgGrammar.SPRULETRANS_DICTATION || rule == CfgGrammar.SPRULETRANS_TEXTBUFFER)
+            if (
+                rule == CfgGrammar.SPRULETRANS_WILDCARD
+                || rule == CfgGrammar.SPRULETRANS_DICTATION
+                || rule == CfgGrammar.SPRULETRANS_TEXTBUFFER
+            )
             {
                 specialRuleTrans = rule;
             }
@@ -413,7 +508,16 @@ namespace System.Speech.Internal.SrgsCompiler
             }
 
             bool fNeedWeightTable = false;
-            Arc arc = new(null, ruleToTransitionTo, _words, flWeight, '\0', specialRuleTrans, MatchMode.AllWords, ref fNeedWeightTable);
+            Arc arc = new(
+                null,
+                ruleToTransitionTo,
+                _words,
+                flWeight,
+                '\0',
+                specialRuleTrans,
+                MatchMode.AllWords,
+                ref fNeedWeightTable
+            );
 
             AddArc(arc);
 
@@ -440,7 +544,6 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal void AddSemanticInterpretationTag(Arc arc, CfgGrammar.CfgProperty propertyInfo)
         {
-
             Tag tag = new(this, propertyInfo);
             _tags.Add(tag);
 
@@ -450,7 +553,6 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal void AddPropertyTag(Arc start, Arc end, CfgGrammar.CfgProperty propertyInfo)
         {
-
             Tag tag = new(this, propertyInfo);
             _tags.Add(tag);
 
@@ -465,8 +567,8 @@ namespace System.Speech.Internal.SrgsCompiler
         /// </summary>
         internal State CloneSubGraph(State srcFromState, State srcEndState, State destFromState)
         {
-            Dictionary<State, State> SrcToDestHash = new();    // Hash source state to destination state
-            Stack<State> CloneStack = new();       // States to process
+            Dictionary<State, State> SrcToDestHash = new(); // Hash source state to destination state
+            Stack<State> CloneStack = new(); // States to process
             Dictionary<Tag, Tag> tags = new();
 
             // Add initial state to CloneStack and SrcToDestHash.
@@ -520,11 +622,17 @@ namespace System.Speech.Internal.SrgsCompiler
         /// cloning each transition except ones originating from SrcEndState, and return
         /// the cloned state corresponding to SrcEndState.
         /// </summary>
-        internal void CloneSubGraph(Rule rule, Backend org, Backend extra, Dictionary<State, State> srcToDestHash, bool fromOrg)
+        internal void CloneSubGraph(
+            Rule rule,
+            Backend org,
+            Backend extra,
+            Dictionary<State, State> srcToDestHash,
+            bool fromOrg
+        )
         {
             Backend beSrc = fromOrg ? org : extra;
 
-            List<State> CloneStack = new();       // States to process
+            List<State> CloneStack = new(); // States to process
             Dictionary<Tag, Tag> tags = new();
 
             // Push all the state for the top level rule
@@ -580,12 +688,17 @@ namespace System.Speech.Internal.SrgsCompiler
                                 Rule ruleExtra = extra.FindInRules(ruleName);
                                 if (ruleExtra == null)
                                 {
-                                    XmlParser.ThrowSrgsException(SRID.DynamicRuleNotFound, ruleName);
+                                    XmlParser.ThrowSrgsException(
+                                        SRID.DynamicRuleNotFound,
+                                        ruleName
+                                    );
                                 }
                                 CloneSubGraph(ruleExtra, org, extra, srcToDestHash, false);
                             }
                         }
-                        else if (arc.RuleRef.Name.StartsWith("URL:STATIC#", StringComparison.Ordinal))
+                        else if (
+                            arc.RuleRef.Name.StartsWith("URL:STATIC#", StringComparison.Ordinal)
+                        )
                         {
                             ruleName = arc.RuleRef.Name.Substring(11);
                             if (fromOrg == false && FindInRules(ruleName) == null)
@@ -593,7 +706,10 @@ namespace System.Speech.Internal.SrgsCompiler
                                 Rule ruleOrg = org.FindInRules(ruleName);
                                 if (ruleOrg == null)
                                 {
-                                    XmlParser.ThrowSrgsException(SRID.DynamicRuleNotFound, ruleName);
+                                    XmlParser.ThrowSrgsException(
+                                        SRID.DynamicRuleNotFound,
+                                        ruleName
+                                    );
                                 }
                                 CloneSubGraph(ruleOrg, org, extra, srcToDestHash, true);
                             }
@@ -626,7 +742,7 @@ namespace System.Speech.Internal.SrgsCompiler
         internal void DeleteSubGraph(State state)
         {
             // Add initial state to DeleteStack.
-            Stack<State> stateToProcess = new();           // States to delete
+            Stack<State> stateToProcess = new(); // States to delete
             Collection<Arc> arcsToDelete = new();
             Collection<State> statesToDelete = new();
             stateToProcess.Push(state);
@@ -646,7 +762,11 @@ namespace System.Speech.Internal.SrgsCompiler
                     State endState = arc.End;
 
                     // Add this state to the list of states to delete
-                    if (endState != null && !stateToProcess.Contains(endState) && !statesToDelete.Contains(endState))
+                    if (
+                        endState != null
+                        && !stateToProcess.Contains(endState)
+                        && !statesToDelete.Contains(endState)
+                    )
                     {
                         stateToProcess.Push(endState);
                     }
@@ -739,7 +859,7 @@ namespace System.Speech.Internal.SrgsCompiler
             char[] achSrc = sToken.ToCharArray();
             int iDest = 0;
 
-            for (int i = 0; i < achSrc.Length;)
+            for (int i = 0; i < achSrc.Length; )
             {
                 // Collapsed multiple white spaces into ' '
                 if (achSrc[i] == ' ')
@@ -766,18 +886,12 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal StringBlob Words
         {
-            get
-            {
-                return _words;
-            }
+            get { return _words; }
         }
 
         internal StringBlob Symbols
         {
-            get
-            {
-                return _symbols;
-            }
+            get { return _symbols; }
         }
 
         #endregion
@@ -886,20 +1000,46 @@ namespace System.Speech.Internal.SrgsCompiler
                         targetState = apStateTable[iNextArc];
                     }
 
-                    float flWeight = header.weights != null ? header.weights[k] : CfgGrammar.DEFAULT_WEIGHT;
+                    float flWeight =
+                        header.weights != null ? header.weights[k] : CfgGrammar.DEFAULT_WEIGHT;
 
                     // determine properties of the arc now ...
                     if (arc.RuleRef)
                     {
                         Rule ruleToTransitionTo = _rules[(int)arc.TransitionIndex];
 
-                        newArc = new Arc(null, ruleToTransitionTo, _words, flWeight, CfgGrammar.SP_NORMAL_CONFIDENCE, null, MatchMode.AllWords, ref _fNeedWeightTable);
+                        newArc = new Arc(
+                            null,
+                            ruleToTransitionTo,
+                            _words,
+                            flWeight,
+                            CfgGrammar.SP_NORMAL_CONFIDENCE,
+                            null,
+                            MatchMode.AllWords,
+                            ref _fNeedWeightTable
+                        );
                     }
                     else
                     {
                         int transitionIndex = (int)arc.TransitionIndex;
-                        int ulSpecialTransitionIndex = (transitionIndex == CfgGrammar.SPWILDCARDTRANSITION || transitionIndex == CfgGrammar.SPDICTATIONTRANSITION || transitionIndex == CfgGrammar.SPTEXTBUFFERTRANSITION) ? transitionIndex : 0;
-                        newArc = new Arc((ulSpecialTransitionIndex != 0) ? 0 : (int)arc.TransitionIndex, flWeight, arc.LowConfRequired ? CfgGrammar.SP_LOW_CONFIDENCE : arc.HighConfRequired ? CfgGrammar.SP_HIGH_CONFIDENCE : CfgGrammar.SP_NORMAL_CONFIDENCE, ulSpecialTransitionIndex, MatchMode.AllWords, ref _fNeedWeightTable);
+                        int ulSpecialTransitionIndex =
+                            (
+                                transitionIndex == CfgGrammar.SPWILDCARDTRANSITION
+                                || transitionIndex == CfgGrammar.SPDICTATIONTRANSITION
+                                || transitionIndex == CfgGrammar.SPTEXTBUFFERTRANSITION
+                            )
+                                ? transitionIndex
+                                : 0;
+                        newArc = new Arc(
+                            (ulSpecialTransitionIndex != 0) ? 0 : (int)arc.TransitionIndex,
+                            flWeight,
+                            arc.LowConfRequired ? CfgGrammar.SP_LOW_CONFIDENCE
+                                : arc.HighConfRequired ? CfgGrammar.SP_HIGH_CONFIDENCE
+                                : CfgGrammar.SP_NORMAL_CONFIDENCE,
+                            ulSpecialTransitionIndex,
+                            MatchMode.AllWords,
+                            ref _fNeedWeightTable
+                        );
                     }
                     newArc.Start = currentState;
                     newArc.End = targetState;
@@ -934,12 +1074,16 @@ namespace System.Speech.Internal.SrgsCompiler
                         // If we have ms-properties than _nameOffset != otherwise it is w3c tags.
                         if (semTag._nameOffset > 0)
                         {
-                            tag._cfgTag._nameOffset = _symbols.OffsetFromId(_symbols.Find(_symbols.FromOffset(semTag._nameOffset)));
+                            tag._cfgTag._nameOffset = _symbols.OffsetFromId(
+                                _symbols.Find(_symbols.FromOffset(semTag._nameOffset))
+                            );
                         }
                         else
                         {
                             // The offset of the JScrip expression is stored in the value field.
-                            tag._cfgTag._valueOffset = _symbols.OffsetFromId(_symbols.Find(_symbols.FromOffset(semTag._valueOffset)));
+                            tag._cfgTag._valueOffset = _symbols.OffsetFromId(
+                                _symbols.Find(_symbols.FromOffset(semTag._valueOffset))
+                            );
                         }
                         iCurTag++;
                     }
@@ -957,16 +1101,25 @@ namespace System.Speech.Internal.SrgsCompiler
 
             _fLoadedFromBinary = true;
             // Save Last ArcIndex
-
         }
 
         private Arc CreateTransition(string sWord, float flWeight, int requiredConfidence)
         {
             // epsilon transition for empty words
-            return AddSingleWordTransition(!string.IsNullOrEmpty(sWord) ? sWord : null, flWeight, requiredConfidence);
+            return AddSingleWordTransition(
+                !string.IsNullOrEmpty(sWord) ? sWord : null,
+                flWeight,
+                requiredConfidence
+            );
         }
 
-        private CfgGrammar.CfgSerializedHeader BuildHeader(List<State> sortedStates, int cBasePath, ushort iSemanticGlobals, out int cArcs, out float[] pWeights)
+        private CfgGrammar.CfgSerializedHeader BuildHeader(
+            List<State> sortedStates,
+            int cBasePath,
+            ushort iSemanticGlobals,
+            out int cArcs,
+            out float[] pWeights
+        )
         {
             cArcs = 1; // Start with offset one! (0 indicates dead state).
             pWeights = null;
@@ -1055,8 +1208,11 @@ namespace System.Speech.Internal.SrgsCompiler
                 header.ulRootRuleIndex = 0xFFFFFFFF;
             }
 
-            header.GrammarOptions = _grammarOptions | ((_alphabet == AlphabetType.Sapi) ? 0 : GrammarOptions.IpaPhoneme);
-            header.GrammarOptions |= _scriptRefs.Count > 0 ? GrammarOptions.STG | GrammarOptions.KeyValuePairSrgs : 0;
+            header.GrammarOptions =
+                _grammarOptions
+                | ((_alphabet == AlphabetType.Sapi) ? 0 : GrammarOptions.IpaPhoneme);
+            header.GrammarOptions |=
+                _scriptRefs.Count > 0 ? GrammarOptions.STG | GrammarOptions.KeyValuePairSrgs : 0;
             header.GrammarMode = (uint)_grammarMode;
             header.cTags = cSemanticTags;
             header.tags = ulOffset;
@@ -1074,7 +1230,12 @@ namespace System.Speech.Internal.SrgsCompiler
             return header;
         }
 
-        private CfgGrammar.CfgHeader BuildRulesFromBinaryGrammar(CfgGrammar.CfgHeader header, State[] apStateTable, SortedDictionary<int, Rule> ruleFirstArcs, int previousCfgLastRules)
+        private CfgGrammar.CfgHeader BuildRulesFromBinaryGrammar(
+            CfgGrammar.CfgHeader header,
+            State[] apStateTable,
+            SortedDictionary<int, Rule> ruleFirstArcs,
+            int previousCfgLastRules
+        )
         {
             for (int i = 0; i < header.rules.Length; i++)
             {
@@ -1082,9 +1243,18 @@ namespace System.Speech.Internal.SrgsCompiler
                 CfgRule cfgRule = header.rules[i];
                 int firstArc = (int)cfgRule.FirstArcIndex;
 
-                cfgRule._nameOffset = _symbols.OffsetFromId(_symbols.Find(header.pszSymbols.FromOffset(cfgRule._nameOffset)));
+                cfgRule._nameOffset = _symbols.OffsetFromId(
+                    _symbols.Find(header.pszSymbols.FromOffset(cfgRule._nameOffset))
+                );
 
-                Rule rule = new(this, _symbols.FromOffset(cfgRule._nameOffset), cfgRule, i + previousCfgLastRules, _grammarOptions & GrammarOptions.TagFormat, ref _cImportedRules);
+                Rule rule = new(
+                    this,
+                    _symbols.FromOffset(cfgRule._nameOffset),
+                    cfgRule,
+                    i + previousCfgLastRules,
+                    _grammarOptions & GrammarOptions.TagFormat,
+                    ref _cImportedRules
+                );
 
                 rule._firstState = _states.CreateNewState(rule);
                 _rules.Add(rule);
@@ -1129,11 +1299,16 @@ namespace System.Speech.Internal.SrgsCompiler
             return header;
         }
 
-        private Rule CloneState(State srcToState, List<State> CloneStack, Dictionary<State, State> srcToDestHash)
+        private Rule CloneState(
+            State srcToState,
+            List<State> CloneStack,
+            Dictionary<State, State> srcToDestHash
+        )
         {
             bool newRule = false;
             int posDynamic = srcToState.Rule.Name.IndexOf("URL:DYNAMIC#", StringComparison.Ordinal);
-            string ruleName = posDynamic != 0 ? srcToState.Rule.Name : srcToState.Rule.Name.Substring(12);
+            string ruleName =
+                posDynamic != 0 ? srcToState.Rule.Name : srcToState.Rule.Name.Substring(12);
             Rule dstRule = FindInRules(ruleName);
 
             // Clone this rule into this GrammarBuilder if it does not exist yet
@@ -1175,7 +1350,9 @@ namespace System.Speech.Internal.SrgsCompiler
         private static void LogError(string rule, SRID srid, params object[] args)
         {
             string sError = SR.Get(srid, args);
-            throw new FormatException(string.Format(CultureInfo.InvariantCulture, "Rule=\"{0}\" - ", rule) + sError);
+            throw new FormatException(
+                string.Format(CultureInfo.InvariantCulture, "Rule=\"{0}\" - ", rule) + sError
+            );
         }
 
         /// <summary>
@@ -1206,7 +1383,9 @@ namespace System.Speech.Internal.SrgsCompiler
                 // Clear this for the next loop through the rules....
                 rule._fHasExitPath |= (rule._cfgRule.Dynamic | rule._cfgRule.Import) ? true : false;
                 rule._iSerialize = ulIndex++;
-                fAtLeastOneRule |= (rule._cfgRule.Dynamic || rule._cfgRule.TopLevel || rule._cfgRule.Export);
+                fAtLeastOneRule |= (
+                    rule._cfgRule.Dynamic || rule._cfgRule.TopLevel || rule._cfgRule.Export
+                );
                 rule.Validate();
             }
 #if DEBUG
@@ -1246,8 +1425,16 @@ namespace System.Speech.Internal.SrgsCompiler
 
         private Arc AddSingleWordTransition(string s, float flWeight, int requiredConfidence)
         {
-
-            Arc arc = new(s, null, _words, flWeight, requiredConfidence, null, MatchMode.AllWords, ref _fNeedWeightTable);
+            Arc arc = new(
+                s,
+                null,
+                _words,
+                flWeight,
+                requiredConfidence,
+                null,
+                MatchMode.AllWords,
+                ref _fNeedWeightTable
+            );
             AddArc(arc);
             return arc;
         }
@@ -1263,66 +1450,36 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal int LangId
         {
-            get
-            {
-                return _langId;
-            }
-            set
-            {
-                _langId = value;
-            }
+            get { return _langId; }
+            set { _langId = value; }
         }
 
         internal GrammarOptions GrammarOptions
         {
-            get
-            {
-                return _grammarOptions;
-            }
-            set
-            {
-                _grammarOptions = value;
-            }
+            get { return _grammarOptions; }
+            set { _grammarOptions = value; }
         }
 
         internal GrammarType GrammarMode
         {
-            set
-            {
-                _grammarMode = value;
-            }
+            set { _grammarMode = value; }
         }
 
         internal AlphabetType Alphabet
         {
-            get
-            {
-                return _alphabet;
-            }
-            set
-            {
-                _alphabet = value;
-            }
+            get { return _alphabet; }
+            set { _alphabet = value; }
         }
 
         internal Collection<string> GlobalTags
         {
-            get
-            {
-                return _globalTags;
-            }
-            set
-            {
-                _globalTags = value;
-            }
+            get { return _globalTags; }
+            set { _globalTags = value; }
         }
 
         internal Collection<ScriptRef> ScriptRefs
         {
-            set
-            {
-                _scriptRefs = value;
-            }
+            set { _scriptRefs = value; }
         }
 
         #endregion

@@ -16,48 +16,58 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpQuickInfo()
-            : base(nameof(CSharpQuickInfo))
-        {
-        }
+            : base(nameof(CSharpQuickInfo)) { }
 
         [IdeFact]
         public async Task QuickInfo_MetadataDocumentation()
         {
-            await SetUpEditorAsync(@"
+            await SetUpEditorAsync(
+                @"
 ///<summary>Hello!</summary>
 class Program
 {
     static void Main(string$$[] args)
     {
     }
-}", HangMitigatingCancellationToken);
+}",
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.InvokeQuickInfoAsync(HangMitigatingCancellationToken);
-            var quickInfo = await TestServices.Editor.GetQuickInfoAsync(HangMitigatingCancellationToken);
+            var quickInfo = await TestServices.Editor.GetQuickInfoAsync(
+                HangMitigatingCancellationToken
+            );
             Assert.Equal(
                 "class System.String\r\nRepresents text as a sequence of UTF-16 code units.To browse the .NET Framework source code for this type, see the Reference Source.",
-                quickInfo);
+                quickInfo
+            );
         }
 
         [IdeFact, Trait(Traits.Editor, Traits.Editors.LanguageServerProtocol)]
         public async Task QuickInfo_Documentation()
         {
-            await SetUpEditorAsync(@"
+            await SetUpEditorAsync(
+                @"
 ///<summary>Hello!</summary>
 class Program$$
 {
     static void Main(string[] args)
     {
     }
-}", HangMitigatingCancellationToken);
+}",
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.InvokeQuickInfoAsync(HangMitigatingCancellationToken);
-            var quickInfo = await TestServices.Editor.GetQuickInfoAsync(HangMitigatingCancellationToken);
+            var quickInfo = await TestServices.Editor.GetQuickInfoAsync(
+                HangMitigatingCancellationToken
+            );
             Assert.Equal("class Program\r\nHello!", quickInfo);
         }
 
         [IdeFact, Trait(Traits.Editor, Traits.Editors.LanguageServerProtocol)]
         public async Task International()
         {
-            await SetUpEditorAsync(@"
+            await SetUpEditorAsync(
+                @"
 /// <summary>
 /// This is an XML doc comment defined in code.
 /// </summary>
@@ -67,17 +77,25 @@ class العربية123
     {
          العربية123$$ goo;
     }
-}", HangMitigatingCancellationToken);
+}",
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.InvokeQuickInfoAsync(HangMitigatingCancellationToken);
-            var quickInfo = await TestServices.Editor.GetQuickInfoAsync(HangMitigatingCancellationToken);
-            Assert.Equal(@"class العربية123
-This is an XML doc comment defined in code.", quickInfo);
+            var quickInfo = await TestServices.Editor.GetQuickInfoAsync(
+                HangMitigatingCancellationToken
+            );
+            Assert.Equal(
+                @"class العربية123
+This is an XML doc comment defined in code.",
+                quickInfo
+            );
         }
 
         [IdeFact, Trait(Traits.Editor, Traits.Editors.LanguageServerProtocol)]
         public async Task SectionOrdering()
         {
-            await SetUpEditorAsync(@"
+            await SetUpEditorAsync(
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -88,10 +106,14 @@ class C
     {
                 return await M$$();
             }
-        }", HangMitigatingCancellationToken);
+        }",
+                HangMitigatingCancellationToken
+            );
 
             await TestServices.Editor.InvokeQuickInfoAsync(HangMitigatingCancellationToken);
-            var quickInfo = await TestServices.Editor.GetQuickInfoAsync(HangMitigatingCancellationToken);
+            var quickInfo = await TestServices.Editor.GetQuickInfoAsync(
+                HangMitigatingCancellationToken
+            );
             var expected = "(awaitable) Task<int> C.M()\r\n\r\nExceptions:\r\n  Exception";
             Assert.Equal(expected, quickInfo);
         }

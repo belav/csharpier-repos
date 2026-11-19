@@ -36,7 +36,8 @@ namespace System.Web.Http.WebHost.Routing
                 // Assert
                 Assert.NotNull(routeData);
                 Assert.Same(product, routeData.Route);
-                HttpRouteExceptionRouteHandler typedHandler = Assert.IsType<HttpRouteExceptionRouteHandler>(routeData.RouteHandler);
+                HttpRouteExceptionRouteHandler typedHandler =
+                    Assert.IsType<HttpRouteExceptionRouteHandler>(routeData.RouteHandler);
                 ExceptionDispatchInfo exceptionInfo = typedHandler.ExceptionInfo;
                 Assert.NotNull(exceptionInfo); // Guard
                 Assert.Same(expectedException, exceptionInfo.SourceException);
@@ -75,8 +76,7 @@ namespace System.Web.Http.WebHost.Routing
         private static IHttpRoute CreateThrowingRoute(Exception exception)
         {
             Mock<IHttpRoute> mock = new Mock<IHttpRoute>(MockBehavior.Strict);
-            mock
-                .Setup(m => m.GetRouteData(It.IsAny<string>(), It.IsAny<HttpRequestMessage>()))
+            mock.Setup(m => m.GetRouteData(It.IsAny<string>(), It.IsAny<HttpRequestMessage>()))
                 .Throws(exception);
             return mock.Object;
         }

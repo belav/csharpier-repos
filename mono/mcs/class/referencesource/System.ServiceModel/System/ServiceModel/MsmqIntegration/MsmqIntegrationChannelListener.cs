@@ -7,16 +7,20 @@ namespace System.ServiceModel.MsmqIntegration
     using System.Xml;
     using System.Xml.Serialization;
 
-    sealed class MsmqIntegrationChannelListener
-        : MsmqInputChannelListenerBase
+    sealed class MsmqIntegrationChannelListener : MsmqInputChannelListenerBase
     {
         XmlSerializer[] xmlSerializerList;
 
-        internal MsmqIntegrationChannelListener(MsmqBindingElementBase bindingElement, BindingContext context, MsmqReceiveParameters receiveParameters)
+        internal MsmqIntegrationChannelListener(
+            MsmqBindingElementBase bindingElement,
+            BindingContext context,
+            MsmqReceiveParameters receiveParameters
+        )
             : base(bindingElement, context, receiveParameters, null)
         {
             SetSecurityTokenAuthenticator(MsmqUri.FormatNameAddressTranslator.Scheme, context);
-            MsmqIntegrationReceiveParameters parameters = receiveParameters as MsmqIntegrationReceiveParameters;
+            MsmqIntegrationReceiveParameters parameters =
+                receiveParameters as MsmqIntegrationReceiveParameters;
             xmlSerializerList = XmlSerializer.FromTypes(parameters.TargetSerializationTypes);
         }
 

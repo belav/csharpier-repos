@@ -1,23 +1,23 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Diagnostics;
     using System.Drawing;
     using System.Drawing.Design;
     using System.Drawing.Drawing2D;
+    using System.Reflection;
     using System.Security;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
     using System.Workflow.Activities;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
-    using System.Windows.Forms;
-    using System.Windows.Forms.Design;
 
     #region Class SetStateDesigner
 
@@ -92,10 +92,9 @@ namespace System.Workflow.Activities
                 Rectangle textRectangle = this.TextRectangle;
                 Point location = new Point(
                     bounds.Left + margin.Width,
-                    textRectangle.Bottom + (margin.Height / 2));
-                Size size = new Size(
-                    bounds.Width - margin.Width * 2,
-                    targetStateSize.Height);
+                    textRectangle.Bottom + (margin.Height / 2)
+                );
+                Size size = new Size(bounds.Width - margin.Width * 2, targetStateSize.Height);
                 return new Rectangle(location, size);
             }
         }
@@ -146,18 +145,20 @@ namespace System.Workflow.Activities
             string targetState = this.TargetState;
             if (String.IsNullOrEmpty(targetState))
             {
-                // We use a dummy string so we don't 
+                // We use a dummy string so we don't
                 // calculate an empty rectangle
                 targetState = "M";
             }
 
             Font font = e.DesignerTheme.Font;
 
-            this.targetStateSize = StateMachineDesignerPaint.MeasureString(e.Graphics,
+            this.targetStateSize = StateMachineDesignerPaint.MeasureString(
+                e.Graphics,
                 font,
                 targetState,
                 StringAlignment.Near,
-                Size.Empty);
+                Size.Empty
+            );
 
             size.Height += targetStateSize.Height;
             return size;
@@ -169,13 +170,15 @@ namespace System.Workflow.Activities
 
             string targetState = this.TargetState;
 
-            ActivityDesignerPaint.DrawText(e.Graphics,
+            ActivityDesignerPaint.DrawText(
+                e.Graphics,
                 e.DesignerTheme.Font,
                 targetState,
                 this.TargetStateRectangle,
                 StringAlignment.Center,
                 e.AmbientTheme.TextQuality,
-                e.DesignerTheme.ForegroundBrush);
+                e.DesignerTheme.ForegroundBrush
+            );
         }
 
         #endregion Protected Methods
@@ -196,7 +199,6 @@ namespace System.Workflow.Activities
         #endregion Static Private Methods
 
         #endregion Methods
-
     }
 
     #endregion
@@ -228,21 +230,24 @@ namespace System.Workflow.Activities
         #endregion Fields
 
         #region Constructors/Destructors
-        public StateDropDownEditor()
-        {
-        }
+        public StateDropDownEditor() { }
         #endregion Constructors/Destructors
 
         #region Methods
 
         #region Public Methods
-        public override object EditValue(ITypeDescriptorContext typeDescriptorContext, IServiceProvider serviceProvider, object value)
+        public override object EditValue(
+            ITypeDescriptorContext typeDescriptorContext,
+            IServiceProvider serviceProvider,
+            object value
+        )
         {
             if (typeDescriptorContext == null)
                 throw new ArgumentNullException("typeDescriptorContext");
             if (serviceProvider == null)
                 throw new ArgumentNullException("serviceProvider");
-            _editorService = (IWindowsFormsEditorService)serviceProvider.GetService(typeof(IWindowsFormsEditorService));
+            _editorService = (IWindowsFormsEditorService)
+                serviceProvider.GetService(typeof(IWindowsFormsEditorService));
             _context = typeDescriptorContext;
 
             // Initialize the dropdown control
@@ -252,7 +257,7 @@ namespace System.Workflow.Activities
             Activity activity = _context.Instance as Activity;
             if (activity == null)
             {
-                // this could happen when there are multiple 
+                // this could happen when there are multiple
                 // SetState activities selected
                 object[] activities = _context.Instance as object[];
                 if (activities != null && activities.Length > 0)
@@ -263,7 +268,9 @@ namespace System.Workflow.Activities
             // Add the items from the typeconverter, followed by the datasource choices
             PopulateDropDownList(dropDownList, activity);
 
-            dropDownList.SelectedIndexChanged += new EventHandler(dataSourceDropDown_SelectedIndexChanged);
+            dropDownList.SelectedIndexChanged += new EventHandler(
+                dataSourceDropDown_SelectedIndexChanged
+            );
 
             // Display the control
             _editorService.DropDownControl(dropDownList);
@@ -275,7 +282,9 @@ namespace System.Workflow.Activities
             return value;
         }
 
-        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext typeDescriptorContext)
+        public override UITypeEditorEditStyle GetEditStyle(
+            ITypeDescriptorContext typeDescriptorContext
+        )
         {
             return UITypeEditorEditStyle.DropDown;
         }

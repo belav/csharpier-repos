@@ -7,10 +7,7 @@ namespace System.Net.NetworkInformation
     {
         public static string DomainName
         {
-            get
-            {
-                return "contoso.com";
-            }
+            get { return "contoso.com"; }
         }
     }
 }

@@ -28,9 +28,14 @@ namespace System.Reflection.Tests
                 m.TestNonGenericMethodInfoCommonInvariants();
         }
 
-        public static void TestNonGenericMethodInfoInvariants(this MethodInfo m) => m.TestNonGenericMethodInfoCommonInvariants();
-        public static void TestGenericMethodInfoInvariants(this MethodInfo m) => m.TestGenericMethodInfoCommonInvariants();
-        public static void TestConstructedGenericMethodInfoInvariants(this MethodInfo m) => m.TestConstructedGenericMethodInfoCommonInvariants();
+        public static void TestNonGenericMethodInfoInvariants(this MethodInfo m) =>
+            m.TestNonGenericMethodInfoCommonInvariants();
+
+        public static void TestGenericMethodInfoInvariants(this MethodInfo m) =>
+            m.TestGenericMethodInfoCommonInvariants();
+
+        public static void TestConstructedGenericMethodInfoInvariants(this MethodInfo m) =>
+            m.TestConstructedGenericMethodInfoCommonInvariants();
 
         public static void TestConstructorInfoInvariants(this ConstructorInfo c)
         {
@@ -42,7 +47,10 @@ namespace System.Reflection.Tests
             string s = mb.ToString(); // We don't test the contents but make sure it doesn't crash.
             Assert.NotNull(s);
 
-            Assert.Equal(mb.IsGenericMethod, mb.IsGenericMethodDefinition || mb.IsConstructedGenericMethod());
+            Assert.Equal(
+                mb.IsGenericMethod,
+                mb.IsGenericMethodDefinition || mb.IsConstructedGenericMethod()
+            );
             Assert.False(mb.IsGenericMethodDefinition && mb.IsConstructedGenericMethod());
             Assert.Equal(mb.MethodImplementationFlags, mb.GetMethodImplementationFlags());
 
@@ -66,7 +74,10 @@ namespace System.Reflection.Tests
 
             MethodBody body = mb.GetMethodBody();
 
-            if (mb.IsAbstract || (mb.GetMethodImplementationFlags() & MethodImplAttributes.InternalCall) != 0)
+            if (
+                mb.IsAbstract
+                || (mb.GetMethodImplementationFlags() & MethodImplAttributes.InternalCall) != 0
+            )
             {
                 Assert.Null(body);
             }

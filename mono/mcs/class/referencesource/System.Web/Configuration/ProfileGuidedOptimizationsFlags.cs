@@ -4,11 +4,12 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
-
+namespace System.Web.Configuration
+{
     [Flags]
-    public enum ProfileGuidedOptimizationsFlags {
+    public enum ProfileGuidedOptimizationsFlags
+    {
         None = 0,
-        All = 1
-   }
+        All = 1,
+    }
 }

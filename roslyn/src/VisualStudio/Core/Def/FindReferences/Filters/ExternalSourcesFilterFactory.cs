@@ -19,9 +19,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences.
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ExternalSourcesFilterFactory()
-        {
-        }
+        public ExternalSourcesFilterFactory() { }
 
         public IErrorListFilterHandler CreateFilter(IWpfTableControl tableControl)
         {

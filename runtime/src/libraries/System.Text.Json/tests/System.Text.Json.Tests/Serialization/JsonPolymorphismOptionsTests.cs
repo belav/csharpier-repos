@@ -18,7 +18,10 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonPolymorphismOptions();
 
             Assert.False(options.IgnoreUnrecognizedTypeDiscriminators);
-            Assert.Equal(JsonUnknownDerivedTypeHandling.FailSerialization, options.UnknownDerivedTypeHandling);
+            Assert.Equal(
+                JsonUnknownDerivedTypeHandling.FailSerialization,
+                options.UnknownDerivedTypeHandling
+            );
             Assert.Equal("$type", options.TypeDiscriminatorPropertyName);
             Assert.Empty(options.DerivedTypes);
         }
@@ -46,9 +49,11 @@ namespace System.Text.Json.Serialization.Tests
             yield return WrapArgs(
                 new JsonDerivedType(typeof(JsonSerializerOptions)),
                 new JsonDerivedType(typeof(int), 42),
-                new JsonDerivedType(typeof(void), "void"));
+                new JsonDerivedType(typeof(void), "void")
+            );
 
-            static object[] WrapArgs(params JsonDerivedType[] derivedTypes) => new object[] { derivedTypes };
+            static object[] WrapArgs(params JsonDerivedType[] derivedTypes) =>
+                new object[] { derivedTypes };
         }
 
         [Fact]
@@ -79,7 +84,10 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions options = JsonSerializerOptions.Default;
 
             // Sanity check: type returns polymorphism options using the default resolver
-            JsonTypeInfo jti = options.TypeInfoResolver.GetTypeInfo(typeof(PolymorphicClass), options);
+            JsonTypeInfo jti = options.TypeInfoResolver.GetTypeInfo(
+                typeof(PolymorphicClass),
+                options
+            );
             Assert.NotNull(jti.PolymorphismOptions);
 
             // Blank instance should not contain polymorphism options
@@ -115,12 +123,18 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(typeof(PolymorphicClass_CustomConverter_NoTypeDiscriminator))]
         public static void DefaultResolver_ReportsCorrectPolymorphismMetadata(Type polymorphicType)
         {
-            JsonPolymorphicAttribute? polymorphicAttribute = polymorphicType.GetCustomAttribute<JsonPolymorphicAttribute>(inherit: false);
-            JsonDerivedTypeAttribute[] derivedTypeAttributes = polymorphicType.GetCustomAttributes<JsonDerivedTypeAttribute>(inherit: false).ToArray();
+            JsonPolymorphicAttribute? polymorphicAttribute =
+                polymorphicType.GetCustomAttribute<JsonPolymorphicAttribute>(inherit: false);
+            JsonDerivedTypeAttribute[] derivedTypeAttributes = polymorphicType
+                .GetCustomAttributes<JsonDerivedTypeAttribute>(inherit: false)
+                .ToArray();
 
             JsonSerializer.Serialize(42); // Ensure default converters have been rooted
             var options = JsonSerializerOptions.Default;
-            JsonTypeInfo jsonTypeInfo = options.TypeInfoResolver.GetTypeInfo(polymorphicType, options);
+            JsonTypeInfo jsonTypeInfo = options.TypeInfoResolver.GetTypeInfo(
+                polymorphicType,
+                options
+            );
 
             Assert.Equal(polymorphicType, jsonTypeInfo.Type);
 
@@ -133,12 +147,26 @@ namespace System.Text.Json.Serialization.Tests
             {
                 Assert.NotNull(polyOptions);
 
-                Assert.Equal(polymorphicAttribute?.IgnoreUnrecognizedTypeDiscriminators ?? false, polyOptions.IgnoreUnrecognizedTypeDiscriminators);
-                Assert.Equal(polymorphicAttribute?.UnknownDerivedTypeHandling ?? default, polyOptions.UnknownDerivedTypeHandling);
-                Assert.Equal(polymorphicAttribute?.TypeDiscriminatorPropertyName ?? "$type", polyOptions.TypeDiscriminatorPropertyName);
                 Assert.Equal(
-                    expected: derivedTypeAttributes.Select(attr => (attr.DerivedType, attr.TypeDiscriminator)),
-                    actual: polyOptions.DerivedTypes.Select(attr => (attr.DerivedType, attr.TypeDiscriminator)));
+                    polymorphicAttribute?.IgnoreUnrecognizedTypeDiscriminators ?? false,
+                    polyOptions.IgnoreUnrecognizedTypeDiscriminators
+                );
+                Assert.Equal(
+                    polymorphicAttribute?.UnknownDerivedTypeHandling ?? default,
+                    polyOptions.UnknownDerivedTypeHandling
+                );
+                Assert.Equal(
+                    polymorphicAttribute?.TypeDiscriminatorPropertyName ?? "$type",
+                    polyOptions.TypeDiscriminatorPropertyName
+                );
+                Assert.Equal(
+                    expected: derivedTypeAttributes.Select(attr =>
+                        (attr.DerivedType, attr.TypeDiscriminator)
+                    ),
+                    actual: polyOptions.DerivedTypes.Select(attr =>
+                        (attr.DerivedType, attr.TypeDiscriminator)
+                    )
+                );
             }
         }
     }

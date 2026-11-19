@@ -6,7 +6,8 @@ using Xunit;
 
 namespace System.CodeDom.Tests
 {
-    public abstract class CodeTypeMemberTestBase<T> : CodeObjectTestBase<T> where T : CodeTypeMember, new()
+    public abstract class CodeTypeMemberTestBase<T> : CodeObjectTestBase<T>
+        where T : CodeTypeMember, new()
     {
         [Fact]
         public void Ctor_Default_MemberBase()
@@ -86,11 +87,17 @@ namespace System.CodeDom.Tests
 
             CodeAttributeDeclaration attribute1 = new CodeAttributeDeclaration("Name1");
             member.CustomAttributes.Add(attribute1);
-            Assert.Equal(new CodeAttributeDeclaration[] { attribute1 }, member.CustomAttributes.Cast<CodeAttributeDeclaration>());
+            Assert.Equal(
+                new CodeAttributeDeclaration[] { attribute1 },
+                member.CustomAttributes.Cast<CodeAttributeDeclaration>()
+            );
 
             CodeAttributeDeclaration attribute2 = new CodeAttributeDeclaration("Name2");
             member.CustomAttributes.Add(attribute2);
-            Assert.Equal(new CodeAttributeDeclaration[] { attribute1, attribute2 }, member.CustomAttributes.Cast<CodeAttributeDeclaration>());
+            Assert.Equal(
+                new CodeAttributeDeclaration[] { attribute1, attribute2 },
+                member.CustomAttributes.Cast<CodeAttributeDeclaration>()
+            );
         }
 
         [Fact]
@@ -100,11 +107,17 @@ namespace System.CodeDom.Tests
 
             CodeCommentStatement comment1 = new CodeCommentStatement("Comment1");
             member.Comments.Add(comment1);
-            Assert.Equal(new CodeCommentStatement[] { comment1 }, member.Comments.Cast<CodeCommentStatement>());
+            Assert.Equal(
+                new CodeCommentStatement[] { comment1 },
+                member.Comments.Cast<CodeCommentStatement>()
+            );
 
             CodeCommentStatement comment2 = new CodeCommentStatement("Comment2");
             member.Comments.Add(comment2);
-            Assert.Equal(new CodeCommentStatement[] { comment1, comment2 }, member.Comments.Cast<CodeCommentStatement>());
+            Assert.Equal(
+                new CodeCommentStatement[] { comment1, comment2 },
+                member.Comments.Cast<CodeCommentStatement>()
+            );
         }
 
         [Fact]
@@ -112,13 +125,25 @@ namespace System.CodeDom.Tests
         {
             CodeTypeMember member = new T();
 
-            CodeRegionDirective directive1 = new CodeRegionDirective(CodeRegionMode.None, "Region1");
+            CodeRegionDirective directive1 = new CodeRegionDirective(
+                CodeRegionMode.None,
+                "Region1"
+            );
             member.StartDirectives.Add(directive1);
-            Assert.Equal(new CodeRegionDirective[] { directive1 }, member.StartDirectives.Cast<CodeDirective>());
+            Assert.Equal(
+                new CodeRegionDirective[] { directive1 },
+                member.StartDirectives.Cast<CodeDirective>()
+            );
 
-            CodeRegionDirective directive2 = new CodeRegionDirective(CodeRegionMode.None, "Region2");
+            CodeRegionDirective directive2 = new CodeRegionDirective(
+                CodeRegionMode.None,
+                "Region2"
+            );
             member.StartDirectives.Add(directive2);
-            Assert.Equal(new CodeRegionDirective[] { directive1, directive2 }, member.StartDirectives.Cast<CodeDirective>());
+            Assert.Equal(
+                new CodeRegionDirective[] { directive1, directive2 },
+                member.StartDirectives.Cast<CodeDirective>()
+            );
         }
 
         [Fact]
@@ -126,13 +151,25 @@ namespace System.CodeDom.Tests
         {
             CodeTypeMember member = new T();
 
-            CodeRegionDirective directive1 = new CodeRegionDirective(CodeRegionMode.None, "Region1");
+            CodeRegionDirective directive1 = new CodeRegionDirective(
+                CodeRegionMode.None,
+                "Region1"
+            );
             member.EndDirectives.Add(directive1);
-            Assert.Equal(new CodeRegionDirective[] { directive1 }, member.EndDirectives.Cast<CodeDirective>());
+            Assert.Equal(
+                new CodeRegionDirective[] { directive1 },
+                member.EndDirectives.Cast<CodeDirective>()
+            );
 
-            CodeRegionDirective directive2 = new CodeRegionDirective(CodeRegionMode.None, "Region2");
+            CodeRegionDirective directive2 = new CodeRegionDirective(
+                CodeRegionMode.None,
+                "Region2"
+            );
             member.EndDirectives.Add(directive2);
-            Assert.Equal(new CodeRegionDirective[] { directive1, directive2 }, member.EndDirectives.Cast<CodeDirective>());
+            Assert.Equal(
+                new CodeRegionDirective[] { directive1, directive2 },
+                member.EndDirectives.Cast<CodeDirective>()
+            );
         }
     }
 }

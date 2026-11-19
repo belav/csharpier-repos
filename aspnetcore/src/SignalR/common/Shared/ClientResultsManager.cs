@@ -32,23 +32,18 @@ internal sealed class ClientResultsManager : IInvocationBinder
         );
         var result = _pendingInvocations.TryAdd(
             invocationId,
-            (
-                typeof(T),
-                connectionId,
-                tcs,
-                static (state, completionMessage) =>
+            (typeof(T), connectionId, tcs, static (state, completionMessage) =>
+            {
+                var tcs = (TaskCompletionSourceWithCancellation<T>)state;
+                if (completionMessage.HasResult)
                 {
-                    var tcs = (TaskCompletionSourceWithCancellation<T>)state;
-                    if (completionMessage.HasResult)
-                    {
-                        tcs.SetResult((T)completionMessage.Result!);
-                    }
-                    else
-                    {
-                        tcs.SetException(new HubException(completionMessage.Error));
-                    }
+                    tcs.SetResult((T)completionMessage.Result!);
                 }
-            )
+                else
+                {
+                    tcs.SetException(new HubException(completionMessage.Error));
+                }
+            })
         );
         Debug.Assert(result);
 

@@ -5,8 +5,8 @@
 namespace System.Activities.Validation
 {
     using System;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Runtime;
 
     [Fx.Tag.XamlVisible(false)]
@@ -25,7 +25,9 @@ namespace System.Activities.Validation
             }
             else
             {
-                this.allValidationErrors = new ReadOnlyCollection<ValidationError>(allValidationErrors);
+                this.allValidationErrors = new ReadOnlyCollection<ValidationError>(
+                    allValidationErrors
+                );
             }
         }
 

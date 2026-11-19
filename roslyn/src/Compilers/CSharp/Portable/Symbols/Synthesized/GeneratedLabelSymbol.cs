@@ -23,10 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
 #if DEBUG
@@ -34,6 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private static int s_sequence = 1;
 #endif
+
         private static string LabelName(string name)
         {
 #if DEBUG
@@ -46,10 +44,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get
-            {
-                return ImmutableArray<SyntaxReference>.Empty;
-            }
+            get { return ImmutableArray<SyntaxReference>.Empty; }
         }
 
         public override bool IsImplicitlyDeclared

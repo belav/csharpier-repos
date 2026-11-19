@@ -18,7 +18,8 @@ internal readonly record struct LspSolutionSnapshotId([property: DataMember(Name
 
 [ExportCSharpVisualBasicStatelessLspService(typeof(RegisterSolutionSnapshotHandler)), Shared]
 [Method("workspace/_vs_registerSolutionSnapshot")]
-internal sealed class RegisterSolutionSnapshotHandler : ILspServiceRequestHandler<LspSolutionSnapshotId>
+internal sealed class RegisterSolutionSnapshotHandler
+    : ILspServiceRequestHandler<LspSolutionSnapshotId>
 {
     private readonly ISolutionSnapshotRegistry _registry;
 
@@ -32,7 +33,10 @@ internal sealed class RegisterSolutionSnapshotHandler : ILspServiceRequestHandle
     public bool MutatesSolutionState => false;
     public bool RequiresLSPSolution => true;
 
-    public Task<LspSolutionSnapshotId> HandleRequestAsync(RequestContext context, CancellationToken cancellationToken)
+    public Task<LspSolutionSnapshotId> HandleRequestAsync(
+        RequestContext context,
+        CancellationToken cancellationToken
+    )
     {
         Contract.ThrowIfNull(context.Solution);
         var id = _registry.RegisterSolutionSnapshot(context.Solution);

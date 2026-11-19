@@ -46,8 +46,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 
 // The main application class containing the program entry point.
@@ -68,9 +68,14 @@ class CrstTypeTool
 
             // A common error is to forget to check out the crsttypes_generated.h file first. Handle this case specially
             // so we can give a good error message.
-            if (File.Exists(outputFile) && (File.GetAttributes(outputFile) & FileAttributes.ReadOnly) != 0)
+            if (
+                File.Exists(outputFile)
+                && (File.GetAttributes(outputFile) & FileAttributes.ReadOnly) != 0
+            )
             {
-                Console.WriteLine(outputFile + " is read-only, you must check it out of TFS/SD first");
+                Console.WriteLine(
+                    outputFile + " is read-only, you must check it out of TFS/SD first"
+                );
                 return 2;
             }
 
@@ -116,7 +121,12 @@ class CrstTypeTool
     // Emit the crsttypes_generated.h output file.
     void WriteHeaderFile(string fileName)
     {
-        FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None);
+        FileStream stream = new FileStream(
+            fileName,
+            FileMode.Create,
+            FileAccess.Write,
+            FileShare.None
+        );
         StreamWriter writer = new StreamWriter(stream);
 
         // Create a collection based on all the Crst types we've stored in the hash. We do this so we can sort
@@ -137,16 +147,26 @@ class CrstTypeTool
         writer.WriteLine("#ifndef __CRST_TYPES_INCLUDED");
         writer.WriteLine("#define __CRST_TYPES_INCLUDED");
         writer.WriteLine();
-        writer.WriteLine("// **** THIS IS AN AUTOMATICALLY GENERATED HEADER FILE -- DO NOT EDIT!!! ****");
+        writer.WriteLine(
+            "// **** THIS IS AN AUTOMATICALLY GENERATED HEADER FILE -- DO NOT EDIT!!! ****"
+        );
         writer.WriteLine();
-        writer.WriteLine("// This file describes the range of Crst types available and their mapping to a numeric level (used by the");
-        writer.WriteLine("// runtime in debug mode to validate we're deadlock free). To modify these settings edit the");
-        writer.WriteLine("// file:CrstTypes.def file and run the clr\\artifacts\\CrstTypeTool utility to generate a new version of this file.");
+        writer.WriteLine(
+            "// This file describes the range of Crst types available and their mapping to a numeric level (used by the"
+        );
+        writer.WriteLine(
+            "// runtime in debug mode to validate we're deadlock free). To modify these settings edit the"
+        );
+        writer.WriteLine(
+            "// file:CrstTypes.def file and run the clr\\artifacts\\CrstTypeTool utility to generate a new version of this file."
+        );
         writer.WriteLine();
 
         // Emit the CrstType enum to define a value for each crst type (along with the kNumberOfCrstTypes
         // constant).
-        writer.WriteLine("// Each Crst type is declared as a value in the following CrstType enum.");
+        writer.WriteLine(
+            "// Each Crst type is declared as a value in the following CrstType enum."
+        );
         writer.WriteLine("enum CrstType");
         writer.WriteLine("{");
         for (int i = 0; i < crsts.Length; i++)
@@ -228,18 +248,29 @@ class CrstTypeTool
             // Catch Crst types that are referenced but never defined.
             if (!crst.Defined)
             {
-                Console.WriteLine(String.Format("Error: CrstType 'Crst{0}' is referenced without being defined",
-                                                crst.Name));
+                Console.WriteLine(
+                    String.Format(
+                        "Error: CrstType 'Crst{0}' is referenced without being defined",
+                        crst.Name
+                    )
+                );
                 return false;
             }
 
             // Catch the use of the 'Unordered' attribute alongside the 'AcquiredBefore' attribute (which
             // indicates an ordering).
-            if (crst.Level == CrstType.CrstUnordered && (crst.AcquiredBeforeList.Count > 0 ||
-                                                         crst.Group != null))
+            if (
+                crst.Level == CrstType.CrstUnordered
+                && (crst.AcquiredBeforeList.Count > 0 || crst.Group != null)
+            )
             {
-                Console.WriteLine(String.Format("Error: CrstType 'Crst{0}' is declared as both unordered and acquired before 'Crst{1}'",
-                                                crst.Name, crst.AcquiredBeforeList[0].Name));
+                Console.WriteLine(
+                    String.Format(
+                        "Error: CrstType 'Crst{0}' is declared as both unordered and acquired before 'Crst{1}'",
+                        crst.Name,
+                        crst.AcquiredBeforeList[0].Name
+                    )
+                );
                 return false;
             }
 
@@ -247,16 +278,24 @@ class CrstTypeTool
             // indicates an ordering).
             if (crst.Level == CrstType.CrstUnordered && crst.Group != null)
             {
-                Console.WriteLine(String.Format("Error: CrstType 'Crst{0}' is declared as both unordered and in the same level as another CrstType",
-                                                crst.Name));
+                Console.WriteLine(
+                    String.Format(
+                        "Error: CrstType 'Crst{0}' is declared as both unordered and in the same level as another CrstType",
+                        crst.Name
+                    )
+                );
                 return false;
             }
 
             // Catch the simple cycle where the Crst type depends on itself.
             if (crst.AcquiredBeforeList.Contains(crst))
             {
-                Console.WriteLine(String.Format("Error: CrstType 'Crst{0}' is declared as being acquired before itself",
-                                                crst.Name));
+                Console.WriteLine(
+                    String.Format(
+                        "Error: CrstType 'Crst{0}' is declared as being acquired before itself",
+                        crst.Name
+                    )
+                );
                 return false;
             }
 
@@ -264,8 +303,12 @@ class CrstTypeTool
             List<CrstType> cycleList = new List<CrstType>();
             if (FindCycle(crst, crst, cycleList))
             {
-                Console.WriteLine(String.Format("Error: CrstType 'Crst{0}' is involved in a dependency cycle with the following CrstTypes:",
-                                                crst.Name));
+                Console.WriteLine(
+                    String.Format(
+                        "Error: CrstType 'Crst{0}' is involved in a dependency cycle with the following CrstTypes:",
+                        crst.Name
+                    )
+                );
                 foreach (CrstType cycleCrst in cycleList)
                     Console.WriteLine(String.Format("    Crst{0}", cycleCrst.Name));
                 return false;
@@ -286,11 +329,17 @@ class CrstTypeTool
             List<CrstType> cycleList = new List<CrstType>();
             if (FindCycle(crst, crst, cycleList))
             {
-                Console.WriteLine(String.Format("Error: CrstType 'Crst{0}' is involved in a dependency cycle with the following CrstTypes:",
-                                                crst.Name));
+                Console.WriteLine(
+                    String.Format(
+                        "Error: CrstType 'Crst{0}' is involved in a dependency cycle with the following CrstTypes:",
+                        crst.Name
+                    )
+                );
                 foreach (CrstType cycleCrst in cycleList)
                     Console.WriteLine(String.Format("    Crst{0}", cycleCrst));
-                Console.WriteLine("Note that the cycle was detected only after 'SameLevelAs' processing was performed so some CrstType dependencies are implied by peer CrstTypes");
+                Console.WriteLine(
+                    "Note that the cycle was detected only after 'SameLevelAs' processing was performed so some CrstType dependencies are implied by peer CrstTypes"
+                );
                 return false;
             }
         }
@@ -426,7 +475,9 @@ class CrstTypeTool
                     // by now). There should be no way that this error should ever occur, it's just paranoia
                     // on my part.
                     if (crst.AcquiredBeforeList.Count != 0)
-                        throw new Exception("Internal error: SameLevel CrstTypes with differing rulesets");
+                        throw new Exception(
+                            "Internal error: SameLevel CrstTypes with differing rulesets"
+                        );
 
                     crst.Level = currLevel;
                     unsorted--;
@@ -443,7 +494,9 @@ class CrstTypeTool
             if (!madeProgress)
             {
                 Console.WriteLine(String.Format("{0} unsorted remain", unsorted));
-                throw new Exception("Cycle detected trying to assign level " + currLevel.ToString());
+                throw new Exception(
+                    "Cycle detected trying to assign level " + currLevel.ToString()
+                );
             }
 
             // Loop through all the unranked Crsts types and remove any AcquiredBefore relationships that
@@ -476,16 +529,16 @@ class CrstTypeTool
 class TypeFileParser
 {
     // Remember the input file name and the dictionary we're meant to populate.
-    string                          m_typeFileName;
-    Dictionary<string, CrstType>    m_crsts;
+    string m_typeFileName;
+    Dictionary<string, CrstType> m_crsts;
 
     // Compile regular expressions for detecting comments and tokens in the parser input.
-    Regex                           m_commentRegex = new Regex(@"//.*");
-    Regex                           m_tokenRegex = new Regex(@"^(\s*(\S+)\s*)*");
+    Regex m_commentRegex = new Regex(@"//.*");
+    Regex m_tokenRegex = new Regex(@"^(\s*(\S+)\s*)*");
 
     // Input is lexed into an array of tokens. We record the index of the token being currently parsed.
-    Token[]                         m_tokens;
-    int                             m_currToken;
+    Token[] m_tokens;
+    int m_currToken;
 
     // Parse the given file into Crst type definitions and place these definitions in the dictionary provided.
     // Syntax errors are signalled via ParseError derived exceptions.
@@ -529,7 +582,10 @@ class TypeFileParser
         {
             crst = m_crsts[token.Text];
             if (crst.Defined)
-                throw new ParseError(String.Format("Duplicate definition for CrstType '{0}'", token.Text), token);
+                throw new ParseError(
+                    String.Format("Duplicate definition for CrstType '{0}'", token.Text),
+                    token
+                );
         }
         else
         {
@@ -552,47 +608,48 @@ class TypeFileParser
 
             switch (token.Id)
             {
+                case KeywordId.AcquiredBefore:
+                    // Simply parse the following list of Crst types into the current type's AcquiredBefore list.
+                    ParseList(crst.AcquiredBeforeList);
+                    break;
 
-            case KeywordId.AcquiredBefore:
-                // Simply parse the following list of Crst types into the current type's AcquiredBefore list.
-                ParseList(crst.AcquiredBeforeList);
-                break;
+                case KeywordId.AcquiredAfter:
+                    // AcquiredAfter is trickier. To make the ranking algorithm's life easier we actually
+                    // normalize all rules to the AcquiredBefore form (see LevelCrsts() for the reasoning). So we
+                    // capture the list of Crst types that follow the AcquiredAfter keyword and then append the
+                    // current type to the AcquiredBefore list of each type found.
+                    list = new List<CrstType>();
+                    ParseList(list);
+                    foreach (CrstType priorCrst in list)
+                        priorCrst.AcquiredBeforeList.Add(crst);
+                    break;
 
-            case KeywordId.AcquiredAfter:
-                // AcquiredAfter is trickier. To make the ranking algorithm's life easier we actually
-                // normalize all rules to the AcquiredBefore form (see LevelCrsts() for the reasoning). So we
-                // capture the list of Crst types that follow the AcquiredAfter keyword and then append the
-                // current type to the AcquiredBefore list of each type found.
-                list = new List<CrstType>();
-                ParseList(list);
-                foreach (CrstType priorCrst in list)
-                    priorCrst.AcquiredBeforeList.Add(crst);
-                break;
+                case KeywordId.SameLevelAs:
+                    // Parse the following list of Crst types them let the CrstTypeGroup class handle the
+                    // resulting updates to the type groups we're currently maintaining. See the comments for the
+                    // CrstTypeGroup class for more details.
+                    list = new List<CrstType>();
+                    ParseList(list);
+                    foreach (CrstType sameLevelCrst in list)
+                        CrstTypeGroup.Join(crst, sameLevelCrst);
+                    break;
 
-            case KeywordId.SameLevelAs:
-                // Parse the following list of Crst types them let the CrstTypeGroup class handle the
-                // resulting updates to the type groups we're currently maintaining. See the comments for the
-                // CrstTypeGroup class for more details.
-                list = new List<CrstType>();
-                ParseList(list);
-                foreach (CrstType sameLevelCrst in list)
-                    CrstTypeGroup.Join(crst, sameLevelCrst);
-                break;
+                case KeywordId.Unordered:
+                    crst.Level = CrstType.CrstUnordered;
+                    break;
 
-            case KeywordId.Unordered:
-                crst.Level = CrstType.CrstUnordered;
-                break;
+                case KeywordId.End:
+                    parsingCrst = false;
+                    break;
 
-            case KeywordId.End:
-                parsingCrst = false;
-                break;
-
-            default:
-                throw new UnexpectedTokenError(token,
-                                               KeywordId.AcquiredBefore,
-                                               KeywordId.AcquiredAfter,
-                                               KeywordId.SameLevelAs,
-                                               KeywordId.Unordered);
+                default:
+                    throw new UnexpectedTokenError(
+                        token,
+                        KeywordId.AcquiredBefore,
+                        KeywordId.AcquiredAfter,
+                        KeywordId.SameLevelAs,
+                        KeywordId.Unordered
+                    );
             }
         }
     }
@@ -632,9 +689,9 @@ class TypeFileParser
     // Lex the input file into an array of tokens.
     void InitTokenStream()
     {
-        StreamReader    file = new StreamReader(m_typeFileName);
-        int             lineNumber = 1;
-        List<Token>     tokenList = new List<Token>();
+        StreamReader file = new StreamReader(m_typeFileName);
+        int lineNumber = 1;
+        List<Token> tokenList = new List<Token>();
 
         // Read the file a line at a time.
         string line;
@@ -652,7 +709,9 @@ class TypeFileParser
                 // error messages).
                 CaptureCollection cap = match.Groups[2].Captures;
                 for (int i = 0; i < cap.Count; i++)
-                    tokenList.Add(new Token(m_typeFileName, cap[i].Value, lineNumber, cap[i].Index));
+                    tokenList.Add(
+                        new Token(m_typeFileName, cap[i].Value, lineNumber, cap[i].Index)
+                    );
             }
 
             lineNumber++;
@@ -706,15 +765,15 @@ class TypeFileParser
         static Dictionary<string, KeywordId> s_keywords;
 
         // The characters comprising the text of the token from the input file.
-        string      m_text;
+        string m_text;
 
         // Where the token was found (for error messages).
-        string      m_file;
-        int         m_line;
-        int         m_column;
+        string m_file;
+        int m_line;
+        int m_column;
 
         // The ID of the keyword this token represents (or KeywordId.Id).
-        KeywordId   m_id;
+        KeywordId m_id;
 
         // Static class initialization.
         static Token()
@@ -747,9 +806,18 @@ class TypeFileParser
                 m_id = KeywordId.Id;
         }
 
-        public string Text {get { return m_text; }}
-        public string Location {get { return String.Format("{0} line {1}, column {2}", m_file, m_line, m_column); }}
-        public KeywordId Id {get { return m_id; }}
+        public string Text
+        {
+            get { return m_text; }
+        }
+        public string Location
+        {
+            get { return String.Format("{0} line {1}, column {2}", m_file, m_line, m_column); }
+        }
+        public KeywordId Id
+        {
+            get { return m_id; }
+        }
     }
 
     // Base class for all syntax errors reported by the parser.
@@ -757,13 +825,11 @@ class TypeFileParser
     {
         // A raw error message.
         public ParseError(string message)
-            : base(message)
-        {}
+            : base(message) { }
 
         // An error message tagged with a file, line and column (coming from an error token).
         public ParseError(string message, Token errorToken)
-            : base(String.Format("{0}: {1}", errorToken.Location, message))
-        {}
+            : base(String.Format("{0}: {1}", errorToken.Location, message)) { }
 
         // Produce a textual name for the given keyword type.
         protected static string IdToName(KeywordId id)
@@ -781,16 +847,14 @@ class TypeFileParser
         // Produce an unexpected token message with a file, line and column coming from an error token and
         // optionally the names of zero or more tokens that would have been accepted.
         public UnexpectedTokenError(Token errorToken, params KeywordId[] expected)
-            : base(FormatErrorMessage(errorToken, expected))
-        {}
+            : base(FormatErrorMessage(errorToken, expected)) { }
 
         static string FormatErrorMessage(Token errorToken, KeywordId[] expected)
         {
-            StringBuilder message = new StringBuilder(String.Format("Unexpected token '{0}' at {1}",
-                                                                    errorToken.Text, errorToken.Location));
-            if (expected.Length == 0)
-            {
-            }
+            StringBuilder message = new StringBuilder(
+                String.Format("Unexpected token '{0}' at {1}", errorToken.Text, errorToken.Location)
+            );
+            if (expected.Length == 0) { }
             else if (expected.Length == 1)
             {
                 message.Append(String.Format("; expected {0}", IdToName(expected[0])));
@@ -801,7 +865,6 @@ class TypeFileParser
                 for (int i = 0; i < expected.Length - 1; i++)
                     message.Append(String.Format("{0}, ", IdToName(expected[i])));
                 message.Append(IdToName(expected[expected.Length - 1]));
-
             }
 
             return message.ToString();
@@ -812,8 +875,7 @@ class TypeFileParser
     internal class UnexpectedEofError : ParseError
     {
         public UnexpectedEofError()
-            : base("Unexpected end of file")
-        {}
+            : base("Unexpected end of file") { }
     }
 }
 
@@ -827,24 +889,24 @@ class CrstType : IComparable
     public static readonly int CrstUnassigned = -2;
 
     // Name of the type, e.g. "AppDomainCache" for the CrstAppDomainCache type.
-    string          m_name;
+    string m_name;
 
     // The numeric ranking assigned to this type. Starts as CrstUnassigned and then becomes either
     // CrstUnordered (while parsing the input file) or a number >= 0 (during LevelCrsts()).
-    int             m_level;
+    int m_level;
 
     // List of Crst types that can be legally acquired while this one is held. (AcquiredAfter relationships
     // are by switching the terms and adding to the second type's AcquiredBefore list).
-    List<CrstType>  m_acquiredBeforeCrsts;
+    List<CrstType> m_acquiredBeforeCrsts;
 
     // Either null if this Crst type is not in (or has not yet been determined to be in) a SameLevelAs
     // relationship or points to a CrstTypeGroup that records all the sibling types at the same level (that
     // have been discovered thus far during parsing).
-    CrstTypeGroup   m_group;
+    CrstTypeGroup m_group;
 
     // Set once a definition for this type has been discovered. Used to detect double definitions and types
     // referenced without definitions.
-    bool            m_defined;
+    bool m_defined;
 
     public CrstType(string name)
     {
@@ -855,11 +917,30 @@ class CrstType : IComparable
         m_defined = false;
     }
 
-    public string Name {get { return m_name; }}
-    public int Level {get { return m_level; } set { m_level = value; }}
-    public List<CrstType> AcquiredBeforeList {get { return m_acquiredBeforeCrsts; } set { m_acquiredBeforeCrsts = value; }}
-    public CrstTypeGroup Group {get { return m_group; } set { m_group = value; }}
-    public bool Defined {get {return m_defined; } set { m_defined = value; }}
+    public string Name
+    {
+        get { return m_name; }
+    }
+    public int Level
+    {
+        get { return m_level; }
+        set { m_level = value; }
+    }
+    public List<CrstType> AcquiredBeforeList
+    {
+        get { return m_acquiredBeforeCrsts; }
+        set { m_acquiredBeforeCrsts = value; }
+    }
+    public CrstTypeGroup Group
+    {
+        get { return m_group; }
+        set { m_group = value; }
+    }
+    public bool Defined
+    {
+        get { return m_defined; }
+        set { m_defined = value; }
+    }
 
     // Helper used to sort CrstTypes. The sort order is lexical based on the type name.
     public int CompareTo(object other)
@@ -882,10 +963,10 @@ class CrstType : IComparable
 class CrstTypeGroup
 {
     // We record every group that has been formed so far. This makes normalizing all groups easier.
-    static List<CrstTypeGroup>  s_groups = new List<CrstTypeGroup>();
+    static List<CrstTypeGroup> s_groups = new List<CrstTypeGroup>();
 
     // Crst types that are members of the current group. There are no duplicates in this list.
-    List<CrstType>              m_members = new List<CrstType>();
+    List<CrstType> m_members = new List<CrstType>();
 
     // Declare a SameLevelAs relationship between the two Crst types given. Groups will be assigned, created
     // or merged as required to maintain our guarantees (each CrstType is a member of at most one group and
@@ -988,5 +1069,8 @@ class CrstTypeGroup
             crst.AcquiredBeforeList = acquiredBeforeList.GetRange(0, acquiredBeforeList.Count);
     }
 
-    public List<CrstType> Members {get { return m_members; }}
+    public List<CrstType> Members
+    {
+        get { return m_members; }
+    }
 }

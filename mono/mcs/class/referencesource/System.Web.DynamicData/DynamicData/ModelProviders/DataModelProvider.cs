@@ -1,11 +1,13 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace System.Web.DynamicData.ModelProviders {
+namespace System.Web.DynamicData.ModelProviders
+{
     /// <summary>
-    /// Base data model provider class 
+    /// Base data model provider class
     /// Each provider type (e.g. Linq To Sql, Entity Framework, 3rd party) extends this class.
     /// </summary>
-    public abstract class DataModelProvider {
+    public abstract class DataModelProvider
+    {
         /// <summary>
         ///  The list of tables exposed by this data model
         /// </summary>

@@ -28,10 +28,10 @@
 
 namespace MonoTests.System.Data.Connected
 {
-	public enum EngineType
-	{
-		SQLServer = 1,
-		MySQL = 2,
-		PostgreSQL = 3
-	}
+    public enum EngineType
+    {
+        SQLServer = 1,
+        MySQL = 2,
+        PostgreSQL = 3,
+    }
 }

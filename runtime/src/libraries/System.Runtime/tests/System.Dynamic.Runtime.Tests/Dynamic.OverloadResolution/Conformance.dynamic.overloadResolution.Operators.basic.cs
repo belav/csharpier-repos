@@ -18,7 +18,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
         EM0,
         EM1,
         EM2,
-        EM3
+        EM3,
     }
 
     public class A
@@ -75,8 +75,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enum001b.enum001b
 {
     // <Area>Enum -- binary operator -- user-defined conversion</Area>
@@ -92,7 +90,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public enum E
     {
         EM0,
-        EM1
+        EM1,
     }
 
     public class A
@@ -219,8 +217,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enum002.enum002
 {
     // <Area>Enum -- binary operator</Area>
@@ -237,7 +233,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
         EM0,
         EM1,
         EM2,
-        EM3
+        EM3,
     }
 
     public class A
@@ -261,8 +257,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enum003.enum003
 {
     // <Area>Enum -- binary operators -- user-defined conversion</Area>
@@ -279,7 +273,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     {
         Zero,
         One,
-        Two
+        Two,
     }
 
     public class C
@@ -290,7 +284,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             return E.One;
         }
 
-        public static implicit operator int (C s)
+        public static implicit operator int(C s)
         {
             return 3;
         }
@@ -304,7 +298,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             return E.One;
         }
 
-        public static implicit operator int (S s)
+        public static implicit operator int(S s)
         {
             return 3;
         }
@@ -335,8 +329,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enum004.enum004
 {
     // <Area>Enum -- binary operators -- user-defined conversion</Area>
@@ -357,7 +349,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
         EM2,
         EM3,
         EM4,
-        EM5
+        EM5,
     }
 
     public class ConvE
@@ -370,7 +362,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
     public struct ConvInt
     {
-        public static implicit operator int (ConvInt s)
+        public static implicit operator int(ConvInt s)
         {
             return 2;
         }
@@ -453,8 +445,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enum004b.enum004b
 {
     // <Area>Enum -- binary operators -- user-defined conversion</Area>
@@ -475,7 +465,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
         EM2,
         EM3,
         EM4,
-        EM5
+        EM5,
     }
 
     public class ConvE
@@ -489,7 +479,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
     public struct ConvInt
     {
-        public static implicit operator int (ConvInt s)
+        public static implicit operator int(ConvInt s)
         {
             System.Console.WriteLine("imp ConvInt ==> int");
             return 2;
@@ -520,7 +510,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "+", "E", "ConvE"))
+                if (
+                    ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "+", "E", "ConvE")
+                )
                 {
                     flag = 0;
                 }
@@ -536,7 +528,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "==", "ConvInt", "E"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "==",
+                        "ConvInt",
+                        "E"
+                    )
+                )
                 {
                     flag = 0;
                 }
@@ -551,7 +551,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, ">", "E", "ConvInt"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        ">",
+                        "E",
+                        "ConvInt"
+                    )
+                )
                 {
                     flag = 0;
                 }
@@ -566,7 +574,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "&", "E", "ConvInt"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "&",
+                        "E",
+                        "ConvInt"
+                    )
+                )
                 {
                     flag = 0;
                 }
@@ -581,7 +597,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "^", "ConvInt", "E"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "^",
+                        "ConvInt",
+                        "E"
+                    )
+                )
                 {
                     flag = 0;
                 }
@@ -593,8 +617,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enum004c.enum004c
 {
@@ -616,7 +638,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
         EM2,
         EM3,
         EM4,
-        EM5
+        EM5,
     }
 
     public class ConvE
@@ -629,7 +651,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
     public struct ConvInt
     {
-        public static implicit operator int (ConvInt s)
+        public static implicit operator int(ConvInt s)
         {
             return 2;
         }
@@ -712,8 +734,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enum004d.enum004d
 {
     // <Area>Enum -- binary operators -- user-defined conversion</Area>
@@ -734,7 +754,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
         EM2,
         EM3,
         EM4,
-        EM5
+        EM5,
     }
 
     public class ConvE
@@ -748,7 +768,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
     public struct ConvInt
     {
-        public static implicit operator int (ConvInt s)
+        public static implicit operator int(ConvInt s)
         {
             System.Console.WriteLine("imp ConvInt ==> int");
             return 2;
@@ -779,7 +799,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "+", "E?", "ConvE"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "+",
+                        "E?",
+                        "ConvE"
+                    )
+                )
                 {
                     flag = 0;
                 }
@@ -796,7 +824,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "==", "ConvInt", "E?"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "==",
+                        "ConvInt",
+                        "E?"
+                    )
+                )
                 {
                     flag = 0;
                 }
@@ -811,7 +847,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, ">", "E?", "ConvInt"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        ">",
+                        "E?",
+                        "ConvInt"
+                    )
+                )
                 {
                     flag = 0;
                 }
@@ -826,7 +870,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "&", "E?", "ConvInt"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "&",
+                        "E?",
+                        "ConvInt"
+                    )
+                )
                 {
                     flag = 0;
                 }
@@ -841,7 +893,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "^", "ConvInt", "E?"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "^",
+                        "ConvInt",
+                        "E?"
+                    )
+                )
                 {
                     flag = 0;
                 }
@@ -853,8 +913,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enum004e.enum004e
 {
@@ -876,12 +934,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
         EM2,
         EM3,
         EM4,
-        EM5
+        EM5,
     }
 
     public class ConvE
     {
-        public static implicit operator E? (ConvE s)
+        public static implicit operator E?(ConvE s)
         {
             return E.EM1;
         }
@@ -889,7 +947,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
     public struct ConvInt
     {
-        public static implicit operator int? (ConvInt s)
+        public static implicit operator int?(ConvInt s)
         {
             return 2;
         }
@@ -972,8 +1030,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enum004f.enum004f
 {
     // <Area>Enum -- binary operators -- user-defined conversion</Area>
@@ -994,12 +1050,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
         EM2,
         EM3,
         EM4,
-        EM5
+        EM5,
     }
 
     public class ConvE
     {
-        public static implicit operator E? (ConvE s)
+        public static implicit operator E?(ConvE s)
         {
             System.Console.WriteLine("imp ConvE ==> E?");
             return E.EM1;
@@ -1008,7 +1064,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
     public struct ConvInt
     {
-        public static implicit operator int? (ConvInt s)
+        public static implicit operator int?(ConvInt s)
         {
             System.Console.WriteLine("imp ConvInt ==> int?");
             return 2;
@@ -1039,7 +1095,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "+", "E?", "ConvE"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "+",
+                        "E?",
+                        "ConvE"
+                    )
+                )
                 {
                     flag = 0;
                 }
@@ -1056,7 +1120,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "==", "ConvInt", "E?"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "==",
+                        "ConvInt",
+                        "E?"
+                    )
+                )
                 {
                     flag = 0;
                 }
@@ -1071,7 +1143,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, ">", "E?", "ConvInt"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        ">",
+                        "E?",
+                        "ConvInt"
+                    )
+                )
                 {
                     flag = 0;
                 }
@@ -1086,7 +1166,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "&", "E?", "ConvInt"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "&",
+                        "E?",
+                        "ConvInt"
+                    )
+                )
                 {
                     flag = 0;
                 }
@@ -1101,7 +1189,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "^", "ConvInt", "E?"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "^",
+                        "ConvInt",
+                        "E?"
+                    )
+                )
                 {
                     flag = 0;
                 }
@@ -1113,8 +1209,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enumhelper.enumhelper
 {
@@ -1139,7 +1233,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
         EM4,
         EM5,
         EM6,
-        EM7
+        EM7,
     }
 
     public enum EByte : byte
@@ -1151,13 +1245,21 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
         EM4,
         EM5,
         EM6,
-        EM7
+        EM7,
     }
 
     public class Helper
     {
         public static int result = 0;
-        public static void ExecPositiveTest<T>(dynamic dobj, Type exp_type, T exp_undervalue, string tip, Func<dynamic, dynamic> test) where T : struct
+
+        public static void ExecPositiveTest<T>(
+            dynamic dobj,
+            Type exp_type,
+            T exp_undervalue,
+            string tip,
+            Func<dynamic, dynamic> test
+        )
+            where T : struct
         {
             int flag = 1;
             try
@@ -1169,24 +1271,43 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
                 }
                 else
                 {
-                    System.Console.WriteLine("Got invalid result when testing {0}: {1}[{2}]", tip, dr, dr.GetType());
+                    System.Console.WriteLine(
+                        "Got invalid result when testing {0}: {1}[{2}]",
+                        tip,
+                        dr,
+                        dr.GetType()
+                    );
                 }
             }
             catch (Exception ex)
             {
-                System.Console.WriteLine("Catch an unexpected exception when testing {0}: {1}", tip, ex);
+                System.Console.WriteLine(
+                    "Catch an unexpected exception when testing {0}: {1}",
+                    tip,
+                    ex
+                );
             }
 
             result += flag;
         }
 
-        public static void ExecNegativeTestWithBadOps(dynamic dobj, string[] exp_msg, string tip, Func<dynamic, dynamic> test)
+        public static void ExecNegativeTestWithBadOps(
+            dynamic dobj,
+            string[] exp_msg,
+            string tip,
+            Func<dynamic, dynamic> test
+        )
         {
             int flag = 1;
             try
             {
                 dynamic dr = test(dobj);
-                System.Console.WriteLine("Got invalid result when testing {0}: {1}[{2}]", tip, dr, dr.GetType());
+                System.Console.WriteLine(
+                    "Got invalid result when testing {0}: {1}[{2}]",
+                    tip,
+                    dr,
+                    dr.GetType()
+                );
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
@@ -1196,12 +1317,20 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
                 }
                 else
                 {
-                    System.Console.WriteLine("Catch an unexpected RuntimeBinderException when testing {0}: {1}", tip, ex);
+                    System.Console.WriteLine(
+                        "Catch an unexpected RuntimeBinderException when testing {0}: {1}",
+                        tip,
+                        ex
+                    );
                 }
             }
             catch (Exception ex)
             {
-                System.Console.WriteLine("Catch an unexpected exception when testing {0}: {1}", tip, ex);
+                System.Console.WriteLine(
+                    "Catch an unexpected exception when testing {0}: {1}",
+                    tip,
+                    ex
+                );
             }
 
             result += flag;
@@ -1210,11 +1339,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enum005.enum005
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enumhelper.enumhelper;
     // <Area>Enum -- binary operator</Area>
     // <Title>Predefined enum binary operators</Title>
     // <Description>
@@ -1233,6 +1359,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     //
     // <Code>
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enumhelper.enumhelper;
 
     public class Test
     {
@@ -1257,110 +1384,230 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             ulong? nul1 = 1;
             Helper.result = 0;
             #region operator+
-            Helper.ExecPositiveTest(dobj, te, 3, "EInt + int(C)", (Func<dynamic, dynamic>)(d => d + 1));
-            Helper.ExecPositiveTest(dobj, te, 2, "EInt + int(C0)", (Func<dynamic, dynamic>)(d => d + 0));
-            Helper.ExecPositiveTest(dobj, te, 1, "EInt + int", (Func<dynamic, dynamic>)(d => d + in1));
-            Helper.ExecPositiveTest(dobj, te, 1, "int(C) + EInt", (Func<dynamic, dynamic>)(d => (-1) + d));
-            Helper.ExecPositiveTest(dobj, te, 2, "int(C0) + EInt", (Func<dynamic, dynamic>)(d => 0 + d));
-            Helper.ExecPositiveTest(dobj, te, 3, "int + EInt", (Func<dynamic, dynamic>)(d => i1 + d));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "+", "EInt", "EInt"
-            }
-
-            , "EInt + EInt", (Func<dynamic, dynamic>)(d => d + EInt.EM0));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "+", "EInt", "EByte"
-            }
-
-            , "EInt + EByte", (Func<dynamic, dynamic>)(d => d + EByte.EM0));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "+", "EInt", "ulong"
-            }
-
-            , "EInt + ulong", (Func<dynamic, dynamic>)(d => d + 1UL));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "+", "double", "EInt"
-            }
-
-            , "double + EInt", (Func<dynamic, dynamic>)(d => 1.0 + d));
+            Helper.ExecPositiveTest(
+                dobj,
+                te,
+                3,
+                "EInt + int(C)",
+                (Func<dynamic, dynamic>)(d => d + 1)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                te,
+                2,
+                "EInt + int(C0)",
+                (Func<dynamic, dynamic>)(d => d + 0)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                te,
+                1,
+                "EInt + int",
+                (Func<dynamic, dynamic>)(d => d + in1)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                te,
+                1,
+                "int(C) + EInt",
+                (Func<dynamic, dynamic>)(d => (-1) + d)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                te,
+                2,
+                "int(C0) + EInt",
+                (Func<dynamic, dynamic>)(d => 0 + d)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                te,
+                3,
+                "int + EInt",
+                (Func<dynamic, dynamic>)(d => i1 + d)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "+", "EInt", "EInt" },
+                "EInt + EInt",
+                (Func<dynamic, dynamic>)(d => d + EInt.EM0)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "+", "EInt", "EByte" },
+                "EInt + EByte",
+                (Func<dynamic, dynamic>)(d => d + EByte.EM0)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "+", "EInt", "ulong" },
+                "EInt + ulong",
+                (Func<dynamic, dynamic>)(d => d + 1UL)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "+", "double", "EInt" },
+                "double + EInt",
+                (Func<dynamic, dynamic>)(d => 1.0 + d)
+            );
             // nullable
-            Helper.ExecPositiveTest(dobj, te, 3, "EInt + int?", (Func<dynamic, dynamic>)(d => d + ni1));
-            Helper.ExecPositiveTest(dobj, te, 1, "int? + EInt", (Func<dynamic, dynamic>)(d => nin1 + d));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "+", "EInt", "EInt?"
-            }
-
-            , "EInt + EInt?", (Func<dynamic, dynamic>)(d => d + nei0));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "+", "EInt", "ulong?"
-            }
-
-            , "EInt + ulong?", (Func<dynamic, dynamic>)(d => d + nul1));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "+", "ulong?", "EInt"
-            }
-
-            , "ulong? + EInt", (Func<dynamic, dynamic>)(d => nul1 + d));
+            Helper.ExecPositiveTest(
+                dobj,
+                te,
+                3,
+                "EInt + int?",
+                (Func<dynamic, dynamic>)(d => d + ni1)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                te,
+                1,
+                "int? + EInt",
+                (Func<dynamic, dynamic>)(d => nin1 + d)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "+", "EInt", "EInt?" },
+                "EInt + EInt?",
+                (Func<dynamic, dynamic>)(d => d + nei0)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "+", "EInt", "ulong?" },
+                "EInt + ulong?",
+                (Func<dynamic, dynamic>)(d => d + nul1)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "+", "ulong?", "EInt" },
+                "ulong? + EInt",
+                (Func<dynamic, dynamic>)(d => nul1 + d)
+            );
             #endregion operator+
             #region operator-
-            Helper.ExecPositiveTest(dobj, tint, 2, "EInt(dynamic) - EInt", (Func<dynamic, dynamic>)(d => d - EInt.EM0));
-            Helper.ExecPositiveTest(dobj, tint, 3, "EInt - EInt(dynamic)", (Func<dynamic, dynamic>)(d => ei5 - d));
-            Helper.ExecPositiveTest(dobj, te, 1, "EInt - int(C)", (Func<dynamic, dynamic>)(d => d - 1));
-            Helper.ExecPositiveTest(dobj, te, 2, "EInt - int(C0)", (Func<dynamic, dynamic>)(d => d - 0));
-            Helper.ExecPositiveTest(dobj, te, 3, "EInt - int", (Func<dynamic, dynamic>)(d => d - in1));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "-", "EInt", "EByte"
-            }
+            Helper.ExecPositiveTest(
+                dobj,
+                tint,
+                2,
+                "EInt(dynamic) - EInt",
+                (Func<dynamic, dynamic>)(d => d - EInt.EM0)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tint,
+                3,
+                "EInt - EInt(dynamic)",
+                (Func<dynamic, dynamic>)(d => ei5 - d)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                te,
+                1,
+                "EInt - int(C)",
+                (Func<dynamic, dynamic>)(d => d - 1)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                te,
+                2,
+                "EInt - int(C0)",
+                (Func<dynamic, dynamic>)(d => d - 0)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                te,
+                3,
+                "EInt - int",
+                (Func<dynamic, dynamic>)(d => d - in1)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "-", "EInt", "EByte" },
+                "EInt - EByte",
+                (Func<dynamic, dynamic>)(d => d - EByte.EM0)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "-", "EInt", "ulong" },
+                "EInt - ulong",
+                (Func<dynamic, dynamic>)(d => d - 1UL)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "-", "double", "EInt" },
+                "double - EInt",
+                (Func<dynamic, dynamic>)(d => 1.0 - d)
+            );
 
-            , "EInt - EByte", (Func<dynamic, dynamic>)(d => d - EByte.EM0));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "-", "EInt", "ulong"
-            }
-
-            , "EInt - ulong", (Func<dynamic, dynamic>)(d => d - 1UL));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "-", "double", "EInt"
-            }
-
-            , "double - EInt", (Func<dynamic, dynamic>)(d => 1.0 - d));
-
-            Helper.ExecPositiveTest(dobj, te, 3, "int - EInt", (Func<dynamic, dynamic>)(d => 5 - d));
-            Helper.ExecPositiveTest(dobj, te, -1, "int - EInt", (Func<dynamic, dynamic>)(d => i1 - d));
-            Helper.ExecPositiveTest(dobj, tint, -2, "int(C0) - EInt", (Func<dynamic, dynamic>)(d => 0 - d));
+            Helper.ExecPositiveTest(
+                dobj,
+                te,
+                3,
+                "int - EInt",
+                (Func<dynamic, dynamic>)(d => 5 - d)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                te,
+                -1,
+                "int - EInt",
+                (Func<dynamic, dynamic>)(d => i1 - d)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tint,
+                -2,
+                "int(C0) - EInt",
+                (Func<dynamic, dynamic>)(d => 0 - d)
+            );
             // nullable
-            Helper.ExecPositiveTest(dobj, tint, 1, "EInt - Eint?(C)", (Func<dynamic, dynamic>)(d => d - (EInt?)EInt.EM1));
-            Helper.ExecPositiveTest(dobj, tint, 2, "EInt - Eint?", (Func<dynamic, dynamic>)(d => d - nei0));
-            Helper.ExecPositiveTest(dobj, te, 3, "EInt - int?", (Func<dynamic, dynamic>)(d => d - nin1));
+            Helper.ExecPositiveTest(
+                dobj,
+                tint,
+                1,
+                "EInt - Eint?(C)",
+                (Func<dynamic, dynamic>)(d => d - (EInt?)EInt.EM1)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tint,
+                2,
+                "EInt - Eint?",
+                (Func<dynamic, dynamic>)(d => d - nei0)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                te,
+                3,
+                "EInt - int?",
+                (Func<dynamic, dynamic>)(d => d - nin1)
+            );
 
-            Helper.ExecPositiveTest(dobj, te, -1, "int? - EInt", (Func<dynamic, dynamic>)(d => ni1 - d));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "-", "EInt", "EByte?"
-            }
-
-            , "EInt - EByte?", (Func<dynamic, dynamic>)(d => d - neb0));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "-", "EInt", "ulong?"
-            }
-
-            , "EInt - ulong?", (Func<dynamic, dynamic>)(d => d - nul1));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "-", "ulong?", "EInt"
-            }
-
-            , "ulong? - EInt", (Func<dynamic, dynamic>)(d => nul1 - d));
+            Helper.ExecPositiveTest(
+                dobj,
+                te,
+                -1,
+                "int? - EInt",
+                (Func<dynamic, dynamic>)(d => ni1 - d)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "-", "EInt", "EByte?" },
+                "EInt - EByte?",
+                (Func<dynamic, dynamic>)(d => d - neb0)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "-", "EInt", "ulong?" },
+                "EInt - ulong?",
+                (Func<dynamic, dynamic>)(d => d - nul1)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "-", "ulong?", "EInt" },
+                "ulong? - EInt",
+                (Func<dynamic, dynamic>)(d => nul1 - d)
+            );
             #endregion operator-
             return Helper.result;
         }
@@ -1368,11 +1615,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enum005b.enum005b
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enumhelper.enumhelper;
     // <Area>Enum -- binary operator</Area>
     // <Title>Predefined enum binary operators</Title>
     // <Description>
@@ -1393,6 +1637,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <Code>
     //<Expects Status=warning>\(32,16\).*CS0219</Expects>
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enumhelper.enumhelper;
 
     public class Test
     {
@@ -1412,186 +1657,327 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             EInt? nei5 = EInt.EM5;
             EByte? neb0 = EByte.EM0;
             Helper.result = 0;
-            Helper.ExecPositiveTest(dobj, tbool, true, "EInt(dynamic) == EInt(C)", (Func<dynamic, dynamic>)(d => d == EInt.EM2));
-            Helper.ExecPositiveTest(dobj, tbool, false, "EInt == EInt(dynamic)", (Func<dynamic, dynamic>)(d => ei5 == d));
-            Helper.ExecPositiveTest(dobj, tbool, false, "EInt(C) != EInt((dynamic))", (Func<dynamic, dynamic>)(d => EInt.EM2 != d));
-            Helper.ExecPositiveTest(dobj, tbool, true, "EInt(dynamic) != EInt", (Func<dynamic, dynamic>)(d => d != ei5));
-            Helper.ExecPositiveTest(dobj, tbool, false, "EInt(dynamic) > EInt(C)", (Func<dynamic, dynamic>)(d => d > EInt.EM2));
-            Helper.ExecPositiveTest(dobj, tbool, true, "EInt > EInt(dynamic)", (Func<dynamic, dynamic>)(d => ei5 > d));
-            Helper.ExecPositiveTest(dobj, tbool, false, "EInt(C) < EInt((dynamic))", (Func<dynamic, dynamic>)(d => EInt.EM2 < d));
-            Helper.ExecPositiveTest(dobj, tbool, true, "EInt(dynamic) < EInt", (Func<dynamic, dynamic>)(d => d < ei5));
-            Helper.ExecPositiveTest(dobj, tbool, true, "EInt(dynamic) >= EInt(C)", (Func<dynamic, dynamic>)(d => d >= EInt.EM2));
-            Helper.ExecPositiveTest(dobj, tbool, true, "EInt >= EInt(dynamic)", (Func<dynamic, dynamic>)(d => ei5 >= d));
-            Helper.ExecPositiveTest(dobj, tbool, true, "EInt(C) <= EInt((dynamic))", (Func<dynamic, dynamic>)(d => EInt.EM2 <= d));
-            Helper.ExecPositiveTest(dobj, tbool, true, "EInt(dynamic) <= EInt", (Func<dynamic, dynamic>)(d => d <= ei5));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "==", "EInt", "int"
-            }
-
-            , "EInt == int", (Func<dynamic, dynamic>)(d => d == i1));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "==", "EByte", "EInt"
-            }
-
-            , "EByte == EInt", (Func<dynamic, dynamic>)(d => EByte.EM0 == d));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "!=", "int", "EInt"
-            }
-
-            , "int != EInt", (Func<dynamic, dynamic>)(d => i1 != d));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "!=", "EInt", "EByte"
-            }
-
-            , "EInt != EByte", (Func<dynamic, dynamic>)(d => d != EByte.EM1));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            ">", "EInt", "int"
-            }
-
-            , "EInt > int", (Func<dynamic, dynamic>)(d => d > i1));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            ">", "EByte", "EInt"
-            }
-
-            , "EByte > EInt", (Func<dynamic, dynamic>)(d => EByte.EM0 > d));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "<", "int", "EInt"
-            }
-
-            , "int < EInt", (Func<dynamic, dynamic>)(d => i1 < d));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "<", "EInt", "EByte"
-            }
-
-            , "EInt < EByte", (Func<dynamic, dynamic>)(d => d < EByte.EM1));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            ">=", "EInt", "int"
-            }
-
-            , "EInt >= int", (Func<dynamic, dynamic>)(d => d >= i1));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            ">=", "EByte", "EInt"
-            }
-
-            , "EByte >= EInt", (Func<dynamic, dynamic>)(d => EByte.EM0 >= d));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "<=", "int", "EInt"
-            }
-
-            , "int <= EInt", (Func<dynamic, dynamic>)(d => i1 <= d));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "<=", "EInt", "EByte"
-            }
-
-            , "EInt <= EByte", (Func<dynamic, dynamic>)(d => d <= EByte.EM1));
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                true,
+                "EInt(dynamic) == EInt(C)",
+                (Func<dynamic, dynamic>)(d => d == EInt.EM2)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                false,
+                "EInt == EInt(dynamic)",
+                (Func<dynamic, dynamic>)(d => ei5 == d)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                false,
+                "EInt(C) != EInt((dynamic))",
+                (Func<dynamic, dynamic>)(d => EInt.EM2 != d)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                true,
+                "EInt(dynamic) != EInt",
+                (Func<dynamic, dynamic>)(d => d != ei5)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                false,
+                "EInt(dynamic) > EInt(C)",
+                (Func<dynamic, dynamic>)(d => d > EInt.EM2)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                true,
+                "EInt > EInt(dynamic)",
+                (Func<dynamic, dynamic>)(d => ei5 > d)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                false,
+                "EInt(C) < EInt((dynamic))",
+                (Func<dynamic, dynamic>)(d => EInt.EM2 < d)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                true,
+                "EInt(dynamic) < EInt",
+                (Func<dynamic, dynamic>)(d => d < ei5)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                true,
+                "EInt(dynamic) >= EInt(C)",
+                (Func<dynamic, dynamic>)(d => d >= EInt.EM2)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                true,
+                "EInt >= EInt(dynamic)",
+                (Func<dynamic, dynamic>)(d => ei5 >= d)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                true,
+                "EInt(C) <= EInt((dynamic))",
+                (Func<dynamic, dynamic>)(d => EInt.EM2 <= d)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                true,
+                "EInt(dynamic) <= EInt",
+                (Func<dynamic, dynamic>)(d => d <= ei5)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "==", "EInt", "int" },
+                "EInt == int",
+                (Func<dynamic, dynamic>)(d => d == i1)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "==", "EByte", "EInt" },
+                "EByte == EInt",
+                (Func<dynamic, dynamic>)(d => EByte.EM0 == d)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "!=", "int", "EInt" },
+                "int != EInt",
+                (Func<dynamic, dynamic>)(d => i1 != d)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "!=", "EInt", "EByte" },
+                "EInt != EByte",
+                (Func<dynamic, dynamic>)(d => d != EByte.EM1)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { ">", "EInt", "int" },
+                "EInt > int",
+                (Func<dynamic, dynamic>)(d => d > i1)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { ">", "EByte", "EInt" },
+                "EByte > EInt",
+                (Func<dynamic, dynamic>)(d => EByte.EM0 > d)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "<", "int", "EInt" },
+                "int < EInt",
+                (Func<dynamic, dynamic>)(d => i1 < d)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "<", "EInt", "EByte" },
+                "EInt < EByte",
+                (Func<dynamic, dynamic>)(d => d < EByte.EM1)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { ">=", "EInt", "int" },
+                "EInt >= int",
+                (Func<dynamic, dynamic>)(d => d >= i1)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { ">=", "EByte", "EInt" },
+                "EByte >= EInt",
+                (Func<dynamic, dynamic>)(d => EByte.EM0 >= d)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "<=", "int", "EInt" },
+                "int <= EInt",
+                (Func<dynamic, dynamic>)(d => i1 <= d)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "<=", "EInt", "EByte" },
+                "EInt <= EByte",
+                (Func<dynamic, dynamic>)(d => d <= EByte.EM1)
+            );
             // nullable
-            Helper.ExecPositiveTest(dobj, tbool, true, "EInt(dynamic) == EInt?(C)", (Func<dynamic, dynamic>)(d => d == (EInt?)EInt.EM2));
-            Helper.ExecPositiveTest(dobj, tbool, false, "EInt? == EInt(dynamic)", (Func<dynamic, dynamic>)(d => nei5 == d));
-            Helper.ExecPositiveTest(dobj, tbool, false, "EInt?(C) != EInt((dynamic))", (Func<dynamic, dynamic>)(d => (EInt?)EInt.EM2 != d));
-            Helper.ExecPositiveTest(dobj, tbool, true, "EInt(dynamic) != EInt?", (Func<dynamic, dynamic>)(d => d != nei5));
-            Helper.ExecPositiveTest(dobj, tbool, false, "EInt(dynamic) > EInt?(C)", (Func<dynamic, dynamic>)(d => d > (EInt?)EInt.EM2));
-            Helper.ExecPositiveTest(dobj, tbool, true, "EInt? > EInt(dynamic)", (Func<dynamic, dynamic>)(d => nei5 > d));
-            Helper.ExecPositiveTest(dobj, tbool, false, "EInt?(C) < EInt((dynamic))", (Func<dynamic, dynamic>)(d => (EInt?)EInt.EM2 < d));
-            Helper.ExecPositiveTest(dobj, tbool, true, "EInt(dynamic) < EInt?", (Func<dynamic, dynamic>)(d => d < nei5));
-            Helper.ExecPositiveTest(dobj, tbool, true, "EInt(dynamic) >= EInt?(C)", (Func<dynamic, dynamic>)(d => d >= (EInt?)EInt.EM2));
-            Helper.ExecPositiveTest(dobj, tbool, true, "EInt? >= EInt(dynamic)", (Func<dynamic, dynamic>)(d => nei5 >= d));
-            Helper.ExecPositiveTest(dobj, tbool, true, "EInt?(C) <= EInt((dynamic))", (Func<dynamic, dynamic>)(d => (EInt?)EInt.EM2 <= d));
-            Helper.ExecPositiveTest(dobj, tbool, true, "EInt(dynamic) <= EInt?", (Func<dynamic, dynamic>)(d => d <= nei5));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "==", "EInt", "int?"
-            }
-
-            , "EInt == int?", (Func<dynamic, dynamic>)(d => d == ni1));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "==", "EByte?", "EInt"
-            }
-
-            , "EByte? == EInt", (Func<dynamic, dynamic>)(d => (EByte?)EByte.EM0 == d));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "!=", "int?", "EInt"
-            }
-
-            , "int? != EInt", (Func<dynamic, dynamic>)(d => ni1 != d));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "!=", "EInt", "EByte?"
-            }
-
-            , "EInt != EByte?", (Func<dynamic, dynamic>)(d => d != (EByte?)EByte.EM1));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            ">", "EInt", "int?"
-            }
-
-            , "EInt > int?", (Func<dynamic, dynamic>)(d => d > ni1));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            ">", "EByte?", "EInt"
-            }
-
-            , "EByte? > EInt", (Func<dynamic, dynamic>)(d => (EByte?)EByte.EM0 > d));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "<", "int?", "EInt"
-            }
-
-            , "int? < EInt", (Func<dynamic, dynamic>)(d => ni1 < d));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "<", "EInt", "EByte?"
-            }
-
-            , "EInt < EByte?", (Func<dynamic, dynamic>)(d => d < (EByte?)EByte.EM1));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            ">=", "EInt", "int?"
-            }
-
-            , "EInt >= int?", (Func<dynamic, dynamic>)(d => d >= ni1));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            ">=", "EByte?", "EInt"
-            }
-
-            , "EByte? >= EInt", (Func<dynamic, dynamic>)(d => (EByte?)EByte.EM0 >= d));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "<=", "int?", "EInt"
-            }
-
-            , "int? <= EInt", (Func<dynamic, dynamic>)(d => ni1 <= d));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "<=", "EInt", "EByte?"
-            }
-
-            , "EInt <= EByte?", (Func<dynamic, dynamic>)(d => d <= (EByte?)EByte.EM1));
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                true,
+                "EInt(dynamic) == EInt?(C)",
+                (Func<dynamic, dynamic>)(d => d == (EInt?)EInt.EM2)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                false,
+                "EInt? == EInt(dynamic)",
+                (Func<dynamic, dynamic>)(d => nei5 == d)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                false,
+                "EInt?(C) != EInt((dynamic))",
+                (Func<dynamic, dynamic>)(d => (EInt?)EInt.EM2 != d)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                true,
+                "EInt(dynamic) != EInt?",
+                (Func<dynamic, dynamic>)(d => d != nei5)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                false,
+                "EInt(dynamic) > EInt?(C)",
+                (Func<dynamic, dynamic>)(d => d > (EInt?)EInt.EM2)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                true,
+                "EInt? > EInt(dynamic)",
+                (Func<dynamic, dynamic>)(d => nei5 > d)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                false,
+                "EInt?(C) < EInt((dynamic))",
+                (Func<dynamic, dynamic>)(d => (EInt?)EInt.EM2 < d)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                true,
+                "EInt(dynamic) < EInt?",
+                (Func<dynamic, dynamic>)(d => d < nei5)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                true,
+                "EInt(dynamic) >= EInt?(C)",
+                (Func<dynamic, dynamic>)(d => d >= (EInt?)EInt.EM2)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                true,
+                "EInt? >= EInt(dynamic)",
+                (Func<dynamic, dynamic>)(d => nei5 >= d)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                true,
+                "EInt?(C) <= EInt((dynamic))",
+                (Func<dynamic, dynamic>)(d => (EInt?)EInt.EM2 <= d)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                tbool,
+                true,
+                "EInt(dynamic) <= EInt?",
+                (Func<dynamic, dynamic>)(d => d <= nei5)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "==", "EInt", "int?" },
+                "EInt == int?",
+                (Func<dynamic, dynamic>)(d => d == ni1)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "==", "EByte?", "EInt" },
+                "EByte? == EInt",
+                (Func<dynamic, dynamic>)(d => (EByte?)EByte.EM0 == d)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "!=", "int?", "EInt" },
+                "int? != EInt",
+                (Func<dynamic, dynamic>)(d => ni1 != d)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "!=", "EInt", "EByte?" },
+                "EInt != EByte?",
+                (Func<dynamic, dynamic>)(d => d != (EByte?)EByte.EM1)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { ">", "EInt", "int?" },
+                "EInt > int?",
+                (Func<dynamic, dynamic>)(d => d > ni1)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { ">", "EByte?", "EInt" },
+                "EByte? > EInt",
+                (Func<dynamic, dynamic>)(d => (EByte?)EByte.EM0 > d)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "<", "int?", "EInt" },
+                "int? < EInt",
+                (Func<dynamic, dynamic>)(d => ni1 < d)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "<", "EInt", "EByte?" },
+                "EInt < EByte?",
+                (Func<dynamic, dynamic>)(d => d < (EByte?)EByte.EM1)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { ">=", "EInt", "int?" },
+                "EInt >= int?",
+                (Func<dynamic, dynamic>)(d => d >= ni1)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { ">=", "EByte?", "EInt" },
+                "EByte? >= EInt",
+                (Func<dynamic, dynamic>)(d => (EByte?)EByte.EM0 >= d)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "<=", "int?", "EInt" },
+                "int? <= EInt",
+                (Func<dynamic, dynamic>)(d => ni1 <= d)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "<=", "EInt", "EByte?" },
+                "EInt <= EByte?",
+                (Func<dynamic, dynamic>)(d => d <= (EByte?)EByte.EM1)
+            );
             return Helper.result;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enum005c.enum005c
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enumhelper.enumhelper;
     // <Area>Enum -- binary operator</Area>
     // <Title>Predefined enum binary operators</Title>
     // <Description>
@@ -1608,6 +1994,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     //
     // <Code>
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enumhelper.enumhelper;
 
     public class Test
     {
@@ -1626,98 +2013,168 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             int? ni1 = 1;
             EInt? nei5 = EInt.EM5;
             Helper.result = 0;
-            Helper.ExecPositiveTest(dobj, teint, 2, "EInt(dynamic) & EInt(C)", (Func<dynamic, dynamic>)(d => d & EInt.EM3));
-            Helper.ExecPositiveTest(dobj, teint, 0, "EInt & EInt(dynamic)", (Func<dynamic, dynamic>)(d => ei5 & d));
-            Helper.ExecPositiveTest(dobj, teint, 3, "EInt(C) | EInt((dynamic))", (Func<dynamic, dynamic>)(d => EInt.EM1 | d));
-            Helper.ExecPositiveTest(dobj, teint, 7, "EInt(dynamic) | EInt", (Func<dynamic, dynamic>)(d => d | ei5));
-            Helper.ExecPositiveTest(dobj, teint, 1, "EInt(dynamic) ^ EInt(C)", (Func<dynamic, dynamic>)(d => d ^ EInt.EM3));
-            Helper.ExecPositiveTest(dobj, teint, 7, "EInt ^ EInt(dynamic)", (Func<dynamic, dynamic>)(d => ei5 ^ d));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "&", "EInt", "int"
-            }
-
-            , "EInt & int", (Func<dynamic, dynamic>)(d => d & i1));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "&", "EByte", "EInt"
-            }
-
-            , "EByte & EInt", (Func<dynamic, dynamic>)(d => EByte.EM0 & d));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "|", "int", "EInt"
-            }
-
-            , "int | EInt", (Func<dynamic, dynamic>)(d => i1 | d));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "|", "EInt", "EByte"
-            }
-
-            , "EInt | EByte", (Func<dynamic, dynamic>)(d => d | EByte.EM1));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "^", "EInt", "int"
-            }
-
-            , "EInt ^ int", (Func<dynamic, dynamic>)(d => d ^ i1));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "^", "EByte", "EInt"
-            }
-
-            , "EByte ^ EInt", (Func<dynamic, dynamic>)(d => EByte.EM0 ^ d));
+            Helper.ExecPositiveTest(
+                dobj,
+                teint,
+                2,
+                "EInt(dynamic) & EInt(C)",
+                (Func<dynamic, dynamic>)(d => d & EInt.EM3)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                teint,
+                0,
+                "EInt & EInt(dynamic)",
+                (Func<dynamic, dynamic>)(d => ei5 & d)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                teint,
+                3,
+                "EInt(C) | EInt((dynamic))",
+                (Func<dynamic, dynamic>)(d => EInt.EM1 | d)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                teint,
+                7,
+                "EInt(dynamic) | EInt",
+                (Func<dynamic, dynamic>)(d => d | ei5)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                teint,
+                1,
+                "EInt(dynamic) ^ EInt(C)",
+                (Func<dynamic, dynamic>)(d => d ^ EInt.EM3)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                teint,
+                7,
+                "EInt ^ EInt(dynamic)",
+                (Func<dynamic, dynamic>)(d => ei5 ^ d)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "&", "EInt", "int" },
+                "EInt & int",
+                (Func<dynamic, dynamic>)(d => d & i1)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "&", "EByte", "EInt" },
+                "EByte & EInt",
+                (Func<dynamic, dynamic>)(d => EByte.EM0 & d)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "|", "int", "EInt" },
+                "int | EInt",
+                (Func<dynamic, dynamic>)(d => i1 | d)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "|", "EInt", "EByte" },
+                "EInt | EByte",
+                (Func<dynamic, dynamic>)(d => d | EByte.EM1)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "^", "EInt", "int" },
+                "EInt ^ int",
+                (Func<dynamic, dynamic>)(d => d ^ i1)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "^", "EByte", "EInt" },
+                "EByte ^ EInt",
+                (Func<dynamic, dynamic>)(d => EByte.EM0 ^ d)
+            );
             // nullable
-            Helper.ExecPositiveTest(dobj, teint, 2, "EInt(dynamic) & EInt?(C)", (Func<dynamic, dynamic>)(d => d & (EInt?)EInt.EM3));
-            Helper.ExecPositiveTest(dobj, teint, 0, "EInt? & EInt(dynamic)", (Func<dynamic, dynamic>)(d => nei5 & d));
-            Helper.ExecPositiveTest(dobj, teint, 3, "EInt?(C) | EInt((dynamic))", (Func<dynamic, dynamic>)(d => (EInt?)EInt.EM1 | d));
-            Helper.ExecPositiveTest(dobj, teint, 7, "EInt(dynamic) | EInt?", (Func<dynamic, dynamic>)(d => d | nei5));
-            Helper.ExecPositiveTest(dobj, teint, 1, "EInt(dynamic) ^ EInt?(C)", (Func<dynamic, dynamic>)(d => d ^ (EInt?)EInt.EM3));
-            Helper.ExecPositiveTest(dobj, teint, 7, "EInt? ^ EInt(dynamic)", (Func<dynamic, dynamic>)(d => nei5 ^ d));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "&", "EInt", "int?"
-            }
-
-            , "EInt & int?", (Func<dynamic, dynamic>)(d => d & ni1));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "&", "EByte?", "EInt"
-            }
-
-            , "EByte? & EInt", (Func<dynamic, dynamic>)(d => (EByte?)EByte.EM0 & d));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "|", "int?", "EInt"
-            }
-
-            , "int? | EInt", (Func<dynamic, dynamic>)(d => ni1 | d));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "|", "EInt", "EByte?"
-            }
-
-            , "EInt | EByte?", (Func<dynamic, dynamic>)(d => d | (EByte?)EByte.EM1));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "^", "EInt", "int?"
-            }
-
-            , "EInt ^ int?", (Func<dynamic, dynamic>)(d => d ^ ni1));
-            Helper.ExecNegativeTestWithBadOps(dobj, new[]
-            {
-            "^", "EByte?", "EInt"
-            }
-
-            , "EByte? ^ EInt", (Func<dynamic, dynamic>)(d => (EByte?)EByte.EM0 ^ d));
+            Helper.ExecPositiveTest(
+                dobj,
+                teint,
+                2,
+                "EInt(dynamic) & EInt?(C)",
+                (Func<dynamic, dynamic>)(d => d & (EInt?)EInt.EM3)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                teint,
+                0,
+                "EInt? & EInt(dynamic)",
+                (Func<dynamic, dynamic>)(d => nei5 & d)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                teint,
+                3,
+                "EInt?(C) | EInt((dynamic))",
+                (Func<dynamic, dynamic>)(d => (EInt?)EInt.EM1 | d)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                teint,
+                7,
+                "EInt(dynamic) | EInt?",
+                (Func<dynamic, dynamic>)(d => d | nei5)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                teint,
+                1,
+                "EInt(dynamic) ^ EInt?(C)",
+                (Func<dynamic, dynamic>)(d => d ^ (EInt?)EInt.EM3)
+            );
+            Helper.ExecPositiveTest(
+                dobj,
+                teint,
+                7,
+                "EInt? ^ EInt(dynamic)",
+                (Func<dynamic, dynamic>)(d => nei5 ^ d)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "&", "EInt", "int?" },
+                "EInt & int?",
+                (Func<dynamic, dynamic>)(d => d & ni1)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "&", "EByte?", "EInt" },
+                "EByte? & EInt",
+                (Func<dynamic, dynamic>)(d => (EByte?)EByte.EM0 & d)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "|", "int?", "EInt" },
+                "int? | EInt",
+                (Func<dynamic, dynamic>)(d => ni1 | d)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "|", "EInt", "EByte?" },
+                "EInt | EByte?",
+                (Func<dynamic, dynamic>)(d => d | (EByte?)EByte.EM1)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "^", "EInt", "int?" },
+                "EInt ^ int?",
+                (Func<dynamic, dynamic>)(d => d ^ ni1)
+            );
+            Helper.ExecNegativeTestWithBadOps(
+                dobj,
+                new[] { "^", "EByte?", "EInt" },
+                "EByte? ^ EInt",
+                (Func<dynamic, dynamic>)(d => (EByte?)EByte.EM0 ^ d)
+            );
             return Helper.result;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.bug811970.bug811970
 {
@@ -1732,12 +2189,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
     public class A
     {
-        public static implicit operator ulong (A x)
+        public static implicit operator ulong(A x)
         {
             return 1;
         }
 
-        public static implicit operator long (A x)
+        public static implicit operator long(A x)
         {
             return 0;
         }
@@ -1751,18 +2208,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
         public static int MainMethod()
         {
             var x = new A();
-            int result = new[]
-            {
-            1
-            }
-
-            [x];
-            result += new[]
-            {
-            1
-            }
-
-            [(dynamic)x];
+            int result = new[] { 1 }[x];
+            result += new[] { 1 }[(dynamic)x];
             if (result == 2)
                 return 0;
             else

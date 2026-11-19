@@ -7,50 +7,62 @@
 
 using System;
 
-public class PressureOverflow {
-
+public class PressureOverflow
+{
     int numTests = 0;
 
     // memory pressure should overflow when increased beyond ulong.MaxInt
-    public bool AddTest() {
+    public bool AddTest()
+    {
         numTests++;
         bool retVal = false;
 
-        for (int i=0; i<3; i++) {
-            try {
+        for (int i = 0; i < 3; i++)
+        {
+            try
+            {
                 GC.AddMemoryPressure(Int64.MaxValue);
                 retVal = true;
-            } catch (ArgumentOutOfRangeException) {
+            }
+            catch (ArgumentOutOfRangeException)
+            {
                 Console.WriteLine("This test is for 64-bit only!");
                 retVal = true;
                 break;
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 Console.WriteLine("Caught unexpected exception at {0}", i);
                 Console.WriteLine(e);
                 retVal = false;
                 break;
             }
-
         }
 
         return retVal;
-
     }
 
     // memory pressure should underflow when decreased beyond ulong.MaxInt
-    public bool RemoveTest() {
+    public bool RemoveTest()
+    {
         numTests++;
         bool retVal = false;
 
-        for (int i=0; i<3; i++) {
-            try {
+        for (int i = 0; i < 3; i++)
+        {
+            try
+            {
                 GC.RemoveMemoryPressure(Int64.MaxValue);
                 retVal = true;
-            } catch (ArgumentOutOfRangeException) {
+            }
+            catch (ArgumentOutOfRangeException)
+            {
                 Console.WriteLine("This test is for 64-bit only!");
                 retVal = true;
                 break;
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 Console.WriteLine("Caught unexpected exception at {0}", i);
                 Console.WriteLine(e);
                 retVal = false;
@@ -58,11 +70,10 @@ public class PressureOverflow {
             }
         }
         return retVal;
-
     }
 
-    public bool RunTest() {
-
+    public bool RunTest()
+    {
         int numPassed = 0;
 
         if (AddTest())
@@ -73,18 +84,16 @@ public class PressureOverflow {
         return (numPassed == numTests);
     }
 
+    public static int Main()
+    {
+        PressureOverflow a = new PressureOverflow();
 
-    public static int Main() {
-
-            PressureOverflow a = new PressureOverflow();
-
-            if (a.RunTest()) {
-                Console.WriteLine("Test Passed!");
-                return 100;
-            }
-            Console.WriteLine("Test Failed!");
-            return 1;
-
-
+        if (a.RunTest())
+        {
+            Console.WriteLine("Test Passed!");
+            return 100;
+        }
+        Console.WriteLine("Test Failed!");
+        return 1;
     }
 }

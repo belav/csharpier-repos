@@ -8,7 +8,8 @@ namespace System.Globalization.Tests
 {
     public class GregorianCalendarAddYears
     {
-        private static readonly RandomDataGenerator s_randomDataGenerator = new RandomDataGenerator();
+        private static readonly RandomDataGenerator s_randomDataGenerator =
+            new RandomDataGenerator();
 
         public static IEnumerable<object[]> AddYears_TestData()
         {

@@ -21,27 +21,57 @@ namespace Microsoft.CodeAnalysis.LanguageService
         TFieldDeclarationSyntax,
         TPropertyDeclarationSyntax,
         TTypeDeclarationSyntax,
-        TVariableSyntax>
+        TVariableSyntax
+    >
         where TMemberDeclarationSyntax : SyntaxNode
         where TFieldDeclarationSyntax : TMemberDeclarationSyntax
         where TPropertyDeclarationSyntax : TMemberDeclarationSyntax
         where TTypeDeclarationSyntax : TMemberDeclarationSyntax
         where TVariableSyntax : SyntaxNode
     {
-        protected abstract SyntaxList<TMemberDeclarationSyntax> GetMembers(TTypeDeclarationSyntax containingType);
-        protected abstract ImmutableArray<(SyntaxNode declarator, SyntaxToken identifier)> GetDeclaratorsAndIdentifiers(TMemberDeclarationSyntax member);
+        protected abstract SyntaxList<TMemberDeclarationSyntax> GetMembers(
+            TTypeDeclarationSyntax containingType
+        );
+        protected abstract ImmutableArray<(
+            SyntaxNode declarator,
+            SyntaxToken identifier
+        )> GetDeclaratorsAndIdentifiers(TMemberDeclarationSyntax member);
 
         public Task<ImmutableArray<SyntaxNode>> GetSelectedFieldsAndPropertiesAsync(
-            SyntaxTree tree, TextSpan textSpan, bool allowPartialSelection, CancellationToken cancellationToken)
-                => GetSelectedMembersAsync(tree, textSpan, allowPartialSelection, IsFieldOrProperty, cancellationToken);
+            SyntaxTree tree,
+            TextSpan textSpan,
+            bool allowPartialSelection,
+            CancellationToken cancellationToken
+        ) =>
+            GetSelectedMembersAsync(
+                tree,
+                textSpan,
+                allowPartialSelection,
+                IsFieldOrProperty,
+                cancellationToken
+            );
 
         public Task<ImmutableArray<SyntaxNode>> GetSelectedMembersAsync(
-            SyntaxTree tree, TextSpan textSpan, bool allowPartialSelection, CancellationToken cancellationToken)
-                => GetSelectedMembersAsync(tree, textSpan, allowPartialSelection, static _ => true, cancellationToken);
+            SyntaxTree tree,
+            TextSpan textSpan,
+            bool allowPartialSelection,
+            CancellationToken cancellationToken
+        ) =>
+            GetSelectedMembersAsync(
+                tree,
+                textSpan,
+                allowPartialSelection,
+                static _ => true,
+                cancellationToken
+            );
 
         private async Task<ImmutableArray<SyntaxNode>> GetSelectedMembersAsync(
-            SyntaxTree tree, TextSpan textSpan, bool allowPartialSelection,
-            Func<TMemberDeclarationSyntax, bool> membersToKeep, CancellationToken cancellationToken)
+            SyntaxTree tree,
+            TextSpan textSpan,
+            bool allowPartialSelection,
+            Func<TMemberDeclarationSyntax, bool> membersToKeep,
+            CancellationToken cancellationToken
+        )
         {
             var text = await tree.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var root = await tree.GetRootAsync(cancellationToken).ConfigureAwait(false);
@@ -65,19 +95,31 @@ namespace Microsoft.CodeAnalysis.LanguageService
             var token = textSpan.IsEmpty
                 ? root.FindToken(textSpan.Start)
                 : root.FindTokenOnRightOfPosition(textSpan.Start);
-            var firstMember = token.GetAncestors<TMemberDeclarationSyntax>()
-                                   .Where(m => m.Parent is TTypeDeclarationSyntax)
-                                   .FirstOrDefault();
+            var firstMember = token
+                .GetAncestors<TMemberDeclarationSyntax>()
+                .Where(m => m.Parent is TTypeDeclarationSyntax)
+                .FirstOrDefault();
             if (firstMember == null)
                 return ImmutableArray<SyntaxNode>.Empty;
 
-            return GetMembersInSpan(root, text, textSpan, firstMember, allowPartialSelection, membersToKeep);
+            return GetMembersInSpan(
+                root,
+                text,
+                textSpan,
+                firstMember,
+                allowPartialSelection,
+                membersToKeep
+            );
         }
 
         private ImmutableArray<SyntaxNode> GetMembersInSpan(
-            SyntaxNode root, SourceText text, TextSpan textSpan,
-            TMemberDeclarationSyntax firstMember, bool allowPartialSelection,
-            Func<TMemberDeclarationSyntax, bool> membersToKeep)
+            SyntaxNode root,
+            SourceText text,
+            TextSpan textSpan,
+            TMemberDeclarationSyntax firstMember,
+            bool allowPartialSelection,
+            Func<TMemberDeclarationSyntax, bool> membersToKeep
+        )
         {
             var containingType = (TTypeDeclarationSyntax)firstMember.Parent;
             var members = GetMembers(containingType);
@@ -96,11 +138,16 @@ namespace Microsoft.CodeAnalysis.LanguageService
 
             void AddAllMembers(TMemberDeclarationSyntax member)
             {
-                selectedMembers.AddRange(GetDeclaratorsAndIdentifiers(member).Select(pair => pair.declarator));
+                selectedMembers.AddRange(
+                    GetDeclaratorsAndIdentifiers(member).Select(pair => pair.declarator)
+                );
             }
 
             // local functions
-            void AddSelectedMemberDeclarations(TMemberDeclarationSyntax member, Func<TMemberDeclarationSyntax, bool> membersToKeep)
+            void AddSelectedMemberDeclarations(
+                TMemberDeclarationSyntax member,
+                Func<TMemberDeclarationSyntax, bool> membersToKeep
+            )
             {
                 if (!membersToKeep(member))
                 {
@@ -162,19 +209,27 @@ namespace Microsoft.CodeAnalysis.LanguageService
         }
 
         private static bool IsBeforeOrAfterNodeOnSameLine(
-            SourceText text, SyntaxNode root, SyntaxNode member, int position)
+            SourceText text,
+            SyntaxNode root,
+            SyntaxNode member,
+            int position
+        )
         {
             var token = root.FindToken(position);
-            if (token == member.GetFirstToken() &&
-                position <= token.SpanStart &&
-                text.AreOnSameLine(position, token.SpanStart))
+            if (
+                token == member.GetFirstToken()
+                && position <= token.SpanStart
+                && text.AreOnSameLine(position, token.SpanStart)
+            )
             {
                 return true;
             }
 
-            if (token == member.GetLastToken() &&
-                position >= token.Span.End &&
-                text.AreOnSameLine(position, token.Span.End))
+            if (
+                token == member.GetLastToken()
+                && position >= token.Span.End
+                && text.AreOnSameLine(position, token.Span.End)
+            )
             {
                 return true;
             }
@@ -182,7 +237,7 @@ namespace Microsoft.CodeAnalysis.LanguageService
             return false;
         }
 
-        private static bool IsFieldOrProperty(TMemberDeclarationSyntax member)
-            => member is TFieldDeclarationSyntax or TPropertyDeclarationSyntax;
+        private static bool IsFieldOrProperty(TMemberDeclarationSyntax member) =>
+            member is TFieldDeclarationSyntax or TPropertyDeclarationSyntax;
     }
 }

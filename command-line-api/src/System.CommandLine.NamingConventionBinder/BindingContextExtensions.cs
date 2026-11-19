@@ -14,7 +14,10 @@ public static class BindingContextExtensions
 {
     private sealed class DummyStateHoldingHandler : BindingHandler
     {
-        public override Task<int> InvokeAsync(ParseResult parseResult, CancellationToken cancellationToken = default) => Task.FromResult(0);
+        public override Task<int> InvokeAsync(
+            ParseResult parseResult,
+            CancellationToken cancellationToken = default
+        ) => Task.FromResult(0);
     }
 
     public static BindingContext GetBindingContext(this ParseResult parseResult)
@@ -25,7 +28,9 @@ public static class BindingContextExtensions
             parseResult.CommandResult.Command.Action = new DummyStateHoldingHandler();
         }
 
-        return ((BindingHandler)parseResult.CommandResult.Command.Action).GetBindingContext(parseResult);
+        return ((BindingHandler)parseResult.CommandResult.Command.Action).GetBindingContext(
+            parseResult
+        );
     }
 
     /// <summary>
@@ -33,9 +38,7 @@ public static class BindingContextExtensions
     /// </summary>
     /// <param name="bindingContext">The binding context for the current binding operation.</param>
     /// <param name="binder">The model binder to add.</param>
-    public static void AddModelBinder(
-        this BindingContext bindingContext,
-        ModelBinder binder)
+    public static void AddModelBinder(this BindingContext bindingContext, ModelBinder binder)
     {
         var modelBinders = GetModelBinderCollection(bindingContext);
 
@@ -48,12 +51,15 @@ public static class BindingContextExtensions
     /// <returns>A model binder for the specified value descriptor.</returns>
     public static ModelBinder GetOrCreateModelBinder(
         this BindingContext bindingContext,
-        IValueDescriptor valueDescriptor) =>
-        GetModelBinderCollection(bindingContext).GetModelBinder(valueDescriptor);
+        IValueDescriptor valueDescriptor
+    ) => GetModelBinderCollection(bindingContext).GetModelBinder(valueDescriptor);
 
     private static ModelBinderCollection GetModelBinderCollection(BindingContext bindingContext)
     {
-        if (bindingContext.GetService(typeof(ModelBinderCollection)) is not ModelBinderCollection modelBinders)
+        if (
+            bindingContext.GetService(typeof(ModelBinderCollection))
+            is not ModelBinderCollection modelBinders
+        )
         {
             modelBinders = new ModelBinderCollection();
             bindingContext.AddService(typeof(ModelBinderCollection), _ => modelBinders);

@@ -74,8 +74,14 @@ namespace System.Xml.Linq.Tests
             object value = xelAttPD.GetValue(xel);
 
             // not exposed, must use reflection to get at it?!
-            var getItemMethod = value.GetType().GetMethod("get_Item", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-            Func<string, XAttribute> getAttribute = (name) => (XAttribute)getItemMethod.Invoke(value, new string[] { name });
+            var getItemMethod = value
+                .GetType()
+                .GetMethod(
+                    "get_Item",
+                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
+                );
+            Func<string, XAttribute> getAttribute = (name) =>
+                (XAttribute)getItemMethod.Invoke(value, new string[] { name });
 
             Assert.Equal(attr1, getAttribute(attr1.Name.ToString()));
 
@@ -90,7 +96,7 @@ namespace System.Xml.Linq.Tests
             Assert.Null(getAttribute(attr2.Name.ToString()));
             Assert.False(valueChanged);
             xel.Add(attr2);
-            Assert.False(valueChanged);  // value is bound to attr1
+            Assert.False(valueChanged); // value is bound to attr1
             xel.Add(attr1);
             Assert.True(valueChanged);
 
@@ -140,7 +146,10 @@ namespace System.Xml.Linq.Tests
                 valueChanged = true;
             });
 
-            xel.Add(new XElement("c1", new XElement("gc1", new XElement("ggc1"))), new XElement("c2"));
+            xel.Add(
+                new XElement("c1", new XElement("gc1", new XElement("ggc1"))),
+                new XElement("c2")
+            );
             Assert.True(valueChanged);
 
             Assert.Equal(dess, xel.Descendants());
@@ -182,8 +191,14 @@ namespace System.Xml.Linq.Tests
             object value = xelElPD.GetValue(xel);
 
             // not exposed, must use reflection to get at it?!
-            var getItemMethod = value.GetType().GetMethod("get_Item", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-            Func<string, XElement> getElement = (name) => (XElement)getItemMethod.Invoke(value, new string[] { name });
+            var getItemMethod = value
+                .GetType()
+                .GetMethod(
+                    "get_Item",
+                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
+                );
+            Func<string, XElement> getElement = (name) =>
+                (XElement)getItemMethod.Invoke(value, new string[] { name });
 
             Assert.Equal(el1, getElement(el1.Name.ToString()));
 
@@ -198,7 +213,7 @@ namespace System.Xml.Linq.Tests
             Assert.Null(getElement(el2.Name.ToString()));
             Assert.False(valueChanged);
             xel.Add(el2);
-            Assert.False(valueChanged);  // value is bound to attr1
+            Assert.False(valueChanged); // value is bound to attr1
             xel.Add(el1);
             Assert.True(valueChanged);
 

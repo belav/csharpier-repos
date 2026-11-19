@@ -1,20 +1,19 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Globalization;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using System.Runtime.InteropServices;
-using System.Text;
+using System.Security.Cryptography;
 using System.Security.Cryptography.Pkcs;
-using System.Security.Cryptography.Xml;
-using System.Security.Cryptography.X509Certificates;
-using Xunit;
-
-using Test.Cryptography;
 using System.Security.Cryptography.Pkcs.Tests;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography.Xml;
+using System.Text;
+using Test.Cryptography;
+using Xunit;
 
 namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 {
@@ -38,13 +37,14 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         [Fact]
         public static void DecodeCertificates0_FixedValue()
         {
-            byte[] encodedMessage =
-                 ("3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
+            byte[] encodedMessage = (
+                "3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
                 + "414b65795472616e7366657231021031d935fb63e8cfab48a0bf7b397b67c0300d06092a864886f70d010101050004818013"
                 + "dc0eb2984a445d04a1f6246b8fe41f1d24507548d449d454d5bb5e0638d75ed101bf78c0155a5d208eb746755fbccbc86923"
                 + "8443760a9ae94770d6373e0197be23a6a891f0c522ca96b3e8008bf23547474b7e24e7f32e8134df3862d84f4dea2470548e"
                 + "c774dd74f149a56cdd966e141122900d00ad9d10ea1848541294a1302b06092a864886f70d010701301406082a864886f70d"
-                + "030704089c8119f6cf6b174c8008bcea3a10d0737eb9").HexToByteArray();
+                + "030704089c8119f6cf6b174c8008bcea3a10d0737eb9"
+            ).HexToByteArray();
 
             VerifyCertificates0(encodedMessage);
         }
@@ -81,8 +81,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         [Fact]
         public static void DecodeCertificates3_FixedValue()
         {
-            byte[] encodedMessage =
-                 ("308208cb06092a864886f70d010703a08208bc308208b8020102a08207b9a08207b5308201c830820131a00302010202102b"
+            byte[] encodedMessage = (
+                "308208cb06092a864886f70d010703a08208bc308208b8020102a08207b9a08207b5308201c830820131a00302010202102b"
                 + "ce9f9ece39f98044f0cd2faa9a14e7300d06092a864886f70d0101050500301a311830160603550403130f5253414b657954"
                 + "72616e7366657232301e170d3136303332353231323334325a170d3137303332363033323334325a301a3118301606035504"
                 + "03130f5253414b65795472616e736665723230819f300d06092a864886f70d010101050003818d0030818902818100ea5a38"
@@ -127,7 +127,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "d3b2c0c1656ab987f7b3a34af282ada97d3f1e79ea84ab09f973b24ef5615097fca7e989a9017f94f65113e3c29bf7908863"
                 + "8095255d522b08e863c041969ccdf9826a1aea42816ee6ec4bb399c663a4a4e891ec20ec778786d7efe91f6cade5859a9299"
                 + "69fa5d990524578b6917302b06092a864886f70d010701301406082a864886f70d030704082a476e3ed67037f480088fb65b"
-                + "4df40a6635").HexToByteArray();
+                + "4df40a6635"
+            ).HexToByteArray();
 
             VerifyCertificates3(encodedMessage);
         }

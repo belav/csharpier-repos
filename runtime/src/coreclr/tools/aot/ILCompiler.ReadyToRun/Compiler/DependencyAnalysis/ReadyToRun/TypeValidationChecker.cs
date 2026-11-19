@@ -16,20 +16,30 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
     internal class TypeValidationChecker
     {
-        private ConcurrentBag<(TypeDesc type, string reason)> _typeLoadValidationErrors = new ConcurrentBag<(TypeDesc type, string reason)>();
-        private ConcurrentDictionary<TypeDesc, Task<bool>> _firstStageValidationChecks = new ConcurrentDictionary<TypeDesc, Task<bool>>();
-        private ConcurrentDictionary<TypeDesc, (TypeDesc dependendOnType, string reason)[]> _crossTypeValidationDependencies = new ConcurrentDictionary<TypeDesc, (TypeDesc dependendOnType, string reason)[]>();
-        private ConcurrentQueue<Task<bool>> _tasksThatMustFinish = new ConcurrentQueue<Task<bool>>();
+        private ConcurrentBag<(TypeDesc type, string reason)> _typeLoadValidationErrors =
+            new ConcurrentBag<(TypeDesc type, string reason)>();
+        private ConcurrentDictionary<TypeDesc, Task<bool>> _firstStageValidationChecks =
+            new ConcurrentDictionary<TypeDesc, Task<bool>>();
+        private ConcurrentDictionary<
+            TypeDesc,
+            (TypeDesc dependendOnType, string reason)[]
+        > _crossTypeValidationDependencies =
+            new ConcurrentDictionary<TypeDesc, (TypeDesc dependendOnType, string reason)[]>();
+        private ConcurrentQueue<Task<bool>> _tasksThatMustFinish =
+            new ConcurrentQueue<Task<bool>>();
 
         private TypeValidationChecker() { }
 
         private void LogErrors(Action<string> loggingFunction)
         {
             var typeLoadValidationErrors = _typeLoadValidationErrors.ToArray();
-            Array.Sort(typeLoadValidationErrors, (ValueTuple<TypeDesc, string> left, ValueTuple<TypeDesc, string> right) =>
-            {
-                return TypeSystemComparer.Instance.Compare(left.Item1, right.Item1);
-            });
+            Array.Sort(
+                typeLoadValidationErrors,
+                (ValueTuple<TypeDesc, string> left, ValueTuple<TypeDesc, string> right) =>
+                {
+                    return TypeSystemComparer.Instance.Compare(left.Item1, right.Item1);
+                }
+            );
             loggingFunction($"{_typeLoadValidationErrors.Count} type validation errors");
             loggingFunction("------");
             foreach (var reason in typeLoadValidationErrors)
@@ -57,7 +67,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 if (type is EcmaType ecmaType)
                     _tasksThatMustFinish.Enqueue(ValidateType(this, ecmaType));
             }
-            _tasksThatMustFinish.Enqueue(ValidateType(this, (EcmaType)module.GetGlobalModuleType()));
+            _tasksThatMustFinish.Enqueue(
+                ValidateType(this, (EcmaType)module.GetGlobalModuleType())
+            );
 
             bool failAtEnd = false;
             while (_tasksThatMustFinish.TryDequeue(out var taskToComplete))
@@ -72,7 +84,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 // Spot check that the system module ALWAYS succeeds
                 if (failAtEnd)
                 {
-                    throw new InternalCompilerErrorException("System module failed to validate all types");
+                    throw new InternalCompilerErrorException(
+                        "System module failed to validate all types"
+                    );
                 }
             }
 #endif
@@ -80,7 +94,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             return !failAtEnd;
         }
 
-        public static async Task<(bool canSkipValidation, string[] reasonsWhyItFailed)> CanSkipValidation(EcmaModule module)
+        public static async Task<(
+            bool canSkipValidation,
+            string[] reasonsWhyItFailed
+        )> CanSkipValidation(EcmaModule module)
         {
             TypeValidationChecker checker = new TypeValidationChecker();
             bool canSkipValidation = await checker.CanSkipValidationInstance(module);
@@ -91,23 +108,28 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         private static Task<bool> ValidateType(TypeValidationChecker checker, EcmaType type)
         {
-            if (checker._firstStageValidationChecks.TryGetValue(type, out var result)) return result;
+            if (checker._firstStageValidationChecks.TryGetValue(type, out var result))
+                return result;
             Task<bool> skipValidatorForType = Task.Run(() => checker.ValidateTypeWorker(type));
             checker._firstStageValidationChecks.TryAdd(type, skipValidatorForType);
             return skipValidatorForType;
         }
 
-
         private async Task<bool> ValidateTypeWorker(EcmaType type)
         {
             Task<bool> ValidateTypeWorkerHelper(TypeDesc typeToCheckForSkipValidation)
             {
-                return ValidateTypeHelper(typeToCheckForSkipValidation.InstantiateSignature(type.Instantiation, new Instantiation()));
+                return ValidateTypeHelper(
+                    typeToCheckForSkipValidation.InstantiateSignature(
+                        type.Instantiation,
+                        new Instantiation()
+                    )
+                );
             }
             // The runtime has a number of checks in the type loader which it will skip running if the SkipValidation flag is set
             // This function attempts to document all of them, and implement *some* of them.
 
-            // This function performs a portion of the validation skipping that has been found to have some importance, or to serve as 
+            // This function performs a portion of the validation skipping that has been found to have some importance, or to serve as
             // In addition, there are comments about all validation skipping activities that the runtime will perform.
             try
             {
@@ -130,7 +152,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     // Validate that the all referenced interface types are loadable
                     if (!await ValidateTypeWorkerHelper(interfaceType))
                     {
-                        AddTypeValidationError(type, $"Interface type {interfaceType} failed validation");
+                        AddTypeValidationError(
+                            type,
+                            $"Interface type {interfaceType} failed validation"
+                        );
                         return false;
                     }
                 }
@@ -141,7 +166,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     // Validate that all fields on the type are both loadable
                     if (!await ValidateTypeWorkerHelper(field.FieldType))
                     {
-                        AddTypeValidationError(type, $"Field {field.Name}'s type failed validation");
+                        AddTypeValidationError(
+                            type,
+                            $"Field {field.Name}'s type failed validation"
+                        );
                         return false;
                     }
 
@@ -161,7 +189,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     }
                     catch
                     {
-                        AddTypeValidationError(type, $"Signature could not be loaded for method {method.Name}");
+                        AddTypeValidationError(
+                            type,
+                            $"Signature could not be loaded for method {method.Name}"
+                        );
                         return false;
                     }
 
@@ -177,28 +208,52 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     {
                         // Validate that if the method has an RVA that the Class is not a ComImport class -- UNIMPLEMENTED
                         // Validate that if the method has an RVA that the method is not abstract
-                        if (methodDef.Attributes.HasFlag(System.Reflection.MethodAttributes.Abstract))
+                        if (
+                            methodDef.Attributes.HasFlag(
+                                System.Reflection.MethodAttributes.Abstract
+                            )
+                        )
                         {
-                            AddTypeValidationError(type, $"{method} is an abstract method with a non-zero RVA");
+                            AddTypeValidationError(
+                                type,
+                                $"{method} is an abstract method with a non-zero RVA"
+                            );
                             return false;
                         }
                         // Validate that if the method has an RVA is not marked with the miRuntime flag
-                        if (methodDef.ImplAttributes.HasFlag(System.Reflection.MethodImplAttributes.Runtime))
+                        if (
+                            methodDef.ImplAttributes.HasFlag(
+                                System.Reflection.MethodImplAttributes.Runtime
+                            )
+                        )
                         {
-                            AddTypeValidationError(type, $"{method} is an miRuntime method with a non-zero RVA");
+                            AddTypeValidationError(
+                                type,
+                                $"{method} is an miRuntime method with a non-zero RVA"
+                            );
                             return false;
                         }
                         // Validate that if the method has an RVA is not marked as InternalCall
-                        if (methodDef.ImplAttributes.HasFlag(System.Reflection.MethodImplAttributes.InternalCall))
+                        if (
+                            methodDef.ImplAttributes.HasFlag(
+                                System.Reflection.MethodImplAttributes.InternalCall
+                            )
+                        )
                         {
-                            AddTypeValidationError(type, $"{method} is an internal call method with a non-zero RVA");
+                            AddTypeValidationError(
+                                type,
+                                $"{method} is an internal call method with a non-zero RVA"
+                            );
                             return false;
                         }
                     }
                     // Validate that abstract methods cannot exist on non-abstract classes
                     if (method.IsAbstract && !type.IsAbstract)
                     {
-                        AddTypeValidationError(type, $"abstract method {method} defined on non-abstract type");
+                        AddTypeValidationError(
+                            type,
+                            $"abstract method {method} defined on non-abstract type"
+                        );
                         return false;
                     }
                     // Validate that for instance methods, the abstract flag can only be set on a virtual method.
@@ -206,7 +261,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     {
                         if (!method.IsVirtual)
                         {
-                            AddTypeValidationError(type, $"instance abstract method {method} not marked as virtual");
+                            AddTypeValidationError(
+                                type,
+                                $"instance abstract method {method} not marked as virtual"
+                            );
                             return false;
                         }
                     }
@@ -217,7 +275,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         {
                             if ((method.Name != ".cctor") && !method.Name.StartsWith("_VtblGap"))
                             {
-                                AddTypeValidationError(type, $"Special name method {method} defined on interface");
+                                AddTypeValidationError(
+                                    type,
+                                    $"Special name method {method} defined on interface"
+                                );
                                 return false;
                             }
                         }
@@ -227,13 +288,22 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         // Validate that if a method is virtual that it cannot be a p/invoke
                         if (method.IsPInvoke)
                         {
-                            AddTypeValidationError(type, $"'{method}' is both virtual and a p/invoke");
+                            AddTypeValidationError(
+                                type,
+                                $"'{method}' is both virtual and a p/invoke"
+                            );
                             return false;
                         }
                         // Validate that if a method is virtual and static it can only exist on an interface
-                        if (methodDef.Attributes.HasFlag(MethodAttributes.Static) && !type.IsInterface)
+                        if (
+                            methodDef.Attributes.HasFlag(MethodAttributes.Static)
+                            && !type.IsInterface
+                        )
                         {
-                            AddTypeValidationError(type, $"'{method}' is a virtual static method not defined on an interface");
+                            AddTypeValidationError(
+                                type,
+                                $"'{method}' is a virtual static method not defined on an interface"
+                            );
                             return false;
                         }
                         // Validate that constructors cannot be marked as virtual
@@ -248,14 +318,23 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     {
                         if (method.IsSynchronized)
                         {
-                            AddTypeValidationError(type, $"'{method}' is synchronized method on a value type");
+                            AddTypeValidationError(
+                                type,
+                                $"'{method}' is synchronized method on a value type"
+                            );
                             return false;
                         }
                     }
                     // validate that the global class cannot have instance methods
-                    if (type.EcmaModule.GetGlobalModuleType() == type && !methodDef.Attributes.HasFlag(MethodAttributes.Static))
+                    if (
+                        type.EcmaModule.GetGlobalModuleType() == type
+                        && !methodDef.Attributes.HasFlag(MethodAttributes.Static)
+                    )
                     {
-                        AddTypeValidationError(type, $"'{method}' is an instance method defined on the global <module> type");
+                        AddTypeValidationError(
+                            type,
+                            $"'{method}' is an instance method defined on the global <module> type"
+                        );
                         return false;
                     }
                     // Validate that a generic method cannot be on a ComImport class, or a ComEventInterface  -- UNIMPLEMENTED
@@ -264,12 +343,18 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     {
                         if (type.HasInstantiation)
                         {
-                            AddTypeValidationError(type, $"'{method}' is an pinvoke defined on a generic type");
+                            AddTypeValidationError(
+                                type,
+                                $"'{method}' is an pinvoke defined on a generic type"
+                            );
                             return false;
                         }
                         if (method.HasInstantiation)
                         {
-                            AddTypeValidationError(type, $"'{method}' is an pinvoke defined as a generic method");
+                            AddTypeValidationError(
+                                type,
+                                $"'{method}' is an pinvoke defined as a generic method"
+                            );
                             return false;
                         }
                     }
@@ -278,19 +363,28 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     {
                         if (method.HasInstantiation)
                         {
-                            AddTypeValidationError(type, $"'{method}' is an internal call generic method");
+                            AddTypeValidationError(
+                                type,
+                                $"'{method}' is an internal call generic method"
+                            );
                             return false;
                         }
                         if (type.HasInstantiation)
                         {
-                            AddTypeValidationError(type, $"'{method}' is an internal call method on generic type");
+                            AddTypeValidationError(
+                                type,
+                                $"'{method}' is an internal call method on generic type"
+                            );
                             return false;
                         }
                     }
                     // Validate that a generic method cannot be marked as runtime
                     if (method.HasInstantiation && method.IsRuntimeImplemented)
                     {
-                        AddTypeValidationError(type, $"'{method}' is an runtime-impl generic method");
+                        AddTypeValidationError(
+                            type,
+                            $"'{method}' is an runtime-impl generic method"
+                        );
                         return false;
                     }
                     // Validate that generic variance is properly respected in method signatures -- UNIMPLEMENTED
@@ -314,47 +408,74 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     var methodDecl = type.EcmaModule.GetMethod(methodImpl.MethodDeclaration);
 
                     // Validate that all MethodImpls actually match signatures closely enough
-                    if (!methodBody.Signature.ApplySubstitution(type.Instantiation).EquivalentWithCovariantReturnType(methodDecl.Signature.ApplySubstitution(type.Instantiation)))
+                    if (
+                        !methodBody
+                            .Signature.ApplySubstitution(type.Instantiation)
+                            .EquivalentWithCovariantReturnType(
+                                methodDecl.Signature.ApplySubstitution(type.Instantiation)
+                            )
+                    )
                     {
-                        AddTypeValidationError(type, $"MethodImpl with Body '{methodBody}' and Decl '{methodDecl}' do not have matching signatures");
+                        AddTypeValidationError(
+                            type,
+                            $"MethodImpl with Body '{methodBody}' and Decl '{methodDecl}' do not have matching signatures"
+                        );
                         return false;
                     }
 
                     if (!methodDecl.IsVirtual)
                     {
-                        AddTypeValidationError(type, $"MethodImpl with Decl '{methodDecl}' points at non-virtual decl method");
+                        AddTypeValidationError(
+                            type,
+                            $"MethodImpl with Decl '{methodDecl}' points at non-virtual decl method"
+                        );
                         return false;
                     }
 
                     if (methodDecl.IsFinal)
                     {
-                        AddTypeValidationError(type, $"MethodImpl with Decl '{methodDecl}' points at sealed decl method");
+                        AddTypeValidationError(
+                            type,
+                            $"MethodImpl with Decl '{methodDecl}' points at sealed decl method"
+                        );
                         return false;
                     }
 
                     bool isStatic = methodBody.Signature.IsStatic;
                     if (methodBody.OwningType.IsInterface && !isStatic && !methodBody.IsFinal)
                     {
-                        AddTypeValidationError(type, $"MethodImpl with Body '{methodBody}' and Decl '{methodDecl}' implements interface on another interface with a non-sealed method");
+                        AddTypeValidationError(
+                            type,
+                            $"MethodImpl with Body '{methodBody}' and Decl '{methodDecl}' implements interface on another interface with a non-sealed method"
+                        );
                         return false;
                     }
 
                     if (isStatic && methodBody.IsVirtual)
                     {
-                        AddTypeValidationError(type, $"MethodImpl with Body '{methodBody}' and Decl '{methodDecl}' implements a static virtual method with a virtual static method");
+                        AddTypeValidationError(
+                            type,
+                            $"MethodImpl with Body '{methodBody}' and Decl '{methodDecl}' implements a static virtual method with a virtual static method"
+                        );
                         return false;
                     }
 
                     if (!isStatic && !methodBody.IsVirtual)
                     {
-                        AddTypeValidationError(type, $"MethodImpl with Body '{methodBody}' and Decl '{methodDecl}' implements a instance virtual method with a non-virtual instance method");
+                        AddTypeValidationError(
+                            type,
+                            $"MethodImpl with Body '{methodBody}' and Decl '{methodDecl}' implements a instance virtual method with a non-virtual instance method"
+                        );
                         return false;
                     }
 
                     // Validate that multiple MethodImpls don't override the same method
                     if (!overridenDeclMethods.Add(methodDecl))
                     {
-                        AddTypeValidationError(type, $"Multiple MethodImpl records override '{methodDecl}'");
+                        AddTypeValidationError(
+                            type,
+                            $"Multiple MethodImpl records override '{methodDecl}'"
+                        );
                         return false;
                     }
 
@@ -365,7 +486,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 VirtualMethodAlgorithm baseTypeVirtualMethodAlgorithm = null;
                 if (type.BaseType != null && !type.IsInterface && !type.IsValueType)
                 {
-                    baseTypeVirtualMethodAlgorithm = type.Context.GetVirtualMethodAlgorithmForType(type.BaseType);
+                    baseTypeVirtualMethodAlgorithm = type.Context.GetVirtualMethodAlgorithmForType(
+                        type.BaseType
+                    );
                 }
 
                 foreach (var interfaceImplemented in type.RuntimeInterfaces)
@@ -376,7 +499,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         bool staticInterfaceMethod = interfaceMethod.Signature.IsStatic;
                         if (staticInterfaceMethod)
                         {
-                            resolvedMethod = virtualMethodAlgorithm.ResolveInterfaceMethodToStaticVirtualMethodOnType(interfaceMethod, type);
+                            resolvedMethod =
+                                virtualMethodAlgorithm.ResolveInterfaceMethodToStaticVirtualMethodOnType(
+                                    interfaceMethod,
+                                    type
+                                );
                         }
                         else
                         {
@@ -388,7 +515,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                             // Validate that for every override involving generic methods that the generic method constraints are matching
                             if (!CompareMethodConstraints(interfaceMethod, resolvedMethod))
                             {
-                                AddTypeValidationError(type, $"Interface method '{interfaceMethod}' overriden by method '{resolvedMethod}' which does not have matching generic constraints");
+                                AddTypeValidationError(
+                                    type,
+                                    $"Interface method '{interfaceMethod}' overriden by method '{resolvedMethod}' which does not have matching generic constraints"
+                                );
                                 return false;
                             }
                         }
@@ -397,11 +527,24 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         // Validate that all virtual instance methods are actually implemented if the type is not abstract
                         if (!type.IsAbstract)
                         {
-                            if (null == resolvedMethod || (staticInterfaceMethod && resolvedMethod.IsAbstract))
+                            if (
+                                null == resolvedMethod
+                                || (staticInterfaceMethod && resolvedMethod.IsAbstract)
+                            )
                             {
-                                if (virtualMethodAlgorithm.ResolveInterfaceMethodToDefaultImplementationOnType(interfaceMethod, type, out var impl) != DefaultInterfaceMethodResolution.DefaultImplementation || impl.IsAbstract)
+                                if (
+                                    virtualMethodAlgorithm.ResolveInterfaceMethodToDefaultImplementationOnType(
+                                        interfaceMethod,
+                                        type,
+                                        out var impl
+                                    ) != DefaultInterfaceMethodResolution.DefaultImplementation
+                                    || impl.IsAbstract
+                                )
                                 {
-                                    AddTypeValidationError(type, $"Interface method '{interfaceMethod}' does not have implementation");
+                                    AddTypeValidationError(
+                                        type,
+                                        $"Interface method '{interfaceMethod}' does not have implementation"
+                                    );
                                     return false;
                                 }
 
@@ -410,7 +553,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                                     // Validate that for every override involving generic methods that the generic method constraints are matching
                                     if (!CompareMethodConstraints(interfaceMethod, impl))
                                     {
-                                        AddTypeValidationError(type, $"Interface method '{interfaceMethod}' overriden by method '{impl}' which does not have matching generic constraints");
+                                        AddTypeValidationError(
+                                            type,
+                                            $"Interface method '{interfaceMethod}' overriden by method '{impl}' which does not have matching generic constraints"
+                                        );
                                         return false;
                                     }
                                 }
@@ -421,25 +567,51 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
                 foreach (var virtualMethod in type.EnumAllVirtualSlots())
                 {
-                    var implementationMethod = virtualMethodAlgorithm.FindVirtualFunctionTargetMethodOnObjectType(virtualMethod, type);
+                    var implementationMethod =
+                        virtualMethodAlgorithm.FindVirtualFunctionTargetMethodOnObjectType(
+                            virtualMethod,
+                            type
+                        );
 
                     if (implementationMethod != null)
                     {
                         // Validate that for every override involving generic methods that the generic method constraints are matching
                         if (!CompareMethodConstraints(virtualMethod, implementationMethod))
                         {
-                            AddTypeValidationError(type, $"Virtual method '{virtualMethod}' overriden by method '{implementationMethod}' which does not have matching generic constraints");
+                            AddTypeValidationError(
+                                type,
+                                $"Virtual method '{virtualMethod}' overriden by method '{implementationMethod}' which does not have matching generic constraints"
+                            );
                             return false;
                         }
 
                         // Validate that if the decl method for the virtual is not on the immediate base type, that the intermediate type did not establish a
                         // covariant return type which requires the implementation method to specify a more specific base type
-                        if ((virtualMethod.OwningType != type.BaseType) && (virtualMethod.OwningType != type) && (baseTypeVirtualMethodAlgorithm != null))
+                        if (
+                            (virtualMethod.OwningType != type.BaseType)
+                            && (virtualMethod.OwningType != type)
+                            && (baseTypeVirtualMethodAlgorithm != null)
+                        )
                         {
-                            var implementationOnBaseType = baseTypeVirtualMethodAlgorithm.FindVirtualFunctionTargetMethodOnObjectType(virtualMethod, type.BaseType);
-                            if (!implementationMethod.Signature.ApplySubstitution(type.Instantiation).EquivalentWithCovariantReturnType(implementationOnBaseType.Signature.ApplySubstitution(type.Instantiation)))
+                            var implementationOnBaseType =
+                                baseTypeVirtualMethodAlgorithm.FindVirtualFunctionTargetMethodOnObjectType(
+                                    virtualMethod,
+                                    type.BaseType
+                                );
+                            if (
+                                !implementationMethod
+                                    .Signature.ApplySubstitution(type.Instantiation)
+                                    .EquivalentWithCovariantReturnType(
+                                        implementationOnBaseType.Signature.ApplySubstitution(
+                                            type.Instantiation
+                                        )
+                                    )
+                            )
                             {
-                                AddTypeValidationError(type, $"Virtual method '{virtualMethod}' overriden by method '{implementationMethod}' does not satisfy the covariant return type introduced with '{implementationOnBaseType}'");
+                                AddTypeValidationError(
+                                    type,
+                                    $"Virtual method '{virtualMethod}' overriden by method '{implementationMethod}' does not satisfy the covariant return type introduced with '{implementationOnBaseType}'"
+                                );
                                 return false;
                             }
                         }
@@ -451,7 +623,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     {
                         if (implementationMethod == null || implementationMethod.IsAbstract)
                         {
-                            AddTypeValidationError(type, $"Interface method '{virtualMethod}' does not have implementation");
+                            AddTypeValidationError(
+                                type,
+                                $"Interface method '{virtualMethod}' does not have implementation"
+                            );
                             return false;
                         }
                     }
@@ -474,10 +649,18 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 return false;
             }
 
-            static bool CompareGenericParameterConstraint(MethodDesc declMethod, GenericParameterDesc parameterOfDecl, MethodDesc implMethod, GenericParameterDesc parameterOfImpl)
+            static bool CompareGenericParameterConstraint(
+                MethodDesc declMethod,
+                GenericParameterDesc parameterOfDecl,
+                MethodDesc implMethod,
+                GenericParameterDesc parameterOfImpl
+            )
             {
                 if (parameterOfImpl.HasDefaultConstructorConstraint)
-                    if (!parameterOfDecl.HasDefaultConstructorConstraint && !parameterOfDecl.HasNotNullableValueTypeConstraint)
+                    if (
+                        !parameterOfDecl.HasDefaultConstructorConstraint
+                        && !parameterOfDecl.HasNotNullableValueTypeConstraint
+                    )
                         return false;
 
                 if (parameterOfImpl.HasNotNullableValueTypeConstraint)
@@ -495,12 +678,29 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 HashSet<TypeDesc> constraintsOnDecl = new HashSet<TypeDesc>();
                 foreach (var constraint in parameterOfDecl.TypeConstraints)
                 {
-                    constraintsOnDecl.Add(constraint.InstantiateSignature(declMethod.OwningType.Instantiation, implMethod.Instantiation).InstantiateSignature(implMethod.OwningType.Instantiation, new Instantiation()));
+                    constraintsOnDecl.Add(
+                        constraint
+                            .InstantiateSignature(
+                                declMethod.OwningType.Instantiation,
+                                implMethod.Instantiation
+                            )
+                            .InstantiateSignature(
+                                implMethod.OwningType.Instantiation,
+                                new Instantiation()
+                            )
+                    );
                 }
 
                 foreach (var constraint in parameterOfImpl.TypeConstraints)
                 {
-                    if (!constraintsOnDecl.Contains(constraint.InstantiateSignature(implMethod.OwningType.Instantiation, implMethod.Instantiation)))
+                    if (
+                        !constraintsOnDecl.Contains(
+                            constraint.InstantiateSignature(
+                                implMethod.OwningType.Instantiation,
+                                implMethod.Instantiation
+                            )
+                        )
+                    )
                         return false;
                 }
 
@@ -516,9 +716,18 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     return false;
                 for (int i = 0; i < methodDecl.Instantiation.Length; i++)
                 {
-                    var genericParameterDescOnImpl = (GenericParameterDesc)methodImpl.GetTypicalMethodDefinition().Instantiation[i];
-                    var genericParameterDescOnDecl = (GenericParameterDesc)methodDecl.GetTypicalMethodDefinition().Instantiation[i];
-                    if (!CompareGenericParameterConstraint(methodDecl, genericParameterDescOnDecl, methodImpl, genericParameterDescOnImpl))
+                    var genericParameterDescOnImpl = (GenericParameterDesc)
+                        methodImpl.GetTypicalMethodDefinition().Instantiation[i];
+                    var genericParameterDescOnDecl = (GenericParameterDesc)
+                        methodDecl.GetTypicalMethodDefinition().Instantiation[i];
+                    if (
+                        !CompareGenericParameterConstraint(
+                            methodDecl,
+                            genericParameterDescOnDecl,
+                            methodImpl,
+                            genericParameterDescOnImpl
+                        )
+                    )
                     {
                         return false;
                     }
@@ -554,7 +763,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     // Constraints should be satisfied
                     if (!instantiatedType.CheckConstraints())
                     {
-                        AddTypeValidationError(type, $"Constraint check failed validating {instantiatedType}");
+                        AddTypeValidationError(
+                            type,
+                            $"Constraint check failed validating {instantiatedType}"
+                        );
                         return Task.FromResult(false);
                     }
 
@@ -567,7 +779,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 }
             }
 
-            async Task<bool> ValidateTypeHelperFunctionPointerType(FunctionPointerType functionPointerType)
+            async Task<bool> ValidateTypeHelperFunctionPointerType(
+                FunctionPointerType functionPointerType
+            )
             {
                 if (!await ValidateTypeHelper(functionPointerType.Signature.ReturnType))
                     return false;

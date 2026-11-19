@@ -4,28 +4,29 @@
 
 namespace System.Activities.Presentation
 {
-    using System.ComponentModel;
-    using System.Activities.Statements;
+    using System.Activities.Core.Presentation;
+    using System.Activities.Core.Presentation.Themes;
     using System.Activities.Presentation.Metadata;
     using System.Activities.Presentation.Model;
     using System.Activities.Presentation.View;
-    using System.Activities.Core.Presentation.Themes;
-    using System.Linq;
-    using System.Activities.Core.Presentation;
+    using System.Activities.Statements;
+    using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Linq;
+    using System.Runtime;
     using System.ServiceModel.Activities;
     using System.Windows;
-    using System.Runtime;
-    using System.Globalization;
-
-
 
     static class ActivityDesignerHelper
     {
         public const string ChannelBasedCorrelationKey = "ChannelBasedCorrelation";
 
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters",
-            Justification = "This is a TryGet pattern that requires out parameters")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1021:AvoidOutParameters",
+            Justification = "This is a TryGet pattern that requires out parameters"
+        )]
         public static bool IsItemInSequence(this ModelItem item, out ModelItem sequence)
         {
             if (null == item)
@@ -51,7 +52,8 @@ namespace System.Activities.Presentation
 
                     default:
                         return false;
-                };
+                }
+                ;
             };
 
             ModelItem container = item.GetParentEnumerator(isInSequencePredicate).LastOrDefault();
@@ -59,9 +61,16 @@ namespace System.Activities.Presentation
             return result;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters",
-            Justification = "This is a TryGet pattern that requires out parameters")]
-        public static bool IsItemInFlowchart(this ModelItem item, out ModelItem flowchart, out ModelItem flowStep)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1021:AvoidOutParameters",
+            Justification = "This is a TryGet pattern that requires out parameters"
+        )]
+        public static bool IsItemInFlowchart(
+            this ModelItem item,
+            out ModelItem flowchart,
+            out ModelItem flowStep
+        )
         {
             if (null == item)
             {
@@ -81,7 +90,9 @@ namespace System.Activities.Presentation
                 {
                     case 0:
                         ++level;
-                        flowStepContainer = typeof(FlowStep).IsAssignableFrom(p.ItemType) ? p : null;
+                        flowStepContainer = typeof(FlowStep).IsAssignableFrom(p.ItemType)
+                            ? p
+                            : null;
                         return null != flowStepContainer;
 
                     case 1:
@@ -117,15 +128,18 @@ namespace System.Activities.Presentation
             }
 
             bool result =
-                item.IsAssignableFrom<Receive>() ||
-                item.IsAssignableFrom<Send>() ||
-                item.IsAssignableFrom<ReceiveReply>() ||
-                item.IsAssignableFrom<SendReply>();
+                item.IsAssignableFrom<Receive>()
+                || item.IsAssignableFrom<Send>()
+                || item.IsAssignableFrom<ReceiveReply>()
+                || item.IsAssignableFrom<SendReply>();
 
             return result;
         }
 
-        public static string GenerateUniqueVariableNameForContext(DependencyObject context, string prefix)
+        public static string GenerateUniqueVariableNameForContext(
+            DependencyObject context,
+            string prefix
+        )
         {
             if (null == context)
             {
@@ -140,7 +154,10 @@ namespace System.Activities.Presentation
             }
 
             string name;
-            var scope = VariableHelper.FindCommonVariableScope(viewElement.ModelItem, viewElement.ModelItem);
+            var scope = VariableHelper.FindCommonVariableScope(
+                viewElement.ModelItem,
+                viewElement.ModelItem
+            );
             if (null == scope)
             {
                 name = string.Format(CultureInfo.CurrentUICulture, "{0}{1}", prefix, 1);
@@ -150,7 +167,6 @@ namespace System.Activities.Presentation
                 name = scope.GetVariableCollection().CreateUniqueVariableName(prefix, 1);
             }
             return name;
-
         }
     }
 }

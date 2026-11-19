@@ -5,17 +5,16 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class InMemoryFixture
 {
-    public static IServiceProvider DefaultServiceProvider { get; }
-        = BuildServiceProvider();
+    public static IServiceProvider DefaultServiceProvider { get; } = BuildServiceProvider();
 
-    public static IServiceProvider DefaultSensitiveServiceProvider { get; }
-        = BuildServiceProvider();
+    public static IServiceProvider DefaultSensitiveServiceProvider { get; } =
+        BuildServiceProvider();
 
-    public static IServiceProvider DefaultNullabilityCheckProvider { get; }
-        = BuildServiceProvider();
+    public static IServiceProvider DefaultNullabilityCheckProvider { get; } =
+        BuildServiceProvider();
 
-    public static IServiceProvider DefaultNullabilitySensitiveCheckProvider { get; }
-        = BuildServiceProvider();
+    public static IServiceProvider DefaultNullabilitySensitiveCheckProvider { get; } =
+        BuildServiceProvider();
 
     public readonly IServiceProvider ServiceProvider;
 
@@ -24,12 +23,13 @@ public class InMemoryFixture
         ServiceProvider = BuildServiceProvider();
     }
 
-    public static ServiceProvider BuildServiceProvider(ILoggerFactory loggerFactory)
-        => BuildServiceProvider(new ServiceCollection().AddSingleton(loggerFactory));
+    public static ServiceProvider BuildServiceProvider(ILoggerFactory loggerFactory) =>
+        BuildServiceProvider(new ServiceCollection().AddSingleton(loggerFactory));
 
-    public static ServiceProvider BuildServiceProvider(IServiceCollection providerServices = null)
-        => InMemoryTestStoreFactory.Instance.AddProviderServices(
-                providerServices
-                ?? new ServiceCollection())
+    public static ServiceProvider BuildServiceProvider(
+        IServiceCollection providerServices = null
+    ) =>
+        InMemoryTestStoreFactory
+            .Instance.AddProviderServices(providerServices ?? new ServiceCollection())
             .BuildServiceProvider(validateScopes: true);
 }

@@ -17,11 +17,21 @@ namespace System.Reflection.Emit.Tests
             MethodBuilder method2 = type.DefineMethod("TestMethod2", MethodAttributes.Public);
             method2.DefineGenericParameters("T");
 
-            MethodBuilder method3 = type.DefineMethod("TestMethod3", MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual, typeof(void), new Type[] { typeof(int) });
+            MethodBuilder method3 = type.DefineMethod(
+                "TestMethod3",
+                MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual,
+                typeof(void),
+                new Type[] { typeof(int) }
+            );
             method3.DefineGenericParameters("T");
             method3.DefineParameter(1, ParameterAttributes.HasDefault, "TestParam");
 
-            MethodBuilder method4 = type.DefineMethod("TestMethod4", MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual, typeof(void), new Type[] { typeof(int) });
+            MethodBuilder method4 = type.DefineMethod(
+                "TestMethod4",
+                MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual,
+                typeof(void),
+                new Type[] { typeof(int) }
+            );
             method4.DefineParameter(1, ParameterAttributes.HasDefault, "TestParam");
 
             yield return new object[] { method1, false }; // Non-generic

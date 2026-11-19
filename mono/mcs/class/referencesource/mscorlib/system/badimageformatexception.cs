@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -10,56 +10,62 @@
 **
 ** Purpose: Exception to an invalid dll or executable format.
 **
-** 
+**
 ===========================================================*/
 // <OWNER>Microsoft</OWNER>
 
-namespace System {
-    
+namespace System
+{
     using System;
-    using System.Runtime.Serialization;
-    using FileLoadException = System.IO.FileLoadException;
-    using System.Security.Permissions;
-    using SecurityException = System.Security.SecurityException;
     using System.Globalization;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
+    using FileLoadException = System.IO.FileLoadException;
+    using SecurityException = System.Security.SecurityException;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    public class BadImageFormatException : SystemException {
+    public class BadImageFormatException : SystemException
+    {
+        private String _fileName; // The name of the corrupt PE file.
+        private String _fusionLog; // fusion log (when applicable)
 
-        private String _fileName;  // The name of the corrupt PE file.
-        private String _fusionLog;  // fusion log (when applicable)
-
-        public BadImageFormatException() 
-            : base(Environment.GetResourceString("Arg_BadImageFormatException")) {
-            SetErrorCode(__HResults.COR_E_BADIMAGEFORMAT);
-        }
-    
-        public BadImageFormatException(String message) 
-            : base(message) {
-            SetErrorCode(__HResults.COR_E_BADIMAGEFORMAT);
-        }
-        
-        public BadImageFormatException(String message, Exception inner) 
-            : base(message, inner) {
+        public BadImageFormatException()
+            : base(Environment.GetResourceString("Arg_BadImageFormatException"))
+        {
             SetErrorCode(__HResults.COR_E_BADIMAGEFORMAT);
         }
 
-        public BadImageFormatException(String message, String fileName) : base(message)
+        public BadImageFormatException(String message)
+            : base(message)
+        {
+            SetErrorCode(__HResults.COR_E_BADIMAGEFORMAT);
+        }
+
+        public BadImageFormatException(String message, Exception inner)
+            : base(message, inner)
+        {
+            SetErrorCode(__HResults.COR_E_BADIMAGEFORMAT);
+        }
+
+        public BadImageFormatException(String message, String fileName)
+            : base(message)
         {
             SetErrorCode(__HResults.COR_E_BADIMAGEFORMAT);
             _fileName = fileName;
         }
 
-        public BadImageFormatException(String message, String fileName, Exception inner) 
-            : base(message, inner) {
+        public BadImageFormatException(String message, String fileName, Exception inner)
+            : base(message, inner)
+        {
             SetErrorCode(__HResults.COR_E_BADIMAGEFORMAT);
             _fileName = fileName;
         }
 
         public override String Message
         {
-            get {
+            get
+            {
                 SetMessageField();
                 return _message;
             }
@@ -67,17 +73,17 @@ namespace System {
 
         private void SetMessageField()
         {
-            if (_message == null) {
-                if ((_fileName == null) &&
-                    (HResult == System.__HResults.COR_E_EXCEPTION))
+            if (_message == null)
+            {
+                if ((_fileName == null) && (HResult == System.__HResults.COR_E_EXCEPTION))
                     _message = Environment.GetResourceString("Arg_BadImageFormatException");
-
                 else
                     _message = FileLoadException.FormatFileLoadExceptionMessage(_fileName, HResult);
             }
         }
 
-        public String FileName {
+        public String FileName
+        {
             get { return _fileName; }
         }
 
@@ -86,8 +92,10 @@ namespace System {
             String s = GetType().FullName + ": " + Message;
 
             if (_fileName != null && _fileName.Length != 0)
-                s += Environment.NewLine + Environment.GetResourceString("IO.FileName_Name", _fileName);
-            
+                s +=
+                    Environment.NewLine
+                    + Environment.GetResourceString("IO.FileName_Name", _fileName);
+
             if (InnerException != null)
                 s = s + " ---> " + InnerException.ToString();
 
@@ -96,24 +104,23 @@ namespace System {
 #if FEATURE_FUSION
             try
             {
-                if(FusionLog!=null)
+                if (FusionLog != null)
                 {
-                    if (s==null)
-                        s=" ";
-                    s+=Environment.NewLine;
-                    s+=Environment.NewLine;
-                    s+=FusionLog;
+                    if (s == null)
+                        s = " ";
+                    s += Environment.NewLine;
+                    s += Environment.NewLine;
+                    s += FusionLog;
                 }
             }
-            catch(SecurityException)
-            {
-            
-            }
+            catch (SecurityException) { }
 #endif
             return s;
         }
 
-        protected BadImageFormatException(SerializationInfo info, StreamingContext context) : base(info, context) {
+        protected BadImageFormatException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
             // Base class constructor will check info != null.
 
             _fileName = info.GetString("BadImageFormat_FileName");
@@ -121,7 +128,7 @@ namespace System {
             {
                 _fusionLog = info.GetString("BadImageFormat_FusionLog");
             }
-            catch 
+            catch
             {
                 _fusionLog = null;
             }
@@ -132,21 +139,27 @@ namespace System {
         {
             SetErrorCode(hResult);
             _fileName = fileName;
-            _fusionLog=fusionLog;
+            _fusionLog = fusionLog;
             SetMessageField();
         }
 
 #if FEATURE_FUSION
-        public String FusionLog {
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            [SecurityPermissionAttribute( SecurityAction.Demand, Flags = SecurityPermissionFlag.ControlEvidence | SecurityPermissionFlag.ControlPolicy)]
+        public String FusionLog
+        {
+            [System.Security.SecuritySafeCritical] // auto-generated
+            [SecurityPermissionAttribute(
+                SecurityAction.Demand,
+                Flags = SecurityPermissionFlag.ControlEvidence
+                    | SecurityPermissionFlag.ControlPolicy
+            )]
             get { return _fusionLog; }
         }
 #endif
 
 #if FEATURE_SERIALIZATION
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public override void GetObjectData(SerializationInfo info, StreamingContext context) {
+        [System.Security.SecurityCritical] // auto-generated_required
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
             // Serialize data for our base classes.  base will verify info != null.
             base.GetObjectData(info, context);
 
@@ -156,10 +169,7 @@ namespace System {
             {
                 info.AddValue("BadImageFormat_FusionLog", FusionLog, typeof(String));
             }
-            catch (SecurityException)
-            {
-            }
-
+            catch (SecurityException) { }
         }
 #endif
     }

@@ -28,8 +28,8 @@ public class TestSet
         int nSuccesses = 0;
         int nFailures = 0;
 
-		CountResults(new TryCatchInFinallyTest().Run(),         ref nSuccesses, ref nFailures);
-        
+        CountResults(new TryCatchInFinallyTest().Run(), ref nSuccesses, ref nFailures);
+
         if (0 == nFailures)
         {
             Console.WriteLine("OVERALL PASS: " + nSuccesses + " tests");
@@ -46,11 +46,11 @@ public class TestSet
 class TryCatchInFinallyTest
 {
     Trace _trace;
-    
+
     public int Run()
     {
         _trace = new Trace("TryCatchInFinallyTest", "0123456");
-        
+
         _trace.Write("0");
         try
         {
@@ -64,7 +64,7 @@ class TryCatchInFinallyTest
                 _trace.Write("3");
                 throw new InvalidProgramException();
             }
-            catch(InvalidProgramException e)
+            catch (InvalidProgramException e)
             {
                 Console.WriteLine(e);
                 _trace.Write("4");

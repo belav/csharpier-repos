@@ -14,22 +14,26 @@ namespace System.Composition.Convention.Tests
 
     public class ClassWithLifetimeConcerns : IContract1, IContract2, IDisposable
     {
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
-        public void OnImportsSatisfied()
-        {
-        }
+        public void OnImportsSatisfied() { }
     }
 
     internal static class DELETE_ME_TESTER
     {
-        public static PartConventionBuilder ExportInterfaces(this PartConventionBuilder pb) { return null; }
+        public static PartConventionBuilder ExportInterfaces(this PartConventionBuilder pb)
+        {
+            return null;
+        }
     }
+
     public class ExportInterfacesContractExclusionTests
     {
-        private static readonly Type[] s_contractInterfaces = new[] { typeof(IContract1), typeof(IContract2) };
+        private static readonly Type[] s_contractInterfaces = new[]
+        {
+            typeof(IContract1),
+            typeof(IContract2),
+        };
 
         [Fact]
         public void WhenExportingInterfaces_NoPredicate_OnlyContractInterfacesAreExported()
@@ -37,7 +41,10 @@ namespace System.Composition.Convention.Tests
             var builder = new ConventionBuilder();
             builder.ForType<ClassWithLifetimeConcerns>().ExportInterfaces();
 
-            IEnumerable<ExportAttribute> attributes = GetExportAttributes(builder, typeof(ClassWithLifetimeConcerns));
+            IEnumerable<ExportAttribute> attributes = GetExportAttributes(
+                builder,
+                typeof(ClassWithLifetimeConcerns)
+            );
             Type[] exportedContracts = attributes.Select(e => e.ContractType).ToArray();
             Equivalent(s_contractInterfaces, exportedContracts);
         }
@@ -48,13 +55,25 @@ namespace System.Composition.Convention.Tests
             var seenInterfaces = new List<Type>();
 
             var builder = new ConventionBuilder();
-            builder.ForType<ClassWithLifetimeConcerns>().ExportInterfaces(i => { seenInterfaces.Add(i); return true; });
+            builder
+                .ForType<ClassWithLifetimeConcerns>()
+                .ExportInterfaces(i =>
+                {
+                    seenInterfaces.Add(i);
+                    return true;
+                });
 
-            IEnumerable<ExportAttribute> attributes = GetExportAttributes(builder, typeof(ClassWithLifetimeConcerns));
+            IEnumerable<ExportAttribute> attributes = GetExportAttributes(
+                builder,
+                typeof(ClassWithLifetimeConcerns)
+            );
             Equivalent(s_contractInterfaces, seenInterfaces);
         }
 
-        private static IEnumerable<ExportAttribute> GetExportAttributes(ConventionBuilder builder, Type type)
+        private static IEnumerable<ExportAttribute> GetExportAttributes(
+            ConventionBuilder builder,
+            Type type
+        )
         {
             Attribute[] list = builder.GetDeclaredAttributes(type, type.GetTypeInfo());
             return list.Cast<ExportAttribute>();
@@ -62,8 +81,12 @@ namespace System.Composition.Convention.Tests
 
         private static void Equivalent<T>(IEnumerable<T> expected, IEnumerable<T> actual)
         {
-            IDictionary<T, int> expectedCounts = expected.GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count());
-            IDictionary<T, int> actualCounts = actual.GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count());
+            IDictionary<T, int> expectedCounts = expected
+                .GroupBy(x => x)
+                .ToDictionary(x => x.Key, x => x.Count());
+            IDictionary<T, int> actualCounts = actual
+                .GroupBy(x => x)
+                .ToDictionary(x => x.Key, x => x.Count());
 
             Assert.Equal(expectedCounts, actualCounts);
         }

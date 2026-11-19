@@ -11,7 +11,6 @@ namespace System.Data.Query.InternalTrees
 {
     using System.Collections;
     using System.Collections.Generic;
-    using System.Text;
     using System.Data;
     using System.Data.Common;
     using System.Data.Common.CommandTrees;
@@ -19,11 +18,12 @@ namespace System.Data.Query.InternalTrees
     using System.Data.Query.PlanCompiler;
     using System.Diagnostics;
     using System.IO;
+    using System.Text;
     using System.Threading;
 
     /// <summary>
     /// Basic Visitor Design Pattern support for ColumnMap hierarchy;
-    /// 
+    ///
     /// This visitor class will walk the entire hierarchy, but does not
     /// return results; it's useful for operations such as printing and
     /// searching.
@@ -39,7 +39,7 @@ namespace System.Data.Query.InternalTrees
         /// <param name="columnMaps"></param>
         /// <param name="arg"></param>
         protected void VisitList<TListType>(TListType[] columnMaps, TArgType arg)
-                   where TListType : ColumnMap
+            where TListType : ColumnMap
         {
             foreach (TListType columnMap in columnMaps)
             {
@@ -64,7 +64,10 @@ namespace System.Data.Query.InternalTrees
             }
         }
 
-        protected virtual void VisitEntityIdentity(DiscriminatedEntityIdentity entityIdentity, TArgType arg)
+        protected virtual void VisitEntityIdentity(
+            DiscriminatedEntityIdentity entityIdentity,
+            TArgType arg
+        )
         {
             entityIdentity.EntitySetColumnMap.Accept(this, arg);
             foreach (SimpleColumnMap columnMap in entityIdentity.Keys)
@@ -73,7 +76,10 @@ namespace System.Data.Query.InternalTrees
             }
         }
 
-        protected virtual void VisitEntityIdentity(SimpleEntityIdentity entityIdentity, TArgType arg)
+        protected virtual void VisitEntityIdentity(
+            SimpleEntityIdentity entityIdentity,
+            TArgType arg
+        )
         {
             foreach (SimpleColumnMap columnMap in entityIdentity.Keys)
             {
@@ -88,7 +94,7 @@ namespace System.Data.Query.InternalTrees
         internal virtual void Visit(ComplexTypeColumnMap columnMap, TArgType arg)
         {
             ColumnMap nullSentinel = columnMap.NullSentinel;
-            if (null != nullSentinel) 
+            if (null != nullSentinel)
             {
                 nullSentinel.Accept(this, arg);
             }
@@ -134,7 +140,10 @@ namespace System.Data.Query.InternalTrees
             }
         }
 
-        internal virtual void Visit(MultipleDiscriminatorPolymorphicColumnMap columnMap, TArgType arg)
+        internal virtual void Visit(
+            MultipleDiscriminatorPolymorphicColumnMap columnMap,
+            TArgType arg
+        )
         {
             foreach (var typeDiscriminator in columnMap.TypeDiscriminators)
             {
@@ -153,7 +162,7 @@ namespace System.Data.Query.InternalTrees
         internal virtual void Visit(RecordColumnMap columnMap, TArgType arg)
         {
             ColumnMap nullSentinel = columnMap.NullSentinel;
-            if (null != nullSentinel) 
+            if (null != nullSentinel)
             {
                 nullSentinel.Accept(this, arg);
             }
@@ -168,9 +177,7 @@ namespace System.Data.Query.InternalTrees
             VisitEntityIdentity(columnMap.EntityIdentity, arg);
         }
 
-        internal virtual void Visit(ScalarColumnMap columnMap, TArgType arg)
-        {
-        }
+        internal virtual void Visit(ScalarColumnMap columnMap, TArgType arg) { }
 
         internal virtual void Visit(SimpleCollectionColumnMap columnMap, TArgType arg)
         {
@@ -185,16 +192,14 @@ namespace System.Data.Query.InternalTrees
             columnMap.Element.Accept(this, arg);
         }
 
-        internal virtual void Visit(VarRefColumnMap columnMap, TArgType arg)
-        {
-        }
+        internal virtual void Visit(VarRefColumnMap columnMap, TArgType arg) { }
 
         #endregion
     }
 
     /// <summary>
-    /// Basic Visitor Design Pattern support for ColumnMap hierarchy; 
-    /// 
+    /// Basic Visitor Design Pattern support for ColumnMap hierarchy;
+    ///
     /// This visitor class allows you to return results; it's useful for operations
     /// that copy or manipulate the hierarchy.
     /// </summary>
@@ -202,7 +207,6 @@ namespace System.Data.Query.InternalTrees
     /// <typeparam name="TResultType"></typeparam>
     internal abstract class ColumnMapVisitorWithResults<TResultType, TArgType>
     {
-
         #region EntityIdentity handling
 
         protected EntityIdentity VisitEntityIdentity(EntityIdentity entityIdentity, TArgType arg)
@@ -218,12 +222,18 @@ namespace System.Data.Query.InternalTrees
             }
         }
 
-        protected virtual EntityIdentity VisitEntityIdentity(DiscriminatedEntityIdentity entityIdentity, TArgType arg)
+        protected virtual EntityIdentity VisitEntityIdentity(
+            DiscriminatedEntityIdentity entityIdentity,
+            TArgType arg
+        )
         {
             return entityIdentity;
         }
 
-        protected virtual EntityIdentity VisitEntityIdentity(SimpleEntityIdentity entityIdentity, TArgType arg)
+        protected virtual EntityIdentity VisitEntityIdentity(
+            SimpleEntityIdentity entityIdentity,
+            TArgType arg
+        )
         {
             return entityIdentity;
         }
@@ -234,7 +244,10 @@ namespace System.Data.Query.InternalTrees
 
         internal abstract TResultType Visit(ComplexTypeColumnMap columnMap, TArgType arg);
 
-        internal abstract TResultType Visit(DiscriminatedCollectionColumnMap columnMap, TArgType arg);
+        internal abstract TResultType Visit(
+            DiscriminatedCollectionColumnMap columnMap,
+            TArgType arg
+        );
 
         internal abstract TResultType Visit(EntityColumnMap columnMap, TArgType arg);
 
@@ -250,9 +263,11 @@ namespace System.Data.Query.InternalTrees
 
         internal abstract TResultType Visit(VarRefColumnMap columnMap, TArgType arg);
 
-        internal abstract TResultType Visit(MultipleDiscriminatorPolymorphicColumnMap columnMap, TArgType arg);
+        internal abstract TResultType Visit(
+            MultipleDiscriminatorPolymorphicColumnMap columnMap,
+            TArgType arg
+        );
 
         #endregion
     }
-
 }

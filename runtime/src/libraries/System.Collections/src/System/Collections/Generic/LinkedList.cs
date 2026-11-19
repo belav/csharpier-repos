@@ -11,8 +11,15 @@ namespace System.Collections.Generic
     [DebuggerTypeProxy(typeof(ICollectionDebugView<>))]
     [DebuggerDisplay("Count = {Count}")]
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-    public class LinkedList<T> : ICollection<T>, ICollection, IReadOnlyCollection<T>, ISerializable, IDeserializationCallback
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
+    public class LinkedList<T>
+        : ICollection<T>,
+            ICollection,
+            IReadOnlyCollection<T>,
+            ISerializable,
+            IDeserializationCallback
     {
         // This LinkedList is a doubly-Linked circular list.
         internal LinkedListNode<T>? head;
@@ -25,9 +32,7 @@ namespace System.Collections.Generic
         private const string CountName = "Count"; // Do not rename (binary serialization)
         private const string ValuesName = "Data"; // Do not rename (binary serialization)
 
-        public LinkedList()
-        {
-        }
+        public LinkedList() { }
 
         public LinkedList(IEnumerable<T> collection)
         {
@@ -39,7 +44,11 @@ namespace System.Collections.Generic
             }
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected LinkedList(SerializationInfo info, StreamingContext context)
         {
@@ -199,7 +208,11 @@ namespace System.Collections.Generic
 
             if (index > array.Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), index, SR.ArgumentOutOfRange_BiggerThanCollection);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    index,
+                    SR.ArgumentOutOfRange_BiggerThanCollection
+                );
             }
 
             if (array.Length - index < Count)
@@ -252,7 +265,8 @@ namespace System.Collections.Generic
 
         public LinkedListNode<T>? FindLast(T value)
         {
-            if (head == null) return null;
+            if (head == null)
+                return null;
 
             LinkedListNode<T>? last = head.prev;
             LinkedListNode<T>? node = last;
@@ -289,8 +303,7 @@ namespace System.Collections.Generic
         public Enumerator GetEnumerator() => new Enumerator(this);
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator() =>
-            Count == 0 ? EnumerableHelpers.GetEmptyEnumerator<T>() :
-            GetEnumerator();
+            Count == 0 ? EnumerableHelpers.GetEmptyEnumerator<T>() : GetEnumerator();
 
         public bool Remove(T value)
         {
@@ -311,17 +324,27 @@ namespace System.Collections.Generic
 
         public void RemoveFirst()
         {
-            if (head == null) { throw new InvalidOperationException(SR.LinkedListEmpty); }
+            if (head == null)
+            {
+                throw new InvalidOperationException(SR.LinkedListEmpty);
+            }
             InternalRemoveNode(head);
         }
 
         public void RemoveLast()
         {
-            if (head == null) { throw new InvalidOperationException(SR.LinkedListEmpty); }
+            if (head == null)
+            {
+                throw new InvalidOperationException(SR.LinkedListEmpty);
+            }
             InternalRemoveNode(head.prev!);
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -386,7 +409,10 @@ namespace System.Collections.Generic
 
         private void InternalInsertNodeToEmptyList(LinkedListNode<T> newNode)
         {
-            Debug.Assert(head == null && count == 0, "LinkedList must be empty when this method is called!");
+            Debug.Assert(
+                head == null && count == 0,
+                "LinkedList must be empty when this method is called!"
+            );
             newNode.next = newNode;
             newNode.prev = newNode;
             head = newNode;
@@ -400,7 +426,10 @@ namespace System.Collections.Generic
             Debug.Assert(head != null, "This method shouldn't be called on empty list!");
             if (node.next == node)
             {
-                Debug.Assert(count == 1 && head == node, "this should only be true for a list with only one node");
+                Debug.Assert(
+                    count == 1 && head == node,
+                    "this should only be true for a list with only one node"
+                );
                 head = null;
             }
             else
@@ -500,7 +529,11 @@ namespace System.Collections.Generic
 
         IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable<T>)this).GetEnumerator();
 
-        public struct Enumerator : IEnumerator<T>, IEnumerator, ISerializable, IDeserializationCallback
+        public struct Enumerator
+            : IEnumerator<T>,
+                IEnumerator,
+                ISerializable,
+                IDeserializationCallback
         {
             private readonly LinkedList<T> _list;
             private LinkedListNode<T>? _node;
@@ -567,9 +600,7 @@ namespace System.Collections.Generic
                 _index = 0;
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
             {

@@ -30,13 +30,16 @@ public class SqliteRelationalConnection : RelationalConnection, ISqliteRelationa
     public SqliteRelationalConnection(
         RelationalConnectionDependencies dependencies,
         IRawSqlCommandBuilder rawSqlCommandBuilder,
-        IDiagnosticsLogger<DbLoggerCategory.Infrastructure> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Infrastructure> logger
+    )
         : base(dependencies)
     {
         _rawSqlCommandBuilder = rawSqlCommandBuilder;
         _logger = logger;
 
-        var optionsExtension = dependencies.ContextOptions.Extensions.OfType<SqliteOptionsExtension>().FirstOrDefault();
+        var optionsExtension = dependencies
+            .ContextOptions.Extensions.OfType<SqliteOptionsExtension>()
+            .FirstOrDefault();
         if (optionsExtension != null)
         {
             _loadSpatialite = optionsExtension.LoadSpatialite;
@@ -73,14 +76,26 @@ public class SqliteRelationalConnection : RelationalConnection, ISqliteRelationa
     /// </summary>
     public virtual ISqliteRelationalConnection CreateReadOnlyConnection()
     {
-        var connectionStringBuilder = new SqliteConnectionStringBuilder(GetValidatedConnectionString())
+        var connectionStringBuilder = new SqliteConnectionStringBuilder(
+            GetValidatedConnectionString()
+        )
         {
-            Mode = SqliteOpenMode.ReadOnly, Pooling = false
+            Mode = SqliteOpenMode.ReadOnly,
+            Pooling = false,
         };
 
-        var contextOptions = new DbContextOptionsBuilder().UseSqlite(connectionStringBuilder.ToString()).Options;
+        var contextOptions = new DbContextOptionsBuilder()
+            .UseSqlite(connectionStringBuilder.ToString())
+            .Options;
 
-        return new SqliteRelationalConnection(Dependencies with { ContextOptions = contextOptions }, _rawSqlCommandBuilder, _logger);
+        return new SqliteRelationalConnection(
+            Dependencies with
+            {
+                ContextOptions = contextOptions,
+            },
+            _rawSqlCommandBuilder,
+            _logger
+        );
     }
 
     private void InitializeDbConnection(DbConnection connection)
@@ -101,47 +116,54 @@ public class SqliteRelationalConnection : RelationalConnection, ISqliteRelationa
                 "regexp",
                 (pattern, input) =>
                 {
-                    if (input == null
-                        || pattern == null)
+                    if (input == null || pattern == null)
                     {
                         return null;
                     }
 
                     return Regex.IsMatch(input, pattern);
                 },
-                isDeterministic: true);
+                isDeterministic: true
+            );
 
             sqliteConnection.CreateFunction(
                 "ef_mod",
                 (decimal? dividend, decimal? divisor) => dividend % divisor,
-                isDeterministic: true);
+                isDeterministic: true
+            );
 
             sqliteConnection.CreateFunction(
                 name: "ef_add",
                 (decimal? left, decimal? right) => left + right,
-                isDeterministic: true);
+                isDeterministic: true
+            );
 
             sqliteConnection.CreateFunction(
                 name: "ef_divide",
                 (decimal? dividend, decimal? divisor) => dividend / divisor,
-                isDeterministic: true);
+                isDeterministic: true
+            );
 
             sqliteConnection.CreateFunction(
                 name: "ef_compare",
-                (decimal? left, decimal? right) => left.HasValue && right.HasValue
-                    ? decimal.Compare(left.Value, right.Value)
-                    : default(int?),
-                isDeterministic: true);
+                (decimal? left, decimal? right) =>
+                    left.HasValue && right.HasValue
+                        ? decimal.Compare(left.Value, right.Value)
+                        : default(int?),
+                isDeterministic: true
+            );
 
             sqliteConnection.CreateFunction(
                 name: "ef_multiply",
                 (decimal? left, decimal? right) => left * right,
-                isDeterministic: true);
+                isDeterministic: true
+            );
 
             sqliteConnection.CreateFunction(
                 name: "ef_negate",
                 (decimal? m) => -m,
-                isDeterministic: true);
+                isDeterministic: true
+            );
         }
         else
         {

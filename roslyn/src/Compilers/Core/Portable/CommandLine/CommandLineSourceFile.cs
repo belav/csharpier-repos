@@ -12,9 +12,8 @@ namespace Microsoft.CodeAnalysis
     [DebuggerDisplay("{Path,nq}")]
     public readonly struct CommandLineSourceFile
     {
-        public CommandLineSourceFile(string path, bool isScript) :
-            this(path, isScript, false)
-        { }
+        public CommandLineSourceFile(string path, bool isScript)
+            : this(path, isScript, false) { }
 
         public CommandLineSourceFile(string path, bool isScript, bool isInputRedirected)
         {
@@ -29,7 +28,7 @@ namespace Microsoft.CodeAnalysis
         /// Resolved absolute path of the source file (does not contain wildcards).
         /// </summary>
         /// <remarks>
-        /// Although this path is absolute it may not be normalized. That is, it may contain ".." and "." in the middle. 
+        /// Although this path is absolute it may not be normalized. That is, it may contain ".." and "." in the middle.
         /// </remarks>
         public string Path { get; }
 

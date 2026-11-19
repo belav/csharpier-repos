@@ -4,14 +4,16 @@
 using System;
 using System.Collections;
 using System.Collections.Specialized;
-using System.Threading;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Security;
 using System.Security.Permissions;
-using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 
-namespace System.Runtime.Caching {
-    internal sealed class MemoryCacheStore : IDisposable {
+namespace System.Runtime.Caching
+{
+    internal sealed class MemoryCacheStore : IDisposable
+    {
         const int INSERT_BLOCK_WAIT = 10000;
         const int MAX_COUNT = Int32.MaxValue / 2;
 
@@ -25,7 +27,8 @@ namespace System.Runtime.Caching {
         private MemoryCache _cache;
         private PerfCounters _perfCounters;
 
-        internal MemoryCacheStore(MemoryCache cache, PerfCounters perfCounters) {
+        internal MemoryCacheStore(MemoryCache cache, PerfCounters perfCounters)
+        {
             _cache = cache;
             _perfCounters = perfCounters;
             _entries = new Hashtable(new MemoryCacheEqualityComparer());
@@ -35,66 +38,91 @@ namespace System.Runtime.Caching {
             InitDisposableMembers();
         }
 
-        // private members        
+        // private members
 
-        private void AddToCache(MemoryCacheEntry entry) {
-
+        private void AddToCache(MemoryCacheEntry entry)
+        {
             // add outside of lock
-            if (entry == null) {
+            if (entry == null)
+            {
                 return;
             }
 
-            if (entry.HasExpiration()) {
+            if (entry.HasExpiration())
+            {
                 _expires.Add(entry);
             }
 
-            if (entry.HasUsage()
-                && (!entry.HasExpiration() || entry.UtcAbsExp - DateTime.UtcNow >= CacheUsage.MIN_LIFETIME_FOR_USAGE)) {
+            if (
+                entry.HasUsage()
+                && (
+                    !entry.HasExpiration()
+                    || entry.UtcAbsExp - DateTime.UtcNow >= CacheUsage.MIN_LIFETIME_FOR_USAGE
+                )
+            )
+            {
                 _usage.Add(entry);
             }
 
             // One last sanity check to be sure we didn't fall victim to an Add ----
-            if (!entry.CompareExchangeState(EntryState.AddedToCache, EntryState.AddingToCache)) {
-                if (entry.InExpires()) {
+            if (!entry.CompareExchangeState(EntryState.AddedToCache, EntryState.AddingToCache))
+            {
+                if (entry.InExpires())
+                {
                     _expires.Remove(entry);
                 }
 
-                if (entry.InUsage()) {
+                if (entry.InUsage())
+                {
                     _usage.Remove(entry);
                 }
             }
 
             entry.CallNotifyOnChanged();
-            if (_perfCounters != null) {
+            if (_perfCounters != null)
+            {
                 _perfCounters.Increment(PerfCounterName.Entries);
                 _perfCounters.Increment(PerfCounterName.Turnover);
             }
         }
 
-        private void InitDisposableMembers() {
+        private void InitDisposableMembers()
+        {
             _insertBlock = new ManualResetEvent(true);
             _expires.EnableExpirationTimer(true);
         }
 
-
-        private void RemoveFromCache(MemoryCacheEntry entry, CacheEntryRemovedReason reason, bool delayRelease = false) {
+        private void RemoveFromCache(
+            MemoryCacheEntry entry,
+            CacheEntryRemovedReason reason,
+            bool delayRelease = false
+        )
+        {
             // release outside of lock
-            if (entry != null) {
-                if (entry.InExpires()) {
+            if (entry != null)
+            {
+                if (entry.InExpires())
+                {
                     _expires.Remove(entry);
                 }
 
-                if (entry.InUsage()) {
+                if (entry.InUsage())
+                {
                     _usage.Remove(entry);
                 }
 
-                Dbg.Assert(entry.State == EntryState.RemovingFromCache, "entry.State = EntryState.RemovingFromCache");
+                Dbg.Assert(
+                    entry.State == EntryState.RemovingFromCache,
+                    "entry.State = EntryState.RemovingFromCache"
+                );
 
                 entry.State = EntryState.RemovedFromCache;
-                if (!delayRelease) {
+                if (!delayRelease)
+                {
                     entry.Release(_cache, reason);
                 }
-                if (_perfCounters != null) {
+                if (_perfCounters != null)
+                {
                     _perfCounters.Decrement(PerfCounterName.Entries);
                     _perfCounters.Increment(PerfCounterName.Turnover);
                 }
@@ -105,9 +133,12 @@ namespace System.Runtime.Caching {
         // to update both the performance counters and the sliding expiration. Callers that perform
         // nested sliding expiration updates (like a MemoryCacheEntry touching its update sentinel)
         // can pass false to prevent these from unintentionally showing up in the perf counters.
-        internal void UpdateExpAndUsage(MemoryCacheEntry entry, bool updatePerfCounters = true) {
-            if (entry != null) {
-                if (entry.InUsage() || entry.SlidingExp > TimeSpan.Zero) {
+        internal void UpdateExpAndUsage(MemoryCacheEntry entry, bool updatePerfCounters = true)
+        {
+            if (entry != null)
+            {
+                if (entry.InUsage() || entry.SlidingExp > TimeSpan.Zero)
+                {
                     DateTime utcNow = DateTime.UtcNow;
                     entry.UpdateSlidingExp(utcNow, _expires);
                     entry.UpdateUsage(utcNow, _usage);
@@ -118,47 +149,59 @@ namespace System.Runtime.Caching {
                 // keep the sentinel from expiring, which in turn would force a removal of this entry from the cache.
                 entry.UpdateSlidingExpForUpdateSentinel();
 
-                if (updatePerfCounters && _perfCounters != null) {
+                if (updatePerfCounters && _perfCounters != null)
+                {
                     _perfCounters.Increment(PerfCounterName.Hits);
                     _perfCounters.Increment(PerfCounterName.HitRatio);
                     _perfCounters.Increment(PerfCounterName.HitRatioBase);
                 }
             }
-            else {
-                if (updatePerfCounters && _perfCounters != null) {
+            else
+            {
+                if (updatePerfCounters && _perfCounters != null)
+                {
                     _perfCounters.Increment(PerfCounterName.Misses);
                     _perfCounters.Increment(PerfCounterName.HitRatioBase);
                 }
             }
         }
 
-        private void WaitInsertBlock() {
+        private void WaitInsertBlock()
+        {
             _insertBlock.WaitOne(INSERT_BLOCK_WAIT, false);
         }
 
-
         // public/internal members
 
-        internal CacheUsage Usage { get { return _usage; } }
+        internal CacheUsage Usage
+        {
+            get { return _usage; }
+        }
 
-        internal MemoryCacheEntry AddOrGetExisting(MemoryCacheKey key, MemoryCacheEntry entry) {
-            if (_useInsertBlock && entry.HasUsage()) {
+        internal MemoryCacheEntry AddOrGetExisting(MemoryCacheKey key, MemoryCacheEntry entry)
+        {
+            if (_useInsertBlock && entry.HasUsage())
+            {
                 WaitInsertBlock();
             }
             MemoryCacheEntry existingEntry = null;
             MemoryCacheEntry toBeReleasedEntry = null;
             bool added = false;
-            lock (_entriesLock) {
-                if (_disposed == 0) {
+            lock (_entriesLock)
+            {
+                if (_disposed == 0)
+                {
                     existingEntry = _entries[key] as MemoryCacheEntry;
                     // has it expired?
-                    if (existingEntry != null && existingEntry.UtcAbsExp <= DateTime.UtcNow) {
+                    if (existingEntry != null && existingEntry.UtcAbsExp <= DateTime.UtcNow)
+                    {
                         toBeReleasedEntry = existingEntry;
                         toBeReleasedEntry.State = EntryState.RemovingFromCache;
                         existingEntry = null;
                     }
                     // can we add entry to the cache?
-                    if (existingEntry == null) {
+                    if (existingEntry == null)
+                    {
                         entry.State = EntryState.AddingToCache;
                         added = true;
                         _entries[key] = entry;
@@ -166,34 +209,42 @@ namespace System.Runtime.Caching {
                 }
             }
             // release outside of lock
-            RemoveFromCache(toBeReleasedEntry, CacheEntryRemovedReason.Expired, delayRelease:true);
-            if (added) {
+            RemoveFromCache(toBeReleasedEntry, CacheEntryRemovedReason.Expired, delayRelease: true);
+            if (added)
+            {
                 // add outside of lock
                 AddToCache(entry);
             }
             // update outside of lock
             UpdateExpAndUsage(existingEntry);
-            
-            // Dev10 861163: Call Release after the new entry has been completely added so 
+
+            // Dev10 861163: Call Release after the new entry has been completely added so
             // that the CacheItemRemovedCallback can take a dependency on the newly inserted item.
-            if (toBeReleasedEntry != null) {
+            if (toBeReleasedEntry != null)
+            {
                 toBeReleasedEntry.Release(_cache, CacheEntryRemovedReason.Expired);
             }
             return existingEntry;
         }
 
-        internal void BlockInsert() {
+        internal void BlockInsert()
+        {
             _insertBlock.Reset();
             _useInsertBlock = true;
         }
 
-        internal void CopyTo(IDictionary h) {
-            lock (_entriesLock) {
-                if (_disposed == 0) {
-                    foreach (DictionaryEntry e in _entries) {
+        internal void CopyTo(IDictionary h)
+        {
+            lock (_entriesLock)
+            {
+                if (_disposed == 0)
+                {
+                    foreach (DictionaryEntry e in _entries)
+                    {
                         MemoryCacheKey key = e.Key as MemoryCacheKey;
                         MemoryCacheEntry entry = e.Value as MemoryCacheEntry;
-                        if (entry.UtcAbsExp > DateTime.UtcNow) {
+                        if (entry.UtcAbsExp > DateTime.UtcNow)
+                        {
                             h[key.Key] = entry.Value;
                         }
                     }
@@ -201,32 +252,36 @@ namespace System.Runtime.Caching {
             }
         }
 
-        internal int Count {
-            get {
-                return _entries.Count;
-
-            }
+        internal int Count
+        {
+            get { return _entries.Count; }
         }
 
-        public void Dispose() {
-            if (Interlocked.Exchange(ref _disposed, 1) == 0) {
+        public void Dispose()
+        {
+            if (Interlocked.Exchange(ref _disposed, 1) == 0)
+            {
                 // disable CacheExpires timer
                 _expires.EnableExpirationTimer(false);
                 // build array list of entries
                 ArrayList entries = new ArrayList(_entries.Count);
-                lock (_entriesLock) {
-                    foreach (DictionaryEntry e in _entries) {
+                lock (_entriesLock)
+                {
+                    foreach (DictionaryEntry e in _entries)
+                    {
                         MemoryCacheEntry entry = e.Value as MemoryCacheEntry;
                         entries.Add(entry);
                     }
-                    foreach (MemoryCacheEntry entry in entries) {
+                    foreach (MemoryCacheEntry entry in entries)
+                    {
                         MemoryCacheKey key = entry as MemoryCacheKey;
                         entry.State = EntryState.RemovingFromCache;
                         _entries.Remove(key);
                     }
                 }
                 // release entries outside of lock
-                foreach (MemoryCacheEntry entry in entries) {
+                foreach (MemoryCacheEntry entry in entries)
+                {
                     RemoveFromCache(entry, CacheEntryRemovedReason.CacheSpecificEviction);
                 }
 
@@ -235,15 +290,16 @@ namespace System.Runtime.Caching {
                 Dbg.Assert(_useInsertBlock == false, "_useInsertBlock == false");
                 _insertBlock.Close();
 
-
                 // Don't need to call GC.SuppressFinalize(this) for sealed types without finalizers.
             }
         }
 
-        internal MemoryCacheEntry Get(MemoryCacheKey key) {
+        internal MemoryCacheEntry Get(MemoryCacheKey key)
+        {
             MemoryCacheEntry entry = _entries[key] as MemoryCacheEntry;
             // has it expired?
-            if (entry != null && entry.UtcAbsExp <= DateTime.UtcNow) {
+            if (entry != null && entry.UtcAbsExp <= DateTime.UtcNow)
+            {
                 Remove(key, entry, CacheEntryRemovedReason.Expired);
                 entry = null;
             }
@@ -252,21 +308,31 @@ namespace System.Runtime.Caching {
             return entry;
         }
 
-        internal MemoryCacheEntry Remove(MemoryCacheKey key, MemoryCacheEntry entryToRemove, CacheEntryRemovedReason reason) {
+        internal MemoryCacheEntry Remove(
+            MemoryCacheKey key,
+            MemoryCacheEntry entryToRemove,
+            CacheEntryRemovedReason reason
+        )
+        {
             MemoryCacheEntry entry = null;
-            lock (_entriesLock) {
-                if (_disposed == 0) {
+            lock (_entriesLock)
+            {
+                if (_disposed == 0)
+                {
                     // get current entry
                     entry = _entries[key] as MemoryCacheEntry;
                     // remove if it matches the entry to be removed (but always remove if entryToRemove is null)
-                    if (entryToRemove == null || Object.ReferenceEquals(entry, entryToRemove)) {
+                    if (entryToRemove == null || Object.ReferenceEquals(entry, entryToRemove))
+                    {
                         // Dev10 865887: MemoryCache.Remove("\ue637\ud22a\u3e17") causes NullReferenceEx
-                        if (entry != null) {
+                        if (entry != null)
+                        {
                             entry.State = EntryState.RemovingFromCache;
                             _entries.Remove(key);
                         }
                     }
-                    else {
+                    else
+                    {
                         entry = null;
                     }
                 }
@@ -276,16 +342,21 @@ namespace System.Runtime.Caching {
             return entry;
         }
 
-        internal void Set(MemoryCacheKey key, MemoryCacheEntry entry) {
-            if (_useInsertBlock && entry.HasUsage()) {
+        internal void Set(MemoryCacheKey key, MemoryCacheEntry entry)
+        {
+            if (_useInsertBlock && entry.HasUsage())
+            {
                 WaitInsertBlock();
             }
             MemoryCacheEntry existingEntry = null;
             bool added = false;
-            lock (_entriesLock) {
-                if (_disposed == 0) {
+            lock (_entriesLock)
+            {
+                if (_disposed == 0)
+                {
                     existingEntry = _entries[key] as MemoryCacheEntry;
-                    if (existingEntry != null) {
+                    if (existingEntry != null)
+                    {
                         existingEntry.State = EntryState.RemovingFromCache;
                     }
                     entry.State = EntryState.AddingToCache;
@@ -295,39 +366,47 @@ namespace System.Runtime.Caching {
             }
 
             CacheEntryRemovedReason reason = CacheEntryRemovedReason.Removed;
-            if (existingEntry != null) {
-                if (existingEntry.UtcAbsExp <= DateTime.UtcNow) {
+            if (existingEntry != null)
+            {
+                if (existingEntry.UtcAbsExp <= DateTime.UtcNow)
+                {
                     reason = CacheEntryRemovedReason.Expired;
                 }
-                RemoveFromCache(existingEntry, reason, delayRelease:true);
+                RemoveFromCache(existingEntry, reason, delayRelease: true);
             }
-            if (added) {
+            if (added)
+            {
                 AddToCache(entry);
             }
 
-            // Dev10 861163: Call Release after the new entry has been completely added so 
+            // Dev10 861163: Call Release after the new entry has been completely added so
             // that the CacheItemRemovedCallback can take a dependency on the newly inserted item.
-            if (existingEntry != null) {
+            if (existingEntry != null)
+            {
                 existingEntry.Release(_cache, reason);
             }
         }
 
-        internal long TrimInternal(int percent) {
+        internal long TrimInternal(int percent)
+        {
             Dbg.Assert(percent <= 100, "percent <= 100");
 
             int count = Count;
             int toTrim = 0;
             // do we need to drop a percentage of entries?
-            if (percent > 0) {
+            if (percent > 0)
+            {
                 toTrim = (int)Math.Ceiling(((long)count * (long)percent) / 100D);
                 // would this leave us above MAX_COUNT?
                 int minTrim = count - MAX_COUNT;
-                if (toTrim < minTrim) {
+                if (toTrim < minTrim)
+                {
                     toTrim = minTrim;
                 }
             }
             // do we need to trim?
-            if (toTrim <= 0 || _disposed == 1) {
+            if (toTrim <= 0 || _disposed == 1)
+            {
                 return 0;
             }
             int trimmed = 0; // total number of entries trimmed
@@ -337,28 +416,37 @@ namespace System.Runtime.Caching {
 #endif
 
             trimmedOrExpired = _expires.FlushExpiredItems(true);
-            if (trimmedOrExpired < toTrim) {
+            if (trimmedOrExpired < toTrim)
+            {
                 trimmed = _usage.FlushUnderUsedItems(toTrim - trimmedOrExpired);
                 trimmedOrExpired += trimmed;
             }
 
-            if (trimmed > 0 && _perfCounters != null) {
+            if (trimmed > 0 && _perfCounters != null)
+            {
                 // Update values for perfcounters
                 _perfCounters.IncrementBy(PerfCounterName.Trims, trimmed);
             }
 
 #if DBG
-            Dbg.Trace("MemoryCacheStore", "TrimInternal:"
-                        + " beginTotalCount=" + beginTotalCount
-                        + ", endTotalCount=" + count
-                        + ", percent=" + percent
-                        + ", trimmed=" + trimmed);
+            Dbg.Trace(
+                "MemoryCacheStore",
+                "TrimInternal:"
+                    + " beginTotalCount="
+                    + beginTotalCount
+                    + ", endTotalCount="
+                    + count
+                    + ", percent="
+                    + percent
+                    + ", trimmed="
+                    + trimmed
+            );
 #endif
             return trimmedOrExpired;
-
         }
 
-        internal void UnblockInsert() {
+        internal void UnblockInsert()
+        {
             _useInsertBlock = false;
             _insertBlock.Set();
         }

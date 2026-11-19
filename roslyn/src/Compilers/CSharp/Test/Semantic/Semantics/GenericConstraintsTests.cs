@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
         [Fact]
         public void EnumConstraint_Compilation_Alone()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class Test<T> where T : System.Enum
 {
 }
@@ -39,19 +40,27 @@ public class Test2
         var d = new Test<System.Enum>();    // Enum type
         var e = new Test<U>();              // Generic type constrained to enum
     }
-}").VerifyDiagnostics(
-                // (14,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Enum'.
-                //         var b = new Test<int>();            // value type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int").WithArguments("Test<T>", "System.Enum", "T", "int").WithLocation(14, 26),
-                // (15,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Enum'.
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string").WithArguments("Test<T>", "System.Enum", "T", "string").WithLocation(15, 26));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (14,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Enum'.
+                    //         var b = new Test<int>();            // value type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int")
+                        .WithArguments("Test<T>", "System.Enum", "T", "int")
+                        .WithLocation(14, 26),
+                    // (15,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Enum'.
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
+                        .WithArguments("Test<T>", "System.Enum", "T", "string")
+                        .WithLocation(15, 26)
+                );
         }
 
         [Fact]
         public void EnumConstraint_Compilation_ReferenceType()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class Test<T> where T : class, System.Enum
 {
 }
@@ -69,22 +78,32 @@ public class Test2
         var d = new Test<System.Enum>();    // Enum type
         var e = new Test<U>();              // Generic type constrained to enum
     }
-}").VerifyDiagnostics(
-                // (13,26): error CS0452: The type 'E1' must be a reference type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var a = new Test<E1>();             // enum
-                Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "E1").WithArguments("Test<T>", "T", "E1").WithLocation(13, 26),
-                // (14,26): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var b = new Test<int>();            // value type
-                Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "int").WithArguments("Test<T>", "T", "int").WithLocation(14, 26),
-                // (15,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Enum'.
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string").WithArguments("Test<T>", "System.Enum", "T", "string").WithLocation(15, 26));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (13,26): error CS0452: The type 'E1' must be a reference type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var a = new Test<E1>();             // enum
+                    Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "E1")
+                        .WithArguments("Test<T>", "T", "E1")
+                        .WithLocation(13, 26),
+                    // (14,26): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var b = new Test<int>();            // value type
+                    Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "int")
+                        .WithArguments("Test<T>", "T", "int")
+                        .WithLocation(14, 26),
+                    // (15,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Enum'.
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
+                        .WithArguments("Test<T>", "System.Enum", "T", "string")
+                        .WithLocation(15, 26)
+                );
         }
 
         [Fact]
         public void EnumConstraint_Compilation_Interface()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class Test<T> where T : System.Enum, System.IDisposable
 {
 }
@@ -100,25 +119,37 @@ public class Test2
         var b = new Test<U>();              // not enum
         var c = new Test<int>();            // neither disposable nor enum
     }
-}").VerifyDiagnostics(
-                // (13,26): error CS0315: The type 'E1' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'E1' to 'System.IDisposable'.
-                //         var a = new Test<E1>();             // not disposable
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "E1").WithArguments("Test<T>", "System.IDisposable", "T", "E1").WithLocation(13, 26),
-                // (14,26): error CS0314: The type 'U' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion or type parameter conversion from 'U' to 'System.Enum'.
-                //         var b = new Test<U>();              // not enum
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedTyVar, "U").WithArguments("Test<T>", "System.Enum", "T", "U").WithLocation(14, 26),
-                // (15,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Enum'.
-                //         var c = new Test<int>();            // neither disposable nor enum
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int").WithArguments("Test<T>", "System.Enum", "T", "int").WithLocation(15, 26),
-                // (15,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.IDisposable'.
-                //         var c = new Test<int>();            // neither disposable nor enum
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int").WithArguments("Test<T>", "System.IDisposable", "T", "int").WithLocation(15, 26));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (13,26): error CS0315: The type 'E1' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'E1' to 'System.IDisposable'.
+                    //         var a = new Test<E1>();             // not disposable
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "E1")
+                        .WithArguments("Test<T>", "System.IDisposable", "T", "E1")
+                        .WithLocation(13, 26),
+                    // (14,26): error CS0314: The type 'U' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion or type parameter conversion from 'U' to 'System.Enum'.
+                    //         var b = new Test<U>();              // not enum
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedTyVar, "U")
+                        .WithArguments("Test<T>", "System.Enum", "T", "U")
+                        .WithLocation(14, 26),
+                    // (15,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Enum'.
+                    //         var c = new Test<int>();            // neither disposable nor enum
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int")
+                        .WithArguments("Test<T>", "System.Enum", "T", "int")
+                        .WithLocation(15, 26),
+                    // (15,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.IDisposable'.
+                    //         var c = new Test<int>();            // neither disposable nor enum
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int")
+                        .WithArguments("Test<T>", "System.IDisposable", "T", "int")
+                        .WithLocation(15, 26)
+                );
         }
 
         [Fact]
         public void EnumConstraint_Compilation_ValueType()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class Test<T> where T : struct, System.Enum
 {
 }
@@ -136,22 +167,32 @@ public class Test2
         var d = new Test<System.Enum>();    // Enum type
         var e = new Test<U>();              // Generic type constrained to enum
     }
-}").VerifyDiagnostics(
-                // (14,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Enum'.
-                //         var b = new Test<int>();            // value type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int").WithArguments("Test<T>", "System.Enum", "T", "int").WithLocation(14, 26),
-                // (15,26): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "string").WithArguments("Test<T>", "T", "string").WithLocation(15, 26),
-                // (16,26): error CS0453: The type 'Enum' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var d = new Test<System.Enum>();    // Enum type
-                Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "System.Enum").WithArguments("Test<T>", "T", "System.Enum").WithLocation(16, 26));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (14,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Enum'.
+                    //         var b = new Test<int>();            // value type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int")
+                        .WithArguments("Test<T>", "System.Enum", "T", "int")
+                        .WithLocation(14, 26),
+                    // (15,26): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "string")
+                        .WithArguments("Test<T>", "T", "string")
+                        .WithLocation(15, 26),
+                    // (16,26): error CS0453: The type 'Enum' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var d = new Test<System.Enum>();    // Enum type
+                    Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "System.Enum")
+                        .WithArguments("Test<T>", "T", "System.Enum")
+                        .WithLocation(16, 26)
+                );
         }
 
         [Fact]
         public void EnumConstraint_Compilation_Constructor()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class Test<T> where T : System.Enum, new()
 {
 }
@@ -169,31 +210,45 @@ public class Test2
         var d = new Test<System.Enum>();    // Enum type
         var e = new Test<U>();              // Generic type constrained to enum
     }
-}").VerifyDiagnostics(
-                // (14,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Enum'.
-                //         var b = new Test<int>();            // value type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int").WithArguments("Test<T>", "System.Enum", "T", "int").WithLocation(14, 26),
-                // (15,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Enum'.
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string").WithArguments("Test<T>", "System.Enum", "T", "string").WithLocation(15, 26),
-                // (15,26): error CS0310: 'string' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "string").WithArguments("Test<T>", "T", "string").WithLocation(15, 26),
-                // (16,26): error CS0310: 'Enum' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var d = new Test<System.Enum>();    // Enum type
-                Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "System.Enum").WithArguments("Test<T>", "T", "System.Enum").WithLocation(16, 26));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (14,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Enum'.
+                    //         var b = new Test<int>();            // value type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int")
+                        .WithArguments("Test<T>", "System.Enum", "T", "int")
+                        .WithLocation(14, 26),
+                    // (15,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Enum'.
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
+                        .WithArguments("Test<T>", "System.Enum", "T", "string")
+                        .WithLocation(15, 26),
+                    // (15,26): error CS0310: 'string' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "string")
+                        .WithArguments("Test<T>", "T", "string")
+                        .WithLocation(15, 26),
+                    // (16,26): error CS0310: 'Enum' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var d = new Test<System.Enum>();    // Enum type
+                    Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "System.Enum")
+                        .WithArguments("Test<T>", "T", "System.Enum")
+                        .WithLocation(16, 26)
+                );
         }
 
         [Fact]
         public void EnumConstraint_Reference_Alone()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public class Test<T> where T : System.Enum
 {
 }"
-                ).EmitToImageReference();
+                )
+                .EmitToImageReference();
 
-            var code = @"
+            var code =
+                @"
 public enum E1
 {
     A
@@ -211,25 +266,34 @@ public class Test2
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
-                // (12,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Enum'.
-                //         var b = new Test<int>();            // value type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int").WithArguments("Test<T>", "System.Enum", "T", "int").WithLocation(12, 26),
-                // (13,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Enum'.
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string").WithArguments("Test<T>", "System.Enum", "T", "string").WithLocation(13, 26));
+            CreateCompilation(code, references: new[] { reference })
+                .VerifyDiagnostics(
+                    // (12,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Enum'.
+                    //         var b = new Test<int>();            // value type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int")
+                        .WithArguments("Test<T>", "System.Enum", "T", "int")
+                        .WithLocation(12, 26),
+                    // (13,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Enum'.
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
+                        .WithArguments("Test<T>", "System.Enum", "T", "string")
+                        .WithLocation(13, 26)
+                );
         }
 
         [Fact]
         public void EnumConstraint_Reference_ReferenceType()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public class Test<T> where T : class, System.Enum
 {
 }"
-                ).EmitToImageReference();
+                )
+                .EmitToImageReference();
 
-            var code = @"
+            var code =
+                @"
 public enum E1
 {
     A
@@ -247,28 +311,39 @@ public class Test2
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
-                // (11,26): error CS0452: The type 'E1' must be a reference type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var a = new Test<E1>();             // enum
-                Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "E1").WithArguments("Test<T>", "T", "E1").WithLocation(11, 26),
-                // (12,26): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var b = new Test<int>();            // value type
-                Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "int").WithArguments("Test<T>", "T", "int").WithLocation(12, 26),
-                // (13,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Enum'.
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string").WithArguments("Test<T>", "System.Enum", "T", "string").WithLocation(13, 26));
+            CreateCompilation(code, references: new[] { reference })
+                .VerifyDiagnostics(
+                    // (11,26): error CS0452: The type 'E1' must be a reference type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var a = new Test<E1>();             // enum
+                    Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "E1")
+                        .WithArguments("Test<T>", "T", "E1")
+                        .WithLocation(11, 26),
+                    // (12,26): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var b = new Test<int>();            // value type
+                    Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "int")
+                        .WithArguments("Test<T>", "T", "int")
+                        .WithLocation(12, 26),
+                    // (13,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Enum'.
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
+                        .WithArguments("Test<T>", "System.Enum", "T", "string")
+                        .WithLocation(13, 26)
+                );
         }
 
         [Fact]
         public void EnumConstraint_Reference_ValueType()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public class Test<T> where T : struct, System.Enum
 {
 }"
-                ).EmitToImageReference();
+                )
+                .EmitToImageReference();
 
-            var code = @"
+            var code =
+                @"
 public enum E1
 {
     A
@@ -286,28 +361,39 @@ public class Test2
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
-                // (12,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Enum'.
-                //         var b = new Test<int>();            // value type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int").WithArguments("Test<T>", "System.Enum", "T", "int").WithLocation(12, 26),
-                // (13,26): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "string").WithArguments("Test<T>", "T", "string").WithLocation(13, 26),
-                // (14,26): error CS0453: The type 'Enum' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var d = new Test<System.Enum>();    // Enum type
-                Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "System.Enum").WithArguments("Test<T>", "T", "System.Enum").WithLocation(14, 26));
+            CreateCompilation(code, references: new[] { reference })
+                .VerifyDiagnostics(
+                    // (12,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Enum'.
+                    //         var b = new Test<int>();            // value type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int")
+                        .WithArguments("Test<T>", "System.Enum", "T", "int")
+                        .WithLocation(12, 26),
+                    // (13,26): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "string")
+                        .WithArguments("Test<T>", "T", "string")
+                        .WithLocation(13, 26),
+                    // (14,26): error CS0453: The type 'Enum' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var d = new Test<System.Enum>();    // Enum type
+                    Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "System.Enum")
+                        .WithArguments("Test<T>", "T", "System.Enum")
+                        .WithLocation(14, 26)
+                );
         }
 
         [Fact]
         public void EnumConstraint_Reference_Constructor()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public class Test<T> where T : System.Enum, new()
 {
 }"
-                ).EmitToImageReference();
+                )
+                .EmitToImageReference();
 
-            var code = @"
+            var code =
+                @"
 public enum E1
 {
     A
@@ -325,39 +411,55 @@ public class Test2
     }
 }";
 
-            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
-                // (12,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Enum'.
-                //         var b = new Test<int>();            // value type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int").WithArguments("Test<T>", "System.Enum", "T", "int").WithLocation(12, 26),
-                // (13,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Enum'.
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string").WithArguments("Test<T>", "System.Enum", "T", "string").WithLocation(13, 26),
-                // (13,26): error CS0310: 'string' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "string").WithArguments("Test<T>", "T", "string").WithLocation(13, 26),
-                // (14,26): error CS0310: 'Enum' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var d = new Test<System.Enum>();    // Enum type
-                Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "System.Enum").WithArguments("Test<T>", "T", "System.Enum").WithLocation(14, 26));
+            CreateCompilation(code, references: new[] { reference })
+                .VerifyDiagnostics(
+                    // (12,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Enum'.
+                    //         var b = new Test<int>();            // value type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int")
+                        .WithArguments("Test<T>", "System.Enum", "T", "int")
+                        .WithLocation(12, 26),
+                    // (13,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Enum'.
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
+                        .WithArguments("Test<T>", "System.Enum", "T", "string")
+                        .WithLocation(13, 26),
+                    // (13,26): error CS0310: 'string' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "string")
+                        .WithArguments("Test<T>", "T", "string")
+                        .WithLocation(13, 26),
+                    // (14,26): error CS0310: 'Enum' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var d = new Test<System.Enum>();    // Enum type
+                    Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "System.Enum")
+                        .WithArguments("Test<T>", "T", "System.Enum")
+                        .WithLocation(14, 26)
+                );
         }
 
         [Fact]
         public void EnumConstraint_Before_7_3()
         {
-            var code = @"
+            var code =
+                @"
 public class Test<T> where T : System.Enum
 {
 }";
 
             var oldOptions = new CSharpParseOptions(LanguageVersion.CSharp7_2);
 
-            CreateCompilation(code, parseOptions: oldOptions).VerifyDiagnostics(
-                // (2,32): error CS8320: Feature 'enum generic type constraints' is not available in C# 7.2. Please use language version 7.3 or greater.
-                // public class Test<T> where T : System.Enum
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "System.Enum").WithArguments("enum generic type constraints", "7.3").WithLocation(2, 32));
+            CreateCompilation(code, parseOptions: oldOptions)
+                .VerifyDiagnostics(
+                    // (2,32): error CS8320: Feature 'enum generic type constraints' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    // public class Test<T> where T : System.Enum
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "System.Enum")
+                        .WithArguments("enum generic type constraints", "7.3")
+                        .WithLocation(2, 32)
+                );
 
             var reference = CreateCompilation(code).EmitToImageReference();
 
-            var legacyCode = @"
+            var legacyCode =
+                @"
 enum E
 {
 }
@@ -370,10 +472,14 @@ class Legacy
     }
 }";
 
-            CreateCompilation(legacyCode, parseOptions: oldOptions, references: new[] { reference }).VerifyDiagnostics(
-                // (10,26): error CS0311: The type 'Legacy' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'Legacy' to 'System.Enum'.
-                //         var b = new Test<Legacy>();     // invalid
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "Legacy").WithArguments("Test<T>", "System.Enum", "T", "Legacy").WithLocation(10, 26));
+            CreateCompilation(legacyCode, parseOptions: oldOptions, references: new[] { reference })
+                .VerifyDiagnostics(
+                    // (10,26): error CS0311: The type 'Legacy' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'Legacy' to 'System.Enum'.
+                    //         var b = new Test<Legacy>();     // invalid
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "Legacy")
+                        .WithArguments("Test<T>", "System.Enum", "T", "Legacy")
+                        .WithLocation(10, 26)
+                );
         }
 
         [Theory]
@@ -387,7 +493,8 @@ class Legacy
         [InlineData("ulong")]
         public void EnumConstraint_DifferentBaseTypes(string type)
         {
-            CreateCompilation($@"
+            CreateCompilation(
+                    $@"
 public class Test<T> where T : System.Enum
 {{
 }}
@@ -403,16 +510,22 @@ public class Test2
         var b = new Test<int>();    // Invalid
     }}
 }}
-").VerifyDiagnostics(
-                // (14,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Enum'.
-                //         var b = new Test<int>();    // Invalid
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int").WithArguments("Test<T>", "System.Enum", "T", "int").WithLocation(14, 26));
+"
+                )
+                .VerifyDiagnostics(
+                    // (14,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Enum'.
+                    //         var b = new Test<int>();    // Invalid
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int")
+                        .WithArguments("Test<T>", "System.Enum", "T", "int")
+                        .WithLocation(14, 26)
+                );
         }
 
         [Fact]
         public void EnumConstraint_InheritanceChain()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public enum E
 {
     A
@@ -432,13 +545,20 @@ public class Test2
         var d = new Test<E, System.Enum>();
         var e = new Test<System.Enum, E>();
     }
-}").VerifyDiagnostics(
-                // (13,33): error CS0315: The type 'E' cannot be used as type parameter 'U' in the generic type or method 'Test<T, U>'. There is no boxing conversion from 'E' to 'Test2'.
-                //         var a = new Test<Test2, E>();
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "E").WithArguments("Test<T, U>", "Test2", "U", "E").WithLocation(13, 33),
-                // (18,29): error CS0311: The type 'System.Enum' cannot be used as type parameter 'U' in the generic type or method 'Test<T, U>'. There is no implicit reference conversion from 'System.Enum' to 'E'.
-                //         var d = new Test<E, System.Enum>();
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "System.Enum").WithArguments("Test<T, U>", "E", "U", "System.Enum").WithLocation(18, 29));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (13,33): error CS0315: The type 'E' cannot be used as type parameter 'U' in the generic type or method 'Test<T, U>'. There is no boxing conversion from 'E' to 'Test2'.
+                    //         var a = new Test<Test2, E>();
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "E")
+                        .WithArguments("Test<T, U>", "Test2", "U", "E")
+                        .WithLocation(13, 33),
+                    // (18,29): error CS0311: The type 'System.Enum' cannot be used as type parameter 'U' in the generic type or method 'Test<T, U>'. There is no implicit reference conversion from 'System.Enum' to 'E'.
+                    //         var d = new Test<E, System.Enum>();
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "System.Enum")
+                        .WithArguments("Test<T, U>", "E", "U", "System.Enum")
+                        .WithLocation(18, 29)
+                );
         }
 
         [Fact]
@@ -448,12 +568,17 @@ public class Test2
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace.GetTypeMember("Test").TypeParameters.Single();
+                var typeParameter = module
+                    .GlobalNamespace.GetTypeMember("Test")
+                    .TypeParameters.Single();
                 Assert.False(typeParameter.IsValueType);
                 Assert.False(typeParameter.IsReferenceType);
                 Assert.False(typeParameter.HasValueTypeConstraint);
                 Assert.False(typeParameter.HasReferenceTypeConstraint);
-                Assert.Equal(SpecialType.System_Enum, typeParameter.ConstraintTypes().Single().SpecialType);
+                Assert.Equal(
+                    SpecialType.System_Enum,
+                    typeParameter.ConstraintTypes().Single().SpecialType
+                );
             };
 
             CompileAndVerify(code, sourceSymbolValidator: validator, symbolValidator: validator);
@@ -466,13 +591,18 @@ public class Test2
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace.GetTypeMember("Test").TypeParameters.Single();
+                var typeParameter = module
+                    .GlobalNamespace.GetTypeMember("Test")
+                    .TypeParameters.Single();
                 Assert.True(typeParameter.IsValueType);
                 Assert.False(typeParameter.IsReferenceType);
                 Assert.True(typeParameter.HasValueTypeConstraint);
                 Assert.False(typeParameter.HasReferenceTypeConstraint);
                 Assert.False(typeParameter.HasConstructorConstraint);
-                Assert.Equal(SpecialType.System_Enum, typeParameter.ConstraintTypes().Single().SpecialType);
+                Assert.Equal(
+                    SpecialType.System_Enum,
+                    typeParameter.ConstraintTypes().Single().SpecialType
+                );
             };
 
             CompileAndVerify(code, sourceSymbolValidator: validator, symbolValidator: validator);
@@ -485,13 +615,18 @@ public class Test2
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace.GetTypeMember("Test").TypeParameters.Single();
+                var typeParameter = module
+                    .GlobalNamespace.GetTypeMember("Test")
+                    .TypeParameters.Single();
                 Assert.False(typeParameter.IsValueType);
                 Assert.True(typeParameter.IsReferenceType);
                 Assert.False(typeParameter.HasValueTypeConstraint);
                 Assert.True(typeParameter.HasReferenceTypeConstraint);
                 Assert.False(typeParameter.HasConstructorConstraint);
-                Assert.Equal(SpecialType.System_Enum, typeParameter.ConstraintTypes().Single().SpecialType);
+                Assert.Equal(
+                    SpecialType.System_Enum,
+                    typeParameter.ConstraintTypes().Single().SpecialType
+                );
             };
 
             CompileAndVerify(code, sourceSymbolValidator: validator, symbolValidator: validator);
@@ -504,13 +639,18 @@ public class Test2
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace.GetTypeMember("Test").TypeParameters.Single();
+                var typeParameter = module
+                    .GlobalNamespace.GetTypeMember("Test")
+                    .TypeParameters.Single();
                 Assert.False(typeParameter.IsValueType);
                 Assert.False(typeParameter.IsReferenceType);
                 Assert.False(typeParameter.HasValueTypeConstraint);
                 Assert.False(typeParameter.HasReferenceTypeConstraint);
                 Assert.True(typeParameter.HasConstructorConstraint);
-                Assert.Equal(SpecialType.System_Enum, typeParameter.ConstraintTypes().Single().SpecialType);
+                Assert.Equal(
+                    SpecialType.System_Enum,
+                    typeParameter.ConstraintTypes().Single().SpecialType
+                );
             };
 
             CompileAndVerify(code, sourceSymbolValidator: validator, symbolValidator: validator);
@@ -519,7 +659,8 @@ public class Test2
         [Fact]
         public void EnumConstraint_EnforcedInInheritanceChain_Downwards_Source()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public abstract class A
 {
     public abstract void M<T>() where T : System.Enum;
@@ -536,23 +677,31 @@ public class B : A
 }
 public enum E
 {
-}").VerifyDiagnostics(
-                // (12,14): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'B.M<T>()'. There is no boxing conversion from 'int' to 'System.Enum'.
-                //         this.M<int>();
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M<int>").WithArguments("B.M<T>()", "System.Enum", "T", "int").WithLocation(12, 14)
+}"
+                )
+                .VerifyDiagnostics(
+                    // (12,14): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'B.M<T>()'. There is no boxing conversion from 'int' to 'System.Enum'.
+                    //         this.M<int>();
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M<int>")
+                        .WithArguments("B.M<T>()", "System.Enum", "T", "int")
+                        .WithLocation(12, 14)
                 );
         }
 
         [Fact]
         public void EnumConstraint_EnforcedInInheritanceChain_Downwards_Reference()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public abstract class A
 {
     public abstract void M<T>() where T : System.Enum;
-}").EmitToImageReference();
+}"
+                )
+                .EmitToImageReference();
 
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class B : A
 {
     public override void M<T>() { }
@@ -565,17 +714,23 @@ public class B : A
 }
 public enum E
 {
-}", references: new[] { reference }).VerifyDiagnostics(
-                // (8,14): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'B.M<T>()'. There is no boxing conversion from 'int' to 'System.Enum'.
-                //         this.M<int>();
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M<int>").WithArguments("B.M<T>()", "System.Enum", "T", "int").WithLocation(8, 14)
+}",
+                    references: new[] { reference }
+                )
+                .VerifyDiagnostics(
+                    // (8,14): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'B.M<T>()'. There is no boxing conversion from 'int' to 'System.Enum'.
+                    //         this.M<int>();
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M<int>")
+                        .WithArguments("B.M<T>()", "System.Enum", "T", "int")
+                        .WithLocation(8, 14)
                 );
         }
 
         [Fact]
         public void EnumConstraint_EnforcedInInheritanceChain_Upwards_Source()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public abstract class A
 {
     public abstract void M<T>();
@@ -583,35 +738,49 @@ public abstract class A
 public class B : A
 {
     public override void M<T>() where T : System.Enum { }
-}").VerifyDiagnostics(
-                // (8,43): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
-                //     public override void M<T>() where T : System.Enum { }
-                Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "System.Enum").WithLocation(8, 43));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (8,43): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
+                    //     public override void M<T>() where T : System.Enum { }
+                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "System.Enum")
+                        .WithLocation(8, 43)
+                );
         }
 
         [Fact]
         public void EnumConstraint_EnforcedInInheritanceChain_Upwards_Reference()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public abstract class A
 {
     public abstract void M<T>();
-}").EmitToImageReference();
+}"
+                )
+                .EmitToImageReference();
 
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class B : A
 {
     public override void M<T>() where T : System.Enum { }
-}", references: new[] { reference }).VerifyDiagnostics(
-                // (4,43): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
-                //     public override void M<T>() where T : System.Enum { }
-                Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "System.Enum").WithLocation(4, 43));
+}",
+                    references: new[] { reference }
+                )
+                .VerifyDiagnostics(
+                    // (4,43): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
+                    //     public override void M<T>() where T : System.Enum { }
+                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "System.Enum")
+                        .WithLocation(4, 43)
+                );
         }
 
         [Fact]
         public void EnumConstraint_ResolveParentConstraints()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 public enum MyEnum
 {
 }
@@ -622,12 +791,16 @@ public abstract class A<T>
 public class B : A<MyEnum>
 {
     public override void F<U>() { }
-}");
+}"
+            );
 
             Action<ModuleSymbol> validator = module =>
             {
                 var method = module.GlobalNamespace.GetTypeMember("B").GetMethod("F");
-                var constraintTypeNames = method.TypeParameters.Single().ConstraintTypes().Select(type => type.ToTestDisplayString());
+                var constraintTypeNames = method
+                    .TypeParameters.Single()
+                    .ConstraintTypes()
+                    .Select(type => type.ToTestDisplayString());
 
                 AssertEx.SetEqual(new[] { "System.Enum", "MyEnum" }, constraintTypeNames);
             };
@@ -638,7 +811,8 @@ public class B : A<MyEnum>
         [Fact]
         public void EnumConstraint_TypeNotAvailable()
         {
-            CreateEmptyCompilation(@"
+            CreateEmptyCompilation(
+                    @"
 namespace System
 {
     public class Object {}
@@ -646,16 +820,22 @@ namespace System
 }
 public class Test<T> where T : System.Enum
 {
-}").VerifyDiagnostics(
-                // (7,39): error CS0234: The type or namespace name 'Enum' does not exist in the namespace 'System' (are you missing an assembly reference?)
-                // public class Test<T> where T : System.Enum
-                Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "Enum").WithArguments("Enum", "System").WithLocation(7, 39));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (7,39): error CS0234: The type or namespace name 'Enum' does not exist in the namespace 'System' (are you missing an assembly reference?)
+                    // public class Test<T> where T : System.Enum
+                    Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "Enum")
+                        .WithArguments("Enum", "System")
+                        .WithLocation(7, 39)
+                );
         }
 
         [Fact]
         public void EnumConstraint_BindingToMethods()
         {
-            var code = @"
+            var code =
+                @"
 enum A : short { a }
 enum B : uint { b }
 class Test
@@ -671,15 +851,19 @@ class Test
     }
 }";
 
-            CompileAndVerify(code, expectedOutput: @"
+            CompileAndVerify(
+                code,
+                expectedOutput: @"
 Int16
-UInt32");
+UInt32"
+            );
         }
 
         [Fact]
         public void EnumConstraint_InheritingFromEnum()
         {
-            var code = @"
+            var code =
+                @"
 public class Child : System.Enum
 {
 }
@@ -702,19 +886,26 @@ public class Test
     }
 }";
 
-            CreateCompilation(code).VerifyDiagnostics(
-                // (2,22): error CS0644: 'Child' cannot derive from special class 'Enum'
-                // public class Child : System.Enum
-                Diagnostic(ErrorCode.ERR_DeriveFromEnumOrValueType, "System.Enum").WithArguments("Child", "System.Enum").WithLocation(2, 22),
-                // (20,9): error CS0311: The type 'Child' cannot be used as type parameter 'T' in the generic type or method 'Test.M<T>(T)'. There is no implicit reference conversion from 'Child' to 'System.Enum'.
-                //         M(new Child());     // invalid
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M").WithArguments("Test.M<T>(T)", "System.Enum", "T", "Child").WithLocation(20, 9));
+            CreateCompilation(code)
+                .VerifyDiagnostics(
+                    // (2,22): error CS0644: 'Child' cannot derive from special class 'Enum'
+                    // public class Child : System.Enum
+                    Diagnostic(ErrorCode.ERR_DeriveFromEnumOrValueType, "System.Enum")
+                        .WithArguments("Child", "System.Enum")
+                        .WithLocation(2, 22),
+                    // (20,9): error CS0311: The type 'Child' cannot be used as type parameter 'T' in the generic type or method 'Test.M<T>(T)'. There is no implicit reference conversion from 'Child' to 'System.Enum'.
+                    //         M(new Child());     // invalid
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M")
+                        .WithArguments("Test.M<T>(T)", "System.Enum", "T", "Child")
+                        .WithLocation(20, 9)
+                );
         }
 
         [Fact]
         public void DelegateConstraint_Compilation_Alone()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class Test<T> where T : System.Delegate
 {
 }
@@ -728,19 +919,27 @@ public class Test2
         var c = new Test<string>();         // reference type
         var d = new Test<U>();              // delegate type
     }
-}").VerifyDiagnostics(
-                // (11,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Delegate'.
-                //         var b = new Test<int>();            // value type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int").WithArguments("Test<T>", "System.Delegate", "T", "int").WithLocation(11, 26),
-                // (12,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Delegate'.
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string").WithArguments("Test<T>", "System.Delegate", "T", "string").WithLocation(12, 26));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (11,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Delegate'.
+                    //         var b = new Test<int>();            // value type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int")
+                        .WithArguments("Test<T>", "System.Delegate", "T", "int")
+                        .WithLocation(11, 26),
+                    // (12,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Delegate'.
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
+                        .WithArguments("Test<T>", "System.Delegate", "T", "string")
+                        .WithLocation(12, 26)
+                );
         }
 
         [Fact]
         public void DelegateConstraint_Compilation_ReferenceType()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class Test<T> where T : class, System.Delegate
 {
 }
@@ -754,32 +953,45 @@ public class Test2
         var c = new Test<string>();         // reference type
         var d = new Test<U>();              // delegate type
     }
-}").VerifyDiagnostics(
-                // (11,26): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var b = new Test<int>();            // value type
-                Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "int").WithArguments("Test<T>", "T", "int").WithLocation(11, 26),
-                // (12,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Delegate'.
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string").WithArguments("Test<T>", "System.Delegate", "T", "string").WithLocation(12, 26));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (11,26): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var b = new Test<int>();            // value type
+                    Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "int")
+                        .WithArguments("Test<T>", "T", "int")
+                        .WithLocation(11, 26),
+                    // (12,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Delegate'.
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
+                        .WithArguments("Test<T>", "System.Delegate", "T", "string")
+                        .WithLocation(12, 26)
+                );
         }
 
         [Fact]
         public void DelegateConstraint_Compilation_ValueType()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class Test<T> where T : struct, System.Delegate
 {
-}").VerifyDiagnostics(
-                // (2,40): error CS0450: 'Delegate': cannot specify both a constraint class and the 'class' or 'struct' constraint
-                // public class Test<T> where T : struct, System.Delegate
-                Diagnostic(ErrorCode.ERR_RefValBoundWithClass, "System.Delegate").WithArguments("System.Delegate").WithLocation(2, 40)
-            );
+}"
+                )
+                .VerifyDiagnostics(
+                    // (2,40): error CS0450: 'Delegate': cannot specify both a constraint class and the 'class' or 'struct' constraint
+                    // public class Test<T> where T : struct, System.Delegate
+                    Diagnostic(ErrorCode.ERR_RefValBoundWithClass, "System.Delegate")
+                        .WithArguments("System.Delegate")
+                        .WithLocation(2, 40)
+                );
         }
 
         [Fact]
         public void DelegateConstraint_Compilation_Constructor()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class Test<T> where T : System.Delegate, new()
 {
 }
@@ -793,30 +1005,45 @@ public class Test2
         var c = new Test<string>();         // reference type
         var d = new Test<U>();              // delegate type
     }
-}").VerifyDiagnostics(
-                // (10,26): error CS0310: 'D1' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var a = new Test<D1>();             // delegate
-                Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "D1").WithArguments("Test<T>", "T", "D1").WithLocation(10, 26),
-                // (11,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Delegate'.
-                //         var b = new Test<int>();            // value type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int").WithArguments("Test<T>", "System.Delegate", "T", "int").WithLocation(11, 26),
-                // (12,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Delegate'.
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string").WithArguments("Test<T>", "System.Delegate", "T", "string").WithLocation(12, 26),
-                // (12,26): error CS0310: 'string' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "string").WithArguments("Test<T>", "T", "string").WithLocation(12, 26));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (10,26): error CS0310: 'D1' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var a = new Test<D1>();             // delegate
+                    Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "D1")
+                        .WithArguments("Test<T>", "T", "D1")
+                        .WithLocation(10, 26),
+                    // (11,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Delegate'.
+                    //         var b = new Test<int>();            // value type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int")
+                        .WithArguments("Test<T>", "System.Delegate", "T", "int")
+                        .WithLocation(11, 26),
+                    // (12,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Delegate'.
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
+                        .WithArguments("Test<T>", "System.Delegate", "T", "string")
+                        .WithLocation(12, 26),
+                    // (12,26): error CS0310: 'string' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "string")
+                        .WithArguments("Test<T>", "T", "string")
+                        .WithLocation(12, 26)
+                );
         }
 
         [Fact]
         public void DelegateConstraint_Reference_Alone()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public class Test<T> where T : System.Delegate
 {
-}").EmitToImageReference();
+}"
+                )
+                .EmitToImageReference();
 
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public delegate void D1();
 public class Test2
 {
@@ -827,24 +1054,36 @@ public class Test2
         var c = new Test<string>();         // reference type
         var d = new Test<U>();              // delegate type
     }
-}", references: new[] { reference }).VerifyDiagnostics(
-                // (8,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Delegate'.
-                //         var b = new Test<int>();            // value type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int").WithArguments("Test<T>", "System.Delegate", "T", "int").WithLocation(8, 26),
-                // (9,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Delegate'.
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string").WithArguments("Test<T>", "System.Delegate", "T", "string").WithLocation(9, 26));
+}",
+                    references: new[] { reference }
+                )
+                .VerifyDiagnostics(
+                    // (8,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Delegate'.
+                    //         var b = new Test<int>();            // value type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int")
+                        .WithArguments("Test<T>", "System.Delegate", "T", "int")
+                        .WithLocation(8, 26),
+                    // (9,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Delegate'.
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
+                        .WithArguments("Test<T>", "System.Delegate", "T", "string")
+                        .WithLocation(9, 26)
+                );
         }
 
         [Fact]
         public void DelegateConstraint_Reference_ReferenceType()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public class Test<T> where T : class, System.Delegate
 {
-}").EmitToImageReference();
+}"
+                )
+                .EmitToImageReference();
 
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public delegate void D1();
 public class Test2
 {
@@ -855,24 +1094,36 @@ public class Test2
         var c = new Test<string>();         // reference type
         var d = new Test<U>();              // delegate type
     }
-}", references: new[] { reference }).VerifyDiagnostics(
-                // (8,26): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var b = new Test<int>();            // value type
-                Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "int").WithArguments("Test<T>", "T", "int").WithLocation(8, 26),
-                // (9,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Delegate'.
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string").WithArguments("Test<T>", "System.Delegate", "T", "string").WithLocation(9, 26));
+}",
+                    references: new[] { reference }
+                )
+                .VerifyDiagnostics(
+                    // (8,26): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var b = new Test<int>();            // value type
+                    Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "int")
+                        .WithArguments("Test<T>", "T", "int")
+                        .WithLocation(8, 26),
+                    // (9,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Delegate'.
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
+                        .WithArguments("Test<T>", "System.Delegate", "T", "string")
+                        .WithLocation(9, 26)
+                );
         }
 
         [Fact]
         public void DelegateConstraint_Reference_Constructor()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public class Test<T> where T : System.Delegate, new()
 {
-}").EmitToImageReference();
+}"
+                )
+                .EmitToImageReference();
 
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public delegate void D1();
 public class Test2
 {
@@ -883,38 +1134,56 @@ public class Test2
         var c = new Test<string>();         // reference type
         var d = new Test<U>();              // delegate type
     }
-}", references: new[] { reference }).VerifyDiagnostics(
-                // (7,26): error CS0310: 'D1' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var a = new Test<D1>();             // delegate
-                Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "D1").WithArguments("Test<T>", "T", "D1").WithLocation(7, 26),
-                // (8,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Delegate'.
-                //         var b = new Test<int>();            // value type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int").WithArguments("Test<T>", "System.Delegate", "T", "int").WithLocation(8, 26),
-                // (9,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Delegate'.
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string").WithArguments("Test<T>", "System.Delegate", "T", "string").WithLocation(9, 26),
-                // (9,26): error CS0310: 'string' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "string").WithArguments("Test<T>", "T", "string").WithLocation(9, 26));
+}",
+                    references: new[] { reference }
+                )
+                .VerifyDiagnostics(
+                    // (7,26): error CS0310: 'D1' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var a = new Test<D1>();             // delegate
+                    Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "D1")
+                        .WithArguments("Test<T>", "T", "D1")
+                        .WithLocation(7, 26),
+                    // (8,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.Delegate'.
+                    //         var b = new Test<int>();            // value type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int")
+                        .WithArguments("Test<T>", "System.Delegate", "T", "int")
+                        .WithLocation(8, 26),
+                    // (9,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.Delegate'.
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
+                        .WithArguments("Test<T>", "System.Delegate", "T", "string")
+                        .WithLocation(9, 26),
+                    // (9,26): error CS0310: 'string' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "string")
+                        .WithArguments("Test<T>", "T", "string")
+                        .WithLocation(9, 26)
+                );
         }
 
         [Fact]
         public void DelegateConstraint_Before_7_3()
         {
-            var code = @"
+            var code =
+                @"
 public class Test<T> where T : System.Delegate
 {
 }";
             var oldOptions = new CSharpParseOptions(LanguageVersion.CSharp7_2);
 
-            CreateCompilation(code, parseOptions: oldOptions).VerifyDiagnostics(
-                // (2,32): error CS8320: Feature 'delegate generic type constraints' is not available in C# 7.2. Please use language version 7.3 or greater.
-                // public class Test<T> where T : System.Delegate
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "System.Delegate").WithArguments("delegate generic type constraints", "7.3").WithLocation(2, 32));
+            CreateCompilation(code, parseOptions: oldOptions)
+                .VerifyDiagnostics(
+                    // (2,32): error CS8320: Feature 'delegate generic type constraints' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    // public class Test<T> where T : System.Delegate
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "System.Delegate")
+                        .WithArguments("delegate generic type constraints", "7.3")
+                        .WithLocation(2, 32)
+                );
 
             var reference = CreateCompilation(code).EmitToImageReference();
 
-            var legacyCode = @"
+            var legacyCode =
+                @"
 delegate void D();
 
 class Legacy
@@ -926,16 +1195,21 @@ class Legacy
     }
 }";
 
-            CreateCompilation(legacyCode, parseOptions: oldOptions, references: new[] { reference }).VerifyDiagnostics(
-                // (9,26): error CS0311: The type 'Legacy' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'Legacy' to 'System.Delegate'.
-                //         var b = new Test<Legacy>();     // invalid
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "Legacy").WithArguments("Test<T>", "System.Delegate", "T", "Legacy").WithLocation(9, 26));
+            CreateCompilation(legacyCode, parseOptions: oldOptions, references: new[] { reference })
+                .VerifyDiagnostics(
+                    // (9,26): error CS0311: The type 'Legacy' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'Legacy' to 'System.Delegate'.
+                    //         var b = new Test<Legacy>();     // invalid
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "Legacy")
+                        .WithArguments("Test<T>", "System.Delegate", "T", "Legacy")
+                        .WithLocation(9, 26)
+                );
         }
 
         [Fact]
         public void DelegateConstraint_InheritanceChain()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public delegate void D1();
 public class Test<T, U> where U : System.Delegate, T
 {
@@ -955,16 +1229,36 @@ public class Test2
         var g = new Test<D1, System.Delegate>();
         var h = new Test<System.Delegate, D1>();
     }
-}").VerifyDiagnostics(
-                // (10,33): error CS0311: The type 'D1' cannot be used as type parameter 'U' in the generic type or method 'Test<T, U>'. There is no implicit reference conversion from 'D1' to 'Test2'.
-                //         var a = new Test<Test2, D1>();
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "D1").WithArguments("Test<T, U>", "Test2", "U", "D1").WithLocation(10, 33),
-                // (14,52): error CS0311: The type 'System.Delegate' cannot be used as type parameter 'U' in the generic type or method 'Test<T, U>'. There is no implicit reference conversion from 'System.Delegate' to 'System.MulticastDelegate'.
-                //         var d = new Test<System.MulticastDelegate, System.Delegate>();
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "System.Delegate").WithArguments("Test<T, U>", "System.MulticastDelegate", "U", "System.Delegate").WithLocation(14, 52),
-                // (18,30): error CS0311: The type 'System.Delegate' cannot be used as type parameter 'U' in the generic type or method 'Test<T, U>'. There is no implicit reference conversion from 'System.Delegate' to 'D1'.
-                //         var g = new Test<D1, System.Delegate>();
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "System.Delegate").WithArguments("Test<T, U>", "D1", "U", "System.Delegate").WithLocation(18, 30));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (10,33): error CS0311: The type 'D1' cannot be used as type parameter 'U' in the generic type or method 'Test<T, U>'. There is no implicit reference conversion from 'D1' to 'Test2'.
+                    //         var a = new Test<Test2, D1>();
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "D1")
+                        .WithArguments("Test<T, U>", "Test2", "U", "D1")
+                        .WithLocation(10, 33),
+                    // (14,52): error CS0311: The type 'System.Delegate' cannot be used as type parameter 'U' in the generic type or method 'Test<T, U>'. There is no implicit reference conversion from 'System.Delegate' to 'System.MulticastDelegate'.
+                    //         var d = new Test<System.MulticastDelegate, System.Delegate>();
+                    Diagnostic(
+                            ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
+                            "System.Delegate"
+                        )
+                        .WithArguments(
+                            "Test<T, U>",
+                            "System.MulticastDelegate",
+                            "U",
+                            "System.Delegate"
+                        )
+                        .WithLocation(14, 52),
+                    // (18,30): error CS0311: The type 'System.Delegate' cannot be used as type parameter 'U' in the generic type or method 'Test<T, U>'. There is no implicit reference conversion from 'System.Delegate' to 'D1'.
+                    //         var g = new Test<D1, System.Delegate>();
+                    Diagnostic(
+                            ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
+                            "System.Delegate"
+                        )
+                        .WithArguments("Test<T, U>", "D1", "U", "System.Delegate")
+                        .WithLocation(18, 30)
+                );
         }
 
         [Fact]
@@ -974,10 +1268,15 @@ public class Test2
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace.GetTypeMember("Test").TypeParameters.Single();
+                var typeParameter = module
+                    .GlobalNamespace.GetTypeMember("Test")
+                    .TypeParameters.Single();
                 Assert.False(typeParameter.HasValueTypeConstraint);
                 Assert.False(typeParameter.HasReferenceTypeConstraint);
-                Assert.Equal(SpecialType.System_Delegate, typeParameter.ConstraintTypes().Single().SpecialType);
+                Assert.Equal(
+                    SpecialType.System_Delegate,
+                    typeParameter.ConstraintTypes().Single().SpecialType
+                );
             };
 
             CompileAndVerify(code, sourceSymbolValidator: validator, symbolValidator: validator);
@@ -986,14 +1285,20 @@ public class Test2
         [Fact]
         public void DelegateConstraint_IsReflectedInSymbols_ValueType()
         {
-            var compilation = CreateCompilation("public class Test<T> where T : struct, System.Delegate { }")
-                    .VerifyDiagnostics(
-                        // (1,40): error CS0450: 'Delegate': cannot specify both a constraint class and the 'class' or 'struct' constraint
-                        // public class Test<T> where T : struct, System.Delegate { }
-                        Diagnostic(ErrorCode.ERR_RefValBoundWithClass, "System.Delegate").WithArguments("System.Delegate").WithLocation(1, 40)
-                    );
+            var compilation = CreateCompilation(
+                    "public class Test<T> where T : struct, System.Delegate { }"
+                )
+                .VerifyDiagnostics(
+                    // (1,40): error CS0450: 'Delegate': cannot specify both a constraint class and the 'class' or 'struct' constraint
+                    // public class Test<T> where T : struct, System.Delegate { }
+                    Diagnostic(ErrorCode.ERR_RefValBoundWithClass, "System.Delegate")
+                        .WithArguments("System.Delegate")
+                        .WithLocation(1, 40)
+                );
 
-            var typeParameter = compilation.GlobalNamespace.GetTypeMember("Test").TypeParameters.Single();
+            var typeParameter = compilation
+                .GlobalNamespace.GetTypeMember("Test")
+                .TypeParameters.Single();
 
             Assert.True(typeParameter.HasValueTypeConstraint);
             Assert.False(typeParameter.HasReferenceTypeConstraint);
@@ -1008,11 +1313,16 @@ public class Test2
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace.GetTypeMember("Test").TypeParameters.Single();
+                var typeParameter = module
+                    .GlobalNamespace.GetTypeMember("Test")
+                    .TypeParameters.Single();
                 Assert.False(typeParameter.HasValueTypeConstraint);
                 Assert.True(typeParameter.HasReferenceTypeConstraint);
                 Assert.False(typeParameter.HasConstructorConstraint);
-                Assert.Equal(SpecialType.System_Delegate, typeParameter.ConstraintTypes().Single().SpecialType);
+                Assert.Equal(
+                    SpecialType.System_Delegate,
+                    typeParameter.ConstraintTypes().Single().SpecialType
+                );
             };
 
             CompileAndVerify(code, sourceSymbolValidator: validator, symbolValidator: validator);
@@ -1025,11 +1335,16 @@ public class Test2
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace.GetTypeMember("Test").TypeParameters.Single();
+                var typeParameter = module
+                    .GlobalNamespace.GetTypeMember("Test")
+                    .TypeParameters.Single();
                 Assert.False(typeParameter.HasValueTypeConstraint);
                 Assert.False(typeParameter.HasReferenceTypeConstraint);
                 Assert.True(typeParameter.HasConstructorConstraint);
-                Assert.Equal(SpecialType.System_Delegate, typeParameter.ConstraintTypes().Single().SpecialType);
+                Assert.Equal(
+                    SpecialType.System_Delegate,
+                    typeParameter.ConstraintTypes().Single().SpecialType
+                );
             };
 
             CompileAndVerify(code, sourceSymbolValidator: validator, symbolValidator: validator);
@@ -1038,7 +1353,8 @@ public class Test2
         [Fact]
         public void DelegateConstraint_EnforcedInInheritanceChain_Downwards_Source()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public abstract class A
 {
     public abstract void M<T>() where T : System.Delegate;
@@ -1053,23 +1369,31 @@ public class B : A
         this.M<int>();
         this.M<D1>();
     }
-}").VerifyDiagnostics(
-                // (13,14): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'B.M<T>()'. There is no boxing conversion from 'int' to 'System.Delegate'.
-                //         this.M<int>();
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M<int>").WithArguments("B.M<T>()", "System.Delegate", "T", "int").WithLocation(13, 14)
+}"
+                )
+                .VerifyDiagnostics(
+                    // (13,14): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'B.M<T>()'. There is no boxing conversion from 'int' to 'System.Delegate'.
+                    //         this.M<int>();
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M<int>")
+                        .WithArguments("B.M<T>()", "System.Delegate", "T", "int")
+                        .WithLocation(13, 14)
                 );
         }
 
         [Fact]
         public void DelegateConstraint_EnforcedInInheritanceChain_Downwards_Reference()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public abstract class A
 {
     public abstract void M<T>() where T : System.Delegate;
-}").EmitToImageReference();
+}"
+                )
+                .EmitToImageReference();
 
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public delegate void D1();
 public class B : A
 {
@@ -1080,17 +1404,23 @@ public class B : A
         this.M<int>();
         this.M<D1>();
     }
-}", references: new[] { reference }).VerifyDiagnostics(
-                // (9,14): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'B.M<T>()'. There is no boxing conversion from 'int' to 'System.Delegate'.
-                //         this.M<int>();
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M<int>").WithArguments("B.M<T>()", "System.Delegate", "T", "int").WithLocation(9, 14)
+}",
+                    references: new[] { reference }
+                )
+                .VerifyDiagnostics(
+                    // (9,14): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'B.M<T>()'. There is no boxing conversion from 'int' to 'System.Delegate'.
+                    //         this.M<int>();
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M<int>")
+                        .WithArguments("B.M<T>()", "System.Delegate", "T", "int")
+                        .WithLocation(9, 14)
                 );
         }
 
         [Fact]
         public void DelegateConstraint_EnforcedInInheritanceChain_Upwards_Source()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public abstract class A
 {
     public abstract void M<T>();
@@ -1098,35 +1428,49 @@ public abstract class A
 public class B : A
 {
     public override void M<T>() where T : System.Delegate { }
-}").VerifyDiagnostics(
-                // (8,43): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
-                //     public override void M<T>() where T : System.Delegate { }
-                Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "System.Delegate").WithLocation(8, 43));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (8,43): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
+                    //     public override void M<T>() where T : System.Delegate { }
+                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "System.Delegate")
+                        .WithLocation(8, 43)
+                );
         }
 
         [Fact]
         public void DelegateConstraint_EnforcedInInheritanceChain_Upwards_Reference()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public abstract class A
 {
     public abstract void M<T>();
-}").EmitToImageReference();
+}"
+                )
+                .EmitToImageReference();
 
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class B : A
 {
     public override void M<T>() where T : System.Delegate { }
-}", references: new[] { reference }).VerifyDiagnostics(
-                // (4,43): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
-                //     public override void M<T>() where T : System.Delegate { }
-                Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "System.Delegate").WithLocation(4, 43));
+}",
+                    references: new[] { reference }
+                )
+                .VerifyDiagnostics(
+                    // (4,43): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
+                    //     public override void M<T>() where T : System.Delegate { }
+                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "System.Delegate")
+                        .WithLocation(4, 43)
+                );
         }
 
         [Fact]
         public void DelegateConstraint_ResolveParentConstraints()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 public delegate void D1();
 public abstract class A<T>
 {
@@ -1135,12 +1479,16 @@ public abstract class A<T>
 public class B : A<D1>
 {
     public override void F<U>() { }
-}");
+}"
+            );
 
             Action<ModuleSymbol> validator = module =>
             {
                 var method = module.GlobalNamespace.GetTypeMember("B").GetMethod("F");
-                var constraintTypeNames = method.TypeParameters.Single().ConstraintTypes().Select(type => type.ToTestDisplayString());
+                var constraintTypeNames = method
+                    .TypeParameters.Single()
+                    .ConstraintTypes()
+                    .Select(type => type.ToTestDisplayString());
 
                 AssertEx.SetEqual(new[] { "System.Delegate", "D1" }, constraintTypeNames);
             };
@@ -1151,7 +1499,8 @@ public class B : A<D1>
         [Fact]
         public void DelegateConstraint_TypeNotAvailable()
         {
-            CreateEmptyCompilation(@"
+            CreateEmptyCompilation(
+                    @"
 namespace System
 {
     public class Object {}
@@ -1159,16 +1508,22 @@ namespace System
 }
 public class Test<T> where T : System.Delegate
 {
-}").VerifyDiagnostics(
-                // (7,39): error CS0234: The type or namespace name 'Delegate' does not exist in the namespace 'System' (are you missing an assembly reference?)
-                // public class Test<T> where T : System.Delegate
-                Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "Delegate").WithArguments("Delegate", "System").WithLocation(7, 39));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (7,39): error CS0234: The type or namespace name 'Delegate' does not exist in the namespace 'System' (are you missing an assembly reference?)
+                    // public class Test<T> where T : System.Delegate
+                    Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "Delegate")
+                        .WithArguments("Delegate", "System")
+                        .WithLocation(7, 39)
+                );
         }
 
         [Fact]
         public void DelegateConstraint_BindingToMethods()
         {
-            var code = @"
+            var code =
+                @"
 delegate void D1(int a, int b);
 class TestClass
 {
@@ -1187,15 +1542,19 @@ class TestClass
     }
 }";
 
-            CompileAndVerify(code, expectedOutput: @"
+            CompileAndVerify(
+                code,
+                expectedOutput: @"
 Got 2 and 3
-Got 7 and 9");
+Got 7 and 9"
+            );
         }
 
         [Fact]
         public void MulticastDelegateConstraint_Compilation_Alone()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class Test<T> where T : System.MulticastDelegate
 {
 }
@@ -1209,19 +1568,27 @@ public class Test2
         var c = new Test<string>();         // reference type
         var d = new Test<U>();              // multicast delegate type
     }
-}").VerifyDiagnostics(
-                // (11,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.MulticastDelegate'.
-                //         var b = new Test<int>();            // value type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int").WithArguments("Test<T>", "System.MulticastDelegate", "T", "int").WithLocation(11, 26),
-                // (12,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.MulticastDelegate'.
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string").WithArguments("Test<T>", "System.MulticastDelegate", "T", "string").WithLocation(12, 26));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (11,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.MulticastDelegate'.
+                    //         var b = new Test<int>();            // value type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int")
+                        .WithArguments("Test<T>", "System.MulticastDelegate", "T", "int")
+                        .WithLocation(11, 26),
+                    // (12,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.MulticastDelegate'.
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
+                        .WithArguments("Test<T>", "System.MulticastDelegate", "T", "string")
+                        .WithLocation(12, 26)
+                );
         }
 
         [Fact]
         public void MulticastDelegateConstraint_Compilation_ReferenceType()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class Test<T> where T : class, System.MulticastDelegate
 {
 }
@@ -1235,32 +1602,45 @@ public class Test2
         var c = new Test<string>();         // reference type
         var d = new Test<U>();              // multicast delegate type
     }
-}").VerifyDiagnostics(
-                // (11,26): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var b = new Test<int>();            // value type
-                Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "int").WithArguments("Test<T>", "T", "int").WithLocation(11, 26),
-                // (12,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.MulticastDelegate'.
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string").WithArguments("Test<T>", "System.MulticastDelegate", "T", "string").WithLocation(12, 26));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (11,26): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var b = new Test<int>();            // value type
+                    Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "int")
+                        .WithArguments("Test<T>", "T", "int")
+                        .WithLocation(11, 26),
+                    // (12,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.MulticastDelegate'.
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
+                        .WithArguments("Test<T>", "System.MulticastDelegate", "T", "string")
+                        .WithLocation(12, 26)
+                );
         }
 
         [Fact]
         public void MulticastDelegateConstraint_Compilation_ValueType()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class Test<T> where T : struct, System.MulticastDelegate
 {
-}").VerifyDiagnostics(
-                // (2,40): error CS0450: 'MulticastDelegate': cannot specify both a constraint class and the 'class' or 'struct' constraint
-                // public class Test<T> where T : struct, System.MulticastDelegate
-                Diagnostic(ErrorCode.ERR_RefValBoundWithClass, "System.MulticastDelegate").WithArguments("System.MulticastDelegate").WithLocation(2, 40)
-            );
+}"
+                )
+                .VerifyDiagnostics(
+                    // (2,40): error CS0450: 'MulticastDelegate': cannot specify both a constraint class and the 'class' or 'struct' constraint
+                    // public class Test<T> where T : struct, System.MulticastDelegate
+                    Diagnostic(ErrorCode.ERR_RefValBoundWithClass, "System.MulticastDelegate")
+                        .WithArguments("System.MulticastDelegate")
+                        .WithLocation(2, 40)
+                );
         }
 
         [Fact]
         public void MulticastDelegateConstraint_Compilation_Constructor()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class Test<T> where T : System.MulticastDelegate, new()
 {
 }
@@ -1274,30 +1654,45 @@ public class Test2
         var c = new Test<string>();         // reference type
         var d = new Test<U>();              // multicast delegate type
     }
-}").VerifyDiagnostics(
-                // (10,26): error CS0310: 'D1' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var a = new Test<D1>();             // delegate
-                Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "D1").WithArguments("Test<T>", "T", "D1").WithLocation(10, 26),
-                // (11,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.MulticastDelegate'.
-                //         var b = new Test<int>();            // value type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int").WithArguments("Test<T>", "System.MulticastDelegate", "T", "int").WithLocation(11, 26),
-                // (12,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.MulticastDelegate'.
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string").WithArguments("Test<T>", "System.MulticastDelegate", "T", "string").WithLocation(12, 26),
-                // (12,26): error CS0310: 'string' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "string").WithArguments("Test<T>", "T", "string").WithLocation(12, 26));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (10,26): error CS0310: 'D1' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var a = new Test<D1>();             // delegate
+                    Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "D1")
+                        .WithArguments("Test<T>", "T", "D1")
+                        .WithLocation(10, 26),
+                    // (11,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.MulticastDelegate'.
+                    //         var b = new Test<int>();            // value type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int")
+                        .WithArguments("Test<T>", "System.MulticastDelegate", "T", "int")
+                        .WithLocation(11, 26),
+                    // (12,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.MulticastDelegate'.
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
+                        .WithArguments("Test<T>", "System.MulticastDelegate", "T", "string")
+                        .WithLocation(12, 26),
+                    // (12,26): error CS0310: 'string' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "string")
+                        .WithArguments("Test<T>", "T", "string")
+                        .WithLocation(12, 26)
+                );
         }
 
         [Fact]
         public void MulticastDelegateConstraint_Reference_Alone()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public class Test<T> where T : System.MulticastDelegate
 {
-}").EmitToImageReference();
+}"
+                )
+                .EmitToImageReference();
 
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public delegate void D1();
 public class Test2
 {
@@ -1308,24 +1703,36 @@ public class Test2
         var c = new Test<string>();         // reference type
         var d = new Test<U>();              // multicast delegate type
     }
-}", references: new[] { reference }).VerifyDiagnostics(
-                // (8,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.MulticastDelegate'.
-                //         var b = new Test<int>();            // value type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int").WithArguments("Test<T>", "System.MulticastDelegate", "T", "int").WithLocation(8, 26),
-                // (9,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.MulticastDelegate'.
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string").WithArguments("Test<T>", "System.MulticastDelegate", "T", "string").WithLocation(9, 26));
+}",
+                    references: new[] { reference }
+                )
+                .VerifyDiagnostics(
+                    // (8,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.MulticastDelegate'.
+                    //         var b = new Test<int>();            // value type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int")
+                        .WithArguments("Test<T>", "System.MulticastDelegate", "T", "int")
+                        .WithLocation(8, 26),
+                    // (9,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.MulticastDelegate'.
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
+                        .WithArguments("Test<T>", "System.MulticastDelegate", "T", "string")
+                        .WithLocation(9, 26)
+                );
         }
 
         [Fact]
         public void MulticastDelegateConstraint_Reference_ReferenceType()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public class Test<T> where T : class, System.MulticastDelegate
 {
-}").EmitToImageReference();
+}"
+                )
+                .EmitToImageReference();
 
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public delegate void D1();
 public class Test2
 {
@@ -1336,24 +1743,36 @@ public class Test2
         var c = new Test<string>();         // reference type
         var d = new Test<U>();              // multicast delegate type
     }
-}", references: new[] { reference }).VerifyDiagnostics(
-                // (8,26): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var b = new Test<int>();            // value type
-                Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "int").WithArguments("Test<T>", "T", "int").WithLocation(8, 26),
-                // (9,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.MulticastDelegate'.
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string").WithArguments("Test<T>", "System.MulticastDelegate", "T", "string").WithLocation(9, 26));
+}",
+                    references: new[] { reference }
+                )
+                .VerifyDiagnostics(
+                    // (8,26): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var b = new Test<int>();            // value type
+                    Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "int")
+                        .WithArguments("Test<T>", "T", "int")
+                        .WithLocation(8, 26),
+                    // (9,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.MulticastDelegate'.
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
+                        .WithArguments("Test<T>", "System.MulticastDelegate", "T", "string")
+                        .WithLocation(9, 26)
+                );
         }
 
         [Fact]
         public void MulticastDelegateConstraint_Reference_Constructor()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public class Test<T> where T : System.MulticastDelegate, new()
 {
-}").EmitToImageReference();
+}"
+                )
+                .EmitToImageReference();
 
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public delegate void D1();
 public class Test2
 {
@@ -1364,39 +1783,60 @@ public class Test2
         var c = new Test<string>();         // reference type
         var d = new Test<U>();              // multicast delegate type
     }
-}", references: new[] { reference }).VerifyDiagnostics(
-                // (7,26): error CS0310: 'D1' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var a = new Test<D1>();             // delegate
-                Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "D1").WithArguments("Test<T>", "T", "D1").WithLocation(7, 26),
-                // (8,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.MulticastDelegate'.
-                //         var b = new Test<int>();            // value type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int").WithArguments("Test<T>", "System.MulticastDelegate", "T", "int").WithLocation(8, 26),
-                // (9,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.MulticastDelegate'.
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string").WithArguments("Test<T>", "System.MulticastDelegate", "T", "string").WithLocation(9, 26),
-                // (9,26): error CS0310: 'string' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var c = new Test<string>();         // reference type
-                Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "string").WithArguments("Test<T>", "T", "string").WithLocation(9, 26));
+}",
+                    references: new[] { reference }
+                )
+                .VerifyDiagnostics(
+                    // (7,26): error CS0310: 'D1' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var a = new Test<D1>();             // delegate
+                    Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "D1")
+                        .WithArguments("Test<T>", "T", "D1")
+                        .WithLocation(7, 26),
+                    // (8,26): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no boxing conversion from 'int' to 'System.MulticastDelegate'.
+                    //         var b = new Test<int>();            // value type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "int")
+                        .WithArguments("Test<T>", "System.MulticastDelegate", "T", "int")
+                        .WithLocation(8, 26),
+                    // (9,26): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'string' to 'System.MulticastDelegate'.
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "string")
+                        .WithArguments("Test<T>", "System.MulticastDelegate", "T", "string")
+                        .WithLocation(9, 26),
+                    // (9,26): error CS0310: 'string' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var c = new Test<string>();         // reference type
+                    Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "string")
+                        .WithArguments("Test<T>", "T", "string")
+                        .WithLocation(9, 26)
+                );
         }
 
         [Fact]
         public void MulticastDelegateConstraint_Before_7_3()
         {
-            var code = @"
+            var code =
+                @"
 public class Test<T> where T : System.MulticastDelegate
 {
 }";
 
             var oldOptions = new CSharpParseOptions(LanguageVersion.CSharp7_2);
 
-            CreateCompilation(code, parseOptions: oldOptions).VerifyDiagnostics(
-                // (2,32): error CS8320: Feature 'delegate generic type constraints' is not available in C# 7.2. Please use language version 7.3 or greater.
-                // public class Test<T> where T : System.MulticastDelegate
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "System.MulticastDelegate").WithArguments("delegate generic type constraints", "7.3").WithLocation(2, 32));
+            CreateCompilation(code, parseOptions: oldOptions)
+                .VerifyDiagnostics(
+                    // (2,32): error CS8320: Feature 'delegate generic type constraints' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    // public class Test<T> where T : System.MulticastDelegate
+                    Diagnostic(
+                            ErrorCode.ERR_FeatureNotAvailableInVersion7_2,
+                            "System.MulticastDelegate"
+                        )
+                        .WithArguments("delegate generic type constraints", "7.3")
+                        .WithLocation(2, 32)
+                );
 
             var reference = CreateCompilation(code).EmitToImageReference();
 
-            var legacyCode = @"
+            var legacyCode =
+                @"
 delegate void D();
 
 class Legacy
@@ -1408,16 +1848,21 @@ class Legacy
     }
 }";
 
-            CreateCompilation(legacyCode, parseOptions: oldOptions, references: new[] { reference }).VerifyDiagnostics(
-                // (9,26): error CS0311: The type 'Legacy' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'Legacy' to 'System.MulticastDelegate'.
-                //         var b = new Test<Legacy>();     // invalid
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "Legacy").WithArguments("Test<T>", "System.MulticastDelegate", "T", "Legacy").WithLocation(9, 26));
+            CreateCompilation(legacyCode, parseOptions: oldOptions, references: new[] { reference })
+                .VerifyDiagnostics(
+                    // (9,26): error CS0311: The type 'Legacy' cannot be used as type parameter 'T' in the generic type or method 'Test<T>'. There is no implicit reference conversion from 'Legacy' to 'System.MulticastDelegate'.
+                    //         var b = new Test<Legacy>();     // invalid
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "Legacy")
+                        .WithArguments("Test<T>", "System.MulticastDelegate", "T", "Legacy")
+                        .WithLocation(9, 26)
+                );
         }
 
         [Fact]
         public void MulticastDelegateConstraint_InheritanceChain()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public delegate void D1();
 public class Test<T, U> where U : System.MulticastDelegate, T
 {
@@ -1437,19 +1882,49 @@ public class Test2
         var g = new Test<D1, System.MulticastDelegate>();
         var h = new Test<System.MulticastDelegate, D1>();
     }
-}").VerifyDiagnostics(
-                // (10,33): error CS0311: The type 'D1' cannot be used as type parameter 'U' in the generic type or method 'Test<T, U>'. There is no implicit reference conversion from 'D1' to 'Test2'.
-                //         var a = new Test<Test2, D1>();
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "D1").WithArguments("Test<T, U>", "Test2", "U", "D1").WithLocation(10, 33),
-                // (15,52): error CS0311: The type 'System.Delegate' cannot be used as type parameter 'U' in the generic type or method 'Test<T, U>'. There is no implicit reference conversion from 'System.Delegate' to 'System.MulticastDelegate'.
-                //         var e = new Test<System.MulticastDelegate, System.Delegate>();
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "System.Delegate").WithArguments("Test<T, U>", "System.MulticastDelegate", "U", "System.Delegate").WithLocation(15, 52),
-                // (16,43): error CS0311: The type 'System.Delegate' cannot be used as type parameter 'U' in the generic type or method 'Test<T, U>'. There is no implicit reference conversion from 'System.Delegate' to 'System.MulticastDelegate'.
-                //         var f = new Test<System.Delegate, System.Delegate>();
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "System.Delegate").WithArguments("Test<T, U>", "System.MulticastDelegate", "U", "System.Delegate").WithLocation(16, 43),
-                // (18,30): error CS0311: The type 'System.MulticastDelegate' cannot be used as type parameter 'U' in the generic type or method 'Test<T, U>'. There is no implicit reference conversion from 'System.MulticastDelegate' to 'D1'.
-                //         var g = new Test<D1, System.MulticastDelegate>();
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "System.MulticastDelegate").WithArguments("Test<T, U>", "D1", "U", "System.MulticastDelegate").WithLocation(18, 30));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (10,33): error CS0311: The type 'D1' cannot be used as type parameter 'U' in the generic type or method 'Test<T, U>'. There is no implicit reference conversion from 'D1' to 'Test2'.
+                    //         var a = new Test<Test2, D1>();
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "D1")
+                        .WithArguments("Test<T, U>", "Test2", "U", "D1")
+                        .WithLocation(10, 33),
+                    // (15,52): error CS0311: The type 'System.Delegate' cannot be used as type parameter 'U' in the generic type or method 'Test<T, U>'. There is no implicit reference conversion from 'System.Delegate' to 'System.MulticastDelegate'.
+                    //         var e = new Test<System.MulticastDelegate, System.Delegate>();
+                    Diagnostic(
+                            ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
+                            "System.Delegate"
+                        )
+                        .WithArguments(
+                            "Test<T, U>",
+                            "System.MulticastDelegate",
+                            "U",
+                            "System.Delegate"
+                        )
+                        .WithLocation(15, 52),
+                    // (16,43): error CS0311: The type 'System.Delegate' cannot be used as type parameter 'U' in the generic type or method 'Test<T, U>'. There is no implicit reference conversion from 'System.Delegate' to 'System.MulticastDelegate'.
+                    //         var f = new Test<System.Delegate, System.Delegate>();
+                    Diagnostic(
+                            ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
+                            "System.Delegate"
+                        )
+                        .WithArguments(
+                            "Test<T, U>",
+                            "System.MulticastDelegate",
+                            "U",
+                            "System.Delegate"
+                        )
+                        .WithLocation(16, 43),
+                    // (18,30): error CS0311: The type 'System.MulticastDelegate' cannot be used as type parameter 'U' in the generic type or method 'Test<T, U>'. There is no implicit reference conversion from 'System.MulticastDelegate' to 'D1'.
+                    //         var g = new Test<D1, System.MulticastDelegate>();
+                    Diagnostic(
+                            ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
+                            "System.MulticastDelegate"
+                        )
+                        .WithArguments("Test<T, U>", "D1", "U", "System.MulticastDelegate")
+                        .WithLocation(18, 30)
+                );
         }
 
         [Fact]
@@ -1459,10 +1934,15 @@ public class Test2
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace.GetTypeMember("Test").TypeParameters.Single();
+                var typeParameter = module
+                    .GlobalNamespace.GetTypeMember("Test")
+                    .TypeParameters.Single();
                 Assert.False(typeParameter.HasValueTypeConstraint);
                 Assert.False(typeParameter.HasReferenceTypeConstraint);
-                Assert.Equal(SpecialType.System_MulticastDelegate, typeParameter.ConstraintTypes().Single().SpecialType);
+                Assert.Equal(
+                    SpecialType.System_MulticastDelegate,
+                    typeParameter.ConstraintTypes().Single().SpecialType
+                );
             };
 
             CompileAndVerify(code, sourceSymbolValidator: validator, symbolValidator: validator);
@@ -1471,14 +1951,20 @@ public class Test2
         [Fact]
         public void MulticastDelegateConstraint_IsReflectedInSymbols_ValueType()
         {
-            var compilation = CreateCompilation("public class Test<T> where T : struct, System.MulticastDelegate { }")
-                    .VerifyDiagnostics(
-                        // (1,40): error CS0450: 'MulticastDelegate': cannot specify both a constraint class and the 'class' or 'struct' constraint
-                        // public class Test<T> where T : struct, System.MulticastDelegate { }
-                        Diagnostic(ErrorCode.ERR_RefValBoundWithClass, "System.MulticastDelegate").WithArguments("System.MulticastDelegate").WithLocation(1, 40)
-                     );
+            var compilation = CreateCompilation(
+                    "public class Test<T> where T : struct, System.MulticastDelegate { }"
+                )
+                .VerifyDiagnostics(
+                    // (1,40): error CS0450: 'MulticastDelegate': cannot specify both a constraint class and the 'class' or 'struct' constraint
+                    // public class Test<T> where T : struct, System.MulticastDelegate { }
+                    Diagnostic(ErrorCode.ERR_RefValBoundWithClass, "System.MulticastDelegate")
+                        .WithArguments("System.MulticastDelegate")
+                        .WithLocation(1, 40)
+                );
 
-            var typeParameter = compilation.GlobalNamespace.GetTypeMember("Test").TypeParameters.Single();
+            var typeParameter = compilation
+                .GlobalNamespace.GetTypeMember("Test")
+                .TypeParameters.Single();
 
             Assert.True(typeParameter.HasValueTypeConstraint);
             Assert.False(typeParameter.HasReferenceTypeConstraint);
@@ -1493,11 +1979,16 @@ public class Test2
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace.GetTypeMember("Test").TypeParameters.Single();
+                var typeParameter = module
+                    .GlobalNamespace.GetTypeMember("Test")
+                    .TypeParameters.Single();
                 Assert.False(typeParameter.HasValueTypeConstraint);
                 Assert.True(typeParameter.HasReferenceTypeConstraint);
                 Assert.False(typeParameter.HasConstructorConstraint);
-                Assert.Equal(SpecialType.System_MulticastDelegate, typeParameter.ConstraintTypes().Single().SpecialType);
+                Assert.Equal(
+                    SpecialType.System_MulticastDelegate,
+                    typeParameter.ConstraintTypes().Single().SpecialType
+                );
             };
 
             CompileAndVerify(code, sourceSymbolValidator: validator, symbolValidator: validator);
@@ -1510,11 +2001,16 @@ public class Test2
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace.GetTypeMember("Test").TypeParameters.Single();
+                var typeParameter = module
+                    .GlobalNamespace.GetTypeMember("Test")
+                    .TypeParameters.Single();
                 Assert.False(typeParameter.HasValueTypeConstraint);
                 Assert.False(typeParameter.HasReferenceTypeConstraint);
                 Assert.True(typeParameter.HasConstructorConstraint);
-                Assert.Equal(SpecialType.System_MulticastDelegate, typeParameter.ConstraintTypes().Single().SpecialType);
+                Assert.Equal(
+                    SpecialType.System_MulticastDelegate,
+                    typeParameter.ConstraintTypes().Single().SpecialType
+                );
             };
 
             CompileAndVerify(code, sourceSymbolValidator: validator, symbolValidator: validator);
@@ -1523,7 +2019,8 @@ public class Test2
         [Fact]
         public void MulticastDelegateConstraint_EnforcedInInheritanceChain_Downwards_Source()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public abstract class A
 {
     public abstract void M<T>() where T : System.MulticastDelegate;
@@ -1538,23 +2035,31 @@ public class B : A
         this.M<int>();
         this.M<D1>();
     }
-}").VerifyDiagnostics(
-                // (13,14): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'B.M<T>()'. There is no boxing conversion from 'int' to 'System.MulticastDelegate'.
-                //         this.M<int>();
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M<int>").WithArguments("B.M<T>()", "System.MulticastDelegate", "T", "int").WithLocation(13, 14)
+}"
+                )
+                .VerifyDiagnostics(
+                    // (13,14): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'B.M<T>()'. There is no boxing conversion from 'int' to 'System.MulticastDelegate'.
+                    //         this.M<int>();
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M<int>")
+                        .WithArguments("B.M<T>()", "System.MulticastDelegate", "T", "int")
+                        .WithLocation(13, 14)
                 );
         }
 
         [Fact]
         public void MulticastDelegateConstraint_EnforcedInInheritanceChain_Downwards_Reference()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public abstract class A
 {
     public abstract void M<T>() where T : System.MulticastDelegate;
-}").EmitToImageReference();
+}"
+                )
+                .EmitToImageReference();
 
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public delegate void D1();
 public class B : A
 {
@@ -1565,17 +2070,23 @@ public class B : A
         this.M<int>();
         this.M<D1>();
     }
-}", references: new[] { reference }).VerifyDiagnostics(
-                // (9,14): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'B.M<T>()'. There is no boxing conversion from 'int' to 'System.MulticastDelegate'.
-                //         this.M<int>();
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M<int>").WithArguments("B.M<T>()", "System.MulticastDelegate", "T", "int").WithLocation(9, 14)
+}",
+                    references: new[] { reference }
+                )
+                .VerifyDiagnostics(
+                    // (9,14): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'B.M<T>()'. There is no boxing conversion from 'int' to 'System.MulticastDelegate'.
+                    //         this.M<int>();
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M<int>")
+                        .WithArguments("B.M<T>()", "System.MulticastDelegate", "T", "int")
+                        .WithLocation(9, 14)
                 );
         }
 
         [Fact]
         public void MulticastDelegateConstraint_EnforcedInInheritanceChain_Upwards_Source()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public abstract class A
 {
     public abstract void M<T>();
@@ -1583,35 +2094,49 @@ public abstract class A
 public class B : A
 {
     public override void M<T>() where T : System.MulticastDelegate { }
-}").VerifyDiagnostics(
-                // (8,43): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
-                //     public override void M<T>() where T : System.MulticastDelegate { }
-                Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "System.MulticastDelegate").WithLocation(8, 43));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (8,43): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
+                    //     public override void M<T>() where T : System.MulticastDelegate { }
+                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "System.MulticastDelegate")
+                        .WithLocation(8, 43)
+                );
         }
 
         [Fact]
         public void MulticastDelegateConstraint_EnforcedInInheritanceChain_Upwards_Reference()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public abstract class A
 {
     public abstract void M<T>();
-}").EmitToImageReference();
+}"
+                )
+                .EmitToImageReference();
 
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class B : A
 {
     public override void M<T>() where T : System.MulticastDelegate { }
-}", references: new[] { reference }).VerifyDiagnostics(
-                // (4,43): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
-                //     public override void M<T>() where T : System.MulticastDelegate { }
-                Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "System.MulticastDelegate").WithLocation(4, 43));
+}",
+                    references: new[] { reference }
+                )
+                .VerifyDiagnostics(
+                    // (4,43): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
+                    //     public override void M<T>() where T : System.MulticastDelegate { }
+                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "System.MulticastDelegate")
+                        .WithLocation(4, 43)
+                );
         }
 
         [Fact]
         public void MulticastDelegateConstraint_ResolveParentConstraints()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 public delegate void D1();
 public abstract class A<T>
 {
@@ -1620,12 +2145,16 @@ public abstract class A<T>
 public class B : A<D1>
 {
     public override void F<U>() { }
-}");
+}"
+            );
 
             Action<ModuleSymbol> validator = module =>
             {
                 var method = module.GlobalNamespace.GetTypeMember("B").GetMethod("F");
-                var constraintTypeNames = method.TypeParameters.Single().ConstraintTypes().Select(type => type.ToTestDisplayString());
+                var constraintTypeNames = method
+                    .TypeParameters.Single()
+                    .ConstraintTypes()
+                    .Select(type => type.ToTestDisplayString());
 
                 AssertEx.SetEqual(new[] { "System.MulticastDelegate", "D1" }, constraintTypeNames);
             };
@@ -1636,7 +2165,8 @@ public class B : A<D1>
         [Fact]
         public void MulticastDelegateConstraint_TypeNotAvailable()
         {
-            CreateEmptyCompilation(@"
+            CreateEmptyCompilation(
+                    @"
 namespace System
 {
     public class Object {}
@@ -1644,16 +2174,22 @@ namespace System
 }
 public class Test<T> where T : System.MulticastDelegate
 {
-}").VerifyDiagnostics(
-                // (7,39): error CS0234: The type or namespace name 'MulticastDelegate' does not exist in the namespace 'System' (are you missing an assembly reference?)
-                // public class Test<T> where T : System.MulticastDelegate
-                Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "MulticastDelegate").WithArguments("MulticastDelegate", "System").WithLocation(7, 39));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (7,39): error CS0234: The type or namespace name 'MulticastDelegate' does not exist in the namespace 'System' (are you missing an assembly reference?)
+                    // public class Test<T> where T : System.MulticastDelegate
+                    Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "MulticastDelegate")
+                        .WithArguments("MulticastDelegate", "System")
+                        .WithLocation(7, 39)
+                );
         }
 
         [Fact]
         public void MulticastDelegateConstraint_BindingToMethods()
         {
-            var code = @"
+            var code =
+                @"
 delegate void D1(int a, int b);
 class TestClass
 {
@@ -1672,34 +2208,44 @@ class TestClass
     }
 }";
 
-            CompileAndVerify(code, expectedOutput: @"
+            CompileAndVerify(
+                code,
+                expectedOutput: @"
 Got 2 and 3
-Got 7 and 9");
+Got 7 and 9"
+            );
         }
 
         [Fact]
         public void ConversionInInheritanceChain_MulticastDelegate()
         {
-            var code = @"
+            var code =
+                @"
 class A<T> where T : System.Delegate { }
 class B<T> : A<T> where T : System.MulticastDelegate { }";
 
             CreateCompilation(code).VerifyDiagnostics();
 
-            code = @"
+            code =
+                @"
 class A<T> where T : System.MulticastDelegate { }
 class B<T> : A<T> where T : System.Delegate { }";
 
-            CreateCompilation(code).VerifyDiagnostics(
-                // (3,7): error CS0311: The type 'T' cannot be used as type parameter 'T' in the generic type or method 'A<T>'. There is no implicit reference conversion from 'T' to 'System.MulticastDelegate'.
-                // class B<T> : A<T> where T : System.Delegate { }
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "B").WithArguments("A<T>", "System.MulticastDelegate", "T", "T").WithLocation(3, 7));
+            CreateCompilation(code)
+                .VerifyDiagnostics(
+                    // (3,7): error CS0311: The type 'T' cannot be used as type parameter 'T' in the generic type or method 'A<T>'. There is no implicit reference conversion from 'T' to 'System.MulticastDelegate'.
+                    // class B<T> : A<T> where T : System.Delegate { }
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "B")
+                        .WithArguments("A<T>", "System.MulticastDelegate", "T", "T")
+                        .WithLocation(3, 7)
+                );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraint_Compilation_Alone_Type()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class Test<T> where T : unmanaged
 {
 }
@@ -1716,22 +2262,32 @@ public class Test2
         var e = new Test<U>();                  // generic type constrained to unmanaged
         var f = new Test<W>();                  // unconstrained generic type
     }
-}").VerifyDiagnostics(
-                // (12,26): error CS8379: The type 'BadType' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var b = new Test<BadType>();            // managed struct
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "BadType").WithArguments("Test<T>", "T", "BadType").WithLocation(12, 26),
-                // (13,26): error CS8379: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var c = new Test<string>();             // reference type
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "string").WithArguments("Test<T>", "T", "string").WithLocation(13, 26),
-                // (16,26): error CS8379: The type 'W' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var f = new Test<W>();                  // unconstrained generic type
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "W").WithArguments("Test<T>", "T", "W").WithLocation(16, 26));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (12,26): error CS8379: The type 'BadType' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var b = new Test<BadType>();            // managed struct
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "BadType")
+                        .WithArguments("Test<T>", "T", "BadType")
+                        .WithLocation(12, 26),
+                    // (13,26): error CS8379: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var c = new Test<string>();             // reference type
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "string")
+                        .WithArguments("Test<T>", "T", "string")
+                        .WithLocation(13, 26),
+                    // (16,26): error CS8379: The type 'W' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var f = new Test<W>();                  // unconstrained generic type
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "W")
+                        .WithArguments("Test<T>", "T", "W")
+                        .WithLocation(16, 26)
+                );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraint_Compilation_Alone_Method()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class Test
 {
     public int M<T>() where T : unmanaged => 0;
@@ -1749,23 +2305,32 @@ public class Test2
         var e = new Test().M<U>();                  // generic type constrained to unmanaged
         var f = new Test().M<W>();                  // unconstrained generic type
     }
-}").VerifyDiagnostics(
-                // (13,28): error CS8379: The type 'BadType' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test.M<T>()'
-                //         var b = new Test().M<BadType>();            // managed struct
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<BadType>").WithArguments("Test.M<T>()", "T", "BadType").WithLocation(13, 28),
-                // (14,28): error CS8379: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test.M<T>()'
-                //         var c = new Test().M<string>();             // reference type
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<string>").WithArguments("Test.M<T>()", "T", "string").WithLocation(14, 28),
-                // (17,28): error CS8379: The type 'W' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test.M<T>()'
-                //         var f = new Test().M<W>();                  // unconstrained generic type
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<W>").WithArguments("Test.M<T>()", "T", "W").WithLocation(17, 28)
+}"
+                )
+                .VerifyDiagnostics(
+                    // (13,28): error CS8379: The type 'BadType' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test.M<T>()'
+                    //         var b = new Test().M<BadType>();            // managed struct
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<BadType>")
+                        .WithArguments("Test.M<T>()", "T", "BadType")
+                        .WithLocation(13, 28),
+                    // (14,28): error CS8379: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test.M<T>()'
+                    //         var c = new Test().M<string>();             // reference type
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<string>")
+                        .WithArguments("Test.M<T>()", "T", "string")
+                        .WithLocation(14, 28),
+                    // (17,28): error CS8379: The type 'W' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test.M<T>()'
+                    //         var f = new Test().M<W>();                  // unconstrained generic type
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<W>")
+                        .WithArguments("Test.M<T>()", "T", "W")
+                        .WithLocation(17, 28)
                 );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraint_Compilation_Alone_Delegate()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public delegate void D<T>() where T : unmanaged;
 public struct GoodType { public int I; }
 public struct BadType { public string S; }
@@ -1777,22 +2342,32 @@ public abstract class Test2<U, W> where U : unmanaged
     public abstract D<int> d();                     // value type
     public abstract D<U> e();                       // generic type constrained to unmanaged
     public abstract D<W> f();                       // unconstrained generic type
-}").VerifyDiagnostics(
-                // (8,32): error CS8379: The type 'BadType' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'D<T>'
-                //     public abstract D<BadType> b();                 // managed struct
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "b").WithArguments("D<T>", "T", "BadType").WithLocation(8, 32),
-                // (9,31): error CS8379: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'D<T>'
-                //     public abstract D<string> c();                  // reference type
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "c").WithArguments("D<T>", "T", "string").WithLocation(9, 31),
-                // (12,26): error CS8379: The type 'W' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'D<T>'
-                //     public abstract D<W> f();                       // unconstrained generic type
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "f").WithArguments("D<T>", "T", "W").WithLocation(12, 26));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (8,32): error CS8379: The type 'BadType' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'D<T>'
+                    //     public abstract D<BadType> b();                 // managed struct
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "b")
+                        .WithArguments("D<T>", "T", "BadType")
+                        .WithLocation(8, 32),
+                    // (9,31): error CS8379: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'D<T>'
+                    //     public abstract D<string> c();                  // reference type
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "c")
+                        .WithArguments("D<T>", "T", "string")
+                        .WithLocation(9, 31),
+                    // (12,26): error CS8379: The type 'W' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'D<T>'
+                    //     public abstract D<W> f();                       // unconstrained generic type
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "f")
+                        .WithArguments("D<T>", "T", "W")
+                        .WithLocation(12, 26)
+                );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraint_Compilation_Alone_LocalFunction()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public struct GoodType { public int I; }
 public struct BadType { public string S; }
 public class Test2
@@ -1810,16 +2385,25 @@ public class Test2
         M<U>();                              // generic type constrained to unmanaged
         M<W>();                              // unconstrained generic type
     }
-}").VerifyDiagnostics(
-                // (13,9): error CS8377: The type 'BadType' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'M<T>()'
-                //         M<BadType>();                        // managed struct
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<BadType>").WithArguments("M<T>()", "T", "BadType").WithLocation(13, 9),
-                // (14,9): error CS8377: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'M<T>()'
-                //         M<string>();                         // reference type
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<string>").WithArguments("M<T>()", "T", "string").WithLocation(14, 9),
-                // (17,9): error CS8377: The type 'W' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'M<T>()'
-                //         M<W>();                              // unconstrained generic type
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<W>").WithArguments("M<T>()", "T", "W").WithLocation(17, 9));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (13,9): error CS8377: The type 'BadType' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'M<T>()'
+                    //         M<BadType>();                        // managed struct
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<BadType>")
+                        .WithArguments("M<T>()", "T", "BadType")
+                        .WithLocation(13, 9),
+                    // (14,9): error CS8377: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'M<T>()'
+                    //         M<string>();                         // reference type
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<string>")
+                        .WithArguments("M<T>()", "T", "string")
+                        .WithLocation(14, 9),
+                    // (17,9): error CS8377: The type 'W' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'M<T>()'
+                    //         M<W>();                              // unconstrained generic type
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<W>")
+                        .WithArguments("M<T>()", "T", "W")
+                        .WithLocation(17, 9)
+                );
         }
 
         [Fact]
@@ -1830,7 +2414,9 @@ public class Test2
             c.VerifyDiagnostics(
                 // (1,39): error CS0449: The 'unmanaged' constraint cannot be combined with the 'class' constraint
                 // public class Test<T> where T : class, unmanaged {}
-                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "unmanaged").WithLocation(1, 39));
+                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "unmanaged")
+                    .WithLocation(1, 39)
+            );
 
             var typeParameter = c.GlobalNamespace.GetTypeMember("Test").TypeParameters.Single();
             Assert.False(typeParameter.HasUnmanagedTypeConstraint);
@@ -1848,7 +2434,9 @@ public class Test2
             c.VerifyDiagnostics(
                 // (1,40): error CS0449: The 'unmanaged' constraint cannot be combined with the 'struct' constraint
                 // public class Test<T> where T : struct, unmanaged {}
-                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "unmanaged").WithLocation(1, 40));
+                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "unmanaged")
+                    .WithLocation(1, 40)
+            );
 
             var typeParameter = c.GlobalNamespace.GetTypeMember("Test").TypeParameters.Single();
             Assert.False(typeParameter.HasUnmanagedTypeConstraint);
@@ -1861,38 +2449,51 @@ public class Test2
         [Fact]
         public void UnmanagedConstraint_Compilation_Constructor()
         {
-            CreateCompilation("public class Test<T> where T : unmanaged, new() {}").VerifyDiagnostics(
-                // (1,43): error CS8379: The 'new()' constraint cannot be used with the 'unmanaged' constraint
-                // public class Test<T> where T : unmanaged, new() {}
-                Diagnostic(ErrorCode.ERR_NewBoundWithUnmanaged, "new").WithLocation(1, 43));
+            CreateCompilation("public class Test<T> where T : unmanaged, new() {}")
+                .VerifyDiagnostics(
+                    // (1,43): error CS8379: The 'new()' constraint cannot be used with the 'unmanaged' constraint
+                    // public class Test<T> where T : unmanaged, new() {}
+                    Diagnostic(ErrorCode.ERR_NewBoundWithUnmanaged, "new").WithLocation(1, 43)
+                );
         }
 
         [Fact]
         public void UnmanagedConstraint_Compilation_AnotherClass_Before()
         {
-            CreateCompilation("public class Test<T> where T : unmanaged, System.Exception { }").VerifyDiagnostics(
-                // (1,43): error CS8380: 'Exception': cannot specify both a constraint class and the 'unmanaged' constraint
-                // public class Test<T> where T : unmanaged, System.Exception { }
-                Diagnostic(ErrorCode.ERR_UnmanagedBoundWithClass, "System.Exception").WithArguments("System.Exception").WithLocation(1, 43)
-            );
+            CreateCompilation("public class Test<T> where T : unmanaged, System.Exception { }")
+                .VerifyDiagnostics(
+                    // (1,43): error CS8380: 'Exception': cannot specify both a constraint class and the 'unmanaged' constraint
+                    // public class Test<T> where T : unmanaged, System.Exception { }
+                    Diagnostic(ErrorCode.ERR_UnmanagedBoundWithClass, "System.Exception")
+                        .WithArguments("System.Exception")
+                        .WithLocation(1, 43)
+                );
         }
 
         [Fact]
         public void UnmanagedConstraint_Compilation_AnotherClass_After()
         {
-            CreateCompilation("public class Test<T> where T : System.Exception, unmanaged { }").VerifyDiagnostics(
-                // (1,50): error CS8380: The 'unmanaged' constraint must come before any other constraints
-                // public class Test<T> where T : System.Exception, unmanaged { }
-                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "unmanaged").WithLocation(1, 50));
+            CreateCompilation("public class Test<T> where T : System.Exception, unmanaged { }")
+                .VerifyDiagnostics(
+                    // (1,50): error CS8380: The 'unmanaged' constraint must come before any other constraints
+                    // public class Test<T> where T : System.Exception, unmanaged { }
+                    Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "unmanaged")
+                        .WithLocation(1, 50)
+                );
         }
 
         [Fact]
         public void UnmanagedConstraint_Compilation_OtherValidTypes_After()
         {
-            CreateCompilation("public class Test<T> where T : System.Enum, System.IDisposable, unmanaged { }").VerifyDiagnostics(
-                // (1,65): error CS8376: The 'unmanaged' constraint must come before any other constraints
-                // public class Test<T> where T : System.Enum, System.IDisposable, unmanaged { }
-                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "unmanaged").WithLocation(1, 65));
+            CreateCompilation(
+                    "public class Test<T> where T : System.Enum, System.IDisposable, unmanaged { }"
+                )
+                .VerifyDiagnostics(
+                    // (1,65): error CS8376: The 'unmanaged' constraint must come before any other constraints
+                    // public class Test<T> where T : System.Enum, System.IDisposable, unmanaged { }
+                    Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "unmanaged")
+                        .WithLocation(1, 65)
+                );
         }
 
         [Fact]
@@ -1900,38 +2501,52 @@ public class Test2
         {
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace.GetTypeMember("Test").TypeParameters.Single();
+                var typeParameter = module
+                    .GlobalNamespace.GetTypeMember("Test")
+                    .TypeParameters.Single();
 
                 Assert.True(typeParameter.HasUnmanagedTypeConstraint);
-                AssertEx.Equal(new string[] { "Enum", "IDisposable" }, typeParameter.ConstraintTypes().Select(type => type.Name));
+                AssertEx.Equal(
+                    new string[] { "Enum", "IDisposable" },
+                    typeParameter.ConstraintTypes().Select(type => type.Name)
+                );
             };
 
             CompileAndVerify(
                 "public class Test<T> where T : unmanaged, System.Enum, System.IDisposable { }",
                 sourceSymbolValidator: validator,
-                symbolValidator: validator);
+                symbolValidator: validator
+            );
         }
 
         [Fact]
         public void UnmanagedConstraint_Compilation_AnotherParameter_After()
         {
-            CreateCompilation("public class Test<T, U> where T : U, unmanaged { }").VerifyDiagnostics(
-                // (1,38): error CS8380: The 'unmanaged' constraint must come before any other constraints
-                // public class Test<T, U> where T : U, unmanaged { }
-                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "unmanaged").WithLocation(1, 38));
+            CreateCompilation("public class Test<T, U> where T : U, unmanaged { }")
+                .VerifyDiagnostics(
+                    // (1,38): error CS8380: The 'unmanaged' constraint must come before any other constraints
+                    // public class Test<T, U> where T : U, unmanaged { }
+                    Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "unmanaged")
+                        .WithLocation(1, 38)
+                );
         }
 
         [Fact]
         public void UnmanagedConstraint_Compilation_AnotherParameter_Before()
         {
-            CreateCompilation("public class Test<T, U> where T : unmanaged, U { }").VerifyDiagnostics();
-            CreateCompilation("public class Test<T, U> where U: class where T : unmanaged, U, System.IDisposable { }").VerifyDiagnostics();
+            CreateCompilation("public class Test<T, U> where T : unmanaged, U { }")
+                .VerifyDiagnostics();
+            CreateCompilation(
+                    "public class Test<T, U> where U: class where T : unmanaged, U, System.IDisposable { }"
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         public void UnmanagedConstraint_UnmanagedEnumNotAvailable()
         {
-            CreateEmptyCompilation(@"
+            CreateEmptyCompilation(
+                    @"
 namespace System
 {
     public class Object {}
@@ -1940,16 +2555,22 @@ namespace System
 }
 public class Test<T> where T : unmanaged
 {
-}").VerifyDiagnostics(
-                // (8,32): error CS0518: Predefined type 'System.Runtime.InteropServices.UnmanagedType' is not defined or imported
-                // public class Test<T> where T : unmanaged
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged").WithArguments("System.Runtime.InteropServices.UnmanagedType").WithLocation(8, 32));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (8,32): error CS0518: Predefined type 'System.Runtime.InteropServices.UnmanagedType' is not defined or imported
+                    // public class Test<T> where T : unmanaged
+                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
+                        .WithArguments("System.Runtime.InteropServices.UnmanagedType")
+                        .WithLocation(8, 32)
+                );
         }
 
         [Fact]
         public void UnmanagedConstraint_ValueTypeNotAvailable()
         {
-            CreateEmptyCompilation(@"
+            CreateEmptyCompilation(
+                    @"
 namespace System
 {
     public class Object {}
@@ -1966,21 +2587,30 @@ namespace System
 }
 public class Test<T> where T : unmanaged
 {
-}").VerifyDiagnostics(
-                // (16,32): error CS0518: Predefined type 'System.ValueType' is not defined or imported
-                // public class Test<T> where T : unmanaged
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged").WithArguments("System.ValueType").WithLocation(16, 32));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (16,32): error CS0518: Predefined type 'System.ValueType' is not defined or imported
+                    // public class Test<T> where T : unmanaged
+                    Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
+                        .WithArguments("System.ValueType")
+                        .WithLocation(16, 32)
+                );
         }
 
         [Fact]
         public void UnmanagedConstraint_Reference_Alone_Type()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public class Test<T> where T : unmanaged
 {
-}").EmitToImageReference();
+}"
+                )
+                .EmitToImageReference();
 
-            var code = @"
+            var code =
+                @"
 public struct GoodType { public int I; }
 public struct BadType { public string S; }
 public class Test2
@@ -1995,28 +2625,40 @@ public class Test2
         var f = new Test<W>();                  // unconstrained generic type
     }
 }";
-            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
-                // (9,26): error CS8379: The type 'BadType' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var b = new Test<BadType>();            // managed struct
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "BadType").WithArguments("Test<T>", "T", "BadType").WithLocation(9, 26),
-                // (10,26): error CS8379: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var c = new Test<string>();             // reference type
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "string").WithArguments("Test<T>", "T", "string").WithLocation(10, 26),
-                // (13,26): error CS8379: The type 'W' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var f = new Test<W>();                  // unconstrained generic type
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "W").WithArguments("Test<T>", "T", "W").WithLocation(13, 26));
+            CreateCompilation(code, references: new[] { reference })
+                .VerifyDiagnostics(
+                    // (9,26): error CS8379: The type 'BadType' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var b = new Test<BadType>();            // managed struct
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "BadType")
+                        .WithArguments("Test<T>", "T", "BadType")
+                        .WithLocation(9, 26),
+                    // (10,26): error CS8379: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var c = new Test<string>();             // reference type
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "string")
+                        .WithArguments("Test<T>", "T", "string")
+                        .WithLocation(10, 26),
+                    // (13,26): error CS8379: The type 'W' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var f = new Test<W>();                  // unconstrained generic type
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "W")
+                        .WithArguments("Test<T>", "T", "W")
+                        .WithLocation(13, 26)
+                );
         }
 
         [Fact]
         public void UnmanagedConstraint_Reference_Alone_Method()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public class Test
 {
     public int M<T>() where T : unmanaged => 0;
-}").EmitToImageReference();
+}"
+                )
+                .EmitToImageReference();
 
-            var code = @"
+            var code =
+                @"
 public struct GoodType { public int I; }
 public struct BadType { public string S; }
 public class Test2
@@ -2031,27 +2673,38 @@ public class Test2
         var f = new Test().M<W>();                  // unconstrained generic type
     }
 }";
-            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
-                // (9,28): error CS8379: The type 'BadType' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test.M<T>()'
-                //         var b = new Test().M<BadType>();            // managed struct
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<BadType>").WithArguments("Test.M<T>()", "T", "BadType").WithLocation(9, 28),
-                // (10,28): error CS8379: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test.M<T>()'
-                //         var c = new Test().M<string>();             // reference type
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<string>").WithArguments("Test.M<T>()", "T", "string").WithLocation(10, 28),
-                // (13,28): error CS8379: The type 'W' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test.M<T>()'
-                //         var f = new Test().M<W>();                  // unconstrained generic type
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<W>").WithArguments("Test.M<T>()", "T", "W").WithLocation(13, 28)
+            CreateCompilation(code, references: new[] { reference })
+                .VerifyDiagnostics(
+                    // (9,28): error CS8379: The type 'BadType' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test.M<T>()'
+                    //         var b = new Test().M<BadType>();            // managed struct
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<BadType>")
+                        .WithArguments("Test.M<T>()", "T", "BadType")
+                        .WithLocation(9, 28),
+                    // (10,28): error CS8379: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test.M<T>()'
+                    //         var c = new Test().M<string>();             // reference type
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<string>")
+                        .WithArguments("Test.M<T>()", "T", "string")
+                        .WithLocation(10, 28),
+                    // (13,28): error CS8379: The type 'W' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test.M<T>()'
+                    //         var f = new Test().M<W>();                  // unconstrained generic type
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<W>")
+                        .WithArguments("Test.M<T>()", "T", "W")
+                        .WithLocation(13, 28)
                 );
         }
 
         [Fact]
         public void UnmanagedConstraint_Reference_Alone_Delegate()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public delegate void D<T>() where T : unmanaged;
-").EmitToImageReference();
+"
+                )
+                .EmitToImageReference();
 
-            var code = @"
+            var code =
+                @"
 public struct GoodType { public int I; }
 public struct BadType { public string S; }
 public abstract class Test2<U, W> where U : unmanaged
@@ -2063,36 +2716,50 @@ public abstract class Test2<U, W> where U : unmanaged
     public abstract D<U> e();                       // generic type constrained to unmanaged
     public abstract D<W> f();                       // unconstrained generic type
 }";
-            CreateCompilation(code, references: new[] { reference }).VerifyDiagnostics(
-                // (7,32): error CS8379: The type 'BadType' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'D<T>'
-                //     public abstract D<BadType> b();                 // managed struct
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "b").WithArguments("D<T>", "T", "BadType").WithLocation(7, 32),
-                // (8,31): error CS8379: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'D<T>'
-                //     public abstract D<string> c();                  // reference type
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "c").WithArguments("D<T>", "T", "string").WithLocation(8, 31),
-                // (11,26): error CS8379: The type 'W' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'D<T>'
-                //     public abstract D<W> f();                       // unconstrained generic type
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "f").WithArguments("D<T>", "T", "W").WithLocation(11, 26));
+            CreateCompilation(code, references: new[] { reference })
+                .VerifyDiagnostics(
+                    // (7,32): error CS8379: The type 'BadType' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'D<T>'
+                    //     public abstract D<BadType> b();                 // managed struct
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "b")
+                        .WithArguments("D<T>", "T", "BadType")
+                        .WithLocation(7, 32),
+                    // (8,31): error CS8379: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'D<T>'
+                    //     public abstract D<string> c();                  // reference type
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "c")
+                        .WithArguments("D<T>", "T", "string")
+                        .WithLocation(8, 31),
+                    // (11,26): error CS8379: The type 'W' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'D<T>'
+                    //     public abstract D<W> f();                       // unconstrained generic type
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "f")
+                        .WithArguments("D<T>", "T", "W")
+                        .WithLocation(11, 26)
+                );
         }
 
         [Fact]
         public void UnmanagedConstraint_Before_7_3()
         {
-            var code = @"
+            var code =
+                @"
 public class Test<T> where T : unmanaged
 {
 }";
 
             var oldOptions = new CSharpParseOptions(LanguageVersion.CSharp7_2);
 
-            CreateCompilation(code, parseOptions: oldOptions).VerifyDiagnostics(
-                // (2,32): error CS8320: Feature 'unmanaged generic type constraints' is not available in C# 7.2. Please use language version 7.3 or greater.
-                // public class Test<T> where T : unmanaged
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "unmanaged").WithArguments("unmanaged generic type constraints", "7.3").WithLocation(2, 32));
+            CreateCompilation(code, parseOptions: oldOptions)
+                .VerifyDiagnostics(
+                    // (2,32): error CS8320: Feature 'unmanaged generic type constraints' is not available in C# 7.2. Please use language version 7.3 or greater.
+                    // public class Test<T> where T : unmanaged
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "unmanaged")
+                        .WithArguments("unmanaged generic type constraints", "7.3")
+                        .WithLocation(2, 32)
+                );
 
             var reference = CreateCompilation(code).EmitToImageReference();
 
-            var legacyCode = @"
+            var legacyCode =
+                @"
 class Legacy
 {
     void M()
@@ -2102,10 +2769,14 @@ class Legacy
     }
 }";
 
-            CreateCompilation(legacyCode, parseOptions: oldOptions, references: new[] { reference }).VerifyDiagnostics(
-                // (7,26): error CS8377: The type 'Legacy' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test<T>'
-                //         var b = new Test<Legacy>();     // invalid
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "Legacy").WithArguments("Test<T>", "T", "Legacy").WithLocation(7, 26));
+            CreateCompilation(legacyCode, parseOptions: oldOptions, references: new[] { reference })
+                .VerifyDiagnostics(
+                    // (7,26): error CS8377: The type 'Legacy' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test<T>'
+                    //         var b = new Test<Legacy>();     // invalid
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "Legacy")
+                        .WithArguments("Test<T>", "T", "Legacy")
+                        .WithLocation(7, 26)
+                );
         }
 
         [Fact]
@@ -2115,7 +2786,9 @@ class Legacy
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace.GetTypeMember("Test").TypeParameters.Single();
+                var typeParameter = module
+                    .GlobalNamespace.GetTypeMember("Test")
+                    .TypeParameters.Single();
 
                 Assert.True(typeParameter.IsValueType);
                 Assert.False(typeParameter.IsReferenceType);
@@ -2132,7 +2805,8 @@ class Legacy
         [Fact]
         public void UnmanagedConstraint_IsReflectedInSymbols_Alone_Method()
         {
-            var code = @"
+            var code =
+                @"
 public class Test
 {
     public void M<T>() where T : unmanaged {}
@@ -2140,7 +2814,10 @@ public class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace.GetTypeMember("Test").GetMethod("M").TypeParameters.Single();
+                var typeParameter = module
+                    .GlobalNamespace.GetTypeMember("Test")
+                    .GetMethod("M")
+                    .TypeParameters.Single();
 
                 Assert.True(typeParameter.IsValueType);
                 Assert.False(typeParameter.IsReferenceType);
@@ -2161,7 +2838,9 @@ public class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace.GetTypeMember("D").TypeParameters.Single();
+                var typeParameter = module
+                    .GlobalNamespace.GetTypeMember("D")
+                    .TypeParameters.Single();
 
                 Assert.True(typeParameter.IsValueType);
                 Assert.False(typeParameter.IsReferenceType);
@@ -2178,7 +2857,8 @@ public class Test
         [Fact]
         public void UnmanagedConstraint_IsReflectedInSymbols_Alone_LocalFunction()
         {
-            var code = @"
+            var code =
+                @"
 public class Test
 {
     public void M()
@@ -2189,24 +2869,34 @@ public class Test
     }
 }";
 
-            CompileAndVerify(code, options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All), symbolValidator: module =>
-            {
-                var typeParameter = module.ContainingAssembly.GetTypeByMetadataName("Test").GetMethod("<M>g__N|0_0").TypeParameters.Single();
+            CompileAndVerify(
+                code,
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
+                symbolValidator: module =>
+                {
+                    var typeParameter = module
+                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                        .GetMethod("<M>g__N|0_0")
+                        .TypeParameters.Single();
 
-                Assert.True(typeParameter.IsValueType);
-                Assert.False(typeParameter.IsReferenceType);
-                Assert.True(typeParameter.HasUnmanagedTypeConstraint);
-                Assert.True(typeParameter.HasValueTypeConstraint);
-                Assert.False(typeParameter.HasReferenceTypeConstraint);
-                Assert.False(typeParameter.HasConstructorConstraint);
-                Assert.Empty(typeParameter.ConstraintTypes());
-            });
+                    Assert.True(typeParameter.IsValueType);
+                    Assert.False(typeParameter.IsReferenceType);
+                    Assert.True(typeParameter.HasUnmanagedTypeConstraint);
+                    Assert.True(typeParameter.HasValueTypeConstraint);
+                    Assert.False(typeParameter.HasReferenceTypeConstraint);
+                    Assert.False(typeParameter.HasConstructorConstraint);
+                    Assert.Empty(typeParameter.ConstraintTypes());
+                }
+            );
         }
 
         [Fact]
         public void UnmanagedConstraint_EnforcedInInheritanceChain_Downwards_Source()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 struct Test
 {
     public string RefMember { get; set; }
@@ -2225,26 +2915,36 @@ public class B : A
         this.M<string>();
         this.M<Test>();
     }
-}").VerifyDiagnostics(
-                // (17,14): error CS8379: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'B.M<T>()'
-                //         this.M<string>();
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<string>").WithArguments("B.M<T>()", "T", "string").WithLocation(17, 14),
-                // (18,14): error CS8379: The type 'Test' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'B.M<T>()'
-                //         this.M<Test>();
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<Test>").WithArguments("B.M<T>()", "T", "Test").WithLocation(18, 14)
+}"
+                )
+                .VerifyDiagnostics(
+                    // (17,14): error CS8379: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'B.M<T>()'
+                    //         this.M<string>();
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<string>")
+                        .WithArguments("B.M<T>()", "T", "string")
+                        .WithLocation(17, 14),
+                    // (18,14): error CS8379: The type 'Test' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'B.M<T>()'
+                    //         this.M<Test>();
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<Test>")
+                        .WithArguments("B.M<T>()", "T", "Test")
+                        .WithLocation(18, 14)
                 );
         }
 
         [Fact]
         public void UnmanagedConstraint_EnforcedInInheritanceChain_Downwards_Reference()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public abstract class A
 {
     public abstract void M<T>() where T : unmanaged;
-}").EmitToImageReference();
+}"
+                )
+                .EmitToImageReference();
 
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 struct Test
 {
     public string RefMember { get; set; }
@@ -2259,20 +2959,28 @@ public class B : A
         this.M<string>();
         this.M<Test>();
     }
-}", references: new[] { reference }).VerifyDiagnostics(
-                // (13,14): error CS8379: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'B.M<T>()'
-                //         this.M<string>();
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<string>").WithArguments("B.M<T>()", "T", "string").WithLocation(13, 14),
-                // (14,14): error CS8379: The type 'Test' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'B.M<T>()'
-                //         this.M<Test>();
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<Test>").WithArguments("B.M<T>()", "T", "Test").WithLocation(14, 14)
+}",
+                    references: new[] { reference }
+                )
+                .VerifyDiagnostics(
+                    // (13,14): error CS8379: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'B.M<T>()'
+                    //         this.M<string>();
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<string>")
+                        .WithArguments("B.M<T>()", "T", "string")
+                        .WithLocation(13, 14),
+                    // (14,14): error CS8379: The type 'Test' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'B.M<T>()'
+                    //         this.M<Test>();
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<Test>")
+                        .WithArguments("B.M<T>()", "T", "Test")
+                        .WithLocation(14, 14)
                 );
         }
 
         [Fact]
         public void UnmanagedConstraint_EnforcedInInheritanceChain_Upwards_Source()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public abstract class A
 {
     public abstract void M<T>();
@@ -2280,16 +2988,21 @@ public abstract class A
 public class B : A
 {
     public override void M<T>() where T : unmanaged { }
-}").VerifyDiagnostics(
-                // (8,43): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
-                //     public override void M<T>() where T : unmanaged { }
-                Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "unmanaged").WithLocation(8, 43));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (8,43): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
+                    //     public override void M<T>() where T : unmanaged { }
+                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "unmanaged")
+                        .WithLocation(8, 43)
+                );
         }
 
         [Fact]
         public void UnmanagedConstraint_StructMismatchInImplements()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public struct Segment<T> {
     public T[] array;
 }
@@ -2307,26 +3020,37 @@ public class C2<T> : I1<T> where T : struct
         i.Test(default(Segment<int>));
     }
 }
-").VerifyDiagnostics(
-                // (11,14): error CS8377: The type 'T' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'I1<T>'
-                // public class C2<T> : I1<T> where T : struct
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "C2").WithArguments("I1<T>", "T", "T").WithLocation(11, 14),
-                // (13,17): error CS0425: The constraints for type parameter 'G' of method 'C2<T>.Test<G>(G)' must match the constraints for type parameter 'G' of interface method 'I1<T>.Test<G>(G)'. Consider using an explicit interface implementation instead.
-                //     public void Test<G>(G x) where G : struct
-                Diagnostic(ErrorCode.ERR_ImplBadConstraints, "Test").WithArguments("G", "C2<T>.Test<G>(G)", "G", "I1<T>.Test<G>(G)").WithLocation(13, 17),
-                // (15,12): error CS8377: The type 'T' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'I1<T>'
-                //         I1<T> i = this;
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "T").WithArguments("I1<T>", "T", "T").WithLocation(15, 12),
-                // (16,11): error CS8377: The type 'Segment<int>' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'G' in the generic type or method 'I1<T>.Test<G>(G)'
-                //         i.Test(default(Segment<int>));
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "Test").WithArguments("I1<T>.Test<G>(G)", "G", "Segment<int>").WithLocation(16, 11)
+"
+                )
+                .VerifyDiagnostics(
+                    // (11,14): error CS8377: The type 'T' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'I1<T>'
+                    // public class C2<T> : I1<T> where T : struct
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "C2")
+                        .WithArguments("I1<T>", "T", "T")
+                        .WithLocation(11, 14),
+                    // (13,17): error CS0425: The constraints for type parameter 'G' of method 'C2<T>.Test<G>(G)' must match the constraints for type parameter 'G' of interface method 'I1<T>.Test<G>(G)'. Consider using an explicit interface implementation instead.
+                    //     public void Test<G>(G x) where G : struct
+                    Diagnostic(ErrorCode.ERR_ImplBadConstraints, "Test")
+                        .WithArguments("G", "C2<T>.Test<G>(G)", "G", "I1<T>.Test<G>(G)")
+                        .WithLocation(13, 17),
+                    // (15,12): error CS8377: The type 'T' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'I1<T>'
+                    //         I1<T> i = this;
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "T")
+                        .WithArguments("I1<T>", "T", "T")
+                        .WithLocation(15, 12),
+                    // (16,11): error CS8377: The type 'Segment<int>' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'G' in the generic type or method 'I1<T>.Test<G>(G)'
+                    //         i.Test(default(Segment<int>));
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "Test")
+                        .WithArguments("I1<T>.Test<G>(G)", "G", "Segment<int>")
+                        .WithLocation(16, 11)
                 );
         }
 
         [Fact]
         public void UnmanagedConstraint_TypeMismatchInImplements()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public interface I1<in T> where T : unmanaged, System.IDisposable
 {
     void Test<G>(G x) where G : unmanaged, System.Enum;
@@ -2341,33 +3065,47 @@ public class C2<T> : I1<T> where T : unmanaged
         i.Test(0);
     }
 }
-").VerifyDiagnostics(
-                // (7,14): error CS0314: The type 'T' cannot be used as type parameter 'T' in the generic type or method 'I1<T>'. There is no boxing conversion or type parameter conversion from 'T' to 'System.IDisposable'.
-                // public class C2<T> : I1<T> where T : unmanaged
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedTyVar, "C2").WithArguments("I1<T>", "System.IDisposable", "T", "T").WithLocation(7, 14),
-                // (9,17): error CS0425: The constraints for type parameter 'G' of method 'C2<T>.Test<G>(G)' must match the constraints for type parameter 'G' of interface method 'I1<T>.Test<G>(G)'. Consider using an explicit interface implementation instead.
-                //     public void Test<G>(G x) where G : unmanaged
-                Diagnostic(ErrorCode.ERR_ImplBadConstraints, "Test").WithArguments("G", "C2<T>.Test<G>(G)", "G", "I1<T>.Test<G>(G)").WithLocation(9, 17),
-                // (11,12): error CS0314: The type 'T' cannot be used as type parameter 'T' in the generic type or method 'I1<T>'. There is no boxing conversion or type parameter conversion from 'T' to 'System.IDisposable'.
-                //         I1<T> i = this;
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedTyVar, "T").WithArguments("I1<T>", "System.IDisposable", "T", "T").WithLocation(11, 12),
-                // (13,11): error CS0315: The type 'int' cannot be used as type parameter 'G' in the generic type or method 'I1<T>.Test<G>(G)'. There is no boxing conversion from 'int' to 'System.Enum'.
-                //         i.Test(0);
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "Test").WithArguments("I1<T>.Test<G>(G)", "System.Enum", "G", "int").WithLocation(13, 11)
+"
+                )
+                .VerifyDiagnostics(
+                    // (7,14): error CS0314: The type 'T' cannot be used as type parameter 'T' in the generic type or method 'I1<T>'. There is no boxing conversion or type parameter conversion from 'T' to 'System.IDisposable'.
+                    // public class C2<T> : I1<T> where T : unmanaged
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedTyVar, "C2")
+                        .WithArguments("I1<T>", "System.IDisposable", "T", "T")
+                        .WithLocation(7, 14),
+                    // (9,17): error CS0425: The constraints for type parameter 'G' of method 'C2<T>.Test<G>(G)' must match the constraints for type parameter 'G' of interface method 'I1<T>.Test<G>(G)'. Consider using an explicit interface implementation instead.
+                    //     public void Test<G>(G x) where G : unmanaged
+                    Diagnostic(ErrorCode.ERR_ImplBadConstraints, "Test")
+                        .WithArguments("G", "C2<T>.Test<G>(G)", "G", "I1<T>.Test<G>(G)")
+                        .WithLocation(9, 17),
+                    // (11,12): error CS0314: The type 'T' cannot be used as type parameter 'T' in the generic type or method 'I1<T>'. There is no boxing conversion or type parameter conversion from 'T' to 'System.IDisposable'.
+                    //         I1<T> i = this;
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedTyVar, "T")
+                        .WithArguments("I1<T>", "System.IDisposable", "T", "T")
+                        .WithLocation(11, 12),
+                    // (13,11): error CS0315: The type 'int' cannot be used as type parameter 'G' in the generic type or method 'I1<T>.Test<G>(G)'. There is no boxing conversion from 'int' to 'System.Enum'.
+                    //         i.Test(0);
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "Test")
+                        .WithArguments("I1<T>.Test<G>(G)", "System.Enum", "G", "int")
+                        .WithLocation(13, 11)
                 );
         }
 
         [Fact]
         public void UnmanagedConstraint_TypeMismatchInImplementsMeta()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public interface I1<in T> where T : unmanaged, System.IDisposable
 {
     void Test<G>(G x) where G : unmanaged, System.Enum;
 }
-").EmitToImageReference();
+"
+                )
+                .EmitToImageReference();
 
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class C2<T> : I1<T> where T : unmanaged
 {
     public void Test<G>(G x) where G : unmanaged
@@ -2376,42 +3114,62 @@ public class C2<T> : I1<T> where T : unmanaged
         i.Test(default(System.AttributeTargets)); // <-- this one is OK
         i.Test(0);
     }
-}", references: new[] { reference }).VerifyDiagnostics(
-                // (2,14): error CS0314: The type 'T' cannot be used as type parameter 'T' in the generic type or method 'I1<T>'. There is no boxing conversion or type parameter conversion from 'T' to 'System.IDisposable'.
-                // public class C2<T> : I1<T> where T : unmanaged
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedTyVar, "C2").WithArguments("I1<T>", "System.IDisposable", "T", "T").WithLocation(2, 14),
-                // (4,17): error CS0425: The constraints for type parameter 'G' of method 'C2<T>.Test<G>(G)' must match the constraints for type parameter 'G' of interface method 'I1<T>.Test<G>(G)'. Consider using an explicit interface implementation instead.
-                //     public void Test<G>(G x) where G : unmanaged
-                Diagnostic(ErrorCode.ERR_ImplBadConstraints, "Test").WithArguments("G", "C2<T>.Test<G>(G)", "G", "I1<T>.Test<G>(G)").WithLocation(4, 17),
-                // (6,12): error CS0314: The type 'T' cannot be used as type parameter 'T' in the generic type or method 'I1<T>'. There is no boxing conversion or type parameter conversion from 'T' to 'System.IDisposable'.
-                //         I1<T> i = this;
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedTyVar, "T").WithArguments("I1<T>", "System.IDisposable", "T", "T").WithLocation(6, 12),
-                // (8,11): error CS0315: The type 'int' cannot be used as type parameter 'G' in the generic type or method 'I1<T>.Test<G>(G)'. There is no boxing conversion from 'int' to 'System.Enum'.
-                //         i.Test(0);
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "Test").WithArguments("I1<T>.Test<G>(G)", "System.Enum", "G", "int").WithLocation(8, 11)
+}",
+                    references: new[] { reference }
+                )
+                .VerifyDiagnostics(
+                    // (2,14): error CS0314: The type 'T' cannot be used as type parameter 'T' in the generic type or method 'I1<T>'. There is no boxing conversion or type parameter conversion from 'T' to 'System.IDisposable'.
+                    // public class C2<T> : I1<T> where T : unmanaged
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedTyVar, "C2")
+                        .WithArguments("I1<T>", "System.IDisposable", "T", "T")
+                        .WithLocation(2, 14),
+                    // (4,17): error CS0425: The constraints for type parameter 'G' of method 'C2<T>.Test<G>(G)' must match the constraints for type parameter 'G' of interface method 'I1<T>.Test<G>(G)'. Consider using an explicit interface implementation instead.
+                    //     public void Test<G>(G x) where G : unmanaged
+                    Diagnostic(ErrorCode.ERR_ImplBadConstraints, "Test")
+                        .WithArguments("G", "C2<T>.Test<G>(G)", "G", "I1<T>.Test<G>(G)")
+                        .WithLocation(4, 17),
+                    // (6,12): error CS0314: The type 'T' cannot be used as type parameter 'T' in the generic type or method 'I1<T>'. There is no boxing conversion or type parameter conversion from 'T' to 'System.IDisposable'.
+                    //         I1<T> i = this;
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedTyVar, "T")
+                        .WithArguments("I1<T>", "System.IDisposable", "T", "T")
+                        .WithLocation(6, 12),
+                    // (8,11): error CS0315: The type 'int' cannot be used as type parameter 'G' in the generic type or method 'I1<T>.Test<G>(G)'. There is no boxing conversion from 'int' to 'System.Enum'.
+                    //         i.Test(0);
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "Test")
+                        .WithArguments("I1<T>.Test<G>(G)", "System.Enum", "G", "int")
+                        .WithLocation(8, 11)
                 );
         }
 
         [Fact]
         public void UnmanagedConstraint_TypeMismatchInImplementsMeta2()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
     public interface I1
     {
         void Test<G>(ref G x) where G : unmanaged, System.IDisposable;
     }
-").EmitToImageReference();
+"
+                )
+                .EmitToImageReference();
 
-            var reference1 = CreateCompilation(@"
+            var reference1 = CreateCompilation(
+                    @"
 public class C1 : I1
 {
     void I1.Test<G>(ref G x)
     {
         x.Dispose();
     }
-}", references: new[] { reference }).EmitToImageReference(); ;
+}",
+                    references: new[] { reference }
+                )
+                .EmitToImageReference();
+            ;
 
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 struct S : System.IDisposable
 {
     public int a;
@@ -2432,34 +3190,47 @@ class Test
         System.Console.WriteLine(local.a);
     }
 }",
-
-                // NOTE: must pass verification (IDisposable constraint is copied over to the implementing method) 
-                options: TestOptions.UnsafeReleaseExe, references: new[] { reference, reference1 }, verify: Verification.Passes, expectedOutput: "123");
+                // NOTE: must pass verification (IDisposable constraint is copied over to the implementing method)
+                options: TestOptions.UnsafeReleaseExe,
+                references: new[] { reference, reference1 },
+                verify: Verification.Passes,
+                expectedOutput: "123"
+            );
         }
 
         [Fact]
         public void UnmanagedConstraint_EnforcedInInheritanceChain_Upwards_Reference()
         {
-            var reference = CreateCompilation(@"
+            var reference = CreateCompilation(
+                    @"
 public abstract class A
 {
     public abstract void M<T>();
-}").EmitToImageReference();
+}"
+                )
+                .EmitToImageReference();
 
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public class B : A
 {
     public override void M<T>() where T : unmanaged { }
-}", references: new[] { reference }).VerifyDiagnostics(
-                // (4,43): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
-                //     public override void M<T>() where T : unmanaged { }
-                Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "unmanaged").WithLocation(4, 43));
+}",
+                    references: new[] { reference }
+                )
+                .VerifyDiagnostics(
+                    // (4,43): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
+                    //     public override void M<T>() where T : unmanaged { }
+                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "unmanaged")
+                        .WithLocation(4, 43)
+                );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraints_PointerOperations_Invalid()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 class Test
 {
     void M<T>(T arg) where T : unmanaged
@@ -2469,10 +3240,15 @@ class Test
     {
         M(""test"");
     }
-}").VerifyDiagnostics(
-                // (9,9): error CS8379: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test.M<T>(T)'
-                //         M("test");
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M").WithArguments("Test.M<T>(T)", "T", "string").WithLocation(9, 9));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (9,9): error CS8379: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test.M<T>(T)'
+                    //         M("test");
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M")
+                        .WithArguments("Test.M<T>(T)", "T", "string")
+                        .WithLocation(9, 9)
+                );
         }
 
         [ConditionalTheory(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
@@ -2491,9 +3267,14 @@ class Test
         [InlineData("false", "System.Boolean", 1)]
         [InlineData("E.A", "E", 4)]
         [InlineData("new S { a = 1, b = 2, c = 3 }", "S", 12)]
-        public void UnmanagedConstraints_PointerOperations_SimpleTypes(string arg, string type, int size)
+        public void UnmanagedConstraints_PointerOperations_SimpleTypes(
+            string arg,
+            string type,
+            int size
+        )
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                    @"
 enum E
 {
     A
@@ -2517,10 +3298,18 @@ unsafe class Test
     }
     static void Main()
     {
-        M(" + arg + @");
+        M("
+                        + arg
+                        + @");
     }
 }",
-    options: TestOptions.UnsafeReleaseExe, verify: Verification.Fails, expectedOutput: string.Join(Environment.NewLine, type, size)).VerifyIL("Test.M<T>", @"
+                    options: TestOptions.UnsafeReleaseExe,
+                    verify: Verification.Fails,
+                    expectedOutput: string.Join(Environment.NewLine, type, size)
+                )
+                .VerifyIL(
+                    "Test.M<T>",
+                    @"
 {
   // Code size       43 (0x2b)
   .maxstack  2
@@ -2537,13 +3326,15 @@ unsafe class Test
   IL_0027:  mul.ovf.un
   IL_0028:  localloc
   IL_002a:  ret
-}");
+}"
+                );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraints_InterfaceMethod()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                    @"
 struct S : System.IDisposable
 {
     public int a;
@@ -2572,7 +3363,13 @@ unsafe class Test
         System.Console.WriteLine(local.a);
     }
 }",
-    options: TestOptions.UnsafeReleaseExe, verify: Verification.Fails, expectedOutput: "246").VerifyIL("Test.M<T>", @"
+                    options: TestOptions.UnsafeReleaseExe,
+                    verify: Verification.Fails,
+                    expectedOutput: "246"
+                )
+                .VerifyIL(
+                    "Test.M<T>",
+                    @"
 {
   // Code size       31 (0x1f)
   .maxstack  1
@@ -2590,13 +3387,15 @@ unsafe class Test
   IL_001c:  conv.u
   IL_001d:  stloc.0
   IL_001e:  ret
-}");
+}"
+                );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraints_CtorAndValueTypeAreEmitted()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 using System.Linq;
 class Program
 {
@@ -2610,13 +3409,17 @@ class Program
         System.Console.WriteLine(typeParam.GenericParameterAttributes);
     }
 }",
-    options: TestOptions.UnsafeReleaseExe, verify: Verification.Passes, expectedOutput: "NotNullableValueTypeConstraint, DefaultConstructorConstraint");
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Passes,
+                expectedOutput: "NotNullableValueTypeConstraint, DefaultConstructorConstraint"
+            );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraints_NestedStructs_Flat()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 struct TestData
 {
     public int A;
@@ -2635,13 +3438,18 @@ unsafe class Test
     {
         System.Console.WriteLine(sizeof(T));
     }
-}", options: TestOptions.UnsafeReleaseExe, verify: Verification.Passes, expectedOutput: "4");
+}",
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Passes,
+                expectedOutput: "4"
+            );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraints_NestedStructs_Nested()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 struct InnerTestData
 {
     public int B;
@@ -2670,13 +3478,18 @@ unsafe class Test
     {
         System.Console.WriteLine(sizeof(T));
     }
-}", options: TestOptions.UnsafeReleaseExe, verify: Verification.Passes, expectedOutput: "8");
+}",
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Passes,
+                expectedOutput: "8"
+            );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraints_NestedStructs_Error()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 struct InnerTestData
 {
     public string B;
@@ -2704,16 +3517,22 @@ class Test
     static void N<T>() where T : unmanaged
     {
     }
-}").VerifyDiagnostics(
-                // (24,9): error CS8379: The type 'TestData' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test.N<T>()'
-                //         N<TestData>();
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "N<TestData>").WithArguments("Test.N<T>()", "T", "TestData").WithLocation(24, 9));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (24,9): error CS8379: The type 'TestData' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test.N<T>()'
+                    //         N<TestData>();
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "N<TestData>")
+                        .WithArguments("Test.N<T>()", "T", "TestData")
+                        .WithLocation(24, 9)
+                );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraints_ExistingUnmanagedKeywordType_InScope()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 class unmanaged
 {
     public void Print()
@@ -2731,13 +3550,16 @@ class Test
     {
         arg.Print();
     }
-}", expectedOutput: "success");
+}",
+                expectedOutput: "success"
+            );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraints_ExistingUnmanagedKeywordType_OutOfScope()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 namespace hidden
 {
     class @unmanaged
@@ -2758,19 +3580,27 @@ class Test
     {
         arg.Print();
     }
-}").VerifyDiagnostics(
-                // (16,9): error CS8379: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test.M<T>(T)'
-                //         M("test");
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M").WithArguments("Test.M<T>(T)", "T", "string").WithLocation(16, 9),
-                // (20,13): error CS1061: 'T' does not contain a definition for 'Print' and no extension method 'Print' accepting a first argument of type 'T' could be found (are you missing a using directive or an assembly reference?)
-                //         arg.Print();
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "Print").WithArguments("T", "Print").WithLocation(20, 13));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (16,9): error CS8379: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'Test.M<T>(T)'
+                    //         M("test");
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M")
+                        .WithArguments("Test.M<T>(T)", "T", "string")
+                        .WithLocation(16, 9),
+                    // (20,13): error CS1061: 'T' does not contain a definition for 'Print' and no extension method 'Print' accepting a first argument of type 'T' could be found (are you missing a using directive or an assembly reference?)
+                    //         arg.Print();
+                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "Print")
+                        .WithArguments("T", "Print")
+                        .WithLocation(20, 13)
+                );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraints_UnmanagedIsValidForStructConstraint_Methods()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 class Program
 {
     static void A<T>(T arg) where T : struct
@@ -2785,13 +3615,16 @@ class Program
     {
         B(5);
     }
-}", expectedOutput: "5");
+}",
+                expectedOutput: "5"
+            );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraints_UnmanagedIsValidForStructConstraint_Types()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 class A<T> where T : struct
 {
     public void M(T arg)
@@ -2808,13 +3641,16 @@ class Program
     {
         new B<int>().M(5);
     }
-}", expectedOutput: "5");
+}",
+                expectedOutput: "5"
+            );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraints_UnmanagedIsValidForStructConstraint_Interfaces()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 interface A<T> where T : struct
 {
     void M(T arg);
@@ -2832,13 +3668,16 @@ class Program
     {
         new B<int>().M(5);
     }
-}", expectedOutput: "5");
+}",
+                expectedOutput: "5"
+            );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraints_UnmanagedIsValidForStructConstraint_LocalFunctions()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 class Program
 {
     static void Main()
@@ -2855,13 +3694,16 @@ class Program
 
         B(5);
     }
-}", expectedOutput: "5");
+}",
+                expectedOutput: "5"
+            );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraints_PointerTypeSubstitution()
         {
-            var compilation = CreateCompilation(@"
+            var compilation = CreateCompilation(
+                    @"
 unsafe public class Test
 {
     public T* M<T>() where T : unmanaged => throw null;
@@ -2870,12 +3712,19 @@ unsafe public class Test
     {
         var result = M<int>();
     }
-}", options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics();
+}",
+                    options: TestOptions.UnsafeReleaseDll
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree, ignoreAccessibility: true);
 
-            var value = ((VariableDeclaratorSyntax)tree.FindNodeOrTokenByKind(SyntaxKind.VariableDeclarator)).Initializer.Value;
+            var value = (
+                (VariableDeclaratorSyntax)tree.FindNodeOrTokenByKind(SyntaxKind.VariableDeclarator)
+            )
+                .Initializer
+                .Value;
             Assert.Equal("M<int>()", value.ToFullString());
 
             var symbol = (IMethodSymbol)model.GetSymbolInfo(value).Symbol;
@@ -2885,22 +3734,29 @@ unsafe public class Test
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraints_CannotConstraintToTypeParameterConstrainedByUnmanaged()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 class Test<U> where U : unmanaged
 {
     void M<T>() where T : U
     {
     }
-}").VerifyDiagnostics(
-                // (4,12): error CS8379: Type parameter 'U' has the 'unmanaged' constraint so 'U' cannot be used as a constraint for 'T'
-                //     void M<T>() where T : U
-                Diagnostic(ErrorCode.ERR_ConWithUnmanagedCon, "T").WithArguments("T", "U").WithLocation(4, 12));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (4,12): error CS8379: Type parameter 'U' has the 'unmanaged' constraint so 'U' cannot be used as a constraint for 'T'
+                    //     void M<T>() where T : U
+                    Diagnostic(ErrorCode.ERR_ConWithUnmanagedCon, "T")
+                        .WithArguments("T", "U")
+                        .WithLocation(4, 12)
+                );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraints_UnmanagedAsTypeConstraintName()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 class Test<@unmanaged> where unmanaged : System.IDisposable
 {
     void M<T>(T arg) where T : unmanaged
@@ -2908,27 +3764,37 @@ class Test<@unmanaged> where unmanaged : System.IDisposable
         arg.Dispose();
         arg.NonExistentMethod();
     }
-}").VerifyDiagnostics(
-                // (7,13): error CS1061: 'T' does not contain a definition for 'NonExistentMethod' and no extension method 'NonExistentMethod' accepting a first argument of type 'T' could be found (are you missing a using directive or an assembly reference?)
-                //         arg.NonExistentMethod();
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "NonExistentMethod").WithArguments("T", "NonExistentMethod").WithLocation(7, 13));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (7,13): error CS1061: 'T' does not contain a definition for 'NonExistentMethod' and no extension method 'NonExistentMethod' accepting a first argument of type 'T' could be found (are you missing a using directive or an assembly reference?)
+                    //         arg.NonExistentMethod();
+                    Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "NonExistentMethod")
+                        .WithArguments("T", "NonExistentMethod")
+                        .WithLocation(7, 13)
+                );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraints_CircularReferenceToUnmanagedTypeWillBindSuccessfully()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 public unsafe class C<U> where U : unmanaged
 {
     public void M1<T>() where T : T* { }
     public void M2<T>() where T : U* { }
-}", options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics(
-                // (5,35): error CS0706: Invalid constraint type. A type used as a constraint must be an interface, a non-sealed class or a type parameter.
-                //     public void M2<T>() where T : U* { }
-                Diagnostic(ErrorCode.ERR_BadConstraintType, "U*").WithLocation(5, 35),
-                // (4,35): error CS0706: Invalid constraint type. A type used as a constraint must be an interface, a non-sealed class or a type parameter.
-                //     public void M1<T>() where T : T* { }
-                Diagnostic(ErrorCode.ERR_BadConstraintType, "T*").WithLocation(4, 35));
+}",
+                    options: TestOptions.UnsafeReleaseDll
+                )
+                .VerifyDiagnostics(
+                    // (5,35): error CS0706: Invalid constraint type. A type used as a constraint must be an interface, a non-sealed class or a type parameter.
+                    //     public void M2<T>() where T : U* { }
+                    Diagnostic(ErrorCode.ERR_BadConstraintType, "U*").WithLocation(5, 35),
+                    // (4,35): error CS0706: Invalid constraint type. A type used as a constraint must be an interface, a non-sealed class or a type parameter.
+                    //     public void M1<T>() where T : T* { }
+                    Diagnostic(ErrorCode.ERR_BadConstraintType, "T*").WithLocation(4, 35)
+                );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
@@ -2936,7 +3802,9 @@ public unsafe class C<U> where U : unmanaged
         {
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace.GetTypeMember("Test").TypeParameters.Single();
+                var typeParameter = module
+                    .GlobalNamespace.GetTypeMember("Test")
+                    .TypeParameters.Single();
 
                 Assert.True(typeParameter.HasUnmanagedTypeConstraint);
                 Assert.True(typeParameter.HasValueTypeConstraint);
@@ -2952,13 +3820,15 @@ public unsafe class C<U> where U : unmanaged
             CompileAndVerify(
                 source: "public class Test<T> where T : unmanaged, System.Enum {}",
                 sourceSymbolValidator: validator,
-                symbolValidator: validator);
+                symbolValidator: validator
+            );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraints_NestedInGenericType()
         {
-            var code = @"
+            var code =
+                @"
 public class Wrapper<T>
 {
     public enum E
@@ -3001,19 +3871,32 @@ public class Test
     }
 }";
 
-            CreateCompilation(code).VerifyDiagnostics(
-                // (28,9): error CS0315: The type 'Wrapper<int>.S' cannot be used as type parameter 'T' in the generic type or method 'Test.IsEnum<T>()'. There is no boxing conversion from 'Wrapper<int>.S' to 'System.Enum'.
-                //         IsEnum<Wrapper<int>.S>();               // Invalid
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "IsEnum<Wrapper<int>.S>").WithArguments("Test.IsEnum<T>()", "System.Enum", "T", "Wrapper<int>.S").WithLocation(28, 9),
-                // (38,9): error CS0315: The type 'Wrapper<string>.S' cannot be used as type parameter 'T' in the generic type or method 'Test.IsEnum<T>()'. There is no boxing conversion from 'Wrapper<string>.S' to 'System.Enum'.
-                //         IsEnum<Wrapper<string>.S>();               // Invalid
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "IsEnum<Wrapper<string>.S>").WithArguments("Test.IsEnum<T>()", "System.Enum", "T", "Wrapper<string>.S").WithLocation(38, 9));
+            CreateCompilation(code)
+                .VerifyDiagnostics(
+                    // (28,9): error CS0315: The type 'Wrapper<int>.S' cannot be used as type parameter 'T' in the generic type or method 'Test.IsEnum<T>()'. There is no boxing conversion from 'Wrapper<int>.S' to 'System.Enum'.
+                    //         IsEnum<Wrapper<int>.S>();               // Invalid
+                    Diagnostic(
+                            ErrorCode.ERR_GenericConstraintNotSatisfiedValType,
+                            "IsEnum<Wrapper<int>.S>"
+                        )
+                        .WithArguments("Test.IsEnum<T>()", "System.Enum", "T", "Wrapper<int>.S")
+                        .WithLocation(28, 9),
+                    // (38,9): error CS0315: The type 'Wrapper<string>.S' cannot be used as type parameter 'T' in the generic type or method 'Test.IsEnum<T>()'. There is no boxing conversion from 'Wrapper<string>.S' to 'System.Enum'.
+                    //         IsEnum<Wrapper<string>.S>();               // Invalid
+                    Diagnostic(
+                            ErrorCode.ERR_GenericConstraintNotSatisfiedValType,
+                            "IsEnum<Wrapper<string>.S>"
+                        )
+                        .WithArguments("Test.IsEnum<T>()", "System.Enum", "T", "Wrapper<string>.S")
+                        .WithLocation(38, 9)
+                );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraints_PointerInsideStruct()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 unsafe struct S
 {
     public int a;
@@ -3041,13 +3924,15 @@ unsafe class Test
 }",
                 options: TestOptions.UnsafeReleaseExe,
                 verify: Verification.Fails,
-                expectedOutput: "S");
+                expectedOutput: "S"
+            );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraint_LambdaTypeParameters()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 public delegate T D<T>() where T : unmanaged;
 public class Test<U1> where U1 : unmanaged
 {
@@ -3077,19 +3962,39 @@ public class Program
                 expectedOutput: @"
 1
 2",
-                options: TestOptions.ReleaseExe.WithMetadataImportOptions(MetadataImportOptions.All),
+                options: TestOptions.ReleaseExe.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
                 symbolValidator: module =>
                 {
-                    Assert.True(module.ContainingAssembly.GetTypeByMetadataName("D`1").TypeParameters.Single().HasUnmanagedTypeConstraint);
-                    Assert.True(module.ContainingAssembly.GetTypeByMetadataName("Test`1").TypeParameters.Single().HasUnmanagedTypeConstraint);
-                    Assert.True(module.ContainingAssembly.GetTypeByMetadataName("Test`1").GetTypeMember("<>c__DisplayClass2_0").TypeParameters.Single().HasUnmanagedTypeConstraint);
-                });
+                    Assert.True(
+                        module
+                            .ContainingAssembly.GetTypeByMetadataName("D`1")
+                            .TypeParameters.Single()
+                            .HasUnmanagedTypeConstraint
+                    );
+                    Assert.True(
+                        module
+                            .ContainingAssembly.GetTypeByMetadataName("Test`1")
+                            .TypeParameters.Single()
+                            .HasUnmanagedTypeConstraint
+                    );
+                    Assert.True(
+                        module
+                            .ContainingAssembly.GetTypeByMetadataName("Test`1")
+                            .GetTypeMember("<>c__DisplayClass2_0")
+                            .TypeParameters.Single()
+                            .HasUnmanagedTypeConstraint
+                    );
+                }
+            );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         public void UnmanagedConstraint_IsConsideredDuringOverloadResolution()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 public class Program
 {
     static void Test<T>(T arg) where T : unmanaged
@@ -3115,14 +4020,16 @@ public class Program
                 expectedOutput: @"
 Unmanaged: 1
 Object: 2
-Unmanaged: 3");
+Unmanaged: 3"
+            );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         [WorkItem(25654, "https://github.com/dotnet/roslyn/issues/25654")]
         public void UnmanagedConstraint_PointersTypeInference()
         {
-            var compilation = CreateCompilation(@"
+            var compilation = CreateCompilation(
+                @"
 class C
 {
     unsafe void M<T>(T* a) where T : unmanaged
@@ -3130,26 +4037,35 @@ class C
         var p = stackalloc T[10];
         M(p);
     }
-}", options: TestOptions.UnsafeReleaseDll);
+}",
+                options: TestOptions.UnsafeReleaseDll
+            );
 
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var call = tree.GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>().Single();
+            var call = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single();
             var inferredMethod = (IMethodSymbol)model.GetSymbolInfo(call).Symbol;
             var declaredMethod = compilation.GlobalNamespace.GetTypeMember("C").GetMethod("M");
 
             Assert.Equal(declaredMethod.GetPublicSymbol(), inferredMethod);
-            Assert.Equal(declaredMethod.TypeParameters.Single().GetPublicSymbol(), inferredMethod.TypeArguments.Single());
+            Assert.Equal(
+                declaredMethod.TypeParameters.Single().GetPublicSymbol(),
+                inferredMethod.TypeArguments.Single()
+            );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         [WorkItem(25654, "https://github.com/dotnet/roslyn/issues/25654")]
         public void UnmanagedConstraint_PointersTypeInference_CallFromADifferentMethod()
         {
-            var compilation = CreateCompilation(@"
+            var compilation = CreateCompilation(
+                @"
 class C
 {
     unsafe void M<T>(T* a) where T : unmanaged
@@ -3160,52 +4076,70 @@ class C
         var p = stackalloc int[10];
         M(p);
     }
-}", options: TestOptions.UnsafeReleaseDll);
+}",
+                options: TestOptions.UnsafeReleaseDll
+            );
 
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var call = tree.GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>().Single();
+            var call = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single();
             var inferredMethod = (IMethodSymbol)model.GetSymbolInfo(call).Symbol;
             var declaredMethod = compilation.GlobalNamespace.GetTypeMember("C").GetMethod("M");
 
             Assert.Equal(declaredMethod.GetPublicSymbol(), inferredMethod.ConstructedFrom());
-            Assert.Equal(SpecialType.System_Int32, inferredMethod.TypeArguments.Single().SpecialType);
+            Assert.Equal(
+                SpecialType.System_Int32,
+                inferredMethod.TypeArguments.Single().SpecialType
+            );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         [WorkItem(25654, "https://github.com/dotnet/roslyn/issues/25654")]
         public void UnmanagedConstraint_PointersTypeInference_WithOtherArgs()
         {
-            var compilation = CreateCompilation(@"
+            var compilation = CreateCompilation(
+                @"
 unsafe class C
 {
     static void M<T>(T* a, T b) where T : unmanaged
     {
         M(null, b);
     }
-}", options: TestOptions.UnsafeReleaseDll);
+}",
+                options: TestOptions.UnsafeReleaseDll
+            );
 
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var call = tree.GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>().Single();
+            var call = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single();
             var inferredMethod = (IMethodSymbol)model.GetSymbolInfo(call).Symbol;
             var declaredMethod = compilation.GlobalNamespace.GetTypeMember("C").GetMethod("M");
 
             Assert.Equal(declaredMethod.GetPublicSymbol(), inferredMethod);
-            Assert.Equal(declaredMethod.TypeParameters.Single().GetPublicSymbol(), inferredMethod.TypeArguments.Single());
+            Assert.Equal(
+                declaredMethod.TypeParameters.Single().GetPublicSymbol(),
+                inferredMethod.TypeArguments.Single()
+            );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         [WorkItem(25654, "https://github.com/dotnet/roslyn/issues/25654")]
         public void UnmanagedConstraint_PointersTypeInference_WithOtherArgs_CallFromADifferentMethod()
         {
-            var compilation = CreateCompilation(@"
+            var compilation = CreateCompilation(
+                @"
 unsafe class C
 {
     static void M<T>(T* a, T b) where T : unmanaged
@@ -3215,26 +4149,35 @@ unsafe class C
     {
         M(null, 5);
     }
-}", options: TestOptions.UnsafeReleaseDll);
+}",
+                options: TestOptions.UnsafeReleaseDll
+            );
 
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var call = tree.GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>().Single();
+            var call = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single();
             var inferredMethod = (IMethodSymbol)model.GetSymbolInfo(call).Symbol;
             var declaredMethod = compilation.GlobalNamespace.GetTypeMember("C").GetMethod("M");
 
             Assert.Equal(declaredMethod.GetPublicSymbol(), inferredMethod.ConstructedFrom());
-            Assert.Equal(SpecialType.System_Int32, inferredMethod.TypeArguments.Single().SpecialType);
+            Assert.Equal(
+                SpecialType.System_Int32,
+                inferredMethod.TypeArguments.Single().SpecialType
+            );
         }
 
         [ConditionalFact(typeof(ClrOnly), Reason = "https://github.com/mono/mono/issues/10782")]
         [WorkItem(25654, "https://github.com/dotnet/roslyn/issues/25654")]
         public void UnmanagedConstraint_PointersTypeInference_Errors()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 unsafe class C
 {
     void Unmanaged<T>(T* a) where T : unmanaged
@@ -3255,28 +4198,51 @@ unsafe class C
         UnmanagedWithInterface(a);          // fail (type inference)
         UnmanagedWithInterface(&a);         // fail (does not match interface)
     }
-}", options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics(
-                // (14,9): error CS0411: The type arguments for method 'C.Unmanaged<T>(T*)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //         Unmanaged(0);                       // fail (type inference)
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Unmanaged").WithArguments("C.Unmanaged<T>(T*)").WithLocation(14, 9),
-                // (15,9): error CS0411: The type arguments for method 'C.Unmanaged<T>(T*)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //         Unmanaged(a);                       // fail (type inference)
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Unmanaged").WithArguments("C.Unmanaged<T>(T*)").WithLocation(15, 9),
-                // (18,9): error CS0411: The type arguments for method 'C.UnmanagedWithInterface<T>(T*)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //         UnmanagedWithInterface(0);          // fail (type inference)
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "UnmanagedWithInterface").WithArguments("C.UnmanagedWithInterface<T>(T*)").WithLocation(18, 9),
-                // (19,9): error CS0411: The type arguments for method 'C.UnmanagedWithInterface<T>(T*)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //         UnmanagedWithInterface(a);          // fail (type inference)
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "UnmanagedWithInterface").WithArguments("C.UnmanagedWithInterface<T>(T*)").WithLocation(19, 9),
-                // (20,9): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'C.UnmanagedWithInterface<T>(T*)'. There is no boxing conversion from 'int' to 'System.IDisposable'.
-                //         UnmanagedWithInterface(&a);         // fail (does not match interface)
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "UnmanagedWithInterface").WithArguments("C.UnmanagedWithInterface<T>(T*)", "System.IDisposable", "T", "int").WithLocation(20, 9));
+}",
+                    options: TestOptions.UnsafeReleaseDll
+                )
+                .VerifyDiagnostics(
+                    // (14,9): error CS0411: The type arguments for method 'C.Unmanaged<T>(T*)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         Unmanaged(0);                       // fail (type inference)
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Unmanaged")
+                        .WithArguments("C.Unmanaged<T>(T*)")
+                        .WithLocation(14, 9),
+                    // (15,9): error CS0411: The type arguments for method 'C.Unmanaged<T>(T*)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         Unmanaged(a);                       // fail (type inference)
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Unmanaged")
+                        .WithArguments("C.Unmanaged<T>(T*)")
+                        .WithLocation(15, 9),
+                    // (18,9): error CS0411: The type arguments for method 'C.UnmanagedWithInterface<T>(T*)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         UnmanagedWithInterface(0);          // fail (type inference)
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "UnmanagedWithInterface")
+                        .WithArguments("C.UnmanagedWithInterface<T>(T*)")
+                        .WithLocation(18, 9),
+                    // (19,9): error CS0411: The type arguments for method 'C.UnmanagedWithInterface<T>(T*)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         UnmanagedWithInterface(a);          // fail (type inference)
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "UnmanagedWithInterface")
+                        .WithArguments("C.UnmanagedWithInterface<T>(T*)")
+                        .WithLocation(19, 9),
+                    // (20,9): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'C.UnmanagedWithInterface<T>(T*)'. There is no boxing conversion from 'int' to 'System.IDisposable'.
+                    //         UnmanagedWithInterface(&a);         // fail (does not match interface)
+                    Diagnostic(
+                            ErrorCode.ERR_GenericConstraintNotSatisfiedValType,
+                            "UnmanagedWithInterface"
+                        )
+                        .WithArguments(
+                            "C.UnmanagedWithInterface<T>(T*)",
+                            "System.IDisposable",
+                            "T",
+                            "int"
+                        )
+                        .WithLocation(20, 9)
+                );
         }
 
         [Fact]
         public void UnmanagedGenericStructPointer()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T>
 {
     public T field;
@@ -3293,14 +4259,14 @@ public class C
     public unsafe void M2(MyStruct<int>* ms) { }
 }
 ";
-            CreateCompilation(code, options: TestOptions.UnsafeReleaseDll)
-                .VerifyDiagnostics();
+            CreateCompilation(code, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics();
         }
 
         [Fact]
         public void ManagedGenericStructPointer()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T>
 {
     public T field;
@@ -3321,16 +4287,22 @@ public class C
                 .VerifyDiagnostics(
                     // (12,9): error CS8377: The type 'string' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'C.M2<T>(MyStruct<T>*)'
                     //         M2(&myStruct);
-                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M2").WithArguments("C.M2<T>(MyStruct<T>*)", "T", "string").WithLocation(12, 9),
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M2")
+                        .WithArguments("C.M2<T>(MyStruct<T>*)", "T", "string")
+                        .WithLocation(12, 9),
                     // (12,12): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('MyStruct<string>')
                     //         M2(&myStruct);
-                    Diagnostic(ErrorCode.WRN_ManagedAddr, "&myStruct").WithArguments("MyStruct<string>").WithLocation(12, 12));
+                    Diagnostic(ErrorCode.WRN_ManagedAddr, "&myStruct")
+                        .WithArguments("MyStruct<string>")
+                        .WithLocation(12, 12)
+                );
         }
 
         [Fact]
         public void UnmanagedGenericConstraintStructPointer()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T> where T : unmanaged
 {
     public T field;
@@ -3347,14 +4319,14 @@ public class C
     public unsafe void M2(MyStruct<int>* ms) { }
 }
 ";
-            CreateCompilation(code, options: TestOptions.UnsafeReleaseDll)
-                .VerifyDiagnostics();
+            CreateCompilation(code, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics();
         }
 
         [Fact]
         public void UnmanagedGenericConstraintNestedStructPointer()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T> where T : unmanaged
 {
     public T field;
@@ -3382,14 +4354,14 @@ public class C
     public unsafe void M2(MyStruct<OuterStruct>* ms) { }
 }
 ";
-            CreateCompilation(code, options: TestOptions.UnsafeReleaseDll)
-                .VerifyDiagnostics();
+            CreateCompilation(code, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics();
         }
 
         [Fact]
         public void UnmanagedGenericConstraintNestedGenericStructPointer()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T> where T : unmanaged
 {
     public T field;
@@ -3411,30 +4383,43 @@ public class C
     public unsafe void M2(MyStruct<InnerStruct<int>>* ms) { }
 }
 ";
-            CreateCompilation(code, options: TestOptions.UnsafeReleaseDll)
-                .VerifyDiagnostics();
+            CreateCompilation(code, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics();
 
-            CreateCompilation(code, options: TestOptions.UnsafeReleaseDll, parseOptions: TestOptions.Regular7_3)
+            CreateCompilation(
+                    code,
+                    options: TestOptions.UnsafeReleaseDll,
+                    parseOptions: TestOptions.Regular7_3
+                )
                 .VerifyDiagnostics(
-                // (16,18): error CS8370: Feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
-                //         MyStruct<InnerStruct<int>> myStruct;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "InnerStruct<int>").WithArguments("unmanaged constructed types", "8.0").WithLocation(16, 18),
-                // (17,12): error CS8370: Feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
-                //         M2(&myStruct);
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "&myStruct").WithArguments("unmanaged constructed types", "8.0").WithLocation(17, 12),
-                // (20,55): error CS8370: Feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
-                //     public unsafe void M2(MyStruct<InnerStruct<int>>* ms) { }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "ms").WithArguments("unmanaged constructed types", "8.0").WithLocation(20, 55),
-                // (20,55): error CS8370: Feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
-                //     public unsafe void M2(MyStruct<InnerStruct<int>>* ms) { }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "ms").WithArguments("unmanaged constructed types", "8.0").WithLocation(20, 55));
+                    // (16,18): error CS8370: Feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    //         MyStruct<InnerStruct<int>> myStruct;
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "InnerStruct<int>")
+                        .WithArguments("unmanaged constructed types", "8.0")
+                        .WithLocation(16, 18),
+                    // (17,12): error CS8370: Feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    //         M2(&myStruct);
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "&myStruct")
+                        .WithArguments("unmanaged constructed types", "8.0")
+                        .WithLocation(17, 12),
+                    // (20,55): error CS8370: Feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    //     public unsafe void M2(MyStruct<InnerStruct<int>>* ms) { }
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "ms")
+                        .WithArguments("unmanaged constructed types", "8.0")
+                        .WithLocation(20, 55),
+                    // (20,55): error CS8370: Feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    //     public unsafe void M2(MyStruct<InnerStruct<int>>* ms) { }
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "ms")
+                        .WithArguments("unmanaged constructed types", "8.0")
+                        .WithLocation(20, 55)
+                );
         }
 
         [Fact]
         public void UnmanagedGenericStructMultipleConstraints()
         {
             // A diagnostic will only be produced for the first violated constraint.
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T> where T : unmanaged, System.IDisposable
 {
     public T field;
@@ -3458,21 +4443,33 @@ public class C
                 .VerifyDiagnostics(
                     // (16,18): error CS0315: The type 'InnerStruct<int>' cannot be used as type parameter 'T' in the generic type or method 'MyStruct<T>'. There is no boxing conversion from 'InnerStruct<int>' to 'System.IDisposable'.
                     //         MyStruct<InnerStruct<int>> myStruct = default;
-                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "InnerStruct<int>").WithArguments("MyStruct<T>", "System.IDisposable", "T", "InnerStruct<int>").WithLocation(16, 18)
+                    Diagnostic(
+                            ErrorCode.ERR_GenericConstraintNotSatisfiedValType,
+                            "InnerStruct<int>"
+                        )
+                        .WithArguments("MyStruct<T>", "System.IDisposable", "T", "InnerStruct<int>")
+                        .WithLocation(16, 18)
                 );
 
-            CreateCompilation(code, options: TestOptions.UnsafeReleaseDll, parseOptions: TestOptions.Regular7_3)
+            CreateCompilation(
+                    code,
+                    options: TestOptions.UnsafeReleaseDll,
+                    parseOptions: TestOptions.Regular7_3
+                )
                 .VerifyDiagnostics(
-                // (16,18): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
-                //         MyStruct<InnerStruct<int>> myStruct = default;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "InnerStruct<int>").WithArguments("unmanaged constructed types", "8.0").WithLocation(16, 18)
+                    // (16,18): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    //         MyStruct<InnerStruct<int>> myStruct = default;
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "InnerStruct<int>")
+                        .WithArguments("unmanaged constructed types", "8.0")
+                        .WithLocation(16, 18)
                 );
         }
 
         [Fact]
         public void UnmanagedGenericConstraintPartialConstructedStruct()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T> where T : unmanaged
 {
     public T field;
@@ -3493,28 +4490,42 @@ public class C
                 .VerifyDiagnostics(
                     // (11,18): error CS8377: The type 'U' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'MyStruct<T>'
                     //         MyStruct<U> myStruct;
-                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "U").WithArguments("MyStruct<T>", "T", "U").WithLocation(11, 18),
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "U")
+                        .WithArguments("MyStruct<T>", "T", "U")
+                        .WithLocation(11, 18),
                     // (12,9): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('MyStruct<U>')
                     //         M2<U>(&myStruct);
-                    Diagnostic(ErrorCode.WRN_ManagedAddr, "M2<U>").WithArguments("MyStruct<U>").WithLocation(12, 9),
+                    Diagnostic(ErrorCode.WRN_ManagedAddr, "M2<U>")
+                        .WithArguments("MyStruct<U>")
+                        .WithLocation(12, 9),
                     // (12,9): error CS8377: The type 'U' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'MyStruct<T>'
                     //         M2<U>(&myStruct);
-                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M2<U>").WithArguments("MyStruct<T>", "T", "U").WithLocation(12, 9),
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M2<U>")
+                        .WithArguments("MyStruct<T>", "T", "U")
+                        .WithLocation(12, 9),
                     // (12,15): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('MyStruct<U>')
                     //         M2<U>(&myStruct);
-                    Diagnostic(ErrorCode.WRN_ManagedAddr, "&myStruct").WithArguments("MyStruct<U>").WithLocation(12, 15),
+                    Diagnostic(ErrorCode.WRN_ManagedAddr, "&myStruct")
+                        .WithArguments("MyStruct<U>")
+                        .WithLocation(12, 15),
                     // (15,43): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('MyStruct<V>')
                     //     public unsafe void M2<V>(MyStruct<V>* ms) { }
-                    Diagnostic(ErrorCode.WRN_ManagedAddr, "ms").WithArguments("MyStruct<V>").WithLocation(15, 43),
+                    Diagnostic(ErrorCode.WRN_ManagedAddr, "ms")
+                        .WithArguments("MyStruct<V>")
+                        .WithLocation(15, 43),
                     // (15,43): error CS8377: The type 'V' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'MyStruct<T>'
                     //     public unsafe void M2<V>(MyStruct<V>* ms) { }
-                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "ms").WithArguments("MyStruct<T>", "T", "V").WithLocation(15, 43));
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "ms")
+                        .WithArguments("MyStruct<T>", "T", "V")
+                        .WithLocation(15, 43)
+                );
         }
 
         [Fact]
         public void GenericStructManagedFieldPointer()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T>
 {
     public T field;
@@ -3535,16 +4546,22 @@ public class C
                 .VerifyDiagnostics(
                     // (12,12): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('MyStruct<string>')
                     //         M2(&myStruct);
-                    Diagnostic(ErrorCode.WRN_ManagedAddr, "&myStruct").WithArguments("MyStruct<string>").WithLocation(12, 12),
+                    Diagnostic(ErrorCode.WRN_ManagedAddr, "&myStruct")
+                        .WithArguments("MyStruct<string>")
+                        .WithLocation(12, 12),
                     // (15,45): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('MyStruct<string>')
                     //     public unsafe void M2(MyStruct<string>* ms) { }
-                    Diagnostic(ErrorCode.WRN_ManagedAddr, "ms").WithArguments("MyStruct<string>").WithLocation(15, 45));
+                    Diagnostic(ErrorCode.WRN_ManagedAddr, "ms")
+                        .WithArguments("MyStruct<string>")
+                        .WithLocation(15, 45)
+                );
         }
 
         [Fact]
         public void UnmanagedRecursiveGenericStruct()
         {
-            var code = @"
+            var code =
+                @"
 public unsafe struct MyStruct<T> where T : unmanaged
 {
     public YourStruct<T>* field;
@@ -3557,14 +4574,21 @@ public unsafe struct YourStruct<T> where T : unmanaged
 ";
             var compilation = CreateCompilation(code, options: TestOptions.UnsafeReleaseDll);
             compilation.VerifyDiagnostics();
-            Assert.False(compilation.GetMember<NamedTypeSymbol>("MyStruct").IsManagedTypeNoUseSiteDiagnostics);
-            Assert.False(compilation.GetMember<NamedTypeSymbol>("YourStruct").IsManagedTypeNoUseSiteDiagnostics);
+            Assert.False(
+                compilation.GetMember<NamedTypeSymbol>("MyStruct").IsManagedTypeNoUseSiteDiagnostics
+            );
+            Assert.False(
+                compilation
+                    .GetMember<NamedTypeSymbol>("YourStruct")
+                    .IsManagedTypeNoUseSiteDiagnostics
+            );
         }
 
         [Fact]
         public void UnmanagedRecursiveStruct()
         {
-            var code = @"
+            var code =
+                @"
 public unsafe struct MyStruct
 {
     public YourStruct* field;
@@ -3577,15 +4601,21 @@ public unsafe struct YourStruct
 ";
             var compilation = CreateCompilation(code, options: TestOptions.UnsafeReleaseDll);
             compilation.VerifyDiagnostics();
-            Assert.False(compilation.GetMember<NamedTypeSymbol>("MyStruct").IsManagedTypeNoUseSiteDiagnostics);
-            Assert.False(compilation.GetMember<NamedTypeSymbol>("YourStruct").IsManagedTypeNoUseSiteDiagnostics);
-
+            Assert.False(
+                compilation.GetMember<NamedTypeSymbol>("MyStruct").IsManagedTypeNoUseSiteDiagnostics
+            );
+            Assert.False(
+                compilation
+                    .GetMember<NamedTypeSymbol>("YourStruct")
+                    .IsManagedTypeNoUseSiteDiagnostics
+            );
         }
 
         [Fact]
         public void UnmanagedExpandingTypeArgument()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T>
 {
     public YourStruct<MyStruct<MyStruct<T>>> field;
@@ -3598,18 +4628,28 @@ public struct YourStruct<T> where T : unmanaged
 ";
             var compilation = CreateCompilation(code, options: TestOptions.UnsafeReleaseDll);
             compilation.VerifyDiagnostics(
-                    // (4,46): error CS0523: Struct member 'MyStruct<T>.field' of type 'YourStruct<MyStruct<MyStruct<T>>>' causes a cycle in the struct layout
-                    //     public YourStruct<MyStruct<MyStruct<T>>> field;
-                    Diagnostic(ErrorCode.ERR_StructLayoutCycle, "field").WithArguments("MyStruct<T>.field", "YourStruct<MyStruct<MyStruct<T>>>").WithLocation(4, 46));
+                // (4,46): error CS0523: Struct member 'MyStruct<T>.field' of type 'YourStruct<MyStruct<MyStruct<T>>>' causes a cycle in the struct layout
+                //     public YourStruct<MyStruct<MyStruct<T>>> field;
+                Diagnostic(ErrorCode.ERR_StructLayoutCycle, "field")
+                    .WithArguments("MyStruct<T>.field", "YourStruct<MyStruct<MyStruct<T>>>")
+                    .WithLocation(4, 46)
+            );
 
-            Assert.False(compilation.GetMember<NamedTypeSymbol>("MyStruct").IsManagedTypeNoUseSiteDiagnostics);
-            Assert.False(compilation.GetMember<NamedTypeSymbol>("YourStruct").IsManagedTypeNoUseSiteDiagnostics);
+            Assert.False(
+                compilation.GetMember<NamedTypeSymbol>("MyStruct").IsManagedTypeNoUseSiteDiagnostics
+            );
+            Assert.False(
+                compilation
+                    .GetMember<NamedTypeSymbol>("YourStruct")
+                    .IsManagedTypeNoUseSiteDiagnostics
+            );
         }
 
         [Fact]
         public void UnmanagedCyclic()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T>
 {
     public YourStruct<T> field;
@@ -3622,24 +4662,38 @@ public struct YourStruct<T> where T : unmanaged
 ";
             var compilation = CreateCompilation(code, options: TestOptions.UnsafeReleaseDll);
             compilation.VerifyDiagnostics(
-                    // (4,26): error CS0523: Struct member 'MyStruct<T>.field' of type 'YourStruct<T>' causes a cycle in the struct layout
-                    //     public YourStruct<T> field;
-                    Diagnostic(ErrorCode.ERR_StructLayoutCycle, "field").WithArguments("MyStruct<T>.field", "YourStruct<T>").WithLocation(4, 26),
-                    // (4,26): error CS8377: The type 'T' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'YourStruct<T>'
-                    //     public YourStruct<T> field;
-                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "field").WithArguments("YourStruct<T>", "T", "T").WithLocation(4, 26),
-                    // (9,24): error CS0523: Struct member 'YourStruct<T>.field' of type 'MyStruct<T>' causes a cycle in the struct layout
-                    //     public MyStruct<T> field;
-                    Diagnostic(ErrorCode.ERR_StructLayoutCycle, "field").WithArguments("YourStruct<T>.field", "MyStruct<T>").WithLocation(9, 24));
+                // (4,26): error CS0523: Struct member 'MyStruct<T>.field' of type 'YourStruct<T>' causes a cycle in the struct layout
+                //     public YourStruct<T> field;
+                Diagnostic(ErrorCode.ERR_StructLayoutCycle, "field")
+                    .WithArguments("MyStruct<T>.field", "YourStruct<T>")
+                    .WithLocation(4, 26),
+                // (4,26): error CS8377: The type 'T' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'YourStruct<T>'
+                //     public YourStruct<T> field;
+                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "field")
+                    .WithArguments("YourStruct<T>", "T", "T")
+                    .WithLocation(4, 26),
+                // (9,24): error CS0523: Struct member 'YourStruct<T>.field' of type 'MyStruct<T>' causes a cycle in the struct layout
+                //     public MyStruct<T> field;
+                Diagnostic(ErrorCode.ERR_StructLayoutCycle, "field")
+                    .WithArguments("YourStruct<T>.field", "MyStruct<T>")
+                    .WithLocation(9, 24)
+            );
 
-            Assert.False(compilation.GetMember<NamedTypeSymbol>("MyStruct").IsManagedTypeNoUseSiteDiagnostics);
-            Assert.False(compilation.GetMember<NamedTypeSymbol>("YourStruct").IsManagedTypeNoUseSiteDiagnostics);
+            Assert.False(
+                compilation.GetMember<NamedTypeSymbol>("MyStruct").IsManagedTypeNoUseSiteDiagnostics
+            );
+            Assert.False(
+                compilation
+                    .GetMember<NamedTypeSymbol>("YourStruct")
+                    .IsManagedTypeNoUseSiteDiagnostics
+            );
         }
 
         [Fact]
         public void UnmanagedExpandingTypeArgumentManagedGenericField()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T>
 {
     public YourStruct<MyStruct<MyStruct<T>>> field;
@@ -3653,18 +4707,28 @@ public struct YourStruct<T> where T : unmanaged
 ";
             var compilation = CreateCompilation(code, options: TestOptions.UnsafeReleaseDll);
             compilation.VerifyDiagnostics(
-                    // (4,46): error CS0523: Struct member 'MyStruct<T>.field' of type 'YourStruct<MyStruct<MyStruct<T>>>' causes a cycle in the struct layout
-                    //     public YourStruct<MyStruct<MyStruct<T>>> field;
-                    Diagnostic(ErrorCode.ERR_StructLayoutCycle, "field").WithArguments("MyStruct<T>.field", "YourStruct<MyStruct<MyStruct<T>>>").WithLocation(4, 46));
+                // (4,46): error CS0523: Struct member 'MyStruct<T>.field' of type 'YourStruct<MyStruct<MyStruct<T>>>' causes a cycle in the struct layout
+                //     public YourStruct<MyStruct<MyStruct<T>>> field;
+                Diagnostic(ErrorCode.ERR_StructLayoutCycle, "field")
+                    .WithArguments("MyStruct<T>.field", "YourStruct<MyStruct<MyStruct<T>>>")
+                    .WithLocation(4, 46)
+            );
 
-            Assert.True(compilation.GetMember<NamedTypeSymbol>("MyStruct").IsManagedTypeNoUseSiteDiagnostics);
-            Assert.False(compilation.GetMember<NamedTypeSymbol>("YourStruct").IsManagedTypeNoUseSiteDiagnostics);
+            Assert.True(
+                compilation.GetMember<NamedTypeSymbol>("MyStruct").IsManagedTypeNoUseSiteDiagnostics
+            );
+            Assert.False(
+                compilation
+                    .GetMember<NamedTypeSymbol>("YourStruct")
+                    .IsManagedTypeNoUseSiteDiagnostics
+            );
         }
 
         [Fact]
         public void UnmanagedExpandingTypeArgumentConstraintViolation()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T>
 {
     public YourStruct<MyStruct<MyStruct<T>>> field;
@@ -3678,21 +4742,33 @@ public struct YourStruct<T> where T : unmanaged
 ";
             var compilation = CreateCompilation(code, options: TestOptions.UnsafeReleaseDll);
             compilation.VerifyDiagnostics(
-                    // (4,46): error CS0523: Struct member 'MyStruct<T>.field' of type 'YourStruct<MyStruct<MyStruct<T>>>' causes a cycle in the struct layout
-                    //     public YourStruct<MyStruct<MyStruct<T>>> field;
-                    Diagnostic(ErrorCode.ERR_StructLayoutCycle, "field").WithArguments("MyStruct<T>.field", "YourStruct<MyStruct<MyStruct<T>>>").WithLocation(4, 46),
-                    // (4,46): error CS8377: The type 'MyStruct<MyStruct<T>>' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'YourStruct<T>'
-                    //     public YourStruct<MyStruct<MyStruct<T>>> field;
-                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "field").WithArguments("YourStruct<T>", "T", "MyStruct<MyStruct<T>>").WithLocation(4, 46));
+                // (4,46): error CS0523: Struct member 'MyStruct<T>.field' of type 'YourStruct<MyStruct<MyStruct<T>>>' causes a cycle in the struct layout
+                //     public YourStruct<MyStruct<MyStruct<T>>> field;
+                Diagnostic(ErrorCode.ERR_StructLayoutCycle, "field")
+                    .WithArguments("MyStruct<T>.field", "YourStruct<MyStruct<MyStruct<T>>>")
+                    .WithLocation(4, 46),
+                // (4,46): error CS8377: The type 'MyStruct<MyStruct<T>>' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'YourStruct<T>'
+                //     public YourStruct<MyStruct<MyStruct<T>>> field;
+                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "field")
+                    .WithArguments("YourStruct<T>", "T", "MyStruct<MyStruct<T>>")
+                    .WithLocation(4, 46)
+            );
 
-            Assert.True(compilation.GetMember<NamedTypeSymbol>("MyStruct").IsManagedTypeNoUseSiteDiagnostics);
-            Assert.False(compilation.GetMember<NamedTypeSymbol>("YourStruct").IsManagedTypeNoUseSiteDiagnostics);
+            Assert.True(
+                compilation.GetMember<NamedTypeSymbol>("MyStruct").IsManagedTypeNoUseSiteDiagnostics
+            );
+            Assert.False(
+                compilation
+                    .GetMember<NamedTypeSymbol>("YourStruct")
+                    .IsManagedTypeNoUseSiteDiagnostics
+            );
         }
 
         [Fact]
         public void UnmanagedRecursiveTypeArgumentConstraintViolation_02()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T>
 {
     public YourStruct<MyStruct<MyStruct<T>>> field;
@@ -3706,21 +4782,33 @@ public struct YourStruct<T> where T : unmanaged
 ";
             var compilation = CreateCompilation(code, options: TestOptions.UnsafeReleaseDll);
             compilation.VerifyDiagnostics(
-                    // (4,46): error CS0523: Struct member 'MyStruct<T>.field' of type 'YourStruct<MyStruct<MyStruct<T>>>' causes a cycle in the struct layout
-                    //     public YourStruct<MyStruct<MyStruct<T>>> field;
-                    Diagnostic(ErrorCode.ERR_StructLayoutCycle, "field").WithArguments("MyStruct<T>.field", "YourStruct<MyStruct<MyStruct<T>>>").WithLocation(4, 46),
-                    // (4,46): error CS8377: The type 'MyStruct<MyStruct<T>>' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'YourStruct<T>'
-                    //     public YourStruct<MyStruct<MyStruct<T>>> field;
-                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "field").WithArguments("YourStruct<T>", "T", "MyStruct<MyStruct<T>>").WithLocation(4, 46));
+                // (4,46): error CS0523: Struct member 'MyStruct<T>.field' of type 'YourStruct<MyStruct<MyStruct<T>>>' causes a cycle in the struct layout
+                //     public YourStruct<MyStruct<MyStruct<T>>> field;
+                Diagnostic(ErrorCode.ERR_StructLayoutCycle, "field")
+                    .WithArguments("MyStruct<T>.field", "YourStruct<MyStruct<MyStruct<T>>>")
+                    .WithLocation(4, 46),
+                // (4,46): error CS8377: The type 'MyStruct<MyStruct<T>>' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'YourStruct<T>'
+                //     public YourStruct<MyStruct<MyStruct<T>>> field;
+                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "field")
+                    .WithArguments("YourStruct<T>", "T", "MyStruct<MyStruct<T>>")
+                    .WithLocation(4, 46)
+            );
 
-            Assert.True(compilation.GetMember<NamedTypeSymbol>("MyStruct").IsManagedTypeNoUseSiteDiagnostics);
-            Assert.True(compilation.GetMember<NamedTypeSymbol>("YourStruct").IsManagedTypeNoUseSiteDiagnostics);
+            Assert.True(
+                compilation.GetMember<NamedTypeSymbol>("MyStruct").IsManagedTypeNoUseSiteDiagnostics
+            );
+            Assert.True(
+                compilation
+                    .GetMember<NamedTypeSymbol>("YourStruct")
+                    .IsManagedTypeNoUseSiteDiagnostics
+            );
         }
 
         [Fact]
         public void NestedGenericStructContainingPointer()
         {
-            var code = @"
+            var code =
+                @"
 public unsafe struct MyStruct<T> where T : unmanaged
 {
     public T* field;
@@ -3743,13 +4831,19 @@ public class C
     }
 }
 ";
-            CompileAndVerify(code, options: TestOptions.UnsafeReleaseExe, expectedOutput: "42", verify: Verification.Skipped);
+            CompileAndVerify(
+                code,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "42",
+                verify: Verification.Skipped
+            );
         }
 
         [Fact]
         public void SimpleGenericStructPointer_ILValidation()
         {
-            var code = @"
+            var code =
+                @"
 public unsafe struct MyStruct<T> where T : unmanaged
 {
     public T field;
@@ -3762,7 +4856,8 @@ public unsafe struct MyStruct<T> where T : unmanaged
     }
 }
 ";
-            var il = @"
+            var il =
+                @"
 {
   // Code size       19 (0x13)
   .maxstack  2
@@ -3776,14 +4871,19 @@ public unsafe struct MyStruct<T> where T : unmanaged
   IL_0012:  ret
 }
 ";
-            CompileAndVerify(code, options: TestOptions.UnsafeReleaseDll, verify: Verification.Skipped)
+            CompileAndVerify(
+                    code,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Skipped
+                )
                 .VerifyIL("MyStruct<T>.Test", il);
         }
 
         [Fact, WorkItem(31439, "https://github.com/dotnet/roslyn/issues/31439")]
         public void CircularTypeArgumentUnmanagedConstraint()
         {
-            var code = @"
+            var code =
+                @"
 public struct X<T>
     where T : unmanaged
 {
@@ -3796,14 +4896,19 @@ public struct Z
             var compilation = CreateCompilation(code);
             compilation.VerifyDiagnostics();
 
-            Assert.False(compilation.GetMember<NamedTypeSymbol>("X").IsManagedTypeNoUseSiteDiagnostics);
-            Assert.False(compilation.GetMember<NamedTypeSymbol>("Z").IsManagedTypeNoUseSiteDiagnostics);
+            Assert.False(
+                compilation.GetMember<NamedTypeSymbol>("X").IsManagedTypeNoUseSiteDiagnostics
+            );
+            Assert.False(
+                compilation.GetMember<NamedTypeSymbol>("Z").IsManagedTypeNoUseSiteDiagnostics
+            );
         }
 
         [Fact]
         public void GenericStructAddressOfRequiresCSharp8()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T>
 {
     public T field;
@@ -3815,11 +4920,17 @@ public struct MyStruct<T>
     }
 }
 ";
-            CreateCompilation(code, options: TestOptions.UnsafeReleaseDll, parseOptions: TestOptions.Regular7_3)
+            CreateCompilation(
+                    code,
+                    options: TestOptions.UnsafeReleaseDll,
+                    parseOptions: TestOptions.Regular7_3
+                )
                 .VerifyDiagnostics(
-                // (9,19): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
-                //         var ptr = &ms;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "&ms").WithArguments("unmanaged constructed types", "8.0").WithLocation(9, 19)
+                    // (9,19): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    //         var ptr = &ms;
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "&ms")
+                        .WithArguments("unmanaged constructed types", "8.0")
+                        .WithLocation(9, 19)
                 );
 
             CreateCompilation(code, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics();
@@ -3828,7 +4939,8 @@ public struct MyStruct<T>
         [Fact]
         public void GenericStructFixedRequiresCSharp8()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T>
 {
     public T field;
@@ -3845,14 +4957,23 @@ public class MyClass
     }
 }
 ";
-            CreateCompilation(code, options: TestOptions.UnsafeReleaseDll, parseOptions: TestOptions.Regular7_3)
+            CreateCompilation(
+                    code,
+                    options: TestOptions.UnsafeReleaseDll,
+                    parseOptions: TestOptions.Regular7_3
+                )
                 .VerifyDiagnostics(
-                // (12,16): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
-                //         fixed (MyStruct<int>* ptr = &c.ms)
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "MyStruct<int>*").WithArguments("unmanaged constructed types", "8.0").WithLocation(12, 16),
-                // (12,37): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
-                //         fixed (MyStruct<int>* ptr = &c.ms)
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "&c.ms").WithArguments("unmanaged constructed types", "8.0").WithLocation(12, 37));
+                    // (12,16): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    //         fixed (MyStruct<int>* ptr = &c.ms)
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "MyStruct<int>*")
+                        .WithArguments("unmanaged constructed types", "8.0")
+                        .WithLocation(12, 16),
+                    // (12,37): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    //         fixed (MyStruct<int>* ptr = &c.ms)
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "&c.ms")
+                        .WithArguments("unmanaged constructed types", "8.0")
+                        .WithLocation(12, 37)
+                );
 
             CreateCompilation(code, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics();
         }
@@ -3860,7 +4981,8 @@ public class MyClass
         [Fact]
         public void GenericStructSizeofRequiresCSharp8()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T>
 {
     public T field;
@@ -3871,11 +4993,20 @@ public struct MyStruct<T>
     }
 }
 ";
-            CreateCompilation(code, options: TestOptions.UnsafeReleaseDll, parseOptions: TestOptions.Regular7_3)
+            CreateCompilation(
+                    code,
+                    options: TestOptions.UnsafeReleaseDll,
+                    parseOptions: TestOptions.Regular7_3
+                )
                 .VerifyDiagnostics(
-                // (8,20): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
-                //         var size = sizeof(MyStruct<int>);
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "sizeof(MyStruct<int>)").WithArguments("unmanaged constructed types", "8.0").WithLocation(8, 20)
+                    // (8,20): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    //         var size = sizeof(MyStruct<int>);
+                    Diagnostic(
+                            ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
+                            "sizeof(MyStruct<int>)"
+                        )
+                        .WithArguments("unmanaged constructed types", "8.0")
+                        .WithLocation(8, 20)
                 );
 
             CreateCompilation(code, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics();
@@ -3884,7 +5015,8 @@ public struct MyStruct<T>
         [Fact]
         public void GenericImplicitStackallocRequiresCSharp8()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T>
 {
     public T field;
@@ -3895,11 +5027,21 @@ public struct MyStruct<T>
     }
 }
 ";
-            CreateCompilation(code, options: TestOptions.UnsafeReleaseDll, parseOptions: TestOptions.Regular7_3)
+            CreateCompilation(
+                    code,
+                    options: TestOptions.UnsafeReleaseDll,
+                    parseOptions: TestOptions.Regular7_3
+                )
                 .VerifyDiagnostics(
-                // (8,19): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
-                //         var arr = stackalloc[] { new MyStruct<int>() };
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc[] { new MyStruct<int>() }").WithArguments("unmanaged constructed types", "8.0").WithLocation(8, 19));
+                    // (8,19): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    //         var arr = stackalloc[] { new MyStruct<int>() };
+                    Diagnostic(
+                            ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
+                            "stackalloc[] { new MyStruct<int>() }"
+                        )
+                        .WithArguments("unmanaged constructed types", "8.0")
+                        .WithLocation(8, 19)
+                );
 
             CreateCompilation(code, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics();
         }
@@ -3907,7 +5049,8 @@ public struct MyStruct<T>
         [Fact]
         public void GenericStackallocRequiresCSharp8()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T>
 {
     public T field;
@@ -3918,11 +5061,18 @@ public struct MyStruct<T>
     }
 }
 ";
-            CreateCompilation(code, options: TestOptions.UnsafeReleaseDll, parseOptions: TestOptions.Regular7_3)
+            CreateCompilation(
+                    code,
+                    options: TestOptions.UnsafeReleaseDll,
+                    parseOptions: TestOptions.Regular7_3
+                )
                 .VerifyDiagnostics(
-                // (8,30): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
-                //         var arr = stackalloc MyStruct<int>[4];
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "MyStruct<int>").WithArguments("unmanaged constructed types", "8.0").WithLocation(8, 30));
+                    // (8,30): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    //         var arr = stackalloc MyStruct<int>[4];
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "MyStruct<int>")
+                        .WithArguments("unmanaged constructed types", "8.0")
+                        .WithLocation(8, 30)
+                );
 
             CreateCompilation(code, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics();
         }
@@ -3930,7 +5080,8 @@ public struct MyStruct<T>
         [Fact]
         public void GenericStructPointerFieldRequiresCSharp8()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T>
 {
     public T field;
@@ -3941,11 +5092,17 @@ public unsafe struct OtherStruct
     public MyStruct<int>* ms;
 }
 ";
-            CreateCompilation(code, options: TestOptions.UnsafeReleaseDll, parseOptions: TestOptions.Regular7_3)
+            CreateCompilation(
+                    code,
+                    options: TestOptions.UnsafeReleaseDll,
+                    parseOptions: TestOptions.Regular7_3
+                )
                 .VerifyDiagnostics(
-                // (9,27): error CS8370: Feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
-                //     public MyStruct<int>* ms;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "ms").WithArguments("unmanaged constructed types", "8.0").WithLocation(9, 27)
+                    // (9,27): error CS8370: Feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    //     public MyStruct<int>* ms;
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "ms")
+                        .WithArguments("unmanaged constructed types", "8.0")
+                        .WithLocation(9, 27)
                 );
 
             CreateCompilation(code, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics();
@@ -3954,7 +5111,8 @@ public unsafe struct OtherStruct
         [Fact]
         public void GenericNestedStructPointerFieldRequiresCSharp8()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T>
 {
     public struct InnerStruct
@@ -3968,11 +5126,17 @@ public unsafe struct OtherStruct
     public MyStruct<int>.InnerStruct* ms;
 }
 ";
-            CreateCompilation(code, options: TestOptions.UnsafeReleaseDll, parseOptions: TestOptions.Regular7_3)
+            CreateCompilation(
+                    code,
+                    options: TestOptions.UnsafeReleaseDll,
+                    parseOptions: TestOptions.Regular7_3
+                )
                 .VerifyDiagnostics(
                     // (12,39): error CS8370: Feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
                     //     public MyStruct<int>.InnerStruct* ms;
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "ms").WithArguments("unmanaged constructed types", "8.0").WithLocation(12, 39)
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "ms")
+                        .WithArguments("unmanaged constructed types", "8.0")
+                        .WithLocation(12, 39)
                 );
 
             CreateCompilation(code, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics();
@@ -3981,7 +5145,8 @@ public unsafe struct OtherStruct
         [Fact, WorkItem(32103, "https://github.com/dotnet/roslyn/issues/32103")]
         public void StructContainingTuple_Unmanaged_RequiresCSharp8()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct
 {
     public (int, int) field;
@@ -3998,14 +5163,22 @@ public class C
     }
 }
 ";
-            CreateCompilation(code, options: TestOptions.UnsafeReleaseDll, parseOptions: TestOptions.Regular7_3)
+            CreateCompilation(
+                    code,
+                    options: TestOptions.UnsafeReleaseDll,
+                    parseOptions: TestOptions.Regular7_3
+                )
                 .VerifyDiagnostics(
-                // (13,9): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
-                //         M<MyStruct>();
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "M<MyStruct>").WithArguments("unmanaged constructed types", "8.0").WithLocation(13, 9),
-                // (14,9): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
-                //         M<(int, int)>();
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "M<(int, int)>").WithArguments("unmanaged constructed types", "8.0").WithLocation(14, 9)
+                    // (13,9): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    //         M<MyStruct>();
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "M<MyStruct>")
+                        .WithArguments("unmanaged constructed types", "8.0")
+                        .WithLocation(13, 9),
+                    // (14,9): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    //         M<(int, int)>();
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "M<(int, int)>")
+                        .WithArguments("unmanaged constructed types", "8.0")
+                        .WithLocation(14, 9)
                 );
 
             CreateCompilation(code, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics();
@@ -4014,7 +5187,8 @@ public class C
         [Fact, WorkItem(32103, "https://github.com/dotnet/roslyn/issues/32103")]
         public void StructContainingGenericTuple_Unmanaged()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T>
 {
     public (T, T) field;
@@ -4035,28 +5209,39 @@ public class C
     }
 }
 ";
-            CreateCompilation(code, options: TestOptions.UnsafeReleaseDll, parseOptions: TestOptions.Regular7_3)
+            CreateCompilation(
+                    code,
+                    options: TestOptions.UnsafeReleaseDll,
+                    parseOptions: TestOptions.Regular7_3
+                )
                 .VerifyDiagnostics(
-                // (13,9): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
-                //         M<MyStruct<U>>();
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "M<MyStruct<U>>").WithArguments("unmanaged constructed types", "8.0").WithLocation(13, 9),
-                // (18,9): error CS8377: The type 'MyStruct<V>' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'C.M<T>()'
-                //         M<MyStruct<V>>();
-                Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<MyStruct<V>>").WithArguments("C.M<T>()", "T", "MyStruct<V>").WithLocation(18, 9)
+                    // (13,9): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    //         M<MyStruct<U>>();
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "M<MyStruct<U>>")
+                        .WithArguments("unmanaged constructed types", "8.0")
+                        .WithLocation(13, 9),
+                    // (18,9): error CS8377: The type 'MyStruct<V>' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'C.M<T>()'
+                    //         M<MyStruct<V>>();
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<MyStruct<V>>")
+                        .WithArguments("C.M<T>()", "T", "MyStruct<V>")
+                        .WithLocation(18, 9)
                 );
 
             CreateCompilation(code, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
                     // (18,9): error CS8377: The type 'MyStruct<V>' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'C.M<T>()'
                     //         M<MyStruct<V>>();
-                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<MyStruct<V>>").WithArguments("C.M<T>()", "T", "MyStruct<V>").WithLocation(18, 9)
+                    Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M<MyStruct<V>>")
+                        .WithArguments("C.M<T>()", "T", "MyStruct<V>")
+                        .WithLocation(18, 9)
                 );
         }
 
         [Fact]
         public void GenericRefStructAddressOf_01()
         {
-            var code = @"
+            var code =
+                @"
 public ref struct MyStruct<T>
 {
     public T field;
@@ -4073,16 +5258,19 @@ public class MyClass
 }
 ";
 
-            CompileAndVerify(code,
+            CompileAndVerify(
+                code,
                 options: TestOptions.UnsafeReleaseExe,
                 verify: Verification.Skipped,
-                expectedOutput: "42");
+                expectedOutput: "42"
+            );
         }
 
         [Fact]
         public void GenericRefStructAddressOf_02()
         {
-            var code = @"
+            var code =
+                @"
 public ref struct MyStruct<T>
 {
     public T field;
@@ -4098,17 +5286,21 @@ public class MyClass
 }
 ";
 
-            CreateCompilation(code, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics(
-                // (12,19): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('MyStruct<object>')
-                //         var ptr = &ms;
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "&ms").WithArguments("MyStruct<object>").WithLocation(12, 19)
-            );
+            CreateCompilation(code, options: TestOptions.UnsafeReleaseDll)
+                .VerifyDiagnostics(
+                    // (12,19): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('MyStruct<object>')
+                    //         var ptr = &ms;
+                    Diagnostic(ErrorCode.WRN_ManagedAddr, "&ms")
+                        .WithArguments("MyStruct<object>")
+                        .WithLocation(12, 19)
+                );
         }
 
         [Fact]
         public void GenericStructFixedStatement()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T>
 {
     public T field;
@@ -4129,16 +5321,19 @@ public class MyClass
 }
 ";
 
-            CompileAndVerify(code,
+            CompileAndVerify(
+                code,
                 options: TestOptions.UnsafeReleaseExe,
                 verify: Verification.Skipped,
-                expectedOutput: "42");
+                expectedOutput: "42"
+            );
         }
 
         [Fact]
         public void GenericStructLocalFixedStatement()
         {
-            var code = @"
+            var code =
+                @"
 public struct MyStruct<T>
 {
     public T field;
@@ -4166,7 +5361,8 @@ public class MyClass
         [Fact, WorkItem(45141, "https://github.com/dotnet/roslyn/issues/45141")]
         public void CannotCombineDiagnostics()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 class C1<T1> where T1 : class, struct, unmanaged, notnull
 {
     void M1<T2>() where T2 : class, struct, unmanaged, notnull {}
@@ -4179,58 +5375,74 @@ class C3<T1> where T1 : class, class
 {
     void M3<T2>() where T2 : class, class {}
 }
-");
+"
+            );
 
             comp.VerifyDiagnostics(
                 // (2,32): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
                 // class C1<T1> where T1 : class, struct, unmanaged, notnull
-                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "struct").WithLocation(2, 32),
+                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "struct")
+                    .WithLocation(2, 32),
                 // (2,40): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
                 // class C1<T1> where T1 : class, struct, unmanaged, notnull
-                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "unmanaged").WithLocation(2, 40),
+                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "unmanaged")
+                    .WithLocation(2, 40),
                 // (2,51): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
                 // class C1<T1> where T1 : class, struct, unmanaged, notnull
-                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "notnull").WithLocation(2, 51),
+                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "notnull")
+                    .WithLocation(2, 51),
                 // (4,37): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
                 //     void M1<T2>() where T2 : class, struct, unmanaged, notnull {}
-                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "struct").WithLocation(4, 37),
+                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "struct")
+                    .WithLocation(4, 37),
                 // (4,45): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
                 //     void M1<T2>() where T2 : class, struct, unmanaged, notnull {}
-                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "unmanaged").WithLocation(4, 45),
+                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "unmanaged")
+                    .WithLocation(4, 45),
                 // (4,56): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
                 //     void M1<T2>() where T2 : class, struct, unmanaged, notnull {}
-                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "notnull").WithLocation(4, 56),
+                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "notnull")
+                    .WithLocation(4, 56),
                 // (6,33): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
                 // class C2<T1> where T1 : struct, class, unmanaged, notnull
-                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "class").WithLocation(6, 33),
+                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "class")
+                    .WithLocation(6, 33),
                 // (6,40): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
                 // class C2<T1> where T1 : struct, class, unmanaged, notnull
-                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "unmanaged").WithLocation(6, 40),
+                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "unmanaged")
+                    .WithLocation(6, 40),
                 // (6,51): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
                 // class C2<T1> where T1 : struct, class, unmanaged, notnull
-                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "notnull").WithLocation(6, 51),
+                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "notnull")
+                    .WithLocation(6, 51),
                 // (8,38): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
                 //     void M2<T2>() where T2 : struct, class, unmanaged, notnull {}
-                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "class").WithLocation(8, 38),
+                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "class")
+                    .WithLocation(8, 38),
                 // (8,45): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
                 //     void M2<T2>() where T2 : struct, class, unmanaged, notnull {}
-                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "unmanaged").WithLocation(8, 45),
+                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "unmanaged")
+                    .WithLocation(8, 45),
                 // (8,56): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
                 //     void M2<T2>() where T2 : struct, class, unmanaged, notnull {}
-                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "notnull").WithLocation(8, 56),
+                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "notnull")
+                    .WithLocation(8, 56),
                 // (10,32): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
                 // class C3<T1> where T1 : class, class
-                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "class").WithLocation(10, 32),
+                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "class")
+                    .WithLocation(10, 32),
                 // (12,37): error CS0449: The 'class', 'struct', 'unmanaged', 'notnull', and 'default' constraints cannot be combined or duplicated, and must be specified first in the constraints list.
                 //     void M3<T2>() where T2 : class, class {}
-                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "class").WithLocation(12, 37)
+                Diagnostic(ErrorCode.ERR_TypeConstraintsMustBeUniqueAndFirst, "class")
+                    .WithLocation(12, 37)
             );
         }
 
         [Fact, WorkItem(45141, "https://github.com/dotnet/roslyn/issues/45141")]
         public void CannotCombineDiagnostics_InheritedClassStruct()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 class C
 {
     public virtual void M<T1>() where T1 : class {}
@@ -4255,7 +5467,8 @@ class H : G
 {
     public override void M<T3>() where T3 : G, unmanaged, struct {}
 }
-");
+"
+            );
 
             comp.VerifyDiagnostics(
                 // (8,45): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.

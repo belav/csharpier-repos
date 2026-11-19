@@ -6,7 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Net.Http
 {
-
     internal sealed class HttpAuthority : IEquatable<HttpAuthority>
     {
         // ALPN Protocol Name should also be part of an authority, but we are special-casing for HTTP/3, so this can be assumed to be "H3".

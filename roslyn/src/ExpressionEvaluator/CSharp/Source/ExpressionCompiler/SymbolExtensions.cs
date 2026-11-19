@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 {
     internal static class SymbolExtensions
     {
-        internal static ImmutableArray<TypeParameterSymbol> GetAllTypeParameters(this MethodSymbol method)
+        internal static ImmutableArray<TypeParameterSymbol> GetAllTypeParameters(
+            this MethodSymbol method
+        )
         {
             var builder = ArrayBuilder<TypeParameterSymbol>.GetInstance();
             method.ContainingType.GetAllTypeParameters(builder);
@@ -21,7 +23,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         internal static ReadOnlyCollection<byte>? GetCustomTypeInfoPayload(this MethodSymbol method)
         {
-            return method.DeclaringCompilation.GetCustomTypeInfoPayload(method.ReturnType, method.ReturnTypeWithAnnotations.CustomModifiers.Length + method.RefCustomModifiers.Length, RefKind.None);
+            return method.DeclaringCompilation.GetCustomTypeInfoPayload(
+                method.ReturnType,
+                method.ReturnTypeWithAnnotations.CustomModifiers.Length
+                    + method.RefCustomModifiers.Length,
+                RefKind.None
+            );
         }
     }
 }

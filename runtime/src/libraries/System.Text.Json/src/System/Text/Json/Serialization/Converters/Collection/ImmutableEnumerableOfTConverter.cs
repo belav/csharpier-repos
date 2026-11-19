@@ -19,16 +19,28 @@ namespace System.Text.Json.Serialization.Converters
         internal sealed override bool CanHaveMetadata => false;
 
         internal override bool SupportsCreateObjectDelegate => false;
-        protected sealed override void CreateCollection(ref Utf8JsonReader reader, scoped ref ReadStack state, JsonSerializerOptions options)
+
+        protected sealed override void CreateCollection(
+            ref Utf8JsonReader reader,
+            scoped ref ReadStack state,
+            JsonSerializerOptions options
+        )
         {
             state.Current.ReturnValue = new List<TElement>();
         }
 
-        protected sealed override void ConvertCollection(ref ReadStack state, JsonSerializerOptions options)
+        protected sealed override void ConvertCollection(
+            ref ReadStack state,
+            JsonSerializerOptions options
+        )
         {
             JsonTypeInfo typeInfo = state.Current.JsonTypeInfo;
 
-            Func<IEnumerable<TElement>, TCollection>? creator = (Func<IEnumerable<TElement>, TCollection>?)typeInfo.CreateObjectWithArgs;
+            Func<IEnumerable<TElement>, TCollection>? creator = (Func<
+                IEnumerable<TElement>,
+                TCollection
+            >?)
+                typeInfo.CreateObjectWithArgs;
             Debug.Assert(creator != null);
             state.Current.ReturnValue = creator((List<TElement>)state.Current.ReturnValue!);
         }

@@ -18,6 +18,6 @@ namespace System.Threading
         WaitSleepJoin = 32,
         Suspended = 64,
         AbortRequested = 128,
-        Aborted = 256
+        Aborted = 256,
     }
 }

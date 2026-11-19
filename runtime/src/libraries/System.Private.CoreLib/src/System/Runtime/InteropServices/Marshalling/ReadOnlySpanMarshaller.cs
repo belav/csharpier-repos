@@ -19,8 +19,16 @@ namespace System.Runtime.InteropServices.Marshalling
     /// In particular, this marshaller will pass a non-null value for a zero-length span if the span was constructed with a non-null value.
     /// </remarks>
     [CLSCompliant(false)]
-    [CustomMarshaller(typeof(ReadOnlySpan<>), MarshalMode.ManagedToUnmanagedIn, typeof(ReadOnlySpanMarshaller<,>.ManagedToUnmanagedIn))]
-    [CustomMarshaller(typeof(ReadOnlySpan<>), MarshalMode.UnmanagedToManagedOut, typeof(ReadOnlySpanMarshaller<,>.UnmanagedToManagedOut))]
+    [CustomMarshaller(
+        typeof(ReadOnlySpan<>),
+        MarshalMode.ManagedToUnmanagedIn,
+        typeof(ReadOnlySpanMarshaller<,>.ManagedToUnmanagedIn)
+    )]
+    [CustomMarshaller(
+        typeof(ReadOnlySpan<>),
+        MarshalMode.UnmanagedToManagedOut,
+        typeof(ReadOnlySpanMarshaller<,>.UnmanagedToManagedOut)
+    )]
     [ContiguousCollectionMarshaller]
     public static unsafe class ReadOnlySpanMarshaller<T, TUnmanagedElement>
         where TUnmanagedElement : unmanaged
@@ -36,7 +44,10 @@ namespace System.Runtime.InteropServices.Marshalling
             /// <param name="managed">The managed span.</param>
             /// <param name="numElements">The number of elements in the span.</param>
             /// <returns>A pointer to the block of memory for the unmanaged elements.</returns>
-            public static TUnmanagedElement* AllocateContainerForUnmanagedElements(ReadOnlySpan<T> managed, out int numElements)
+            public static TUnmanagedElement* AllocateContainerForUnmanagedElements(
+                ReadOnlySpan<T> managed,
+                out int numElements
+            )
             {
                 // Emulate the pinning behavior:
                 // If the span is over a null reference, then pass a null pointer.
@@ -58,8 +69,8 @@ namespace System.Runtime.InteropServices.Marshalling
             /// </summary>
             /// <param name="managed">The managed collection.</param>
             /// <returns>A span of the managed collection elements.</returns>
-            public static ReadOnlySpan<T> GetManagedValuesSource(ReadOnlySpan<T> managed)
-                => managed;
+            public static ReadOnlySpan<T> GetManagedValuesSource(ReadOnlySpan<T> managed) =>
+                managed;
 
             /// <summary>
             /// Gets a span of the space where the unmanaged collection elements should be stored.
@@ -67,8 +78,10 @@ namespace System.Runtime.InteropServices.Marshalling
             /// <param name="unmanaged">The pointer to the block of memory for the unmanaged elements.</param>
             /// <param name="numElements">The number of elements that will be copied into the memory block.</param>
             /// <returns>A span over the unmanaged memory that can contain the specified number of elements.</returns>
-            public static Span<TUnmanagedElement> GetUnmanagedValuesDestination(TUnmanagedElement* unmanaged, int numElements)
-                => new Span<TUnmanagedElement>(unmanaged, numElements);
+            public static Span<TUnmanagedElement> GetUnmanagedValuesDestination(
+                TUnmanagedElement* unmanaged,
+                int numElements
+            ) => new Span<TUnmanagedElement>(unmanaged, numElements);
         }
 
         /// <summary>
@@ -137,12 +150,14 @@ namespace System.Runtime.InteropServices.Marshalling
             /// <summary>
             /// Returns a reference to the marshalled array.
             /// </summary>
-            public ref TUnmanagedElement GetPinnableReference() => ref MemoryMarshal.GetReference(_span);
+            public ref TUnmanagedElement GetPinnableReference() =>
+                ref MemoryMarshal.GetReference(_span);
 
             /// <summary>
             /// Returns the unmanaged value representing the array.
             /// </summary>
-            public TUnmanagedElement* ToUnmanaged() => (TUnmanagedElement*)Unsafe.AsPointer(ref GetPinnableReference());
+            public TUnmanagedElement* ToUnmanaged() =>
+                (TUnmanagedElement*)Unsafe.AsPointer(ref GetPinnableReference());
 
             /// <summary>
             /// Frees resources.

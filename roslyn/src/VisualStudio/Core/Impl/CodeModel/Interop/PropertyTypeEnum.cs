@@ -15,6 +15,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
     {
         ReadOnly = 0,
         WriteOnly,
-        ReadWrite
+        ReadWrite,
     }
 }

@@ -39,10 +39,7 @@ namespace System.IdentityModel.Metadata
         /// Initializes an instance of <see cref="MetadataSerializer"/>
         /// </summary>
         public MetadataSerializer()
-            : this(new KeyInfoSerializer(true))
-        {
-        }
-
+            : this(new KeyInfoSerializer(true)) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="MetadataSerializer"/>
@@ -218,7 +215,6 @@ namespace System.IdentityModel.Metadata
             }
             found = false;
             return ContactType.Unspecified;
-
         }
 
         private static KeyType GetKeyDescriptorType(string keyType)
@@ -236,7 +232,11 @@ namespace System.IdentityModel.Metadata
                 return KeyType.Signing;
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, Saml2MetadataConstants.Attributes.Use, keyType)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new MetadataSerializationException(
+                    SR.GetString(SR.ID3202, Saml2MetadataConstants.Attributes.Use, keyType)
+                )
+            );
         }
 
         /// <summary>
@@ -245,7 +245,9 @@ namespace System.IdentityModel.Metadata
         /// <param name="reader">Xml reader.</param>
         /// <returns>An application service descriptor.</returns>
         /// <exception cref="ArgumentNullException">The parameter reader is null.</exception>
-        protected virtual ApplicationServiceDescriptor ReadApplicationServiceDescriptor(XmlReader reader)
+        protected virtual ApplicationServiceDescriptor ReadApplicationServiceDescriptor(
+            XmlReader reader
+        )
         {
             if (reader == null)
             {
@@ -262,7 +264,12 @@ namespace System.IdentityModel.Metadata
             {
                 while (reader.IsStartElement())
                 {
-                    if (reader.IsStartElement(FederationMetadataConstants.Elements.ApplicationServiceEndpoint, FederationMetadataConstants.Namespace))
+                    if (
+                        reader.IsStartElement(
+                            FederationMetadataConstants.Elements.ApplicationServiceEndpoint,
+                            FederationMetadataConstants.Namespace
+                        )
+                    )
                     {
                         isEmpty = reader.IsEmptyElement;
                         reader.ReadStartElement();
@@ -273,7 +280,12 @@ namespace System.IdentityModel.Metadata
                             reader.ReadEndElement();
                         }
                     }
-                    else if (reader.IsStartElement(FederationMetadataConstants.Elements.PassiveRequestorEndpoint, FederationMetadataConstants.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            FederationMetadataConstants.Elements.PassiveRequestorEndpoint,
+                            FederationMetadataConstants.Namespace
+                        )
+                    )
                     {
                         isEmpty = reader.IsEmptyElement;
                         reader.ReadStartElement();
@@ -319,13 +331,20 @@ namespace System.IdentityModel.Metadata
             }
             ContactPerson person = CreateContactPersonInstance();
 
-            string contactType = reader.GetAttribute(Saml2MetadataConstants.Attributes.ContactType, null);
+            string contactType = reader.GetAttribute(
+                Saml2MetadataConstants.Attributes.ContactType,
+                null
+            );
             bool foundKey = false;
 
             person.Type = GetContactPersonType(contactType, out foundKey);
             if (!foundKey)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3201, typeof(ContactType), contactType)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3201, typeof(ContactType), contactType)
+                    )
+                );
             }
 
             ReadCustomAttributes<ContactPerson>(reader, person);
@@ -336,29 +355,69 @@ namespace System.IdentityModel.Metadata
             {
                 while (reader.IsStartElement())
                 {
-                    if (reader.IsStartElement(Saml2MetadataConstants.Elements.Company, Saml2MetadataConstants.Namespace))
+                    if (
+                        reader.IsStartElement(
+                            Saml2MetadataConstants.Elements.Company,
+                            Saml2MetadataConstants.Namespace
+                        )
+                    )
                     {
-                        person.Company = reader.ReadElementContentAsString(Saml2MetadataConstants.Elements.Company, Saml2MetadataConstants.Namespace);
+                        person.Company = reader.ReadElementContentAsString(
+                            Saml2MetadataConstants.Elements.Company,
+                            Saml2MetadataConstants.Namespace
+                        );
                     }
-                    else if (reader.IsStartElement(Saml2MetadataConstants.Elements.GivenName, Saml2MetadataConstants.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            Saml2MetadataConstants.Elements.GivenName,
+                            Saml2MetadataConstants.Namespace
+                        )
+                    )
                     {
-                        person.GivenName = reader.ReadElementContentAsString(Saml2MetadataConstants.Elements.GivenName, Saml2MetadataConstants.Namespace);
+                        person.GivenName = reader.ReadElementContentAsString(
+                            Saml2MetadataConstants.Elements.GivenName,
+                            Saml2MetadataConstants.Namespace
+                        );
                     }
-                    else if (reader.IsStartElement(Saml2MetadataConstants.Elements.Surname, Saml2MetadataConstants.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            Saml2MetadataConstants.Elements.Surname,
+                            Saml2MetadataConstants.Namespace
+                        )
+                    )
                     {
-                        person.Surname = reader.ReadElementContentAsString(Saml2MetadataConstants.Elements.Surname, Saml2MetadataConstants.Namespace);
+                        person.Surname = reader.ReadElementContentAsString(
+                            Saml2MetadataConstants.Elements.Surname,
+                            Saml2MetadataConstants.Namespace
+                        );
                     }
-                    else if (reader.IsStartElement(Saml2MetadataConstants.Elements.EmailAddress, Saml2MetadataConstants.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            Saml2MetadataConstants.Elements.EmailAddress,
+                            Saml2MetadataConstants.Namespace
+                        )
+                    )
                     {
-                        string emailId = reader.ReadElementContentAsString(Saml2MetadataConstants.Elements.EmailAddress, Saml2MetadataConstants.Namespace);
+                        string emailId = reader.ReadElementContentAsString(
+                            Saml2MetadataConstants.Elements.EmailAddress,
+                            Saml2MetadataConstants.Namespace
+                        );
                         if (!String.IsNullOrEmpty(emailId))
                         {
                             person.EmailAddresses.Add(emailId);
                         }
                     }
-                    else if (reader.IsStartElement(Saml2MetadataConstants.Elements.TelephoneNumber, Saml2MetadataConstants.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            Saml2MetadataConstants.Elements.TelephoneNumber,
+                            Saml2MetadataConstants.Namespace
+                        )
+                    )
                     {
-                        string phone = reader.ReadElementContentAsString(Saml2MetadataConstants.Elements.TelephoneNumber, Saml2MetadataConstants.Namespace);
+                        string phone = reader.ReadElementContentAsString(
+                            Saml2MetadataConstants.Elements.TelephoneNumber,
+                            Saml2MetadataConstants.Namespace
+                        );
                         if (!String.IsNullOrEmpty(phone))
                         {
                             person.TelephoneNumbers.Add(phone);
@@ -372,7 +431,6 @@ namespace System.IdentityModel.Metadata
                     {
                         reader.Skip();
                     }
-
                 }
                 reader.ReadEndElement(); // </ContactPerson>
             }
@@ -411,10 +469,14 @@ namespace System.IdentityModel.Metadata
         /// <param name="xsiType">The xsi type</param>
         /// <param name="reader">Xml reader</param>
         /// <param name="entityDescriptor">The entity descriptor for adding the Role Descriptors</param>
-        protected virtual void ReadCustomRoleDescriptor(string xsiType, XmlReader reader, EntityDescriptor entityDescriptor)
+        protected virtual void ReadCustomRoleDescriptor(
+            string xsiType,
+            XmlReader reader,
+            EntityDescriptor entityDescriptor
+        )
         {
             //
-            // Extensibility point: Based on the xsiType, overriden implementations have the ability to read the RoleDescriptor 
+            // Extensibility point: Based on the xsiType, overriden implementations have the ability to read the RoleDescriptor
             // attributes from a (##other) namespace and add the Role Descriptors to the entityDescriptor
             //
             if (reader == null)
@@ -422,7 +484,10 @@ namespace System.IdentityModel.Metadata
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
 
-            TraceUtility.TraceString(System.Diagnostics.TraceEventType.Warning, SR.GetString(SR.ID3274, xsiType));
+            TraceUtility.TraceString(
+                System.Diagnostics.TraceEventType.Warning,
+                SR.GetString(SR.ID3274, xsiType)
+            );
             reader.Skip();
         }
 
@@ -443,15 +508,28 @@ namespace System.IdentityModel.Metadata
             //
             // This is out of scope for extensibility.
             //
-            string claimType = reader.GetAttribute(WSFederationMetadataConstants.Attributes.Uri, null);
+            string claimType = reader.GetAttribute(
+                WSFederationMetadataConstants.Attributes.Uri,
+                null
+            );
             if (!UriUtil.CanCreateValidUri(claimType, UriKind.Absolute))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, WSAuthorizationConstants.Elements.ClaimType, claimType)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(
+                            SR.ID3202,
+                            WSAuthorizationConstants.Elements.ClaimType,
+                            claimType
+                        )
+                    )
+                );
             }
             DisplayClaim claim = new DisplayClaim(claimType);
 
             bool isOptional = true;
-            string optionalString = reader.GetAttribute(WSFederationMetadataConstants.Attributes.Optional);
+            string optionalString = reader.GetAttribute(
+                WSFederationMetadataConstants.Attributes.Optional
+            );
             if (!String.IsNullOrEmpty(optionalString))
             {
                 try
@@ -460,7 +538,15 @@ namespace System.IdentityModel.Metadata
                 }
                 catch (FormatException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, WSFederationMetadataConstants.Attributes.Optional, optionalString)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3202,
+                                WSFederationMetadataConstants.Attributes.Optional,
+                                optionalString
+                            )
+                        )
+                    );
                 }
             }
             claim.Optional = isOptional;
@@ -471,13 +557,29 @@ namespace System.IdentityModel.Metadata
             {
                 while (reader.IsStartElement())
                 {
-                    if (reader.IsStartElement(WSAuthorizationConstants.Elements.DisplayName, WSAuthorizationConstants.Namespace))
+                    if (
+                        reader.IsStartElement(
+                            WSAuthorizationConstants.Elements.DisplayName,
+                            WSAuthorizationConstants.Namespace
+                        )
+                    )
                     {
-                        claim.DisplayTag = reader.ReadElementContentAsString(WSAuthorizationConstants.Elements.DisplayName, WSAuthorizationConstants.Namespace);
+                        claim.DisplayTag = reader.ReadElementContentAsString(
+                            WSAuthorizationConstants.Elements.DisplayName,
+                            WSAuthorizationConstants.Namespace
+                        );
                     }
-                    else if (reader.IsStartElement(WSAuthorizationConstants.Elements.Description, WSAuthorizationConstants.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            WSAuthorizationConstants.Elements.Description,
+                            WSAuthorizationConstants.Namespace
+                        )
+                    )
                     {
-                        claim.Description = reader.ReadElementContentAsString(WSAuthorizationConstants.Elements.Description, WSAuthorizationConstants.Namespace);
+                        claim.Description = reader.ReadElementContentAsString(
+                            WSAuthorizationConstants.Elements.Description,
+                            WSAuthorizationConstants.Namespace
+                        );
                     }
                     else
                     {
@@ -498,7 +600,10 @@ namespace System.IdentityModel.Metadata
         /// <returns>The entities descriptor.</returns>
         /// <exception cref="ArgumentNullException">The parameter reader is null.</exception>
         /// <exception cref="MetadataSerializationException">Thrown if the XML is not well-formed.</exception>
-        protected virtual EntitiesDescriptor ReadEntitiesDescriptor(XmlReader reader, SecurityTokenResolver tokenResolver)
+        protected virtual EntitiesDescriptor ReadEntitiesDescriptor(
+            XmlReader reader,
+            SecurityTokenResolver tokenResolver
+        )
         {
             if (reader == null)
             {
@@ -510,9 +615,19 @@ namespace System.IdentityModel.Metadata
             //
             // There may be embedded signed XML elements. So we need to plumb the SecurityTokenSerializer and tokenResolver
             //
-            EnvelopedSignatureReader envelopeReader = new EnvelopedSignatureReader(reader, SecurityTokenSerializer, tokenResolver, false, false, true);
+            EnvelopedSignatureReader envelopeReader = new EnvelopedSignatureReader(
+                reader,
+                SecurityTokenSerializer,
+                tokenResolver,
+                false,
+                false,
+                true
+            );
 
-            string name = envelopeReader.GetAttribute(Saml2MetadataConstants.Attributes.EntityGroupName, null);
+            string name = envelopeReader.GetAttribute(
+                Saml2MetadataConstants.Attributes.EntityGroupName,
+                null
+            );
             if (!String.IsNullOrEmpty(name))
             {
                 resultEntityGroup.Name = name;
@@ -526,19 +641,35 @@ namespace System.IdentityModel.Metadata
             {
                 while (envelopeReader.IsStartElement())
                 {
-                    if (envelopeReader.IsStartElement(Saml2MetadataConstants.Elements.EntityDescriptor, Saml2MetadataConstants.Namespace))
+                    if (
+                        envelopeReader.IsStartElement(
+                            Saml2MetadataConstants.Elements.EntityDescriptor,
+                            Saml2MetadataConstants.Namespace
+                        )
+                    )
                     {
-                        resultEntityGroup.ChildEntities.Add(ReadEntityDescriptor(envelopeReader, tokenResolver));
+                        resultEntityGroup.ChildEntities.Add(
+                            ReadEntityDescriptor(envelopeReader, tokenResolver)
+                        );
                     }
-                    else if (envelopeReader.IsStartElement(Saml2MetadataConstants.Elements.EntitiesDescriptor, Saml2MetadataConstants.Namespace))
+                    else if (
+                        envelopeReader.IsStartElement(
+                            Saml2MetadataConstants.Elements.EntitiesDescriptor,
+                            Saml2MetadataConstants.Namespace
+                        )
+                    )
                     {
-                        resultEntityGroup.ChildEntityGroups.Add(ReadEntitiesDescriptor(envelopeReader, tokenResolver));
+                        resultEntityGroup.ChildEntityGroups.Add(
+                            ReadEntitiesDescriptor(envelopeReader, tokenResolver)
+                        );
                     }
                     else if (envelopeReader.TryReadSignature())
                     {
                         // Do nothng
                     }
-                    else if (ReadCustomElement<EntitiesDescriptor>(envelopeReader, resultEntityGroup))
+                    else if (
+                        ReadCustomElement<EntitiesDescriptor>(envelopeReader, resultEntityGroup)
+                    )
                     {
                         // Do nothing.
                     }
@@ -546,7 +677,6 @@ namespace System.IdentityModel.Metadata
                     {
                         envelopeReader.Skip();
                     }
-
                 }
                 envelopeReader.ReadEndElement(); // </EntitiesDescriptor>
             }
@@ -558,9 +688,16 @@ namespace System.IdentityModel.Metadata
                 ValidateSigningCredential(resultEntityGroup.SigningCredentials);
             }
 
-            if (resultEntityGroup.ChildEntityGroups.Count == 0 && resultEntityGroup.ChildEntities.Count == 0)
+            if (
+                resultEntityGroup.ChildEntityGroups.Count == 0
+                && resultEntityGroup.ChildEntities.Count == 0
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3200, Saml2MetadataConstants.Elements.EntityDescriptor)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3200, Saml2MetadataConstants.Elements.EntityDescriptor)
+                    )
+                );
             }
             foreach (EntityDescriptor entity in resultEntityGroup.ChildEntities)
             {
@@ -568,7 +705,15 @@ namespace System.IdentityModel.Metadata
                 {
                     if (!StringComparer.Ordinal.Equals(entity.FederationId, resultEntityGroup.Name))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, WSFederationMetadataConstants.Attributes.FederationId, entity.FederationId)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MetadataSerializationException(
+                                SR.GetString(
+                                    SR.ID3202,
+                                    WSFederationMetadataConstants.Attributes.FederationId,
+                                    entity.FederationId
+                                )
+                            )
+                        );
                     }
                 }
             }
@@ -578,45 +723,29 @@ namespace System.IdentityModel.Metadata
         /// <summary>
         /// Gets or sets the validation mode of the X509 certificate that is used to sign the metadata document.
         /// </summary>
-        public X509CertificateValidationMode CertificateValidationMode
-        {
-            get;
-            set;
-        }
+        public X509CertificateValidationMode CertificateValidationMode { get; set; }
 
         /// <summary>
         /// Gets or sets the revocation mode of the X509 certificate that is used to sign the metadata document.
         /// </summary>
-        public X509RevocationMode RevocationMode
-        {
-            get;
-            set;
-        }
+        public X509RevocationMode RevocationMode { get; set; }
 
         /// <summary>
         /// Gets or sets the trusted store location of the X509 certificate that is used to sign the metadata document.
         /// </summary>
-        public StoreLocation TrustedStoreLocation
-        {
-            get;
-            set;
-        }
+        public StoreLocation TrustedStoreLocation { get; set; }
 
         /// <summary>
         /// Gets or sets the certificate validator of the X509 certificate that is used to sign the metadata document.
         /// </summary>
-        public X509CertificateValidator CertificateValidator
-        {
-            get;
-            set;
-        }
+        public X509CertificateValidator CertificateValidator { get; set; }
 
         /// <summary>
         /// Gets the list of trusted issuer that this serializer instance trusts to sign the metadata docuemnt.
         /// </summary>
         public List<string> TrustedIssuers
         {
-            get { return _trustedIssuers;  }
+            get { return _trustedIssuers; }
         }
 
         /// <summary>
@@ -628,19 +757,32 @@ namespace System.IdentityModel.Metadata
         {
             if (signingCredentials == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("signingCredentials");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "signingCredentials"
+                );
             }
 
             if (CertificateValidationMode != X509CertificateValidationMode.Custom)
             {
-                CertificateValidator = X509Util.CreateCertificateValidator(CertificateValidationMode, RevocationMode, TrustedStoreLocation);
+                CertificateValidator = X509Util.CreateCertificateValidator(
+                    CertificateValidationMode,
+                    RevocationMode,
+                    TrustedStoreLocation
+                );
             }
-            else if (CertificateValidationMode == X509CertificateValidationMode.Custom && CertificateValidator == null)
+            else if (
+                CertificateValidationMode == X509CertificateValidationMode.Custom
+                && CertificateValidator == null
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4280)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID4280))
+                );
             }
 
-            X509Certificate2 certificate = GetMetadataSigningCertificate(signingCredentials.SigningKeyIdentifier);
+            X509Certificate2 certificate = GetMetadataSigningCertificate(
+                signingCredentials.SigningKeyIdentifier
+            );
 
             ValidateIssuer(certificate);
             CertificateValidator.Validate(certificate);
@@ -663,7 +805,7 @@ namespace System.IdentityModel.Metadata
         /// </summary>
         /// <param name="ski">The security key identifier instance.</param>
         /// <returns>An <see cref="X509Certificate2"/> instance.</returns>
-        protected virtual X509Certificate2 GetMetadataSigningCertificate( SecurityKeyIdentifier ski )
+        protected virtual X509Certificate2 GetMetadataSigningCertificate(SecurityKeyIdentifier ski)
         {
             if (ski == null)
             {
@@ -677,7 +819,9 @@ namespace System.IdentityModel.Metadata
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID8029)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID8029))
+                );
             }
         }
 
@@ -688,7 +832,10 @@ namespace System.IdentityModel.Metadata
         /// <param name="tokenResolver">The security token resolver.</param>
         /// <returns>An entity descriptor.</returns>
         /// <exception cref="ArgumentNullException">The parameter inputReader is null.</exception>
-        protected virtual EntityDescriptor ReadEntityDescriptor(XmlReader inputReader, SecurityTokenResolver tokenResolver)
+        protected virtual EntityDescriptor ReadEntityDescriptor(
+            XmlReader inputReader,
+            SecurityTokenResolver tokenResolver
+        )
         {
             if (inputReader == null)
             {
@@ -699,9 +846,16 @@ namespace System.IdentityModel.Metadata
 
             //
             // There may be embedded signed XML elements. So we need to plumb the SecurityTokenSerializer and tokenResolver
-            // IDFX 
+            // IDFX
 
-            EnvelopedSignatureReader reader = new EnvelopedSignatureReader(inputReader, SecurityTokenSerializer, tokenResolver, false, false, true);
+            EnvelopedSignatureReader reader = new EnvelopedSignatureReader(
+                inputReader,
+                SecurityTokenSerializer,
+                tokenResolver,
+                false,
+                false,
+                true
+            );
 
             // EntityID is mandatory - relaxed as per FIP 9935
             string entityId = reader.GetAttribute(Saml2MetadataConstants.Attributes.EntityId, null);
@@ -711,7 +865,10 @@ namespace System.IdentityModel.Metadata
             }
 
             // FederationID is optional
-            string fedId = reader.GetAttribute(WSFederationMetadataConstants.Attributes.FederationId, WSFederationMetadataConstants.Namespace);
+            string fedId = reader.GetAttribute(
+                WSFederationMetadataConstants.Attributes.FederationId,
+                WSFederationMetadataConstants.Namespace
+            );
             if (!String.IsNullOrEmpty(fedId))
             {
                 resultEntity.FederationId = fedId;
@@ -725,15 +882,34 @@ namespace System.IdentityModel.Metadata
             {
                 while (reader.IsStartElement())
                 {
-                    if (reader.IsStartElement(Saml2MetadataConstants.Elements.SpssoDescriptor, Saml2MetadataConstants.Namespace))
+                    if (
+                        reader.IsStartElement(
+                            Saml2MetadataConstants.Elements.SpssoDescriptor,
+                            Saml2MetadataConstants.Namespace
+                        )
+                    )
                     {
-                        resultEntity.RoleDescriptors.Add(ReadServiceProviderSingleSignOnDescriptor(reader));
+                        resultEntity.RoleDescriptors.Add(
+                            ReadServiceProviderSingleSignOnDescriptor(reader)
+                        );
                     }
-                    else if (reader.IsStartElement(Saml2MetadataConstants.Elements.IdpssoDescriptor, Saml2MetadataConstants.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            Saml2MetadataConstants.Elements.IdpssoDescriptor,
+                            Saml2MetadataConstants.Namespace
+                        )
+                    )
                     {
-                        resultEntity.RoleDescriptors.Add(ReadIdentityProviderSingleSignOnDescriptor(reader));
+                        resultEntity.RoleDescriptors.Add(
+                            ReadIdentityProviderSingleSignOnDescriptor(reader)
+                        );
                     }
-                    else if (reader.IsStartElement(Saml2MetadataConstants.Elements.RoleDescriptor, Saml2MetadataConstants.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            Saml2MetadataConstants.Elements.RoleDescriptor,
+                            Saml2MetadataConstants.Namespace
+                        )
+                    )
                     {
                         string xsiType = reader.GetAttribute("type", XmlSchema.InstanceNamespace);
 
@@ -742,42 +918,109 @@ namespace System.IdentityModel.Metadata
                             int index = xsiType.IndexOf(":", 0, StringComparison.Ordinal);
                             if (index < 0)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3207, "xsi:type", Saml2MetadataConstants.Elements.RoleDescriptor, xsiType)));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new MetadataSerializationException(
+                                        SR.GetString(
+                                            SR.ID3207,
+                                            "xsi:type",
+                                            Saml2MetadataConstants.Elements.RoleDescriptor,
+                                            xsiType
+                                        )
+                                    )
+                                );
                             }
                             string prefix = xsiType.Substring(0, index);
                             string ns = reader.LookupNamespace(prefix);
 
                             if (String.IsNullOrEmpty(ns))
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, prefix, ns)));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new MetadataSerializationException(
+                                        SR.GetString(SR.ID3202, prefix, ns)
+                                    )
+                                );
                             }
-                            else if (!StringComparer.Ordinal.Equals(ns, FederationMetadataConstants.Namespace))
+                            else if (
+                                !StringComparer.Ordinal.Equals(
+                                    ns,
+                                    FederationMetadataConstants.Namespace
+                                )
+                            )
                             {
                                 ReadCustomRoleDescriptor(xsiType, reader, resultEntity);
                             }
-                            else if (StringComparer.Ordinal.Equals(xsiType, prefix + ":" + FederationMetadataConstants.Elements.ApplicationServiceType))
+                            else if (
+                                StringComparer.Ordinal.Equals(
+                                    xsiType,
+                                    prefix
+                                        + ":"
+                                        + FederationMetadataConstants
+                                            .Elements
+                                            .ApplicationServiceType
+                                )
+                            )
                             {
-                                resultEntity.RoleDescriptors.Add(ReadApplicationServiceDescriptor(reader));
+                                resultEntity.RoleDescriptors.Add(
+                                    ReadApplicationServiceDescriptor(reader)
+                                );
                             }
-                            else if (StringComparer.Ordinal.Equals(xsiType, prefix + ":" + FederationMetadataConstants.Elements.SecurityTokenServiceType))
+                            else if (
+                                StringComparer.Ordinal.Equals(
+                                    xsiType,
+                                    prefix
+                                        + ":"
+                                        + FederationMetadataConstants
+                                            .Elements
+                                            .SecurityTokenServiceType
+                                )
+                            )
                             {
-                                resultEntity.RoleDescriptors.Add(ReadSecurityTokenServiceDescriptor(reader));
+                                resultEntity.RoleDescriptors.Add(
+                                    ReadSecurityTokenServiceDescriptor(reader)
+                                );
                             }
                             else
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3207, "xsi:type", Saml2MetadataConstants.Elements.RoleDescriptor, xsiType)));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new MetadataSerializationException(
+                                        SR.GetString(
+                                            SR.ID3207,
+                                            "xsi:type",
+                                            Saml2MetadataConstants.Elements.RoleDescriptor,
+                                            xsiType
+                                        )
+                                    )
+                                );
                             }
                         }
                         else
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID0001, "xsi:type", Saml2MetadataConstants.Elements.RoleDescriptor)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new MetadataSerializationException(
+                                    SR.GetString(
+                                        SR.ID0001,
+                                        "xsi:type",
+                                        Saml2MetadataConstants.Elements.RoleDescriptor
+                                    )
+                                )
+                            );
                         }
                     }
-                    else if (reader.IsStartElement(Saml2MetadataConstants.Elements.Organization, Saml2MetadataConstants.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            Saml2MetadataConstants.Elements.Organization,
+                            Saml2MetadataConstants.Namespace
+                        )
+                    )
                     {
                         resultEntity.Organization = ReadOrganization(reader);
                     }
-                    else if (reader.IsStartElement(Saml2MetadataConstants.Elements.ContactPerson, Saml2MetadataConstants.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            Saml2MetadataConstants.Elements.ContactPerson,
+                            Saml2MetadataConstants.Namespace
+                        )
+                    )
                     {
                         resultEntity.Contacts.Add(ReadContactPerson(reader));
                     }
@@ -814,28 +1057,42 @@ namespace System.IdentityModel.Metadata
         /// <param name="reader">The xml reader.</param>
         /// <returns>An idpsso descriptor.</returns>
         /// <exception cref="ArgumentNullException">The parameter reader is null.</exception>
-        protected virtual IdentityProviderSingleSignOnDescriptor ReadIdentityProviderSingleSignOnDescriptor(XmlReader reader)
+        protected virtual IdentityProviderSingleSignOnDescriptor ReadIdentityProviderSingleSignOnDescriptor(
+            XmlReader reader
+        )
         {
             if (reader == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
 
-            IdentityProviderSingleSignOnDescriptor idpssoDescriptor = CreateIdentityProviderSingleSignOnDescriptorInstance();
+            IdentityProviderSingleSignOnDescriptor idpssoDescriptor =
+                CreateIdentityProviderSingleSignOnDescriptorInstance();
             ReadSingleSignOnDescriptorAttributes(reader, idpssoDescriptor);
             ReadCustomAttributes<IdentityProviderSingleSignOnDescriptor>(reader, idpssoDescriptor);
 
-            string wantAuthnRequestSignedAttribute = reader.GetAttribute(Saml2MetadataConstants.Attributes.WantAuthenticationRequestsSigned);
+            string wantAuthnRequestSignedAttribute = reader.GetAttribute(
+                Saml2MetadataConstants.Attributes.WantAuthenticationRequestsSigned
+            );
             if (!String.IsNullOrEmpty(wantAuthnRequestSignedAttribute))
             {
                 try
                 {
-                    idpssoDescriptor.WantAuthenticationRequestsSigned = XmlConvert.ToBoolean(wantAuthnRequestSignedAttribute.ToLowerInvariant());
+                    idpssoDescriptor.WantAuthenticationRequestsSigned = XmlConvert.ToBoolean(
+                        wantAuthnRequestSignedAttribute.ToLowerInvariant()
+                    );
                 }
                 catch (FormatException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(
-                        SR.ID3202, Saml2MetadataConstants.Attributes.WantAuthenticationRequestsSigned, wantAuthnRequestSignedAttribute)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3202,
+                                Saml2MetadataConstants.Attributes.WantAuthenticationRequestsSigned,
+                                wantAuthnRequestSignedAttribute
+                            )
+                        )
+                    );
                 }
             }
 
@@ -845,14 +1102,24 @@ namespace System.IdentityModel.Metadata
             {
                 while (reader.IsStartElement())
                 {
-                    if (reader.IsStartElement(Saml2MetadataConstants.Elements.SingleSignOnService, Saml2MetadataConstants.Namespace))
+                    if (
+                        reader.IsStartElement(
+                            Saml2MetadataConstants.Elements.SingleSignOnService,
+                            Saml2MetadataConstants.Namespace
+                        )
+                    )
                     {
                         ProtocolEndpoint endpoint = ReadProtocolEndpoint(reader);
 
                         // Relaxed check for endpoint.ResponseLocation as per FIP 9935
                         idpssoDescriptor.SingleSignOnServices.Add(endpoint);
                     }
-                    else if (reader.IsStartElement(Saml2Constants.Elements.Attribute, Saml2Constants.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            Saml2Constants.Elements.Attribute,
+                            Saml2Constants.Namespace
+                        )
+                    )
                     {
                         idpssoDescriptor.SupportedAttributes.Add(ReadAttribute(reader));
                     }
@@ -860,7 +1127,12 @@ namespace System.IdentityModel.Metadata
                     {
                         // Do nothing
                     }
-                    else if (ReadCustomElement<IdentityProviderSingleSignOnDescriptor>(reader, idpssoDescriptor))
+                    else if (
+                        ReadCustomElement<IdentityProviderSingleSignOnDescriptor>(
+                            reader,
+                            idpssoDescriptor
+                        )
+                    )
                     {
                         // Do nothing.
                     }
@@ -895,7 +1167,11 @@ namespace System.IdentityModel.Metadata
             Uri bindingUri;
             if (!UriUtil.TryCreateValidUri(binding, UriKind.RelativeOrAbsolute, out bindingUri))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, Saml2MetadataConstants.Attributes.Binding, binding)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3202, Saml2MetadataConstants.Attributes.Binding, binding)
+                    )
+                );
             }
             endpoint.Binding = bindingUri;
 
@@ -903,32 +1179,71 @@ namespace System.IdentityModel.Metadata
             Uri locationUri;
             if (!UriUtil.TryCreateValidUri(location, UriKind.RelativeOrAbsolute, out locationUri))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, Saml2MetadataConstants.Attributes.Location, location)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(
+                            SR.ID3202,
+                            Saml2MetadataConstants.Attributes.Location,
+                            location
+                        )
+                    )
+                );
             }
             endpoint.Location = locationUri;
 
-            string indexStr = reader.GetAttribute(Saml2MetadataConstants.Attributes.EndpointIndex, null);
+            string indexStr = reader.GetAttribute(
+                Saml2MetadataConstants.Attributes.EndpointIndex,
+                null
+            );
             int index;
             if (!Int32.TryParse(indexStr, out index))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, Saml2MetadataConstants.Attributes.EndpointIndex, indexStr)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(
+                            SR.ID3202,
+                            Saml2MetadataConstants.Attributes.EndpointIndex,
+                            indexStr
+                        )
+                    )
+                );
             }
             endpoint.Index = index;
 
             // responseLocation is optional
-            string responseLocation = reader.GetAttribute(Saml2MetadataConstants.Attributes.ResponseLocation, null);
+            string responseLocation = reader.GetAttribute(
+                Saml2MetadataConstants.Attributes.ResponseLocation,
+                null
+            );
             if (!String.IsNullOrEmpty(responseLocation))
             {
                 Uri responseUri;
-                if (!UriUtil.TryCreateValidUri(responseLocation, UriKind.RelativeOrAbsolute, out responseUri))
+                if (
+                    !UriUtil.TryCreateValidUri(
+                        responseLocation,
+                        UriKind.RelativeOrAbsolute,
+                        out responseUri
+                    )
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, Saml2MetadataConstants.Attributes.ResponseLocation, responseLocation)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3202,
+                                Saml2MetadataConstants.Attributes.ResponseLocation,
+                                responseLocation
+                            )
+                        )
+                    );
                 }
                 endpoint.ResponseLocation = responseUri;
             }
 
             // isDefault is optional
-            string isDefaultString = reader.GetAttribute(Saml2MetadataConstants.Attributes.EndpointIsDefault, null);
+            string isDefaultString = reader.GetAttribute(
+                Saml2MetadataConstants.Attributes.EndpointIsDefault,
+                null
+            );
             if (!String.IsNullOrEmpty(isDefaultString))
             {
                 try
@@ -937,7 +1252,15 @@ namespace System.IdentityModel.Metadata
                 }
                 catch (FormatException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, Saml2MetadataConstants.Attributes.EndpointIsDefault, isDefaultString)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3202,
+                                Saml2MetadataConstants.Attributes.EndpointIsDefault,
+                                isDefaultString
+                            )
+                        )
+                    );
                 }
             }
 
@@ -995,21 +1318,41 @@ namespace System.IdentityModel.Metadata
             {
                 while (reader.IsStartElement())
                 {
-                    if (reader.IsStartElement(XmlSignatureConstants.Elements.KeyInfo, XmlSignatureConstants.Namespace))
+                    if (
+                        reader.IsStartElement(
+                            XmlSignatureConstants.Elements.KeyInfo,
+                            XmlSignatureConstants.Namespace
+                        )
+                    )
                     {
                         resultKey.KeyInfo = SecurityTokenSerializer.ReadKeyIdentifier(reader);
                     }
-                    else if (reader.IsStartElement(Saml2MetadataConstants.Elements.EncryptionMethod, Saml2MetadataConstants.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            Saml2MetadataConstants.Elements.EncryptionMethod,
+                            Saml2MetadataConstants.Namespace
+                        )
+                    )
                     {
                         // Read the required algorithm attribute - relaxed as per FIP 9935
-                        string algorithm = reader.GetAttribute(Saml2MetadataConstants.Attributes.Algorithm);
-                        if (!String.IsNullOrEmpty(algorithm) && UriUtil.CanCreateValidUri(algorithm, UriKind.Absolute))
+                        string algorithm = reader.GetAttribute(
+                            Saml2MetadataConstants.Attributes.Algorithm
+                        );
+                        if (
+                            !String.IsNullOrEmpty(algorithm)
+                            && UriUtil.CanCreateValidUri(algorithm, UriKind.Absolute)
+                        )
                         {
-                            resultKey.EncryptionMethods.Add(new EncryptionMethod(new Uri(algorithm)));
+                            resultKey.EncryptionMethods.Add(
+                                new EncryptionMethod(new Uri(algorithm))
+                            );
                         }
 
                         isEmpty = reader.IsEmptyElement;
-                        reader.ReadStartElement(Saml2MetadataConstants.Elements.EncryptionMethod, Saml2MetadataConstants.Namespace);
+                        reader.ReadStartElement(
+                            Saml2MetadataConstants.Elements.EncryptionMethod,
+                            Saml2MetadataConstants.Namespace
+                        );
                         if (!isEmpty)
                         {
                             while (reader.IsStartElement())
@@ -1040,7 +1383,11 @@ namespace System.IdentityModel.Metadata
 
             if (resultKey.KeyInfo == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3200, XmlSignatureConstants.Elements.KeyInfo)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3200, XmlSignatureConstants.Elements.KeyInfo)
+                    )
+                );
             }
             return resultKey;
         }
@@ -1067,11 +1414,19 @@ namespace System.IdentityModel.Metadata
             }
             catch (ArgumentNullException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, LanguageLocalName, "null")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3202, LanguageLocalName, "null")
+                    )
+                );
             }
             catch (ArgumentException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, LanguageLocalName, lang)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3202, LanguageLocalName, lang)
+                    )
+                );
             }
 
             ReadCustomAttributes<LocalizedName>(reader, resultName);
@@ -1099,7 +1454,9 @@ namespace System.IdentityModel.Metadata
 
             if (String.IsNullOrEmpty(resultName.Name))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3200, elementName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(SR.GetString(SR.ID3200, elementName))
+                );
             }
             return resultName;
         }
@@ -1126,11 +1483,19 @@ namespace System.IdentityModel.Metadata
             }
             catch (ArgumentNullException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, LanguageLocalName, "null")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3202, LanguageLocalName, "null")
+                    )
+                );
             }
             catch (ArgumentException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, LanguageLocalName, lang)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3202, LanguageLocalName, lang)
+                    )
+                );
             }
 
             ReadCustomAttributes<LocalizedUri>(reader, resultUri);
@@ -1144,7 +1509,11 @@ namespace System.IdentityModel.Metadata
                 Uri uri;
                 if (!UriUtil.TryCreateValidUri(uriContent, UriKind.RelativeOrAbsolute, out uri))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, elementName, uriContent)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(SR.ID3202, elementName, uriContent)
+                        )
+                    );
                 }
                 resultUri.Uri = uri;
                 while (reader.IsStartElement())
@@ -1163,7 +1532,9 @@ namespace System.IdentityModel.Metadata
 
             if (resultUri.Uri == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3200, elementName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(SR.GetString(SR.ID3200, elementName))
+                );
             }
             return resultUri;
         }
@@ -1180,7 +1551,10 @@ namespace System.IdentityModel.Metadata
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("stream");
             }
-            XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(stream, XmlDictionaryReaderQuotas.Max);
+            XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(
+                stream,
+                XmlDictionaryReaderQuotas.Max
+            );
             return ReadMetadata(reader);
         }
 
@@ -1227,7 +1601,10 @@ namespace System.IdentityModel.Metadata
         /// <param name="tokenResolver">The security token resolver.</param>
         /// <returns>MetadataBase</returns>
         /// <exception cref="ArgumentNullException">The parameter reader or tokenReolver is null.</exception>
-        protected virtual MetadataBase ReadMetadataCore(XmlReader reader, SecurityTokenResolver tokenResolver)
+        protected virtual MetadataBase ReadMetadataCore(
+            XmlReader reader,
+            SecurityTokenResolver tokenResolver
+        )
         {
             if (reader == null)
             {
@@ -1240,17 +1617,29 @@ namespace System.IdentityModel.Metadata
 
             MetadataBase metadataBase;
 
-            if (reader.IsStartElement(Saml2MetadataConstants.Elements.EntitiesDescriptor, Saml2MetadataConstants.Namespace))
+            if (
+                reader.IsStartElement(
+                    Saml2MetadataConstants.Elements.EntitiesDescriptor,
+                    Saml2MetadataConstants.Namespace
+                )
+            )
             {
                 metadataBase = ReadEntitiesDescriptor(reader, tokenResolver);
             }
-            else if (reader.IsStartElement(Saml2MetadataConstants.Elements.EntityDescriptor, Saml2MetadataConstants.Namespace))
+            else if (
+                reader.IsStartElement(
+                    Saml2MetadataConstants.Elements.EntityDescriptor,
+                    Saml2MetadataConstants.Namespace
+                )
+            )
             {
                 metadataBase = ReadEntityDescriptor(reader, tokenResolver);
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3260)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(SR.GetString(SR.ID3260))
+                );
             }
 
             return metadataBase;
@@ -1278,15 +1667,30 @@ namespace System.IdentityModel.Metadata
             {
                 while (reader.IsStartElement())
                 {
-                    if (reader.IsStartElement(Saml2MetadataConstants.Elements.OrganizationName, Saml2MetadataConstants.Namespace))
+                    if (
+                        reader.IsStartElement(
+                            Saml2MetadataConstants.Elements.OrganizationName,
+                            Saml2MetadataConstants.Namespace
+                        )
+                    )
                     {
                         resultOrg.Names.Add(ReadLocalizedName(reader));
                     }
-                    else if (reader.IsStartElement(Saml2MetadataConstants.Elements.OrganizationDisplayName, Saml2MetadataConstants.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            Saml2MetadataConstants.Elements.OrganizationDisplayName,
+                            Saml2MetadataConstants.Namespace
+                        )
+                    )
                     {
                         resultOrg.DisplayNames.Add(ReadLocalizedName(reader));
                     }
-                    else if (reader.IsStartElement(Saml2MetadataConstants.Elements.OrganizationUrl, Saml2MetadataConstants.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            Saml2MetadataConstants.Elements.OrganizationUrl,
+                            Saml2MetadataConstants.Namespace
+                        )
+                    )
                     {
                         resultOrg.Urls.Add(ReadLocalizedUri(reader));
                     }
@@ -1329,7 +1733,11 @@ namespace System.IdentityModel.Metadata
             Uri bindingUri;
             if (!UriUtil.TryCreateValidUri(binding, UriKind.RelativeOrAbsolute, out bindingUri))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, Saml2MetadataConstants.Attributes.Binding, binding)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3202, Saml2MetadataConstants.Attributes.Binding, binding)
+                    )
+                );
             }
             endpoint.Binding = bindingUri;
 
@@ -1337,17 +1745,42 @@ namespace System.IdentityModel.Metadata
             Uri locationUri;
             if (!UriUtil.TryCreateValidUri(location, UriKind.RelativeOrAbsolute, out locationUri))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, Saml2MetadataConstants.Attributes.Location, location)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(
+                            SR.ID3202,
+                            Saml2MetadataConstants.Attributes.Location,
+                            location
+                        )
+                    )
+                );
             }
             endpoint.Location = locationUri;
 
-            string responseLocation = reader.GetAttribute(Saml2MetadataConstants.Attributes.ResponseLocation, null);
+            string responseLocation = reader.GetAttribute(
+                Saml2MetadataConstants.Attributes.ResponseLocation,
+                null
+            );
             if (!String.IsNullOrEmpty(responseLocation))
             {
                 Uri responseUri;
-                if (!UriUtil.TryCreateValidUri(responseLocation, UriKind.RelativeOrAbsolute, out responseUri))
+                if (
+                    !UriUtil.TryCreateValidUri(
+                        responseLocation,
+                        UriKind.RelativeOrAbsolute,
+                        out responseUri
+                    )
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, Saml2MetadataConstants.Attributes.ResponseLocation, responseLocation)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3202,
+                                Saml2MetadataConstants.Attributes.ResponseLocation,
+                                responseLocation
+                            )
+                        )
+                    );
                 }
                 endpoint.ResponseLocation = responseUri;
             }
@@ -1378,7 +1811,10 @@ namespace System.IdentityModel.Metadata
         /// <param name="reader">The xml reader</param>
         /// <param name="roleDescriptor">The role descriptor.</param>
         /// <exception cref="ArgumentNullException">The parameter reader/roleDescriptor/roleDescriptor.ProtocolsSupported is null.</exception>
-        protected virtual void ReadRoleDescriptorAttributes(XmlReader reader, RoleDescriptor roleDescriptor)
+        protected virtual void ReadRoleDescriptorAttributes(
+            XmlReader reader,
+            RoleDescriptor roleDescriptor
+        )
         {
             if (reader == null)
             {
@@ -1390,38 +1826,79 @@ namespace System.IdentityModel.Metadata
             }
             if (roleDescriptor.ProtocolsSupported == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("roleDescriptor.ProtocolsSupported");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "roleDescriptor.ProtocolsSupported"
+                );
             }
 
             // Optional
-            string validUntilString = reader.GetAttribute(Saml2MetadataConstants.Attributes.ValidUntil, null);
+            string validUntilString = reader.GetAttribute(
+                Saml2MetadataConstants.Attributes.ValidUntil,
+                null
+            );
             if (!String.IsNullOrEmpty(validUntilString))
             {
                 DateTime validUntil;
                 if (!DateTime.TryParse(validUntilString, out validUntil))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, Saml2MetadataConstants.Attributes.ValidUntil, validUntilString)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3202,
+                                Saml2MetadataConstants.Attributes.ValidUntil,
+                                validUntilString
+                            )
+                        )
+                    );
                 }
                 roleDescriptor.ValidUntil = validUntil;
             }
 
             // Optional
-            string errorUrlString = reader.GetAttribute(Saml2MetadataConstants.Attributes.ErrorUrl, null);
+            string errorUrlString = reader.GetAttribute(
+                Saml2MetadataConstants.Attributes.ErrorUrl,
+                null
+            );
             if (!string.IsNullOrEmpty(errorUrlString))
             {
                 Uri errorUrl;
-                if (!UriUtil.TryCreateValidUri(errorUrlString, UriKind.RelativeOrAbsolute, out errorUrl))
+                if (
+                    !UriUtil.TryCreateValidUri(
+                        errorUrlString,
+                        UriKind.RelativeOrAbsolute,
+                        out errorUrl
+                    )
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, Saml2MetadataConstants.Attributes.ErrorUrl, errorUrlString)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3202,
+                                Saml2MetadataConstants.Attributes.ErrorUrl,
+                                errorUrlString
+                            )
+                        )
+                    );
                 }
                 roleDescriptor.ErrorUrl = errorUrl;
             }
 
             // Mandatory
-            string protocols = reader.GetAttribute(Saml2MetadataConstants.Attributes.ProtocolsSupported, null);
+            string protocols = reader.GetAttribute(
+                Saml2MetadataConstants.Attributes.ProtocolsSupported,
+                null
+            );
             if (String.IsNullOrEmpty(protocols))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, Saml2MetadataConstants.Attributes.ProtocolsSupported, protocols)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(
+                            SR.ID3202,
+                            Saml2MetadataConstants.Attributes.ProtocolsSupported,
+                            protocols
+                        )
+                    )
+                );
             }
             foreach (string protocol in protocols.Split(' '))
             {
@@ -1441,7 +1918,10 @@ namespace System.IdentityModel.Metadata
         /// <param name="roleDescriptor">The role descriptor.</param>
         /// <returns>True if read.</returns>
         /// <exception cref="ArgumentNullException">The parameter reader/roleDescriptor/roleDescriptor.Contacts/rolDescriptor.Keys is null.</exception>
-        protected virtual bool ReadRoleDescriptorElement(XmlReader reader, RoleDescriptor roleDescriptor)
+        protected virtual bool ReadRoleDescriptorElement(
+            XmlReader reader,
+            RoleDescriptor roleDescriptor
+        )
         {
             if (reader == null)
             {
@@ -1453,24 +1933,43 @@ namespace System.IdentityModel.Metadata
             }
             if (roleDescriptor.Contacts == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("roleDescriptor.Contacts");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "roleDescriptor.Contacts"
+                );
             }
             if (roleDescriptor.Keys == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("roleDescriptor.Keys");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "roleDescriptor.Keys"
+                );
             }
 
-            if (reader.IsStartElement(Saml2MetadataConstants.Elements.Organization, Saml2MetadataConstants.Namespace))
+            if (
+                reader.IsStartElement(
+                    Saml2MetadataConstants.Elements.Organization,
+                    Saml2MetadataConstants.Namespace
+                )
+            )
             {
                 roleDescriptor.Organization = ReadOrganization(reader);
                 return true;
             }
-            else if (reader.IsStartElement(Saml2MetadataConstants.Elements.KeyDescriptor, Saml2MetadataConstants.Namespace))
+            else if (
+                reader.IsStartElement(
+                    Saml2MetadataConstants.Elements.KeyDescriptor,
+                    Saml2MetadataConstants.Namespace
+                )
+            )
             {
                 roleDescriptor.Keys.Add(ReadKeyDescriptor(reader));
                 return true;
             }
-            else if (reader.IsStartElement(Saml2MetadataConstants.Elements.ContactPerson, Saml2MetadataConstants.Namespace))
+            else if (
+                reader.IsStartElement(
+                    Saml2MetadataConstants.Elements.ContactPerson,
+                    Saml2MetadataConstants.Namespace
+                )
+            )
             {
                 roleDescriptor.Contacts.Add(ReadContactPerson(reader));
                 return true;
@@ -1489,16 +1988,22 @@ namespace System.IdentityModel.Metadata
         /// <param name="reader">The xml reader.</param>
         /// <returns>A security token service descriptor.</returns>
         /// <exception cref="ArgumentNullException">The parameter reader is null.</exception>
-        protected virtual SecurityTokenServiceDescriptor ReadSecurityTokenServiceDescriptor(XmlReader reader)
+        protected virtual SecurityTokenServiceDescriptor ReadSecurityTokenServiceDescriptor(
+            XmlReader reader
+        )
         {
             if (reader == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
 
-            SecurityTokenServiceDescriptor securityTokenServiceDescriptor = CreateSecurityTokenServiceDescriptorInstance();
+            SecurityTokenServiceDescriptor securityTokenServiceDescriptor =
+                CreateSecurityTokenServiceDescriptorInstance();
             ReadWebServiceDescriptorAttributes(reader, securityTokenServiceDescriptor);
-            ReadCustomAttributes<SecurityTokenServiceDescriptor>(reader, securityTokenServiceDescriptor);
+            ReadCustomAttributes<SecurityTokenServiceDescriptor>(
+                reader,
+                securityTokenServiceDescriptor
+            );
 
             bool isEmpty = reader.IsEmptyElement;
             reader.ReadStartElement();
@@ -1506,18 +2011,30 @@ namespace System.IdentityModel.Metadata
             {
                 while (reader.IsStartElement())
                 {
-                    if (reader.IsStartElement(FederationMetadataConstants.Elements.SecurityTokenServiceEndpoint, FederationMetadataConstants.Namespace))
+                    if (
+                        reader.IsStartElement(
+                            FederationMetadataConstants.Elements.SecurityTokenServiceEndpoint,
+                            FederationMetadataConstants.Namespace
+                        )
+                    )
                     {
                         isEmpty = reader.IsEmptyElement;
                         reader.ReadStartElement();
                         if (!isEmpty && reader.IsStartElement())
                         {
                             EndpointReference address = EndpointReference.ReadFrom(reader);
-                            securityTokenServiceDescriptor.SecurityTokenServiceEndpoints.Add(address);
+                            securityTokenServiceDescriptor.SecurityTokenServiceEndpoints.Add(
+                                address
+                            );
                             reader.ReadEndElement();
                         }
                     }
-                    else if (reader.IsStartElement(FederationMetadataConstants.Elements.PassiveRequestorEndpoint, FederationMetadataConstants.Namespace))
+                    else if (
+                        reader.IsStartElement(
+                            FederationMetadataConstants.Elements.PassiveRequestorEndpoint,
+                            FederationMetadataConstants.Namespace
+                        )
+                    )
                     {
                         isEmpty = reader.IsEmptyElement;
                         reader.ReadStartElement();
@@ -1528,11 +2045,18 @@ namespace System.IdentityModel.Metadata
                             reader.ReadEndElement();
                         }
                     }
-                    else if (ReadWebServiceDescriptorElement(reader, securityTokenServiceDescriptor))
+                    else if (
+                        ReadWebServiceDescriptorElement(reader, securityTokenServiceDescriptor)
+                    )
                     {
                         // Do nothing
                     }
-                    else if (ReadCustomElement<SecurityTokenServiceDescriptor>(reader, securityTokenServiceDescriptor))
+                    else if (
+                        ReadCustomElement<SecurityTokenServiceDescriptor>(
+                            reader,
+                            securityTokenServiceDescriptor
+                        )
+                    )
                     {
                         // Do nothing.
                     }
@@ -1558,40 +2082,65 @@ namespace System.IdentityModel.Metadata
         /// <returns>An spsso descriptor.</returns>
         /// <exception cref="ArgumentNullException">The parameter reader is null.</exception>
         /// <exception cref="MetadataSerializationException">The XML was invalid.</exception>
-        protected virtual ServiceProviderSingleSignOnDescriptor ReadServiceProviderSingleSignOnDescriptor(XmlReader reader)
+        protected virtual ServiceProviderSingleSignOnDescriptor ReadServiceProviderSingleSignOnDescriptor(
+            XmlReader reader
+        )
         {
             if (reader == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
 
-            ServiceProviderSingleSignOnDescriptor spssoDescriptor = CreateServiceProviderSingleSignOnDescriptorInstance();
+            ServiceProviderSingleSignOnDescriptor spssoDescriptor =
+                CreateServiceProviderSingleSignOnDescriptorInstance();
 
-            string authnRequestsSignedAttribute = reader.GetAttribute(Saml2MetadataConstants.Attributes.AuthenticationRequestsSigned);
+            string authnRequestsSignedAttribute = reader.GetAttribute(
+                Saml2MetadataConstants.Attributes.AuthenticationRequestsSigned
+            );
             if (!String.IsNullOrEmpty(authnRequestsSignedAttribute))
             {
                 try
                 {
-                    spssoDescriptor.AuthenticationRequestsSigned = XmlConvert.ToBoolean(authnRequestsSignedAttribute.ToLowerInvariant());
+                    spssoDescriptor.AuthenticationRequestsSigned = XmlConvert.ToBoolean(
+                        authnRequestsSignedAttribute.ToLowerInvariant()
+                    );
                 }
                 catch (FormatException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(
-                        SR.ID3202, Saml2MetadataConstants.Attributes.AuthenticationRequestsSigned, authnRequestsSignedAttribute)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3202,
+                                Saml2MetadataConstants.Attributes.AuthenticationRequestsSigned,
+                                authnRequestsSignedAttribute
+                            )
+                        )
+                    );
                 }
             }
 
-            string wantAssertionsSignedAttribute = reader.GetAttribute(Saml2MetadataConstants.Attributes.WantAssertionsSigned);
+            string wantAssertionsSignedAttribute = reader.GetAttribute(
+                Saml2MetadataConstants.Attributes.WantAssertionsSigned
+            );
             if (!String.IsNullOrEmpty(wantAssertionsSignedAttribute))
             {
                 try
                 {
-                    spssoDescriptor.WantAssertionsSigned = XmlConvert.ToBoolean(wantAssertionsSignedAttribute.ToLowerInvariant());
+                    spssoDescriptor.WantAssertionsSigned = XmlConvert.ToBoolean(
+                        wantAssertionsSignedAttribute.ToLowerInvariant()
+                    );
                 }
                 catch (FormatException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(
-                        SR.ID3202, Saml2MetadataConstants.Attributes.WantAssertionsSigned, wantAssertionsSignedAttribute)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3202,
+                                Saml2MetadataConstants.Attributes.WantAssertionsSigned,
+                                wantAssertionsSignedAttribute
+                            )
+                        )
+                    );
                 }
             }
 
@@ -1604,7 +2153,12 @@ namespace System.IdentityModel.Metadata
             {
                 while (reader.IsStartElement())
                 {
-                    if (reader.IsStartElement(Saml2MetadataConstants.Elements.AssertionConsumerService, Saml2MetadataConstants.Namespace))
+                    if (
+                        reader.IsStartElement(
+                            Saml2MetadataConstants.Elements.AssertionConsumerService,
+                            Saml2MetadataConstants.Namespace
+                        )
+                    )
                     {
                         IndexedProtocolEndpoint endpoint = ReadIndexedProtocolEndpoint(reader);
                         spssoDescriptor.AssertionConsumerServices.Add(endpoint.Index, endpoint);
@@ -1613,7 +2167,12 @@ namespace System.IdentityModel.Metadata
                     {
                         // Do nothing
                     }
-                    else if (ReadCustomElement<ServiceProviderSingleSignOnDescriptor>(reader, spssoDescriptor))
+                    else if (
+                        ReadCustomElement<ServiceProviderSingleSignOnDescriptor>(
+                            reader,
+                            spssoDescriptor
+                        )
+                    )
                     {
                         // Do nothing.
                     }
@@ -1637,7 +2196,10 @@ namespace System.IdentityModel.Metadata
         /// </summary>
         /// <param name="reader">The xml reader.</param>
         /// <param name="roleDescriptor">The sso role descriptor.</param>
-        protected virtual void ReadSingleSignOnDescriptorAttributes(XmlReader reader, SingleSignOnDescriptor roleDescriptor)
+        protected virtual void ReadSingleSignOnDescriptorAttributes(
+            XmlReader reader,
+            SingleSignOnDescriptor roleDescriptor
+        )
         {
             ReadRoleDescriptorAttributes(reader, roleDescriptor);
             ReadCustomAttributes<SingleSignOnDescriptor>(reader, roleDescriptor);
@@ -1649,7 +2211,10 @@ namespace System.IdentityModel.Metadata
         /// <param name="reader">The xml reader.</param>
         /// <param name="singleSignOnDescriptor">The sso descriptor.</param>
         /// <returns>True if read.</returns>
-        protected virtual bool ReadSingleSignOnDescriptorElement(XmlReader reader, SingleSignOnDescriptor singleSignOnDescriptor)
+        protected virtual bool ReadSingleSignOnDescriptorElement(
+            XmlReader reader,
+            SingleSignOnDescriptor singleSignOnDescriptor
+        )
         {
             if (reader == null)
             {
@@ -1664,7 +2229,12 @@ namespace System.IdentityModel.Metadata
             {
                 return true;
             }
-            else if (reader.IsStartElement(Saml2MetadataConstants.Elements.ArtifactResolutionService, Saml2MetadataConstants.Namespace))
+            else if (
+                reader.IsStartElement(
+                    Saml2MetadataConstants.Elements.ArtifactResolutionService,
+                    Saml2MetadataConstants.Namespace
+                )
+            )
             {
                 IndexedProtocolEndpoint endpoint = ReadIndexedProtocolEndpoint(reader);
 
@@ -1672,17 +2242,34 @@ namespace System.IdentityModel.Metadata
                 singleSignOnDescriptor.ArtifactResolutionServices.Add(endpoint.Index, endpoint);
                 return true;
             }
-            else if (reader.IsStartElement(Saml2MetadataConstants.Elements.SingleLogoutService, Saml2MetadataConstants.Namespace))
+            else if (
+                reader.IsStartElement(
+                    Saml2MetadataConstants.Elements.SingleLogoutService,
+                    Saml2MetadataConstants.Namespace
+                )
+            )
             {
                 singleSignOnDescriptor.SingleLogoutServices.Add(ReadProtocolEndpoint(reader));
                 return true;
             }
-            else if (reader.IsStartElement(Saml2MetadataConstants.Elements.NameIDFormat, Saml2MetadataConstants.Namespace))
+            else if (
+                reader.IsStartElement(
+                    Saml2MetadataConstants.Elements.NameIDFormat,
+                    Saml2MetadataConstants.Namespace
+                )
+            )
             {
-                string nameId = reader.ReadElementContentAsString(Saml2MetadataConstants.Elements.NameIDFormat, Saml2MetadataConstants.Namespace);
+                string nameId = reader.ReadElementContentAsString(
+                    Saml2MetadataConstants.Elements.NameIDFormat,
+                    Saml2MetadataConstants.Namespace
+                );
                 if (!UriUtil.CanCreateValidUri(nameId, UriKind.Absolute))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID0014, Saml2MetadataConstants.Elements.NameIDFormat)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(SR.ID0014, Saml2MetadataConstants.Elements.NameIDFormat)
+                        )
+                    );
                 }
                 singleSignOnDescriptor.NameIdentifierFormats.Add(new Uri(nameId));
                 return true;
@@ -1699,7 +2286,10 @@ namespace System.IdentityModel.Metadata
         /// <param name="reader">The xml reader.</param>
         /// <param name="roleDescriptor">The web service descriptor.</param>
         /// <exception cref="ArgumentNullException">The parameter reader/roleDescriptor is null.</exception>
-        protected virtual void ReadWebServiceDescriptorAttributes(XmlReader reader, WebServiceDescriptor roleDescriptor)
+        protected virtual void ReadWebServiceDescriptorAttributes(
+            XmlReader reader,
+            WebServiceDescriptor roleDescriptor
+        )
         {
             if (reader == null)
             {
@@ -1711,12 +2301,18 @@ namespace System.IdentityModel.Metadata
             }
 
             ReadRoleDescriptorAttributes(reader, roleDescriptor);
-            string displayName = reader.GetAttribute(Saml2MetadataConstants.Attributes.ServiceDisplayName, null);
+            string displayName = reader.GetAttribute(
+                Saml2MetadataConstants.Attributes.ServiceDisplayName,
+                null
+            );
             if (!String.IsNullOrEmpty(displayName))
             {
                 roleDescriptor.ServiceDisplayName = displayName;
             }
-            string description = reader.GetAttribute(Saml2MetadataConstants.Attributes.ServiceDescription, null);
+            string description = reader.GetAttribute(
+                Saml2MetadataConstants.Attributes.ServiceDescription,
+                null
+            );
             if (!String.IsNullOrEmpty(description))
             {
                 roleDescriptor.ServiceDescription = description;
@@ -1734,7 +2330,10 @@ namespace System.IdentityModel.Metadata
         /// <returns>True if read.</returns>
         /// <exception cref="ArgumentNullException">The parameter reader/roleDescriptor/roleDescriptor.TargetScopes/roleDescriptor.TargetScopes/roleDescriptor.TokenTypesOffered
         /// is null.</exception>
-        public virtual bool ReadWebServiceDescriptorElement(XmlReader reader, WebServiceDescriptor roleDescriptor)
+        public virtual bool ReadWebServiceDescriptorElement(
+            XmlReader reader,
+            WebServiceDescriptor roleDescriptor
+        )
         {
             if (reader == null)
             {
@@ -1746,22 +2345,33 @@ namespace System.IdentityModel.Metadata
             }
             if (roleDescriptor.TargetScopes == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("roleDescriptor.TargetScopes");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "roleDescriptor.TargetScopes"
+                );
             }
             if (roleDescriptor.ClaimTypesOffered == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("roleDescriptor.TargetScopes");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "roleDescriptor.TargetScopes"
+                );
             }
             if (roleDescriptor.TokenTypesOffered == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("roleDescriptor.TokenTypesOffered");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "roleDescriptor.TokenTypesOffered"
+                );
             }
 
             if (ReadRoleDescriptorElement(reader, roleDescriptor))
             {
                 return true;
             }
-            else if (reader.IsStartElement(FederationMetadataConstants.Elements.TargetScopes, FederationMetadataConstants.Namespace))
+            else if (
+                reader.IsStartElement(
+                    FederationMetadataConstants.Elements.TargetScopes,
+                    FederationMetadataConstants.Namespace
+                )
+            )
             {
                 bool isEmpty = reader.IsEmptyElement;
                 reader.ReadStartElement();
@@ -1777,7 +2387,12 @@ namespace System.IdentityModel.Metadata
 
                 return true;
             }
-            else if (reader.IsStartElement(FederationMetadataConstants.Elements.ClaimTypesOffered, FederationMetadataConstants.Namespace))
+            else if (
+                reader.IsStartElement(
+                    FederationMetadataConstants.Elements.ClaimTypesOffered,
+                    FederationMetadataConstants.Namespace
+                )
+            )
             {
                 bool isEmpty = reader.IsEmptyElement;
                 reader.ReadStartElement();
@@ -1785,7 +2400,12 @@ namespace System.IdentityModel.Metadata
                 {
                     while (reader.IsStartElement())
                     {
-                        if (reader.IsStartElement(WSAuthorizationConstants.Elements.ClaimType, WSAuthorizationConstants.Namespace))
+                        if (
+                            reader.IsStartElement(
+                                WSAuthorizationConstants.Elements.ClaimType,
+                                WSAuthorizationConstants.Namespace
+                            )
+                        )
                         {
                             roleDescriptor.ClaimTypesOffered.Add(ReadDisplayClaim(reader));
                         }
@@ -1801,7 +2421,12 @@ namespace System.IdentityModel.Metadata
 
                 return true;
             }
-            else if (reader.IsStartElement(FederationMetadataConstants.Elements.ClaimTypesRequested, FederationMetadataConstants.Namespace))
+            else if (
+                reader.IsStartElement(
+                    FederationMetadataConstants.Elements.ClaimTypesRequested,
+                    FederationMetadataConstants.Namespace
+                )
+            )
             {
                 bool isEmpty = reader.IsEmptyElement;
                 reader.ReadStartElement();
@@ -1809,7 +2434,12 @@ namespace System.IdentityModel.Metadata
                 {
                     while (reader.IsStartElement())
                     {
-                        if (reader.IsStartElement(WSAuthorizationConstants.Elements.ClaimType, WSAuthorizationConstants.Namespace))
+                        if (
+                            reader.IsStartElement(
+                                WSAuthorizationConstants.Elements.ClaimType,
+                                WSAuthorizationConstants.Namespace
+                            )
+                        )
                         {
                             roleDescriptor.ClaimTypesRequested.Add(ReadDisplayClaim(reader));
                         }
@@ -1825,22 +2455,52 @@ namespace System.IdentityModel.Metadata
 
                 return true;
             }
-            else if (reader.IsStartElement(FederationMetadataConstants.Elements.TokenTypesOffered, FederationMetadataConstants.Namespace))
+            else if (
+                reader.IsStartElement(
+                    FederationMetadataConstants.Elements.TokenTypesOffered,
+                    FederationMetadataConstants.Namespace
+                )
+            )
             {
                 bool isEmpty = reader.IsEmptyElement;
-                reader.ReadStartElement(FederationMetadataConstants.Elements.TokenTypesOffered, FederationMetadataConstants.Namespace);
+                reader.ReadStartElement(
+                    FederationMetadataConstants.Elements.TokenTypesOffered,
+                    FederationMetadataConstants.Namespace
+                );
 
                 if (!isEmpty)
                 {
                     while (reader.IsStartElement())
                     {
-                        if (reader.IsStartElement(WSFederationMetadataConstants.Elements.TokenType, WSFederationMetadataConstants.Namespace))
+                        if (
+                            reader.IsStartElement(
+                                WSFederationMetadataConstants.Elements.TokenType,
+                                WSFederationMetadataConstants.Namespace
+                            )
+                        )
                         {
-                            string tokenType = reader.GetAttribute(WSFederationMetadataConstants.Attributes.Uri, null);
+                            string tokenType = reader.GetAttribute(
+                                WSFederationMetadataConstants.Attributes.Uri,
+                                null
+                            );
                             Uri tokenTypeUri;
-                            if (!UriUtil.TryCreateValidUri(tokenType, UriKind.Absolute, out tokenTypeUri))
+                            if (
+                                !UriUtil.TryCreateValidUri(
+                                    tokenType,
+                                    UriKind.Absolute,
+                                    out tokenTypeUri
+                                )
+                            )
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3202, WSFederationMetadataConstants.Elements.TokenType, tokenType)));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new MetadataSerializationException(
+                                        SR.GetString(
+                                            SR.ID3202,
+                                            WSFederationMetadataConstants.Elements.TokenType,
+                                            tokenType
+                                        )
+                                    )
+                                );
                             }
 
                             roleDescriptor.TokenTypesOffered.Add(tokenTypeUri);
@@ -1871,15 +2531,12 @@ namespace System.IdentityModel.Metadata
         }
 
         /// <summary>
-        /// Gets the SecurityTokenSerializer that this instance is using to serializer 
+        /// Gets the SecurityTokenSerializer that this instance is using to serializer
         /// SecurityTokens.
         /// </summary>
         public SecurityTokenSerializer SecurityTokenSerializer
         {
-            get
-            {
-                return _tokenSerializer;
-            }
+            get { return _tokenSerializer; }
         }
 
         /// <summary>
@@ -1888,7 +2545,10 @@ namespace System.IdentityModel.Metadata
         /// <param name="writer">The xml writer.</param>
         /// <param name="appService">The application service descriptor.</param>
         /// <exception cref="ArgumentNullException">The parameter writer/appService/appService.Endpoint/aappService.PassiveRequestorEndpoints is null.</exception>
-        protected virtual void WriteApplicationServiceDescriptor(XmlWriter writer, ApplicationServiceDescriptor appService)
+        protected virtual void WriteApplicationServiceDescriptor(
+            XmlWriter writer,
+            ApplicationServiceDescriptor appService
+        )
         {
             if (writer == null)
             {
@@ -1902,18 +2562,37 @@ namespace System.IdentityModel.Metadata
 
             if (appService.Endpoints == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("appService.Endpoints");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "appService.Endpoints"
+                );
             }
 
             if (appService.PassiveRequestorEndpoints == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("appService.PassiveRequestorEndpoints");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "appService.PassiveRequestorEndpoints"
+                );
             }
 
-            writer.WriteStartElement(Saml2MetadataConstants.Elements.RoleDescriptor, Saml2MetadataConstants.Namespace);
-            writer.WriteAttributeString("xsi", "type", XmlSchema.InstanceNamespace, FederationMetadataConstants.Prefix + ":" + FederationMetadataConstants.Elements.ApplicationServiceType);
+            writer.WriteStartElement(
+                Saml2MetadataConstants.Elements.RoleDescriptor,
+                Saml2MetadataConstants.Namespace
+            );
+            writer.WriteAttributeString(
+                "xsi",
+                "type",
+                XmlSchema.InstanceNamespace,
+                FederationMetadataConstants.Prefix
+                    + ":"
+                    + FederationMetadataConstants.Elements.ApplicationServiceType
+            );
 
-            writer.WriteAttributeString("xmlns", FederationMetadataConstants.Prefix, null, FederationMetadataConstants.Namespace);
+            writer.WriteAttributeString(
+                "xmlns",
+                FederationMetadataConstants.Prefix,
+                null,
+                FederationMetadataConstants.Namespace
+            );
 
             WriteWebServiceDescriptorAttributes(writer, appService);
             WriteCustomAttributes<ApplicationServiceDescriptor>(writer, appService);
@@ -1923,7 +2602,10 @@ namespace System.IdentityModel.Metadata
             // Optional ApplicationServiceEndpoints
             foreach (EndpointReference epr in appService.Endpoints)
             {
-                writer.WriteStartElement(FederationMetadataConstants.Elements.ApplicationServiceEndpoint, FederationMetadataConstants.Namespace);
+                writer.WriteStartElement(
+                    FederationMetadataConstants.Elements.ApplicationServiceEndpoint,
+                    FederationMetadataConstants.Namespace
+                );
                 epr.WriteTo(writer);
                 writer.WriteEndElement();
             }
@@ -1931,7 +2613,10 @@ namespace System.IdentityModel.Metadata
             // Optional PassiveRequestorEndpoints
             foreach (EndpointReference epr in appService.PassiveRequestorEndpoints)
             {
-                writer.WriteStartElement(FederationMetadataConstants.Elements.PassiveRequestorEndpoint, FederationMetadataConstants.Namespace);
+                writer.WriteStartElement(
+                    FederationMetadataConstants.Elements.PassiveRequestorEndpoint,
+                    FederationMetadataConstants.Namespace
+                );
                 epr.WriteTo(writer);
                 writer.WriteEndElement();
             }
@@ -1961,47 +2646,82 @@ namespace System.IdentityModel.Metadata
 
             if (contactPerson.EmailAddresses == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contactPerson.EmailAddresses");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "contactPerson.EmailAddresses"
+                );
             }
 
             if (contactPerson.TelephoneNumbers == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contactPerson.TelephoneNumbers");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "contactPerson.TelephoneNumbers"
+                );
             }
 
-            writer.WriteStartElement(Saml2MetadataConstants.Elements.ContactPerson, Saml2MetadataConstants.Namespace);
+            writer.WriteStartElement(
+                Saml2MetadataConstants.Elements.ContactPerson,
+                Saml2MetadataConstants.Namespace
+            );
             if (contactPerson.Type == ContactType.Unspecified)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.ContactType)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.ContactType)
+                    )
+                );
             }
 
-            writer.WriteAttributeString(Saml2MetadataConstants.Attributes.ContactType, null, contactPerson.Type.ToString().ToLowerInvariant());
+            writer.WriteAttributeString(
+                Saml2MetadataConstants.Attributes.ContactType,
+                null,
+                contactPerson.Type.ToString().ToLowerInvariant()
+            );
 
             WriteCustomAttributes<ContactPerson>(writer, contactPerson);
 
             if (!String.IsNullOrEmpty(contactPerson.Company))
             {
-                writer.WriteElementString(Saml2MetadataConstants.Elements.Company, Saml2MetadataConstants.Namespace, contactPerson.Company);
+                writer.WriteElementString(
+                    Saml2MetadataConstants.Elements.Company,
+                    Saml2MetadataConstants.Namespace,
+                    contactPerson.Company
+                );
             }
 
             if (!String.IsNullOrEmpty(contactPerson.GivenName))
             {
-                writer.WriteElementString(Saml2MetadataConstants.Elements.GivenName, Saml2MetadataConstants.Namespace, contactPerson.GivenName);
+                writer.WriteElementString(
+                    Saml2MetadataConstants.Elements.GivenName,
+                    Saml2MetadataConstants.Namespace,
+                    contactPerson.GivenName
+                );
             }
 
             if (!String.IsNullOrEmpty(contactPerson.Surname))
             {
-                writer.WriteElementString(Saml2MetadataConstants.Elements.Surname, Saml2MetadataConstants.Namespace, contactPerson.Surname);
+                writer.WriteElementString(
+                    Saml2MetadataConstants.Elements.Surname,
+                    Saml2MetadataConstants.Namespace,
+                    contactPerson.Surname
+                );
             }
 
             foreach (string email in contactPerson.EmailAddresses)
             {
-                writer.WriteElementString(Saml2MetadataConstants.Elements.EmailAddress, Saml2MetadataConstants.Namespace, email);
+                writer.WriteElementString(
+                    Saml2MetadataConstants.Elements.EmailAddress,
+                    Saml2MetadataConstants.Namespace,
+                    email
+                );
             }
 
             foreach (string phone in contactPerson.TelephoneNumbers)
             {
-                writer.WriteElementString(Saml2MetadataConstants.Elements.TelephoneNumber, Saml2MetadataConstants.Namespace, phone);
+                writer.WriteElementString(
+                    Saml2MetadataConstants.Elements.TelephoneNumber,
+                    Saml2MetadataConstants.Namespace,
+                    phone
+                );
             }
 
             WriteCustomElements<ContactPerson>(writer, contactPerson);
@@ -2038,7 +2758,11 @@ namespace System.IdentityModel.Metadata
         /// <param name="endpoint">The endpoint.</param>
         /// <param name="element">The xml qualified name element.</param>
         /// <exception cref="ArgumentNullException">The parameter writer/endpoint/element is null.</exception>
-        protected virtual void WriteProtocolEndpoint(XmlWriter writer, ProtocolEndpoint endpoint, XmlQualifiedName element)
+        protected virtual void WriteProtocolEndpoint(
+            XmlWriter writer,
+            ProtocolEndpoint endpoint,
+            XmlQualifiedName element
+        )
         {
             if (writer == null)
             {
@@ -2058,21 +2782,53 @@ namespace System.IdentityModel.Metadata
             writer.WriteStartElement(element.Name, element.Namespace);
             if (endpoint.Binding == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Binding)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Binding)
+                    )
+                );
             }
 
-            writer.WriteAttributeString(Saml2MetadataConstants.Attributes.Binding, null, (endpoint.Binding.IsAbsoluteUri ? endpoint.Binding.AbsoluteUri : endpoint.Binding.ToString()));
+            writer.WriteAttributeString(
+                Saml2MetadataConstants.Attributes.Binding,
+                null,
+                (
+                    endpoint.Binding.IsAbsoluteUri
+                        ? endpoint.Binding.AbsoluteUri
+                        : endpoint.Binding.ToString()
+                )
+            );
 
             if (endpoint.Location == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Location)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Location)
+                    )
+                );
             }
 
-            writer.WriteAttributeString(Saml2MetadataConstants.Attributes.Location, null, (endpoint.Location.IsAbsoluteUri ? endpoint.Location.AbsoluteUri : endpoint.Location.ToString()));
+            writer.WriteAttributeString(
+                Saml2MetadataConstants.Attributes.Location,
+                null,
+                (
+                    endpoint.Location.IsAbsoluteUri
+                        ? endpoint.Location.AbsoluteUri
+                        : endpoint.Location.ToString()
+                )
+            );
 
             if (endpoint.ResponseLocation != null)
             {
-                writer.WriteAttributeString(Saml2MetadataConstants.Attributes.ResponseLocation, null, (endpoint.ResponseLocation.IsAbsoluteUri ? endpoint.ResponseLocation.AbsoluteUri : endpoint.ResponseLocation.ToString()));
+                writer.WriteAttributeString(
+                    Saml2MetadataConstants.Attributes.ResponseLocation,
+                    null,
+                    (
+                        endpoint.ResponseLocation.IsAbsoluteUri
+                            ? endpoint.ResponseLocation.AbsoluteUri
+                            : endpoint.ResponseLocation.ToString()
+                    )
+                );
             }
 
             WriteCustomAttributes<ProtocolEndpoint>(writer, endpoint);
@@ -2089,34 +2845,60 @@ namespace System.IdentityModel.Metadata
         protected virtual void WriteDisplayClaim(XmlWriter writer, DisplayClaim claim)
         {
             // This is not extensible since it is defined in a different spec.
-            writer.WriteStartElement(WSAuthorizationConstants.Prefix, WSAuthorizationConstants.Elements.ClaimType, WSAuthorizationConstants.Namespace);
+            writer.WriteStartElement(
+                WSAuthorizationConstants.Prefix,
+                WSAuthorizationConstants.Elements.ClaimType,
+                WSAuthorizationConstants.Namespace
+            );
 
             // ClaimType is mandatory
             if (String.IsNullOrEmpty(claim.ClaimType))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, WSAuthorizationConstants.Elements.ClaimType)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, WSAuthorizationConstants.Elements.ClaimType)
+                    )
+                );
             }
 
             if (!UriUtil.CanCreateValidUri(claim.ClaimType, UriKind.Absolute))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID0014, claim.ClaimType)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(SR.GetString(SR.ID0014, claim.ClaimType))
+                );
             }
 
-            writer.WriteAttributeString(WSFederationMetadataConstants.Attributes.Uri, claim.ClaimType);
+            writer.WriteAttributeString(
+                WSFederationMetadataConstants.Attributes.Uri,
+                claim.ClaimType
+            );
 
             if (claim.WriteOptionalAttribute)
             {
-                writer.WriteAttributeString(WSFederationMetadataConstants.Attributes.Optional, XmlConvert.ToString(claim.Optional));
+                writer.WriteAttributeString(
+                    WSFederationMetadataConstants.Attributes.Optional,
+                    XmlConvert.ToString(claim.Optional)
+                );
             }
 
             if (!String.IsNullOrEmpty(claim.DisplayTag))
             {
-                writer.WriteElementString(WSAuthorizationConstants.Prefix, WSAuthorizationConstants.Elements.DisplayName, WSAuthorizationConstants.Namespace, claim.DisplayTag);
+                writer.WriteElementString(
+                    WSAuthorizationConstants.Prefix,
+                    WSAuthorizationConstants.Elements.DisplayName,
+                    WSAuthorizationConstants.Namespace,
+                    claim.DisplayTag
+                );
             }
 
             if (!String.IsNullOrEmpty(claim.Description))
             {
-                writer.WriteElementString(WSAuthorizationConstants.Prefix, WSAuthorizationConstants.Elements.Description, WSAuthorizationConstants.Namespace, claim.Description);
+                writer.WriteElementString(
+                    WSAuthorizationConstants.Prefix,
+                    WSAuthorizationConstants.Elements.Description,
+                    WSAuthorizationConstants.Namespace,
+                    claim.Description
+                );
             }
 
             writer.WriteEndElement(); // ClaimType
@@ -2129,7 +2911,10 @@ namespace System.IdentityModel.Metadata
         /// <param name="entitiesDescriptor">The entities descriptor.</param>
         /// <exception cref="ArgumentNullException">The parameter inputWriter/entitiesDescriptor/entitiesDescriptor.ChildEntities/entitiesDescriptor.ChildEntityGroups
         /// is null.</exception>
-        protected virtual void WriteEntitiesDescriptor(XmlWriter inputWriter, EntitiesDescriptor entitiesDescriptor)
+        protected virtual void WriteEntitiesDescriptor(
+            XmlWriter inputWriter,
+            EntitiesDescriptor entitiesDescriptor
+        )
         {
             if (inputWriter == null)
             {
@@ -2138,17 +2923,23 @@ namespace System.IdentityModel.Metadata
 
             if (entitiesDescriptor == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("entitiesDescriptor");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "entitiesDescriptor"
+                );
             }
 
             if (entitiesDescriptor.ChildEntities == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("entitiesDescriptor.ChildEntities");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "entitiesDescriptor.ChildEntities"
+                );
             }
 
             if (entitiesDescriptor.ChildEntityGroups == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("entitiesDescriptor.ChildEntityGroups");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "entitiesDescriptor.ChildEntityGroups"
+                );
             }
 
             string entityReference = "_" + Guid.NewGuid().ToString();
@@ -2156,16 +2947,35 @@ namespace System.IdentityModel.Metadata
             EnvelopedSignatureWriter signedWriter = null;
             if (entitiesDescriptor.SigningCredentials != null)
             {
-                signedWriter = new EnvelopedSignatureWriter(inputWriter, entitiesDescriptor.SigningCredentials, entityReference, SecurityTokenSerializer);
+                signedWriter = new EnvelopedSignatureWriter(
+                    inputWriter,
+                    entitiesDescriptor.SigningCredentials,
+                    entityReference,
+                    SecurityTokenSerializer
+                );
                 writer = signedWriter;
             }
 
-            writer.WriteStartElement(Saml2MetadataConstants.Elements.EntitiesDescriptor, Saml2MetadataConstants.Namespace);
-            writer.WriteAttributeString(Saml2MetadataConstants.Attributes.Id, null, entityReference);
+            writer.WriteStartElement(
+                Saml2MetadataConstants.Elements.EntitiesDescriptor,
+                Saml2MetadataConstants.Namespace
+            );
+            writer.WriteAttributeString(
+                Saml2MetadataConstants.Attributes.Id,
+                null,
+                entityReference
+            );
 
-            if (entitiesDescriptor.ChildEntities.Count == 0 && entitiesDescriptor.ChildEntityGroups.Count == 0)
+            if (
+                entitiesDescriptor.ChildEntities.Count == 0
+                && entitiesDescriptor.ChildEntityGroups.Count == 0
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.EntitiesDescriptor)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.EntitiesDescriptor)
+                    )
+                );
             }
 
             // Ensure FederationID in all children are valid.
@@ -2173,16 +2983,29 @@ namespace System.IdentityModel.Metadata
             {
                 if (!String.IsNullOrEmpty(entity.FederationId))
                 {
-                    if (!StringComparer.Ordinal.Equals(entity.FederationId, entitiesDescriptor.Name))
+                    if (
+                        !StringComparer.Ordinal.Equals(entity.FederationId, entitiesDescriptor.Name)
+                    )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, WSFederationMetadataConstants.Attributes.FederationId)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MetadataSerializationException(
+                                SR.GetString(
+                                    SR.ID3203,
+                                    WSFederationMetadataConstants.Attributes.FederationId
+                                )
+                            )
+                        );
                     }
                 }
             }
 
             if (!String.IsNullOrEmpty(entitiesDescriptor.Name))
             {
-                writer.WriteAttributeString(Saml2MetadataConstants.Attributes.EntityGroupName, null, entitiesDescriptor.Name);
+                writer.WriteAttributeString(
+                    Saml2MetadataConstants.Attributes.EntityGroupName,
+                    null,
+                    entitiesDescriptor.Name
+                );
             }
 
             WriteCustomAttributes<EntitiesDescriptor>(writer, entitiesDescriptor);
@@ -2216,7 +3039,10 @@ namespace System.IdentityModel.Metadata
         /// <param name="inputWriter">The xml writer.</param>
         /// <param name="entityDescriptor">The entity descriptor.</param>
         /// <exception cref="ArgumentNullException">The parameter inputWriter/entityDescriptor/entityDescriptor.Contacts/entityDescriptor.RoleDescriptors is null.</exception>
-        protected virtual void WriteEntityDescriptor(XmlWriter inputWriter, EntityDescriptor entityDescriptor)
+        protected virtual void WriteEntityDescriptor(
+            XmlWriter inputWriter,
+            EntityDescriptor entityDescriptor
+        )
         {
             if (inputWriter == null)
             {
@@ -2225,17 +3051,23 @@ namespace System.IdentityModel.Metadata
 
             if (entityDescriptor == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("entityDescriptor");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "entityDescriptor"
+                );
             }
 
             if (entityDescriptor.Contacts == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("entityDescriptor.Contacts");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "entityDescriptor.Contacts"
+                );
             }
 
             if (entityDescriptor.RoleDescriptors == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("entityDescriptor.RoleDescriptors");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "entityDescriptor.RoleDescriptors"
+                );
             }
 
             string entityReference = "_" + Guid.NewGuid().ToString();
@@ -2243,23 +3075,47 @@ namespace System.IdentityModel.Metadata
             EnvelopedSignatureWriter signedWriter = null;
             if (entityDescriptor.SigningCredentials != null)
             {
-                signedWriter = new EnvelopedSignatureWriter(inputWriter, entityDescriptor.SigningCredentials, entityReference, SecurityTokenSerializer);
+                signedWriter = new EnvelopedSignatureWriter(
+                    inputWriter,
+                    entityDescriptor.SigningCredentials,
+                    entityReference,
+                    SecurityTokenSerializer
+                );
                 writer = signedWriter;
             }
 
-            writer.WriteStartElement(Saml2MetadataConstants.Elements.EntityDescriptor, Saml2MetadataConstants.Namespace);
-            writer.WriteAttributeString(Saml2MetadataConstants.Attributes.Id, null, entityReference);
+            writer.WriteStartElement(
+                Saml2MetadataConstants.Elements.EntityDescriptor,
+                Saml2MetadataConstants.Namespace
+            );
+            writer.WriteAttributeString(
+                Saml2MetadataConstants.Attributes.Id,
+                null,
+                entityReference
+            );
 
             if (entityDescriptor.EntityId == null || entityDescriptor.EntityId.Id == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.EntityId)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.EntityId)
+                    )
+                );
             }
 
-            writer.WriteAttributeString(Saml2MetadataConstants.Attributes.EntityId, null, entityDescriptor.EntityId.Id);
+            writer.WriteAttributeString(
+                Saml2MetadataConstants.Attributes.EntityId,
+                null,
+                entityDescriptor.EntityId.Id
+            );
 
             if (!String.IsNullOrEmpty(entityDescriptor.FederationId))
             {
-                writer.WriteAttributeString(WSFederationMetadataConstants.Attributes.FederationId, WSFederationMetadataConstants.Namespace, entityDescriptor.FederationId);
+                writer.WriteAttributeString(
+                    WSFederationMetadataConstants.Attributes.FederationId,
+                    WSFederationMetadataConstants.Namespace,
+                    entityDescriptor.FederationId
+                );
             }
 
             WriteCustomAttributes<EntityDescriptor>(writer, entityDescriptor);
@@ -2272,30 +3128,38 @@ namespace System.IdentityModel.Metadata
 
             if (entityDescriptor.RoleDescriptors.Count == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.RoleDescriptor)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.RoleDescriptor)
+                    )
+                );
             }
 
             foreach (RoleDescriptor roleDescriptor in entityDescriptor.RoleDescriptors)
             {
-                ServiceProviderSingleSignOnDescriptor spDesc = roleDescriptor as ServiceProviderSingleSignOnDescriptor;
+                ServiceProviderSingleSignOnDescriptor spDesc =
+                    roleDescriptor as ServiceProviderSingleSignOnDescriptor;
                 if (spDesc != null)
                 {
                     WriteServiceProviderSingleSignOnDescriptor(writer, spDesc);
                 }
 
-                IdentityProviderSingleSignOnDescriptor idpDesc = roleDescriptor as IdentityProviderSingleSignOnDescriptor;
+                IdentityProviderSingleSignOnDescriptor idpDesc =
+                    roleDescriptor as IdentityProviderSingleSignOnDescriptor;
                 if (idpDesc != null)
                 {
                     WriteIdentityProviderSingleSignOnDescriptor(writer, idpDesc);
                 }
 
-                ApplicationServiceDescriptor appService = roleDescriptor as ApplicationServiceDescriptor;
+                ApplicationServiceDescriptor appService =
+                    roleDescriptor as ApplicationServiceDescriptor;
                 if (appService != null)
                 {
                     WriteApplicationServiceDescriptor(writer, appService);
                 }
 
-                SecurityTokenServiceDescriptor stsService = roleDescriptor as SecurityTokenServiceDescriptor;
+                SecurityTokenServiceDescriptor stsService =
+                    roleDescriptor as SecurityTokenServiceDescriptor;
                 if (stsService != null)
                 {
                     WriteSecurityTokenServiceDescriptor(writer, stsService);
@@ -2324,7 +3188,10 @@ namespace System.IdentityModel.Metadata
         /// <param name="identityProviderSingleSignOnDescriptor">The idpsso descriptor.</param>
         /// <exception cref="ArgumentNullException">The parameter writer/idpssoDescriptor/idpssoDescriptor.SupportedAttributes/idpssoDescriptor.SingleSignOnServices
         /// is null.</exception>
-        protected virtual void WriteIdentityProviderSingleSignOnDescriptor(XmlWriter writer, IdentityProviderSingleSignOnDescriptor identityProviderSingleSignOnDescriptor)
+        protected virtual void WriteIdentityProviderSingleSignOnDescriptor(
+            XmlWriter writer,
+            IdentityProviderSingleSignOnDescriptor identityProviderSingleSignOnDescriptor
+        )
         {
             if (writer == null)
             {
@@ -2333,55 +3200,93 @@ namespace System.IdentityModel.Metadata
 
             if (identityProviderSingleSignOnDescriptor == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("idpssoDescriptor");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "idpssoDescriptor"
+                );
             }
 
             if (identityProviderSingleSignOnDescriptor.SupportedAttributes == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("idpssoDescriptor.SupportedAttributes");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "idpssoDescriptor.SupportedAttributes"
+                );
             }
 
             if (identityProviderSingleSignOnDescriptor.SingleSignOnServices == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("idpssoDescriptor.SingleSignOnServices");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "idpssoDescriptor.SingleSignOnServices"
+                );
             }
 
-            writer.WriteStartElement(Saml2MetadataConstants.Elements.IdpssoDescriptor, Saml2MetadataConstants.Namespace);
+            writer.WriteStartElement(
+                Saml2MetadataConstants.Elements.IdpssoDescriptor,
+                Saml2MetadataConstants.Namespace
+            );
             if (identityProviderSingleSignOnDescriptor.WantAuthenticationRequestsSigned)
             {
-                writer.WriteAttributeString(Saml2MetadataConstants.Attributes.WantAuthenticationRequestsSigned, null,
-                    XmlConvert.ToString(identityProviderSingleSignOnDescriptor.WantAuthenticationRequestsSigned));
+                writer.WriteAttributeString(
+                    Saml2MetadataConstants.Attributes.WantAuthenticationRequestsSigned,
+                    null,
+                    XmlConvert.ToString(
+                        identityProviderSingleSignOnDescriptor.WantAuthenticationRequestsSigned
+                    )
+                );
             }
 
             WriteSingleSignOnDescriptorAttributes(writer, identityProviderSingleSignOnDescriptor);
-            WriteCustomAttributes<IdentityProviderSingleSignOnDescriptor>(writer, identityProviderSingleSignOnDescriptor);
+            WriteCustomAttributes<IdentityProviderSingleSignOnDescriptor>(
+                writer,
+                identityProviderSingleSignOnDescriptor
+            );
 
             WriteSingleSignOnDescriptorElements(writer, identityProviderSingleSignOnDescriptor);
 
             // Mandatory SingleSignonServiceEndpoint
             if (identityProviderSingleSignOnDescriptor.SingleSignOnServices.Count == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.SingleSignOnService)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.SingleSignOnService)
+                    )
+                );
             }
 
-            foreach (ProtocolEndpoint endpoint in identityProviderSingleSignOnDescriptor.SingleSignOnServices)
+            foreach (
+                ProtocolEndpoint endpoint in identityProviderSingleSignOnDescriptor.SingleSignOnServices
+            )
             {
                 if (endpoint.ResponseLocation != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3249, Saml2MetadataConstants.Attributes.ResponseLocation)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3249,
+                                Saml2MetadataConstants.Attributes.ResponseLocation
+                            )
+                        )
+                    );
                 }
 
-                XmlQualifiedName element = new XmlQualifiedName(Saml2MetadataConstants.Elements.SingleSignOnService, Saml2MetadataConstants.Namespace);
+                XmlQualifiedName element = new XmlQualifiedName(
+                    Saml2MetadataConstants.Elements.SingleSignOnService,
+                    Saml2MetadataConstants.Namespace
+                );
                 WriteProtocolEndpoint(writer, endpoint, element);
             }
 
             // Optional SupportedAttributes
-            foreach (Saml2Attribute attribute in identityProviderSingleSignOnDescriptor.SupportedAttributes)
+            foreach (
+                Saml2Attribute attribute in identityProviderSingleSignOnDescriptor.SupportedAttributes
+            )
             {
                 WriteAttribute(writer, attribute);
             }
 
-            WriteCustomElements<IdentityProviderSingleSignOnDescriptor>(writer, identityProviderSingleSignOnDescriptor);
+            WriteCustomElements<IdentityProviderSingleSignOnDescriptor>(
+                writer,
+                identityProviderSingleSignOnDescriptor
+            );
 
             writer.WriteEndElement();
         }
@@ -2393,7 +3298,11 @@ namespace System.IdentityModel.Metadata
         /// <param name="indexedEP">The indexed endpoint.</param>
         /// <param name="element">The xml qualified element.</param>
         /// <exception cref="ArgumentNullException">The parameter writer/indexedEP/element is null.</exception>
-        protected virtual void WriteIndexedProtocolEndpoint(XmlWriter writer, IndexedProtocolEndpoint indexedEP, XmlQualifiedName element)
+        protected virtual void WriteIndexedProtocolEndpoint(
+            XmlWriter writer,
+            IndexedProtocolEndpoint indexedEP,
+            XmlQualifiedName element
+        )
         {
             if (writer == null)
             {
@@ -2413,33 +3322,77 @@ namespace System.IdentityModel.Metadata
             writer.WriteStartElement(element.Name, element.Namespace);
             if (indexedEP.Binding == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Binding)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Binding)
+                    )
+                );
             }
 
-            writer.WriteAttributeString(Saml2MetadataConstants.Attributes.Binding, null, (indexedEP.Binding.IsAbsoluteUri ? indexedEP.Binding.AbsoluteUri : indexedEP.Binding.ToString()));
+            writer.WriteAttributeString(
+                Saml2MetadataConstants.Attributes.Binding,
+                null,
+                (
+                    indexedEP.Binding.IsAbsoluteUri
+                        ? indexedEP.Binding.AbsoluteUri
+                        : indexedEP.Binding.ToString()
+                )
+            );
 
             if (indexedEP.Location == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Location)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Location)
+                    )
+                );
             }
 
-            writer.WriteAttributeString(Saml2MetadataConstants.Attributes.Location, null, (indexedEP.Location.IsAbsoluteUri ? indexedEP.Location.AbsoluteUri : indexedEP.Location.ToString()));
+            writer.WriteAttributeString(
+                Saml2MetadataConstants.Attributes.Location,
+                null,
+                (
+                    indexedEP.Location.IsAbsoluteUri
+                        ? indexedEP.Location.AbsoluteUri
+                        : indexedEP.Location.ToString()
+                )
+            );
 
             if (indexedEP.Index < 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.EndpointIndex)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.EndpointIndex)
+                    )
+                );
             }
 
-            writer.WriteAttributeString(Saml2MetadataConstants.Attributes.EndpointIndex, null, indexedEP.Index.ToString(CultureInfo.InvariantCulture));
+            writer.WriteAttributeString(
+                Saml2MetadataConstants.Attributes.EndpointIndex,
+                null,
+                indexedEP.Index.ToString(CultureInfo.InvariantCulture)
+            );
 
             if (indexedEP.ResponseLocation != null)
             {
-                writer.WriteAttributeString(Saml2MetadataConstants.Attributes.ResponseLocation, null, (indexedEP.ResponseLocation.IsAbsoluteUri ? indexedEP.ResponseLocation.AbsoluteUri : indexedEP.ResponseLocation.ToString()));
+                writer.WriteAttributeString(
+                    Saml2MetadataConstants.Attributes.ResponseLocation,
+                    null,
+                    (
+                        indexedEP.ResponseLocation.IsAbsoluteUri
+                            ? indexedEP.ResponseLocation.AbsoluteUri
+                            : indexedEP.ResponseLocation.ToString()
+                    )
+                );
             }
 
             if (indexedEP.IsDefault.HasValue)
             {
-                writer.WriteAttributeString(Saml2MetadataConstants.Attributes.EndpointIsDefault, null, XmlConvert.ToString(indexedEP.IsDefault.Value));
+                writer.WriteAttributeString(
+                    Saml2MetadataConstants.Attributes.EndpointIsDefault,
+                    null,
+                    XmlConvert.ToString(indexedEP.IsDefault.Value)
+                );
             }
 
             WriteCustomAttributes<IndexedProtocolEndpoint>(writer, indexedEP);
@@ -2465,38 +3418,67 @@ namespace System.IdentityModel.Metadata
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("keyDescriptor");
             }
 
-            writer.WriteStartElement(Saml2MetadataConstants.Elements.KeyDescriptor, Saml2MetadataConstants.Namespace);
+            writer.WriteStartElement(
+                Saml2MetadataConstants.Elements.KeyDescriptor,
+                Saml2MetadataConstants.Namespace
+            );
             if (keyDescriptor.Use == KeyType.Encryption || keyDescriptor.Use == KeyType.Signing)
             {
-                writer.WriteAttributeString(Saml2MetadataConstants.Attributes.Use, null, keyDescriptor.Use.ToString().ToLowerInvariant());
+                writer.WriteAttributeString(
+                    Saml2MetadataConstants.Attributes.Use,
+                    null,
+                    keyDescriptor.Use.ToString().ToLowerInvariant()
+                );
             }
 
             WriteCustomAttributes<KeyDescriptor>(writer, keyDescriptor);
 
             if (keyDescriptor.KeyInfo == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, XmlSignatureConstants.Elements.KeyInfo)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, XmlSignatureConstants.Elements.KeyInfo)
+                    )
+                );
             }
 
             SecurityTokenSerializer.WriteKeyIdentifier(writer, keyDescriptor.KeyInfo);
 
             // Write the encryption method element.
-            if (keyDescriptor.EncryptionMethods != null && keyDescriptor.EncryptionMethods.Count > 0)
+            if (
+                keyDescriptor.EncryptionMethods != null
+                && keyDescriptor.EncryptionMethods.Count > 0
+            )
             {
                 foreach (EncryptionMethod encryptionMethod in keyDescriptor.EncryptionMethods)
                 {
                     if (encryptionMethod.Algorithm == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Algorithm)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MetadataSerializationException(
+                                SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Algorithm)
+                            )
+                        );
                     }
 
                     if (!encryptionMethod.Algorithm.IsAbsoluteUri)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID0014, Saml2MetadataConstants.Attributes.Algorithm)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MetadataSerializationException(
+                                SR.GetString(SR.ID0014, Saml2MetadataConstants.Attributes.Algorithm)
+                            )
+                        );
                     }
 
-                    writer.WriteStartElement(Saml2MetadataConstants.Elements.EncryptionMethod, Saml2MetadataConstants.Namespace);
-                    writer.WriteAttributeString(Saml2MetadataConstants.Attributes.Algorithm, null, encryptionMethod.Algorithm.AbsoluteUri);
+                    writer.WriteStartElement(
+                        Saml2MetadataConstants.Elements.EncryptionMethod,
+                        Saml2MetadataConstants.Namespace
+                    );
+                    writer.WriteAttributeString(
+                        Saml2MetadataConstants.Attributes.Algorithm,
+                        null,
+                        encryptionMethod.Algorithm.AbsoluteUri
+                    );
                     writer.WriteEndElement();
                 }
             }
@@ -2512,7 +3494,11 @@ namespace System.IdentityModel.Metadata
         /// <param name="name">The localized name.</param>
         /// <param name="element">The xml qualified name.</param>
         /// <exception cref="ArgumentNullException">The parameter writer/name/element/name.Name is null.</exception>
-        protected virtual void WriteLocalizedName(XmlWriter writer, LocalizedName name, XmlQualifiedName element)
+        protected virtual void WriteLocalizedName(
+            XmlWriter writer,
+            LocalizedName name,
+            XmlQualifiedName element
+        )
         {
             if (writer == null)
             {
@@ -2537,10 +3523,17 @@ namespace System.IdentityModel.Metadata
             writer.WriteStartElement(element.Name, element.Namespace);
             if (name.Language == null || String.IsNullOrEmpty(name.Name))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, LanguageLocalName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(SR.GetString(SR.ID3203, LanguageLocalName))
+                );
             }
 
-            writer.WriteAttributeString(LanguagePrefix, LanguageLocalName, LanguageNamespaceUri, name.Language.Name);
+            writer.WriteAttributeString(
+                LanguagePrefix,
+                LanguageLocalName,
+                LanguageNamespaceUri,
+                name.Language.Name
+            );
             WriteCustomAttributes<LocalizedName>(writer, name);
             writer.WriteString(name.Name);
             WriteCustomElements<LocalizedName>(writer, name);
@@ -2554,7 +3547,11 @@ namespace System.IdentityModel.Metadata
         /// <param name="uri">The localized uri.</param>
         /// <param name="element">The xml qualified name.</param>
         /// <exception cref="ArgumentNullException">The parameter writer/uri/element is null.</exception>
-        protected virtual void WriteLocalizedUri(XmlWriter writer, LocalizedUri uri, XmlQualifiedName element)
+        protected virtual void WriteLocalizedUri(
+            XmlWriter writer,
+            LocalizedUri uri,
+            XmlQualifiedName element
+        )
         {
             if (writer == null)
             {
@@ -2574,10 +3571,17 @@ namespace System.IdentityModel.Metadata
             writer.WriteStartElement(element.Name, element.Namespace);
             if (uri.Language == null || uri.Uri == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, LanguageLocalName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(SR.GetString(SR.ID3203, LanguageLocalName))
+                );
             }
 
-            writer.WriteAttributeString(LanguagePrefix, LanguageLocalName, LanguageNamespaceUri, uri.Language.Name);
+            writer.WriteAttributeString(
+                LanguagePrefix,
+                LanguageLocalName,
+                LanguageNamespaceUri,
+                uri.Language.Name
+            );
             WriteCustomAttributes<LocalizedUri>(writer, uri);
             writer.WriteString(uri.Uri.IsAbsoluteUri ? uri.Uri.AbsoluteUri : uri.Uri.ToString());
             WriteCustomElements<LocalizedUri>(writer, uri);
@@ -2602,7 +3606,13 @@ namespace System.IdentityModel.Metadata
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("metadata");
             }
 
-            using (XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(stream, Encoding.UTF8, false))
+            using (
+                XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(
+                    stream,
+                    Encoding.UTF8,
+                    false
+                )
+            )
             {
                 WriteMetadata(writer, metadata);
             }
@@ -2657,7 +3667,14 @@ namespace System.IdentityModel.Metadata
                 EntityDescriptor entityDescriptor = metadataBase as EntityDescriptor;
                 if (entityDescriptor == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.EntitiesDescriptor)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MetadataSerializationException(
+                            SR.GetString(
+                                SR.ID3203,
+                                Saml2MetadataConstants.Elements.EntitiesDescriptor
+                            )
+                        )
+                    );
                 }
 
                 WriteEntityDescriptor(writer, entityDescriptor);
@@ -2684,51 +3701,84 @@ namespace System.IdentityModel.Metadata
 
             if (organization.DisplayNames == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("organization.DisplayNames");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "organization.DisplayNames"
+                );
             }
 
             if (organization.Names == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("organization.Names");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "organization.Names"
+                );
             }
 
             if (organization.Urls == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("organization.Urls");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "organization.Urls"
+                );
             }
 
-            writer.WriteStartElement(Saml2MetadataConstants.Elements.Organization, Saml2MetadataConstants.Namespace);
+            writer.WriteStartElement(
+                Saml2MetadataConstants.Elements.Organization,
+                Saml2MetadataConstants.Namespace
+            );
 
             if (organization.Names.Count < 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.OrganizationName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.OrganizationName)
+                    )
+                );
             }
 
             foreach (LocalizedName name in organization.Names)
             {
-                XmlQualifiedName element = new XmlQualifiedName(Saml2MetadataConstants.Elements.OrganizationName, Saml2MetadataConstants.Namespace);
+                XmlQualifiedName element = new XmlQualifiedName(
+                    Saml2MetadataConstants.Elements.OrganizationName,
+                    Saml2MetadataConstants.Namespace
+                );
                 WriteLocalizedName(writer, name, element);
             }
 
             if (organization.DisplayNames.Count < 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.OrganizationDisplayName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(
+                            SR.ID3203,
+                            Saml2MetadataConstants.Elements.OrganizationDisplayName
+                        )
+                    )
+                );
             }
 
             foreach (LocalizedName displayName in organization.DisplayNames)
             {
-                XmlQualifiedName element = new XmlQualifiedName(Saml2MetadataConstants.Elements.OrganizationDisplayName, Saml2MetadataConstants.Namespace);
+                XmlQualifiedName element = new XmlQualifiedName(
+                    Saml2MetadataConstants.Elements.OrganizationDisplayName,
+                    Saml2MetadataConstants.Namespace
+                );
                 WriteLocalizedName(writer, displayName, element);
             }
 
             if (organization.Urls.Count < 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.OrganizationUrl)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.OrganizationUrl)
+                    )
+                );
             }
 
             foreach (LocalizedUri uri in organization.Urls)
             {
-                XmlQualifiedName element = new XmlQualifiedName(Saml2MetadataConstants.Elements.OrganizationUrl, Saml2MetadataConstants.Namespace);
+                XmlQualifiedName element = new XmlQualifiedName(
+                    Saml2MetadataConstants.Elements.OrganizationUrl,
+                    Saml2MetadataConstants.Namespace
+                );
                 WriteLocalizedUri(writer, uri, element);
             }
 
@@ -2743,7 +3793,10 @@ namespace System.IdentityModel.Metadata
         /// <param name="writer">The xml writer.</param>
         /// <param name="roleDescriptor">The role descriptor.</param>
         /// <exception cref="ArgumentNullException">The parameter writer/roleDescriptor/roleDescriptor.ProtocolsSupporeted is null.</exception>
-        protected virtual void WriteRoleDescriptorAttributes(XmlWriter writer, RoleDescriptor roleDescriptor)
+        protected virtual void WriteRoleDescriptorAttributes(
+            XmlWriter writer,
+            RoleDescriptor roleDescriptor
+        )
         {
             if (writer == null)
             {
@@ -2757,36 +3810,64 @@ namespace System.IdentityModel.Metadata
 
             if (roleDescriptor.ProtocolsSupported == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("roleDescriptor.ProtocolsSupported");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "roleDescriptor.ProtocolsSupported"
+                );
             }
 
             // Optional
             if (roleDescriptor.ValidUntil != null && roleDescriptor.ValidUntil != DateTime.MaxValue)
             {
                 // Write the date in a sortable form.
-                writer.WriteAttributeString(Saml2MetadataConstants.Attributes.ValidUntil, null, roleDescriptor.ValidUntil.ToString("s", CultureInfo.InvariantCulture));
+                writer.WriteAttributeString(
+                    Saml2MetadataConstants.Attributes.ValidUntil,
+                    null,
+                    roleDescriptor.ValidUntil.ToString("s", CultureInfo.InvariantCulture)
+                );
             }
 
             // Optional
             if (roleDescriptor.ErrorUrl != null)
             {
-                writer.WriteAttributeString(Saml2MetadataConstants.Attributes.ErrorUrl, null, (roleDescriptor.ErrorUrl.IsAbsoluteUri ? roleDescriptor.ErrorUrl.AbsoluteUri : roleDescriptor.ErrorUrl.ToString()));
+                writer.WriteAttributeString(
+                    Saml2MetadataConstants.Attributes.ErrorUrl,
+                    null,
+                    (
+                        roleDescriptor.ErrorUrl.IsAbsoluteUri
+                            ? roleDescriptor.ErrorUrl.AbsoluteUri
+                            : roleDescriptor.ErrorUrl.ToString()
+                    )
+                );
             }
 
             // Mandatory
             if (roleDescriptor.ProtocolsSupported.Count == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.ProtocolsSupported)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(
+                            SR.ID3203,
+                            Saml2MetadataConstants.Attributes.ProtocolsSupported
+                        )
+                    )
+                );
             }
 
             StringBuilder sb = new StringBuilder();
             foreach (Uri protocol in roleDescriptor.ProtocolsSupported)
             {
-                sb.AppendFormat("{0} ", (protocol.IsAbsoluteUri ? protocol.AbsoluteUri : protocol.ToString()));
+                sb.AppendFormat(
+                    "{0} ",
+                    (protocol.IsAbsoluteUri ? protocol.AbsoluteUri : protocol.ToString())
+                );
             }
 
             string protocolsString = sb.ToString();
-            writer.WriteAttributeString(Saml2MetadataConstants.Attributes.ProtocolsSupported, null, protocolsString.Trim());
+            writer.WriteAttributeString(
+                Saml2MetadataConstants.Attributes.ProtocolsSupported,
+                null,
+                protocolsString.Trim()
+            );
 
             WriteCustomAttributes<RoleDescriptor>(writer, roleDescriptor);
         }
@@ -2797,7 +3878,10 @@ namespace System.IdentityModel.Metadata
         /// <param name="writer">The xml writer.</param>
         /// <param name="roleDescriptor">The role descriptor.</param>
         /// <exception cref="ArgumentNullException">The parameter writer/roleDescriptor/roleDescriptor.Contacts/roleDescriptor.Keys is null.</exception>
-        protected virtual void WriteRoleDescriptorElements(XmlWriter writer, RoleDescriptor roleDescriptor)
+        protected virtual void WriteRoleDescriptorElements(
+            XmlWriter writer,
+            RoleDescriptor roleDescriptor
+        )
         {
             if (writer == null)
             {
@@ -2811,12 +3895,16 @@ namespace System.IdentityModel.Metadata
 
             if (roleDescriptor.Contacts == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("roleDescriptor.Contacts");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "roleDescriptor.Contacts"
+                );
             }
 
             if (roleDescriptor.Keys == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("roleDescriptor.Keys");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "roleDescriptor.Keys"
+                );
             }
 
             // Optional
@@ -2847,7 +3935,10 @@ namespace System.IdentityModel.Metadata
         /// <param name="securityTokenServiceDescriptor">The <see cref="SecurityTokenServiceDescriptor"/>.</param>
         /// <exception cref="ArgumentNullException">The parameter writer/securityTokenServiceDescriptor/securityTokenServiceDescriptor.Endpoint/
         /// securityTokenServiceDescriptor.PassiveRequestorEndpoints is null.</exception>
-        protected virtual void WriteSecurityTokenServiceDescriptor(XmlWriter writer, SecurityTokenServiceDescriptor securityTokenServiceDescriptor)
+        protected virtual void WriteSecurityTokenServiceDescriptor(
+            XmlWriter writer,
+            SecurityTokenServiceDescriptor securityTokenServiceDescriptor
+        )
         {
             if (writer == null)
             {
@@ -2856,49 +3947,93 @@ namespace System.IdentityModel.Metadata
 
             if (securityTokenServiceDescriptor == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("securityTokenServiceDescriptor");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityTokenServiceDescriptor"
+                );
             }
 
             if (securityTokenServiceDescriptor.SecurityTokenServiceEndpoints == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("securityTokenServiceDescriptor.Endpoints");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityTokenServiceDescriptor.Endpoints"
+                );
             }
 
             if (securityTokenServiceDescriptor.PassiveRequestorEndpoints == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("securityTokenServiceDescriptor.PassiveRequestorEndpoints");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityTokenServiceDescriptor.PassiveRequestorEndpoints"
+                );
             }
 
-            writer.WriteStartElement(Saml2MetadataConstants.Elements.RoleDescriptor, Saml2MetadataConstants.Namespace);
-            writer.WriteAttributeString("xsi", "type", XmlSchema.InstanceNamespace, FederationMetadataConstants.Prefix + ":" + FederationMetadataConstants.Elements.SecurityTokenServiceType);
+            writer.WriteStartElement(
+                Saml2MetadataConstants.Elements.RoleDescriptor,
+                Saml2MetadataConstants.Namespace
+            );
+            writer.WriteAttributeString(
+                "xsi",
+                "type",
+                XmlSchema.InstanceNamespace,
+                FederationMetadataConstants.Prefix
+                    + ":"
+                    + FederationMetadataConstants.Elements.SecurityTokenServiceType
+            );
 
-            writer.WriteAttributeString("xmlns", FederationMetadataConstants.Prefix, null, FederationMetadataConstants.Namespace);
+            writer.WriteAttributeString(
+                "xmlns",
+                FederationMetadataConstants.Prefix,
+                null,
+                FederationMetadataConstants.Namespace
+            );
 
             WriteWebServiceDescriptorAttributes(writer, securityTokenServiceDescriptor);
-            WriteCustomAttributes<SecurityTokenServiceDescriptor>(writer, securityTokenServiceDescriptor);
+            WriteCustomAttributes<SecurityTokenServiceDescriptor>(
+                writer,
+                securityTokenServiceDescriptor
+            );
 
             WriteWebServiceDescriptorElements(writer, securityTokenServiceDescriptor);
 
             if (securityTokenServiceDescriptor.SecurityTokenServiceEndpoints.Count == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, FederationMetadataConstants.Elements.SecurityTokenServiceEndpoint)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(
+                            SR.ID3203,
+                            FederationMetadataConstants.Elements.SecurityTokenServiceEndpoint
+                        )
+                    )
+                );
             }
 
-            foreach (EndpointReference epr in securityTokenServiceDescriptor.SecurityTokenServiceEndpoints)
+            foreach (
+                EndpointReference epr in securityTokenServiceDescriptor.SecurityTokenServiceEndpoints
+            )
             {
-                writer.WriteStartElement(FederationMetadataConstants.Elements.SecurityTokenServiceEndpoint, FederationMetadataConstants.Namespace);
+                writer.WriteStartElement(
+                    FederationMetadataConstants.Elements.SecurityTokenServiceEndpoint,
+                    FederationMetadataConstants.Namespace
+                );
                 epr.WriteTo(writer);
                 writer.WriteEndElement();
             }
 
-            foreach (EndpointReference epr in securityTokenServiceDescriptor.PassiveRequestorEndpoints)
+            foreach (
+                EndpointReference epr in securityTokenServiceDescriptor.PassiveRequestorEndpoints
+            )
             {
-                writer.WriteStartElement(FederationMetadataConstants.Elements.PassiveRequestorEndpoint, FederationMetadataConstants.Namespace);
+                writer.WriteStartElement(
+                    FederationMetadataConstants.Elements.PassiveRequestorEndpoint,
+                    FederationMetadataConstants.Namespace
+                );
                 epr.WriteTo(writer);
                 writer.WriteEndElement();
             }
 
-            WriteCustomElements<SecurityTokenServiceDescriptor>(writer, securityTokenServiceDescriptor);
+            WriteCustomElements<SecurityTokenServiceDescriptor>(
+                writer,
+                securityTokenServiceDescriptor
+            );
 
             writer.WriteEndElement();
         }
@@ -2909,7 +4044,10 @@ namespace System.IdentityModel.Metadata
         /// <param name="writer">The xml writer.</param>
         /// <param name="serviceProviderSingleSignOnDescriptor">The spsso descriptor.</param>
         /// <exception cref="ArgumentNullException">The input parameter is null.</exception>
-        protected virtual void WriteServiceProviderSingleSignOnDescriptor(XmlWriter writer, ServiceProviderSingleSignOnDescriptor serviceProviderSingleSignOnDescriptor)
+        protected virtual void WriteServiceProviderSingleSignOnDescriptor(
+            XmlWriter writer,
+            ServiceProviderSingleSignOnDescriptor serviceProviderSingleSignOnDescriptor
+        )
         {
             if (writer == null)
             {
@@ -2923,38 +4061,71 @@ namespace System.IdentityModel.Metadata
 
             if (serviceProviderSingleSignOnDescriptor.AssertionConsumerServices == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("spssoDescriptor.AssertionConsumerService");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "spssoDescriptor.AssertionConsumerService"
+                );
             }
 
-            writer.WriteStartElement(Saml2MetadataConstants.Elements.SpssoDescriptor, Saml2MetadataConstants.Namespace);
+            writer.WriteStartElement(
+                Saml2MetadataConstants.Elements.SpssoDescriptor,
+                Saml2MetadataConstants.Namespace
+            );
             if (serviceProviderSingleSignOnDescriptor.AuthenticationRequestsSigned)
             {
-                writer.WriteAttributeString(Saml2MetadataConstants.Attributes.AuthenticationRequestsSigned, null,
-                    XmlConvert.ToString(serviceProviderSingleSignOnDescriptor.AuthenticationRequestsSigned));
+                writer.WriteAttributeString(
+                    Saml2MetadataConstants.Attributes.AuthenticationRequestsSigned,
+                    null,
+                    XmlConvert.ToString(
+                        serviceProviderSingleSignOnDescriptor.AuthenticationRequestsSigned
+                    )
+                );
             }
 
             if (serviceProviderSingleSignOnDescriptor.WantAssertionsSigned)
             {
-                writer.WriteAttributeString(Saml2MetadataConstants.Attributes.WantAssertionsSigned, null,
-                    XmlConvert.ToString(serviceProviderSingleSignOnDescriptor.WantAssertionsSigned));
+                writer.WriteAttributeString(
+                    Saml2MetadataConstants.Attributes.WantAssertionsSigned,
+                    null,
+                    XmlConvert.ToString(serviceProviderSingleSignOnDescriptor.WantAssertionsSigned)
+                );
             }
 
             WriteSingleSignOnDescriptorAttributes(writer, serviceProviderSingleSignOnDescriptor);
-            WriteCustomAttributes<ServiceProviderSingleSignOnDescriptor>(writer, serviceProviderSingleSignOnDescriptor);
+            WriteCustomAttributes<ServiceProviderSingleSignOnDescriptor>(
+                writer,
+                serviceProviderSingleSignOnDescriptor
+            );
 
             WriteSingleSignOnDescriptorElements(writer, serviceProviderSingleSignOnDescriptor);
             if (serviceProviderSingleSignOnDescriptor.AssertionConsumerServices.Count == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.AssertionConsumerService)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MetadataSerializationException(
+                        SR.GetString(
+                            SR.ID3203,
+                            Saml2MetadataConstants.Elements.AssertionConsumerService
+                        )
+                    )
+                );
             }
 
-            foreach (IndexedProtocolEndpoint ep in serviceProviderSingleSignOnDescriptor.AssertionConsumerServices.Values)
+            foreach (
+                IndexedProtocolEndpoint ep in serviceProviderSingleSignOnDescriptor
+                    .AssertionConsumerServices
+                    .Values
+            )
             {
-                XmlQualifiedName element = new XmlQualifiedName(Saml2MetadataConstants.Elements.AssertionConsumerService, Saml2MetadataConstants.Namespace);
+                XmlQualifiedName element = new XmlQualifiedName(
+                    Saml2MetadataConstants.Elements.AssertionConsumerService,
+                    Saml2MetadataConstants.Namespace
+                );
                 WriteIndexedProtocolEndpoint(writer, ep, element);
             }
 
-            WriteCustomElements<ServiceProviderSingleSignOnDescriptor>(writer, serviceProviderSingleSignOnDescriptor);
+            WriteCustomElements<ServiceProviderSingleSignOnDescriptor>(
+                writer,
+                serviceProviderSingleSignOnDescriptor
+            );
             writer.WriteEndElement(); // SPSSODescriptor
         }
 
@@ -2963,7 +4134,10 @@ namespace System.IdentityModel.Metadata
         /// </summary>
         /// <param name="writer">The xml writer.</param>
         /// <param name="singleSignOnDescriptor">The sso descriptor.</param>
-        protected virtual void WriteSingleSignOnDescriptorAttributes(XmlWriter writer, SingleSignOnDescriptor singleSignOnDescriptor)
+        protected virtual void WriteSingleSignOnDescriptorAttributes(
+            XmlWriter writer,
+            SingleSignOnDescriptor singleSignOnDescriptor
+        )
         {
             WriteRoleDescriptorAttributes(writer, singleSignOnDescriptor);
             WriteCustomAttributes<SingleSignOnDescriptor>(writer, singleSignOnDescriptor);
@@ -2974,7 +4148,10 @@ namespace System.IdentityModel.Metadata
         /// </summary>
         /// <param name="writer">The xml writer.</param>
         /// <param name="singleSignOnDescriptor">The sso descriptor.</param>
-        protected virtual void WriteSingleSignOnDescriptorElements(XmlWriter writer, SingleSignOnDescriptor singleSignOnDescriptor)
+        protected virtual void WriteSingleSignOnDescriptorElements(
+            XmlWriter writer,
+            SingleSignOnDescriptor singleSignOnDescriptor
+        )
         {
             if (writer == null)
             {
@@ -2988,42 +4165,78 @@ namespace System.IdentityModel.Metadata
 
             WriteRoleDescriptorElements(writer, singleSignOnDescriptor);
 
-            if (singleSignOnDescriptor.ArtifactResolutionServices != null && singleSignOnDescriptor.ArtifactResolutionServices.Count > 0)
+            if (
+                singleSignOnDescriptor.ArtifactResolutionServices != null
+                && singleSignOnDescriptor.ArtifactResolutionServices.Count > 0
+            )
             {
                 // Write the artifact resolution services
-                foreach (IndexedProtocolEndpoint ep in singleSignOnDescriptor.ArtifactResolutionServices.Values)
+                foreach (
+                    IndexedProtocolEndpoint ep in singleSignOnDescriptor
+                        .ArtifactResolutionServices
+                        .Values
+                )
                 {
                     if (ep.ResponseLocation != null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3249, Saml2MetadataConstants.Attributes.ResponseLocation)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MetadataSerializationException(
+                                SR.GetString(
+                                    SR.ID3249,
+                                    Saml2MetadataConstants.Attributes.ResponseLocation
+                                )
+                            )
+                        );
                     }
 
-                    XmlQualifiedName element = new XmlQualifiedName(Saml2MetadataConstants.Elements.ArtifactResolutionService, Saml2MetadataConstants.Namespace);
+                    XmlQualifiedName element = new XmlQualifiedName(
+                        Saml2MetadataConstants.Elements.ArtifactResolutionService,
+                        Saml2MetadataConstants.Namespace
+                    );
                     WriteIndexedProtocolEndpoint(writer, ep, element);
                 }
             }
 
-            if (singleSignOnDescriptor.SingleLogoutServices != null && singleSignOnDescriptor.SingleLogoutServices.Count > 0)
+            if (
+                singleSignOnDescriptor.SingleLogoutServices != null
+                && singleSignOnDescriptor.SingleLogoutServices.Count > 0
+            )
             {
                 // Write the single logout service endpoints.
                 foreach (ProtocolEndpoint endpoint in singleSignOnDescriptor.SingleLogoutServices)
                 {
-                    XmlQualifiedName element = new XmlQualifiedName(Saml2MetadataConstants.Elements.SingleLogoutService, Saml2MetadataConstants.Namespace);
+                    XmlQualifiedName element = new XmlQualifiedName(
+                        Saml2MetadataConstants.Elements.SingleLogoutService,
+                        Saml2MetadataConstants.Namespace
+                    );
                     WriteProtocolEndpoint(writer, endpoint, element);
                 }
             }
 
-            if (singleSignOnDescriptor.NameIdentifierFormats != null && singleSignOnDescriptor.NameIdentifierFormats.Count > 0)
+            if (
+                singleSignOnDescriptor.NameIdentifierFormats != null
+                && singleSignOnDescriptor.NameIdentifierFormats.Count > 0
+            )
             {
                 // Write the name id formats
                 foreach (Uri nameId in singleSignOnDescriptor.NameIdentifierFormats)
                 {
                     if (!nameId.IsAbsoluteUri)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID0014, Saml2MetadataConstants.Elements.NameIDFormat)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MetadataSerializationException(
+                                SR.GetString(
+                                    SR.ID0014,
+                                    Saml2MetadataConstants.Elements.NameIDFormat
+                                )
+                            )
+                        );
                     }
 
-                    writer.WriteStartElement(Saml2MetadataConstants.Elements.NameIDFormat, Saml2MetadataConstants.Namespace);
+                    writer.WriteStartElement(
+                        Saml2MetadataConstants.Elements.NameIDFormat,
+                        Saml2MetadataConstants.Namespace
+                    );
                     writer.WriteString(nameId.AbsoluteUri);
                     writer.WriteEndElement();
                 }
@@ -3038,7 +4251,10 @@ namespace System.IdentityModel.Metadata
         /// <param name="writer">The xml writer.</param>
         /// <param name="wsDescriptor">The web service desriptor.</param>
         /// <exception cref="ArgumentNullException">The input parameter is null.</exception>
-        protected virtual void WriteWebServiceDescriptorAttributes(XmlWriter writer, WebServiceDescriptor wsDescriptor)
+        protected virtual void WriteWebServiceDescriptorAttributes(
+            XmlWriter writer,
+            WebServiceDescriptor wsDescriptor
+        )
         {
             if (writer == null)
             {
@@ -3054,12 +4270,20 @@ namespace System.IdentityModel.Metadata
 
             if (!String.IsNullOrEmpty(wsDescriptor.ServiceDisplayName))
             {
-                writer.WriteAttributeString(Saml2MetadataConstants.Attributes.ServiceDisplayName, null, wsDescriptor.ServiceDisplayName);
+                writer.WriteAttributeString(
+                    Saml2MetadataConstants.Attributes.ServiceDisplayName,
+                    null,
+                    wsDescriptor.ServiceDisplayName
+                );
             }
 
             if (!String.IsNullOrEmpty(wsDescriptor.ServiceDescription))
             {
-                writer.WriteAttributeString(Saml2MetadataConstants.Attributes.ServiceDescription, null, wsDescriptor.ServiceDescription);
+                writer.WriteAttributeString(
+                    Saml2MetadataConstants.Attributes.ServiceDescription,
+                    null,
+                    wsDescriptor.ServiceDescription
+                );
             }
 
             WriteCustomAttributes<WebServiceDescriptor>(writer, wsDescriptor);
@@ -3071,7 +4295,10 @@ namespace System.IdentityModel.Metadata
         /// <param name="writer">The xml writer.</param>
         /// <param name="wsDescriptor">The web service desriptor.</param>
         /// <exception cref="ArgumentNullException">The input parameter is null.</exception>
-        protected virtual void WriteWebServiceDescriptorElements(XmlWriter writer, WebServiceDescriptor wsDescriptor)
+        protected virtual void WriteWebServiceDescriptorElements(
+            XmlWriter writer,
+            WebServiceDescriptor wsDescriptor
+        )
         {
             if (writer == null)
             {
@@ -3085,33 +4312,52 @@ namespace System.IdentityModel.Metadata
 
             if (wsDescriptor.TargetScopes == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("wsDescriptor.TargetScopes");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "wsDescriptor.TargetScopes"
+                );
             }
 
             if (wsDescriptor.ClaimTypesOffered == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("wsDescriptor.ClaimTypesOffered");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "wsDescriptor.ClaimTypesOffered"
+                );
             }
 
             if (wsDescriptor.TokenTypesOffered == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("wsDescriptor.TokenTypesOffered");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "wsDescriptor.TokenTypesOffered"
+                );
             }
 
             WriteRoleDescriptorElements(writer, wsDescriptor);
 
             if (wsDescriptor.TokenTypesOffered.Count > 0)
             {
-                writer.WriteStartElement(FederationMetadataConstants.Elements.TokenTypesOffered, FederationMetadataConstants.Namespace);
+                writer.WriteStartElement(
+                    FederationMetadataConstants.Elements.TokenTypesOffered,
+                    FederationMetadataConstants.Namespace
+                );
                 foreach (Uri tokenType in wsDescriptor.TokenTypesOffered)
                 {
-                    writer.WriteStartElement(WSFederationMetadataConstants.Elements.TokenType, WSFederationMetadataConstants.Namespace);
+                    writer.WriteStartElement(
+                        WSFederationMetadataConstants.Elements.TokenType,
+                        WSFederationMetadataConstants.Namespace
+                    );
                     if (!tokenType.IsAbsoluteUri)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3203, WSAuthorizationConstants.Elements.ClaimType)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MetadataSerializationException(
+                                SR.GetString(SR.ID3203, WSAuthorizationConstants.Elements.ClaimType)
+                            )
+                        );
                     }
 
-                    writer.WriteAttributeString(WSFederationMetadataConstants.Attributes.Uri, tokenType.AbsoluteUri);
+                    writer.WriteAttributeString(
+                        WSFederationMetadataConstants.Attributes.Uri,
+                        tokenType.AbsoluteUri
+                    );
                     writer.WriteEndElement();
                 }
 
@@ -3120,7 +4366,10 @@ namespace System.IdentityModel.Metadata
 
             if (wsDescriptor.ClaimTypesOffered.Count > 0)
             {
-                writer.WriteStartElement(FederationMetadataConstants.Elements.ClaimTypesOffered, FederationMetadataConstants.Namespace);
+                writer.WriteStartElement(
+                    FederationMetadataConstants.Elements.ClaimTypesOffered,
+                    FederationMetadataConstants.Namespace
+                );
                 foreach (DisplayClaim claim in wsDescriptor.ClaimTypesOffered)
                 {
                     WriteDisplayClaim(writer, claim);
@@ -3131,7 +4380,10 @@ namespace System.IdentityModel.Metadata
 
             if (wsDescriptor.ClaimTypesRequested.Count > 0)
             {
-                writer.WriteStartElement(FederationMetadataConstants.Elements.ClaimTypesRequested, FederationMetadataConstants.Namespace);
+                writer.WriteStartElement(
+                    FederationMetadataConstants.Elements.ClaimTypesRequested,
+                    FederationMetadataConstants.Namespace
+                );
                 foreach (DisplayClaim claim in wsDescriptor.ClaimTypesRequested)
                 {
                     WriteDisplayClaim(writer, claim);
@@ -3142,7 +4394,10 @@ namespace System.IdentityModel.Metadata
 
             if (wsDescriptor.TargetScopes.Count > 0)
             {
-                writer.WriteStartElement(FederationMetadataConstants.Elements.TargetScopes, FederationMetadataConstants.Namespace);
+                writer.WriteStartElement(
+                    FederationMetadataConstants.Elements.TargetScopes,
+                    FederationMetadataConstants.Namespace
+                );
                 foreach (EndpointReference address in wsDescriptor.TargetScopes)
                 {
                     address.WriteTo(writer);
@@ -3158,7 +4413,7 @@ namespace System.IdentityModel.Metadata
         /// Reads the &lt;saml:Attribute> element.
         /// </summary>
         /// <remarks>
-        /// The default implementation requires that the content of the 
+        /// The default implementation requires that the content of the
         /// Attribute element be a simple string. To handle complex content
         /// or content of declared simple types other than xs:string, override
         /// this method.
@@ -3176,7 +4431,10 @@ namespace System.IdentityModel.Metadata
             // throw if wrong element
             if (!reader.IsStartElement(Saml2Constants.Elements.Attribute, Saml2Constants.Namespace))
             {
-                reader.ReadStartElement(Saml2Constants.Elements.Attribute, Saml2Constants.Namespace);
+                reader.ReadStartElement(
+                    Saml2Constants.Elements.Attribute,
+                    Saml2Constants.Namespace
+                );
             }
 
             try
@@ -3187,14 +4445,25 @@ namespace System.IdentityModel.Metadata
                 // @attributes
                 string value;
 
-                // @xsi:type 
-                XmlUtil.ValidateXsiType(reader, Saml2Constants.Types.AttributeType, Saml2Constants.Namespace);
+                // @xsi:type
+                XmlUtil.ValidateXsiType(
+                    reader,
+                    Saml2Constants.Types.AttributeType,
+                    Saml2Constants.Namespace
+                );
 
                 // @Name - required
                 value = reader.GetAttribute(Saml2Constants.Attributes.Name);
                 if (String.IsNullOrEmpty(value))
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID0001, Saml2Constants.Attributes.Name, Saml2Constants.Elements.Attribute));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(
+                            SR.ID0001,
+                            Saml2Constants.Attributes.Name,
+                            Saml2Constants.Elements.Attribute
+                        )
+                    );
                 }
 
                 attribute = new Saml2Attribute(value);
@@ -3205,20 +4474,34 @@ namespace System.IdentityModel.Metadata
                 {
                     if (!UriUtil.CanCreateValidUri(value, UriKind.Absolute))
                     {
-                        throw DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID0011, Saml2Constants.Attributes.Namespace, Saml2Constants.Elements.Action));
+                        throw DiagnosticUtility.ThrowHelperXml(
+                            reader,
+                            SR.GetString(
+                                SR.ID0011,
+                                Saml2Constants.Attributes.Namespace,
+                                Saml2Constants.Elements.Action
+                            )
+                        );
                     }
 
                     attribute.NameFormat = new Uri(value);
                 }
 
                 // @FriendlyName - optional
-                attribute.FriendlyName = reader.GetAttribute(Saml2Constants.Attributes.FriendlyName);
+                attribute.FriendlyName = reader.GetAttribute(
+                    Saml2Constants.Attributes.FriendlyName
+                );
 
                 // content
                 reader.Read();
                 if (!isEmpty)
                 {
-                    while (reader.IsStartElement(Saml2Constants.Elements.AttributeValue, Saml2Constants.Namespace))
+                    while (
+                        reader.IsStartElement(
+                            Saml2Constants.Elements.AttributeValue,
+                            Saml2Constants.Namespace
+                        )
+                    )
                     {
                         bool isEmptyValue = reader.IsEmptyElement;
                         bool isNil = XmlUtil.IsNil(reader);
@@ -3296,23 +4579,36 @@ namespace System.IdentityModel.Metadata
             // @NameFormat - optional
             if (null != data.NameFormat)
             {
-                writer.WriteAttributeString(Saml2Constants.Attributes.NameFormat, data.NameFormat.AbsoluteUri);
+                writer.WriteAttributeString(
+                    Saml2Constants.Attributes.NameFormat,
+                    data.NameFormat.AbsoluteUri
+                );
             }
 
             // @FriendlyName - optional
             if (null != data.FriendlyName)
             {
-                writer.WriteAttributeString(Saml2Constants.Attributes.FriendlyName, data.FriendlyName);
+                writer.WriteAttributeString(
+                    Saml2Constants.Attributes.FriendlyName,
+                    data.FriendlyName
+                );
             }
 
             // <AttributeValue> 0-OO (nillable)
             foreach (string value in data.Values)
             {
-                writer.WriteStartElement(Saml2Constants.Elements.AttributeValue, Saml2Constants.Namespace);
+                writer.WriteStartElement(
+                    Saml2Constants.Elements.AttributeValue,
+                    Saml2Constants.Namespace
+                );
 
                 if (null == value)
                 {
-                    writer.WriteAttributeString("nil", XmlSchema.InstanceNamespace, XmlConvert.ToString(true));
+                    writer.WriteAttributeString(
+                        "nil",
+                        XmlSchema.InstanceNamespace,
+                        XmlConvert.ToString(true)
+                    );
                 }
                 else if (value.Length > 0)
                 {
@@ -3326,14 +4622,16 @@ namespace System.IdentityModel.Metadata
             writer.WriteEndElement();
         }
 
-        // Wraps common data validation exceptions with an XmlException 
+        // Wraps common data validation exceptions with an XmlException
         // associated with the failing reader
         private static Exception TryWrapReadException(XmlReader reader, Exception inner)
         {
-            if (inner is FormatException
+            if (
+                inner is FormatException
                 || inner is ArgumentException
                 || inner is InvalidOperationException
-                || inner is OverflowException)
+                || inner is OverflowException
+            )
             {
                 return DiagnosticUtility.ThrowHelperXml(reader, SR.GetString(SR.ID4125), inner);
             }

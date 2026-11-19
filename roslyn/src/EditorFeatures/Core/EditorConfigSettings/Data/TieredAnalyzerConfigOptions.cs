@@ -7,7 +7,12 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data;
 
-internal sealed class TieredAnalyzerConfigOptions(AnalyzerConfigOptions editorConfigOptions, IGlobalOptionService globalOptions, string language, string editorConfigFileName)
+internal sealed class TieredAnalyzerConfigOptions(
+    AnalyzerConfigOptions editorConfigOptions,
+    IGlobalOptionService globalOptions,
+    string language,
+    string editorConfigFileName
+)
 {
     public readonly AnalyzerConfigOptions EditorConfigOptions = editorConfigOptions;
     public readonly IGlobalOptionService GlobalOptions = globalOptions;
@@ -18,10 +23,14 @@ internal sealed class TieredAnalyzerConfigOptions(AnalyzerConfigOptions editorCo
     public void GetInitialLocationAndValue<TValue>(
         IOption2 option,
         out SettingLocation location,
-        out TValue initialValue)
+        out TValue initialValue
+    )
         where TValue : notnull
     {
-        if (EditorConfigOptions.TryGetEditorConfigOption<TValue>(option, out var editorConfigValue) && editorConfigValue is not null)
+        if (
+            EditorConfigOptions.TryGetEditorConfigOption<TValue>(option, out var editorConfigValue)
+            && editorConfigValue is not null
+        )
         {
             location = new SettingLocation(LocationKind.EditorConfig, EditorConfigFileName);
             initialValue = editorConfigValue;
@@ -29,7 +38,9 @@ internal sealed class TieredAnalyzerConfigOptions(AnalyzerConfigOptions editorCo
         else
         {
             location = new SettingLocation(LocationKind.VisualStudio, Path: null);
-            initialValue = GlobalOptions.GetOption<TValue>(new OptionKey2(option, option.IsPerLanguage ? Language : null))!;
+            initialValue = GlobalOptions.GetOption<TValue>(
+                new OptionKey2(option, option.IsPerLanguage ? Language : null)
+            )!;
         }
     }
 }

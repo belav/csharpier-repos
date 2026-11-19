@@ -13,6 +13,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         NullableConversion,
         NullableConversionConstructor,
         NullableIntermediateConversion,
-        NotLiftedIntermediateConversion
+        NotLiftedIntermediateConversion,
     }
 }

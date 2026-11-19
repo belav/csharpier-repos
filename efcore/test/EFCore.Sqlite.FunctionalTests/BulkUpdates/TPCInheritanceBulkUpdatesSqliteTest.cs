@@ -3,18 +3,18 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
-public class TPCInheritanceBulkUpdatesSqliteTest : TPCInheritanceBulkUpdatesTestBase<TPCInheritanceBulkUpdatesSqliteFixture>
+public class TPCInheritanceBulkUpdatesSqliteTest
+    : TPCInheritanceBulkUpdatesTestBase<TPCInheritanceBulkUpdatesSqliteFixture>
 {
     public TPCInheritanceBulkUpdatesSqliteTest(
         TPCInheritanceBulkUpdatesSqliteFixture fixture,
-        ITestOutputHelper testOutputHelper)
-        : base(fixture, testOutputHelper)
-    {
-    }
+        ITestOutputHelper testOutputHelper
+    )
+        : base(fixture, testOutputHelper) { }
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task Delete_where_hierarchy(bool async)
     {
@@ -31,7 +31,8 @@ public class TPCInheritanceBulkUpdatesSqliteTest : TPCInheritanceBulkUpdatesTest
             """
 DELETE FROM "Kiwi" AS "k"
 WHERE "k"."Name" = 'Great spotted kiwi'
-""");
+"""
+        );
     }
 
     public override async Task Delete_where_using_hierarchy(bool async)
@@ -51,7 +52,8 @@ WHERE (
         FROM "Kiwi" AS "k"
     ) AS "t"
     WHERE "c"."Id" = "t"."CountryId" AND "t"."CountryId" > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Delete_where_using_hierarchy_derived(bool async)
@@ -68,7 +70,8 @@ WHERE (
         FROM "Kiwi" AS "k"
     ) AS "t"
     WHERE "c"."Id" = "t"."CountryId" AND "t"."CountryId" > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Delete_where_keyless_entity_mapped_to_sql_query(bool async)
@@ -135,7 +138,8 @@ WHERE (
             """
 UPDATE "Kiwi" AS "k"
 SET "Name" = 'SomeOtherKiwi'
-""");
+"""
+        );
     }
 
     public override async Task Update_derived_property_on_derived_type(bool async)
@@ -146,7 +150,8 @@ SET "Name" = 'SomeOtherKiwi'
             """
 UPDATE "Kiwi" AS "k"
 SET "FoundOn" = 0
-""");
+"""
+        );
     }
 
     public override async Task Update_where_using_hierarchy(bool async)
@@ -167,7 +172,8 @@ WHERE (
         FROM "Kiwi" AS "k"
     ) AS "t"
     WHERE "c"."Id" = "t"."CountryId" AND "t"."CountryId" > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Update_base_and_derived_types(bool async)
@@ -179,7 +185,8 @@ WHERE (
 UPDATE "Kiwi" AS "k"
 SET "FoundOn" = 0,
     "Name" = 'Kiwi'
-""");
+"""
+        );
     }
 
     public override async Task Update_where_using_hierarchy_derived(bool async)
@@ -197,7 +204,8 @@ WHERE (
         FROM "Kiwi" AS "k"
     ) AS "t"
     WHERE "c"."Id" = "t"."CountryId" AND "t"."CountryId" > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Update_where_keyless_entity_mapped_to_sql_query(bool async)
@@ -215,10 +223,13 @@ WHERE (
             """
 UPDATE "Coke" AS "c"
 SET "SugarGrams" = 0
-""");
+"""
+        );
     }
 
-    public override async Task Update_with_interface_in_EF_Property_in_property_expression(bool async)
+    public override async Task Update_with_interface_in_EF_Property_in_property_expression(
+        bool async
+    )
     {
         await base.Update_with_interface_in_EF_Property_in_property_expression(async);
 
@@ -226,15 +237,15 @@ SET "SugarGrams" = 0
             """
 UPDATE "Coke" AS "c"
 SET "SugarGrams" = 0
-""");
+"""
+        );
     }
 
-    protected override void ClearLog()
-        => Fixture.TestSqlLoggerFactory.Clear();
+    protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-    private void AssertExecuteUpdateSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
+    private void AssertExecuteUpdateSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
 }

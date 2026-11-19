@@ -17,7 +17,10 @@ namespace System.Reflection.PortableExecutable
         /// <param name="portablePdbVersion">Version of Portable PDB format (e.g. 0x0100 for 1.0).</param>
         /// <exception cref="ArgumentNullException"><paramref name="debugMetadata"/> is null.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="portablePdbVersion"/> is smaller than 0x0100.</exception>
-        public void AddEmbeddedPortablePdbEntry(BlobBuilder debugMetadata, ushort portablePdbVersion)
+        public void AddEmbeddedPortablePdbEntry(
+            BlobBuilder debugMetadata,
+            ushort portablePdbVersion
+        )
         {
             if (debugMetadata is null)
             {
@@ -35,10 +38,14 @@ namespace System.Reflection.PortableExecutable
                 type: DebugDirectoryEntryType.EmbeddedPortablePdb,
                 version: PortablePdbVersions.DebugDirectoryEmbeddedVersion(portablePdbVersion),
                 stamp: 0,
-                dataSize);
+                dataSize
+            );
         }
 
-        private static int WriteEmbeddedPortablePdbData(BlobBuilder builder, BlobBuilder debugMetadata)
+        private static int WriteEmbeddedPortablePdbData(
+            BlobBuilder builder,
+            BlobBuilder debugMetadata
+        )
         {
             int start = builder.Count;
 
@@ -48,7 +55,13 @@ namespace System.Reflection.PortableExecutable
 
             // compressed data:
             var compressed = new MemoryStream();
-            using (var deflate = new DeflateStream(compressed, CompressionLevel.Optimal, leaveOpen: true))
+            using (
+                var deflate = new DeflateStream(
+                    compressed,
+                    CompressionLevel.Optimal,
+                    leaveOpen: true
+                )
+            )
             {
                 foreach (var blob in debugMetadata.GetBlobs())
                 {
@@ -61,6 +74,5 @@ namespace System.Reflection.PortableExecutable
 
             return builder.Count - start;
         }
-
     }
 }

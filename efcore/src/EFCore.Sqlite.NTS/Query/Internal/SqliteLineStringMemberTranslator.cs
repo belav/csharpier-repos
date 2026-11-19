@@ -14,15 +14,32 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal;
 /// </summary>
 public class SqliteLineStringMemberTranslator : IMemberTranslator
 {
-    private static readonly IDictionary<MemberInfo, string> MemberToFunctionName
-        = new Dictionary<MemberInfo, string>
+    private static readonly IDictionary<MemberInfo, string> MemberToFunctionName = new Dictionary<
+        MemberInfo,
+        string
+    >
+    {
         {
-            { typeof(LineString).GetTypeInfo().GetRuntimeProperty(nameof(LineString.Count))!, "NumPoints" },
-            { typeof(LineString).GetTypeInfo().GetRuntimeProperty(nameof(LineString.EndPoint))!, "EndPoint" },
-            { typeof(LineString).GetTypeInfo().GetRuntimeProperty(nameof(LineString.IsClosed))!, "IsClosed" },
-            { typeof(LineString).GetTypeInfo().GetRuntimeProperty(nameof(LineString.IsRing))!, "IsRing" },
-            { typeof(LineString).GetTypeInfo().GetRuntimeProperty(nameof(LineString.StartPoint))!, "StartPoint" }
-        };
+            typeof(LineString).GetTypeInfo().GetRuntimeProperty(nameof(LineString.Count))!,
+            "NumPoints"
+        },
+        {
+            typeof(LineString).GetTypeInfo().GetRuntimeProperty(nameof(LineString.EndPoint))!,
+            "EndPoint"
+        },
+        {
+            typeof(LineString).GetTypeInfo().GetRuntimeProperty(nameof(LineString.IsClosed))!,
+            "IsClosed"
+        },
+        {
+            typeof(LineString).GetTypeInfo().GetRuntimeProperty(nameof(LineString.IsRing))!,
+            "IsRing"
+        },
+        {
+            typeof(LineString).GetTypeInfo().GetRuntimeProperty(nameof(LineString.StartPoint))!,
+            "StartPoint"
+        },
+    };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -47,10 +64,10 @@ public class SqliteLineStringMemberTranslator : IMemberTranslator
         SqlExpression? instance,
         MemberInfo member,
         Type returnType,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
-        if (MemberToFunctionName.TryGetValue(member, out var functionName)
-            && instance != null)
+        if (MemberToFunctionName.TryGetValue(member, out var functionName) && instance != null)
         {
             return returnType == typeof(bool)
                 ? _sqlExpressionFactory.Case(
@@ -63,15 +80,19 @@ public class SqliteLineStringMemberTranslator : IMemberTranslator
                                 new[] { instance },
                                 nullable: false,
                                 argumentsPropagateNullability: new[] { false },
-                                returnType))
+                                returnType
+                            )
+                        ),
                     },
-                    null)
+                    null
+                )
                 : _sqlExpressionFactory.Function(
                     functionName,
                     new[] { instance },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true },
-                    returnType);
+                    returnType
+                );
         }
 
         return null;

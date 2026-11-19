@@ -9,7 +9,11 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetCwd", SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetCwd",
+            SetLastError = true
+        )]
         private static unsafe partial byte* GetCwd(byte* buffer, int bufferLength);
 
         internal static unsafe string GetCwd()
@@ -26,7 +30,10 @@ internal static partial class Interop
             int bufferSize = DefaultPathBufferSize;
             while (true)
             {
-                checked { bufferSize *= 2; }
+                checked
+                {
+                    bufferSize *= 2;
+                }
                 byte[] buf = ArrayPool<byte>.Shared.Rent(bufferSize);
                 try
                 {
@@ -62,7 +69,7 @@ internal static partial class Interop
             ErrorInfo errorInfo = Interop.Sys.GetLastErrorInfo();
             if (errorInfo.Error == Interop.Error.ERANGE)
             {
-               return null;
+                return null;
             }
             throw Interop.GetExceptionForIoErrno(errorInfo);
         }

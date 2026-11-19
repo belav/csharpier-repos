@@ -55,7 +55,14 @@ namespace Microsoft.DiaSymReader
             _count = 0;
         }
 
-        public void Add(int documentIndex, int offset, int startLine, int startColumn, int endLine, int endColumn)
+        public void Add(
+            int documentIndex,
+            int offset,
+            int startLine,
+            int startColumn,
+            int endLine,
+            int endColumn
+        )
         {
             if (documentIndex < 0)
             {
@@ -94,7 +101,8 @@ namespace Microsoft.DiaSymReader
                     _startLines,
                     _startColumns,
                     _endLines,
-                    _endColumns);
+                    _endColumns
+                );
             }
 
             Clear();

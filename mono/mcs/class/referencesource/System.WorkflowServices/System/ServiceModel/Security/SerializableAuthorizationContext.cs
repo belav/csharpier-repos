@@ -4,16 +4,16 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.IdentityModel.Policy;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IdentityModel.Claims;
-    using System.Collections.Generic;
-    using System.Runtime.Serialization;
+    using System.IdentityModel.Policy;
     using System.IO;
-    using System.Xml;
-    using System.ServiceModel.Dispatcher;
+    using System.Runtime.Serialization;
     using System.Security.Principal;
+    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security.Tokens;
+    using System.Xml;
 
     [Serializable]
     class SerializableAuthorizationContext
@@ -24,15 +24,21 @@ namespace System.ServiceModel.Security
                 typeof(DefaultClaimSet),
                 typeof(WindowsClaimSet),
                 typeof(X509CertificateClaimSet),
-                typeof(Claim)
-            });
+                typeof(Claim),
+            }
+        );
 
         byte[] contextBlob;
         DateTime expirationTime;
         string id;
         IList<Type> knownTypes;
 
-        SerializableAuthorizationContext(byte[] contextBlob, DateTime expirationTime, string id, IList<Type> knownTypes)
+        SerializableAuthorizationContext(
+            byte[] contextBlob,
+            DateTime expirationTime,
+            string id,
+            IList<Type> knownTypes
+        )
         {
             if (contextBlob == null)
             {
@@ -45,23 +51,39 @@ namespace System.ServiceModel.Security
             this.knownTypes = knownTypes;
         }
 
-        public static SerializableAuthorizationContext From(AuthorizationContext authorizationContext)
+        public static SerializableAuthorizationContext From(
+            AuthorizationContext authorizationContext
+        )
         {
             if (authorizationContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("authorizationContext");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "authorizationContext"
+                );
             }
 
             IList<Type> knownTypes = BuildKnownClaimTypes(authorizationContext);
             byte[] contextBlob = CreateSerializableBlob(authorizationContext, knownTypes);
 
-            return new SerializableAuthorizationContext(contextBlob, authorizationContext.ExpirationTime, authorizationContext.Id, knownTypes);
+            return new SerializableAuthorizationContext(
+                contextBlob,
+                authorizationContext.ExpirationTime,
+                authorizationContext.Id,
+                knownTypes
+            );
         }
 
         public AuthorizationContext Retrieve()
         {
             List<IAuthorizationPolicy> authorizationPolicies = new List<IAuthorizationPolicy>(1);
-            authorizationPolicies.Add(RetrievePolicyFromBlob(this.contextBlob, this.id, this.expirationTime, this.knownTypes));
+            authorizationPolicies.Add(
+                RetrievePolicyFromBlob(
+                    this.contextBlob,
+                    this.id,
+                    this.expirationTime,
+                    this.knownTypes
+                )
+            );
             return AuthorizationContext.CreateDefaultAuthorizationContext(authorizationPolicies);
         }
 
@@ -97,34 +119,71 @@ namespace System.ServiceModel.Security
             return null;
         }
 
-        static byte[] CreateSerializableBlob(AuthorizationContext authorizationContext, IList<Type> knownTypes)
+        static byte[] CreateSerializableBlob(
+            AuthorizationContext authorizationContext,
+            IList<Type> knownTypes
+        )
         {
             if (authorizationContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("authorizationContext");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "authorizationContext"
+                );
             }
 
             MemoryStream stream = new MemoryStream();
-            XmlDictionaryWriter writer = XmlDictionaryWriter.CreateBinaryWriter(stream, SctClaimDictionary.Instance, null);
+            XmlDictionaryWriter writer = XmlDictionaryWriter.CreateBinaryWriter(
+                stream,
+                SctClaimDictionary.Instance,
+                null
+            );
             SctClaimDictionary claimDictionary = SctClaimDictionary.Instance;
 
-
-            writer.WriteStartElement(claimDictionary.SecurityContextSecurityToken, claimDictionary.EmptyString);
+            writer.WriteStartElement(
+                claimDictionary.SecurityContextSecurityToken,
+                claimDictionary.EmptyString
+            );
             writer.WriteStartElement(claimDictionary.Version, claimDictionary.EmptyString);
             writer.WriteValue(1);
             writer.WriteEndElement();
 
             if ((authorizationContext != null) && (authorizationContext.ClaimSets.Count != 0))
             {
-                DataContractSerializer identitySerializer = DataContractSerializerDefaults.CreateSerializer(typeof(IIdentity), knownTypes, 0x7fffffff);
-                DataContractSerializer claimSetSerializer = DataContractSerializerDefaults.CreateSerializer(typeof(ClaimSet), knownTypes, 0x7fffffff);
-                DataContractSerializer claimSerializer = DataContractSerializerDefaults.CreateSerializer(typeof(Claim), knownTypes, 0x7fffffff);
-                SctClaimSerializer.SerializeIdentities(authorizationContext, claimDictionary, writer, identitySerializer);
+                DataContractSerializer identitySerializer =
+                    DataContractSerializerDefaults.CreateSerializer(
+                        typeof(IIdentity),
+                        knownTypes,
+                        0x7fffffff
+                    );
+                DataContractSerializer claimSetSerializer =
+                    DataContractSerializerDefaults.CreateSerializer(
+                        typeof(ClaimSet),
+                        knownTypes,
+                        0x7fffffff
+                    );
+                DataContractSerializer claimSerializer =
+                    DataContractSerializerDefaults.CreateSerializer(
+                        typeof(Claim),
+                        knownTypes,
+                        0x7fffffff
+                    );
+                SctClaimSerializer.SerializeIdentities(
+                    authorizationContext,
+                    claimDictionary,
+                    writer,
+                    identitySerializer
+                );
 
                 writer.WriteStartElement(claimDictionary.ClaimSets, claimDictionary.EmptyString);
                 for (int i = 0; i < authorizationContext.ClaimSets.Count; i++)
                 {
-                    SctClaimSerializer.SerializeClaimSet(authorizationContext.ClaimSets[i], claimDictionary, writer, claimSetSerializer, claimSerializer);
+                    SctClaimSerializer.SerializeClaimSet(
+                        authorizationContext.ClaimSets[i],
+                        claimDictionary,
+                        writer,
+                        claimSetSerializer,
+                        claimSerializer
+                    );
                 }
                 writer.WriteEndElement();
             }
@@ -134,7 +193,12 @@ namespace System.ServiceModel.Security
             return stream.ToArray();
         }
 
-        static IAuthorizationPolicy RetrievePolicyFromBlob(byte[] contextBlob, string id, DateTime expirationTime, IList<Type> knownTypes)
+        static IAuthorizationPolicy RetrievePolicyFromBlob(
+            byte[] contextBlob,
+            string id,
+            DateTime expirationTime,
+            IList<Type> knownTypes
+        )
         {
             if (contextBlob == null)
             {
@@ -147,12 +211,23 @@ namespace System.ServiceModel.Security
             }
 
             SctClaimDictionary claimDictionary = SctClaimDictionary.Instance;
-            XmlDictionaryReader reader = XmlDictionaryReader.CreateBinaryReader(contextBlob, 0, contextBlob.Length, claimDictionary, XmlDictionaryReaderQuotas.Max, null, null);
+            XmlDictionaryReader reader = XmlDictionaryReader.CreateBinaryReader(
+                contextBlob,
+                0,
+                contextBlob.Length,
+                claimDictionary,
+                XmlDictionaryReaderQuotas.Max,
+                null,
+                null
+            );
             IList<IIdentity> identities = null;
             IList<ClaimSet> claimSets = null;
             int versionNumber = -1;
 
-            reader.ReadFullStartElement(claimDictionary.SecurityContextSecurityToken, claimDictionary.EmptyString);
+            reader.ReadFullStartElement(
+                claimDictionary.SecurityContextSecurityToken,
+                claimDictionary.EmptyString
+            );
 
             while (reader.IsStartElement())
             {
@@ -162,26 +237,68 @@ namespace System.ServiceModel.Security
 
                     if (versionNumber != 1)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR2.GetString(SR2.SerializedAuthorizationContextVersionUnsupported, versionNumber)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotSupportedException(
+                                SR2.GetString(
+                                    SR2.SerializedAuthorizationContextVersionUnsupported,
+                                    versionNumber
+                                )
+                            )
+                        );
                     }
                 }
                 else
                 {
-                    if (reader.IsStartElement(claimDictionary.Identities, claimDictionary.EmptyString))
+                    if (
+                        reader.IsStartElement(
+                            claimDictionary.Identities,
+                            claimDictionary.EmptyString
+                        )
+                    )
                     {
-                        identities = SctClaimSerializer.DeserializeIdentities(reader, claimDictionary, DataContractSerializerDefaults.CreateSerializer(typeof(IIdentity), knownTypes, 0x7fffffff));
+                        identities = SctClaimSerializer.DeserializeIdentities(
+                            reader,
+                            claimDictionary,
+                            DataContractSerializerDefaults.CreateSerializer(
+                                typeof(IIdentity),
+                                knownTypes,
+                                0x7fffffff
+                            )
+                        );
                         continue;
                     }
-                    if (reader.IsStartElement(claimDictionary.ClaimSets, claimDictionary.EmptyString))
+                    if (
+                        reader.IsStartElement(
+                            claimDictionary.ClaimSets,
+                            claimDictionary.EmptyString
+                        )
+                    )
                     {
                         reader.ReadStartElement();
-                        DataContractSerializer claimSetSerializer = DataContractSerializerDefaults.CreateSerializer(typeof(ClaimSet), knownTypes, 0x7fffffff);
-                        DataContractSerializer claimSerializer = DataContractSerializerDefaults.CreateSerializer(typeof(Claim), knownTypes, 0x7fffffff);
+                        DataContractSerializer claimSetSerializer =
+                            DataContractSerializerDefaults.CreateSerializer(
+                                typeof(ClaimSet),
+                                knownTypes,
+                                0x7fffffff
+                            );
+                        DataContractSerializer claimSerializer =
+                            DataContractSerializerDefaults.CreateSerializer(
+                                typeof(Claim),
+                                knownTypes,
+                                0x7fffffff
+                            );
                         claimSets = new List<ClaimSet>(1);
 
                         while (reader.IsStartElement())
                         {
-                            claimSets.Add(SctClaimSerializer.DeserializeClaimSet(reader, claimDictionary, claimSetSerializer, claimSerializer));
+                            claimSets.Add(
+                                SctClaimSerializer.DeserializeClaimSet(
+                                    reader,
+                                    claimDictionary,
+                                    claimSetSerializer,
+                                    claimSerializer
+                                )
+                            );
                         }
 
                         reader.ReadEndElement();
@@ -195,13 +312,17 @@ namespace System.ServiceModel.Security
 
         class SctUnconditionalPolicy : IAuthorizationPolicy, IAuthorizationComponent
         {
-
             IList<ClaimSet> claimSets;
             DateTime expirationTime;
             string id;
             IList<IIdentity> identities;
 
-            public SctUnconditionalPolicy(IList<IIdentity> identities, string id, IList<ClaimSet> claimSets, DateTime expirationTime)
+            public SctUnconditionalPolicy(
+                IList<IIdentity> identities,
+                string id,
+                IList<ClaimSet> claimSets,
+                DateTime expirationTime
+            )
             {
                 this.identities = identities;
                 this.claimSets = claimSets;
@@ -211,18 +332,12 @@ namespace System.ServiceModel.Security
 
             public string Id
             {
-                get
-                {
-                    return this.id;
-                }
+                get { return this.id; }
             }
 
             public ClaimSet Issuer
             {
-                get
-                {
-                    return ClaimSet.System;
-                }
+                get { return ClaimSet.System; }
             }
 
             public bool Evaluate(EvaluationContext evaluationContext, ref object state)

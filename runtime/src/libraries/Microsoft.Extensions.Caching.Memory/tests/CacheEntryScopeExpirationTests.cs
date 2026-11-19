@@ -19,11 +19,13 @@ namespace Microsoft.Extensions.Caching.Memory
 
         private IMemoryCache CreateCache(ISystemClock clock, bool trackLinkedCacheEntries = false)
         {
-            return new MemoryCache(new MemoryCacheOptions()
-            {
-                Clock = clock,
-                TrackLinkedCacheEntries = trackLinkedCacheEntries
-            });
+            return new MemoryCache(
+                new MemoryCacheOptions()
+                {
+                    Clock = clock,
+                    TrackLinkedCacheEntries = trackLinkedCacheEntries,
+                }
+            );
         }
 
         [Theory]
@@ -41,7 +43,11 @@ namespace Microsoft.Extensions.Caching.Memory
                 VerifyCurrentEntry(trackLinkedCacheEntries, entry);
 
                 var expirationToken = new TestExpirationToken() { ActiveChangeCallbacks = true };
-                cache.Set(key, obj, new MemoryCacheEntryOptions().AddExpirationToken(expirationToken));
+                cache.Set(
+                    key,
+                    obj,
+                    new MemoryCacheEntryOptions().AddExpirationToken(expirationToken)
+                );
             }
 
             Assert.Equal(trackLinkedCacheEntries ? 1 : 0, entry.ExpirationTokens.Count);
@@ -86,7 +92,11 @@ namespace Microsoft.Extensions.Caching.Memory
             {
                 entry.SetValue(obj);
 
-                cache.Set(key1, obj, new MemoryCacheEntryOptions().AddExpirationToken(expirationToken));
+                cache.Set(
+                    key1,
+                    obj,
+                    new MemoryCacheEntryOptions().AddExpirationToken(expirationToken)
+                );
             }
 
             Assert.Same(obj, cache.Get(key));
@@ -245,7 +255,11 @@ namespace Microsoft.Extensions.Caching.Memory
             using (var entry = cache.CreateEntry(key))
             {
                 entry.SetValue(obj);
-                cache.Set(key1, obj, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(5)));
+                cache.Set(
+                    key1,
+                    obj,
+                    new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(5))
+                );
             }
 
             Assert.Same(obj, cache.Get(key));
@@ -348,7 +362,11 @@ namespace Microsoft.Extensions.Caching.Memory
                 VerifyCurrentEntry(trackLinkedCacheEntries, entry);
 
                 var expirationToken = new TestExpirationToken() { ActiveChangeCallbacks = true };
-                cache.Set(key1, obj, new MemoryCacheEntryOptions().AddExpirationToken(expirationToken));
+                cache.Set(
+                    key1,
+                    obj,
+                    new MemoryCacheEntryOptions().AddExpirationToken(expirationToken)
+                );
             }
 
             Assert.Null(CacheEntry.Current);
@@ -379,7 +397,10 @@ namespace Microsoft.Extensions.Caching.Memory
                 {
                     VerifyCurrentEntry(trackLinkedCacheEntries, entry1);
 
-                    var expirationToken = new TestExpirationToken() { ActiveChangeCallbacks = true };
+                    var expirationToken = new TestExpirationToken()
+                    {
+                        ActiveChangeCallbacks = true,
+                    };
                     entry1.SetValue(obj);
                     entry1.AddExpirationToken(expirationToken);
                 }
@@ -469,7 +490,8 @@ namespace Microsoft.Extensions.Caching.Memory
                             Task.Run(() =>
                             {
                                 value4 = cache.Set(key4, Guid.NewGuid(), t4);
-                            }));
+                            })
+                        );
 
                         return Guid.NewGuid();
                     });
@@ -517,7 +539,8 @@ namespace Microsoft.Extensions.Caching.Memory
 
             await Task.WhenAll(
                 Task.Run(() => SetExpiredManyTimes(entry)),
-                Task.Run(() => SetExpiredManyTimes(entry)));
+                Task.Run(() => SetExpiredManyTimes(entry))
+            );
 
             Assert.True(entry.CheckExpired(DateTime.UtcNow));
 

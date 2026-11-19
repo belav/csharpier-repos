@@ -25,26 +25,17 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override System.Reflection.MethodAttributes Attributes
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override System.Reflection.CallingConventions CallingConvention
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override Type DeclaringType
         {
-            get
-            {
-                return (TypeImpl)Constructor.DeclaringType;
-            }
+            get { return (TypeImpl)Constructor.DeclaringType; }
         }
 
         public override bool IsEquivalentTo(MemberInfo other)
@@ -54,58 +45,37 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override bool IsGenericMethodDefinition
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override MemberTypes MemberType
         {
-            get
-            {
-                return (MemberTypes)Constructor.MemberType;
-            }
+            get { return (MemberTypes)Constructor.MemberType; }
         }
 
         public override int MetadataToken
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override RuntimeMethodHandle MethodHandle
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override Microsoft.VisualStudio.Debugger.Metadata.Module Module
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override string Name
         {
-            get
-            {
-                return Constructor.Name;
-            }
+            get { return Constructor.Name; }
         }
 
         public override Type ReflectedType
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override object[] GetCustomAttributes(bool inherit)
@@ -138,13 +108,29 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             throw new NotImplementedException();
         }
 
-        public override object Invoke(BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture)
+        public override object Invoke(
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] parameters,
+            CultureInfo culture
+        )
         {
             Debug.Assert(binder == null, "NYI");
-            return Constructor.Invoke((System.Reflection.BindingFlags)invokeAttr, null, parameters, culture);
+            return Constructor.Invoke(
+                (System.Reflection.BindingFlags)invokeAttr,
+                null,
+                parameters,
+                culture
+            );
         }
 
-        public override object Invoke(object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture)
+        public override object Invoke(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] parameters,
+            CultureInfo culture
+        )
         {
             throw new NotImplementedException();
         }

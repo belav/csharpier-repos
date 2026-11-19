@@ -21,7 +21,8 @@ public class SqliteStringTypeMapping : StringTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static new SqliteStringTypeMapping Default { get; } = new(SqliteTypeMappingSource.TextTypeName);
+    public static new SqliteStringTypeMapping Default { get; } =
+        new(SqliteTypeMappingSource.TextTypeName);
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="SqliteStringTypeMapping" /> class.
@@ -34,31 +35,36 @@ public class SqliteStringTypeMapping : StringTypeMapping
         string storeType,
         DbType? dbType = null,
         bool unicode = false,
-        int? size = null)
+        int? size = null
+    )
         : base(
             new RelationalTypeMappingParameters(
                 new CoreTypeMappingParameters(
-                    typeof(string), jsonValueReaderWriter: JsonStringReaderWriter.Instance), storeType, StoreTypePostfix.None, dbType,
-                unicode, size))
-    {
-    }
+                    typeof(string),
+                    jsonValueReaderWriter: JsonStringReaderWriter.Instance
+                ),
+                storeType,
+                StoreTypePostfix.None,
+                dbType,
+                unicode,
+                size
+            )
+        ) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="SqliteStringTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
     protected SqliteStringTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.
     /// </summary>
     /// <param name="parameters">The parameters for this mapping.</param>
     /// <returns>The newly created mapping.</returns>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new SqliteStringTypeMapping(parameters);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new SqliteStringTypeMapping(parameters);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -116,10 +122,7 @@ public class SqliteStringTypeMapping : StringTypeMapping
                         startIndexes.Add(builder.Length);
                     }
 
-                    builder
-                        .Append("CHAR(")
-                        .Append(lineFeed ? "10" : "13")
-                        .Append(')');
+                    builder.Append("CHAR(").Append(lineFeed ? "10" : "13").Append(')');
                 }
                 else if (apostrophe)
                 {
@@ -170,8 +173,7 @@ public class SqliteStringTypeMapping : StringTypeMapping
             lengths.Add(builder.Length - startIndexes[^1]);
         }
 
-        if (lengths.Count == 0
-            && builder.Length == 0)
+        if (lengths.Count == 0 && builder.Length == 0)
         {
             return "''";
         }

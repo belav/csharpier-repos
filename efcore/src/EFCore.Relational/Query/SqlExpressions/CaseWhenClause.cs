@@ -36,17 +36,16 @@ public class CaseWhenClause
     public virtual SqlExpression Result { get; }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is CaseWhenClause caseWhenClause
-                && Equals(caseWhenClause));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is CaseWhenClause caseWhenClause && Equals(caseWhenClause)
+        );
 
-    private bool Equals(CaseWhenClause caseWhenClause)
-        => Test.Equals(caseWhenClause.Test)
-            && Result.Equals(caseWhenClause.Result);
+    private bool Equals(CaseWhenClause caseWhenClause) =>
+        Test.Equals(caseWhenClause.Test) && Result.Equals(caseWhenClause.Result);
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(Test, Result);
+    public override int GetHashCode() => HashCode.Combine(Test, Result);
 }

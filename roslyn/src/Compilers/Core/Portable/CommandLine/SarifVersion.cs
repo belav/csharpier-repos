@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// The latest supported SARIF version.
         /// </summary>
-        Latest = int.MaxValue
+        Latest = int.MaxValue,
     }
 
     public static class SarifVersionFacts

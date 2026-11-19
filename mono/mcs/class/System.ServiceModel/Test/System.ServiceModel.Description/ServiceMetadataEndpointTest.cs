@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,20 +37,20 @@ using System.ServiceModel.Channels;
 
 namespace MonoTests.System.ServiceModel.Description
 {
-	[TestFixture]
-	public class ServiceMetadataEndpointTest
-	{
-		[Test]
-		public void DefaultValues ()
-		{
-			var se = new ServiceMetadataEndpoint ();
-			Assert.IsNotNull (se.Contract, "#1");
-			Assert.AreEqual (typeof (IMetadataExchange), se.Contract.ContractType, "#1.2");
-			Assert.IsNotNull (se.Binding, "#2");
-			// FIXME: enable once we get usable WSHttpBinding.
-			// Assert.AreEqual (typeof (WSHttpBinding), se.Binding.GetType (), "#2.2");
-			Assert.IsNull (se.Address, "#3");
-		}
-	}
+    [TestFixture]
+    public class ServiceMetadataEndpointTest
+    {
+        [Test]
+        public void DefaultValues()
+        {
+            var se = new ServiceMetadataEndpoint();
+            Assert.IsNotNull(se.Contract, "#1");
+            Assert.AreEqual(typeof(IMetadataExchange), se.Contract.ContractType, "#1.2");
+            Assert.IsNotNull(se.Binding, "#2");
+            // FIXME: enable once we get usable WSHttpBinding.
+            // Assert.AreEqual (typeof (WSHttpBinding), se.Binding.GetType (), "#2.2");
+            Assert.IsNull(se.Address, "#3");
+        }
+    }
 }
 #endif

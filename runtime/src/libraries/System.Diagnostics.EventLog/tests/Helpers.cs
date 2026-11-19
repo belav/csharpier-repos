@@ -12,10 +12,22 @@ namespace System.Diagnostics.Tests
 {
     internal class Helpers
     {
-        public static bool HasAssemblyFilesIsElevatedAndSupportsEventLogs => PlatformDetection.HasAssemblyFiles && IsElevatedAndSupportsEventLogs;
-        public static bool NotElevatedAndSupportsEventLogs { get => !AdminHelpers.IsProcessElevated() && SupportsEventLogs; }
-        public static bool IsElevatedAndSupportsEventLogs { get => AdminHelpers.IsProcessElevated() && SupportsEventLogs; }
-        public static bool SupportsEventLogs { get => PlatformDetection.IsNotWindowsNanoNorServerCore && PlatformDetection.IsNotWindowsIoTCore; }
+        public static bool HasAssemblyFilesIsElevatedAndSupportsEventLogs =>
+            PlatformDetection.HasAssemblyFiles && IsElevatedAndSupportsEventLogs;
+        public static bool NotElevatedAndSupportsEventLogs
+        {
+            get => !AdminHelpers.IsProcessElevated() && SupportsEventLogs;
+        }
+        public static bool IsElevatedAndSupportsEventLogs
+        {
+            get => AdminHelpers.IsProcessElevated() && SupportsEventLogs;
+        }
+        public static bool SupportsEventLogs
+        {
+            get =>
+                PlatformDetection.IsNotWindowsNanoNorServerCore
+                && PlatformDetection.IsNotWindowsIoTCore;
+        }
 
         // Retry that eats exceptions: for "best effort cleanup"
         public static void RetrySilently(Action func)
@@ -24,23 +36,30 @@ namespace System.Diagnostics.Tests
             {
                 Retry(func);
             }
-            catch
-            {}
+            catch { }
         }
 
         public static void Retry(Action func)
         {
-            Retry<object>(() => { func(); return null; });
+            Retry<object>(() =>
+            {
+                func();
+                return null;
+            });
         }
 
         public static T Retry<T>(Func<T> func)
         {
             // Harden the tests increasing the retry count and the timeout.
             T result = default;
-            RetryHelper.Execute(() =>
-            {
-                result = func();
-            }, maxAttempts: 20, (iteration) => iteration * 300);
+            RetryHelper.Execute(
+                () =>
+                {
+                    result = func();
+                },
+                maxAttempts: 20,
+                (iteration) => iteration * 300
+            );
 
             return result;
         }
@@ -63,7 +82,7 @@ namespace System.Diagnostics.Tests
             }
 
             if (stopwatch.ElapsedMilliseconds / 1000 >= 5)
-                Console.WriteLine($"{stopwatch.ElapsedMilliseconds / 1000 } seconds");
+                Console.WriteLine($"{stopwatch.ElapsedMilliseconds / 1000} seconds");
 
             Assert.Equal(entriesExpected, Retry((() => eventLog.Entries.Count)));
         }

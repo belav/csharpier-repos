@@ -25,7 +25,11 @@ namespace System.IO.MemoryMappedFiles
             _leaveOpen = true; // No SafeFileHandle to dispose of in this case.
         }
 
-        private MemoryMappedFile(SafeMemoryMappedFileHandle handle, SafeFileHandle fileHandle, bool leaveOpen)
+        private MemoryMappedFile(
+            SafeMemoryMappedFileHandle handle,
+            SafeFileHandle fileHandle,
+            bool leaveOpen
+        )
         {
             Debug.Assert(handle != null);
             Debug.Assert(!handle.IsClosed);
@@ -47,32 +51,60 @@ namespace System.IO.MemoryMappedFiles
         [SupportedOSPlatform("windows")]
         public static MemoryMappedFile OpenExisting(string mapName)
         {
-            return OpenExisting(mapName, MemoryMappedFileRights.ReadWrite, HandleInheritability.None);
+            return OpenExisting(
+                mapName,
+                MemoryMappedFileRights.ReadWrite,
+                HandleInheritability.None
+            );
         }
 
         [SupportedOSPlatform("windows")]
-        public static MemoryMappedFile OpenExisting(string mapName, MemoryMappedFileRights desiredAccessRights)
+        public static MemoryMappedFile OpenExisting(
+            string mapName,
+            MemoryMappedFileRights desiredAccessRights
+        )
         {
             return OpenExisting(mapName, desiredAccessRights, HandleInheritability.None);
         }
 
         [SupportedOSPlatform("windows")]
-        public static MemoryMappedFile OpenExisting(string mapName, MemoryMappedFileRights desiredAccessRights,
-                                                                    HandleInheritability inheritability)
+        public static MemoryMappedFile OpenExisting(
+            string mapName,
+            MemoryMappedFileRights desiredAccessRights,
+            HandleInheritability inheritability
+        )
         {
             ArgumentException.ThrowIfNullOrEmpty(mapName);
 
-            if (inheritability < HandleInheritability.None || inheritability > HandleInheritability.Inheritable)
+            if (
+                inheritability < HandleInheritability.None
+                || inheritability > HandleInheritability.Inheritable
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(inheritability));
             }
 
-            if (((int)desiredAccessRights & ~((int)(MemoryMappedFileRights.FullControl | MemoryMappedFileRights.AccessSystemSecurity))) != 0)
+            if (
+                (
+                    (int)desiredAccessRights
+                    & ~(
+                        (int)(
+                            MemoryMappedFileRights.FullControl
+                            | MemoryMappedFileRights.AccessSystemSecurity
+                        )
+                    )
+                ) != 0
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(desiredAccessRights));
             }
 
-            SafeMemoryMappedFileHandle handle = OpenCore(mapName, inheritability, desiredAccessRights, false);
+            SafeMemoryMappedFileHandle handle = OpenCore(
+                mapName,
+                inheritability,
+                desiredAccessRights,
+                false
+            );
             return new MemoryMappedFile(handle);
         }
 
@@ -86,8 +118,15 @@ namespace System.IO.MemoryMappedFiles
         // changed by the leaveOpen boolean argument.
         public static MemoryMappedFile CreateFromFile(string path)
         {
-            return CreateFromFile(path, FileMode.Open, null, DefaultSize, MemoryMappedFileAccess.ReadWrite);
+            return CreateFromFile(
+                path,
+                FileMode.Open,
+                null,
+                DefaultSize,
+                MemoryMappedFileAccess.ReadWrite
+            );
         }
+
         public static MemoryMappedFile CreateFromFile(string path, FileMode mode)
         {
             return CreateFromFile(path, mode, null, DefaultSize, MemoryMappedFileAccess.ReadWrite);
@@ -95,16 +134,32 @@ namespace System.IO.MemoryMappedFiles
 
         public static MemoryMappedFile CreateFromFile(string path, FileMode mode, string? mapName)
         {
-            return CreateFromFile(path, mode, mapName, DefaultSize, MemoryMappedFileAccess.ReadWrite);
+            return CreateFromFile(
+                path,
+                mode,
+                mapName,
+                DefaultSize,
+                MemoryMappedFileAccess.ReadWrite
+            );
         }
 
-        public static MemoryMappedFile CreateFromFile(string path, FileMode mode, string? mapName, long capacity)
+        public static MemoryMappedFile CreateFromFile(
+            string path,
+            FileMode mode,
+            string? mapName,
+            long capacity
+        )
         {
             return CreateFromFile(path, mode, mapName, capacity, MemoryMappedFileAccess.ReadWrite);
         }
 
-        public static MemoryMappedFile CreateFromFile(string path, FileMode mode, string? mapName, long capacity,
-                                                                        MemoryMappedFileAccess access)
+        public static MemoryMappedFile CreateFromFile(
+            string path,
+            FileMode mode,
+            string? mapName,
+            long capacity,
+            MemoryMappedFileAccess access
+        )
         {
             ArgumentNullException.ThrowIfNull(path);
             ValidateCreateFile(mapName, capacity, access);
@@ -122,9 +177,15 @@ namespace System.IO.MemoryMappedFiles
             {
                 FileMode.Open => true, // FileStream ctor will throw if the file doesn't exist
                 FileMode.CreateNew => false,
-                _ => File.Exists(path)
+                _ => File.Exists(path),
             };
-            SafeFileHandle fileHandle = File.OpenHandle(path, mode, GetFileAccess(access), FileShare.Read, FileOptions.None);
+            SafeFileHandle fileHandle = File.OpenHandle(
+                path,
+                mode,
+                GetFileAccess(access),
+                FileShare.Read,
+                FileOptions.None
+            );
             long fileSize = 0;
             if (mode is not (FileMode.CreateNew or FileMode.Create)) // the file is brand new and it's empty
             {
@@ -153,8 +214,15 @@ namespace System.IO.MemoryMappedFiles
             SafeMemoryMappedFileHandle? handle;
             try
             {
-                handle = CreateCore(fileHandle, mapName, HandleInheritability.None,
-                    access, MemoryMappedFileOptions.None, capacity, fileSize);
+                handle = CreateCore(
+                    fileHandle,
+                    mapName,
+                    HandleInheritability.None,
+                    access,
+                    MemoryMappedFileOptions.None,
+                    capacity,
+                    fileSize
+                );
             }
             catch
             {
@@ -205,9 +273,14 @@ namespace System.IO.MemoryMappedFiles
         /// <para>-or-</para>
         /// <para><paramref name="inheritability"/> is not a valid <see cref="HandleInheritability"/> enumeration value.</para>
         /// </exception>
-        public static MemoryMappedFile CreateFromFile(SafeFileHandle fileHandle, string? mapName, long capacity,
-                                                        MemoryMappedFileAccess access,
-                                                        HandleInheritability inheritability, bool leaveOpen)
+        public static MemoryMappedFile CreateFromFile(
+            SafeFileHandle fileHandle,
+            string? mapName,
+            long capacity,
+            MemoryMappedFileAccess access,
+            HandleInheritability inheritability,
+            bool leaveOpen
+        )
         {
             ArgumentNullException.ThrowIfNull(fileHandle);
             ValidateCreateFile(mapName, capacity, access);
@@ -218,7 +291,10 @@ namespace System.IO.MemoryMappedFiles
                 throw new ArgumentException(SR.Argument_EmptyFile);
             }
 
-            if (inheritability < HandleInheritability.None || inheritability > HandleInheritability.Inheritable)
+            if (
+                inheritability < HandleInheritability.None
+                || inheritability > HandleInheritability.Inheritable
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(inheritability));
             }
@@ -228,15 +304,27 @@ namespace System.IO.MemoryMappedFiles
                 capacity = fileSize;
             }
 
-            SafeMemoryMappedFileHandle handle = CreateCore(fileHandle, mapName, inheritability,
-                access, MemoryMappedFileOptions.None, capacity, fileSize);
+            SafeMemoryMappedFileHandle handle = CreateCore(
+                fileHandle,
+                mapName,
+                inheritability,
+                access,
+                MemoryMappedFileOptions.None,
+                capacity,
+                fileSize
+            );
 
             return new MemoryMappedFile(handle, fileHandle, leaveOpen);
         }
 
-        public static MemoryMappedFile CreateFromFile(FileStream fileStream, string? mapName, long capacity,
-                                                        MemoryMappedFileAccess access,
-                                                        HandleInheritability inheritability, bool leaveOpen)
+        public static MemoryMappedFile CreateFromFile(
+            FileStream fileStream,
+            string? mapName,
+            long capacity,
+            MemoryMappedFileAccess access,
+            HandleInheritability inheritability,
+            bool leaveOpen
+        )
         {
             ArgumentNullException.ThrowIfNull(fileStream);
             ValidateCreateFile(mapName, capacity, access);
@@ -247,7 +335,10 @@ namespace System.IO.MemoryMappedFiles
                 throw new ArgumentException(SR.Argument_EmptyFile);
             }
 
-            if (inheritability < HandleInheritability.None || inheritability > HandleInheritability.Inheritable)
+            if (
+                inheritability < HandleInheritability.None
+                || inheritability > HandleInheritability.Inheritable
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(inheritability));
             }
@@ -261,8 +352,15 @@ namespace System.IO.MemoryMappedFiles
             }
 
             SafeFileHandle fileHandle = fileStream.SafeFileHandle; // access the property only once (it might perform a sys-call)
-            SafeMemoryMappedFileHandle handle = CreateCore(fileHandle, mapName, inheritability,
-                access, MemoryMappedFileOptions.None, capacity, fileSize);
+            SafeMemoryMappedFileHandle handle = CreateCore(
+                fileHandle,
+                mapName,
+                inheritability,
+                access,
+                MemoryMappedFileOptions.None,
+                capacity,
+                fileSize
+            );
 
             return new MemoryMappedFile(handle, fileHandle, leaveOpen);
         }
@@ -271,19 +369,37 @@ namespace System.IO.MemoryMappedFiles
         // for IPC, when mapName != null.
         public static MemoryMappedFile CreateNew(string? mapName, long capacity)
         {
-            return CreateNew(mapName, capacity, MemoryMappedFileAccess.ReadWrite, MemoryMappedFileOptions.None,
-                   HandleInheritability.None);
+            return CreateNew(
+                mapName,
+                capacity,
+                MemoryMappedFileAccess.ReadWrite,
+                MemoryMappedFileOptions.None,
+                HandleInheritability.None
+            );
         }
 
-        public static MemoryMappedFile CreateNew(string? mapName, long capacity, MemoryMappedFileAccess access)
+        public static MemoryMappedFile CreateNew(
+            string? mapName,
+            long capacity,
+            MemoryMappedFileAccess access
+        )
         {
-            return CreateNew(mapName, capacity, access, MemoryMappedFileOptions.None,
-                   HandleInheritability.None);
+            return CreateNew(
+                mapName,
+                capacity,
+                access,
+                MemoryMappedFileOptions.None,
+                HandleInheritability.None
+            );
         }
 
-        public static MemoryMappedFile CreateNew(string? mapName, long capacity, MemoryMappedFileAccess access,
-                                                    MemoryMappedFileOptions options,
-                                                    HandleInheritability inheritability)
+        public static MemoryMappedFile CreateNew(
+            string? mapName,
+            long capacity,
+            MemoryMappedFileAccess access,
+            MemoryMappedFileOptions options,
+            HandleInheritability inheritability
+        )
         {
             if (mapName != null && mapName.Length == 0)
             {
@@ -294,18 +410,26 @@ namespace System.IO.MemoryMappedFiles
 
             if (IntPtr.Size == 4 && capacity > uint.MaxValue)
             {
-                throw new ArgumentOutOfRangeException(nameof(capacity), SR.ArgumentOutOfRange_CapacityLargerThanLogicalAddressSpaceNotAllowed);
+                throw new ArgumentOutOfRangeException(
+                    nameof(capacity),
+                    SR.ArgumentOutOfRange_CapacityLargerThanLogicalAddressSpaceNotAllowed
+                );
             }
 
-            if (access < MemoryMappedFileAccess.ReadWrite ||
-                access > MemoryMappedFileAccess.ReadWriteExecute)
+            if (
+                access < MemoryMappedFileAccess.ReadWrite
+                || access > MemoryMappedFileAccess.ReadWriteExecute
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(access));
             }
 
             if (access == MemoryMappedFileAccess.Write)
             {
-                throw new ArgumentException(SR.Argument_NewMMFWriteAccessNotAllowed, nameof(access));
+                throw new ArgumentException(
+                    SR.Argument_NewMMFWriteAccessNotAllowed,
+                    nameof(access)
+                );
             }
 
             if (((int)options & ~((int)(MemoryMappedFileOptions.DelayAllocatePages))) != 0)
@@ -313,12 +437,23 @@ namespace System.IO.MemoryMappedFiles
                 throw new ArgumentOutOfRangeException(nameof(options));
             }
 
-            if (inheritability < HandleInheritability.None || inheritability > HandleInheritability.Inheritable)
+            if (
+                inheritability < HandleInheritability.None
+                || inheritability > HandleInheritability.Inheritable
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(inheritability));
             }
 
-            SafeMemoryMappedFileHandle handle = CreateCore(null, mapName, inheritability, access, options, capacity, -1);
+            SafeMemoryMappedFileHandle handle = CreateCore(
+                null,
+                mapName,
+                inheritability,
+                access,
+                options,
+                capacity,
+                -1
+            );
             return new MemoryMappedFile(handle);
         }
 
@@ -329,21 +464,39 @@ namespace System.IO.MemoryMappedFiles
         [SupportedOSPlatform("windows")]
         public static MemoryMappedFile CreateOrOpen(string mapName, long capacity)
         {
-            return CreateOrOpen(mapName, capacity, MemoryMappedFileAccess.ReadWrite,
-                MemoryMappedFileOptions.None, HandleInheritability.None);
+            return CreateOrOpen(
+                mapName,
+                capacity,
+                MemoryMappedFileAccess.ReadWrite,
+                MemoryMappedFileOptions.None,
+                HandleInheritability.None
+            );
         }
 
         [SupportedOSPlatform("windows")]
-        public static MemoryMappedFile CreateOrOpen(string mapName, long capacity,
-                                                    MemoryMappedFileAccess access)
+        public static MemoryMappedFile CreateOrOpen(
+            string mapName,
+            long capacity,
+            MemoryMappedFileAccess access
+        )
         {
-            return CreateOrOpen(mapName, capacity, access, MemoryMappedFileOptions.None, HandleInheritability.None);
+            return CreateOrOpen(
+                mapName,
+                capacity,
+                access,
+                MemoryMappedFileOptions.None,
+                HandleInheritability.None
+            );
         }
 
         [SupportedOSPlatform("windows")]
-        public static MemoryMappedFile CreateOrOpen(string mapName, long capacity,
-                                                    MemoryMappedFileAccess access, MemoryMappedFileOptions options,
-                                                    HandleInheritability inheritability)
+        public static MemoryMappedFile CreateOrOpen(
+            string mapName,
+            long capacity,
+            MemoryMappedFileAccess access,
+            MemoryMappedFileOptions options,
+            HandleInheritability inheritability
+        )
         {
             ArgumentException.ThrowIfNullOrEmpty(mapName);
 
@@ -351,11 +504,16 @@ namespace System.IO.MemoryMappedFiles
 
             if (IntPtr.Size == 4 && capacity > uint.MaxValue)
             {
-                throw new ArgumentOutOfRangeException(nameof(capacity), SR.ArgumentOutOfRange_CapacityLargerThanLogicalAddressSpaceNotAllowed);
+                throw new ArgumentOutOfRangeException(
+                    nameof(capacity),
+                    SR.ArgumentOutOfRange_CapacityLargerThanLogicalAddressSpaceNotAllowed
+                );
             }
 
-            if (access < MemoryMappedFileAccess.ReadWrite ||
-                access > MemoryMappedFileAccess.ReadWriteExecute)
+            if (
+                access < MemoryMappedFileAccess.ReadWrite
+                || access > MemoryMappedFileAccess.ReadWriteExecute
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(access));
             }
@@ -365,7 +523,10 @@ namespace System.IO.MemoryMappedFiles
                 throw new ArgumentOutOfRangeException(nameof(options));
             }
 
-            if (inheritability < HandleInheritability.None || inheritability > HandleInheritability.Inheritable)
+            if (
+                inheritability < HandleInheritability.None
+                || inheritability > HandleInheritability.Inheritable
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(inheritability));
             }
@@ -394,23 +555,36 @@ namespace System.IO.MemoryMappedFiles
             return CreateViewStream(offset, size, MemoryMappedFileAccess.ReadWrite);
         }
 
-        public MemoryMappedViewStream CreateViewStream(long offset, long size, MemoryMappedFileAccess access)
+        public MemoryMappedViewStream CreateViewStream(
+            long offset,
+            long size,
+            MemoryMappedFileAccess access
+        )
         {
             ArgumentOutOfRangeException.ThrowIfNegative(offset);
 
             if (size < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(size), SR.ArgumentOutOfRange_PositiveOrDefaultSizeRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(size),
+                    SR.ArgumentOutOfRange_PositiveOrDefaultSizeRequired
+                );
             }
 
-            if (access < MemoryMappedFileAccess.ReadWrite || access > MemoryMappedFileAccess.ReadWriteExecute)
+            if (
+                access < MemoryMappedFileAccess.ReadWrite
+                || access > MemoryMappedFileAccess.ReadWriteExecute
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(access));
             }
 
             if (IntPtr.Size == 4 && size > uint.MaxValue)
             {
-                throw new ArgumentOutOfRangeException(nameof(size), SR.ArgumentOutOfRange_CapacityLargerThanLogicalAddressSpaceNotAllowed);
+                throw new ArgumentOutOfRangeException(
+                    nameof(size),
+                    SR.ArgumentOutOfRange_CapacityLargerThanLogicalAddressSpaceNotAllowed
+                );
             }
 
             MemoryMappedView view = MemoryMappedView.CreateView(_handle, access, offset, size);
@@ -428,23 +602,36 @@ namespace System.IO.MemoryMappedFiles
             return CreateViewAccessor(offset, size, MemoryMappedFileAccess.ReadWrite);
         }
 
-        public MemoryMappedViewAccessor CreateViewAccessor(long offset, long size, MemoryMappedFileAccess access)
+        public MemoryMappedViewAccessor CreateViewAccessor(
+            long offset,
+            long size,
+            MemoryMappedFileAccess access
+        )
         {
             ArgumentOutOfRangeException.ThrowIfNegative(offset);
 
             if (size < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(size), SR.ArgumentOutOfRange_PositiveOrDefaultSizeRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(size),
+                    SR.ArgumentOutOfRange_PositiveOrDefaultSizeRequired
+                );
             }
 
-            if (access < MemoryMappedFileAccess.ReadWrite || access > MemoryMappedFileAccess.ReadWriteExecute)
+            if (
+                access < MemoryMappedFileAccess.ReadWrite
+                || access > MemoryMappedFileAccess.ReadWriteExecute
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(access));
             }
 
             if (IntPtr.Size == 4 && size > uint.MaxValue)
             {
-                throw new ArgumentOutOfRangeException(nameof(size), SR.ArgumentOutOfRange_CapacityLargerThanLogicalAddressSpaceNotAllowed);
+                throw new ArgumentOutOfRangeException(
+                    nameof(size),
+                    SR.ArgumentOutOfRange_CapacityLargerThanLogicalAddressSpaceNotAllowed
+                );
             }
 
             MemoryMappedView view = MemoryMappedView.CreateView(_handle, access, offset, size);
@@ -512,7 +699,11 @@ namespace System.IO.MemoryMappedFiles
             }
         }
 
-        private static void ValidateCreateFile(string? mapName, long capacity, MemoryMappedFileAccess access)
+        private static void ValidateCreateFile(
+            string? mapName,
+            long capacity,
+            MemoryMappedFileAccess access
+        )
         {
             if (mapName != null && mapName.Length == 0)
             {
@@ -521,18 +712,26 @@ namespace System.IO.MemoryMappedFiles
 
             if (capacity < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(capacity), SR.ArgumentOutOfRange_PositiveOrDefaultCapacityRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(capacity),
+                    SR.ArgumentOutOfRange_PositiveOrDefaultCapacityRequired
+                );
             }
 
-            if (access < MemoryMappedFileAccess.ReadWrite ||
-                access > MemoryMappedFileAccess.ReadWriteExecute)
+            if (
+                access < MemoryMappedFileAccess.ReadWrite
+                || access > MemoryMappedFileAccess.ReadWriteExecute
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(access));
             }
 
             if (access == MemoryMappedFileAccess.Write)
             {
-                throw new ArgumentException(SR.Argument_NewMMFWriteAccessNotAllowed, nameof(access));
+                throw new ArgumentException(
+                    SR.Argument_NewMMFWriteAccessNotAllowed,
+                    nameof(access)
+                );
             }
         }
     }

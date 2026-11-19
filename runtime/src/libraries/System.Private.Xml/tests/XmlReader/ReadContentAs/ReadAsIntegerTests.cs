@@ -13,13 +13,18 @@ namespace System.Xml.XmlReaderTests
             var reader = Utils.CreateFragmentReader(@"<doc a='b'>9999</doc>");
             reader.PositionOnElementNonEmptyNoDoctype("doc");
             reader.Read();
-            Assert.Equal(new DateTime(9999, 1, 1, 0, 0, 0), reader.ReadContentAs(typeof(DateTime), null));
+            Assert.Equal(
+                new DateTime(9999, 1, 1, 0, 0, 0),
+                reader.ReadContentAs(typeof(DateTime), null)
+            );
         }
 
         [Fact]
         public static void ReadContentAsInt10()
         {
-            var reader = Utils.CreateFragmentReader("<Root> -<!-- Comment inbetween-->000<?a?>455 </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> -<!-- Comment inbetween-->000<?a?>455 </Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(-455, reader.ReadContentAsInt());
@@ -28,7 +33,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsInt11()
         {
-            var reader = Utils.CreateFragmentReader("<Root>  -<![CDATA[0]]>0<!-- Comment inbetween-->5<?a?>  </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>  -<![CDATA[0]]>0<!-- Comment inbetween-->5<?a?>  </Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(-5, reader.ReadContentAs(typeof(int), null));
@@ -37,7 +44,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsInt12()
         {
-            var reader = Utils.CreateFragmentReader("<Root>  <!-- Comment inbetween-->0<?a?>00<![CDATA[1]]></Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>  <!-- Comment inbetween-->0<?a?>00<![CDATA[1]]></Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(1, reader.ReadContentAs(typeof(int), null));
@@ -46,7 +55,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsInt13()
         {
-            var reader = Utils.CreateFragmentReader("<Root><![CDATA[0]]> <!-- Comment inbetween--> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root><![CDATA[0]]> <!-- Comment inbetween--> </Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(0, reader.ReadContentAs(typeof(int), null));
@@ -55,7 +66,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsInt14()
         {
-            var reader = Utils.CreateFragmentReader("<Root> 9<![CDATA[9]]>99<?a?>9<!-- Comment inbetween--><![CDATA[9]]> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> 9<![CDATA[9]]>99<?a?>9<!-- Comment inbetween--><![CDATA[9]]> </Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(999999, reader.ReadContentAs(typeof(int), null));
@@ -73,7 +86,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsInt16()
         {
-            var reader = Utils.CreateFragmentReader("<Root> -<!-- Comment inbetween-->000<?a?>455 </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> -<!-- Comment inbetween-->000<?a?>455 </Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(-455, reader.ReadContentAs(typeof(int), null));
@@ -85,7 +100,18 @@ namespace System.Xml.XmlReaderTests
             var reader = Utils.CreateFragmentReader(@"<doc a='b'>9999</doc>");
             reader.PositionOnElementNonEmptyNoDoctype("doc");
             reader.Read();
-            Assert.Equal(new DateTimeOffset(9999, 1, 1, 0, 0, 0, TimeZoneInfo.Local.GetUtcOffset(new DateTime(9999, 1, 1))).ToString(), reader.ReadContentAs(typeof(DateTimeOffset), null).ToString());
+            Assert.Equal(
+                new DateTimeOffset(
+                    9999,
+                    1,
+                    1,
+                    0,
+                    0,
+                    0,
+                    TimeZoneInfo.Local.GetUtcOffset(new DateTime(9999, 1, 1))
+                ).ToString(),
+                reader.ReadContentAs(typeof(DateTimeOffset), null).ToString()
+            );
         }
 
         [Fact]
@@ -94,7 +120,10 @@ namespace System.Xml.XmlReaderTests
             var reader = Utils.CreateFragmentReader(@"<doc a='b'>0001z</doc>");
             reader.PositionOnElementNonEmptyNoDoctype("doc");
             reader.Read();
-            Assert.Equal(new DateTimeOffset(1, 1, 1, 0, 0, 0, TimeSpan.FromHours(0)).ToString(), reader.ReadContentAs(typeof(DateTimeOffset), null).ToString());
+            Assert.Equal(
+                new DateTimeOffset(1, 1, 1, 0, 0, 0, TimeSpan.FromHours(0)).ToString(),
+                reader.ReadContentAs(typeof(DateTimeOffset), null).ToString()
+            );
         }
 
         [Fact]
@@ -103,7 +132,10 @@ namespace System.Xml.XmlReaderTests
             var reader = Utils.CreateFragmentReader(@"<doc a='b'>0001z</doc>");
             reader.PositionOnElementNonEmptyNoDoctype("doc");
             reader.Read();
-            Assert.Equal(new DateTime(1, 1, 1, 0, 0, 0, 0).Add(new TimeSpan(0, 0, 0)), reader.ReadContentAs(typeof(DateTime), null));
+            Assert.Equal(
+                new DateTime(1, 1, 1, 0, 0, 0, 0).Add(new TimeSpan(0, 0, 0)),
+                reader.ReadContentAs(typeof(DateTime), null)
+            );
         }
 
         [Fact]
@@ -112,7 +144,10 @@ namespace System.Xml.XmlReaderTests
             var reader = Utils.CreateFragmentReader(@"<doc a='b'>0001z</doc>");
             reader.PositionOnElementNonEmptyNoDoctype("doc");
             reader.Read();
-            Assert.Equal(new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)), reader.ReadContentAs(typeof(DateTimeOffset), null));
+            Assert.Equal(
+                new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)),
+                reader.ReadContentAs(typeof(DateTimeOffset), null)
+            );
         }
 
         [Fact]
@@ -121,13 +156,18 @@ namespace System.Xml.XmlReaderTests
             var reader = Utils.CreateFragmentReader(@"<doc a='b'>9999</doc>");
             reader.PositionOnElementNonEmptyNoDoctype("doc");
             reader.Read();
-            Assert.Equal(new DateTimeOffset(new DateTime(9999, 1, 1, 0, 0, 0, DateTimeKind.Local)), reader.ReadContentAs(typeof(DateTimeOffset), null));
+            Assert.Equal(
+                new DateTimeOffset(new DateTime(9999, 1, 1, 0, 0, 0, DateTimeKind.Local)),
+                reader.ReadContentAs(typeof(DateTimeOffset), null)
+            );
         }
 
         [Fact]
         public static void ReadContentAsInt5()
         {
-            var reader = Utils.CreateFragmentReader("<Root>  -<![CDATA[0]]>0<!-- Comment inbetween-->5<?a?>  </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>  -<![CDATA[0]]>0<!-- Comment inbetween-->5<?a?>  </Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(-5, reader.ReadContentAsInt());
@@ -136,7 +176,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsInt6()
         {
-            var reader = Utils.CreateFragmentReader("<Root>  <!-- Comment inbetween-->0<?a?>00<![CDATA[1]]></Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root>  <!-- Comment inbetween-->0<?a?>00<![CDATA[1]]></Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(1, reader.ReadContentAsInt());
@@ -145,7 +187,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsInt7()
         {
-            var reader = Utils.CreateFragmentReader("<Root><![CDATA[0]]> <!-- Comment inbetween--> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root><![CDATA[0]]> <!-- Comment inbetween--> </Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(0, reader.ReadContentAsInt());
@@ -154,7 +198,9 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadContentAsInt8()
         {
-            var reader = Utils.CreateFragmentReader("<Root> 9<![CDATA[9]]>99<?a?>9<!-- Comment inbetween--><![CDATA[9]]> </Root>");
+            var reader = Utils.CreateFragmentReader(
+                "<Root> 9<![CDATA[9]]>99<?a?>9<!-- Comment inbetween--><![CDATA[9]]> </Root>"
+            );
             reader.PositionOnElement("Root");
             reader.Read();
             Assert.Equal(999999, reader.ReadContentAsInt());

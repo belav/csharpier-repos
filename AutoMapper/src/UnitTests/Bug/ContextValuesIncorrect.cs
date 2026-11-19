@@ -18,23 +18,19 @@
         {
             private FooDto _destination;
 
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.CreateMap<Foo, FooDto>()
-                    .ForAllMembers(opt => opt.Condition((src, p, srvVal, destVal) => destVal == null));
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    cfg.CreateMap<Foo, FooDto>()
+                        .ForAllMembers(opt =>
+                            opt.Condition((src, p, srvVal, destVal) => destVal == null)
+                        );
+                });
 
             protected override void Because_of()
             {
-                var source = new Foo
-                {
-                    Value = 3,
-                    Value2 = 4
-                };
-                _destination = new FooDto
-                {
-                    Value = 5
-                };
+                var source = new Foo { Value = 3, Value2 = 4 };
+                _destination = new FooDto { Value = 5 };
 
                 Mapper.Map(source, _destination);
             }

@@ -21,13 +21,29 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    public virtual async Task Load_collection_unidirectional(EntityState state, QueryTrackingBehavior queryTrackingBehavior, bool async)
+    public virtual async Task Load_collection_unidirectional(
+        EntityState state,
+        QueryTrackingBehavior queryTrackingBehavior,
+        bool async
+    )
     {
         using var context = Fixture.CreateContext();
 
@@ -71,7 +87,13 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         Assert.Equal(7, left.TwoSkip.Count);
         foreach (var right in left.TwoSkip)
         {
-            Assert.Contains(left, ((IEnumerable<object>)context.Entry(right).Collection("UnidirectionalEntityOne1").CurrentValue)!);
+            Assert.Contains(
+                left,
+                (
+                    (IEnumerable<object>)
+                        context.Entry(right).Collection("UnidirectionalEntityOne1").CurrentValue
+                )!
+            );
         }
 
         Assert.Equal(1 + 7 + 7, context.ChangeTracker.Entries().Count());
@@ -84,7 +106,10 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_collection_using_Query_unidirectional(EntityState state, bool async)
+    public virtual async Task Load_collection_using_Query_unidirectional(
+        EntityState state,
+        bool async
+    )
     {
         using var context = Fixture.CreateContext();
 
@@ -114,7 +139,13 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         Assert.Equal(3, left.TwoSkipShared.Count);
         foreach (var right in left.TwoSkipShared)
         {
-            Assert.Contains(left, context.Entry(right).Collection("UnidirectionalEntityOne").CurrentValue!.Cast<object>());
+            Assert.Contains(
+                left,
+                context
+                    .Entry(right)
+                    .Collection("UnidirectionalEntityOne")
+                    .CurrentValue!.Cast<object>()
+            );
         }
 
         Assert.Equal(children, left.TwoSkipShared.ToList());
@@ -129,23 +160,40 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
     [InlineData(EntityState.Unchanged, true)]
     [InlineData(EntityState.Modified, true)]
     [InlineData(EntityState.Added, true)]
-    public virtual void Attached_collections_are_not_marked_as_loaded_unidirectional(EntityState state, bool lazy)
+    public virtual void Attached_collections_are_not_marked_as_loaded_unidirectional(
+        EntityState state,
+        bool lazy
+    )
     {
         using var context = Fixture.CreateContext();
 
         context.ChangeTracker.LazyLoadingEnabled = false;
 
         var left = ExpectLazyLoading
-            ? context.CreateProxy<UnidirectionalEntityOne>(
-                b =>
+            ? context.CreateProxy<UnidirectionalEntityOne>(b =>
+            {
+                b.Id = 7776;
+                b.TwoSkip = new ObservableCollection<UnidirectionalEntityTwo>
                 {
-                    b.Id = 7776;
-                    b.TwoSkip = new ObservableCollection<UnidirectionalEntityTwo> { new() { Id = 7777 } };
-                    b.TwoSkipShared = new ObservableCollection<UnidirectionalEntityTwo> { new() { Id = 7778 } };
-                    b.SelfSkipPayloadLeft = new ObservableCollection<UnidirectionalEntityOne> { new() { Id = 7779 } };
-                    b.BranchSkip = new ObservableCollection<UnidirectionalEntityBranch> { new() { Id = 7781 } };
-                    b.ThreeSkipPayloadFullShared = new ObservableCollection<UnidirectionalEntityThree> { new() { Id = 7783 } };
-                })
+                    new() { Id = 7777 },
+                };
+                b.TwoSkipShared = new ObservableCollection<UnidirectionalEntityTwo>
+                {
+                    new() { Id = 7778 },
+                };
+                b.SelfSkipPayloadLeft = new ObservableCollection<UnidirectionalEntityOne>
+                {
+                    new() { Id = 7779 },
+                };
+                b.BranchSkip = new ObservableCollection<UnidirectionalEntityBranch>
+                {
+                    new() { Id = 7781 },
+                };
+                b.ThreeSkipPayloadFullShared = new ObservableCollection<UnidirectionalEntityThree>
+                {
+                    new() { Id = 7783 },
+                };
+            })
             : new UnidirectionalEntityOne
             {
                 Id = 7776,
@@ -153,33 +201,47 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
                 TwoSkipShared = new List<UnidirectionalEntityTwo> { new() { Id = 7778 } },
                 SelfSkipPayloadLeft = new List<UnidirectionalEntityOne> { new() { Id = 7779 } },
                 BranchSkip = new List<UnidirectionalEntityBranch> { new() { Id = 7781 } },
-                ThreeSkipPayloadFullShared = new List<UnidirectionalEntityThree> { new() { Id = 7783 } }
+                ThreeSkipPayloadFullShared = new List<UnidirectionalEntityThree>
+                {
+                    new() { Id = 7783 },
+                },
             };
 
-        var entityThreeCollection = context.Entry(left).Collection<UnidirectionalEntityThree>("UnidirectionalEntityThree");
+        var entityThreeCollection = context
+            .Entry(left)
+            .Collection<UnidirectionalEntityThree>("UnidirectionalEntityThree");
         entityThreeCollection.CurrentValue = ExpectLazyLoading
             ? new ObservableCollection<UnidirectionalEntityThree>()
             : new List<UnidirectionalEntityThree>();
-        ((ICollection<UnidirectionalEntityThree>)entityThreeCollection.CurrentValue!).Add(new UnidirectionalEntityThree { Id = 7782 });
+        ((ICollection<UnidirectionalEntityThree>)entityThreeCollection.CurrentValue!).Add(
+            new UnidirectionalEntityThree { Id = 7782 }
+        );
 
-        var entityOneCollection = context.Entry(left).Collection<UnidirectionalEntityOne>("UnidirectionalEntityOne");
+        var entityOneCollection = context
+            .Entry(left)
+            .Collection<UnidirectionalEntityOne>("UnidirectionalEntityOne");
         entityOneCollection.CurrentValue = ExpectLazyLoading
             ? new ObservableCollection<UnidirectionalEntityOne>()
             : new List<UnidirectionalEntityOne>();
-        ((ICollection<UnidirectionalEntityOne>)entityOneCollection.CurrentValue!).Add(new UnidirectionalEntityOne { Id = 7780 });
+        ((ICollection<UnidirectionalEntityOne>)entityOneCollection.CurrentValue!).Add(
+            new UnidirectionalEntityOne { Id = 7780 }
+        );
 
         context.Attach(left);
 
         if (state != EntityState.Unchanged)
         {
-            foreach (var child in left.TwoSkip.Cast<object>()
-                         .Concat(left.TwoSkipShared)
-                         .Concat(left.SelfSkipPayloadLeft)
-                         .Concat(entityOneCollection.CurrentValue!)
-                         .Concat(left.BranchSkip)
-                         .Concat(entityThreeCollection.CurrentValue!)
-                         .Concat(left.TwoSkipShared)
-                         .Concat(left.ThreeSkipPayloadFullShared))
+            foreach (
+                var child in left
+                    .TwoSkip.Cast<object>()
+                    .Concat(left.TwoSkipShared)
+                    .Concat(left.SelfSkipPayloadLeft)
+                    .Concat(entityOneCollection.CurrentValue!)
+                    .Concat(left.BranchSkip)
+                    .Concat(entityThreeCollection.CurrentValue!)
+                    .Concat(left.TwoSkipShared)
+                    .Concat(left.ThreeSkipPayloadFullShared)
+            )
             {
                 context.Entry(child).State = state;
             }
@@ -205,15 +267,23 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_collection_already_loaded_unidirectional(EntityState state, bool async)
+    public virtual async Task Load_collection_already_loaded_unidirectional(
+        EntityState state,
+        bool async
+    )
     {
         using var context = Fixture.CreateContext();
 
-        var left = context.Set<UnidirectionalEntityOne>().Include("UnidirectionalEntityThree").Single(e => e.Id == 3);
+        var left = context
+            .Set<UnidirectionalEntityOne>()
+            .Include("UnidirectionalEntityThree")
+            .Single(e => e.Id == 3);
 
         ClearLog();
 
-        var collectionEntry = context.Entry(left).Collection<UnidirectionalEntityThree>("UnidirectionalEntityThree");
+        var collectionEntry = context
+            .Entry(left)
+            .Collection<UnidirectionalEntityThree>("UnidirectionalEntityThree");
 
         context.Entry(left).State = state;
 
@@ -247,7 +317,13 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         Assert.Equal(4, collectionEntry.CurrentValue!.Count());
         foreach (var right in collectionEntry.CurrentValue!)
         {
-            Assert.Contains(left, context.Entry(right).Collection<UnidirectionalEntityOne>("UnidirectionalEntityOne").CurrentValue!);
+            Assert.Contains(
+                left,
+                context
+                    .Entry(right)
+                    .Collection<UnidirectionalEntityOne>("UnidirectionalEntityOne")
+                    .CurrentValue!
+            );
         }
 
         Assert.Equal(1 + 4 + 4, context.ChangeTracker.Entries().Count());
@@ -260,11 +336,17 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_collection_using_Query_already_loaded_unidirectional(EntityState state, bool async)
+    public virtual async Task Load_collection_using_Query_already_loaded_unidirectional(
+        EntityState state,
+        bool async
+    )
     {
         using var context = Fixture.CreateContext();
 
-        var left = context.Set<UnidirectionalEntityOne>().Include(e => e.TwoSkip).Single(e => e.Id == 3);
+        var left = context
+            .Set<UnidirectionalEntityOne>()
+            .Include(e => e.TwoSkip)
+            .Single(e => e.Id == 3);
 
         ClearLog();
 
@@ -290,7 +372,13 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         Assert.Equal(7, left.TwoSkip.Count);
         foreach (var right in left.TwoSkip)
         {
-            Assert.Contains(left, ((IEnumerable<object>)context.Entry(right).Navigation("UnidirectionalEntityOne1").CurrentValue)!);
+            Assert.Contains(
+                left,
+                (
+                    (IEnumerable<object>)
+                        context.Entry(right).Navigation("UnidirectionalEntityOne1").CurrentValue
+                )!
+            );
         }
 
         Assert.Equal(children, left.TwoSkip.ToList());
@@ -338,7 +426,9 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         Assert.True(navigationEntry.IsLoaded);
         foreach (var entityTwo in left.TwoSkip)
         {
-            Assert.False(context.Entry((object)entityTwo).Collection("UnidirectionalEntityOne1").IsLoaded);
+            Assert.False(
+                context.Entry((object)entityTwo).Collection("UnidirectionalEntityOne1").IsLoaded
+            );
         }
 
         RecordLog();
@@ -347,7 +437,13 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         Assert.Equal(7, left.TwoSkip.Count);
         foreach (var right in left.TwoSkip)
         {
-            Assert.Contains(left, ((IEnumerable<object>)context.Entry(right).Member("UnidirectionalEntityOne1").CurrentValue)!);
+            Assert.Contains(
+                left,
+                (
+                    (IEnumerable<object>)
+                        context.Entry(right).Member("UnidirectionalEntityOne1").CurrentValue
+                )!
+            );
         }
 
         Assert.Equal(1 + 7 + 7, context.ChangeTracker.Entries().Count());
@@ -360,7 +456,10 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_collection_using_Query_untyped_unidirectional(EntityState state, bool async)
+    public virtual async Task Load_collection_using_Query_untyped_unidirectional(
+        EntityState state,
+        bool async
+    )
     {
         using var context = Fixture.CreateContext();
 
@@ -381,7 +480,9 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         Assert.False(collectionEntry.IsLoaded);
         foreach (var entityTwo in left.TwoSkipShared)
         {
-            Assert.False(context.Entry((object)entityTwo).Collection("UnidirectionalEntityOne").IsLoaded);
+            Assert.False(
+                context.Entry((object)entityTwo).Collection("UnidirectionalEntityOne").IsLoaded
+            );
         }
 
         RecordLog();
@@ -390,7 +491,13 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         Assert.Equal(3, left.TwoSkipShared.Count);
         foreach (var right in left.TwoSkipShared)
         {
-            Assert.Contains(left, context.Entry(right).Collection("UnidirectionalEntityOne").CurrentValue!.Cast<object>());
+            Assert.Contains(
+                left,
+                context
+                    .Entry(right)
+                    .Collection("UnidirectionalEntityOne")
+                    .CurrentValue!.Cast<object>()
+            );
         }
 
         Assert.Equal(children, left.TwoSkipShared.ToList());
@@ -405,14 +512,20 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_collection_not_found_untyped_unidirectional(EntityState state, bool async)
+    public virtual async Task Load_collection_not_found_untyped_unidirectional(
+        EntityState state,
+        bool async
+    )
     {
         using var context = Fixture.CreateContext();
 
-        var left = context.Attach(
-            ExpectLazyLoading
-                ? context.CreateProxy<UnidirectionalEntityOne>(b => b.Id = 999)
-                : new UnidirectionalEntityOne { Id = 999 }).Entity;
+        var left = context
+            .Attach(
+                ExpectLazyLoading
+                    ? context.CreateProxy<UnidirectionalEntityOne>(b => b.Id = 999)
+                    : new UnidirectionalEntityOne { Id = 999 }
+            )
+            .Entity;
 
         ClearLog();
 
@@ -454,14 +567,20 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_collection_using_Query_not_found_untyped_unidirectional(EntityState state, bool async)
+    public virtual async Task Load_collection_using_Query_not_found_untyped_unidirectional(
+        EntityState state,
+        bool async
+    )
     {
         using var context = Fixture.CreateContext();
 
-        var left = context.Attach(
-            ExpectLazyLoading
-                ? context.CreateProxy<UnidirectionalEntityOne>(b => b.Id = 999)
-                : new UnidirectionalEntityOne { Id = 999 }).Entity;
+        var left = context
+            .Attach(
+                ExpectLazyLoading
+                    ? context.CreateProxy<UnidirectionalEntityOne>(b => b.Id = 999)
+                    : new UnidirectionalEntityOne { Id = 999 }
+            )
+            .Entity;
 
         ClearLog();
 
@@ -502,17 +621,23 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
     public virtual async Task Load_collection_already_loaded_untyped_unidirectional(
         EntityState state,
         bool async,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = Fixture.CreateContext();
 
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
 
-        var left = context.Set<UnidirectionalEntityOne>().Include("UnidirectionalEntityThree").Single(e => e.Id == 3);
+        var left = context
+            .Set<UnidirectionalEntityOne>()
+            .Include("UnidirectionalEntityThree")
+            .Single(e => e.Id == 3);
 
         ClearLog();
 
-        var navigationEntry = context.Entry(left).Collection<UnidirectionalEntityThree>("UnidirectionalEntityThree");
+        var navigationEntry = context
+            .Entry(left)
+            .Collection<UnidirectionalEntityThree>("UnidirectionalEntityThree");
 
         context.Entry(left).State = state;
 
@@ -537,7 +662,9 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         Assert.True(navigationEntry.IsLoaded);
         foreach (var entityTwo in navigationEntry.CurrentValue!)
         {
-            Assert.False(context.Entry((object)entityTwo).Collection("UnidirectionalEntityOne").IsLoaded);
+            Assert.False(
+                context.Entry((object)entityTwo).Collection("UnidirectionalEntityOne").IsLoaded
+            );
         }
 
         RecordLog();
@@ -547,8 +674,12 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         foreach (var right in navigationEntry.CurrentValue!)
         {
             Assert.Contains(
-                left, context.Entry((object)right).Collection("UnidirectionalEntityOne")
-                    .CurrentValue!.Cast<UnidirectionalEntityOne>());
+                left,
+                context
+                    .Entry((object)right)
+                    .Collection("UnidirectionalEntityOne")
+                    .CurrentValue!.Cast<UnidirectionalEntityOne>()
+            );
         }
 
         Assert.Equal(1 + 4 + 4, context.ChangeTracker.Entries().Count());
@@ -570,13 +701,17 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
     public virtual async Task Load_collection_using_Query_already_loaded_untyped_unidirectional(
         EntityState state,
         bool async,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = Fixture.CreateContext();
 
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
 
-        var left = context.Set<UnidirectionalEntityOne>().Include(e => e.TwoSkip).Single(e => e.Id == 3);
+        var left = context
+            .Set<UnidirectionalEntityOne>()
+            .Include(e => e.TwoSkip)
+            .Single(e => e.Id == 3);
 
         ClearLog();
 
@@ -594,7 +729,9 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         Assert.True(navigationEntry.IsLoaded);
         foreach (var entityTwo in left.TwoSkip)
         {
-            Assert.False(context.Entry((object)entityTwo).Collection("UnidirectionalEntityOne1").IsLoaded);
+            Assert.False(
+                context.Entry((object)entityTwo).Collection("UnidirectionalEntityOne1").IsLoaded
+            );
         }
 
         RecordLog();
@@ -603,7 +740,13 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         Assert.Equal(7, left.TwoSkip.Count);
         foreach (var right in left.TwoSkip)
         {
-            Assert.Contains(left, ((IEnumerable<object>)context.Entry(right).Collection("UnidirectionalEntityOne1").CurrentValue)!);
+            Assert.Contains(
+                left,
+                (
+                    (IEnumerable<object>)
+                        context.Entry(right).Collection("UnidirectionalEntityOne1").CurrentValue
+                )!
+            );
         }
 
         Assert.Equal(children, left.TwoSkip.ToList());
@@ -618,11 +761,16 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_collection_composite_key_unidirectional(EntityState state, bool async)
+    public virtual async Task Load_collection_composite_key_unidirectional(
+        EntityState state,
+        bool async
+    )
     {
         using var context = Fixture.CreateContext();
 
-        var left = context.Set<UnidirectionalEntityCompositeKey>().Find(7, "7_2", new DateTime(2007, 2, 1));
+        var left = context
+            .Set<UnidirectionalEntityCompositeKey>()
+            .Find(7, "7_2", new DateTime(2007, 2, 1));
 
         ClearLog();
 
@@ -651,7 +799,9 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         Assert.True(collectionEntry.IsLoaded);
         foreach (var entityTwo in left.ThreeSkipFull)
         {
-            Assert.False(context.Entry(entityTwo).Collection("UnidirectionalEntityCompositeKey").IsLoaded);
+            Assert.False(
+                context.Entry(entityTwo).Collection("UnidirectionalEntityCompositeKey").IsLoaded
+            );
         }
 
         RecordLog();
@@ -660,7 +810,13 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         Assert.Equal(2, left.ThreeSkipFull.Count);
         foreach (var right in left.ThreeSkipFull)
         {
-            Assert.Contains(left, context.Entry(right).Collection("UnidirectionalEntityCompositeKey").CurrentValue!.Cast<object>());
+            Assert.Contains(
+                left,
+                context
+                    .Entry(right)
+                    .Collection("UnidirectionalEntityCompositeKey")
+                    .CurrentValue!.Cast<object>()
+            );
         }
 
         Assert.Equal(1 + 2 + 2, context.ChangeTracker.Entries().Count());
@@ -673,11 +829,16 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_collection_using_Query_composite_key_unidirectional(EntityState state, bool async)
+    public virtual async Task Load_collection_using_Query_composite_key_unidirectional(
+        EntityState state,
+        bool async
+    )
     {
         using var context = Fixture.CreateContext();
 
-        var left = context.Set<UnidirectionalEntityCompositeKey>().Find(7, "7_2", new DateTime(2007, 2, 1));
+        var left = context
+            .Set<UnidirectionalEntityCompositeKey>()
+            .Find(7, "7_2", new DateTime(2007, 2, 1));
 
         ClearLog();
 
@@ -708,11 +869,17 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
     [InlineData(false, QueryTrackingBehavior.NoTracking)]
     [InlineData(false, QueryTrackingBehavior.TrackAll)]
     [InlineData(false, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    public virtual async Task Load_collection_for_detached_throws_unidirectional(bool async, QueryTrackingBehavior queryTrackingBehavior)
+    public virtual async Task Load_collection_for_detached_throws_unidirectional(
+        bool async,
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = Fixture.CreateContext();
 
-        var left = context.Set<UnidirectionalEntityOne>().AsTracking(queryTrackingBehavior).Single(e => e.Id == 3);
+        var left = context
+            .Set<UnidirectionalEntityOne>()
+            .AsTracking(queryTrackingBehavior)
+            .Single(e => e.Id == 3);
 
         var collectionEntry = context.Entry(left).Collection(e => e.TwoSkip);
 
@@ -735,11 +902,16 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
     [InlineData(QueryTrackingBehavior.NoTracking)]
     [InlineData(QueryTrackingBehavior.TrackAll)]
     [InlineData(QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    public virtual void Query_collection_for_detached_throws_unidirectional(QueryTrackingBehavior queryTrackingBehavior)
+    public virtual void Query_collection_for_detached_throws_unidirectional(
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = Fixture.CreateContext();
 
-        var left = context.Set<UnidirectionalEntityOne>().AsTracking(queryTrackingBehavior).Single(e => e.Id == 3);
+        var left = context
+            .Set<UnidirectionalEntityOne>()
+            .AsTracking(queryTrackingBehavior)
+            .Single(e => e.Id == 3);
 
         var collectionEntry = context.Entry(left).Collection(e => e.TwoSkip);
 
@@ -773,7 +945,9 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         Assert.False(collectionEntry.IsLoaded);
         foreach (var entityTwo in left.TwoSkipShared)
         {
-            var threeNav = context.Entry(entityTwo).Collection<UnidirectionalEntityThree>("UnidirectionalEntityThree");
+            var threeNav = context
+                .Entry(entityTwo)
+                .Collection<UnidirectionalEntityThree>("UnidirectionalEntityThree");
             Assert.True(threeNav.IsLoaded);
             foreach (var entityThree in threeNav.CurrentValue!)
             {
@@ -787,7 +961,12 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         Assert.Equal(3, left.TwoSkipShared.Count);
         foreach (var right in left.TwoSkipShared)
         {
-            foreach (var three in context.Entry(right).Collection<UnidirectionalEntityThree>("UnidirectionalEntityThree").CurrentValue!)
+            foreach (
+                var three in context
+                    .Entry(right)
+                    .Collection<UnidirectionalEntityThree>("UnidirectionalEntityThree")
+                    .CurrentValue!
+            )
             {
                 Assert.Contains(right, three.TwoSkipFull);
             }
@@ -801,7 +980,9 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public virtual async Task Load_collection_using_Query_with_Include_for_inverse_unidirectional(bool async)
+    public virtual async Task Load_collection_using_Query_with_Include_for_inverse_unidirectional(
+        bool async
+    )
     {
         using var context = Fixture.CreateContext();
 
@@ -814,9 +995,7 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         Assert.False(collectionEntry.IsLoaded);
 
         var queryable = collectionEntry.Query().Include("UnidirectionalEntityOne");
-        var children = async
-            ? await queryable.ToListAsync()
-            : queryable.ToList();
+        var children = async ? await queryable.ToListAsync() : queryable.ToList();
 
         Assert.False(collectionEntry.IsLoaded);
         foreach (var entityTwo in left.TwoSkipShared)
@@ -832,7 +1011,11 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         {
             Assert.Contains(
                 left,
-                context.Entry(right).Collection("UnidirectionalEntityOne").CurrentValue!.Cast<object>());
+                context
+                    .Entry(right)
+                    .Collection("UnidirectionalEntityOne")
+                    .CurrentValue!.Cast<object>()
+            );
         }
 
         Assert.Equal(children, left.TwoSkipShared.ToList());
@@ -842,7 +1025,9 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public virtual async Task Load_collection_using_Query_with_filtered_Include_unidirectional(bool async)
+    public virtual async Task Load_collection_using_Query_with_filtered_Include_unidirectional(
+        bool async
+    )
     {
         using var context = Fixture.CreateContext();
 
@@ -855,14 +1040,26 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         Assert.False(collectionEntry.IsLoaded);
 
         var children = async
-            ? await collectionEntry.Query()
-                .Include(
-                    e => EF.Property<ICollection<UnidirectionalEntityThree>>(e, "UnidirectionalEntityThree")
-                        .Where(e => e.Id == 13 || e.Id == 11)).ToListAsync()
-            : collectionEntry.Query()
-                .Include(
-                    e => EF.Property<ICollection<UnidirectionalEntityThree>>(e, "UnidirectionalEntityThree")
-                        .Where(e => e.Id == 13 || e.Id == 11)).ToList();
+            ? await collectionEntry
+                .Query()
+                .Include(e =>
+                    EF.Property<ICollection<UnidirectionalEntityThree>>(
+                            e,
+                            "UnidirectionalEntityThree"
+                        )
+                        .Where(e => e.Id == 13 || e.Id == 11)
+                )
+                .ToListAsync()
+            : collectionEntry
+                .Query()
+                .Include(e =>
+                    EF.Property<ICollection<UnidirectionalEntityThree>>(
+                            e,
+                            "UnidirectionalEntityThree"
+                        )
+                        .Where(e => e.Id == 13 || e.Id == 11)
+                )
+                .ToList();
 
         Assert.False(collectionEntry.IsLoaded);
         foreach (var entityTwo in left.TwoSkipShared)
@@ -870,8 +1067,12 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
             Assert.False(context.Entry(entityTwo).Collection("UnidirectionalEntityOne").IsLoaded);
             Assert.True(context.Entry(entityTwo).Collection("UnidirectionalEntityThree").IsLoaded);
 
-            foreach (var entityThree in
-                     context.Entry(entityTwo).Collection<UnidirectionalEntityThree>("UnidirectionalEntityThree").CurrentValue!)
+            foreach (
+                var entityThree in context
+                    .Entry(entityTwo)
+                    .Collection<UnidirectionalEntityThree>("UnidirectionalEntityThree")
+                    .CurrentValue!
+            )
             {
                 Assert.False(context.Entry(entityThree).Collection(e => e.TwoSkipFull).IsLoaded);
             }
@@ -883,8 +1084,19 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         Assert.Equal(3, left.TwoSkipShared.Count);
         foreach (var right in left.TwoSkipShared)
         {
-            Assert.Contains(left, context.Entry(right).Collection("UnidirectionalEntityOne").CurrentValue!.Cast<object>());
-            foreach (var three in context.Entry(right).Collection<UnidirectionalEntityThree>("UnidirectionalEntityThree").CurrentValue!)
+            Assert.Contains(
+                left,
+                context
+                    .Entry(right)
+                    .Collection("UnidirectionalEntityOne")
+                    .CurrentValue!.Cast<object>()
+            );
+            foreach (
+                var three in context
+                    .Entry(right)
+                    .Collection<UnidirectionalEntityThree>("UnidirectionalEntityThree")
+                    .CurrentValue!
+            )
             {
                 Assert.True(three.Id is 11 or 13);
                 Assert.Contains(right, three.TwoSkipFull);
@@ -899,7 +1111,9 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public virtual async Task Load_collection_using_Query_with_filtered_Include_and_projection_unidirectional(bool async)
+    public virtual async Task Load_collection_using_Query_with_filtered_Include_and_projection_unidirectional(
+        bool async
+    )
     {
         using var context = Fixture.CreateContext();
 
@@ -913,19 +1127,14 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
 
         var queryable = collectionEntry
             .Query()
-            .Include(
-                e => EF.Property<ICollection<UnidirectionalEntityThree>>(e, "UnidirectionalEntityThree")
-                    .Where(e => e.Id == 13 || e.Id == 11))
+            .Include(e =>
+                EF.Property<ICollection<UnidirectionalEntityThree>>(e, "UnidirectionalEntityThree")
+                    .Where(e => e.Id == 13 || e.Id == 11)
+            )
             .OrderBy(e => e.Id)
-            .Select(
-                e => new
-                {
-                    e.Id, e.Name,
-                });
+            .Select(e => new { e.Id, e.Name });
 
-        var projected = async
-            ? await queryable.ToListAsync()
-            : queryable.ToList();
+        var projected = async ? await queryable.ToListAsync() : queryable.ToList();
 
         RecordLog();
         context.ChangeTracker.LazyLoadingEnabled = false;
@@ -960,14 +1169,13 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
 
         Assert.False(collectionEntry.IsLoaded);
 
-        var queryable = from t in collectionEntry.Query()
-                        join s in context.Set<UnidirectionalEntityOne>().SelectMany(e => e.TwoSkipShared)
-                            on t.Id equals s.Id
-                        select new { t, s };
+        var queryable =
+            from t in collectionEntry.Query()
+            join s in context.Set<UnidirectionalEntityOne>().SelectMany(e => e.TwoSkipShared)
+                on t.Id equals s.Id
+            select new { t, s };
 
-        var projected = async
-            ? await queryable.ToListAsync()
-            : queryable.ToList();
+        var projected = async ? await queryable.ToListAsync() : queryable.ToList();
 
         Assert.False(collectionEntry.IsLoaded);
 
@@ -986,7 +1194,9 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public virtual async Task Query_with_Include_marks_only_left_as_loaded_unidirectional(bool async)
+    public virtual async Task Query_with_Include_marks_only_left_as_loaded_unidirectional(
+        bool async
+    )
     {
         using var context = Fixture.CreateContext();
 
@@ -1003,18 +1213,29 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         foreach (var right in left.TwoSkip)
         {
             Assert.False(context.Entry(right).Navigation("UnidirectionalEntityOne1").IsLoaded);
-            Assert.Same(left, context.Entry(right).Collection("UnidirectionalEntityOne1").CurrentValue!.Cast<object>().Single());
+            Assert.Same(
+                left,
+                context
+                    .Entry(right)
+                    .Collection("UnidirectionalEntityOne1")
+                    .CurrentValue!.Cast<object>()
+                    .Single()
+            );
         }
     }
 
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public virtual async Task Query_with_filtered_Include_marks_only_left_as_loaded_unidirectional(bool async)
+    public virtual async Task Query_with_filtered_Include_marks_only_left_as_loaded_unidirectional(
+        bool async
+    )
     {
         using var context = Fixture.CreateContext();
 
-        var queryable = context.UnidirectionalEntityOnes.Include(e => e.TwoSkip.Where(e => e.Id == 1 || e.Id == 2));
+        var queryable = context.UnidirectionalEntityOnes.Include(e =>
+            e.TwoSkip.Where(e => e.Id == 1 || e.Id == 2)
+        );
         var left = async
             ? await queryable.SingleAsync(e => e.Id == 1)
             : queryable.Single(e => e.Id == 1);
@@ -1026,8 +1247,20 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         Assert.Equal(2, left.TwoSkip.Count);
         foreach (var right in left.TwoSkip)
         {
-            Assert.False(context.Entry(right).Collection<UnidirectionalEntityOne>("UnidirectionalEntityOne1").IsLoaded);
-            Assert.Same(left, context.Entry(right).Collection("UnidirectionalEntityOne1").CurrentValue!.Cast<object>().Single());
+            Assert.False(
+                context
+                    .Entry(right)
+                    .Collection<UnidirectionalEntityOne>("UnidirectionalEntityOne1")
+                    .IsLoaded
+            );
+            Assert.Same(
+                left,
+                context
+                    .Entry(right)
+                    .Collection("UnidirectionalEntityOne1")
+                    .CurrentValue!.Cast<object>()
+                    .Single()
+            );
         }
     }
 }

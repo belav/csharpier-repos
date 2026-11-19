@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,33 +28,42 @@
 //
 
 using System.Collections;
+using System.Globalization;
 using System.Security.Permissions;
 using System.Web.UI.WebControls;
-using System.Globalization;
 using System.Web.Util;
 
 namespace System.Web.UI.HtmlControls
 {
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class HtmlSelectBuilder : ControlBuilder
-	{
-		public override bool AllowWhitespaceLiterals () 
-		{
-			return false;
-		}
+    // CAS
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public class HtmlSelectBuilder : ControlBuilder
+    {
+        public override bool AllowWhitespaceLiterals()
+        {
+            return false;
+        }
 
-		public override Type GetChildControlType (string tagName, IDictionary attribs) 
-		{
-			if (String.Compare (tagName, "option", true, Helpers.InvariantCulture) != 0)
-				return null;
+        public override Type GetChildControlType(string tagName, IDictionary attribs)
+        {
+            if (String.Compare(tagName, "option", true, Helpers.InvariantCulture) != 0)
+                return null;
 
-			string selected = attribs ["selected"] as string;
-			if (selected != null && selected.Length > 0 && String.Compare (selected, "selected", true, Helpers.InvariantCulture) == 0)
-				attribs ["selected"] = "true";
-			return typeof (ListItem);
-		}
-	}
+            string selected = attribs["selected"] as string;
+            if (
+                selected != null
+                && selected.Length > 0
+                && String.Compare(selected, "selected", true, Helpers.InvariantCulture) == 0
+            )
+                attribs["selected"] = "true";
+            return typeof(ListItem);
+        }
+    }
 }
-

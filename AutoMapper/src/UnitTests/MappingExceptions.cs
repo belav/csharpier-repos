@@ -12,10 +12,11 @@ public class When_encountering_a_member_mapping_problem_during_mapping : NonVali
         public int Value { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Dest>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Dest>();
+        });
 
     [Fact]
     public void Should_provide_a_contextual_exception()
@@ -60,11 +61,12 @@ public class When_encountering_a_path_mapping_problem_during_mapping : NonValida
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Dest>()
-            .ForPath(d => d.SubValue.Value, opt => opt.MapFrom(src => src.Value));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Dest>()
+                .ForPath(d => d.SubValue.Value, opt => opt.MapFrom(src => src.Value));
+        });
 
     [Fact]
     public void Should_provide_a_contextual_exception()

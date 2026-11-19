@@ -26,11 +26,19 @@
 #pragma warning disable 618
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
+using Newtonsoft.Json.Bson;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Tests.TestObjects;
+using Newtonsoft.Json.Tests.TestObjects.GeoCoding;
+using Newtonsoft.Json.Utilities;
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
 using System.Numerics;
 #endif
-using System.Text;
-using System.Text.RegularExpressions;
+
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -38,13 +46,7 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using Newtonsoft.Json.Bson;
-using System.IO;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Utilities;
-using Newtonsoft.Json.Tests.TestObjects;
-using System.Globalization;
-using Newtonsoft.Json.Tests.TestObjects.GeoCoding;
+
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -115,7 +117,10 @@ namespace Newtonsoft.Json.Tests.Bson
             writer.WriteEnd();
 
             string bson = BytesToHex(ms.ToArray());
-            Assert.AreEqual("8C-00-00-00-12-30-00-FF-FF-FF-FF-FF-FF-FF-7F-12-31-00-FF-FF-FF-FF-FF-FF-FF-7F-10-32-00-FF-FF-FF-7F-10-33-00-FF-FF-FF-7F-10-34-00-FF-00-00-00-10-35-00-7F-00-00-00-02-36-00-02-00-00-00-61-00-01-37-00-00-00-00-00-00-00-F0-45-01-38-00-FF-FF-FF-FF-FF-FF-EF-7F-01-39-00-00-00-00-E0-FF-FF-EF-47-08-31-30-00-01-05-31-31-00-05-00-00-00-00-00-01-02-03-04-09-31-32-00-40-C5-E2-BA-E3-00-00-00-09-31-33-00-40-C5-E2-BA-E3-00-00-00-00", bson);
+            Assert.AreEqual(
+                "8C-00-00-00-12-30-00-FF-FF-FF-FF-FF-FF-FF-7F-12-31-00-FF-FF-FF-FF-FF-FF-FF-7F-10-32-00-FF-FF-FF-7F-10-33-00-FF-FF-FF-7F-10-34-00-FF-00-00-00-10-35-00-7F-00-00-00-02-36-00-02-00-00-00-61-00-01-37-00-00-00-00-00-00-00-F0-45-01-38-00-FF-FF-FF-FF-FF-FF-EF-7F-01-39-00-00-00-00-E0-FF-FF-EF-47-08-31-30-00-01-05-31-31-00-05-00-00-00-00-00-01-02-03-04-09-31-32-00-40-C5-E2-BA-E3-00-00-00-09-31-33-00-40-C5-E2-BA-E3-00-00-00-00",
+                bson
+            );
         }
 #endif
 
@@ -146,7 +151,10 @@ namespace Newtonsoft.Json.Tests.Bson
             writer.WriteEnd();
 
             string bson = BytesToHex(ms.ToArray());
-            Assert.AreEqual("1D-00-00-00-05-30-00-10-00-00-00-04-D7-EE-21-D8-5C-4B-C9-43-8A-C2-69-28-E5-79-B7-05-00", bson);
+            Assert.AreEqual(
+                "1D-00-00-00-05-30-00-10-00-00-00-04-D7-EE-21-D8-5C-4B-C9-43-8A-C2-69-28-E5-79-B7-05-00",
+                bson
+            );
         }
 
         [Test]
@@ -164,7 +172,8 @@ namespace Newtonsoft.Json.Tests.Bson
 
             ms.Seek(0, SeekOrigin.Begin);
 
-            string expected = "20-00-00-00-02-30-00-02-00-00-00-61-00-02-31-00-02-00-00-00-62-00-02-32-00-02-00-00-00-63-00-00";
+            string expected =
+                "20-00-00-00-02-30-00-02-00-00-00-61-00-02-31-00-02-00-00-00-62-00-02-32-00-02-00-00-00-63-00-00";
             string bson = BytesToHex(ms.ToArray());
 
             Assert.AreEqual(expected, bson);
@@ -187,7 +196,8 @@ namespace Newtonsoft.Json.Tests.Bson
 
             ms.Seek(0, SeekOrigin.Begin);
 
-            string expected = "2B-00-00-00-02-30-00-02-00-00-00-61-00-02-31-00-02-00-00-00-62-00-05-32-00-0C-00-00-00-00-48-65-6C-6C-6F-20-77-6F-72-6C-64-21-00";
+            string expected =
+                "2B-00-00-00-02-30-00-02-00-00-00-61-00-02-31-00-02-00-00-00-62-00-05-32-00-0C-00-00-00-00-48-65-6C-6C-6F-20-77-6F-72-6C-64-21-00";
             string bson = BytesToHex(ms.ToArray());
 
             Assert.AreEqual(expected, bson);
@@ -216,9 +226,7 @@ namespace Newtonsoft.Json.Tests.Bson
             writer.WriteStartArray();
             for (int i = 1; i <= 8; i++)
             {
-                double value = (i != 5)
-                    ? Convert.ToDouble(i)
-                    : 5.78960446186581E+77d;
+                double value = (i != 5) ? Convert.ToDouble(i) : 5.78960446186581E+77d;
 
                 writer.WriteValue(value);
             }
@@ -233,7 +241,8 @@ namespace Newtonsoft.Json.Tests.Bson
 
             ms.Seek(0, SeekOrigin.Begin);
 
-            string expected = "87-00-00-00-05-5F-69-64-00-0C-00-00-00-00-4A-78-93-79-17-22-00-00-00-00-61-CF-04-61-00-5D-00-00-00-01-30-00-00-00-00-00-00-00-F0-3F-01-31-00-00-00-00-00-00-00-00-40-01-32-00-00-00-00-00-00-00-08-40-01-33-00-00-00-00-00-00-00-10-40-01-34-00-00-00-00-00-00-00-14-50-01-35-00-00-00-00-00-00-00-18-40-01-36-00-00-00-00-00-00-00-1C-40-01-37-00-00-00-00-00-00-00-20-40-00-02-62-00-05-00-00-00-74-65-73-74-00-00";
+            string expected =
+                "87-00-00-00-05-5F-69-64-00-0C-00-00-00-00-4A-78-93-79-17-22-00-00-00-00-61-CF-04-61-00-5D-00-00-00-01-30-00-00-00-00-00-00-00-F0-3F-01-31-00-00-00-00-00-00-00-00-40-01-32-00-00-00-00-00-00-00-08-40-01-33-00-00-00-00-00-00-00-10-40-01-34-00-00-00-00-00-00-00-14-50-01-35-00-00-00-00-00-00-00-18-40-01-36-00-00-00-00-00-00-00-1C-40-01-37-00-00-00-00-00-00-00-20-40-00-02-62-00-05-00-00-00-74-65-73-74-00-00";
             string bson = BytesToHex(ms.ToArray());
 
             Assert.AreEqual(expected, bson);
@@ -250,13 +259,15 @@ namespace Newtonsoft.Json.Tests.Bson
             s1.Cost = 999.59m;
             s1.Employees = int.MaxValue - 1;
             s1.Open = true;
-            s1.product.Add(new Product
-            {
-                ExpiryDate = new DateTime(2000, 9, 28, 3, 59, 58, DateTimeKind.Local),
-                Name = "BSON!",
-                Price = -0.1m,
-                Sizes = new[] { "First", "Second" }
-            });
+            s1.product.Add(
+                new Product
+                {
+                    ExpiryDate = new DateTime(2000, 9, 28, 3, 59, 58, DateTimeKind.Local),
+                    Name = "BSON!",
+                    Price = -0.1m,
+                    Sizes = new[] { "First", "Second" },
+                }
+            );
             s1.Establised = new DateTime(2000, 1, 1, 0, 0, 0, DateTimeKind.Local);
 
             JsonSerializer serializer = new JsonSerializer();
@@ -313,13 +324,17 @@ namespace Newtonsoft.Json.Tests.Bson
             writer.WriteEndObject();
 
             string bson = BytesToHex(ms.ToArray());
-            Assert.AreEqual("4E-02-00-00-02-30-2D-31-2D-32-2D-33-2D-34-2D-35-2D-36-2D-37-2D-38-2D-39-2D-31-30-2D-31-31-2D-31-32-2D-31-33-2D-31-34-2D-31-35-2D-31-36-2D-31-37-2D-31-38-2D-31-39-2D-32-30-2D-32-31-2D-32-32-2D-32-33-2D-32-34-2D-32-35-2D-32-36-2D-32-37-2D-32-38-2D-32-39-2D-33-30-2D-33-31-2D-33-32-2D-33-33-2D-33-34-2D-33-35-2D-33-36-2D-33-37-2D-33-38-2D-33-39-2D-34-30-2D-34-31-2D-34-32-2D-34-33-2D-34-34-2D-34-35-2D-34-36-2D-34-37-2D-34-38-2D-34-39-2D-35-30-2D-35-31-2D-35-32-2D-35-33-2D-35-34-2D-35-35-2D-35-36-2D-35-37-2D-35-38-2D-35-39-2D-36-30-2D-36-31-2D-36-32-2D-36-33-2D-36-34-2D-36-35-2D-36-36-2D-36-37-2D-36-38-2D-36-39-2D-37-30-2D-37-31-2D-37-32-2D-37-33-2D-37-34-2D-37-35-2D-37-36-2D-37-37-2D-37-38-2D-37-39-2D-38-30-2D-38-31-2D-38-32-2D-38-33-2D-38-34-2D-38-35-2D-38-36-2D-38-37-2D-38-38-2D-38-39-2D-39-30-2D-39-31-2D-39-32-2D-39-33-2D-39-34-2D-39-35-2D-39-36-2D-39-37-2D-39-38-2D-39-39-00-22-01-00-00-30-2D-31-2D-32-2D-33-2D-34-2D-35-2D-36-2D-37-2D-38-2D-39-2D-31-30-2D-31-31-2D-31-32-2D-31-33-2D-31-34-2D-31-35-2D-31-36-2D-31-37-2D-31-38-2D-31-39-2D-32-30-2D-32-31-2D-32-32-2D-32-33-2D-32-34-2D-32-35-2D-32-36-2D-32-37-2D-32-38-2D-32-39-2D-33-30-2D-33-31-2D-33-32-2D-33-33-2D-33-34-2D-33-35-2D-33-36-2D-33-37-2D-33-38-2D-33-39-2D-34-30-2D-34-31-2D-34-32-2D-34-33-2D-34-34-2D-34-35-2D-34-36-2D-34-37-2D-34-38-2D-34-39-2D-35-30-2D-35-31-2D-35-32-2D-35-33-2D-35-34-2D-35-35-2D-35-36-2D-35-37-2D-35-38-2D-35-39-2D-36-30-2D-36-31-2D-36-32-2D-36-33-2D-36-34-2D-36-35-2D-36-36-2D-36-37-2D-36-38-2D-36-39-2D-37-30-2D-37-31-2D-37-32-2D-37-33-2D-37-34-2D-37-35-2D-37-36-2D-37-37-2D-37-38-2D-37-39-2D-38-30-2D-38-31-2D-38-32-2D-38-33-2D-38-34-2D-38-35-2D-38-36-2D-38-37-2D-38-38-2D-38-39-2D-39-30-2D-39-31-2D-39-32-2D-39-33-2D-39-34-2D-39-35-2D-39-36-2D-39-37-2D-39-38-2D-39-39-00-00", bson);
+            Assert.AreEqual(
+                "4E-02-00-00-02-30-2D-31-2D-32-2D-33-2D-34-2D-35-2D-36-2D-37-2D-38-2D-39-2D-31-30-2D-31-31-2D-31-32-2D-31-33-2D-31-34-2D-31-35-2D-31-36-2D-31-37-2D-31-38-2D-31-39-2D-32-30-2D-32-31-2D-32-32-2D-32-33-2D-32-34-2D-32-35-2D-32-36-2D-32-37-2D-32-38-2D-32-39-2D-33-30-2D-33-31-2D-33-32-2D-33-33-2D-33-34-2D-33-35-2D-33-36-2D-33-37-2D-33-38-2D-33-39-2D-34-30-2D-34-31-2D-34-32-2D-34-33-2D-34-34-2D-34-35-2D-34-36-2D-34-37-2D-34-38-2D-34-39-2D-35-30-2D-35-31-2D-35-32-2D-35-33-2D-35-34-2D-35-35-2D-35-36-2D-35-37-2D-35-38-2D-35-39-2D-36-30-2D-36-31-2D-36-32-2D-36-33-2D-36-34-2D-36-35-2D-36-36-2D-36-37-2D-36-38-2D-36-39-2D-37-30-2D-37-31-2D-37-32-2D-37-33-2D-37-34-2D-37-35-2D-37-36-2D-37-37-2D-37-38-2D-37-39-2D-38-30-2D-38-31-2D-38-32-2D-38-33-2D-38-34-2D-38-35-2D-38-36-2D-38-37-2D-38-38-2D-38-39-2D-39-30-2D-39-31-2D-39-32-2D-39-33-2D-39-34-2D-39-35-2D-39-36-2D-39-37-2D-39-38-2D-39-39-00-22-01-00-00-30-2D-31-2D-32-2D-33-2D-34-2D-35-2D-36-2D-37-2D-38-2D-39-2D-31-30-2D-31-31-2D-31-32-2D-31-33-2D-31-34-2D-31-35-2D-31-36-2D-31-37-2D-31-38-2D-31-39-2D-32-30-2D-32-31-2D-32-32-2D-32-33-2D-32-34-2D-32-35-2D-32-36-2D-32-37-2D-32-38-2D-32-39-2D-33-30-2D-33-31-2D-33-32-2D-33-33-2D-33-34-2D-33-35-2D-33-36-2D-33-37-2D-33-38-2D-33-39-2D-34-30-2D-34-31-2D-34-32-2D-34-33-2D-34-34-2D-34-35-2D-34-36-2D-34-37-2D-34-38-2D-34-39-2D-35-30-2D-35-31-2D-35-32-2D-35-33-2D-35-34-2D-35-35-2D-35-36-2D-35-37-2D-35-38-2D-35-39-2D-36-30-2D-36-31-2D-36-32-2D-36-33-2D-36-34-2D-36-35-2D-36-36-2D-36-37-2D-36-38-2D-36-39-2D-37-30-2D-37-31-2D-37-32-2D-37-33-2D-37-34-2D-37-35-2D-37-36-2D-37-37-2D-37-38-2D-37-39-2D-38-30-2D-38-31-2D-38-32-2D-38-33-2D-38-34-2D-38-35-2D-38-36-2D-38-37-2D-38-38-2D-38-39-2D-39-30-2D-39-31-2D-39-32-2D-39-33-2D-39-34-2D-39-35-2D-39-36-2D-39-37-2D-39-38-2D-39-39-00-00",
+                bson
+            );
         }
 
         [Test]
         public void SerializeGoogleGeoCode()
         {
-            string json = @"{
+            string json =
+                @"{
   ""name"": ""1600 Amphitheatre Parkway, Mountain View, CA, USA"",
   ""Status"": {
     ""code"": 200,
@@ -356,7 +371,8 @@ namespace Newtonsoft.Json.Tests.Bson
   ]
 }";
 
-            GoogleMapGeocoderStructure jsonGoogleMapGeocoder = JsonConvert.DeserializeObject<GoogleMapGeocoderStructure>(json);
+            GoogleMapGeocoderStructure jsonGoogleMapGeocoder =
+                JsonConvert.DeserializeObject<GoogleMapGeocoderStructure>(json);
 
             MemoryStream ms = new MemoryStream();
             BsonWriter writer = new BsonWriter(ms);
@@ -366,10 +382,14 @@ namespace Newtonsoft.Json.Tests.Bson
 
             ms.Seek(0, SeekOrigin.Begin);
             BsonReader reader = new BsonReader(ms);
-            GoogleMapGeocoderStructure bsonGoogleMapGeocoder = (GoogleMapGeocoderStructure)serializer.Deserialize(reader, typeof(GoogleMapGeocoderStructure));
+            GoogleMapGeocoderStructure bsonGoogleMapGeocoder = (GoogleMapGeocoderStructure)
+                serializer.Deserialize(reader, typeof(GoogleMapGeocoderStructure));
 
             Assert.IsNotNull(bsonGoogleMapGeocoder);
-            Assert.AreEqual("1600 Amphitheatre Parkway, Mountain View, CA, USA", bsonGoogleMapGeocoder.Name);
+            Assert.AreEqual(
+                "1600 Amphitheatre Parkway, Mountain View, CA, USA",
+                bsonGoogleMapGeocoder.Name
+            );
             Assert.AreEqual("200", bsonGoogleMapGeocoder.Status.Code);
             Assert.AreEqual("geocode", bsonGoogleMapGeocoder.Status.Request);
 
@@ -378,14 +398,57 @@ namespace Newtonsoft.Json.Tests.Bson
             Assert.AreEqual(1, placemarks.Count);
 
             Placemark placemark = placemarks[0];
-            Assert.AreEqual("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA", placemark.Address);
+            Assert.AreEqual(
+                "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA",
+                placemark.Address
+            );
             Assert.AreEqual(8, placemark.AddressDetails.Accuracy);
             Assert.AreEqual("US", placemark.AddressDetails.Country.CountryNameCode);
-            Assert.AreEqual("CA", placemark.AddressDetails.Country.AdministrativeArea.AdministrativeAreaName);
-            Assert.AreEqual("Santa Clara", placemark.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.SubAdministrativeAreaName);
-            Assert.AreEqual("Mountain View", placemark.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.LocalityName);
-            Assert.AreEqual("1600 Amphitheatre Pkwy", placemark.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.Thoroughfare.ThoroughfareName);
-            Assert.AreEqual("94043", placemark.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.PostalCode.PostalCodeNumber);
+            Assert.AreEqual(
+                "CA",
+                placemark.AddressDetails.Country.AdministrativeArea.AdministrativeAreaName
+            );
+            Assert.AreEqual(
+                "Santa Clara",
+                placemark
+                    .AddressDetails
+                    .Country
+                    .AdministrativeArea
+                    .SubAdministrativeArea
+                    .SubAdministrativeAreaName
+            );
+            Assert.AreEqual(
+                "Mountain View",
+                placemark
+                    .AddressDetails
+                    .Country
+                    .AdministrativeArea
+                    .SubAdministrativeArea
+                    .Locality
+                    .LocalityName
+            );
+            Assert.AreEqual(
+                "1600 Amphitheatre Pkwy",
+                placemark
+                    .AddressDetails
+                    .Country
+                    .AdministrativeArea
+                    .SubAdministrativeArea
+                    .Locality
+                    .Thoroughfare
+                    .ThoroughfareName
+            );
+            Assert.AreEqual(
+                "94043",
+                placemark
+                    .AddressDetails
+                    .Country
+                    .AdministrativeArea
+                    .SubAdministrativeArea
+                    .Locality
+                    .PostalCode
+                    .PostalCodeNumber
+            );
             Assert.AreEqual(-122.083739m, placemark.Point.Coordinates[0]);
             Assert.AreEqual(37.423021m, placemark.Point.Coordinates[1]);
             Assert.AreEqual(0m, placemark.Point.Coordinates[2]);
@@ -409,53 +472,65 @@ namespace Newtonsoft.Json.Tests.Bson
         [Test]
         public void WriteComment()
         {
-            ExceptionAssert.Throws<JsonWriterException>(() =>
-            {
-                MemoryStream ms = new MemoryStream();
-                BsonWriter writer = new BsonWriter(ms);
+            ExceptionAssert.Throws<JsonWriterException>(
+                () =>
+                {
+                    MemoryStream ms = new MemoryStream();
+                    BsonWriter writer = new BsonWriter(ms);
 
-                writer.WriteStartArray();
-                writer.WriteComment("fail");
-            }, "Cannot write JSON comment as BSON. Path ''.");
+                    writer.WriteStartArray();
+                    writer.WriteComment("fail");
+                },
+                "Cannot write JSON comment as BSON. Path ''."
+            );
         }
 
         [Test]
         public void WriteConstructor()
         {
-            ExceptionAssert.Throws<JsonWriterException>(() =>
-            {
-                MemoryStream ms = new MemoryStream();
-                BsonWriter writer = new BsonWriter(ms);
+            ExceptionAssert.Throws<JsonWriterException>(
+                () =>
+                {
+                    MemoryStream ms = new MemoryStream();
+                    BsonWriter writer = new BsonWriter(ms);
 
-                writer.WriteStartArray();
-                writer.WriteStartConstructor("fail");
-            }, "Cannot write JSON constructor as BSON. Path ''.");
+                    writer.WriteStartArray();
+                    writer.WriteStartConstructor("fail");
+                },
+                "Cannot write JSON constructor as BSON. Path ''."
+            );
         }
 
         [Test]
         public void WriteRaw()
         {
-            ExceptionAssert.Throws<JsonWriterException>(() =>
-            {
-                MemoryStream ms = new MemoryStream();
-                BsonWriter writer = new BsonWriter(ms);
+            ExceptionAssert.Throws<JsonWriterException>(
+                () =>
+                {
+                    MemoryStream ms = new MemoryStream();
+                    BsonWriter writer = new BsonWriter(ms);
 
-                writer.WriteStartArray();
-                writer.WriteRaw("fail");
-            }, "Cannot write raw JSON as BSON. Path ''.");
+                    writer.WriteStartArray();
+                    writer.WriteRaw("fail");
+                },
+                "Cannot write raw JSON as BSON. Path ''."
+            );
         }
 
         [Test]
         public void WriteRawValue()
         {
-            ExceptionAssert.Throws<JsonWriterException>(() =>
-            {
-                MemoryStream ms = new MemoryStream();
-                BsonWriter writer = new BsonWriter(ms);
+            ExceptionAssert.Throws<JsonWriterException>(
+                () =>
+                {
+                    MemoryStream ms = new MemoryStream();
+                    BsonWriter writer = new BsonWriter(ms);
 
-                writer.WriteStartArray();
-                writer.WriteRawValue("fail");
-            }, "Cannot write raw JSON as BSON. Path ''.");
+                    writer.WriteStartArray();
+                    writer.WriteRawValue("fail");
+                },
+                "Cannot write raw JSON as BSON. Path ''."
+            );
         }
 
         [Test]
@@ -511,7 +586,10 @@ namespace Newtonsoft.Json.Tests.Bson
             writer.WriteEndObject();
 
             string bson = BytesToHex(ms.ToArray());
-            Assert.AreEqual("17-00-00-00-07-5F-6F-69-64-00-01-02-03-04-05-06-07-08-09-0A-0B-0C-00", bson);
+            Assert.AreEqual(
+                "17-00-00-00-07-5F-6F-69-64-00-01-02-03-04-05-06-07-08-09-0A-0B-0C-00",
+                bson
+            );
 
             ms.Seek(0, SeekOrigin.Begin);
             BsonReader reader = new BsonReader(ms);
@@ -543,7 +621,9 @@ namespace Newtonsoft.Json.Tests.Bson
             writer.WriteValue("1234£56");
             writer.WriteEndObject();
 
-            byte[] expected = HexToBytes("29000000075F6964004ABBED9D1D8B0F02180000010274657374000900000031323334C2A335360000");
+            byte[] expected = HexToBytes(
+                "29000000075F6964004ABBED9D1D8B0F02180000010274657374000900000031323334C2A335360000"
+            );
 
             CollectionAssert.AreEquivalent(expected, ms.ToArray());
         }
@@ -561,7 +641,9 @@ namespace Newtonsoft.Json.Tests.Bson
             writer.WriteRegex(string.Empty, null);
             writer.WriteEndObject();
 
-            byte[] expected = HexToBytes("1A-00-00-00-0B-72-65-67-65-78-00-61-62-63-00-69-00-0B-74-65-73-74-00-00-00-00");
+            byte[] expected = HexToBytes(
+                "1A-00-00-00-0B-72-65-67-65-78-00-61-62-63-00-69-00-0B-74-65-73-74-00-00-00-00"
+            );
 
             CollectionAssert.AreEquivalent(expected, ms.ToArray());
         }
@@ -677,16 +759,19 @@ namespace Newtonsoft.Json.Tests.Bson
         [Test]
         public void WriteValueOutsideOfObjectOrArray()
         {
-            ExceptionAssert.Throws<JsonWriterException>(() =>
-            {
-                MemoryStream stream = new MemoryStream();
-
-                using (BsonWriter writer = new BsonWriter(stream))
+            ExceptionAssert.Throws<JsonWriterException>(
+                () =>
                 {
-                    writer.WriteValue("test");
-                    writer.Flush();
-                }
-            }, "Error writing String value. BSON must start with an Object or Array. Path ''.");
+                    MemoryStream stream = new MemoryStream();
+
+                    using (BsonWriter writer = new BsonWriter(stream))
+                    {
+                        writer.WriteValue("test");
+                        writer.Flush();
+                    }
+                },
+                "Error writing String value. BSON must start with an Object or Array. Path ''."
+            );
         }
 
         [Test]
@@ -695,14 +780,17 @@ namespace Newtonsoft.Json.Tests.Bson
             MemoryStream ms = new MemoryStream();
             JsonWriter writer = new BsonWriter(ms)
             {
-                DateTimeZoneHandling = Json.DateTimeZoneHandling.Utc
+                DateTimeZoneHandling = Json.DateTimeZoneHandling.Utc,
             };
 
             writer.WriteStartArray();
             writer.WriteValue(new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Unspecified));
             writer.WriteEndArray();
 
-            Assert.AreEqual("10-00-00-00-09-30-00-C8-88-07-6B-DC-00-00-00-00", (BitConverter.ToString(ms.ToArray())));
+            Assert.AreEqual(
+                "10-00-00-00-09-30-00-C8-88-07-6B-DC-00-00-00-00",
+                (BitConverter.ToString(ms.ToArray()))
+            );
         }
 
         public class RegexTestClass
@@ -728,9 +816,12 @@ namespace Newtonsoft.Json.Tests.Bson
 
             JObject o = (JObject)JObject.ReadFrom(new BsonReader(new MemoryStream(ms.ToArray())));
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Regex"": ""/(hi)/iux""
-}", o.ToString());
+}",
+                o.ToString()
+            );
         }
 
         [Test]
@@ -743,7 +834,13 @@ namespace Newtonsoft.Json.Tests.Bson
 
             BsonWriter writer = new BsonWriter(ms);
 
-            ExceptionAssert.Throws<JsonWriterException>(() => { serializer.Serialize(writer, b); }, "Error writing Binary value. BSON must start with an Object or Array. Path ''.");
+            ExceptionAssert.Throws<JsonWriterException>(
+                () =>
+                {
+                    serializer.Serialize(writer, b);
+                },
+                "Error writing Binary value. BSON must start with an Object or Array. Path ''."
+            );
         }
 
         public class GuidTestClass
@@ -802,7 +899,9 @@ namespace Newtonsoft.Json.Tests.Bson
         [Test]
         public void WriteBigInteger()
         {
-            BigInteger i = BigInteger.Parse("1999999999999999999999999999999999999999999999999999999999990");
+            BigInteger i = BigInteger.Parse(
+                "1999999999999999999999999999999999999999999999999999999999990"
+            );
 
             MemoryStream ms = new MemoryStream();
             BsonWriter writer = new BsonWriter(ms);
@@ -813,7 +912,10 @@ namespace Newtonsoft.Json.Tests.Bson
             writer.WriteEndObject();
 
             string bson = BytesToHex(ms.ToArray());
-            Assert.AreEqual("2A-00-00-00-05-42-6C-61-68-00-1A-00-00-00-00-F6-FF-FF-FF-FF-FF-FF-1F-B2-21-CB-28-59-84-C4-AE-03-8A-44-34-2F-4C-4E-9E-3E-01-00", bson);
+            Assert.AreEqual(
+                "2A-00-00-00-05-42-6C-61-68-00-1A-00-00-00-00-F6-FF-FF-FF-FF-FF-FF-1F-B2-21-CB-28-59-84-C4-AE-03-8A-44-34-2F-4C-4E-9E-3E-01-00",
+                bson
+            );
 
             ms.Seek(0, SeekOrigin.Begin);
             BsonReader reader = new BsonReader(ms);
@@ -825,7 +927,38 @@ namespace Newtonsoft.Json.Tests.Bson
 
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.Bytes, reader.TokenType);
-            CollectionAssert.AreEqual(new byte[] { 246, 255, 255, 255, 255, 255, 255, 31, 178, 33, 203, 40, 89, 132, 196, 174, 3, 138, 68, 52, 47, 76, 78, 158, 62, 1 }, (byte[])reader.Value);
+            CollectionAssert.AreEqual(
+                new byte[]
+                {
+                    246,
+                    255,
+                    255,
+                    255,
+                    255,
+                    255,
+                    255,
+                    31,
+                    178,
+                    33,
+                    203,
+                    40,
+                    89,
+                    132,
+                    196,
+                    174,
+                    3,
+                    138,
+                    68,
+                    52,
+                    47,
+                    76,
+                    78,
+                    158,
+                    62,
+                    1,
+                },
+                (byte[])reader.Value
+            );
             Assert.AreEqual(i, new BigInteger((byte[])reader.Value));
 
             Assert.IsTrue(reader.Read());
@@ -867,7 +1000,7 @@ namespace Newtonsoft.Json.Tests.Bson
 
             writer.WriteStartObject();
             writer.WritePropertyName("array0");
-            writer.WriteValue(new byte[] {0, 1, 2, 3, 4, 5, 6, 7});
+            writer.WriteValue(new byte[] { 0, 1, 2, 3, 4, 5, 6, 7 });
             writer.WritePropertyName("array1");
             writer.WriteValue(default(byte[]));
             writer.WriteEndObject();
@@ -878,7 +1011,7 @@ namespace Newtonsoft.Json.Tests.Bson
             Assert.AreEqual(JsonToken.StartObject, reader.TokenType);
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.PropertyName, reader.TokenType);
-            Assert.AreEqual(new byte[] {0, 1, 2, 3, 4, 5, 6, 7}, reader.ReadAsBytes());
+            Assert.AreEqual(new byte[] { 0, 1, 2, 3, 4, 5, 6, 7 }, reader.ReadAsBytes());
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.PropertyName, reader.TokenType);
             Assert.IsNull(reader.ReadAsBytes());
@@ -894,7 +1027,10 @@ namespace Newtonsoft.Json.Tests.Bson
             writer.WritePropertyName("Blah");
             writer.WriteEnd();
 
-            Assert.AreEqual("0B-00-00-00-0A-42-6C-61-68-00-00", (BitConverter.ToString(ms.ToArray())));
+            Assert.AreEqual(
+                "0B-00-00-00-0A-42-6C-61-68-00-00",
+                (BitConverter.ToString(ms.ToArray()))
+            );
         }
 
         [Test]
@@ -907,7 +1043,10 @@ namespace Newtonsoft.Json.Tests.Bson
             writer.WritePropertyName("Blah");
             writer.Close();
 
-            Assert.AreEqual("0B-00-00-00-0A-42-6C-61-68-00-00", (BitConverter.ToString(ms.ToArray())));
+            Assert.AreEqual(
+                "0B-00-00-00-0A-42-6C-61-68-00-00",
+                (BitConverter.ToString(ms.ToArray()))
+            );
         }
 
         [Test]
@@ -920,7 +1059,10 @@ namespace Newtonsoft.Json.Tests.Bson
                 writer.WritePropertyName("Blah");
             }
 
-            Assert.AreEqual("0B-00-00-00-0A-42-6C-61-68-00-00", (BitConverter.ToString(ms.ToArray())));
+            Assert.AreEqual(
+                "0B-00-00-00-0A-42-6C-61-68-00-00",
+                (BitConverter.ToString(ms.ToArray()))
+            );
         }
 
         [Test]

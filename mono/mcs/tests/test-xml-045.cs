@@ -7,28 +7,24 @@
 /// <see cref="Remove" />
 /// <see cref="Destroy" />
 /// </summary>
-public class EntryPoint {
-	static void Main () {
-	}
+public class EntryPoint
+{
+    static void Main() { }
 
-	/// dummy comments
-	protected void Create (bool test) {
-		Define (true);
-	}
+    /// dummy comments
+    protected void Create(bool test)
+    {
+        Define(true);
+    }
 
-	private void Define (bool test) {
-	}
+    private void Define(bool test) { }
 
-	/// dummy comments
-	protected void Undefine (bool test) {
-	}
+    /// dummy comments
+    protected void Undefine(bool test) { }
 
-	/// dummy comments
-	protected void Remove () {
-	}
+    /// dummy comments
+    protected void Remove() { }
 
-	/// dummy comments
-	public virtual void Destroy (bool test) {
-	}
+    /// dummy comments
+    public virtual void Destroy(bool test) { }
 }
-

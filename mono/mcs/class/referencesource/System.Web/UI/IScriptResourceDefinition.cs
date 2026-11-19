@@ -4,11 +4,13 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
     using System;
     using System.Reflection;
 
-    internal interface IScriptResourceDefinition {
+    internal interface IScriptResourceDefinition
+    {
         string Path { get; }
         string DebugPath { get; }
         string CdnPath { get; }

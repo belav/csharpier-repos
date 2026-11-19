@@ -12,16 +12,16 @@ namespace System.Activities.DurableInstancing
     [Serializable]
     class InstanceAlreadyLockedToOwnerException : InstancePersistenceCommandException
     {
-        public InstanceAlreadyLockedToOwnerException(XName commandName, Guid instanceId, long instanceVersion)
+        public InstanceAlreadyLockedToOwnerException(
+            XName commandName,
+            Guid instanceId,
+            long instanceVersion
+        )
             : base(commandName, instanceId)
         {
             this.InstanceVersion = instanceVersion;
         }
 
-        public long InstanceVersion
-        {
-            get;
-            private set;
-        }
+        public long InstanceVersion { get; private set; }
     }
 }

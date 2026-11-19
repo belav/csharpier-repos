@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,62 +30,75 @@
 using System;
 using System.Collections;
 using System.ComponentModel;
-using System.Web.UI;
 using System.Security.Permissions;
+using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	[AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class FormViewRow: TableRow
-	{
-		int rowIndex;
-		DataControlRowState rowState;
-		DataControlRowType rowType;
-		internal bool RenderJustCellContents {
-			get;
-			set;
-		}
-		public FormViewRow (int itemIndex, DataControlRowType rowType, DataControlRowState rowState)
-		{
-			this.rowIndex = itemIndex;
-			this.rowType = rowType;
-			this.rowState = rowState;
-		}
-		
-		public virtual int ItemIndex {
-			get { return rowIndex; }
-		}
-		
-		public virtual DataControlRowState RowState {
-			get { return rowState; }
-		}
-		
-		public virtual DataControlRowType RowType {
-			get { return rowType; }
-		}
-		
-		protected override bool OnBubbleEvent (object source, EventArgs e)
-		{
-			if (base.OnBubbleEvent (source, e)) return true;
-			
-			if (e is CommandEventArgs) {
-				FormViewCommandEventArgs args = new FormViewCommandEventArgs (source, (CommandEventArgs)e);
-				RaiseBubbleEvent (source, args);
-				return true;
-			}
-			return false;
-		}
-		protected internal override void Render (HtmlTextWriter writer)
-		{
-			if (!RenderJustCellContents) {
-				base.Render (writer);
-				return;
-			}
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public class FormViewRow : TableRow
+    {
+        int rowIndex;
+        DataControlRowState rowState;
+        DataControlRowType rowType;
+        internal bool RenderJustCellContents { get; set; }
 
-			foreach (TableCell cell in Cells)
-				cell.RenderContents (writer);
-		}
-	}
+        public FormViewRow(int itemIndex, DataControlRowType rowType, DataControlRowState rowState)
+        {
+            this.rowIndex = itemIndex;
+            this.rowType = rowType;
+            this.rowState = rowState;
+        }
+
+        public virtual int ItemIndex
+        {
+            get { return rowIndex; }
+        }
+
+        public virtual DataControlRowState RowState
+        {
+            get { return rowState; }
+        }
+
+        public virtual DataControlRowType RowType
+        {
+            get { return rowType; }
+        }
+
+        protected override bool OnBubbleEvent(object source, EventArgs e)
+        {
+            if (base.OnBubbleEvent(source, e))
+                return true;
+
+            if (e is CommandEventArgs)
+            {
+                FormViewCommandEventArgs args = new FormViewCommandEventArgs(
+                    source,
+                    (CommandEventArgs)e
+                );
+                RaiseBubbleEvent(source, args);
+                return true;
+            }
+            return false;
+        }
+
+        protected internal override void Render(HtmlTextWriter writer)
+        {
+            if (!RenderJustCellContents)
+            {
+                base.Render(writer);
+                return;
+            }
+
+            foreach (TableCell cell in Cells)
+                cell.RenderContents(writer);
+        }
+    }
 }
-

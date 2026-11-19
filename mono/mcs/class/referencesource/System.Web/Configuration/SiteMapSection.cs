@@ -4,15 +4,16 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.Configuration;
     using System.IO;
-    using System.Text;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Xml;
 
     /*         <!-- Configuration for siteMap:
                Attributes:
@@ -41,32 +42,38 @@ namespace System.Web.Configuration {
             </providers>
         </siteMap>
 */
-    public sealed class SiteMapSection : ConfigurationSection {
+    public sealed class SiteMapSection : ConfigurationSection
+    {
         private static ConfigurationPropertyCollection _properties;
-        
-        private static readonly ConfigurationProperty _propDefaultProvider =
-            new ConfigurationProperty("defaultProvider",
-                                        typeof(string),
-                                        "AspNetXmlSiteMapProvider",
-                                        null,
-                                        StdValidatorsAndConverters.NonEmptyStringValidator,
-                                        ConfigurationPropertyOptions.None);
-        
-        private static readonly ConfigurationProperty _propEnabled =
-            new ConfigurationProperty("enabled", 
-                                        typeof(bool), 
-                                        true, 
-                                        ConfigurationPropertyOptions.None);
 
-        private static readonly ConfigurationProperty _propProviders =
-            new ConfigurationProperty("providers", 
-                                        typeof(ProviderSettingsCollection), 
-                                        null, 
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propDefaultProvider =
+            new ConfigurationProperty(
+                "defaultProvider",
+                typeof(string),
+                "AspNetXmlSiteMapProvider",
+                null,
+                StdValidatorsAndConverters.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.None
+            );
+
+        private static readonly ConfigurationProperty _propEnabled = new ConfigurationProperty(
+            "enabled",
+            typeof(bool),
+            true,
+            ConfigurationPropertyOptions.None
+        );
+
+        private static readonly ConfigurationProperty _propProviders = new ConfigurationProperty(
+            "providers",
+            typeof(ProviderSettingsCollection),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
         private SiteMapProviderCollection _siteMapProviders;
 
-        static SiteMapSection() {
+        static SiteMapSection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propDefaultProvider);
@@ -74,50 +81,51 @@ namespace System.Web.Configuration {
             _properties.Add(_propProviders);
         }
 
-        public SiteMapSection() {
-        }
+        public SiteMapSection() { }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("defaultProvider", DefaultValue = "AspNetXmlSiteMapProvider")]
         [StringValidator(MinLength = 1)]
-        public string DefaultProvider {
-            get {
-                return (string)base[_propDefaultProvider];
-            }
-            set {
-                base[_propDefaultProvider] = value;
-            }
+        public string DefaultProvider
+        {
+            get { return (string)base[_propDefaultProvider]; }
+            set { base[_propDefaultProvider] = value; }
         }
 
         [ConfigurationProperty("enabled", DefaultValue = true)]
-        public bool Enabled {
-            get {
-                return (bool)base[_propEnabled];
-            }
-            set {
-                base[_propEnabled] = value;
-            }
+        public bool Enabled
+        {
+            get { return (bool)base[_propEnabled]; }
+            set { base[_propEnabled] = value; }
         }
 
         [ConfigurationProperty("providers")]
-        public ProviderSettingsCollection Providers {
-            get {
-                return (ProviderSettingsCollection)base[_propProviders];
-            }
+        public ProviderSettingsCollection Providers
+        {
+            get { return (ProviderSettingsCollection)base[_propProviders]; }
         }
 
-        internal SiteMapProviderCollection ProvidersInternal {
-            get {
-                if (_siteMapProviders == null) {
-                    lock (this) {
-                        if (_siteMapProviders == null) {
-                            SiteMapProviderCollection siteMapProviders = new SiteMapProviderCollection();
-                            ProvidersHelper.InstantiateProviders(Providers, siteMapProviders, typeof(SiteMapProvider));
+        internal SiteMapProviderCollection ProvidersInternal
+        {
+            get
+            {
+                if (_siteMapProviders == null)
+                {
+                    lock (this)
+                    {
+                        if (_siteMapProviders == null)
+                        {
+                            SiteMapProviderCollection siteMapProviders =
+                                new SiteMapProviderCollection();
+                            ProvidersHelper.InstantiateProviders(
+                                Providers,
+                                siteMapProviders,
+                                typeof(SiteMapProvider)
+                            );
 
                             _siteMapProviders = siteMapProviders;
                         }
@@ -128,14 +136,17 @@ namespace System.Web.Configuration {
             }
         }
 
-        internal void ValidateDefaultProvider() {
+        internal void ValidateDefaultProvider()
+        {
             if (!String.IsNullOrEmpty(DefaultProvider)) // make sure the specified provider has a provider entry in the collection
             {
-                if (Providers[DefaultProvider] == null) {
+                if (Providers[DefaultProvider] == null)
+                {
                     throw new ConfigurationErrorsException(
                         SR.GetString(SR.Config_provider_must_exist, DefaultProvider),
-                        ElementInformation.Properties[_propDefaultProvider.Name].Source, 
-                        ElementInformation.Properties[_propDefaultProvider.Name].LineNumber);
+                        ElementInformation.Properties[_propDefaultProvider.Name].Source,
+                        ElementInformation.Properties[_propDefaultProvider.Name].LineNumber
+                    );
                 }
             }
         }

@@ -17,23 +17,30 @@ public static class Statics
     {
         if (expectedResult != actualResult)
         {
-            Console.WriteLine($"FAILURE({Failures}) - Scenario {scenario} failed - expected {expectedResult ?? "<null>"}, got {actualResult ?? "<null>"}");
+            Console.WriteLine(
+                $"FAILURE({Failures}) - Scenario {scenario} failed - expected {expectedResult ?? "<null>"}, got {actualResult ?? "<null>"}"
+            );
             Failures++;
         }
         else
         {
-            Console.WriteLine($"Scenario {scenario} succeeded ({expectedResult ?? "<null>"}) Success ({Successes})");
+            Console.WriteLine(
+                $"Scenario {scenario} succeeded ({expectedResult ?? "<null>"}) Success ({Successes})"
+            );
             Successes++;
         }
     }
+
     public static void CheckForFailure(string scenario, string expectedResult)
     {
         CheckForFailure(scenario, expectedResult, String);
     }
+
     public static string MakeName(RuntimeTypeHandle t)
     {
         return MakeName(Type.GetTypeFromHandle(t));
     }
+
     public static int ReportResults()
     {
         Console.WriteLine($"{Successes} successes reported");

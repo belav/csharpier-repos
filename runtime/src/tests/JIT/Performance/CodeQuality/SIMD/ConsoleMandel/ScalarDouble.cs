@@ -12,14 +12,18 @@ namespace Algorithms
     internal class ScalarDoubleRenderer : FractalRenderer
     {
         public ScalarDoubleRenderer(Action<int, int, int> dp, Func<bool> abortFunc)
-            : base(dp, abortFunc)
-        {
-        }
+            : base(dp, abortFunc) { }
 
         protected const double limit = 4.0;
 
         // Render the fractal using the BCL Complex data type abstraction on a single thread with scalar doubles
-        public void RenderSingleThreadedWithADT(float xminf, float xmaxf, float yminf, float ymaxf, float stepf)
+        public void RenderSingleThreadedWithADT(
+            float xminf,
+            float xmaxf,
+            float yminf,
+            float ymaxf,
+            float stepf
+        )
         {
             double xmin = (double)xminf;
             double xmax = (double)xmaxf;
@@ -51,7 +55,13 @@ namespace Algorithms
         }
 
         // Render the fractal with no data type abstraction on a single thread with scalar doubles
-        public void RenderSingleThreadedNoADT(float xminf, float xmaxf, float yminf, float ymaxf, float stepf)
+        public void RenderSingleThreadedNoADT(
+            float xminf,
+            float xmaxf,
+            float yminf,
+            float ymaxf,
+            float stepf
+        )
         {
             double xmin = (double)xminf;
             double xmax = (double)xmaxf;
@@ -85,7 +95,13 @@ namespace Algorithms
         }
 
         // Render the fractal using the BCL Complex data type abstraction on multiple threads with scalar doubles
-        public void RenderMultiThreadedWithADT(float xminf, float xmaxf, float yminf, float ymaxf, float stepf)
+        public void RenderMultiThreadedWithADT(
+            float xminf,
+            float xmaxf,
+            float yminf,
+            float ymaxf,
+            float stepf
+        )
         {
             double xmin = (double)xminf;
             double xmax = (double)xmaxf;
@@ -119,7 +135,13 @@ namespace Algorithms
         }
 
         // Render the fractal with no data type abstraction on multiple threads with scalar doubles
-        public void RenderMultiThreadedNoADT(float xmind, float xmaxd, float ymind, float ymaxd, float stepd)
+        public void RenderMultiThreadedNoADT(
+            float xmind,
+            float xmaxd,
+            float ymind,
+            float ymaxd,
+            float stepd
+        )
         {
             double xmin = (double)xmind;
             double xmax = (double)xmaxd;

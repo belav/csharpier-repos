@@ -22,6 +22,7 @@ namespace System.Speech.Recognition
         {
             Initialize(null);
         }
+
         public SpeechRecognitionEngine(CultureInfo culture)
         {
             Helpers.ThrowIfNull(culture, nameof(culture));
@@ -53,6 +54,7 @@ namespace System.Speech.Recognition
             // No match even with culture having the same parent
             throw new ArgumentException(SR.Get(SRID.RecognizerNotFound), nameof(culture));
         }
+
         public SpeechRecognitionEngine(string recognizerId)
         {
             Helpers.ThrowIfEmptyOrNull(recognizerId, nameof(recognizerId));
@@ -68,17 +70,20 @@ namespace System.Speech.Recognition
 
             throw new ArgumentException(SR.Get(SRID.RecognizerNotFound), nameof(recognizerId));
         }
+
         public SpeechRecognitionEngine(RecognizerInfo recognizerInfo)
         {
             Helpers.ThrowIfNull(recognizerInfo, nameof(recognizerInfo));
 
             Initialize(recognizerInfo);
         }
+
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
         protected virtual void Dispose(bool disposing)
         {
             if (disposing && !_disposed)
@@ -107,7 +112,11 @@ namespace System.Speech.Recognition
             List<RecognizerInfo> recognizers = new();
 
             // Get list of ObjectTokens
-            using (ObjectTokenCategory category = ObjectTokenCategory.Create(SAPICategories.Recognizers))
+            using (
+                ObjectTokenCategory category = ObjectTokenCategory.Create(
+                    SAPICategories.Recognizers
+                )
+            )
             {
                 if (category != null)
                 {
@@ -141,36 +150,63 @@ namespace System.Speech.Recognition
             get { return RecoBase.InitialSilenceTimeout; }
             set { RecoBase.InitialSilenceTimeout = value; }
         }
+
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public TimeSpan BabbleTimeout
         {
             get { return RecoBase.BabbleTimeout; }
             set { RecoBase.BabbleTimeout = value; }
         }
+
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public TimeSpan EndSilenceTimeout
         {
-            get { return TimeSpan.FromMilliseconds(RecoBase.QueryRecognizerSettingAsInt(SapiConstants.SPPROP_RESPONSE_SPEED)); }
+            get
+            {
+                return TimeSpan.FromMilliseconds(
+                    RecoBase.QueryRecognizerSettingAsInt(SapiConstants.SPPROP_RESPONSE_SPEED)
+                );
+            }
             set
             {
                 if (value.TotalMilliseconds < 0.0f || value.TotalMilliseconds > 10000.0f)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.Get(SRID.EndSilenceOutOfRange));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.Get(SRID.EndSilenceOutOfRange)
+                    );
                 }
-                RecoBase.UpdateRecognizerSetting(SapiConstants.SPPROP_RESPONSE_SPEED, (int)value.TotalMilliseconds);
+                RecoBase.UpdateRecognizerSetting(
+                    SapiConstants.SPPROP_RESPONSE_SPEED,
+                    (int)value.TotalMilliseconds
+                );
             }
         }
+
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public TimeSpan EndSilenceTimeoutAmbiguous
         {
-            get { return TimeSpan.FromMilliseconds(RecoBase.QueryRecognizerSettingAsInt(SapiConstants.SPPROP_COMPLEX_RESPONSE_SPEED)); }
+            get
+            {
+                return TimeSpan.FromMilliseconds(
+                    RecoBase.QueryRecognizerSettingAsInt(
+                        SapiConstants.SPPROP_COMPLEX_RESPONSE_SPEED
+                    )
+                );
+            }
             set
             {
                 if (value.TotalMilliseconds < 0.0f || value.TotalMilliseconds > 10000.0f)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.Get(SRID.EndSilenceOutOfRange));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.Get(SRID.EndSilenceOutOfRange)
+                    );
                 }
-                RecoBase.UpdateRecognizerSetting(SapiConstants.SPPROP_COMPLEX_RESPONSE_SPEED, (int)value.TotalMilliseconds);
+                RecoBase.UpdateRecognizerSetting(
+                    SapiConstants.SPPROP_COMPLEX_RESPONSE_SPEED,
+                    (int)value.TotalMilliseconds
+                );
             }
         }
 
@@ -228,10 +264,12 @@ namespace System.Speech.Recognition
 
             RecoBase.SetInput(path);
         }
+
         public void SetInputToWaveStream(Stream audioSource)
         {
             RecoBase.SetInput(audioSource, null);
         }
+
         public void SetInputToAudioStream(Stream audioSource, SpeechAudioFormatInfo audioFormat)
         {
             Helpers.ThrowIfNull(audioSource, nameof(audioSource));
@@ -260,6 +298,7 @@ namespace System.Speech.Recognition
         {
             return RecoBase.Recognize(RecoBase.InitialSilenceTimeout);
         }
+
         public RecognitionResult Recognize(TimeSpan initialSilenceTimeout)
         {
             if (Grammars.Count == 0)
@@ -304,34 +343,47 @@ namespace System.Speech.Recognition
         {
             return RecoBase.QueryRecognizerSetting(settingName);
         }
+
         public void UpdateRecognizerSetting(string settingName, string updatedValue)
         {
             RecoBase.UpdateRecognizerSetting(settingName, updatedValue);
         }
+
         public void UpdateRecognizerSetting(string settingName, int updatedValue)
         {
             RecoBase.UpdateRecognizerSetting(settingName, updatedValue);
         }
+
         public void LoadGrammar(Grammar grammar)
         {
             RecoBase.LoadGrammar(grammar);
         }
+
         public void LoadGrammarAsync(Grammar grammar)
         {
             RecoBase.LoadGrammarAsync(grammar);
         }
+
         public void UnloadGrammar(Grammar grammar)
         {
             RecoBase.UnloadGrammar(grammar);
         }
+
         public void UnloadAllGrammars()
         {
             RecoBase.UnloadAllGrammars();
         }
+
         public RecognitionResult EmulateRecognize(string inputText)
         {
-            return EmulateRecognize(inputText, CompareOptions.IgnoreCase | CompareOptions.IgnoreKanaType | CompareOptions.IgnoreWidth);
+            return EmulateRecognize(
+                inputText,
+                CompareOptions.IgnoreCase
+                    | CompareOptions.IgnoreKanaType
+                    | CompareOptions.IgnoreWidth
+            );
         }
+
         public RecognitionResult EmulateRecognize(string inputText, CompareOptions compareOptions)
         {
             if (Grammars.Count == 0)
@@ -341,7 +393,11 @@ namespace System.Speech.Recognition
 
             return RecoBase.EmulateRecognize(inputText, compareOptions);
         }
-        public RecognitionResult EmulateRecognize(RecognizedWordUnit[] wordUnits, CompareOptions compareOptions)
+
+        public RecognitionResult EmulateRecognize(
+            RecognizedWordUnit[] wordUnits,
+            CompareOptions compareOptions
+        )
         {
             if (Grammars.Count == 0)
             {
@@ -350,10 +406,17 @@ namespace System.Speech.Recognition
 
             return RecoBase.EmulateRecognize(wordUnits, compareOptions);
         }
+
         public void EmulateRecognizeAsync(string inputText)
         {
-            EmulateRecognizeAsync(inputText, CompareOptions.IgnoreCase | CompareOptions.IgnoreKanaType | CompareOptions.IgnoreWidth);
+            EmulateRecognizeAsync(
+                inputText,
+                CompareOptions.IgnoreCase
+                    | CompareOptions.IgnoreKanaType
+                    | CompareOptions.IgnoreWidth
+            );
         }
+
         public void EmulateRecognizeAsync(string inputText, CompareOptions compareOptions)
         {
             if (Grammars.Count == 0)
@@ -363,7 +426,11 @@ namespace System.Speech.Recognition
 
             RecoBase.EmulateRecognizeAsync(inputText, compareOptions);
         }
-        public void EmulateRecognizeAsync(RecognizedWordUnit[] wordUnits, CompareOptions compareOptions)
+
+        public void EmulateRecognizeAsync(
+            RecognizedWordUnit[] wordUnits,
+            CompareOptions compareOptions
+        )
         {
             if (Grammars.Count == 0)
             {
@@ -378,11 +445,16 @@ namespace System.Speech.Recognition
         {
             RecoBase.RequestRecognizerUpdate();
         }
+
         public void RequestRecognizerUpdate(object userToken)
         {
             RecoBase.RequestRecognizerUpdate(userToken);
         }
-        public void RequestRecognizerUpdate(object userToken, TimeSpan audioPositionAheadToRaiseUpdate)
+
+        public void RequestRecognizerUpdate(
+            object userToken,
+            TimeSpan audioPositionAheadToRaiseUpdate
+        )
         {
             RecoBase.RequestRecognizerUpdate(userToken, audioPositionAheadToRaiseUpdate);
         }
@@ -421,7 +493,6 @@ namespace System.Speech.Recognition
                 }
                 _speechHypothesizedDelegate += value;
             }
-
             [MethodImplAttribute(MethodImplOptions.Synchronized)]
             remove
             {
@@ -445,7 +516,6 @@ namespace System.Speech.Recognition
                 }
                 _audioSignalProblemOccurredDelegate += value;
             }
-
             [MethodImplAttribute(MethodImplOptions.Synchronized)]
             remove
             {
@@ -469,7 +539,6 @@ namespace System.Speech.Recognition
                 }
                 _audioLevelUpdatedDelegate += value;
             }
-
             [MethodImplAttribute(MethodImplOptions.Synchronized)]
             remove
             {
@@ -493,7 +562,6 @@ namespace System.Speech.Recognition
                 }
                 _audioStateChangedDelegate += value;
             }
-
             [MethodImplAttribute(MethodImplOptions.Synchronized)]
             remove
             {
@@ -526,7 +594,10 @@ namespace System.Speech.Recognition
                 ObjectToken token = recognizerInfo.GetObjectToken();
                 if (token == null)
                 {
-                    throw new ArgumentException(SR.Get(SRID.NullParamIllegal), nameof(recognizerInfo));
+                    throw new ArgumentException(
+                        SR.Get(SRID.NullParamIllegal),
+                        nameof(recognizerInfo)
+                    );
                 }
                 try
                 {
@@ -534,7 +605,10 @@ namespace System.Speech.Recognition
                 }
                 catch (COMException e)
                 {
-                    throw new ArgumentException(SR.Get(SRID.RecognizerNotFound), RecognizerBase.ExceptionFromSapiCreateRecognizerError(e));
+                    throw new ArgumentException(
+                        SR.Get(SRID.RecognizerNotFound),
+                        RecognizerBase.ExceptionFromSapiCreateRecognizerError(e)
+                    );
                 }
             }
 
@@ -549,7 +623,10 @@ namespace System.Speech.Recognition
             RecognizeCompleted?.Invoke(this, e);
         }
 
-        private void EmulateRecognizeCompletedProxy(object sender, EmulateRecognizeCompletedEventArgs e)
+        private void EmulateRecognizeCompletedProxy(
+            object sender,
+            EmulateRecognizeCompletedEventArgs e
+        )
         {
             EmulateRecognizeCompleted?.Invoke(this, e);
         }
@@ -569,7 +646,10 @@ namespace System.Speech.Recognition
             SpeechRecognized?.Invoke(this, e);
         }
 
-        private void SpeechRecognitionRejectedProxy(object sender, SpeechRecognitionRejectedEventArgs e)
+        private void SpeechRecognitionRejectedProxy(
+            object sender,
+            SpeechRecognitionRejectedEventArgs e
+        )
         {
             SpeechRecognitionRejected?.Invoke(this, e);
         }
@@ -584,7 +664,10 @@ namespace System.Speech.Recognition
             _speechHypothesizedDelegate?.Invoke(this, e);
         }
 
-        private void AudioSignalProblemOccurredProxy(object sender, AudioSignalProblemOccurredEventArgs e)
+        private void AudioSignalProblemOccurredProxy(
+            object sender,
+            AudioSignalProblemOccurredEventArgs e
+        )
         {
             _audioSignalProblemOccurredDelegate?.Invoke(this, e);
         }

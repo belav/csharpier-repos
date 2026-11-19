@@ -25,22 +25,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
             // {
             //   void M(object, object);
             // }
-            var reference = Roslyn.Test.Utilities.Desktop.DesktopRuntimeUtil.CreateReflectionEmitAssembly(moduleBuilder =>
-                {
-                    var typeBuilder = moduleBuilder.DefineType(
-                        "I",
-                        TypeAttributes.Interface | TypeAttributes.Public | TypeAttributes.Abstract);
-                    var methodBuilder = typeBuilder.DefineMethod(
-                        "M",
-                        MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual,
-                        typeof(void),
-                        new Type[] { typeof(object), typeof(object) });
-                    methodBuilder.DefineParameter(1, ParameterAttributes.None, null);
-                    methodBuilder.DefineParameter(2, ParameterAttributes.None, null);
-                    typeBuilder.CreateType();
-                });
+            var reference =
+                Roslyn.Test.Utilities.Desktop.DesktopRuntimeUtil.CreateReflectionEmitAssembly(
+                    moduleBuilder =>
+                    {
+                        var typeBuilder = moduleBuilder.DefineType(
+                            "I",
+                            TypeAttributes.Interface
+                                | TypeAttributes.Public
+                                | TypeAttributes.Abstract
+                        );
+                        var methodBuilder = typeBuilder.DefineMethod(
+                            "M",
+                            MethodAttributes.Public
+                                | MethodAttributes.Abstract
+                                | MethodAttributes.Virtual,
+                            typeof(void),
+                            new Type[] { typeof(object), typeof(object) }
+                        );
+                        methodBuilder.DefineParameter(1, ParameterAttributes.None, null);
+                        methodBuilder.DefineParameter(2, ParameterAttributes.None, null);
+                        typeBuilder.CreateType();
+                    }
+                );
             var source =
-@"class C
+                @"class C
 {
     static void M(I o)
     {
@@ -50,7 +59,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
             var compilation = CreateCompilation(source, new[] { reference });
             compilation.VerifyDiagnostics(
                 // (5,16): error CS1744: Named argument 'value' specifies a parameter for which a positional argument has already been given
-                Diagnostic(ErrorCode.ERR_NamedArgumentUsedInPositional, "value").WithArguments("value").WithLocation(5, 16));
+                Diagnostic(ErrorCode.ERR_NamedArgumentUsedInPositional, "value")
+                    .WithArguments("value")
+                    .WithLocation(5, 16)
+            );
         }
 #endif
 
@@ -58,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
         [WorkItem(8018, "https://github.com/dotnet/roslyn/issues/8018")]
         public void IsOptional()
         {
-            var vbComp = CreateVisualBasicCompilation(@"
+            var vbComp = CreateVisualBasicCompilation(
+                    @"
 Public Class Class1
     Public Shared Sub Test(<System.Runtime.InteropServices.Out> Optional ByRef x As Object = Nothing,
                            Optional ByRef y As Object = Nothing, Optional z As Integer = -1)
@@ -73,10 +86,12 @@ Public Interface I1
     Sub M1(<System.Runtime.InteropServices.Out> Optional ByRef x1 As Object = Nothing)
     Sub M2(Optional ByRef y2 As Object = Nothing)
 End Interface
-").EmitToImageReference();
+"
+                )
+                .EmitToImageReference();
 
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -89,19 +104,31 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, new[] { vbComp }, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                new[] { vbComp },
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
             compilation.VerifyDiagnostics(
                 // (6,16): error CS7036: There is no argument given that corresponds to the required parameter 'x' of 'Class1.Test(out object, ref object, int)'
                 //         Class1.Test();
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Test").WithArguments("x", "Class1.Test(out object, ref object, int)").WithLocation(6, 16),
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Test")
+                    .WithArguments("x", "Class1.Test(out object, ref object, int)")
+                    .WithLocation(6, 16),
                 // (9,12): error CS7036: There is no argument given that corresponds to the required parameter 'x1' of 'I1.M1(out object)'
                 //         i1.M1();
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M1").WithArguments("x1", "I1.M1(out object)").WithLocation(9, 12)
-                );
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M1")
+                    .WithArguments("x1", "I1.M1(out object)")
+                    .WithLocation(9, 12)
+            );
 
             var m = compilation.GetMember<MethodSymbol>("Class1.Test");
 
-            Assert.Equal("void Class1.Test(out System.Object x, ref System.Object y, [System.Int32 z = -1])", m.ToTestDisplayString());
+            Assert.Equal(
+                "void Class1.Test(out System.Object x, ref System.Object y, [System.Int32 z = -1])",
+                m.ToTestDisplayString()
+            );
 
             var x = m.Parameters[0];
             var y = m.Parameters[1];

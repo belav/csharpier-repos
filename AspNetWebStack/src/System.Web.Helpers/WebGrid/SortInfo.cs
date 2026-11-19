@@ -12,8 +12,8 @@ namespace System.Web.Helpers
         public bool Equals(SortInfo other)
         {
             return other != null
-                   && String.Equals(SortColumn, other.SortColumn, StringComparison.OrdinalIgnoreCase)
-                   && SortDirection == other.SortDirection;
+                && String.Equals(SortColumn, other.SortColumn, StringComparison.OrdinalIgnoreCase)
+                && SortDirection == other.SortDirection;
         }
 
         public override bool Equals(object obj)

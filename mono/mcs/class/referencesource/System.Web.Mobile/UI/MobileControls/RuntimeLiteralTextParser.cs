@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="RuntimeLiteralTextParser.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -22,77 +22,76 @@ namespace System.Web.UI.MobileControls
      * Copyright (c) 2000 Microsoft Corporation
      */
 
-/*
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    internal class RuntimeLiteralTextParser : LiteralTextParser
-    {
-        Control _parentControl;
-        bool _elementsAdded = false;
-
-        internal RuntimeLiteralTextParser(Control parentControl)
+    /*
+        [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+        internal class RuntimeLiteralTextParser : LiteralTextParser
         {
-            _parentControl = parentControl;
-        }
-
-        protected override void ProcessElement(LiteralElement element)
-        {
-            MobileControl ctl;
-
-            switch (element.Type)
+            Control _parentControl;
+            bool _elementsAdded = false;
+    
+            internal RuntimeLiteralTextParser(Control parentControl)
             {
-                case LiteralElementType.Text:
+                _parentControl = parentControl;
+            }
+    
+            protected override void ProcessElement(LiteralElement element)
+            {
+                MobileControl ctl;
+    
+                switch (element.Type)
                 {
-                    LiteralText textCtl = new LiteralText();
-                    textCtl.BreakAfter = element.BreakAfter;
-                    ctl = textCtl;
-                    break;
+                    case LiteralElementType.Text:
+                    {
+                        LiteralText textCtl = new LiteralText();
+                        textCtl.BreakAfter = element.BreakAfter;
+                        ctl = textCtl;
+                        break;
+                    }
+    
+                    case LiteralElementType.Anchor:
+                    {
+                        Link link = new LiteralLink();
+                        link.NavigateUrl = element.GetAttribute ("href");
+                        link.BreakAfter = element.BreakAfter;
+    
+                        ctl = link;
+                        break;
+                    }
+    
+                    default:
+                        return;
                 }
-
-                case LiteralElementType.Anchor:
+    
+                // Need to add text as a child, so that it can be written out unscathed.
+    
+                if (element.Text != null)
                 {
-                    Link link = new LiteralLink();
-                    link.NavigateUrl = element.GetAttribute ("href");
-                    link.BreakAfter = element.BreakAfter;
-
-                    ctl = link;
-                    break;
+                    ctl.Controls.Add(new LiteralControl(element.Text));
                 }
-
-                default:
-                    return;
+    
+                if ((element.Format & LiteralFormat.Bold) == LiteralFormat.Bold)
+                {
+                    ctl.Font.Bold = BooleanOption.True;
+                }
+                if ((element.Format & LiteralFormat.Italic) == LiteralFormat.Italic)
+                {
+                    ctl.Font.Italic = BooleanOption.True;
+                }
+    
+                _parentControl.Controls.Add (ctl);
+                _elementsAdded = true;
             }
-
-            // Need to add text as a child, so that it can be written out unscathed.
-
-            if (element.Text != null)
+    
+            protected override void ProcessTagInnerText(String text)
             {
-                ctl.Controls.Add(new LiteralControl(element.Text));
+                Debug.Assert(false);
             }
-
-            if ((element.Format & LiteralFormat.Bold) == LiteralFormat.Bold)
+    
+            protected override bool IgnoreWhiteSpaceElement(LiteralElement element)
             {
-                ctl.Font.Bold = BooleanOption.True;
+                return !_elementsAdded;
             }
-            if ((element.Format & LiteralFormat.Italic) == LiteralFormat.Italic)
-            {
-                ctl.Font.Italic = BooleanOption.True;
-            }
-
-            _parentControl.Controls.Add (ctl);
-            _elementsAdded = true;
+    
         }
-
-        protected override void ProcessTagInnerText(String text)
-        {
-            Debug.Assert(false);
-        }
-
-        protected override bool IgnoreWhiteSpaceElement(LiteralElement element)
-        {
-            return !_elementsAdded;
-        }
-
-    }
-*/
+    */
 }
-

@@ -4,15 +4,16 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration.Internal {
-
+namespace System.Configuration.Internal
+{
     using System;
     using System.Configuration;
 
-    public interface IConfigSystem {
+    public interface IConfigSystem
+    {
         void Init(Type typeConfigHost, params object[] hostInitParams);
 
-        IInternalConfigHost Host {get;}
-        IInternalConfigRoot Root {get;}
+        IInternalConfigHost Host { get; }
+        IInternalConfigRoot Root { get; }
     }
 }

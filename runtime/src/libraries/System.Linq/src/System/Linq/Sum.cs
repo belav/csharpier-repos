@@ -15,11 +15,13 @@ namespace System.Linq
 
         public static long Sum(this IEnumerable<long> source) => Sum<long, long>(source);
 
-        public static float Sum(this IEnumerable<float> source) => (float)Sum<float, double>(source);
+        public static float Sum(this IEnumerable<float> source) =>
+            (float)Sum<float, double>(source);
 
         public static double Sum(this IEnumerable<double> source) => Sum<double, double>(source);
 
-        public static decimal Sum(this IEnumerable<decimal> source) => Sum<decimal, decimal>(source);
+        public static decimal Sum(this IEnumerable<decimal> source) =>
+            Sum<decimal, decimal>(source);
 
         private static TResult Sum<TSource, TResult>(this IEnumerable<TSource> source)
             where TSource : struct, INumber<TSource>
@@ -33,7 +35,10 @@ namespace System.Linq
             TResult sum = TResult.Zero;
             foreach (TSource value in source)
             {
-                checked { sum += TResult.CreateChecked(value); }
+                checked
+                {
+                    sum += TResult.CreateChecked(value);
+                }
             }
 
             return sum;
@@ -43,11 +48,13 @@ namespace System.Linq
             where T : struct, INumber<T>
             where TResult : struct, INumber<TResult>
         {
-            if (typeof(T) == typeof(TResult)
+            if (
+                typeof(T) == typeof(TResult)
                 && Vector<T>.IsSupported
                 && Vector.IsHardwareAccelerated
                 && Vector<T>.Count > 2
-                && span.Length >= Vector<T>.Count * 4)
+                && span.Length >= Vector<T>.Count * 4
+            )
             {
                 // For cases where the vector may only contain two elements vectorization doesn't add any benefit
                 // due to the expense of overflow checking. This means that architectures where Vector<T> is 128 bit,
@@ -55,18 +62,23 @@ namespace System.Linq
 
                 if (typeof(T) == typeof(long))
                 {
-                    return (TResult) (object) SumSignedIntegersVectorized(MemoryMarshal.Cast<T, long>(span));
+                    return (TResult)
+                        (object)SumSignedIntegersVectorized(MemoryMarshal.Cast<T, long>(span));
                 }
                 if (typeof(T) == typeof(int))
                 {
-                    return (TResult) (object) SumSignedIntegersVectorized(MemoryMarshal.Cast<T, int>(span));
+                    return (TResult)
+                        (object)SumSignedIntegersVectorized(MemoryMarshal.Cast<T, int>(span));
                 }
             }
 
             TResult sum = TResult.Zero;
             foreach (T value in span)
             {
-                checked { sum += TResult.CreateChecked(value); }
+                checked
+                {
+                    sum += TResult.CreateChecked(value);
+                }
             }
 
             return sum;
@@ -171,13 +183,19 @@ namespace System.Linq
             T result = T.Zero;
             for (int i = 0; i < Vector<T>.Count; i++)
             {
-                checked { result += accumulator[i]; }
+                checked
+                {
+                    result += accumulator[i];
+                }
             }
 
             // Add any remaining elements
             while (index < length)
             {
-                checked { result += Unsafe.Add(ref ptr, index); }
+                checked
+                {
+                    result += Unsafe.Add(ref ptr, index);
+                }
 
                 index++;
             }
@@ -193,7 +211,8 @@ namespace System.Linq
 
         public static double? Sum(this IEnumerable<double?> source) => Sum<double, double>(source);
 
-        public static decimal? Sum(this IEnumerable<decimal?> source) => Sum<decimal, decimal>(source);
+        public static decimal? Sum(this IEnumerable<decimal?> source) =>
+            Sum<decimal, decimal>(source);
 
         private static TSource? Sum<TSource, TAccumulator>(this IEnumerable<TSource?> source)
             where TSource : struct, INumber<TSource>
@@ -209,25 +228,45 @@ namespace System.Linq
             {
                 if (value is not null)
                 {
-                    checked { sum += TAccumulator.CreateChecked(value.GetValueOrDefault()); }
+                    checked
+                    {
+                        sum += TAccumulator.CreateChecked(value.GetValueOrDefault());
+                    }
                 }
             }
 
             return TSource.CreateTruncating(sum);
         }
 
+        public static int Sum<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, int> selector
+        ) => Sum<TSource, int, int>(source, selector);
 
-        public static int Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, int> selector) => Sum<TSource, int, int>(source, selector);
+        public static long Sum<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, long> selector
+        ) => Sum<TSource, long, long>(source, selector);
 
-        public static long Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, long> selector) => Sum<TSource, long, long>(source, selector);
+        public static float Sum<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, float> selector
+        ) => Sum<TSource, float, double>(source, selector);
 
-        public static float Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, float> selector) => Sum<TSource, float, double>(source, selector);
+        public static double Sum<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, double> selector
+        ) => Sum<TSource, double, double>(source, selector);
 
-        public static double Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, double> selector) => Sum<TSource, double, double>(source, selector);
+        public static decimal Sum<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, decimal> selector
+        ) => Sum<TSource, decimal, decimal>(source, selector);
 
-        public static decimal Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal> selector) => Sum<TSource, decimal, decimal>(source, selector);
-
-        private static TResult Sum<TSource, TResult, TAccumulator>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
+        private static TResult Sum<TSource, TResult, TAccumulator>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TResult> selector
+        )
             where TResult : struct, INumber<TResult>
             where TAccumulator : struct, INumber<TAccumulator>
         {
@@ -244,24 +283,44 @@ namespace System.Linq
             TAccumulator sum = TAccumulator.Zero;
             foreach (TSource value in source)
             {
-                checked { sum += TAccumulator.CreateChecked(selector(value)); }
+                checked
+                {
+                    sum += TAccumulator.CreateChecked(selector(value));
+                }
             }
 
             return TResult.CreateTruncating(sum);
         }
 
+        public static int? Sum<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, int?> selector
+        ) => Sum<TSource, int, int>(source, selector);
 
-        public static int? Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, int?> selector) => Sum<TSource, int, int>(source, selector);
+        public static long? Sum<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, long?> selector
+        ) => Sum<TSource, long, long>(source, selector);
 
-        public static long? Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, long?> selector) => Sum<TSource, long, long>(source, selector);
+        public static float? Sum<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, float?> selector
+        ) => Sum<TSource, float, double>(source, selector);
 
-        public static float? Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, float?> selector) => Sum<TSource, float, double>(source, selector);
+        public static double? Sum<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, double?> selector
+        ) => Sum<TSource, double, double>(source, selector);
 
-        public static double? Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, double?> selector) => Sum<TSource, double, double>(source, selector);
+        public static decimal? Sum<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, decimal?> selector
+        ) => Sum<TSource, decimal, decimal>(source, selector);
 
-        public static decimal? Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal?> selector) => Sum<TSource, decimal, decimal>(source, selector);
-
-        private static TResult? Sum<TSource, TResult, TAccumulator>(this IEnumerable<TSource> source, Func<TSource, TResult?> selector)
+        private static TResult? Sum<TSource, TResult, TAccumulator>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TResult?> selector
+        )
             where TResult : struct, INumber<TResult>
             where TAccumulator : struct, INumber<TAccumulator>
         {
@@ -280,7 +339,10 @@ namespace System.Linq
             {
                 if (selector(item) is TResult selectedValue)
                 {
-                    checked { sum += TAccumulator.CreateChecked(selectedValue); }
+                    checked
+                    {
+                        sum += TAccumulator.CreateChecked(selectedValue);
+                    }
                 }
             }
 

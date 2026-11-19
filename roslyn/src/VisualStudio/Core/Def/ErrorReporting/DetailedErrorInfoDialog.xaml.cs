@@ -35,7 +35,6 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
             }
         }
 
-        private void CloseWindow(object sender, RoutedEventArgs e)
-            => this.Close();
+        private void CloseWindow(object sender, RoutedEventArgs e) => this.Close();
     }
 }

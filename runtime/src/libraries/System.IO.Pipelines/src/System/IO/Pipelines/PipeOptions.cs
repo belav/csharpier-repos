@@ -30,9 +30,11 @@ namespace System.IO.Pipelines
             long pauseWriterThreshold = -1,
             long resumeWriterThreshold = -1,
             int minimumSegmentSize = -1,
-            bool useSynchronizationContext = true)
+            bool useSynchronizationContext = true
+        )
         {
-            MinimumSegmentSize = minimumSegmentSize == -1 ? DefaultMinimumSegmentSize : minimumSegmentSize;
+            MinimumSegmentSize =
+                minimumSegmentSize == -1 ? DefaultMinimumSegmentSize : minimumSegmentSize;
 
             // TODO: These *should* be computed based on how much users want to buffer and the minimum segment size. Today we don't have a way
             // to let users specify the maximum buffer size, so we pick a reasonable number based on defaults. They can influence
@@ -56,7 +58,9 @@ namespace System.IO.Pipelines
             }
             else if (pauseWriterThreshold < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.pauseWriterThreshold);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.pauseWriterThreshold
+                );
             }
 
             if (resumeWriterThreshold == -1)
@@ -71,9 +75,14 @@ namespace System.IO.Pipelines
             }
 
             // Only validate that the resumeWriterThreshold is not too large if the writer could actually pause.
-            if (resumeWriterThreshold < 0 || (pauseWriterThreshold > 0 && resumeWriterThreshold > pauseWriterThreshold))
+            if (
+                resumeWriterThreshold < 0
+                || (pauseWriterThreshold > 0 && resumeWriterThreshold > pauseWriterThreshold)
+            )
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.resumeWriterThreshold);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.resumeWriterThreshold
+                );
             }
 
             Pool = pool ?? MemoryPool<byte>.Shared;

@@ -20,11 +20,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VSTypeScriptSignatureHelpClassifierProvider()
-        {
-        }
+        public VSTypeScriptSignatureHelpClassifierProvider() { }
 
-        public IClassifier Create(ITextBuffer textBuffer, ClassificationTypeMap typeMap)
-            => new SignatureHelpClassifier(textBuffer, typeMap);
+        public IClassifier Create(ITextBuffer textBuffer, ClassificationTypeMap typeMap) =>
+            new SignatureHelpClassifier(textBuffer, typeMap);
     }
 }

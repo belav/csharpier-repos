@@ -22,10 +22,12 @@ namespace System.Runtime.CompilerServices
         /// is valid for the mode in which we're operating.  As such, it's cached on the generic builder per TResult
         /// rather than having one sentinel instance for all types.
         /// </remarks>
-        internal static readonly StateMachineBox s_syncSuccessSentinel = new SyncSuccessSentinelStateMachineBox();
+        internal static readonly StateMachineBox s_syncSuccessSentinel =
+            new SyncSuccessSentinelStateMachineBox();
 
         /// <summary>The wrapped state machine or task.  If the operation completed synchronously and successfully, this will be a sentinel object compared by reference identity.</summary>
         private StateMachineBox? m_task; // Debugger depends on the exact name of this field.
+
         /// <summary>The result for this builder if it's completed synchronously, in which case <see cref="m_task"/> will be <see cref="s_syncSuccessSentinel"/>.</summary>
         private TResult _result;
 
@@ -37,7 +39,8 @@ namespace System.Runtime.CompilerServices
         /// <typeparam name="TStateMachine">The type of the state machine.</typeparam>
         /// <param name="stateMachine">The state machine instance, passed by reference.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Start<TStateMachine>(ref TStateMachine stateMachine) where TStateMachine : IAsyncStateMachine =>
+        public void Start<TStateMachine>(ref TStateMachine stateMachine)
+            where TStateMachine : IAsyncStateMachine =>
             AsyncMethodBuilderCore.Start(ref stateMachine);
 
         /// <summary>Associates the builder with the specified state machine.</summary>
@@ -62,10 +65,12 @@ namespace System.Runtime.CompilerServices
 
         /// <summary>Marks the value task as failed and binds the specified exception to the value task.</summary>
         /// <param name="exception">The exception to bind to the value task.</param>
-        public void SetException(Exception exception) =>
-            SetException(exception, ref m_task);
+        public void SetException(Exception exception) => SetException(exception, ref m_task);
 
-        internal static void SetException(Exception exception, [NotNull] ref StateMachineBox? boxFieldRef)
+        internal static void SetException(
+            Exception exception,
+            [NotNull] ref StateMachineBox? boxFieldRef
+        )
         {
             if (exception is null)
             {
@@ -103,13 +108,19 @@ namespace System.Runtime.CompilerServices
         /// <typeparam name="TStateMachine">The type of the state machine.</typeparam>
         /// <param name="awaiter">the awaiter</param>
         /// <param name="stateMachine">The state machine.</param>
-        public void AwaitOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter awaiter, ref TStateMachine stateMachine)
+        public void AwaitOnCompleted<TAwaiter, TStateMachine>(
+            ref TAwaiter awaiter,
+            ref TStateMachine stateMachine
+        )
             where TAwaiter : INotifyCompletion
             where TStateMachine : IAsyncStateMachine =>
             AwaitOnCompleted(ref awaiter, ref stateMachine, ref m_task);
 
         internal static void AwaitOnCompleted<TAwaiter, TStateMachine>(
-            ref TAwaiter awaiter, ref TStateMachine stateMachine, ref StateMachineBox? box)
+            ref TAwaiter awaiter,
+            ref TStateMachine stateMachine,
+            ref StateMachineBox? box
+        )
             where TAwaiter : INotifyCompletion
             where TStateMachine : IAsyncStateMachine
         {
@@ -129,14 +140,20 @@ namespace System.Runtime.CompilerServices
         /// <param name="awaiter">the awaiter</param>
         /// <param name="stateMachine">The state machine.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter awaiter, ref TStateMachine stateMachine)
+        public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
+            ref TAwaiter awaiter,
+            ref TStateMachine stateMachine
+        )
             where TAwaiter : ICriticalNotifyCompletion
             where TStateMachine : IAsyncStateMachine =>
             AwaitUnsafeOnCompleted(ref awaiter, ref stateMachine, ref m_task);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
-            ref TAwaiter awaiter, ref TStateMachine stateMachine, [NotNull] ref StateMachineBox? boxRef)
+            ref TAwaiter awaiter,
+            ref TStateMachine stateMachine,
+            [NotNull] ref StateMachineBox? boxRef
+        )
             where TAwaiter : ICriticalNotifyCompletion
             where TStateMachine : IAsyncStateMachine
         {
@@ -151,7 +168,8 @@ namespace System.Runtime.CompilerServices
         /// <returns>The "boxed" state machine.</returns>
         private static IAsyncStateMachineBox GetStateMachineBox<TStateMachine>(
             ref TStateMachine stateMachine,
-            [NotNull] ref StateMachineBox? boxFieldRef)
+            [NotNull] ref StateMachineBox? boxFieldRef
+        )
             where TStateMachine : IAsyncStateMachine
         {
             ExecutionContext? currentContext = ExecutionContext.Capture();
@@ -221,7 +239,8 @@ namespace System.Runtime.CompilerServices
         /// Creates a box object for use when a non-standard access pattern is employed, e.g. when Task
         /// is evaluated in the debugger prior to the async method yielding for the first time.
         /// </summary>
-        internal static StateMachineBox CreateWeaklyTypedStateMachineBox() => new StateMachineBox<IAsyncStateMachine>();
+        internal static StateMachineBox CreateWeaklyTypedStateMachineBox() =>
+            new StateMachineBox<IAsyncStateMachine>();
 
         /// <summary>
         /// Gets an object that may be used to uniquely identify this builder to the debugger.
@@ -238,33 +257,39 @@ namespace System.Runtime.CompilerServices
         {
             /// <summary>A delegate to the MoveNext method.</summary>
             protected Action? _moveNextAction;
+
             /// <summary>Captured ExecutionContext with which to invoke MoveNext.</summary>
             public ExecutionContext? Context;
+
             /// <summary>Implementation for IValueTaskSource interfaces.</summary>
             protected ManualResetValueTaskSourceCore<TResult> _valueTaskSource;
 
             /// <summary>Completes the box with a result.</summary>
             /// <param name="result">The result.</param>
-            public void SetResult(TResult result) =>
-                _valueTaskSource.SetResult(result);
+            public void SetResult(TResult result) => _valueTaskSource.SetResult(result);
 
             /// <summary>Completes the box with an error.</summary>
             /// <param name="error">The exception.</param>
-            public void SetException(Exception error) =>
-                _valueTaskSource.SetException(error);
+            public void SetException(Exception error) => _valueTaskSource.SetException(error);
 
             /// <summary>Gets the status of the box.</summary>
-            public ValueTaskSourceStatus GetStatus(short token) => _valueTaskSource.GetStatus(token);
+            public ValueTaskSourceStatus GetStatus(short token) =>
+                _valueTaskSource.GetStatus(token);
 
             /// <summary>Schedules the continuation action for this box.</summary>
-            public void OnCompleted(Action<object?> continuation, object? state, short token, ValueTaskSourceOnCompletedFlags flags) =>
-                _valueTaskSource.OnCompleted(continuation, state, token, flags);
+            public void OnCompleted(
+                Action<object?> continuation,
+                object? state,
+                short token,
+                ValueTaskSourceOnCompletedFlags flags
+            ) => _valueTaskSource.OnCompleted(continuation, state, token, flags);
 
             /// <summary>Gets the current version number of the box.</summary>
             public short Version => _valueTaskSource.Version;
 
             /// <summary>Implemented by derived type.</summary>
-            TResult IValueTaskSource<TResult>.GetResult(short token) => throw NotImplemented.ByDesign;
+            TResult IValueTaskSource<TResult>.GetResult(short token) =>
+                throw NotImplemented.ByDesign;
 
             /// <summary>Implemented by derived type.</summary>
             void IValueTaskSource.GetResult(short token) => throw NotImplemented.ByDesign;
@@ -277,16 +302,23 @@ namespace System.Runtime.CompilerServices
         }
 
         /// <summary>Provides a strongly-typed box object based on the specific state machine type in use.</summary>
-        private sealed class StateMachineBox<TStateMachine> :
-            StateMachineBox,
-            IValueTaskSource<TResult>, IValueTaskSource, IAsyncStateMachineBox, IThreadPoolWorkItem
+        private sealed class StateMachineBox<TStateMachine>
+            : StateMachineBox,
+                IValueTaskSource<TResult>,
+                IValueTaskSource,
+                IAsyncStateMachineBox,
+                IThreadPoolWorkItem
             where TStateMachine : IAsyncStateMachine
         {
             /// <summary>Delegate used to invoke on an ExecutionContext when passed an instance of this box type.</summary>
             private static readonly ContextCallback s_callback = ExecutionContextCallback;
+
             /// <summary>Per-core cache of boxes, with one box per core.</summary>
             /// <remarks>Each element is padded to expected cache-line size so as to minimize false sharing.</remarks>
-            private static readonly PaddedReference[] s_perCoreCache = new PaddedReference[Environment.ProcessorCount];
+            private static readonly PaddedReference[] s_perCoreCache = new PaddedReference[
+                Environment.ProcessorCount
+            ];
+
             /// <summary>Thread-local cache of boxes. This currently only ever stores one.</summary>
             [ThreadStatic]
             private static StateMachineBox<TStateMachine>? t_tlsCache;
@@ -308,8 +340,16 @@ namespace System.Runtime.CompilerServices
                 {
                     // If we can't, then try to get a box from the per-core cache.
                     ref StateMachineBox<TStateMachine>? slot = ref PerCoreCacheSlot;
-                    if (slot is null ||
-                        (box = Interlocked.Exchange<StateMachineBox<TStateMachine>?>(ref slot, null)) is null)
+                    if (
+                        slot is null
+                        || (
+                            box = Interlocked.Exchange<StateMachineBox<TStateMachine>?>(
+                                ref slot,
+                                null
+                            )
+                        )
+                            is null
+                    )
                     {
                         // If we can't, just create a new one.
                         box = new StateMachineBox<TStateMachine>();
@@ -355,8 +395,13 @@ namespace System.Runtime.CompilerServices
                     // Get the current processor ID.  We need to ensure it fits within s_perCoreCache, so we
                     // could % by its length, but we can do so instead by Environment.ProcessorCount, which will be a const
                     // in tier 1, allowing better code gen, and then further use uints for even better code gen.
-                    Debug.Assert(s_perCoreCache.Length == Environment.ProcessorCount, $"{s_perCoreCache.Length} != {Environment.ProcessorCount}");
-                    int i = (int)((uint)Thread.GetCurrentProcessorId() % (uint)Environment.ProcessorCount);
+                    Debug.Assert(
+                        s_perCoreCache.Length == Environment.ProcessorCount,
+                        $"{s_perCoreCache.Length} != {Environment.ProcessorCount}"
+                    );
+                    int i = (int)(
+                        (uint)Thread.GetCurrentProcessorId() % (uint)Environment.ProcessorCount
+                    );
 
                     // We want an array of StateMachineBox<> objects, each consuming its own cache line so that
                     // elements don't cause false sharing with each other.  But we can't use StructLayout.Explicit
@@ -364,10 +409,14 @@ namespace System.Runtime.CompilerServices
                     // to avoid any safety issues) as StateMachineBox<> instances.
 #if DEBUG
                     object? transientValue = s_perCoreCache[i].Object;
-                    Debug.Assert(transientValue is null || transientValue is StateMachineBox<TStateMachine>,
-                        $"Expected null or {nameof(StateMachineBox<TStateMachine>)}, got '{transientValue}'");
+                    Debug.Assert(
+                        transientValue is null || transientValue is StateMachineBox<TStateMachine>,
+                        $"Expected null or {nameof(StateMachineBox<TStateMachine>)}, got '{transientValue}'"
+                    );
 #endif
-                    return ref Unsafe.As<object?, StateMachineBox<TStateMachine>?>(ref s_perCoreCache[i].Object);
+                    return ref Unsafe.As<object?, StateMachineBox<TStateMachine>?>(
+                        ref s_perCoreCache[i].Object
+                    );
                 }
             }
 
@@ -388,7 +437,10 @@ namespace System.Runtime.CompilerServices
             private static void ExecutionContextCallback(object? s)
             {
                 // Only used privately to pass directly to EC.Run
-                Debug.Assert(s is StateMachineBox<TStateMachine>, $"Expected {nameof(StateMachineBox<TStateMachine>)}, got '{s}'");
+                Debug.Assert(
+                    s is StateMachineBox<TStateMachine>,
+                    $"Expected {nameof(StateMachineBox<TStateMachine>)}, got '{s}'"
+                );
                 Unsafe.As<StateMachineBox<TStateMachine>>(s).StateMachine!.MoveNext();
             }
 

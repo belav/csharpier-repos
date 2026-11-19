@@ -19,7 +19,16 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ActionExecutingContext(controllerContext, actionDescriptor, actionParameters); }, "actionDescriptor");
+                delegate
+                {
+                    new ActionExecutingContext(
+                        controllerContext,
+                        actionDescriptor,
+                        actionParameters
+                    );
+                },
+                "actionDescriptor"
+            );
         }
 
         [Fact]
@@ -32,7 +41,16 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ActionExecutingContext(controllerContext, actionDescriptor, actionParameters); }, "actionParameters");
+                delegate
+                {
+                    new ActionExecutingContext(
+                        controllerContext,
+                        actionDescriptor,
+                        actionParameters
+                    );
+                },
+                "actionParameters"
+            );
         }
 
         [Fact]
@@ -44,7 +62,11 @@ namespace System.Web.Mvc.Test
             Dictionary<string, object> actionParameters = new Dictionary<string, object>();
 
             // Act
-            ActionExecutingContext actionExecutingContext = new ActionExecutingContext(controllerContext, actionDescriptor, actionParameters);
+            ActionExecutingContext actionExecutingContext = new ActionExecutingContext(
+                controllerContext,
+                actionDescriptor,
+                actionParameters
+            );
 
             // Assert
             Assert.Equal(actionDescriptor, actionExecutingContext.ActionDescriptor);

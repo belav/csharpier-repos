@@ -17,8 +17,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.AddThisOrMeQualificationDiagnosticId)]
         [Order(After = IDEDiagnosticIds.UseObjectInitializerDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.AddThisOrMeQualificationDiagnosticId}")]
-        [LocalizedName(typeof(AnalyzersResources), nameof(AnalyzersResources.Add_this_or_Me_qualification))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.AddThisOrMeQualificationDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(AnalyzersResources),
+            nameof(AnalyzersResources.Add_this_or_Me_qualification)
+        )]
         public static readonly FixIdDefinition? AddQualificationDiagnosticId;
 
         [Export]
@@ -26,8 +31,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.RemoveThisOrMeQualificationDiagnosticId)]
         [Order(After = IDEDiagnosticIds.UseObjectInitializerDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.RemoveThisOrMeQualificationDiagnosticId}")]
-        [LocalizedName(typeof(AnalyzersResources), nameof(AnalyzersResources.Add_this_or_Me_qualification))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.RemoveThisOrMeQualificationDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(AnalyzersResources),
+            nameof(AnalyzersResources.Add_this_or_Me_qualification)
+        )]
         public static readonly FixIdDefinition? RemoveQualificationDiagnosticId;
 
         [Export]
@@ -35,8 +45,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.AddAccessibilityModifiersDiagnosticId)]
         [Order(After = IDEDiagnosticIds.AddBracesDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.AddAccessibilityModifiersDiagnosticId}")]
-        [LocalizedName(typeof(AnalyzersResources), nameof(AnalyzersResources.Add_accessibility_modifiers))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.AddAccessibilityModifiersDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(AnalyzersResources),
+            nameof(AnalyzersResources.Add_accessibility_modifiers)
+        )]
         public static readonly FixIdDefinition? AddAccessibilityModifiersDiagnosticId;
 
         [Export]
@@ -44,7 +59,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.OrderModifiersDiagnosticId)]
         [Order(After = IDEDiagnosticIds.AddAccessibilityModifiersDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.OrderModifiersDiagnosticId}")]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.OrderModifiersDiagnosticId}"
+        )]
         [LocalizedName(typeof(AnalyzersResources), nameof(AnalyzersResources.Order_modifiers))]
         public static readonly FixIdDefinition? OrderModifiersDiagnosticId;
 
@@ -53,7 +70,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.MakeFieldReadonlyDiagnosticId)]
         [Order(After = IDEDiagnosticIds.AddThisOrMeQualificationDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.MakeFieldReadonlyDiagnosticId}")]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.MakeFieldReadonlyDiagnosticId}"
+        )]
         [LocalizedName(typeof(AnalyzersResources), nameof(AnalyzersResources.Make_field_readonly))]
         public static readonly FixIdDefinition? MakeFieldReadonlyDiagnosticId;
 
@@ -62,8 +81,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [Order(After = IDEDiagnosticIds.MakeFieldReadonlyDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Remove_unnecessary_casts))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Remove_unnecessary_casts)
+        )]
         public static readonly FixIdDefinition? RemoveUnnecessaryCastDiagnosticId;
 
         [Export]
@@ -71,8 +95,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.UseObjectInitializerDiagnosticId)]
         [Order(After = IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseObjectInitializerDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_object_collection_initialization_preferences))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseObjectInitializerDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_object_collection_initialization_preferences)
+        )]
         public static readonly FixIdDefinition? UseObjectInitializerDiagnosticId;
 
         [Export]
@@ -80,15 +109,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.UseCollectionInitializerDiagnosticId)]
         [Order(After = IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseCollectionInitializerDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_object_collection_initialization_preferences))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseCollectionInitializerDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_object_collection_initialization_preferences)
+        )]
         public static readonly FixIdDefinition? UseCollectionInitializerDiagnosticId;
 
         [Export]
         [FixId(AbstractCodeCleanUpFixer.FormatDocumentFixId)]
         [Name(AbstractCodeCleanUpFixer.FormatDocumentFixId)]
         [ConfigurationKey("unused")]
-        [HelpLink("https://learn.microsoft.com/visualstudio/ide/reference/options-text-editor-csharp-formatting")]
+        [HelpLink(
+            "https://learn.microsoft.com/visualstudio/ide/reference/options-text-editor-csharp-formatting"
+        )]
         [ExportMetadata("EnableByDefault", true)]
         [LocalizedName(typeof(ServicesVSResources), nameof(ServicesVSResources.Format_document))]
         public static readonly FixIdDefinition? FormatDocument;
@@ -98,9 +134,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(AbstractCodeCleanUpFixer.RemoveUnusedImportsFixId)]
         [Order(After = AbstractCodeCleanUpFixer.FormatDocumentFixId)]
         [ConfigurationKey("unused")]
-        [HelpLink("https://learn.microsoft.com/visualstudio/ide/reference/options-text-editor-csharp-advanced#using-directives")]
+        [HelpLink(
+            "https://learn.microsoft.com/visualstudio/ide/reference/options-text-editor-csharp-advanced#using-directives"
+        )]
         [ExportMetadata("EnableByDefault", true)]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Remove_unnecessary_imports_or_usings))]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Remove_unnecessary_imports_or_usings)
+        )]
         public static readonly FixIdDefinition? RemoveUnusedImports;
 
         [Export]
@@ -108,7 +149,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(AbstractCodeCleanUpFixer.SortImportsFixId)]
         [Order(After = AbstractCodeCleanUpFixer.RemoveUnusedImportsFixId)]
         [ConfigurationKey("unused")]
-        [HelpLink("https://learn.microsoft.com/visualstudio/ide/reference/options-text-editor-csharp-advanced#using-directives")]
+        [HelpLink(
+            "https://learn.microsoft.com/visualstudio/ide/reference/options-text-editor-csharp-advanced#using-directives"
+        )]
         [ExportMetadata("EnableByDefault", true)]
         [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Sort_Imports_or_usings))]
         public static readonly FixIdDefinition? SortImports;
@@ -118,9 +161,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.FileHeaderMismatch)]
         [Order(After = AbstractCodeCleanUpFixer.SortImportsFixId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.FileHeaderMismatch}")]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.FileHeaderMismatch}"
+        )]
         [ExportMetadata("EnableByDefault", true)]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_file_header_preferences))]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_file_header_preferences)
+        )]
         public static readonly FixIdDefinition? FileHeaderMismatch;
 
         [Export]
@@ -128,8 +176,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.MoveMisplacedUsingDirectivesDiagnosticId)]
         [Order(After = AbstractCodeCleanUpFixer.SortImportsFixId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.MoveMisplacedUsingDirectivesDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_using_directive_placement_preferences))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.MoveMisplacedUsingDirectivesDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_using_directive_placement_preferences)
+        )]
         public static readonly FixIdDefinition? MoveMisplacedUsingDirectivesDiagnosticId;
 
         [Export]
@@ -137,8 +190,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.AddRequiredParenthesesDiagnosticId)]
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.AddRequiredParenthesesDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_parentheses_preferences))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.AddRequiredParenthesesDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_parentheses_preferences)
+        )]
         public static readonly FixIdDefinition? AddRequiredParenthesesDiagnosticId;
 
         [Export]
@@ -147,7 +205,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
         [HelpLink("https://www.microsoft.com")] // Experimental features, not documented
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_statement_after_block_preferences_experimental))]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_statement_after_block_preferences_experimental)
+        )]
         public static readonly FixIdDefinition? ConsecutiveStatementPlacementDiagnosticId;
 
         [Export]
@@ -155,8 +216,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.ExpressionValueIsUnusedDiagnosticId)]
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.ExpressionValueIsUnusedDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_unused_value_preferences))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.ExpressionValueIsUnusedDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_unused_value_preferences)
+        )]
         public static readonly FixIdDefinition? ExpressionValueIsUnusedDiagnosticId;
 
         [Export]
@@ -165,7 +231,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
         [HelpLink("https://www.microsoft.com")] // Features not documented tracked by https://github.com/dotnet/roslyn/issues/59103
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_namespace_matches_folder_preferences))]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_namespace_matches_folder_preferences)
+        )]
         public static readonly FixIdDefinition? MatchFolderAndNamespaceDiagnosticId;
 
         [Export]
@@ -174,7 +243,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
         [HelpLink("https://www.microsoft.com")] // Experimental features, not documented
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_blank_line_preferences_experimental))]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_blank_line_preferences_experimental)
+        )]
         public static readonly FixIdDefinition? MultipleBlankLinesDiagnosticId;
 
         [Export]
@@ -182,8 +254,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId)]
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_language_framework_type_preferences))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_language_framework_type_preferences)
+        )]
         public static readonly FixIdDefinition? PreferBuiltInOrFrameworkTypeDiagnosticId;
 
         [Export]
@@ -191,8 +268,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.RemoveUnnecessaryParenthesesDiagnosticId)]
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.RemoveUnnecessaryParenthesesDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_parentheses_preferences))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.RemoveUnnecessaryParenthesesDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_parentheses_preferences)
+        )]
         public static readonly FixIdDefinition? RemoveUnnecessaryParenthesesDiagnosticId;
 
         [Export]
@@ -200,8 +282,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId)]
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Remove_unused_suppressions))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Remove_unused_suppressions)
+        )]
         public static readonly FixIdDefinition? RemoveUnnecessarySuppressionDiagnosticId;
 
         [Export]
@@ -209,8 +296,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.SimplifyConditionalExpressionDiagnosticId)]
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.SimplifyConditionalExpressionDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_simplify_boolean_expression_preferences))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.SimplifyConditionalExpressionDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_simplify_boolean_expression_preferences)
+        )]
         public static readonly FixIdDefinition? SimplifyConditionalExpressionDiagnosticId;
 
         [Export]
@@ -218,8 +310,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.SimplifyInterpolationId)]
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.SimplifyInterpolationId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_string_interpolation_preferences))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.SimplifyInterpolationId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_string_interpolation_preferences)
+        )]
         public static readonly FixIdDefinition? SimplifyInterpolationId;
 
         [Export]
@@ -227,8 +324,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.UnusedParameterDiagnosticId)]
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UnusedParameterDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Remove_unused_parameters))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UnusedParameterDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Remove_unused_parameters)
+        )]
         public static readonly FixIdDefinition? UnusedParameterDiagnosticId;
 
         [Export]
@@ -236,8 +338,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.UseAutoPropertyDiagnosticId)]
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseAutoPropertyDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_auto_property_preferences))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseAutoPropertyDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_auto_property_preferences)
+        )]
         public static readonly FixIdDefinition? UseAutoPropertyDiagnosticId;
 
         [Export]
@@ -245,8 +352,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.UseCoalesceCompoundAssignmentDiagnosticId)]
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseCoalesceCompoundAssignmentDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_compound_assignment_preferences))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseCoalesceCompoundAssignmentDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_compound_assignment_preferences)
+        )]
         public static readonly FixIdDefinition? UseCoalesceCompoundAssignmentDiagnosticId;
 
         [Export]
@@ -254,8 +366,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.UseCoalesceExpressionForTernaryConditionalCheckDiagnosticId)]
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseCoalesceExpressionForTernaryConditionalCheckDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_coalesce_expression_preferences))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseCoalesceExpressionForTernaryConditionalCheckDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_coalesce_expression_preferences)
+        )]
         public static readonly FixIdDefinition? UseCoalesceExpressionForTernaryConditionalCheckDiagnosticId;
 
         [Export]
@@ -263,8 +380,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.UseCompoundAssignmentDiagnosticId)]
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseCompoundAssignmentDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_compound_assignment_preferences))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseCompoundAssignmentDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_compound_assignment_preferences)
+        )]
         public static readonly FixIdDefinition? UseCompoundAssignmentDiagnosticId;
 
         [Export]
@@ -272,8 +394,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.UseConditionalExpressionForAssignmentDiagnosticId)]
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseConditionalExpressionForAssignmentDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_conditional_expression_preferences))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseConditionalExpressionForAssignmentDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_conditional_expression_preferences)
+        )]
         public static readonly FixIdDefinition? UseConditionalExpressionForAssignmentDiagnosticId;
 
         [Export]
@@ -281,8 +408,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.UseConditionalExpressionForReturnDiagnosticId)]
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseConditionalExpressionForReturnDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_conditional_expression_preferences))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseConditionalExpressionForReturnDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_conditional_expression_preferences)
+        )]
         public static readonly FixIdDefinition? UseConditionalExpressionForReturnDiagnosticId;
 
         [Export]
@@ -290,8 +422,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.UseExplicitTupleNameDiagnosticId)]
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseExplicitTupleNameDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_tuple_name_preferences))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseExplicitTupleNameDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_tuple_name_preferences)
+        )]
         public static readonly FixIdDefinition? UseExplicitTupleNameDiagnosticId;
 
         [Export]
@@ -299,8 +436,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.UseInferredMemberNameDiagnosticId)]
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseInferredMemberNameDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_inferred_anonymous_type_member_names_preferences))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseInferredMemberNameDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_inferred_anonymous_type_member_names_preferences)
+        )]
         public static readonly FixIdDefinition? UseInferredMemberNameDiagnosticId;
 
         [Export]
@@ -308,8 +450,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.UseIsNullCheckDiagnosticId)]
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseIsNullCheckDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_null_checking_preferences))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseIsNullCheckDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_null_checking_preferences)
+        )]
         public static readonly FixIdDefinition? UseIsNullCheckDiagnosticId;
 
         [Export]
@@ -317,8 +464,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.UseNullPropagationDiagnosticId)]
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseNullPropagationDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_null_propagation_preferences))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.UseNullPropagationDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_null_propagation_preferences)
+        )]
         public static readonly FixIdDefinition? UseNullPropagationDiagnosticId;
 
         [Export]
@@ -326,8 +478,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Name(IDEDiagnosticIds.ValueAssignedIsUnusedDiagnosticId)]
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
-        [HelpLink($"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.ValueAssignedIsUnusedDiagnosticId}")]
-        [LocalizedName(typeof(FeaturesResources), nameof(FeaturesResources.Apply_unused_value_preferences))]
+        [HelpLink(
+            $"https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/{IDEDiagnosticIds.ValueAssignedIsUnusedDiagnosticId}"
+        )]
+        [LocalizedName(
+            typeof(FeaturesResources),
+            nameof(FeaturesResources.Apply_unused_value_preferences)
+        )]
         public static readonly FixIdDefinition? ValueAssignedIsUnusedDiagnosticId;
 
         [Export]
@@ -336,7 +493,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
         [HelpLink($"https://microsoft.com/")]
-        [LocalizedName(typeof(ServicesVSResources), nameof(ServicesVSResources.Fix_analyzer_warnings_and_errors_set_in_EditorConfig))]
+        [LocalizedName(
+            typeof(ServicesVSResources),
+            nameof(ServicesVSResources.Fix_analyzer_warnings_and_errors_set_in_EditorConfig)
+        )]
         public static readonly FixIdDefinition? ThirdPartyAnalyzers;
 
         [Export]
@@ -345,7 +505,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         [Order(After = IDEDiagnosticIds.RemoveUnnecessaryCastDiagnosticId)]
         [ConfigurationKey("unused")]
         [HelpLink($"https://microsoft.com/")]
-        [LocalizedName(typeof(ServicesVSResources), nameof(ServicesVSResources.Fix_all_warnings_and_errors_set_in_EditorConfig))]
+        [LocalizedName(
+            typeof(ServicesVSResources),
+            nameof(ServicesVSResources.Fix_all_warnings_and_errors_set_in_EditorConfig)
+        )]
         public static readonly FixIdDefinition? AllAnalyzers;
     }
 }

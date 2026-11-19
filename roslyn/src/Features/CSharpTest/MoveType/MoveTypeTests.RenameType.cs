@@ -17,11 +17,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.MoveType
         [WpfFact]
         public async Task SingleClassInFile_RenameType()
         {
-            var code =
-@"[||]class Class1 { }";
+            var code = @"[||]class Class1 { }";
 
-            var codeWithTypeRenamedToMatchFileName =
-@"class [|test1|] { }";
+            var codeWithTypeRenamedToMatchFileName = @"class [|test1|] { }";
 
             await TestRenameTypeToMatchFileAsync(code, codeWithTypeRenamedToMatchFileName);
         }
@@ -30,13 +28,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.MoveType
         public async Task MoreThanOneTypeInFile_RenameType()
         {
             var code =
-@"[||]class Class1
+                @"[||]class Class1
 { 
     class Inner { }
 }";
 
             var codeWithTypeRenamedToMatchFileName =
-@"class [|test1|]
+                @"class [|test1|]
 { 
     class Inner { }
 }";
@@ -47,10 +45,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.MoveType
         [WpfFact]
         public async Task TestMissing_TypeNameMatchesFileName_RenameType()
         {
-            // testworkspace creates files like test1.cs, test2.cs and so on.. 
+            // testworkspace creates files like test1.cs, test2.cs and so on..
             // so type name matches filename here and rename file action should not be offered.
-            var code =
-@"[||]class test1 { }";
+            var code = @"[||]class test1 { }";
 
             await TestRenameTypeToMatchFileAsync(code, expectedCodeAction: false);
         }
@@ -59,7 +56,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.MoveType
         public async Task TestMissing_MultipleTopLevelTypesInFileAndAtleastOneMatchesFileName_RenameType()
         {
             var code =
-@"[||]class Class1 { }
+                @"[||]class Class1 { }
 class test1 { }";
 
             await TestRenameTypeToMatchFileAsync(code, expectedCodeAction: false);
@@ -69,11 +66,11 @@ class test1 { }";
         public async Task MultipleTopLevelTypesInFileAndNoneMatchFileName1_RenameType()
         {
             var code =
-@"[||]class Class1 { }
+                @"[||]class Class1 { }
 class Class2 { }";
 
             var codeWithTypeRenamedToMatchFileName =
-@"class [|test1|] { }
+                @"class [|test1|] { }
 class Class2 { }";
 
             await TestRenameTypeToMatchFileAsync(code, codeWithTypeRenamedToMatchFileName);
@@ -83,11 +80,11 @@ class Class2 { }";
         public async Task MultipleTopLevelTypesInFileAndNoneMatchFileName2_RenameType()
         {
             var code =
-@"class Class1 { }
+                @"class Class1 { }
 [||]class Class2 { }";
 
             var codeWithTypeRenamedToMatchFileName =
-@"class Class1 { }
+                @"class Class1 { }
 class [|test1|] { }";
 
             await TestRenameTypeToMatchFileAsync(code, codeWithTypeRenamedToMatchFileName);

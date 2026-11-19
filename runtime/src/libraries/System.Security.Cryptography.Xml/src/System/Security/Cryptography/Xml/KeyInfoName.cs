@@ -13,7 +13,8 @@ namespace System.Security.Cryptography.Xml
         // public constructors
         //
 
-        public KeyInfoName() : this(null) { }
+        public KeyInfoName()
+            : this(null) { }
 
         public KeyInfoName(string? keyName)
         {
@@ -43,7 +44,10 @@ namespace System.Security.Cryptography.Xml
 
         internal override XmlElement GetXml(XmlDocument xmlDocument)
         {
-            XmlElement nameElement = xmlDocument.CreateElement("KeyName", SignedXml.XmlDsigNamespaceUrl);
+            XmlElement nameElement = xmlDocument.CreateElement(
+                "KeyName",
+                SignedXml.XmlDsigNamespaceUrl
+            );
             nameElement.AppendChild(xmlDocument.CreateTextNode(_keyName));
             return nameElement;
         }

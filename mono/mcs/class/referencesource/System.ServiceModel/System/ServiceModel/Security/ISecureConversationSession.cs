@@ -3,8 +3,8 @@
 //----------------------------------------------------------------------------
 namespace System.ServiceModel.Security
 {
-    using System.Xml;
     using System.ServiceModel;
+    using System.Xml;
 
     public interface ISecureConversationSession : ISecuritySession
     {

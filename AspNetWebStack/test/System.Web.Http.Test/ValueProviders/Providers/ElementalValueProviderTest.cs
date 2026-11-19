@@ -12,13 +12,18 @@ namespace System.Web.Http.ValueProviders.Providers
         [InlineData("MyProperty", "MyProperty")]
         [InlineData("MyProperty.SubProperty", "MyProperty")]
         [InlineData("MyProperty[0]", "MyProperty")]
-        public void ContainsPrefix_ReturnsTrue_IfElementNameStartsWithPrefix(string elementName, string prefix)
+        public void ContainsPrefix_ReturnsTrue_IfElementNameStartsWithPrefix(
+            string elementName,
+            string prefix
+        )
         {
             // Arrange
             CultureInfo culture = new CultureInfo("en-US");
-            ElementalValueProvider elementalValueProvider = new ElementalValueProvider(elementName,
-                                                                                       new object(),
-                                                                                       culture);
+            ElementalValueProvider elementalValueProvider = new ElementalValueProvider(
+                elementName,
+                new object(),
+                culture
+            );
 
             // Act
             bool containsPrefix = elementalValueProvider.ContainsPrefix(prefix);
@@ -31,13 +36,18 @@ namespace System.Web.Http.ValueProviders.Providers
         [InlineData("MyProperty", "MyProperty1")]
         [InlineData("MyPropertyTest", "MyProperty")]
         [InlineData("Random", "MyProperty")]
-        public void ContainsPrefix_ReturnsFalse_IfElementCannotSpecifyValuesForPrefix(string elementName, string prefix)
+        public void ContainsPrefix_ReturnsFalse_IfElementCannotSpecifyValuesForPrefix(
+            string elementName,
+            string prefix
+        )
         {
             // Arrange
             CultureInfo culture = new CultureInfo("en-US");
-            ElementalValueProvider elementalValueProvider = new ElementalValueProvider(elementName,
-                                                                                       new object(),
-                                                                                       culture);
+            ElementalValueProvider elementalValueProvider = new ElementalValueProvider(
+                elementName,
+                new object(),
+                culture
+            );
 
             // Act
             bool containsPrefix = elementalValueProvider.ContainsPrefix(prefix);
@@ -52,7 +62,11 @@ namespace System.Web.Http.ValueProviders.Providers
             // Arrange
             CultureInfo culture = CultureInfo.GetCultureInfo("fr-FR");
             DateTime rawValue = new DateTime(2001, 1, 2);
-            ElementalValueProvider valueProvider = new ElementalValueProvider("foo", rawValue, culture);
+            ElementalValueProvider valueProvider = new ElementalValueProvider(
+                "foo",
+                rawValue,
+                culture
+            );
 
             // Act
             ValueProviderResult vpResult = valueProvider.GetValue("bar");
@@ -70,7 +84,11 @@ namespace System.Web.Http.ValueProviders.Providers
             // Arrange
             CultureInfo culture = CultureInfo.GetCultureInfo("fr-FR");
             DateTime rawValue = new DateTime(2001, 1, 2);
-            ElementalValueProvider valueProvider = new ElementalValueProvider("foo", rawValue, culture);
+            ElementalValueProvider valueProvider = new ElementalValueProvider(
+                "foo",
+                rawValue,
+                culture
+            );
 
             // Act
             ValueProviderResult vpResult = valueProvider.GetValue(name);

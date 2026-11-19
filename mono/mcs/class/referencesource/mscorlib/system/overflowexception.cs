@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -13,32 +13,34 @@
 **
 =============================================================================*/
 
-namespace System {
- 
-    
+namespace System
+{
     using System;
     using System.Runtime.Serialization;
-[System.Runtime.InteropServices.ComVisible(true)]
+
+    [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    public class OverflowException : ArithmeticException {
-        public OverflowException() 
-            : base(Environment.GetResourceString("Arg_OverflowException")) {
-            SetErrorCode(__HResults.COR_E_OVERFLOW);
-        }
-    
-        public OverflowException(String message) 
-            : base(message) {
-            SetErrorCode(__HResults.COR_E_OVERFLOW);
-        }
-        
-        public OverflowException(String message, Exception innerException) 
-            : base(message, innerException) {
+    public class OverflowException : ArithmeticException
+    {
+        public OverflowException()
+            : base(Environment.GetResourceString("Arg_OverflowException"))
+        {
             SetErrorCode(__HResults.COR_E_OVERFLOW);
         }
 
-        protected OverflowException(SerializationInfo info, StreamingContext context) : base(info, context) {
+        public OverflowException(String message)
+            : base(message)
+        {
+            SetErrorCode(__HResults.COR_E_OVERFLOW);
         }
 
+        public OverflowException(String message, Exception innerException)
+            : base(message, innerException)
+        {
+            SetErrorCode(__HResults.COR_E_OVERFLOW);
+        }
+
+        protected OverflowException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
-
 }

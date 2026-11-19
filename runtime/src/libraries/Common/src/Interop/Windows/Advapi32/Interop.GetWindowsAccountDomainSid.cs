@@ -8,10 +8,15 @@ internal static partial class Interop
 {
     internal static partial class Advapi32
     {
-        [LibraryImport(Interop.Libraries.Advapi32, EntryPoint = "GetWindowsAccountDomainSid", SetLastError = true)]
+        [LibraryImport(
+            Interop.Libraries.Advapi32,
+            EntryPoint = "GetWindowsAccountDomainSid",
+            SetLastError = true
+        )]
         internal static partial int GetWindowsAccountDomainSid(
             byte[] sid,
             byte[] resultSid,
-            ref uint resultSidLength);
+            ref uint resultSidLength
+        );
     }
 }

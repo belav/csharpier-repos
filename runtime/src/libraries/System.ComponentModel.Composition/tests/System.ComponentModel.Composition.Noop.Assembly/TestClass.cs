@@ -4,7 +4,5 @@
 namespace System.ComponentModel.Composition.Noop.Assembly
 {
     [Export]
-    public class TestClass
-    {
-    }
+    public class TestClass { }
 }

@@ -37,10 +37,7 @@ namespace System.ComponentModel
 
         public SynchronizationContext SynchronizationContext
         {
-            get
-            {
-                return _syncContext;
-            }
+            get { return _syncContext; }
         }
 
         public void Post(SendOrPostCallback d, object? arg)
@@ -99,7 +96,10 @@ namespace System.ComponentModel
         /// <summary>
         ///     Only for use by AsyncOperationManager to create new AsyncOperation objects
         /// </summary>
-        internal static AsyncOperation CreateOperation(object? userSuppliedState, SynchronizationContext syncContext)
+        internal static AsyncOperation CreateOperation(
+            object? userSuppliedState,
+            SynchronizationContext syncContext
+        )
         {
             AsyncOperation newOp = new AsyncOperation(userSuppliedState, syncContext);
             return newOp;

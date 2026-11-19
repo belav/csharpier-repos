@@ -519,16 +519,11 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
 
         builder.Services.AddOidcAuthentication<TestAuthenticationState, TestAccount>(options =>
         { });
-        builder.Services.Replace(
-            ServiceDescriptor.Scoped(
-                typeof(NavigationManager),
-                _ =>
-                {
-                    calls++;
-                    return new TestNavigationManager();
-                }
-            )
-        );
+        builder.Services.Replace(ServiceDescriptor.Scoped(typeof(NavigationManager), _ =>
+            {
+                calls++;
+                return new TestNavigationManager();
+            }));
 
         var host = builder.Build();
 

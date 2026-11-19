@@ -11,9 +11,7 @@ namespace System.Diagnostics.Eventing.Reader
     internal sealed class CoTaskMemUnicodeSafeHandle : SafeHandle
     {
         public CoTaskMemUnicodeSafeHandle()
-            : base(IntPtr.Zero, true)
-        {
-        }
+            : base(IntPtr.Zero, true) { }
 
         internal CoTaskMemUnicodeSafeHandle(IntPtr handle, bool ownsHandle)
             : base(IntPtr.Zero, ownsHandle)
@@ -33,10 +31,7 @@ namespace System.Diagnostics.Eventing.Reader
 
         public override bool IsInvalid
         {
-            get
-            {
-                return IsClosed || handle == IntPtr.Zero;
-            }
+            get { return IsClosed || handle == IntPtr.Zero; }
         }
 
         protected override bool ReleaseHandle()
@@ -50,10 +45,7 @@ namespace System.Diagnostics.Eventing.Reader
         // use IsInvalid instead. Zero is provided where a NULL handle needed
         public static CoTaskMemUnicodeSafeHandle Zero
         {
-            get
-            {
-                return new CoTaskMemUnicodeSafeHandle();
-            }
+            get { return new CoTaskMemUnicodeSafeHandle(); }
         }
     }
 }

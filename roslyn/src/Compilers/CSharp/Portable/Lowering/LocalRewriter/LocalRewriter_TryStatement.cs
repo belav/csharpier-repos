@@ -22,8 +22,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             var optimizing = _compilation.Options.OptimizationLevel == OptimizationLevel.Release;
             ImmutableArray<BoundCatchBlock> catchBlocks =
                 // When optimizing and we have a try block without side-effects, we can discard the catch blocks.
-                (optimizing && !HasSideEffects(tryBlock)) ? ImmutableArray<BoundCatchBlock>.Empty
-                : this.VisitList(node.CatchBlocks);
+                (optimizing && !HasSideEffects(tryBlock))
+                    ? ImmutableArray<BoundCatchBlock>.Empty
+                    : this.VisitList(node.CatchBlocks);
             BoundBlock? finallyBlockOpt = (BoundBlock?)this.Visit(node.FinallyBlockOpt);
 
             _sawAwaitInExceptionHandler |= _sawAwait;
@@ -36,7 +37,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return (catchBlocks.IsDefaultOrEmpty && finallyBlockOpt == null)
                 ? (BoundNode)tryBlock
-                : (BoundNode)node.Update(tryBlock, catchBlocks, finallyBlockOpt, node.FinallyLabelOpt, node.PreferFaultHandler);
+                : (BoundNode)
+                    node.Update(
+                        tryBlock,
+                        catchBlocks,
+                        finallyBlockOpt,
+                        node.FinallyLabelOpt,
+                        node.PreferFaultHandler
+                    );
         }
 
         /// <summary>
@@ -46,30 +54,32 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private static bool HasSideEffects([NotNullWhen(true)] BoundStatement? statement)
         {
-            if (statement == null) return false;
+            if (statement == null)
+                return false;
             switch (statement.Kind)
             {
                 case BoundKind.NoOpStatement:
                     return false;
                 case BoundKind.Block:
+                {
+                    var block = (BoundBlock)statement;
+                    foreach (var stmt in block.Statements)
                     {
-                        var block = (BoundBlock)statement;
-                        foreach (var stmt in block.Statements)
-                        {
-                            if (HasSideEffects(stmt)) return true;
-                        }
-                        return false;
+                        if (HasSideEffects(stmt))
+                            return true;
                     }
+                    return false;
+                }
                 case BoundKind.SequencePoint:
-                    {
-                        var sequence = (BoundSequencePoint)statement;
-                        return HasSideEffects(sequence.StatementOpt);
-                    }
+                {
+                    var sequence = (BoundSequencePoint)statement;
+                    return HasSideEffects(sequence.StatementOpt);
+                }
                 case BoundKind.SequencePointWithSpan:
-                    {
-                        var sequence = (BoundSequencePointWithSpan)statement;
-                        return HasSideEffects(sequence.StatementOpt);
-                    }
+                {
+                    var sequence = (BoundSequencePointWithSpan)statement;
+                    return HasSideEffects(sequence.StatementOpt);
+                }
                 default:
                     return true;
             }
@@ -82,9 +92,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return null;
             }
 
-            BoundExpression? rewrittenExceptionSourceOpt = (BoundExpression?)this.Visit(node.ExceptionSourceOpt);
-            BoundStatementList? rewrittenFilterPrologue = (BoundStatementList?)this.Visit(node.ExceptionFilterPrologueOpt);
-            BoundExpression? rewrittenFilter = (BoundExpression?)this.Visit(node.ExceptionFilterOpt);
+            BoundExpression? rewrittenExceptionSourceOpt = (BoundExpression?)
+                this.Visit(node.ExceptionSourceOpt);
+            BoundStatementList? rewrittenFilterPrologue = (BoundStatementList?)
+                this.Visit(node.ExceptionFilterPrologueOpt);
+            BoundExpression? rewrittenFilter = (BoundExpression?)
+                this.Visit(node.ExceptionFilterOpt);
             BoundBlock? rewrittenBody = (BoundBlock?)this.Visit(node.Body);
             Debug.Assert(rewrittenBody is { });
             TypeSymbol? rewrittenExceptionTypeOpt = this.VisitType(node.ExceptionTypeOpt);
@@ -98,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ref rewrittenFilter,
                     ref rewrittenBody,
                     ref rewrittenExceptionTypeOpt,
-                    _factory);
+                    _factory
+                );
             }
 
             return node.Update(
@@ -108,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 rewrittenFilterPrologue,
                 rewrittenFilter,
                 rewrittenBody,
-                node.IsSynthesizedAsyncCatchAll);
+                node.IsSynthesizedAsyncCatchAll
+            );
         }
     }
 }

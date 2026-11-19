@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,13 +32,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
+using System.IdentityModel.Claims;
+using System.IdentityModel.Policy;
+using System.IdentityModel.Selectors;
+using System.IdentityModel.Tokens;
 using System.Net;
 using System.Net.Security;
 using System.Reflection;
-using System.IdentityModel.Claims;
-using System.IdentityModel.Policy;
-using System.IdentityModel.Tokens;
-using System.IdentityModel.Selectors;
+using System.Runtime.Serialization;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 using System.ServiceModel;
@@ -49,167 +50,278 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel.MsmqIntegration;
 using System.ServiceModel.PeerResolvers;
 using System.ServiceModel.Security;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public class ClientCredentialsElement
-		 : BehaviorExtensionElement
-	{
-		// Static Fields
-		ConfigurationPropertyCollection _properties;
+    public class ClientCredentialsElement : BehaviorExtensionElement
+    {
+        // Static Fields
+        ConfigurationPropertyCollection _properties;
 
-		// Properties
+        // Properties
 
-		public override Type BehaviorType {
-			get { return typeof (ClientCredentials); }
-		}
+        public override Type BehaviorType
+        {
+            get { return typeof(ClientCredentials); }
+        }
 
-		[ConfigurationProperty ("clientCertificate",
-			 Options = ConfigurationPropertyOptions.None)]
-		public X509InitiatorCertificateClientElement ClientCertificate {
-			get { return (X509InitiatorCertificateClientElement) base ["clientCertificate"]; }
-		}
+        [ConfigurationProperty("clientCertificate", Options = ConfigurationPropertyOptions.None)]
+        public X509InitiatorCertificateClientElement ClientCertificate
+        {
+            get { return (X509InitiatorCertificateClientElement)base["clientCertificate"]; }
+        }
 
-		[MonoTODO]
-		[ConfigurationProperty ("httpDigest",
-			 Options = ConfigurationPropertyOptions.None)]
-		public HttpDigestClientElement HttpDigest {
-			get { return (HttpDigestClientElement) base ["httpDigest"]; }
-		}
+        [MonoTODO]
+        [ConfigurationProperty("httpDigest", Options = ConfigurationPropertyOptions.None)]
+        public HttpDigestClientElement HttpDigest
+        {
+            get { return (HttpDigestClientElement)base["httpDigest"]; }
+        }
 
-		[ConfigurationProperty ("issuedToken",
-			 Options = ConfigurationPropertyOptions.None)]
-		public IssuedTokenClientElement IssuedToken {
-			get { return (IssuedTokenClientElement) base ["issuedToken"]; }
-		}
+        [ConfigurationProperty("issuedToken", Options = ConfigurationPropertyOptions.None)]
+        public IssuedTokenClientElement IssuedToken
+        {
+            get { return (IssuedTokenClientElement)base["issuedToken"]; }
+        }
 
-		[ConfigurationProperty ("peer",
-			 Options = ConfigurationPropertyOptions.None)]
-		public PeerCredentialElement Peer {
-			get { return (PeerCredentialElement) base ["peer"]; }
-		}
+        [ConfigurationProperty("peer", Options = ConfigurationPropertyOptions.None)]
+        public PeerCredentialElement Peer
+        {
+            get { return (PeerCredentialElement)base["peer"]; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get {
-				if (_properties == null) {
-					_properties = new ConfigurationPropertyCollection ();
-					_properties.Add (new ConfigurationProperty ("clientCertificate", typeof (X509InitiatorCertificateClientElement), null, null, null, ConfigurationPropertyOptions.None));
-					_properties.Add (new ConfigurationProperty ("httpDigest", typeof (HttpDigestClientElement), null, null, null, ConfigurationPropertyOptions.None));
-					_properties.Add (new ConfigurationProperty ("issuedToken", typeof (IssuedTokenClientElement), null, null, null, ConfigurationPropertyOptions.None));
-					_properties.Add (new ConfigurationProperty ("peer", typeof (PeerCredentialElement), null, null, null, ConfigurationPropertyOptions.None));
-					_properties.Add (new ConfigurationProperty ("serviceCertificate", typeof (X509RecipientCertificateClientElement), null, null, null, ConfigurationPropertyOptions.None));
-					_properties.Add (new ConfigurationProperty ("supportInteractive", typeof (bool), "true", new BooleanConverter (), null, ConfigurationPropertyOptions.None));
-					_properties.Add (new ConfigurationProperty ("type", typeof (string), String.Empty, new StringConverter (), new StringValidator (0, int.MaxValue, null), ConfigurationPropertyOptions.None));
-					_properties.Add (new ConfigurationProperty ("windows", typeof (WindowsClientElement), null, null, null, ConfigurationPropertyOptions.None));
-				}
-				return _properties;
-			}
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (_properties == null)
+                {
+                    _properties = new ConfigurationPropertyCollection();
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "clientCertificate",
+                            typeof(X509InitiatorCertificateClientElement),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "httpDigest",
+                            typeof(HttpDigestClientElement),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "issuedToken",
+                            typeof(IssuedTokenClientElement),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "peer",
+                            typeof(PeerCredentialElement),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "serviceCertificate",
+                            typeof(X509RecipientCertificateClientElement),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "supportInteractive",
+                            typeof(bool),
+                            "true",
+                            new BooleanConverter(),
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "type",
+                            typeof(string),
+                            String.Empty,
+                            new StringConverter(),
+                            new StringValidator(0, int.MaxValue, null),
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "windows",
+                            typeof(WindowsClientElement),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                }
+                return _properties;
+            }
+        }
 
-		[ConfigurationProperty ("serviceCertificate",
-			 Options = ConfigurationPropertyOptions.None)]
-		public X509RecipientCertificateClientElement ServiceCertificate {
-			get { return (X509RecipientCertificateClientElement) base ["serviceCertificate"]; }
-		}
+        [ConfigurationProperty("serviceCertificate", Options = ConfigurationPropertyOptions.None)]
+        public X509RecipientCertificateClientElement ServiceCertificate
+        {
+            get { return (X509RecipientCertificateClientElement)base["serviceCertificate"]; }
+        }
 
-		[ConfigurationProperty ("supportInteractive",
-			DefaultValue = true,
-			 Options = ConfigurationPropertyOptions.None)]
-		public bool SupportInteractive {
-			get { return (bool) base ["supportInteractive"]; }
-			set { base ["supportInteractive"] = value; }
-		}
+        [ConfigurationProperty(
+            "supportInteractive",
+            DefaultValue = true,
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public bool SupportInteractive
+        {
+            get { return (bool)base["supportInteractive"]; }
+            set { base["supportInteractive"] = value; }
+        }
 
-		[ConfigurationProperty ("type",
-			 DefaultValue = "",
-			 Options = ConfigurationPropertyOptions.None)]
-		[StringValidator (MinLength = 0,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		public string Type {
-			get { return (string) base ["type"]; }
-			set { base ["type"] = value; }
-		}
+        [ConfigurationProperty(
+            "type",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        [StringValidator(MinLength = 0, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        public string Type
+        {
+            get { return (string)base["type"]; }
+            set { base["type"] = value; }
+        }
 
-		[ConfigurationProperty ("windows",
-			 Options = ConfigurationPropertyOptions.None)]
-		public WindowsClientElement Windows {
-			get { return (WindowsClientElement) base ["windows"]; }
-		}
+        [ConfigurationProperty("windows", Options = ConfigurationPropertyOptions.None)]
+        public WindowsClientElement Windows
+        {
+            get { return (WindowsClientElement)base["windows"]; }
+        }
 
-		protected internal override object CreateBehavior ()
-		{
-			var cb = new ClientCredentials ();
-			ApplyConfiguration (cb);
-			return cb;
-		}
+        protected internal override object CreateBehavior()
+        {
+            var cb = new ClientCredentials();
+            ApplyConfiguration(cb);
+            return cb;
+        }
 
-		protected internal void ApplyConfiguration (ClientCredentials behavior)
-		{
-			behavior.SupportInteractive = SupportInteractive;
-			// how is "Type" used?
+        protected internal void ApplyConfiguration(ClientCredentials behavior)
+        {
+            behavior.SupportInteractive = SupportInteractive;
+            // how is "Type" used?
 
-			// ClientCertificate
-			if (!String.IsNullOrEmpty (ClientCertificate.FindValue))
-				behavior.ClientCertificate.SetCertificate (ClientCertificate.StoreLocation, ClientCertificate.StoreName, ClientCertificate.X509FindType, ClientCertificate.FindValue);
+            // ClientCertificate
+            if (!String.IsNullOrEmpty(ClientCertificate.FindValue))
+                behavior.ClientCertificate.SetCertificate(
+                    ClientCertificate.StoreLocation,
+                    ClientCertificate.StoreName,
+                    ClientCertificate.X509FindType,
+                    ClientCertificate.FindValue
+                );
 
-			// HttpDigest
-			if (HttpDigest.ImpersonationLevel != TokenImpersonationLevel.None)
-				throw new NotImplementedException ();
+            // HttpDigest
+            if (HttpDigest.ImpersonationLevel != TokenImpersonationLevel.None)
+                throw new NotImplementedException();
 
-			// IssuedToken
-			var bi = behavior.IssuedToken;
-			var ci = IssuedToken;
-			bi.CacheIssuedTokens = ci.CacheIssuedTokens;
-			bi.DefaultKeyEntropyMode = ci.DefaultKeyEntropyMode;
-			bi.IssuedTokenRenewalThresholdPercentage = ci.IssuedTokenRenewalThresholdPercentage;
-			foreach (IssuedTokenClientBehaviorsElement ccb in ci.IssuerChannelBehaviors)
-				bi.IssuerChannelBehaviors.Add (new Uri (ccb.IssuerAddress, UriKind.RelativeOrAbsolute), ConfigUtil.CreateEndpointBehaviors (ccb.BehaviorConfiguration));
-			bi.LocalIssuerAddress = ci.LocalIssuer.CreateInstance ();
-			bi.LocalIssuerBinding = ConfigUtil.CreateBinding (ci.LocalIssuer.Binding, ci.LocalIssuer.BindingConfiguration);
-			bi.MaxIssuedTokenCachingTime = ci.MaxIssuedTokenCachingTime;
+            // IssuedToken
+            var bi = behavior.IssuedToken;
+            var ci = IssuedToken;
+            bi.CacheIssuedTokens = ci.CacheIssuedTokens;
+            bi.DefaultKeyEntropyMode = ci.DefaultKeyEntropyMode;
+            bi.IssuedTokenRenewalThresholdPercentage = ci.IssuedTokenRenewalThresholdPercentage;
+            foreach (IssuedTokenClientBehaviorsElement ccb in ci.IssuerChannelBehaviors)
+                bi.IssuerChannelBehaviors.Add(
+                    new Uri(ccb.IssuerAddress, UriKind.RelativeOrAbsolute),
+                    ConfigUtil.CreateEndpointBehaviors(ccb.BehaviorConfiguration)
+                );
+            bi.LocalIssuerAddress = ci.LocalIssuer.CreateInstance();
+            bi.LocalIssuerBinding = ConfigUtil.CreateBinding(
+                ci.LocalIssuer.Binding,
+                ci.LocalIssuer.BindingConfiguration
+            );
+            bi.MaxIssuedTokenCachingTime = ci.MaxIssuedTokenCachingTime;
 
-			// Peer
-			if (!String.IsNullOrEmpty (Peer.Certificate.FindValue))
-				behavior.Peer.SetCertificate (Peer.Certificate.StoreLocation, Peer.Certificate.StoreName, Peer.Certificate.X509FindType, Peer.Certificate.FindValue);
-			// cb.Peer.MeshPassword = /* cannot fill it here */
-			behavior.Peer.MessageSenderAuthentication.CustomCertificateValidator = (X509CertificateValidator) CreateInstance (Peer.MessageSenderAuthentication.CustomCertificateValidatorType);
-			behavior.Peer.MessageSenderAuthentication.CertificateValidationMode = Peer.MessageSenderAuthentication.CertificateValidationMode;
-			behavior.Peer.MessageSenderAuthentication.RevocationMode = Peer.MessageSenderAuthentication.RevocationMode;
-			behavior.Peer.MessageSenderAuthentication.TrustedStoreLocation = Peer.MessageSenderAuthentication.TrustedStoreLocation;
-			behavior.Peer.PeerAuthentication.CustomCertificateValidator = (X509CertificateValidator) CreateInstance (Peer.PeerAuthentication.CustomCertificateValidatorType);
-			behavior.Peer.PeerAuthentication.CertificateValidationMode = Peer.PeerAuthentication.CertificateValidationMode;
-			behavior.Peer.PeerAuthentication.RevocationMode = Peer.PeerAuthentication.RevocationMode;
-			behavior.Peer.PeerAuthentication.TrustedStoreLocation = Peer.PeerAuthentication.TrustedStoreLocation;
+            // Peer
+            if (!String.IsNullOrEmpty(Peer.Certificate.FindValue))
+                behavior.Peer.SetCertificate(
+                    Peer.Certificate.StoreLocation,
+                    Peer.Certificate.StoreName,
+                    Peer.Certificate.X509FindType,
+                    Peer.Certificate.FindValue
+                );
+            // cb.Peer.MeshPassword = /* cannot fill it here */
+            behavior.Peer.MessageSenderAuthentication.CustomCertificateValidator =
+                (X509CertificateValidator)CreateInstance(
+                    Peer.MessageSenderAuthentication.CustomCertificateValidatorType
+                );
+            behavior.Peer.MessageSenderAuthentication.CertificateValidationMode =
+                Peer.MessageSenderAuthentication.CertificateValidationMode;
+            behavior.Peer.MessageSenderAuthentication.RevocationMode =
+                Peer.MessageSenderAuthentication.RevocationMode;
+            behavior.Peer.MessageSenderAuthentication.TrustedStoreLocation =
+                Peer.MessageSenderAuthentication.TrustedStoreLocation;
+            behavior.Peer.PeerAuthentication.CustomCertificateValidator =
+                (X509CertificateValidator)CreateInstance(
+                    Peer.PeerAuthentication.CustomCertificateValidatorType
+                );
+            behavior.Peer.PeerAuthentication.CertificateValidationMode =
+                Peer.PeerAuthentication.CertificateValidationMode;
+            behavior.Peer.PeerAuthentication.RevocationMode =
+                Peer.PeerAuthentication.RevocationMode;
+            behavior.Peer.PeerAuthentication.TrustedStoreLocation =
+                Peer.PeerAuthentication.TrustedStoreLocation;
 
-			// ServiceCertificate
-			var bsc = behavior.ServiceCertificate;
-			var csc = ServiceCertificate;
-			var bsca = bsc.Authentication;
-			var csca = csc.Authentication;
-			bsc.DefaultCertificate = csc.DefaultCertificate.CreateInstance ();
-			bsca.CertificateValidationMode = csca.CertificateValidationMode;
-			if (csca.CustomCertificateValidatorType != null)
-				bsca.CustomCertificateValidator = (X509CertificateValidator) CreateInstance (csca.CustomCertificateValidatorType);
-			bsca.RevocationMode = csca.RevocationMode;
-			bsca.TrustedStoreLocation = csca.TrustedStoreLocation;
-			foreach (X509ScopedServiceCertificateElement sce in ServiceCertificate.ScopedCertificates)
-				bsc.ScopedCertificates.Add (sce.TargetUri, sce.CreateInstance ());
+            // ServiceCertificate
+            var bsc = behavior.ServiceCertificate;
+            var csc = ServiceCertificate;
+            var bsca = bsc.Authentication;
+            var csca = csc.Authentication;
+            bsc.DefaultCertificate = csc.DefaultCertificate.CreateInstance();
+            bsca.CertificateValidationMode = csca.CertificateValidationMode;
+            if (csca.CustomCertificateValidatorType != null)
+                bsca.CustomCertificateValidator = (X509CertificateValidator)CreateInstance(
+                    csca.CustomCertificateValidatorType
+                );
+            bsca.RevocationMode = csca.RevocationMode;
+            bsca.TrustedStoreLocation = csca.TrustedStoreLocation;
+            foreach (
+                X509ScopedServiceCertificateElement sce in ServiceCertificate.ScopedCertificates
+            )
+                bsc.ScopedCertificates.Add(sce.TargetUri, sce.CreateInstance());
 
-			// cb.UserNamePassword : not configurable ...
+            // cb.UserNamePassword : not configurable ...
 
-			// Windows
-			behavior.Windows.AllowedImpersonationLevel = Windows.AllowedImpersonationLevel;
-			behavior.Windows.AllowNtlm = Windows.AllowNtlm;
-		}
+            // Windows
+            behavior.Windows.AllowedImpersonationLevel = Windows.AllowedImpersonationLevel;
+            behavior.Windows.AllowNtlm = Windows.AllowNtlm;
+        }
 
-		object CreateInstance (string typeName)
-		{
-			return String.IsNullOrEmpty (typeName) ? null : Activator.CreateInstance (System.Type.GetType (typeName, true));
-		}
-	}
-
+        object CreateInstance(string typeName)
+        {
+            return String.IsNullOrEmpty(typeName)
+                ? null
+                : Activator.CreateInstance(System.Type.GetType(typeName, true));
+        }
+    }
 }

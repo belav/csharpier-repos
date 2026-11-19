@@ -24,7 +24,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _methods = new List<IMethodNode>();
         }
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.ReadOnlyDataSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.ReadOnlyDataSection;
 
         public override bool IsShareable => false;
 
@@ -53,10 +54,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (_methods.Count == 0 || relocsOnly)
             {
                 return new ObjectData(
-                    data: Array.Empty<byte>(), 
-                    relocs: Array.Empty<Relocation>(), 
-                    alignment: 1, 
-                    definedSymbols: new ISymbolDefinitionNode[] { this });
+                    data: Array.Empty<byte>(),
+                    relocs: Array.Empty<Relocation>(),
+                    alignment: 1,
+                    definedSymbols: new ISymbolDefinitionNode[] { this }
+                );
             }
 
             _methods.MergeSort(CompilerComparer.Instance);
@@ -68,7 +70,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             int offsetCount = _methods.Count / GCREFMAP_LOOKUP_STRIDE;
             builder.Builder.EmitInt((offsetCount + 1) * sizeof(int));
 
-            ObjectDataBuilder.Reservation[] offsets = new ObjectDataBuilder.Reservation[offsetCount];
+            ObjectDataBuilder.Reservation[] offsets = new ObjectDataBuilder.Reservation[
+                offsetCount
+            ];
             for (int offsetIndex = 0; offsetIndex < offsetCount; offsetIndex++)
             {
                 offsets[offsetIndex] = builder.Builder.ReserveInt();
@@ -91,7 +95,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     bool isStub = false;
                     if (methodNode is DelayLoadHelperImport methodImport)
                     {
-                        MethodFixupSignature signature = (MethodFixupSignature)methodImport.ImportSignature.Target;
+                        MethodFixupSignature signature = (MethodFixupSignature)
+                            methodImport.ImportSignature.Target;
                         isStub = signature.IsUnboxingStub || signature.IsInstantiatingStub;
                     }
                     builder.GetCallRefMap(methodNode.Method, isStub);

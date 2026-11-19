@@ -43,25 +43,16 @@ namespace System.Xml
         // StreamBuffer/BufferOffset exists only for the BinaryWriter to fix up nodes
         public byte[] StreamBuffer
         {
-            get
-            {
-                return _buffer;
-            }
+            get { return _buffer; }
         }
         public int BufferOffset
         {
-            get
-            {
-                return _offset;
-            }
+            get { return _offset; }
         }
 
         public int Position
         {
-            get
-            {
-                return (int)OutputStream.Position + _offset;
-            }
+            get { return (int)OutputStream.Position + _offset; }
         }
 
         protected byte[] GetBuffer(int count, out int offset)
@@ -333,17 +324,25 @@ namespace System.Xml
             }
         }
 
-        protected static unsafe int UnsafeGetUnicodeChars(char* chars, int charCount, byte[] buffer, int offset)
+        protected static unsafe int UnsafeGetUnicodeChars(
+            char* chars,
+            int charCount,
+            byte[] buffer,
+            int offset
+        )
         {
             if (BitConverter.IsLittleEndian)
             {
-                new ReadOnlySpan<char>(chars, charCount)
-                    .CopyTo(MemoryMarshal.Cast<byte, char>(buffer.AsSpan(offset)));
+                new ReadOnlySpan<char>(chars, charCount).CopyTo(
+                    MemoryMarshal.Cast<byte, char>(buffer.AsSpan(offset))
+                );
             }
             else
             {
-                BinaryPrimitives.ReverseEndianness(new ReadOnlySpan<short>(chars, charCount),
-                    MemoryMarshal.Cast<byte, short>(buffer.AsSpan(offset)));
+                BinaryPrimitives.ReverseEndianness(
+                    new ReadOnlySpan<short>(chars, charCount),
+                    MemoryMarshal.Cast<byte, short>(buffer.AsSpan(offset))
+                );
             }
 
             return charCount * 2;
@@ -352,10 +351,18 @@ namespace System.Xml
         protected unsafe int UnsafeGetUTF8Length(char* chars, int charCount)
         {
             // Length will always be at least ( 128 / maxBytesPerChar) = 42
-            return (_encoding ?? DataContractSerializer.ValidatingUTF8).GetByteCount(chars, charCount);
+            return (_encoding ?? DataContractSerializer.ValidatingUTF8).GetByteCount(
+                chars,
+                charCount
+            );
         }
 
-        protected unsafe int UnsafeGetUTF8Chars(char* chars, int charCount, byte[] buffer, int offset)
+        protected unsafe int UnsafeGetUTF8Chars(
+            char* chars,
+            int charCount,
+            byte[] buffer,
+            int offset
+        )
         {
             if (charCount > 0)
             {
@@ -379,13 +386,24 @@ namespace System.Xml
                         }
                         return charCount;
 
-                    NonAscii:
+                        NonAscii:
                         byte* bytesMax = _bytes + buffer.Length - offset;
-                        return (int)(bytes - _bytes) + (_encoding ?? DataContractSerializer.ValidatingUTF8).GetBytes(chars, (int)(charsMax - chars), bytes, (int)(bytesMax - bytes));
+                        return (int)(bytes - _bytes)
+                            + (_encoding ?? DataContractSerializer.ValidatingUTF8).GetBytes(
+                                chars,
+                                (int)(charsMax - chars),
+                                bytes,
+                                (int)(bytesMax - bytes)
+                            );
                     }
                     else
                     {
-                        return (_encoding ?? DataContractSerializer.ValidatingUTF8).GetBytes(chars, charCount, _bytes, buffer.Length - offset);
+                        return (_encoding ?? DataContractSerializer.ValidatingUTF8).GetBytes(
+                            chars,
+                            charCount,
+                            _bytes,
+                            buffer.Length - offset
+                        );
                     }
                 }
             }

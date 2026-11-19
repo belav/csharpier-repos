@@ -35,6 +35,10 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
         /// function is undefined if they are not.
         /// </para>
         /// </summary>
-        Task<SemanticModel?> TryGetSpeculativeSemanticModelAsync(SemanticModel previousSemanticModel, SyntaxNode currentBodyNode, CancellationToken cancellationToken);
+        Task<SemanticModel?> TryGetSpeculativeSemanticModelAsync(
+            SemanticModel previousSemanticModel,
+            SyntaxNode currentBodyNode,
+            CancellationToken cancellationToken
+        );
     }
 }

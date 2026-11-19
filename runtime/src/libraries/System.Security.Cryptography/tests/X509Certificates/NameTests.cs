@@ -41,10 +41,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             // The Issuer field from the Microsoft.com test cert.
             byte[] encoding = (
-                "3077310B3009060355040613025553311D301B060355040A131453796D616E74" +
-                "656320436F72706F726174696F6E311F301D060355040B131653796D616E7465" +
-                "63205472757374204E6574776F726B312830260603550403131F53796D616E74" +
-                "656320436C61737320332045562053534C204341202D204733").HexToByteArray();
+                "3077310B3009060355040613025553311D301B060355040A131453796D616E74"
+                + "656320436F72706F726174696F6E311F301D060355040B131653796D616E7465"
+                + "63205472757374204E6574776F726B312830260603550403131F53796D616E74"
+                + "656320436C61737320332045562053534C204341202D204733"
+            ).HexToByteArray();
 
             X500DistinguishedName name = new X500DistinguishedName(encoding);
             string delimiter;
@@ -66,7 +67,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
             string expected = string.Format(
                 "C=US{0}O=Symantec Corporation{0}OU=Symantec Trust Network{0}CN=Symantec Class 3 EV SSL CA - G3",
-                delimiter);
+                delimiter
+            );
 
             string actual = name.Decode(format);
 
@@ -80,19 +82,47 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             // as UTF8String.
             X500DistinguishedName name = new X500DistinguishedName(
                 "CN=potato, O=jicama",
-                X500DistinguishedNameFlags.ForceUTF8Encoding);
+                X500DistinguishedNameFlags.ForceUTF8Encoding
+            );
 
             ReadOnlySpan<byte> expectedDer = new byte[]
             {
-                0x30, 0x22,
-                0x31, 0x0F,
-                0x30, 0x0D,
-                    0x06, 0x03, 0x55, 0x04, 0x03, // id-at-commonName OID
-                    0x0C, 0x06, 0x70, 0x6F, 0x74, 0x61, 0x74, 0x6F, // 0x0C is UTF8String
-                0x31, 0x0F,
-                0x30, 0x0D,
-                    0x06, 0x03, 0x55, 0x04, 0x0A,  // id-at-organizatioName OID
-                    0x0C, 0x06, 0x6A, 0x69, 0x63, 0x61, 0x6D, 0x61, // 0x0C is UTF8String
+                0x30,
+                0x22,
+                0x31,
+                0x0F,
+                0x30,
+                0x0D,
+                0x06,
+                0x03,
+                0x55,
+                0x04,
+                0x03, // id-at-commonName OID
+                0x0C,
+                0x06,
+                0x70,
+                0x6F,
+                0x74,
+                0x61,
+                0x74,
+                0x6F, // 0x0C is UTF8String
+                0x31,
+                0x0F,
+                0x30,
+                0x0D,
+                0x06,
+                0x03,
+                0x55,
+                0x04,
+                0x0A, // id-at-organizatioName OID
+                0x0C,
+                0x06,
+                0x6A,
+                0x69,
+                0x63,
+                0x61,
+                0x6D,
+                0x61, // 0x0C is UTF8String
             };
 
             AssertExtensions.SequenceEqual(expectedDer, name.RawData);
@@ -105,10 +135,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             // The Issuer field from the Microsoft.com test cert.
             byte[] encoding = (
-                "3077310B3009060355040613025553311D301B060355040A131453796D616E74" +
-                "656320436F72706F726174696F6E311F301D060355040B131653796D616E7465" +
-                "63205472757374204E6574776F726B312830260603550403131F53796D616E74" +
-                "656320436C61737320332045562053534C204341202D204733").HexToByteArray();
+                "3077310B3009060355040613025553311D301B060355040A131453796D616E74"
+                + "656320436F72706F726174696F6E311F301D060355040B131653796D616E7465"
+                + "63205472757374204E6574776F726B312830260603550403131F53796D616E74"
+                + "656320436C61737320332045562053534C204341202D204733"
+            ).HexToByteArray();
 
             X500DistinguishedName name = new X500DistinguishedName(encoding);
             string formatted = name.Format(multiLine);
@@ -118,11 +149,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             {
                 expected = string.Format(
                     "C=US{0}O=Symantec Corporation{0}OU=Symantec Trust Network{0}CN=Symantec Class 3 EV SSL CA - G3{0}",
-                    Environment.NewLine);
+                    Environment.NewLine
+                );
             }
             else
             {
-                expected = "C=US, O=Symantec Corporation, OU=Symantec Trust Network, CN=Symantec Class 3 EV SSL CA - G3";
+                expected =
+                    "C=US, O=Symantec Corporation, OU=Symantec Trust Network, CN=Symantec Class 3 EV SSL CA - G3";
             }
 
             Assert.Equal(expected, formatted);

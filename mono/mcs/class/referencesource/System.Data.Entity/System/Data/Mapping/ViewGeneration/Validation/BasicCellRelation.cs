@@ -8,26 +8,27 @@
 //---------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Data.Mapping.ViewGeneration.Structures;
-using System.Text;
-using System.Diagnostics;
 using System.Data.Common.Utils;
+using System.Data.Mapping.ViewGeneration.Structures;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Validation
 {
-
     using BasicSchemaConstraints = SchemaConstraints<BasicKeyConstraint>;
 
     // This class represents a relation signature that lists all scalar
     // slots for the join tree in cell query (before projection)
     internal class BasicCellRelation : CellRelation
     {
-
         #region Constructor
         // effects: Creates a basic cell relation for query
-        internal BasicCellRelation(CellQuery cellQuery, ViewCellRelation viewCellRelation,
-                                   IEnumerable<MemberProjectedSlot> slots)
+        internal BasicCellRelation(
+            CellQuery cellQuery,
+            ViewCellRelation viewCellRelation,
+            IEnumerable<MemberProjectedSlot> slots
+        )
             : base(viewCellRelation.CellNumber)
         {
             m_cellQuery = cellQuery;
@@ -56,9 +57,14 @@ namespace System.Data.Mapping.ViewGeneration.Validation
         // are present in this relation
         internal void PopulateKeyConstraints(BasicSchemaConstraints constraints)
         {
-            Debug.Assert(this == m_cellQuery.BasicCellRelation, "Cellquery does not point to the correct BasicCellRelation?");
-            Debug.Assert(m_cellQuery.Extent is EntitySet || m_cellQuery.Extent is AssociationSet,
-                         "Top level extents handled is currently entityset or association set");
+            Debug.Assert(
+                this == m_cellQuery.BasicCellRelation,
+                "Cellquery does not point to the correct BasicCellRelation?"
+            );
+            Debug.Assert(
+                m_cellQuery.Extent is EntitySet || m_cellQuery.Extent is AssociationSet,
+                "Top level extents handled is currently entityset or association set"
+            );
             if (m_cellQuery.Extent is EntitySet)
             {
                 PopulateKeyConstraintsForEntitySet(constraints);
@@ -94,7 +100,9 @@ namespace System.Data.Mapping.ViewGeneration.Validation
             // Keep track of all the key members for the association in a set
             // so that if no end corresponds to a key, we use all the members
             // to form the key
-            Set<MemberPath> associationKeyMembers = new Set<MemberPath>(MemberPath.EqualityComparer);
+            Set<MemberPath> associationKeyMembers = new Set<MemberPath>(
+                MemberPath.EqualityComparer
+            );
             bool hasAnEndThatFormsKey = false;
 
             // Determine the keys of each end. If the end forms a key, add it
@@ -105,7 +113,10 @@ namespace System.Data.Mapping.ViewGeneration.Validation
                 AssociationEndMember endMember = end.CorrespondingAssociationEndMember;
 
                 MemberPath prefix = new MemberPath(relationshipSet, endMember);
-                List<ExtentKey> keys = ExtentKey.GetKeysForEntityType(prefix, end.EntitySet.ElementType);
+                List<ExtentKey> keys = ExtentKey.GetKeysForEntityType(
+                    prefix,
+                    end.EntitySet.ElementType
+                );
                 Debug.Assert(keys.Count > 0, "No keys for entity?");
                 Debug.Assert(keys.Count == 1, "Currently, we only support primary keys");
 
@@ -131,13 +142,19 @@ namespace System.Data.Mapping.ViewGeneration.Validation
 
         // effects: Given keys for this relation, adds one key constraint for
         // each key present in keys
-        private void AddKeyConstraints(IEnumerable<ExtentKey> keys, BasicSchemaConstraints constraints)
+        private void AddKeyConstraints(
+            IEnumerable<ExtentKey> keys,
+            BasicSchemaConstraints constraints
+        )
         {
             foreach (ExtentKey key in keys)
             {
                 // If the key is being projected, only then do we add the key constraint
 
-                List<MemberProjectedSlot> keySlots = MemberProjectedSlot.GetSlots(m_slots, key.KeyFields);
+                List<MemberProjectedSlot> keySlots = MemberProjectedSlot.GetSlots(
+                    m_slots,
+                    key.KeyFields
+                );
                 if (keySlots != null)
                 {
                     BasicKeyConstraint keyConstraint = new BasicKeyConstraint(this, keySlots);

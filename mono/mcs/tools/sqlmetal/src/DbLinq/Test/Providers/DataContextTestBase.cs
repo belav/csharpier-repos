@@ -1,19 +1,19 @@
 #region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2009 Novell, Inc.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -29,26 +29,24 @@ using System.Data;
 using System.Data.Common;
 // using System.Data.Linq;
 using System.Data.Linq.Mapping;
-using System.Linq;
 using System.IO;
-
+using System.Linq;
+using DbLinq.Null;
+using NUnit.Framework;
 #if MONO_STRICT
 using System.Data.Linq;
 #else
 using DbLinq.Data.Linq;
 #endif
 
-using NUnit.Framework;
-
-using DbLinq.Null;
-
-namespace DbLinqTest {
-
+namespace DbLinqTest
+{
     public abstract class DataContextTestBase
     {
         DataContext context;
 
-        protected DataContext Context {
+        protected DataContext Context
+        {
             get { return context; }
         }
 
@@ -69,55 +67,49 @@ namespace DbLinqTest {
         [Test]
         public void ExecuteCommand()
         {
-            context.Log = new StringWriter ();
-            try 
+            context.Log = new StringWriter();
+            try
             {
                 context.ExecuteCommand("SomeCommand", 1, 2, 3);
             }
-            catch (NotSupportedException)
-            {
-            }
+            catch (NotSupportedException) { }
             catch (Exception e)
             {
                 Assert.Fail("# ExecuteCommand: Got exception {0}", e.ToString());
             }
-            Console.WriteLine ("# ExecuteCommand: Log={0}", context.Log);
+            Console.WriteLine("# ExecuteCommand: Log={0}", context.Log);
         }
 
         [Test]
         public void ExecuteQuery()
         {
-            context.Log = new StringWriter ();
-            try 
+            context.Log = new StringWriter();
+            try
             {
                 context.ExecuteQuery(typeof(Person), "select * from people", 1, 2, 3);
             }
-            catch (NotSupportedException)
-            {
-            }
+            catch (NotSupportedException) { }
             catch (Exception e)
             {
                 Assert.Fail("# ExecuteQuery: unexpected exception: {0}", e.ToString());
             }
-            Console.WriteLine ("# ExecuteQuery: Log={0}", context.Log);
+            Console.WriteLine("# ExecuteQuery: Log={0}", context.Log);
         }
 
         [Test]
         public void ExecuteQueryTResult()
         {
-            context.Log = new StringWriter ();
-            try 
+            context.Log = new StringWriter();
+            try
             {
                 context.ExecuteQuery<Person>("select * from people", 1, 2, 3);
             }
-            catch (NotSupportedException)
-            {
-            }
+            catch (NotSupportedException) { }
             catch (Exception)
             {
                 Assert.Fail();
             }
-            Console.WriteLine ("# ExecuteQueryTResult: Log={0}", context.Log);
+            Console.WriteLine("# ExecuteQueryTResult: Log={0}", context.Log);
         }
 
         [Test]
@@ -134,10 +126,7 @@ namespace DbLinqTest {
         [Test]
         public void GetCommand()
         {
-            var foos = 
-                from p in context.GetTable<Person>()
-                where p.FirstName == "foo"
-                select p;
+            var foos = from p in context.GetTable<Person>() where p.FirstName == "foo" select p;
             var cmd = context.GetCommand(foos);
 
             Assert.AreEqual(People("foo"), cmd.CommandText);
@@ -155,4 +144,3 @@ namespace DbLinqTest {
         }
     }
 }
-

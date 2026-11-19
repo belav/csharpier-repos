@@ -47,13 +47,10 @@ public class HttpConnectionsEventSourceTests
         Assert.Equal(EventLevel.Informational, eventData.Level);
         Assert.Same(httpConnectionsEventSource, eventData.EventSource);
         Assert.Equal("Started connection '{0}'.", eventData.Message);
-        Assert.Collection(
-            eventData.Payload,
-            arg =>
-            {
-                Assert.Equal("1", arg);
-            }
-        );
+        Assert.Collection(eventData.Payload, arg =>
+        {
+            Assert.Equal("1", arg);
+        });
     }
 
     [Fact]
@@ -80,13 +77,10 @@ public class HttpConnectionsEventSourceTests
         Assert.Equal(EventLevel.Informational, eventData.Level);
         Assert.Same(httpConnectionsEventSource, eventData.EventSource);
         Assert.Equal("Stopped connection '{0}'.", eventData.Message);
-        Assert.Collection(
-            eventData.Payload,
-            arg =>
-            {
-                Assert.Equal("1", arg);
-            }
-        );
+        Assert.Collection(eventData.Payload, arg =>
+        {
+            Assert.Equal("1", arg);
+        });
     }
 
     [Fact]
@@ -109,13 +103,10 @@ public class HttpConnectionsEventSourceTests
         Assert.Equal(EventLevel.Informational, eventData.Level);
         Assert.Same(httpConnectionsEventSource, eventData.EventSource);
         Assert.Equal("Connection '{0}' timed out.", eventData.Message);
-        Assert.Collection(
-            eventData.Payload,
-            arg =>
-            {
-                Assert.Equal("1", arg);
-            }
-        );
+        Assert.Collection(eventData.Payload, arg =>
+        {
+            Assert.Equal("1", arg);
+        });
     }
 
     private static HttpConnectionsEventSource GetHttpConnectionEventSource()

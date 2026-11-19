@@ -41,10 +41,7 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test()
         {
-            Data data = new Data
-            {
-                Value = 1.1m
-            };
+            Data data = new Data { Value = 1.1m };
 
             string serialized = JsonConvert.SerializeObject(data);
 

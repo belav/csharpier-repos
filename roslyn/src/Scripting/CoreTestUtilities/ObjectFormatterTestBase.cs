@@ -12,14 +12,23 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting.UnitTests
 {
     public abstract class ObjectFormatterTestBase
     {
-        protected static PrintOptions SingleLineOptions => new PrintOptions { MemberDisplayFormat = MemberDisplayFormat.SingleLine };
-        protected static PrintOptions SeparateLinesOptions => new PrintOptions { MemberDisplayFormat = MemberDisplayFormat.SeparateLines, MaximumOutputLength = int.MaxValue };
-        protected static PrintOptions HiddenOptions => new PrintOptions { MemberDisplayFormat = MemberDisplayFormat.Hidden };
+        protected static PrintOptions SingleLineOptions =>
+            new PrintOptions { MemberDisplayFormat = MemberDisplayFormat.SingleLine };
+        protected static PrintOptions SeparateLinesOptions =>
+            new PrintOptions
+            {
+                MemberDisplayFormat = MemberDisplayFormat.SeparateLines,
+                MaximumOutputLength = int.MaxValue,
+            };
+        protected static PrintOptions HiddenOptions =>
+            new PrintOptions { MemberDisplayFormat = MemberDisplayFormat.Hidden };
 
         public void AssertMembers(string str, params string[] expected)
         {
             int i = 0;
-            foreach (var line in str.Split(new[] { Environment.NewLine + "  " }, StringSplitOptions.None))
+            foreach (
+                var line in str.Split(new[] { Environment.NewLine + "  " }, StringSplitOptions.None)
+            )
             {
                 if (i == 0)
                 {
@@ -27,7 +36,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting.UnitTests
                 }
                 else if (i == expected.Length - 1)
                 {
-                    Assert.Equal(expected[i] + Environment.NewLine + "}" + Environment.NewLine, line);
+                    Assert.Equal(
+                        expected[i] + Environment.NewLine + "}" + Environment.NewLine,
+                        line
+                    );
                 }
                 else
                 {

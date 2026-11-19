@@ -57,16 +57,13 @@ public class HttpRoutePatternParserTests
             s => Assert.Equal("books", s),
             s => Assert.Equal("*", s)
         );
-        Assert.Collection(
-            pattern.Variables,
-            v =>
-            {
-                Assert.Equal(1, v.StartSegment);
-                Assert.Equal(5, v.EndSegment);
-                Assert.Equal("book.name", string.Join(".", v.FieldPath));
-                Assert.False(v.HasCatchAllPath);
-            }
-        );
+        Assert.Collection(pattern.Variables, v =>
+        {
+            Assert.Equal(1, v.StartSegment);
+            Assert.Equal(5, v.EndSegment);
+            Assert.Equal("book.name", string.Join(".", v.FieldPath));
+            Assert.False(v.HasCatchAllPath);
+        });
     }
 
     [Fact]
@@ -140,16 +137,13 @@ public class HttpRoutePatternParserTests
     {
         var pattern = HttpRoutePattern.Parse("/a/{a.b.c}");
         Assert.Collection(pattern.Segments, s => Assert.Equal("a", s), s => Assert.Equal("*", s));
-        Assert.Collection(
-            pattern.Variables,
-            v =>
-            {
-                Assert.Equal(1, v.StartSegment);
-                Assert.Equal(2, v.EndSegment);
-                Assert.Equal("a.b.c", string.Join(".", v.FieldPath));
-                Assert.False(v.HasCatchAllPath);
-            }
-        );
+        Assert.Collection(pattern.Variables, v =>
+        {
+            Assert.Equal(1, v.StartSegment);
+            Assert.Equal(2, v.EndSegment);
+            Assert.Equal("a.b.c", string.Join(".", v.FieldPath));
+            Assert.False(v.HasCatchAllPath);
+        });
     }
 
     [Fact]
@@ -157,16 +151,13 @@ public class HttpRoutePatternParserTests
     {
         var pattern = HttpRoutePattern.Parse("/a/{a.b.c=*}");
         Assert.Collection(pattern.Segments, s => Assert.Equal("a", s), s => Assert.Equal("*", s));
-        Assert.Collection(
-            pattern.Variables,
-            v =>
-            {
-                Assert.Equal(1, v.StartSegment);
-                Assert.Equal(2, v.EndSegment);
-                Assert.Equal("a.b.c", string.Join(".", v.FieldPath));
-                Assert.False(v.HasCatchAllPath);
-            }
-        );
+        Assert.Collection(pattern.Variables, v =>
+        {
+            Assert.Equal(1, v.StartSegment);
+            Assert.Equal(2, v.EndSegment);
+            Assert.Equal("a.b.c", string.Join(".", v.FieldPath));
+            Assert.False(v.HasCatchAllPath);
+        });
     }
 
     [Fact]
@@ -174,16 +165,13 @@ public class HttpRoutePatternParserTests
     {
         var pattern = HttpRoutePattern.Parse("/a/{b=**}");
         Assert.Collection(pattern.Segments, s => Assert.Equal("a", s), s => Assert.Equal("**", s));
-        Assert.Collection(
-            pattern.Variables,
-            v =>
-            {
-                Assert.Equal(1, v.StartSegment);
-                Assert.Equal(2, v.EndSegment);
-                Assert.Equal("b", string.Join(".", v.FieldPath));
-                Assert.True(v.HasCatchAllPath);
-            }
-        );
+        Assert.Collection(pattern.Variables, v =>
+        {
+            Assert.Equal(1, v.StartSegment);
+            Assert.Equal(2, v.EndSegment);
+            Assert.Equal("b", string.Join(".", v.FieldPath));
+            Assert.True(v.HasCatchAllPath);
+        });
     }
 
     [Fact]
@@ -196,16 +184,13 @@ public class HttpRoutePatternParserTests
             s => Assert.Equal("c", s),
             s => Assert.Equal("*", s)
         );
-        Assert.Collection(
-            pattern.Variables,
-            v =>
-            {
-                Assert.Equal(1, v.StartSegment);
-                Assert.Equal(3, v.EndSegment);
-                Assert.Equal("b", string.Join(".", v.FieldPath));
-                Assert.False(v.HasCatchAllPath);
-            }
-        );
+        Assert.Collection(pattern.Variables, v =>
+        {
+            Assert.Equal(1, v.StartSegment);
+            Assert.Equal(3, v.EndSegment);
+            Assert.Equal("b", string.Join(".", v.FieldPath));
+            Assert.False(v.HasCatchAllPath);
+        });
     }
 
     [Fact]
@@ -219,16 +204,13 @@ public class HttpRoutePatternParserTests
             s => Assert.Equal("*", s),
             s => Assert.Equal("d", s)
         );
-        Assert.Collection(
-            pattern.Variables,
-            v =>
-            {
-                Assert.Equal(1, v.StartSegment);
-                Assert.Equal(4, v.EndSegment);
-                Assert.Equal("b", string.Join(".", v.FieldPath));
-                Assert.False(v.HasCatchAllPath);
-            }
-        );
+        Assert.Collection(pattern.Variables, v =>
+        {
+            Assert.Equal(1, v.StartSegment);
+            Assert.Equal(4, v.EndSegment);
+            Assert.Equal("b", string.Join(".", v.FieldPath));
+            Assert.False(v.HasCatchAllPath);
+        });
     }
 
     [Fact]
@@ -241,16 +223,13 @@ public class HttpRoutePatternParserTests
             s => Assert.Equal("c", s),
             s => Assert.Equal("**", s)
         );
-        Assert.Collection(
-            pattern.Variables,
-            v =>
-            {
-                Assert.Equal(1, v.StartSegment);
-                Assert.Equal(3, v.EndSegment);
-                Assert.Equal("b", string.Join(".", v.FieldPath));
-                Assert.True(v.HasCatchAllPath);
-            }
-        );
+        Assert.Collection(pattern.Variables, v =>
+        {
+            Assert.Equal(1, v.StartSegment);
+            Assert.Equal(3, v.EndSegment);
+            Assert.Equal("b", string.Join(".", v.FieldPath));
+            Assert.True(v.HasCatchAllPath);
+        });
     }
 
     [Fact]
@@ -265,16 +244,13 @@ public class HttpRoutePatternParserTests
             s => Assert.Equal("c", s),
             s => Assert.Equal("d", s)
         );
-        Assert.Collection(
-            pattern.Variables,
-            v =>
-            {
-                Assert.Equal(0, v.StartSegment);
-                Assert.Equal(3, v.EndSegment);
-                Assert.Equal("x.y.z", string.Join(".", v.FieldPath));
-                Assert.True(v.HasCatchAllPath);
-            }
-        );
+        Assert.Collection(pattern.Variables, v =>
+        {
+            Assert.Equal(0, v.StartSegment);
+            Assert.Equal(3, v.EndSegment);
+            Assert.Equal("x.y.z", string.Join(".", v.FieldPath));
+            Assert.True(v.HasCatchAllPath);
+        });
     }
 
     [Fact]
@@ -288,16 +264,13 @@ public class HttpRoutePatternParserTests
             s => Assert.Equal("*", s),
             s => Assert.Equal("**", s)
         );
-        Assert.Collection(
-            pattern.Variables,
-            v =>
-            {
-                Assert.Equal(1, v.StartSegment);
-                Assert.Equal(2, v.EndSegment);
-                Assert.Equal("b", string.Join(".", v.FieldPath));
-                Assert.False(v.HasCatchAllPath);
-            }
-        );
+        Assert.Collection(pattern.Variables, v =>
+        {
+            Assert.Equal(1, v.StartSegment);
+            Assert.Equal(2, v.EndSegment);
+            Assert.Equal("b", string.Join(".", v.FieldPath));
+            Assert.False(v.HasCatchAllPath);
+        });
     }
 
     [Theory]

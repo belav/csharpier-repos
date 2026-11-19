@@ -27,9 +27,7 @@ public class IndexBuilder<T> : IndexBuilder
     /// </summary>
     [EntityFrameworkInternal]
     public IndexBuilder(IMutableIndex index)
-        : base(index)
-    {
-    }
+        : base(index) { }
 
     /// <summary>
     ///     Adds or updates an annotation on the index. If an annotation with the key specified in
@@ -39,16 +37,16 @@ public class IndexBuilder<T> : IndexBuilder
     /// <param name="annotation">The key of the annotation to be added or updated.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual IndexBuilder<T> HasAnnotation(string annotation, object? value)
-        => (IndexBuilder<T>)base.HasAnnotation(annotation, value);
+    public new virtual IndexBuilder<T> HasAnnotation(string annotation, object? value) =>
+        (IndexBuilder<T>)base.HasAnnotation(annotation, value);
 
     /// <summary>
     ///     Configures whether this index is unique (i.e. the value(s) for each instance must be unique).
     /// </summary>
     /// <param name="unique">A value indicating whether this index is unique.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual IndexBuilder<T> IsUnique(bool unique = true)
-        => (IndexBuilder<T>)base.IsUnique(unique);
+    public new virtual IndexBuilder<T> IsUnique(bool unique = true) =>
+        (IndexBuilder<T>)base.IsUnique(unique);
 
     /// <summary>
     ///     Configures the sort order(s) for the columns of this index (ascending or descending).
@@ -58,6 +56,6 @@ public class IndexBuilder<T> : IndexBuilder
     ///     An empty list indicates that all index columns will have descending sort order.
     /// </param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual IndexBuilder<T> IsDescending(params bool[] descending)
-        => (IndexBuilder<T>)base.IsDescending(descending);
+    public new virtual IndexBuilder<T> IsDescending(params bool[] descending) =>
+        (IndexBuilder<T>)base.IsDescending(descending);
 }

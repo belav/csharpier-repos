@@ -6,9 +6,8 @@ namespace System.ServiceModel.Administration
 {
     using System;
     using System.Reflection;
-    using System.ServiceModel.Channels;
     using System.ServiceModel;
-
+    using System.ServiceModel.Channels;
 
     static class AdministrationHelpers
     {

@@ -21,16 +21,19 @@ public class Program
     public static IRuntime s_rt;
     public static bool s_25;
     public static short[] s_42;
-    public static S0[][] s_43 = new S0[][]{new S0[]{new S0()}};
+    public static S0[][] s_43 = new S0[][] { new S0[] { new S0() } };
 
     [Fact]
     public static void TestEntryPoint()
     {
         CollectibleALC alc = new CollectibleALC();
-        System.Reflection.Assembly asm = alc.LoadFromAssemblyPath(System.Reflection.Assembly.GetExecutingAssembly().Location);
-        System.Reflection.MethodInfo mi = asm.GetType(typeof(Program).FullName).GetMethod(nameof(MainInner));
+        System.Reflection.Assembly asm = alc.LoadFromAssemblyPath(
+            System.Reflection.Assembly.GetExecutingAssembly().Location
+        );
+        System.Reflection.MethodInfo mi = asm.GetType(typeof(Program).FullName)
+            .GetMethod(nameof(MainInner));
         System.Type runtimeTy = asm.GetType(typeof(Runtime).FullName);
-        mi.Invoke(null, new object[]{System.Activator.CreateInstance(runtimeTy)});
+        mi.Invoke(null, new object[] { System.Activator.CreateInstance(runtimeTy) });
     }
 
 #pragma warning disable xUnit1013
@@ -44,9 +47,7 @@ public class Program
     }
 #pragma warning restore xUnit1013
 
-    internal static void M60(ref sbyte arg1, ref short[] arg2)
-    {
-    }
+    internal static void M60(ref sbyte arg1, ref short[] arg2) { }
 
     internal static void M6(C1 argThis, bool arg0)
     {
@@ -59,17 +60,12 @@ public class Program
     }
 }
 
-public interface IRuntime
-{
-}
+public interface IRuntime { }
 
-public class Runtime : IRuntime
-{
-}
+public class Runtime : IRuntime { }
 
 public class CollectibleALC : System.Runtime.Loader.AssemblyLoadContext
 {
-    public CollectibleALC(): base(true)
-    {
-    }
+    public CollectibleALC()
+        : base(true) { }
 }

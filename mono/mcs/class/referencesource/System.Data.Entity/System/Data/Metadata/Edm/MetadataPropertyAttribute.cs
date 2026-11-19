@@ -26,19 +26,21 @@ namespace System.Data.Metadata.Edm
         /// <param name="builtInTypeKind">Built in type setting Type property</param>
         /// <param name="isCollectionType">Sets IsCollectionType property</param>
         internal MetadataPropertyAttribute(BuiltInTypeKind builtInTypeKind, bool isCollectionType)
-            : this(MetadataItem.GetBuiltInType(builtInTypeKind), isCollectionType)
-        {
-        }
+            : this(MetadataItem.GetBuiltInType(builtInTypeKind), isCollectionType) { }
 
         /// <summary>
         /// Initializes a new attribute with primitive type kind
         /// </summary>
         /// <param name="primitiveTypeKind">Primitive type setting Type property</param>
         /// <param name="isCollectionType">Sets IsCollectionType property</param>
-        internal MetadataPropertyAttribute(PrimitiveTypeKind primitiveTypeKind, bool isCollectionType)
-            : this(MetadataItem.EdmProviderManifest.GetPrimitiveType(primitiveTypeKind), isCollectionType)
-        {
-        }
+        internal MetadataPropertyAttribute(
+            PrimitiveTypeKind primitiveTypeKind,
+            bool isCollectionType
+        )
+            : this(
+                MetadataItem.EdmProviderManifest.GetPrimitiveType(primitiveTypeKind),
+                isCollectionType
+            ) { }
 
         /// <summary>
         /// Initialize a new attribute with complex type kind (corresponding the the CLR type)
@@ -46,9 +48,14 @@ namespace System.Data.Metadata.Edm
         /// <param name="type">CLR type setting Type property</param>
         /// <param name="isCollection">Sets IsCollectionType property</param>
         internal MetadataPropertyAttribute(Type type, bool isCollection)
-            : this(ClrComplexType.CreateReadonlyClrComplexType(type, type.Namespace ?? string.Empty, type.Name), isCollection)
-        {
-        }
+            : this(
+                ClrComplexType.CreateReadonlyClrComplexType(
+                    type,
+                    type.Namespace ?? string.Empty,
+                    type.Name
+                ),
+                isCollection
+            ) { }
 
         /// <summary>
         /// Initialize a new attribute
@@ -68,11 +75,17 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Gets EDM type for values stored in property.
         /// </summary>
-        internal EdmType Type { get { return _type; } }
+        internal EdmType Type
+        {
+            get { return _type; }
+        }
 
         /// <summary>
         /// Gets bool indicating whether this is a collection type.
         /// </summary>
-        internal bool IsCollectionType { get { return _isCollectionType; } }
+        internal bool IsCollectionType
+        {
+            get { return _isCollectionType; }
+        }
     }
 }

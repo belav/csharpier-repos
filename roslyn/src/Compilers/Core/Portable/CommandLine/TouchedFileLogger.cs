@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Roslyn.Utilities;
 using System;
 using System.IO;
 using System.Threading;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public void AddRead(string path)
         {
-            if (path == null) throw new ArgumentNullException(path);
+            if (path == null)
+                throw new ArgumentNullException(path);
             _readFiles.Add(path);
         }
 
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public void AddWritten(string path)
         {
-            if (path == null) throw new ArgumentNullException(path);
+            if (path == null)
+                throw new ArgumentNullException(path);
             _writtenFiles.Add(path);
         }
 
@@ -56,7 +58,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Writes all of the paths the TouchedFileLogger to the given 
+        /// Writes all of the paths the TouchedFileLogger to the given
         /// TextWriter in upper case. After calling this method the
         /// logger is in an undefined state.
         /// </summary>
@@ -64,9 +66,7 @@ namespace Microsoft.CodeAnalysis
         {
             var temp = new string[_readFiles.Count];
             int i = 0;
-            var readFiles = Interlocked.Exchange(
-                ref _readFiles,
-                null!);
+            var readFiles = Interlocked.Exchange(ref _readFiles, null!);
             foreach (var path in readFiles)
             {
                 temp[i] = path.ToUpperInvariant();
@@ -81,7 +81,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Writes all of the paths the TouchedFileLogger to the given 
+        /// Writes all of the paths the TouchedFileLogger to the given
         /// TextWriter in upper case. After calling this method the
         /// logger is in an undefined state.
         /// </summary>
@@ -89,9 +89,7 @@ namespace Microsoft.CodeAnalysis
         {
             var temp = new string[_writtenFiles.Count];
             int i = 0;
-            var writtenFiles = Interlocked.Exchange(
-                ref _writtenFiles,
-                null!);
+            var writtenFiles = Interlocked.Exchange(ref _writtenFiles, null!);
             foreach (var path in writtenFiles)
             {
                 temp[i] = path.ToUpperInvariant();

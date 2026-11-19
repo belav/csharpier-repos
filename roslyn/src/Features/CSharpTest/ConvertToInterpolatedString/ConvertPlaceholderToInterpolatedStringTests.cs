@@ -17,8 +17,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertToInterpolatedString)]
     public class ConvertPlaceholderToInterpolatedStringTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpConvertPlaceholderToInterpolatedStringRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpConvertPlaceholderToInterpolatedStringRefactoringProvider();
 
         private static readonly string[] CompositeFormattedMethods =
         [
@@ -35,7 +37,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
         {
             get
             {
-                // Every API so far starts to use a params object after 4 paramters following the formatted 
+                // Every API so far starts to use a params object after 4 paramters following the formatted
                 const int ParametersToCheck = 4;
 
                 // string.Format gets replaced with just the interpolated string
@@ -75,8 +77,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
                 static string MakeFormattedParameters(int numberOfParameters)
                 {
                     var formatString = MakeInterpolatedString(numberOfParameters);
-                    return formatString + "," + string.Join(",", Enumerable.Range(0, numberOfParameters));
-
+                    return formatString
+                        + ","
+                        + string.Join(",", Enumerable.Range(0, numberOfParameters));
                 }
             }
         }
@@ -86,7 +89,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
         public async Task TestInvocationSubstitution(string before, string after)
         {
             await TestInRegularAndScriptAsync(
-@$"using System;
+                @$"using System;
 using System.Diagnostics;
 
 class T
@@ -96,7 +99,7 @@ class T
         [|{before}|];
     }}
 }}",
-@$"using System;
+                @$"using System;
 using System.Diagnostics;
 
 class T
@@ -105,14 +108,15 @@ class T
     {{
         {after};
     }}
-}}");
+}}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/55053")]
         public async Task TestMissing_ConsoleWriteLine()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -123,14 +127,15 @@ class T
     }
 
     string GetString() => """";
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/55053")]
         public async Task TestMissing_ConsoleWrite()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -141,14 +146,15 @@ class T
     }
 
     string GetString() => """";
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestItemOrdering()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -157,7 +163,7 @@ class T
         var a = [|string.Format(""{0}{1}{2}"", 1, 2, 3)|];
     }
 }",
-@"using System;
+                @"using System;
 
 class T
 {
@@ -165,14 +171,15 @@ class T
     {
         var a = $""{1}{2}{3}"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestItemOrdering2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -181,7 +188,7 @@ class T
         var a = [|string.Format(""{0}{2}{1}"", 1, 2, 3)|];
     }
 }",
-@"using System;
+                @"using System;
 
 class T
 {
@@ -189,7 +196,8 @@ class T
     {
         var a = $""{1}{3}{2}"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -198,7 +206,7 @@ class T
             // Missing as we have arguments we don't know what to do with here.  Likely a bug in user code that needs
             // fixing first.
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -206,14 +214,15 @@ class T
     {
         var a = [|string.Format(""{0}{0}{0}"", 1, 2, 3)|];
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestItemOrdering4()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -222,7 +231,7 @@ class T
         var a = [|string.Format(""{0}{1}{2}{0}{1}{2}"", 1, 2, 3)|];
     }
 }",
-@"using System;
+                @"using System;
 
 class T
 {
@@ -230,14 +239,15 @@ class T
     {
         var a = $""{1}{2}{3}{1}{2}{3}"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotWithMissingCurly1()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -245,14 +255,15 @@ class T
     {
         var a = [|string.Format(""0}{"", 1)|];
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotWithMissingCurly2()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -260,14 +271,15 @@ class T
     {
         var a = [|string.Format(""0{"", 1)|];
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotWithIncorrectSyntax1()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -275,7 +287,8 @@ class T
     {
         var a = [|string.Format(""{:0}"", 1)|];
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -283,7 +296,7 @@ class T
         {
             // want to make sure that `{1` is not matched as `{1}`
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -291,14 +304,15 @@ class T
     {
         var a = [|string.Format(""{0}{12}"", 1, 2)|];
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotWithStringThatParsesWrongAsInterpolation()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -306,7 +320,8 @@ class T
     {
         var a = [|string.Format(""{0}{a +}"", 1)|];
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -314,7 +329,7 @@ class T
         {
             // Missing as the format string refers to parameters that aren't provided.
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -322,14 +337,15 @@ class T
     {
         var a = [|string.Format(""{4}{5}{6}"", 1, 2, 3)|];
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestItemDoNotHaveCast()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -338,7 +354,7 @@ class T
         var a = [|string.Format(""{0}{1}{2}"", 0.5, ""Hello"", 3)|];
     }
 }",
-@"using System;
+                @"using System;
 
 class T
 {
@@ -346,14 +362,15 @@ class T
     {
         var a = $""{0.5}{""Hello""}{3}"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestItemWithSyntaxErrorDoesHaveCast()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -362,7 +379,7 @@ class T
         var a = [|string.Format(""{0}"", new object)|];
     }
 }",
-@"using System;
+                @"using System;
 
 class T
 {
@@ -370,14 +387,15 @@ class T
     {
         var a = $""{(object)new object}"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestItemWithoutSyntaxErrorDoesNotHaveCast()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -386,7 +404,7 @@ class T
         var a = [|string.Format(""{0}"", new object())|];
     }
 }",
-@"using System;
+                @"using System;
 
 class T
 {
@@ -394,14 +412,15 @@ class T
     {
         var a = $""{new object()}"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestParenthesisAddedForTernaryExpression()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -410,7 +429,7 @@ class T
         var a = [|string.Format(""{0}"", true ? ""Yes"" : ""No"")|];
     }
 }",
-@"using System;
+                @"using System;
 
 class T
 {
@@ -418,14 +437,15 @@ class T
     {
         var a = $""{(true ? ""Yes"" : ""No"")}"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestDoesNotAddDoubleParenthesisForTernaryExpression()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -434,7 +454,7 @@ class T
         var a = [|string.Format(""{0}"", (true ? ""Yes"" : ""No""))|];
     }
 }",
-@"using System;
+                @"using System;
 
 class T
 {
@@ -442,14 +462,15 @@ class T
     {
         var a = $""{(true ? ""Yes"" : ""No"")}"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMultiLineExpression()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -460,7 +481,7 @@ class T
             true ? ""Yes"" : false as object)|];
     }
 }",
-@"using System;
+                @"using System;
 
 class T
 {
@@ -468,14 +489,15 @@ class T
     {
         var a = $""{(true ? ""Yes"" : false as object)}"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFormatSpecifiers()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -486,7 +508,7 @@ class T
                                  pricePerOunce)|];
     }
 }",
-@"using System;
+                @"using System;
 
 class T
 {
@@ -495,14 +517,15 @@ class T
         Decimal pricePerOunce = 17.36m;
         String s = $""The current price is {pricePerOunce:C2} per ounce."";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFormatSpecifiers2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -511,7 +534,7 @@ class T
         string s = [|String.Format(""It is now {0:d} at {0:t}"", DateTime.Now)|];
     }
 }",
-@"using System;
+                @"using System;
 
 class T
 {
@@ -519,14 +542,15 @@ class T
     {
         string s = $""It is now {DateTime.Now:d} at {DateTime.Now:t}"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFormatSpecifiers3()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class T
 {
     void M()
@@ -539,7 +563,7 @@ class T
                                years[index], population[index])|];
     }
 }",
-@"using System;
+                @"using System;
 class T
 {
     void M()
@@ -550,14 +574,15 @@ class T
         for (int index = 0; index < years.Length; index++)
             s += $""{years[index],6} {population[index],15:N0}\n"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFormatSpecifiers4()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -566,7 +591,7 @@ class T
         var a = [|String.Format(""{ 0,-10:C}"", 126347.89m)|];
     }
 }",
-@"using System;
+                @"using System;
 
 class T
 {
@@ -574,14 +599,15 @@ class T
     {
         var a = $""{126347.89m,-10:C}"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFormatSpecifiers5()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 public class T
 {
@@ -606,7 +632,7 @@ public class T
         }
     }
 }",
-@"using System;
+                @"using System;
 
 public class T
 {
@@ -628,14 +654,15 @@ public class T
             output = $""{city.Item1,-12}{city.Item2,8:yyyy}{city.Item3,12:N0}{city.Item4,8:yyyy}{city.Item5,12:N0}{(city.Item5 - city.Item3) / (double)city.Item3,14:P1}"";
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFormatSpecifiers6()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 public class T
 {
@@ -654,7 +681,7 @@ public class T
         }
     }
 }",
-@"using System;
+                @"using System;
 
 public class T
 {
@@ -672,14 +699,15 @@ public class T
             string formatString = $""{value,10:G}: {value,10:X}"";
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestVerbatimStringLiteral()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 public class T
 {
@@ -694,7 +722,7 @@ And {1,10} ({1,8:X8})
                                       value1, value2, value1 & value2)|];
     }
 }",
-@"using System;
+                @"using System;
 
 public class T
 {
@@ -707,14 +735,15 @@ public class T
 And {value2,10} ({value2,8:X8})
   = {value1 & value2,10} ({value1 & value2,8:X8})"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFormatWithParams()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 public class T
 {
@@ -730,14 +759,15 @@ public class T
                                         {3,11}: {4} degrees (lo)"",
                                       new object[] { date1, hiTime, hiTemp, loTime, loTemp })|];
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestInvalidInteger()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 public class T
 {
@@ -746,7 +776,7 @@ public class T
         string result = [|String.Format(""{0L}"", 5)|];
     }
 }",
-@"using System;
+                @"using System;
 
 public class T
 {
@@ -754,14 +784,15 @@ public class T
     {
         string result = $""{5}"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestOutVariableDeclaration_01()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -769,14 +800,15 @@ class T
     {
         var a = [|string.Format(""{0}"", out int x)|];
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestOutVariableDeclaration_02()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -784,7 +816,8 @@ class T
     {
         var a = [|string.Format(out string x, 1)|];
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -793,7 +826,7 @@ class T
             // Missing as this scenario is too esoteric.  I was not able to find any examples of code that reorders and
             // names thigns like this with format strings.
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -801,14 +834,15 @@ class T
     {
         var a = [|string.Format(arg0: ""test"", arg1: ""also"", format: ""This {0} {1} works"")|];
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFormatWithNamedArguments2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -817,7 +851,7 @@ class T
         var a = [|string.Format(""This {0} {1} works"", arg1: ""also"", arg0: ""test"")|];
     }
 }",
-@"using System;
+                @"using System;
 
 class T
 {
@@ -825,14 +859,15 @@ class T
     {
         var a = $""This {""test""} {""also""} works"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFormatWithNamedArguments3()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -841,7 +876,7 @@ class T
         var a = [|string.Format(""{0} {1} {2}"", ""10"", arg1: ""11"", arg2: ""12"" )|];
     }
 }",
-@"using System;
+                @"using System;
 
 class T
 {
@@ -849,14 +884,15 @@ class T
     {
         var a = $""{""10""} {""11""} {""12""}"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFormatWithNamedArguments4()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -865,7 +901,7 @@ class T
         var a = [|string.Format(""{0} {1} {2}"", ""10"", arg2: ""12"", arg1: ""11"")|];
     }
 }",
-@"using System;
+                @"using System;
 
 class T
 {
@@ -873,14 +909,15 @@ class T
     {
         var a = $""{""10""} {""11""} {""12""}"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFormatWithNamedArguments5()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -889,7 +926,7 @@ class T
         var a = [|string.Format(""{0} {1} {2} {3}"", ""10"", arg1: ""11"", arg2: ""12"")|];
     }
 }",
-@"using System;
+                @"using System;
 
 class T
 {
@@ -897,14 +934,15 @@ class T
     {
         var a = $""{""10""} {""11""} {""12""} {3}"";
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
         public async Task TestOnlyArgumentSelection1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -913,7 +951,7 @@ class T
         var a = string.Format([|""{0}""|], 1);
     }
 }",
-@"using System;
+                @"using System;
 
 class T
 {
@@ -921,14 +959,15 @@ class T
     {
         var a = $""{1}"";
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
         public async Task TestOnlyArgumentSelection2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -937,7 +976,7 @@ class T
         var a = string.Format(""{0}"", [|1|]);
     }
 }",
-@"using System;
+                @"using System;
 
 class T
 {
@@ -945,14 +984,15 @@ class T
     {
         var a = $""{1}"";
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
         public async Task TestArgumentsSelection2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class T
 {
@@ -961,7 +1001,7 @@ class T
         var a = string.Format([|""{0}"", 1|]);
     }
 }",
-@"using System;
+                @"using System;
 
 class T
 {
@@ -969,14 +1009,15 @@ class T
     {
         var a = $""{1}"";
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61346")]
         public async Task TestNoCastToObjectWhenNullableEnabled()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 #nullable enable
 
@@ -987,7 +1028,7 @@ class T
         var a = string.Format([|""{0}"", 1|]);
     }
 }",
-@"using System;
+                @"using System;
 
 #nullable enable
 
@@ -997,14 +1038,15 @@ class T
     {
         var a = $""{1}"";
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(1756068, "https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1756068")]
         public async Task TestArbitraryAPI()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 interface ILogger
 {
@@ -1019,7 +1061,7 @@ class T
         [|logger.Log(""{0}"", 5)|];
     }
 }",
-@"using System;
+                @"using System;
 
 interface ILogger
 {
@@ -1033,14 +1075,15 @@ class T
     {
         logger.Log($""{5}"");
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(61346, "https://github.com/dotnet/roslyn/issues/61346")]
         public async Task TestNotWithExplicitCultureInfo()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Globalization;
 
 class T
@@ -1049,7 +1092,8 @@ class T
     {
         var a = string.Format(CultureInfo.InvariantCulture, [|""{0}"", 1|]);
     }
-}");
+}"
+            );
         }
     }
 }

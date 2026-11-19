@@ -146,10 +146,8 @@ public class OwinExtensionTests
         // Dictionary contains context but does not contain "websocket.Accept" or "websocket.AcceptAlt" keys.
         Assert.NotNull(environment);
         var value = Assert
-            .Single(
-                environment,
-                kvp =>
-                    string.Equals(typeof(HttpContext).FullName, kvp.Key, StringComparison.Ordinal)
+            .Single(environment, kvp =>
+                string.Equals(typeof(HttpContext).FullName, kvp.Key, StringComparison.Ordinal)
             )
             .Value;
         Assert.Equal(context, value);

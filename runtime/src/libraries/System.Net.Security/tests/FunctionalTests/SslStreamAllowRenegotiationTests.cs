@@ -9,7 +9,6 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace System.Net.Security.Tests
@@ -26,11 +25,18 @@ namespace System.Net.Security.Tests
         {
             int validationCount = 0;
 
-            var validationCallback = new RemoteCertificateValidationCallback((object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) =>
-            {
-                validationCount++;
-                return true;
-            });
+            var validationCallback = new RemoteCertificateValidationCallback(
+                (
+                    object sender,
+                    X509Certificate certificate,
+                    X509Chain chain,
+                    SslPolicyErrors sslPolicyErrors
+                ) =>
+                {
+                    validationCount++;
+                    return true;
+                }
+            );
 
             Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             await s.ConnectAsync(Configuration.Security.TlsRenegotiationServer, 443);
@@ -47,7 +53,7 @@ namespace System.Net.Security.Tests
                     ClientCertificates = certBundle,
                     EnabledSslProtocols = SslProtocols.Tls12,
                     CertificateRevocationCheckMode = X509RevocationMode.NoCheck,
-                    AllowRenegotiation = true
+                    AllowRenegotiation = true,
                 };
 
                 // Perform handshake to establish secure connection.
@@ -56,7 +62,8 @@ namespace System.Net.Security.Tests
                 Assert.True(ssl.IsEncrypted);
 
                 // Issue request that triggers renegotiation from server.
-                byte[] message = "GET /EchoClientCertificate.ashx HTTP/1.1\r\nHost: corefx-net-tls.azurewebsites.net\r\n\r\n"u8.ToArray();
+                byte[] message =
+                    "GET /EchoClientCertificate.ashx HTTP/1.1\r\nHost: corefx-net-tls.azurewebsites.net\r\n\r\n"u8.ToArray();
                 await ssl.WriteAsync(message, 0, message.Length);
 
                 // Initiate Read operation, that results in starting renegotiation as per server response to the above request.
@@ -87,7 +94,7 @@ namespace System.Net.Security.Tests
                     ClientCertificates = certBundle,
                     EnabledSslProtocols = SslProtocols.Tls12,
                     CertificateRevocationCheckMode = X509RevocationMode.NoCheck,
-                    AllowRenegotiation = false
+                    AllowRenegotiation = false,
                 };
 
                 // Perform handshake to establish secure connection.
@@ -96,12 +103,15 @@ namespace System.Net.Security.Tests
                 Assert.True(ssl.IsEncrypted);
 
                 // Issue request that triggers regotiation from server.
-                byte[] message = "GET /EchoClientCertificate.ashx HTTP/1.1\r\nHost: corefx-net-tls.azurewebsites.net\r\n\r\n"u8.ToArray();
+                byte[] message =
+                    "GET /EchoClientCertificate.ashx HTTP/1.1\r\nHost: corefx-net-tls.azurewebsites.net\r\n\r\n"u8.ToArray();
                 await ssl.WriteAsync(message, 0, message.Length);
 
                 // Initiate Read operation, that results in starting renegotiation as per server response to the above request.
                 // This will throw IOException, since renegotiation is disabled on client side.
-                await Assert.ThrowsAsync<IOException>(() => ssl.ReadAsync(message, 0, message.Length));
+                await Assert.ThrowsAsync<IOException>(() =>
+                    ssl.ReadAsync(message, 0, message.Length)
+                );
             }
         }
     }
@@ -111,7 +121,8 @@ namespace System.Net.Security.Tests
         protected override bool TestAuthenticateAsync => false;
     }
 
-    public sealed class SslStreamAllowRenegotiationTests_Async : SslStreamAllowRenegotiationTestsBase
+    public sealed class SslStreamAllowRenegotiationTests_Async
+        : SslStreamAllowRenegotiationTestsBase
     {
         protected override bool TestAuthenticateAsync => true;
     }

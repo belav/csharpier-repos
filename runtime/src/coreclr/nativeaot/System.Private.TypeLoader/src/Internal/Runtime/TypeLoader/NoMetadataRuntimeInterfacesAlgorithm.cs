@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using Internal.Runtime.Augments;
 using Internal.TypeSystem;
 
@@ -19,7 +18,10 @@ namespace Internal.Runtime.TypeLoader
             DefType[] interfaces = new DefType[numInterfaces];
             for (int i = 0; i < numInterfaces; i++)
             {
-                RuntimeTypeHandle itfHandle = RuntimeAugments.GetInterface(type.RuntimeTypeHandle, i);
+                RuntimeTypeHandle itfHandle = RuntimeAugments.GetInterface(
+                    type.RuntimeTypeHandle,
+                    i
+                );
                 TypeDesc itfType = type.Context.ResolveRuntimeTypeHandle(itfHandle);
                 interfaces[i] = (DefType)itfType;
             }

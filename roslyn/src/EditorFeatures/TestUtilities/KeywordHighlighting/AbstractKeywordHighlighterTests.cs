@@ -20,11 +20,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.KeywordHighlighting
     [UseExportProvider]
     public abstract class AbstractKeywordHighlighterTests
     {
-        private static readonly TestComposition s_baseComposition = EditorTestCompositions.EditorFeatures.AddExcludedPartTypes(typeof(IHighlighter));
+        private static readonly TestComposition s_baseComposition =
+            EditorTestCompositions.EditorFeatures.AddExcludedPartTypes(typeof(IHighlighter));
         private TestComposition _lazyComposition;
 
-        protected TestComposition Composition
-            => _lazyComposition ??= s_baseComposition.AddParts(GetHighlighterType());
+        protected TestComposition Composition =>
+            _lazyComposition ??= s_baseComposition.AddParts(GetHighlighterType());
 
         internal abstract Type GetHighlighterType();
 
@@ -50,7 +51,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.KeywordHighlighting
             var textSnapshot = testDocument.GetTextBuffer().CurrentSnapshot;
             var document = workspace.CurrentSolution.GetDocument(testDocument.Id);
 
-            var service = Assert.IsType<HighlightingService>(workspace.ExportProvider.GetExportedValue<IHighlightingService>());
+            var service = Assert.IsType<HighlightingService>(
+                workspace.ExportProvider.GetExportedValue<IHighlightingService>()
+            );
 
             var root = await document.GetSyntaxRootAsync();
 
@@ -66,7 +69,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.KeywordHighlighting
             }
         }
 
-        private static void CheckSpans(SyntaxTree tree, IList<TextSpan> expectedHighlightSpans, List<TextSpan> highlightSpans)
+        private static void CheckSpans(
+            SyntaxTree tree,
+            IList<TextSpan> expectedHighlightSpans,
+            List<TextSpan> highlightSpans
+        )
         {
             for (var j = 0; j < Math.Max(highlightSpans.Count, expectedHighlightSpans.Count); j++)
             {
@@ -80,7 +87,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.KeywordHighlighting
                 {
                     var expectedLineSpan = tree.GetLineSpan(expectedHighlightSpans[j]).Span;
                     var expectedText = tree.GetText().ToString(expectedHighlightSpans[j]);
-                    Assert.False(true, $"Missing highlight at {expectedLineSpan}: '{expectedText}'");
+                    Assert.False(
+                        true,
+                        $"Missing highlight at {expectedLineSpan}: '{expectedText}'"
+                    );
                 }
 
                 var expected = expectedHighlightSpans[j];

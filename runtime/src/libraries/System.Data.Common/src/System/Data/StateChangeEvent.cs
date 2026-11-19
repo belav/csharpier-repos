@@ -16,18 +16,12 @@ namespace System.Data
 
         public ConnectionState CurrentState
         {
-            get
-            {
-                return _currentState;
-            }
+            get { return _currentState; }
         }
 
         public ConnectionState OriginalState
         {
-            get
-            {
-                return _originalState;
-            }
+            get { return _originalState; }
         }
     }
 }

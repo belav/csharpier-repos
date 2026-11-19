@@ -16,8 +16,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
     [Trait(Traits.Feature, Traits.Features.CodeActionsWrapping)]
     public class ArgumentWrappingTests : AbstractWrappingTests
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpWrappingCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpWrappingCodeRefactoringProvider();
 
         [Fact]
         public async Task TestMissingWithSyntaxError()
@@ -29,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         Goobar([||]i, j
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -42,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         Goobar([|i|], j);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -55,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         a.[||]b.Goobar(i, j);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -68,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         Goobar([||]i);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -82,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                             k);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -96,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         ");
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -117,7 +125,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                                j);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -138,7 +147,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                                  j);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -159,7 +169,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                                  j);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -205,7 +216,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                             i, j);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -254,7 +266,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                             i, j, k);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -313,7 +326,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                             i, j, k);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -329,8 +343,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                     }
                 }
                 """,
-GetIndentionColumn(30),
-"""
+                GetIndentionColumn(30),
+                """
 class C {
     void Goo() {
         this.Goobar(i,
@@ -345,7 +359,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         this.Goobar(
@@ -361,7 +375,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         this.Goobar(i,
@@ -376,14 +390,14 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         this.Goobar(i, j, k, l, m, n, o, p, n);
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         this.Goobar(
@@ -391,7 +405,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         this.Goobar(i, j, k, l,
@@ -400,7 +414,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         this.Goobar(
@@ -409,14 +423,15 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         this.Goobar(i, j, k, l,
             m, n, o, p, n);
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -432,8 +447,8 @@ class C {
                     }
                 }
                 """,
-GetIndentionColumn(30),
-"""
+                GetIndentionColumn(30),
+                """
 class C {
     void Goo() {
         this.Goobar(i,
@@ -445,7 +460,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         this.Goobar(
@@ -458,7 +473,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         this.Goobar(i,
@@ -470,14 +485,14 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         this.Goobar(i, jj, kkkkk, llllllll, mmmmmmmmmmmmmmmmmm, nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn);
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         this.Goobar(
@@ -485,7 +500,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         this.Goobar(i, jj,
@@ -496,7 +511,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         this.Goobar(
@@ -507,7 +522,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         this.Goobar(i, jj,
@@ -516,7 +531,8 @@ class C {
             nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn);
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -532,8 +548,8 @@ class C {
                     }
                 }
                 """,
-GetIndentionColumn(25),
-"""
+                GetIndentionColumn(25),
+                """
 class C {
     void Goo() {
         this.Goobar(iiiii,
@@ -545,7 +561,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         this.Goobar(
@@ -558,7 +574,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         this.Goobar(iiiii,
@@ -570,14 +586,14 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         this.Goobar(iiiii, jjjjj, kkkkk, lllll, mmmmm, nnnnn);
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         this.Goobar(
@@ -585,7 +601,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         this.Goobar(
@@ -595,7 +611,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         this.Goobar(iiiii,
@@ -604,7 +620,8 @@ class C {
             nnnnn);
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -620,8 +637,8 @@ class C {
                     }
                 }
                 """,
-GetIndentionColumn(20),
-"""
+                GetIndentionColumn(20),
+                """
 class C {
     void Bar() {
         a.Goobar(iiiii,
@@ -633,7 +650,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(
@@ -646,7 +663,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(iiiii,
@@ -658,21 +675,22 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(iiiii, jjjjj, kkkkk, lllll, mmmmm, nnnnn);
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(
             iiiii, jjjjj, kkkkk, lllll, mmmmm, nnnnn);
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -688,8 +706,8 @@ class C {
                     }
                 }
                 """,
-GetIndentionColumn(30),
-"""
+                GetIndentionColumn(30),
+                """
 class C {
     void Bar() {
         a.Goobar(i,
@@ -701,7 +719,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(
@@ -714,7 +732,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(i,
@@ -726,14 +744,14 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(i, jj, kkkk, lll, mm, n) {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(
@@ -741,7 +759,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(i, jj, kkkk,
@@ -749,7 +767,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(
@@ -758,14 +776,15 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(i, jj, kkkk,
             lll, mm, n) {
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -784,8 +803,8 @@ class C {
                     }
                 }
                 """,
-GetIndentionColumn(30),
-"""
+                GetIndentionColumn(30),
+                """
 class C {
     void Bar() {
         a.Goobar(
@@ -798,7 +817,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(iiiii,
@@ -810,14 +829,14 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(iiiii, jjjjj, kkkkk, lllll, mmmmm, nnnnn);
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(
@@ -825,7 +844,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(iiiii, jjjjj,
@@ -834,7 +853,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(
@@ -844,7 +863,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(iiiii, jjjjj,
@@ -852,7 +871,8 @@ class C {
             mmmmm, nnnnn);
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -872,8 +892,8 @@ class C {
                     }
                 }
                 """,
-GetIndentionColumn(30),
-"""
+                GetIndentionColumn(30),
+                """
 class C {
     void Bar() {
         a.Goobar(i,
@@ -885,7 +905,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(i,
@@ -897,14 +917,14 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(i, jj, kkkk, lll, mm, n);
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(
@@ -912,7 +932,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(i, jj, kkkk,
@@ -920,7 +940,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(
@@ -929,14 +949,15 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         a.Goobar(i, jj, kkkk,
             lll, mm, n);
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -958,7 +979,8 @@ class C {
                                      c];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -980,7 +1002,8 @@ class C {
                                      c];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1002,7 +1025,8 @@ class C {
                                         c);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1024,7 +1048,8 @@ class C {
                                         c);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/50104")]
@@ -1053,7 +1078,8 @@ class C {
 
                     public Program(object o1, object o2) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1073,7 +1099,8 @@ class C {
                                       c) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1093,7 +1120,8 @@ class C {
                                       c) {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63732")]
@@ -1106,7 +1134,8 @@ class C {
                         Goobar [||])
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63732")]
@@ -1119,7 +1148,8 @@ class C {
                         Goobar [||]i, j)
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63732")]
@@ -1132,7 +1162,8 @@ class C {
                         Goobar([||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63732")]
@@ -1145,7 +1176,8 @@ class C {
                         Goobar([||]i, j
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

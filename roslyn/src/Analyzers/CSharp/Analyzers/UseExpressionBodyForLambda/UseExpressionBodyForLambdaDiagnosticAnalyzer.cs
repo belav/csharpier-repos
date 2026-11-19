@@ -15,30 +15,50 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class UseExpressionBodyForLambdaDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal sealed class UseExpressionBodyForLambdaDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
-        private static readonly DiagnosticDescriptor s_useExpressionBodyForLambda = CreateDescriptorWithId(UseExpressionBodyForLambdaHelpers.UseExpressionBodyTitle, UseExpressionBodyForLambdaHelpers.UseExpressionBodyTitle);
-        private static readonly DiagnosticDescriptor s_useBlockBodyForLambda = CreateDescriptorWithId(UseExpressionBodyForLambdaHelpers.UseBlockBodyTitle, UseExpressionBodyForLambdaHelpers.UseBlockBodyTitle);
+        private static readonly DiagnosticDescriptor s_useExpressionBodyForLambda =
+            CreateDescriptorWithId(
+                UseExpressionBodyForLambdaHelpers.UseExpressionBodyTitle,
+                UseExpressionBodyForLambdaHelpers.UseExpressionBodyTitle
+            );
+        private static readonly DiagnosticDescriptor s_useBlockBodyForLambda =
+            CreateDescriptorWithId(
+                UseExpressionBodyForLambdaHelpers.UseBlockBodyTitle,
+                UseExpressionBodyForLambdaHelpers.UseBlockBodyTitle
+            );
 
-        public UseExpressionBodyForLambdaDiagnosticAnalyzer() : base(
-            ImmutableDictionary<DiagnosticDescriptor, Options.IOption2>.Empty
-                .Add(s_useExpressionBodyForLambda, CSharpCodeStyleOptions.PreferExpressionBodiedLambdas)
-                .Add(s_useBlockBodyForLambda, CSharpCodeStyleOptions.PreferExpressionBodiedLambdas))
-        {
-        }
+        public UseExpressionBodyForLambdaDiagnosticAnalyzer()
+            : base(
+                ImmutableDictionary<DiagnosticDescriptor, Options.IOption2>
+                    .Empty.Add(
+                        s_useExpressionBodyForLambda,
+                        CSharpCodeStyleOptions.PreferExpressionBodiedLambdas
+                    )
+                    .Add(
+                        s_useBlockBodyForLambda,
+                        CSharpCodeStyleOptions.PreferExpressionBodiedLambdas
+                    )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxNodeAction(AnalyzeIfEnabled,
-                SyntaxKind.SimpleLambdaExpression, SyntaxKind.ParenthesizedLambdaExpression);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(
+                AnalyzeIfEnabled,
+                SyntaxKind.SimpleLambdaExpression,
+                SyntaxKind.ParenthesizedLambdaExpression
+            );
 
         private void AnalyzeIfEnabled(SyntaxNodeAnalysisContext context)
         {
             var analyzerOptions = context.Options;
             var syntaxTree = context.SemanticModel.SyntaxTree;
-            var optionValue = UseExpressionBodyForLambdaHelpers.GetCodeStyleOption(analyzerOptions.GetAnalyzerOptions(syntaxTree));
+            var optionValue = UseExpressionBodyForLambdaHelpers.GetCodeStyleOption(
+                analyzerOptions.GetAnalyzerOptions(syntaxTree)
+            );
             if (ShouldSkipAnalysis(context, optionValue.Notification))
                 return;
 
@@ -57,10 +77,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             AnalyzeSyntax(context, optionValue);
         }
 
-        private static void AnalyzeSyntax(SyntaxNodeAnalysisContext context, CodeStyleOption2<ExpressionBodyPreference> option)
+        private static void AnalyzeSyntax(
+            SyntaxNodeAnalysisContext context,
+            CodeStyleOption2<ExpressionBodyPreference> option
+        )
         {
             var declaration = (LambdaExpressionSyntax)context.Node;
-            var diagnostic = AnalyzeSyntax(context.SemanticModel, option, declaration, context.CancellationToken);
+            var diagnostic = AnalyzeSyntax(
+                context.SemanticModel,
+                option,
+                declaration,
+                context.CancellationToken
+            );
             if (diagnostic != null)
             {
                 context.ReportDiagnostic(diagnostic);
@@ -68,10 +96,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
         }
 
         private static Diagnostic? AnalyzeSyntax(
-            SemanticModel semanticModel, CodeStyleOption2<ExpressionBodyPreference> option,
-            LambdaExpressionSyntax declaration, CancellationToken cancellationToken)
+            SemanticModel semanticModel,
+            CodeStyleOption2<ExpressionBodyPreference> option,
+            LambdaExpressionSyntax declaration,
+            CancellationToken cancellationToken
+        )
         {
-            if (UseExpressionBodyForLambdaHelpers.CanOfferUseExpressionBody(option.Value, declaration, declaration.GetLanguageVersion(), cancellationToken))
+            if (
+                UseExpressionBodyForLambdaHelpers.CanOfferUseExpressionBody(
+                    option.Value,
+                    declaration,
+                    declaration.GetLanguageVersion(),
+                    cancellationToken
+                )
+            )
             {
                 var location = GetDiagnosticLocation(declaration);
 
@@ -79,33 +117,58 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
                 var properties = ImmutableDictionary<string, string?>.Empty;
                 return DiagnosticHelper.Create(
                     s_useExpressionBodyForLambda,
-                    location, option.Notification, additionalLocations, properties);
+                    location,
+                    option.Notification,
+                    additionalLocations,
+                    properties
+                );
             }
 
-            if (UseExpressionBodyForLambdaHelpers.CanOfferUseBlockBody(semanticModel, option.Value, declaration, cancellationToken))
+            if (
+                UseExpressionBodyForLambdaHelpers.CanOfferUseBlockBody(
+                    semanticModel,
+                    option.Value,
+                    declaration,
+                    cancellationToken
+                )
+            )
             {
                 // They have an expression body.  Create a diagnostic to convert it to a block
-                // if they don't want expression bodies for this member.  
+                // if they don't want expression bodies for this member.
                 var location = GetDiagnosticLocation(declaration);
 
                 var properties = ImmutableDictionary<string, string?>.Empty;
                 var additionalLocations = ImmutableArray.Create(declaration.GetLocation());
                 return DiagnosticHelper.Create(
                     s_useBlockBodyForLambda,
-                    location, option.Notification, additionalLocations, properties);
+                    location,
+                    option.Notification,
+                    additionalLocations,
+                    properties
+                );
             }
 
             return null;
         }
 
-        private static Location GetDiagnosticLocation(LambdaExpressionSyntax declaration)
-            => Location.Create(declaration.SyntaxTree,
-                    TextSpan.FromBounds(declaration.SpanStart, declaration.ArrowToken.Span.End));
+        private static Location GetDiagnosticLocation(LambdaExpressionSyntax declaration) =>
+            Location.Create(
+                declaration.SyntaxTree,
+                TextSpan.FromBounds(declaration.SpanStart, declaration.ArrowToken.Span.End)
+            );
 
         private static DiagnosticDescriptor CreateDescriptorWithId(
-            LocalizableString title, LocalizableString message)
+            LocalizableString title,
+            LocalizableString message
+        )
         {
-            return CreateDescriptorWithId(IDEDiagnosticIds.UseExpressionBodyForLambdaExpressionsDiagnosticId, EnforceOnBuildValues.UseExpressionBodyForLambdaExpressions, hasAnyCodeStyleOption: true, title, message);
+            return CreateDescriptorWithId(
+                IDEDiagnosticIds.UseExpressionBodyForLambdaExpressionsDiagnosticId,
+                EnforceOnBuildValues.UseExpressionBodyForLambdaExpressions,
+                hasAnyCodeStyleOption: true,
+                title,
+                message
+            );
         }
     }
 }

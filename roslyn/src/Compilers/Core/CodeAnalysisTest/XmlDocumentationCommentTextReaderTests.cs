@@ -25,10 +25,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.Equal(109, charsRead);
             Assert.Equal(
-                XmlDocumentationCommentTextReader.Reader.RootStart +
-                XmlDocumentationCommentTextReader.Reader.CurrentStart +
-                "abc" +
-                XmlDocumentationCommentTextReader.Reader.CurrentEnd, new string(buffer, 0, charsRead));
+                XmlDocumentationCommentTextReader.Reader.RootStart
+                    + XmlDocumentationCommentTextReader.Reader.CurrentStart
+                    + "abc"
+                    + XmlDocumentationCommentTextReader.Reader.CurrentEnd,
+                new string(buffer, 0, charsRead)
+            );
 
             charsRead = s.Read(buffer, 0, 10);
 
@@ -41,9 +43,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.Equal(76, charsRead);
             Assert.Equal(
-                XmlDocumentationCommentTextReader.Reader.CurrentStart +
-                "hello" +
-                XmlDocumentationCommentTextReader.Reader.CurrentEnd, new string(buffer, 0, charsRead));
+                XmlDocumentationCommentTextReader.Reader.CurrentStart
+                    + "hello"
+                    + XmlDocumentationCommentTextReader.Reader.CurrentEnd,
+                new string(buffer, 0, charsRead)
+            );
 
             s.SetText("");
 
@@ -51,9 +55,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.Equal(71, charsRead);
             Assert.Equal(
-                XmlDocumentationCommentTextReader.Reader.CurrentStart +
-                "" +
-                XmlDocumentationCommentTextReader.Reader.CurrentEnd, new string(buffer, 0, charsRead));
+                XmlDocumentationCommentTextReader.Reader.CurrentStart
+                    + ""
+                    + XmlDocumentationCommentTextReader.Reader.CurrentEnd,
+                new string(buffer, 0, charsRead)
+            );
 
             s.SetText("xxxxxxxxxxxxxxxxxxxxxxxx");
 
@@ -61,9 +67,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.Equal(95, charsRead);
             Assert.Equal(
-                XmlDocumentationCommentTextReader.Reader.CurrentStart +
-                "xxxxxxxxxxxxxxxxxxxxxxxx" +
-                XmlDocumentationCommentTextReader.Reader.CurrentEnd, new string(buffer, 0, charsRead));
+                XmlDocumentationCommentTextReader.Reader.CurrentStart
+                    + "xxxxxxxxxxxxxxxxxxxxxxxx"
+                    + XmlDocumentationCommentTextReader.Reader.CurrentEnd,
+                new string(buffer, 0, charsRead)
+            );
         }
 
         [Fact]

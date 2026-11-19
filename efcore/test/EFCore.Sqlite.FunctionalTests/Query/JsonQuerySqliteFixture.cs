@@ -5,6 +5,5 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class JsonQuerySqliteFixture : JsonQueryFixtureBase
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqliteTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 }

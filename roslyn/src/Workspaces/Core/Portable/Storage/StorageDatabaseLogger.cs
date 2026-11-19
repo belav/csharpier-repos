@@ -20,10 +20,12 @@ namespace Microsoft.CodeAnalysis.Storage
         private string? _reportedExceptionMessage;
 #pragma warning restore IDE0052 // Remove unread private members
 
-        private readonly ConcurrentDictionary<Type, Exception> _set = new(concurrencyLevel: 2, capacity: 10);
+        private readonly ConcurrentDictionary<Type, Exception> _set = new(
+            concurrencyLevel: 2,
+            capacity: 10
+        );
 
-        internal static void LogException(Exception ex)
-            => Instance.LogExceptionWorker(ex);
+        internal static void LogException(Exception ex) => Instance.LogExceptionWorker(ex);
 
         private void LogExceptionWorker(Exception ex)
         {
@@ -37,12 +39,15 @@ namespace Microsoft.CodeAnalysis.Storage
                 return;
             }
 
-            Logger.Log(FunctionId.StorageDatabase_Exceptions, KeyValueLogMessage.Create(m =>
-            {
-                // this is okay since it is our exception
-                m[Kind] = ex.GetType().ToString();
-                m[Reason] = ex.ToString();
-            }));
+            Logger.Log(
+                FunctionId.StorageDatabase_Exceptions,
+                KeyValueLogMessage.Create(m =>
+                {
+                    // this is okay since it is our exception
+                    m[Kind] = ex.GetType().ToString();
+                    m[Reason] = ex.ToString();
+                })
+            );
         }
     }
 }

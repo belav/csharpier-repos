@@ -23,9 +23,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         /// </summary>
         protected uint CurrentlyExecutingCommand { get; private set; }
 
-        public AbstractOleCommandTarget(
-            IWpfTextView wpfTextView,
-            IComponentModel componentModel)
+        public AbstractOleCommandTarget(IWpfTextView wpfTextView, IComponentModel componentModel)
         {
             Contract.ThrowIfNull(wpfTextView);
             Contract.ThrowIfNull(componentModel);
@@ -68,10 +66,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             return this;
         }
 
-        protected virtual ITextBuffer? GetSubjectBufferContainingCaret()
-            => WpfTextView.GetBufferContainingCaret();
+        protected virtual ITextBuffer? GetSubjectBufferContainingCaret() =>
+            WpfTextView.GetBufferContainingCaret();
 
-        protected virtual ITextView ConvertTextView()
-            => WpfTextView;
+        protected virtual ITextView ConvertTextView() => WpfTextView;
     }
 }

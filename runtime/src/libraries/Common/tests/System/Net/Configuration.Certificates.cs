@@ -30,31 +30,76 @@ namespace System.Net.Test.Common
             static Certificates()
             {
                 Mutex mutex =
-                    PlatformDetection.IsInAppContainer ? new Mutex(initiallyOwned: false, "Local\\CoreFXTest.Configuration.Certificates.LoadPfxCertificate") : // UWP doesn't support Global mutexes
-                    PlatformDetection.IsWindows ? new Mutex(initiallyOwned: false, "Global\\CoreFXTest.Configuration.Certificates.LoadPfxCertificate") :
-                    null;
+                    PlatformDetection.IsInAppContainer
+                        ? new Mutex(
+                            initiallyOwned: false,
+                            "Local\\CoreFXTest.Configuration.Certificates.LoadPfxCertificate"
+                        )
+                    : // UWP doesn't support Global mutexes
+                    PlatformDetection.IsWindows
+                        ? new Mutex(
+                            initiallyOwned: false,
+                            "Global\\CoreFXTest.Configuration.Certificates.LoadPfxCertificate"
+                        )
+                    : null;
                 using (mutex)
                 {
                     try
                     {
-                        byte[] serverCertificateBytes = File.ReadAllBytes(Path.Combine(TestDataFolder, "testservereku.contoso.com.pfx"));
-                        byte[] clientCertificateBytes = File.ReadAllBytes(Path.Combine(TestDataFolder, "testclienteku.contoso.com.pfx"));
-                        byte[] noEKUCertificateBytes = File.ReadAllBytes(Path.Combine(TestDataFolder, "testnoeku.contoso.com.pfx"));
-                        byte[] selfSignedServerCertificateBytes = File.ReadAllBytes(Path.Combine(TestDataFolder, "testselfsignedservereku.contoso.com.pfx"));
-                        byte[] selfSignedClientCertificateBytes = File.ReadAllBytes(Path.Combine(TestDataFolder, "testselfsignedclienteku.contoso.com.pfx"));
+                        byte[] serverCertificateBytes = File.ReadAllBytes(
+                            Path.Combine(TestDataFolder, "testservereku.contoso.com.pfx")
+                        );
+                        byte[] clientCertificateBytes = File.ReadAllBytes(
+                            Path.Combine(TestDataFolder, "testclienteku.contoso.com.pfx")
+                        );
+                        byte[] noEKUCertificateBytes = File.ReadAllBytes(
+                            Path.Combine(TestDataFolder, "testnoeku.contoso.com.pfx")
+                        );
+                        byte[] selfSignedServerCertificateBytes = File.ReadAllBytes(
+                            Path.Combine(TestDataFolder, "testselfsignedservereku.contoso.com.pfx")
+                        );
+                        byte[] selfSignedClientCertificateBytes = File.ReadAllBytes(
+                            Path.Combine(TestDataFolder, "testselfsignedclienteku.contoso.com.pfx")
+                        );
 
                         // On Windows, applications should not import PFX files in parallel to avoid a known system-level
                         // race condition bug in native code which can cause crashes/corruption of the certificate state.
-                        Assert.True(mutex?.WaitOne(MutexTimeoutMs) ?? true, "Could not acquire the global certificate mutex.");
+                        Assert.True(
+                            mutex?.WaitOne(MutexTimeoutMs) ?? true,
+                            "Could not acquire the global certificate mutex."
+                        );
                         try
                         {
-                            s_serverCertificate = new X509Certificate2(serverCertificateBytes, CertificatePassword, X509KeyStorageFlags.Exportable);
-                            s_clientCertificate = new X509Certificate2(clientCertificateBytes, CertificatePassword, X509KeyStorageFlags.Exportable);
-                            s_noEKUCertificate = new X509Certificate2(noEKUCertificateBytes, CertificatePassword, X509KeyStorageFlags.Exportable);
-                            s_selfSignedServerCertificate = new X509Certificate2(selfSignedServerCertificateBytes, CertificatePassword, X509KeyStorageFlags.Exportable);
-                            s_selfSignedClientCertificate = new X509Certificate2(selfSignedClientCertificateBytes, CertificatePassword, X509KeyStorageFlags.Exportable);
+                            s_serverCertificate = new X509Certificate2(
+                                serverCertificateBytes,
+                                CertificatePassword,
+                                X509KeyStorageFlags.Exportable
+                            );
+                            s_clientCertificate = new X509Certificate2(
+                                clientCertificateBytes,
+                                CertificatePassword,
+                                X509KeyStorageFlags.Exportable
+                            );
+                            s_noEKUCertificate = new X509Certificate2(
+                                noEKUCertificateBytes,
+                                CertificatePassword,
+                                X509KeyStorageFlags.Exportable
+                            );
+                            s_selfSignedServerCertificate = new X509Certificate2(
+                                selfSignedServerCertificateBytes,
+                                CertificatePassword,
+                                X509KeyStorageFlags.Exportable
+                            );
+                            s_selfSignedClientCertificate = new X509Certificate2(
+                                selfSignedClientCertificateBytes,
+                                CertificatePassword,
+                                X509KeyStorageFlags.Exportable
+                            );
                         }
-                        finally { mutex?.ReleaseMutex(); }
+                        finally
+                        {
+                            mutex?.ReleaseMutex();
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -67,11 +112,20 @@ namespace System.Net.Test.Common
             // These Get* methods make a copy of the certificates so that consumers own the lifetime of the
             // certificates handed back.  Consumers are expected to dispose of their certs when done with them.
 
-            public static X509Certificate2 GetServerCertificate() => new X509Certificate2(s_serverCertificate);
-            public static X509Certificate2 GetClientCertificate() => new X509Certificate2(s_clientCertificate);
-            public static X509Certificate2 GetNoEKUCertificate() => new X509Certificate2(s_noEKUCertificate);
-            public static X509Certificate2 GetSelfSignedServerCertificate() => new X509Certificate2(s_selfSignedServerCertificate);
-            public static X509Certificate2 GetSelfSignedClientCertificate() => new X509Certificate2(s_selfSignedClientCertificate);
+            public static X509Certificate2 GetServerCertificate() =>
+                new X509Certificate2(s_serverCertificate);
+
+            public static X509Certificate2 GetClientCertificate() =>
+                new X509Certificate2(s_clientCertificate);
+
+            public static X509Certificate2 GetNoEKUCertificate() =>
+                new X509Certificate2(s_noEKUCertificate);
+
+            public static X509Certificate2 GetSelfSignedServerCertificate() =>
+                new X509Certificate2(s_selfSignedServerCertificate);
+
+            public static X509Certificate2 GetSelfSignedClientCertificate() =>
+                new X509Certificate2(s_selfSignedClientCertificate);
 
             public static X509Certificate2 GetSelfSigned13ServerCertificate()
             {
@@ -81,12 +135,28 @@ namespace System.Net.Test.Common
 
                     using (ECDsa dsa = ECDsa.Create())
                     {
-                        var certReq = new CertificateRequest("CN=testservereku.contoso.com", dsa, HashAlgorithmName.SHA256);
-                        certReq.CertificateExtensions.Add(new X509BasicConstraintsExtension(false, false, 0, false));
-                        certReq.CertificateExtensions.Add(new X509EnhancedKeyUsageExtension(new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") }, false));
-                        certReq.CertificateExtensions.Add(new X509KeyUsageExtension(X509KeyUsageFlags.DigitalSignature, false));
+                        var certReq = new CertificateRequest(
+                            "CN=testservereku.contoso.com",
+                            dsa,
+                            HashAlgorithmName.SHA256
+                        );
+                        certReq.CertificateExtensions.Add(
+                            new X509BasicConstraintsExtension(false, false, 0, false)
+                        );
+                        certReq.CertificateExtensions.Add(
+                            new X509EnhancedKeyUsageExtension(
+                                new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
+                                false
+                            )
+                        );
+                        certReq.CertificateExtensions.Add(
+                            new X509KeyUsageExtension(X509KeyUsageFlags.DigitalSignature, false)
+                        );
 
-                        X509Certificate2 innerCert = certReq.CreateSelfSigned(DateTimeOffset.UtcNow.AddMonths(-1), DateTimeOffset.UtcNow.AddMonths(1));
+                        X509Certificate2 innerCert = certReq.CreateSelfSigned(
+                            DateTimeOffset.UtcNow.AddMonths(-1),
+                            DateTimeOffset.UtcNow.AddMonths(1)
+                        );
 
                         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                         {
@@ -101,7 +171,10 @@ namespace System.Net.Test.Common
                         }
                     }
 
-                    if (Interlocked.CompareExchange(ref s_selfSigned13ServerCertificate, cert, null) != null)
+                    if (
+                        Interlocked.CompareExchange(ref s_selfSigned13ServerCertificate, cert, null)
+                        != null
+                    )
                     {
                         // Lost a race to create.
                         cert.Dispose();

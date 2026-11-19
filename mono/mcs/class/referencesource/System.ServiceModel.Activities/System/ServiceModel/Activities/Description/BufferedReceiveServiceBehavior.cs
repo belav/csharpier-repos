@@ -20,30 +20,39 @@ namespace System.ServiceModel.Activities.Description
 
         public int MaxPendingMessagesPerChannel
         {
-            get
-            {
-                return this.maxPendingMessagesPerChannel;
-            }
+            get { return this.maxPendingMessagesPerChannel; }
             set
             {
                 if (value <= 0)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange("value", value, SR.MaxPendingMessagesPerChannelMustBeGreaterThanZero);
+                    throw FxTrace.Exception.ArgumentOutOfRange(
+                        "value",
+                        value,
+                        SR.MaxPendingMessagesPerChannelMustBeGreaterThanZero
+                    );
                 }
                 this.maxPendingMessagesPerChannel = value;
             }
         }
 
-        public void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
+        public void ApplyDispatchBehavior(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase
+        )
         {
             if (serviceHostBase is WorkflowServiceHost)
             {
-                foreach (ChannelDispatcherBase channelDispatcherBase in serviceHostBase.ChannelDispatchers)
+                foreach (
+                    ChannelDispatcherBase channelDispatcherBase in serviceHostBase.ChannelDispatchers
+                )
                 {
-                    ChannelDispatcher channelDispatcher = channelDispatcherBase as ChannelDispatcher;
+                    ChannelDispatcher channelDispatcher =
+                        channelDispatcherBase as ChannelDispatcher;
                     if (channelDispatcher != null)
                     {
-                        foreach (EndpointDispatcher endpointDispatcher in channelDispatcher.Endpoints)
+                        foreach (
+                            EndpointDispatcher endpointDispatcher in channelDispatcher.Endpoints
+                        )
                         {
                             if (WorkflowServiceBehavior.IsWorkflowEndpoint(endpointDispatcher))
                             {
@@ -51,7 +60,11 @@ namespace System.ServiceModel.Activities.Description
                                 endpointDispatcher.DispatchRuntime.PreserveMessage = true;
 
                                 // Enable BufferedReceive processing for each operation
-                                foreach (DispatchOperation dispatchOperation in endpointDispatcher.DispatchRuntime.Operations)
+                                foreach (
+                                    DispatchOperation dispatchOperation in endpointDispatcher
+                                        .DispatchRuntime
+                                        .Operations
+                                )
                                 {
                                     dispatchOperation.BufferedReceiveEnabled = true;
                                 }
@@ -60,7 +73,9 @@ namespace System.ServiceModel.Activities.Description
                     }
                 }
 
-                serviceHostBase.Extensions.Add(new BufferedReceiveManager(this.MaxPendingMessagesPerChannel));
+                serviceHostBase.Extensions.Add(
+                    new BufferedReceiveManager(this.MaxPendingMessagesPerChannel)
+                );
             }
         }
 
@@ -73,20 +88,27 @@ namespace System.ServiceModel.Activities.Description
                 {
                     foreach (OperationDescription operation in serviceEndpoint.Contract.Operations)
                     {
-                        ReceiveContextEnabledAttribute receiveContextEnabled = operation.Behaviors.Find<ReceiveContextEnabledAttribute>();
+                        ReceiveContextEnabledAttribute receiveContextEnabled =
+                            operation.Behaviors.Find<ReceiveContextEnabledAttribute>();
                         if (receiveContextEnabled == null || !receiveContextEnabled.ManualControl)
                         {
                             throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(SR.BufferedReceiveRequiresReceiveContext(operation.Name)));
+                                new InvalidOperationException(
+                                    SR.BufferedReceiveRequiresReceiveContext(operation.Name)
+                                )
+                            );
                         }
                     }
                 }
             }
         }
 
-        public void AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection bindingParameters)
-        {
-        }
+        public void AddBindingParameters(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection bindingParameters
+        ) { }
 
         // See WorkflowServiceBehavior.cs for another implementation of IsWorkflowEndpoint which
         // operates against EndpointDispatchers instead of ServiceEndpoints

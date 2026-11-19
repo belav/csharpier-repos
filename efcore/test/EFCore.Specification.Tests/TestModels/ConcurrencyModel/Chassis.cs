@@ -7,13 +7,8 @@ public class Chassis
 {
     public class ChassisProxy : Chassis, IF1Proxy
     {
-        public ChassisProxy(
-            ILazyLoader loader,
-            int teamId,
-            string name)
-            : base(loader, teamId, name)
-        {
-        }
+        public ChassisProxy(ILazyLoader loader, int teamId, string name)
+            : base(loader, teamId, name) { }
 
         public bool CreatedCalled { get; set; }
         public bool InitializingCalled { get; set; }
@@ -23,14 +18,9 @@ public class Chassis
     private readonly ILazyLoader _loader;
     private Team _team;
 
-    public Chassis()
-    {
-    }
+    public Chassis() { }
 
-    private Chassis(
-        ILazyLoader loader,
-        int teamId,
-        string name)
+    private Chassis(ILazyLoader loader, int teamId, string name)
     {
         _loader = loader;
         TeamId = teamId;

@@ -1,22 +1,22 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>Microsoft</OWNER>
 
-namespace System.Threading 
+namespace System.Threading
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
 
     [Serializable]
-    public sealed class ThreadStartException : SystemException 
+    public sealed class ThreadStartException : SystemException
     {
-        private ThreadStartException() 
-            : base(Environment.GetResourceString("Arg_ThreadStartException")) 
+        private ThreadStartException()
+            : base(Environment.GetResourceString("Arg_ThreadStartException"))
         {
             SetErrorCode(__HResults.COR_E_THREADSTART);
         }
@@ -28,12 +28,7 @@ namespace System.Threading
         }
 
         //required for serialization
-        internal ThreadStartException(SerializationInfo info, StreamingContext context) 
-            : base(info, context) 
-        {
-        }
-   
+        internal ThreadStartException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }
-
-

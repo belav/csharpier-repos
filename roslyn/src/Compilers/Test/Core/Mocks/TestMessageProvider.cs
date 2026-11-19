@@ -18,7 +18,11 @@ namespace Roslyn.Test.Utilities
             get { throw new NotImplementedException(); }
         }
 
-        public override Diagnostic CreateDiagnostic(int code, Location location, params object[] args)
+        public override Diagnostic CreateDiagnostic(
+            int code,
+            Location location,
+            params object[] args
+        )
         {
             throw new NotImplementedException();
         }
@@ -28,12 +32,20 @@ namespace Roslyn.Test.Utilities
             throw new NotImplementedException();
         }
 
-        public override string GetMessagePrefix(string id, DiagnosticSeverity severity, bool isWarningAsError, CultureInfo culture)
+        public override string GetMessagePrefix(
+            string id,
+            DiagnosticSeverity severity,
+            bool isWarningAsError,
+            CultureInfo culture
+        )
         {
             throw new NotImplementedException();
         }
 
-        public override ReportDiagnostic GetDiagnosticReport(DiagnosticInfo diagnosticInfo, CompilationOptions options)
+        public override ReportDiagnostic GetDiagnosticReport(
+            DiagnosticInfo diagnosticInfo,
+            CompilationOptions options
+        )
         {
             throw new NotImplementedException();
         }
@@ -53,7 +65,8 @@ namespace Roslyn.Test.Utilities
             get { throw new NotImplementedException(); }
         }
 
-        public override int ERR_MultipleAnalyzerConfigsInSameDir => throw new NotImplementedException();
+        public override int ERR_MultipleAnalyzerConfigsInSameDir =>
+            throw new NotImplementedException();
 
         public override int ERR_ExpectedSingleScript
         {
@@ -255,47 +268,97 @@ namespace Roslyn.Test.Utilities
             get { throw new NotImplementedException(); }
         }
 
-        public override void ReportDuplicateMetadataReferenceStrong(DiagnosticBag diagnostics, Location location, MetadataReference reference, AssemblyIdentity identity, MetadataReference equivalentReference, AssemblyIdentity equivalentIdentity)
+        public override void ReportDuplicateMetadataReferenceStrong(
+            DiagnosticBag diagnostics,
+            Location location,
+            MetadataReference reference,
+            AssemblyIdentity identity,
+            MetadataReference equivalentReference,
+            AssemblyIdentity equivalentIdentity
+        )
         {
             throw new NotImplementedException();
         }
 
-        public override void ReportDuplicateMetadataReferenceWeak(DiagnosticBag diagnostics, Location location, MetadataReference reference, AssemblyIdentity identity, MetadataReference equivalentReference, AssemblyIdentity equivalentIdentity)
+        public override void ReportDuplicateMetadataReferenceWeak(
+            DiagnosticBag diagnostics,
+            Location location,
+            MetadataReference reference,
+            AssemblyIdentity identity,
+            MetadataReference equivalentReference,
+            AssemblyIdentity equivalentIdentity
+        )
         {
             throw new NotImplementedException();
         }
 
-        protected override void ReportInvalidAttributeArgument(DiagnosticBag diagnostics, SyntaxNode attributeSyntax, int parameterIndex, AttributeData attribute)
+        protected override void ReportInvalidAttributeArgument(
+            DiagnosticBag diagnostics,
+            SyntaxNode attributeSyntax,
+            int parameterIndex,
+            AttributeData attribute
+        )
         {
             throw new NotImplementedException();
         }
 
-        protected override void ReportInvalidNamedArgument(DiagnosticBag diagnostics, SyntaxNode attributeSyntax, int namedArgumentIndex, ITypeSymbol attributeClass, string parameterName)
+        protected override void ReportInvalidNamedArgument(
+            DiagnosticBag diagnostics,
+            SyntaxNode attributeSyntax,
+            int namedArgumentIndex,
+            ITypeSymbol attributeClass,
+            string parameterName
+        )
         {
             throw new NotImplementedException();
         }
 
-        protected override void ReportParameterNotValidForType(DiagnosticBag diagnostics, SyntaxNode attributeSyntax, int namedArgumentIndex)
+        protected override void ReportParameterNotValidForType(
+            DiagnosticBag diagnostics,
+            SyntaxNode attributeSyntax,
+            int namedArgumentIndex
+        )
         {
             throw new NotImplementedException();
         }
 
-        protected override void ReportMarshalUnmanagedTypeNotValidForFields(DiagnosticBag diagnostics, SyntaxNode attributeSyntax, int parameterIndex, string unmanagedTypeName, AttributeData attribute)
+        protected override void ReportMarshalUnmanagedTypeNotValidForFields(
+            DiagnosticBag diagnostics,
+            SyntaxNode attributeSyntax,
+            int parameterIndex,
+            string unmanagedTypeName,
+            AttributeData attribute
+        )
         {
             throw new NotImplementedException();
         }
 
-        protected override void ReportMarshalUnmanagedTypeOnlyValidForFields(DiagnosticBag diagnostics, SyntaxNode attributeSyntax, int parameterIndex, string unmanagedTypeName, AttributeData attribute)
+        protected override void ReportMarshalUnmanagedTypeOnlyValidForFields(
+            DiagnosticBag diagnostics,
+            SyntaxNode attributeSyntax,
+            int parameterIndex,
+            string unmanagedTypeName,
+            AttributeData attribute
+        )
         {
             throw new NotImplementedException();
         }
 
-        protected override void ReportAttributeParameterRequired(DiagnosticBag diagnostics, SyntaxNode attributeSyntax, string parameterName)
+        protected override void ReportAttributeParameterRequired(
+            DiagnosticBag diagnostics,
+            SyntaxNode attributeSyntax,
+            string parameterName
+        )
         {
             throw new NotImplementedException();
         }
 
-        protected override void ReportAttributeParameterRequired(DiagnosticBag diagnostics, SyntaxNode attributeSyntax, string parameterName1, string parameterName2)
+        protected override void ReportAttributeParameterRequired(
+            DiagnosticBag diagnostics,
+            SyntaxNode attributeSyntax,
+            string parameterName1,
+            string parameterName2
+        )
         {
             throw new NotImplementedException();
         }
@@ -322,153 +385,106 @@ namespace Roslyn.Test.Utilities
 
         public override int ERR_LinkedNetmoduleMetadataMustProvideFullPEImage
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override int ERR_InvalidDebugInformationFormat
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override int ERR_InvalidFileAlignment
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override int ERR_InvalidSubsystemVersion
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override int ERR_InvalidInstrumentationKind
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override int ERR_InvalidOutputName
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override int ERR_EncReferenceToAddedMember
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override int ERR_BadCompilationOptionValue
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override int ERR_MutuallyExclusiveOptions
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override int ERR_TooManyUserStrings
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override int ERR_PeWritingFailure
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override int ERR_ModuleEmitFailure
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override int ERR_EncUpdateFailedMissingAttribute
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override int ERR_BadAssemblyName
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override int ERR_BadSourceCodeKind
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override int ERR_BadDocumentationMode
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override int ERR_InvalidDebugInfo
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override int ERR_InvalidHashAlgorithmName => throw new NotImplementedException();
 
-        public override int WRN_GeneratorFailedDuringGeneration => throw new NotImplementedException();
+        public override int WRN_GeneratorFailedDuringGeneration =>
+            throw new NotImplementedException();
 
-        public override int WRN_GeneratorFailedDuringInitialization => throw new NotImplementedException();
+        public override int WRN_GeneratorFailedDuringInitialization =>
+            throw new NotImplementedException();
 
         public override int WRN_AnalyzerReferencesFramework => throw new NotImplementedException();
 
-        public override int WRN_AnalyzerReferencesNewerCompiler => throw new NotImplementedException();
+        public override int WRN_AnalyzerReferencesNewerCompiler =>
+            throw new NotImplementedException();
 
         public override int WRN_DuplicateAnalyzerReference => throw new NotImplementedException();
 
-        public override int ERR_FunctionPointerTypesInAttributeNotSupported => throw new NotImplementedException();
+        public override int ERR_FunctionPointerTypesInAttributeNotSupported =>
+            throw new NotImplementedException();
 
         public override int? WRN_ByValArraySizeConstRequired => throw new NotImplementedException();
     }

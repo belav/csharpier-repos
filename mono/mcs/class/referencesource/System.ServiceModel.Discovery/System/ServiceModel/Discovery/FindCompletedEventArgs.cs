@@ -12,7 +12,12 @@ namespace System.ServiceModel.Discovery
     {
         FindResponse result;
 
-        internal FindCompletedEventArgs(Exception error, bool cancelled, object userState, FindResponse result)
+        internal FindCompletedEventArgs(
+            Exception error,
+            bool cancelled,
+            object userState,
+            FindResponse result
+        )
             : base(error, cancelled, userState)
         {
             this.result = result;

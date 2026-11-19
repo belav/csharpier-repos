@@ -16,6 +16,6 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
         Library,
         Module,
         AppContainer,
-        WinMDObj
+        WinMDObj,
     }
 }

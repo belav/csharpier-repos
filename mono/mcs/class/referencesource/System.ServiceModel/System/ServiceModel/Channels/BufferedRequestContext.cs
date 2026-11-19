@@ -15,7 +15,6 @@ namespace System.ServiceModel.Channels
         object thisLock;
         RequestContext innerRequestContext;
 
-
         public BufferedRequestContext(RequestContext requestContext)
         {
             this.innerRequestContext = requestContext;
@@ -24,18 +23,12 @@ namespace System.ServiceModel.Channels
 
         public override Message RequestMessage
         {
-            get
-            {
-                return innerRequestContext.RequestMessage;
-            }
+            get { return innerRequestContext.RequestMessage; }
         }
 
         public RequestContext InnerRequestContext
         {
-            get
-            {
-                return innerRequestContext;
-            }
+            get { return innerRequestContext; }
         }
 
         public void DelayClose(bool delay)
@@ -100,7 +93,6 @@ namespace System.ServiceModel.Channels
             this.innerRequestContext.Close(timeout);
         }
 
-
         public override void Reply(Message message)
         {
             this.innerRequestContext.Reply(message);
@@ -111,12 +103,21 @@ namespace System.ServiceModel.Channels
             this.innerRequestContext.Reply(message, timeout);
         }
 
-        public override IAsyncResult BeginReply(Message message, AsyncCallback callback, object state)
+        public override IAsyncResult BeginReply(
+            Message message,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.innerRequestContext.BeginReply(message, callback, state);
         }
 
-        public override IAsyncResult BeginReply(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginReply(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.innerRequestContext.BeginReply(message, timeout, callback, state);
         }

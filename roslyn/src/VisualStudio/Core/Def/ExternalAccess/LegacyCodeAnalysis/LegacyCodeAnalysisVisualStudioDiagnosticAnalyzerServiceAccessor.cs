@@ -23,13 +23,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.LegacyCodeAnalysis
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LegacyCodeAnalysisVisualStudioDiagnosticAnalyzerServiceAccessor(IVisualStudioDiagnosticAnalyzerService implementation)
-            => _implementation = implementation;
+        public LegacyCodeAnalysisVisualStudioDiagnosticAnalyzerServiceAccessor(
+            IVisualStudioDiagnosticAnalyzerService implementation
+        ) => _implementation = implementation;
 
-        public IReadOnlyDictionary<string, IEnumerable<DiagnosticDescriptor>> GetAllDiagnosticDescriptors(IVsHierarchy hierarchyOpt)
-            => _implementation.GetAllDiagnosticDescriptors(hierarchyOpt);
+        public IReadOnlyDictionary<
+            string,
+            IEnumerable<DiagnosticDescriptor>
+        > GetAllDiagnosticDescriptors(IVsHierarchy hierarchyOpt) =>
+            _implementation.GetAllDiagnosticDescriptors(hierarchyOpt);
 
-        public void RunAnalyzers(IVsHierarchy hierarchyOpt)
-            => _implementation.RunAnalyzers(hierarchyOpt);
+        public void RunAnalyzers(IVsHierarchy hierarchyOpt) =>
+            _implementation.RunAnalyzers(hierarchyOpt);
     }
 }

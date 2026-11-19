@@ -35,7 +35,8 @@ namespace System
             }
 
             /// <summary>Create a copy of <see cref="Values"/>.</summary>
-            public unsafe TResult[] CloneValues<TResult>() where TResult : struct
+            public unsafe TResult[] CloneValues<TResult>()
+                where TResult : struct
             {
                 Debug.Assert(sizeof(TStorage) == sizeof(TResult));
                 return MemoryMarshal.Cast<TStorage, TResult>(Values).ToArray();

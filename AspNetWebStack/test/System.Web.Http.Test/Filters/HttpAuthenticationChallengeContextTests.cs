@@ -18,7 +18,13 @@ namespace System.Web.Http.Controllers
             IHttpActionResult result = CreateDummyResult();
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => { CreateProductUnderTest(actionContext, result); }, "actionContext");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    CreateProductUnderTest(actionContext, result);
+                },
+                "actionContext"
+            );
         }
 
         [Fact]
@@ -29,7 +35,13 @@ namespace System.Web.Http.Controllers
             IHttpActionResult result = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => { CreateProductUnderTest(actionContext, result); }, "result");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    CreateProductUnderTest(actionContext, result);
+                },
+                "result"
+            );
         }
 
         [Fact]
@@ -38,7 +50,10 @@ namespace System.Web.Http.Controllers
             // Arrange
             HttpActionContext expectedActionContext = CreateActionContext();
             IHttpActionResult result = CreateDummyResult();
-            HttpAuthenticationChallengeContext product = CreateProductUnderTest(expectedActionContext, result);
+            HttpAuthenticationChallengeContext product = CreateProductUnderTest(
+                expectedActionContext,
+                result
+            );
 
             // Act
             HttpActionContext actionContext = product.ActionContext;
@@ -53,7 +68,10 @@ namespace System.Web.Http.Controllers
             // Arrange
             HttpActionContext actionContext = CreateActionContext();
             IHttpActionResult expectedResult = CreateDummyResult();
-            HttpAuthenticationChallengeContext product = CreateProductUnderTest(actionContext, expectedResult);
+            HttpAuthenticationChallengeContext product = CreateProductUnderTest(
+                actionContext,
+                expectedResult
+            );
 
             // Act
             IHttpActionResult result = product.Result;
@@ -70,7 +88,10 @@ namespace System.Web.Http.Controllers
             {
                 HttpActionContext actionContext = CreateActionContext(expectedRequest);
                 IHttpActionResult result = CreateDummyResult();
-                HttpAuthenticationChallengeContext product = CreateProductUnderTest(actionContext, result);
+                HttpAuthenticationChallengeContext product = CreateProductUnderTest(
+                    actionContext,
+                    result
+                );
 
                 // Act
                 HttpRequestMessage request = product.Request;
@@ -86,10 +107,19 @@ namespace System.Web.Http.Controllers
             // Arrange
             HttpActionContext actionContext = CreateActionContext();
             IHttpActionResult result = CreateDummyResult();
-            HttpAuthenticationChallengeContext product = CreateProductUnderTest(actionContext, result);
+            HttpAuthenticationChallengeContext product = CreateProductUnderTest(
+                actionContext,
+                result
+            );
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => { product.Result = null; }, "value");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    product.Result = null;
+                },
+                "value"
+            );
         }
 
         private static HttpActionContext CreateActionContext()
@@ -111,8 +141,10 @@ namespace System.Web.Http.Controllers
             return new Mock<IHttpActionResult>(MockBehavior.Strict).Object;
         }
 
-        private static HttpAuthenticationChallengeContext CreateProductUnderTest(HttpActionContext actionContext,
-            IHttpActionResult result)
+        private static HttpAuthenticationChallengeContext CreateProductUnderTest(
+            HttpActionContext actionContext,
+            IHttpActionResult result
+        )
         {
             return new HttpAuthenticationChallengeContext(actionContext, result);
         }

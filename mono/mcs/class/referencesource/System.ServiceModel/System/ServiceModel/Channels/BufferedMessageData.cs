@@ -146,9 +146,7 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected virtual void OnClosed()
-        {
-        }
+        protected virtual void OnClosed() { }
 
         public RecycledMessageState TakeMessageState()
         {

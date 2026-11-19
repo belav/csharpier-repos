@@ -17,15 +17,17 @@ namespace System.ServiceModel.Channels
                 return authScheme.IsSet(AuthenticationSchemes.Anonymous);
             }
 
-            if (authType.Equals("kerberos", StringComparison.OrdinalIgnoreCase) ||
-                authType.Equals("negotiate", StringComparison.OrdinalIgnoreCase))
+            if (
+                authType.Equals("kerberos", StringComparison.OrdinalIgnoreCase)
+                || authType.Equals("negotiate", StringComparison.OrdinalIgnoreCase)
+            )
             {
                 return authScheme.IsSet(AuthenticationSchemes.Negotiate);
             }
             else if (authType.Equals("ntlm", StringComparison.OrdinalIgnoreCase))
             {
-                return authScheme.IsSet(AuthenticationSchemes.Negotiate) ||
-                    authScheme.IsSet(AuthenticationSchemes.Ntlm);
+                return authScheme.IsSet(AuthenticationSchemes.Negotiate)
+                    || authScheme.IsSet(AuthenticationSchemes.Ntlm);
             }
 
             AuthenticationSchemes authTypeScheme;
@@ -56,12 +58,18 @@ namespace System.ServiceModel.Channels
             return result;
         }
 
-        public static bool IsSet(this AuthenticationSchemes thisPtr, AuthenticationSchemes authenticationSchemes)
+        public static bool IsSet(
+            this AuthenticationSchemes thisPtr,
+            AuthenticationSchemes authenticationSchemes
+        )
         {
             return (thisPtr & authenticationSchemes) == authenticationSchemes;
         }
 
-        public static bool IsNotSet(this AuthenticationSchemes thisPtr, AuthenticationSchemes authenticationSchemes)
+        public static bool IsNotSet(
+            this AuthenticationSchemes thisPtr,
+            AuthenticationSchemes authenticationSchemes
+        )
         {
             return (thisPtr & authenticationSchemes) == 0;
         }

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 public class Runtime_81081
 {
     [Fact]
@@ -21,6 +22,7 @@ public class Runtime_81081
 
     struct S16
     {
-        public object A, B;
+        public object A,
+            B;
     }
 }

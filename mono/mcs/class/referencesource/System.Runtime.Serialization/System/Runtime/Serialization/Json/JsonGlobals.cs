@@ -4,36 +4,62 @@
 
 namespace System.Runtime.Serialization.Json
 {
-    using System.Runtime.Serialization;
-    using System.Xml;
-    using System.Security;
     using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Security;
+    using System.Xml;
 
     static class JsonGlobals
     {
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
-            + " data from being modified or leaked to other components in appdomain.")]
-        public static readonly int DataContractXsdBaseNamespaceLength = Globals.DataContractXsdBaseNamespace.Length;
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
+                + " data from being modified or leaked to other components in appdomain."
+        )]
+        public static readonly int DataContractXsdBaseNamespaceLength = Globals
+            .DataContractXsdBaseNamespace
+            .Length;
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
-            + " data from being modified or leaked to other components in appdomain.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
+                + " data from being modified or leaked to other components in appdomain."
+        )]
         public static readonly XmlDictionaryString dDictionaryString = new XmlDictionary().Add("d");
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
-            + " data from being modified or leaked to other components in appdomain.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
+                + " data from being modified or leaked to other components in appdomain."
+        )]
         public static readonly char[] floatingPointCharacters = new char[] { '.', 'e' };
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
-            + " data from being modified or leaked to other components in appdomain.")]
-        public static readonly XmlDictionaryString itemDictionaryString = new XmlDictionary().Add("item");
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
+                + " data from being modified or leaked to other components in appdomain."
+        )]
+        public static readonly XmlDictionaryString itemDictionaryString = new XmlDictionary().Add(
+            "item"
+        );
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
-            + " data from being modified or leaked to other components in appdomain.")]
-        public static readonly XmlDictionaryString rootDictionaryString = new XmlDictionary().Add("root");
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
+                + " data from being modified or leaked to other components in appdomain."
+        )]
+        public static readonly XmlDictionaryString rootDictionaryString = new XmlDictionary().Add(
+            "root"
+        );
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
-            + " data from being modified or leaked to other components in appdomain.")]
-        public static readonly long unixEpochTicks = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks;
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
+                + " data from being modified or leaked to other components in appdomain."
+        )]
+        public static readonly long unixEpochTicks = new DateTime(
+            1970,
+            1,
+            1,
+            0,
+            0,
+            0,
+            DateTimeKind.Utc
+        ).Ticks;
 
         public const string applicationJsonMediaType = "application/json";
         public const string arrayString = "array";

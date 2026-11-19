@@ -16,18 +16,19 @@ namespace System.Data.OleDb
         // stores the exception with last error.HRESULT from IDBProperties.GetProperties
         private Exception? lastErrorFromProvider;
 
-        public DBPropSet() : base(IntPtr.Zero, true)
+        public DBPropSet()
+            : base(IntPtr.Zero, true)
         {
             propertySetCount = 0;
         }
 
-        internal DBPropSet(int propertysetCount) : this()
+        internal DBPropSet(int propertysetCount)
+            : this()
         {
             this.propertySetCount = propertysetCount;
             nuint countOfBytes = (nuint)(propertysetCount * ODB.SizeOf_tagDBPROPSET);
             RuntimeHelpers.PrepareConstrainedRegions();
-            try
-            { }
+            try { }
             finally
             {
                 base.handle = Interop.Ole32.CoTaskMemAlloc(countOfBytes);
@@ -42,7 +43,12 @@ namespace System.Data.OleDb
             }
         }
 
-        internal DBPropSet(UnsafeNativeMethods.IDBProperties properties, PropertyIDSet? propidset, out OleDbHResult hr) : this()
+        internal DBPropSet(
+            UnsafeNativeMethods.IDBProperties properties,
+            PropertyIDSet? propidset,
+            out OleDbHResult hr
+        )
+            : this()
         {
             Debug.Assert(null != properties, "null IDBProperties");
 
@@ -51,7 +57,12 @@ namespace System.Data.OleDb
             {
                 propidsetcount = propidset.Count;
             }
-            hr = properties.GetProperties(propidsetcount, propidset, out this.propertySetCount, out base.handle);
+            hr = properties.GetProperties(
+                propidsetcount,
+                propidset,
+                out this.propertySetCount,
+                out base.handle
+            );
 
             if (hr < 0)
             {
@@ -60,7 +71,12 @@ namespace System.Data.OleDb
             }
         }
 
-        internal DBPropSet(UnsafeNativeMethods.IRowsetInfo properties, PropertyIDSet? propidset, out OleDbHResult hr) : this()
+        internal DBPropSet(
+            UnsafeNativeMethods.IRowsetInfo properties,
+            PropertyIDSet? propidset,
+            out OleDbHResult hr
+        )
+            : this()
         {
             Debug.Assert(null != properties, "null IRowsetInfo");
 
@@ -69,7 +85,12 @@ namespace System.Data.OleDb
             {
                 propidsetcount = propidset.Count;
             }
-            hr = properties.GetProperties(propidsetcount, propidset, out this.propertySetCount, out base.handle);
+            hr = properties.GetProperties(
+                propidsetcount,
+                propidset,
+                out this.propertySetCount,
+                out base.handle
+            );
 
             if (hr < 0)
             {
@@ -78,7 +99,12 @@ namespace System.Data.OleDb
             }
         }
 
-        internal DBPropSet(UnsafeNativeMethods.ICommandProperties properties, PropertyIDSet? propidset, out OleDbHResult hr) : this()
+        internal DBPropSet(
+            UnsafeNativeMethods.ICommandProperties properties,
+            PropertyIDSet? propidset,
+            out OleDbHResult hr
+        )
+            : this()
         {
             Debug.Assert(null != properties, "null ICommandProperties");
 
@@ -87,7 +113,12 @@ namespace System.Data.OleDb
             {
                 propidsetcount = propidset.Count;
             }
-            hr = properties.GetProperties(propidsetcount, propidset, out this.propertySetCount, out base.handle);
+            hr = properties.GetProperties(
+                propidsetcount,
+                propidset,
+                out this.propertySetCount,
+                out base.handle
+            );
 
             if (hr < 0)
             {
@@ -101,7 +132,10 @@ namespace System.Data.OleDb
             // note: OleDbHResult is actually a simple wrapper over HRESULT with OLEDB-specific codes
             string message = string.Empty;
 
-            OleDbHResult errorInfoHr = UnsafeNativeMethods.GetErrorInfo(0, out UnsafeNativeMethods.IErrorInfo? errorInfo);  // 0 - IErrorInfo exists, 1 - no IErrorInfo
+            OleDbHResult errorInfoHr = UnsafeNativeMethods.GetErrorInfo(
+                0,
+                out UnsafeNativeMethods.IErrorInfo? errorInfo
+            ); // 0 - IErrorInfo exists, 1 - no IErrorInfo
             if ((errorInfoHr == OleDbHResult.S_OK) && (errorInfo != null))
             {
                 try
@@ -120,10 +154,7 @@ namespace System.Data.OleDb
 
         public override bool IsInvalid
         {
-            get
-            {
-                return (IntPtr.Zero == base.handle);
-            }
+            get { return (IntPtr.Zero == base.handle); }
         }
 
         protected override bool ReleaseHandle()
@@ -142,7 +173,11 @@ namespace System.Data.OleDb
                         int cProperties = Marshal.ReadInt32(ptr, offset + IntPtr.Size);
 
                         IntPtr vptr = ADP.IntPtrOffset(rgProperties, ODB.OffsetOf_tagDBPROP_Value);
-                        for (int k = 0; k < cProperties; ++k, vptr = ADP.IntPtrOffset(vptr, ODB.SizeOf_tagDBPROP))
+                        for (
+                            int k = 0;
+                            k < cProperties;
+                            ++k, vptr = ADP.IntPtrOffset(vptr, ODB.SizeOf_tagDBPROP)
+                        )
                         {
                             Interop.OleAut32.VariantClear(vptr);
                         }
@@ -156,10 +191,7 @@ namespace System.Data.OleDb
 
         internal int PropertySetCount
         {
-            get
-            {
-                return this.propertySetCount;
-            }
+            get { return this.propertySetCount; }
         }
 
         internal ItagDBPROP[] GetPropertySet(int index, out Guid propertyset)
@@ -170,7 +202,10 @@ namespace System.Data.OleDb
                 {
                     // add extra error information for CSS/stress troubleshooting.
                     // We need to keep same exception type to avoid breaking change with Orcas RTM/SP1.
-                    throw ADP.InternalError(ADP.InternalErrorCode.InvalidBuffer, lastErrorFromProvider);
+                    throw ADP.InternalError(
+                        ADP.InternalErrorCode.InvalidBuffer,
+                        lastErrorFromProvider
+                    );
                 }
                 else
                 {
@@ -186,7 +221,10 @@ namespace System.Data.OleDb
             try
             {
                 DangerousAddRef(ref mustRelease);
-                IntPtr propertySetPtr = ADP.IntPtrOffset(DangerousGetHandle(), index * ODB.SizeOf_tagDBPROPSET);
+                IntPtr propertySetPtr = ADP.IntPtrOffset(
+                    DangerousGetHandle(),
+                    index * ODB.SizeOf_tagDBPROPSET
+                );
                 Marshal.PtrToStructure(propertySetPtr, propset);
                 propertyset = propset.guidPropertySet;
 
@@ -216,7 +254,10 @@ namespace System.Data.OleDb
                 {
                     // add extra error information for CSS/stress troubleshooting.
                     // We need to keep same exception type to avoid breaking change with Orcas RTM/SP1.
-                    throw ADP.InternalError(ADP.InternalErrorCode.InvalidBuffer, lastErrorFromProvider);
+                    throw ADP.InternalError(
+                        ADP.InternalErrorCode.InvalidBuffer,
+                        lastErrorFromProvider
+                    );
                 }
                 else
                 {
@@ -235,11 +276,13 @@ namespace System.Data.OleDb
             {
                 DangerousAddRef(ref mustRelease);
 
-                IntPtr propsetPtr = ADP.IntPtrOffset(DangerousGetHandle(), index * ODB.SizeOf_tagDBPROPSET);
+                IntPtr propsetPtr = ADP.IntPtrOffset(
+                    DangerousGetHandle(),
+                    index * ODB.SizeOf_tagDBPROPSET
+                );
 
                 RuntimeHelpers.PrepareConstrainedRegions();
-                try
-                { }
+                try { }
                 finally
                 {
                     // must allocate and clear the memory without interruption
@@ -251,7 +294,11 @@ namespace System.Data.OleDb
                         SafeNativeMethods.ZeroMemory(propset.rgProperties, (int)countOfBytes);
 
                         // writing the structure to native memory so that it knows to free the referenced pointers
-                        Marshal.StructureToPtr(propset, propsetPtr, false/*deleteold*/);
+                        Marshal.StructureToPtr(
+                            propset,
+                            propsetPtr,
+                            false /*deleteold*/
+                        );
                     }
                 }
                 if (IntPtr.Zero == propset.rgProperties)
@@ -261,9 +308,19 @@ namespace System.Data.OleDb
 
                 for (int i = 0; i < properties.Length; ++i)
                 {
-                    Debug.Assert(null != properties[i], $"null tagDBPROP {i.ToString(CultureInfo.InvariantCulture)}");
-                    IntPtr propertyPtr = ADP.IntPtrOffset(propset.rgProperties, i * ODB.SizeOf_tagDBPROP);
-                    Marshal.StructureToPtr(properties[i], propertyPtr, false/*deleteold*/);
+                    Debug.Assert(
+                        null != properties[i],
+                        $"null tagDBPROP {i.ToString(CultureInfo.InvariantCulture)}"
+                    );
+                    IntPtr propertyPtr = ADP.IntPtrOffset(
+                        propset.rgProperties,
+                        i * ODB.SizeOf_tagDBPROP
+                    );
+                    Marshal.StructureToPtr(
+                        properties[i],
+                        propertyPtr,
+                        false /*deleteold*/
+                    );
                 }
             }
             finally
@@ -275,7 +332,12 @@ namespace System.Data.OleDb
             }
         }
 
-        internal static DBPropSet CreateProperty(Guid propertySet, int propertyId, bool required, object value)
+        internal static DBPropSet CreateProperty(
+            Guid propertySet,
+            int propertyId,
+            bool required,
+            object value
+        )
         {
             ItagDBPROP dbprop = OleDbStructHelpers.CreateTagDbProp(propertyId, required, value);
             DBPropSet propertyset = new DBPropSet(1);

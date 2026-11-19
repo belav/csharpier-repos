@@ -39,7 +39,8 @@ public class CommandEventData : CommandCorrelatedEventData
         bool async,
         bool logParameterValues,
         DateTimeOffset startTime,
-        CommandSource commandSource)
+        CommandSource commandSource
+    )
         : base(
             eventDefinition,
             messageGenerator,
@@ -50,7 +51,8 @@ public class CommandEventData : CommandCorrelatedEventData
             connectionId,
             async,
             startTime,
-            commandSource)
+            commandSource
+        )
     {
         Command = command;
         LogParameterValues = logParameterValues;

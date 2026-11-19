@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
         public int AssignLocalOrdinal(SynthesizedLocalKind localKind, int syntaxOffset)
         {
 #if !DEBUG
-            // Optimization (avoid growing the dictionary below): 
+            // Optimization (avoid growing the dictionary below):
             // User-defined locals have to have a distinct syntax offset, thus ordinal is always 0.
             if (localKind == SynthesizedLocalKind.UserDefined)
             {

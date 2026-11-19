@@ -46,14 +46,10 @@ namespace System.ServiceModel.Dispatcher
         int segmentLength;
 
         internal TrieSegment()
-            : this(char.MinValue)
-        {
-        }
+            : this(char.MinValue) { }
 
         internal TrieSegment(char firstChar)
-            : this(firstChar, string.Empty)
-        {
-        }
+            : this(firstChar, string.Empty) { }
 
         internal TrieSegment(char firstChar, string segmentTail)
         {
@@ -71,28 +67,20 @@ namespace System.ServiceModel.Dispatcher
 
         internal bool CanMerge
         {
-            get
-            {
-                return (null == this.data && 1 == this.children.Count);
-            }
+            get { return (null == this.data && 1 == this.children.Count); }
         }
 
         internal bool CanPrune
         {
-            get
-            {
-                return (null == this.data && 0 == this.children.Count);
-            }
+            get { return (null == this.data && 0 == this.children.Count); }
         }
 #if NO
         internal int ChildCount
         {
-            get
-            {
-                return this.children.Count;
-            }
+            get { return this.children.Count; }
         }
 #endif
+
         internal void CollectXPathFilters(ICollection<MessageFilter> filters)
         {
             if (this.data != null)
@@ -108,30 +96,18 @@ namespace System.ServiceModel.Dispatcher
 
         internal QueryBranch Data
         {
-            get
-            {
-                return this.data;
-            }
-            set
-            {
-                this.data = value;
-            }
+            get { return this.data; }
+            set { this.data = value; }
         }
 
         internal char FirstChar
         {
-            get
-            {
-                return this.segmentFirstChar;
-            }
+            get { return this.segmentFirstChar; }
         }
 
         internal bool HasChildren
         {
-            get
-            {
-                return (this.children.Count > 0);
-            }
+            get { return (this.children.Count > 0); }
         }
 
         internal int Length
@@ -145,12 +121,10 @@ namespace System.ServiceModel.Dispatcher
 #if NO
         internal string Tail
         {
-            get
-            {
-                return this.segmentTail;
-            }
+            get { return this.segmentTail; }
         }
 #endif
+
         internal TrieSegment AddChild(TrieSegment segment)
         {
             Fx.Assert(null != segment, "");
@@ -160,12 +134,14 @@ namespace System.ServiceModel.Dispatcher
 
             return segment;
         }
+
 #if NO
         internal TrieSegment[] CopyChildren()
         {
             return this.children.ToArray();
         }
 #endif
+
         internal int FindDivergence(string compareString, int offset, int length)
         {
             Fx.Assert(null != compareString && length > 0, "");
@@ -218,7 +194,20 @@ namespace System.ServiceModel.Dispatcher
                 if (index >= 0)
                 {
                     TrieSegment child = this.children[index];
-                    if (tailLength >= child.segmentTail.Length && (0 == child.segmentTail.Length || 0 == string.CompareOrdinal(matchString, tailOffset, child.segmentTail, 0, child.segmentTail.Length)))
+                    if (
+                        tailLength >= child.segmentTail.Length
+                        && (
+                            0 == child.segmentTail.Length
+                            || 0
+                                == string.CompareOrdinal(
+                                    matchString,
+                                    tailOffset,
+                                    child.segmentTail,
+                                    0,
+                                    child.segmentTail.Length
+                                )
+                        )
+                    )
                     {
                         return index;
                     }
@@ -359,7 +348,10 @@ namespace System.ServiceModel.Dispatcher
             else
             {
                 Fx.Assert(this.segmentTail.Length > 0, "");
-                newSegment = new TrieSegment(this.segmentFirstChar, this.segmentTail.Substring(0, charIndex - 1));
+                newSegment = new TrieSegment(
+                    this.segmentFirstChar,
+                    this.segmentTail.Substring(0, charIndex - 1)
+                );
             }
             --charIndex;
             this.SetSegmentString(this.segmentTail, charIndex, this.segmentTail.Length - charIndex);
@@ -414,10 +406,7 @@ namespace System.ServiceModel.Dispatcher
         /// </summary>
         internal int Length
         {
-            get
-            {
-                return this.length;
-            }
+            get { return this.length; }
         }
 
         /// <summary>
@@ -425,10 +414,7 @@ namespace System.ServiceModel.Dispatcher
         /// </summary>
         internal int Offset
         {
-            get
-            {
-                return this.offset;
-            }
+            get { return this.offset; }
         }
 
         /// <summary>
@@ -436,10 +422,7 @@ namespace System.ServiceModel.Dispatcher
         /// </summary>
         internal TrieSegment Segment
         {
-            get
-            {
-                return this.segment;
-            }
+            get { return this.segment; }
             set
             {
                 Fx.Assert(null != value, "");
@@ -449,10 +432,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal int SegmentIndex
         {
-            get
-            {
-                return this.segmentIndex;
-            }
+            get { return this.segmentIndex; }
         }
 
         /// <summary>
@@ -468,7 +448,11 @@ namespace System.ServiceModel.Dispatcher
 
                 if (this.length > 0)
                 {
-                    this.segmentIndex = this.segment.GetChildPosition(this.prefix, this.offset, this.length);
+                    this.segmentIndex = this.segment.GetChildPosition(
+                        this.prefix,
+                        this.offset,
+                        this.length
+                    );
                     if (this.segmentIndex > -1)
                     {
                         this.segment = this.segment.GetChild(this.segmentIndex);
@@ -528,7 +512,6 @@ namespace System.ServiceModel.Dispatcher
         }
     }
 
-
     internal class Trie
     {
         TrieSegment root; // prefix tree root
@@ -558,10 +541,7 @@ namespace System.ServiceModel.Dispatcher
 #endif
         internal TrieSegment this[string prefix]
         {
-            get
-            {
-                return this.Find(prefix);
-            }
+            get { return this.Find(prefix); }
         }
 
         /// <summary>
@@ -595,7 +575,17 @@ namespace System.ServiceModel.Dispatcher
                     // There is a child segment that starts with the same character as the remainder of newPrefix
                     // We have a shared segment
                     // How much does newPrefix share with the current segment? Find the point at which they diverge
-                    if (null != parent && -1 != (indexDivergence = traverser.Segment.FindDivergence(newPrefix, traverser.Offset, traverser.Length)))
+                    if (
+                        null != parent
+                        && -1
+                            != (
+                                indexDivergence = traverser.Segment.FindDivergence(
+                                    newPrefix,
+                                    traverser.Offset,
+                                    traverser.Length
+                                )
+                            )
+                    )
                     {
                         // Segments diverge at character # 'indexDivergence'. newPrefix will share the segment upto
                         // that character. Beyond that character, we will now have 2 child segments:
@@ -603,7 +593,10 @@ namespace System.ServiceModel.Dispatcher
                         // - one for the portion of the new segment that diverged
 
                         // Split the current segment into a shared part and a child containing the remainder of the segment..
-                        traverser.Segment = parent.SplitChild(traverser.SegmentIndex, indexDivergence);
+                        traverser.Segment = parent.SplitChild(
+                            traverser.SegmentIndex,
+                            indexDivergence
+                        );
                     }
                 }
                 else
@@ -614,7 +607,9 @@ namespace System.ServiceModel.Dispatcher
                         break;
                     }
                     // No existing segment to share. Add a new one
-                    traverser.Segment = parent.AddChild(new TrieSegment(newPrefix, traverser.Offset, traverser.Length));
+                    traverser.Segment = parent.AddChild(
+                        new TrieSegment(newPrefix, traverser.Offset, traverser.Length)
+                    );
                 }
             }
 
@@ -711,21 +706,16 @@ namespace System.ServiceModel.Dispatcher
             Fx.Assert(null != literal, "");
             this.literal = literal;
         }
+
 #if NO
         internal override ValueDataType DataType
         {
-            get
-            {
-                return ValueDataType.String;
-            }
+            get { return ValueDataType.String; }
         }
 #endif
         internal override object Literal
         {
-            get
-            {
-                return this.literal;
-            }
+            get { return this.literal; }
         }
 
         internal override void Add(Opcode op)
@@ -764,7 +754,10 @@ namespace System.ServiceModel.Dispatcher
                 Fx.Assert(context.Values[arg.basePtr].IsType(ValueDataType.String), "");
 
                 string target = context.Values[arg.basePtr].String;
-                context.Values[arg.basePtr].Boolean = target.StartsWith(this.literal, StringComparison.Ordinal);
+                context.Values[arg.basePtr].Boolean = target.StartsWith(
+                    this.literal,
+                    StringComparison.Ordinal
+                );
             }
             else
             {
@@ -772,7 +765,10 @@ namespace System.ServiceModel.Dispatcher
                 {
                     Fx.Assert(context.Values[i].IsType(ValueDataType.String), "");
                     string target = context.Values[i].String;
-                    context.Values[i].Boolean = target.StartsWith(this.literal, StringComparison.Ordinal);
+                    context.Values[i].Boolean = target.StartsWith(
+                        this.literal,
+                        StringComparison.Ordinal
+                    );
                 }
             }
 
@@ -793,10 +789,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal override int Count
         {
-            get
-            {
-                return this.count;
-            }
+            get { return this.count; }
         }
 
         internal override QueryBranch this[object key]
@@ -829,7 +822,9 @@ namespace System.ServiceModel.Dispatcher
         internal override IEnumerator GetEnumerator()
         {
             //return new TrieBreadthFirstEnum(this.trie);
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException("TODO"));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException("TODO")
+            );
         }
 #endif
 
@@ -877,8 +872,6 @@ namespace System.ServiceModel.Dispatcher
     internal class StringPrefixBranchOpcode : QueryConditionalBranchOpcode
     {
         internal StringPrefixBranchOpcode()
-            : base(OpcodeID.StringPrefixBranch, new TrieBranchIndex())
-        {
-        }
+            : base(OpcodeID.StringPrefixBranch, new TrieBranchIndex()) { }
     }
 }

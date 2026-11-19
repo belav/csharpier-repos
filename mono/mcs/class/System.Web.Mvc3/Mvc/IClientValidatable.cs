@@ -1,4 +1,5 @@
-﻿namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc
+{
     using System.Collections.Generic;
 
     // The purpose of this interface is to make something as supporting client-side
@@ -11,7 +12,11 @@
     // (the class which derives from ValidationAttribute). When you've implemented
     // this interface, it will alleviate the need of writing a validator and registering
     // it with the DataAnnotationsModelValidatorProvider.
-    public interface IClientValidatable {
-        IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context);
+    public interface IClientValidatable
+    {
+        IEnumerable<ModelClientValidationRule> GetClientValidationRules(
+            ModelMetadata metadata,
+            ControllerContext context
+        );
     }
 }

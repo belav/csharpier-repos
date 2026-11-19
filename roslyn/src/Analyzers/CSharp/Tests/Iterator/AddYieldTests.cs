@@ -29,8 +29,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestAddYieldIEnumerableReturnNull()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections;
 
@@ -48,8 +47,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestAddYieldIEnumerableReturnObject()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections;
 
@@ -61,8 +59,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Collections;
 
@@ -80,8 +77,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestAddYieldIEnumeratorReturnObject()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections;
 
@@ -93,8 +89,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Collections;
 
@@ -112,8 +107,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestAddYieldIEnumeratorReturnGenericList()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -126,8 +120,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -146,8 +139,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestAddYieldGenericIEnumeratorReturnObject()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -160,8 +152,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -180,8 +171,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestAddYieldGenericIEnumerableReturnObject()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -194,8 +184,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -214,8 +203,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestAddYieldIEnumerableReturnGenericList()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -234,8 +222,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestAddYieldGenericIEnumeratorReturnDefault()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -248,8 +235,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -268,8 +254,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestAddYieldGenericIEnumerableReturnConvertibleToObject()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -282,8 +267,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -302,8 +286,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestAddYieldGenericIEnumerableReturnConvertibleToFloat()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -316,8 +299,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -336,8 +318,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestAddYieldGenericIEnumeratorNonConvertableType()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -356,8 +337,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestAddYieldGenericIEnumeratorConvertableTypeDateTime()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -370,8 +350,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -390,8 +369,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestAddYieldNoTypeArguments()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections.Generic;
                 using System.IO;

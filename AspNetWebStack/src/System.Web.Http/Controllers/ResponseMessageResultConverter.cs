@@ -11,7 +11,10 @@ namespace System.Web.Http.Controllers
     /// </summary>
     public class ResponseMessageResultConverter : IActionResultConverter
     {
-        public HttpResponseMessage Convert(HttpControllerContext controllerContext, object actionResult)
+        public HttpResponseMessage Convert(
+            HttpControllerContext controllerContext,
+            object actionResult
+        )
         {
             if (controllerContext == null)
             {
@@ -21,7 +24,9 @@ namespace System.Web.Http.Controllers
             HttpResponseMessage response = (HttpResponseMessage)actionResult;
             if (response == null)
             {
-                throw Error.InvalidOperation(SRResources.ResponseMessageResultConverter_NullHttpResponseMessage);
+                throw Error.InvalidOperation(
+                    SRResources.ResponseMessageResultConverter_NullHttpResponseMessage
+                );
             }
 
             response.EnsureResponseHasRequest(controllerContext.Request);

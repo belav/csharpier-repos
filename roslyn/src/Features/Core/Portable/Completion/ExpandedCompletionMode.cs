@@ -8,6 +8,6 @@ namespace Microsoft.CodeAnalysis.Completion
     {
         NonExpandedItemsOnly,
         ExpandedItemsOnly,
-        AllItems
+        AllItems,
     }
 }

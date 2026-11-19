@@ -7,6 +7,6 @@ namespace System.Runtime.InteropServices
     {
         NOTIF_TYPECONVERTED = 0,
         NOTIF_CONVERTWARNING = 1,
-        ERROR_REFTOINVALIDASSEMBLY = 2
+        ERROR_REFTOINVALIDASSEMBLY = 2,
     }
 }

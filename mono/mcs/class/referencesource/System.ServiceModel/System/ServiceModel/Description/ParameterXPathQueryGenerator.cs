@@ -3,12 +3,12 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Description
 {
-    using System.Xml.Linq;
-    using System.Xml;
-    using System.Text;
+    using System.Reflection;
     using System.Runtime.Serialization;
     using System.ServiceModel.Description;
-    using System.Reflection;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.Linq;
 
     public static class ParameterXPathQueryGenerator
     {
@@ -16,33 +16,58 @@ namespace System.ServiceModel.Description
         const string NsSeparator = ":";
         const string ServiceContractPrefix = "xgSc";
 
-        public static string CreateFromDataContractSerializer(XName serviceContractName, string operationName, string parameterName, bool isReply, Type type, MemberInfo[] pathToMember, out XmlNamespaceManager namespaces)
+        public static string CreateFromDataContractSerializer(
+            XName serviceContractName,
+            string operationName,
+            string parameterName,
+            bool isReply,
+            Type type,
+            MemberInfo[] pathToMember,
+            out XmlNamespaceManager namespaces
+        )
         {
             if (type == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("type"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("type")
+                );
             }
             if (pathToMember == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("pathToMember"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("pathToMember")
+                );
             }
             if (operationName == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("operationName"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("operationName")
+                );
             }
             if (serviceContractName == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("serviceContractName"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("serviceContractName")
+                );
             }
             if (isReply)
             {
                 operationName += TypeLoader.ResponseSuffix;
             }
 
-            StringBuilder xPathBuilder = new StringBuilder(XPathSeparator + ServiceContractPrefix + NsSeparator + operationName);
-            xPathBuilder.Append(XPathSeparator + ServiceContractPrefix + NsSeparator + parameterName);
+            StringBuilder xPathBuilder = new StringBuilder(
+                XPathSeparator + ServiceContractPrefix + NsSeparator + operationName
+            );
+            xPathBuilder.Append(
+                XPathSeparator + ServiceContractPrefix + NsSeparator + parameterName
+            );
 
-            string xpath = XPathQueryGenerator.CreateFromDataContractSerializer(type, pathToMember, xPathBuilder, out namespaces);
+            string xpath = XPathQueryGenerator.CreateFromDataContractSerializer(
+                type,
+                pathToMember,
+                xPathBuilder,
+                out namespaces
+            );
             string serviceContractNamespace = serviceContractName.NamespaceName;
             // Use default service contract namespace if the provided serviceContractNamespace is null or empty
             if (string.IsNullOrEmpty(serviceContractNamespace))

@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.Navigation;
 /// <summary>
 /// Service used by "go to definition" and "ctrl-click on symbol" to find the symbol definition location and navigate to
 /// it. Specifically, services that do not intend to show any interesting UI for the symbol definition, they just intend
-/// to navigate to it.  If richer information is desired (like determining what to display for the symbol name), then 
+/// to navigate to it.  If richer information is desired (like determining what to display for the symbol name), then
 /// <see cref="INavigableItemsService"/> should be used instead.
 /// </summary>
 internal interface IDefinitionLocationService : ILanguageService
@@ -28,7 +28,10 @@ internal interface IDefinitionLocationService : ILanguageService
     /// position is within.
     /// </summary>
     Task<DefinitionLocation?> GetDefinitionLocationAsync(
-        Document document, int position, CancellationToken cancellationToken);
+        Document document,
+        int position,
+        CancellationToken cancellationToken
+    );
 }
 
 /// <summary>
@@ -45,7 +48,14 @@ internal sealed record DefinitionLocation(INavigableLocation Location, DocumentS
 internal static class DefinitionLocationServiceHelpers
 {
     public static async Task<DefinitionLocation?> GetDefinitionLocationFromLegacyImplementationsAsync(
-        Document document, int position, Func<CancellationToken, Task<IEnumerable<(Document document, TextSpan sourceSpan)>?>> getNavigableItems, CancellationToken cancellationToken)
+        Document document,
+        int position,
+        Func<
+            CancellationToken,
+            Task<IEnumerable<(Document document, TextSpan sourceSpan)>?>
+        > getNavigableItems,
+        CancellationToken cancellationToken
+    )
     {
         var items = await getNavigableItems(cancellationToken).ConfigureAwait(false);
         if (items is null)
@@ -55,7 +65,12 @@ internal static class DefinitionLocationServiceHelpers
         if (firstItem is null)
             return null;
 
-        var navigableItem = await new DocumentSpan(firstItem.Value.document, firstItem.Value.sourceSpan).GetNavigableLocationAsync(cancellationToken).ConfigureAwait(false);
+        var navigableItem = await new DocumentSpan(
+            firstItem.Value.document,
+            firstItem.Value.sourceSpan
+        )
+            .GetNavigableLocationAsync(cancellationToken)
+            .ConfigureAwait(false);
         if (navigableItem is null)
             return null;
 
@@ -82,7 +97,7 @@ internal static class DefinitionLocationServiceHelpers
             return new DocumentSpan(document, TextSpan.FromBounds(startPosition, endPosition));
         }
 
-        char GetChar(int position)
-            => position >= 0 && position < text.Length ? text[position] : (char)0;
+        char GetChar(int position) =>
+            position >= 0 && position < text.Length ? text[position] : (char)0;
     }
 }

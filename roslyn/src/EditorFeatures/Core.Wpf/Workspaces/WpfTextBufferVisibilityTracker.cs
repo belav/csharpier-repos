@@ -20,22 +20,24 @@ namespace Microsoft.CodeAnalysis.Workspaces
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public WpfTextBufferVisibilityTracker(
             ITextBufferAssociatedViewService associatedViewService,
-            IThreadingContext threadingContext)
-            : base(associatedViewService, threadingContext)
-        {
-        }
+            IThreadingContext threadingContext
+        )
+            : base(associatedViewService, threadingContext) { }
 
-        protected override bool IsVisible(IWpfTextView view)
-            => view.VisualElement.IsVisible;
+        protected override bool IsVisible(IWpfTextView view) => view.VisualElement.IsVisible;
 
-        protected override DependencyPropertyChangedEventHandler GetVisiblityChangeCallback(VisibleTrackerData visibleTrackerData)
-            => (sender, args) => visibleTrackerData.TriggerCallbacks();
+        protected override DependencyPropertyChangedEventHandler GetVisiblityChangeCallback(
+            VisibleTrackerData visibleTrackerData
+        ) => (sender, args) => visibleTrackerData.TriggerCallbacks();
 
-        protected override void AddVisibilityChangedCallback(IWpfTextView view, DependencyPropertyChangedEventHandler visibilityChangedCallback)
-            => view.VisualElement.IsVisibleChanged += visibilityChangedCallback;
+        protected override void AddVisibilityChangedCallback(
+            IWpfTextView view,
+            DependencyPropertyChangedEventHandler visibilityChangedCallback
+        ) => view.VisualElement.IsVisibleChanged += visibilityChangedCallback;
 
-        protected override void RemoveVisibilityChangedCallback(IWpfTextView view, DependencyPropertyChangedEventHandler visibilityChangedCallback)
-            => view.VisualElement.IsVisibleChanged -= visibilityChangedCallback;
-
+        protected override void RemoveVisibilityChangedCallback(
+            IWpfTextView view,
+            DependencyPropertyChangedEventHandler visibilityChangedCallback
+        ) => view.VisualElement.IsVisibleChanged -= visibilityChangedCallback;
     }
 }

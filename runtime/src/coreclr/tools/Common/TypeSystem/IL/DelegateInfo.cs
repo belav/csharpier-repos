@@ -3,10 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-
 using Internal.IL.Stubs;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 using Interlocked = System.Threading.Interlocked;
 
@@ -34,13 +32,21 @@ namespace Internal.IL
             {
                 if (_getThunkMethod == null)
                 {
-                    Interlocked.CompareExchange(ref _getThunkMethod, new DelegateGetThunkMethodOverride(this), null);
+                    Interlocked.CompareExchange(
+                        ref _getThunkMethod,
+                        new DelegateGetThunkMethodOverride(this),
+                        null
+                    );
                 }
 
                 yield return _getThunkMethod;
 
                 DelegateThunkCollection thunks = Thunks;
-                for (DelegateThunkKind kind = 0; kind < DelegateThunkCollection.MaxThunkKind; kind++)
+                for (
+                    DelegateThunkKind kind = 0;
+                    kind < DelegateThunkCollection.MaxThunkKind;
+                    kind++
+                )
                 {
                     MethodDesc thunk = thunks[kind];
                     if (thunk != null)
@@ -58,7 +64,11 @@ namespace Internal.IL
             {
                 if (_thunks == null)
                 {
-                    Interlocked.CompareExchange(ref _thunks, new DelegateThunkCollection(this), null);
+                    Interlocked.CompareExchange(
+                        ref _thunks,
+                        new DelegateThunkCollection(this),
+                        null
+                    );
                 }
                 return _thunks;
             }
@@ -78,10 +88,7 @@ namespace Internal.IL
 
         public DelegateFeature SupportedFeatures
         {
-            get
-            {
-                return _supportedFeatures;
-            }
+            get { return _supportedFeatures; }
         }
 
         /// <summary>
@@ -89,10 +96,7 @@ namespace Internal.IL
         /// </summary>
         public TypeDesc Type
         {
-            get
-            {
-                return _delegateType;
-            }
+            get { return _delegateType; }
         }
 
         public DelegateInfo(TypeDesc delegateType, DelegateFeature features)
@@ -124,7 +128,9 @@ namespace Internal.IL
             _openStaticThunk = new DelegateInvokeOpenStaticThunk(owningDelegate);
             _multicastThunk = new DelegateInvokeMulticastThunk(owningDelegate);
             _closedStaticThunk = new DelegateInvokeClosedStaticThunk(owningDelegate);
-            _closedInstanceOverGeneric = new DelegateInvokeInstanceClosedOverGenericMethodThunk(owningDelegate);
+            _closedInstanceOverGeneric = new DelegateInvokeInstanceClosedOverGenericMethodThunk(
+                owningDelegate
+            );
 
             // Methods that have a byref-like type in the signature cannot be invoked with the object array thunk.
             // We would need to box the parameter and these can't be boxed.
@@ -155,14 +161,20 @@ namespace Internal.IL
             if (returnType.IsPointer || returnType.IsFunctionPointer)
                 generateObjectArrayThunk = false;
 
-            if ((owningDelegate.SupportedFeatures & DelegateFeature.ObjectArrayThunk) != 0 && generateObjectArrayThunk)
+            if (
+                (owningDelegate.SupportedFeatures & DelegateFeature.ObjectArrayThunk) != 0
+                && generateObjectArrayThunk
+            )
                 _invokeObjectArrayThunk = new DelegateInvokeObjectArrayThunk(owningDelegate);
 
             //
             // Check whether we have an open instance thunk
             //
 
-            if ((owningDelegate.SupportedFeatures & DelegateFeature.OpenInstanceThunk) != 0 && delegateSignature.Length > 0)
+            if (
+                (owningDelegate.SupportedFeatures & DelegateFeature.OpenInstanceThunk) != 0
+                && delegateSignature.Length > 0
+            )
             {
                 TypeDesc firstParam = delegateSignature[0];
 
@@ -177,7 +189,8 @@ namespace Internal.IL
 
                     case TypeFlags.ByRef:
                         firstParam = ((ByRefType)firstParam).ParameterType;
-                        generateOpenInstanceMethod = firstParam.IsSignatureVariable || firstParam.IsValueType;
+                        generateOpenInstanceMethod =
+                            firstParam.IsSignatureVariable || firstParam.IsValueType;
                         break;
 
                     case TypeFlags.Array:
@@ -231,8 +244,8 @@ namespace Internal.IL
         ClosedStaticThunk = 1,
         OpenStaticThunk = 2,
         ClosedInstanceThunkOverGenericMethod = 3, // This may not exist
-        OpenInstanceThunk = 4,        // This may not exist
-        ObjectArrayThunk = 5,         // This may not exist
+        OpenInstanceThunk = 4, // This may not exist
+        ObjectArrayThunk = 5, // This may not exist
     }
 
     [Flags]

@@ -15,10 +15,17 @@ using DataAnnotationsCompareAttribute = System.ComponentModel.DataAnnotations.Co
 namespace System.Web.Mvc
 {
     // A factory for validators based on ValidationAttribute
-    public delegate ModelValidator DataAnnotationsModelValidationFactory(ModelMetadata metadata, ControllerContext context, ValidationAttribute attribute);
+    public delegate ModelValidator DataAnnotationsModelValidationFactory(
+        ModelMetadata metadata,
+        ControllerContext context,
+        ValidationAttribute attribute
+    );
 
     // A factory for validators based on IValidatableObject
-    public delegate ModelValidator DataAnnotationsValidatableObjectAdapterFactory(ModelMetadata metadata, ControllerContext context);
+    public delegate ModelValidator DataAnnotationsValidatableObjectAdapterFactory(
+        ModelMetadata metadata,
+        ControllerContext context
+    );
 
     /// <summary>
     /// An implementation of <see cref="ModelValidatorProvider"/> which providers validators
@@ -36,17 +43,27 @@ namespace System.Web.Mvc
 
         // Factories for validation attributes
 
-        internal static DataAnnotationsModelValidationFactory DefaultAttributeFactory =
-            (metadata, context, attribute) => new DataAnnotationsModelValidator(metadata, context, attribute);
+        internal static DataAnnotationsModelValidationFactory DefaultAttributeFactory = (
+            metadata,
+            context,
+            attribute
+        ) => new DataAnnotationsModelValidator(metadata, context, attribute);
 
-        internal static Dictionary<Type, DataAnnotationsModelValidationFactory> AttributeFactories = BuildAttributeFactoriesDictionary();
+        internal static Dictionary<Type, DataAnnotationsModelValidationFactory> AttributeFactories =
+            BuildAttributeFactoriesDictionary();
 
         // Factories for IValidatableObject models
 
-        internal static DataAnnotationsValidatableObjectAdapterFactory DefaultValidatableFactory =
-            (metadata, context) => new ValidatableObjectAdapter(metadata, context);
+        internal static DataAnnotationsValidatableObjectAdapterFactory DefaultValidatableFactory = (
+            metadata,
+            context
+        ) => new ValidatableObjectAdapter(metadata, context);
 
-        internal static Dictionary<Type, DataAnnotationsValidatableObjectAdapterFactory> ValidatableFactories = new Dictionary<Type, DataAnnotationsValidatableObjectAdapterFactory>();
+        internal static Dictionary<
+            Type,
+            DataAnnotationsValidatableObjectAdapterFactory
+        > ValidatableFactories =
+            new Dictionary<Type, DataAnnotationsValidatableObjectAdapterFactory>();
 
         public static bool AddImplicitRequiredAttributeForValueTypes
         {
@@ -54,7 +71,11 @@ namespace System.Web.Mvc
             set { _addImplicitRequiredAttributeForValueTypes = value; }
         }
 
-        protected override IEnumerable<ModelValidator> GetValidators(ModelMetadata metadata, ControllerContext context, IEnumerable<Attribute> attributes)
+        protected override IEnumerable<ModelValidator> GetValidators(
+            ModelMetadata metadata,
+            ControllerContext context,
+            IEnumerable<Attribute> attributes
+        )
         {
             _adaptersLock.EnterReadLock();
 
@@ -64,9 +85,11 @@ namespace System.Web.Mvc
 
                 // Add an implied [Required] attribute for any non-nullable value type,
                 // unless they've configured us not to do that.
-                if (AddImplicitRequiredAttributeForValueTypes &&
-                    metadata.IsRequired &&
-                    !attributes.Any(a => a is RequiredAttribute))
+                if (
+                    AddImplicitRequiredAttributeForValueTypes
+                    && metadata.IsRequired
+                    && !attributes.Any(a => a is RequiredAttribute)
+                )
                 {
                     attributes = attributes.Concat(new[] { new RequiredAttribute() });
                 }
@@ -107,13 +130,18 @@ namespace System.Web.Mvc
         {
             ValidateAttributeType(attributeType);
             ValidateAttributeAdapterType(adapterType);
-            ConstructorInfo constructor = GetAttributeAdapterConstructor(attributeType, adapterType);
+            ConstructorInfo constructor = GetAttributeAdapterConstructor(
+                attributeType,
+                adapterType
+            );
 
             _adaptersLock.EnterWriteLock();
 
             try
             {
-                AttributeFactories[attributeType] = (metadata, context, attribute) => (ModelValidator)constructor.Invoke(new object[] { metadata, context, attribute });
+                AttributeFactories[attributeType] = (metadata, context, attribute) =>
+                    (ModelValidator)
+                        constructor.Invoke(new object[] { metadata, context, attribute });
             }
             finally
             {
@@ -121,7 +149,10 @@ namespace System.Web.Mvc
             }
         }
 
-        public static void RegisterAdapterFactory(Type attributeType, DataAnnotationsModelValidationFactory factory)
+        public static void RegisterAdapterFactory(
+            Type attributeType,
+            DataAnnotationsModelValidationFactory factory
+        )
         {
             ValidateAttributeType(attributeType);
             ValidateAttributeFactory(factory);
@@ -141,23 +172,34 @@ namespace System.Web.Mvc
         public static void RegisterDefaultAdapter(Type adapterType)
         {
             ValidateAttributeAdapterType(adapterType);
-            ConstructorInfo constructor = GetAttributeAdapterConstructor(typeof(ValidationAttribute), adapterType);
+            ConstructorInfo constructor = GetAttributeAdapterConstructor(
+                typeof(ValidationAttribute),
+                adapterType
+            );
 
-            DefaultAttributeFactory = (metadata, context, attribute) => (ModelValidator)constructor.Invoke(new object[] { metadata, context, attribute });
+            DefaultAttributeFactory = (metadata, context, attribute) =>
+                (ModelValidator)constructor.Invoke(new object[] { metadata, context, attribute });
         }
 
-        public static void RegisterDefaultAdapterFactory(DataAnnotationsModelValidationFactory factory)
+        public static void RegisterDefaultAdapterFactory(
+            DataAnnotationsModelValidationFactory factory
+        )
         {
             ValidateAttributeFactory(factory);
 
             DefaultAttributeFactory = factory;
         }
 
-        // Helpers 
+        // Helpers
 
-        private static ConstructorInfo GetAttributeAdapterConstructor(Type attributeType, Type adapterType)
+        private static ConstructorInfo GetAttributeAdapterConstructor(
+            Type attributeType,
+            Type adapterType
+        )
         {
-            ConstructorInfo constructor = adapterType.GetConstructor(new[] { typeof(ModelMetadata), typeof(ControllerContext), attributeType });
+            ConstructorInfo constructor = adapterType.GetConstructor(
+                new[] { typeof(ModelMetadata), typeof(ControllerContext), attributeType }
+            );
             if (constructor == null)
             {
                 throw new ArgumentException(
@@ -167,8 +209,10 @@ namespace System.Web.Mvc
                         adapterType.FullName,
                         typeof(ModelMetadata).FullName,
                         typeof(ControllerContext).FullName,
-                        attributeType.FullName),
-                    "adapterType");
+                        attributeType.FullName
+                    ),
+                    "adapterType"
+                );
             }
 
             return constructor;
@@ -187,8 +231,10 @@ namespace System.Web.Mvc
                         CultureInfo.CurrentCulture,
                         MvcResources.Common_TypeMustDriveFromType,
                         adapterType.FullName,
-                        typeof(ModelValidator).FullName),
-                    "adapterType");
+                        typeof(ModelValidator).FullName
+                    ),
+                    "adapterType"
+                );
             }
         }
 
@@ -205,8 +251,10 @@ namespace System.Web.Mvc
                         CultureInfo.CurrentCulture,
                         MvcResources.Common_TypeMustDriveFromType,
                         attributeType.FullName,
-                        typeof(ValidationAttribute).FullName),
-                    "attributeType");
+                        typeof(ValidationAttribute).FullName
+                    ),
+                    "attributeType"
+                );
             }
         }
 
@@ -239,7 +287,8 @@ namespace System.Web.Mvc
 
             try
             {
-                ValidatableFactories[modelType] = (metadata, context) => (ModelValidator)constructor.Invoke(new object[] { metadata, context });
+                ValidatableFactories[modelType] = (metadata, context) =>
+                    (ModelValidator)constructor.Invoke(new object[] { metadata, context });
             }
             finally
             {
@@ -251,7 +300,10 @@ namespace System.Web.Mvc
         /// Registers an adapter factory for the given <paramref name="modelType"/>, which must
         /// implement <see cref="IValidatableObject"/>.
         /// </summary>
-        public static void RegisterValidatableObjectAdapterFactory(Type modelType, DataAnnotationsValidatableObjectAdapterFactory factory)
+        public static void RegisterValidatableObjectAdapterFactory(
+            Type modelType,
+            DataAnnotationsValidatableObjectAdapterFactory factory
+        )
         {
             ValidateValidatableModelType(modelType);
             ValidateValidatableFactory(factory);
@@ -280,25 +332,30 @@ namespace System.Web.Mvc
             ValidateValidatableAdapterType(adapterType);
             ConstructorInfo constructor = GetValidatableAdapterConstructor(adapterType);
 
-            DefaultValidatableFactory = (metadata, context) => (ModelValidator)constructor.Invoke(new object[] { metadata, context });
+            DefaultValidatableFactory = (metadata, context) =>
+                (ModelValidator)constructor.Invoke(new object[] { metadata, context });
         }
 
         /// <summary>
         /// Registers the default adapter factory for objects which implement
         /// <see cref="IValidatableObject"/>.
         /// </summary>
-        public static void RegisterDefaultValidatableObjectAdapterFactory(DataAnnotationsValidatableObjectAdapterFactory factory)
+        public static void RegisterDefaultValidatableObjectAdapterFactory(
+            DataAnnotationsValidatableObjectAdapterFactory factory
+        )
         {
             ValidateValidatableFactory(factory);
 
             DefaultValidatableFactory = factory;
         }
 
-        // Helpers 
+        // Helpers
 
         private static ConstructorInfo GetValidatableAdapterConstructor(Type adapterType)
         {
-            ConstructorInfo constructor = adapterType.GetConstructor(new[] { typeof(ModelMetadata), typeof(ControllerContext) });
+            ConstructorInfo constructor = adapterType.GetConstructor(
+                new[] { typeof(ModelMetadata), typeof(ControllerContext) }
+            );
             if (constructor == null)
             {
                 throw new ArgumentException(
@@ -307,8 +364,10 @@ namespace System.Web.Mvc
                         MvcResources.DataAnnotationsModelValidatorProvider_ValidatableConstructorRequirements,
                         adapterType.FullName,
                         typeof(ModelMetadata).FullName,
-                        typeof(ControllerContext).FullName),
-                    "adapterType");
+                        typeof(ControllerContext).FullName
+                    ),
+                    "adapterType"
+                );
             }
 
             return constructor;
@@ -327,8 +386,10 @@ namespace System.Web.Mvc
                         CultureInfo.CurrentCulture,
                         MvcResources.Common_TypeMustDriveFromType,
                         adapterType.FullName,
-                        typeof(ModelValidator).FullName),
-                    "adapterType");
+                        typeof(ModelValidator).FullName
+                    ),
+                    "adapterType"
+                );
             }
         }
 
@@ -345,12 +406,16 @@ namespace System.Web.Mvc
                         CultureInfo.CurrentCulture,
                         MvcResources.Common_TypeMustDriveFromType,
                         modelType.FullName,
-                        typeof(IValidatableObject).FullName),
-                    "modelType");
+                        typeof(IValidatableObject).FullName
+                    ),
+                    "modelType"
+                );
             }
         }
 
-        private static void ValidateValidatableFactory(DataAnnotationsValidatableObjectAdapterFactory factory)
+        private static void ValidateValidatableFactory(
+            DataAnnotationsValidatableObjectAdapterFactory factory
+        )
         {
             if (factory == null)
             {
@@ -360,36 +425,95 @@ namespace System.Web.Mvc
 
         #endregion
 
-        private static Dictionary<Type, DataAnnotationsModelValidationFactory> BuildAttributeFactoriesDictionary()
+        private static Dictionary<
+            Type,
+            DataAnnotationsModelValidationFactory
+        > BuildAttributeFactoriesDictionary()
         {
             var dict = new Dictionary<Type, DataAnnotationsModelValidationFactory>();
 
-            AddValidationAttributeAdapter(dict, typeof(RangeAttribute),
-                (metadata, context, attribute) => new RangeAttributeAdapter(metadata, context, (RangeAttribute)attribute));
+            AddValidationAttributeAdapter(
+                dict,
+                typeof(RangeAttribute),
+                (metadata, context, attribute) =>
+                    new RangeAttributeAdapter(metadata, context, (RangeAttribute)attribute)
+            );
 
-            AddValidationAttributeAdapter(dict, typeof(RegularExpressionAttribute),
-                (metadata, context, attribute) => new RegularExpressionAttributeAdapter(metadata, context, (RegularExpressionAttribute)attribute));
+            AddValidationAttributeAdapter(
+                dict,
+                typeof(RegularExpressionAttribute),
+                (metadata, context, attribute) =>
+                    new RegularExpressionAttributeAdapter(
+                        metadata,
+                        context,
+                        (RegularExpressionAttribute)attribute
+                    )
+            );
 
-            AddValidationAttributeAdapter(dict, typeof(RequiredAttribute),
-                (metadata, context, attribute) => new RequiredAttributeAdapter(metadata, context, (RequiredAttribute)attribute));
+            AddValidationAttributeAdapter(
+                dict,
+                typeof(RequiredAttribute),
+                (metadata, context, attribute) =>
+                    new RequiredAttributeAdapter(metadata, context, (RequiredAttribute)attribute)
+            );
 
-            AddValidationAttributeAdapter(dict, typeof(StringLengthAttribute),
-                (metadata, context, attribute) => new StringLengthAttributeAdapter(metadata, context, (StringLengthAttribute)attribute));
+            AddValidationAttributeAdapter(
+                dict,
+                typeof(StringLengthAttribute),
+                (metadata, context, attribute) =>
+                    new StringLengthAttributeAdapter(
+                        metadata,
+                        context,
+                        (StringLengthAttribute)attribute
+                    )
+            );
 
-            AddValidationAttributeAdapter(dict, typeof(MaxLengthAttribute),
-                (metadata, context, attribute) => new MaxLengthAttributeAdapter(metadata, context, (MaxLengthAttribute)attribute));
+            AddValidationAttributeAdapter(
+                dict,
+                typeof(MaxLengthAttribute),
+                (metadata, context, attribute) =>
+                    new MaxLengthAttributeAdapter(metadata, context, (MaxLengthAttribute)attribute)
+            );
 
-            AddValidationAttributeAdapter(dict, typeof(MinLengthAttribute),
-                (metadata, context, attribute) => new MinLengthAttributeAdapter(metadata, context, (MinLengthAttribute)attribute));
+            AddValidationAttributeAdapter(
+                dict,
+                typeof(MinLengthAttribute),
+                (metadata, context, attribute) =>
+                    new MinLengthAttributeAdapter(metadata, context, (MinLengthAttribute)attribute)
+            );
 
-            AddValidationAttributeAdapter(dict, typeof(MembershipPasswordAttribute),
-                    (metadata, context, attribute) => new MembershipPasswordAttributeAdapter(metadata, context, (MembershipPasswordAttribute)attribute));
+            AddValidationAttributeAdapter(
+                dict,
+                typeof(MembershipPasswordAttribute),
+                (metadata, context, attribute) =>
+                    new MembershipPasswordAttributeAdapter(
+                        metadata,
+                        context,
+                        (MembershipPasswordAttribute)attribute
+                    )
+            );
 
-            AddValidationAttributeAdapter(dict, typeof(DataAnnotationsCompareAttribute),
-                    (metadata, context, attribute) => new CompareAttributeAdapter(metadata, context, (DataAnnotationsCompareAttribute)attribute));
+            AddValidationAttributeAdapter(
+                dict,
+                typeof(DataAnnotationsCompareAttribute),
+                (metadata, context, attribute) =>
+                    new CompareAttributeAdapter(
+                        metadata,
+                        context,
+                        (DataAnnotationsCompareAttribute)attribute
+                    )
+            );
 
-            AddValidationAttributeAdapter(dict, typeof(FileExtensionsAttribute),
-                   (metadata, context, attribute) => new FileExtensionsAttributeAdapter(metadata, context, (FileExtensionsAttribute)attribute));
+            AddValidationAttributeAdapter(
+                dict,
+                typeof(FileExtensionsAttribute),
+                (metadata, context, attribute) =>
+                    new FileExtensionsAttributeAdapter(
+                        metadata,
+                        context,
+                        (FileExtensionsAttribute)attribute
+                    )
+            );
 
             AddDataTypeAttributeAdapter(dict, typeof(CreditCardAttribute), "creditcard");
             AddDataTypeAttributeAdapter(dict, typeof(EmailAddressAttribute), "email");
@@ -399,7 +523,11 @@ namespace System.Web.Mvc
             return dict;
         }
 
-        private static void AddValidationAttributeAdapter(Dictionary<Type, DataAnnotationsModelValidationFactory> dictionary, Type validataionAttributeType, DataAnnotationsModelValidationFactory factory)
+        private static void AddValidationAttributeAdapter(
+            Dictionary<Type, DataAnnotationsModelValidationFactory> dictionary,
+            Type validataionAttributeType,
+            DataAnnotationsModelValidationFactory factory
+        )
         {
             Contract.Assert(dictionary != null);
             if (validataionAttributeType != null)
@@ -408,12 +536,23 @@ namespace System.Web.Mvc
             }
         }
 
-        private static void AddDataTypeAttributeAdapter(Dictionary<Type, DataAnnotationsModelValidationFactory> dictionary, Type attributeType, string ruleName)
+        private static void AddDataTypeAttributeAdapter(
+            Dictionary<Type, DataAnnotationsModelValidationFactory> dictionary,
+            Type attributeType,
+            string ruleName
+        )
         {
             AddValidationAttributeAdapter(
                 dictionary,
                 attributeType,
-                (metadata, context, attribute) => new DataTypeAttributeAdapter(metadata, context, (DataTypeAttribute)attribute, ruleName));
+                (metadata, context, attribute) =>
+                    new DataTypeAttributeAdapter(
+                        metadata,
+                        context,
+                        (DataTypeAttribute)attribute,
+                        ruleName
+                    )
+            );
         }
     }
 }

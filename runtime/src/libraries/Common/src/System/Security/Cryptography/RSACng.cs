@@ -14,9 +14,7 @@ namespace System.Security.Cryptography
         /// </summary>
         [SupportedOSPlatform("windows")]
         public RSACng()
-            : this(2048)
-        {
-        }
+            : this(2048) { }
 
         /// <summary>
         ///     Creates a new RSACng object that will use a randomly generated key of the specified size.

@@ -13,8 +13,8 @@ internal sealed class MvcRazorRuntimeCompilationOptionsSetup
 
     public MvcRazorRuntimeCompilationOptionsSetup(IWebHostEnvironment hostingEnvironment)
     {
-        _hostingEnvironment =
-            hostingEnvironment ?? throw new ArgumentNullException(nameof(hostingEnvironment));
+        _hostingEnvironment = hostingEnvironment
+            ?? throw new ArgumentNullException(nameof(hostingEnvironment));
     }
 
     public void Configure(MvcRazorRuntimeCompilationOptions options)

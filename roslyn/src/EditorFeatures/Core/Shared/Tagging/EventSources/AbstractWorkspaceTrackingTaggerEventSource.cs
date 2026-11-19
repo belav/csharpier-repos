@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
         protected AbstractWorkspaceTrackingTaggerEventSource(ITextBuffer subjectBuffer)
         {
             this.SubjectBuffer = subjectBuffer;
-            _workspaceRegistration = Workspace.GetWorkspaceRegistration(subjectBuffer.AsTextContainer());
+            _workspaceRegistration = Workspace.GetWorkspaceRegistration(
+                subjectBuffer.AsTextContainer()
+            );
         }
 
         protected abstract void ConnectToWorkspace(Workspace workspace);

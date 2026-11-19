@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,16 +29,16 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xaml
 {
-	[TestFixture]
-	public class XamlDuplicateMemberExceptionTest
-	{
-		[Test]
-		public void ConstructorNullArg ()
-		{
-			// allowed.
-			var ex = new XamlDuplicateMemberException ((XamlMember) null, (XamlType) null);
-			Assert.IsNull (ex.DuplicateMember, "#1");
-			Assert.IsNull (ex.ParentType, "#2");
-		}
-	}
+    [TestFixture]
+    public class XamlDuplicateMemberExceptionTest
+    {
+        [Test]
+        public void ConstructorNullArg()
+        {
+            // allowed.
+            var ex = new XamlDuplicateMemberException((XamlMember)null, (XamlType)null);
+            Assert.IsNull(ex.DuplicateMember, "#1");
+            Assert.IsNull(ex.ParentType, "#2");
+        }
+    }
 }

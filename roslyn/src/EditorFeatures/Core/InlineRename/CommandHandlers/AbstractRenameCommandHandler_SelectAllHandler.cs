@@ -10,14 +10,13 @@ using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal abstract partial class AbstractRenameCommandHandler :
-        ICommandHandler<SelectAllCommandArgs>
+    internal abstract partial class AbstractRenameCommandHandler
+        : ICommandHandler<SelectAllCommandArgs>
     {
-        public CommandState GetCommandState(SelectAllCommandArgs args)
-            => GetCommandState();
+        public CommandState GetCommandState(SelectAllCommandArgs args) => GetCommandState();
 
-        public bool ExecuteCommand(SelectAllCommandArgs args, CommandExecutionContext context)
-            => ExecuteSelectAll(args.SubjectBuffer, args.TextView);
+        public bool ExecuteCommand(SelectAllCommandArgs args, CommandExecutionContext context) =>
+            ExecuteSelectAll(args.SubjectBuffer, args.TextView);
 
         private bool ExecuteSelectAll(ITextBuffer subjectBuffer, ITextView view)
         {
@@ -29,10 +28,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             var caretPoint = view.GetCaretPoint(subjectBuffer);
             if (caretPoint.HasValue)
             {
-                if (_renameService.ActiveSession.TryGetContainingEditableSpan(caretPoint.Value, out var span))
+                if (
+                    _renameService.ActiveSession.TryGetContainingEditableSpan(
+                        caretPoint.Value,
+                        out var span
+                    )
+                )
                 {
-                    if (view.Selection.Start.Position != span.Start.Position ||
-                        view.Selection.End.Position != span.End.Position)
+                    if (
+                        view.Selection.Start.Position != span.Start.Position
+                        || view.Selection.End.Position != span.End.Position
+                    )
                     {
                         view.SetSelection(span);
                         return true;

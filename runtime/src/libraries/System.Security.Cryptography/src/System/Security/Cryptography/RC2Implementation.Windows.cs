@@ -14,14 +14,27 @@ namespace System.Security.Cryptography
             byte[] key,
             byte[]? iv,
             int blockSize,
-            int _ /*feedbackSize*/,
+            int _ /*feedbackSize*/
+            ,
             int paddingSize,
-            bool encrypting)
+            bool encrypting
+        )
         {
-            using (SafeAlgorithmHandle algorithm = RC2BCryptModes.GetHandle(cipherMode, key.Length * 8))
+            using (
+                SafeAlgorithmHandle algorithm = RC2BCryptModes.GetHandle(cipherMode, key.Length * 8)
+            )
             {
                 // The BasicSymmetricCipherBCrypt ctor will increase algorithm reference count and take ownership.
-                BasicSymmetricCipher cipher = new BasicSymmetricCipherBCrypt(algorithm, cipherMode, blockSize, paddingSize, key, true, iv, encrypting);
+                BasicSymmetricCipher cipher = new BasicSymmetricCipherBCrypt(
+                    algorithm,
+                    cipherMode,
+                    blockSize,
+                    paddingSize,
+                    key,
+                    true,
+                    iv,
+                    encrypting
+                );
                 return UniversalCryptoTransform.Create(paddingMode, cipher, encrypting);
             }
         }
@@ -32,9 +45,12 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> iv,
             int blockSize,
             int paddingSize,
-            bool encrypting)
+            bool encrypting
+        )
         {
-            using (SafeAlgorithmHandle algorithm = RC2BCryptModes.GetHandle(cipherMode, key.Length * 8))
+            using (
+                SafeAlgorithmHandle algorithm = RC2BCryptModes.GetHandle(cipherMode, key.Length * 8)
+            )
             {
                 // The BasicSymmetricCipherBCrypt ctor will increase algorithm reference count and take ownership.
                 return new BasicSymmetricCipherLiteBCrypt(
@@ -44,7 +60,8 @@ namespace System.Security.Cryptography
                     key,
                     ownsParentHandle: true,
                     iv,
-                    encrypting);
+                    encrypting
+                );
             }
         }
     }

@@ -19,10 +19,7 @@ namespace System.Xml.NameTableTests
         private string _TestData = null;
         public string TestData
         {
-            get
-            {
-                return _TestData;
-            }
+            get { return _TestData; }
         }
 
         public override int Init(object objParam)
@@ -78,17 +75,14 @@ namespace System.Xml.NameTableTests
             {
                 NameTableVer = ENAMETABLE_VER.VERIFY_WITH_GETSTR;
             }
-
             else if (GetDescription() == "VerifyWGetChar")
             {
                 NameTableVer = ENAMETABLE_VER.VERIFY_WITH_GETCHAR;
             }
-
             else if (GetDescription() == "VerifyWAddString")
             {
                 NameTableVer = ENAMETABLE_VER.VERIFY_WITH_ADDSTR;
             }
-
             else if (GetDescription() == "VerifyWAddChar")
             {
                 NameTableVer = ENAMETABLE_VER.VERIFY_WITH_ADDCHAR;
@@ -102,7 +96,8 @@ namespace System.Xml.NameTableTests
 
             if (TEST_PASS == ival)
             {
-                while (DataReader.Read() == true) ;
+                while (DataReader.Read() == true)
+                    ;
             }
 
             return ival;
@@ -116,17 +111,31 @@ namespace System.Xml.NameTableTests
             }
 
             string strFile = NameTable_TestFiles.GetTestFileName(EREADER_TYPE.GENERIC);
-            DataReader = XmlReader.Create(FilePathUtil.getStream(strFile), new XmlReaderSettings() { DtdProcessing = DtdProcessing.Ignore });//new XmlTextReader(strFile);
+            DataReader = XmlReader.Create(
+                FilePathUtil.getStream(strFile),
+                new XmlReaderSettings() { DtdProcessing = DtdProcessing.Ignore }
+            ); //new XmlTextReader(strFile);
         }
 
-        public void VerifyNameTable(object objActual, string str, char[] ach, int offset, int length)
+        public void VerifyNameTable(
+            object objActual,
+            string str,
+            char[] ach,
+            int offset,
+            int length
+        )
         {
             VerifyNameTableGet(objActual, str, ach, offset, length);
             VerifyNameTableAdd(objActual, str, ach, offset, length);
         }
 
-
-        public void VerifyNameTableGet(object objActual, string str, char[] ach, int offset, int length)
+        public void VerifyNameTableGet(
+            object objActual,
+            string str,
+            char[] ach,
+            int offset,
+            int length
+        )
         {
             object objExpected = null;
 
@@ -144,7 +153,13 @@ namespace System.Xml.NameTableTests
             }
         }
 
-        public void VerifyNameTableAdd(object objActual, string str, char[] ach, int offset, int length)
+        public void VerifyNameTableAdd(
+            object objActual,
+            string str,
+            char[] ach,
+            int offset,
+            int length
+        )
         {
             object objExpected = null;
 
@@ -180,32 +195,69 @@ namespace System.Xml.NameTableTests
         public static char[] chValW1Fr1EndExtra = { 'P', 'P', 'L', 'A', 'Y', 'Y' };
         public static char[] chValWEndExtras = { 'P', 'L', 'A', 'Y', 'Y', 'Y' };
         public static char[] chValWFrExtras = { 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'L', 'A', 'Y' };
-        public static char[] chValWFrEndExtras = { 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'L', 'A', 'Y', 'Y', 'Y' };
+        public static char[] chValWFrEndExtras =
+        {
+            'P',
+            'P',
+            'P',
+            'P',
+            'P',
+            'P',
+            'P',
+            'L',
+            'A',
+            'Y',
+            'Y',
+            'Y',
+        };
 
         public static string[] strPerVal =
-            {
-                "PLYA", "PALY", "PAYL", "PYLA", "PYAL",
-                "LPAY", "LPYA", "LAPY", "LAYP", "LYPA", "LYAP",
-                "ALPY", "ALYP", "APLY", "APYL", "AYLP", "AYPL",
-                "YLPA", "YLAP", "YPLA", "YPAL", "YALP", "YAPL",
-            };
-
+        {
+            "PLYA",
+            "PALY",
+            "PAYL",
+            "PYLA",
+            "PYAL",
+            "LPAY",
+            "LPYA",
+            "LAPY",
+            "LAYP",
+            "LYPA",
+            "LYAP",
+            "ALPY",
+            "ALYP",
+            "APLY",
+            "APYL",
+            "AYLP",
+            "AYPL",
+            "YLPA",
+            "YLAP",
+            "YPLA",
+            "YPAL",
+            "YALP",
+            "YAPL",
+        };
 
         public static string[] strPerValCase =
-            {
-                "pLAY", "plAY", "plaY", "play",
-                "plAY", "plaY",
-                "pLaY", "pLay",
-                "pLAy",
-                "PlAY", "PlaY", "Play",
-                "PLaY",
-                "PLAy"
-            };
-
+        {
+            "pLAY",
+            "plAY",
+            "plaY",
+            "play",
+            "plAY",
+            "plaY",
+            "pLaY",
+            "pLay",
+            "pLAy",
+            "PlAY",
+            "PlaY",
+            "Play",
+            "PLaY",
+            "PLAy",
+        };
 
         public static string strInv = "Unatomized";
         public static string strVal = "PLAY";
-
 
         [Variation("GetUnAutomized", Pri = 0)]
         public int Variation_1()
@@ -221,7 +273,6 @@ namespace System.Xml.NameTableTests
             return TEST_PASS;
         }
 
-
         [Variation("Get Atomized String", Pri = 0)]
         public int Variation_2()
         {
@@ -232,7 +283,6 @@ namespace System.Xml.NameTableTests
             VerifyNameTable(objActual, strVal, chVal, 0, chVal.Length);
             return TEST_PASS;
         }
-
 
         [Variation("Get Atomized String with end padded", Pri = 0)]
         public int Variation_3()
@@ -245,7 +295,6 @@ namespace System.Xml.NameTableTests
             return TEST_PASS;
         }
 
-
         [Variation("Get Atomized String with front and end padded", Pri = 0)]
         public int Variation_4()
         {
@@ -256,7 +305,6 @@ namespace System.Xml.NameTableTests
             VerifyNameTable(objActual, strVal, chValW1Fr1EndExtra, 1, strVal.Length);
             return TEST_PASS;
         }
-
 
         [Variation("Get Atomized String with front padded", Pri = 0)]
         public int Variation_5()
@@ -269,7 +317,6 @@ namespace System.Xml.NameTableTests
             return TEST_PASS;
         }
 
-
         [Variation("Get Atomized String with end multi-padded", Pri = 0)]
         public int Variation_6()
         {
@@ -280,7 +327,6 @@ namespace System.Xml.NameTableTests
             VerifyNameTable(objActual, strVal, chValWEndExtras, 0, strVal.Length);
             return TEST_PASS;
         }
-
 
         [Variation("Get Atomized String with front and end multi-padded", Pri = 0)]
         public int Variation_7()
@@ -293,18 +339,30 @@ namespace System.Xml.NameTableTests
             return TEST_PASS;
         }
 
-
         [Variation("Get Atomized String with front multi-padded", Pri = 0)]
         public int Variation_8()
         {
-            object objActual = DataReader.NameTable.Get(chValWFrExtras, chValWFrExtras.Length - strVal.Length, strVal.Length);
-            object objActual1 = DataReader.NameTable.Get(chValWFrExtras, chValWFrExtras.Length - strVal.Length, strVal.Length);
+            object objActual = DataReader.NameTable.Get(
+                chValWFrExtras,
+                chValWFrExtras.Length - strVal.Length,
+                strVal.Length
+            );
+            object objActual1 = DataReader.NameTable.Get(
+                chValWFrExtras,
+                chValWFrExtras.Length - strVal.Length,
+                strVal.Length
+            );
 
             CError.Compare(objActual, objActual1, CurVariation.Desc);
-            VerifyNameTable(objActual, strVal, chValWFrExtras, chValWFrExtras.Length - strVal.Length, strVal.Length);
+            VerifyNameTable(
+                objActual,
+                strVal,
+                chValWFrExtras,
+                chValWFrExtras.Length - strVal.Length,
+                strVal.Length
+            );
             return TEST_PASS;
         }
-
 
         [Variation("Get Invalid permutation of valid string", Pri = 0)]
         public int Variation_9()
@@ -332,7 +390,8 @@ namespace System.Xml.NameTableTests
             NameTable_TestFiles.CreateTestFile(ref filename, EREADER_TYPE.BIG_ELEMENT_SIZE);
             XmlReader rDataReader = XmlReader.Create(FilePathUtil.getStream(filename));
 
-            while (rDataReader.Read() == true) ;
+            while (rDataReader.Read() == true)
+                ;
             XmlNameTable nt = rDataReader.NameTable;
             object objTest1 = nt.Get(BigStr + "Z");
             object objTest2 = nt.Get(BigStr + "X");
@@ -352,7 +411,10 @@ namespace System.Xml.NameTableTests
             }
 
             if ((objTest1 == objTest2) || (objTest1 == objTest3) || (objTest2 == objTest3))
-                throw new CTestException(CTestBase.TEST_FAIL, "objTest1 is equal to objTest2, or objTest3");
+                throw new CTestException(
+                    CTestBase.TEST_FAIL,
+                    "objTest1 is equal to objTest2, or objTest3"
+                );
             return TEST_PASS;
         }
 
@@ -402,7 +464,6 @@ namespace System.Xml.NameTableTests
             return TEST_PASS;
         }
 
-
         [Variation("Get empty string, valid offset and length = 0", Pri = 0)]
         public int Variation_12()
         {
@@ -421,7 +482,6 @@ namespace System.Xml.NameTableTests
             return TEST_PASS;
         }
 
-
         [Variation("Get empty string, valid offset and length = 1", Pri = 0)]
         public int Variation_13()
         {
@@ -439,7 +499,6 @@ namespace System.Xml.NameTableTests
             throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
         }
 
-
         [Variation("Get null char[], valid offset and length = 0", Pri = 0)]
         public int Variation_14()
         {
@@ -449,7 +508,6 @@ namespace System.Xml.NameTableTests
             CError.Compare(string.Empty, objActual, "Char with null");
             return TEST_PASS;
         }
-
 
         [Variation("Get null string", Pri = 0)]
         public int Variation_15()
@@ -468,7 +526,6 @@ namespace System.Xml.NameTableTests
             throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
         }
 
-
         [Variation("Get null char[], valid offset and length = 1", Pri = 0)]
         public int Variation_16()
         {
@@ -485,7 +542,6 @@ namespace System.Xml.NameTableTests
             }
             throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
         }
-
 
         [Variation("Get valid string, invalid length, length = 0", Pri = 0)]
         public int Variation_17()
@@ -504,7 +560,6 @@ namespace System.Xml.NameTableTests
             return TEST_PASS;
         }
 
-
         [Variation("Get valid string, invalid length, length = Length+1", Pri = 0)]
         public int Variation_18()
         {
@@ -519,7 +574,6 @@ namespace System.Xml.NameTableTests
             }
             throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
         }
-
 
         [Variation("Get valid string, invalid length, length = max_int", Pri = 0)]
         public int Variation_19()
@@ -536,7 +590,6 @@ namespace System.Xml.NameTableTests
             throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
         }
 
-
         [Variation("Get valid string, invalid length, length = -1", Pri = 0)]
         public int Variation_20()
         {
@@ -544,7 +597,6 @@ namespace System.Xml.NameTableTests
             CError.WriteLine("HERE " + objActual);
             return TEST_PASS;
         }
-
 
         [Variation("Get valid string, invalid offset > Length", Pri = 0)]
         public int Variation_21()
@@ -561,7 +613,6 @@ namespace System.Xml.NameTableTests
             throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
         }
 
-
         [Variation("Get valid string, invalid offset = max_int", Pri = 0)]
         public int Variation_22()
         {
@@ -576,7 +627,6 @@ namespace System.Xml.NameTableTests
             }
             throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
         }
-
 
         [Variation("Get valid string, invalid offset = Length", Pri = 0)]
         public int Variation_23()
@@ -593,7 +643,6 @@ namespace System.Xml.NameTableTests
             throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
         }
 
-
         [Variation("Get valid string, invalid offset -1", Pri = 0)]
         public int Variation_24()
         {
@@ -608,7 +657,6 @@ namespace System.Xml.NameTableTests
             }
             throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
         }
-
 
         [Variation("Get valid string, invalid offset and length", Pri = 0)]
         public int Variation_25()
@@ -642,21 +690,25 @@ namespace System.Xml.NameTableTests
         public static char[] chValW1Fr1EndExtra = { 'F', 'F', 'O', 'O', 'O' };
         public static char[] chValWEndExtras = { 'F', 'O', 'O', 'O', 'O', 'O' };
         public static char[] chValWFrExtras = { 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'O', 'O', 'O' };
-        public static char[] chValWFrEndExtras = { 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'O', 'O', 'O', 'O', 'O' };
+        public static char[] chValWFrEndExtras =
+        {
+            'F',
+            'F',
+            'F',
+            'F',
+            'F',
+            'F',
+            'F',
+            'O',
+            'O',
+            'O',
+            'O',
+            'O',
+        };
 
-        public static string[] strPerVal =
-            {
-                "OFO", "OOF"
-            };
+        public static string[] strPerVal = { "OFO", "OOF" };
 
-
-        public static string[] strPerValCase =
-            {
-                "fOO", "foO", "foo",
-                "FoO", "Foo",
-                "FOo"
-            };
-
+        public static string[] strPerValCase = { "fOO", "foO", "foo", "FoO", "Foo", "FOo" };
 
         public static string strVal = "FOO";
 
@@ -664,8 +716,10 @@ namespace System.Xml.NameTableTests
         public static string strAlphaNumVal = "WITH1Number";
         public static string strSignVal = "+SIGN-";
 
-
-        [Variation("Add a new atomized string (padded with chars at the end), valid offset and length = str_length", Pri = 0)]
+        [Variation(
+            "Add a new atomized string (padded with chars at the end), valid offset and length = str_length",
+            Pri = 0
+        )]
         public int Variation_1()
         {
             ReloadSource();
@@ -681,8 +735,10 @@ namespace System.Xml.NameTableTests
             return TEST_PASS;
         }
 
-
-        [Variation("Add a new atomized string (padded with chars at both front and end), valid offset and length = str_length", Pri = 0)]
+        [Variation(
+            "Add a new atomized string (padded with chars at both front and end), valid offset and length = str_length",
+            Pri = 0
+        )]
         public int Variation_2()
         {
             ReloadSource();
@@ -695,8 +751,10 @@ namespace System.Xml.NameTableTests
             return TEST_PASS;
         }
 
-
-        [Variation("Add a new atomized string (padded with chars at the front), valid offset and length = str_length", Pri = 0)]
+        [Variation(
+            "Add a new atomized string (padded with chars at the front), valid offset and length = str_length",
+            Pri = 0
+        )]
         public int Variation_3()
         {
             ReloadSource();
@@ -709,8 +767,10 @@ namespace System.Xml.NameTableTests
             return TEST_PASS;
         }
 
-
-        [Variation("Add a new atomized string (padded a char at the end), valid offset and length = str_length", Pri = 0)]
+        [Variation(
+            "Add a new atomized string (padded a char at the end), valid offset and length = str_length",
+            Pri = 0
+        )]
         public int Variation_4()
         {
             ReloadSource();
@@ -724,8 +784,10 @@ namespace System.Xml.NameTableTests
             return TEST_PASS;
         }
 
-
-        [Variation("Add a new atomized string (padded with a char at both front and end), valid offset and length = str_length", Pri = 0)]
+        [Variation(
+            "Add a new atomized string (padded with a char at both front and end), valid offset and length = str_length",
+            Pri = 0
+        )]
         public int Variation_5()
         {
             ReloadSource();
@@ -738,8 +800,10 @@ namespace System.Xml.NameTableTests
             return TEST_PASS;
         }
 
-
-        [Variation("Add a new atomized string (padded with a char at the front), valid offset and length = str_length", Pri = 0)]
+        [Variation(
+            "Add a new atomized string (padded with a char at the front), valid offset and length = str_length",
+            Pri = 0
+        )]
         public int Variation_6()
         {
             ReloadSource();
@@ -751,7 +815,6 @@ namespace System.Xml.NameTableTests
             VerifyNameTable(objActual, strVal, chValW1FrExtra, 1, strVal.Length);
             return TEST_PASS;
         }
-
 
         [Variation("Add new string between 1M - 2M in size, valid offset and length")]
         public int Variation_7()
@@ -766,8 +829,9 @@ namespace System.Xml.NameTableTests
             return TEST_PASS;
         }
 
-
-        [Variation("Add an existing atomized string (with Max string for test: 1-2M), valid offset and valid length")]
+        [Variation(
+            "Add an existing atomized string (with Max string for test: 1-2M), valid offset and valid length"
+        )]
         public int Variation_8()
         {
             ////////////////////////////
@@ -776,7 +840,8 @@ namespace System.Xml.NameTableTests
             string filename = null;
             NameTable_TestFiles.CreateTestFile(ref filename, EREADER_TYPE.BIG_ELEMENT_SIZE);
             XmlReader rDataReader = XmlReader.Create(FilePathUtil.getStream(filename));
-            while (rDataReader.Read() == true) ;
+            while (rDataReader.Read() == true)
+                ;
             XmlNameTable nt = rDataReader.NameTable;
 
             string strTest = BigStr + "X";
@@ -786,7 +851,11 @@ namespace System.Xml.NameTableTests
             object objActual2 = nt.Add(chTest, 0, chTest.Length);
 
             CError.Compare(objActual1, objActual2, "Comparing objActual1 and objActual2");
-            CError.Compare(objActual1, nt.Get(chTest, 0, chTest.Length), "Comparing objActual1 and GetCharArray");
+            CError.Compare(
+                objActual1,
+                nt.Get(chTest, 0, chTest.Length),
+                "Comparing objActual1 and GetCharArray"
+            );
             CError.Compare(objActual1, nt.Get(strTest), "Comparing objActual1 and GetString");
             CError.Compare(objActual1, nt.Add(strTest), "Comparing objActual1 and AddString");
 
@@ -795,8 +864,10 @@ namespace System.Xml.NameTableTests
             return TEST_PASS;
         }
 
-
-        [Variation("Add new string, and do Get with a combination of the same string in different order", Pri = 0)]
+        [Variation(
+            "Add new string, and do Get with a combination of the same string in different order",
+            Pri = 0
+        )]
         public int Variation_9()
         {
             ReloadSource();
@@ -818,8 +889,10 @@ namespace System.Xml.NameTableTests
             return TEST_PASS;
         }
 
-
-        [Variation("Add new string, and Add a combination of the same string in different case, all are different objects", Pri = 0)]
+        [Variation(
+            "Add new string, and Add a combination of the same string in different case, all are different objects",
+            Pri = 0
+        )]
         public int Variation_10()
         {
             ReloadSource();
@@ -839,14 +912,18 @@ namespace System.Xml.NameTableTests
                 VerifyNameTable(objActual1, strPerValCase[i], ach, 0, ach.Length);
                 if (objAdded == objActual)
                 {
-                    throw new Exception("\n Object are the same for " + strVal + " and " + strPerValCase[i]);
+                    throw new Exception(
+                        "\n Object are the same for " + strVal + " and " + strPerValCase[i]
+                    );
                 }
             }
             return TEST_PASS;
         }
 
-
-        [Variation("Add 1M new string, and do Get with the last char different than the original string", Pri = 0)]
+        [Variation(
+            "Add 1M new string, and do Get with the last char different than the original string",
+            Pri = 0
+        )]
         public int Variation_11()
         {
             object objAdded = DataReader.NameTable.Add(BigStr + "M");
@@ -856,7 +933,6 @@ namespace System.Xml.NameTableTests
 
             return TEST_PASS;
         }
-
 
         [Variation("Add new alpha numeric, valid offset, valid length", Pri = 0)]
         public int Variation_12()
@@ -872,7 +948,6 @@ namespace System.Xml.NameTableTests
 
             return TEST_PASS;
         }
-
 
         [Variation("Add new alpha numeric, valid offset, length= 0", Pri = 0)]
         public int Variation_13()
@@ -891,7 +966,6 @@ namespace System.Xml.NameTableTests
             return TEST_PASS;
         }
 
-
         [Variation("Add new with whitespace, valid offset, valid length", Pri = 0)]
         public int Variation_14()
         {
@@ -907,7 +981,6 @@ namespace System.Xml.NameTableTests
 
             return TEST_PASS;
         }
-
 
         [Variation("Add new with sign characters, valid offset, valid length", Pri = 0)]
         public int Variation_15()
@@ -925,7 +998,6 @@ namespace System.Xml.NameTableTests
             return TEST_PASS;
         }
 
-
         [Variation("Add new string between 1M - 2M in size, valid offset and length", Pri = 0)]
         public int Variation_16()
         {
@@ -942,8 +1014,10 @@ namespace System.Xml.NameTableTests
             return TEST_PASS;
         }
 
-
-        [Variation("Add new string, get object using permutations of upper & lowercase, should be null", Pri = 0)]
+        [Variation(
+            "Add new string, get object using permutations of upper & lowercase, should be null",
+            Pri = 0
+        )]
         public int Variation_17()
         {
             ReloadSource();
@@ -965,7 +1039,6 @@ namespace System.Xml.NameTableTests
             return TEST_PASS;
         }
 
-
         [Variation("Add an empty atomized string, valid offset and length = 0", Pri = 0)]
         public int Variation_18()
         {
@@ -976,7 +1049,11 @@ namespace System.Xml.NameTableTests
             object objAdded = DataReader.NameTable.Add(strEmpty);
             object objAdded1 = DataReader.NameTable.Add(strEmpty.ToCharArray(), 0, strEmpty.Length);
 
-            object objActual1 = DataReader.NameTable.Get(strEmpty.ToCharArray(), 0, strEmpty.Length);
+            object objActual1 = DataReader.NameTable.Get(
+                strEmpty.ToCharArray(),
+                0,
+                strEmpty.Length
+            );
             object objActual2 = DataReader.NameTable.Get(strEmpty);
 
             CError.WriteLine("String " + DataReader.NameTable.Get(strEmpty));
@@ -989,8 +1066,10 @@ namespace System.Xml.NameTableTests
             return TEST_PASS;
         }
 
-
-        [Variation("Add an empty atomized string (array char only), valid offset and length = 1", Pri = 0)]
+        [Variation(
+            "Add an empty atomized string (array char only), valid offset and length = 1",
+            Pri = 0
+        )]
         public int Variation_19()
         {
             try
@@ -1006,7 +1085,6 @@ namespace System.Xml.NameTableTests
             throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
         }
 
-
         [Variation("Add a NULL atomized string, valid offset and length = 0", Pri = 0)]
         public int Variation_20()
         {
@@ -1014,7 +1092,6 @@ namespace System.Xml.NameTableTests
             VerifyNameTable(objAdded, string.Empty, (String.Empty).ToCharArray(), 0, 0);
             return TEST_PASS;
         }
-
 
         [Variation("Add a NULL atomized string, valid offset and length = 1", Pri = 0)]
         public int Variation_21()
@@ -1030,7 +1107,6 @@ namespace System.Xml.NameTableTests
 
             throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
         }
-
 
         [Variation("Add a valid atomized string, valid offset and length = 0", Pri = 0)]
         public int Variation_22()
@@ -1048,7 +1124,6 @@ namespace System.Xml.NameTableTests
             return TEST_PASS;
         }
 
-
         [Variation("Add a valid atomized string, valid offset and length > valid_length", Pri = 0)]
         public int Variation_23()
         {
@@ -1063,7 +1138,6 @@ namespace System.Xml.NameTableTests
 
             throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
         }
-
 
         [Variation("Add a valid atomized string, valid offset and length = max_int", Pri = 0)]
         public int Variation_24()
@@ -1080,7 +1154,6 @@ namespace System.Xml.NameTableTests
             throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
         }
 
-
         [Variation("Add a valid atomized string, valid offset and length = - 1", Pri = 0)]
         public int Variation_25()
         {
@@ -1095,7 +1168,6 @@ namespace System.Xml.NameTableTests
 
             throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
         }
-
 
         [Variation("Add a valid atomized string, valid length and offset > str_length", Pri = 0)]
         public int Variation_26()
@@ -1112,7 +1184,6 @@ namespace System.Xml.NameTableTests
             throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
         }
 
-
         [Variation("Add a valid atomized string, valid length and offset = max_int", Pri = 0)]
         public int Variation_27()
         {
@@ -1127,7 +1198,6 @@ namespace System.Xml.NameTableTests
 
             throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
         }
-
 
         [Variation("Add a valid atomized string, valid length and offset = str_length", Pri = 0)]
         public int Variation_28()
@@ -1144,7 +1214,6 @@ namespace System.Xml.NameTableTests
             throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
         }
 
-
         [Variation("Add a valid atomized string, valid length and offset = - 1", Pri = 0)]
         public int Variation_29()
         {
@@ -1159,7 +1228,6 @@ namespace System.Xml.NameTableTests
 
             throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
         }
-
 
         [Variation("Add a valid atomized string, with both invalid offset and length", Pri = 0)]
         public int Variation_30()

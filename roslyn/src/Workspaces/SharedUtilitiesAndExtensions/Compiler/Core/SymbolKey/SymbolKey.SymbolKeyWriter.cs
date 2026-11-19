@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis
 
         private class SymbolKeyWriter : SymbolVisitor, IDisposable
         {
-            private static readonly ObjectPool<SymbolKeyWriter> s_writerPool = SharedPools.Default<SymbolKeyWriter>();
+            private static readonly ObjectPool<SymbolKeyWriter> s_writerPool =
+                SharedPools.Default<SymbolKeyWriter>();
 
             private readonly Action<ISymbol> _writeSymbolKey;
             private readonly Action<string?> _writeString;
@@ -101,8 +102,8 @@ namespace Microsoft.CodeAnalysis
                 return visitor;
             }
 
-            private void Initialize(CancellationToken cancellationToken)
-                => CancellationToken = cancellationToken;
+            private void Initialize(CancellationToken cancellationToken) =>
+                CancellationToken = cancellationToken;
 
             public string CreateKey()
             {
@@ -116,8 +117,7 @@ namespace Microsoft.CodeAnalysis
                 _nestingCount++;
             }
 
-            private void WriteType(SymbolKeyType type)
-                => _stringBuilder.Append((char)type);
+            private void WriteType(SymbolKeyType type) => _stringBuilder.Append((char)type);
 
             private void EndKey()
             {
@@ -165,7 +165,7 @@ namespace Microsoft.CodeAnalysis
 
                 if (!shouldWriteOrdinal)
                 {
-                    // Note: it is possible in some situations to hit the same symbol 
+                    // Note: it is possible in some situations to hit the same symbol
                     // multiple times.  For example, if you have:
                     //
                     //      Goo<Z>(List<Z> list)
@@ -173,7 +173,7 @@ namespace Microsoft.CodeAnalysis
                     // If we start with the symbol for "list" then we'll see the following
                     // chain of symbols hit:
                     //
-                    //      List<Z>     
+                    //      List<Z>
                     //          Z
                     //              Goo<Z>(List<Z>)
                     //                  List<Z>
@@ -197,18 +197,17 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
 
-                // Now write out the ID for this symbol so that any future hits of it can 
+                // Now write out the ID for this symbol so that any future hits of it can
                 // write out a reference to it instead.
                 WriteInteger(id);
 
                 EndKey();
             }
 
-            private void WriteSpace()
-                => _stringBuilder.Append(' ');
+            private void WriteSpace() => _stringBuilder.Append(' ');
 
-            internal void WriteFormatVersion(int version)
-                => WriteIntegerRaw_DoNotCallDirectly(version);
+            internal void WriteFormatVersion(int version) =>
+                WriteIntegerRaw_DoNotCallDirectly(version);
 
             internal void WriteInteger(int value)
             {
@@ -216,11 +215,10 @@ namespace Microsoft.CodeAnalysis
                 WriteIntegerRaw_DoNotCallDirectly(value);
             }
 
-            private void WriteIntegerRaw_DoNotCallDirectly(int value)
-                => _stringBuilder.Append(value.ToString(CultureInfo.InvariantCulture));
+            private void WriteIntegerRaw_DoNotCallDirectly(int value) =>
+                _stringBuilder.Append(value.ToString(CultureInfo.InvariantCulture));
 
-            internal void WriteBoolean(bool value)
-                => WriteInteger(value ? 1 : 0);
+            internal void WriteBoolean(bool value) => WriteInteger(value ? 1 : 0);
 
             internal void WriteString(string? value)
             {
@@ -247,9 +245,12 @@ namespace Microsoft.CodeAnalysis
                     return;
                 }
 
-                Debug.Assert(location.Kind is LocationKind.None or
-                             LocationKind.SourceFile or
-                             LocationKind.MetadataFile);
+                Debug.Assert(
+                    location.Kind
+                        is LocationKind.None
+                            or LocationKind.SourceFile
+                            or LocationKind.MetadataFile
+                );
 
                 WriteInteger((int)location.Kind);
                 if (location.IsInSource)
@@ -275,27 +276,27 @@ namespace Microsoft.CodeAnalysis
                 WriteArray(symbols, _writeSymbolKey);
             }
 
-            internal void WriteParameterTypesArray(ImmutableArray<IParameterSymbol> symbols)
-                => WriteArray(symbols, _writeParameterType);
+            internal void WriteParameterTypesArray(ImmutableArray<IParameterSymbol> symbols) =>
+                WriteArray(symbols, _writeParameterType);
 
-            internal void WriteBooleanArray(ImmutableArray<bool> array)
-                => WriteArray(array, _writeBoolean);
+            internal void WriteBooleanArray(ImmutableArray<bool> array) =>
+                WriteArray(array, _writeBoolean);
 
             // annotating WriteStringArray and WriteLocationArray as allowing null elements
             // then causes issues where we can't pass ImmutableArrays of non-null elements
 
 #nullable disable
 
-            internal void WriteStringArray(ImmutableArray<string> strings)
-                => WriteArray(strings, _writeString);
+            internal void WriteStringArray(ImmutableArray<string> strings) =>
+                WriteArray(strings, _writeString);
 
-            internal void WriteLocationArray(ImmutableArray<Location> array)
-                => WriteArray(array, _writeLocation);
+            internal void WriteLocationArray(ImmutableArray<Location> array) =>
+                WriteArray(array, _writeLocation);
 
 #nullable enable
 
-            internal void WriteRefKindArray(ImmutableArray<IParameterSymbol> values)
-                => WriteArray(values, _writeRefKind);
+            internal void WriteRefKindArray(ImmutableArray<IParameterSymbol> values) =>
+                WriteArray(values, _writeRefKind);
 
             private void WriteArray<T, U>(ImmutableArray<T> array, Action<U> writeValue)
                 where T : U
@@ -347,14 +348,14 @@ namespace Microsoft.CodeAnalysis
                 FieldSymbolKey.Instance.Create(fieldSymbol, this);
             }
 
-            public override void VisitLabel(ILabelSymbol labelSymbol)
-                => throw ExceptionUtilities.Unreachable();
+            public override void VisitLabel(ILabelSymbol labelSymbol) =>
+                throw ExceptionUtilities.Unreachable();
 
-            public override void VisitLocal(ILocalSymbol localSymbol)
-                => throw ExceptionUtilities.Unreachable();
+            public override void VisitLocal(ILocalSymbol localSymbol) =>
+                throw ExceptionUtilities.Unreachable();
 
-            public override void VisitRangeVariable(IRangeVariableSymbol rangeVariableSymbol)
-                => throw ExceptionUtilities.Unreachable();
+            public override void VisitRangeVariable(IRangeVariableSymbol rangeVariableSymbol) =>
+                throw ExceptionUtilities.Unreachable();
 
             public override void VisitMethod(IMethodSymbol methodSymbol)
             {
@@ -406,7 +407,11 @@ namespace Microsoft.CodeAnalysis
                     WriteType(SymbolKeyType.ErrorType);
                     ErrorTypeSymbolKey.Instance.Create(namedTypeSymbol, this);
                 }
-                else if (namedTypeSymbol.IsTupleType && namedTypeSymbol.TupleUnderlyingType is INamedTypeSymbol underlyingType && underlyingType != namedTypeSymbol)
+                else if (
+                    namedTypeSymbol.IsTupleType
+                    && namedTypeSymbol.TupleUnderlyingType is INamedTypeSymbol underlyingType
+                    && underlyingType != namedTypeSymbol
+                )
                 {
                     // A tuple is a named type with some added information
                     // We only need to store this extra information if there is some
@@ -473,7 +478,7 @@ namespace Microsoft.CodeAnalysis
             public override void VisitTypeParameter(ITypeParameterSymbol typeParameterSymbol)
             {
                 // If it's a reference to a method type parameter, and we're currently writing
-                // out a signture, then only write out the ordinal of type parameter.  This 
+                // out a signture, then only write out the ordinal of type parameter.  This
                 // helps prevent recursion problems in cases like "Goo<T>(T t).
                 if (ShouldWriteTypeParameterOrdinal(typeParameterSymbol, out var methodIndex))
                 {
@@ -510,13 +515,14 @@ namespace Microsoft.CodeAnalysis
                 return false;
             }
 
-            public void PushMethod(IMethodSymbol method)
-                => _methodSymbolStack.Add(method);
+            public void PushMethod(IMethodSymbol method) => _methodSymbolStack.Add(method);
 
             public void PopMethod(IMethodSymbol method)
             {
                 Contract.ThrowIfTrue(_methodSymbolStack.Count == 0);
-                Contract.ThrowIfFalse(method.Equals(_methodSymbolStack[_methodSymbolStack.Count - 1]));
+                Contract.ThrowIfFalse(
+                    method.Equals(_methodSymbolStack[_methodSymbolStack.Count - 1])
+                );
                 _methodSymbolStack.RemoveAt(_methodSymbolStack.Count - 1);
             }
         }

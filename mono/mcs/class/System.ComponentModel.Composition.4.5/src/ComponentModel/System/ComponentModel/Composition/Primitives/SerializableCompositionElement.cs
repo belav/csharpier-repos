@@ -6,8 +6,8 @@ using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Primitives
 {
-    // As most objects that implement ICompositionElement (such as Export, ComposablePart, 
-    // ComposablePartCatalog, etc) are not serializable, this class is used as a serializable 
+    // As most objects that implement ICompositionElement (such as Export, ComposablePart,
+    // ComposablePartCatalog, etc) are not serializable, this class is used as a serializable
     // placeholder for these types when ICompositionElement is used within serializable types,
     // such as CompositionException, CompositionIssue, etc.
     [Serializable]
@@ -43,8 +43,7 @@ namespace System.ComponentModel.Composition.Primitives
         public static ICompositionElement FromICompositionElement(ICompositionElement element)
         {
             if (element == null)
-            {   // Null is always serializable   
-
+            { // Null is always serializable
                 return null;
             }
 

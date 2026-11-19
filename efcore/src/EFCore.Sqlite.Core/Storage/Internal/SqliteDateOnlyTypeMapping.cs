@@ -21,7 +21,8 @@ public class SqliteDateOnlyTypeMapping : DateOnlyTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static new SqliteDateOnlyTypeMapping Default { get; } = new(SqliteTypeMappingSource.TextTypeName);
+    public static new SqliteDateOnlyTypeMapping Default { get; } =
+        new(SqliteTypeMappingSource.TextTypeName);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -29,12 +30,8 @@ public class SqliteDateOnlyTypeMapping : DateOnlyTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SqliteDateOnlyTypeMapping(
-        string storeType,
-        DbType? dbType = System.Data.DbType.Date)
-        : base(storeType, dbType)
-    {
-    }
+    public SqliteDateOnlyTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Date)
+        : base(storeType, dbType) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -43,17 +40,15 @@ public class SqliteDateOnlyTypeMapping : DateOnlyTypeMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected SqliteDateOnlyTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.
     /// </summary>
     /// <param name="parameters">The parameters for this mapping.</param>
     /// <returns>The newly created mapping.</returns>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new SqliteDateOnlyTypeMapping(parameters);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new SqliteDateOnlyTypeMapping(parameters);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -61,6 +56,5 @@ public class SqliteDateOnlyTypeMapping : DateOnlyTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override string SqlLiteralFormatString
-        => DateOnlyFormatConst;
+    protected override string SqlLiteralFormatString => DateOnlyFormatConst;
 }

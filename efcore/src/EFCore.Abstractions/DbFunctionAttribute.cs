@@ -27,9 +27,7 @@ public class DbFunctionAttribute : Attribute
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbFunctionAttribute" /> class.
     /// </summary>
-    public DbFunctionAttribute()
-    {
-    }
+    public DbFunctionAttribute() { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbFunctionAttribute" /> class.
@@ -89,6 +87,5 @@ public class DbFunctionAttribute : Attribute
     /// <summary>
     ///     Checks whether <see cref="IsNullable" /> has been explicitly set to a value.
     /// </summary>
-    public bool IsNullableHasValue
-        => _nullable.HasValue;
+    public bool IsNullableHasValue => _nullable.HasValue;
 }

@@ -2,11 +2,11 @@
 // <copyright file="XmlReflectionMember.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Serialization {
-
+namespace System.Xml.Serialization
+{
     using System;
 
     /// <include file='doc\XmlReflectionMember.uex' path='docs/doc[@for="XmlReflectionMember"]/*' />
@@ -14,7 +14,8 @@ namespace System.Xml.Serialization {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public class XmlReflectionMember {
+    public class XmlReflectionMember
+    {
         string memberName;
         Type type;
         XmlAttributes xmlAttributes = new XmlAttributes();
@@ -26,7 +27,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Type MemberType {
+        public Type MemberType
+        {
             get { return type; }
             set { type = value; }
         }
@@ -35,7 +37,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlAttributes XmlAttributes {
+        public XmlAttributes XmlAttributes
+        {
             get { return xmlAttributes; }
             set { xmlAttributes = value; }
         }
@@ -44,7 +47,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapAttributes SoapAttributes {
+        public SoapAttributes SoapAttributes
+        {
             get { return soapAttributes; }
             set { soapAttributes = value; }
         }
@@ -53,7 +57,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string MemberName {
+        public string MemberName
+        {
             get { return memberName == null ? string.Empty : memberName; }
             set { memberName = value; }
         }
@@ -62,7 +67,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool IsReturnValue {
+        public bool IsReturnValue
+        {
             get { return isReturnValue; }
             set { isReturnValue = value; }
         }
@@ -71,11 +77,10 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool OverrideIsNullable {
+        public bool OverrideIsNullable
+        {
             get { return overrideIsNullable; }
             set { overrideIsNullable = value; }
         }
     }
-
-
 }

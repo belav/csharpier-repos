@@ -28,7 +28,9 @@ namespace System.ServiceModel.Channels
 
             CloseSequenceInfo closeSequenceInfo = new CloseSequenceInfo();
 
-            XmlDictionaryString wsrmNs = WsrmIndex.GetNamespace(ReliableMessagingVersion.WSReliableMessaging11);
+            XmlDictionaryString wsrmNs = WsrmIndex.GetNamespace(
+                ReliableMessagingVersion.WSReliableMessaging11
+            );
             Wsrm11Dictionary wsrm11Dictionary = DXD.Wsrm11Dictionary;
 
             reader.ReadStartElement(wsrm11Dictionary.CloseSequence, wsrmNs);
@@ -55,7 +57,9 @@ namespace System.ServiceModel.Channels
 
         protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
         {
-            XmlDictionaryString wsrmNs = WsrmIndex.GetNamespace(ReliableMessagingVersion.WSReliableMessaging11);
+            XmlDictionaryString wsrmNs = WsrmIndex.GetNamespace(
+                ReliableMessagingVersion.WSReliableMessaging11
+            );
             Wsrm11Dictionary wsrm11Dictionary = DXD.Wsrm11Dictionary;
 
             writer.WriteStartElement(wsrm11Dictionary.CloseSequence, wsrmNs);

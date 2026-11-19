@@ -26,12 +26,12 @@ public class Program
         GC.Collect();
         return e is OperationCanceledException;
     }
-    
+
     public static IDisposable AllocateObject()
     {
         return new DisposableObject();
     }
-    
+
     [Fact]
     public static int TestEntryPoint()
     {

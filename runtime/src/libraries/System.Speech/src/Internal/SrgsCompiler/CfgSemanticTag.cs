@@ -86,10 +86,7 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal uint StartArcIndex
         {
-            get
-            {
-                return _flag1 & 0x3FFFFF;
-            }
+            get { return _flag1 & 0x3FFFFF; }
             set
             {
                 if (value > 0x3FFFFF)
@@ -104,10 +101,7 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal uint EndArcIndex
         {
-            get
-            {
-                return _flag2 & 0x3FFFFF;
-            }
+            get { return _flag2 & 0x3FFFFF; }
             set
             {
                 if (value > 0x3FFFFF)
@@ -123,10 +117,7 @@ namespace System.Speech.Internal.SrgsCompiler
 #pragma warning disable 0618 // VarEnum is obsolete
         internal VarEnum PropVariantType
         {
-            get
-            {
-                return (VarEnum)(_flag3 & 0xFF);
-            }
+            get { return (VarEnum)(_flag3 & 0xFF); }
             set
             {
                 uint varType = (uint)value;
@@ -144,10 +135,7 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal uint ArcIndex
         {
-            get
-            {
-                return (_flag3 >> 8) & 0x3FFFFF;
-            }
+            get { return (_flag3 >> 8) & 0x3FFFFF; }
             set
             {
                 if (value > 0x3FFFFF)
@@ -182,6 +170,7 @@ namespace System.Speech.Internal.SrgsCompiler
 
         [FieldOffset(20)]
         internal int _valueOffset;
+
         [FieldOffset(24)]
         internal int _varInt;
 
@@ -202,6 +191,6 @@ namespace System.Speech.Internal.SrgsCompiler
         STG = 0x10,
 
         TagFormat = KeyValuePairs | MssV1 | W3cV1 | KeyValuePairSrgs,
-        SemanticInterpretation = MssV1 | W3cV1
+        SemanticInterpretation = MssV1 | W3cV1,
     };
 }

@@ -78,9 +78,8 @@ public class OpenIdConnectTests
         Assert.Equal(HttpStatusCode.Redirect, res.StatusCode);
         Assert.NotNull(res.Headers.Location);
         var setCookie = Assert.Single(res.Headers, h => h.Key == "Set-Cookie");
-        var nonce = Assert.Single(
-            setCookie.Value,
-            v => v.StartsWith(OpenIdConnectDefaults.CookieNoncePrefix, StringComparison.Ordinal)
+        var nonce = Assert.Single(setCookie.Value, v =>
+            v.StartsWith(OpenIdConnectDefaults.CookieNoncePrefix, StringComparison.Ordinal)
         );
         Assert.Contains("path=/signin-oidc", nonce);
     }
@@ -108,9 +107,8 @@ public class OpenIdConnectTests
         Assert.Equal(HttpStatusCode.Redirect, res.StatusCode);
         Assert.NotNull(res.Headers.Location);
         var setCookie = Assert.Single(res.Headers, h => h.Key == "Set-Cookie");
-        var nonce = Assert.Single(
-            setCookie.Value,
-            v => v.StartsWith(OpenIdConnectDefaults.CookieNoncePrefix, StringComparison.Ordinal)
+        var nonce = Assert.Single(setCookie.Value, v =>
+            v.StartsWith(OpenIdConnectDefaults.CookieNoncePrefix, StringComparison.Ordinal)
         );
         Assert.Contains("path=/", nonce);
         Assert.Contains("ExtN", nonce);
@@ -137,9 +135,8 @@ public class OpenIdConnectTests
         Assert.Equal(HttpStatusCode.Redirect, res.StatusCode);
         Assert.NotNull(res.Headers.Location);
         var setCookie = Assert.Single(res.Headers, h => h.Key == "Set-Cookie");
-        var correlation = Assert.Single(
-            setCookie.Value,
-            v => v.StartsWith(".AspNetCore.Correlation.", StringComparison.Ordinal)
+        var correlation = Assert.Single(setCookie.Value, v =>
+            v.StartsWith(".AspNetCore.Correlation.", StringComparison.Ordinal)
         );
         Assert.Contains("path=/signin-oidc", correlation);
     }
@@ -167,9 +164,8 @@ public class OpenIdConnectTests
         Assert.Equal(HttpStatusCode.Redirect, res.StatusCode);
         Assert.NotNull(res.Headers.Location);
         var setCookie = Assert.Single(res.Headers, h => h.Key == "Set-Cookie");
-        var correlation = Assert.Single(
-            setCookie.Value,
-            v => v.StartsWith(".AspNetCore.Correlation.", StringComparison.Ordinal)
+        var correlation = Assert.Single(setCookie.Value, v =>
+            v.StartsWith(".AspNetCore.Correlation.", StringComparison.Ordinal)
         );
         Assert.Contains("path=/", correlation);
         Assert.EndsWith("ExtC", correlation);
@@ -332,8 +328,8 @@ public class OpenIdConnectTests
         });
         var server = setting.CreateTestServer();
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => server.SendAsync(DefaultHost + TestServerBuilder.Signout)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            server.SendAsync(DefaultHost + TestServerBuilder.Signout)
         );
         Assert.Equal(
             "Cannot redirect to the end session endpoint, the configuration may be missing or invalid.",
@@ -364,9 +360,8 @@ public class OpenIdConnectTests
             signInTransaction.AuthenticationCookieValue
         );
         Assert.Equal(HttpStatusCode.OK, remoteSignOutTransaction.Response.StatusCode);
-        Assert.DoesNotContain(
-            remoteSignOutTransaction.Response.Headers,
-            h => h.Key == "Set-Cookie"
+        Assert.DoesNotContain(remoteSignOutTransaction.Response.Headers, h =>
+            h.Key == "Set-Cookie"
         );
     }
 
@@ -393,9 +388,8 @@ public class OpenIdConnectTests
             signInTransaction.AuthenticationCookieValue
         );
         Assert.Equal(HttpStatusCode.OK, remoteSignOutTransaction.Response.StatusCode);
-        Assert.DoesNotContain(
-            remoteSignOutTransaction.Response.Headers,
-            h => h.Key == "Set-Cookie"
+        Assert.DoesNotContain(remoteSignOutTransaction.Response.Headers, h =>
+            h.Key == "Set-Cookie"
         );
     }
 
@@ -679,10 +673,9 @@ public class OpenIdConnectTests
         builder.AddOpenIdConnect();
         var sp = services.BuildServiceProvider();
 
-        Assert.Throws<FormatException>(
-            () =>
-                sp.GetRequiredService<IOptionsMonitor<OpenIdConnectOptions>>()
-                    .Get(OpenIdConnectDefaults.AuthenticationScheme)
+        Assert.Throws<FormatException>(() =>
+            sp.GetRequiredService<IOptionsMonitor<OpenIdConnectOptions>>()
+                .Get(OpenIdConnectDefaults.AuthenticationScheme)
         );
     }
 

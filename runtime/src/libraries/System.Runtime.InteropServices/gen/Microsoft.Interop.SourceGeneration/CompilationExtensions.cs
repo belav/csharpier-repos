@@ -14,11 +14,25 @@ namespace Microsoft.Interop
         public static EnvironmentFlags GetEnvironmentFlags(this Compilation compilation)
         {
             EnvironmentFlags flags = EnvironmentFlags.None;
-            if (compilation.SourceModule.GetAttributes().Any(attr => attr.AttributeClass.ToDisplayString() == TypeNames.System_Runtime_CompilerServices_SkipLocalsInitAttribute))
+            if (
+                compilation
+                    .SourceModule.GetAttributes()
+                    .Any(attr =>
+                        attr.AttributeClass.ToDisplayString()
+                        == TypeNames.System_Runtime_CompilerServices_SkipLocalsInitAttribute
+                    )
+            )
             {
                 flags |= EnvironmentFlags.SkipLocalsInit;
             }
-            if (compilation.SourceModule.GetAttributes().Any(attr => attr.AttributeClass.ToDisplayString() == TypeNames.System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute))
+            if (
+                compilation
+                    .SourceModule.GetAttributes()
+                    .Any(attr =>
+                        attr.AttributeClass.ToDisplayString()
+                        == TypeNames.System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute
+                    )
+            )
             {
                 flags |= EnvironmentFlags.DisableRuntimeMarshalling;
             }

@@ -87,7 +87,9 @@ namespace System.Web.Http
             mockAsyncResult.Complete(completedSynchronously);
 
             // Assert
-            Assert.Throws<InvalidOperationException>(() => mockAsyncResult.Complete(completedSynchronously));
+            Assert.Throws<InvalidOperationException>(() =>
+                mockAsyncResult.Complete(completedSynchronously)
+            );
         }
 
         [Fact]
@@ -111,7 +113,10 @@ namespace System.Web.Http
         public void End_ThrowsOnInvalidAsyncResult()
         {
             Mock<IAsyncResult> mockIAsyncResult = new Mock<IAsyncResult>();
-            Assert.ThrowsArgument(() => MockAsyncResult.End<MockAsyncResult>(mockIAsyncResult.Object), "result");
+            Assert.ThrowsArgument(
+                () => MockAsyncResult.End<MockAsyncResult>(mockIAsyncResult.Object),
+                "result"
+            );
         }
 
         [Theory]
@@ -128,7 +133,9 @@ namespace System.Web.Http
             MockAsyncResult.End<MockAsyncResult>(mockAsyncResult);
 
             // Act
-            Assert.Throws<InvalidOperationException>(() => MockAsyncResult.End<MockAsyncResult>(mockAsyncResult));
+            Assert.Throws<InvalidOperationException>(() =>
+                MockAsyncResult.End<MockAsyncResult>(mockAsyncResult)
+            );
         }
 
         [Theory]
@@ -139,19 +146,21 @@ namespace System.Web.Http
             // Arrange
             MockAsyncCallback mockCallback = new MockAsyncCallback(false);
             MockAsyncResult mockAsyncResult = new MockAsyncResult(mockCallback.Callback, null);
-            ApplicationException applicationException = new ApplicationException("Complete failed!");
+            ApplicationException applicationException = new ApplicationException(
+                "Complete failed!"
+            );
             mockAsyncResult.Complete(completedSynchronously, applicationException);
 
             // Act/Assert
-            Assert.Throws<ApplicationException>(() => MockAsyncResult.End<MockAsyncResult>(mockAsyncResult));
+            Assert.Throws<ApplicationException>(() =>
+                MockAsyncResult.End<MockAsyncResult>(mockAsyncResult)
+            );
         }
 
         internal class MockAsyncResult : AsyncResult
         {
             public MockAsyncResult(AsyncCallback callback, object state)
-                : base(callback, state)
-            {
-            }
+                : base(callback, state) { }
 
             public new void Complete(bool completedSynchronously)
             {
@@ -163,7 +172,8 @@ namespace System.Web.Http
                 base.Complete(completedSynchronously, e);
             }
 
-            public static new TAsyncResult End<TAsyncResult>(IAsyncResult result) where TAsyncResult : AsyncResult
+            public static new TAsyncResult End<TAsyncResult>(IAsyncResult result)
+                where TAsyncResult : AsyncResult
             {
                 return AsyncResult.End<TAsyncResult>(result);
             }

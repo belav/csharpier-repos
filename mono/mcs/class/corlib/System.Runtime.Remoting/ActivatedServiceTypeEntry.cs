@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,42 +34,44 @@ using System.Reflection;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Contexts;
 
-namespace System.Runtime.Remoting {
+namespace System.Runtime.Remoting
+{
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public class ActivatedServiceTypeEntry : TypeEntry
+    {
+        Type obj_type;
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class ActivatedServiceTypeEntry : TypeEntry
-	{
-		Type obj_type;
-		
-		public ActivatedServiceTypeEntry (Type type)			
-		{
-			AssemblyName = type.Assembly.FullName;
-			TypeName = type.FullName;
-			obj_type = type;
-		}
+        public ActivatedServiceTypeEntry(Type type)
+        {
+            AssemblyName = type.Assembly.FullName;
+            TypeName = type.FullName;
+            obj_type = type;
+        }
 
-		public ActivatedServiceTypeEntry (string typeName, string assemblyName)
-		{
-			AssemblyName = assemblyName;
-			TypeName = typeName;
-			Assembly a = Assembly.Load (assemblyName);
-			obj_type = a.GetType (typeName);
-			if (obj_type == null) 
-				throw new RemotingException ("Type not found: " + typeName + ", " + assemblyName);
-		}
-		
-		public IContextAttribute [] ContextAttributes {
-			get { return null; }
-			set { } // This is not implemented in the MS runtime yet.
-		}
+        public ActivatedServiceTypeEntry(string typeName, string assemblyName)
+        {
+            AssemblyName = assemblyName;
+            TypeName = typeName;
+            Assembly a = Assembly.Load(assemblyName);
+            obj_type = a.GetType(typeName);
+            if (obj_type == null)
+                throw new RemotingException("Type not found: " + typeName + ", " + assemblyName);
+        }
 
-		public Type ObjectType {
-			get { return obj_type; }
-		}
+        public IContextAttribute[] ContextAttributes
+        {
+            get { return null; }
+            set { } // This is not implemented in the MS runtime yet.
+        }
 
-		public override string ToString ()
-		{
-			return AssemblyName + TypeName;
-		}
-	}
+        public Type ObjectType
+        {
+            get { return obj_type; }
+        }
+
+        public override string ToString()
+        {
+            return AssemblyName + TypeName;
+        }
+    }
 }

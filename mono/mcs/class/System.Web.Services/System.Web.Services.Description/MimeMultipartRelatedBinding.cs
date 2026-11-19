@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.MimeMultipartRelatedBinding.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,32 +31,39 @@
 using System.Web.Services.Configuration;
 using System.Xml.Serialization;
 
-namespace System.Web.Services.Description {
-	[XmlFormatExtension ("multipartRelated", "http://schemas.xmlsoap.org/wsdl/mime/", typeof (InputBinding), typeof (OutputBinding))]
-	public sealed class MimeMultipartRelatedBinding : ServiceDescriptionFormatExtension {
+namespace System.Web.Services.Description
+{
+    [XmlFormatExtension(
+        "multipartRelated",
+        "http://schemas.xmlsoap.org/wsdl/mime/",
+        typeof(InputBinding),
+        typeof(OutputBinding)
+    )]
+    public sealed class MimeMultipartRelatedBinding : ServiceDescriptionFormatExtension
+    {
+        #region Fields
 
-		#region Fields
+        MimePartCollection parts;
 
-		MimePartCollection parts;
+        #endregion // Fields
 
-		#endregion // Fields
+        #region Constructors
 
-		#region Constructors
-		
-		public MimeMultipartRelatedBinding ()
-		{
-			parts = new MimePartCollection ();
-		}
-		
-		#endregion // Constructors
+        public MimeMultipartRelatedBinding()
+        {
+            parts = new MimePartCollection();
+        }
 
-		#region Properties
+        #endregion // Constructors
 
-		[XmlElement ("part")]
-		public MimePartCollection Parts {
-			get { return parts; }
-		}
+        #region Properties
 
-		#endregion // Properties
-	}
+        [XmlElement("part")]
+        public MimePartCollection Parts
+        {
+            get { return parts; }
+        }
+
+        #endregion // Properties
+    }
 }

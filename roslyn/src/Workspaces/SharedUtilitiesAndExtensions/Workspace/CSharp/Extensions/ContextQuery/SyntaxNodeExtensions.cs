@@ -8,24 +8,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
 {
     internal static class SyntaxNodeExtensions
     {
-        public static bool IsDelegateOrConstructorOrLocalFunctionOrMethodOrOperatorParameterList([NotNullWhen(true)] this SyntaxNode? node, bool includeOperators)
+        public static bool IsDelegateOrConstructorOrLocalFunctionOrMethodOrOperatorParameterList(
+            [NotNullWhen(true)] this SyntaxNode? node,
+            bool includeOperators
+        )
         {
             if (!node.IsKind(SyntaxKind.ParameterList))
             {
                 return false;
             }
 
-            if (node?.Parent?.Kind()
-                    is SyntaxKind.MethodDeclaration
+            if (
+                node?.Parent?.Kind()
+                is SyntaxKind.MethodDeclaration
                     or SyntaxKind.LocalFunctionStatement
                     or SyntaxKind.ConstructorDeclaration
-                    or SyntaxKind.DelegateDeclaration)
+                    or SyntaxKind.DelegateDeclaration
+            )
             {
                 return true;
             }
 
             if (includeOperators)
-                return node?.Parent?.Kind() is SyntaxKind.OperatorDeclaration or SyntaxKind.ConversionOperatorDeclaration;
+                return node?.Parent?.Kind()
+                    is SyntaxKind.OperatorDeclaration
+                        or SyntaxKind.ConversionOperatorDeclaration;
 
             return false;
         }

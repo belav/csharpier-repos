@@ -20,9 +20,7 @@ public class TimeSpanToStringConverter : StringTimeSpanConverter<TimeSpan, strin
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
     public TimeSpanToStringConverter()
-        : this(null)
-    {
-    }
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter.
@@ -35,16 +33,16 @@ public class TimeSpanToStringConverter : StringTimeSpanConverter<TimeSpan, strin
     ///     facets for the converted data.
     /// </param>
     public TimeSpanToStringConverter(ConverterMappingHints? mappingHints)
-        : base(
-            ToString(),
-            ToTimeSpan(),
-            DefaultHints.With(mappingHints))
-    {
-    }
+        : base(ToString(), ToTimeSpan(), DefaultHints.With(mappingHints)) { }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
     /// </summary>
-    public static ValueConverterInfo DefaultInfo { get; }
-        = new(typeof(TimeSpan), typeof(string), i => new TimeSpanToStringConverter(i.MappingHints), DefaultHints);
+    public static ValueConverterInfo DefaultInfo { get; } =
+        new(
+            typeof(TimeSpan),
+            typeof(string),
+            i => new TimeSpanToStringConverter(i.MappingHints),
+            DefaultHints
+        );
 }

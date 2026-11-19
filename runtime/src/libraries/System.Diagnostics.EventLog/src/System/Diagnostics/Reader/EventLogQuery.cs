@@ -13,14 +13,12 @@ namespace System.Diagnostics.Eventing.Reader
     public class EventLogQuery
     {
         public EventLogQuery(string path, PathType pathType)
-            : this(path, pathType, null)
-        {
-        }
+            : this(path, pathType, null) { }
 
         public EventLogQuery(string path, PathType pathType, string query)
         {
             Session = EventLogSession.GlobalSession;
-            Path = path;   // can be null
+            Path = path; // can be null
             ThePathType = pathType;
 
             if (query == null)

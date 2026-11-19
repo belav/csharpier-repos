@@ -18,14 +18,13 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpF1Help()
-            : base(nameof(CSharpF1Help))
-        {
-        }
+            : base(nameof(CSharpF1Help)) { }
 
         [IdeFact]
         private async Task F1Help()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.IO;
 using System.Linq;
@@ -69,16 +68,35 @@ namespace F1TestNamespace
 }";
 
             await SetUpEditorAsync(text, HangMitigatingCancellationToken);
-            await VerifyAsync("abstract", "abstract_CSharpKeyword", HangMitigatingCancellationToken);
-            await VerifyAsync("ascending", "ascending_CSharpKeyword", HangMitigatingCancellationToken);
+            await VerifyAsync(
+                "abstract",
+                "abstract_CSharpKeyword",
+                HangMitigatingCancellationToken
+            );
+            await VerifyAsync(
+                "ascending",
+                "ascending_CSharpKeyword",
+                HangMitigatingCancellationToken
+            );
             await VerifyAsync("from", "from_CSharpKeyword", HangMitigatingCancellationToken);
-            await VerifyAsync("First();", "System.Linq.Enumerable.First``1", HangMitigatingCancellationToken);
+            await VerifyAsync(
+                "First();",
+                "System.Linq.Enumerable.First``1",
+                HangMitigatingCancellationToken
+            );
         }
 
-        private async Task VerifyAsync(string word, string expectedKeyword, CancellationToken cancellationToken)
+        private async Task VerifyAsync(
+            string word,
+            string expectedKeyword,
+            CancellationToken cancellationToken
+        )
         {
             await TestServices.Editor.PlaceCaretAsync(word, charsOffset: -1, cancellationToken);
-            Assert.Contains(expectedKeyword, await TestServices.Editor.GetF1KeywordsAsync(cancellationToken));
+            Assert.Contains(
+                expectedKeyword,
+                await TestServices.Editor.GetF1KeywordsAsync(cancellationToken)
+            );
         }
     }
 }

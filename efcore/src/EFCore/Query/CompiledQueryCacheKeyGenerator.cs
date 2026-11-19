@@ -21,8 +21,8 @@ public class CompiledQueryCacheKeyGenerator : ICompiledQueryCacheKeyGenerator
     protected virtual CompiledQueryCacheKeyGeneratorDependencies Dependencies { get; }
 
     /// <inheritdoc />
-    public virtual object GenerateCacheKey(Expression query, bool async)
-        => GenerateCacheKeyCore(query, async);
+    public virtual object GenerateCacheKey(Expression query, bool async) =>
+        GenerateCacheKeyCore(query, async);
 
     /// <summary>
     ///     Generates the cache key for the given query.
@@ -30,12 +30,17 @@ public class CompiledQueryCacheKeyGenerator : ICompiledQueryCacheKeyGenerator
     /// <param name="query">The query to get the cache key for.</param>
     /// <param name="async">A value indicating whether the query will be executed asynchronously.</param>
     /// <returns>The cache key.</returns>
-    protected CompiledQueryCacheKey GenerateCacheKeyCore(Expression query, bool async) // Intentionally non-virtual
-        => new(
+    protected CompiledQueryCacheKey GenerateCacheKeyCore(
+        Expression query,
+        bool async
+    ) // Intentionally non-virtual
+        =>
+        new(
             query,
             Dependencies.Model,
             Dependencies.CurrentContext.Context.ChangeTracker.QueryTrackingBehavior,
-            async);
+            async
+        );
 
     /// <summary>
     ///     <para>
@@ -65,7 +70,8 @@ public class CompiledQueryCacheKeyGenerator : ICompiledQueryCacheKeyGenerator
             Expression query,
             IModel model,
             QueryTrackingBehavior queryTrackingBehavior,
-            bool async)
+            bool async
+        )
         {
             _query = query;
             _model = model;
@@ -74,15 +80,15 @@ public class CompiledQueryCacheKeyGenerator : ICompiledQueryCacheKeyGenerator
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj is CompiledQueryCacheKey other && Equals(other);
+        public override bool Equals(object? obj) =>
+            obj is CompiledQueryCacheKey other && Equals(other);
 
         /// <inheritdoc />
-        public bool Equals(CompiledQueryCacheKey other)
-            => ReferenceEquals(_model, other._model)
-                && _queryTrackingBehavior == other._queryTrackingBehavior
-                && _async == other._async
-                && ExpressionEqualityComparer.Instance.Equals(_query, other._query);
+        public bool Equals(CompiledQueryCacheKey other) =>
+            ReferenceEquals(_model, other._model)
+            && _queryTrackingBehavior == other._queryTrackingBehavior
+            && _async == other._async
+            && ExpressionEqualityComparer.Instance.Equals(_query, other._query);
 
         /// <inheritdoc />
         public override int GetHashCode()

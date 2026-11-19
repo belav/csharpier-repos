@@ -17,7 +17,10 @@ namespace System.Xml.Xsl.IlGen
 
         // Enable all normalizations and annotations for Release code
         // Enable all patterns for Release code
-        private static readonly QilPatterns s_patternsOpt = new QilPatterns((int)XmlILOptimization.Last_, allSet: true);
+        private static readonly QilPatterns s_patternsOpt = new QilPatterns(
+            (int)XmlILOptimization.Last_,
+            allSet: true
+        );
 
         private readonly QilExpression _qil;
         private readonly XmlILElementAnalyzer _elemAnalyzer;
@@ -62,7 +65,8 @@ namespace System.Xml.Xsl.IlGen
             return patterns;
         }
 
-        public XmlILOptimizerVisitor(QilExpression qil, bool optimize) : base(optimize ? s_patternsOpt : s_patternsNoOpt, qil.Factory)
+        public XmlILOptimizerVisitor(QilExpression qil, bool optimize)
+            : base(optimize ? s_patternsOpt : s_patternsNoOpt, qil.Factory)
         {
             _qil = qil;
             _elemAnalyzer = new XmlILElementAnalyzer(qil.Factory);
@@ -134,7 +138,11 @@ namespace System.Xml.Xsl.IlGen
                     QilNode binding = ((QilIterator)oldNode).Binding!;
 
                     if (IsLiteral(binding))
-                        return Replace(XmlILOptimization.EliminateLiteralVariables, newNode, binding.ShallowClone(f));
+                        return Replace(
+                            XmlILOptimization.EliminateLiteralVariables,
+                            newNode,
+                            binding.ShallowClone(f)
+                        );
                 }
             }
             if (this[XmlILOptimization.EliminateUnusedGlobals])
@@ -178,7 +186,9 @@ namespace System.Xml.Xsl.IlGen
                     case QilNodeType.Warning:
                     case QilNodeType.XsltInvokeLateBound:
                         // Error, Warning, and XsltInvokeLateBound are always assumed to have side-effects
-                        OptimizerPatterns.Write(node).AddPattern(OptimizerPatternName.MaybeSideEffects);
+                        OptimizerPatterns
+                            .Write(node)
+                            .AddPattern(OptimizerPatternName.MaybeSideEffects);
                         break;
 
                     case QilNodeType.XsltInvokeEarlyBound:
@@ -201,7 +211,11 @@ namespace System.Xml.Xsl.IlGen
                         {
                             if (node[i] != null)
                             {
-                                if (OptimizerPatterns.Read(node[i]).MatchesPattern(OptimizerPatternName.MaybeSideEffects))
+                                if (
+                                    OptimizerPatterns
+                                        .Read(node[i])
+                                        .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
+                                )
                                     goto case QilNodeType.XsltInvokeLateBound;
                             }
                         }
@@ -250,7 +264,10 @@ namespace System.Xml.Xsl.IlGen
                         if (IsConstructedExpression(ndFunc.Definition))
                         {
                             // Perform state analysis on function's content
-                            ndFunc.Definition = _contentAnalyzer.Analyze(ndFunc, ndFunc.Definition)!;
+                            ndFunc.Definition = _contentAnalyzer.Analyze(
+                                ndFunc,
+                                ndFunc.Definition
+                            )!;
                         }
                     }
 
@@ -272,7 +289,16 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotateBarrier] $outer:(OptimizeBarrier $expr:*) => (InheritPattern $outer $expr {IsDocOrderDistinct}) ^ (InheritPattern $outer $expr {SameDepth}) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotateBarrier, local0))
                 {
-                    OptimizerPatterns.Inherit((QilNode)(local1), (QilNode)(local0), OptimizerPatternName.IsDocOrderDistinct); OptimizerPatterns.Inherit((QilNode)(local1), (QilNode)(local0), OptimizerPatternName.SameDepth);
+                    OptimizerPatterns.Inherit(
+                        (QilNode)(local1),
+                        (QilNode)(local0),
+                        OptimizerPatternName.IsDocOrderDistinct
+                    );
+                    OptimizerPatterns.Inherit(
+                        (QilNode)(local1),
+                        (QilNode)(local0),
+                        OptimizerPatternName.SameDepth
+                    );
                 }
             }
             return NoReplace(local0);
@@ -364,7 +390,10 @@ namespace System.Xml.Xsl.IlGen
         protected override QilNode VisitLet(QilIterator local0)
         {
             QilNode local1 = local0[0];
-            if (((((local0).XmlType)!.IsSingleton) && (!(IsGlobalVariable(local0)))) && (this[XmlILOptimization.NormalizeSingletonLet]))
+            if (
+                ((((local0).XmlType)!.IsSingleton) && (!(IsGlobalVariable(local0))))
+                && (this[XmlILOptimization.NormalizeSingletonLet])
+            )
             {
                 // PATTERN: [NormalizeSingletonLet] $iter:(Let $bind:*) ^ (Single? (TypeOf $iter)) ^ ~((GlobalVariable? $iter)) => { ... }
                 if (AllowReplace(XmlILOptimization.NormalizeSingletonLet, local0))
@@ -378,7 +407,21 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotateLet] $outer:(Let $bind:*) => (InheritPattern $outer $bind {Step}) ^ (InheritPattern $outer $bind {IsDocOrderDistinct}) ^ (InheritPattern $outer $bind {SameDepth}) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotateLet, local0))
                 {
-                    OptimizerPatterns.Inherit((QilNode)(local1), (QilNode)(local0), OptimizerPatternName.Step); OptimizerPatterns.Inherit((QilNode)(local1), (QilNode)(local0), OptimizerPatternName.IsDocOrderDistinct); OptimizerPatterns.Inherit((QilNode)(local1), (QilNode)(local0), OptimizerPatternName.SameDepth);
+                    OptimizerPatterns.Inherit(
+                        (QilNode)(local1),
+                        (QilNode)(local0),
+                        OptimizerPatternName.Step
+                    );
+                    OptimizerPatterns.Inherit(
+                        (QilNode)(local1),
+                        (QilNode)(local0),
+                        OptimizerPatternName.IsDocOrderDistinct
+                    );
+                    OptimizerPatterns.Inherit(
+                        (QilNode)(local1),
+                        (QilNode)(local0),
+                        OptimizerPatternName.SameDepth
+                    );
                 }
             }
             return NoReplace(local0);
@@ -394,7 +437,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [EliminatePositionOf] (PositionOf $x:* ^ ~((NodeType? $x {For}))) => (LiteralInt32 1)
                     if (AllowReplace(XmlILOptimization.EliminatePositionOf, local0))
                     {
-                        return Replace(XmlILOptimization.EliminatePositionOf, local0, VisitLiteralInt32(f.LiteralInt32(1)));
+                        return Replace(
+                            XmlILOptimization.EliminatePositionOf,
+                            local0,
+                            VisitLiteralInt32(f.LiteralInt32(1))
+                        );
                     }
                 }
             }
@@ -408,7 +455,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [EliminatePositionOf] (PositionOf (For $x:* ^ (Single? (TypeOf $x)))) => (LiteralInt32 1)
                         if (AllowReplace(XmlILOptimization.EliminatePositionOf, local0))
                         {
-                            return Replace(XmlILOptimization.EliminatePositionOf, local0, VisitLiteralInt32(f.LiteralInt32(1)));
+                            return Replace(
+                                XmlILOptimization.EliminatePositionOf,
+                                local0,
+                                VisitLiteralInt32(f.LiteralInt32(1))
+                            );
                         }
                     }
                 }
@@ -418,7 +469,9 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotatePositionalIterator] (PositionOf $iter:*) => (AddPattern $iter {IsPositional}) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotatePositionalIterator, local0))
                 {
-                    OptimizerPatterns.Write((QilNode)(local1)).AddPattern(OptimizerPatternName.IsPositional);
+                    OptimizerPatterns
+                        .Write((QilNode)(local1))
+                        .AddPattern(OptimizerPatternName.IsPositional);
                 }
             }
             return NoReplace(local0);
@@ -597,7 +650,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [EliminateNot] (Not (True)) => (False)
                     if (AllowReplace(XmlILOptimization.EliminateNot, local0))
                     {
-                        return Replace(XmlILOptimization.EliminateNot, local0, VisitFalse(f.False()));
+                        return Replace(
+                            XmlILOptimization.EliminateNot,
+                            local0,
+                            VisitFalse(f.False())
+                        );
                     }
                 }
             }
@@ -679,7 +736,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [EliminateConditional] (Conditional $x:* (False) (True)) => (Not $x)
                         if (AllowReplace(XmlILOptimization.EliminateConditional, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateConditional, local0, VisitNot(f.Not(local1)));
+                            return Replace(
+                                XmlILOptimization.EliminateConditional,
+                                local0,
+                                VisitNot(f.Not(local1))
+                            );
                         }
                     }
                 }
@@ -692,7 +753,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [FoldConditionalNot] (Conditional (Not $x:*) $t:* $f:*) => (Conditional $x $f $t)
                     if (AllowReplace(XmlILOptimization.FoldConditionalNot, local0))
                     {
-                        return Replace(XmlILOptimization.FoldConditionalNot, local0, VisitConditional(f.Conditional(local4, local3, local2)));
+                        return Replace(
+                            XmlILOptimization.FoldConditionalNot,
+                            local0,
+                            VisitConditional(f.Conditional(local4, local3, local2))
+                        );
                     }
                 }
             }
@@ -707,7 +772,15 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [NormalizeConditionalText] (Conditional $cond:* $left:(TextCtor $leftText:*) $right:(TextCtor $rightText:*)) => (TextCtor (Conditional $cond $leftText $rightText))
                         if (AllowReplace(XmlILOptimization.NormalizeConditionalText, local0))
                         {
-                            return Replace(XmlILOptimization.NormalizeConditionalText, local0, VisitTextCtor(f.TextCtor(VisitConditional(f.Conditional(local1, local4, local5)))));
+                            return Replace(
+                                XmlILOptimization.NormalizeConditionalText,
+                                local0,
+                                VisitTextCtor(
+                                    f.TextCtor(
+                                        VisitConditional(f.Conditional(local1, local4, local5))
+                                    )
+                                )
+                            );
                         }
                     }
                 }
@@ -754,30 +827,55 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [EliminateLength] (Length $x:(Sequence) ^ (Count? $x 0)) => (LiteralInt32 0)
                         if (AllowReplace(XmlILOptimization.EliminateLength, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateLength, local0, VisitLiteralInt32(f.LiteralInt32(0)));
+                            return Replace(
+                                XmlILOptimization.EliminateLength,
+                                local0,
+                                VisitLiteralInt32(f.LiteralInt32(0))
+                            );
                         }
                     }
                 }
             }
             if (this[XmlILOptimization.EliminateLength])
             {
-                if ((((local1).XmlType)!.IsSingleton) && (!OptimizerPatterns.Read(local1).MatchesPattern(OptimizerPatternName.MaybeSideEffects)))
+                if (
+                    (((local1).XmlType)!.IsSingleton)
+                    && (
+                        !OptimizerPatterns
+                            .Read(local1)
+                            .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
+                    )
+                )
                 {
                     // PATTERN: [EliminateLength] (Length $x:* ^ (Single? (TypeOf $x)) ^ (NoSideEffects? $x)) => (LiteralInt32 1)
                     if (AllowReplace(XmlILOptimization.EliminateLength, local0))
                     {
-                        return Replace(XmlILOptimization.EliminateLength, local0, VisitLiteralInt32(f.LiteralInt32(1)));
+                        return Replace(
+                            XmlILOptimization.EliminateLength,
+                            local0,
+                            VisitLiteralInt32(f.LiteralInt32(1))
+                        );
                     }
                 }
             }
             if (this[XmlILOptimization.IntroducePrecedingDod])
             {
-                if ((!(IsDocOrderDistinct(local1))) && ((IsStepPattern(local1, QilNodeType.XPathPreceding)) || (IsStepPattern(local1, QilNodeType.PrecedingSibling))))
+                if (
+                    (!(IsDocOrderDistinct(local1)))
+                    && (
+                        (IsStepPattern(local1, QilNodeType.XPathPreceding))
+                        || (IsStepPattern(local1, QilNodeType.PrecedingSibling))
+                    )
+                )
                 {
                     // PATTERN: [IntroducePrecedingDod] (Length $expr:* ^ ~((DocOrderDistinct? $expr)) ^ (StepPattern? $expr {XPathPreceding}) | (StepPattern? $expr {PrecedingSibling})) => (Length (DocOrderDistinct $expr))
                     if (AllowReplace(XmlILOptimization.IntroducePrecedingDod, local0))
                     {
-                        return Replace(XmlILOptimization.IntroducePrecedingDod, local0, VisitLength(f.Length(VisitDocOrderDistinct(f.DocOrderDistinct(local1)))));
+                        return Replace(
+                            XmlILOptimization.IntroducePrecedingDod,
+                            local0,
+                            VisitLength(f.Length(VisitDocOrderDistinct(f.DocOrderDistinct(local1))))
+                        );
                     }
                 }
             }
@@ -791,7 +889,11 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [EliminateSequence] $x:(Sequence) ^ (Count? $x 1) => (First $x)
                 if (AllowReplace(XmlILOptimization.EliminateSequence, local0))
                 {
-                    return Replace(XmlILOptimization.EliminateSequence, local0, (QilNode)(local0)[0]);
+                    return Replace(
+                        XmlILOptimization.EliminateSequence,
+                        local0,
+                        (QilNode)(local0)[0]
+                    );
                 }
             }
             if ((HasNestedSequence(local0)) && (this[XmlILOptimization.NormalizeNestedSequences]))
@@ -849,7 +951,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [EliminateUnion] (Union $x:* $x) => (DocOrderDistinct $x)
                     if (AllowReplace(XmlILOptimization.EliminateUnion, local0))
                     {
-                        return Replace(XmlILOptimization.EliminateUnion, local0, VisitDocOrderDistinct(f.DocOrderDistinct(local1)));
+                        return Replace(
+                            XmlILOptimization.EliminateUnion,
+                            local0,
+                            VisitDocOrderDistinct(f.DocOrderDistinct(local1))
+                        );
                     }
                 }
             }
@@ -862,7 +968,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [EliminateUnion] (Union $x:(Sequence) ^ (Count? $x 0) $y:*) => (DocOrderDistinct $y)
                         if (AllowReplace(XmlILOptimization.EliminateUnion, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateUnion, local0, VisitDocOrderDistinct(f.DocOrderDistinct(local2)));
+                            return Replace(
+                                XmlILOptimization.EliminateUnion,
+                                local0,
+                                VisitDocOrderDistinct(f.DocOrderDistinct(local2))
+                            );
                         }
                     }
                 }
@@ -876,7 +986,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [EliminateUnion] (Union $x:* $y:(Sequence) ^ (Count? $y 0)) => (DocOrderDistinct $x)
                         if (AllowReplace(XmlILOptimization.EliminateUnion, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateUnion, local0, VisitDocOrderDistinct(f.DocOrderDistinct(local1)));
+                            return Replace(
+                                XmlILOptimization.EliminateUnion,
+                                local0,
+                                VisitDocOrderDistinct(f.DocOrderDistinct(local1))
+                            );
                         }
                     }
                 }
@@ -902,7 +1016,16 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [NormalizeUnion] (Union $left:* $right:* ^ ~((DocOrderDistinct? $left)) | ~((DocOrderDistinct? $right))) => (Union (DocOrderDistinct $left) (DocOrderDistinct $right))
                     if (AllowReplace(XmlILOptimization.NormalizeUnion, local0))
                     {
-                        return Replace(XmlILOptimization.NormalizeUnion, local0, VisitUnion(f.Union(VisitDocOrderDistinct(f.DocOrderDistinct(local1)), VisitDocOrderDistinct(f.DocOrderDistinct(local2)))));
+                        return Replace(
+                            XmlILOptimization.NormalizeUnion,
+                            local0,
+                            VisitUnion(
+                                f.Union(
+                                    VisitDocOrderDistinct(f.DocOrderDistinct(local1)),
+                                    VisitDocOrderDistinct(f.DocOrderDistinct(local2))
+                                )
+                            )
+                        );
                     }
                 }
             }
@@ -911,19 +1034,51 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotateUnion] $outer:(Union * *) => (AddPattern $outer {IsDocOrderDistinct}) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotateUnion, local0))
                 {
-                    OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.IsDocOrderDistinct);
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.IsDocOrderDistinct);
                 }
             }
             if (this[XmlILOptimization.AnnotateUnionContent])
             {
-                if ((IsStepPattern(local1, QilNodeType.Content)) || (IsStepPattern(local1, QilNodeType.Union)))
+                if (
+                    (IsStepPattern(local1, QilNodeType.Content))
+                    || (IsStepPattern(local1, QilNodeType.Union))
+                )
                 {
-                    if (((IsStepPattern(local2, QilNodeType.Content)) || (IsStepPattern(local2, QilNodeType.Union))) && ((OptimizerPatterns.Read((QilNode)(local1)).GetArgument(OptimizerPatternArgument.StepInput)) == (OptimizerPatterns.Read((QilNode)(local2)).GetArgument(OptimizerPatternArgument.StepInput))))
+                    if (
+                        (
+                            (IsStepPattern(local2, QilNodeType.Content))
+                            || (IsStepPattern(local2, QilNodeType.Union))
+                        )
+                        && (
+                            (
+                                OptimizerPatterns
+                                    .Read((QilNode)(local1))
+                                    .GetArgument(OptimizerPatternArgument.StepInput)
+                            )
+                            == (
+                                OptimizerPatterns
+                                    .Read((QilNode)(local2))
+                                    .GetArgument(OptimizerPatternArgument.StepInput)
+                            )
+                        )
+                    )
                     {
                         // PATTERN: [AnnotateUnionContent] $outer:(Union $left:* ^ (StepPattern? $left {Content}) | (StepPattern? $left {Union}) $right:* ^ (StepPattern? $right {Content}) | (StepPattern? $right {Union}) ^ (Equal? (Argument $left {StepInput}) (Argument $right {StepInput}))) => (AddStepPattern $outer (Argument $left {StepInput})) ^ (AddPattern $outer {SameDepth}) ^ { }
                         if (AllowReplace(XmlILOptimization.AnnotateUnionContent, local0))
                         {
-                            AddStepPattern((QilNode)(local0), (QilNode)(OptimizerPatterns.Read((QilNode)(local1)).GetArgument(OptimizerPatternArgument.StepInput))); OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.SameDepth);
+                            AddStepPattern(
+                                (QilNode)(local0),
+                                (QilNode)(
+                                    OptimizerPatterns
+                                        .Read((QilNode)(local1))
+                                        .GetArgument(OptimizerPatternArgument.StepInput)
+                                )
+                            );
+                            OptimizerPatterns
+                                .Write((QilNode)(local0))
+                                .AddPattern(OptimizerPatternName.SameDepth);
                         }
                     }
                 }
@@ -964,7 +1119,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [EliminateIntersection] (Intersection $x:* $x) => (DocOrderDistinct $x)
                     if (AllowReplace(XmlILOptimization.EliminateIntersection, local0))
                     {
-                        return Replace(XmlILOptimization.EliminateIntersection, local0, VisitDocOrderDistinct(f.DocOrderDistinct(local1)));
+                        return Replace(
+                            XmlILOptimization.EliminateIntersection,
+                            local0,
+                            VisitDocOrderDistinct(f.DocOrderDistinct(local1))
+                        );
                     }
                 }
             }
@@ -1017,7 +1176,16 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [NormalizeIntersect] (Intersection $left:* $right:* ^ ~((DocOrderDistinct? $left)) | ~((DocOrderDistinct? $right))) => (Intersection (DocOrderDistinct $left) (DocOrderDistinct $right))
                     if (AllowReplace(XmlILOptimization.NormalizeIntersect, local0))
                     {
-                        return Replace(XmlILOptimization.NormalizeIntersect, local0, VisitIntersection(f.Intersection(VisitDocOrderDistinct(f.DocOrderDistinct(local1)), VisitDocOrderDistinct(f.DocOrderDistinct(local2)))));
+                        return Replace(
+                            XmlILOptimization.NormalizeIntersect,
+                            local0,
+                            VisitIntersection(
+                                f.Intersection(
+                                    VisitDocOrderDistinct(f.DocOrderDistinct(local1)),
+                                    VisitDocOrderDistinct(f.DocOrderDistinct(local2))
+                                )
+                            )
+                        );
                     }
                 }
             }
@@ -1026,7 +1194,9 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotateIntersect] $outer:(Intersection * *) => (AddPattern $outer {IsDocOrderDistinct}) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotateIntersect, local0))
                 {
-                    OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.IsDocOrderDistinct);
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.IsDocOrderDistinct);
                 }
             }
             return NoReplace(local0);
@@ -1081,7 +1251,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [EliminateDifference] (Difference $x:* $y:(Sequence) ^ (Count? $y 0)) => (DocOrderDistinct $x)
                         if (AllowReplace(XmlILOptimization.EliminateDifference, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateDifference, local0, VisitDocOrderDistinct(f.DocOrderDistinct(local1)));
+                            return Replace(
+                                XmlILOptimization.EliminateDifference,
+                                local0,
+                                VisitDocOrderDistinct(f.DocOrderDistinct(local1))
+                            );
                         }
                     }
                 }
@@ -1093,7 +1267,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [EliminateDifference] (Difference $x:* $x) => (Sequence)
                     if (AllowReplace(XmlILOptimization.EliminateDifference, local0))
                     {
-                        return Replace(XmlILOptimization.EliminateDifference, local0, VisitSequence(f.Sequence()));
+                        return Replace(
+                            XmlILOptimization.EliminateDifference,
+                            local0,
+                            VisitSequence(f.Sequence())
+                        );
                     }
                 }
             }
@@ -1106,7 +1284,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [EliminateDifference] (Difference XmlContext XmlContext) => (Sequence)
                         if (AllowReplace(XmlILOptimization.EliminateDifference, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateDifference, local0, VisitSequence(f.Sequence()));
+                            return Replace(
+                                XmlILOptimization.EliminateDifference,
+                                local0,
+                                VisitSequence(f.Sequence())
+                            );
                         }
                     }
                 }
@@ -1118,7 +1300,16 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [NormalizeDifference] (Difference $left:* $right:* ^ ~((DocOrderDistinct? $left)) | ~((DocOrderDistinct? $right))) => (Difference (DocOrderDistinct $left) (DocOrderDistinct $right))
                     if (AllowReplace(XmlILOptimization.NormalizeDifference, local0))
                     {
-                        return Replace(XmlILOptimization.NormalizeDifference, local0, VisitDifference(f.Difference(VisitDocOrderDistinct(f.DocOrderDistinct(local1)), VisitDocOrderDistinct(f.DocOrderDistinct(local2)))));
+                        return Replace(
+                            XmlILOptimization.NormalizeDifference,
+                            local0,
+                            VisitDifference(
+                                f.Difference(
+                                    VisitDocOrderDistinct(f.DocOrderDistinct(local1)),
+                                    VisitDocOrderDistinct(f.DocOrderDistinct(local2))
+                                )
+                            )
+                        );
                     }
                 }
             }
@@ -1127,7 +1318,9 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotateDifference] $outer:(Difference * *) => (AddPattern $outer {IsDocOrderDistinct}) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotateDifference, local0))
                 {
-                    OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.IsDocOrderDistinct);
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.IsDocOrderDistinct);
                 }
             }
             return NoReplace(local0);
@@ -1154,7 +1347,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [EliminateAverage] (Average $x:* ^ (Empty? (TypeOf $x))) => (Nop $x)
                     if (AllowReplace(XmlILOptimization.EliminateAverage, local0))
                     {
-                        return Replace(XmlILOptimization.EliminateAverage, local0, VisitNop(f.Nop(local1)));
+                        return Replace(
+                            XmlILOptimization.EliminateAverage,
+                            local0,
+                            VisitNop(f.Nop(local1))
+                        );
                     }
                 }
             }
@@ -1182,7 +1379,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [EliminateSum] (Sum $x:* ^ (Empty? (TypeOf $x))) => (Nop $x)
                     if (AllowReplace(XmlILOptimization.EliminateSum, local0))
                     {
-                        return Replace(XmlILOptimization.EliminateSum, local0, VisitNop(f.Nop(local1)));
+                        return Replace(
+                            XmlILOptimization.EliminateSum,
+                            local0,
+                            VisitNop(f.Nop(local1))
+                        );
                     }
                 }
             }
@@ -1210,7 +1411,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [EliminateMinimum] (Minimum $x:* ^ (Empty? (TypeOf $x))) => (Nop $x)
                     if (AllowReplace(XmlILOptimization.EliminateMinimum, local0))
                     {
-                        return Replace(XmlILOptimization.EliminateMinimum, local0, VisitNop(f.Nop(local1)));
+                        return Replace(
+                            XmlILOptimization.EliminateMinimum,
+                            local0,
+                            VisitNop(f.Nop(local1))
+                        );
                     }
                 }
             }
@@ -1238,7 +1443,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [EliminateMaximum] (Maximum $x:* ^ (Empty? (TypeOf $x))) => (Nop $x)
                     if (AllowReplace(XmlILOptimization.EliminateMaximum, local0))
                     {
-                        return Replace(XmlILOptimization.EliminateMaximum, local0, VisitNop(f.Nop(local1)));
+                        return Replace(
+                            XmlILOptimization.EliminateMaximum,
+                            local0,
+                            VisitNop(f.Nop(local1))
+                        );
                     }
                 }
             }
@@ -1270,7 +1479,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [EliminateNegate] (Negate (LiteralDecimal $x:*)) => (LiteralDecimal { -{$x} })
                     if (AllowReplace(XmlILOptimization.EliminateNegate, local0))
                     {
-                        return Replace(XmlILOptimization.EliminateNegate, local0, VisitLiteralDecimal(f.LiteralDecimal(-local2)));
+                        return Replace(
+                            XmlILOptimization.EliminateNegate,
+                            local0,
+                            VisitLiteralDecimal(f.LiteralDecimal(-local2))
+                        );
                     }
                 }
             }
@@ -1282,7 +1495,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [EliminateNegate] (Negate (LiteralDouble $x:*)) => (LiteralDouble { -{$x} })
                     if (AllowReplace(XmlILOptimization.EliminateNegate, local0))
                     {
-                        return Replace(XmlILOptimization.EliminateNegate, local0, VisitLiteralDouble(f.LiteralDouble(-local2)));
+                        return Replace(
+                            XmlILOptimization.EliminateNegate,
+                            local0,
+                            VisitLiteralDouble(f.LiteralDouble(-local2))
+                        );
                     }
                 }
             }
@@ -1294,7 +1511,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [EliminateNegate] (Negate (LiteralInt32 $x:*)) => (LiteralInt32 { -{$x} })
                     if (AllowReplace(XmlILOptimization.EliminateNegate, local0))
                     {
-                        return Replace(XmlILOptimization.EliminateNegate, local0, VisitLiteralInt32(f.LiteralInt32(-local2)));
+                        return Replace(
+                            XmlILOptimization.EliminateNegate,
+                            local0,
+                            VisitLiteralInt32(f.LiteralInt32(-local2))
+                        );
                     }
                 }
             }
@@ -1306,7 +1527,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [EliminateNegate] (Negate (LiteralInt64 $x:*)) => (LiteralInt64 { -{$x} })
                     if (AllowReplace(XmlILOptimization.EliminateNegate, local0))
                     {
-                        return Replace(XmlILOptimization.EliminateNegate, local0, VisitLiteralInt64(f.LiteralInt64(-local2)));
+                        return Replace(
+                            XmlILOptimization.EliminateNegate,
+                            local0,
+                            VisitLiteralInt64(f.LiteralInt64(-local2))
+                        );
                     }
                 }
             }
@@ -1343,12 +1568,29 @@ namespace System.Xml.Xsl.IlGen
             {
                 if (IsLiteral((local1)))
                 {
-                    if ((IsLiteral((local2))) && (CanFoldArithmetic(QilNodeType.Add, (QilLiteral)local1, (QilLiteral)local2)))
+                    if (
+                        (IsLiteral((local2)))
+                        && (
+                            CanFoldArithmetic(
+                                QilNodeType.Add,
+                                (QilLiteral)local1,
+                                (QilLiteral)local2
+                            )
+                        )
+                    )
                     {
                         // PATTERN: [EliminateAdd] (Add $x:* ^ (Literal? $x) $y:* ^ (Literal? $y) ^ (CanFoldAdd? $x $y)) => (Add! $x $y)
                         if (AllowReplace(XmlILOptimization.EliminateAdd, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateAdd, local0, FoldArithmetic(QilNodeType.Add, (QilLiteral)local1, (QilLiteral)local2));
+                            return Replace(
+                                XmlILOptimization.EliminateAdd,
+                                local0,
+                                FoldArithmetic(
+                                    QilNodeType.Add,
+                                    (QilLiteral)local1,
+                                    (QilLiteral)local2
+                                )
+                            );
                         }
                     }
                 }
@@ -1362,7 +1604,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [NormalizeAddLiteral] (Add $left:* ^ (Literal? $left) $right:* ^ ~((Literal? $right))) => (Add $right $left)
                         if (AllowReplace(XmlILOptimization.NormalizeAddLiteral, local0))
                         {
-                            return Replace(XmlILOptimization.NormalizeAddLiteral, local0, VisitAdd(f.Add(local2, local1)));
+                            return Replace(
+                                XmlILOptimization.NormalizeAddLiteral,
+                                local0,
+                                VisitAdd(f.Add(local2, local1))
+                            );
                         }
                     }
                 }
@@ -1400,12 +1646,29 @@ namespace System.Xml.Xsl.IlGen
             {
                 if (IsLiteral((local1)))
                 {
-                    if ((IsLiteral((local2))) && (CanFoldArithmetic(QilNodeType.Subtract, (QilLiteral)local1, (QilLiteral)local2)))
+                    if (
+                        (IsLiteral((local2)))
+                        && (
+                            CanFoldArithmetic(
+                                QilNodeType.Subtract,
+                                (QilLiteral)local1,
+                                (QilLiteral)local2
+                            )
+                        )
+                    )
                     {
                         // PATTERN: [EliminateSubtract] (Subtract $x:* ^ (Literal? $x) $y:* ^ (Literal? $y) ^ (CanFoldSub? $x $y)) => (Sub! $x $y)
                         if (AllowReplace(XmlILOptimization.EliminateSubtract, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateSubtract, local0, FoldArithmetic(QilNodeType.Subtract, (QilLiteral)local1, (QilLiteral)local2));
+                            return Replace(
+                                XmlILOptimization.EliminateSubtract,
+                                local0,
+                                FoldArithmetic(
+                                    QilNodeType.Subtract,
+                                    (QilLiteral)local1,
+                                    (QilLiteral)local2
+                                )
+                            );
                         }
                     }
                 }
@@ -1443,12 +1706,29 @@ namespace System.Xml.Xsl.IlGen
             {
                 if (IsLiteral((local1)))
                 {
-                    if ((IsLiteral((local2))) && (CanFoldArithmetic(QilNodeType.Multiply, (QilLiteral)local1, (QilLiteral)local2)))
+                    if (
+                        (IsLiteral((local2)))
+                        && (
+                            CanFoldArithmetic(
+                                QilNodeType.Multiply,
+                                (QilLiteral)local1,
+                                (QilLiteral)local2
+                            )
+                        )
+                    )
                     {
                         // PATTERN: [EliminateMultiply] (Multiply $x:* ^ (Literal? $x) $y:* ^ (Literal? $y) ^ (CanFoldMul? $x $y)) => (Mul! $x $y)
                         if (AllowReplace(XmlILOptimization.EliminateMultiply, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateMultiply, local0, FoldArithmetic(QilNodeType.Multiply, (QilLiteral)local1, (QilLiteral)local2));
+                            return Replace(
+                                XmlILOptimization.EliminateMultiply,
+                                local0,
+                                FoldArithmetic(
+                                    QilNodeType.Multiply,
+                                    (QilLiteral)local1,
+                                    (QilLiteral)local2
+                                )
+                            );
                         }
                     }
                 }
@@ -1462,7 +1742,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [NormalizeMultiplyLiteral] (Multiply $left:* ^ (Literal? $left) $right:* ^ ~((Literal? $right))) => (Multiply $right $left)
                         if (AllowReplace(XmlILOptimization.NormalizeMultiplyLiteral, local0))
                         {
-                            return Replace(XmlILOptimization.NormalizeMultiplyLiteral, local0, VisitMultiply(f.Multiply(local2, local1)));
+                            return Replace(
+                                XmlILOptimization.NormalizeMultiplyLiteral,
+                                local0,
+                                VisitMultiply(f.Multiply(local2, local1))
+                            );
                         }
                     }
                 }
@@ -1500,12 +1784,29 @@ namespace System.Xml.Xsl.IlGen
             {
                 if (IsLiteral((local1)))
                 {
-                    if ((IsLiteral((local2))) && (CanFoldArithmetic(QilNodeType.Divide, (QilLiteral)local1, (QilLiteral)local2)))
+                    if (
+                        (IsLiteral((local2)))
+                        && (
+                            CanFoldArithmetic(
+                                QilNodeType.Divide,
+                                (QilLiteral)local1,
+                                (QilLiteral)local2
+                            )
+                        )
+                    )
                     {
                         // PATTERN: [EliminateDivide] (Divide $x:* ^ (Literal? $x) $y:* ^ (Literal? $y) ^ (CanFoldDiv? $x $y)) => (Div! $x $y)
                         if (AllowReplace(XmlILOptimization.EliminateDivide, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateDivide, local0, FoldArithmetic(QilNodeType.Divide, (QilLiteral)local1, (QilLiteral)local2));
+                            return Replace(
+                                XmlILOptimization.EliminateDivide,
+                                local0,
+                                FoldArithmetic(
+                                    QilNodeType.Divide,
+                                    (QilLiteral)local1,
+                                    (QilLiteral)local2
+                                )
+                            );
                         }
                     }
                 }
@@ -1543,12 +1844,29 @@ namespace System.Xml.Xsl.IlGen
             {
                 if (IsLiteral((local1)))
                 {
-                    if ((IsLiteral((local2))) && (CanFoldArithmetic(QilNodeType.Modulo, (QilLiteral)local1, (QilLiteral)local2)))
+                    if (
+                        (IsLiteral((local2)))
+                        && (
+                            CanFoldArithmetic(
+                                QilNodeType.Modulo,
+                                (QilLiteral)local1,
+                                (QilLiteral)local2
+                            )
+                        )
+                    )
                     {
                         // PATTERN: [EliminateModulo] (Modulo $x:* ^ (Literal? $x) $y:* ^ (Literal? $y) ^ (CanFoldMod? $x $y)) => (Mod! $x $y)
                         if (AllowReplace(XmlILOptimization.EliminateModulo, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateModulo, local0, FoldArithmetic(QilNodeType.Modulo, (QilLiteral)local1, (QilLiteral)local2));
+                            return Replace(
+                                XmlILOptimization.EliminateModulo,
+                                local0,
+                                FoldArithmetic(
+                                    QilNodeType.Modulo,
+                                    (QilLiteral)local1,
+                                    (QilLiteral)local2
+                                )
+                            );
                         }
                     }
                 }
@@ -1581,7 +1899,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [EliminateStrLength] (StrLength (LiteralString $x:*)) => (LiteralInt32 { {$x}.Length })
                     if (AllowReplace(XmlILOptimization.EliminateStrLength, local0))
                     {
-                        return Replace(XmlILOptimization.EliminateStrLength, local0, VisitLiteralInt32(f.LiteralInt32(local2.Length)));
+                        return Replace(
+                            XmlILOptimization.EliminateStrLength,
+                            local0,
+                            VisitLiteralInt32(f.LiteralInt32(local2.Length))
+                        );
                     }
                 }
             }
@@ -1614,12 +1936,19 @@ namespace System.Xml.Xsl.IlGen
                     }
                 }
             }
-            if ((((local2).XmlType)!.IsSingleton) && (this[XmlILOptimization.EliminateStrConcatSingle]))
+            if (
+                (((local2).XmlType)!.IsSingleton)
+                && (this[XmlILOptimization.EliminateStrConcatSingle])
+            )
             {
                 // PATTERN: [EliminateStrConcatSingle] (StrConcat * $x:*) ^ (Single? (TypeOf $x)) => (Nop $x)
                 if (AllowReplace(XmlILOptimization.EliminateStrConcatSingle, local0))
                 {
-                    return Replace(XmlILOptimization.EliminateStrConcatSingle, local0, VisitNop(f.Nop(local2)));
+                    return Replace(
+                        XmlILOptimization.EliminateStrConcatSingle,
+                        local0,
+                        VisitNop(f.Nop(local2))
+                    );
                 }
             }
             if (this[XmlILOptimization.EliminateStrConcat])
@@ -1640,7 +1969,11 @@ namespace System.Xml.Xsl.IlGen
 
                                 foreach (QilLiteral lit in local2)
                                     concat.Concat((string)lit);
-                                return Replace(XmlILOptimization.EliminateStrConcat, local0, VisitLiteralString(f.LiteralString(concat.GetResult())));
+                                return Replace(
+                                    XmlILOptimization.EliminateStrConcat,
+                                    local0,
+                                    VisitLiteralString(f.LiteralString(concat.GetResult()))
+                                );
                             }
                         }
                     }
@@ -1716,7 +2049,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [EliminateNe] (Ne $x:* ^ (Literal? $x) $y:* ^ (Literal? $y)) => (Ne! $x $y)
                         if (AllowReplace(XmlILOptimization.EliminateNe, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateNe, local0, FoldComparison(QilNodeType.Ne, local1, local2));
+                            return Replace(
+                                XmlILOptimization.EliminateNe,
+                                local0,
+                                FoldComparison(QilNodeType.Ne, local1, local2)
+                            );
                         }
                     }
                 }
@@ -1730,7 +2067,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [NormalizeNeLiteral] (Ne $left:* ^ (Literal? $left) $right:* ^ ~((Literal? $right))) => (Ne $right $left)
                         if (AllowReplace(XmlILOptimization.NormalizeNeLiteral, local0))
                         {
-                            return Replace(XmlILOptimization.NormalizeNeLiteral, local0, VisitNe(f.Ne(local2, local1)));
+                            return Replace(
+                                XmlILOptimization.NormalizeNeLiteral,
+                                local0,
+                                VisitNe(f.Ne(local2, local1))
+                            );
                         }
                     }
                 }
@@ -1746,12 +2087,21 @@ namespace System.Xml.Xsl.IlGen
                         XmlQueryType local5 = (XmlQueryType)((QilLiteral)local4).Value!;
                         if ((IsPrimitiveNumeric((local3).XmlType)) && (IsPrimitiveNumeric(local5)))
                         {
-                            if ((IsLiteral((local2))) && (CanFoldXsltConvertNonLossy(local2, (local3).XmlType!)))
+                            if (
+                                (IsLiteral((local2)))
+                                && (CanFoldXsltConvertNonLossy(local2, (local3).XmlType!))
+                            )
                             {
                                 // PATTERN: [NormalizeXsltConvertNe] (Ne (XsltConvert $expr:* (LiteralType $typ:*)) ^ (PrimitiveNumeric? (TypeOf $expr)) ^ (PrimitiveNumeric? $typ) $lit:* ^ (Literal? $lit) ^ (CanFoldXsltConvertNonLossy? $lit (TypeOf $expr))) => (Ne $expr (FoldXsltConvert $lit (TypeOf $expr)))
                                 if (AllowReplace(XmlILOptimization.NormalizeXsltConvertNe, local0))
                                 {
-                                    return Replace(XmlILOptimization.NormalizeXsltConvertNe, local0, VisitNe(f.Ne(local3, FoldXsltConvert(local2, (local3).XmlType!))));
+                                    return Replace(
+                                        XmlILOptimization.NormalizeXsltConvertNe,
+                                        local0,
+                                        VisitNe(
+                                            f.Ne(local3, FoldXsltConvert(local2, (local3).XmlType!))
+                                        )
+                                    );
                                 }
                             }
                         }
@@ -1773,7 +2123,11 @@ namespace System.Xml.Xsl.IlGen
                                 // PATTERN: [NormalizeIdNe] (Ne (XsltGenerateId $arg1:*) ^ (Single? (TypeOf $arg1)) (XsltGenerateId $arg2:*) ^ (Single? (TypeOf $arg2))) => (Not (Is $arg1 $arg2))
                                 if (AllowReplace(XmlILOptimization.NormalizeIdNe, local0))
                                 {
-                                    return Replace(XmlILOptimization.NormalizeIdNe, local0, VisitNot(f.Not(VisitIs(f.Is(local3, local4)))));
+                                    return Replace(
+                                        XmlILOptimization.NormalizeIdNe,
+                                        local0,
+                                        VisitNot(f.Not(VisitIs(f.Is(local3, local4))))
+                                    );
                                 }
                             }
                         }
@@ -1793,7 +2147,11 @@ namespace System.Xml.Xsl.IlGen
                             // PATTERN: [NormalizeLengthNe] (Ne (Length $expr:*) (LiteralInt32 0)) => (Not (IsEmpty $expr))
                             if (AllowReplace(XmlILOptimization.NormalizeLengthNe, local0))
                             {
-                                return Replace(XmlILOptimization.NormalizeLengthNe, local0, VisitNot(f.Not(VisitIsEmpty(f.IsEmpty(local3)))));
+                                return Replace(
+                                    XmlILOptimization.NormalizeLengthNe,
+                                    local0,
+                                    VisitNot(f.Not(VisitIsEmpty(f.IsEmpty(local3))))
+                                );
                             }
                         }
                     }
@@ -1809,7 +2167,12 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [AnnotateMaxLengthNe] (Ne $len:(Length *) (LiteralInt32 $num:*)) => (AddPattern $len {MaxPosition}) ^ (AddArgument $len {MaxPosition} $num) ^ { }
                         if (AllowReplace(XmlILOptimization.AnnotateMaxLengthNe, local0))
                         {
-                            OptimizerPatterns.Write((QilNode)(local1)).AddPattern(OptimizerPatternName.MaxPosition); OptimizerPatterns.Write((QilNode)(local1)).AddArgument(OptimizerPatternArgument.MaxPosition, local4);
+                            OptimizerPatterns
+                                .Write((QilNode)(local1))
+                                .AddPattern(OptimizerPatternName.MaxPosition);
+                            OptimizerPatterns
+                                .Write((QilNode)(local1))
+                                .AddArgument(OptimizerPatternArgument.MaxPosition, local4);
                         }
                     }
                 }
@@ -1852,7 +2215,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [EliminateEq] (Eq $x:* ^ (Literal? $x) $y:* ^ (Literal? $y)) => (Eq! $x $y)
                         if (AllowReplace(XmlILOptimization.EliminateEq, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateEq, local0, FoldComparison(QilNodeType.Eq, local1, local2));
+                            return Replace(
+                                XmlILOptimization.EliminateEq,
+                                local0,
+                                FoldComparison(QilNodeType.Eq, local1, local2)
+                            );
                         }
                     }
                 }
@@ -1866,7 +2233,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [NormalizeEqLiteral] (Eq $left:* ^ (Literal? $left) $right:* ^ ~((Literal? $right))) => (Eq $right $left)
                         if (AllowReplace(XmlILOptimization.NormalizeEqLiteral, local0))
                         {
-                            return Replace(XmlILOptimization.NormalizeEqLiteral, local0, VisitEq(f.Eq(local2, local1)));
+                            return Replace(
+                                XmlILOptimization.NormalizeEqLiteral,
+                                local0,
+                                VisitEq(f.Eq(local2, local1))
+                            );
                         }
                     }
                 }
@@ -1882,12 +2253,21 @@ namespace System.Xml.Xsl.IlGen
                         XmlQueryType local5 = (XmlQueryType)((QilLiteral)local4).Value!;
                         if ((IsPrimitiveNumeric((local3).XmlType)) && (IsPrimitiveNumeric(local5)))
                         {
-                            if ((IsLiteral((local2))) && (CanFoldXsltConvertNonLossy(local2, (local3).XmlType!)))
+                            if (
+                                (IsLiteral((local2)))
+                                && (CanFoldXsltConvertNonLossy(local2, (local3).XmlType!))
+                            )
                             {
                                 // PATTERN: [NormalizeXsltConvertEq] (Eq (XsltConvert $expr:* (LiteralType $typ:*)) ^ (PrimitiveNumeric? (TypeOf $expr)) ^ (PrimitiveNumeric? $typ) $lit:* ^ (Literal? $lit) ^ (CanFoldXsltConvertNonLossy? $lit (TypeOf $expr))) => (Eq $expr (FoldXsltConvert $lit (TypeOf $expr)))
                                 if (AllowReplace(XmlILOptimization.NormalizeXsltConvertEq, local0))
                                 {
-                                    return Replace(XmlILOptimization.NormalizeXsltConvertEq, local0, VisitEq(f.Eq(local3, FoldXsltConvert(local2, (local3).XmlType!))));
+                                    return Replace(
+                                        XmlILOptimization.NormalizeXsltConvertEq,
+                                        local0,
+                                        VisitEq(
+                                            f.Eq(local3, FoldXsltConvert(local2, (local3).XmlType!))
+                                        )
+                                    );
                                 }
                             }
                         }
@@ -1902,12 +2282,34 @@ namespace System.Xml.Xsl.IlGen
                     QilNode local4 = local1[1];
                     if (IsLiteral((local4)))
                     {
-                        if ((IsLiteral((local2))) && (CanFoldArithmetic(QilNodeType.Subtract, (QilLiteral)local2, (QilLiteral)local4)))
+                        if (
+                            (IsLiteral((local2)))
+                            && (
+                                CanFoldArithmetic(
+                                    QilNodeType.Subtract,
+                                    (QilLiteral)local2,
+                                    (QilLiteral)local4
+                                )
+                            )
+                        )
                         {
                             // PATTERN: [NormalizeAddEq] (Eq (Add $exprAdd:* $litAdd:*) ^ (Literal? $litAdd) $litEq:* ^ (Literal? $litEq) ^ (CanFoldSub? $litEq $litAdd)) => (Eq $exprAdd (Sub! $litEq $litAdd))
                             if (AllowReplace(XmlILOptimization.NormalizeAddEq, local0))
                             {
-                                return Replace(XmlILOptimization.NormalizeAddEq, local0, VisitEq(f.Eq(local3, FoldArithmetic(QilNodeType.Subtract, (QilLiteral)local2, (QilLiteral)local4))));
+                                return Replace(
+                                    XmlILOptimization.NormalizeAddEq,
+                                    local0,
+                                    VisitEq(
+                                        f.Eq(
+                                            local3,
+                                            FoldArithmetic(
+                                                QilNodeType.Subtract,
+                                                (QilLiteral)local2,
+                                                (QilLiteral)local4
+                                            )
+                                        )
+                                    )
+                                );
                             }
                         }
                     }
@@ -1928,7 +2330,11 @@ namespace System.Xml.Xsl.IlGen
                                 // PATTERN: [NormalizeIdEq] (Eq (XsltGenerateId $arg1:*) ^ (Single? (TypeOf $arg1)) (XsltGenerateId $arg2:*) ^ (Single? (TypeOf $arg2))) => (Is $arg1 $arg2)
                                 if (AllowReplace(XmlILOptimization.NormalizeIdEq, local0))
                                 {
-                                    return Replace(XmlILOptimization.NormalizeIdEq, local0, VisitIs(f.Is(local3, local4)));
+                                    return Replace(
+                                        XmlILOptimization.NormalizeIdEq,
+                                        local0,
+                                        VisitIs(f.Is(local3, local4))
+                                    );
                                 }
                             }
                         }
@@ -1960,10 +2366,37 @@ namespace System.Xml.Xsl.IlGen
                                             if (local9 == local6)
                                             {
                                                 // PATTERN: [NormalizeIdEq] (Eq (XsltGenerateId $arg:*) ^ (Single? (TypeOf $arg)) (StrConcat * (Loop $iter:(For $bind:* ^ (AtMostOne? (TypeOf $bind))) (XsltGenerateId $iter)))) => (Not (IsEmpty (Filter $iterNew:(For $bind) (Is $arg $iterNew))))
-                                                if (AllowReplace(XmlILOptimization.NormalizeIdEq, local0))
+                                                if (
+                                                    AllowReplace(
+                                                        XmlILOptimization.NormalizeIdEq,
+                                                        local0
+                                                    )
+                                                )
                                                 {
                                                     QilNode local10 = VisitFor(f.For(local7));
-                                                    return Replace(XmlILOptimization.NormalizeIdEq, local0, VisitNot(f.Not(VisitIsEmpty(f.IsEmpty(VisitFilter(f.Filter(local10, VisitIs(f.Is(local3, local10)))))))));
+                                                    return Replace(
+                                                        XmlILOptimization.NormalizeIdEq,
+                                                        local0,
+                                                        VisitNot(
+                                                            f.Not(
+                                                                VisitIsEmpty(
+                                                                    f.IsEmpty(
+                                                                        VisitFilter(
+                                                                            f.Filter(
+                                                                                local10,
+                                                                                VisitIs(
+                                                                                    f.Is(
+                                                                                        local3,
+                                                                                        local10
+                                                                                    )
+                                                                                )
+                                                                            )
+                                                                        )
+                                                                    )
+                                                                )
+                                                            )
+                                                        )
+                                                    );
                                                 }
                                             }
                                         }
@@ -1999,10 +2432,37 @@ namespace System.Xml.Xsl.IlGen
                                             if (((local9).XmlType)!.IsSingleton)
                                             {
                                                 // PATTERN: [NormalizeIdEq] (Eq (StrConcat * (Loop $iter:(For $bind:* ^ (AtMostOne? (TypeOf $bind))) (XsltGenerateId $iter))) (XsltGenerateId $arg:*) ^ (Single? (TypeOf $arg))) => (Not (IsEmpty (Filter $iterNew:(For $bind) (Is $arg $iterNew))))
-                                                if (AllowReplace(XmlILOptimization.NormalizeIdEq, local0))
+                                                if (
+                                                    AllowReplace(
+                                                        XmlILOptimization.NormalizeIdEq,
+                                                        local0
+                                                    )
+                                                )
                                                 {
                                                     QilNode local10 = VisitFor(f.For(local6));
-                                                    return Replace(XmlILOptimization.NormalizeIdEq, local0, VisitNot(f.Not(VisitIsEmpty(f.IsEmpty(VisitFilter(f.Filter(local10, VisitIs(f.Is(local9, local10)))))))));
+                                                    return Replace(
+                                                        XmlILOptimization.NormalizeIdEq,
+                                                        local0,
+                                                        VisitNot(
+                                                            f.Not(
+                                                                VisitIsEmpty(
+                                                                    f.IsEmpty(
+                                                                        VisitFilter(
+                                                                            f.Filter(
+                                                                                local10,
+                                                                                VisitIs(
+                                                                                    f.Is(
+                                                                                        local9,
+                                                                                        local10
+                                                                                    )
+                                                                                )
+                                                                            )
+                                                                        )
+                                                                    )
+                                                                )
+                                                            )
+                                                        )
+                                                    );
                                                 }
                                             }
                                         }
@@ -2033,7 +2493,22 @@ namespace System.Xml.Xsl.IlGen
                                     if (AllowReplace(XmlILOptimization.NormalizeMuenchian, local0))
                                     {
                                         QilNode local7 = VisitFor(f.For(local5));
-                                        return Replace(XmlILOptimization.NormalizeMuenchian, local0, VisitIsEmpty(f.IsEmpty(VisitFilter(f.Filter(local7, VisitNot(f.Not(VisitIs(f.Is(local4, local7)))))))));
+                                        return Replace(
+                                            XmlILOptimization.NormalizeMuenchian,
+                                            local0,
+                                            VisitIsEmpty(
+                                                f.IsEmpty(
+                                                    VisitFilter(
+                                                        f.Filter(
+                                                            local7,
+                                                            VisitNot(
+                                                                f.Not(VisitIs(f.Is(local4, local7)))
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        );
                                     }
                                 }
                             }
@@ -2061,7 +2536,22 @@ namespace System.Xml.Xsl.IlGen
                                     if (AllowReplace(XmlILOptimization.NormalizeMuenchian, local0))
                                     {
                                         QilNode local7 = VisitFor(f.For(local4));
-                                        return Replace(XmlILOptimization.NormalizeMuenchian, local0, VisitIsEmpty(f.IsEmpty(VisitFilter(f.Filter(local7, VisitNot(f.Not(VisitIs(f.Is(local7, local5)))))))));
+                                        return Replace(
+                                            XmlILOptimization.NormalizeMuenchian,
+                                            local0,
+                                            VisitIsEmpty(
+                                                f.IsEmpty(
+                                                    VisitFilter(
+                                                        f.Filter(
+                                                            local7,
+                                                            VisitNot(
+                                                                f.Not(VisitIs(f.Is(local7, local5)))
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        );
                                     }
                                 }
                             }
@@ -2079,7 +2569,12 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [AnnotateMaxLengthEq] (Eq $len:(Length *) (LiteralInt32 $num:*)) => (AddPattern $len {MaxPosition}) ^ (AddArgument $len {MaxPosition} $num) ^ { }
                         if (AllowReplace(XmlILOptimization.AnnotateMaxLengthEq, local0))
                         {
-                            OptimizerPatterns.Write((QilNode)(local1)).AddPattern(OptimizerPatternName.MaxPosition); OptimizerPatterns.Write((QilNode)(local1)).AddArgument(OptimizerPatternArgument.MaxPosition, local4);
+                            OptimizerPatterns
+                                .Write((QilNode)(local1))
+                                .AddPattern(OptimizerPatternName.MaxPosition);
+                            OptimizerPatterns
+                                .Write((QilNode)(local1))
+                                .AddArgument(OptimizerPatternArgument.MaxPosition, local4);
                         }
                     }
                 }
@@ -2122,7 +2617,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [EliminateGt] (Gt $x:* ^ (Literal? $x) $y:* ^ (Literal? $y)) => (Gt! $x $y)
                         if (AllowReplace(XmlILOptimization.EliminateGt, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateGt, local0, FoldComparison(QilNodeType.Gt, local1, local2));
+                            return Replace(
+                                XmlILOptimization.EliminateGt,
+                                local0,
+                                FoldComparison(QilNodeType.Gt, local1, local2)
+                            );
                         }
                     }
                 }
@@ -2136,7 +2635,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [NormalizeGtLiteral] (Gt $left:* ^ (Literal? $left) $right:* ^ ~((Literal? $right))) => (Lt $right $left)
                         if (AllowReplace(XmlILOptimization.NormalizeGtLiteral, local0))
                         {
-                            return Replace(XmlILOptimization.NormalizeGtLiteral, local0, VisitLt(f.Lt(local2, local1)));
+                            return Replace(
+                                XmlILOptimization.NormalizeGtLiteral,
+                                local0,
+                                VisitLt(f.Lt(local2, local1))
+                            );
                         }
                     }
                 }
@@ -2152,12 +2655,21 @@ namespace System.Xml.Xsl.IlGen
                         XmlQueryType local5 = (XmlQueryType)((QilLiteral)local4).Value!;
                         if ((IsPrimitiveNumeric((local3).XmlType)) && (IsPrimitiveNumeric(local5)))
                         {
-                            if ((IsLiteral((local2))) && (CanFoldXsltConvertNonLossy(local2, (local3).XmlType!)))
+                            if (
+                                (IsLiteral((local2)))
+                                && (CanFoldXsltConvertNonLossy(local2, (local3).XmlType!))
+                            )
                             {
                                 // PATTERN: [NormalizeXsltConvertGt] (Gt (XsltConvert $expr:* (LiteralType $typ:*)) ^ (PrimitiveNumeric? (TypeOf $expr)) ^ (PrimitiveNumeric? $typ) $lit:* ^ (Literal? $lit) ^ (CanFoldXsltConvertNonLossy? $lit (TypeOf $expr))) => (Gt $expr (FoldXsltConvert $lit (TypeOf $expr)))
                                 if (AllowReplace(XmlILOptimization.NormalizeXsltConvertGt, local0))
                                 {
-                                    return Replace(XmlILOptimization.NormalizeXsltConvertGt, local0, VisitGt(f.Gt(local3, FoldXsltConvert(local2, (local3).XmlType!))));
+                                    return Replace(
+                                        XmlILOptimization.NormalizeXsltConvertGt,
+                                        local0,
+                                        VisitGt(
+                                            f.Gt(local3, FoldXsltConvert(local2, (local3).XmlType!))
+                                        )
+                                    );
                                 }
                             }
                         }
@@ -2177,7 +2689,11 @@ namespace System.Xml.Xsl.IlGen
                             // PATTERN: [NormalizeLengthGt] (Gt (Length $expr:*) (LiteralInt32 0)) => (Not (IsEmpty $expr))
                             if (AllowReplace(XmlILOptimization.NormalizeLengthGt, local0))
                             {
-                                return Replace(XmlILOptimization.NormalizeLengthGt, local0, VisitNot(f.Not(VisitIsEmpty(f.IsEmpty(local3)))));
+                                return Replace(
+                                    XmlILOptimization.NormalizeLengthGt,
+                                    local0,
+                                    VisitNot(f.Not(VisitIsEmpty(f.IsEmpty(local3))))
+                                );
                             }
                         }
                     }
@@ -2193,7 +2709,12 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [AnnotateMaxLengthGt] (Gt $len:(Length *) (LiteralInt32 $num:*)) => (AddPattern $len {MaxPosition}) ^ (AddArgument $len {MaxPosition} $num) ^ { }
                         if (AllowReplace(XmlILOptimization.AnnotateMaxLengthGt, local0))
                         {
-                            OptimizerPatterns.Write((QilNode)(local1)).AddPattern(OptimizerPatternName.MaxPosition); OptimizerPatterns.Write((QilNode)(local1)).AddArgument(OptimizerPatternArgument.MaxPosition, local4);
+                            OptimizerPatterns
+                                .Write((QilNode)(local1))
+                                .AddPattern(OptimizerPatternName.MaxPosition);
+                            OptimizerPatterns
+                                .Write((QilNode)(local1))
+                                .AddArgument(OptimizerPatternArgument.MaxPosition, local4);
                         }
                     }
                 }
@@ -2236,7 +2757,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [EliminateGe] (Ge $x:* ^ (Literal? $x) $y:* ^ (Literal? $y)) => (Ge! $x $y)
                         if (AllowReplace(XmlILOptimization.EliminateGe, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateGe, local0, FoldComparison(QilNodeType.Ge, local1, local2));
+                            return Replace(
+                                XmlILOptimization.EliminateGe,
+                                local0,
+                                FoldComparison(QilNodeType.Ge, local1, local2)
+                            );
                         }
                     }
                 }
@@ -2250,7 +2775,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [NormalizeGeLiteral] (Ge $left:* ^ (Literal? $left) $right:* ^ ~((Literal? $right))) => (Le $right $left)
                         if (AllowReplace(XmlILOptimization.NormalizeGeLiteral, local0))
                         {
-                            return Replace(XmlILOptimization.NormalizeGeLiteral, local0, VisitLe(f.Le(local2, local1)));
+                            return Replace(
+                                XmlILOptimization.NormalizeGeLiteral,
+                                local0,
+                                VisitLe(f.Le(local2, local1))
+                            );
                         }
                     }
                 }
@@ -2266,12 +2795,21 @@ namespace System.Xml.Xsl.IlGen
                         XmlQueryType local5 = (XmlQueryType)((QilLiteral)local4).Value!;
                         if ((IsPrimitiveNumeric((local3).XmlType)) && (IsPrimitiveNumeric(local5)))
                         {
-                            if ((IsLiteral((local2))) && (CanFoldXsltConvertNonLossy(local2, (local3).XmlType!)))
+                            if (
+                                (IsLiteral((local2)))
+                                && (CanFoldXsltConvertNonLossy(local2, (local3).XmlType!))
+                            )
                             {
                                 // PATTERN: [NormalizeXsltConvertGe] (Ge (XsltConvert $expr:* (LiteralType $typ:*)) ^ (PrimitiveNumeric? (TypeOf $expr)) ^ (PrimitiveNumeric? $typ) $lit:* ^ (Literal? $lit) ^ (CanFoldXsltConvertNonLossy? $lit (TypeOf $expr))) => (Ge $expr (FoldXsltConvert $lit (TypeOf $expr)))
                                 if (AllowReplace(XmlILOptimization.NormalizeXsltConvertGe, local0))
                                 {
-                                    return Replace(XmlILOptimization.NormalizeXsltConvertGe, local0, VisitGe(f.Ge(local3, FoldXsltConvert(local2, (local3).XmlType!))));
+                                    return Replace(
+                                        XmlILOptimization.NormalizeXsltConvertGe,
+                                        local0,
+                                        VisitGe(
+                                            f.Ge(local3, FoldXsltConvert(local2, (local3).XmlType!))
+                                        )
+                                    );
                                 }
                             }
                         }
@@ -2288,7 +2826,12 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [AnnotateMaxLengthGe] (Ge $len:(Length *) (LiteralInt32 $num:*)) => (AddPattern $len {MaxPosition}) ^ (AddArgument $len {MaxPosition} $num) ^ { }
                         if (AllowReplace(XmlILOptimization.AnnotateMaxLengthGe, local0))
                         {
-                            OptimizerPatterns.Write((QilNode)(local1)).AddPattern(OptimizerPatternName.MaxPosition); OptimizerPatterns.Write((QilNode)(local1)).AddArgument(OptimizerPatternArgument.MaxPosition, local4);
+                            OptimizerPatterns
+                                .Write((QilNode)(local1))
+                                .AddPattern(OptimizerPatternName.MaxPosition);
+                            OptimizerPatterns
+                                .Write((QilNode)(local1))
+                                .AddArgument(OptimizerPatternArgument.MaxPosition, local4);
                         }
                     }
                 }
@@ -2331,7 +2874,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [EliminateLt] (Lt $x:* ^ (Literal? $x) $y:* ^ (Literal? $y)) => (Lt! $x $y)
                         if (AllowReplace(XmlILOptimization.EliminateLt, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateLt, local0, FoldComparison(QilNodeType.Lt, local1, local2));
+                            return Replace(
+                                XmlILOptimization.EliminateLt,
+                                local0,
+                                FoldComparison(QilNodeType.Lt, local1, local2)
+                            );
                         }
                     }
                 }
@@ -2345,7 +2892,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [NormalizeLtLiteral] (Lt $left:* ^ (Literal? $left) $right:* ^ ~((Literal? $right))) => (Gt $right $left)
                         if (AllowReplace(XmlILOptimization.NormalizeLtLiteral, local0))
                         {
-                            return Replace(XmlILOptimization.NormalizeLtLiteral, local0, VisitGt(f.Gt(local2, local1)));
+                            return Replace(
+                                XmlILOptimization.NormalizeLtLiteral,
+                                local0,
+                                VisitGt(f.Gt(local2, local1))
+                            );
                         }
                     }
                 }
@@ -2361,12 +2912,21 @@ namespace System.Xml.Xsl.IlGen
                         XmlQueryType local5 = (XmlQueryType)((QilLiteral)local4).Value!;
                         if ((IsPrimitiveNumeric((local3).XmlType)) && (IsPrimitiveNumeric(local5)))
                         {
-                            if ((IsLiteral((local2))) && (CanFoldXsltConvertNonLossy(local2, (local3).XmlType!)))
+                            if (
+                                (IsLiteral((local2)))
+                                && (CanFoldXsltConvertNonLossy(local2, (local3).XmlType!))
+                            )
                             {
                                 // PATTERN: [NormalizeXsltConvertLt] (Lt (XsltConvert $expr:* (LiteralType $typ:*)) ^ (PrimitiveNumeric? (TypeOf $expr)) ^ (PrimitiveNumeric? $typ) $lit:* ^ (Literal? $lit) ^ (CanFoldXsltConvertNonLossy? $lit (TypeOf $expr))) => (Lt $expr (FoldXsltConvert $lit (TypeOf $expr)))
                                 if (AllowReplace(XmlILOptimization.NormalizeXsltConvertLt, local0))
                                 {
-                                    return Replace(XmlILOptimization.NormalizeXsltConvertLt, local0, VisitLt(f.Lt(local3, FoldXsltConvert(local2, (local3).XmlType!))));
+                                    return Replace(
+                                        XmlILOptimization.NormalizeXsltConvertLt,
+                                        local0,
+                                        VisitLt(
+                                            f.Lt(local3, FoldXsltConvert(local2, (local3).XmlType!))
+                                        )
+                                    );
                                 }
                             }
                         }
@@ -2383,7 +2943,12 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [AnnotateMaxLengthLt] (Lt $len:(Length *) (LiteralInt32 $num:*)) => (AddPattern $len {MaxPosition}) ^ (AddArgument $len {MaxPosition} $num) ^ { }
                         if (AllowReplace(XmlILOptimization.AnnotateMaxLengthLt, local0))
                         {
-                            OptimizerPatterns.Write((QilNode)(local1)).AddPattern(OptimizerPatternName.MaxPosition); OptimizerPatterns.Write((QilNode)(local1)).AddArgument(OptimizerPatternArgument.MaxPosition, local4);
+                            OptimizerPatterns
+                                .Write((QilNode)(local1))
+                                .AddPattern(OptimizerPatternName.MaxPosition);
+                            OptimizerPatterns
+                                .Write((QilNode)(local1))
+                                .AddArgument(OptimizerPatternArgument.MaxPosition, local4);
                         }
                     }
                 }
@@ -2426,7 +2991,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [EliminateLe] (Le $x:* ^ (Literal? $x) $y:* ^ (Literal? $y)) => (Le! $x $y)
                         if (AllowReplace(XmlILOptimization.EliminateLe, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateLe, local0, FoldComparison(QilNodeType.Le, local1, local2));
+                            return Replace(
+                                XmlILOptimization.EliminateLe,
+                                local0,
+                                FoldComparison(QilNodeType.Le, local1, local2)
+                            );
                         }
                     }
                 }
@@ -2440,7 +3009,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [NormalizeLeLiteral] (Le $left:* ^ (Literal? $left) $right:* ^ ~((Literal? $right))) => (Ge $right $left)
                         if (AllowReplace(XmlILOptimization.NormalizeLeLiteral, local0))
                         {
-                            return Replace(XmlILOptimization.NormalizeLeLiteral, local0, VisitGe(f.Ge(local2, local1)));
+                            return Replace(
+                                XmlILOptimization.NormalizeLeLiteral,
+                                local0,
+                                VisitGe(f.Ge(local2, local1))
+                            );
                         }
                     }
                 }
@@ -2456,12 +3029,21 @@ namespace System.Xml.Xsl.IlGen
                         XmlQueryType local5 = (XmlQueryType)((QilLiteral)local4).Value!;
                         if ((IsPrimitiveNumeric((local3).XmlType)) && (IsPrimitiveNumeric(local5)))
                         {
-                            if ((IsLiteral((local2))) && (CanFoldXsltConvertNonLossy(local2, (local3).XmlType!)))
+                            if (
+                                (IsLiteral((local2)))
+                                && (CanFoldXsltConvertNonLossy(local2, (local3).XmlType!))
+                            )
                             {
                                 // PATTERN: [NormalizeXsltConvertLe] (Le (XsltConvert $expr:* (LiteralType $typ:*)) ^ (PrimitiveNumeric? (TypeOf $expr)) ^ (PrimitiveNumeric? $typ) $lit:* ^ (Literal? $lit) ^ (CanFoldXsltConvertNonLossy? $lit (TypeOf $expr))) => (Le $expr (FoldXsltConvert $lit (TypeOf $expr)))
                                 if (AllowReplace(XmlILOptimization.NormalizeXsltConvertLe, local0))
                                 {
-                                    return Replace(XmlILOptimization.NormalizeXsltConvertLe, local0, VisitLe(f.Le(local3, FoldXsltConvert(local2, (local3).XmlType!))));
+                                    return Replace(
+                                        XmlILOptimization.NormalizeXsltConvertLe,
+                                        local0,
+                                        VisitLe(
+                                            f.Le(local3, FoldXsltConvert(local2, (local3).XmlType!))
+                                        )
+                                    );
                                 }
                             }
                         }
@@ -2478,7 +3060,12 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [AnnotateMaxLengthLe] (Le $len:(Length *) (LiteralInt32 $num:*)) => (AddPattern $len {MaxPosition}) ^ (AddArgument $len {MaxPosition} $num) ^ { }
                         if (AllowReplace(XmlILOptimization.AnnotateMaxLengthLe, local0))
                         {
-                            OptimizerPatterns.Write((QilNode)(local1)).AddPattern(OptimizerPatternName.MaxPosition); OptimizerPatterns.Write((QilNode)(local1)).AddArgument(OptimizerPatternArgument.MaxPosition, local4);
+                            OptimizerPatterns
+                                .Write((QilNode)(local1))
+                                .AddPattern(OptimizerPatternName.MaxPosition);
+                            OptimizerPatterns
+                                .Write((QilNode)(local1))
+                                .AddArgument(OptimizerPatternArgument.MaxPosition, local4);
                         }
                     }
                 }
@@ -2562,7 +3149,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [EliminateAfter] (After $x:* $x) => (False)
                     if (AllowReplace(XmlILOptimization.EliminateAfter, local0))
                     {
-                        return Replace(XmlILOptimization.EliminateAfter, local0, VisitFalse(f.False()));
+                        return Replace(
+                            XmlILOptimization.EliminateAfter,
+                            local0,
+                            VisitFalse(f.False())
+                        );
                     }
                 }
             }
@@ -2602,7 +3193,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [EliminateBefore] (Before $x:* $x) => (False)
                     if (AllowReplace(XmlILOptimization.EliminateBefore, local0))
                     {
-                        return Replace(XmlILOptimization.EliminateBefore, local0, VisitFalse(f.False()));
+                        return Replace(
+                            XmlILOptimization.EliminateBefore,
+                            local0,
+                            VisitFalse(f.False())
+                        );
                     }
                 }
             }
@@ -2623,7 +3218,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [FoldNone] (Loop $i:* ^ (None? (TypeOf $i)) *) => (Nop (First $i))
                     if (AllowReplace(XmlILOptimization.FoldNone, local0))
                     {
-                        return Replace(XmlILOptimization.FoldNone, local0, VisitNop(f.Nop((QilNode)(local1)[0])));
+                        return Replace(
+                            XmlILOptimization.FoldNone,
+                            local0,
+                            VisitNop(f.Nop((QilNode)(local1)[0]))
+                        );
                     }
                 }
             }
@@ -2634,12 +3233,20 @@ namespace System.Xml.Xsl.IlGen
                     QilNode local3 = local1[0];
                     if (local3.NodeType == QilNodeType.For)
                     {
-                        if (!OptimizerPatterns.Read(local1).MatchesPattern(OptimizerPatternName.IsPositional))
+                        if (
+                            !OptimizerPatterns
+                                .Read(local1)
+                                .MatchesPattern(OptimizerPatternName.IsPositional)
+                        )
                         {
                             // PATTERN: [EliminateIterator] $outer:(Loop $iter:(For $iterRef:(For *)) ^ (NonPositionalIterator? $iter) $ret:*) => (Subs $ret $iter $iterRef)
                             if (AllowReplace(XmlILOptimization.EliminateIterator, local0))
                             {
-                                return Replace(XmlILOptimization.EliminateIterator, local0, Subs(local2, local1, local3));
+                                return Replace(
+                                    XmlILOptimization.EliminateIterator,
+                                    local0,
+                                    Subs(local2, local1, local3)
+                                );
                             }
                         }
                     }
@@ -2657,7 +3264,11 @@ namespace System.Xml.Xsl.IlGen
                             // PATTERN: [EliminateLoop] (Loop (For $x:(Sequence) ^ (Count? $x 0)) *) => (Sequence)
                             if (AllowReplace(XmlILOptimization.EliminateLoop, local0))
                             {
-                                return Replace(XmlILOptimization.EliminateLoop, local0, VisitSequence(f.Sequence()));
+                                return Replace(
+                                    XmlILOptimization.EliminateLoop,
+                                    local0,
+                                    VisitSequence(f.Sequence())
+                                );
                             }
                         }
                     }
@@ -2665,7 +3276,11 @@ namespace System.Xml.Xsl.IlGen
             }
             if (this[XmlILOptimization.EliminateLoop])
             {
-                if (!OptimizerPatterns.Read(local1).MatchesPattern(OptimizerPatternName.MaybeSideEffects))
+                if (
+                    !OptimizerPatterns
+                        .Read(local1)
+                        .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
+                )
                 {
                     if (local2.NodeType == QilNodeType.Sequence)
                     {
@@ -2674,7 +3289,11 @@ namespace System.Xml.Xsl.IlGen
                             // PATTERN: [EliminateLoop] (Loop $i:* ^ (NoSideEffects? $i) $x:(Sequence) ^ (Count? $x 0)) => (Sequence)
                             if (AllowReplace(XmlILOptimization.EliminateLoop, local0))
                             {
-                                return Replace(XmlILOptimization.EliminateLoop, local0, VisitSequence(f.Sequence()));
+                                return Replace(
+                                    XmlILOptimization.EliminateLoop,
+                                    local0,
+                                    VisitSequence(f.Sequence())
+                                );
                             }
                         }
                     }
@@ -2687,7 +3306,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [EliminateLoop] (Loop $iter:* $iter) => (First $iter)
                     if (AllowReplace(XmlILOptimization.EliminateLoop, local0))
                     {
-                        return Replace(XmlILOptimization.EliminateLoop, local0, (QilNode)(local1)[0]);
+                        return Replace(
+                            XmlILOptimization.EliminateLoop,
+                            local0,
+                            (QilNode)(local1)[0]
+                        );
                     }
                 }
             }
@@ -2704,7 +3327,11 @@ namespace System.Xml.Xsl.IlGen
                             // PATTERN: [NormalizeLoopText] (Loop $iter:(For $bind:* ^ (Single? (TypeOf $bind))) $ctor:(TextCtor $text:*)) => (TextCtor (Loop $iter $text))
                             if (AllowReplace(XmlILOptimization.NormalizeLoopText, local0))
                             {
-                                return Replace(XmlILOptimization.NormalizeLoopText, local0, VisitTextCtor(f.TextCtor(VisitLoop(f.Loop(local1, local4)))));
+                                return Replace(
+                                    XmlILOptimization.NormalizeLoopText,
+                                    local0,
+                                    VisitTextCtor(f.TextCtor(VisitLoop(f.Loop(local1, local4))))
+                                );
                             }
                         }
                     }
@@ -2712,14 +3339,28 @@ namespace System.Xml.Xsl.IlGen
             }
             if (this[XmlILOptimization.EliminateIteratorUsedAtMostOnce])
             {
-                if ((((local1).NodeType == QilNodeType.Let) || ((((QilNode)(local1)[0]).XmlType!).IsSingleton)) && (!OptimizerPatterns.Read(local1).MatchesPattern(OptimizerPatternName.MaybeSideEffects)))
+                if (
+                    (
+                        ((local1).NodeType == QilNodeType.Let)
+                        || ((((QilNode)(local1)[0]).XmlType!).IsSingleton)
+                    )
+                    && (
+                        !OptimizerPatterns
+                            .Read(local1)
+                            .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
+                    )
+                )
                 {
                     if (_nodeCounter.Count(local2, local1) <= 1)
                     {
                         // PATTERN: [EliminateIteratorUsedAtMostOnce] (Loop $iter:* ^ (NodeType? $iter {Let}) | (Single? (TypeOf (First $iter))) ^ (NoSideEffects? $iter) $ret:* ^ (RefCountZeroOrOne? $ret $iter)) => (Subs $ret $iter (First $iter))
                         if (AllowReplace(XmlILOptimization.EliminateIteratorUsedAtMostOnce, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateIteratorUsedAtMostOnce, local0, Subs(local2, local1, (QilNode)(local1)[0]));
+                            return Replace(
+                                XmlILOptimization.EliminateIteratorUsedAtMostOnce,
+                                local0,
+                                Subs(local2, local1, (QilNode)(local1)[0])
+                            );
                         }
                     }
                 }
@@ -2738,9 +3379,15 @@ namespace System.Xml.Xsl.IlGen
                             if (local5 == local1)
                             {
                                 // PATTERN: [NormalizeLoopConditional] (Loop $iter:* (Conditional $cond:* $left:(Sequence) ^ (Count? $left 0) $iter)) => (Filter $iter (Not $cond))
-                                if (AllowReplace(XmlILOptimization.NormalizeLoopConditional, local0))
+                                if (
+                                    AllowReplace(XmlILOptimization.NormalizeLoopConditional, local0)
+                                )
                                 {
-                                    return Replace(XmlILOptimization.NormalizeLoopConditional, local0, VisitFilter(f.Filter(local1, VisitNot(f.Not(local3)))));
+                                    return Replace(
+                                        XmlILOptimization.NormalizeLoopConditional,
+                                        local0,
+                                        VisitFilter(f.Filter(local1, VisitNot(f.Not(local3))))
+                                    );
                                 }
                             }
                         }
@@ -2761,9 +3408,15 @@ namespace System.Xml.Xsl.IlGen
                             if ((local5).Count == (0))
                             {
                                 // PATTERN: [NormalizeLoopConditional] (Loop $iter:* (Conditional $cond:* $iter $right:(Sequence) ^ (Count? $right 0))) => (Filter $iter $cond)
-                                if (AllowReplace(XmlILOptimization.NormalizeLoopConditional, local0))
+                                if (
+                                    AllowReplace(XmlILOptimization.NormalizeLoopConditional, local0)
+                                )
                                 {
-                                    return Replace(XmlILOptimization.NormalizeLoopConditional, local0, VisitFilter(f.Filter(local1, local3)));
+                                    return Replace(
+                                        XmlILOptimization.NormalizeLoopConditional,
+                                        local0,
+                                        VisitFilter(f.Filter(local1, local3))
+                                    );
                                 }
                             }
                         }
@@ -2786,10 +3439,25 @@ namespace System.Xml.Xsl.IlGen
                                 if (NonPositional(local6, local1))
                                 {
                                     // PATTERN: [NormalizeLoopConditional] (Loop $iter:(For *) (Conditional $cond:* $left:(Sequence) ^ (Count? $left 0) $right:* ^ (NonPositional? $right $iter))) => (Loop $iter2:(For (Filter $iter (Not $cond))) (Subs $right $iter $iter2))
-                                    if (AllowReplace(XmlILOptimization.NormalizeLoopConditional, local0))
+                                    if (
+                                        AllowReplace(
+                                            XmlILOptimization.NormalizeLoopConditional,
+                                            local0
+                                        )
+                                    )
                                     {
-                                        QilNode local7 = VisitFor(f.For(VisitFilter(f.Filter(local1, VisitNot(f.Not(local4))))));
-                                        return Replace(XmlILOptimization.NormalizeLoopConditional, local0, VisitLoop(f.Loop(local7, Subs(local6, local1, local7))));
+                                        QilNode local7 = VisitFor(
+                                            f.For(
+                                                VisitFilter(
+                                                    f.Filter(local1, VisitNot(f.Not(local4)))
+                                                )
+                                            )
+                                        );
+                                        return Replace(
+                                            XmlILOptimization.NormalizeLoopConditional,
+                                            local0,
+                                            VisitLoop(f.Loop(local7, Subs(local6, local1, local7)))
+                                        );
                                     }
                                 }
                             }
@@ -2813,10 +3481,21 @@ namespace System.Xml.Xsl.IlGen
                                 if ((local6).Count == (0))
                                 {
                                     // PATTERN: [NormalizeLoopConditional] (Loop $iter:(For *) (Conditional $cond:* $left:* ^ (NonPositional? $left $iter) $right:(Sequence) ^ (Count? $right 0))) => (Loop $iter2:(For (Filter $iter $cond)) (Subs $left $iter $iter2))
-                                    if (AllowReplace(XmlILOptimization.NormalizeLoopConditional, local0))
+                                    if (
+                                        AllowReplace(
+                                            XmlILOptimization.NormalizeLoopConditional,
+                                            local0
+                                        )
+                                    )
                                     {
-                                        QilNode local7 = VisitFor(f.For(VisitFilter(f.Filter(local1, local4))));
-                                        return Replace(XmlILOptimization.NormalizeLoopConditional, local0, VisitLoop(f.Loop(local7, Subs(local5, local1, local7))));
+                                        QilNode local7 = VisitFor(
+                                            f.For(VisitFilter(f.Filter(local1, local4)))
+                                        );
+                                        return Replace(
+                                            XmlILOptimization.NormalizeLoopConditional,
+                                            local0,
+                                            VisitLoop(f.Loop(local7, Subs(local5, local1, local7)))
+                                        );
                                     }
                                 }
                             }
@@ -2839,7 +3518,11 @@ namespace System.Xml.Xsl.IlGen
                             if (AllowReplace(XmlILOptimization.NormalizeLoopLoop, local0))
                             {
                                 QilNode local6 = VisitFor(f.For(VisitLoop(f.Loop(local1, local4))));
-                                return Replace(XmlILOptimization.NormalizeLoopLoop, local0, VisitLoop(f.Loop(local6, Subs(local5, local3, local6))));
+                                return Replace(
+                                    XmlILOptimization.NormalizeLoopLoop,
+                                    local0,
+                                    VisitLoop(f.Loop(local6, Subs(local5, local3, local6)))
+                                );
                             }
                         }
                     }
@@ -2855,7 +3538,16 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [AnnotateSingletonLoop] $outer:(Loop (For $bind:* ^ (AtMostOne? (TypeOf $bind))) $ret:*) => (InheritPattern $outer $ret {IsDocOrderDistinct}) ^ (InheritPattern $outer $ret {SameDepth}) ^ { }
                         if (AllowReplace(XmlILOptimization.AnnotateSingletonLoop, local0))
                         {
-                            OptimizerPatterns.Inherit((QilNode)(local2), (QilNode)(local0), OptimizerPatternName.IsDocOrderDistinct); OptimizerPatterns.Inherit((QilNode)(local2), (QilNode)(local0), OptimizerPatternName.SameDepth);
+                            OptimizerPatterns.Inherit(
+                                (QilNode)(local2),
+                                (QilNode)(local0),
+                                OptimizerPatternName.IsDocOrderDistinct
+                            );
+                            OptimizerPatterns.Inherit(
+                                (QilNode)(local2),
+                                (QilNode)(local0),
+                                OptimizerPatternName.SameDepth
+                            );
                         }
                     }
                 }
@@ -2867,7 +3559,9 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [AnnotateRootLoop] $outer:(Loop * $ret:* ^ (StepPattern? $ret {Root})) => (AddPattern $outer {SameDepth}) ^ { }
                     if (AllowReplace(XmlILOptimization.AnnotateRootLoop, local0))
                     {
-                        OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.SameDepth);
+                        OptimizerPatterns
+                            .Write((QilNode)(local0))
+                            .AddPattern(OptimizerPatternName.SameDepth);
                     }
                 }
             }
@@ -2876,14 +3570,38 @@ namespace System.Xml.Xsl.IlGen
                 if (local1.NodeType == QilNodeType.For)
                 {
                     QilNode local3 = local1[0];
-                    if (OptimizerPatterns.Read((QilNode)(local3)).MatchesPattern(OptimizerPatternName.SameDepth))
+                    if (
+                        OptimizerPatterns
+                            .Read((QilNode)(local3))
+                            .MatchesPattern(OptimizerPatternName.SameDepth)
+                    )
                     {
-                        if (((IsStepPattern(local2, QilNodeType.Content)) || (IsStepPattern(local2, QilNodeType.Union))) && ((local1) == (OptimizerPatterns.Read((QilNode)(local2)).GetArgument(OptimizerPatternArgument.StepInput))))
+                        if (
+                            (
+                                (IsStepPattern(local2, QilNodeType.Content))
+                                || (IsStepPattern(local2, QilNodeType.Union))
+                            )
+                            && (
+                                (local1)
+                                == (
+                                    OptimizerPatterns
+                                        .Read((QilNode)(local2))
+                                        .GetArgument(OptimizerPatternArgument.StepInput)
+                                )
+                            )
+                        )
                         {
                             // PATTERN: [AnnotateContentLoop] $outer:(Loop $iter:(For $bind:* ^ (Pattern? $bind {SameDepth})) $ret:* ^ (StepPattern? $ret {Content}) | (StepPattern? $ret {Union}) ^ (Equal? $iter (Argument $ret {StepInput}))) => (AddPattern $outer {SameDepth}) ^ (InheritPattern $outer $bind {IsDocOrderDistinct}) ^ { }
                             if (AllowReplace(XmlILOptimization.AnnotateContentLoop, local0))
                             {
-                                OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.SameDepth); OptimizerPatterns.Inherit((QilNode)(local3), (QilNode)(local0), OptimizerPatternName.IsDocOrderDistinct);
+                                OptimizerPatterns
+                                    .Write((QilNode)(local0))
+                                    .AddPattern(OptimizerPatternName.SameDepth);
+                                OptimizerPatterns.Inherit(
+                                    (QilNode)(local3),
+                                    (QilNode)(local0),
+                                    OptimizerPatternName.IsDocOrderDistinct
+                                );
                             }
                         }
                     }
@@ -2894,12 +3612,41 @@ namespace System.Xml.Xsl.IlGen
                 if (local1.NodeType == QilNodeType.For)
                 {
                     QilNode local3 = local1[0];
-                    if ((((IsStepPattern(local2, QilNodeType.Attribute)) || (IsStepPattern(local2, QilNodeType.XPathNamespace))) || (OptimizerPatterns.Read((QilNode)(local2)).MatchesPattern(OptimizerPatternName.FilterAttributeKind))) && ((local1) == (OptimizerPatterns.Read((QilNode)(local2)).GetArgument(OptimizerPatternArgument.StepInput))))
+                    if (
+                        (
+                            (
+                                (IsStepPattern(local2, QilNodeType.Attribute))
+                                || (IsStepPattern(local2, QilNodeType.XPathNamespace))
+                            )
+                            || (
+                                OptimizerPatterns
+                                    .Read((QilNode)(local2))
+                                    .MatchesPattern(OptimizerPatternName.FilterAttributeKind)
+                            )
+                        )
+                        && (
+                            (local1)
+                            == (
+                                OptimizerPatterns
+                                    .Read((QilNode)(local2))
+                                    .GetArgument(OptimizerPatternArgument.StepInput)
+                            )
+                        )
+                    )
                     {
                         // PATTERN: [AnnotateAttrNmspLoop] $outer:(Loop $iter:(For $bind:*) $ret:* ^ (StepPattern? $ret {Attribute}) | (StepPattern? $ret {XPathNamespace}) | (Pattern? $ret {FilterAttributeKind}) ^ (Equal? $iter (Argument $ret {StepInput}))) => (InheritPattern $outer $bind {SameDepth}) ^ (InheritPattern $outer $bind {IsDocOrderDistinct}) ^ { }
                         if (AllowReplace(XmlILOptimization.AnnotateAttrNmspLoop, local0))
                         {
-                            OptimizerPatterns.Inherit((QilNode)(local3), (QilNode)(local0), OptimizerPatternName.SameDepth); OptimizerPatterns.Inherit((QilNode)(local3), (QilNode)(local0), OptimizerPatternName.IsDocOrderDistinct);
+                            OptimizerPatterns.Inherit(
+                                (QilNode)(local3),
+                                (QilNode)(local0),
+                                OptimizerPatternName.SameDepth
+                            );
+                            OptimizerPatterns.Inherit(
+                                (QilNode)(local3),
+                                (QilNode)(local0),
+                                OptimizerPatternName.IsDocOrderDistinct
+                            );
                         }
                     }
                 }
@@ -2909,14 +3656,35 @@ namespace System.Xml.Xsl.IlGen
                 if (local1.NodeType == QilNodeType.For)
                 {
                     QilNode local3 = local1[0];
-                    if (OptimizerPatterns.Read((QilNode)(local3)).MatchesPattern(OptimizerPatternName.SameDepth))
+                    if (
+                        OptimizerPatterns
+                            .Read((QilNode)(local3))
+                            .MatchesPattern(OptimizerPatternName.SameDepth)
+                    )
                     {
-                        if (((IsStepPattern(local2, QilNodeType.Descendant)) || (IsStepPattern(local2, QilNodeType.DescendantOrSelf))) && ((local1) == (OptimizerPatterns.Read((QilNode)(local2)).GetArgument(OptimizerPatternArgument.StepInput))))
+                        if (
+                            (
+                                (IsStepPattern(local2, QilNodeType.Descendant))
+                                || (IsStepPattern(local2, QilNodeType.DescendantOrSelf))
+                            )
+                            && (
+                                (local1)
+                                == (
+                                    OptimizerPatterns
+                                        .Read((QilNode)(local2))
+                                        .GetArgument(OptimizerPatternArgument.StepInput)
+                                )
+                            )
+                        )
                         {
                             // PATTERN: [AnnotateDescendantLoop] $outer:(Loop $iter:(For $bind:* ^ (Pattern? $bind {SameDepth})) $ret:* ^ (StepPattern? $ret {Descendant}) | (StepPattern? $ret {DescendantOrSelf}) ^ (Equal? $iter (Argument $ret {StepInput}))) => (InheritPattern $outer $bind {IsDocOrderDistinct}) ^ { }
                             if (AllowReplace(XmlILOptimization.AnnotateDescendantLoop, local0))
                             {
-                                OptimizerPatterns.Inherit((QilNode)(local3), (QilNode)(local0), OptimizerPatternName.IsDocOrderDistinct);
+                                OptimizerPatterns.Inherit(
+                                    (QilNode)(local3),
+                                    (QilNode)(local0),
+                                    OptimizerPatternName.IsDocOrderDistinct
+                                );
                             }
                         }
                     }
@@ -2936,7 +3704,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [FoldNone] (Filter $i:* ^ (None? (TypeOf $i)) *) => (Nop (First $i))
                     if (AllowReplace(XmlILOptimization.FoldNone, local0))
                     {
-                        return Replace(XmlILOptimization.FoldNone, local0, VisitNop(f.Nop((QilNode)(local1)[0])));
+                        return Replace(
+                            XmlILOptimization.FoldNone,
+                            local0,
+                            VisitNop(f.Nop((QilNode)(local1)[0]))
+                        );
                     }
                 }
             }
@@ -2947,20 +3719,32 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [FoldNone] (Filter $i:* $w:* ^ (None? (TypeOf $w))) => (Loop $i $w)
                     if (AllowReplace(XmlILOptimization.FoldNone, local0))
                     {
-                        return Replace(XmlILOptimization.FoldNone, local0, VisitLoop(f.Loop(local1, local2)));
+                        return Replace(
+                            XmlILOptimization.FoldNone,
+                            local0,
+                            VisitLoop(f.Loop(local1, local2))
+                        );
                     }
                 }
             }
             if (this[XmlILOptimization.EliminateFilter])
             {
-                if (!OptimizerPatterns.Read(local1).MatchesPattern(OptimizerPatternName.MaybeSideEffects))
+                if (
+                    !OptimizerPatterns
+                        .Read(local1)
+                        .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
+                )
                 {
                     if (local2.NodeType == QilNodeType.False)
                     {
                         // PATTERN: [EliminateFilter] (Filter $i:* ^ (NoSideEffects? $i) (False)) => (Sequence)
                         if (AllowReplace(XmlILOptimization.EliminateFilter, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateFilter, local0, VisitSequence(f.Sequence()));
+                            return Replace(
+                                XmlILOptimization.EliminateFilter,
+                                local0,
+                                VisitSequence(f.Sequence())
+                            );
                         }
                     }
                 }
@@ -2972,7 +3756,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [EliminateFilter] (Filter $i:* (True)) => (First $i)
                     if (AllowReplace(XmlILOptimization.EliminateFilter, local0))
                     {
-                        return Replace(XmlILOptimization.EliminateFilter, local0, (QilNode)(local1)[0]);
+                        return Replace(
+                            XmlILOptimization.EliminateFilter,
+                            local0,
+                            (QilNode)(local1)[0]
+                        );
                     }
                 }
             }
@@ -2996,7 +3784,8 @@ namespace System.Xml.Xsl.IlGen
                                 {
                                     if (local7.NodeType == QilNodeType.LiteralType)
                                     {
-                                        XmlQueryType local8 = (XmlQueryType)((QilLiteral)local7).Value!;
+                                        XmlQueryType local8 = (XmlQueryType)
+                                            ((QilLiteral)local7).Value!;
                                         if ((local8) == (XmlQueryTypeFactory.Attribute))
                                         {
                                             if (local9.NodeType == QilNodeType.Eq)
@@ -3008,12 +3797,26 @@ namespace System.Xml.Xsl.IlGen
                                                     QilNode local11 = local10[0];
                                                     if (local11 == local1)
                                                     {
-                                                        if (local12.NodeType == QilNodeType.LiteralQName)
+                                                        if (
+                                                            local12.NodeType
+                                                            == QilNodeType.LiteralQName
+                                                        )
                                                         {
                                                             // PATTERN: [NormalizeAttribute] (Filter $iter:(For (Content $input:*)) (And (IsType $iter (LiteralType $typ:* ^ (Equal? $typ (ConstructType {Attribute})))) (Eq (NameOf $iter) $qname:(LiteralQName * * *)))) => (Attribute $input $qname)
-                                                            if (AllowReplace(XmlILOptimization.NormalizeAttribute, local0))
+                                                            if (
+                                                                AllowReplace(
+                                                                    XmlILOptimization.NormalizeAttribute,
+                                                                    local0
+                                                                )
+                                                            )
                                                             {
-                                                                return Replace(XmlILOptimization.NormalizeAttribute, local0, VisitAttribute(f.Attribute(local4, local12)));
+                                                                return Replace(
+                                                                    XmlILOptimization.NormalizeAttribute,
+                                                                    local0,
+                                                                    VisitAttribute(
+                                                                        f.Attribute(local4, local12)
+                                                                    )
+                                                                );
                                                             }
                                                         }
                                                     }
@@ -3042,7 +3845,18 @@ namespace System.Xml.Xsl.IlGen
                             if (AllowReplace(XmlILOptimization.CommuteFilterLoop, local0))
                             {
                                 QilNode local6 = VisitFor(f.For(local5));
-                                return Replace(XmlILOptimization.CommuteFilterLoop, local0, VisitLoop(f.Loop(local4, VisitFilter(f.Filter(local6, Subs(local2, local1, local6))))));
+                                return Replace(
+                                    XmlILOptimization.CommuteFilterLoop,
+                                    local0,
+                                    VisitLoop(
+                                        f.Loop(
+                                            local4,
+                                            VisitFilter(
+                                                f.Filter(local6, Subs(local2, local1, local6))
+                                            )
+                                        )
+                                    )
+                                );
                             }
                         }
                     }
@@ -3050,14 +3864,37 @@ namespace System.Xml.Xsl.IlGen
             }
             if (this[XmlILOptimization.NormalizeLoopInvariant])
             {
-                if ((!OptimizerPatterns.Read(local1).MatchesPattern(OptimizerPatternName.MaybeSideEffects)) && (!(((QilNode)(local1)[0]).NodeType == QilNodeType.OptimizeBarrier)))
+                if (
+                    (
+                        !OptimizerPatterns
+                            .Read(local1)
+                            .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
+                    ) && (!(((QilNode)(local1)[0]).NodeType == QilNodeType.OptimizeBarrier))
+                )
                 {
-                    if ((!(DependsOn(local2, local1))) && (!OptimizerPatterns.Read(local2).MatchesPattern(OptimizerPatternName.MaybeSideEffects)))
+                    if (
+                        (!(DependsOn(local2, local1)))
+                        && (
+                            !OptimizerPatterns
+                                .Read(local2)
+                                .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
+                        )
+                    )
                     {
                         // PATTERN: [NormalizeLoopInvariant] (Filter $iter:* ^ (NoSideEffects? $iter) ^ ~((NodeType? (First $iter) {OptimizeBarrier})) $cond:* ^ ~($cond >> $iter) ^ (NoSideEffects? $cond)) => (Conditional $cond (First $iter) (Sequence))
                         if (AllowReplace(XmlILOptimization.NormalizeLoopInvariant, local0))
                         {
-                            return Replace(XmlILOptimization.NormalizeLoopInvariant, local0, VisitConditional(f.Conditional(local2, (QilNode)(local1)[0], VisitSequence(f.Sequence()))));
+                            return Replace(
+                                XmlILOptimization.NormalizeLoopInvariant,
+                                local0,
+                                VisitConditional(
+                                    f.Conditional(
+                                        local2,
+                                        (QilNode)(local1)[0],
+                                        VisitSequence(f.Sequence())
+                                    )
+                                )
+                            );
                         }
                     }
                 }
@@ -3079,7 +3916,12 @@ namespace System.Xml.Xsl.IlGen
                                 // PATTERN: [AnnotateMaxPositionEq] $outer:(Filter $iter:* (Eq (PositionOf $iter) (LiteralInt32 $num:*))) => (AddPattern $iter {MaxPosition}) ^ (AddArgument $iter {MaxPosition} $num) ^ { }
                                 if (AllowReplace(XmlILOptimization.AnnotateMaxPositionEq, local0))
                                 {
-                                    OptimizerPatterns.Write((QilNode)(local1)).AddPattern(OptimizerPatternName.MaxPosition); OptimizerPatterns.Write((QilNode)(local1)).AddArgument(OptimizerPatternArgument.MaxPosition, local6);
+                                    OptimizerPatterns
+                                        .Write((QilNode)(local1))
+                                        .AddPattern(OptimizerPatternName.MaxPosition);
+                                    OptimizerPatterns
+                                        .Write((QilNode)(local1))
+                                        .AddArgument(OptimizerPatternArgument.MaxPosition, local6);
                                 }
                             }
                         }
@@ -3103,7 +3945,12 @@ namespace System.Xml.Xsl.IlGen
                                 // PATTERN: [AnnotateMaxPositionLe] $outer:(Filter $iter:* (Le (PositionOf $iter) (LiteralInt32 $num:*))) => (AddPattern $iter {MaxPosition}) ^ (AddArgument $iter {MaxPosition} $num) ^ { }
                                 if (AllowReplace(XmlILOptimization.AnnotateMaxPositionLe, local0))
                                 {
-                                    OptimizerPatterns.Write((QilNode)(local1)).AddPattern(OptimizerPatternName.MaxPosition); OptimizerPatterns.Write((QilNode)(local1)).AddArgument(OptimizerPatternArgument.MaxPosition, local6);
+                                    OptimizerPatterns
+                                        .Write((QilNode)(local1))
+                                        .AddPattern(OptimizerPatternName.MaxPosition);
+                                    OptimizerPatterns
+                                        .Write((QilNode)(local1))
+                                        .AddArgument(OptimizerPatternArgument.MaxPosition, local6);
                                 }
                             }
                         }
@@ -3127,7 +3974,15 @@ namespace System.Xml.Xsl.IlGen
                                 // PATTERN: [AnnotateMaxPositionLt] $outer:(Filter $iter:* (Lt (PositionOf $iter) (LiteralInt32 $num:*))) => (AddPattern $iter {MaxPosition}) ^ (AddArgument $iter {MaxPosition} { {$num} - 1 }) ^ { }
                                 if (AllowReplace(XmlILOptimization.AnnotateMaxPositionLt, local0))
                                 {
-                                    OptimizerPatterns.Write((QilNode)(local1)).AddPattern(OptimizerPatternName.MaxPosition); OptimizerPatterns.Write((QilNode)(local1)).AddArgument(OptimizerPatternArgument.MaxPosition, local6 - 1);
+                                    OptimizerPatterns
+                                        .Write((QilNode)(local1))
+                                        .AddPattern(OptimizerPatternName.MaxPosition);
+                                    OptimizerPatterns
+                                        .Write((QilNode)(local1))
+                                        .AddArgument(
+                                            OptimizerPatternArgument.MaxPosition,
+                                            local6 - 1
+                                        );
                                 }
                             }
                         }
@@ -3142,7 +3997,21 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [AnnotateFilter] $outer:(Filter $iter:(For $bind:*) *) => (InheritPattern $outer $bind {Step}) ^ (InheritPattern $outer $bind {IsDocOrderDistinct}) ^ (InheritPattern $outer $bind {SameDepth}) ^ { }
                     if (AllowReplace(XmlILOptimization.AnnotateFilter, local0))
                     {
-                        OptimizerPatterns.Inherit((QilNode)(local3), (QilNode)(local0), OptimizerPatternName.Step); OptimizerPatterns.Inherit((QilNode)(local3), (QilNode)(local0), OptimizerPatternName.IsDocOrderDistinct); OptimizerPatterns.Inherit((QilNode)(local3), (QilNode)(local0), OptimizerPatternName.SameDepth);
+                        OptimizerPatterns.Inherit(
+                            (QilNode)(local3),
+                            (QilNode)(local0),
+                            OptimizerPatternName.Step
+                        );
+                        OptimizerPatterns.Inherit(
+                            (QilNode)(local3),
+                            (QilNode)(local0),
+                            OptimizerPatternName.IsDocOrderDistinct
+                        );
+                        OptimizerPatterns.Inherit(
+                            (QilNode)(local3),
+                            (QilNode)(local0),
+                            OptimizerPatternName.SameDepth
+                        );
                     }
                 }
             }
@@ -3151,7 +4020,11 @@ namespace System.Xml.Xsl.IlGen
                 if (local1.NodeType == QilNodeType.For)
                 {
                     QilNode local3 = local1[0];
-                    if (OptimizerPatterns.Read((QilNode)(local3)).MatchesPattern(OptimizerPatternName.Axis))
+                    if (
+                        OptimizerPatterns
+                            .Read((QilNode)(local3))
+                            .MatchesPattern(OptimizerPatternName.Axis)
+                    )
                     {
                         if (local2.NodeType == QilNodeType.And)
                         {
@@ -3165,7 +4038,8 @@ namespace System.Xml.Xsl.IlGen
                                 {
                                     if (local6.NodeType == QilNodeType.LiteralType)
                                     {
-                                        XmlQueryType local7 = (XmlQueryType)((QilLiteral)local6).Value!;
+                                        XmlQueryType local7 = (XmlQueryType)
+                                            ((QilLiteral)local6).Value!;
                                         if ((local7) == (XmlQueryTypeFactory.Element))
                                         {
                                             if (local8.NodeType == QilNodeType.Eq)
@@ -3177,12 +4051,30 @@ namespace System.Xml.Xsl.IlGen
                                                     QilNode local10 = local9[0];
                                                     if (local10 == local1)
                                                     {
-                                                        if (local11.NodeType == QilNodeType.LiteralQName)
+                                                        if (
+                                                            local11.NodeType
+                                                            == QilNodeType.LiteralQName
+                                                        )
                                                         {
                                                             // PATTERN: [AnnotateFilterElements] $outer:(Filter $iter:(For $bind:* ^ (Pattern? $bind {Axis})) (And (IsType $iter (LiteralType $typ:* ^ (Equal? $typ (ConstructType {Element})))) (Eq (NameOf $iter) $qname:(LiteralQName * * *)))) => (AddPattern $outer {FilterElements}) ^ (AddArgument $outer {ElementQName} $qname) ^ { }
-                                                            if (AllowReplace(XmlILOptimization.AnnotateFilterElements, local0))
+                                                            if (
+                                                                AllowReplace(
+                                                                    XmlILOptimization.AnnotateFilterElements,
+                                                                    local0
+                                                                )
+                                                            )
                                                             {
-                                                                OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.FilterElements); OptimizerPatterns.Write((QilNode)(local0)).AddArgument(OptimizerPatternArgument.ElementQName, local11);
+                                                                OptimizerPatterns
+                                                                    .Write((QilNode)(local0))
+                                                                    .AddPattern(
+                                                                        OptimizerPatternName.FilterElements
+                                                                    );
+                                                                OptimizerPatterns
+                                                                    .Write((QilNode)(local0))
+                                                                    .AddArgument(
+                                                                        OptimizerPatternArgument.ElementQName,
+                                                                        local11
+                                                                    );
                                                             }
                                                         }
                                                     }
@@ -3201,7 +4093,11 @@ namespace System.Xml.Xsl.IlGen
                 if (local1.NodeType == QilNodeType.For)
                 {
                     QilNode local3 = local1[0];
-                    if (OptimizerPatterns.Read((QilNode)(local3)).MatchesPattern(OptimizerPatternName.Axis))
+                    if (
+                        OptimizerPatterns
+                            .Read((QilNode)(local3))
+                            .MatchesPattern(OptimizerPatternName.Axis)
+                    )
                     {
                         if (local2.NodeType == QilNodeType.IsType)
                         {
@@ -3215,9 +4111,22 @@ namespace System.Xml.Xsl.IlGen
                                     if (MatchesContentTest(local6))
                                     {
                                         // PATTERN: [AnnotateFilterContentKind] $outer:(Filter $iter:(For $bind:* ^ (Pattern? $bind {Axis})) (IsType $iter (LiteralType $kind:* ^ (ContentTest? $kind)))) => (AddPattern $outer {FilterContentKind}) ^ (AddArgument $outer {KindTestType} $kind) ^ { }
-                                        if (AllowReplace(XmlILOptimization.AnnotateFilterContentKind, local0))
+                                        if (
+                                            AllowReplace(
+                                                XmlILOptimization.AnnotateFilterContentKind,
+                                                local0
+                                            )
+                                        )
                                         {
-                                            OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.FilterContentKind); OptimizerPatterns.Write((QilNode)(local0)).AddArgument(OptimizerPatternArgument.KindTestType, local6);
+                                            OptimizerPatterns
+                                                .Write((QilNode)(local0))
+                                                .AddPattern(OptimizerPatternName.FilterContentKind);
+                                            OptimizerPatterns
+                                                .Write((QilNode)(local0))
+                                                .AddArgument(
+                                                    OptimizerPatternArgument.KindTestType,
+                                                    local6
+                                                );
                                         }
                                     }
                                 }
@@ -3245,9 +4154,18 @@ namespace System.Xml.Xsl.IlGen
                                     if ((local7) == (XmlQueryTypeFactory.Attribute))
                                     {
                                         // PATTERN: [AnnotateFilterAttributeKind] $outer:(Filter $iter:(For (Content *)) (IsType $iter (LiteralType $kind:*) ^ (Equal? $kind (ConstructType {Attribute})))) => (AddPattern $outer {FilterAttributeKind}) ^ { }
-                                        if (AllowReplace(XmlILOptimization.AnnotateFilterAttributeKind, local0))
+                                        if (
+                                            AllowReplace(
+                                                XmlILOptimization.AnnotateFilterAttributeKind,
+                                                local0
+                                            )
+                                        )
                                         {
-                                            OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.FilterAttributeKind);
+                                            OptimizerPatterns
+                                                .Write((QilNode)(local0))
+                                                .AddPattern(
+                                                    OptimizerPatternName.FilterAttributeKind
+                                                );
                                         }
                                     }
                                 }
@@ -3272,7 +4190,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [FoldNone] (Sort $i:* ^ (None? (TypeOf $i)) *) => (Nop (First $i))
                     if (AllowReplace(XmlILOptimization.FoldNone, local0))
                     {
-                        return Replace(XmlILOptimization.FoldNone, local0, VisitNop(f.Nop((QilNode)(local1)[0])));
+                        return Replace(
+                            XmlILOptimization.FoldNone,
+                            local0,
+                            VisitNop(f.Nop((QilNode)(local1)[0]))
+                        );
                     }
                 }
             }
@@ -3286,7 +4208,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [EliminateSort] (Sort (For $bind:* ^ (Single? (TypeOf $bind))) *) => (Nop $bind)
                         if (AllowReplace(XmlILOptimization.EliminateSort, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateSort, local0, VisitNop(f.Nop(local3)));
+                            return Replace(
+                                XmlILOptimization.EliminateSort,
+                                local0,
+                                VisitNop(f.Nop(local3))
+                            );
                         }
                     }
                 }
@@ -3307,12 +4233,19 @@ namespace System.Xml.Xsl.IlGen
                     if (local4.NodeType == QilNodeType.LiteralType)
                     {
                         XmlQueryType local5 = (XmlQueryType)((QilLiteral)local4).Value!;
-                        if ((((local3).XmlType) == (XmlQueryTypeFactory.IntX)) && ((local5) == (XmlQueryTypeFactory.DoubleX)))
+                        if (
+                            (((local3).XmlType) == (XmlQueryTypeFactory.IntX))
+                            && ((local5) == (XmlQueryTypeFactory.DoubleX))
+                        )
                         {
                             // PATTERN: [NormalizeSortXsltConvert] (SortKey (XsltConvert $expr:* (LiteralType $typ:*)) ^ (Equal? (TypeOf $expr) (ConstructType {IntX})) ^ (Equal? $typ (ConstructType {DoubleX})) $coll:*) => (SortKey $expr $coll)
                             if (AllowReplace(XmlILOptimization.NormalizeSortXsltConvert, local0))
                             {
-                                return Replace(XmlILOptimization.NormalizeSortXsltConvert, local0, VisitSortKey(f.SortKey(local3, local2)));
+                                return Replace(
+                                    XmlILOptimization.NormalizeSortXsltConvert,
+                                    local0,
+                                    VisitSortKey(f.SortKey(local3, local2))
+                                );
                             }
                         }
                     }
@@ -3366,13 +4299,59 @@ namespace System.Xml.Xsl.IlGen
                                 {
                                     QilNode local8 = local7[0];
                                     QilNode local9 = local7[1];
-                                    if (((OptimizerPatterns.Read((QilNode)(local7)).MatchesPattern(OptimizerPatternName.FilterElements)) || (OptimizerPatterns.Read((QilNode)(local7)).MatchesPattern(OptimizerPatternName.FilterContentKind))) && (IsStepPattern(local7, QilNodeType.Content)))
+                                    if (
+                                        (
+                                            (
+                                                OptimizerPatterns
+                                                    .Read((QilNode)(local7))
+                                                    .MatchesPattern(
+                                                        OptimizerPatternName.FilterElements
+                                                    )
+                                            )
+                                            || (
+                                                OptimizerPatterns
+                                                    .Read((QilNode)(local7))
+                                                    .MatchesPattern(
+                                                        OptimizerPatternName.FilterContentKind
+                                                    )
+                                            )
+                                        ) && (IsStepPattern(local7, QilNodeType.Content))
+                                    )
                                     {
                                         // PATTERN: [FoldNamedDescendants] (DocOrderDistinct $path:(Loop $iter1:(For (Loop $iter2:* $ret2:(DescendantOrSelf $input:*))) $ret1:(Filter $iter3:* $cond3:*) ^ (Pattern? $ret1 {FilterElements}) | (Pattern? $ret1 {FilterContentKind}) ^ (StepPattern? $ret1 {Content}))) => (DocOrderDistinct (Loop $iter2 (Filter $iterNew:(For (Descendant $input)) (Subs $cond3 $iter3 $iterNew))))
-                                        if (AllowReplace(XmlILOptimization.FoldNamedDescendants, local0))
+                                        if (
+                                            AllowReplace(
+                                                XmlILOptimization.FoldNamedDescendants,
+                                                local0
+                                            )
+                                        )
                                         {
-                                            QilNode local10 = VisitFor(f.For(VisitDescendant(f.Descendant(local6))));
-                                            return Replace(XmlILOptimization.FoldNamedDescendants, local0, VisitDocOrderDistinct(f.DocOrderDistinct(VisitLoop(f.Loop(local4, VisitFilter(f.Filter(local10, Subs(local9, local8, local10))))))));
+                                            QilNode local10 = VisitFor(
+                                                f.For(VisitDescendant(f.Descendant(local6)))
+                                            );
+                                            return Replace(
+                                                XmlILOptimization.FoldNamedDescendants,
+                                                local0,
+                                                VisitDocOrderDistinct(
+                                                    f.DocOrderDistinct(
+                                                        VisitLoop(
+                                                            f.Loop(
+                                                                local4,
+                                                                VisitFilter(
+                                                                    f.Filter(
+                                                                        local10,
+                                                                        Subs(
+                                                                            local9,
+                                                                            local8,
+                                                                            local10
+                                                                        )
+                                                                    )
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            );
                                         }
                                     }
                                 }
@@ -3397,13 +4376,38 @@ namespace System.Xml.Xsl.IlGen
                             {
                                 QilNode local6 = local5[0];
                                 QilNode local7 = local5[1];
-                                if (((OptimizerPatterns.Read((QilNode)(local5)).MatchesPattern(OptimizerPatternName.FilterElements)) || (OptimizerPatterns.Read((QilNode)(local5)).MatchesPattern(OptimizerPatternName.FilterContentKind))) && (IsStepPattern(local5, QilNodeType.Content)))
+                                if (
+                                    (
+                                        (
+                                            OptimizerPatterns
+                                                .Read((QilNode)(local5))
+                                                .MatchesPattern(OptimizerPatternName.FilterElements)
+                                        )
+                                        || (
+                                            OptimizerPatterns
+                                                .Read((QilNode)(local5))
+                                                .MatchesPattern(
+                                                    OptimizerPatternName.FilterContentKind
+                                                )
+                                        )
+                                    ) && (IsStepPattern(local5, QilNodeType.Content))
+                                )
                                 {
                                     // PATTERN: [FoldNamedDescendants] (DocOrderDistinct $path:(Loop $iter1:(For (DescendantOrSelf $input:*)) $ret1:(Filter $iter2:* $cond2:*) ^ (Pattern? $ret1 {FilterElements}) | (Pattern? $ret1 {FilterContentKind}) ^ (StepPattern? $ret1 {Content}))) => (Filter $iterNew:(For (Descendant $input)) (Subs $cond2 $iter2 $iterNew))
-                                    if (AllowReplace(XmlILOptimization.FoldNamedDescendants, local0))
+                                    if (
+                                        AllowReplace(XmlILOptimization.FoldNamedDescendants, local0)
+                                    )
                                     {
-                                        QilNode local8 = VisitFor(f.For(VisitDescendant(f.Descendant(local4))));
-                                        return Replace(XmlILOptimization.FoldNamedDescendants, local0, VisitFilter(f.Filter(local8, Subs(local7, local6, local8))));
+                                        QilNode local8 = VisitFor(
+                                            f.For(VisitDescendant(f.Descendant(local4)))
+                                        );
+                                        return Replace(
+                                            XmlILOptimization.FoldNamedDescendants,
+                                            local0,
+                                            VisitFilter(
+                                                f.Filter(local8, Subs(local7, local6, local8))
+                                            )
+                                        );
                                     }
                                 }
                             }
@@ -3420,15 +4424,53 @@ namespace System.Xml.Xsl.IlGen
                     if (local2.NodeType == QilNodeType.For)
                     {
                         QilNode local3 = local2[0];
-                        if (!OptimizerPatterns.Read(local2).MatchesPattern(OptimizerPatternName.IsPositional))
+                        if (
+                            !OptimizerPatterns
+                                .Read(local2)
+                                .MatchesPattern(OptimizerPatternName.IsPositional)
+                        )
                         {
-                            if (((!(OptimizerPatterns.Read((QilNode)(local1)).MatchesPattern(OptimizerPatternName.FilterElements))) && (!(OptimizerPatterns.Read((QilNode)(local1)).MatchesPattern(OptimizerPatternName.FilterContentKind)))) && (!(OptimizerPatterns.Read((QilNode)(local1)).MatchesPattern(OptimizerPatternName.FilterAttributeKind))))
+                            if (
+                                (
+                                    (
+                                        !(
+                                            OptimizerPatterns
+                                                .Read((QilNode)(local1))
+                                                .MatchesPattern(OptimizerPatternName.FilterElements)
+                                        )
+                                    )
+                                    && (
+                                        !(
+                                            OptimizerPatterns
+                                                .Read((QilNode)(local1))
+                                                .MatchesPattern(
+                                                    OptimizerPatternName.FilterContentKind
+                                                )
+                                        )
+                                    )
+                                )
+                                && (
+                                    !(
+                                        OptimizerPatterns
+                                            .Read((QilNode)(local1))
+                                            .MatchesPattern(
+                                                OptimizerPatternName.FilterAttributeKind
+                                            )
+                                    )
+                                )
+                            )
                             {
                                 // PATTERN: [CommuteDodFilter] (DocOrderDistinct $filter:(Filter $iter:(For $bind:*) ^ (NonPositionalIterator? $iter) $cond:*) ^ ~((Pattern? $filter {FilterElements})) ^ ~((Pattern? $filter {FilterContentKind})) ^ ~((Pattern? $filter {FilterAttributeKind}))) => (Filter $iterNew:(For (DocOrderDistinct $bind)) (Subs $cond $iter $iterNew))
                                 if (AllowReplace(XmlILOptimization.CommuteDodFilter, local0))
                                 {
-                                    QilNode local5 = VisitFor(f.For(VisitDocOrderDistinct(f.DocOrderDistinct(local3))));
-                                    return Replace(XmlILOptimization.CommuteDodFilter, local0, VisitFilter(f.Filter(local5, Subs(local4, local2, local5))));
+                                    QilNode local5 = VisitFor(
+                                        f.For(VisitDocOrderDistinct(f.DocOrderDistinct(local3)))
+                                    );
+                                    return Replace(
+                                        XmlILOptimization.CommuteDodFilter,
+                                        local0,
+                                        VisitFilter(f.Filter(local5, Subs(local4, local2, local5)))
+                                    );
                                 }
                             }
                         }
@@ -3448,17 +4490,67 @@ namespace System.Xml.Xsl.IlGen
                         if (local4.NodeType == QilNodeType.For)
                         {
                             QilNode local5 = local4[0];
-                            if (!OptimizerPatterns.Read(local4).MatchesPattern(OptimizerPatternName.IsPositional))
+                            if (
+                                !OptimizerPatterns
+                                    .Read(local4)
+                                    .MatchesPattern(OptimizerPatternName.IsPositional)
+                            )
                             {
                                 if (!(DependsOn(local6, local2)))
                                 {
-                                    if (((!(OptimizerPatterns.Read((QilNode)(local3)).MatchesPattern(OptimizerPatternName.FilterElements))) && (!(OptimizerPatterns.Read((QilNode)(local3)).MatchesPattern(OptimizerPatternName.FilterContentKind)))) && (!(OptimizerPatterns.Read((QilNode)(local3)).MatchesPattern(OptimizerPatternName.FilterAttributeKind))))
+                                    if (
+                                        (
+                                            (
+                                                !(
+                                                    OptimizerPatterns
+                                                        .Read((QilNode)(local3))
+                                                        .MatchesPattern(
+                                                            OptimizerPatternName.FilterElements
+                                                        )
+                                                )
+                                            )
+                                            && (
+                                                !(
+                                                    OptimizerPatterns
+                                                        .Read((QilNode)(local3))
+                                                        .MatchesPattern(
+                                                            OptimizerPatternName.FilterContentKind
+                                                        )
+                                                )
+                                            )
+                                        )
+                                        && (
+                                            !(
+                                                OptimizerPatterns
+                                                    .Read((QilNode)(local3))
+                                                    .MatchesPattern(
+                                                        OptimizerPatternName.FilterAttributeKind
+                                                    )
+                                            )
+                                        )
+                                    )
                                     {
                                         // PATTERN: [CommuteDodFilter] (DocOrderDistinct (Loop $iter1:* $ret1:(Filter $iter2:(For $bind2:*) ^ (NonPositionalIterator? $iter2) $cond2:* ^ ~($cond2 >> $iter1)) ^ ~((Pattern? $ret1 {FilterElements})) ^ ~((Pattern? $ret1 {FilterContentKind})) ^ ~((Pattern? $ret1 {FilterAttributeKind})))) => (Filter $iterNew:(For (DocOrderDistinct (Loop $iter1 $bind2))) (Subs $cond2 $iter2 $iterNew))
-                                        if (AllowReplace(XmlILOptimization.CommuteDodFilter, local0))
+                                        if (
+                                            AllowReplace(XmlILOptimization.CommuteDodFilter, local0)
+                                        )
                                         {
-                                            QilNode local7 = VisitFor(f.For(VisitDocOrderDistinct(f.DocOrderDistinct(VisitLoop(f.Loop(local2, local5))))));
-                                            return Replace(XmlILOptimization.CommuteDodFilter, local0, VisitFilter(f.Filter(local7, Subs(local6, local4, local7))));
+                                            QilNode local7 = VisitFor(
+                                                f.For(
+                                                    VisitDocOrderDistinct(
+                                                        f.DocOrderDistinct(
+                                                            VisitLoop(f.Loop(local2, local5))
+                                                        )
+                                                    )
+                                                )
+                                            );
+                                            return Replace(
+                                                XmlILOptimization.CommuteDodFilter,
+                                                local0,
+                                                VisitFilter(
+                                                    f.Filter(local7, Subs(local6, local4, local7))
+                                                )
+                                            );
                                         }
                                     }
                                 }
@@ -3478,15 +4570,64 @@ namespace System.Xml.Xsl.IlGen
                         QilNode local3 = local2[0];
                         if (!(IsDocOrderDistinct(local3)))
                         {
-                            if ((!OptimizerPatterns.Read(local2).MatchesPattern(OptimizerPatternName.IsPositional)) && ((local3).XmlType!.IsSubtypeOf(XmlQueryTypeFactory.NodeNotRtfS)))
+                            if (
+                                (
+                                    !OptimizerPatterns
+                                        .Read(local2)
+                                        .MatchesPattern(OptimizerPatternName.IsPositional)
+                                )
+                                && ((local3).XmlType!.IsSubtypeOf(XmlQueryTypeFactory.NodeNotRtfS))
+                            )
                             {
-                                if (((!(OptimizerPatterns.Read((QilNode)(local1)).MatchesPattern(OptimizerPatternName.FilterElements))) && (!(OptimizerPatterns.Read((QilNode)(local1)).MatchesPattern(OptimizerPatternName.FilterContentKind)))) && (!(OptimizerPatterns.Read((QilNode)(local1)).MatchesPattern(OptimizerPatternName.FilterAttributeKind))))
+                                if (
+                                    (
+                                        (
+                                            !(
+                                                OptimizerPatterns
+                                                    .Read((QilNode)(local1))
+                                                    .MatchesPattern(
+                                                        OptimizerPatternName.FilterElements
+                                                    )
+                                            )
+                                        )
+                                        && (
+                                            !(
+                                                OptimizerPatterns
+                                                    .Read((QilNode)(local1))
+                                                    .MatchesPattern(
+                                                        OptimizerPatternName.FilterContentKind
+                                                    )
+                                            )
+                                        )
+                                    )
+                                    && (
+                                        !(
+                                            OptimizerPatterns
+                                                .Read((QilNode)(local1))
+                                                .MatchesPattern(
+                                                    OptimizerPatternName.FilterAttributeKind
+                                                )
+                                        )
+                                    )
+                                )
                                 {
                                     // PATTERN: [IntroduceDod] (DocOrderDistinct $loop:(Loop $iter:(For $bind:* ^ ~((DocOrderDistinct? $bind))) ^ (NonPositionalIterator? $iter) ^ (SubtypeOf? (TypeOf $bind) (ConstructType {NodeNotRtfS})) $ret:*) ^ ~((Pattern? $loop {FilterElements})) ^ ~((Pattern? $loop {FilterContentKind})) ^ ~((Pattern? $loop {FilterAttributeKind}))) => (DocOrderDistinct (Loop $iterNew:(For (DocOrderDistinct $bind)) (Subs $ret $iter $iterNew)))
                                     if (AllowReplace(XmlILOptimization.IntroduceDod, local0))
                                     {
-                                        QilNode local5 = VisitFor(f.For(VisitDocOrderDistinct(f.DocOrderDistinct(local3))));
-                                        return Replace(XmlILOptimization.IntroduceDod, local0, VisitDocOrderDistinct(f.DocOrderDistinct(VisitLoop(f.Loop(local5, Subs(local4, local2, local5))))));
+                                        QilNode local5 = VisitFor(
+                                            f.For(VisitDocOrderDistinct(f.DocOrderDistinct(local3)))
+                                        );
+                                        return Replace(
+                                            XmlILOptimization.IntroduceDod,
+                                            local0,
+                                            VisitDocOrderDistinct(
+                                                f.DocOrderDistinct(
+                                                    VisitLoop(
+                                                        f.Loop(local5, Subs(local4, local2, local5))
+                                                    )
+                                                )
+                                            )
+                                        );
                                     }
                                 }
                             }
@@ -3500,12 +4641,28 @@ namespace System.Xml.Xsl.IlGen
                 {
                     QilNode local2 = local1[0];
                     QilNode local3 = local1[1];
-                    if ((!(IsDocOrderDistinct(local3))) && (IsStepPattern(local3, QilNodeType.PrecedingSibling)))
+                    if (
+                        (!(IsDocOrderDistinct(local3)))
+                        && (IsStepPattern(local3, QilNodeType.PrecedingSibling))
+                    )
                     {
                         // PATTERN: [IntroducePrecedingDod] (DocOrderDistinct (Loop $iter:* $ret:* ^ ~((DocOrderDistinct? $ret)) ^ (StepPattern? $ret {PrecedingSibling}))) => (DocOrderDistinct (Loop $iter (DocOrderDistinct $ret)))
                         if (AllowReplace(XmlILOptimization.IntroducePrecedingDod, local0))
                         {
-                            return Replace(XmlILOptimization.IntroducePrecedingDod, local0, VisitDocOrderDistinct(f.DocOrderDistinct(VisitLoop(f.Loop(local2, VisitDocOrderDistinct(f.DocOrderDistinct(local3)))))));
+                            return Replace(
+                                XmlILOptimization.IntroducePrecedingDod,
+                                local0,
+                                VisitDocOrderDistinct(
+                                    f.DocOrderDistinct(
+                                        VisitLoop(
+                                            f.Loop(
+                                                local2,
+                                                VisitDocOrderDistinct(f.DocOrderDistinct(local3))
+                                            )
+                                        )
+                                    )
+                                )
+                            );
                         }
                     }
                 }
@@ -3524,7 +4681,13 @@ namespace System.Xml.Xsl.IlGen
                             // PATTERN: [EliminateReturnDod] (DocOrderDistinct (Loop $iter:* $ret:(DocOrderDistinct $opnd:*) ^ ~((StepPattern? $opnd {PrecedingSibling})))) => (DocOrderDistinct (Loop $iter $opnd))
                             if (AllowReplace(XmlILOptimization.EliminateReturnDod, local0))
                             {
-                                return Replace(XmlILOptimization.EliminateReturnDod, local0, VisitDocOrderDistinct(f.DocOrderDistinct(VisitLoop(f.Loop(local2, local4)))));
+                                return Replace(
+                                    XmlILOptimization.EliminateReturnDod,
+                                    local0,
+                                    VisitDocOrderDistinct(
+                                        f.DocOrderDistinct(VisitLoop(f.Loop(local2, local4)))
+                                    )
+                                );
                             }
                         }
                     }
@@ -3535,7 +4698,14 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotateDod] $outer:(DocOrderDistinct $inner:*) => (AddPattern $outer {IsDocOrderDistinct}) ^ (InheritPattern $outer $inner {SameDepth}) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotateDod, local0))
                 {
-                    OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.IsDocOrderDistinct); OptimizerPatterns.Inherit((QilNode)(local1), (QilNode)(local0), OptimizerPatternName.SameDepth);
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.IsDocOrderDistinct);
+                    OptimizerPatterns.Inherit(
+                        (QilNode)(local1),
+                        (QilNode)(local0),
+                        OptimizerPatternName.SameDepth
+                    );
                 }
             }
             if (this[XmlILOptimization.AnnotateDodReverse])
@@ -3545,7 +4715,12 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [AnnotateDodReverse] $outer:(DocOrderDistinct $inner:* ^ (DodReverse? $inner)) => (AddPattern $outer {DodReverse}) ^ (AddArgument $outer {DodStep} $inner) ^ { }
                     if (AllowReplace(XmlILOptimization.AnnotateDodReverse, local0))
                     {
-                        OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.DodReverse); OptimizerPatterns.Write((QilNode)(local0)).AddArgument(OptimizerPatternArgument.DodStep, local1);
+                        OptimizerPatterns
+                            .Write((QilNode)(local0))
+                            .AddPattern(OptimizerPatternName.DodReverse);
+                        OptimizerPatterns
+                            .Write((QilNode)(local0))
+                            .AddArgument(OptimizerPatternArgument.DodStep, local1);
                     }
                 }
             }
@@ -3560,12 +4735,27 @@ namespace System.Xml.Xsl.IlGen
                         QilNode local3 = local2[0];
                         if (IsDocOrderDistinct(local3))
                         {
-                            if ((AllowJoinAndDod(local4)) && ((local2) == (OptimizerPatterns.Read((QilNode)(local4)).GetArgument(OptimizerPatternArgument.StepInput))))
+                            if (
+                                (AllowJoinAndDod(local4))
+                                && (
+                                    (local2)
+                                    == (
+                                        OptimizerPatterns
+                                            .Read((QilNode)(local4))
+                                            .GetArgument(OptimizerPatternArgument.StepInput)
+                                    )
+                                )
+                            )
                             {
                                 // PATTERN: [AnnotateJoinAndDod] $outer:(DocOrderDistinct $join:(Loop $iter:(For $bind:*) ^ (DocOrderDistinct? $bind) $ret:* ^ (JoinAndDod? $ret) ^ (Equal? $iter (Argument $ret {StepInput})))) => (AddPattern $outer {JoinAndDod}) ^ (AddArgument $outer {DodStep} $ret) ^ { }
                                 if (AllowReplace(XmlILOptimization.AnnotateJoinAndDod, local0))
                                 {
-                                    OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.JoinAndDod); OptimizerPatterns.Write((QilNode)(local0)).AddArgument(OptimizerPatternArgument.DodStep, local4);
+                                    OptimizerPatterns
+                                        .Write((QilNode)(local0))
+                                        .AddPattern(OptimizerPatternName.JoinAndDod);
+                                    OptimizerPatterns
+                                        .Write((QilNode)(local0))
+                                        .AddArgument(OptimizerPatternArgument.DodStep, local4);
                                 }
                             }
                         }
@@ -3584,7 +4774,9 @@ namespace System.Xml.Xsl.IlGen
                             // PATTERN: [AnnotateDodMerge] $outer:(DocOrderDistinct (Loop * $ret:(Invoke * *) ^ (DocOrderDistinct? $ret))) => (AddPattern $outer {DodMerge}) ^ { }
                             if (AllowReplace(XmlILOptimization.AnnotateDodMerge, local0))
                             {
-                                OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.DodMerge);
+                                OptimizerPatterns
+                                    .Write((QilNode)(local0))
+                                    .AddPattern(OptimizerPatternName.DodMerge);
                             }
                         }
                     }
@@ -3600,9 +4792,17 @@ namespace System.Xml.Xsl.IlGen
         {
             QilNode local1 = local0[0];
             QilNode local2 = local0[1];
-            if (((local0).XmlType!.IsSubtypeOf(XmlQueryTypeFactory.NodeS)) && (this[XmlILOptimization.AnnotateIndex1]))
+            if (
+                ((local0).XmlType!.IsSubtypeOf(XmlQueryTypeFactory.NodeS))
+                && (this[XmlILOptimization.AnnotateIndex1])
+            )
             {
-                if (((local1.Count == 2) && (((QilNode)(local1)[0]).XmlType!.IsSubtypeOf(XmlQueryTypeFactory.Node))) && ((((QilNode)(local1)[1]).XmlType) == (XmlQueryTypeFactory.StringX)))
+                if (
+                    (
+                        (local1.Count == 2)
+                        && (((QilNode)(local1)[0]).XmlType!.IsSubtypeOf(XmlQueryTypeFactory.Node))
+                    ) && ((((QilNode)(local1)[1]).XmlType) == (XmlQueryTypeFactory.StringX))
+                )
                 {
                     if (local2.NodeType == QilNodeType.Filter)
                     {
@@ -3637,7 +4837,12 @@ namespace System.Xml.Xsl.IlGen
                                                             if (IsDocOrderDistinct(local2))
                                                             {
                                                                 // PATTERN: [AnnotateIndex1] $outer:(Function $args:* ^ { {$args}.Count == 2 } ^ (SubtypeOf? (TypeOf (Nth $args 0)) (ConstructType {Node})) ^ (Equal? (TypeOf (Nth $args 1)) (ConstructType {StringX})) $def:(Filter $iterNodes:(For $bindingNodes:*) (Not (IsEmpty (Filter $iterKeys:(For $bindingKeys:*) (Eq $iterKeys $keyParam:(Parameter * * *) ^ (Equal? $keyParam (Nth $args 1))))))) ^ (DocOrderDistinct? $def) * *) ^ (SubtypeOf? (TypeOf $outer) (ConstructType {NodeS})) => { ... }
-                                                                if (AllowReplace(XmlILOptimization.AnnotateIndex1, local0))
+                                                                if (
+                                                                    AllowReplace(
+                                                                        XmlILOptimization.AnnotateIndex1,
+                                                                        local0
+                                                                    )
+                                                                )
                                                                 {
                                                                     // The following conditions must be true for this pattern to match:
                                                                     //   1. The function must have exactly two arguments
@@ -3648,14 +4853,37 @@ namespace System.Xml.Xsl.IlGen
                                                                     //   6. Every reference to $args[0] (context document) must be wrapped in an (Root *) function
                                                                     //   7. $keyParam cannot be used with the $bindingNodes and $bindingKeys expressions
 
-                                                                    EqualityIndexVisitor visitor = new EqualityIndexVisitor();
-                                                                    if (visitor.Scan(local6, local1[0], local14) && visitor.Scan(local11, local1[0], local14))
+                                                                    EqualityIndexVisitor visitor =
+                                                                        new EqualityIndexVisitor();
+                                                                    if (
+                                                                        visitor.Scan(
+                                                                            local6,
+                                                                            local1[0],
+                                                                            local14
+                                                                        )
+                                                                        && visitor.Scan(
+                                                                            local11,
+                                                                            local1[0],
+                                                                            local14
+                                                                        )
+                                                                    )
                                                                     {
                                                                         // All conditions were true, so annotate Filter with the EqualityIndex pattern
-                                                                        OptimizerPatterns patt = OptimizerPatterns.Write(local2);
-                                                                        patt.AddPattern(OptimizerPatternName.EqualityIndex);
-                                                                        patt.AddArgument(OptimizerPatternArgument.IndexedNodes, local5);
-                                                                        patt.AddArgument(OptimizerPatternArgument.KeyExpression, local11);
+                                                                        OptimizerPatterns patt =
+                                                                            OptimizerPatterns.Write(
+                                                                                local2
+                                                                            );
+                                                                        patt.AddPattern(
+                                                                            OptimizerPatternName.EqualityIndex
+                                                                        );
+                                                                        patt.AddArgument(
+                                                                            OptimizerPatternArgument.IndexedNodes,
+                                                                            local5
+                                                                        );
+                                                                        patt.AddArgument(
+                                                                            OptimizerPatternArgument.KeyExpression,
+                                                                            local11
+                                                                        );
                                                                     }
                                                                 }
                                                             }
@@ -3671,9 +4899,17 @@ namespace System.Xml.Xsl.IlGen
                     }
                 }
             }
-            if (((local0).XmlType.IsSubtypeOf(XmlQueryTypeFactory.NodeS)) && (this[XmlILOptimization.AnnotateIndex2]))
+            if (
+                ((local0).XmlType.IsSubtypeOf(XmlQueryTypeFactory.NodeS))
+                && (this[XmlILOptimization.AnnotateIndex2])
+            )
             {
-                if (((local1.Count == 2) && ((((QilNode)(local1)[0]).XmlType) == (XmlQueryTypeFactory.Node))) && ((((QilNode)(local1)[1]).XmlType) == (XmlQueryTypeFactory.StringX)))
+                if (
+                    (
+                        (local1.Count == 2)
+                        && ((((QilNode)(local1)[0]).XmlType) == (XmlQueryTypeFactory.Node))
+                    ) && ((((QilNode)(local1)[1]).XmlType) == (XmlQueryTypeFactory.StringX))
+                )
                 {
                     if (local2.NodeType == QilNodeType.Filter)
                     {
@@ -3693,18 +4929,36 @@ namespace System.Xml.Xsl.IlGen
                                         if (IsDocOrderDistinct(local2))
                                         {
                                             // PATTERN: [AnnotateIndex2] $outer:(Function $args:* ^ { {$args}.Count == 2 } ^ (Equal? (TypeOf (Nth $args 0)) (ConstructType {Node})) ^ (Equal? (TypeOf (Nth $args 1)) (ConstructType {StringX})) $def:(Filter $iterNodes:(For $bindingNodes:*) (Eq $keyExpr:* $keyParam:(Parameter * * *) ^ (Equal? $keyParam (Nth $args 1)))) ^ (DocOrderDistinct? $def) * *) ^ (SubtypeOf? (TypeOf $outer) (ConstructType {NodeS})) => { ... }
-                                            if (AllowReplace(XmlILOptimization.AnnotateIndex2, local0))
+                                            if (
+                                                AllowReplace(
+                                                    XmlILOptimization.AnnotateIndex2,
+                                                    local0
+                                                )
+                                            )
                                             {
                                                 // Same as EqualityIndex1, except that each nodes has at most one key value
 
-                                                EqualityIndexVisitor visitor = new EqualityIndexVisitor();
-                                                if (visitor.Scan(local6, local1[0], local9) && visitor.Scan(local8, local1[0], local9))
+                                                EqualityIndexVisitor visitor =
+                                                    new EqualityIndexVisitor();
+                                                if (
+                                                    visitor.Scan(local6, local1[0], local9)
+                                                    && visitor.Scan(local8, local1[0], local9)
+                                                )
                                                 {
                                                     // All conditions were true, so annotate Filter with the EqualityIndex pattern
-                                                    OptimizerPatterns patt = OptimizerPatterns.Write(local2);
-                                                    patt.AddPattern(OptimizerPatternName.EqualityIndex);
-                                                    patt.AddArgument(OptimizerPatternArgument.IndexedNodes, local5);
-                                                    patt.AddArgument(OptimizerPatternArgument.KeyExpression, local8);
+                                                    OptimizerPatterns patt =
+                                                        OptimizerPatterns.Write(local2);
+                                                    patt.AddPattern(
+                                                        OptimizerPatternName.EqualityIndex
+                                                    );
+                                                    patt.AddArgument(
+                                                        OptimizerPatternArgument.IndexedNodes,
+                                                        local5
+                                                    );
+                                                    patt.AddArgument(
+                                                        OptimizerPatternArgument.KeyExpression,
+                                                        local8
+                                                    );
                                                 }
                                             }
                                         }
@@ -3733,7 +4987,11 @@ namespace System.Xml.Xsl.IlGen
                             // PATTERN: [NormalizeInvokeEmpty] (Invoke (Function * $seq:(Sequence) ^ (Count? $seq 0) * *) *) => (Sequence)
                             if (AllowReplace(XmlILOptimization.NormalizeInvokeEmpty, local0))
                             {
-                                return Replace(XmlILOptimization.NormalizeInvokeEmpty, local0, VisitSequence(f.Sequence()));
+                                return Replace(
+                                    XmlILOptimization.NormalizeInvokeEmpty,
+                                    local0,
+                                    VisitSequence(f.Sequence())
+                                );
                             }
                         }
                     }
@@ -3744,7 +5002,9 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotateTrackCallers] $caller:(Invoke $func:* *) => (AddCaller $func $caller) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotateTrackCallers, local0))
                 {
-                    XmlILConstructInfo.Write(local1).CallersInfo.Add(XmlILConstructInfo.Write(local0));
+                    XmlILConstructInfo
+                        .Write(local1)
+                        .CallersInfo.Add(XmlILConstructInfo.Write(local0));
                 }
             }
             if (this[XmlILOptimization.AnnotateInvoke])
@@ -3755,7 +5015,16 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [AnnotateInvoke] $outer:(Invoke (Function * $defn:* * *) *) => (InheritPattern $outer $defn {IsDocOrderDistinct}) ^ (InheritPattern $outer $defn {SameDepth}) ^ { }
                     if (AllowReplace(XmlILOptimization.AnnotateInvoke, local0))
                     {
-                        OptimizerPatterns.Inherit((QilNode)(local4), (QilNode)(local0), OptimizerPatternName.IsDocOrderDistinct); OptimizerPatterns.Inherit((QilNode)(local4), (QilNode)(local0), OptimizerPatternName.SameDepth);
+                        OptimizerPatterns.Inherit(
+                            (QilNode)(local4),
+                            (QilNode)(local0),
+                            OptimizerPatternName.IsDocOrderDistinct
+                        );
+                        OptimizerPatterns.Inherit(
+                            (QilNode)(local4),
+                            (QilNode)(local0),
+                            OptimizerPatternName.SameDepth
+                        );
                     }
                 }
             }
@@ -3784,7 +5053,16 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotateContent] $outer:(Content $input:*) => (AddStepPattern $outer $input) ^ (AddPattern $outer {Axis}) ^ (AddPattern $outer {IsDocOrderDistinct}) ^ (AddPattern $outer {SameDepth}) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotateContent, local0))
                 {
-                    AddStepPattern((QilNode)(local0), (QilNode)(local1)); OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.Axis); OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.IsDocOrderDistinct); OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.SameDepth);
+                    AddStepPattern((QilNode)(local0), (QilNode)(local1));
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.Axis);
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.IsDocOrderDistinct);
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.SameDepth);
                 }
             }
             return NoReplace(local0);
@@ -3821,7 +5099,16 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotateAttribute] $outer:(Attribute $input:* *) => (AddPattern $outer {Axis}) ^ (AddStepPattern $outer $input) ^ (AddPattern $outer {IsDocOrderDistinct}) ^ (AddPattern $outer {SameDepth}) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotateAttribute, local0))
                 {
-                    OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.Axis); AddStepPattern((QilNode)(local0), (QilNode)(local1)); OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.IsDocOrderDistinct); OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.SameDepth);
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.Axis);
+                    AddStepPattern((QilNode)(local0), (QilNode)(local1));
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.IsDocOrderDistinct);
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.SameDepth);
                 }
             }
             return NoReplace(local0);
@@ -3846,7 +5133,16 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotateParent] $outer:(Parent $input:*) => (AddPattern $outer {Axis}) ^ (AddStepPattern $outer $input) ^ (AddPattern $outer {IsDocOrderDistinct}) ^ (AddPattern $outer {SameDepth}) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotateParent, local0))
                 {
-                    OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.Axis); AddStepPattern((QilNode)(local0), (QilNode)(local1)); OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.IsDocOrderDistinct); OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.SameDepth);
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.Axis);
+                    AddStepPattern((QilNode)(local0), (QilNode)(local1));
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.IsDocOrderDistinct);
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.SameDepth);
                 }
             }
             return NoReplace(local0);
@@ -3871,7 +5167,16 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotateRoot] $outer:(Root $input:*) => (AddPattern $outer {Axis}) ^ (AddStepPattern $outer $input) ^ (AddPattern $outer {IsDocOrderDistinct}) ^ (AddPattern $outer {SameDepth}) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotateRoot, local0))
                 {
-                    OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.Axis); AddStepPattern((QilNode)(local0), (QilNode)(local1)); OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.IsDocOrderDistinct); OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.SameDepth);
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.Axis);
+                    AddStepPattern((QilNode)(local0), (QilNode)(local1));
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.IsDocOrderDistinct);
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.SameDepth);
                 }
             }
             return NoReplace(local0);
@@ -3896,7 +5201,13 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotateDescendant] $outer:(Descendant $input:*) => (AddPattern $outer {Axis}) ^ (AddStepPattern $outer $input) ^ (AddPattern $outer {IsDocOrderDistinct}) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotateDescendant, local0))
                 {
-                    OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.Axis); AddStepPattern((QilNode)(local0), (QilNode)(local1)); OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.IsDocOrderDistinct);
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.Axis);
+                    AddStepPattern((QilNode)(local0), (QilNode)(local1));
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.IsDocOrderDistinct);
                 }
             }
             return NoReplace(local0);
@@ -3921,7 +5232,13 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotateDescendantSelf] $outer:(DescendantOrSelf $input:*) => (AddPattern $outer {Axis}) ^ (AddStepPattern $outer $input) ^ (AddPattern $outer {IsDocOrderDistinct}) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotateDescendantSelf, local0))
                 {
-                    OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.Axis); AddStepPattern((QilNode)(local0), (QilNode)(local1)); OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.IsDocOrderDistinct);
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.Axis);
+                    AddStepPattern((QilNode)(local0), (QilNode)(local1));
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.IsDocOrderDistinct);
                 }
             }
             return NoReplace(local0);
@@ -3946,7 +5263,10 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotateAncestor] $outer:(Ancestor $input:*) => (AddPattern $outer {Axis}) ^ (AddStepPattern $outer $input) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotateAncestor, local0))
                 {
-                    OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.Axis); AddStepPattern((QilNode)(local0), (QilNode)(local1));
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.Axis);
+                    AddStepPattern((QilNode)(local0), (QilNode)(local1));
                 }
             }
             return NoReplace(local0);
@@ -3971,7 +5291,10 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotateAncestorSelf] $outer:(AncestorOrSelf $input:*) => (AddPattern $outer {Axis}) ^ (AddStepPattern $outer $input) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotateAncestorSelf, local0))
                 {
-                    OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.Axis); AddStepPattern((QilNode)(local0), (QilNode)(local1));
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.Axis);
+                    AddStepPattern((QilNode)(local0), (QilNode)(local1));
                 }
             }
             return NoReplace(local0);
@@ -3996,7 +5319,10 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotatePreceding] $outer:(Preceding $input:*) => (AddPattern $outer {Axis}) ^ (AddStepPattern $outer $input) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotatePreceding, local0))
                 {
-                    OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.Axis); AddStepPattern((QilNode)(local0), (QilNode)(local1));
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.Axis);
+                    AddStepPattern((QilNode)(local0), (QilNode)(local1));
                 }
             }
             return NoReplace(local0);
@@ -4021,7 +5347,16 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotateFollowingSibling] $outer:(FollowingSibling $input:*) => (AddPattern $outer {Axis}) ^ (AddStepPattern $outer $input) ^ (AddPattern $outer {IsDocOrderDistinct}) ^ (AddPattern $outer {SameDepth}) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotateFollowingSibling, local0))
                 {
-                    OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.Axis); AddStepPattern((QilNode)(local0), (QilNode)(local1)); OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.IsDocOrderDistinct); OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.SameDepth);
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.Axis);
+                    AddStepPattern((QilNode)(local0), (QilNode)(local1));
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.IsDocOrderDistinct);
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.SameDepth);
                 }
             }
             return NoReplace(local0);
@@ -4046,7 +5381,13 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotatePrecedingSibling] $outer:(PrecedingSibling $input:*) => (AddPattern $outer {Axis}) ^ (AddStepPattern $outer $input) ^ (AddPattern $outer {SameDepth}) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotatePrecedingSibling, local0))
                 {
-                    OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.Axis); AddStepPattern((QilNode)(local0), (QilNode)(local1)); OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.SameDepth);
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.Axis);
+                    AddStepPattern((QilNode)(local0), (QilNode)(local1));
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.SameDepth);
                 }
             }
             return NoReplace(local0);
@@ -4083,7 +5424,13 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotateNodeRange] $outer:(NodeRange $start:* *) => (AddPattern $outer {Axis}) ^ (AddStepPattern $outer $start) ^ (AddPattern $outer {IsDocOrderDistinct}) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotateNodeRange, local0))
                 {
-                    OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.Axis); AddStepPattern((QilNode)(local0), (QilNode)(local1)); OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.IsDocOrderDistinct);
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.Axis);
+                    AddStepPattern((QilNode)(local0), (QilNode)(local1));
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.IsDocOrderDistinct);
                 }
             }
             return NoReplace(local0);
@@ -4360,12 +5707,19 @@ namespace System.Xml.Xsl.IlGen
                     }
                 }
             }
-            if ((XmlILConstructInfo.Read(local0).IsNamespaceInScope) && (this[XmlILOptimization.EliminateNamespaceDecl]))
+            if (
+                (XmlILConstructInfo.Read(local0).IsNamespaceInScope)
+                && (this[XmlILOptimization.EliminateNamespaceDecl])
+            )
             {
                 // PATTERN: [EliminateNamespaceDecl] $nmsp:(NamespaceDecl * *) ^ (NamespaceInScope? $nmsp) => (Sequence)
                 if (AllowReplace(XmlILOptimization.EliminateNamespaceDecl, local0))
                 {
-                    return Replace(XmlILOptimization.EliminateNamespaceDecl, local0, VisitSequence(f.Sequence()));
+                    return Replace(
+                        XmlILOptimization.EliminateNamespaceDecl,
+                        local0,
+                        VisitSequence(f.Sequence())
+                    );
                 }
             }
             if (this[XmlILOptimization.AnnotateConstruction])
@@ -4409,7 +5763,12 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [AnnotateSingleTextRtf] $outer:(RtfCtor $ctor:(TextCtor $text:*) *) => (AddPattern $outer {SingleTextRtf}) ^ (AddArgument $outer {RtfText} $text) ^ { ... }
                     if (AllowReplace(XmlILOptimization.AnnotateSingleTextRtf, local0))
                     {
-                        OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.SingleTextRtf); OptimizerPatterns.Write((QilNode)(local0)).AddArgument(OptimizerPatternArgument.RtfText, local3);
+                        OptimizerPatterns
+                            .Write((QilNode)(local0))
+                            .AddPattern(OptimizerPatternName.SingleTextRtf);
+                        OptimizerPatterns
+                            .Write((QilNode)(local0))
+                            .AddArgument(OptimizerPatternArgument.RtfText, local3);
                         // In this case, Rtf will be pushed onto the stack rather than pushed to the writer
                         XmlILConstructInfo.Write(local0).PullFromIteratorFirst = true;
                     }
@@ -4517,7 +5876,13 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [EliminateTypeAssert] (TypeAssert $opnd:* (LiteralType $typ:*) ^ (NeverSubtypeOf? (TypeOf $opnd) $typ)) => (Error (LiteralString ""))
                         if (AllowReplace(XmlILOptimization.EliminateTypeAssert, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateTypeAssert, local0, VisitError(f.Error(VisitLiteralString(f.LiteralString(string.Empty)))));
+                            return Replace(
+                                XmlILOptimization.EliminateTypeAssert,
+                                local0,
+                                VisitError(
+                                    f.Error(VisitLiteralString(f.LiteralString(string.Empty)))
+                                )
+                            );
                         }
                     }
                 }
@@ -4532,7 +5897,21 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [EliminateTypeAssert] (TypeAssert $opnd:* (LiteralType $typ:*) ^ (NeverSubtypeOf? (Prime (TypeOf $opnd)) (Prime $typ))) => (Conditional (IsEmpty $opnd) (Sequence) (Error (LiteralString "")))
                         if (AllowReplace(XmlILOptimization.EliminateTypeAssert, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateTypeAssert, local0, VisitConditional(f.Conditional(VisitIsEmpty(f.IsEmpty(local1)), VisitSequence(f.Sequence()), VisitError(f.Error(VisitLiteralString(f.LiteralString(string.Empty)))))));
+                            return Replace(
+                                XmlILOptimization.EliminateTypeAssert,
+                                local0,
+                                VisitConditional(
+                                    f.Conditional(
+                                        VisitIsEmpty(f.IsEmpty(local1)),
+                                        VisitSequence(f.Sequence()),
+                                        VisitError(
+                                            f.Error(
+                                                VisitLiteralString(f.LiteralString(string.Empty))
+                                            )
+                                        )
+                                    )
+                                )
+                            );
                         }
                     }
                 }
@@ -4547,7 +5926,11 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [EliminateTypeAssertOptional] (TypeAssert $opnd:* (LiteralType $base:*) ^ (SubtypeOf? (TypeOf $opnd) $base)) => $opnd
                         if (AllowReplace(XmlILOptimization.EliminateTypeAssertOptional, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateTypeAssertOptional, local0, local1);
+                            return Replace(
+                                XmlILOptimization.EliminateTypeAssertOptional,
+                                local0,
+                                local1
+                            );
                         }
                     }
                 }
@@ -4572,7 +5955,11 @@ namespace System.Xml.Xsl.IlGen
             }
             if (this[XmlILOptimization.EliminateIsType])
             {
-                if (!OptimizerPatterns.Read(local1).MatchesPattern(OptimizerPatternName.MaybeSideEffects))
+                if (
+                    !OptimizerPatterns
+                        .Read(local1)
+                        .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
+                )
                 {
                     if (local2.NodeType == QilNodeType.LiteralType)
                     {
@@ -4582,7 +5969,11 @@ namespace System.Xml.Xsl.IlGen
                             // PATTERN: [EliminateIsType] (IsType $opnd:* ^ (NoSideEffects? $opnd) (LiteralType $base:*) ^ (SubtypeOf? (TypeOf $opnd) $base)) => (True)
                             if (AllowReplace(XmlILOptimization.EliminateIsType, local0))
                             {
-                                return Replace(XmlILOptimization.EliminateIsType, local0, VisitTrue(f.True()));
+                                return Replace(
+                                    XmlILOptimization.EliminateIsType,
+                                    local0,
+                                    VisitTrue(f.True())
+                                );
                             }
                         }
                     }
@@ -4590,7 +5981,11 @@ namespace System.Xml.Xsl.IlGen
             }
             if (this[XmlILOptimization.EliminateIsType])
             {
-                if (!OptimizerPatterns.Read(local1).MatchesPattern(OptimizerPatternName.MaybeSideEffects))
+                if (
+                    !OptimizerPatterns
+                        .Read(local1)
+                        .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
+                )
                 {
                     if (local2.NodeType == QilNodeType.LiteralType)
                     {
@@ -4600,7 +5995,11 @@ namespace System.Xml.Xsl.IlGen
                             // PATTERN: [EliminateIsType] (IsType $opnd:* ^ (NoSideEffects? $opnd) (LiteralType $typ:*) ^ (NeverSubtypeOf? (TypeOf $opnd) $typ)) => (False)
                             if (AllowReplace(XmlILOptimization.EliminateIsType, local0))
                             {
-                                return Replace(XmlILOptimization.EliminateIsType, local0, VisitFalse(f.False()));
+                                return Replace(
+                                    XmlILOptimization.EliminateIsType,
+                                    local0,
+                                    VisitFalse(f.False())
+                                );
                             }
                         }
                     }
@@ -4616,14 +6015,24 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [EliminateIsType] (IsType $opnd:* (LiteralType $typ:*) ^ (NeverSubtypeOf? (Prime (TypeOf $opnd)) (Prime $typ))) => (IsEmpty $opnd)
                         if (AllowReplace(XmlILOptimization.EliminateIsType, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateIsType, local0, VisitIsEmpty(f.IsEmpty(local1)));
+                            return Replace(
+                                XmlILOptimization.EliminateIsType,
+                                local0,
+                                VisitIsEmpty(f.IsEmpty(local1))
+                            );
                         }
                     }
                 }
             }
             if (this[XmlILOptimization.EliminateIsType])
             {
-                if (!(!OptimizerPatterns.Read(local1).MatchesPattern(OptimizerPatternName.MaybeSideEffects)))
+                if (
+                    !(
+                        !OptimizerPatterns
+                            .Read(local1)
+                            .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
+                    )
+                )
                 {
                     if (local2.NodeType == QilNodeType.LiteralType)
                     {
@@ -4633,7 +6042,11 @@ namespace System.Xml.Xsl.IlGen
                             // PATTERN: [EliminateIsType] (IsType $opnd:* ^ ~((NoSideEffects? $opnd)) (LiteralType $base:*) ^ (SubtypeOf? (TypeOf $opnd) $base)) => (Loop (Let $opnd) (True))
                             if (AllowReplace(XmlILOptimization.EliminateIsType, local0))
                             {
-                                return Replace(XmlILOptimization.EliminateIsType, local0, VisitLoop(f.Loop(VisitLet(f.Let(local1)), VisitTrue(f.True()))));
+                                return Replace(
+                                    XmlILOptimization.EliminateIsType,
+                                    local0,
+                                    VisitLoop(f.Loop(VisitLet(f.Let(local1)), VisitTrue(f.True())))
+                                );
                             }
                         }
                     }
@@ -4641,7 +6054,13 @@ namespace System.Xml.Xsl.IlGen
             }
             if (this[XmlILOptimization.EliminateIsType])
             {
-                if (!(!OptimizerPatterns.Read(local1).MatchesPattern(OptimizerPatternName.MaybeSideEffects)))
+                if (
+                    !(
+                        !OptimizerPatterns
+                            .Read(local1)
+                            .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
+                    )
+                )
                 {
                     if (local2.NodeType == QilNodeType.LiteralType)
                     {
@@ -4651,7 +6070,13 @@ namespace System.Xml.Xsl.IlGen
                             // PATTERN: [EliminateIsType] (IsType $opnd:* ^ ~((NoSideEffects? $opnd)) (LiteralType $typ:*) ^ (NeverSubtypeOf? (TypeOf $opnd) $typ)) => (Loop (Let $opnd) (False))
                             if (AllowReplace(XmlILOptimization.EliminateIsType, local0))
                             {
-                                return Replace(XmlILOptimization.EliminateIsType, local0, VisitLoop(f.Loop(VisitLet(f.Let(local1)), VisitFalse(f.False()))));
+                                return Replace(
+                                    XmlILOptimization.EliminateIsType,
+                                    local0,
+                                    VisitLoop(
+                                        f.Loop(VisitLet(f.Let(local1)), VisitFalse(f.False()))
+                                    )
+                                );
                             }
                         }
                     }
@@ -4683,19 +6108,34 @@ namespace System.Xml.Xsl.IlGen
                         // PATTERN: [EliminateIsEmpty] (IsEmpty $expr:(Sequence) ^ (Count? $expr 0)) => (True)
                         if (AllowReplace(XmlILOptimization.EliminateIsEmpty, local0))
                         {
-                            return Replace(XmlILOptimization.EliminateIsEmpty, local0, VisitTrue(f.True()));
+                            return Replace(
+                                XmlILOptimization.EliminateIsEmpty,
+                                local0,
+                                VisitTrue(f.True())
+                            );
                         }
                     }
                 }
             }
             if (this[XmlILOptimization.EliminateIsEmpty])
             {
-                if ((!((local1).XmlType)!.MaybeEmpty) && (!OptimizerPatterns.Read(local1).MatchesPattern(OptimizerPatternName.MaybeSideEffects)))
+                if (
+                    (!((local1).XmlType)!.MaybeEmpty)
+                    && (
+                        !OptimizerPatterns
+                            .Read(local1)
+                            .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
+                    )
+                )
                 {
                     // PATTERN: [EliminateIsEmpty] (IsEmpty $expr:* ^ (NonEmpty? (TypeOf $expr)) ^ (NoSideEffects? $expr)) => (False)
                     if (AllowReplace(XmlILOptimization.EliminateIsEmpty, local0))
                     {
-                        return Replace(XmlILOptimization.EliminateIsEmpty, local0, VisitFalse(f.False()));
+                        return Replace(
+                            XmlILOptimization.EliminateIsEmpty,
+                            local0,
+                            VisitFalse(f.False())
+                        );
                     }
                 }
             }
@@ -4706,7 +6146,11 @@ namespace System.Xml.Xsl.IlGen
                     // PATTERN: [EliminateIsEmpty] (IsEmpty $expr:* ^ (NonEmpty? (TypeOf $expr))) => (Loop (Let $expr) (False))
                     if (AllowReplace(XmlILOptimization.EliminateIsEmpty, local0))
                     {
-                        return Replace(XmlILOptimization.EliminateIsEmpty, local0, VisitLoop(f.Loop(VisitLet(f.Let(local1)), VisitFalse(f.False()))));
+                        return Replace(
+                            XmlILOptimization.EliminateIsEmpty,
+                            local0,
+                            VisitLoop(f.Loop(VisitLet(f.Let(local1)), VisitFalse(f.False())))
+                        );
                     }
                 }
             }
@@ -4752,7 +6196,13 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotateXPathFollowing] $outer:(XPathFollowing $input:*) => (AddPattern $outer {Axis}) ^ (AddStepPattern $outer $input) ^ (AddPattern $outer {IsDocOrderDistinct}) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotateXPathFollowing, local0))
                 {
-                    OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.Axis); AddStepPattern((QilNode)(local0), (QilNode)(local1)); OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.IsDocOrderDistinct);
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.Axis);
+                    AddStepPattern((QilNode)(local0), (QilNode)(local1));
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.IsDocOrderDistinct);
                 }
             }
             return NoReplace(local0);
@@ -4777,7 +6227,10 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotateXPathPreceding] $outer:(XPathPreceding $input:*) => (AddPattern $outer {Axis}) ^ (AddStepPattern $outer $input) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotateXPathPreceding, local0))
                 {
-                    OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.Axis); AddStepPattern((QilNode)(local0), (QilNode)(local1));
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.Axis);
+                    AddStepPattern((QilNode)(local0), (QilNode)(local1));
                 }
             }
             return NoReplace(local0);
@@ -4802,7 +6255,16 @@ namespace System.Xml.Xsl.IlGen
                 // PATTERN: [AnnotateNamespace] $outer:(XPathNamespace $input:*) => (AddPattern $outer {Axis}) ^ (AddStepPattern $outer $input) ^ (AddPattern $outer {IsDocOrderDistinct}) ^ (AddPattern $outer {SameDepth}) ^ { }
                 if (AllowReplace(XmlILOptimization.AnnotateNamespace, local0))
                 {
-                    OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.Axis); AddStepPattern((QilNode)(local0), (QilNode)(local1)); OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.IsDocOrderDistinct); OptimizerPatterns.Write((QilNode)(local0)).AddPattern(OptimizerPatternName.SameDepth);
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.Axis);
+                    AddStepPattern((QilNode)(local0), (QilNode)(local1));
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.IsDocOrderDistinct);
+                    OptimizerPatterns
+                        .Write((QilNode)(local0))
+                        .AddPattern(OptimizerPatternName.SameDepth);
                 }
             }
             return NoReplace(local0);
@@ -4917,7 +6379,11 @@ namespace System.Xml.Xsl.IlGen
                             // PATTERN: [FoldXsltConvertLiteral] (XsltConvert $lit:* ^ (Literal? $lit) (LiteralType $typ:*) ^ (CanFoldXsltConvert? $lit $typ)) => (FoldXsltConvert $lit $typ)
                             if (AllowReplace(XmlILOptimization.FoldXsltConvertLiteral, local0))
                             {
-                                return Replace(XmlILOptimization.FoldXsltConvertLiteral, local0, FoldXsltConvert(local1, local3));
+                                return Replace(
+                                    XmlILOptimization.FoldXsltConvertLiteral,
+                                    local0,
+                                    FoldXsltConvert(local1, local3)
+                                );
                             }
                         }
                     }
@@ -4992,7 +6458,8 @@ namespace System.Xml.Xsl.IlGen
         private class NodeFinder : QilVisitor
         {
             protected bool result;
-            protected QilNode? target, parent;
+            protected QilNode? target,
+                parent;
 
             /// <summary>
             /// Returns true if "target" node exists within the subtree of "expr".
@@ -5062,7 +6529,8 @@ namespace System.Xml.Xsl.IlGen
         private sealed class EqualityIndexVisitor : QilVisitor
         {
             private bool result;
-            private QilNode? ctxt, key;
+            private QilNode? ctxt,
+                key;
 
             /// <summary>
             /// Returns true if the subtree of "expr" meets the following requirements:
@@ -5166,11 +6634,16 @@ namespace System.Xml.Xsl.IlGen
         /// </summary>
         private static bool IsPrimitiveNumeric(XmlQueryType? typ)
         {
-            if (typ == XmlQueryTypeFactory.IntX) return true;
-            if (typ == XmlQueryTypeFactory.IntegerX) return true;
-            if (typ == XmlQueryTypeFactory.DecimalX) return true;
-            if (typ == XmlQueryTypeFactory.FloatX) return true;
-            if (typ == XmlQueryTypeFactory.DoubleX) return true;
+            if (typ == XmlQueryTypeFactory.IntX)
+                return true;
+            if (typ == XmlQueryTypeFactory.IntegerX)
+                return true;
+            if (typ == XmlQueryTypeFactory.DecimalX)
+                return true;
+            if (typ == XmlQueryTypeFactory.FloatX)
+                return true;
+            if (typ == XmlQueryTypeFactory.DoubleX)
+                return true;
 
             return false;
         }
@@ -5180,11 +6653,16 @@ namespace System.Xml.Xsl.IlGen
         /// </summary>
         private static bool MatchesContentTest(XmlQueryType typ)
         {
-            if (typ == XmlQueryTypeFactory.Element) return true;
-            if (typ == XmlQueryTypeFactory.Text) return true;
-            if (typ == XmlQueryTypeFactory.Comment) return true;
-            if (typ == XmlQueryTypeFactory.PI) return true;
-            if (typ == XmlQueryTypeFactory.Content) return true;
+            if (typ == XmlQueryTypeFactory.Element)
+                return true;
+            if (typ == XmlQueryTypeFactory.Text)
+                return true;
+            if (typ == XmlQueryTypeFactory.Comment)
+                return true;
+            if (typ == XmlQueryTypeFactory.PI)
+                return true;
+            if (typ == XmlQueryTypeFactory.Content)
+                return true;
 
             return false;
         }
@@ -5239,7 +6717,8 @@ namespace System.Xml.Xsl.IlGen
                     case QilNodeType.Conditional:
                         // Return true if either left and right branches of the conditional are constructed
                         ndCond = (QilTernary)nd;
-                        return IsConstructedExpression(ndCond.Center) || IsConstructedExpression(ndCond.Right);
+                        return IsConstructedExpression(ndCond.Center)
+                            || IsConstructedExpression(ndCond.Right);
 
                     case QilNodeType.Invoke:
                         // Return true if the function might return nodes
@@ -5294,7 +6773,10 @@ namespace System.Xml.Xsl.IlGen
             else if (nd.NodeType == QilNodeType.LiteralQName)
                 return nd;
 
-            Debug.Assert(nd is QilLiteral, "All literals except True, False, and QName must use QilLiteral");
+            Debug.Assert(
+                nd is QilLiteral,
+                "All literals except True, False, and QName must use QilLiteral"
+            );
             return ((QilLiteral)nd).Value!;
         }
 
@@ -5320,11 +6802,19 @@ namespace System.Xml.Xsl.IlGen
 
             // AllowJoinAndDod if this pattern is the descendant, descendant-or-self, content, preceding, following, or
             // following-sibling axis, filtered by either an element name or a node kind test.
-            if (patt.MatchesPattern(OptimizerPatternName.FilterElements) || patt.MatchesPattern(OptimizerPatternName.FilterContentKind))
+            if (
+                patt.MatchesPattern(OptimizerPatternName.FilterElements)
+                || patt.MatchesPattern(OptimizerPatternName.FilterContentKind)
+            )
             {
-                if (IsStepPattern(patt, QilNodeType.DescendantOrSelf) || IsStepPattern(patt, QilNodeType.Descendant) ||
-                    IsStepPattern(patt, QilNodeType.Content) || IsStepPattern(patt, QilNodeType.XPathPreceding) ||
-                    IsStepPattern(patt, QilNodeType.XPathFollowing) || IsStepPattern(patt, QilNodeType.FollowingSibling))
+                if (
+                    IsStepPattern(patt, QilNodeType.DescendantOrSelf)
+                    || IsStepPattern(patt, QilNodeType.Descendant)
+                    || IsStepPattern(patt, QilNodeType.Content)
+                    || IsStepPattern(patt, QilNodeType.XPathPreceding)
+                    || IsStepPattern(patt, QilNodeType.XPathFollowing)
+                    || IsStepPattern(patt, QilNodeType.FollowingSibling)
+                )
                 {
                     return true;
                 }
@@ -5341,12 +6831,18 @@ namespace System.Xml.Xsl.IlGen
 
             // AllowDodReverse if this pattern is the ancestor, ancestor-or-self, preceding, or preceding-sibling axis,
             // filtered by either an element name or a node kind test.
-            if (patt.MatchesPattern(OptimizerPatternName.Axis) ||
-                patt.MatchesPattern(OptimizerPatternName.FilterElements) ||
-                patt.MatchesPattern(OptimizerPatternName.FilterContentKind))
+            if (
+                patt.MatchesPattern(OptimizerPatternName.Axis)
+                || patt.MatchesPattern(OptimizerPatternName.FilterElements)
+                || patt.MatchesPattern(OptimizerPatternName.FilterContentKind)
+            )
             {
-                if (IsStepPattern(patt, QilNodeType.Ancestor) || IsStepPattern(patt, QilNodeType.AncestorOrSelf) ||
-                    IsStepPattern(patt, QilNodeType.XPathPreceding) || IsStepPattern(patt, QilNodeType.PrecedingSibling))
+                if (
+                    IsStepPattern(patt, QilNodeType.Ancestor)
+                    || IsStepPattern(patt, QilNodeType.AncestorOrSelf)
+                    || IsStepPattern(patt, QilNodeType.XPathPreceding)
+                    || IsStepPattern(patt, QilNodeType.PrecedingSibling)
+                )
                 {
                     return true;
                 }
@@ -5397,7 +6893,10 @@ namespace System.Xml.Xsl.IlGen
                 if (typTarget.IsAtomicValue)
                 {
                     // Convert the literal to an XmlAtomicValue
-                    XmlAtomicValue value = new XmlAtomicValue(ndLiteral.XmlType!.SchemaType, ExtractLiteralValue(ndLiteral));
+                    XmlAtomicValue value = new XmlAtomicValue(
+                        ndLiteral.XmlType!.SchemaType,
+                        ExtractLiteralValue(ndLiteral)
+                    );
                     value = XsltConvert.ConvertToType(value, typTarget);
 
                     if (typTarget == XmlQueryTypeFactory.StringX)
@@ -5427,9 +6926,13 @@ namespace System.Xml.Xsl.IlGen
         /// </summary>
         private QilNode FoldComparison(QilNodeType opType, QilNode left, QilNode right)
         {
-            object litLeft, litRight;
+            object litLeft,
+                litRight;
             int cmp;
-            Debug.Assert(left.XmlType == right.XmlType, $"Comparison is not defined between {left.XmlType} and {right.XmlType}");
+            Debug.Assert(
+                left.XmlType == right.XmlType,
+                $"Comparison is not defined between {left.XmlType} and {right.XmlType}"
+            );
 
             // Extract objects that represent each literal value
             litLeft = ExtractLiteralValue(left);
@@ -5460,10 +6963,14 @@ namespace System.Xml.Xsl.IlGen
 
             switch (opType)
             {
-                case QilNodeType.Gt: return cmp > 0 ? f.True() : f.False();
-                case QilNodeType.Ge: return cmp >= 0 ? f.True() : f.False();
-                case QilNodeType.Lt: return cmp < 0 ? f.True() : f.False();
-                case QilNodeType.Le: return cmp <= 0 ? f.True() : f.False();
+                case QilNodeType.Gt:
+                    return cmp > 0 ? f.True() : f.False();
+                case QilNodeType.Ge:
+                    return cmp >= 0 ? f.True() : f.False();
+                case QilNodeType.Lt:
+                    return cmp < 0 ? f.True() : f.False();
+                case QilNodeType.Le:
+                    return cmp <= 0 ? f.True() : f.False();
             }
 
             Debug.Fail($"Cannot fold this comparison operation: {opType}");
@@ -5496,86 +7003,107 @@ namespace System.Xml.Xsl.IlGen
                     switch (left.NodeType)
                     {
                         case QilNodeType.LiteralInt32:
-                            {
-                                int intLeft = left;
-                                int intRight = right;
+                        {
+                            int intLeft = left;
+                            int intRight = right;
 
-                                switch (opType)
-                                {
-                                    case QilNodeType.Add: return f.LiteralInt32(intLeft + intRight);
-                                    case QilNodeType.Subtract: return f.LiteralInt32(intLeft - intRight);
-                                    case QilNodeType.Multiply: return f.LiteralInt32(intLeft * intRight);
-                                    case QilNodeType.Divide: return f.LiteralInt32(intLeft / intRight);
-                                    case QilNodeType.Modulo: return f.LiteralInt32(intLeft % intRight);
-                                }
-                                break;
+                            switch (opType)
+                            {
+                                case QilNodeType.Add:
+                                    return f.LiteralInt32(intLeft + intRight);
+                                case QilNodeType.Subtract:
+                                    return f.LiteralInt32(intLeft - intRight);
+                                case QilNodeType.Multiply:
+                                    return f.LiteralInt32(intLeft * intRight);
+                                case QilNodeType.Divide:
+                                    return f.LiteralInt32(intLeft / intRight);
+                                case QilNodeType.Modulo:
+                                    return f.LiteralInt32(intLeft % intRight);
                             }
+                            break;
+                        }
 
                         case QilNodeType.LiteralInt64:
-                            {
-                                long lngLeft = left;
-                                long lngRight = right;
+                        {
+                            long lngLeft = left;
+                            long lngRight = right;
 
-                                switch (opType)
-                                {
-                                    case QilNodeType.Add: return f.LiteralInt64(lngLeft + lngRight);
-                                    case QilNodeType.Subtract: return f.LiteralInt64(lngLeft - lngRight);
-                                    case QilNodeType.Multiply: return f.LiteralInt64(lngLeft * lngRight);
-                                    case QilNodeType.Divide: return f.LiteralInt64(lngLeft / lngRight);
-                                    case QilNodeType.Modulo: return f.LiteralInt64(lngLeft % lngRight);
-                                }
-                                break;
+                            switch (opType)
+                            {
+                                case QilNodeType.Add:
+                                    return f.LiteralInt64(lngLeft + lngRight);
+                                case QilNodeType.Subtract:
+                                    return f.LiteralInt64(lngLeft - lngRight);
+                                case QilNodeType.Multiply:
+                                    return f.LiteralInt64(lngLeft * lngRight);
+                                case QilNodeType.Divide:
+                                    return f.LiteralInt64(lngLeft / lngRight);
+                                case QilNodeType.Modulo:
+                                    return f.LiteralInt64(lngLeft % lngRight);
                             }
+                            break;
+                        }
 
                         case QilNodeType.LiteralDecimal:
-                            {
-                                decimal lngLeft = left;
-                                decimal lngRight = right;
+                        {
+                            decimal lngLeft = left;
+                            decimal lngRight = right;
 
-                                switch (opType)
-                                {
-                                    case QilNodeType.Add: return f.LiteralDecimal(lngLeft + lngRight);
-                                    case QilNodeType.Subtract: return f.LiteralDecimal(lngLeft - lngRight);
-                                    case QilNodeType.Multiply: return f.LiteralDecimal(lngLeft * lngRight);
-                                    case QilNodeType.Divide: return f.LiteralDecimal(lngLeft / lngRight);
-                                    case QilNodeType.Modulo: return f.LiteralDecimal(lngLeft % lngRight);
-                                }
-                                break;
+                            switch (opType)
+                            {
+                                case QilNodeType.Add:
+                                    return f.LiteralDecimal(lngLeft + lngRight);
+                                case QilNodeType.Subtract:
+                                    return f.LiteralDecimal(lngLeft - lngRight);
+                                case QilNodeType.Multiply:
+                                    return f.LiteralDecimal(lngLeft * lngRight);
+                                case QilNodeType.Divide:
+                                    return f.LiteralDecimal(lngLeft / lngRight);
+                                case QilNodeType.Modulo:
+                                    return f.LiteralDecimal(lngLeft % lngRight);
                             }
+                            break;
+                        }
 
                         case QilNodeType.LiteralDouble:
-                            {
-                                double lngLeft = left;
-                                double lngRight = right;
+                        {
+                            double lngLeft = left;
+                            double lngRight = right;
 
-                                switch (opType)
-                                {
-                                    case QilNodeType.Add: return f.LiteralDouble(lngLeft + lngRight);
-                                    case QilNodeType.Subtract: return f.LiteralDouble(lngLeft - lngRight);
-                                    case QilNodeType.Multiply: return f.LiteralDouble(lngLeft * lngRight);
-                                    case QilNodeType.Divide: return f.LiteralDouble(lngLeft / lngRight);
-                                    case QilNodeType.Modulo: return f.LiteralDouble(lngLeft % lngRight);
-                                }
-                                break;
+                            switch (opType)
+                            {
+                                case QilNodeType.Add:
+                                    return f.LiteralDouble(lngLeft + lngRight);
+                                case QilNodeType.Subtract:
+                                    return f.LiteralDouble(lngLeft - lngRight);
+                                case QilNodeType.Multiply:
+                                    return f.LiteralDouble(lngLeft * lngRight);
+                                case QilNodeType.Divide:
+                                    return f.LiteralDouble(lngLeft / lngRight);
+                                case QilNodeType.Modulo:
+                                    return f.LiteralDouble(lngLeft % lngRight);
                             }
+                            break;
+                        }
                     }
                 }
             }
-            catch (OverflowException)
-            {
-            }
-            catch (DivideByZeroException)
-            {
-            }
+            catch (OverflowException) { }
+            catch (DivideByZeroException) { }
 
             // An error occurred, so don't fold operationo
             switch (opType)
             {
-                case QilNodeType.Add: return f.Add(left, right);
-                case QilNodeType.Subtract: return f.Subtract(left, right);
-                case QilNodeType.Multiply: return f.Multiply(left, right);
-                case QilNodeType.Divide: return f.Divide(left, right);
-                case QilNodeType.Modulo: return f.Modulo(left, right);
+                case QilNodeType.Add:
+                    return f.Add(left, right);
+                case QilNodeType.Subtract:
+                    return f.Subtract(left, right);
+                case QilNodeType.Multiply:
+                    return f.Multiply(left, right);
+                case QilNodeType.Divide:
+                    return f.Divide(left, right);
+                case QilNodeType.Modulo:
+                    return f.Modulo(left, right);
             }
 
             Debug.Fail($"Cannot fold this arithmetic operation: {opType}");
@@ -5598,7 +7126,9 @@ namespace System.Xml.Xsl.IlGen
         /// </summary>
         private static bool IsDocOrderDistinct(QilNode nd)
         {
-            return OptimizerPatterns.Read(nd).MatchesPattern(OptimizerPatternName.IsDocOrderDistinct);
+            return OptimizerPatterns
+                .Read(nd)
+                .MatchesPattern(OptimizerPatternName.IsDocOrderDistinct);
         }
 
         /// <summary>
@@ -5614,7 +7144,9 @@ namespace System.Xml.Xsl.IlGen
         /// </summary>
         private static bool IsStepPattern(OptimizerPatterns patt, QilNodeType stepType)
         {
-            return patt.MatchesPattern(OptimizerPatternName.Step) && ((QilNode)patt.GetArgument(OptimizerPatternArgument.StepNode)).NodeType == stepType;
+            return patt.MatchesPattern(OptimizerPatternName.Step)
+                && ((QilNode)patt.GetArgument(OptimizerPatternArgument.StepNode)).NodeType
+                    == stepType;
         }
 
         /// <summary>
@@ -5636,11 +7168,16 @@ namespace System.Xml.Xsl.IlGen
                 }
                 else
                 {
-                    Debug.Assert(nd.NodeType == QilNodeType.Let || nd.NodeType == QilNodeType.Parameter, "Unexpected type of a global");
+                    Debug.Assert(
+                        nd.NodeType == QilNodeType.Let || nd.NodeType == QilNodeType.Parameter,
+                        "Unexpected type of a global"
+                    );
 
                     // Keep a variable or parameter if it was referenced at least once or may have side effects
                     OptimizerPatterns optPatt = OptimizerPatterns.Read(nd);
-                    isUsed = optPatt.MatchesPattern(OptimizerPatternName.IsReferenced) || optPatt.MatchesPattern(OptimizerPatternName.MaybeSideEffects);
+                    isUsed =
+                        optPatt.MatchesPattern(OptimizerPatternName.IsReferenced)
+                        || optPatt.MatchesPattern(OptimizerPatternName.MaybeSideEffects);
                 }
 
                 if (isUsed)

@@ -73,17 +73,31 @@ public class ComputeWasmBuildAssets : Task
         {
             if (ProjectAssembly.Length != 1)
             {
-                Log.LogError("Invalid number of project assemblies '{0}'", string.Join("," + Environment.NewLine, ProjectAssembly.Select(a => a.ItemSpec)));
+                Log.LogError(
+                    "Invalid number of project assemblies '{0}'",
+                    string.Join("," + Environment.NewLine, ProjectAssembly.Select(a => a.ItemSpec))
+                );
                 return true;
             }
 
             if (ProjectDebugSymbols.Length > 1)
             {
-                Log.LogError("Invalid number of symbol assemblies '{0}'", string.Join("," + Environment.NewLine, ProjectDebugSymbols.Select(a => a.ItemSpec)));
+                Log.LogError(
+                    "Invalid number of symbol assemblies '{0}'",
+                    string.Join(
+                        "," + Environment.NewLine,
+                        ProjectDebugSymbols.Select(a => a.ItemSpec)
+                    )
+                );
                 return true;
             }
 
-            if (!AssetsComputingHelper.TryGetAssetFilename(CustomIcuCandidate, out string customIcuCandidateFilename))
+            if (
+                !AssetsComputingHelper.TryGetAssetFilename(
+                    CustomIcuCandidate,
+                    out string customIcuCandidateFilename
+                )
+            )
             {
                 // if it's not empty then it's already in Candidates and will get filtered by ShouldFilterCandidate if needed
                 Log.LogMessage(MessageImportance.Low, "Custom icu asset was passed as empty.");
@@ -92,45 +106,93 @@ public class ComputeWasmBuildAssets : Task
             for (int i = 0; i < Candidates.Length; i++)
             {
                 var candidate = Candidates[i];
-                if (AssetsComputingHelper.ShouldFilterCandidate(candidate, TimeZoneSupport, InvariantGlobalization, HybridGlobalization, LoadFullICUData, CopySymbols, customIcuCandidateFilename, EnableThreads, EmitSourceMap, out var reason))
+                if (
+                    AssetsComputingHelper.ShouldFilterCandidate(
+                        candidate,
+                        TimeZoneSupport,
+                        InvariantGlobalization,
+                        HybridGlobalization,
+                        LoadFullICUData,
+                        CopySymbols,
+                        customIcuCandidateFilename,
+                        EnableThreads,
+                        EmitSourceMap,
+                        out var reason
+                    )
+                )
                 {
-                    Log.LogMessage(MessageImportance.Low, "Skipping asset '{0}' because '{1}'", candidate.ItemSpec, reason);
+                    Log.LogMessage(
+                        MessageImportance.Low,
+                        "Skipping asset '{0}' because '{1}'",
+                        candidate.ItemSpec,
+                        reason
+                    );
                     filesToRemove.Add(candidate);
                     continue;
                 }
 
-                var satelliteAssembly = SatelliteAssemblies.FirstOrDefault(s => s.ItemSpec == candidate.ItemSpec);
+                var satelliteAssembly = SatelliteAssemblies.FirstOrDefault(s =>
+                    s.ItemSpec == candidate.ItemSpec
+                );
                 if (satelliteAssembly != null)
                 {
-                    var inferredCulture = satelliteAssembly.GetMetadata("DestinationSubDirectory").Trim('\\', '/');
-                    Log.LogMessage(MessageImportance.Low, "Found satellite assembly '{0}' asset for candidate '{1}' with inferred culture '{2}'", satelliteAssembly.ItemSpec, candidate.ItemSpec, inferredCulture);
+                    var inferredCulture = satelliteAssembly
+                        .GetMetadata("DestinationSubDirectory")
+                        .Trim('\\', '/');
+                    Log.LogMessage(
+                        MessageImportance.Low,
+                        "Found satellite assembly '{0}' asset for candidate '{1}' with inferred culture '{2}'",
+                        satelliteAssembly.ItemSpec,
+                        candidate.ItemSpec,
+                        inferredCulture
+                    );
 
                     var assetCandidate = new TaskItem(satelliteAssembly);
                     assetCandidate.SetMetadata("AssetKind", "Build");
                     assetCandidate.SetMetadata("AssetRole", "Related");
                     assetCandidate.SetMetadata("AssetTraitName", "Culture");
                     assetCandidate.SetMetadata("AssetTraitValue", inferredCulture);
-                    assetCandidate.SetMetadata("RelativePath", $"_framework/{inferredCulture}/{satelliteAssembly.GetMetadata("FileName")}{satelliteAssembly.GetMetadata("Extension")}");
-                    assetCandidate.SetMetadata("RelatedAsset", Path.GetFullPath(Path.Combine(OutputPath, "wwwroot", "_framework", Path.GetFileName(assetCandidate.GetMetadata("ResolvedFrom")))));
+                    assetCandidate.SetMetadata(
+                        "RelativePath",
+                        $"_framework/{inferredCulture}/{satelliteAssembly.GetMetadata("FileName")}{satelliteAssembly.GetMetadata("Extension")}"
+                    );
+                    assetCandidate.SetMetadata(
+                        "RelatedAsset",
+                        Path.GetFullPath(
+                            Path.Combine(
+                                OutputPath,
+                                "wwwroot",
+                                "_framework",
+                                Path.GetFileName(assetCandidate.GetMetadata("ResolvedFrom"))
+                            )
+                        )
+                    );
 
                     assetCandidates.Add(assetCandidate);
                     continue;
                 }
 
                 string candidateFileName = candidate.GetMetadata("FileName");
-                if (candidateFileName.StartsWith("dotnet") && candidate.GetMetadata("Extension") == ".js")
+                if (
+                    candidateFileName.StartsWith("dotnet")
+                    && candidate.GetMetadata("Extension") == ".js"
+                )
                 {
                     string newDotnetJSFileName = null;
                     string newDotNetJSFullPath = null;
                     if (candidateFileName != "dotnet" || FingerprintDotNetJs)
                     {
                         var itemHash = FileHasher.GetFileHash(candidate.ItemSpec);
-                        newDotnetJSFileName = $"{candidateFileName}.{DotNetJsVersion}.{itemHash}.js";
+                        newDotnetJSFileName =
+                            $"{candidateFileName}.{DotNetJsVersion}.{itemHash}.js";
 
                         var originalFileFullPath = Path.GetFullPath(candidate.ItemSpec);
                         var originalFileDirectory = Path.GetDirectoryName(originalFileFullPath);
 
-                        newDotNetJSFullPath = Path.Combine(originalFileDirectory, newDotnetJSFileName);
+                        newDotNetJSFullPath = Path.Combine(
+                            originalFileDirectory,
+                            newDotnetJSFileName
+                        );
                     }
                     else
                     {
@@ -138,7 +200,10 @@ public class ComputeWasmBuildAssets : Task
                         newDotnetJSFileName = Path.GetFileName(newDotNetJSFullPath);
                     }
 
-                    var newDotNetJs = new TaskItem(newDotNetJSFullPath, candidate.CloneCustomMetadata());
+                    var newDotNetJs = new TaskItem(
+                        newDotNetJSFullPath,
+                        candidate.CloneCustomMetadata()
+                    );
                     newDotNetJs.SetMetadata("OriginalItemSpec", candidate.ItemSpec);
 
                     var newRelativePath = $"_framework/{newDotnetJSFileName}";
@@ -173,28 +238,44 @@ public class ComputeWasmBuildAssets : Task
                     candidate.SetMetadata("AssetTraitValue", culture);
                     var fileName = candidate.GetMetadata("FileName");
                     var suffixIndex = fileName.Length - ".resources".Length;
-                    var relatedAssetPath = Path.GetFullPath(Path.Combine(
-                        OutputPath,
-                        "wwwroot",
-                        "_framework",
-                        fileName.Substring(0, suffixIndex) + ProjectAssembly[0].GetMetadata("Extension")));
+                    var relatedAssetPath = Path.GetFullPath(
+                        Path.Combine(
+                            OutputPath,
+                            "wwwroot",
+                            "_framework",
+                            fileName.Substring(0, suffixIndex)
+                                + ProjectAssembly[0].GetMetadata("Extension")
+                        )
+                    );
 
                     candidate.SetMetadata("RelatedAsset", relatedAssetPath);
 
-                    Log.LogMessage(MessageImportance.Low, "Found satellite assembly '{0}' asset for inferred candidate '{1}' with culture '{2}'", candidate.ItemSpec, relatedAssetPath, culture);
+                    Log.LogMessage(
+                        MessageImportance.Low,
+                        "Found satellite assembly '{0}' asset for inferred candidate '{1}' with culture '{2}'",
+                        candidate.ItemSpec,
+                        relatedAssetPath,
+                        culture
+                    );
                 }
 
                 assetCandidates.Add(candidate);
             }
 
             var intermediateAssembly = new TaskItem(ProjectAssembly[0]);
-            intermediateAssembly.SetMetadata("RelativePath", $"_framework/{intermediateAssembly.GetMetadata("FileName")}{intermediateAssembly.GetMetadata("Extension")}");
+            intermediateAssembly.SetMetadata(
+                "RelativePath",
+                $"_framework/{intermediateAssembly.GetMetadata("FileName")}{intermediateAssembly.GetMetadata("Extension")}"
+            );
             assetCandidates.Add(intermediateAssembly);
 
             if (ProjectDebugSymbols.Length > 0)
             {
                 var debugSymbols = new TaskItem(ProjectDebugSymbols[0]);
-                debugSymbols.SetMetadata("RelativePath", $"_framework/{debugSymbols.GetMetadata("FileName")}{debugSymbols.GetMetadata("Extension")}");
+                debugSymbols.SetMetadata(
+                    "RelativePath",
+                    $"_framework/{debugSymbols.GetMetadata("FileName")}{debugSymbols.GetMetadata("Extension")}"
+                );
                 assetCandidates.Add(debugSymbols);
             }
 
@@ -206,14 +287,22 @@ public class ComputeWasmBuildAssets : Task
                     "Found satellite assembly '{0}' asset for project '{1}' with culture '{2}'",
                     projectSatelliteAssembly.ItemSpec,
                     intermediateAssembly.ItemSpec,
-                    candidateCulture);
+                    candidateCulture
+                );
 
-                var assetCandidate = new TaskItem(Path.GetFullPath(projectSatelliteAssembly.ItemSpec), projectSatelliteAssembly.CloneCustomMetadata());
-                var projectAssemblyAssetPath = Path.GetFullPath(Path.Combine(
-                    OutputPath,
-                    "wwwroot",
-                    "_framework",
-                    ProjectAssembly[0].GetMetadata("FileName") + ProjectAssembly[0].GetMetadata("Extension")));
+                var assetCandidate = new TaskItem(
+                    Path.GetFullPath(projectSatelliteAssembly.ItemSpec),
+                    projectSatelliteAssembly.CloneCustomMetadata()
+                );
+                var projectAssemblyAssetPath = Path.GetFullPath(
+                    Path.Combine(
+                        OutputPath,
+                        "wwwroot",
+                        "_framework",
+                        ProjectAssembly[0].GetMetadata("FileName")
+                            + ProjectAssembly[0].GetMetadata("Extension")
+                    )
+                );
 
                 var normalizedPath = assetCandidate.GetMetadata("TargetPath").Replace('\\', '/');
 
@@ -221,7 +310,10 @@ public class ComputeWasmBuildAssets : Task
                 assetCandidate.SetMetadata("AssetRole", "Related");
                 assetCandidate.SetMetadata("AssetTraitName", "Culture");
                 assetCandidate.SetMetadata("AssetTraitValue", candidateCulture);
-                assetCandidate.SetMetadata("RelativePath", Path.Combine("_framework", normalizedPath));
+                assetCandidate.SetMetadata(
+                    "RelativePath",
+                    Path.Combine("_framework", normalizedPath)
+                );
                 assetCandidate.SetMetadata("RelatedAsset", projectAssemblyAssetPath);
 
                 assetCandidates.Add(assetCandidate);
@@ -257,7 +349,13 @@ public class ComputeWasmBuildAssets : Task
                     candidate.SetMetadata("AssetTraitName", "WasmResource");
                     candidate.SetMetadata("AssetTraitValue", "runtime");
                 }
-                if (string.Equals(candidate.GetMetadata("ResolvedFrom"), "{HintPathFromItem}", StringComparison.Ordinal))
+                if (
+                    string.Equals(
+                        candidate.GetMetadata("ResolvedFrom"),
+                        "{HintPathFromItem}",
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     candidate.RemoveMetadata("OriginalItemSpec");
                 }

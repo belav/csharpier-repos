@@ -15,14 +15,16 @@ namespace System.Collections.Frozen
     /// used for an <see cref="IComparable{T}"/> as we can't know for sure whether it's valid, e.g. if the TKey is a ValueTuple`2, it itself
     /// is comparable, but its items might not be such that trying to compare it will result in exception.
     /// </remarks>
-    internal sealed class SmallValueTypeComparableFrozenDictionary<TKey, TValue> : FrozenDictionary<TKey, TValue>
+    internal sealed class SmallValueTypeComparableFrozenDictionary<TKey, TValue>
+        : FrozenDictionary<TKey, TValue>
         where TKey : notnull
     {
         private readonly TKey[] _keys;
         private readonly TValue[] _values;
         private readonly TKey _max;
 
-        internal SmallValueTypeComparableFrozenDictionary(Dictionary<TKey, TValue> source) : base(EqualityComparer<TKey>.Default)
+        internal SmallValueTypeComparableFrozenDictionary(Dictionary<TKey, TValue> source)
+            : base(EqualityComparer<TKey>.Default)
         {
             Debug.Assert(default(TKey) is IComparable<TKey>);
             Debug.Assert(default(TKey) is not null);
@@ -40,7 +42,9 @@ namespace System.Collections.Frozen
 
         private protected override TKey[] KeysCore => _keys;
         private protected override TValue[] ValuesCore => _values;
+
         private protected override Enumerator GetEnumeratorCore() => new Enumerator(_keys, _values);
+
         private protected override int CountCore => _keys.Length;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

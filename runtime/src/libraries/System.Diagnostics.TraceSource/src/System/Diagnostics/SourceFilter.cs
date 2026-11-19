@@ -16,8 +16,16 @@ namespace System.Diagnostics
             Source = source;
         }
 
-        public override bool ShouldTrace(TraceEventCache? cache, string source, TraceEventType eventType, int id, [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string? formatOrMessage,
-                                         object?[]? args, object? data1, object?[]? data)
+        public override bool ShouldTrace(
+            TraceEventCache? cache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string? formatOrMessage,
+            object?[]? args,
+            object? data1,
+            object?[]? data
+        )
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -26,10 +34,7 @@ namespace System.Diagnostics
 
         public string Source
         {
-            get
-            {
-                return _src;
-            }
+            get { return _src; }
             [MemberNotNull(nameof(_src))]
             set
             {

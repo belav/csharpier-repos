@@ -81,9 +81,8 @@ public class DefaultModelBindingContextTest
         );
 
         // Assert
-        Assert.Collection(
-            Assert.IsType<CompositeValueProvider>(context.ValueProvider),
-            vp => Assert.Same(original[1], vp)
+        Assert.Collection(Assert.IsType<CompositeValueProvider>(context.ValueProvider), vp =>
+            Assert.Same(original[1], vp)
         );
     }
 
@@ -114,9 +113,8 @@ public class DefaultModelBindingContextTest
         context.EnterNestedScope(propertyMetadata, "Length", "Length", model: null);
 
         // Assert
-        Assert.Collection(
-            Assert.IsType<CompositeValueProvider>(context.ValueProvider),
-            vp => Assert.Same(original[1], vp)
+        Assert.Collection(Assert.IsType<CompositeValueProvider>(context.ValueProvider), vp =>
+            Assert.Same(original[1], vp)
         );
     }
 
@@ -148,9 +146,8 @@ public class DefaultModelBindingContextTest
         context.EnterNestedScope(propertyMetadata, "Length", "Length", model: null);
 
         // Assert
-        Assert.Collection(
-            Assert.IsType<CompositeValueProvider>(context.ValueProvider),
-            vp => Assert.Same(original[2], vp)
+        Assert.Collection(Assert.IsType<CompositeValueProvider>(context.ValueProvider), vp =>
+            Assert.Same(original[2], vp)
         );
     }
 

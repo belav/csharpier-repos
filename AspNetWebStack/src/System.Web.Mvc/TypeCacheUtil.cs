@@ -12,7 +12,10 @@ namespace System.Web.Mvc
 {
     internal static class TypeCacheUtil
     {
-        private static IEnumerable<Type> FilterTypesInAssemblies(IBuildManager buildManager, Predicate<Type> predicate)
+        private static IEnumerable<Type> FilterTypesInAssemblies(
+            IBuildManager buildManager,
+            Predicate<Type> predicate
+        )
         {
             // Go through all assemblies referenced by the application and search for types matching a predicate
             IEnumerable<Type> typesSoFar = Type.EmptyTypes;
@@ -34,12 +37,21 @@ namespace System.Web.Mvc
             return typesSoFar.Where(type => TypeIsPublicClass(type) && predicate(type));
         }
 
-        public static List<Type> GetFilteredTypesFromAssemblies(string cacheName, Predicate<Type> predicate, IBuildManager buildManager)
+        public static List<Type> GetFilteredTypesFromAssemblies(
+            string cacheName,
+            Predicate<Type> predicate,
+            IBuildManager buildManager
+        )
         {
             TypeCacheSerializer serializer = new TypeCacheSerializer();
 
             // first, try reading from the cache on disk
-            List<Type> matchingTypes = ReadTypesFromCache(cacheName, predicate, buildManager, serializer);
+            List<Type> matchingTypes = ReadTypesFromCache(
+                cacheName,
+                predicate,
+                buildManager,
+                serializer
+            );
             if (matchingTypes != null)
             {
                 return matchingTypes;
@@ -54,8 +66,17 @@ namespace System.Web.Mvc
             return matchingTypes;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Cache failures are not fatal, and the code should continue executing normally.")]
-        internal static List<Type> ReadTypesFromCache(string cacheName, Predicate<Type> predicate, IBuildManager buildManager, TypeCacheSerializer serializer)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Cache failures are not fatal, and the code should continue executing normally."
+        )]
+        internal static List<Type> ReadTypesFromCache(
+            string cacheName,
+            Predicate<Type> predicate,
+            IBuildManager buildManager,
+            TypeCacheSerializer serializer
+        )
         {
             try
             {
@@ -65,7 +86,12 @@ namespace System.Web.Mvc
                     using (StreamReader reader = new StreamReader(stream))
                     {
                         List<Type> deserializedTypes = serializer.DeserializeTypes(reader);
-                        if (deserializedTypes != null && deserializedTypes.All(type => TypeIsPublicClass(type) && predicate(type)))
+                        if (
+                            deserializedTypes != null
+                            && deserializedTypes.All(type =>
+                                TypeIsPublicClass(type) && predicate(type)
+                            )
+                        )
                         {
                             // If all read types still match the predicate, success!
                             return deserializedTypes;
@@ -73,15 +99,22 @@ namespace System.Web.Mvc
                     }
                 }
             }
-            catch
-            {
-            }
+            catch { }
 
             return null;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Cache failures are not fatal, and the code should continue executing normally.")]
-        internal static void SaveTypesToCache(string cacheName, IList<Type> matchingTypes, IBuildManager buildManager, TypeCacheSerializer serializer)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Cache failures are not fatal, and the code should continue executing normally."
+        )]
+        internal static void SaveTypesToCache(
+            string cacheName,
+            IList<Type> matchingTypes,
+            IBuildManager buildManager,
+            TypeCacheSerializer serializer
+        )
         {
             try
             {
@@ -94,9 +127,7 @@ namespace System.Web.Mvc
                     }
                 }
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         private static bool TypeIsPublicClass(Type type)

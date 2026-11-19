@@ -24,6 +24,5 @@ namespace Microsoft.Extensions.DependencyModel
         public string Locale { get; set; }
 
         public string Path { get; set; }
-
     }
 }

@@ -15,6 +15,6 @@ namespace Microsoft.CodeAnalysis.Precedence
         Bitwise,
         Logical,
         Coalesce,
-        Other
+        Other,
     }
 }

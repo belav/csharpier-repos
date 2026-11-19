@@ -29,7 +29,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return result;
         }
 
-        private static void TypeDependsClosure(NamedTypeSymbol type, CSharpCompilation currentCompilation, HashSet<Symbol> partialClosure)
+        private static void TypeDependsClosure(
+            NamedTypeSymbol type,
+            CSharpCompilation currentCompilation,
+            HashSet<Symbol> partialClosure
+        )
         {
             if ((object)type == null)
             {
@@ -48,7 +52,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
                 else
                 {
-                    TypeDependsClosure(type.GetDeclaredBaseType(null), currentCompilation, partialClosure);
+                    TypeDependsClosure(
+                        type.GetDeclaredBaseType(null),
+                        currentCompilation,
+                        partialClosure
+                    );
                 }
 
                 // containment is interesting only for the current compilation
@@ -74,7 +82,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return result;
         }
 
-        private static void StructDependsClosure(NamedTypeSymbol type, HashSet<Symbol> partialClosure, NamedTypeSymbol on)
+        private static void StructDependsClosure(
+            NamedTypeSymbol type,
+            HashSet<Symbol> partialClosure,
+            NamedTypeSymbol on
+        )
         {
             Debug.Assert((object)type != null);
 
@@ -94,7 +106,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     var field = member as FieldSymbol;
                     var fieldType = field?.NonPointerType();
-                    if (fieldType is null || fieldType.TypeKind != TypeKind.Struct || field.IsStatic)
+                    if (
+                        fieldType is null
+                        || fieldType.TypeKind != TypeKind.Struct
+                        || field.IsStatic
+                    )
                     {
                         continue;
                     }
@@ -110,17 +126,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         ///     non-enum, non-struct named types are managed;
         ///     type parameters are managed unless an 'unmanaged' constraint is present;
         ///     all special types have spec'd values (basically, (non-string) primitives) are not managed;
-        /// 
+        ///
         /// Only structs are complicated, because the definition is recursive.  A struct type is managed
         /// if one of its instance fields is managed or a ref field.  Unfortunately, this can result in infinite recursion.
         /// If the closure is finite, and we don't find anything definitely managed, then we return true.
         /// If the closure is infinite, we disregard all but a representative of any expanding cycle.
-        /// 
+        ///
         /// Intuitively, this will only return true if there's a specific type we can point to that is would
         /// be managed even if it had no fields.  e.g. struct S { S s; } is not managed, but struct S { S s; object o; }
         /// is because we can point to object.
         /// </summary>
-        internal static ManagedKind GetManagedKind(NamedTypeSymbol type, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        internal static ManagedKind GetManagedKind(
+            NamedTypeSymbol type,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             var (isManaged, hasGenerics) = IsManagedTypeHelper(type);
             var definitelyManaged = isManaged == ThreeState.True;
@@ -147,7 +166,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return ManagedKind.Unmanaged;
             }
 
-            static (bool definitelyManaged, bool hasGenerics) dependsOnDefinitelyManagedType(NamedTypeSymbol type, HashSet<Symbol> partialClosure, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+            static (bool definitelyManaged, bool hasGenerics) dependsOnDefinitelyManagedType(
+                NamedTypeSymbol type,
+                HashSet<Symbol> partialClosure,
+                ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+            )
             {
                 Debug.Assert((object)type != null);
 
@@ -162,8 +185,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         {
                             case SymbolKind.Field:
                                 field = (FieldSymbol)member;
-                                Debug.Assert((object)(field.AssociatedSymbol as EventSymbol) == null,
-                                    "Didn't expect to find a field-like event backing field in the member list.");
+                                Debug.Assert(
+                                    (object)(field.AssociatedSymbol as EventSymbol) == null,
+                                    "Didn't expect to find a field-like event backing field in the member list."
+                                );
                                 break;
                             case SymbolKind.Event:
                                 field = ((EventSymbol)member).AssociatedField;
@@ -216,7 +241,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 case ThreeState.Unknown:
                                     if (!fieldNamedType.OriginalDefinition.KnownCircularStruct)
                                     {
-                                        var (definitelyManaged, childHasGenerics) = dependsOnDefinitelyManagedType(fieldNamedType, partialClosure, ref useSiteInfo);
+                                        var (definitelyManaged, childHasGenerics) =
+                                            dependsOnDefinitelyManagedType(
+                                                fieldNamedType,
+                                                partialClosure,
+                                                ref useSiteInfo
+                                            );
                                         hasGenerics = hasGenerics || childHasGenerics;
                                         if (definitelyManaged)
                                         {
@@ -241,7 +271,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// without looking at its fields and Unknown otherwise.
         /// Also returns whether or not the given type is generic.
         /// </summary>
-        private static (ThreeState isManaged, bool hasGenerics) IsManagedTypeHelper(NamedTypeSymbol type)
+        private static (ThreeState isManaged, bool hasGenerics) IsManagedTypeHelper(
+            NamedTypeSymbol type
+        )
         {
             // To match dev10, we treat enums as their underlying types.
             if (type.IsEnumType())

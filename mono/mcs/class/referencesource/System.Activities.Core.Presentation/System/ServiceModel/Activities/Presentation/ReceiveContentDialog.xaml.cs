@@ -14,16 +14,22 @@ namespace System.ServiceModel.Activities.Presentation
 
     partial class ReceiveContentDialog : WorkflowElementDialog
     {
-        public static readonly DependencyProperty ViewModelProperty =
-            DependencyProperty.Register("ViewModel", typeof(ContentDialogViewModel<ReceiveMessageContent, ReceiveParametersContent>), typeof(ReceiveContentDialog));
+        public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
+            "ViewModel",
+            typeof(ContentDialogViewModel<ReceiveMessageContent, ReceiveParametersContent>),
+            typeof(ReceiveContentDialog)
+        );
 
         ReceiveContentDialog()
         {
             InitializeComponent();
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors",
-            Justification = "This values must be set before this constructor complete to ensure ShowOkCancel() can consume that immediately")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2214:DoNotCallOverridableMethodsInConstructors",
+            Justification = "This values must be set before this constructor complete to ensure ShowOkCancel() can consume that immediately"
+        )]
         ReceiveContentDialog(ModelItem activity, EditingContext context, DependencyObject owner)
             : this()
         {
@@ -31,7 +37,10 @@ namespace System.ServiceModel.Activities.Presentation
             this.Context = context;
             this.HelpKeyword = HelpKeywords.MessageContentDialog;
             this.Owner = owner;
-            this.ViewModel = new ContentDialogViewModel<ReceiveMessageContent, ReceiveParametersContent>(this.ModelItem);
+            this.ViewModel = new ContentDialogViewModel<
+                ReceiveMessageContent,
+                ReceiveParametersContent
+            >(this.ModelItem);
             if (!this.Context.Items.GetValue<ReadOnlyState>().IsReadOnly)
             {
                 this.OnOk = this.ViewModel.OnOk;
@@ -40,11 +49,19 @@ namespace System.ServiceModel.Activities.Presentation
 
         public ContentDialogViewModel<ReceiveMessageContent, ReceiveParametersContent> ViewModel
         {
-            get { return (ContentDialogViewModel<ReceiveMessageContent, ReceiveParametersContent>)GetValue(ViewModelProperty); }
+            get
+            {
+                return (ContentDialogViewModel<ReceiveMessageContent, ReceiveParametersContent>)
+                    GetValue(ViewModelProperty);
+            }
             set { SetValue(ViewModelProperty, value); }
         }
 
-        public static bool ShowDialog(ModelItem activity, EditingContext context, DependencyObject owner)
+        public static bool ShowDialog(
+            ModelItem activity,
+            EditingContext context,
+            DependencyObject owner
+        )
         {
             return new ReceiveContentDialog(activity, context, owner).ShowOkCancel();
         }

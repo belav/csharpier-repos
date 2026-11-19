@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,51 +25,46 @@
 //
 
 using System;
-using System.ComponentModel;
 using System.Collections;
+using System.ComponentModel;
 using System.Windows.Forms.Layout;
 
-namespace System.Windows.Forms {
+namespace System.Windows.Forms
+{
+    public class TableLayoutRowStyleCollection : TableLayoutStyleCollection
+    {
+        internal TableLayoutRowStyleCollection(IArrangedContainer panel)
+            : base(panel, "RowStyles") { }
 
-	public class TableLayoutRowStyleCollection : TableLayoutStyleCollection {
-		
-		internal TableLayoutRowStyleCollection (IArrangedContainer panel) : base (panel, "RowStyles")
-		{
-		}
-		
-		public int Add (RowStyle rowStyle)
-		{
-			return base.Add (rowStyle);
-		}
+        public int Add(RowStyle rowStyle)
+        {
+            return base.Add(rowStyle);
+        }
 
-		public bool Contains (RowStyle rowStyle)
-		{
-			return ((IList)this).Contains (rowStyle);
-		}
+        public bool Contains(RowStyle rowStyle)
+        {
+            return ((IList)this).Contains(rowStyle);
+        }
 
-		public int IndexOf (RowStyle rowStyle)
-		{
-			return ((IList)this).IndexOf (rowStyle);
-		}
+        public int IndexOf(RowStyle rowStyle)
+        {
+            return ((IList)this).IndexOf(rowStyle);
+        }
 
-		public void Insert (int index, RowStyle rowStyle)
-		{
-			((IList)this).Insert (index, rowStyle);
-		}
+        public void Insert(int index, RowStyle rowStyle)
+        {
+            ((IList)this).Insert(index, rowStyle);
+        }
 
-		public void Remove (RowStyle rowStyle)
-		{
-			((IList)this).Remove (rowStyle);
-		}
-		
-		public new RowStyle this [int index] {
-			get {
-				return (RowStyle) base [index];
-			}
-			
-			set {
-				base [index] = value;
-			}
-		}
-	}
+        public void Remove(RowStyle rowStyle)
+        {
+            ((IList)this).Remove(rowStyle);
+        }
+
+        public new RowStyle this[int index]
+        {
+            get { return (RowStyle)base[index]; }
+            set { base[index] = value; }
+        }
+    }
 }

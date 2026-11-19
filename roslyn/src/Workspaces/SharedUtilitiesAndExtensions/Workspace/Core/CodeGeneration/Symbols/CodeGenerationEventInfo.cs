@@ -10,12 +10,14 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 {
     internal class CodeGenerationEventInfo
     {
-        private static readonly ConditionalWeakTable<IEventSymbol, CodeGenerationEventInfo> s_eventToInfoMap =
-            new();
+        private static readonly ConditionalWeakTable<
+            IEventSymbol,
+            CodeGenerationEventInfo
+        > s_eventToInfoMap = new();
 
         private readonly bool _isUnsafe;
-        private CodeGenerationEventInfo(bool isUnsafe)
-            => _isUnsafe = isUnsafe;
+
+        private CodeGenerationEventInfo(bool isUnsafe) => _isUnsafe = isUnsafe;
 
         public static void Attach(IEventSymbol @event, bool isUnsafe)
         {
@@ -29,10 +31,9 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             return info;
         }
 
-        public static bool GetIsUnsafe(IEventSymbol @event)
-            => GetIsUnsafe(GetInfo(@event));
+        public static bool GetIsUnsafe(IEventSymbol @event) => GetIsUnsafe(GetInfo(@event));
 
-        private static bool GetIsUnsafe(CodeGenerationEventInfo info)
-            => info != null && info._isUnsafe;
+        private static bool GetIsUnsafe(CodeGenerationEventInfo info) =>
+            info != null && info._isUnsafe;
     }
 }

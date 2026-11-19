@@ -21,7 +21,7 @@ namespace System.Collections.Concurrent
     [EventSource(
         Name = "System.Collections.Concurrent.ConcurrentCollectionsEventSource",
         Guid = "35167F8E-49B2-4b96-AB86-435B59336B5E"
-        )]
+    )]
     internal sealed class CDSCollectionETWBCLProvider : EventSource
     {
         /// <summary>
@@ -29,6 +29,7 @@ namespace System.Collections.Concurrent
         /// The collection provider GUID is {35167F8E-49B2-4b96-AB86-435B59336B5E}.
         /// </summary>
         public static CDSCollectionETWBCLProvider Log = new CDSCollectionETWBCLProvider();
+
         /// <summary>Prevent external instantiation.  All logging should go through the Log instance.</summary>
         private CDSCollectionETWBCLProvider() { }
 

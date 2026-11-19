@@ -5,7 +5,11 @@ namespace System.Buffers.Text
 {
     public static partial class Utf8Parser
     {
-        private static bool TryParseTimeSpanBigG(ReadOnlySpan<byte> source, out TimeSpan value, out int bytesConsumed)
+        private static bool TryParseTimeSpanBigG(
+            ReadOnlySpan<byte> source,
+            out TimeSpan value,
+            out int bytesConsumed
+        )
         {
             int srcIndex = 0;
             byte c = default;
@@ -97,7 +101,13 @@ namespace System.Buffers.Text
                 return false;
             }
 
-            if (!TryParseTimeSpanFraction(source.Slice(srcIndex), out uint fraction, out justConsumed))
+            if (
+                !TryParseTimeSpanFraction(
+                    source.Slice(srcIndex),
+                    out uint fraction,
+                    out justConsumed
+                )
+            )
             {
                 value = default;
                 bytesConsumed = 0;
@@ -106,7 +116,17 @@ namespace System.Buffers.Text
 
             srcIndex += justConsumed;
 
-            if (!TryCreateTimeSpan(isNegative: isNegative, days: days, hours: hours, minutes: minutes, seconds: seconds, fraction: fraction, out value))
+            if (
+                !TryCreateTimeSpan(
+                    isNegative: isNegative,
+                    days: days,
+                    hours: hours,
+                    minutes: minutes,
+                    seconds: seconds,
+                    fraction: fraction,
+                    out value
+                )
+            )
             {
                 value = default;
                 bytesConsumed = 0;
@@ -117,7 +137,13 @@ namespace System.Buffers.Text
             // There cannot legally be a sixth number. If the next character is a period or colon, treat this as a error as it's likely
             // to indicate the start of a sixth number. Otherwise, treat as end of parse with data left over.
             //
-            if (srcIndex != source.Length && (source[srcIndex] == Utf8Constants.Period || source[srcIndex] == Utf8Constants.Colon))
+            if (
+                srcIndex != source.Length
+                && (
+                    source[srcIndex] == Utf8Constants.Period
+                    || source[srcIndex] == Utf8Constants.Colon
+                )
+            )
             {
                 value = default;
                 bytesConsumed = 0;

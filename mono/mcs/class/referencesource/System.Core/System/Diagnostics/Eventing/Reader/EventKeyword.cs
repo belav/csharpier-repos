@@ -1,29 +1,30 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class: EventKeyword
 **
-** Purpose: 
-** This public class describes the metadata for a specific Keyword 
-** defined by a Provider. An instance of this class is obtained from 
+** Purpose:
+** This public class describes the metadata for a specific Keyword
+** defined by a Provider. An instance of this class is obtained from
 ** a ProviderMetadata object.
-** 
+**
 ============================================================*/
 
 using System.Collections.Generic;
 
-namespace System.Diagnostics.Eventing.Reader {
-
+namespace System.Diagnostics.Eventing.Reader
+{
     /// <summary>
-    /// Describes the metadata for a specific Keyword defined by a Provider. 
+    /// Describes the metadata for a specific Keyword defined by a Provider.
     /// An instance of this class is obtained from a ProviderMetadata object.
     /// </summary>
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    public sealed class EventKeyword {
+    public sealed class EventKeyword
+    {
         private long value;
         private string name;
         private string displayName;
@@ -32,14 +33,16 @@ namespace System.Diagnostics.Eventing.Reader {
         object syncObject;
 
         //called from EventMetadata
-        internal EventKeyword(long value, ProviderMetadata pmReference) {
+        internal EventKeyword(long value, ProviderMetadata pmReference)
+        {
             this.value = value;
             this.pmReference = pmReference;
             this.syncObject = new object();
         }
 
         //called from ProviderMetadata
-        internal EventKeyword(string name, long value, string displayName) {
+        internal EventKeyword(string name, long value, string displayName)
+        {
             this.value = value;
             this.name = name;
             this.displayName = displayName;
@@ -47,11 +50,15 @@ namespace System.Diagnostics.Eventing.Reader {
             this.syncObject = new object();
         }
 
-        internal void PrepareData() {
-            if (dataReady == true) return;
+        internal void PrepareData()
+        {
+            if (dataReady == true)
+                return;
 
-            lock (syncObject) {
-                if (dataReady == true) return;
+            lock (syncObject)
+            {
+                if (dataReady == true)
+                    return;
 
                 IEnumerable<EventKeyword> result = pmReference.Keywords;
 
@@ -59,8 +66,10 @@ namespace System.Diagnostics.Eventing.Reader {
                 this.displayName = null;
                 this.dataReady = true;
 
-                foreach (EventKeyword key in result) {
-                    if (key.Value == this.value) {
+                foreach (EventKeyword key in result)
+                {
+                    if (key.Value == this.value)
+                    {
                         this.name = key.Name;
                         this.displayName = key.DisplayName;
                         break;
@@ -69,21 +78,24 @@ namespace System.Diagnostics.Eventing.Reader {
             }
         }
 
-        public string Name {
-            get {
+        public string Name
+        {
+            get
+            {
                 PrepareData();
                 return this.name;
             }
         }
 
-        public long Value {
-            get {
-                return this.value;
-            }
+        public long Value
+        {
+            get { return this.value; }
         }
 
-        public string DisplayName {
-            get {
+        public string DisplayName
+        {
+            get
+            {
                 PrepareData();
                 return this.displayName;
             }

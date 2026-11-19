@@ -9,7 +9,5 @@ namespace System.Runtime.CompilerServices
     /// of that interface should exist.
     /// </summary>
     [AttributeUsage(AttributeTargets.Interface, AllowMultiple = false)]
-    internal sealed class InternalImplementationOnlyAttribute : Attribute
-    {
-    }
+    internal sealed class InternalImplementationOnlyAttribute : Attribute { }
 }

@@ -4,15 +4,18 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
     using System.Diagnostics;
 
-    public sealed class RegisteredArrayDeclaration {
+    public sealed class RegisteredArrayDeclaration
+    {
         private Control _control;
         private string _name;
         private string _value;
 
-        internal RegisteredArrayDeclaration(Control control, string arrayName, string arrayValue) {
+        internal RegisteredArrayDeclaration(Control control, string arrayName, string arrayValue)
+        {
             Debug.Assert(arrayName != null);
             // null value allowed by asp.net
             _control = control;
@@ -20,23 +23,23 @@ namespace System.Web.UI {
             _value = arrayValue;
         }
 
-        public string Name {
-            get {
-                return _name;
-            }
+        public string Name
+        {
+            get { return _name; }
         }
 
-        public string Value {
-            get {
+        public string Value
+        {
+            get
+            {
                 // may be null
                 return _value;
             }
         }
 
-        public Control Control {
-            get {
-                return _control;
-            }
+        public Control Control
+        {
+            get { return _control; }
         }
     }
 }

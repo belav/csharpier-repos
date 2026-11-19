@@ -9,8 +9,7 @@ namespace System.Web.Http.SelfHost.ServiceModel
     {
         public static bool IsDefined(HostNameComparisonMode value)
         {
-            return
-                value == HostNameComparisonMode.StrongWildcard
+            return value == HostNameComparisonMode.StrongWildcard
                 || value == HostNameComparisonMode.Exact
                 || value == HostNameComparisonMode.WeakWildcard;
         }
@@ -19,7 +18,11 @@ namespace System.Web.Http.SelfHost.ServiceModel
         {
             if (!IsDefined(value))
             {
-                throw Error.InvalidEnumArgument(parameterName, (int)value, typeof(HostNameComparisonMode));
+                throw Error.InvalidEnumArgument(
+                    parameterName,
+                    (int)value,
+                    typeof(HostNameComparisonMode)
+                );
             }
         }
     }

@@ -5,30 +5,28 @@
 namespace System.ServiceModel.Description
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
-    using System.ServiceModel.Activation;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Reflection;
     using System.Runtime;
     using System.Runtime.Serialization;
-    using System.Reflection;
-    using System.Diagnostics;
     using System.Security;
     using System.Security.Permissions;
+    using System.ServiceModel;
+    using System.ServiceModel.Activation;
 
     [DebuggerDisplay("ServiceType={serviceType}")]
     public class ServiceDescription
     {
-        KeyedByTypeCollection<IServiceBehavior> behaviors = new KeyedByTypeCollection<IServiceBehavior>();
+        KeyedByTypeCollection<IServiceBehavior> behaviors =
+            new KeyedByTypeCollection<IServiceBehavior>();
         string configurationName;
         ServiceEndpointCollection endpoints = new ServiceEndpointCollection();
         Type serviceType;
         XmlName serviceName;
         string serviceNamespace = NamingHelper.DefaultNamespace;
 
-
-        public ServiceDescription()
-        {
-        }
+        public ServiceDescription() { }
 
         internal ServiceDescription(String serviceName)
         {
@@ -68,23 +66,19 @@ namespace System.ServiceModel.Description
                 else
                 {
                     // the XmlName ctor validate the value
-                    serviceName = new XmlName(value, true /*isEncoded*/);
+                    serviceName = new XmlName(
+                        value,
+                        true /*isEncoded*/
+                    );
                 }
             }
         }
 
         public string Namespace
         {
-            get
-            {
-                return serviceNamespace;
-            }
-            set
-            {
-                serviceNamespace = value;
-            }
+            get { return serviceNamespace; }
+            set { serviceNamespace = value; }
         }
-
 
         public KeyedByTypeCollection<IServiceBehavior> Behaviors
         {
@@ -119,8 +113,10 @@ namespace System.ServiceModel.Description
         {
             Type type = serviceDescription.ServiceType;
 
-            System.ServiceModel.Description.TypeLoader.ApplyServiceInheritance<IServiceBehavior, KeyedByTypeCollection<IServiceBehavior>>(
-                type, serviceDescription.Behaviors, ServiceDescription.GetIServiceBehaviorAttributes);
+            System.ServiceModel.Description.TypeLoader.ApplyServiceInheritance<
+                IServiceBehavior,
+                KeyedByTypeCollection<IServiceBehavior>
+            >(type, serviceDescription.Behaviors, ServiceDescription.GetIServiceBehaviorAttributes);
 
             ServiceBehaviorAttribute serviceBehavior = EnsureBehaviorAttribute(serviceDescription);
 
@@ -144,18 +140,25 @@ namespace System.ServiceModel.Description
         internal static object CreateImplementation(Type serviceType)
         {
             ConstructorInfo constructor = serviceType.GetConstructor(
-                TypeLoader.DefaultBindingFlags, null, Type.EmptyTypes, null);
+                TypeLoader.DefaultBindingFlags,
+                null,
+                Type.EmptyTypes,
+                null
+            );
             if (constructor == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR.GetString(SR.SFxNoDefaultConstructor)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.SFxNoDefaultConstructor))
+                );
             }
 
             // Stop the partially trusted callers to use the ServiceDescription.GetService(Type) method to
             // instantiate types in this assembly that are not public or have a non-public default constructor.
-            if ((!PartialTrustHelpers.AppDomainFullyTrusted) &&
-                (serviceType.IsNotPublic || (!constructor.IsPublic)) &&
-                (serviceType.Assembly == typeof(ServiceDescription).Assembly))
+            if (
+                (!PartialTrustHelpers.AppDomainFullyTrusted)
+                && (serviceType.IsNotPublic || (!constructor.IsPublic))
+                && (serviceType.Assembly == typeof(ServiceDescription).Assembly)
+            )
             {
                 PartialTrustHelpers.DemandForFullTrust();
             }
@@ -163,19 +166,31 @@ namespace System.ServiceModel.Description
             try
             {
                 object implementation = constructor.Invoke(
-                    TypeLoader.DefaultBindingFlags, null, null, System.Globalization.CultureInfo.InvariantCulture);
+                    TypeLoader.DefaultBindingFlags,
+                    null,
+                    null,
+                    System.Globalization.CultureInfo.InvariantCulture
+                );
                 return implementation;
             }
             catch (MethodAccessException methodAccessException)
             {
-                SecurityException securityException = methodAccessException.InnerException as SecurityException;
-                if (securityException != null && securityException.PermissionType.Equals(typeof(ReflectionPermission)))
+                SecurityException securityException =
+                    methodAccessException.InnerException as SecurityException;
+                if (
+                    securityException != null
+                    && securityException.PermissionType.Equals(typeof(ReflectionPermission))
+                )
                 {
-                    DiagnosticUtility.TraceHandledException(methodAccessException, TraceEventType.Warning);
+                    DiagnosticUtility.TraceHandledException(
+                        methodAccessException,
+                        TraceEventType.Warning
+                    );
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityException(SR.GetString(
-                                SR.PartialTrustServiceCtorNotVisible,
-                                serviceType.FullName)));
+                        new SecurityException(
+                            SR.GetString(SR.PartialTrustServiceCtorNotVisible, serviceType.FullName)
+                        )
+                    );
                 }
                 else
                 {
@@ -206,15 +221,27 @@ namespace System.ServiceModel.Description
                 ServiceEndpoint endpoint = this.Endpoints[i];
                 if (endpoint == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.AChannelServiceEndpointIsNull0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.AChannelServiceEndpointIsNull0)
+                        )
+                    );
                 }
                 endpoint.EnsureInvariants();
             }
         }
 
-        static void GetIServiceBehaviorAttributes(Type currentServiceType, KeyedByTypeCollection<IServiceBehavior> behaviors)
+        static void GetIServiceBehaviorAttributes(
+            Type currentServiceType,
+            KeyedByTypeCollection<IServiceBehavior> behaviors
+        )
         {
-            foreach (IServiceBehavior behaviorAttribute in ServiceReflector.GetCustomAttributes(currentServiceType, typeof(IServiceBehavior)))
+            foreach (
+                IServiceBehavior behaviorAttribute in ServiceReflector.GetCustomAttributes(
+                    currentServiceType,
+                    typeof(IServiceBehavior)
+                )
+            )
             {
                 behaviors.Add(behaviorAttribute);
             }
@@ -244,7 +271,9 @@ namespace System.ServiceModel.Description
         {
             if (serviceImplementation == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("serviceImplementation");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "serviceImplementation"
+                );
             }
 
             Type serviceType = serviceImplementation.GetType();
@@ -261,11 +290,18 @@ namespace System.ServiceModel.Description
             return description;
         }
 
-        static void SetupSingleton(ServiceDescription serviceDescription, object implementation, bool isWellKnown)
+        static void SetupSingleton(
+            ServiceDescription serviceDescription,
+            object implementation,
+            bool isWellKnown
+        )
         {
             ServiceBehaviorAttribute serviceBehavior = EnsureBehaviorAttribute(serviceDescription);
             Type type = serviceDescription.ServiceType;
-            if ((implementation == null) && (serviceBehavior.InstanceContextMode == InstanceContextMode.Single))
+            if (
+                (implementation == null)
+                && (serviceBehavior.InstanceContextMode == InstanceContextMode.Single)
+            )
             {
                 implementation = CreateImplementation(type);
             }
@@ -274,11 +310,13 @@ namespace System.ServiceModel.Description
             {
                 serviceBehavior.SetWellKnownSingleton(implementation);
             }
-            else if ((implementation != null) && (serviceBehavior.InstanceContextMode == InstanceContextMode.Single))
+            else if (
+                (implementation != null)
+                && (serviceBehavior.InstanceContextMode == InstanceContextMode.Single)
+            )
             {
                 serviceBehavior.SetHiddenSingleton(implementation);
             }
         }
     }
 }
-

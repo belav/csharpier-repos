@@ -9,10 +9,10 @@ using Microsoft.CodeAnalysis.PopulateSwitch;
 namespace Microsoft.CodeAnalysis.CSharp.PopulateSwitch
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class CSharpPopulateSwitchExpressionDiagnosticAnalyzer :
-        AbstractPopulateSwitchExpressionDiagnosticAnalyzer<SwitchExpressionSyntax>
+    internal sealed class CSharpPopulateSwitchExpressionDiagnosticAnalyzer
+        : AbstractPopulateSwitchExpressionDiagnosticAnalyzer<SwitchExpressionSyntax>
     {
-        protected override Location GetDiagnosticLocation(SwitchExpressionSyntax switchBlock)
-            => switchBlock.SwitchKeyword.GetLocation();
+        protected override Location GetDiagnosticLocation(SwitchExpressionSyntax switchBlock) =>
+            switchBlock.SwitchKeyword.GetLocation();
     }
 }

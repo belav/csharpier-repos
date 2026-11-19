@@ -2,11 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
+using Internal.NativeFormat;
 using Internal.Text;
 using Internal.TypeSystem;
-using Internal.NativeFormat;
-
 using FieldTableFlags = Internal.Runtime.FieldTableFlags;
 
 namespace ILCompiler.DependencyAnalysis
@@ -34,17 +32,24 @@ namespace ILCompiler.DependencyAnalysis
         public int Offset => 0;
         public override bool IsShareable => false;
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => _externalReferences.GetSection(factory);
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            _externalReferences.GetSection(factory);
 
         public override bool StaticDependenciesAreComputed => true;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             // This node does not trigger generation of other nodes.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             var writer = new NativeWriter();
             var fieldMapHashTable = new VertexHashtable();
@@ -98,26 +103,33 @@ namespace ILCompiler.DependencyAnalysis
 
                 Vertex vertex = writer.GetUnsignedConstant((uint)flags);
 
-                uint declaringTypeId = _externalReferences.GetIndex(factory.NecessaryTypeSymbol(field.OwningType));
-                vertex = writer.GetTuple(vertex,
-                    writer.GetUnsignedConstant(declaringTypeId));
+                uint declaringTypeId = _externalReferences.GetIndex(
+                    factory.NecessaryTypeSymbol(field.OwningType)
+                );
+                vertex = writer.GetTuple(vertex, writer.GetUnsignedConstant(declaringTypeId));
 
                 if ((flags & FieldTableFlags.HasMetadataHandle) != 0)
                 {
                     // Only store the offset portion of the metadata handle to get better integer compression
-                    vertex = writer.GetTuple(vertex,
-                        writer.GetUnsignedConstant((uint)(fieldMapping.MetadataHandle & MetadataManager.MetadataOffsetMask)));
+                    vertex = writer.GetTuple(
+                        vertex,
+                        writer.GetUnsignedConstant(
+                            (uint)(fieldMapping.MetadataHandle & MetadataManager.MetadataOffsetMask)
+                        )
+                    );
                 }
                 else
                 {
                     // No metadata handle means we need to store name
-                    vertex = writer.GetTuple(vertex,
-                        writer.GetStringConstant(field.Name));
+                    vertex = writer.GetTuple(vertex, writer.GetStringConstant(field.Name));
                 }
 
                 if ((flags & FieldTableFlags.IsUniversalCanonicalEntry) != 0)
                 {
-                    vertex = writer.GetTuple(vertex, writer.GetUnsignedConstant(checked((uint)field.GetFieldOrdinal())));
+                    vertex = writer.GetTuple(
+                        vertex,
+                        writer.GetUnsignedConstant(checked((uint)field.GetFieldOrdinal()))
+                    );
                 }
                 else
                 {
@@ -135,7 +147,10 @@ namespace ILCompiler.DependencyAnalysis
 
                                 if (field.OwningType.HasInstantiation)
                                 {
-                                    vertex = writer.GetTuple(vertex, writer.GetUnsignedConstant(fieldOffset));
+                                    vertex = writer.GetTuple(
+                                        vertex,
+                                        writer.GetUnsignedConstant(fieldOffset)
+                                    );
                                 }
                                 else
                                 {
@@ -157,26 +172,43 @@ namespace ILCompiler.DependencyAnalysis
 
                                     if (!field.IsThreadStatic && !field.HasGCStaticBase)
                                     {
-                                        uint index = _externalReferences.GetIndex(staticsNode, (int)fieldOffset);
-                                        vertex = writer.GetTuple(vertex, writer.GetUnsignedConstant(index));
+                                        uint index = _externalReferences.GetIndex(
+                                            staticsNode,
+                                            (int)fieldOffset
+                                        );
+                                        vertex = writer.GetTuple(
+                                            vertex,
+                                            writer.GetUnsignedConstant(index)
+                                        );
                                     }
                                     else
                                     {
                                         uint index = _externalReferences.GetIndex(staticsNode);
-                                        vertex = writer.GetTuple(vertex, writer.GetUnsignedConstant(index));
-                                        vertex = writer.GetTuple(vertex, writer.GetUnsignedConstant(fieldOffset));
+                                        vertex = writer.GetTuple(
+                                            vertex,
+                                            writer.GetUnsignedConstant(index)
+                                        );
+                                        vertex = writer.GetTuple(
+                                            vertex,
+                                            writer.GetUnsignedConstant(fieldOffset)
+                                        );
                                     }
                                 }
                             }
                             break;
 
                         case FieldTableFlags.Instance:
-                            vertex = writer.GetTuple(vertex, writer.GetUnsignedConstant((uint)field.Offset.AsInt));
+                            vertex = writer.GetTuple(
+                                vertex,
+                                writer.GetUnsignedConstant((uint)field.Offset.AsInt)
+                            );
                             break;
                     }
                 }
 
-                int hashCode = field.OwningType.ConvertToCanonForm(CanonicalFormKind.Specific).GetHashCode();
+                int hashCode = field
+                    .OwningType.ConvertToCanonForm(CanonicalFormKind.Specific)
+                    .GetHashCode();
                 fieldMapHashTable.Append((uint)hashCode, hashTableSection.Place(vertex));
             }
 
@@ -184,7 +216,12 @@ namespace ILCompiler.DependencyAnalysis
 
             _size = hashTableBytes.Length;
 
-            return new ObjectData(hashTableBytes, Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+            return new ObjectData(
+                hashTableBytes,
+                Array.Empty<Relocation>(),
+                1,
+                new ISymbolDefinitionNode[] { this }
+            );
         }
 
         protected internal override int Phase => (int)ObjectNodePhase.Ordered;

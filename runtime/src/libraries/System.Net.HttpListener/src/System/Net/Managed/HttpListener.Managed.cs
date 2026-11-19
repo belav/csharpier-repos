@@ -12,10 +12,13 @@ namespace System.Net
     {
         public static bool IsSupported => true;
 
-        private readonly Dictionary<HttpListenerContext, HttpListenerContext> _listenerContexts = new Dictionary<HttpListenerContext, HttpListenerContext>();
+        private readonly Dictionary<HttpListenerContext, HttpListenerContext> _listenerContexts =
+            new Dictionary<HttpListenerContext, HttpListenerContext>();
         private readonly List<HttpListenerContext> _contextQueue = new List<HttpListenerContext>();
-        private readonly List<ListenerAsyncResult> _asyncWaitQueue = new List<ListenerAsyncResult>();
-        private readonly Dictionary<HttpConnection, HttpConnection> _connections = new Dictionary<HttpConnection, HttpConnection>();
+        private readonly List<ListenerAsyncResult> _asyncWaitQueue =
+            new List<ListenerAsyncResult>();
+        private readonly Dictionary<HttpConnection, HttpConnection> _connections =
+            new Dictionary<HttpConnection, HttpConnection>();
         private bool _unsafeConnectionNtlmAuthentication;
 
         public HttpListenerTimeoutManager TimeoutManager
@@ -27,9 +30,11 @@ namespace System.Net
             }
         }
 
-        private void AddPrefixCore(string uriPrefix) => HttpEndPointManager.AddPrefix(uriPrefix, this);
+        private void AddPrefixCore(string uriPrefix) =>
+            HttpEndPointManager.AddPrefix(uriPrefix, this);
 
-        private void RemovePrefixCore(string uriPrefix) => HttpEndPointManager.RemovePrefix(uriPrefix, this);
+        private void RemovePrefixCore(string uriPrefix) =>
+            HttpEndPointManager.RemovePrefix(uriPrefix, this);
 
         public void Start()
         {
@@ -48,7 +53,8 @@ namespace System.Net
                 catch (Exception exception)
                 {
                     _state = State.Closed;
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, $"Start {exception}");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Error(this, $"Start {exception}");
                     throw;
                 }
             }
@@ -67,7 +73,6 @@ namespace System.Net
 
         public void Stop()
         {
-
             lock (_internalLock)
             {
                 try
@@ -82,7 +87,8 @@ namespace System.Net
                 }
                 catch (Exception exception)
                 {
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, $"Stop {exception}");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Error(this, $"Stop {exception}");
                     throw;
                 }
                 finally
@@ -94,7 +100,6 @@ namespace System.Net
 
         public void Abort()
         {
-
             lock (_internalLock)
             {
                 try
@@ -112,7 +117,8 @@ namespace System.Net
                 }
                 catch (Exception exception)
                 {
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, $"Abort {exception}");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Error(this, $"Abort {exception}");
                     throw;
                 }
                 finally
@@ -124,7 +130,6 @@ namespace System.Net
 
         private void Dispose()
         {
-
             lock (_internalLock)
             {
                 try
@@ -138,7 +143,8 @@ namespace System.Net
                 }
                 catch (Exception exception)
                 {
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, $"Dispose {exception}");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Error(this, $"Dispose {exception}");
                     throw;
                 }
                 finally
@@ -217,7 +223,8 @@ namespace System.Net
                 if (close_existing)
                 {
                     // Need to copy this since closing will call UnregisterContext
-                    Dictionary<HttpListenerContext, HttpListenerContext>.KeyCollection keys = _listenerContexts.Keys;
+                    Dictionary<HttpListenerContext, HttpListenerContext>.KeyCollection keys =
+                        _listenerContexts.Keys;
                     var all = new HttpListenerContext[keys.Count];
                     keys.CopyTo(all, 0);
                     _listenerContexts.Clear();
@@ -227,7 +234,8 @@ namespace System.Net
 
                 lock ((_connections as ICollection).SyncRoot)
                 {
-                    Dictionary<HttpConnection, HttpConnection>.KeyCollection keys = _connections.Keys;
+                    Dictionary<HttpConnection, HttpConnection>.KeyCollection keys =
+                        _connections.Keys;
                     var conns = new HttpConnection[keys.Count];
                     keys.CopyTo(conns, 0);
                     _connections.Clear();
@@ -311,7 +319,9 @@ namespace System.Net
             }
             if (ares._endCalled)
             {
-                throw new InvalidOperationException(SR.Format(SR.net_io_invalidendcall, nameof(EndGetContext)));
+                throw new InvalidOperationException(
+                    SR.Format(SR.net_io_invalidendcall, nameof(EndGetContext))
+                );
             }
 
             ares._endCalled = true;
@@ -333,7 +343,9 @@ namespace System.Net
 
         internal AuthenticationSchemes SelectAuthenticationScheme(HttpListenerContext context)
         {
-            return AuthenticationSchemeSelectorDelegate != null ? AuthenticationSchemeSelectorDelegate(context.Request) : _authenticationScheme;
+            return AuthenticationSchemeSelectorDelegate != null
+                ? AuthenticationSchemeSelectorDelegate(context.Request)
+                : _authenticationScheme;
         }
 
         public HttpListenerContext GetContext()
@@ -345,7 +357,9 @@ namespace System.Net
             }
             if (_prefixes.Count == 0)
             {
-                throw new InvalidOperationException(SR.Format(SR.net_listener_mustcall, "AddPrefix()"));
+                throw new InvalidOperationException(
+                    SR.Format(SR.net_listener_mustcall, "AddPrefix()")
+                );
             }
 
             ListenerAsyncResult ares = (ListenerAsyncResult)BeginGetContext(null, null);

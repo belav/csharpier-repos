@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Xunit;
 
 namespace System.SpanTests
 {
@@ -12,7 +12,30 @@ namespace System.SpanTests
         [Fact]
         public static void IndexOfSequenceMatchAtStart_Char()
         {
-            Span<char> span = new Span<char>(new char[] { '5', '1', '7', '2', '3', '7', '7', '4', '5', '7', '7', '7', '8', '6', '6', '7', '7', '8', '9' });
+            Span<char> span = new Span<char>(
+                new char[]
+                {
+                    '5',
+                    '1',
+                    '7',
+                    '2',
+                    '3',
+                    '7',
+                    '7',
+                    '4',
+                    '5',
+                    '7',
+                    '7',
+                    '7',
+                    '8',
+                    '6',
+                    '6',
+                    '7',
+                    '7',
+                    '8',
+                    '9',
+                }
+            );
             Span<char> value = new Span<char>(new char[] { '5', '1', '7' });
             int index = span.IndexOf(value);
             Assert.Equal(0, index);
@@ -21,7 +44,9 @@ namespace System.SpanTests
         [Fact]
         public static void IndexOfSequenceMultipleMatch_Char()
         {
-            Span<char> span = new Span<char>(new char[] { '1', '2', '3', '1', '2', '3', '1', '2', '3' });
+            Span<char> span = new Span<char>(
+                new char[] { '1', '2', '3', '1', '2', '3', '1', '2', '3' }
+            );
             Span<char> value = new Span<char>(new char[] { '2', '3' });
             int index = span.IndexOf(value);
             Assert.Equal(1, index);
@@ -30,7 +55,30 @@ namespace System.SpanTests
         [Fact]
         public static void IndexOfSequenceRestart_Char()
         {
-            Span<char> span = new Span<char>(new char[] { '5', '1', '7', '2', '3', '7', '7', '4', '5', '7', '7', '7', '8', '6', '6', '7', '7', '8', '9' });
+            Span<char> span = new Span<char>(
+                new char[]
+                {
+                    '5',
+                    '1',
+                    '7',
+                    '2',
+                    '3',
+                    '7',
+                    '7',
+                    '4',
+                    '5',
+                    '7',
+                    '7',
+                    '7',
+                    '8',
+                    '6',
+                    '6',
+                    '7',
+                    '7',
+                    '8',
+                    '9',
+                }
+            );
             Span<char> value = new Span<char>(new char[] { '7', '7', '8' });
             int index = span.IndexOf(value);
             Assert.Equal(10, index);
@@ -39,7 +87,30 @@ namespace System.SpanTests
         [Fact]
         public static void IndexOfSequenceNoMatch_Char()
         {
-            Span<char> span = new Span<char>(new char[] { '0', '1', '7', '2', '3', '7', '7', '4', '5', '7', '7', '7', '8', '6', '6', '7', '7', '8', '9' });
+            Span<char> span = new Span<char>(
+                new char[]
+                {
+                    '0',
+                    '1',
+                    '7',
+                    '2',
+                    '3',
+                    '7',
+                    '7',
+                    '4',
+                    '5',
+                    '7',
+                    '7',
+                    '7',
+                    '8',
+                    '6',
+                    '6',
+                    '7',
+                    '7',
+                    '8',
+                    '9',
+                }
+            );
             Span<char> value = new Span<char>(new char[] { '7', '7', '8', 'X' });
             int index = span.IndexOf(value);
             Assert.Equal(-1, index);
@@ -48,7 +119,30 @@ namespace System.SpanTests
         [Fact]
         public static void IndexOfSequenceNotEvenAHeadMatch_Char()
         {
-            Span<char> span = new Span<char>(new char[] { '0', '1', '7', '2', '3', '7', '7', '4', '5', '7', '7', '7', '8', '6', '6', '7', '7', '8', '9' });
+            Span<char> span = new Span<char>(
+                new char[]
+                {
+                    '0',
+                    '1',
+                    '7',
+                    '2',
+                    '3',
+                    '7',
+                    '7',
+                    '4',
+                    '5',
+                    '7',
+                    '7',
+                    '7',
+                    '8',
+                    '6',
+                    '6',
+                    '7',
+                    '7',
+                    '8',
+                    '9',
+                }
+            );
             Span<char> value = new Span<char>(new char[] { 'X', '7', '8', '9' });
             int index = span.IndexOf(value);
             Assert.Equal(-1, index);
@@ -76,7 +170,30 @@ namespace System.SpanTests
         public static void IndexOfSequenceZeroLengthValue_Char()
         {
             // A zero-length value is always "found" at the start of the span.
-            Span<char> span = new Span<char>(new char[] { '0', '1', '7', '2', '3', '7', '7', '4', '5', '7', '7', '7', '8', '6', '6', '7', '7', '8', '9' });
+            Span<char> span = new Span<char>(
+                new char[]
+                {
+                    '0',
+                    '1',
+                    '7',
+                    '2',
+                    '3',
+                    '7',
+                    '7',
+                    '4',
+                    '5',
+                    '7',
+                    '7',
+                    '7',
+                    '8',
+                    '6',
+                    '6',
+                    '7',
+                    '7',
+                    '8',
+                    '9',
+                }
+            );
             Span<char> value = new Span<char>(Array.Empty<char>());
             int index = span.IndexOf(value);
             Assert.Equal(0, index);
@@ -145,39 +262,237 @@ namespace System.SpanTests
             yield return new object[] { "1111x1211111111111x12", "1211111", 5, 5 };
             yield return new object[] { "1111x1211111111111x12", "1211111", 5, 5 };
             yield return new object[] { "1111x1211111111111x12", "1211111", 5, 5 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "111", 0, 44 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "1111", 0, 43 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "11111", 7, 42 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "111111", 7, 41 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "1111111", 7, 11 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "11111111", 7, 10 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "111111111", 7, 9 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "11111111111", 7, 7 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "111111111111", -1, -1 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "1111111111111", -1, -1 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "11111111111111", -1, -1 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "111111111111111", -1, -1 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "11111111111111111", -1, -1 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "111111111111111111", -1, -1 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "1211", 5, 48 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "11121", 44, 44 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "121111", 5, 19 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "12111211", -1, -1 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "1111111", 7, 11 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "1121121111", -1, -1 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "1111211111", -1, -1 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "111111211111", -1, -1 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "1121111111111", -1, -1 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "11122111112111111", -1, -1 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "1111111211111111", -1, -1 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "111211111111111111", -1, -1 };
-            yield return new object[] { "1111x1211111111111x12111122131221221211221111112121121", "11111211111121111111", -1, -1 };
-            yield return new object[] { "\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436", "\u0436\u0436\u0436", 0, 11 };
-            yield return new object[] { "\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436", "\u04360\u0436", -1, -1 };
-            yield return new object[] { "\u0436\u0436\u0436\u0436\u0436\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0447\u0447\u0447\u0447\u0441", "\u0447\u0447\u0447\u0447\u0441", 20, 20 };
-            yield return new object[] { "\u0436\u0436\u0436\u0436\u0436\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0447\u0447\u0447\u0447\u0441\u0441\u0441\u0441\u0441\u0441\u0441\u0447\u0447\u0447\u0447", "\u0447\u0447\u0447\u0447", 20, 31 };
-            yield return new object[] { "\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436", "1112", -1, -1 };
-            yield return new object[] { "0\u0443\u0437\u04300\u043E\u0446\u0443\u04490\u043E\u0430\u04370\u0449\u0446\u0443\u043E\u0430\u0437\u0449\u0446\u0443\u043E0\u0430\u0437\u0449\u0446\u0443\u043E\u0430\u0437\u0449\u043E\u04460\u0443\u0437\u043E\u0437\u0446\u0443\u043E\u0430\u0437\u0443\u043E\u0446\u04370\u0449\u0430\u0443\u0446\u04370\u043E\u0430\u0437\u0446\u043E", "0\u043E\u0430\u04370", 9, 9 };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "111",
+                0,
+                44,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "1111",
+                0,
+                43,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "11111",
+                7,
+                42,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "111111",
+                7,
+                41,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "1111111",
+                7,
+                11,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "11111111",
+                7,
+                10,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "111111111",
+                7,
+                9,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "11111111111",
+                7,
+                7,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "111111111111",
+                -1,
+                -1,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "1111111111111",
+                -1,
+                -1,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "11111111111111",
+                -1,
+                -1,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "111111111111111",
+                -1,
+                -1,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "11111111111111111",
+                -1,
+                -1,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "111111111111111111",
+                -1,
+                -1,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "1211",
+                5,
+                48,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "11121",
+                44,
+                44,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "121111",
+                5,
+                19,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "12111211",
+                -1,
+                -1,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "1111111",
+                7,
+                11,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "1121121111",
+                -1,
+                -1,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "1111211111",
+                -1,
+                -1,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "111111211111",
+                -1,
+                -1,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "1121111111111",
+                -1,
+                -1,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "11122111112111111",
+                -1,
+                -1,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "1111111211111111",
+                -1,
+                -1,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "111211111111111111",
+                -1,
+                -1,
+            };
+            yield return new object[]
+            {
+                "1111x1211111111111x12111122131221221211221111112121121",
+                "11111211111121111111",
+                -1,
+                -1,
+            };
+            yield return new object[]
+            {
+                "\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436",
+                "\u0436\u0436\u0436",
+                0,
+                11,
+            };
+            yield return new object[]
+            {
+                "\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436",
+                "\u04360\u0436",
+                -1,
+                -1,
+            };
+            yield return new object[]
+            {
+                "\u0436\u0436\u0436\u0436\u0436\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0447\u0447\u0447\u0447\u0441",
+                "\u0447\u0447\u0447\u0447\u0441",
+                20,
+                20,
+            };
+            yield return new object[]
+            {
+                "\u0436\u0436\u0436\u0436\u0436\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0447\u0447\u0447\u0447\u0441\u0441\u0441\u0441\u0441\u0441\u0441\u0447\u0447\u0447\u0447",
+                "\u0447\u0447\u0447\u0447",
+                20,
+                31,
+            };
+            yield return new object[]
+            {
+                "\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436",
+                "1112",
+                -1,
+                -1,
+            };
+            yield return new object[]
+            {
+                "0\u0443\u0437\u04300\u043E\u0446\u0443\u04490\u043E\u0430\u04370\u0449\u0446\u0443\u043E\u0430\u0437\u0449\u0446\u0443\u043E0\u0430\u0437\u0449\u0446\u0443\u043E\u0430\u0437\u0449\u043E\u04460\u0443\u0437\u043E\u0437\u0446\u0443\u043E\u0430\u0437\u0443\u043E\u0446\u04370\u0449\u0430\u0443\u0446\u04370\u043E\u0430\u0437\u0446\u043E",
+                "0\u043E\u0430\u04370",
+                9,
+                9,
+            };
             yield return new object[] { "abababababababababababababababbc", "bb", 29, 29 };
             yield return new object[] { "abababababababababababababababb", "bb", 29, 29 };
             yield return new object[] { "abababababababababababababababbc", "bb", 29, 29 };
@@ -194,24 +509,95 @@ namespace System.SpanTests
             yield return new object[] { "bbbbabababababababababababababababc", "aaa", -1, -1 };
             yield return new object[] { "ababababababababababababababababbc", "abaa", -1, -1 };
             yield return new object[] { "babbbabababababababababababababababc", "babb", 0, 0 };
-            yield return new object[] { "babbbabababababababababababababababc", "\u0441a\u0441\u0441", -1, -1 };
+            yield return new object[]
+            {
+                "babbbabababababababababababababababc",
+                "\u0441a\u0441\u0441",
+                -1,
+                -1,
+            };
             yield return new object[] { "babbbbbbbbbbbbb", "babbbbbbbbbbbb", 0, 0 };
             yield return new object[] { "babbbbbbbbbbbbbbabbbbbbbbbbbb", "babbbbbbbbbbbb", 0, 15 };
-            yield return new object[] { "babbbbbbbbbbbbbbbbabbbbbbbbbbbb", "babbbbbbbbbbbb", 0, 17 };
-            yield return new object[] { "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb", "babbbbbbbbbbbb", 18, 32 };
-            yield return new object[] { "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb", "bbbbbbbbbbbbb", 20, 20 };
-            yield return new object[] { "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb", "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb", 0, 0 };
-            yield return new object[] { "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb", "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbb", 0, 0 };
-            yield return new object[] { "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb", "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbbb", -1, -1 };
-            yield return new object[] { "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb", "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb", 0, 0 };
-            yield return new object[] { "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb", "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbb", 0, 0 };
-            yield return new object[] { "xxxxxxxxxxxxxxbabbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbbxxxxxxxxxxxxxxx", "xxxxxxxxxxxxxxx", 60, 60 };
-            yield return new object[] { "xxxxxxxxxxxxxxxbabbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbbxxxxxxxxxxxxxx", "xxxxxxxxxxxxxxx", 0, 0 };
+            yield return new object[]
+            {
+                "babbbbbbbbbbbbbbbbabbbbbbbbbbbb",
+                "babbbbbbbbbbbb",
+                0,
+                17,
+            };
+            yield return new object[]
+            {
+                "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb",
+                "babbbbbbbbbbbb",
+                18,
+                32,
+            };
+            yield return new object[]
+            {
+                "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb",
+                "bbbbbbbbbbbbb",
+                20,
+                20,
+            };
+            yield return new object[]
+            {
+                "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb",
+                "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb",
+                0,
+                0,
+            };
+            yield return new object[]
+            {
+                "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb",
+                "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbb",
+                0,
+                0,
+            };
+            yield return new object[]
+            {
+                "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb",
+                "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbbb",
+                -1,
+                -1,
+            };
+            yield return new object[]
+            {
+                "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb",
+                "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb",
+                0,
+                0,
+            };
+            yield return new object[]
+            {
+                "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb",
+                "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbb",
+                0,
+                0,
+            };
+            yield return new object[]
+            {
+                "xxxxxxxxxxxxxxbabbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbbxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxx",
+                60,
+                60,
+            };
+            yield return new object[]
+            {
+                "xxxxxxxxxxxxxxxbabbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbbxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxx",
+                0,
+                0,
+            };
         }
 
         [Theory]
         [MemberData(nameof(IndexOfSubSeqData_Char))]
-        public static void ValueStartsAndEndsWithTheSameChars(string searchSpace, string value, int expectedIndexOfValue, int expectedLastIndexOfValue)
+        public static void ValueStartsAndEndsWithTheSameChars(
+            string searchSpace,
+            string value,
+            int expectedIndexOfValue,
+            int expectedLastIndexOfValue
+        )
         {
             Assert.Equal(expectedIndexOfValue, searchSpace.AsSpan().IndexOf(value));
             Assert.Equal(expectedLastIndexOfValue, searchSpace.AsSpan().LastIndexOf(value));

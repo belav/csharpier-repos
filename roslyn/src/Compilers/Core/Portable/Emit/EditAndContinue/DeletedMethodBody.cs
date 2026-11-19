@@ -26,13 +26,15 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
             _ilBytes = GetIL(context);
         }
 
-        public ImmutableArray<ExceptionHandlerRegion> ExceptionRegions => ImmutableArray<ExceptionHandlerRegion>.Empty;
+        public ImmutableArray<ExceptionHandlerRegion> ExceptionRegions =>
+            ImmutableArray<ExceptionHandlerRegion>.Empty;
 
         public bool AreLocalsZeroed => false;
 
         public bool HasStackalloc => false;
 
-        public ImmutableArray<ILocalDefinition> LocalVariables => ImmutableArray<ILocalDefinition>.Empty;
+        public ImmutableArray<ILocalDefinition> LocalVariables =>
+            ImmutableArray<ILocalDefinition>.Empty;
 
         public IMethodDefinition MethodDefinition => _methodDef;
 
@@ -52,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 
         public DebugId MethodId => default;
 
-        public ImmutableArray<StateMachineHoistedLocalScope> StateMachineHoistedLocalScopes => ImmutableArray<StateMachineHoistedLocalScope>.Empty;
+        public ImmutableArray<StateMachineHoistedLocalScope> StateMachineHoistedLocalScopes =>
+            ImmutableArray<StateMachineHoistedLocalScope>.Empty;
 
         public string StateMachineTypeName => null;
 
@@ -60,9 +63,11 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 
         public ImmutableArray<ITypeReference> StateMachineAwaiterSlots => default;
 
-        public ImmutableArray<ClosureDebugInfo> ClosureDebugInfo => ImmutableArray<ClosureDebugInfo>.Empty;
+        public ImmutableArray<ClosureDebugInfo> ClosureDebugInfo =>
+            ImmutableArray<ClosureDebugInfo>.Empty;
 
-        public ImmutableArray<LambdaDebugInfo> LambdaDebugInfo => ImmutableArray<LambdaDebugInfo>.Empty;
+        public ImmutableArray<LambdaDebugInfo> LambdaDebugInfo =>
+            ImmutableArray<LambdaDebugInfo>.Empty;
 
         public ImmutableArray<SourceSpan> CodeCoverageSpans => ImmutableArray<SourceSpan>.Empty;
 
@@ -70,12 +75,24 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 
         private static ImmutableArray<byte> GetIL(EmitContext context)
         {
-            var missingMethodExceptionStringStringConstructor = context.Module.CommonCompilation.CommonGetWellKnownTypeMember(WellKnownMember.System_MissingMethodException__ctor);
+            var missingMethodExceptionStringStringConstructor =
+                context.Module.CommonCompilation.CommonGetWellKnownTypeMember(
+                    WellKnownMember.System_MissingMethodException__ctor
+                );
             Debug.Assert(missingMethodExceptionStringStringConstructor is not null);
 
-            var builder = new ILBuilder((ITokenDeferral)context.Module, null, OptimizationLevel.Debug, false);
+            var builder = new ILBuilder(
+                (ITokenDeferral)context.Module,
+                null,
+                OptimizationLevel.Debug,
+                false
+            );
             builder.EmitOpCode(System.Reflection.Metadata.ILOpCode.Newobj, 4);
-            builder.EmitToken(missingMethodExceptionStringStringConstructor.GetCciAdapter(), context.SyntaxNode!, context.Diagnostics);
+            builder.EmitToken(
+                missingMethodExceptionStringStringConstructor.GetCciAdapter(),
+                context.SyntaxNode!,
+                context.Diagnostics
+            );
             builder.EmitThrow(isRethrow: false);
             builder.Realize();
 

@@ -14,17 +14,30 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod;
 [Export(typeof(IExtractMethodService)), Shared]
 [ExportLanguageService(typeof(IExtractMethodService), LanguageNames.CSharp)]
 [method: ImportingConstructor]
-[method: SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-internal sealed class CSharpExtractMethodService() : AbstractExtractMethodService<
-    CSharpSelectionValidator,
-    CSharpMethodExtractor,
-    CSharpSelectionResult,
-    StatementSyntax,
-    ExpressionSyntax>
+[method: SuppressMessage(
+    "RoslynDiagnosticsReliability",
+    "RS0033:Importing constructor should be [Obsolete]",
+    Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+)]
+internal sealed class CSharpExtractMethodService()
+    : AbstractExtractMethodService<
+        CSharpSelectionValidator,
+        CSharpMethodExtractor,
+        CSharpSelectionResult,
+        StatementSyntax,
+        ExpressionSyntax
+    >
 {
-    protected override CSharpSelectionValidator CreateSelectionValidator(SemanticDocument document, TextSpan textSpan, ExtractMethodOptions options, bool localFunction)
-        => new(document, textSpan, options, localFunction);
+    protected override CSharpSelectionValidator CreateSelectionValidator(
+        SemanticDocument document,
+        TextSpan textSpan,
+        ExtractMethodOptions options,
+        bool localFunction
+    ) => new(document, textSpan, options, localFunction);
 
-    protected override CSharpMethodExtractor CreateMethodExtractor(CSharpSelectionResult selectionResult, ExtractMethodGenerationOptions options, bool localFunction)
-        => new(selectionResult, options, localFunction);
+    protected override CSharpMethodExtractor CreateMethodExtractor(
+        CSharpSelectionResult selectionResult,
+        ExtractMethodGenerationOptions options,
+        bool localFunction
+    ) => new(selectionResult, options, localFunction);
 }

@@ -4,10 +4,10 @@ using System;
 
 class C
 {
-	event Action e;
-	
-	public static void Main ()
-	{
-		const byte x = 9;
-	}
+    event Action e;
+
+    public static void Main()
+    {
+        const byte x = 9;
+    }
 }

@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [WorkItem(29092, "https://github.com/dotnet/roslyn/issues/29092")]
         public void TestMixedWithInitBlock()
         {
-
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Program
@@ -46,12 +46,18 @@ class Program
         }
     }
 }";
-            CompileAndVerify(text,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
-                options: TestOptions.UnsafeReleaseExe,
-                expectedOutput: "000123",
-                verify: Verification.Fails).VerifyIL("Program.MakeBlock",
-@"{
+            CompileAndVerify(
+                    text,
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                        LanguageVersion.CSharp7_3
+                    ),
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: "000123",
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "Program.MakeBlock",
+                    @"{
   // Code size       42 (0x2a)
   .maxstack  4
   IL_0000:  ldc.i4.s   24
@@ -88,13 +94,15 @@ class Program
   IL_0023:  ldc.i4.6
   IL_0024:  call       ""void Program.PrintBytes(int*, int)""
   IL_0029:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void TestUnmanaged_Pointer()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 unsafe class Test
 {
@@ -119,12 +127,18 @@ unsafe class Test
         M(42);
     }
 }";
-            CompileAndVerify(text,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
-                options: TestOptions.UnsafeReleaseExe,
-                expectedOutput: "424242424242424242",
-                verify: Verification.Fails).VerifyIL("Test.M<T>(T)",
-@"{
+            CompileAndVerify(
+                    text,
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                        LanguageVersion.CSharp7_3
+                    ),
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: "424242424242424242",
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "Test.M<T>(T)",
+                    @"{
   // Code size      163 (0xa3)
   .maxstack  4
   IL_0000:  ldc.i4.3
@@ -194,13 +208,15 @@ unsafe class Test
   IL_0098:  stobj      ""T""
   IL_009d:  call       ""void Test.Print<T>(T*)""
   IL_00a2:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void TestUnmanaged_Span()
         {
-            var comp = CreateCompilationWithMscorlibAndSpan(@"
+            var comp = CreateCompilationWithMscorlibAndSpan(
+                @"
 using System;
 class Test
 {
@@ -211,10 +227,15 @@ class Test
         Span<T> obj3 = stackalloc  [ ] { arg, arg, arg };
     }
 }
-", options: TestOptions.ReleaseDll, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3));
+",
+                options: TestOptions.ReleaseDll,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3)
+            );
 
-            CompileAndVerify(comp, verify: Verification.Fails).VerifyIL("Test.M<T>(T)",
-@"{
+            CompileAndVerify(comp, verify: Verification.Fails)
+                .VerifyIL(
+                    "Test.M<T>(T)",
+                    @"{
   // Code size      169 (0xa9)
   .maxstack  4
   IL_0000:  ldc.i4.3
@@ -290,13 +311,15 @@ class Test
   IL_00a2:  newobj     ""System.Span<T>..ctor(void*, int)""
   IL_00a7:  pop
   IL_00a8:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void TestLambdaCapture()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 public class C
 {
@@ -309,12 +332,18 @@ public class C
     }
 }
 ";
-            CompileAndVerify(text,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
-                options: TestOptions.UnsafeReleaseExe,
-                expectedOutput: "2",
-                verify: Verification.Fails).VerifyIL("C.Main",
-@"{
+            CompileAndVerify(
+                    text,
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                        LanguageVersion.CSharp7_3
+                    ),
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: "2",
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Main",
+                    @"{
   // Code size       55 (0x37)
   .maxstack  4
   .locals init (C.<>c__DisplayClass0_0 V_0) //CS$<>8__locals0
@@ -343,13 +372,15 @@ public class C
   IL_0030:  ldind.u1
   IL_0031:  call       ""void System.Console.Write(int)""
   IL_0036:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void TestElementThrow()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 static unsafe class C
@@ -365,11 +396,17 @@ static unsafe class C
     }
 }
 ";
-            CompileAndVerify(text,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
-                options: TestOptions.UnsafeReleaseExe,
-                verify: Verification.Fails).VerifyIL("C.Main",
-@"{
+            CompileAndVerify(
+                    text,
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                        LanguageVersion.CSharp7_3
+                    ),
+                    options: TestOptions.UnsafeReleaseExe,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Main",
+                    @"{
   // Code size       17 (0x11)
   .maxstack  4
   IL_0000:  ldc.i4.s   12
@@ -383,13 +420,15 @@ static unsafe class C
   IL_000e:  add
   IL_000f:  ldnull
   IL_0010:  throw
-}");
+}"
+                );
         }
 
         [Fact]
         public void TestUnused()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 static unsafe class C
@@ -406,12 +445,18 @@ static unsafe class C
     }
 }
 ";
-            CompileAndVerify(text,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
-                options: TestOptions.UnsafeReleaseExe,
-                expectedOutput: "12",
-                verify: Verification.Passes).VerifyIL("C.Main",
-@"{
+            CompileAndVerify(
+                    text,
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                        LanguageVersion.CSharp7_3
+                    ),
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: "12",
+                    verify: Verification.Passes
+                )
+                .VerifyIL(
+                    "C.Main",
+                    @"{
   // Code size       19 (0x13)
   .maxstack  1
   IL_0000:  ldc.i4.s   16
@@ -424,13 +469,20 @@ static unsafe class C
   IL_000c:  call       ""byte C.Method(int)""
   IL_0011:  pop
   IL_0012:  ret
-}");
-            CompileAndVerify(text,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
-                options: TestOptions.UnsafeDebugExe,
-                expectedOutput: "12",
-                verify: Verification.Fails).VerifyIL("C.Main",
-@"{
+}"
+                );
+            CompileAndVerify(
+                    text,
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                        LanguageVersion.CSharp7_3
+                    ),
+                    options: TestOptions.UnsafeDebugExe,
+                    expectedOutput: "12",
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Main",
+                    @"{
   // Code size       44 (0x2c)
   .maxstack  4
   .locals init (int* V_0) //p
@@ -466,13 +518,15 @@ static unsafe class C
   IL_0029:  stind.i4
   IL_002a:  stloc.0
   IL_002b:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void TestEmpty()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 static unsafe class C
@@ -489,24 +543,32 @@ static unsafe class C
 }
 ";
             // PEVerify: [ : C::Main][mdToken=0x6000002][offset 0x00000002][found Native Int][expected unmanaged pointer] Unexpected type on the stack.
-            CompileAndVerify(text,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
-                options: TestOptions.UnsafeReleaseExe,
-                verify: Verification.FailsPEVerify).VerifyIL("C.Main",
-@"{
+            CompileAndVerify(
+                    text,
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                        LanguageVersion.CSharp7_3
+                    ),
+                    options: TestOptions.UnsafeReleaseExe,
+                    verify: Verification.FailsPEVerify
+                )
+                .VerifyIL(
+                    "C.Main",
+                    @"{
   // Code size        8 (0x8)
   .maxstack  1
   IL_0000:  ldc.i4.0
   IL_0001:  conv.u
   IL_0002:  call       ""void C.Use(int*)""
   IL_0007:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void TestIdenticalBytes1()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 static unsafe class C
@@ -524,11 +586,18 @@ static unsafe class C
     }
 }
 ";
-            CompileAndVerify(text,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
-                options: TestOptions.UnsafeReleaseExe,
-                verify: Verification.Fails, expectedOutput: @"424242").VerifyIL("C.Main",
-@"{
+            CompileAndVerify(
+                    text,
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                        LanguageVersion.CSharp7_3
+                    ),
+                    options: TestOptions.UnsafeReleaseExe,
+                    verify: Verification.Fails,
+                    expectedOutput: @"424242"
+                )
+                .VerifyIL(
+                    "C.Main",
+                    @"{
   // Code size       16 (0x10)
   .maxstack  4
   IL_0000:  ldc.i4.3
@@ -540,13 +609,15 @@ static unsafe class C
   IL_0008:  initblk
   IL_000a:  call       ""void C.Print(byte*)""
   IL_000f:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void TestIdenticalBytes2()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 static unsafe class C
@@ -564,11 +635,18 @@ static unsafe class C
     }
 }
 ";
-            CompileAndVerify(text,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
-                options: TestOptions.UnsafeReleaseExe,
-                verify: Verification.Fails, expectedOutput: @"ffffffffffffffffffffffff").VerifyIL("C.Main",
-@"{
+            CompileAndVerify(
+                    text,
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                        LanguageVersion.CSharp7_3
+                    ),
+                    options: TestOptions.UnsafeReleaseExe,
+                    verify: Verification.Fails,
+                    expectedOutput: @"ffffffffffffffffffffffff"
+                )
+                .VerifyIL(
+                    "C.Main",
+                    @"{
   // Code size       21 (0x15)
   .maxstack  4
   IL_0000:  ldc.i4.s   12
@@ -580,7 +658,8 @@ static unsafe class C
   IL_000d:  initblk
   IL_000f:  call       ""void C.Print(uint*)""
   IL_0014:  ret
-}");
+}"
+                );
         }
 
         [Fact]
@@ -609,10 +688,15 @@ static unsafe class C
     enum E : byte { A, B, C, D }
 }
 """;
-            CompileAndVerify(text,
-                options: TestOptions.UnsafeReleaseExe,
-                verify: Verification.Fails, expectedOutput: @"ABCDDD").VerifyIL("C.Main",
-"""
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    verify: Verification.Fails,
+                    expectedOutput: @"ABCDDD"
+                )
+                .VerifyIL(
+                    "C.Main",
+                    """
 {
   // Code size       35 (0x23)
   .maxstack  4
@@ -637,12 +721,15 @@ static unsafe class C
   IL_001d:  call       "void C.Print(C.E*)"
   IL_0022:  ret
 }
-""");
+"""
+                );
         }
+
         [Fact]
         public void TestMixedBlockInit()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 static unsafe class C
@@ -665,11 +752,18 @@ static unsafe class C
     }
 }
 ";
-            CompileAndVerify(text,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
-                options: TestOptions.UnsafeReleaseExe,
-                verify: Verification.Fails, expectedOutput: @"123456789").VerifyIL("C.Main",
-@"{
+            CompileAndVerify(
+                    text,
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                        LanguageVersion.CSharp7_3
+                    ),
+                    options: TestOptions.UnsafeReleaseExe,
+                    verify: Verification.Fails,
+                    expectedOutput: @"123456789"
+                )
+                .VerifyIL(
+                    "C.Main",
+                    @"{
   // Code size       30 (0x1e)
   .maxstack  4
   IL_0000:  ldc.i4.s   9
@@ -686,13 +780,15 @@ static unsafe class C
   IL_0017:  stind.i1
   IL_0018:  call       ""void C.Print(byte*)""
   IL_001d:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void TestElementInit()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 struct S
@@ -720,11 +816,18 @@ static unsafe class C
     }
 }
 ";
-            CompileAndVerify(text,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
-                options: TestOptions.UnsafeReleaseExe,
-                verify: Verification.Fails, expectedOutput: @"123").VerifyIL("C.Main",
-@"{
+            CompileAndVerify(
+                    text,
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                        LanguageVersion.CSharp7_3
+                    ),
+                    options: TestOptions.UnsafeReleaseExe,
+                    verify: Verification.Fails,
+                    expectedOutput: @"123"
+                )
+                .VerifyIL(
+                    "C.Main",
+                    @"{
   // Code size       70 (0x46)
   .maxstack  4
   IL_0000:  ldc.i4.3
@@ -753,14 +856,16 @@ static unsafe class C
   IL_003b:  stobj      ""S""
   IL_0040:  call       ""void C.Print(S*)""
   IL_0045:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void TestBytePointer()
         {
-            Test("System.Byte",
-@"{
+            Test(
+                "System.Byte",
+                @"{
   // Code size       19 (0x13)
   .maxstack  4
   IL_0000:  ldc.i4.3
@@ -772,14 +877,16 @@ static unsafe class C
   IL_000b:  cpblk
   IL_000d:  call       ""void C.Print(byte*)""
   IL_0012:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void TestInt32Pointer()
         {
-            Test("System.Int32",
-@"{
+            Test(
+                "System.Int32",
+                @"{
   // Code size       27 (0x1b)
   .maxstack  4
   IL_0000:  ldc.i4.s   12
@@ -803,14 +910,16 @@ static unsafe class C
   IL_0014:  stind.i4
   IL_0015:  call       ""void C.Print(int*)""
   IL_001a:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void TestInt64Pointer()
         {
-            Test("System.Int64",
-@"{
+            Test(
+                "System.Int64",
+                @"{
   // Code size       30 (0x1e)
   .maxstack  4
   IL_0000:  ldc.i4.s   24
@@ -837,13 +946,15 @@ static unsafe class C
   IL_0017:  stind.i8
   IL_0018:  call       ""void C.Print(long*)""
   IL_001d:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void TestSpan()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System;
 static class C
 {
@@ -863,10 +974,14 @@ namespace System
         }
     }
 }
-", options: TestOptions.UnsafeReleaseExe, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3));
+",
+                options: TestOptions.UnsafeReleaseExe,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3)
+            );
             CompileAndVerify(comp, verify: Verification.Fails, expectedOutput: @"123")
-                .VerifyIL("C.Main",
-@"
+                .VerifyIL(
+                    "C.Main",
+                    @"
 {
   // Code size       21 (0x15)
   .maxstack  4
@@ -882,13 +997,15 @@ namespace System
   IL_0013:  pop
   IL_0014:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void TestReadOnlySpan()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System;
 static class C
 {
@@ -914,10 +1031,14 @@ namespace System
         public static implicit operator System.ReadOnlySpan<T> (System.Span<T> span) => default;
     }
 }
-", options: TestOptions.UnsafeReleaseExe, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3));
+",
+                options: TestOptions.UnsafeReleaseExe,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3)
+            );
             CompileAndVerify(comp, verify: Verification.Fails, expectedOutput: @"123")
-                .VerifyIL("C.Main",
-@"
+                .VerifyIL(
+                    "C.Main",
+                    @"
 {
   // Code size       34 (0x22)
   .maxstack  4
@@ -946,10 +1067,12 @@ namespace System
   IL_0020:  pop
   IL_0021:  ret
 }
-");
+"
+                );
         }
 
-        private static string GetSource(string pointerType) => $@"
+        private static string GetSource(string pointerType) =>
+            $@"
 using System;
 using T = {pointerType};
 static unsafe class C
@@ -968,11 +1091,16 @@ static unsafe class C
 }}
 ";
 
-        private void Test(string pointerType, string il)
-            => CompileAndVerify(GetSource(pointerType),
-                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3),
-                options: TestOptions.UnsafeReleaseExe,
-                verify: Verification.Fails,
-                expectedOutput: @"123").VerifyIL("C.Main", il);
+        private void Test(string pointerType, string il) =>
+            CompileAndVerify(
+                    GetSource(pointerType),
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(
+                        LanguageVersion.CSharp7_3
+                    ),
+                    options: TestOptions.UnsafeReleaseExe,
+                    verify: Verification.Fails,
+                    expectedOutput: @"123"
+                )
+                .VerifyIL("C.Main", il);
     }
 }

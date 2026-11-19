@@ -29,14 +29,19 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
     [Export(typeof(ITaggerProvider))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [TagType(typeof(InlineDiagnosticsTag))]
-    internal sealed class InlineDiagnosticsTaggerProvider : AbstractDiagnosticsAdornmentTaggerProvider<InlineDiagnosticsTag>
+    internal sealed class InlineDiagnosticsTaggerProvider
+        : AbstractDiagnosticsAdornmentTaggerProvider<InlineDiagnosticsTag>
     {
         private readonly IEditorFormatMap _editorFormatMap;
         private readonly IClassificationFormatMapService _classificationFormatMapService;
         private readonly IClassificationTypeRegistryService _classificationTypeRegistryService;
 
-        protected sealed override ImmutableArray<IOption2> Options { get; } = ImmutableArray.Create<IOption2>(InlineDiagnosticsOptionsStorage.EnableInlineDiagnostics);
-        protected sealed override ImmutableArray<IOption2> FeatureOptions { get; } = ImmutableArray.Create<IOption2>(InlineDiagnosticsOptionsStorage.Location);
+        protected sealed override ImmutableArray<IOption2> Options { get; } =
+            ImmutableArray.Create<IOption2>(
+                InlineDiagnosticsOptionsStorage.EnableInlineDiagnostics
+            );
+        protected sealed override ImmutableArray<IOption2> FeatureOptions { get; } =
+            ImmutableArray.Create<IOption2>(InlineDiagnosticsOptionsStorage.Location);
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -49,8 +54,16 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
             IAsynchronousOperationListenerProvider listenerProvider,
             IEditorFormatMapService editorFormatMapService,
             IClassificationFormatMapService classificationFormatMapService,
-            IClassificationTypeRegistryService classificationTypeRegistryService)
-            : base(threadingContext, diagnosticService, analyzerService, globalOptions, visibilityTracker, listenerProvider)
+            IClassificationTypeRegistryService classificationTypeRegistryService
+        )
+            : base(
+                threadingContext,
+                diagnosticService,
+                analyzerService,
+                globalOptions,
+                visibilityTracker,
+                listenerProvider
+            )
         {
             _editorFormatMap = editorFormatMapService.GetEditorFormatMap("text");
             _classificationFormatMapService = classificationFormatMapService;
@@ -65,13 +78,15 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
 
         protected sealed override bool IncludeDiagnostic(DiagnosticData diagnostic)
         {
-            return
-                diagnostic.Severity is DiagnosticSeverity.Warning or DiagnosticSeverity.Error &&
-                !string.IsNullOrWhiteSpace(diagnostic.Message) &&
-                !diagnostic.IsSuppressed;
+            return diagnostic.Severity is DiagnosticSeverity.Warning or DiagnosticSeverity.Error
+                && !string.IsNullOrWhiteSpace(diagnostic.Message)
+                && !diagnostic.IsSuppressed;
         }
 
-        protected override InlineDiagnosticsTag? CreateTag(Workspace workspace, DiagnosticData diagnostic)
+        protected override InlineDiagnosticsTag? CreateTag(
+            Workspace workspace,
+            DiagnosticData diagnostic
+        )
         {
             Debug.Assert(!string.IsNullOrWhiteSpace(diagnostic.Message));
             var errorType = GetErrorTypeFromDiagnostic(diagnostic);
@@ -91,10 +106,20 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
                 return null;
             }
 
-            var locationOption = GlobalOptions.GetOption(InlineDiagnosticsOptionsStorage.Location, project.Language);
+            var locationOption = GlobalOptions.GetOption(
+                InlineDiagnosticsOptionsStorage.Location,
+                project.Language
+            );
             var navigateService = workspace.Services.GetRequiredService<INavigateToLinkService>();
-            return new InlineDiagnosticsTag(errorType, diagnostic, _editorFormatMap, _classificationFormatMapService,
-                _classificationTypeRegistryService, locationOption, navigateService);
+            return new InlineDiagnosticsTag(
+                errorType,
+                diagnostic,
+                _editorFormatMap,
+                _classificationFormatMapService,
+                _classificationTypeRegistryService,
+                locationOption,
+                navigateService
+            );
         }
 
         private static string? GetErrorTypeFromDiagnostic(DiagnosticData diagnostic)
@@ -126,7 +151,9 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
         /// many in a document to matter.
         /// </para>
         /// </summary>
-        protected sealed override bool TagEquals(InlineDiagnosticsTag tag1, InlineDiagnosticsTag tag2)
-            => tag1 == tag2;
+        protected sealed override bool TagEquals(
+            InlineDiagnosticsTag tag1,
+            InlineDiagnosticsTag tag2
+        ) => tag1 == tag2;
     }
 }

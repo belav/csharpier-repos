@@ -62,7 +62,13 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public DocumentId? DocumentId { get; }
 
-        public WorkspaceChangeEventArgs(WorkspaceChangeKind kind, Solution oldSolution, Solution newSolution, ProjectId? projectId = null, DocumentId? documentId = null)
+        public WorkspaceChangeEventArgs(
+            WorkspaceChangeKind kind,
+            Solution oldSolution,
+            Solution newSolution,
+            ProjectId? projectId = null,
+            DocumentId? documentId = null
+        )
         {
             if (!kind.IsValid())
                 throw new ArgumentOutOfRangeException(nameof(kind));

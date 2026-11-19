@@ -18,13 +18,27 @@ namespace System.Net.Http
         {
             uint dataSize = 0;
 
-            if (!Interop.WinHttp.WinHttpQueryOption(requestHandle, Interop.WinHttp.WINHTTP_OPTION_SERVER_CBT, IntPtr.Zero, ref dataSize))
+            if (
+                !Interop.WinHttp.WinHttpQueryOption(
+                    requestHandle,
+                    Interop.WinHttp.WINHTTP_OPTION_SERVER_CBT,
+                    IntPtr.Zero,
+                    ref dataSize
+                )
+            )
             {
                 if (Marshal.GetLastWin32Error() == Interop.WinHttp.ERROR_INSUFFICIENT_BUFFER)
                 {
                     IntPtr data = Marshal.AllocHGlobal((int)dataSize);
 
-                    if (Interop.WinHttp.WinHttpQueryOption(requestHandle, Interop.WinHttp.WINHTTP_OPTION_SERVER_CBT, data, ref dataSize))
+                    if (
+                        Interop.WinHttp.WinHttpQueryOption(
+                            requestHandle,
+                            Interop.WinHttp.WINHTTP_OPTION_SERVER_CBT,
+                            data,
+                            ref dataSize
+                        )
+                    )
                     {
                         SetHandle(data);
                         _size = (int)dataSize;
@@ -39,18 +53,12 @@ namespace System.Net.Http
 
         public override bool IsInvalid
         {
-            get
-            {
-                return _size == 0;
-            }
+            get { return _size == 0; }
         }
 
         public override int Size
         {
-            get
-            {
-                return _size;
-            }
+            get { return _size; }
         }
 
         public override string? ToString()

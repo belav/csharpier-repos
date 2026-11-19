@@ -11,12 +11,20 @@ namespace System.Net.Security
         private static byte[]? GetNegotiatedApplicationProtocol(SafeDeleteContext context)
         {
             Interop.SecPkgContext_ApplicationProtocol alpnContext = default;
-            bool success = SSPIWrapper.QueryBlittableContextAttributes(GlobalSSPI.SSPISecureChannel, context, Interop.SspiCli.ContextAttribute.SECPKG_ATTR_APPLICATION_PROTOCOL, ref alpnContext);
+            bool success = SSPIWrapper.QueryBlittableContextAttributes(
+                GlobalSSPI.SSPISecureChannel,
+                context,
+                Interop.SspiCli.ContextAttribute.SECPKG_ATTR_APPLICATION_PROTOCOL,
+                ref alpnContext
+            );
 
             // Check if the context returned is alpn data, with successful negotiation.
-            if (success &&
-                alpnContext.ProtoNegoExt == Interop.ApplicationProtocolNegotiationExt.ALPN &&
-                alpnContext.ProtoNegoStatus == Interop.ApplicationProtocolNegotiationStatus.Success)
+            if (
+                success
+                && alpnContext.ProtoNegoExt == Interop.ApplicationProtocolNegotiationExt.ALPN
+                && alpnContext.ProtoNegoStatus
+                    == Interop.ApplicationProtocolNegotiationStatus.Success
+            )
             {
                 if (alpnContext.Protocol.SequenceEqual(s_http1))
                 {
@@ -44,13 +52,19 @@ namespace System.Net.Security
                 GlobalSSPI.SSPISecureChannel,
                 securityContext,
                 Interop.SspiCli.ContextAttribute.SECPKG_ATTR_CONNECTION_INFO,
-                ref interopConnectionInfo);
+                ref interopConnectionInfo
+            );
             Debug.Assert(success);
 
             TlsCipherSuite cipherSuite = default;
             SecPkgContext_CipherInfo cipherInfo = default;
 
-            success = SSPIWrapper.QueryBlittableContextAttributes(GlobalSSPI.SSPISecureChannel, securityContext, Interop.SspiCli.ContextAttribute.SECPKG_ATTR_CIPHER_INFO, ref cipherInfo);
+            success = SSPIWrapper.QueryBlittableContextAttributes(
+                GlobalSSPI.SSPISecureChannel,
+                securityContext,
+                Interop.SspiCli.ContextAttribute.SECPKG_ATTR_CIPHER_INFO,
+                ref cipherInfo
+            );
             if (success)
             {
                 cipherSuite = (TlsCipherSuite)cipherInfo.dwCipherSuite;
@@ -70,12 +84,16 @@ namespace System.Net.Security
 
 #if DEBUG
             SecPkgContext_SessionInfo info = default;
-            TlsResumed = SSPIWrapper.QueryBlittableContextAttributes(
-                                    GlobalSSPI.SSPISecureChannel,
-                                    securityContext,
-                                    Interop.SspiCli.ContextAttribute.SECPKG_ATTR_SESSION_INFO,
-                                    ref info) &&
-               ((SecPkgContext_SessionInfo.Flags)info.dwFlags).HasFlag(SecPkgContext_SessionInfo.Flags.SSL_SESSION_RECONNECT);
+            TlsResumed =
+                SSPIWrapper.QueryBlittableContextAttributes(
+                    GlobalSSPI.SSPISecureChannel,
+                    securityContext,
+                    Interop.SspiCli.ContextAttribute.SECPKG_ATTR_SESSION_INFO,
+                    ref info
+                )
+                && ((SecPkgContext_SessionInfo.Flags)info.dwFlags).HasFlag(
+                    SecPkgContext_SessionInfo.Flags.SSL_SESSION_RECONNECT
+                );
 #endif
         }
     }

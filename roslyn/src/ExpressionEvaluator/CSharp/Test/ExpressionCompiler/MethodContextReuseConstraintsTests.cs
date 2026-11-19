@@ -26,16 +26,66 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                 moduleVersionId,
                 methodToken,
                 methodVersion,
-                new ILSpan(startOffset, endOffsetExclusive));
+                new ILSpan(startOffset, endOffsetExclusive)
+            );
 
-            Assert.True(constraints.AreSatisfied(moduleVersionId, methodToken, methodVersion, (int)startOffset));
-            Assert.True(constraints.AreSatisfied(moduleVersionId, methodToken, methodVersion, (int)endOffsetExclusive - 1));
+            Assert.True(
+                constraints.AreSatisfied(
+                    moduleVersionId,
+                    methodToken,
+                    methodVersion,
+                    (int)startOffset
+                )
+            );
+            Assert.True(
+                constraints.AreSatisfied(
+                    moduleVersionId,
+                    methodToken,
+                    methodVersion,
+                    (int)endOffsetExclusive - 1
+                )
+            );
 
-            Assert.False(constraints.AreSatisfied(Guid.NewGuid(), methodToken, methodVersion, (int)startOffset));
-            Assert.False(constraints.AreSatisfied(moduleVersionId, methodToken + 1, methodVersion, (int)startOffset));
-            Assert.False(constraints.AreSatisfied(moduleVersionId, methodToken, methodVersion + 1, (int)startOffset));
-            Assert.False(constraints.AreSatisfied(moduleVersionId, methodToken, methodVersion, (int)startOffset - 1));
-            Assert.False(constraints.AreSatisfied(moduleVersionId, methodToken, methodVersion, (int)endOffsetExclusive));
+            Assert.False(
+                constraints.AreSatisfied(
+                    Guid.NewGuid(),
+                    methodToken,
+                    methodVersion,
+                    (int)startOffset
+                )
+            );
+            Assert.False(
+                constraints.AreSatisfied(
+                    moduleVersionId,
+                    methodToken + 1,
+                    methodVersion,
+                    (int)startOffset
+                )
+            );
+            Assert.False(
+                constraints.AreSatisfied(
+                    moduleVersionId,
+                    methodToken,
+                    methodVersion + 1,
+                    (int)startOffset
+                )
+            );
+            Assert.False(
+                constraints.AreSatisfied(
+                    moduleVersionId,
+                    methodToken,
+                    methodVersion,
+                    (int)startOffset - 1
+                )
+            );
+            Assert.False(
+                constraints.AreSatisfied(
+                    moduleVersionId,
+                    methodToken,
+                    methodVersion,
+                    (int)endOffsetExclusive
+                )
+            );
         }
 
         [Fact]
@@ -50,11 +100,26 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                 new ILSpan(7, 9),
             };
 
-            Assert.Equal(new ILSpan(0u, uint.MaxValue), MethodContextReuseConstraints.CalculateReuseSpan(5, ILSpan.MaxValue, spans.Take(1)));
-            Assert.Equal(new ILSpan(1, 9), MethodContextReuseConstraints.CalculateReuseSpan(5, ILSpan.MaxValue, spans.Take(2)));
-            Assert.Equal(new ILSpan(2, 8), MethodContextReuseConstraints.CalculateReuseSpan(5, ILSpan.MaxValue, spans.Take(3)));
-            Assert.Equal(new ILSpan(3, 8), MethodContextReuseConstraints.CalculateReuseSpan(5, ILSpan.MaxValue, spans.Take(4)));
-            Assert.Equal(new ILSpan(3, 7), MethodContextReuseConstraints.CalculateReuseSpan(5, ILSpan.MaxValue, spans.Take(5)));
+            Assert.Equal(
+                new ILSpan(0u, uint.MaxValue),
+                MethodContextReuseConstraints.CalculateReuseSpan(5, ILSpan.MaxValue, spans.Take(1))
+            );
+            Assert.Equal(
+                new ILSpan(1, 9),
+                MethodContextReuseConstraints.CalculateReuseSpan(5, ILSpan.MaxValue, spans.Take(2))
+            );
+            Assert.Equal(
+                new ILSpan(2, 8),
+                MethodContextReuseConstraints.CalculateReuseSpan(5, ILSpan.MaxValue, spans.Take(3))
+            );
+            Assert.Equal(
+                new ILSpan(3, 8),
+                MethodContextReuseConstraints.CalculateReuseSpan(5, ILSpan.MaxValue, spans.Take(4))
+            );
+            Assert.Equal(
+                new ILSpan(3, 7),
+                MethodContextReuseConstraints.CalculateReuseSpan(5, ILSpan.MaxValue, spans.Take(5))
+            );
         }
 
         [Fact]
@@ -65,16 +130,32 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             span = MethodContextReuseConstraints.CalculateReuseSpan(5, span, new ILSpan[0]);
             Assert.Equal(new ILSpan(0u, uint.MaxValue), span);
 
-            span = MethodContextReuseConstraints.CalculateReuseSpan(5, span, new[] { new ILSpan(1, 10) });
+            span = MethodContextReuseConstraints.CalculateReuseSpan(
+                5,
+                span,
+                new[] { new ILSpan(1, 10) }
+            );
             Assert.Equal(new ILSpan(1, 10), span);
 
-            span = MethodContextReuseConstraints.CalculateReuseSpan(5, span, new[] { new ILSpan(2, 9) });
+            span = MethodContextReuseConstraints.CalculateReuseSpan(
+                5,
+                span,
+                new[] { new ILSpan(2, 9) }
+            );
             Assert.Equal(new ILSpan(2, 9), span);
 
-            span = MethodContextReuseConstraints.CalculateReuseSpan(5, span, new[] { new ILSpan(1, 3) });
+            span = MethodContextReuseConstraints.CalculateReuseSpan(
+                5,
+                span,
+                new[] { new ILSpan(1, 3) }
+            );
             Assert.Equal(new ILSpan(3, 9), span);
 
-            span = MethodContextReuseConstraints.CalculateReuseSpan(5, span, new[] { new ILSpan(7, 9) });
+            span = MethodContextReuseConstraints.CalculateReuseSpan(
+                5,
+                span,
+                new[] { new ILSpan(7, 9) }
+            );
             Assert.Equal(new ILSpan(3, 7), span);
         }
     }

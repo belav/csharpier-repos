@@ -4,6 +4,7 @@
 
 using System;
 using Xunit;
+
 public class CC
 {
     [Fact]
@@ -19,6 +20,7 @@ public class CC
             return 100;
         }
     }
+
     static void Main1()
     {
         object b = null;

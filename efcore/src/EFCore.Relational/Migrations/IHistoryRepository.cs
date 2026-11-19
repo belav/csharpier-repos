@@ -56,7 +56,8 @@ public interface IHistoryRepository
     /// </returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     Task<IReadOnlyList<HistoryRow>> GetAppliedMigrationsAsync(
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     ///     Generates a SQL script that will create the history table.

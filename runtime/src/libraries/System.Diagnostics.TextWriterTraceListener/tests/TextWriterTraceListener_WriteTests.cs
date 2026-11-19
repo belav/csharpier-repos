@@ -6,7 +6,8 @@ using Xunit;
 
 namespace System.Diagnostics.TextWriterTraceListenerTests
 {
-    public class TextWriterTraceListener_WriteTestsCtorFileName : TextWriterTraceListener_WriteTestsBase
+    public class TextWriterTraceListener_WriteTestsCtorFileName
+        : TextWriterTraceListener_WriteTestsBase
     {
         public TextWriterTraceListener_WriteTestsCtorFileName()
         {
@@ -19,9 +20,11 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
         }
     }
 
-    public class TextWriterTraceListener_WriteTestsCtorStream : TextWriterTraceListener_WriteTestsBase
+    public class TextWriterTraceListener_WriteTestsCtorStream
+        : TextWriterTraceListener_WriteTestsBase
     {
         private readonly Stream _stream;
+
         public TextWriterTraceListener_WriteTestsCtorStream()
         {
             CommonUtilities.DeleteFile(_fileName);

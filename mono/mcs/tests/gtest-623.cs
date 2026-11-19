@@ -4,21 +4,22 @@ using System;
 
 public class C
 {
-	static bool Test<T> () where T : struct, I
-	{
-		var t = new T ();
-		if (t.GetValue () != 3)
-			return false;
+    static bool Test<T>()
+        where T : struct, I
+    {
+        var t = new T();
+        if (t.GetValue() != 3)
+            return false;
 
-		return true;
-	}
+        return true;
+    }
 
-	public static int Main ()
-	{
-		if (!Test<S> ())
-			return 1;
+    public static int Main()
+    {
+        if (!Test<S>())
+            return 1;
 
-		Console.WriteLine ("ok");
-		return 0;
-	}
+        Console.WriteLine("ok");
+        return 0;
+    }
 }

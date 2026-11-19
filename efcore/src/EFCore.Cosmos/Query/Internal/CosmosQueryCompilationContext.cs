@@ -19,10 +19,9 @@ public class CosmosQueryCompilationContext : QueryCompilationContext
     /// </summary>
     public CosmosQueryCompilationContext(
         QueryCompilationContextDependencies dependencies,
-        bool async)
-        : base(dependencies, async)
-    {
-    }
+        bool async
+    )
+        : base(dependencies, async) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

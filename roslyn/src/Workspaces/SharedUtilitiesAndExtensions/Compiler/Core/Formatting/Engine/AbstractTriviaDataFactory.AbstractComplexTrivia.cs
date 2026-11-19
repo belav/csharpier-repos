@@ -21,7 +21,12 @@ namespace Microsoft.CodeAnalysis.Formatting
 
             private readonly bool _treatAsElastic;
 
-            public AbstractComplexTrivia(SyntaxFormattingOptions options, TreeData treeInfo, SyntaxToken token1, SyntaxToken token2)
+            public AbstractComplexTrivia(
+                SyntaxFormattingOptions options,
+                TreeData treeInfo,
+                SyntaxToken token1,
+                SyntaxToken token2
+            )
                 : base(options, token1.Language)
             {
                 Contract.ThrowIfNull(treeInfo);
@@ -29,7 +34,10 @@ namespace Microsoft.CodeAnalysis.Formatting
                 _token1 = token1;
                 _token2 = token2;
 
-                _treatAsElastic = CommonFormattingHelpers.HasAnyWhitespaceElasticTrivia(token1, token2);
+                _treatAsElastic = CommonFormattingHelpers.HasAnyWhitespaceElasticTrivia(
+                    token1,
+                    token2
+                );
 
                 this.TreeInfo = treeInfo;
                 this.OriginalString = this.TreeInfo.GetTextBetween(token1, token2);
@@ -42,7 +50,13 @@ namespace Microsoft.CodeAnalysis.Formatting
             protected abstract void ExtractLineAndSpace(string text, out int lines, out int spaces);
             protected abstract TriviaData CreateComplexTrivia(int line, int space);
             protected abstract TriviaData CreateComplexTrivia(int line, int space, int indentation);
-            protected abstract TriviaDataWithList Format(FormattingContext context, ChainedFormattingRules formattingRules, int lines, int spaces, CancellationToken cancellationToken);
+            protected abstract TriviaDataWithList Format(
+                FormattingContext context,
+                ChainedFormattingRules formattingRules,
+                int lines,
+                int spaces,
+                CancellationToken cancellationToken
+            );
             protected abstract bool ContainsSkippedTokensOrText(TriviaList list);
 
             public SyntaxToken Token1 => _token1;
@@ -55,7 +69,11 @@ namespace Microsoft.CodeAnalysis.Formatting
 
             public override bool ContainsChanges => false;
 
-            public override TriviaData WithSpace(int space, FormattingContext context, ChainedFormattingRules formattingRules)
+            public override TriviaData WithSpace(
+                int space,
+                FormattingContext context,
+                ChainedFormattingRules formattingRules
+            )
             {
                 // two tokens are on a single line, we don't allow changing spaces between two
                 // tokens that contain noisy characters between them.
@@ -75,7 +93,12 @@ namespace Microsoft.CodeAnalysis.Formatting
             }
 
             public override TriviaData WithLine(
-                int line, int indentation, FormattingContext context, ChainedFormattingRules formattingRules, CancellationToken cancellationToken)
+                int line,
+                int indentation,
+                FormattingContext context,
+                ChainedFormattingRules formattingRules,
+                CancellationToken cancellationToken
+            )
             {
                 Contract.ThrowIfFalse(line > 0);
 
@@ -103,7 +126,12 @@ namespace Microsoft.CodeAnalysis.Formatting
                     // we already has same number of lines, but it is asking changing indentation
                     if (this.LineBreaks == line)
                     {
-                        return WithIndentation(indentation, context, formattingRules, cancellationToken);
+                        return WithIndentation(
+                            indentation,
+                            context,
+                            formattingRules,
+                            cancellationToken
+                        );
                     }
 
                     // sorry, we can't reduce lines if it contains noisy chars
@@ -117,7 +145,11 @@ namespace Microsoft.CodeAnalysis.Formatting
             }
 
             public override TriviaData WithIndentation(
-                int indentation, FormattingContext context, ChainedFormattingRules formattingRules, CancellationToken cancellationToken)
+                int indentation,
+                FormattingContext context,
+                ChainedFormattingRules formattingRules,
+                CancellationToken cancellationToken
+            )
             {
                 // if tokens are not in different line, there is nothing we can do here
                 if (!this.SecondTokenIsFirstTokenOnLine)
@@ -143,14 +175,23 @@ namespace Microsoft.CodeAnalysis.Formatting
                 }
 
                 // okay, we need to do expansive calculation to find out actual space between two tokens
-                var trivia = Format(context, formattingRules, this.LineBreaks, indentation, cancellationToken);
+                var trivia = Format(
+                    context,
+                    formattingRules,
+                    this.LineBreaks,
+                    indentation,
+                    cancellationToken
+                );
                 var triviaString = CreateString(trivia, cancellationToken);
                 ExtractLineAndSpace(triviaString, out var lineBreaks, out var spaces);
 
                 return CreateComplexTrivia(lineBreaks, spaces, indentation);
             }
 
-            private static string CreateString(TriviaDataWithList triviaData, CancellationToken cancellationToken)
+            private static string CreateString(
+                TriviaDataWithList triviaData,
+                CancellationToken cancellationToken
+            )
             {
                 // create string from given trivia data
                 var sb = StringBuilderPool.Allocate();

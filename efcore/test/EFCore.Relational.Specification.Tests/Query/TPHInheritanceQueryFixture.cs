@@ -7,24 +7,29 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public abstract class TPHInheritanceQueryFixture : InheritanceQueryFixtureBase
 {
-    public TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ListLoggerFactory;
+    public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
     // #31378
-    public override bool EnableComplexTypes
-        => false;
+    public override bool EnableComplexTypes => false;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
     {
         base.OnModelCreating(modelBuilder, context);
 
-        modelBuilder.Entity<Plant>().HasDiscriminator(p => p.Genus)
+        modelBuilder
+            .Entity<Plant>()
+            .HasDiscriminator(p => p.Genus)
             .HasValue<Rose>(PlantGenus.Rose)
             .HasValue<Daisy>(PlantGenus.Daisy)
             .IsComplete(IsDiscriminatorMappingComplete);
 
         modelBuilder.Entity<Country>().Property(e => e.Id).ValueGeneratedNever();
-        modelBuilder.Entity<Eagle>().HasMany(e => e.Prey).WithOne().HasForeignKey(e => e.EagleId).IsRequired(false);
+        modelBuilder
+            .Entity<Eagle>()
+            .HasMany(e => e.Prey)
+            .WithOne()
+            .HasForeignKey(e => e.EagleId)
+            .IsRequired(false);
 
         modelBuilder.Entity<Animal>().HasDiscriminator().IsComplete(IsDiscriminatorMappingComplete);
         modelBuilder.Entity<Animal>().Property(e => e.Species).HasMaxLength(100);

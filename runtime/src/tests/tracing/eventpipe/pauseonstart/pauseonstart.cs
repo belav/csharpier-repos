@@ -2,20 +2,20 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Diagnostics.Tracing;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.Tracing;
+using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using Microsoft.Diagnostics.Tools.RuntimeClient;
-using Tracing.Tests.Common;
-using System.Threading;
 using System.Text;
-using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.Diagnostics.Tools.RuntimeClient;
 using Microsoft.Diagnostics.Tracing;
 using Microsoft.Diagnostics.Tracing.Parsers;
+using Tracing.Tests.Common;
 
 namespace Tracing.Tests.PauseOnStartValidation
 {
@@ -29,14 +29,17 @@ namespace Tracing.Tests.PauseOnStartValidation
             var server = new ReverseServer(serverName);
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string> { { Utils.DiagnosticPortsEnvKey, $"{serverName}" } },
+                environment: new Dictionary<string, string>
+                {
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName}" },
+                },
                 duringExecution: async (_) =>
                 {
                     Stream stream = await server.AcceptAsync();
                     IpcAdvertise advertise = IpcAdvertise.Parse(stream);
                     Logger.logger.Log(advertise.ToString());
                     // send ResumeRuntime command (0x04=ProcessCommandSet, 0x01=ResumeRuntime commandid)
-                    var message = new IpcMessage(0x04,0x01);
+                    var message = new IpcMessage(0x04, 0x01);
                     Logger.logger.Log($"Sent: {message.ToString()}");
                     IpcMessage response = IpcClient.SendMessage(stream, message);
                     Logger.logger.Log($"received: {response.ToString()}");
@@ -57,7 +60,10 @@ namespace Tracing.Tests.PauseOnStartValidation
             using var memoryStream = new MemoryStream();
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string> { { Utils.DiagnosticPortsEnvKey, $"{serverName}" } },
+                environment: new Dictionary<string, string>
+                {
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName}" },
+                },
                 duringExecution: async (pid) =>
                 {
                     Stream stream = await server.AcceptAsync();
@@ -65,23 +71,34 @@ namespace Tracing.Tests.PauseOnStartValidation
                     Logger.logger.Log(advertise.ToString());
 
                     // Native AOT doesn't use the private provider / EEStartupStart event, so the subprocess
-                    // writes a sentinel event to signal that the runtime has resumed and run the application 
-                    Provider provider = TestLibrary.Utilities.IsNativeAot ? new Provider(nameof(SentinelEventSource)) : new Provider("Microsoft-Windows-DotNETRuntimePrivate", 0x80000000, EventLevel.Verbose);
+                    // writes a sentinel event to signal that the runtime has resumed and run the application
+                    Provider provider = TestLibrary.Utilities.IsNativeAot
+                        ? new Provider(nameof(SentinelEventSource))
+                        : new Provider(
+                            "Microsoft-Windows-DotNETRuntimePrivate",
+                            0x80000000,
+                            EventLevel.Verbose
+                        );
                     var config = new SessionConfiguration(
                         circularBufferSizeMB: 1000,
                         format: EventPipeSerializationFormat.NetTrace,
-                        providers: new List<Provider> { 
-                            provider
-                        });
+                        providers: new List<Provider> { provider }
+                    );
 
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
-                    using Stream eventStream = EventPipeClient.CollectTracing(pid, config, out var sessionId);
-                    Logger.logger.Log($"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}");
+                    using Stream eventStream = EventPipeClient.CollectTracing(
+                        pid,
+                        config,
+                        out var sessionId
+                    );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
+                    );
                     Task readerTask = eventStream.CopyToAsync(memoryStream);
-                    
+
                     Logger.logger.Log($"Send ResumeRuntime Diagnostics IPC Command");
                     // send ResumeRuntime command (0x04=ProcessCommandSet, 0x01=ResumeRuntime commandid)
-                    var message = new IpcMessage(0x04,0x01);
+                    var message = new IpcMessage(0x04, 0x01);
                     Logger.logger.Log($"Sent: {message.ToString()}");
                     IpcMessage response = IpcClient.SendMessage(stream, message);
                     Logger.logger.Log($"received: {response.ToString()}");
@@ -99,7 +116,7 @@ namespace Tracing.Tests.PauseOnStartValidation
             memoryStream.Seek(0, SeekOrigin.Begin);
             using var source = new EventPipeEventSource(memoryStream);
             var parser = new ClrPrivateTraceEventParser(source);
-            bool isStartupEventPresent= false;
+            bool isStartupEventPresent = false;
             if (TestLibrary.Utilities.IsNativeAot)
             {
                 source.Dynamic.All += (eventData) => isStartupEventPresent = true;
@@ -126,7 +143,10 @@ namespace Tracing.Tests.PauseOnStartValidation
             using var memoryStream3 = new MemoryStream();
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string> { { Utils.DiagnosticPortsEnvKey, $"{serverName}" } },
+                environment: new Dictionary<string, string>
+                {
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName}" },
+                },
                 duringExecution: async (pid) =>
                 {
                     Stream stream = await server.AcceptAsync();
@@ -134,34 +154,56 @@ namespace Tracing.Tests.PauseOnStartValidation
                     Logger.logger.Log(advertise.ToString());
 
                     // Native AOT doesn't use the private provider / EEStartupStart event, so the subprocess
-                    // writes a sentinel event to signal that the runtime has resumed and run the application 
-                    Provider provider = TestLibrary.Utilities.IsNativeAot ? new Provider(nameof(SentinelEventSource)) : new Provider("Microsoft-Windows-DotNETRuntimePrivate", 0x80000000, EventLevel.Verbose);
+                    // writes a sentinel event to signal that the runtime has resumed and run the application
+                    Provider provider = TestLibrary.Utilities.IsNativeAot
+                        ? new Provider(nameof(SentinelEventSource))
+                        : new Provider(
+                            "Microsoft-Windows-DotNETRuntimePrivate",
+                            0x80000000,
+                            EventLevel.Verbose
+                        );
                     var config = new SessionConfiguration(
                         circularBufferSizeMB: 1000,
                         format: EventPipeSerializationFormat.NetTrace,
-                        providers: new List<Provider> { 
-                            provider
-                        });
+                        providers: new List<Provider> { provider }
+                    );
 
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
-                    using Stream eventStream1 = EventPipeClient.CollectTracing(pid, config, out var sessionId1);
-                    Logger.logger.Log($"Started EventPipeSession over standard connection with session id: 0x{sessionId1:x}");
+                    using Stream eventStream1 = EventPipeClient.CollectTracing(
+                        pid,
+                        config,
+                        out var sessionId1
+                    );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId1:x}"
+                    );
                     Task readerTask1 = eventStream1.CopyToAsync(memoryStream1);
 
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
-                    using Stream eventStream2 = EventPipeClient.CollectTracing(pid, config, out var sessionId2);
-                    Logger.logger.Log($"Started EventPipeSession over standard connection with session id: 0x{sessionId2:x}");
+                    using Stream eventStream2 = EventPipeClient.CollectTracing(
+                        pid,
+                        config,
+                        out var sessionId2
+                    );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId2:x}"
+                    );
                     Task readerTask2 = eventStream2.CopyToAsync(memoryStream2);
 
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
-                    using Stream eventStream3 = EventPipeClient.CollectTracing(pid, config, out var sessionId3);
-                    Logger.logger.Log($"Started EventPipeSession over standard connection with session id: 0x{sessionId3:x}");
+                    using Stream eventStream3 = EventPipeClient.CollectTracing(
+                        pid,
+                        config,
+                        out var sessionId3
+                    );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId3:x}"
+                    );
                     Task readerTask3 = eventStream3.CopyToAsync(memoryStream3);
 
-                    
                     Logger.logger.Log($"Send ResumeRuntime Diagnostics IPC Command");
                     // send ResumeRuntime command (0x04=ProcessCommandSet, 0x01=ResumeRuntime commandid)
-                    var message = new IpcMessage(0x04,0x01);
+                    var message = new IpcMessage(0x04, 0x01);
                     Logger.logger.Log($"Sent: {message.ToString()}");
                     IpcMessage response = IpcClient.SendMessage(stream, message);
                     Logger.logger.Log($"received: {response.ToString()}");
@@ -188,9 +230,9 @@ namespace Tracing.Tests.PauseOnStartValidation
                 var parser = new ClrPrivateTraceEventParser(source);
                 if (TestLibrary.Utilities.IsNativeAot)
                 {
-                    source.Dynamic.All += (eventData) => 
+                    source.Dynamic.All += (eventData) =>
                     {
-                        if(eventData.EventName.Equals("SentinelEvent"))
+                        if (eventData.EventName.Equals("SentinelEvent"))
                             nStartupEventsSeen++;
                     };
                 }
@@ -207,9 +249,9 @@ namespace Tracing.Tests.PauseOnStartValidation
                 var parser = new ClrPrivateTraceEventParser(source);
                 if (TestLibrary.Utilities.IsNativeAot)
                 {
-                    source.Dynamic.All += (eventData) => 
+                    source.Dynamic.All += (eventData) =>
                     {
-                        if(eventData.EventName.Equals("SentinelEvent"))
+                        if (eventData.EventName.Equals("SentinelEvent"))
                             nStartupEventsSeen++;
                     };
                 }
@@ -226,9 +268,9 @@ namespace Tracing.Tests.PauseOnStartValidation
                 var parser = new ClrPrivateTraceEventParser(source);
                 if (TestLibrary.Utilities.IsNativeAot)
                 {
-                    source.Dynamic.All += (eventData) => 
+                    source.Dynamic.All += (eventData) =>
                     {
-                        if(eventData.EventName.Equals("SentinelEvent"))
+                        if (eventData.EventName.Equals("SentinelEvent"))
                             nStartupEventsSeen++;
                     };
                 }
@@ -255,7 +297,10 @@ namespace Tracing.Tests.PauseOnStartValidation
             using var memoryStream3 = new MemoryStream();
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string> { { Utils.DiagnosticPortsEnvKey, $"{serverName}" } },
+                environment: new Dictionary<string, string>
+                {
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName}" },
+                },
                 duringExecution: async (pid) =>
                 {
                     Stream stream = await server.AcceptAsync();
@@ -265,23 +310,47 @@ namespace Tracing.Tests.PauseOnStartValidation
                     var config = new SessionConfiguration(
                         circularBufferSizeMB: 1000,
                         format: EventPipeSerializationFormat.NetTrace,
-                        providers: new List<Provider> { 
-                            new Provider("Microsoft-Windows-DotNETRuntime", UInt64.MaxValue, EventLevel.Verbose)
-                        });
+                        providers: new List<Provider>
+                        {
+                            new Provider(
+                                "Microsoft-Windows-DotNETRuntime",
+                                UInt64.MaxValue,
+                                EventLevel.Verbose
+                            ),
+                        }
+                    );
 
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
-                    using Stream eventStream1 = EventPipeClient.CollectTracing(pid, config, out var sessionId1);
-                    Logger.logger.Log($"Started EventPipeSession over standard connection with session id: 0x{sessionId1:x}");
+                    using Stream eventStream1 = EventPipeClient.CollectTracing(
+                        pid,
+                        config,
+                        out var sessionId1
+                    );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId1:x}"
+                    );
                     Task readerTask1 = eventStream1.CopyToAsync(memoryStream1);
 
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
-                    using Stream eventStream2 = EventPipeClient.CollectTracing(pid, config, out var sessionId2);
-                    Logger.logger.Log($"Started EventPipeSession over standard connection with session id: 0x{sessionId2:x}");
+                    using Stream eventStream2 = EventPipeClient.CollectTracing(
+                        pid,
+                        config,
+                        out var sessionId2
+                    );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId2:x}"
+                    );
                     Task readerTask2 = eventStream2.CopyToAsync(memoryStream2);
 
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
-                    using Stream eventStream3 = EventPipeClient.CollectTracing(pid, config, out var sessionId3);
-                    Logger.logger.Log($"Started EventPipeSession over standard connection with session id: 0x{sessionId3:x}");
+                    using Stream eventStream3 = EventPipeClient.CollectTracing(
+                        pid,
+                        config,
+                        out var sessionId3
+                    );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId3:x}"
+                    );
                     Task readerTask3 = eventStream3.CopyToAsync(memoryStream3);
 
                     await Task.Delay(TimeSpan.FromSeconds(1));
@@ -293,10 +362,10 @@ namespace Tracing.Tests.PauseOnStartValidation
                     await readerTask2;
                     await readerTask3;
                     Logger.logger.Log("Stopped EventPipeSession over standard connection");
-                    
+
                     Logger.logger.Log($"Send ResumeRuntime Diagnostics IPC Command");
                     // send ResumeRuntime command (0x04=ProcessCommandSet, 0x01=ResumeRuntime commandid)
-                    var message = new IpcMessage(0x04,0x01);
+                    var message = new IpcMessage(0x04, 0x01);
                     Logger.logger.Log($"Sent: {message.ToString()}");
                     IpcMessage response = IpcClient.SendMessage(stream, message);
                     Logger.logger.Log($"received: {response.ToString()}");
@@ -319,7 +388,10 @@ namespace Tracing.Tests.PauseOnStartValidation
             using var memoryStream3 = new MemoryStream();
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string> { { Utils.DiagnosticPortsEnvKey, $"{serverName}" } },
+                environment: new Dictionary<string, string>
+                {
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName}" },
+                },
                 duringExecution: async (pid) =>
                 {
                     Stream stream = await server.AcceptAsync();
@@ -328,7 +400,7 @@ namespace Tracing.Tests.PauseOnStartValidation
 
                     Logger.logger.Log($"Send profiler attach Diagnostics IPC Command");
                     // send profiler attach command (0x03=ProfilerCommandId, 0x01=attach commandid)
-                    var message = new IpcMessage(0x03,0x01);
+                    var message = new IpcMessage(0x03, 0x01);
                     Logger.logger.Log($"Sent: {message.ToString()}");
                     IpcMessage response = IpcClient.SendMessage(stream, message);
                     Logger.logger.Log($"received: {response.ToString()}");
@@ -341,7 +413,7 @@ namespace Tracing.Tests.PauseOnStartValidation
 
                     Logger.logger.Log($"Send ResumeRuntime Diagnostics IPC Command");
                     // send ResumeRuntime command (0x04=ProcessCommandSet, 0x01=ResumeRuntime commandid)
-                    message = new IpcMessage(0x04,0x01);
+                    message = new IpcMessage(0x04, 0x01);
                     Logger.logger.Log($"Sent: {message.ToString()}");
                     response = IpcClient.SendMessage(stream, message);
                     Logger.logger.Log($"received: {response.ToString()}");
@@ -355,16 +427,21 @@ namespace Tracing.Tests.PauseOnStartValidation
 
         public sealed class SentinelEventSource : EventSource
         {
-            private SentinelEventSource() {}
+            private SentinelEventSource() { }
+
             public static SentinelEventSource Log = new SentinelEventSource();
-            public void SentinelEvent() { WriteEvent(1, nameof(SentinelEvent)); }
+
+            public void SentinelEvent()
+            {
+                WriteEvent(1, nameof(SentinelEvent));
+            }
         }
 
         public static async Task<int> Main(string[] args)
         {
             if (args.Length >= 1)
             {
-                // Native AOT test uses this event source as a signal that the runtime has resumed and gone on to run the application 
+                // Native AOT test uses this event source as a signal that the runtime has resumed and gone on to run the application
                 if (TestLibrary.Utilities.IsNativeAot)
                     SentinelEventSource.Log.SentinelEvent();
 
@@ -377,14 +454,16 @@ namespace Tracing.Tests.PauseOnStartValidation
             bool fSuccess = true;
             if (!IpcTraceTest.EnsureCleanEnvironment())
                 return -1;
-            IEnumerable<MethodInfo> tests = typeof(PauseOnStartValidation).GetMethods().Where(mi => mi.Name.StartsWith("TEST_"));
+            IEnumerable<MethodInfo> tests = typeof(PauseOnStartValidation)
+                .GetMethods()
+                .Where(mi => mi.Name.StartsWith("TEST_"));
             foreach (var test in tests)
             {
                 Logger.logger.Log($"::== Running test: {test.Name}");
                 bool result = true;
                 try
                 {
-                    result = await (Task<bool>)test.Invoke(null, new object[] {});
+                    result = await (Task<bool>)test.Invoke(null, new object[] { });
                 }
                 catch (Exception e)
                 {
@@ -394,7 +473,6 @@ namespace Tracing.Tests.PauseOnStartValidation
                 fSuccess &= result;
                 Logger.logger.Log($"Test passed: {result}");
                 Logger.logger.Log($"");
-
             }
             return fSuccess ? 100 : -1;
         }

@@ -4,7 +4,9 @@
 namespace System.Data.Odbc
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class OdbcError
     {
         //Data
@@ -23,34 +25,22 @@ namespace System.Data.Odbc
 
         public string Message
         {
-            get
-            {
-                return _message ?? string.Empty;
-            }
+            get { return _message ?? string.Empty; }
         }
 
         public string SQLState
         {
-            get
-            {
-                return _state;
-            }
+            get { return _state; }
         }
 
         public int NativeError
         {
-            get
-            {
-                return _nativeerror;
-            }
+            get { return _nativeerror; }
         }
 
         public string Source
         {
-            get
-            {
-                return _source ?? string.Empty;
-            }
+            get { return _source ?? string.Empty; }
         }
 
         internal void SetSource(string Source)

@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 
 [ExportCSharpVisualBasicStatelessLspService(typeof(ExecuteWorkspaceCommandHandler)), Shared]
 [Method(Methods.WorkspaceExecuteCommandName)]
-internal class ExecuteWorkspaceCommandHandler : ILspServiceRequestHandler<ExecuteCommandParams, object?>
+internal class ExecuteWorkspaceCommandHandler
+    : ILspServiceRequestHandler<ExecuteCommandParams, object?>
 {
     public bool MutatesSolutionState => false;
 
@@ -23,22 +24,31 @@ internal class ExecuteWorkspaceCommandHandler : ILspServiceRequestHandler<Execut
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public ExecuteWorkspaceCommandHandler()
-    {
-    }
+    public ExecuteWorkspaceCommandHandler() { }
 
-    public async Task<object?> HandleRequestAsync(ExecuteCommandParams request, RequestContext context, CancellationToken cancellationToken)
+    public async Task<object?> HandleRequestAsync(
+        ExecuteCommandParams request,
+        RequestContext context,
+        CancellationToken cancellationToken
+    )
     {
-        var requestExecutionQueue = context.GetRequiredService<IRequestExecutionQueue<RequestContext>>();
+        var requestExecutionQueue = context.GetRequiredService<
+            IRequestExecutionQueue<RequestContext>
+        >();
         var lspServices = context.GetRequiredService<ILspServices>();
 
-        var requestMethod = AbstractExecuteWorkspaceCommandHandler.GetRequestNameForCommandName(request.Command);
+        var requestMethod = AbstractExecuteWorkspaceCommandHandler.GetRequestNameForCommandName(
+            request.Command
+        );
 
-        var result = await requestExecutionQueue.ExecuteAsync<ExecuteCommandParams, object?>(
-            request,
-            requestMethod,
-            lspServices,
-            cancellationToken).ConfigureAwait(false);
+        var result = await requestExecutionQueue
+            .ExecuteAsync<ExecuteCommandParams, object?>(
+                request,
+                requestMethod,
+                lspServices,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         return result;
     }

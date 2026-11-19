@@ -21,24 +21,18 @@ namespace System.Activities.Debugger
             this.Type = type;
         }
 
-        public string Name
-        {
-            get;
-            private set;
-        }
+        public string Name { get; private set; }
 
-        [SuppressMessage(FxCop.Category.Naming, FxCop.Rule.PropertyNamesShouldNotMatchGetMethods,
-            Justification = "Workflow normalizes on Type for Type properties")]
-        public Type Type
-        {
-            get;
-            private set;
-        }
+        [SuppressMessage(
+            FxCop.Category.Naming,
+            FxCop.Rule.PropertyNamesShouldNotMatchGetMethods,
+            Justification = "Workflow normalizes on Type for Type properties"
+        )]
+        public Type Type { get; private set; }
 
         public override string ToString()
         {
             return this.Name + ":" + this.Type.ToString();
         }
     }
-
 }

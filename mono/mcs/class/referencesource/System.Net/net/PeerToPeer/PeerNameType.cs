@@ -8,6 +8,6 @@ namespace System.Net.PeerToPeer
     public enum PeerNameType
     {
         Secured = 0,
-        Unsecured = 1
+        Unsecured = 1,
     }
 }

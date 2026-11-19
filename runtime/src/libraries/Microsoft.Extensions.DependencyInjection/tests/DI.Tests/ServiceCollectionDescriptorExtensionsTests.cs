@@ -32,7 +32,11 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
             var descriptor1 = new ServiceDescriptor(typeof(IFakeService), new FakeService());
-            var descriptor2 = new ServiceDescriptor(typeof(IFactoryService), typeof(TransientFactoryService), ServiceLifetime.Transient);
+            var descriptor2 = new ServiceDescriptor(
+                typeof(IFactoryService),
+                typeof(TransientFactoryService),
+                ServiceLifetime.Transient
+            );
 
             // Act
             serviceCollection.Add(descriptor1);
@@ -49,7 +53,11 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var serviceCollection = new ServiceCollection();
             var descriptor1 = new ServiceDescriptor(typeof(IFakeService), new FakeService());
-            var descriptor2 = new ServiceDescriptor(typeof(IFactoryService), typeof(TransientFactoryService), ServiceLifetime.Transient);
+            var descriptor2 = new ServiceDescriptor(
+                typeof(IFactoryService),
+                typeof(TransientFactoryService),
+                ServiceLifetime.Transient
+            );
 
             // Act
             serviceCollection.Add(descriptor1);
@@ -61,37 +69,62 @@ namespace Microsoft.Extensions.DependencyInjection
             Assert.Same(result, descriptor2);
         }
 
-        public static TheoryData<ServiceDescriptor, string> ServiceDescriptorToStringData = new TheoryData<ServiceDescriptor, string>()
-        {
+        public static TheoryData<ServiceDescriptor, string> ServiceDescriptorToStringData =
+            new TheoryData<ServiceDescriptor, string>()
             {
-                new ServiceDescriptor(typeof(IFakeService), typeof(FakeService), ServiceLifetime.Scoped),
-                "ServiceType: Microsoft.Extensions.DependencyInjection.Specification.Fakes.IFakeService Lifetime: Scoped ImplementationType: Microsoft.Extensions.DependencyInjection.Specification.Fakes.FakeService"
-            },
-            {
-                new ServiceDescriptor(typeof(IFakeService), typeof(FakeService), ServiceLifetime.Singleton),
-                "ServiceType: Microsoft.Extensions.DependencyInjection.Specification.Fakes.IFakeService Lifetime: Singleton ImplementationType: Microsoft.Extensions.DependencyInjection.Specification.Fakes.FakeService"
-            },
-            {
-                new ServiceDescriptor(typeof(IFakeService), typeof(FakeService), ServiceLifetime.Transient),
-                "ServiceType: Microsoft.Extensions.DependencyInjection.Specification.Fakes.IFakeService Lifetime: Transient ImplementationType: Microsoft.Extensions.DependencyInjection.Specification.Fakes.FakeService"
-            },
-            {
-                new ServiceDescriptor(typeof(IFakeService), new FakeServiceToString()),
-                "ServiceType: Microsoft.Extensions.DependencyInjection.Specification.Fakes.IFakeService Lifetime: Singleton ImplementationInstance: [FakeServiceToString]"
-            },
-            {
-                new ServiceDescriptor(typeof(IFakeService), CreateFakeService, ServiceLifetime.Scoped),
-                "ServiceType: Microsoft.Extensions.DependencyInjection.Specification.Fakes.IFakeService Lifetime: Scoped ImplementationFactory: Microsoft.Extensions.DependencyInjection.Specification.Fakes.FakeService CreateFakeService(System.IServiceProvider)"
-            },
-            {
-                new ServiceDescriptor(typeof(IFakeService), CreateFakeService, ServiceLifetime.Singleton),
-                "ServiceType: Microsoft.Extensions.DependencyInjection.Specification.Fakes.IFakeService Lifetime: Singleton ImplementationFactory: Microsoft.Extensions.DependencyInjection.Specification.Fakes.FakeService CreateFakeService(System.IServiceProvider)"
-            },
-            {
-                new ServiceDescriptor(typeof(IFakeService), CreateFakeService, ServiceLifetime.Transient),
-                "ServiceType: Microsoft.Extensions.DependencyInjection.Specification.Fakes.IFakeService Lifetime: Transient ImplementationFactory: Microsoft.Extensions.DependencyInjection.Specification.Fakes.FakeService CreateFakeService(System.IServiceProvider)"
-            },
-        };
+                {
+                    new ServiceDescriptor(
+                        typeof(IFakeService),
+                        typeof(FakeService),
+                        ServiceLifetime.Scoped
+                    ),
+                    "ServiceType: Microsoft.Extensions.DependencyInjection.Specification.Fakes.IFakeService Lifetime: Scoped ImplementationType: Microsoft.Extensions.DependencyInjection.Specification.Fakes.FakeService"
+                },
+                {
+                    new ServiceDescriptor(
+                        typeof(IFakeService),
+                        typeof(FakeService),
+                        ServiceLifetime.Singleton
+                    ),
+                    "ServiceType: Microsoft.Extensions.DependencyInjection.Specification.Fakes.IFakeService Lifetime: Singleton ImplementationType: Microsoft.Extensions.DependencyInjection.Specification.Fakes.FakeService"
+                },
+                {
+                    new ServiceDescriptor(
+                        typeof(IFakeService),
+                        typeof(FakeService),
+                        ServiceLifetime.Transient
+                    ),
+                    "ServiceType: Microsoft.Extensions.DependencyInjection.Specification.Fakes.IFakeService Lifetime: Transient ImplementationType: Microsoft.Extensions.DependencyInjection.Specification.Fakes.FakeService"
+                },
+                {
+                    new ServiceDescriptor(typeof(IFakeService), new FakeServiceToString()),
+                    "ServiceType: Microsoft.Extensions.DependencyInjection.Specification.Fakes.IFakeService Lifetime: Singleton ImplementationInstance: [FakeServiceToString]"
+                },
+                {
+                    new ServiceDescriptor(
+                        typeof(IFakeService),
+                        CreateFakeService,
+                        ServiceLifetime.Scoped
+                    ),
+                    "ServiceType: Microsoft.Extensions.DependencyInjection.Specification.Fakes.IFakeService Lifetime: Scoped ImplementationFactory: Microsoft.Extensions.DependencyInjection.Specification.Fakes.FakeService CreateFakeService(System.IServiceProvider)"
+                },
+                {
+                    new ServiceDescriptor(
+                        typeof(IFakeService),
+                        CreateFakeService,
+                        ServiceLifetime.Singleton
+                    ),
+                    "ServiceType: Microsoft.Extensions.DependencyInjection.Specification.Fakes.IFakeService Lifetime: Singleton ImplementationFactory: Microsoft.Extensions.DependencyInjection.Specification.Fakes.FakeService CreateFakeService(System.IServiceProvider)"
+                },
+                {
+                    new ServiceDescriptor(
+                        typeof(IFakeService),
+                        CreateFakeService,
+                        ServiceLifetime.Transient
+                    ),
+                    "ServiceType: Microsoft.Extensions.DependencyInjection.Specification.Fakes.IFakeService Lifetime: Transient ImplementationFactory: Microsoft.Extensions.DependencyInjection.Specification.Fakes.FakeService CreateFakeService(System.IServiceProvider)"
+                },
+            };
 
         [Theory]
         [MemberData(nameof(ServiceDescriptorToStringData))]

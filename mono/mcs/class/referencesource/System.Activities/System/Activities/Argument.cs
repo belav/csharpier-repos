@@ -19,7 +19,7 @@ namespace System.Activities
         public static readonly int UnspecifiedEvaluationOrder = -1;
 
         public const string ResultValue = "Result";
-        
+
         ArgumentDirection direction;
         RuntimeArgument runtimeArgument;
         int evaluationOrder;
@@ -29,18 +29,11 @@ namespace System.Activities
             this.evaluationOrder = Argument.UnspecifiedEvaluationOrder;
         }
 
-        public Type ArgumentType
-        {
-            get;
-            internal set;
-        }
+        public Type ArgumentType { get; internal set; }
 
         public ArgumentDirection Direction
         {
-            get
-            {
-                return this.direction;
-            }
+            get { return this.direction; }
             internal set
             {
                 ArgumentDirectionHelper.Validate(value, "value");
@@ -51,15 +44,16 @@ namespace System.Activities
         [DefaultValue(-1)]
         public int EvaluationOrder
         {
-            get
-            {
-                return this.evaluationOrder;
-            }
+            get { return this.evaluationOrder; }
             set
             {
                 if (value < 0 && value != Argument.UnspecifiedEvaluationOrder)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange("EvaluationOrder", value, SR.InvalidEvaluationOrderValue);
+                    throw FxTrace.Exception.ArgumentOutOfRange(
+                        "EvaluationOrder",
+                        value,
+                        SR.InvalidEvaluationOrderValue
+                    );
                 }
                 this.evaluationOrder = value;
             }
@@ -69,66 +63,46 @@ namespace System.Activities
         [DefaultValue(null)]
         public ActivityWithResult Expression
         {
-            get
-            {
-                return this.ExpressionCore;
-            }
-            set
-            {
-                this.ExpressionCore = value;
-            }
-        }        
-
-        internal abstract ActivityWithResult ExpressionCore
-        {
-            get;
-            set;
+            get { return this.ExpressionCore; }
+            set { this.ExpressionCore = value; }
         }
+
+        internal abstract ActivityWithResult ExpressionCore { get; set; }
 
         internal RuntimeArgument RuntimeArgument
         {
-            get
-            {
-                return this.runtimeArgument;
-            }
-            set
-            {
-                this.runtimeArgument = value;
-            }
+            get { return this.runtimeArgument; }
+            set { this.runtimeArgument = value; }
         }
 
         internal bool IsInTree
         {
-            get
-            {
-                return (this.runtimeArgument != null && this.runtimeArgument.IsInTree);
-            }
+            get { return (this.runtimeArgument != null && this.runtimeArgument.IsInTree); }
         }
 
-        internal bool WasDesignTimeNull
-        {
-            get;
-            set;
-        }
+        internal bool WasDesignTimeNull { get; set; }
 
         internal int Id
         {
             get
             {
-                Fx.Assert(this.runtimeArgument != null, "We shouldn't call Id unless we have a runtime argument.");
+                Fx.Assert(
+                    this.runtimeArgument != null,
+                    "We shouldn't call Id unless we have a runtime argument."
+                );
                 return this.runtimeArgument.Id;
             }
         }
 
         internal bool IsEmpty
         {
-            get
-            {
-                return this.Expression == null;
-            }
+            get { return this.Expression == null; }
         }
 
-        public static Argument CreateReference(Argument argumentToReference, string referencedArgumentName)
+        public static Argument CreateReference(
+            Argument argumentToReference,
+            string referencedArgumentName
+        )
         {
             if (argumentToReference == null)
             {
@@ -140,7 +114,11 @@ namespace System.Activities
                 throw FxTrace.Exception.ArgumentNullOrEmpty("referencedArgumentName");
             }
 
-            return ActivityUtilities.CreateReferenceArgument(argumentToReference.ArgumentType, argumentToReference.Direction, referencedArgumentName);
+            return ActivityUtilities.CreateReferenceArgument(
+                argumentToReference.ArgumentType,
+                argumentToReference.Direction,
+                referencedArgumentName
+            );
         }
 
         // for ArgumentValueSerializer
@@ -149,12 +127,15 @@ namespace System.Activities
             if (this.WasDesignTimeNull)
             {
                 return true;
-            }            
+            }
             else
             {
                 if (this.EvaluationOrder == Argument.UnspecifiedEvaluationOrder)
                 {
-                    return ActivityWithResultValueSerializer.CanConvertToStringWrapper(this.Expression, context);
+                    return ActivityWithResultValueSerializer.CanConvertToStringWrapper(
+                        this.Expression,
+                        context
+                    );
                 }
                 else
                 {
@@ -172,7 +153,10 @@ namespace System.Activities
                 return null;
             }
 
-            return ActivityWithResultValueSerializer.ConvertToStringWrapper(this.Expression, context);
+            return ActivityWithResultValueSerializer.ConvertToStringWrapper(
+                this.Expression,
+                context
+            );
         }
 
         internal static void Bind(Argument binding, RuntimeArgument argument)
@@ -188,7 +172,11 @@ namespace System.Activities
             argument.BoundArgument = binding;
         }
 
-        internal static void TryBind(Argument binding, RuntimeArgument argument, Activity violationOwner)
+        internal static void TryBind(
+            Argument binding,
+            RuntimeArgument argument,
+            Activity violationOwner
+        )
         {
             if (argument == null)
             {
@@ -201,13 +189,29 @@ namespace System.Activities
             {
                 if (binding.Direction != argument.Direction)
                 {
-                    violationOwner.AddTempValidationError(new ValidationError(SR.ArgumentDirectionMismatch(argument.Name, argument.Direction, binding.Direction)));
+                    violationOwner.AddTempValidationError(
+                        new ValidationError(
+                            SR.ArgumentDirectionMismatch(
+                                argument.Name,
+                                argument.Direction,
+                                binding.Direction
+                            )
+                        )
+                    );
                     passedValidations = false;
                 }
 
                 if (binding.ArgumentType != argument.Type)
                 {
-                    violationOwner.AddTempValidationError(new ValidationError(SR.ArgumentTypeMismatch(argument.Name, argument.Type, binding.ArgumentType)));
+                    violationOwner.AddTempValidationError(
+                        new ValidationError(
+                            SR.ArgumentTypeMismatch(
+                                argument.Name,
+                                argument.Type,
+                                binding.ArgumentType
+                            )
+                        )
+                    );
                     passedValidations = false;
                 }
             }
@@ -225,7 +229,10 @@ namespace System.Activities
 
         internal abstract Location CreateDefaultLocation();
 
-        internal abstract void Declare(LocationEnvironment targetEnvironment, ActivityInstance activityInstance);
+        internal abstract void Declare(
+            LocationEnvironment targetEnvironment,
+            ActivityInstance activityInstance
+        );
 
         // Soft-Link: This method is referenced through reflection by
         // ExpressionUtilities.TryRewriteLambdaExpression.  Update that
@@ -268,7 +275,12 @@ namespace System.Activities
             {
                 if (this.Expression.Result != null && !this.Expression.Result.IsEmpty)
                 {
-                    ValidationError validationError = new ValidationError(SR.ResultCannotBeSetOnArgumentExpressions, false, this.RuntimeArgument.Name, owner);
+                    ValidationError validationError = new ValidationError(
+                        SR.ResultCannotBeSetOnArgumentExpressions,
+                        false,
+                        this.RuntimeArgument.Name,
+                        owner
+                    );
                     ActivityUtilities.Add(ref validationErrors, validationError);
                 }
 
@@ -286,19 +298,44 @@ namespace System.Activities
                         {
                             ActivityUtilities.Add(
                                 ref validationErrors,
-                                new ValidationError(SR.ArgumentValueExpressionTypeMismatch(this.ArgumentType, actualExpression.ResultType), false, this.RuntimeArgument.Name, owner));
+                                new ValidationError(
+                                    SR.ArgumentValueExpressionTypeMismatch(
+                                        this.ArgumentType,
+                                        actualExpression.ResultType
+                                    ),
+                                    false,
+                                    this.RuntimeArgument.Name,
+                                    owner
+                                )
+                            );
                         }
                         break;
                     case ArgumentDirection.InOut:
                     case ArgumentDirection.Out:
                         Type locationType;
-                        if (!ActivityUtilities.IsLocationGenericType(actualExpression.ResultType, out locationType) ||
-                            locationType != this.ArgumentType)
+                        if (
+                            !ActivityUtilities.IsLocationGenericType(
+                                actualExpression.ResultType,
+                                out locationType
+                            )
+                            || locationType != this.ArgumentType
+                        )
                         {
-                            Type expectedType = ActivityUtilities.CreateActivityWithResult(ActivityUtilities.CreateLocation(this.ArgumentType));
+                            Type expectedType = ActivityUtilities.CreateActivityWithResult(
+                                ActivityUtilities.CreateLocation(this.ArgumentType)
+                            );
                             ActivityUtilities.Add(
                                 ref validationErrors,
-                                new ValidationError(SR.ArgumentLocationExpressionTypeMismatch(expectedType.FullName, actualExpression.GetType().FullName), false, this.RuntimeArgument.Name, owner));
+                                new ValidationError(
+                                    SR.ArgumentLocationExpressionTypeMismatch(
+                                        expectedType.FullName,
+                                        actualExpression.GetType().FullName
+                                    ),
+                                    false,
+                                    this.RuntimeArgument.Name,
+                                    owner
+                                )
+                            );
                         }
                         break;
                 }
@@ -306,7 +343,11 @@ namespace System.Activities
         }
 
         // optional "fast-path" for arguments that can be resolved synchronously
-        internal abstract bool TryPopulateValue(LocationEnvironment targetEnvironment, ActivityInstance targetActivityInstance, ActivityExecutor executor);
+        internal abstract bool TryPopulateValue(
+            LocationEnvironment targetEnvironment,
+            ActivityInstance targetActivityInstance,
+            ActivityExecutor executor
+        );
 
         // Soft-Link: This method is referenced through reflection by
         // ExpressionUtilities.TryRewriteLambdaExpression.  Update that
@@ -327,7 +368,9 @@ namespace System.Activities
         {
             if (!this.IsInTree)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.ArgumentNotInTree(this.ArgumentType)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.ArgumentNotInTree(this.ArgumentType))
+                );
             }
         }
 

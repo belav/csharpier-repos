@@ -11,7 +11,9 @@ namespace System
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int BinarySearch<T, TComparable>(
-            this ReadOnlySpan<T> span, TComparable comparable)
+            this ReadOnlySpan<T> span,
+            TComparable comparable
+        )
             where TComparable : IComparable<T>
         {
             if (comparable == null)
@@ -21,7 +23,10 @@ namespace System
         }
 
         public static int BinarySearch<T, TComparable>(
-            ref T spanStart, int length, TComparable comparable)
+            ref T spanStart,
+            int length,
+            TComparable comparable
+        )
             where TComparable : IComparable<T>
         {
             int lo = 0;

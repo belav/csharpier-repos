@@ -15,11 +15,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSyntaxContextService()
-        {
-        }
+        public CSharpSyntaxContextService() { }
 
-        public SyntaxContext CreateContext(Document document, SemanticModel semanticModel, int position, CancellationToken cancellationToken)
-            => CSharpSyntaxContext.CreateContext(document, semanticModel, position, cancellationToken);
+        public SyntaxContext CreateContext(
+            Document document,
+            SemanticModel semanticModel,
+            int position,
+            CancellationToken cancellationToken
+        ) =>
+            CSharpSyntaxContext.CreateContext(document, semanticModel, position, cancellationToken);
     }
 }

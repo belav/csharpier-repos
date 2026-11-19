@@ -90,6 +90,7 @@ namespace System.Xml.Xsl.XsltOld
     internal sealed class BuiltInRuleTextAction : Action
     {
         private const int ResultStored = 2;
+
         internal override void Execute(Processor processor, ActionFrame frame)
         {
             Debug.Assert(processor != null && frame != null);
@@ -102,7 +103,12 @@ namespace System.Xml.Xsl.XsltOld
 
                     string value = processor.ValueOf(frame.NodeSet.Current!);
 
-                    if (processor.TextEvent(value, /*disableOutputEscaping:*/false))
+                    if (
+                        processor.TextEvent(
+                            value, /*disableOutputEscaping:*/
+                            false
+                        )
+                    )
                     {
                         frame.Finished();
                     }

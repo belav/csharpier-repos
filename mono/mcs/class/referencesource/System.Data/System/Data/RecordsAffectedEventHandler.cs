@@ -6,9 +6,12 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
 
-    public delegate void StatementCompletedEventHandler(object sender, StatementCompletedEventArgs e);
+    public delegate void StatementCompletedEventHandler(
+        object sender,
+        StatementCompletedEventArgs e
+    );
 }
-

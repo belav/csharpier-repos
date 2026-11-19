@@ -18,11 +18,14 @@ namespace System.Web.Mvc.Test
             // Arrange
             Dictionary<string, object> dictionary = new Dictionary<string, object>()
             {
-                { "stringParameterWithDefaultValue", 42 }
+                { "stringParameterWithDefaultValue", 42 },
             };
 
             // Act
-            object value = ActionDescriptor.ExtractParameterOrDefaultFromDictionary(ParameterExtractionController.StringParameterWithDefaultValue, dictionary);
+            object value = ActionDescriptor.ExtractParameterOrDefaultFromDictionary(
+                ParameterExtractionController.StringParameterWithDefaultValue,
+                dictionary
+            );
 
             // Assert
             Assert.Equal("hello", value);
@@ -35,7 +38,10 @@ namespace System.Web.Mvc.Test
             Dictionary<string, object> dictionary = new Dictionary<string, object>();
 
             // Act
-            object value = ActionDescriptor.ExtractParameterOrDefaultFromDictionary(ParameterExtractionController.IntParameter, dictionary);
+            object value = ActionDescriptor.ExtractParameterOrDefaultFromDictionary(
+                ParameterExtractionController.IntParameter,
+                dictionary
+            );
 
             // Assert
             Assert.Equal(0, value);
@@ -47,11 +53,14 @@ namespace System.Web.Mvc.Test
             // Arrange
             Dictionary<string, object> dictionary = new Dictionary<string, object>()
             {
-                { "stringParameterNoDefaultValue", "someValue" }
+                { "stringParameterNoDefaultValue", "someValue" },
             };
 
             // Act
-            object value = ActionDescriptor.ExtractParameterOrDefaultFromDictionary(ParameterExtractionController.StringParameterNoDefaultValue, dictionary);
+            object value = ActionDescriptor.ExtractParameterOrDefaultFromDictionary(
+                ParameterExtractionController.StringParameterNoDefaultValue,
+                dictionary
+            );
 
             // Assert
             Assert.Equal("someValue", value);
@@ -64,7 +73,8 @@ namespace System.Web.Mvc.Test
             ActionDescriptor ad = GetActionDescriptor();
 
             // Act
-            ObsoleteAttribute[] attrs = (ObsoleteAttribute[])ad.GetCustomAttributes(typeof(ObsoleteAttribute), true);
+            ObsoleteAttribute[] attrs = (ObsoleteAttribute[])
+                ad.GetCustomAttributes(typeof(ObsoleteAttribute), true);
 
             // Assert
             Assert.Empty(attrs);
@@ -78,7 +88,16 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { ad.GetCustomAttributes(null /* attributeType */, true); }, "attributeType");
+                delegate
+                {
+                    ad.GetCustomAttributes(
+                        null /* attributeType */
+                        ,
+                        true
+                    );
+                },
+                "attributeType"
+            );
         }
 
         [Fact]
@@ -86,12 +105,19 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             object[] expected = new object[0];
-            Mock<ActionDescriptor> mockDescriptor = new Mock<ActionDescriptor>() { CallBase = true };
-            mockDescriptor.Setup(d => d.GetCustomAttributes(typeof(object), true)).Returns(expected);
+            Mock<ActionDescriptor> mockDescriptor = new Mock<ActionDescriptor>()
+            {
+                CallBase = true,
+            };
+            mockDescriptor
+                .Setup(d => d.GetCustomAttributes(typeof(object), true))
+                .Returns(expected);
             ActionDescriptor ad = mockDescriptor.Object;
 
             // Act
-            object[] returned = ad.GetCustomAttributes(true /* inherit */);
+            object[] returned = ad.GetCustomAttributes(
+                true /* inherit */
+            );
 
             // Assert
             Assert.Same(expected, returned);
@@ -102,7 +128,10 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             var mockDescriptor = new Mock<ActionDescriptor>() { CallBase = true };
-            mockDescriptor.Setup(d => d.GetCustomAttributes(typeof(FilterAttribute), true)).Returns(new object[] { new Mock<FilterAttribute>().Object }).Verifiable();
+            mockDescriptor
+                .Setup(d => d.GetCustomAttributes(typeof(FilterAttribute), true))
+                .Returns(new object[] { new Mock<FilterAttribute>().Object })
+                .Verifiable();
 
             // Act
             var result = mockDescriptor.Object.GetFilterAttributes(true).ToList();
@@ -147,7 +176,16 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { ad.IsDefined(null /* attributeType */, true); }, "attributeType");
+                delegate
+                {
+                    ad.IsDefined(
+                        null /* attributeType */
+                        ,
+                        true
+                    );
+                },
+                "attributeType"
+            );
         }
 
         [Fact]
@@ -235,7 +273,8 @@ namespace System.Web.Mvc.Test
 
         class BaseDescriptor : ActionDescriptor
         {
-            static ControllerDescriptor controllerDescriptor = new Mock<ControllerDescriptor>().Object;
+            static ControllerDescriptor controllerDescriptor =
+                new Mock<ControllerDescriptor>().Object;
 
             public override string ActionName
             {
@@ -247,7 +286,10 @@ namespace System.Web.Mvc.Test
                 get { return controllerDescriptor; }
             }
 
-            public override object Execute(ControllerContext controllerContext, IDictionary<string, object> parameters)
+            public override object Execute(
+                ControllerContext controllerContext,
+                IDictionary<string, object> parameters
+            )
             {
                 throw new NotImplementedException();
             }
@@ -258,25 +300,31 @@ namespace System.Web.Mvc.Test
             }
         }
 
-        class DerivedDescriptor : BaseDescriptor
-        {
-        }
+        class DerivedDescriptor : BaseDescriptor { }
 
         private static ActionDescriptor GetActionDescriptor()
         {
-            Mock<ActionDescriptor> mockDescriptor = new Mock<ActionDescriptor>() { CallBase = true };
+            Mock<ActionDescriptor> mockDescriptor = new Mock<ActionDescriptor>()
+            {
+                CallBase = true,
+            };
             return mockDescriptor.Object;
         }
 
         private class ParameterExtractionController : Controller
         {
-            public static readonly ParameterInfo IntParameter = typeof(ParameterExtractionController).GetMethod("SomeMethod").GetParameters()[0];
-            public static readonly ParameterInfo StringParameterNoDefaultValue = typeof(ParameterExtractionController).GetMethod("SomeMethod").GetParameters()[1];
-            public static readonly ParameterInfo StringParameterWithDefaultValue = typeof(ParameterExtractionController).GetMethod("SomeMethod").GetParameters()[2];
+            public static readonly ParameterInfo IntParameter =
+                typeof(ParameterExtractionController).GetMethod("SomeMethod").GetParameters()[0];
+            public static readonly ParameterInfo StringParameterNoDefaultValue =
+                typeof(ParameterExtractionController).GetMethod("SomeMethod").GetParameters()[1];
+            public static readonly ParameterInfo StringParameterWithDefaultValue =
+                typeof(ParameterExtractionController).GetMethod("SomeMethod").GetParameters()[2];
 
-            public void SomeMethod(int intParameter, string stringParameterNoDefaultValue, [DefaultValue("hello")] string stringParameterWithDefaultValue)
-            {
-            }
+            public void SomeMethod(
+                int intParameter,
+                string stringParameterNoDefaultValue,
+                [DefaultValue("hello")] string stringParameterWithDefaultValue
+            ) { }
         }
     }
 }

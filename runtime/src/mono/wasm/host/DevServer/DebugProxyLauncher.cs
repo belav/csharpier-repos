@@ -23,9 +23,21 @@ internal static class DebugProxyLauncher
     private static readonly object LaunchLock = new object();
     private static readonly TimeSpan DebugProxyLaunchTimeout = TimeSpan.FromSeconds(10);
     private static Task<string>? LaunchedDebugProxyUrl;
-    private static readonly Regex NowListeningRegex = new Regex(@"^\s*Now listening on: (?<url>.*)$", RegexOptions.None, TimeSpan.FromSeconds(10));
-    private static readonly Regex ApplicationStartedRegex = new Regex(@"^\s*Application started\. Press Ctrl\+C to shut down\.$", RegexOptions.None, TimeSpan.FromSeconds(10));
-    private static readonly Regex NowListeningFirefoxRegex = new Regex(@"^\s*Debug proxy for firefox now listening on tcp://(?<url>.*)\. And expecting firefox at port 6000\.$", RegexOptions.None, TimeSpan.FromSeconds(10));
+    private static readonly Regex NowListeningRegex = new Regex(
+        @"^\s*Now listening on: (?<url>.*)$",
+        RegexOptions.None,
+        TimeSpan.FromSeconds(10)
+    );
+    private static readonly Regex ApplicationStartedRegex = new Regex(
+        @"^\s*Application started\. Press Ctrl\+C to shut down\.$",
+        RegexOptions.None,
+        TimeSpan.FromSeconds(10)
+    );
+    private static readonly Regex NowListeningFirefoxRegex = new Regex(
+        @"^\s*Debug proxy for firefox now listening on tcp://(?<url>.*)\. And expecting firefox at port 6000\.$",
+        RegexOptions.None,
+        TimeSpan.FromSeconds(10)
+    );
     private static readonly string[] MessageSuppressionPrefixes = new[]
     {
         "Hosting environment:",
@@ -35,7 +47,11 @@ internal static class DebugProxyLauncher
         "Debug proxy for firefox now",
     };
 
-    public static Task<string> EnsureLaunchedAndGetUrl(IServiceProvider serviceProvider, string devToolsHost, bool isFirefox)
+    public static Task<string> EnsureLaunchedAndGetUrl(
+        IServiceProvider serviceProvider,
+        string devToolsHost,
+        bool isFirefox
+    )
     {
         lock (LaunchLock)
         {
@@ -45,7 +61,11 @@ internal static class DebugProxyLauncher
         }
     }
 
-    private static async Task<string> LaunchAndGetUrl(IServiceProvider serviceProvider, string devToolsHost, bool isFirefox)
+    private static async Task<string> LaunchAndGetUrl(
+        IServiceProvider serviceProvider,
+        string devToolsHost,
+        bool isFirefox
+    )
     {
         var tcs = new TaskCompletionSource<string>();
 
@@ -55,8 +75,10 @@ internal static class DebugProxyLauncher
 
         var processStartInfo = new ProcessStartInfo
         {
-            FileName = "dotnet" + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".exe" : ""),
-            Arguments = $"exec \"{executablePath}\" --OwnerPid {ownerPid} --DevToolsUrl {devToolsHost} --IsFirefoxDebugging {isFirefox} --FirefoxProxyPort 6001",
+            FileName =
+                "dotnet" + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".exe" : ""),
+            Arguments =
+                $"exec \"{executablePath}\" --OwnerPid {ownerPid} --DevToolsUrl {devToolsHost} --IsFirefoxDebugging {isFirefox} --FirefoxProxyPort 6001",
             UseShellExecute = false,
             RedirectStandardOutput = true,
             RedirectStandardError = true,
@@ -66,7 +88,9 @@ internal static class DebugProxyLauncher
         var debugProxyProcess = Process.Start(processStartInfo);
         if (debugProxyProcess is null)
         {
-            tcs.TrySetException(new InvalidOperationException("Unable to start debug proxy process."));
+            tcs.TrySetException(
+                new InvalidOperationException("Unable to start debug proxy process.")
+            );
         }
         else
         {
@@ -75,7 +99,11 @@ internal static class DebugProxyLauncher
 
             new CancellationTokenSource(DebugProxyLaunchTimeout).Token.Register(() =>
             {
-                tcs.TrySetException(new TimeoutException($"Failed to start the debug proxy within the timeout period of {DebugProxyLaunchTimeout.TotalSeconds} seconds."));
+                tcs.TrySetException(
+                    new TimeoutException(
+                        $"Failed to start the debug proxy within the timeout period of {DebugProxyLaunchTimeout.TotalSeconds} seconds."
+                    )
+                );
             });
         }
 
@@ -90,19 +118,27 @@ internal static class DebugProxyLauncher
         // shouldn't be trying to use the same port numbers, etc. In particular we need to break
         // the association with IISExpress and the MS-ASPNETCORE-TOKEN check.
         // For more context on this, see https://github.com/dotnet/aspnetcore/issues/20308.
-        var keysToRemove = environment.Keys.Where(key => key.StartsWith("ASPNETCORE_", StringComparison.Ordinal)).ToList();
+        var keysToRemove = environment
+            .Keys.Where(key => key.StartsWith("ASPNETCORE_", StringComparison.Ordinal))
+            .ToList();
         foreach (var key in keysToRemove)
         {
             environment.Remove(key);
         }
     }
 
-    [UnconditionalSuppressMessage("SingleFile", "IL3000:Avoid accessing Assembly file path when publishing as a single file", Justification = "Not published as a single file")]
+    [UnconditionalSuppressMessage(
+        "SingleFile",
+        "IL3000:Avoid accessing Assembly file path when publishing as a single file",
+        Justification = "Not published as a single file"
+    )]
     private static string LocateDebugProxyExecutable(IWebHostEnvironment environment)
     {
         if (string.IsNullOrEmpty(environment.ApplicationName))
         {
-            throw new InvalidOperationException("IWebHostEnvironment.ApplicationName is required to be set in order to start the debug proxy.");
+            throw new InvalidOperationException(
+                "IWebHostEnvironment.ApplicationName is required to be set in order to start the debug proxy."
+            );
         }
         var assembly = Assembly.Load(environment.ApplicationName);
         var debugProxyPath = Path.Combine(
@@ -113,7 +149,8 @@ internal static class DebugProxyLauncher
         if (!File.Exists(debugProxyPath))
         {
             throw new FileNotFoundException(
-                $"Cannot start debug proxy because it cannot be found at '{debugProxyPath}'");
+                $"Cannot start debug proxy because it cannot be found at '{debugProxyPath}'"
+            );
         }
 
         return debugProxyPath;
@@ -145,7 +182,11 @@ internal static class DebugProxyLauncher
         };
     }
 
-    private static void CompleteTaskWhenServerIsReady(Process aspNetProcess, bool isFirefox, TaskCompletionSource<string> taskCompletionSource)
+    private static void CompleteTaskWhenServerIsReady(
+        Process aspNetProcess,
+        bool isFirefox,
+        TaskCompletionSource<string> taskCompletionSource
+    )
     {
         string? capturedUrl = null;
         var errorEncountered = false;
@@ -160,8 +201,7 @@ internal static class DebugProxyLauncher
         {
             if (!string.IsNullOrEmpty(eventArgs.Data))
             {
-                taskCompletionSource.TrySetException(new InvalidOperationException(
-                    eventArgs.Data));
+                taskCompletionSource.TrySetException(new InvalidOperationException(eventArgs.Data));
                 errorEncountered = true;
             }
         }
@@ -172,8 +212,11 @@ internal static class DebugProxyLauncher
             {
                 if (!errorEncountered)
                 {
-                    taskCompletionSource.TrySetException(new InvalidOperationException(
-                        "Expected output has not been received from the application."));
+                    taskCompletionSource.TrySetException(
+                        new InvalidOperationException(
+                            "Expected output has not been received from the application."
+                        )
+                    );
                 }
                 return;
             }
@@ -188,8 +231,11 @@ internal static class DebugProxyLauncher
                 }
                 else
                 {
-                    taskCompletionSource.TrySetException(new InvalidOperationException(
-                        "The application started listening without first advertising a URL"));
+                    taskCompletionSource.TrySetException(
+                        new InvalidOperationException(
+                            "The application started listening without first advertising a URL"
+                        )
+                    );
                 }
             }
             else

@@ -46,7 +46,7 @@ public class AddPrimaryKeyOperation : MigrationOperation, ITableMigrationOperati
             Schema = primaryKey.Table.Schema,
             Table = primaryKey.Table.Name,
             Name = primaryKey.Name,
-            Columns = primaryKey.Columns.Select(c => c.Name).ToArray()
+            Columns = primaryKey.Columns.Select(c => c.Name).ToArray(),
         };
 
         operation.AddAnnotations(primaryKey.GetAnnotations());

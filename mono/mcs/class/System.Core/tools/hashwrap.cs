@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,9 +29,10 @@
 using System;
 using System.IO;
 
-class Program {
-
-	static string Template = @"//
+class Program
+{
+    static string Template =
+        @"//
 // NOTE: DO NOT EDIT - This file was automatically generated using
 //	/mcs/class/System.Core/tools/hashwrap.cs
 //
@@ -115,29 +116,32 @@ namespace System.Security.Cryptography {
 #endif
 ";
 
-	static int Main (string [] args)
-	{
-		int n = (args.Length / 3);
-		if ((args.Length > 0) && ((args.Length % 3) != 0)) {
-			Console.WriteLine ("usage: mono hashwrap.exe className baseName wrapAround [...]");
-			return 1;
-		}
+    static int Main(string[] args)
+    {
+        int n = (args.Length / 3);
+        if ((args.Length > 0) && ((args.Length % 3) != 0))
+        {
+            Console.WriteLine("usage: mono hashwrap.exe className baseName wrapAround [...]");
+            return 1;
+        }
 
-		int p = 0;
-		for (int i = 0; i < n; i++) {
-			string className = args [p++];	// e.g. MD5Cng
-			string baseName = args [p++];	// e.g. MD5
-			string wrapAround = args [p++];	// e.g. MD5CryptoServiceProvider
+        int p = 0;
+        for (int i = 0; i < n; i++)
+        {
+            string className = args[p++]; // e.g. MD5Cng
+            string baseName = args[p++]; // e.g. MD5
+            string wrapAround = args[p++]; // e.g. MD5CryptoServiceProvider
 
-			string filename = className + ".cs";
-			using (StreamWriter writer = new StreamWriter (filename)) {
-				string code = Template.Replace ("<className>", className);
-				code = code.Replace ("<baseName>", baseName);
-				code = code.Replace ("<wrapAround>", wrapAround);
-				writer.Write (code);
-			}
-		}
+            string filename = className + ".cs";
+            using (StreamWriter writer = new StreamWriter(filename))
+            {
+                string code = Template.Replace("<className>", className);
+                code = code.Replace("<baseName>", baseName);
+                code = code.Replace("<wrapAround>", wrapAround);
+                writer.Write(code);
+            }
+        }
 
-		return 0;
-	}
+        return 0;
+    }
 }

@@ -13,14 +13,35 @@ namespace System.Security.Cryptography.Pkcs
     {
         static partial void PrepareRegistrationECDsa(Dictionary<string, CmsSignature> lookup)
         {
-            lookup.Add(Oids.ECDsaWithSha1, new ECDsaCmsSignature(Oids.ECDsaWithSha1, HashAlgorithmName.SHA1));
-            lookup.Add(Oids.ECDsaWithSha256, new ECDsaCmsSignature(Oids.ECDsaWithSha256, HashAlgorithmName.SHA256));
-            lookup.Add(Oids.ECDsaWithSha384, new ECDsaCmsSignature(Oids.ECDsaWithSha384, HashAlgorithmName.SHA384));
-            lookup.Add(Oids.ECDsaWithSha512, new ECDsaCmsSignature(Oids.ECDsaWithSha512, HashAlgorithmName.SHA512));
+            lookup.Add(
+                Oids.ECDsaWithSha1,
+                new ECDsaCmsSignature(Oids.ECDsaWithSha1, HashAlgorithmName.SHA1)
+            );
+            lookup.Add(
+                Oids.ECDsaWithSha256,
+                new ECDsaCmsSignature(Oids.ECDsaWithSha256, HashAlgorithmName.SHA256)
+            );
+            lookup.Add(
+                Oids.ECDsaWithSha384,
+                new ECDsaCmsSignature(Oids.ECDsaWithSha384, HashAlgorithmName.SHA384)
+            );
+            lookup.Add(
+                Oids.ECDsaWithSha512,
+                new ECDsaCmsSignature(Oids.ECDsaWithSha512, HashAlgorithmName.SHA512)
+            );
 #if NET8_0_OR_GREATER
-            lookup.Add(Oids.ECDsaWithSha3_256, new ECDsaCmsSignature(Oids.ECDsaWithSha3_256, HashAlgorithmName.SHA3_256));
-            lookup.Add(Oids.ECDsaWithSha3_384, new ECDsaCmsSignature(Oids.ECDsaWithSha3_384, HashAlgorithmName.SHA3_384));
-            lookup.Add(Oids.ECDsaWithSha3_512, new ECDsaCmsSignature(Oids.ECDsaWithSha3_512, HashAlgorithmName.SHA3_512));
+            lookup.Add(
+                Oids.ECDsaWithSha3_256,
+                new ECDsaCmsSignature(Oids.ECDsaWithSha3_256, HashAlgorithmName.SHA3_256)
+            );
+            lookup.Add(
+                Oids.ECDsaWithSha3_384,
+                new ECDsaCmsSignature(Oids.ECDsaWithSha3_384, HashAlgorithmName.SHA3_384)
+            );
+            lookup.Add(
+                Oids.ECDsaWithSha3_512,
+                new ECDsaCmsSignature(Oids.ECDsaWithSha3_512, HashAlgorithmName.SHA3_512)
+            );
 #endif
             lookup.Add(Oids.EcPublicKey, new ECDsaCmsSignature(null, null));
         }
@@ -32,7 +53,10 @@ namespace System.Security.Cryptography.Pkcs
 
             internal override RSASignaturePadding? SignaturePadding => null;
 
-            internal ECDsaCmsSignature(string? signatureAlgorithm, HashAlgorithmName? expectedDigest)
+            internal ECDsaCmsSignature(
+                string? signatureAlgorithm,
+                HashAlgorithmName? expectedDigest
+            )
             {
                 _signatureAlgorithm = signatureAlgorithm;
                 _expectedDigest = expectedDigest;
@@ -54,7 +78,8 @@ namespace System.Security.Cryptography.Pkcs
                 string? digestAlgorithmOid,
                 HashAlgorithmName digestAlgorithmName,
                 ReadOnlyMemory<byte>? signatureParameters,
-                X509Certificate2 certificate)
+                X509Certificate2 certificate
+            )
             {
                 if (_expectedDigest != null && _expectedDigest != digestAlgorithmName)
                 {
@@ -62,7 +87,9 @@ namespace System.Security.Cryptography.Pkcs
                         SR.Format(
                             SR.Cryptography_Cms_InvalidSignerHashForSignatureAlg,
                             digestAlgorithmOid,
-                            _signatureAlgorithm));
+                            _signatureAlgorithm
+                        )
+                    );
                 }
 
                 ECDsa? key = certificate.GetECDsaPublicKey();
@@ -116,13 +143,15 @@ namespace System.Security.Cryptography.Pkcs
                 bool silent,
                 [NotNullWhen(true)] out string? signatureAlgorithm,
                 [NotNullWhen(true)] out byte[]? signatureValue,
-                out byte[]? signatureParameters)
+                out byte[]? signatureParameters
+            )
             {
                 signatureParameters = null;
                 // If there's no private key, fall back to the public key for a "no private key" exception.
-                ECDsa? key = certKey as ECDsa ??
-                    PkcsPal.Instance.GetPrivateKeyForSigning<ECDsa>(certificate, silent) ??
-                    certificate.GetECDsaPublicKey();
+                ECDsa? key =
+                    certKey as ECDsa
+                    ?? PkcsPal.Instance.GetPrivateKeyForSigning<ECDsa>(certificate, silent)
+                    ?? certificate.GetECDsaPublicKey();
 
                 if (key == null)
                 {
@@ -132,14 +161,16 @@ namespace System.Security.Cryptography.Pkcs
                 }
 
                 string? oidValue =
-                    hashAlgorithmName == HashAlgorithmName.SHA1 ? Oids.ECDsaWithSha1 :
-                    hashAlgorithmName == HashAlgorithmName.SHA256 ? Oids.ECDsaWithSha256 :
-                    hashAlgorithmName == HashAlgorithmName.SHA384 ? Oids.ECDsaWithSha384 :
-                    hashAlgorithmName == HashAlgorithmName.SHA512 ? Oids.ECDsaWithSha512 :
+                    hashAlgorithmName == HashAlgorithmName.SHA1 ? Oids.ECDsaWithSha1
+                    : hashAlgorithmName == HashAlgorithmName.SHA256 ? Oids.ECDsaWithSha256
+                    : hashAlgorithmName == HashAlgorithmName.SHA384 ? Oids.ECDsaWithSha384
+                    : hashAlgorithmName == HashAlgorithmName.SHA512 ? Oids.ECDsaWithSha512
+                    :
 #if NET8_0_OR_GREATER
-                    hashAlgorithmName == HashAlgorithmName.SHA3_256 ? Oids.ECDsaWithSha3_256 :
-                    hashAlgorithmName == HashAlgorithmName.SHA3_384 ? Oids.ECDsaWithSha3_384 :
-                    hashAlgorithmName == HashAlgorithmName.SHA3_512 ? Oids.ECDsaWithSha3_512 :
+                    hashAlgorithmName == HashAlgorithmName.SHA3_256 ? Oids.ECDsaWithSha3_256
+                    : hashAlgorithmName == HashAlgorithmName.SHA3_384 ? Oids.ECDsaWithSha3_384
+                    : hashAlgorithmName == HashAlgorithmName.SHA3_512 ? Oids.ECDsaWithSha3_512
+                    :
 #endif
                     null;
 
@@ -170,7 +201,10 @@ namespace System.Security.Cryptography.Pkcs
                     {
                         var signedHash = new ReadOnlySpan<byte>(rented, 0, bytesWritten);
 
-                        if (key != null && !certificate.GetECDsaPublicKey()!.VerifyHash(dataHash, signedHash))
+                        if (
+                            key != null
+                            && !certificate.GetECDsaPublicKey()!.VerifyHash(dataHash, signedHash)
+                        )
                         {
                             // key did not match certificate
                             signatureValue = null;
@@ -189,9 +223,9 @@ namespace System.Security.Cryptography.Pkcs
 
                 signatureValue = DsaIeeeToDer(key.SignHash(
 #if NETCOREAPP || NETSTANDARD2_1
-                    dataHash.ToArray()
+                        dataHash.ToArray()
 #else
-                    dataHash
+                        dataHash
 #endif
                     ));
                 return true;

@@ -14,10 +14,7 @@ namespace System.ServiceModel.Channels
 
         public static RawContentTypeMapper Instance
         {
-            get
-            {
-                return instance;
-            }
+            get { return instance; }
         }
 
         public override WebContentFormat GetMessageFormatForContentType(string contentType)

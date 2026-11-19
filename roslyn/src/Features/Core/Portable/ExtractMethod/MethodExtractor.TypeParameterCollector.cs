@@ -10,7 +10,11 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.ExtractMethod
 {
-    internal abstract partial class MethodExtractor<TSelectionResult, TStatementSyntax, TExpressionSyntax>
+    internal abstract partial class MethodExtractor<
+        TSelectionResult,
+        TStatementSyntax,
+        TExpressionSyntax
+    >
     {
         protected class TypeParameterCollector : SymbolVisitor
         {
@@ -24,12 +28,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 return collector._typeParameters;
             }
 
-            public override void DefaultVisit(ISymbol node)
-                => throw new NotImplementedException();
+            public override void DefaultVisit(ISymbol node) => throw new NotImplementedException();
 
-            public override void VisitDynamicType(IDynamicTypeSymbol dynamicTypeSymbol)
-            {
-            }
+            public override void VisitDynamicType(IDynamicTypeSymbol dynamicTypeSymbol) { }
 
             public override void VisitFunctionPointerType(IFunctionPointerTypeSymbol symbol)
             {
@@ -40,11 +41,11 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 }
             }
 
-            public override void VisitArrayType(IArrayTypeSymbol arrayTypeSymbol)
-                => arrayTypeSymbol.ElementType.Accept(this);
+            public override void VisitArrayType(IArrayTypeSymbol arrayTypeSymbol) =>
+                arrayTypeSymbol.ElementType.Accept(this);
 
-            public override void VisitPointerType(IPointerTypeSymbol pointerTypeSymbol)
-                => pointerTypeSymbol.PointedAtType.Accept(this);
+            public override void VisitPointerType(IPointerTypeSymbol pointerTypeSymbol) =>
+                pointerTypeSymbol.PointedAtType.Accept(this);
 
             public override void VisitNamedType(INamedTypeSymbol namedTypeSymbol)
             {
@@ -54,8 +55,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 }
             }
 
-            public override void VisitTypeParameter(ITypeParameterSymbol typeParameterTypeSymbol)
-                => _typeParameters.Add(typeParameterTypeSymbol);
+            public override void VisitTypeParameter(ITypeParameterSymbol typeParameterTypeSymbol) =>
+                _typeParameters.Add(typeParameterTypeSymbol);
         }
     }
 }

@@ -52,7 +52,8 @@ namespace System.Management
         private readonly ManagementBaseObject parent;
         private readonly bool isSystem;
 
-        internal PropertyDataCollection(ManagementBaseObject parent, bool isSystem) : base()
+        internal PropertyDataCollection(ManagementBaseObject parent, bool isSystem)
+            : base()
         {
             this.parent = parent;
             this.isSystem = isSystem;
@@ -72,7 +73,8 @@ namespace System.Management
         {
             get
             {
-                string[] propertyNames = null; object qualVal = null;
+                string[] propertyNames = null;
+                object qualVal = null;
                 int flag;
                 if (isSystem)
                     flag = (int)tag_WBEM_CONDITION_FLAG_TYPE.WBEM_FLAG_SYSTEM_ONLY;
@@ -81,7 +83,12 @@ namespace System.Management
 
                 flag |= (int)tag_WBEM_CONDITION_FLAG_TYPE.WBEM_FLAG_ALWAYS;
 
-                int status = parent.wbemObject.GetNames_(null, flag, ref qualVal, out propertyNames);
+                int status = parent.wbemObject.GetNames_(
+                    null,
+                    flag,
+                    ref qualVal,
+                    out propertyNames
+                );
 
                 if (status < 0)
                 {
@@ -178,6 +185,7 @@ namespace System.Management
         {
             CopyTo((Array)propertyArray, index);
         }
+
         //
         // IEnumerable
         //
@@ -251,8 +259,10 @@ namespace System.Management
             internal PropertyDataEnumerator(ManagementBaseObject parent, bool isSystem)
             {
                 this.parent = parent;
-                propertyNames = null; index = -1;
-                int flag; object qualVal = null;
+                propertyNames = null;
+                index = -1;
+                int flag;
+                object qualVal = null;
 
                 if (isSystem)
                     flag = (int)tag_WBEM_CONDITION_FLAG_TYPE.WBEM_FLAG_SYSTEM_ONLY;
@@ -261,7 +271,12 @@ namespace System.Management
 
                 flag |= (int)tag_WBEM_CONDITION_FLAG_TYPE.WBEM_FLAG_ALWAYS;
 
-                int status = parent.wbemObject.GetNames_(null, flag, ref qualVal, out propertyNames);
+                int status = parent.wbemObject.GetNames_(
+                    null,
+                    flag,
+                    ref qualVal,
+                    out propertyNames
+                );
 
                 if (status < 0)
                 {
@@ -273,7 +288,10 @@ namespace System.Management
             }
 
             /// <internalonly/>
-            object IEnumerator.Current { get { return (object)this.Current; } }
+            object IEnumerator.Current
+            {
+                get { return (object)this.Current; }
+            }
 
             /// <summary>
             /// <para>Gets the current <see cref='System.Management.PropertyData'/> in the <see cref='System.Management.PropertyDataCollection'/> enumeration.</para>
@@ -318,10 +336,7 @@ namespace System.Management
             {
                 index = -1;
             }
-
-        }//PropertyDataEnumerator
-
-
+        } //PropertyDataEnumerator
 
         //
         // Methods
@@ -418,7 +433,11 @@ namespace System.Management
 
             CimType cimType = 0;
             bool isArray = false;
-            object wmiValue = PropertyData.MapValueToWmiValue(propertyValue, out isArray, out cimType);
+            object wmiValue = PropertyData.MapValueToWmiValue(
+                propertyValue,
+                out isArray,
+                out cimType
+            );
             int wmiCimType = (int)cimType;
 
             if (isArray)
@@ -514,6 +533,5 @@ namespace System.Management
                     Marshal.ThrowExceptionForHR(status, WmiNetUtilsHelper.GetErrorInfo_f());
             }
         }
-
-    }//PropertyDataCollection
+    } //PropertyDataCollection
 }

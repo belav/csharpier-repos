@@ -10,17 +10,15 @@ namespace System.Runtime.InteropServices.CustomMarshalers
     [SupportedOSPlatform("windows")]
     internal sealed class EnumeratorToEnumVariantMarshaler : ICustomMarshaler
     {
-        private static readonly EnumeratorToEnumVariantMarshaler s_enumeratorToEnumVariantMarshaler = new EnumeratorToEnumVariantMarshaler();
+        private static readonly EnumeratorToEnumVariantMarshaler s_enumeratorToEnumVariantMarshaler =
+            new EnumeratorToEnumVariantMarshaler();
 
-        public static ICustomMarshaler GetInstance(string? cookie) => s_enumeratorToEnumVariantMarshaler;
+        public static ICustomMarshaler GetInstance(string? cookie) =>
+            s_enumeratorToEnumVariantMarshaler;
 
-        private EnumeratorToEnumVariantMarshaler()
-        {
-        }
+        private EnumeratorToEnumVariantMarshaler() { }
 
-        public void CleanUpManagedData(object ManagedObj)
-        {
-        }
+        public void CleanUpManagedData(object ManagedObj) { }
 
         public void CleanUpNativeData(IntPtr pNativeData)
         {
@@ -39,12 +37,19 @@ namespace System.Runtime.InteropServices.CustomMarshalers
 
             if (ManagedObj is EnumeratorViewOfEnumVariant view)
             {
-                return Marshal.GetComInterfaceForObject<object, ComTypes.IEnumVARIANT>(view.GetUnderlyingObject());
+                return Marshal.GetComInterfaceForObject<object, ComTypes.IEnumVARIANT>(
+                    view.GetUnderlyingObject()
+                );
             }
 
-            EnumVariantViewOfEnumerator nativeView = new EnumVariantViewOfEnumerator((IEnumerator)ManagedObj);
+            EnumVariantViewOfEnumerator nativeView = new EnumVariantViewOfEnumerator(
+                (IEnumerator)ManagedObj
+            );
 
-            return Marshal.GetComInterfaceForObject<EnumVariantViewOfEnumerator, ComTypes.IEnumVARIANT>(nativeView);
+            return Marshal.GetComInterfaceForObject<
+                EnumVariantViewOfEnumerator,
+                ComTypes.IEnumVARIANT
+            >(nativeView);
         }
 
         public object MarshalNativeToManaged(IntPtr pNativeData)
@@ -63,7 +68,10 @@ namespace System.Runtime.InteropServices.CustomMarshalers
                 return (comObject as IEnumerator)!;
             }
 
-            return ComDataHelpers.GetOrCreateManagedViewFromComData<ComTypes.IEnumVARIANT, EnumeratorViewOfEnumVariant>(comObject, var => new EnumeratorViewOfEnumVariant(var));
+            return ComDataHelpers.GetOrCreateManagedViewFromComData<
+                ComTypes.IEnumVARIANT,
+                EnumeratorViewOfEnumVariant
+            >(comObject, var => new EnumeratorViewOfEnumVariant(var));
         }
     }
 }

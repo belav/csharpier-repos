@@ -18,7 +18,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             DefaultJsonTypeInfoResolver r = new();
             Assert.Throws<ArgumentNullException>(() => r.GetTypeInfo(null, null));
-            Assert.Throws<ArgumentNullException>(() => r.GetTypeInfo(null, new JsonSerializerOptions()));
+            Assert.Throws<ArgumentNullException>(() =>
+                r.GetTypeInfo(null, new JsonSerializerOptions())
+            );
             Assert.Throws<ArgumentNullException>(() => r.GetTypeInfo(typeof(string), null));
         }
 
@@ -141,31 +143,38 @@ namespace System.Text.Json.Serialization.Tests
             JsonTypeInfo storedTypeInfo = null;
             bool createObjectCalled = false;
             bool secondModifierCalled = false;
-            r.Modifiers.Add((ti) =>
-            {
-                Assert.Null(storedTypeInfo);
-                storedTypeInfo = ti;
-
-                // marker that test has modified something
-                ti.CreateObject = () =>
+            r.Modifiers.Add(
+                (ti) =>
                 {
-                    Assert.False(createObjectCalled);
-                    createObjectCalled = true;
+                    Assert.Null(storedTypeInfo);
+                    storedTypeInfo = ti;
 
-                    // we don't care what's returned as it won't be used by deserialization
-                    return null;
-                };
-            });
+                    // marker that test has modified something
+                    ti.CreateObject = () =>
+                    {
+                        Assert.False(createObjectCalled);
+                        createObjectCalled = true;
 
-            r.Modifiers.Add((ti) =>
-            {
-                // this proves we've been called after first modifier
-                Assert.NotNull(storedTypeInfo);
-                Assert.Same(storedTypeInfo, ti);
-                secondModifierCalled = true;
-            });
+                        // we don't care what's returned as it won't be used by deserialization
+                        return null;
+                    };
+                }
+            );
 
-            JsonTypeInfo returnedTypeInfo = r.GetTypeInfo(typeof(InvalidOperationException), new JsonSerializerOptions());
+            r.Modifiers.Add(
+                (ti) =>
+                {
+                    // this proves we've been called after first modifier
+                    Assert.NotNull(storedTypeInfo);
+                    Assert.Same(storedTypeInfo, ti);
+                    secondModifierCalled = true;
+                }
+            );
+
+            JsonTypeInfo returnedTypeInfo = r.GetTypeInfo(
+                typeof(InvalidOperationException),
+                new JsonSerializerOptions()
+            );
 
             Assert.NotNull(storedTypeInfo);
             Assert.Same(storedTypeInfo, returnedTypeInfo);
@@ -208,20 +217,36 @@ namespace System.Text.Json.Serialization.Tests
 
         [JsonSerializable(typeof(SomeClass))]
         [JsonSerializable(typeof(SomeOtherClass))]
-        private partial class SomeClassContext : JsonSerializerContext
-        {
-        }
+        private partial class SomeClassContext : JsonSerializerContext { }
 
         private class CustomThrowingConverter<T> : JsonConverter<T>
         {
-            public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-            public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options) => throw new NotImplementedException();
+            public override T? Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) => throw new NotImplementedException();
+
+            public override void Write(
+                Utf8JsonWriter writer,
+                T value,
+                JsonSerializerOptions options
+            ) => throw new NotImplementedException();
         }
 
         private class DummyConverter<T> : JsonConverter<T>
         {
-            public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => default(T);
-            public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options) { }
+            public override T? Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) => default(T);
+
+            public override void Write(
+                Utf8JsonWriter writer,
+                T value,
+                JsonSerializerOptions options
+            ) { }
         }
 
         private class SomeRecursiveClass
@@ -233,9 +258,7 @@ namespace System.Text.Json.Serialization.Tests
         [JsonDerivedType(typeof(DerivedClass))]
         private class SomePolymorphicClass
         {
-            public class DerivedClass : SomePolymorphicClass
-            {
-            }
+            public class DerivedClass : SomePolymorphicClass { }
         }
     }
 }

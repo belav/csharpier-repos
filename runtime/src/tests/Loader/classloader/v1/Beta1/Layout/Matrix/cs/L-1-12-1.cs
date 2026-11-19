@@ -25,25 +25,26 @@ public class Test
         int mi_RetCode;
         C c = new C();
         mi_RetCode = c.Test();
-        
-        if(mi_RetCode == 100)
+
+        if (mi_RetCode == 100)
             Console.WriteLine("Pass");
         else
             Console.WriteLine("FAIL");
-        
+
         return mi_RetCode;
     }
 }
 
-interface A{
-
-  //////////////////////////////
-  // Instance Methods
-int MethPubInst();
+interface A
+{
+    //////////////////////////////
+    // Instance Methods
+    int MethPubInst();
 }
 
-interface B{
-int MethPubInst2();
+interface B
+{
+    int MethPubInst2();
 }
 
 class C : A, B
@@ -53,25 +54,25 @@ class C : A, B
         Console.WriteLine("B::MethPubInst()");
         return 100;
     }
-    
+
     public int MethPubInst2()
     {
         Console.WriteLine("C::MethPubInst2()");
         return 100;
     }
-    
+
     public int Test()
     {
         int mi_RetCode = 100;
-        
+
         /////////////////////////////////
-        // Test instance method access  
-        if(MethPubInst() != 100)
+        // Test instance method access
+        if (MethPubInst() != 100)
             mi_RetCode = 0;
-        
-        if(MethPubInst2() != 100)
+
+        if (MethPubInst2() != 100)
             mi_RetCode = 0;
-        
+
         return mi_RetCode;
     }
 }

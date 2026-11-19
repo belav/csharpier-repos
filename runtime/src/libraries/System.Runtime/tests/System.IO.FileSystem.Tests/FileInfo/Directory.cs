@@ -22,14 +22,19 @@ namespace System.IO.Tests
         [Fact]
         public void TrailingSlashes()
         {
-            var directory = Directory(Path.Combine(TestDirectory, "a") + Path.DirectorySeparatorChar);
+            var directory = Directory(
+                Path.Combine(TestDirectory, "a") + Path.DirectorySeparatorChar
+            );
             Assert.Equal(Path.Combine(TestDirectory, "a"), directory);
         }
 
         [Fact]
         public void AltSeparatorCharInPath()
         {
-            var directory = Directory(Path.Combine(TestDirectory, "File").Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar));
+            var directory = Directory(
+                Path.Combine(TestDirectory, "File")
+                    .Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
+            );
             Assert.Equal(TestDirectory, directory);
         }
 
@@ -47,11 +52,17 @@ namespace System.IO.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // UNC shares
+        [PlatformSpecific(TestPlatforms.Windows)] // UNC shares
         public void UNCShares()
         {
-            var directory = Directory(new string(Path.DirectorySeparatorChar, 2) + Path.Combine("Machine", "Directory", "File"));
-            Assert.Equal(new string(Path.DirectorySeparatorChar, 2) + Path.Combine("Machine", "Directory"), directory);
+            var directory = Directory(
+                new string(Path.DirectorySeparatorChar, 2)
+                    + Path.Combine("Machine", "Directory", "File")
+            );
+            Assert.Equal(
+                new string(Path.DirectorySeparatorChar, 2) + Path.Combine("Machine", "Directory"),
+                directory
+            );
         }
     }
 

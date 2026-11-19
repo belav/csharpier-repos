@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,52 +28,58 @@ using System.Windows.Markup;
 
 namespace System.Xaml
 {
-	internal class XamlNodeQueueWriter : XamlWriter
-	{
-		XamlNodeQueue source;
+    internal class XamlNodeQueueWriter : XamlWriter
+    {
+        XamlNodeQueue source;
 
-		public XamlNodeQueueWriter (XamlNodeQueue source)
-		{
-			this.source = source;
-		}
+        public XamlNodeQueueWriter(XamlNodeQueue source)
+        {
+            this.source = source;
+        }
 
-		public override XamlSchemaContext SchemaContext {
-			get { return source.SchemaContext; }
-		}
+        public override XamlSchemaContext SchemaContext
+        {
+            get { return source.SchemaContext; }
+        }
 
-		public override void WriteEndMember ()
-		{
-			source.Enqueue (new XamlNodeInfo (XamlNodeType.EndMember, default (XamlNodeMember)));
-		}
+        public override void WriteEndMember()
+        {
+            source.Enqueue(new XamlNodeInfo(XamlNodeType.EndMember, default(XamlNodeMember)));
+        }
 
-		public override void WriteEndObject ()
-		{
-			source.Enqueue (new XamlNodeInfo (XamlNodeType.EndObject, default (XamlObject)));
-		}
+        public override void WriteEndObject()
+        {
+            source.Enqueue(new XamlNodeInfo(XamlNodeType.EndObject, default(XamlObject)));
+        }
 
-		public override void WriteGetObject ()
-		{
-			source.Enqueue (new XamlNodeInfo (XamlNodeType.GetObject, default (XamlObject)));
-		}
+        public override void WriteGetObject()
+        {
+            source.Enqueue(new XamlNodeInfo(XamlNodeType.GetObject, default(XamlObject)));
+        }
 
-		public override void WriteNamespace (NamespaceDeclaration ns)
-		{
-			source.Enqueue (new XamlNodeInfo (ns));
-		}
+        public override void WriteNamespace(NamespaceDeclaration ns)
+        {
+            source.Enqueue(new XamlNodeInfo(ns));
+        }
 
-		public override void WriteStartMember (XamlMember xamlMember)
-		{
-			source.Enqueue (new XamlNodeInfo (XamlNodeType.StartMember, new XamlNodeMember (default (XamlObject), xamlMember)));
-		}
+        public override void WriteStartMember(XamlMember xamlMember)
+        {
+            source.Enqueue(
+                new XamlNodeInfo(
+                    XamlNodeType.StartMember,
+                    new XamlNodeMember(default(XamlObject), xamlMember)
+                )
+            );
+        }
 
-		public override void WriteStartObject (XamlType type)
-		{
-			source.Enqueue (new XamlNodeInfo (XamlNodeType.StartObject, new XamlObject (type, null)));
-		}
+        public override void WriteStartObject(XamlType type)
+        {
+            source.Enqueue(new XamlNodeInfo(XamlNodeType.StartObject, new XamlObject(type, null)));
+        }
 
-		public override void WriteValue (object value)
-		{
-			source.Enqueue (new XamlNodeInfo (value));
-		}
-	}
+        public override void WriteValue(object value)
+        {
+            source.Enqueue(new XamlNodeInfo(value));
+        }
+    }
 }

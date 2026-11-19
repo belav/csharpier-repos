@@ -27,8 +27,10 @@ namespace System.IO.Tests
         protected override FileSystemInfo CreateSymbolicLink(string path, string pathToTarget) =>
             File.CreateSymbolicLink(path, pathToTarget);
 
-        protected override FileSystemInfo ResolveLinkTarget(string linkPath, bool returnFinalTarget) =>
-            File.ResolveLinkTarget(linkPath, returnFinalTarget);
+        protected override FileSystemInfo ResolveLinkTarget(
+            string linkPath,
+            bool returnFinalTarget
+        ) => File.ResolveLinkTarget(linkPath, returnFinalTarget);
 
         protected override void AssertIsCorrectTypeAndDirectoryAttribute(FileSystemInfo linkInfo)
         {
@@ -39,8 +41,7 @@ namespace System.IO.Tests
             Assert.True(linkInfo is FileInfo);
         }
 
-        protected override void AssertLinkExists(FileSystemInfo link) =>
-            Assert.True(link.Exists);
+        protected override void AssertLinkExists(FileSystemInfo link) => Assert.True(link.Exists);
 
         [Fact]
         public void ResolveLinkTarget_Throws_NotExists() =>
@@ -60,12 +61,15 @@ namespace System.IO.Tests
             Assert.Null(File.ResolveLinkTarget(unsupportedLinkPath, true));
         }
 
-
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void CreateSymbolicLink_PathToTarget_RelativeToLinkPath()
         {
-            RemoteExecutor.Invoke(() => CreateSymbolicLink_PathToTarget_RelativeToLinkPath_Internal(false)).Dispose();
-            RemoteExecutor.Invoke(() => CreateSymbolicLink_PathToTarget_RelativeToLinkPath_Internal(true)).Dispose();
+            RemoteExecutor
+                .Invoke(() => CreateSymbolicLink_PathToTarget_RelativeToLinkPath_Internal(false))
+                .Dispose();
+            RemoteExecutor
+                .Invoke(() => CreateSymbolicLink_PathToTarget_RelativeToLinkPath_Internal(true))
+                .Dispose();
         }
     }
 }

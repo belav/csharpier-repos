@@ -3,9 +3,9 @@
 //------------------------------------------------------------
 namespace System.ServiceModel
 {
+    using System.ComponentModel;
     using System.Runtime;
     using System.ServiceModel.Channels;
-    using System.ComponentModel;
 
     public sealed class WebHttpSecurity
     {
@@ -26,7 +26,9 @@ namespace System.ServiceModel
             {
                 if (!WebHttpSecurityModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.mode = value;
                 this.isModeSet = true;
@@ -41,10 +43,7 @@ namespace System.ServiceModel
         public HttpTransportSecurity Transport
         {
             get { return this.transportSecurity; }
-            set
-            {
-                this.transportSecurity = (value == null) ? new HttpTransportSecurity() : value;
-            }
+            set { this.transportSecurity = (value == null) ? new HttpTransportSecurity() : value; }
         }
 
         internal void DisableTransportAuthentication(HttpTransportBindingElement http)
@@ -64,8 +63,7 @@ namespace System.ServiceModel
 
         internal bool InternalShouldSerialize()
         {
-            return this.ShouldSerializeMode()
-                || this.ShouldSerializeTransport();
+            return this.ShouldSerializeMode() || this.ShouldSerializeTransport();
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -79,7 +77,5 @@ namespace System.ServiceModel
         {
             return this.Transport.InternalShouldSerialize();
         }
-
-
     }
 }

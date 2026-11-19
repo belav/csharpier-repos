@@ -34,7 +34,8 @@ public class RelationalSplitCollectionShaperExpression : Expression, IPrintableE
         SelectExpression selectExpression,
         Expression innerShaper,
         INavigationBase? navigation,
-        Type elementType)
+        Type elementType
+    )
     {
         ParentIdentifier = parentIdentifier;
         ChildIdentifier = childIdentifier;
@@ -81,12 +82,10 @@ public class RelationalSplitCollectionShaperExpression : Expression, IPrintableE
     public virtual Type ElementType { get; }
 
     /// <inheritdoc />
-    public override Type Type
-        => Navigation?.ClrType ?? typeof(List<>).MakeGenericType(ElementType);
+    public override Type Type => Navigation?.ClrType ?? typeof(List<>).MakeGenericType(ElementType);
 
     /// <inheritdoc />
-    public sealed override ExpressionType NodeType
-        => ExpressionType.Extension;
+    public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <inheritdoc />
     protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -112,14 +111,22 @@ public class RelationalSplitCollectionShaperExpression : Expression, IPrintableE
         Expression parentIdentifier,
         Expression childIdentifier,
         SelectExpression selectExpression,
-        Expression innerShaper)
-        => parentIdentifier != ParentIdentifier
-            || childIdentifier != ChildIdentifier
-            || selectExpression != SelectExpression
-            || innerShaper != InnerShaper
-                ? new RelationalSplitCollectionShaperExpression(
-                    parentIdentifier, childIdentifier, IdentifierValueComparers, selectExpression, innerShaper, Navigation, ElementType)
-                : this;
+        Expression innerShaper
+    ) =>
+        parentIdentifier != ParentIdentifier
+        || childIdentifier != ChildIdentifier
+        || selectExpression != SelectExpression
+        || innerShaper != InnerShaper
+            ? new RelationalSplitCollectionShaperExpression(
+                parentIdentifier,
+                childIdentifier,
+                IdentifierValueComparers,
+                selectExpression,
+                innerShaper,
+                Navigation,
+                ElementType
+            )
+            : this;
 
     /// <inheritdoc />
     void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)

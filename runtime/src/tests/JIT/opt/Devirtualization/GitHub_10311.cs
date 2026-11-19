@@ -10,9 +10,7 @@ public class MyCollection<T> : ICollection<T>
 {
     private List<T> _items = new List<T>();
 
-    public MyCollection()
-    {
-    }
+    public MyCollection() { }
 
     public MyCollection(params T[] values)
     {

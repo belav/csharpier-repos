@@ -34,7 +34,8 @@ public class RelationalModelRuntimeInitializer : ModelRuntimeInitializer
     /// <param name="relationalDependencies">The relational dependencies to use.</param>
     public RelationalModelRuntimeInitializer(
         ModelRuntimeInitializerDependencies dependencies,
-        RelationalModelRuntimeInitializerDependencies relationalDependencies)
+        RelationalModelRuntimeInitializerDependencies relationalDependencies
+    )
         : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
@@ -58,7 +59,10 @@ public class RelationalModelRuntimeInitializer : ModelRuntimeInitializer
     {
         if (prevalidation)
         {
-            model.SetRuntimeAnnotation(RelationalAnnotationNames.ModelDependencies, RelationalDependencies.RelationalModelDependencies);
+            model.SetRuntimeAnnotation(
+                RelationalAnnotationNames.ModelDependencies,
+                RelationalDependencies.RelationalModelDependencies
+            );
         }
         else if (model.FindRuntimeAnnotation(RelationalAnnotationNames.RelationalModel) == null)
         {
@@ -66,7 +70,8 @@ public class RelationalModelRuntimeInitializer : ModelRuntimeInitializer
                 model,
                 RelationalDependencies.RelationalAnnotationProvider,
                 (IRelationalTypeMappingSource)Dependencies.ModelDependencies.TypeMappingSource,
-                designTime);
+                designTime
+            );
         }
     }
 }

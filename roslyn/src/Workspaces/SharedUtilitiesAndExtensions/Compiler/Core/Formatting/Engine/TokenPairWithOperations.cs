@@ -22,12 +22,15 @@ namespace Microsoft.CodeAnalysis.Formatting
             TokenStream tokenStream,
             int tokenPairIndex,
             AdjustSpacesOperation? spaceOperations,
-            AdjustNewLinesOperation? lineOperations)
+            AdjustNewLinesOperation? lineOperations
+        )
             : this()
         {
             Contract.ThrowIfNull(tokenStream);
 
-            Contract.ThrowIfFalse(0 <= tokenPairIndex && tokenPairIndex < tokenStream.TokenCount - 1);
+            Contract.ThrowIfFalse(
+                0 <= tokenPairIndex && tokenPairIndex < tokenStream.TokenCount - 1
+            );
 
             this.TokenStream = tokenStream;
             this.PairIndex = tokenPairIndex;
@@ -38,18 +41,12 @@ namespace Microsoft.CodeAnalysis.Formatting
 
         public SyntaxToken Token1
         {
-            get
-            {
-                return this.TokenStream.GetToken(this.PairIndex);
-            }
+            get { return this.TokenStream.GetToken(this.PairIndex); }
         }
 
         public SyntaxToken Token2
         {
-            get
-            {
-                return this.TokenStream.GetToken(this.PairIndex + 1);
-            }
+            get { return this.TokenStream.GetToken(this.PairIndex + 1); }
         }
     }
 }

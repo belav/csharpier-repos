@@ -20,14 +20,19 @@ namespace Microsoft.Win32.SafeHandles
         // Rent the reusable ThreadPoolValueTaskSource, or create a new one to use if we couldn't get one (which
         // should only happen on first use or if the SafeFileHandle is being used concurrently).
         internal ThreadPoolValueTaskSource GetThreadPoolValueTaskSource() =>
-            Interlocked.Exchange(ref _reusableThreadPoolValueTaskSource, null) ?? new ThreadPoolValueTaskSource(this);
+            Interlocked.Exchange(ref _reusableThreadPoolValueTaskSource, null)
+            ?? new ThreadPoolValueTaskSource(this);
 
         /// <summary>
         /// A reusable <see cref="IValueTaskSource"/> implementation that
         /// queues asynchronous <see cref="RandomAccess"/> operations to
         /// be completed synchronously on the thread pool.
         /// </summary>
-        internal sealed class ThreadPoolValueTaskSource : IThreadPoolWorkItem, IValueTaskSource<int>, IValueTaskSource<long>, IValueTaskSource
+        internal sealed class ThreadPoolValueTaskSource
+            : IThreadPoolWorkItem,
+                IValueTaskSource<int>,
+                IValueTaskSource<long>,
+                IValueTaskSource
         {
             private readonly SafeFileHandle _fileHandle;
             private ManualResetValueTaskSourceCore<long> _source;
@@ -39,6 +44,7 @@ namespace Microsoft.Win32.SafeHandles
             // The first two are common for all kinds of operations.
             private long _fileOffset;
             private CancellationToken _cancellationToken;
+
             // Used by simple reads and writes. Will be unsafely cast to a memory when performing a read.
             private ReadOnlyMemory<byte> _singleSegment;
             private IReadOnlyList<Memory<byte>>? _readScatterBuffers;
@@ -53,17 +59,25 @@ namespace Microsoft.Win32.SafeHandles
             private void ValidateInvariants()
             {
                 Operation op = _operation;
-                Debug.Assert(op == Operation.None, $"An operation was queued before the previous {op}'s completion.");
+                Debug.Assert(
+                    op == Operation.None,
+                    $"An operation was queued before the previous {op}'s completion."
+                );
             }
 
-            public ValueTaskSourceStatus GetStatus(short token) =>
-                _source.GetStatus(token);
+            public ValueTaskSourceStatus GetStatus(short token) => _source.GetStatus(token);
 
-            public void OnCompleted(Action<object?> continuation, object? state, short token, ValueTaskSourceOnCompletedFlags flags) =>
-                _source.OnCompleted(continuation, state, token, flags);
+            public void OnCompleted(
+                Action<object?> continuation,
+                object? state,
+                short token,
+                ValueTaskSourceOnCompletedFlags flags
+            ) => _source.OnCompleted(continuation, state, token, flags);
 
             void IValueTaskSource.GetResult(short token) => GetResult(token);
+
             int IValueTaskSource<int>.GetResult(short token) => (int)GetResult(token);
+
             public long GetResult(short token)
             {
                 try
@@ -95,19 +109,37 @@ namespace Microsoft.Win32.SafeHandles
                         switch (_operation)
                         {
                             case Operation.Read:
-                                Memory<byte> writableSingleSegment = MemoryMarshal.AsMemory(_singleSegment);
-                                result = RandomAccess.ReadAtOffset(_fileHandle, writableSingleSegment.Span, _fileOffset);
+                                Memory<byte> writableSingleSegment = MemoryMarshal.AsMemory(
+                                    _singleSegment
+                                );
+                                result = RandomAccess.ReadAtOffset(
+                                    _fileHandle,
+                                    writableSingleSegment.Span,
+                                    _fileOffset
+                                );
                                 break;
                             case Operation.Write:
-                                RandomAccess.WriteAtOffset(_fileHandle, _singleSegment.Span, _fileOffset);
+                                RandomAccess.WriteAtOffset(
+                                    _fileHandle,
+                                    _singleSegment.Span,
+                                    _fileOffset
+                                );
                                 break;
                             case Operation.ReadScatter:
                                 Debug.Assert(_readScatterBuffers != null);
-                                result = RandomAccess.ReadScatterAtOffset(_fileHandle, _readScatterBuffers, _fileOffset);
+                                result = RandomAccess.ReadScatterAtOffset(
+                                    _fileHandle,
+                                    _readScatterBuffers,
+                                    _fileOffset
+                                );
                                 break;
                             case Operation.WriteGather:
                                 Debug.Assert(_writeGatherBuffers != null);
-                                RandomAccess.WriteGatherAtOffset(_fileHandle, _writeGatherBuffers, _fileOffset);
+                                RandomAccess.WriteGatherAtOffset(
+                                    _fileHandle,
+                                    _writeGatherBuffers,
+                                    _fileOffset
+                                );
                                 break;
                         }
                     }
@@ -158,7 +190,11 @@ namespace Microsoft.Win32.SafeHandles
                 }
                 else
                 {
-                    ExecutionContext.RunForThreadPoolUnsafe(_context, static x => x.ExecuteInternal(), this);
+                    ExecutionContext.RunForThreadPoolUnsafe(
+                        _context,
+                        static x => x.ExecuteInternal(),
+                        this
+                    );
                 }
             }
 
@@ -168,7 +204,12 @@ namespace Microsoft.Win32.SafeHandles
                 ThreadPool.UnsafeQueueUserWorkItem(this, preferLocal: true);
             }
 
-            public ValueTask<int> QueueRead(Memory<byte> buffer, long fileOffset, CancellationToken cancellationToken, OSFileStreamStrategy? strategy)
+            public ValueTask<int> QueueRead(
+                Memory<byte> buffer,
+                long fileOffset,
+                CancellationToken cancellationToken,
+                OSFileStreamStrategy? strategy
+            )
             {
                 ValidateInvariants();
 
@@ -182,7 +223,12 @@ namespace Microsoft.Win32.SafeHandles
                 return new ValueTask<int>(this, _source.Version);
             }
 
-            public ValueTask QueueWrite(ReadOnlyMemory<byte> buffer, long fileOffset, CancellationToken cancellationToken, OSFileStreamStrategy? strategy)
+            public ValueTask QueueWrite(
+                ReadOnlyMemory<byte> buffer,
+                long fileOffset,
+                CancellationToken cancellationToken,
+                OSFileStreamStrategy? strategy
+            )
             {
                 ValidateInvariants();
 
@@ -196,7 +242,11 @@ namespace Microsoft.Win32.SafeHandles
                 return new ValueTask(this, _source.Version);
             }
 
-            public ValueTask<long> QueueReadScatter(IReadOnlyList<Memory<byte>> buffers, long fileOffset, CancellationToken cancellationToken)
+            public ValueTask<long> QueueReadScatter(
+                IReadOnlyList<Memory<byte>> buffers,
+                long fileOffset,
+                CancellationToken cancellationToken
+            )
             {
                 ValidateInvariants();
 
@@ -209,7 +259,11 @@ namespace Microsoft.Win32.SafeHandles
                 return new ValueTask<long>(this, _source.Version);
             }
 
-            public ValueTask QueueWriteGather(IReadOnlyList<ReadOnlyMemory<byte>> buffers, long fileOffset, CancellationToken cancellationToken)
+            public ValueTask QueueWriteGather(
+                IReadOnlyList<ReadOnlyMemory<byte>> buffers,
+                long fileOffset,
+                CancellationToken cancellationToken
+            )
             {
                 ValidateInvariants();
 
@@ -228,7 +282,7 @@ namespace Microsoft.Win32.SafeHandles
                 Read,
                 Write,
                 ReadScatter,
-                WriteGather
+                WriteGather,
             }
         }
     }

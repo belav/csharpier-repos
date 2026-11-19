@@ -11,10 +11,10 @@ namespace System.Reflection
     public enum PropertyAttributes
     {
         None = 0x0000,
-        SpecialName = 0x0200,     // property is special.  Name describes how.
+        SpecialName = 0x0200, // property is special.  Name describes how.
 
-        RTSpecialName = 0x0400,     // Runtime(metadata internal APIs) should check name encoding.
-        HasDefault = 0x1000,     // Property has default
+        RTSpecialName = 0x0400, // Runtime(metadata internal APIs) should check name encoding.
+        HasDefault = 0x1000, // Property has default
 
         Reserved2 = 0x2000,
         Reserved3 = 0x4000,

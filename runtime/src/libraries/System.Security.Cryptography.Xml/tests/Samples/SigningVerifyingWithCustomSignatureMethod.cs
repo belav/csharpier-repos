@@ -16,21 +16,26 @@ namespace System.Security.Cryptography.Xml.Tests
     // Verifying: https://msdn.microsoft.com/en-us/library/ms229745(v=vs.110).aspx
     public class SigningAndVerifyingWithCustomSignatureMethod
     {
-        const string ExampleXml = @"<?xml version=""1.0""?>
+        const string ExampleXml =
+            @"<?xml version=""1.0""?>
 <example>
 <test>some text node</test>
 </example>";
 
         private static bool SupportsSha2Algorithms =>
-            !PlatformDetection.IsNetFramework ||
-            CryptoConfig.CreateFromName("http://www.w3.org/2001/04/xmldsig-more#rsa-sha384") as SignatureDescription != null;
+            !PlatformDetection.IsNetFramework
+            || CryptoConfig.CreateFromName("http://www.w3.org/2001/04/xmldsig-more#rsa-sha384")
+                as SignatureDescription
+                != null;
 
-        private static void SignXml(XmlDocument doc, RSA key, string signatureMethod, string digestMethod)
+        private static void SignXml(
+            XmlDocument doc,
+            RSA key,
+            string signatureMethod,
+            string digestMethod
+        )
         {
-            var signedXml = new SignedXml(doc)
-            {
-                SigningKey = key
-            };
+            var signedXml = new SignedXml(doc) { SigningKey = key };
 
             signedXml.SignedInfo.SignatureMethod = signatureMethod;
 
@@ -61,10 +66,22 @@ namespace System.Security.Cryptography.Xml.Tests
 
         // https://github.com/dotnet/runtime/issues/21481
         [ConditionalTheory(nameof(SupportsSha2Algorithms))]
-        [InlineData("http://www.w3.org/2001/04/xmldsig-more#rsa-sha256", "http://www.w3.org/2001/04/xmlenc#sha256")]
-        [InlineData("http://www.w3.org/2001/04/xmldsig-more#rsa-sha384", "http://www.w3.org/2001/04/xmldsig-more#sha384")]
-        [InlineData("http://www.w3.org/2001/04/xmldsig-more#rsa-sha512", "http://www.w3.org/2001/04/xmlenc#sha512")]
-        [InlineData("http://www.w3.org/2001/04/xmldsig-more#rsa-sha256", "http://www.w3.org/2001/04/xmlenc#sha512")]
+        [InlineData(
+            "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+            "http://www.w3.org/2001/04/xmlenc#sha256"
+        )]
+        [InlineData(
+            "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384",
+            "http://www.w3.org/2001/04/xmldsig-more#sha384"
+        )]
+        [InlineData(
+            "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+            "http://www.w3.org/2001/04/xmlenc#sha512"
+        )]
+        [InlineData(
+            "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+            "http://www.w3.org/2001/04/xmlenc#sha512"
+        )]
         public void SignedXmlHasVerifiableSignature(string signatureMethod, string digestMethod)
         {
             using (RSA key = RSA.Create())

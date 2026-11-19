@@ -8,7 +8,10 @@ namespace System.SpanTests
 {
     public static partial class ReadOnlySpanTests
     {
-        private static void DoubleEachElementForwards(ReadOnlySpan<int> source, Span<int> destination)
+        private static void DoubleEachElementForwards(
+            ReadOnlySpan<int> source,
+            Span<int> destination
+        )
         {
             if (source.Length != destination.Length)
                 throw new ArgumentException();
@@ -28,7 +31,28 @@ namespace System.SpanTests
         {
             for (int i = 0; i < 14; i++)
             {
-                int[] a = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 };
+                int[] a = new int[]
+                {
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                };
 
                 ReadOnlySpan<int> source = a.AsSpan(7, 5);
 
@@ -50,7 +74,9 @@ namespace System.SpanTests
                 int[] a = new int[] { 1, 2, 3, 4, 5, 6 };
 
                 ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes<int>(a);
-                ReadOnlySpan<int> source = MemoryMarshal.Cast<byte, int>(bytes.Slice(2, 5 * sizeof(int)));
+                ReadOnlySpan<int> source = MemoryMarshal.Cast<byte, int>(
+                    bytes.Slice(2, 5 * sizeof(int))
+                );
 
                 Span<int> actual = a.AsSpan(0, 5);
 
@@ -62,7 +88,9 @@ namespace System.SpanTests
                 int[] a = new int[] { 1, 2, 3, 4, 5, 6 };
 
                 ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes<int>(a);
-                ReadOnlySpan<int> source = MemoryMarshal.Cast<byte, int>(bytes.Slice(2, 5 * sizeof(int)));
+                ReadOnlySpan<int> source = MemoryMarshal.Cast<byte, int>(
+                    bytes.Slice(2, 5 * sizeof(int))
+                );
 
                 Span<int> actual = a.AsSpan(1, 5);
 
@@ -70,7 +98,10 @@ namespace System.SpanTests
             });
         }
 
-        private static void DoubleEachElementBackwards(ReadOnlySpan<int> source, Span<int> destination)
+        private static void DoubleEachElementBackwards(
+            ReadOnlySpan<int> source,
+            Span<int> destination
+        )
         {
             if (source.Length != destination.Length)
                 throw new ArgumentException();
@@ -90,7 +121,28 @@ namespace System.SpanTests
         {
             for (int i = 0; i < 14; i++)
             {
-                int[] a = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 };
+                int[] a = new int[]
+                {
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                };
 
                 ReadOnlySpan<int> source = a.AsSpan(7, 5);
 
@@ -112,7 +164,9 @@ namespace System.SpanTests
                 int[] a = new int[] { 1, 2, 3, 4, 5, 6 };
 
                 ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes<int>(a);
-                ReadOnlySpan<int> source = MemoryMarshal.Cast<byte, int>(bytes.Slice(2, 5 * sizeof(int)));
+                ReadOnlySpan<int> source = MemoryMarshal.Cast<byte, int>(
+                    bytes.Slice(2, 5 * sizeof(int))
+                );
 
                 Span<int> actual = a.AsSpan(0, 5);
 
@@ -124,7 +178,9 @@ namespace System.SpanTests
                 int[] a = new int[] { 1, 2, 3, 4, 5, 6 };
 
                 ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes<int>(a);
-                ReadOnlySpan<int> source = MemoryMarshal.Cast<byte, int>(bytes.Slice(2, 5 * sizeof(int)));
+                ReadOnlySpan<int> source = MemoryMarshal.Cast<byte, int>(
+                    bytes.Slice(2, 5 * sizeof(int))
+                );
 
                 Span<int> actual = a.AsSpan(1, 5);
 
@@ -174,7 +230,8 @@ namespace System.SpanTests
                         {
                             bool expected = (x1 < x2) && (y1 < y2) && (x1 < y2) && (y1 < x2);
 
-                            result += $"[InlineData({x1 * 100}, {x2 * 100}, {y1 * 100}, {y2 * 100}, {(expected ? "true" : "false")})]\r\n";
+                            result +=
+                                $"[InlineData({x1 * 100}, {x2 * 100}, {y1 * 100}, {y2 * 100}, {(expected ? "true" : "false")})]\r\n";
                         }
                     }
                 }
@@ -190,7 +247,6 @@ namespace System.SpanTests
         //               0
         //
         [InlineData(0, 0, 0, 0, false)]
-
         //
         //               0
         //       first:  |
@@ -198,7 +254,6 @@ namespace System.SpanTests
         //               0        100
         //
         [InlineData(0, 0, 0, 100, false)]
-
         //
         //               0
         //       first:  |
@@ -206,7 +261,6 @@ namespace System.SpanTests
         //               0                  200
         //
         [InlineData(0, 0, 0, 200, false)]
-
         //
         //               0
         //       first:  |
@@ -214,7 +268,6 @@ namespace System.SpanTests
         //               0                            300
         //
         [InlineData(0, 0, 0, 300, false)]
-
         //
         //               0
         //       first:  |
@@ -222,7 +275,6 @@ namespace System.SpanTests
         //                        100
         //
         [InlineData(0, 0, 100, 100, false)]
-
         //
         //               0
         //       first:  |
@@ -230,7 +282,6 @@ namespace System.SpanTests
         //                        100       200
         //
         [InlineData(0, 0, 100, 200, false)]
-
         //
         //               0
         //       first:  |
@@ -238,7 +289,6 @@ namespace System.SpanTests
         //                        100                 300
         //
         [InlineData(0, 0, 100, 300, false)]
-
         //
         //               0
         //       first:  |
@@ -246,7 +296,6 @@ namespace System.SpanTests
         //                                  200
         //
         [InlineData(0, 0, 200, 200, false)]
-
         //
         //               0
         //       first:  |
@@ -254,7 +303,6 @@ namespace System.SpanTests
         //                                  200       300
         //
         [InlineData(0, 0, 200, 300, false)]
-
         //
         //               0
         //       first:  |
@@ -262,7 +310,6 @@ namespace System.SpanTests
         //                                            300
         //
         [InlineData(0, 0, 300, 300, false)]
-
         //
         //               0        100
         //       first:  [---------)
@@ -270,7 +317,6 @@ namespace System.SpanTests
         //               0
         //
         [InlineData(0, 100, 0, 0, false)]
-
         //
         //               0        100
         //       first:  [---------)
@@ -278,7 +324,6 @@ namespace System.SpanTests
         //               0        100
         //
         [InlineData(0, 100, 0, 100, true)]
-
         //
         //               0        100
         //       first:  [---------)
@@ -286,7 +331,6 @@ namespace System.SpanTests
         //               0                  200
         //
         [InlineData(0, 100, 0, 200, true)]
-
         //
         //               0        100
         //       first:  [---------)
@@ -294,7 +338,6 @@ namespace System.SpanTests
         //               0                            300
         //
         [InlineData(0, 100, 0, 300, true)]
-
         //
         //               0        100
         //       first:  [---------)
@@ -302,7 +345,6 @@ namespace System.SpanTests
         //                        100
         //
         [InlineData(0, 100, 100, 100, false)]
-
         //
         //               0        100
         //       first:  [---------)
@@ -310,7 +352,6 @@ namespace System.SpanTests
         //                        100       200
         //
         [InlineData(0, 100, 100, 200, false)]
-
         //
         //               0        100
         //       first:  [---------)
@@ -318,7 +359,6 @@ namespace System.SpanTests
         //                        100                 300
         //
         [InlineData(0, 100, 100, 300, false)]
-
         //
         //               0        100
         //       first:  [---------)
@@ -326,7 +366,6 @@ namespace System.SpanTests
         //                                  200
         //
         [InlineData(0, 100, 200, 200, false)]
-
         //
         //               0        100
         //       first:  [---------)
@@ -334,7 +373,6 @@ namespace System.SpanTests
         //                                  200       300
         //
         [InlineData(0, 100, 200, 300, false)]
-
         //
         //               0        100
         //       first:  [---------)
@@ -342,7 +380,6 @@ namespace System.SpanTests
         //                                            300
         //
         [InlineData(0, 100, 300, 300, false)]
-
         //
         //               0                  200
         //       first:  [-------------------)
@@ -350,7 +387,6 @@ namespace System.SpanTests
         //               0
         //
         [InlineData(0, 200, 0, 0, false)]
-
         //
         //               0                  200
         //       first:  [-------------------)
@@ -358,7 +394,6 @@ namespace System.SpanTests
         //               0        100
         //
         [InlineData(0, 200, 0, 100, true)]
-
         //
         //               0                  200
         //       first:  [-------------------)
@@ -366,7 +401,6 @@ namespace System.SpanTests
         //               0                  200
         //
         [InlineData(0, 200, 0, 200, true)]
-
         //
         //               0                  200
         //       first:  [-------------------)
@@ -374,7 +408,6 @@ namespace System.SpanTests
         //               0                            300
         //
         [InlineData(0, 200, 0, 300, true)]
-
         //
         //               0                  200
         //       first:  [-------------------)
@@ -382,7 +415,6 @@ namespace System.SpanTests
         //                        100
         //
         [InlineData(0, 200, 100, 100, false)]
-
         //
         //               0                  200
         //       first:  [-------------------)
@@ -390,7 +422,6 @@ namespace System.SpanTests
         //                        100       200
         //
         [InlineData(0, 200, 100, 200, true)]
-
         //
         //               0                  200
         //       first:  [-------------------)
@@ -398,7 +429,6 @@ namespace System.SpanTests
         //                        100                 300
         //
         [InlineData(0, 200, 100, 300, true)]
-
         //
         //               0                  200
         //       first:  [-------------------)
@@ -406,7 +436,6 @@ namespace System.SpanTests
         //                                  200
         //
         [InlineData(0, 200, 200, 200, false)]
-
         //
         //               0                  200
         //       first:  [-------------------)
@@ -414,7 +443,6 @@ namespace System.SpanTests
         //                                  200       300
         //
         [InlineData(0, 200, 200, 300, false)]
-
         //
         //               0                  200
         //       first:  [-------------------)
@@ -422,7 +450,6 @@ namespace System.SpanTests
         //                                            300
         //
         [InlineData(0, 200, 300, 300, false)]
-
         //
         //               0                            300
         //       first:  [-----------------------------)
@@ -430,7 +457,6 @@ namespace System.SpanTests
         //               0
         //
         [InlineData(0, 300, 0, 0, false)]
-
         //
         //               0                            300
         //       first:  [-----------------------------)
@@ -438,7 +464,6 @@ namespace System.SpanTests
         //               0        100
         //
         [InlineData(0, 300, 0, 100, true)]
-
         //
         //               0                            300
         //       first:  [-----------------------------)
@@ -446,7 +471,6 @@ namespace System.SpanTests
         //               0                  200
         //
         [InlineData(0, 300, 0, 200, true)]
-
         //
         //               0                            300
         //       first:  [-----------------------------)
@@ -454,7 +478,6 @@ namespace System.SpanTests
         //               0                            300
         //
         [InlineData(0, 300, 0, 300, true)]
-
         //
         //               0                            300
         //       first:  [-----------------------------)
@@ -462,7 +485,6 @@ namespace System.SpanTests
         //                        100
         //
         [InlineData(0, 300, 100, 100, false)]
-
         //
         //               0                            300
         //       first:  [-----------------------------)
@@ -470,7 +492,6 @@ namespace System.SpanTests
         //                        100       200
         //
         [InlineData(0, 300, 100, 200, true)]
-
         //
         //               0                            300
         //       first:  [-----------------------------)
@@ -478,7 +499,6 @@ namespace System.SpanTests
         //                        100                 300
         //
         [InlineData(0, 300, 100, 300, true)]
-
         //
         //               0                            300
         //       first:  [-----------------------------)
@@ -486,7 +506,6 @@ namespace System.SpanTests
         //                                  200
         //
         [InlineData(0, 300, 200, 200, false)]
-
         //
         //               0                            300
         //       first:  [-----------------------------)
@@ -494,7 +513,6 @@ namespace System.SpanTests
         //                                  200       300
         //
         [InlineData(0, 300, 200, 300, true)]
-
         //
         //               0                            300
         //       first:  [-----------------------------)
@@ -502,7 +520,6 @@ namespace System.SpanTests
         //                                            300
         //
         [InlineData(0, 300, 300, 300, false)]
-
         //
         //                        100
         //       first:            |
@@ -510,7 +527,6 @@ namespace System.SpanTests
         //               0
         //
         [InlineData(100, 100, 0, 0, false)]
-
         //
         //                        100
         //       first:            |
@@ -518,7 +534,6 @@ namespace System.SpanTests
         //               0        100
         //
         [InlineData(100, 100, 0, 100, false)]
-
         //
         //                        100
         //       first:            |
@@ -526,7 +541,6 @@ namespace System.SpanTests
         //               0                  200
         //
         [InlineData(100, 100, 0, 200, false)]
-
         //
         //                        100
         //       first:            |
@@ -534,7 +548,6 @@ namespace System.SpanTests
         //               0                            300
         //
         [InlineData(100, 100, 0, 300, false)]
-
         //
         //                        100
         //       first:            |
@@ -542,7 +555,6 @@ namespace System.SpanTests
         //                        100
         //
         [InlineData(100, 100, 100, 100, false)]
-
         //
         //                        100
         //       first:            |
@@ -550,7 +562,6 @@ namespace System.SpanTests
         //                        100       200
         //
         [InlineData(100, 100, 100, 200, false)]
-
         //
         //                        100
         //       first:            |
@@ -558,7 +569,6 @@ namespace System.SpanTests
         //                        100                 300
         //
         [InlineData(100, 100, 100, 300, false)]
-
         //
         //                        100
         //       first:            |
@@ -566,7 +576,6 @@ namespace System.SpanTests
         //                                  200
         //
         [InlineData(100, 100, 200, 200, false)]
-
         //
         //                        100
         //       first:            |
@@ -574,7 +583,6 @@ namespace System.SpanTests
         //                                  200       300
         //
         [InlineData(100, 100, 200, 300, false)]
-
         //
         //                        100
         //       first:            |
@@ -582,7 +590,6 @@ namespace System.SpanTests
         //                                            300
         //
         [InlineData(100, 100, 300, 300, false)]
-
         //
         //                        100       200
         //       first:            [---------)
@@ -590,7 +597,6 @@ namespace System.SpanTests
         //               0
         //
         [InlineData(100, 200, 0, 0, false)]
-
         //
         //                        100       200
         //       first:            [---------)
@@ -598,7 +604,6 @@ namespace System.SpanTests
         //               0        100
         //
         [InlineData(100, 200, 0, 100, false)]
-
         //
         //                        100       200
         //       first:            [---------)
@@ -606,7 +611,6 @@ namespace System.SpanTests
         //               0                  200
         //
         [InlineData(100, 200, 0, 200, true)]
-
         //
         //                        100       200
         //       first:            [---------)
@@ -614,7 +618,6 @@ namespace System.SpanTests
         //               0                            300
         //
         [InlineData(100, 200, 0, 300, true)]
-
         //
         //                        100       200
         //       first:            [---------)
@@ -622,7 +625,6 @@ namespace System.SpanTests
         //                        100
         //
         [InlineData(100, 200, 100, 100, false)]
-
         //
         //                        100       200
         //       first:            [---------)
@@ -630,7 +632,6 @@ namespace System.SpanTests
         //                        100       200
         //
         [InlineData(100, 200, 100, 200, true)]
-
         //
         //                        100       200
         //       first:            [---------)
@@ -638,7 +639,6 @@ namespace System.SpanTests
         //                        100                 300
         //
         [InlineData(100, 200, 100, 300, true)]
-
         //
         //                        100       200
         //       first:            [---------)
@@ -646,7 +646,6 @@ namespace System.SpanTests
         //                                  200
         //
         [InlineData(100, 200, 200, 200, false)]
-
         //
         //                        100       200
         //       first:            [---------)
@@ -654,7 +653,6 @@ namespace System.SpanTests
         //                                  200       300
         //
         [InlineData(100, 200, 200, 300, false)]
-
         //
         //                        100       200
         //       first:            [---------)
@@ -662,7 +660,6 @@ namespace System.SpanTests
         //                                            300
         //
         [InlineData(100, 200, 300, 300, false)]
-
         //
         //                        100                 300
         //       first:            [-------------------)
@@ -670,7 +667,6 @@ namespace System.SpanTests
         //               0
         //
         [InlineData(100, 300, 0, 0, false)]
-
         //
         //                        100                 300
         //       first:            [-------------------)
@@ -678,7 +674,6 @@ namespace System.SpanTests
         //               0        100
         //
         [InlineData(100, 300, 0, 100, false)]
-
         //
         //                        100                 300
         //       first:            [-------------------)
@@ -686,7 +681,6 @@ namespace System.SpanTests
         //               0                  200
         //
         [InlineData(100, 300, 0, 200, true)]
-
         //
         //                        100                 300
         //       first:            [-------------------)
@@ -694,7 +688,6 @@ namespace System.SpanTests
         //               0                            300
         //
         [InlineData(100, 300, 0, 300, true)]
-
         //
         //                        100                 300
         //       first:            [-------------------)
@@ -702,7 +695,6 @@ namespace System.SpanTests
         //                        100
         //
         [InlineData(100, 300, 100, 100, false)]
-
         //
         //                        100                 300
         //       first:            [-------------------)
@@ -710,7 +702,6 @@ namespace System.SpanTests
         //                        100       200
         //
         [InlineData(100, 300, 100, 200, true)]
-
         //
         //                        100                 300
         //       first:            [-------------------)
@@ -718,7 +709,6 @@ namespace System.SpanTests
         //                        100                 300
         //
         [InlineData(100, 300, 100, 300, true)]
-
         //
         //                        100                 300
         //       first:            [-------------------)
@@ -726,7 +716,6 @@ namespace System.SpanTests
         //                                  200
         //
         [InlineData(100, 300, 200, 200, false)]
-
         //
         //                        100                 300
         //       first:            [-------------------)
@@ -734,7 +723,6 @@ namespace System.SpanTests
         //                                  200       300
         //
         [InlineData(100, 300, 200, 300, true)]
-
         //
         //                        100                 300
         //       first:            [-------------------)
@@ -742,7 +730,6 @@ namespace System.SpanTests
         //                                            300
         //
         [InlineData(100, 300, 300, 300, false)]
-
         //
         //                                  200
         //       first:                      |
@@ -750,7 +737,6 @@ namespace System.SpanTests
         //               0
         //
         [InlineData(200, 200, 0, 0, false)]
-
         //
         //                                  200
         //       first:                      |
@@ -758,7 +744,6 @@ namespace System.SpanTests
         //               0        100
         //
         [InlineData(200, 200, 0, 100, false)]
-
         //
         //                                  200
         //       first:                      |
@@ -766,7 +751,6 @@ namespace System.SpanTests
         //               0                  200
         //
         [InlineData(200, 200, 0, 200, false)]
-
         //
         //                                  200
         //       first:                      |
@@ -774,7 +758,6 @@ namespace System.SpanTests
         //               0                            300
         //
         [InlineData(200, 200, 0, 300, false)]
-
         //
         //                                  200
         //       first:                      |
@@ -782,7 +765,6 @@ namespace System.SpanTests
         //                        100
         //
         [InlineData(200, 200, 100, 100, false)]
-
         //
         //                                  200
         //       first:                      |
@@ -790,7 +772,6 @@ namespace System.SpanTests
         //                        100       200
         //
         [InlineData(200, 200, 100, 200, false)]
-
         //
         //                                  200
         //       first:                      |
@@ -798,7 +779,6 @@ namespace System.SpanTests
         //                        100                 300
         //
         [InlineData(200, 200, 100, 300, false)]
-
         //
         //                                  200
         //       first:                      |
@@ -806,7 +786,6 @@ namespace System.SpanTests
         //                                  200
         //
         [InlineData(200, 200, 200, 200, false)]
-
         //
         //                                  200
         //       first:                      |
@@ -814,7 +793,6 @@ namespace System.SpanTests
         //                                  200       300
         //
         [InlineData(200, 200, 200, 300, false)]
-
         //
         //                                  200
         //       first:                      |
@@ -822,7 +800,6 @@ namespace System.SpanTests
         //                                            300
         //
         [InlineData(200, 200, 300, 300, false)]
-
         //
         //                                  200       300
         //       first:                      [---------)
@@ -830,7 +807,6 @@ namespace System.SpanTests
         //               0
         //
         [InlineData(200, 300, 0, 0, false)]
-
         //
         //                                  200       300
         //       first:                      [---------)
@@ -838,7 +814,6 @@ namespace System.SpanTests
         //               0        100
         //
         [InlineData(200, 300, 0, 100, false)]
-
         //
         //                                  200       300
         //       first:                      [---------)
@@ -846,7 +821,6 @@ namespace System.SpanTests
         //               0                  200
         //
         [InlineData(200, 300, 0, 200, false)]
-
         //
         //                                  200       300
         //       first:                      [---------)
@@ -854,7 +828,6 @@ namespace System.SpanTests
         //               0                            300
         //
         [InlineData(200, 300, 0, 300, true)]
-
         //
         //                                  200       300
         //       first:                      [---------)
@@ -862,7 +835,6 @@ namespace System.SpanTests
         //                        100
         //
         [InlineData(200, 300, 100, 100, false)]
-
         //
         //                                  200       300
         //       first:                      [---------)
@@ -870,7 +842,6 @@ namespace System.SpanTests
         //                        100       200
         //
         [InlineData(200, 300, 100, 200, false)]
-
         //
         //                                  200       300
         //       first:                      [---------)
@@ -878,7 +849,6 @@ namespace System.SpanTests
         //                        100                 300
         //
         [InlineData(200, 300, 100, 300, true)]
-
         //
         //                                  200       300
         //       first:                      [---------)
@@ -886,7 +856,6 @@ namespace System.SpanTests
         //                                  200
         //
         [InlineData(200, 300, 200, 200, false)]
-
         //
         //                                  200       300
         //       first:                      [---------)
@@ -894,7 +863,6 @@ namespace System.SpanTests
         //                                  200       300
         //
         [InlineData(200, 300, 200, 300, true)]
-
         //
         //                                  200       300
         //       first:                      [---------)
@@ -902,7 +870,6 @@ namespace System.SpanTests
         //                                            300
         //
         [InlineData(200, 300, 300, 300, false)]
-
         //
         //                                            300
         //       first:                                |
@@ -910,7 +877,6 @@ namespace System.SpanTests
         //               0
         //
         [InlineData(300, 300, 0, 0, false)]
-
         //
         //                                            300
         //       first:                                |
@@ -918,7 +884,6 @@ namespace System.SpanTests
         //               0        100
         //
         [InlineData(300, 300, 0, 100, false)]
-
         //
         //                                            300
         //       first:                                |
@@ -926,7 +891,6 @@ namespace System.SpanTests
         //               0                  200
         //
         [InlineData(300, 300, 0, 200, false)]
-
         //
         //                                            300
         //       first:                                |
@@ -934,7 +898,6 @@ namespace System.SpanTests
         //               0                            300
         //
         [InlineData(300, 300, 0, 300, false)]
-
         //
         //                                            300
         //       first:                                |
@@ -942,7 +905,6 @@ namespace System.SpanTests
         //                        100
         //
         [InlineData(300, 300, 100, 100, false)]
-
         //
         //                                            300
         //       first:                                |
@@ -950,7 +912,6 @@ namespace System.SpanTests
         //                        100       200
         //
         [InlineData(300, 300, 100, 200, false)]
-
         //
         //                                            300
         //       first:                                |
@@ -958,7 +919,6 @@ namespace System.SpanTests
         //                        100                 300
         //
         [InlineData(300, 300, 100, 300, false)]
-
         //
         //                                            300
         //       first:                                |
@@ -966,7 +926,6 @@ namespace System.SpanTests
         //                                  200
         //
         [InlineData(300, 300, 200, 200, false)]
-
         //
         //                                            300
         //       first:                                |
@@ -974,7 +933,6 @@ namespace System.SpanTests
         //                                  200       300
         //
         [InlineData(300, 300, 200, 300, false)]
-
         //
         //                                            300
         //       first:                                |
@@ -982,14 +940,16 @@ namespace System.SpanTests
         //                                            300
         //
         [InlineData(300, 300, 300, 300, false)]
-
         [Theory]
         public static void Overlap(int x1, int y1, int x2, int y2, bool expected)
         {
             ReadOnlySpan<int> a = new int[300];
 
             Assert.Equal(expected, a.Slice(x1, y1 - x1).Overlaps(a.Slice(x2, y2 - x2)));
-            Assert.Equal(expected, a.Slice(x1, y1 - x1).Overlaps(a.Slice(x2, y2 - x2), out int elementOffset));
+            Assert.Equal(
+                expected,
+                a.Slice(x1, y1 - x1).Overlaps(a.Slice(x2, y2 - x2), out int elementOffset)
+            );
             Assert.Equal(expected ? x2 - x1 : 0, elementOffset);
         }
     }

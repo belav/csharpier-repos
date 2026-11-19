@@ -446,9 +446,8 @@ public class InlineRouteParameterParserTest
 
         Assert.Equal("12", templatePart.Default);
 
-        Assert.Collection(
-            templatePart.ParameterPolicies,
-            constraint => Assert.Equal("test", constraint.Content)
+        Assert.Collection(templatePart.ParameterPolicies, constraint =>
+            Assert.Equal("test", constraint.Content)
         );
     }
 
@@ -461,9 +460,8 @@ public class InlineRouteParameterParserTest
         // Assert
         Assert.Equal(":param", templatePart.Name);
 
-        Assert.Collection(
-            templatePart.ParameterPolicies,
-            constraint => Assert.Equal("test", constraint.Content)
+        Assert.Collection(templatePart.ParameterPolicies, constraint =>
+            Assert.Equal("test", constraint.Content)
         );
     }
 

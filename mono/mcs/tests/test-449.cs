@@ -8,23 +8,24 @@
 using System;
 using System.Threading;
 
-class X {
+class X
+{
+    public static void Main() { }
 
-	public static void Main () 
-	{
-	}
-	
-	void Z ()
-	{
-		ThreadPool.QueueUserWorkItem (delegate {
-			Z ();
-					
-			ThreadPool.QueueUserWorkItem (delegate {
-				Z ();
-			});	
-		});
-	}	
+    void Z()
+    {
+        ThreadPool.QueueUserWorkItem(
+            delegate
+            {
+                Z();
+
+                ThreadPool.QueueUserWorkItem(
+                    delegate
+                    {
+                        Z();
+                    }
+                );
+            }
+        );
+    }
 }
-
-
-

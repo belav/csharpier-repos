@@ -33,7 +33,7 @@ public class SqliteObjectToStringTranslator : IMethodCallTranslator
         typeof(TimeOnly),
         typeof(TimeSpan),
         typeof(uint),
-        typeof(ushort)
+        typeof(ushort),
     };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -59,7 +59,8 @@ public class SqliteObjectToStringTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         if (instance == null || method.Name != nameof(ToString) || arguments.Count != 0)
         {
@@ -79,23 +80,37 @@ public class SqliteObjectToStringTranslator : IMethodCallTranslator
                     new[]
                     {
                         new CaseWhenClause(
-                            _sqlExpressionFactory.Equal(instance, _sqlExpressionFactory.Constant(false)),
-                            _sqlExpressionFactory.Constant(false.ToString())),
+                            _sqlExpressionFactory.Equal(
+                                instance,
+                                _sqlExpressionFactory.Constant(false)
+                            ),
+                            _sqlExpressionFactory.Constant(false.ToString())
+                        ),
                         new CaseWhenClause(
-                            _sqlExpressionFactory.Equal(instance, _sqlExpressionFactory.Constant(true)),
-                            _sqlExpressionFactory.Constant(true.ToString()))
+                            _sqlExpressionFactory.Equal(
+                                instance,
+                                _sqlExpressionFactory.Constant(true)
+                            ),
+                            _sqlExpressionFactory.Constant(true.ToString())
+                        ),
                     },
-                    _sqlExpressionFactory.Constant(null));
+                    _sqlExpressionFactory.Constant(null)
+                );
             }
 
             return _sqlExpressionFactory.Case(
                 new[]
                 {
                     new CaseWhenClause(
-                        _sqlExpressionFactory.Equal(instance, _sqlExpressionFactory.Constant(false)),
-                        _sqlExpressionFactory.Constant(false.ToString()))
+                        _sqlExpressionFactory.Equal(
+                            instance,
+                            _sqlExpressionFactory.Constant(false)
+                        ),
+                        _sqlExpressionFactory.Constant(false.ToString())
+                    ),
                 },
-                _sqlExpressionFactory.Constant(true.ToString()));
+                _sqlExpressionFactory.Constant(true.ToString())
+            );
         }
 
         return TypeMapping.Contains(instance.Type)

@@ -10,7 +10,7 @@ namespace System.ServiceModel.Dispatcher
     internal enum AxisDirection : byte
     {
         Forward,
-        Reverse
+        Reverse,
     }
 
     internal enum QueryNodeType : byte
@@ -24,9 +24,26 @@ namespace System.ServiceModel.Dispatcher
         Processing = 0x20,
         Namespace = 0x40,
         Multiple = 0x80,
-        ChildNodes = (QueryNodeType.Multiple | QueryNodeType.Element | QueryNodeType.Comment | QueryNodeType.Text | QueryNodeType.Processing),
+        ChildNodes =
+            (
+                QueryNodeType.Multiple
+                | QueryNodeType.Element
+                | QueryNodeType.Comment
+                | QueryNodeType.Text
+                | QueryNodeType.Processing
+            ),
         Ancestor = (QueryNodeType.Multiple | QueryNodeType.Element | QueryNodeType.Root),
-        All = (QueryNodeType.Multiple | QueryNodeType.Element | QueryNodeType.Attribute | QueryNodeType.Namespace | QueryNodeType.Root | QueryNodeType.Comment | QueryNodeType.Text | QueryNodeType.Processing)
+        All =
+            (
+                QueryNodeType.Multiple
+                | QueryNodeType.Element
+                | QueryNodeType.Attribute
+                | QueryNodeType.Namespace
+                | QueryNodeType.Root
+                | QueryNodeType.Comment
+                | QueryNodeType.Text
+                | QueryNodeType.Processing
+            ),
     }
 
     internal enum QueryAxisType : byte
@@ -44,7 +61,7 @@ namespace System.ServiceModel.Dispatcher
         Parent = 10,
         Preceding = 11,
         PrecedingSibling = 12,
-        Self = 13
+        Self = 13,
     }
 
     // 4 bytes - each element is a byte
@@ -55,44 +72,38 @@ namespace System.ServiceModel.Dispatcher
         QueryAxisType type;
         QueryNodeType validNodeTypes;
 
-        internal QueryAxis(QueryAxisType type, AxisDirection direction, QueryNodeType principalNode, QueryNodeType validNodeTypes)
+        internal QueryAxis(
+            QueryAxisType type,
+            AxisDirection direction,
+            QueryNodeType principalNode,
+            QueryNodeType validNodeTypes
+        )
         {
             this.direction = direction;
             this.principalNode = principalNode;
             this.type = type;
             this.validNodeTypes = validNodeTypes;
         }
+
 #if NO
         internal AxisDirection Direction
         {
-            get
-            {
-                return this.direction;
-            }
+            get { return this.direction; }
         }
 #endif
         internal QueryNodeType PrincipalNodeType
         {
-            get
-            {
-                return this.principalNode;
-            }
+            get { return this.principalNode; }
         }
 
         internal QueryAxisType Type
         {
-            get
-            {
-                return this.type;
-            }
+            get { return this.type; }
         }
 
         internal QueryNodeType ValidNodeTypes
         {
-            get
-            {
-                return this.validNodeTypes;
-            }
+            get { return this.validNodeTypes; }
         }
 
         internal bool IsSupported()
@@ -121,18 +132,24 @@ namespace System.ServiceModel.Dispatcher
     {
         // QName has neither name nor namespace. Entirely empty
         Empty = 0x00,
-        // QName has a regular name 
+
+        // QName has a regular name
         Name = 0x01,
-        // QName has regular namespace 
+
+        // QName has regular namespace
         Namespace = 0x02,
+
         // QName has both name and namespace
         Standard = NodeQNameType.Name | NodeQNameType.Namespace,
+
         // QName has a wildcard name
         NameWildcard = 0x04,
+
         // QName has a wildcard namespace
         NamespaceWildcard = 0x08,
+
         // QName is entirely wildcard
-        Wildcard = NodeQNameType.NameWildcard | NodeQNameType.NamespaceWildcard
+        Wildcard = NodeQNameType.NameWildcard | NodeQNameType.NamespaceWildcard,
     }
 
     /// <summary>
@@ -150,15 +167,14 @@ namespace System.ServiceModel.Dispatcher
         internal string ns;
 
         internal NodeQName(string name)
-            : this(name, string.Empty)
-        {
-        }
+            : this(name, string.Empty) { }
 
         internal NodeQName(string name, string ns)
         {
             this.name = (null == name) ? string.Empty : name;
             this.ns = (null == ns) ? string.Empty : ns;
         }
+
 #if NO
         internal NodeQName(string name, string ns, string defaultNS)
         {
@@ -175,58 +191,37 @@ namespace System.ServiceModel.Dispatcher
 
         internal bool HasWildcard
         {
-            get
-            {
-                return (this.IsNameWildcard || this.IsNamespaceWildcard);
-            }
+            get { return (this.IsNameWildcard || this.IsNamespaceWildcard); }
         }
 #endif
         internal bool IsEmpty
         {
-            get
-            {
-                return (this.name.Length == 0 && this.ns.Length == 0);
-            }
+            get { return (this.name.Length == 0 && this.ns.Length == 0); }
         }
 
         internal bool IsNameDefined
         {
-            get
-            {
-                return (this.name.Length > 0);
-            }
+            get { return (this.name.Length > 0); }
         }
 
         internal bool IsNameWildcard
         {
-            get
-            {
-                return object.ReferenceEquals(this.name, QueryDataModel.Wildcard);
-            }
+            get { return object.ReferenceEquals(this.name, QueryDataModel.Wildcard); }
         }
 
         internal bool IsNamespaceDefined
         {
-            get
-            {
-                return (this.ns.Length > 0);
-            }
+            get { return (this.ns.Length > 0); }
         }
 
         internal bool IsNamespaceWildcard
         {
-            get
-            {
-                return object.ReferenceEquals(this.ns, QueryDataModel.Wildcard);
-            }
+            get { return object.ReferenceEquals(this.ns, QueryDataModel.Wildcard); }
         }
 
         internal string Name
         {
-            get
-            {
-                return this.name;
-            }
+            get { return this.name; }
 #if NO
             set
             {
@@ -238,10 +233,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal string Namespace
         {
-            get
-            {
-                return this.ns;
-            }
+            get { return this.ns; }
 #if NO
             set
             {
@@ -261,10 +253,12 @@ namespace System.ServiceModel.Dispatcher
             return false;
         }
 #endif
+
         internal bool EqualsName(string name)
         {
             return (name == this.name);
         }
+
 #if NO
         internal bool Equals(string name)
         {
@@ -273,14 +267,22 @@ namespace System.ServiceModel.Dispatcher
 
         internal bool Equals(string name, string ns)
         {
-            return ( (name.Length == this.name.Length && name == this.name) && (ns.Length == this.ns.Length && ns == this.ns));
+            return (
+                (name.Length == this.name.Length && name == this.name)
+                && (ns.Length == this.ns.Length && ns == this.ns)
+            );
         }
 #endif
+
         internal bool Equals(NodeQName qname)
         {
-            return ((qname.name.Length == this.name.Length && qname.name == this.name) && (qname.ns.Length == this.ns.Length && qname.ns == this.ns));
+            return (
+                (qname.name.Length == this.name.Length && qname.name == this.name)
+                && (qname.ns.Length == this.ns.Length && qname.ns == this.ns)
+            );
         }
-#if NO        
+
+#if NO
         internal bool Equals(SeekableXPathNavigator navigator)
         {
             string str = navigator.LocalName;
@@ -292,21 +294,27 @@ namespace System.ServiceModel.Dispatcher
             return false;
         }
 #endif
+
         internal bool EqualsNamespace(string ns)
         {
             return (ns == this.ns);
         }
-#if NO        
+
+#if NO
         internal bool EqualsReference(NodeQName qname)
         {
-            return (object.ReferenceEquals(qname.name, this.name) && object.ReferenceEquals(qname.ns, this.ns));
+            return (
+                object.ReferenceEquals(qname.name, this.name)
+                && object.ReferenceEquals(qname.ns, this.ns)
+            );
         }
-      
+
         internal string QName()
         {
             return this.ns + ':' + this.name;
         }
 #endif
+
         /// <summary>
         /// Return this qname's type - whether the name is defined, whether the name is a wildcard etc
         /// </summary>
@@ -350,24 +358,94 @@ namespace System.ServiceModel.Dispatcher
         static QueryDataModel()
         {
             // Init axes table
-            QueryDataModel.axes = new QueryAxis[] {
-                new QueryAxis(QueryAxisType.None, AxisDirection.Forward, QueryNodeType.Any, QueryNodeType.Any),
-                new QueryAxis(QueryAxisType.Ancestor, AxisDirection.Reverse, QueryNodeType.Element, QueryNodeType.Ancestor),
-                new QueryAxis(QueryAxisType.AncestorOrSelf, AxisDirection.Reverse, QueryNodeType.Element, QueryNodeType.All),
-                new QueryAxis(QueryAxisType.Attribute, AxisDirection.Forward, QueryNodeType.Attribute, QueryNodeType.Attribute),
-                new QueryAxis(QueryAxisType.Child, AxisDirection.Forward, QueryNodeType.Element, QueryNodeType.ChildNodes),
-                new QueryAxis(QueryAxisType.Descendant, AxisDirection.Forward, QueryNodeType.Element, QueryNodeType.ChildNodes),
-                new QueryAxis(QueryAxisType.DescendantOrSelf, AxisDirection.Forward, QueryNodeType.Element, QueryNodeType.All),
-                new QueryAxis(QueryAxisType.Following, AxisDirection.Forward, QueryNodeType.Element, QueryNodeType.ChildNodes),
-                new QueryAxis(QueryAxisType.FollowingSibling, AxisDirection.Forward, QueryNodeType.Element, QueryNodeType.ChildNodes),
-                new QueryAxis(QueryAxisType.Namespace, AxisDirection.Forward, QueryNodeType.Namespace, QueryNodeType.Namespace),
-                new QueryAxis(QueryAxisType.Parent, AxisDirection.Reverse, QueryNodeType.Element, QueryNodeType.Ancestor),
-                new QueryAxis(QueryAxisType.Preceding, AxisDirection.Reverse, QueryNodeType.Element, QueryNodeType.ChildNodes),
-                new QueryAxis(QueryAxisType.PrecedingSibling, AxisDirection.Reverse, QueryNodeType.Element, QueryNodeType.All),
-                new QueryAxis(QueryAxisType.Self, AxisDirection.Forward, QueryNodeType.Element, QueryNodeType.All),
+            QueryDataModel.axes = new QueryAxis[]
+            {
+                new QueryAxis(
+                    QueryAxisType.None,
+                    AxisDirection.Forward,
+                    QueryNodeType.Any,
+                    QueryNodeType.Any
+                ),
+                new QueryAxis(
+                    QueryAxisType.Ancestor,
+                    AxisDirection.Reverse,
+                    QueryNodeType.Element,
+                    QueryNodeType.Ancestor
+                ),
+                new QueryAxis(
+                    QueryAxisType.AncestorOrSelf,
+                    AxisDirection.Reverse,
+                    QueryNodeType.Element,
+                    QueryNodeType.All
+                ),
+                new QueryAxis(
+                    QueryAxisType.Attribute,
+                    AxisDirection.Forward,
+                    QueryNodeType.Attribute,
+                    QueryNodeType.Attribute
+                ),
+                new QueryAxis(
+                    QueryAxisType.Child,
+                    AxisDirection.Forward,
+                    QueryNodeType.Element,
+                    QueryNodeType.ChildNodes
+                ),
+                new QueryAxis(
+                    QueryAxisType.Descendant,
+                    AxisDirection.Forward,
+                    QueryNodeType.Element,
+                    QueryNodeType.ChildNodes
+                ),
+                new QueryAxis(
+                    QueryAxisType.DescendantOrSelf,
+                    AxisDirection.Forward,
+                    QueryNodeType.Element,
+                    QueryNodeType.All
+                ),
+                new QueryAxis(
+                    QueryAxisType.Following,
+                    AxisDirection.Forward,
+                    QueryNodeType.Element,
+                    QueryNodeType.ChildNodes
+                ),
+                new QueryAxis(
+                    QueryAxisType.FollowingSibling,
+                    AxisDirection.Forward,
+                    QueryNodeType.Element,
+                    QueryNodeType.ChildNodes
+                ),
+                new QueryAxis(
+                    QueryAxisType.Namespace,
+                    AxisDirection.Forward,
+                    QueryNodeType.Namespace,
+                    QueryNodeType.Namespace
+                ),
+                new QueryAxis(
+                    QueryAxisType.Parent,
+                    AxisDirection.Reverse,
+                    QueryNodeType.Element,
+                    QueryNodeType.Ancestor
+                ),
+                new QueryAxis(
+                    QueryAxisType.Preceding,
+                    AxisDirection.Reverse,
+                    QueryNodeType.Element,
+                    QueryNodeType.ChildNodes
+                ),
+                new QueryAxis(
+                    QueryAxisType.PrecedingSibling,
+                    AxisDirection.Reverse,
+                    QueryNodeType.Element,
+                    QueryNodeType.All
+                ),
+                new QueryAxis(
+                    QueryAxisType.Self,
+                    AxisDirection.Forward,
+                    QueryNodeType.Element,
+                    QueryNodeType.All
+                ),
             };
         }
-
 
         /// <summary>
         /// XPath does not interpret namespace declarations as attributes
@@ -378,7 +456,7 @@ namespace System.ServiceModel.Dispatcher
             return (0 != string.CompareOrdinal("http://www.w3.org/2000/xmlns/", ns));
         }
 #if NO
-        
+
         internal static bool IsDigit(char ch)
         {
             return char.IsDigit(ch);
@@ -399,10 +477,12 @@ namespace System.ServiceModel.Dispatcher
             return char.IsWhiteSpace(ch);
         }
 #endif
+
         internal static QueryAxis GetAxis(QueryAxisType type)
         {
             return QueryDataModel.axes[(int)type];
         }
+
 #if NO
         internal static QueryNodeType GetNodeType(XPathNodeType type)
         {
@@ -413,11 +493,11 @@ namespace System.ServiceModel.Dispatcher
                 default:
                     nodeType = QueryNodeType.Any;
                     break;
-                
+
                 case XPathNodeType.Root:
                     nodeType = QueryNodeType.Root;
                     break;
-                    
+
                 case XPathNodeType.Attribute:
                     nodeType = QueryNodeType.Attribute;
                     break;
@@ -447,7 +527,7 @@ namespace System.ServiceModel.Dispatcher
         internal static XPathNodeType GetXPathNodeType(QueryNodeType type)
         {
             XPathNodeType nodeType = XPathNodeType.All;
-            switch(type)
+            switch (type)
             {
                 default:
                     break;
@@ -455,15 +535,15 @@ namespace System.ServiceModel.Dispatcher
                 case QueryNodeType.Attribute:
                     nodeType = XPathNodeType.Attribute;
                     break;
-                
+
                 case QueryNodeType.Root:
                     nodeType = XPathNodeType.Root;
                     break;
-                
+
                 case QueryNodeType.Namespace:
                     nodeType = XPathNodeType.Namespace;
                     break;
-                                        
+
                 case QueryNodeType.Element:
                     nodeType = XPathNodeType.Element;
                     break;
@@ -489,12 +569,12 @@ namespace System.ServiceModel.Dispatcher
         {
             if (0 != (nodeType & QueryNodeType.Attribute))
             {
-                switch(desc.Axis.Type)
+                switch (desc.Axis.Type)
                 {
                     default:
                         return false;
-                        
-                        // Navigation is possible from attributes on these axes
+
+                    // Navigation is possible from attributes on these axes
                     case QueryAxisType.Self:
                     case QueryAxisType.Ancestor:
                     case QueryAxisType.AncestorOrSelf:
@@ -508,27 +588,26 @@ namespace System.ServiceModel.Dispatcher
                 {
                     return false;
                 }
-                
-                switch(desc.Axis.Type)
+
+                switch (desc.Axis.Type)
                 {
                     default:
                         return true;
-                        
-                        // Navigation is possible from attributes on these axes
+
+                    // Navigation is possible from attributes on these axes
                     case QueryAxisType.Attribute:
                     case QueryAxisType.Namespace:
                         return false;
-                }                
+                }
             }
-            
+
             return true;
-        }    
+        }
 #endif
     }
 
     internal static class QueryValueModel
     {
-
         /*
         Conversions
 
@@ -572,10 +651,16 @@ namespace System.ServiceModel.Dispatcher
             if (val.Length > 0 && val[0] != '+')
             {
                 double dblVal;
-                if (double.TryParse(val,
-                                    NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint | NumberStyles.AllowTrailingWhite,
-                                    NumberFormatInfo.InvariantInfo,
-                                    out dblVal))
+                if (
+                    double.TryParse(
+                        val,
+                        NumberStyles.AllowLeadingSign
+                            | NumberStyles.AllowDecimalPoint
+                            | NumberStyles.AllowTrailingWhite,
+                        NumberFormatInfo.InvariantInfo,
+                        out dblVal
+                    )
+                )
                 {
                     return dblVal;
                 }
@@ -595,15 +680,16 @@ namespace System.ServiceModel.Dispatcher
             return QueryValueModel.Double(QueryValueModel.String(iterator));
         }
 
-#if NO        
+#if NO
         internal static string String(object val)
         {
             return val.ToString();
         }
 #endif
+
         internal static string String(bool val)
         {
-            return val ? "true" : "false";  // XPath requires all lower case. bool.ToString() returns 'False' and 'True'
+            return val ? "true" : "false"; // XPath requires all lower case. bool.ToString() returns 'False' and 'True'
         }
 
         internal static string String(double val)
@@ -637,7 +723,10 @@ namespace System.ServiceModel.Dispatcher
             else
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.QueryCantGetStringForMovedIterator)));
+                    new InvalidOperationException(
+                        SR.GetString(SR.QueryCantGetStringForMovedIterator)
+                    )
+                );
             }
         }
 
@@ -648,7 +737,11 @@ namespace System.ServiceModel.Dispatcher
             switch (op)
             {
                 default:
-                    return QueryValueModel.Compare(QueryValueModel.Double(x), QueryValueModel.Double(y), op);
+                    return QueryValueModel.Compare(
+                        QueryValueModel.Double(x),
+                        QueryValueModel.Double(y),
+                        op
+                    );
                 case RelationOperator.Eq:
                     return (x == y);
                 case RelationOperator.Ne:
@@ -675,7 +768,11 @@ namespace System.ServiceModel.Dispatcher
             switch (op)
             {
                 default:
-                    return QueryValueModel.Compare(QueryValueModel.Double(x), QueryValueModel.Double(y), op);
+                    return QueryValueModel.Compare(
+                        QueryValueModel.Double(x),
+                        QueryValueModel.Double(y),
+                        op
+                    );
                 case RelationOperator.Eq:
                     return (x == QueryValueModel.Boolean(y));
                 case RelationOperator.Ne:
@@ -707,7 +804,9 @@ namespace System.ServiceModel.Dispatcher
             switch (op)
             {
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.TypeMismatch));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                        new QueryProcessingException(QueryProcessingError.TypeMismatch)
+                    );
 
                 case RelationOperator.Eq:
                     return (x == y);
@@ -754,7 +853,11 @@ namespace System.ServiceModel.Dispatcher
             switch (op)
             {
                 default:
-                    return QueryValueModel.Compare(QueryValueModel.Double(x), QueryValueModel.Double(y), op);
+                    return QueryValueModel.Compare(
+                        QueryValueModel.Double(x),
+                        QueryValueModel.Double(y),
+                        op
+                    );
                 case RelationOperator.Eq:
                     return (y == QueryValueModel.Boolean(x));
                 case RelationOperator.Ne:
@@ -783,7 +886,11 @@ namespace System.ServiceModel.Dispatcher
                 case RelationOperator.Gt:
                 case RelationOperator.Le:
                 case RelationOperator.Lt:
-                    return QueryValueModel.Compare(QueryValueModel.Double(x), QueryValueModel.Double(y), op);
+                    return QueryValueModel.Compare(
+                        QueryValueModel.Double(x),
+                        QueryValueModel.Double(y),
+                        op
+                    );
                 case RelationOperator.Ne:
                     return (x.Length != y.Length || 0 != string.CompareOrdinal(x, y));
             }
@@ -859,7 +966,9 @@ namespace System.ServiceModel.Dispatcher
                     return QueryValueModel.Compare((double)x, (string)y, op);
                 }
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryCompileException(QueryCompileError.InvalidComparison));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new QueryCompileException(QueryCompileError.InvalidComparison)
+            );
         }
 
         internal static bool Equals(bool x, string y)
@@ -899,32 +1008,33 @@ namespace System.ServiceModel.Dispatcher
 
         internal static double Round(double val)
         {
-            // Math.Round does bankers rounding, which is IEEE 754, section 4. 
-            // If a is halfway between two whole numbers, one of which by definition is even and the other odd, then 
+            // Math.Round does bankers rounding, which is IEEE 754, section 4.
+            // If a is halfway between two whole numbers, one of which by definition is even and the other odd, then
             // the even number is returned. Thus Round(3.5) == Round(4.5) == 4.0
             // XPath has different rules.. which is Math.Floor(a + 0.5)... with two exceptions (see below)
-            // The round function returns the number that is closest to the argument and that is an integer. 
-            // If there are two such numbers, then the one that is closest to positive infinity is returned. 
-            // If the argument is NaN, then NaN is returned. 
-            // If the argument is positive infinity, then positive infinity is returned. 
-            // If the argument is negative infinity, then negative infinity is returned. 
-            // If the argument is positive zero, then positive zero is returned. 
+            // The round function returns the number that is closest to the argument and that is an integer.
+            // If there are two such numbers, then the one that is closest to positive infinity is returned.
+            // If the argument is NaN, then NaN is returned.
+            // If the argument is positive infinity, then positive infinity is returned.
+            // If the argument is negative infinity, then negative infinity is returned.
+            // If the argument is positive zero, then positive zero is returned.
             // If the argument is negative zero, then negative zero is returned.
             // If the argument is less than zero, but greater than or equal to -0.5, then negative zero is returned.
-            // For these last two cases, the result of calling the round function is not the same as the result of 
-            // adding 0.5 and then calling the floor function.            
+            // For these last two cases, the result of calling the round function is not the same as the result of
+            // adding 0.5 and then calling the floor function.
             // Note: .NET has no positive or negative zero... so we give up and use Math.Round...
             // For all other cases, we use Floor to Round...
             return (-0.5 <= val && val <= 0.0) ? Math.Round(val) : Math.Floor(val + 0.5);
         }
-#if NO   
+
+#if NO
         internal static XPathResultType ResultType(ValueDataType dataType)
         {
             switch (dataType)
             {
                 default:
                     break;
-                    
+
                 case ValueDataType.Boolean:
                     return XPathResultType.Boolean;
 
@@ -937,7 +1047,7 @@ namespace System.ServiceModel.Dispatcher
                 case ValueDataType.String:
                     return XPathResultType.String;
             }
-            
+
             return XPathResultType.Any;
         }
 #endif

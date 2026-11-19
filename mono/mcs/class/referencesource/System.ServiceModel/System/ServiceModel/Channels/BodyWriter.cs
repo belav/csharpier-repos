@@ -3,10 +3,10 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
-    using System.Xml;
     using System.Diagnostics;
     using System.Runtime;
     using System.Threading;
+    using System.Xml;
 
     public abstract class BodyWriter
     {
@@ -42,8 +42,13 @@ namespace System.ServiceModel.Channels
         public BodyWriter CreateBufferedCopy(int maxBufferSize)
         {
             if (maxBufferSize < 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("maxBufferSize", maxBufferSize,
-                                                    SR.GetString(SR.ValueMustBeNonNegative)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "maxBufferSize",
+                        maxBufferSize,
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    )
+                );
             if (this.isBuffered)
             {
                 return this;
@@ -53,12 +58,20 @@ namespace System.ServiceModel.Channels
                 lock (this.thisLock)
                 {
                     if (!this.canWrite)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.BodyWriterCanOnlyBeWrittenOnce)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.BodyWriterCanOnlyBeWrittenOnce)
+                            )
+                        );
                     this.canWrite = false;
                 }
                 BodyWriter bodyWriter = OnCreateBufferedCopy(maxBufferSize);
                 if (!bodyWriter.IsBuffered)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.BodyWriterReturnedIsNotBuffered)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.BodyWriterReturnedIsNotBuffered)
+                        )
+                    );
                 return bodyWriter;
             }
         }
@@ -68,7 +81,10 @@ namespace System.ServiceModel.Channels
             return OnCreateBufferedCopy(maxBufferSize, XmlDictionaryReaderQuotas.Max);
         }
 
-        internal BodyWriter OnCreateBufferedCopy(int maxBufferSize, XmlDictionaryReaderQuotas quotas)
+        internal BodyWriter OnCreateBufferedCopy(
+            int maxBufferSize,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             XmlBuffer buffer = new XmlBuffer(maxBufferSize);
             using (XmlDictionaryWriter writer = buffer.OpenSection(quotas))
@@ -84,7 +100,11 @@ namespace System.ServiceModel.Channels
 
         protected abstract void OnWriteBodyContents(XmlDictionaryWriter writer);
 
-        protected virtual IAsyncResult OnBeginWriteBodyContents(XmlDictionaryWriter writer, AsyncCallback callback, object state)
+        protected virtual IAsyncResult OnBeginWriteBodyContents(
+            XmlDictionaryWriter writer,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new OnWriteBodyContentsAsyncResult(writer, this, callback, state);
         }
@@ -97,13 +117,19 @@ namespace System.ServiceModel.Channels
         void EnsureWriteBodyContentsState(XmlDictionaryWriter writer)
         {
             if (writer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("writer"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("writer")
+                );
             if (!this.isBuffered)
             {
                 lock (this.thisLock)
                 {
                     if (!this.canWrite)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.BodyWriterCanOnlyBeWrittenOnce)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.BodyWriterCanOnlyBeWrittenOnce)
+                            )
+                        );
                     this.canWrite = false;
                 }
             }
@@ -115,7 +141,11 @@ namespace System.ServiceModel.Channels
             OnWriteBodyContents(writer);
         }
 
-        public IAsyncResult BeginWriteBodyContents(XmlDictionaryWriter writer, AsyncCallback callback, object state)
+        public IAsyncResult BeginWriteBodyContents(
+            XmlDictionaryWriter writer,
+            AsyncCallback callback,
+            object state
+        )
         {
             EnsureWriteBodyContentsState(writer);
             return OnBeginWriteBodyContents(writer, callback, state);
@@ -156,7 +186,12 @@ namespace System.ServiceModel.Channels
             BodyWriter bodyWriter;
             XmlDictionaryWriter writer;
 
-            public OnWriteBodyContentsAsyncResult(XmlDictionaryWriter writer, BodyWriter bodyWriter, AsyncCallback callback, object state)
+            public OnWriteBodyContentsAsyncResult(
+                XmlDictionaryWriter writer,
+                BodyWriter bodyWriter,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 Fx.Assert(bodyWriter != null, "bodyWriter should never be null");

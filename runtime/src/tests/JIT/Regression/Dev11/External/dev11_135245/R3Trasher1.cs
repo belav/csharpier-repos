@@ -7,13 +7,10 @@ using Xunit;
 
 namespace R3Trasher1
 {
-
-
     internal struct CHESS_POSITION
     {
         internal ulong occupied_rl45;
     };
-
 
     public class Board
     {
@@ -30,17 +27,12 @@ namespace R3Trasher1
             int index;
             int rowIndex;
 
-
-
-
             _search.occupied_rl45 = 0x0030000000000000UL;
-
 
             for (index = 0; index < 64; index++)
             {
                 _bishop_shift_rl45[index] = index;
             }
-
 
             for (rowIndex = 0; rowIndex < 64; rowIndex++)
             {
@@ -56,10 +48,12 @@ namespace R3Trasher1
         [MethodImpl(MethodImplOptions.NoInlining)]
         public ulong AttacksDiaga1(int sq)
         {
-            return _bishop_attacks_rl45[sq, (int)((_search.occupied_rl45 >> _bishop_shift_rl45[sq]) & 255)];
+            return _bishop_attacks_rl45[
+                sq,
+                (int)((_search.occupied_rl45 >> _bishop_shift_rl45[sq]) & 255)
+            ];
         }
     }
-
 
     public static class App
     {
@@ -77,10 +71,7 @@ namespace R3Trasher1
             else
             {
                 Console.WriteLine(
-                    "Test failed.\r\n" +
-                    "    Expected: {0:x16}\r\n" +
-                    "    Observed: {1:x16}\r\n",
-
+                    "Test failed.\r\n" + "    Expected: {0:x16}\r\n" + "    Observed: {1:x16}\r\n",
                     Board.ExpectedResult,
                     result
                 );

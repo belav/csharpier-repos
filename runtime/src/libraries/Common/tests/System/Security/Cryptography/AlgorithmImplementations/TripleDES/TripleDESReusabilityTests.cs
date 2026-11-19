@@ -27,23 +27,28 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 {
                     for (int i = 0; i < 2; i++)
                     {
-                        byte[] plainText1 = "e867f915e275eab27d6951165d26dec6dd0acafcfc".HexToByteArray();
+                        byte[] plainText1 =
+                            "e867f915e275eab27d6951165d26dec6dd0acafcfc".HexToByteArray();
                         byte[] cipher1 = encryptor.Transform(plainText1);
-                        byte[] expectedCipher1 = "446f57875e107702afde16b57eaf250b87b8110bef29af89".HexToByteArray();
+                        byte[] expectedCipher1 =
+                            "446f57875e107702afde16b57eaf250b87b8110bef29af89".HexToByteArray();
                         Assert.Equal<byte>(expectedCipher1, cipher1);
 
                         byte[] decrypted1 = decryptor.Transform(cipher1);
-                        byte[] expectedDecrypted1 = "e867f915e275eab27d6951165d26dec6dd0acafcfc".HexToByteArray();
+                        byte[] expectedDecrypted1 =
+                            "e867f915e275eab27d6951165d26dec6dd0acafcfc".HexToByteArray();
                         Assert.Equal<byte>(expectedDecrypted1, decrypted1);
 
-
-                        byte[] plainText2 = "54686973206973206120736563726574206d657373616765".HexToByteArray();
+                        byte[] plainText2 =
+                            "54686973206973206120736563726574206d657373616765".HexToByteArray();
                         byte[] cipher2 = encryptor.Transform(plainText2);
-                        byte[] expectedCipher2 = "da6af8adc5d934c24943176db82eef34aa027c93e9dbe52dc5f1fa64fef4061c".HexToByteArray();
+                        byte[] expectedCipher2 =
+                            "da6af8adc5d934c24943176db82eef34aa027c93e9dbe52dc5f1fa64fef4061c".HexToByteArray();
                         Assert.Equal<byte>(expectedCipher2, cipher2);
 
                         byte[] decrypted2 = decryptor.Transform(cipher2);
-                        byte[] expectedDecrypted2 = "54686973206973206120736563726574206d657373616765".HexToByteArray();
+                        byte[] expectedDecrypted2 =
+                            "54686973206973206120736563726574206d657373616765".HexToByteArray();
                         Assert.Equal<byte>(expectedDecrypted2, decrypted2);
                     }
                 }

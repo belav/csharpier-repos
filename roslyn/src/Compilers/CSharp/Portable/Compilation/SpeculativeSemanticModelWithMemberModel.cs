@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// Instances of this type represent user-facing speculative semantic models that are backed by 
+    /// Instances of this type represent user-facing speculative semantic models that are backed by
     /// internal <see cref="MemberSemanticModel"/>.
     /// </summary>
     internal sealed class SpeculativeSemanticModelWithMemberModel : PublicSemanticModel
@@ -22,12 +22,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly int _position;
         private readonly NullableWalker.SnapshotManager? _parentSnapshotManagerOpt;
         private readonly MemberSemanticModel _memberModel;
-        private ImmutableDictionary<CSharpSyntaxNode, MemberSemanticModel> _childMemberModels = ImmutableDictionary<CSharpSyntaxNode, MemberSemanticModel>.Empty;
+        private ImmutableDictionary<CSharpSyntaxNode, MemberSemanticModel> _childMemberModels =
+            ImmutableDictionary<CSharpSyntaxNode, MemberSemanticModel>.Empty;
 
         private SpeculativeSemanticModelWithMemberModel(
             SyntaxTreeSemanticModel parentSemanticModel,
             int position,
-            NullableWalker.SnapshotManager? snapshotManagerOpt)
+            NullableWalker.SnapshotManager? snapshotManagerOpt
+        )
         {
             Debug.Assert(parentSemanticModel is not null);
 
@@ -44,16 +46,28 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol attributeType,
             AliasSymbol aliasOpt,
             Binder rootBinder,
-            ImmutableDictionary<Symbol, Symbol>? parentRemappedSymbolsOpt)
+            ImmutableDictionary<Symbol, Symbol>? parentRemappedSymbolsOpt
+        )
             : this(parentSemanticModel, position, snapshotManagerOpt: null)
         {
             Debug.Assert(syntax != null);
             Debug.Assert(rootBinder != null);
             Debug.Assert(rootBinder.IsSemanticModelBinder);
 
-            _memberModel = new AttributeSemanticModel(syntax, attributeType, getAttributeTargetFromPosition(position, parentSemanticModel), aliasOpt, rootBinder, containingPublicSemanticModel: this, parentRemappedSymbolsOpt: parentRemappedSymbolsOpt);
+            _memberModel = new AttributeSemanticModel(
+                syntax,
+                attributeType,
+                getAttributeTargetFromPosition(position, parentSemanticModel),
+                aliasOpt,
+                rootBinder,
+                containingPublicSemanticModel: this,
+                parentRemappedSymbolsOpt: parentRemappedSymbolsOpt
+            );
 
-            static Symbol? getAttributeTargetFromPosition(int position, SyntaxTreeSemanticModel model)
+            static Symbol? getAttributeTargetFromPosition(
+                int position,
+                SyntaxTreeSemanticModel model
+            )
             {
                 var attributedNode = model.SyntaxTree.GetRoot().FindToken(position).Parent;
                 attributedNode = attributedNode?.FirstAncestorOrSelf<AttributeListSyntax>()?.Parent;
@@ -73,14 +87,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol owner,
             EqualsValueClauseSyntax syntax,
             Binder rootBinder,
-            ImmutableDictionary<Symbol, Symbol>? parentRemappedSymbolsOpt)
+            ImmutableDictionary<Symbol, Symbol>? parentRemappedSymbolsOpt
+        )
             : this(parentSemanticModel, position, snapshotManagerOpt: null)
         {
             Debug.Assert(syntax != null);
             Debug.Assert(rootBinder != null);
             Debug.Assert(rootBinder.IsSemanticModelBinder);
 
-            _memberModel = new InitializerSemanticModel(syntax, owner, rootBinder, containingPublicSemanticModel: this, parentRemappedSymbolsOpt: parentRemappedSymbolsOpt);
+            _memberModel = new InitializerSemanticModel(
+                syntax,
+                owner,
+                rootBinder,
+                containingPublicSemanticModel: this,
+                parentRemappedSymbolsOpt: parentRemappedSymbolsOpt
+            );
         }
 
         public SpeculativeSemanticModelWithMemberModel(
@@ -90,10 +111,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSyntax type,
             Binder rootBinder,
             ImmutableDictionary<Symbol, Symbol>? parentRemappedSymbolsOpt,
-            NullableWalker.SnapshotManager? snapshotManagerOpt)
+            NullableWalker.SnapshotManager? snapshotManagerOpt
+        )
             : this(parentModel, position, snapshotManagerOpt)
         {
-            _memberModel = new MemberSemanticModel.SpeculativeMemberSemanticModel(this, owner, type, rootBinder, parentRemappedSymbolsOpt);
+            _memberModel = new MemberSemanticModel.SpeculativeMemberSemanticModel(
+                this,
+                owner,
+                type,
+                rootBinder,
+                parentRemappedSymbolsOpt
+            );
         }
 
         public SpeculativeSemanticModelWithMemberModel(
@@ -103,17 +131,25 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpSyntaxNode syntax,
             Binder rootBinder,
             ImmutableDictionary<Symbol, Symbol>? parentRemappedSymbolsOpt,
-            NullableWalker.SnapshotManager? snapshotManagerOpt)
+            NullableWalker.SnapshotManager? snapshotManagerOpt
+        )
             : this(parentSemanticModel, position, snapshotManagerOpt)
         {
             Debug.Assert(syntax != null);
             Debug.Assert(rootBinder != null);
             Debug.Assert(rootBinder.IsSemanticModelBinder);
 
-            _memberModel = new MethodBodySemanticModel(owner, rootBinder, syntax, containingPublicSemanticModel: this, parentRemappedSymbolsOpt: parentRemappedSymbolsOpt);
+            _memberModel = new MethodBodySemanticModel(
+                owner,
+                rootBinder,
+                syntax,
+                containingPublicSemanticModel: this,
+                parentRemappedSymbolsOpt: parentRemappedSymbolsOpt
+            );
         }
 
-        internal NullableWalker.SnapshotManager? ParentSnapshotManagerOpt => _parentSnapshotManagerOpt;
+        internal NullableWalker.SnapshotManager? ParentSnapshotManagerOpt =>
+            _parentSnapshotManagerOpt;
 
         public override bool IsSpeculativeSemanticModel => true;
 
@@ -143,12 +179,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return _memberModel;
             }
 
-            var attributeOrParameter = node.FirstAncestorOrSelf<SyntaxNode>(static n => n.Kind() is SyntaxKind.Attribute or SyntaxKind.Parameter);
+            var attributeOrParameter = node.FirstAncestorOrSelf<SyntaxNode>(static n =>
+                n.Kind() is SyntaxKind.Attribute or SyntaxKind.Parameter
+            );
 
-            if (attributeOrParameter is null ||
-                attributeOrParameter == Root ||
-                attributeOrParameter.Parent is null ||
-                !Root.Span.Contains(attributeOrParameter.Span))
+            if (
+                attributeOrParameter is null
+                || attributeOrParameter == Root
+                || attributeOrParameter.Parent is null
+                || !Root.Span.Contains(attributeOrParameter.Span)
+            )
             {
                 return _memberModel;
             }
@@ -171,37 +211,57 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private MemberSemanticModel GetOrAddModelForAttribute(MemberSemanticModel containing, AttributeSyntax attribute)
+        private MemberSemanticModel GetOrAddModelForAttribute(
+            MemberSemanticModel containing,
+            AttributeSyntax attribute
+        )
         {
-            return ImmutableInterlocked.GetOrAdd(ref _childMemberModels, attribute,
-                                                 (node, binderAndModel) => CreateModelForAttribute(binderAndModel.binder, (AttributeSyntax)node, binderAndModel.model),
-                                                 (binder: containing.GetEnclosingBinder(attribute.SpanStart), model: containing));
+            return ImmutableInterlocked.GetOrAdd(
+                ref _childMemberModels,
+                attribute,
+                (node, binderAndModel) =>
+                    CreateModelForAttribute(
+                        binderAndModel.binder,
+                        (AttributeSyntax)node,
+                        binderAndModel.model
+                    ),
+                (binder: containing.GetEnclosingBinder(attribute.SpanStart), model: containing)
+            );
         }
 
-        private MemberSemanticModel GetOrAddModelForParameter(SyntaxNode node, MemberSemanticModel containing, ParameterSyntax paramDecl)
+        private MemberSemanticModel GetOrAddModelForParameter(
+            SyntaxNode node,
+            MemberSemanticModel containing,
+            ParameterSyntax paramDecl
+        )
         {
             EqualsValueClauseSyntax? defaultValueSyntax = paramDecl.Default;
 
             if (defaultValueSyntax != null && defaultValueSyntax.FullSpan.Contains(node.Span))
             {
-                var parameterSymbol = containing.GetDeclaredSymbol(paramDecl).GetSymbol<ParameterSymbol>();
+                var parameterSymbol = containing
+                    .GetDeclaredSymbol(paramDecl)
+                    .GetSymbol<ParameterSymbol>();
                 if ((object)parameterSymbol != null)
                 {
-                    return ImmutableInterlocked.GetOrAdd(ref _childMemberModels, defaultValueSyntax,
-                                                         (equalsValue, tuple) =>
-                                                            InitializerSemanticModel.Create(
-                                                                this,
-                                                                tuple.paramDecl,
-                                                                tuple.parameterSymbol,
-                                                                tuple.containing.GetEnclosingBinder(tuple.paramDecl.SpanStart).
-                                                                    CreateBinderForParameterDefaultValue(tuple.parameterSymbol,
-                                                                                            (EqualsValueClauseSyntax)equalsValue),
-                                                                tuple.containing.GetRemappedSymbols()),
-                                                         (compilation: this.Compilation,
-                                                          paramDecl,
-                                                          parameterSymbol,
-                                                          containing)
-                                                         );
+                    return ImmutableInterlocked.GetOrAdd(
+                        ref _childMemberModels,
+                        defaultValueSyntax,
+                        (equalsValue, tuple) =>
+                            InitializerSemanticModel.Create(
+                                this,
+                                tuple.paramDecl,
+                                tuple.parameterSymbol,
+                                tuple
+                                    .containing.GetEnclosingBinder(tuple.paramDecl.SpanStart)
+                                    .CreateBinderForParameterDefaultValue(
+                                        tuple.parameterSymbol,
+                                        (EqualsValueClauseSyntax)equalsValue
+                                    ),
+                                tuple.containing.GetRemappedSymbols()
+                            ),
+                        (compilation: this.Compilation, paramDecl, parameterSymbol, containing)
+                    );
                 }
             }
 
@@ -216,121 +276,205 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override Conversion ClassifyConversion(
             ExpressionSyntax expression,
             ITypeSymbol destination,
-            bool isExplicitInSource = false)
+            bool isExplicitInSource = false
+        )
         {
-            return GetEnclosingMemberModel(expression).ClassifyConversion(expression, destination, isExplicitInSource);
+            return GetEnclosingMemberModel(expression)
+                .ClassifyConversion(expression, destination, isExplicitInSource);
         }
 
         internal override Conversion ClassifyConversionForCast(
             ExpressionSyntax expression,
-            TypeSymbol destination)
+            TypeSymbol destination
+        )
         {
-            return GetEnclosingMemberModel(expression).ClassifyConversionForCast(expression, destination);
+            return GetEnclosingMemberModel(expression)
+                .ClassifyConversionForCast(expression, destination);
         }
 
-        public override ImmutableArray<Diagnostic> GetSyntaxDiagnostics(TextSpan? span = null, CancellationToken cancellationToken = default(CancellationToken))
+        public override ImmutableArray<Diagnostic> GetSyntaxDiagnostics(
+            TextSpan? span = null,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             throw new NotSupportedException();
         }
 
-        public override ImmutableArray<Diagnostic> GetDeclarationDiagnostics(TextSpan? span = null, CancellationToken cancellationToken = default(CancellationToken))
+        public override ImmutableArray<Diagnostic> GetDeclarationDiagnostics(
+            TextSpan? span = null,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             throw new NotSupportedException();
         }
 
-        public override ImmutableArray<Diagnostic> GetMethodBodyDiagnostics(TextSpan? span = null, CancellationToken cancellationToken = default(CancellationToken))
+        public override ImmutableArray<Diagnostic> GetMethodBodyDiagnostics(
+            TextSpan? span = null,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             throw new NotSupportedException();
         }
 
-        public override ImmutableArray<Diagnostic> GetDiagnostics(TextSpan? span = null, CancellationToken cancellationToken = default(CancellationToken))
+        public override ImmutableArray<Diagnostic> GetDiagnostics(
+            TextSpan? span = null,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             throw new NotSupportedException();
         }
 
-        public override INamespaceSymbol GetDeclaredSymbol(NamespaceDeclarationSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override INamespaceSymbol GetDeclaredSymbol(
+            NamespaceDeclarationSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
-        public override INamespaceSymbol GetDeclaredSymbol(FileScopedNamespaceDeclarationSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override INamespaceSymbol GetDeclaredSymbol(
+            FileScopedNamespaceDeclarationSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
-        public override INamedTypeSymbol GetDeclaredSymbol(BaseTypeDeclarationSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override INamedTypeSymbol GetDeclaredSymbol(
+            BaseTypeDeclarationSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
-        public override INamedTypeSymbol GetDeclaredSymbol(DelegateDeclarationSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override INamedTypeSymbol GetDeclaredSymbol(
+            DelegateDeclarationSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
-        public override IFieldSymbol GetDeclaredSymbol(EnumMemberDeclarationSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override IFieldSymbol GetDeclaredSymbol(
+            EnumMemberDeclarationSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
-        public override IMethodSymbol GetDeclaredSymbol(LocalFunctionStatementSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override IMethodSymbol GetDeclaredSymbol(
+            LocalFunctionStatementSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
-        public override ISymbol GetDeclaredSymbol(MemberDeclarationSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override ISymbol GetDeclaredSymbol(
+            MemberDeclarationSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
-        public override IMethodSymbol GetDeclaredSymbol(CompilationUnitSyntax declarationSyntax, CancellationToken cancellationToken = default)
+        public override IMethodSymbol GetDeclaredSymbol(
+            CompilationUnitSyntax declarationSyntax,
+            CancellationToken cancellationToken = default
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
-        public override IMethodSymbol GetDeclaredSymbol(BaseMethodDeclarationSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override IMethodSymbol GetDeclaredSymbol(
+            BaseMethodDeclarationSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
-        public override ISymbol GetDeclaredSymbol(BasePropertyDeclarationSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override ISymbol GetDeclaredSymbol(
+            BasePropertyDeclarationSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
-        public override IPropertySymbol GetDeclaredSymbol(PropertyDeclarationSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override IPropertySymbol GetDeclaredSymbol(
+            PropertyDeclarationSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
-        public override IPropertySymbol GetDeclaredSymbol(IndexerDeclarationSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override IPropertySymbol GetDeclaredSymbol(
+            IndexerDeclarationSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
-        public override IEventSymbol GetDeclaredSymbol(EventDeclarationSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override IEventSymbol GetDeclaredSymbol(
+            EventDeclarationSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
-        public override IMethodSymbol GetDeclaredSymbol(AccessorDeclarationSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override IMethodSymbol GetDeclaredSymbol(
+            AccessorDeclarationSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
-        public override IMethodSymbol GetDeclaredSymbol(ArrowExpressionClauseSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override IMethodSymbol GetDeclaredSymbol(
+            ArrowExpressionClauseSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
-        public override ISymbol GetDeclaredSymbol(VariableDeclaratorSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override ISymbol GetDeclaredSymbol(
+            VariableDeclaratorSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
-        public override ISymbol GetDeclaredSymbol(SingleVariableDesignationSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override ISymbol GetDeclaredSymbol(
+            SingleVariableDesignationSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
         internal override LocalSymbol GetAdjustedLocalSymbol(SourceLocalSymbol local)
@@ -338,52 +482,90 @@ namespace Microsoft.CodeAnalysis.CSharp
             return _memberModel.GetAdjustedLocalSymbol(local);
         }
 
-        public override ILabelSymbol GetDeclaredSymbol(LabeledStatementSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override ILabelSymbol GetDeclaredSymbol(
+            LabeledStatementSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
-        public override ILabelSymbol GetDeclaredSymbol(SwitchLabelSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override ILabelSymbol GetDeclaredSymbol(
+            SwitchLabelSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
-        public override IAliasSymbol GetDeclaredSymbol(UsingDirectiveSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override IAliasSymbol GetDeclaredSymbol(
+            UsingDirectiveSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
-        public override IAliasSymbol GetDeclaredSymbol(ExternAliasDirectiveSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override IAliasSymbol GetDeclaredSymbol(
+            ExternAliasDirectiveSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
-        public override IParameterSymbol GetDeclaredSymbol(ParameterSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override IParameterSymbol GetDeclaredSymbol(
+            ParameterSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbol(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
-        internal override ImmutableArray<ISymbol> GetDeclaredSymbols(BaseFieldDeclarationSyntax declarationSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        internal override ImmutableArray<ISymbol> GetDeclaredSymbols(
+            BaseFieldDeclarationSyntax declarationSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declarationSyntax).GetDeclaredSymbols(declarationSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declarationSyntax)
+                .GetDeclaredSymbols(declarationSyntax, cancellationToken);
         }
 
-        public override ITypeParameterSymbol GetDeclaredSymbol(TypeParameterSyntax typeParameter, CancellationToken cancellationToken = default(CancellationToken))
+        public override ITypeParameterSymbol GetDeclaredSymbol(
+            TypeParameterSyntax typeParameter,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(typeParameter).GetDeclaredSymbol(typeParameter, cancellationToken);
+            return GetEnclosingMemberModel(typeParameter)
+                .GetDeclaredSymbol(typeParameter, cancellationToken);
         }
 
-        public override IRangeVariableSymbol GetDeclaredSymbol(JoinIntoClauseSyntax node, CancellationToken cancellationToken = default(CancellationToken))
+        public override IRangeVariableSymbol GetDeclaredSymbol(
+            JoinIntoClauseSyntax node,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             return GetEnclosingMemberModel(node).GetDeclaredSymbol(node, cancellationToken);
         }
 
-        public override IRangeVariableSymbol GetDeclaredSymbol(QueryClauseSyntax queryClause, CancellationToken cancellationToken = default(CancellationToken))
+        public override IRangeVariableSymbol GetDeclaredSymbol(
+            QueryClauseSyntax queryClause,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(queryClause).GetDeclaredSymbol(queryClause, cancellationToken);
+            return GetEnclosingMemberModel(queryClause)
+                .GetDeclaredSymbol(queryClause, cancellationToken);
         }
 
-        public override IRangeVariableSymbol GetDeclaredSymbol(QueryContinuationSyntax node, CancellationToken cancellationToken = default(CancellationToken))
+        public override IRangeVariableSymbol GetDeclaredSymbol(
+            QueryContinuationSyntax node,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             return GetEnclosingMemberModel(node).GetDeclaredSymbol(node, cancellationToken);
         }
@@ -398,7 +580,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return GetEnclosingMemberModel(node).GetForEachStatementInfo(node);
         }
 
-        public override ForEachStatementInfo GetForEachStatementInfo(CommonForEachStatementSyntax node)
+        public override ForEachStatementInfo GetForEachStatementInfo(
+            CommonForEachStatementSyntax node
+        )
         {
             return GetEnclosingMemberModel(node).GetForEachStatementInfo(node);
         }
@@ -408,82 +592,145 @@ namespace Microsoft.CodeAnalysis.CSharp
             return GetEnclosingMemberModel(node).GetDeconstructionInfo(node);
         }
 
-        public override DeconstructionInfo GetDeconstructionInfo(ForEachVariableStatementSyntax node)
+        public override DeconstructionInfo GetDeconstructionInfo(
+            ForEachVariableStatementSyntax node
+        )
         {
             return GetEnclosingMemberModel(node).GetDeconstructionInfo(node);
         }
 
-        public override QueryClauseInfo GetQueryClauseInfo(QueryClauseSyntax node, CancellationToken cancellationToken = default(CancellationToken))
+        public override QueryClauseInfo GetQueryClauseInfo(
+            QueryClauseSyntax node,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             return GetEnclosingMemberModel(node).GetQueryClauseInfo(node, cancellationToken);
         }
 
-        public override IPropertySymbol GetDeclaredSymbol(AnonymousObjectMemberDeclaratorSyntax declaratorSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override IPropertySymbol GetDeclaredSymbol(
+            AnonymousObjectMemberDeclaratorSyntax declaratorSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declaratorSyntax).GetDeclaredSymbol(declaratorSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declaratorSyntax)
+                .GetDeclaredSymbol(declaratorSyntax, cancellationToken);
         }
 
-        public override INamedTypeSymbol GetDeclaredSymbol(AnonymousObjectCreationExpressionSyntax declaratorSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override INamedTypeSymbol GetDeclaredSymbol(
+            AnonymousObjectCreationExpressionSyntax declaratorSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declaratorSyntax).GetDeclaredSymbol(declaratorSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declaratorSyntax)
+                .GetDeclaredSymbol(declaratorSyntax, cancellationToken);
         }
 
-        public override INamedTypeSymbol GetDeclaredSymbol(TupleExpressionSyntax declaratorSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override INamedTypeSymbol GetDeclaredSymbol(
+            TupleExpressionSyntax declaratorSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declaratorSyntax).GetDeclaredSymbol(declaratorSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declaratorSyntax)
+                .GetDeclaredSymbol(declaratorSyntax, cancellationToken);
         }
 
-        public override ISymbol GetDeclaredSymbol(ArgumentSyntax declaratorSyntax, CancellationToken cancellationToken = default(CancellationToken))
+        public override ISymbol GetDeclaredSymbol(
+            ArgumentSyntax declaratorSyntax,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(declaratorSyntax).GetDeclaredSymbol(declaratorSyntax, cancellationToken);
+            return GetEnclosingMemberModel(declaratorSyntax)
+                .GetDeclaredSymbol(declaratorSyntax, cancellationToken);
         }
 
-        internal override IOperation? GetOperationWorker(CSharpSyntaxNode node, CancellationToken cancellationToken)
+        internal override IOperation? GetOperationWorker(
+            CSharpSyntaxNode node,
+            CancellationToken cancellationToken
+        )
         {
             return GetEnclosingMemberModel(node).GetOperationWorker(node, cancellationToken);
         }
 
-        internal override SymbolInfo GetSymbolInfoWorker(CSharpSyntaxNode node, SymbolInfoOptions options, CancellationToken cancellationToken = default(CancellationToken))
+        internal override SymbolInfo GetSymbolInfoWorker(
+            CSharpSyntaxNode node,
+            SymbolInfoOptions options,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(node).GetSymbolInfoWorker(node, options, cancellationToken);
+            return GetEnclosingMemberModel(node)
+                .GetSymbolInfoWorker(node, options, cancellationToken);
         }
 
-        internal override CSharpTypeInfo GetTypeInfoWorker(CSharpSyntaxNode node, CancellationToken cancellationToken = default(CancellationToken))
+        internal override CSharpTypeInfo GetTypeInfoWorker(
+            CSharpSyntaxNode node,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             return GetEnclosingMemberModel(node).GetTypeInfoWorker(node, cancellationToken);
         }
 
-        internal override ImmutableArray<Symbol> GetMemberGroupWorker(CSharpSyntaxNode node, SymbolInfoOptions options, CancellationToken cancellationToken = default(CancellationToken))
+        internal override ImmutableArray<Symbol> GetMemberGroupWorker(
+            CSharpSyntaxNode node,
+            SymbolInfoOptions options,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(node).GetMemberGroupWorker(node, options, cancellationToken);
+            return GetEnclosingMemberModel(node)
+                .GetMemberGroupWorker(node, options, cancellationToken);
         }
 
-        internal override ImmutableArray<IPropertySymbol> GetIndexerGroupWorker(CSharpSyntaxNode node, SymbolInfoOptions options, CancellationToken cancellationToken = default(CancellationToken))
+        internal override ImmutableArray<IPropertySymbol> GetIndexerGroupWorker(
+            CSharpSyntaxNode node,
+            SymbolInfoOptions options,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(node).GetIndexerGroupWorker(node, options, cancellationToken);
+            return GetEnclosingMemberModel(node)
+                .GetIndexerGroupWorker(node, options, cancellationToken);
         }
 
-        internal override Optional<object> GetConstantValueWorker(CSharpSyntaxNode node, CancellationToken cancellationToken)
+        internal override Optional<object> GetConstantValueWorker(
+            CSharpSyntaxNode node,
+            CancellationToken cancellationToken
+        )
         {
             return GetEnclosingMemberModel(node).GetConstantValueWorker(node, cancellationToken);
         }
 
-        internal override SymbolInfo GetCollectionInitializerSymbolInfoWorker(InitializerExpressionSyntax collectionInitializer, ExpressionSyntax node, CancellationToken cancellationToken = default(CancellationToken))
+        internal override SymbolInfo GetCollectionInitializerSymbolInfoWorker(
+            InitializerExpressionSyntax collectionInitializer,
+            ExpressionSyntax node,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return GetEnclosingMemberModel(collectionInitializer).GetCollectionInitializerSymbolInfoWorker(collectionInitializer, node, cancellationToken);
+            return GetEnclosingMemberModel(collectionInitializer)
+                .GetCollectionInitializerSymbolInfoWorker(
+                    collectionInitializer,
+                    node,
+                    cancellationToken
+                );
         }
 
-        public override SymbolInfo GetSymbolInfo(OrderingSyntax node, CancellationToken cancellationToken = default(CancellationToken))
+        public override SymbolInfo GetSymbolInfo(
+            OrderingSyntax node,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             return GetEnclosingMemberModel(node).GetSymbolInfo(node, cancellationToken);
         }
 
-        public override SymbolInfo GetSymbolInfo(SelectOrGroupClauseSyntax node, CancellationToken cancellationToken = default(CancellationToken))
+        public override SymbolInfo GetSymbolInfo(
+            SelectOrGroupClauseSyntax node,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             return GetEnclosingMemberModel(node).GetSymbolInfo(node, cancellationToken);
         }
 
-        public override TypeInfo GetTypeInfo(SelectOrGroupClauseSyntax node, CancellationToken cancellationToken = default(CancellationToken))
+        public override TypeInfo GetTypeInfo(
+            SelectOrGroupClauseSyntax node,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             return GetEnclosingMemberModel(node).GetTypeInfo(node, cancellationToken);
         }
@@ -498,69 +745,138 @@ namespace Microsoft.CodeAnalysis.CSharp
             return _memberModel.RemapSymbolIfNecessaryCore(symbol);
         }
 
-        internal sealed override Func<SyntaxNode, bool> GetSyntaxNodesToAnalyzeFilter(SyntaxNode declaredNode, ISymbol declaredSymbol)
+        internal sealed override Func<SyntaxNode, bool> GetSyntaxNodesToAnalyzeFilter(
+            SyntaxNode declaredNode,
+            ISymbol declaredSymbol
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal override bool ShouldSkipSyntaxNodeAnalysis(SyntaxNode node, ISymbol containingSymbol)
+        internal override bool ShouldSkipSyntaxNodeAnalysis(
+            SyntaxNode node,
+            ISymbol containingSymbol
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal override BoundNode Bind(Binder binder, CSharpSyntaxNode node, BindingDiagnosticBag diagnostics)
+        internal override BoundNode Bind(
+            Binder binder,
+            CSharpSyntaxNode node,
+            BindingDiagnosticBag diagnostics
+        )
         {
             return GetEnclosingMemberModel(node).Bind(binder, node, diagnostics);
         }
 
-        internal override bool TryGetSpeculativeSemanticModelCore(SyntaxTreeSemanticModel parentModel, int position, ConstructorInitializerSyntax constructorInitializer, out PublicSemanticModel? speculativeModel)
+        internal override bool TryGetSpeculativeSemanticModelCore(
+            SyntaxTreeSemanticModel parentModel,
+            int position,
+            ConstructorInitializerSyntax constructorInitializer,
+            out PublicSemanticModel? speculativeModel
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal override bool TryGetSpeculativeSemanticModelCore(SyntaxTreeSemanticModel parentModel, int position, PrimaryConstructorBaseTypeSyntax constructorInitializer, out PublicSemanticModel? speculativeModel)
+        internal override bool TryGetSpeculativeSemanticModelCore(
+            SyntaxTreeSemanticModel parentModel,
+            int position,
+            PrimaryConstructorBaseTypeSyntax constructorInitializer,
+            out PublicSemanticModel? speculativeModel
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal override bool TryGetSpeculativeSemanticModelCore(SyntaxTreeSemanticModel parentModel, int position, EqualsValueClauseSyntax initializer, out PublicSemanticModel? speculativeModel)
+        internal override bool TryGetSpeculativeSemanticModelCore(
+            SyntaxTreeSemanticModel parentModel,
+            int position,
+            EqualsValueClauseSyntax initializer,
+            out PublicSemanticModel? speculativeModel
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal override bool TryGetSpeculativeSemanticModelCore(SyntaxTreeSemanticModel parentModel, int position, ArrowExpressionClauseSyntax expressionBody, out PublicSemanticModel? speculativeModel)
+        internal override bool TryGetSpeculativeSemanticModelCore(
+            SyntaxTreeSemanticModel parentModel,
+            int position,
+            ArrowExpressionClauseSyntax expressionBody,
+            out PublicSemanticModel? speculativeModel
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal override bool TryGetSpeculativeSemanticModelCore(SyntaxTreeSemanticModel parentModel, int position, StatementSyntax statement, out PublicSemanticModel? speculativeModel)
+        internal override bool TryGetSpeculativeSemanticModelCore(
+            SyntaxTreeSemanticModel parentModel,
+            int position,
+            StatementSyntax statement,
+            out PublicSemanticModel? speculativeModel
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal override bool TryGetSpeculativeSemanticModelForMethodBodyCore(SyntaxTreeSemanticModel parentModel, int position, BaseMethodDeclarationSyntax method, out PublicSemanticModel? speculativeModel)
+        internal override bool TryGetSpeculativeSemanticModelForMethodBodyCore(
+            SyntaxTreeSemanticModel parentModel,
+            int position,
+            BaseMethodDeclarationSyntax method,
+            out PublicSemanticModel? speculativeModel
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal override bool TryGetSpeculativeSemanticModelForMethodBodyCore(SyntaxTreeSemanticModel parentModel, int position, AccessorDeclarationSyntax accessor, out PublicSemanticModel? speculativeModel)
+        internal override bool TryGetSpeculativeSemanticModelForMethodBodyCore(
+            SyntaxTreeSemanticModel parentModel,
+            int position,
+            AccessorDeclarationSyntax accessor,
+            out PublicSemanticModel? speculativeModel
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal sealed override bool TryGetSpeculativeSemanticModelCore(SyntaxTreeSemanticModel parentModel, int position, TypeSyntax type, SpeculativeBindingOption bindingOption, out PublicSemanticModel speculativeModel)
+        internal sealed override bool TryGetSpeculativeSemanticModelCore(
+            SyntaxTreeSemanticModel parentModel,
+            int position,
+            TypeSyntax type,
+            SpeculativeBindingOption bindingOption,
+            out PublicSemanticModel speculativeModel
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal sealed override bool TryGetSpeculativeSemanticModelCore(SyntaxTreeSemanticModel parentModel, int position, CrefSyntax crefSyntax, out PublicSemanticModel speculativeModel)
+        internal sealed override bool TryGetSpeculativeSemanticModelCore(
+            SyntaxTreeSemanticModel parentModel,
+            int position,
+            CrefSyntax crefSyntax,
+            out PublicSemanticModel speculativeModel
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal override BoundExpression GetSpeculativelyBoundExpression(int position, ExpressionSyntax expression, SpeculativeBindingOption bindingOption, out Binder binder, out ImmutableArray<Symbol> crefSymbols)
+        internal override BoundExpression GetSpeculativelyBoundExpression(
+            int position,
+            ExpressionSyntax expression,
+            SpeculativeBindingOption bindingOption,
+            out Binder binder,
+            out ImmutableArray<Symbol> crefSymbols
+        )
         {
-            return GetEnclosingMemberModel(CheckAndAdjustPosition(position)).GetSpeculativelyBoundExpression(position, expression, bindingOption, out binder, out crefSymbols);
+            return GetEnclosingMemberModel(CheckAndAdjustPosition(position))
+                .GetSpeculativelyBoundExpression(
+                    position,
+                    expression,
+                    bindingOption,
+                    out binder,
+                    out crefSymbols
+                );
         }
     }
 }

@@ -22,9 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         // to the VB version.
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        internal EventSymbol()
-        {
-        }
+        internal EventSymbol() { }
 
         /// <summary>
         /// The original definition of this symbol. If this symbol is constructed from another
@@ -33,18 +31,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public new virtual EventSymbol OriginalDefinition
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         protected sealed override Symbol OriginalSymbolDefinition
         {
-            get
-            {
-                return this.OriginalDefinition;
-            }
+            get { return this.OriginalDefinition; }
         }
 
         /// <summary>
@@ -69,10 +61,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal bool HasAssociatedField
         {
-            get
-            {
-                return (object?)this.AssociatedField != null;
-            }
+            get { return (object?)this.AssociatedField != null; }
         }
 
         /// <summary>
@@ -82,11 +71,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// True if this is a Windows Runtime-style event.
-        /// 
+        ///
         /// A normal C# event, "event D E", has accessors
         ///     void add_E(D d)
         ///     void remove_E(D d)
-        /// 
+        ///
         /// A Windows Runtime event, "event D E", has accessors
         ///     EventRegistrationToken add_E(D d)
         ///     void remove_E(EventRegistrationToken t)
@@ -97,7 +86,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// True if the event itself is excluded from code coverage instrumentation.
         /// True for source events marked with <see cref="AttributeDescription.ExcludeFromCodeCoverageAttribute"/>.
         /// </summary>
-        internal virtual bool IsDirectlyExcludedFromCodeCoverage { get => false; }
+        internal virtual bool IsDirectlyExcludedFromCodeCoverage
+        {
+            get => false;
+        }
 
         /// <summary>
         /// True if this symbol has a special name (metadata flag SpecialName is set).
@@ -114,17 +106,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </remarks>
         public ImmutableArray<CSharpAttributeData> GetFieldAttributes()
         {
-            return (object?)this.AssociatedField == null ?
-                ImmutableArray<CSharpAttributeData>.Empty :
-                this.AssociatedField.GetAttributes();
+            return (object?)this.AssociatedField == null
+                ? ImmutableArray<CSharpAttributeData>.Empty
+                : this.AssociatedField.GetAttributes();
         }
 
         internal virtual FieldSymbol? AssociatedField
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         /// <summary>
@@ -141,7 +130,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         return (EventSymbol)OverriddenOrHiddenMembers.GetOverriddenMember();
                     }
 
-                    return (EventSymbol)OverriddenOrHiddenMembersResult.GetOverriddenMember(this, OriginalDefinition.OverriddenEvent);
+                    return (EventSymbol)
+                        OverriddenOrHiddenMembersResult.GetOverriddenMember(
+                            this,
+                            OriginalDefinition.OverriddenEvent
+                        );
                 }
                 return null;
             }
@@ -149,10 +142,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal virtual OverriddenOrHiddenMembersResult OverriddenOrHiddenMembers
         {
-            get
-            {
-                return this.MakeOverriddenOrHiddenMembers();
-            }
+            get { return this.MakeOverriddenOrHiddenMembers(); }
         }
 
         internal bool HidesBaseEventsByName
@@ -171,19 +161,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             while (e.IsOverride && !e.HidesBaseEventsByName)
             {
                 // NOTE: We might not be able to access the overridden event. For example,
-                // 
+                //
                 //   .assembly A
                 //   {
                 //      InternalsVisibleTo("B")
                 //      public class A { internal virtual event Action E { add; remove; } }
                 //   }
-                // 
+                //
                 //   .assembly B
                 //   {
                 //      InternalsVisibleTo("C")
                 //      public class B : A { internal override event Action E { add; remove; } }
                 //   }
-                // 
+                //
                 //   .assembly C
                 //   {
                 //      public class C : B { ... new B().E += null ... }       // A.E is not accessible from here
@@ -192,8 +182,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // See InternalsVisibleToAndStrongNameTests: IvtVirtualCall1, IvtVirtualCall2, IvtVirtual_ParamsAndDynamic.
                 EventSymbol? overridden = e.OverriddenEvent;
                 var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-                if ((object?)overridden == null ||
-                    (accessingTypeOpt is { } && !AccessCheck.IsSymbolAccessible(overridden, accessingTypeOpt, ref discardedUseSiteInfo)))
+                if (
+                    (object?)overridden == null
+                    || (
+                        accessingTypeOpt is { }
+                        && !AccessCheck.IsSymbolAccessible(
+                            overridden,
+                            accessingTypeOpt,
+                            ref discardedUseSiteInfo
+                        )
+                    )
+                )
                 {
                     break;
                 }
@@ -214,10 +213,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </remarks>
         internal virtual bool IsExplicitInterfaceImplementation
         {
-            get
-            {
-                return ExplicitInterfaceImplementations.Any();
-            }
+            get { return ExplicitInterfaceImplementations.Any(); }
         }
 
         /// <summary>
@@ -233,16 +229,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override SymbolKind Kind
         {
-            get
-            {
-                return SymbolKind.Event;
-            }
+            get { return SymbolKind.Event; }
         }
 
         /// <summary>
         /// Implements visitor pattern.
         /// </summary>
-        internal override TResult Accept<TArgument, TResult>(CSharpSymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        internal override TResult Accept<TArgument, TResult>(
+            CSharpSymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitEvent(this, argument);
         }
@@ -260,9 +256,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal EventSymbol AsMember(NamedTypeSymbol newOwner)
         {
             Debug.Assert(this.IsDefinition);
-            Debug.Assert(ReferenceEquals(newOwner.OriginalDefinition, this.ContainingSymbol.OriginalDefinition));
+            Debug.Assert(
+                ReferenceEquals(
+                    newOwner.OriginalDefinition,
+                    this.ContainingSymbol.OriginalDefinition
+                )
+            );
             Debug.Assert(newOwner.IsDefinition || newOwner is SubstitutedNamedTypeSymbol);
-            return newOwner.IsDefinition ? this : new SubstitutedEventSymbol((newOwner as SubstitutedNamedTypeSymbol)!, this);
+            return newOwner.IsDefinition
+                ? this
+                : new SubstitutedEventSymbol((newOwner as SubstitutedNamedTypeSymbol)!, this);
         }
 
         internal abstract bool MustCallMethodsDirectly { get; }
@@ -284,18 +287,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert(this.IsDefinition);
 
             // Check event type.
-            if (DeriveUseSiteInfoFromType(ref result, this.TypeWithAnnotations, AllowedRequiredModifierType.None))
+            if (
+                DeriveUseSiteInfoFromType(
+                    ref result,
+                    this.TypeWithAnnotations,
+                    AllowedRequiredModifierType.None
+                )
+            )
             {
                 return true;
             }
 
             if (this.ContainingModule.HasUnifiedReferences)
             {
-                // If the member is in an assembly with unified references, 
+                // If the member is in an assembly with unified references,
                 // we check if its definition depends on a type from a unified reference.
                 HashSet<TypeSymbol>? unificationCheckedTypes = null;
                 DiagnosticInfo? diagnosticInfo = result.DiagnosticInfo;
-                if (this.TypeWithAnnotations.GetUnificationUseSiteDiagnosticRecursive(ref diagnosticInfo, this, ref unificationCheckedTypes))
+                if (
+                    this.TypeWithAnnotations.GetUnificationUseSiteDiagnosticRecursive(
+                        ref diagnosticInfo,
+                        this,
+                        ref unificationCheckedTypes
+                    )
+                )
                 {
                     result = result.AdjustDiagnosticInfo(diagnosticInfo);
                     return true;
@@ -307,14 +322,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return false;
         }
 
-        protected sealed override bool IsHighestPriorityUseSiteErrorCode(int code) => code is (int)ErrorCode.ERR_UnsupportedCompilerFeature or (int)ErrorCode.ERR_BindToBogus;
+        protected sealed override bool IsHighestPriorityUseSiteErrorCode(int code) =>
+            code is (int)ErrorCode.ERR_UnsupportedCompilerFeature or (int)ErrorCode.ERR_BindToBogus;
 
         public sealed override bool HasUnsupportedMetadata
         {
             get
             {
                 DiagnosticInfo? info = GetUseSiteInfo().DiagnosticInfo;
-                return (object?)info != null && info.Code is (int)ErrorCode.ERR_BindToBogus or (int)ErrorCode.ERR_UnsupportedCompilerFeature;
+                return (object?)info != null
+                    && info.Code
+                        is (int)ErrorCode.ERR_BindToBogus
+                            or (int)ErrorCode.ERR_UnsupportedCompilerFeature;
             }
         }
 
@@ -343,7 +362,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             // This checks if the events have the same definition and the type parameters on the containing types have been
             // substituted in the same way.
-            return TypeSymbol.Equals(this.ContainingType, other.ContainingType, compareKind) && ReferenceEquals(this.OriginalDefinition, other.OriginalDefinition);
+            return TypeSymbol.Equals(this.ContainingType, other.ContainingType, compareKind)
+                && ReferenceEquals(this.OriginalDefinition, other.OriginalDefinition);
         }
 
         public override int GetHashCode()

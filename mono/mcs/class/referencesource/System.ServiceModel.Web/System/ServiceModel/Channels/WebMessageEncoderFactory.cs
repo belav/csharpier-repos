@@ -5,21 +5,35 @@
 namespace System.ServiceModel.Channels
 {
     using System;
+    using System.Diagnostics;
     using System.Globalization;
     using System.IO;
     using System.Runtime;
     using System.ServiceModel.Diagnostics;
     using System.Text;
     using System.Xml;
-    using System.Diagnostics;
 
     class WebMessageEncoderFactory : MessageEncoderFactory
     {
         WebMessageEncoder messageEncoder;
 
-        public WebMessageEncoderFactory(Encoding writeEncoding, int maxReadPoolSize, int maxWritePoolSize, XmlDictionaryReaderQuotas quotas, WebContentTypeMapper contentTypeMapper, bool javascriptCallbackEnabled)
+        public WebMessageEncoderFactory(
+            Encoding writeEncoding,
+            int maxReadPoolSize,
+            int maxWritePoolSize,
+            XmlDictionaryReaderQuotas quotas,
+            WebContentTypeMapper contentTypeMapper,
+            bool javascriptCallbackEnabled
+        )
         {
-            messageEncoder = new WebMessageEncoder(writeEncoding, maxReadPoolSize, maxWritePoolSize, quotas, contentTypeMapper, javascriptCallbackEnabled);
+            messageEncoder = new WebMessageEncoder(
+                writeEncoding,
+                maxReadPoolSize,
+                maxWritePoolSize,
+                quotas,
+                contentTypeMapper,
+                javascriptCallbackEnabled
+            );
         }
 
         public override MessageEncoder Encoder
@@ -37,7 +51,12 @@ namespace System.ServiceModel.Channels
             string charset = TextEncoderDefaults.EncodingToCharSet(encoding);
             if (!string.IsNullOrEmpty(charset))
             {
-                return string.Format(CultureInfo.InvariantCulture, "{0}; charset={1}", mediaType, charset);
+                return string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}; charset={1}",
+                    mediaType,
+                    charset
+                );
             }
             return mediaType;
         }
@@ -63,11 +82,20 @@ namespace System.ServiceModel.Channels
             Encoding writeEncoding;
             bool javascriptCallbackEnabled;
 
-            public WebMessageEncoder(Encoding writeEncoding, int maxReadPoolSize, int maxWritePoolSize, XmlDictionaryReaderQuotas quotas, WebContentTypeMapper contentTypeMapper, bool javascriptCallbackEnabled)
+            public WebMessageEncoder(
+                Encoding writeEncoding,
+                int maxReadPoolSize,
+                int maxWritePoolSize,
+                XmlDictionaryReaderQuotas quotas,
+                WebContentTypeMapper contentTypeMapper,
+                bool javascriptCallbackEnabled
+            )
             {
                 if (writeEncoding == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("writeEncoding");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "writeEncoding"
+                    );
                 }
 
                 this.thisLock = new object();
@@ -111,7 +139,13 @@ namespace System.ServiceModel.Channels
                         {
                             if (jsonMessageEncoder == null)
                             {
-                                jsonMessageEncoder = new JsonMessageEncoderFactory(writeEncoding, maxReadPoolSize, maxWritePoolSize, readerQuotas, javascriptCallbackEnabled).Encoder;
+                                jsonMessageEncoder = new JsonMessageEncoderFactory(
+                                    writeEncoding,
+                                    maxReadPoolSize,
+                                    maxWritePoolSize,
+                                    readerQuotas,
+                                    javascriptCallbackEnabled
+                                ).Encoder;
                             }
                         }
                     }
@@ -129,8 +163,14 @@ namespace System.ServiceModel.Channels
                         {
                             if (rawMessageEncoder == null)
                             {
-                                rawMessageEncoder = new ByteStreamMessageEncodingBindingElement(readerQuotas).CreateMessageEncoderFactory().Encoder;
-                                ((IWebMessageEncoderHelper)rawMessageEncoder).EnableBodyReaderMoveToContent(); // see the comments in IWebMessageEncoderHelper for why this is done
+                                rawMessageEncoder = new ByteStreamMessageEncodingBindingElement(
+                                    readerQuotas
+                                )
+                                    .CreateMessageEncoderFactory()
+                                    .Encoder;
+                                (
+                                    (IWebMessageEncoderHelper)rawMessageEncoder
+                                ).EnableBodyReaderMoveToContent(); // see the comments in IWebMessageEncoderHelper for why this is done
                             }
                         }
                     }
@@ -148,7 +188,13 @@ namespace System.ServiceModel.Channels
                         {
                             if (textMessageEncoder == null)
                             {
-                                textMessageEncoder = new TextMessageEncoderFactory(MessageVersion.None, writeEncoding, maxReadPoolSize, maxWritePoolSize, readerQuotas).Encoder;
+                                textMessageEncoder = new TextMessageEncoderFactory(
+                                    MessageVersion.None,
+                                    writeEncoding,
+                                    maxReadPoolSize,
+                                    maxWritePoolSize,
+                                    readerQuotas
+                                ).Encoder;
                             }
                         }
                     }
@@ -169,20 +215,30 @@ namespace System.ServiceModel.Channels
                 }
 
                 WebContentFormat messageFormat;
-                if (TryGetContentTypeMapping(contentType, out messageFormat) &&
-                    (messageFormat != WebContentFormat.Default))
+                if (
+                    TryGetContentTypeMapping(contentType, out messageFormat)
+                    && (messageFormat != WebContentFormat.Default)
+                )
                 {
                     return true;
                 }
 
-                return RawMessageEncoder.IsContentTypeSupported(contentType) || JsonMessageEncoder.IsContentTypeSupported(contentType) || TextMessageEncoder.IsContentTypeSupported(contentType);
+                return RawMessageEncoder.IsContentTypeSupported(contentType)
+                    || JsonMessageEncoder.IsContentTypeSupported(contentType)
+                    || TextMessageEncoder.IsContentTypeSupported(contentType);
             }
 
-            public override Message ReadMessage(ArraySegment<byte> buffer, BufferManager bufferManager, string contentType)
+            public override Message ReadMessage(
+                ArraySegment<byte> buffer,
+                BufferManager bufferManager,
+                string contentType
+            )
             {
                 if (bufferManager == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("bufferManager"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("bufferManager")
+                    );
                 }
 
                 WebContentFormat format = GetFormatForContentType(contentType);
@@ -191,28 +247,53 @@ namespace System.ServiceModel.Channels
                 switch (format)
                 {
                     case WebContentFormat.Json:
-                        message = JsonMessageEncoder.ReadMessage(buffer, bufferManager, contentType);
-                        message.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.JsonProperty);
+                        message = JsonMessageEncoder.ReadMessage(
+                            buffer,
+                            bufferManager,
+                            contentType
+                        );
+                        message.Properties.Add(
+                            WebBodyFormatMessageProperty.Name,
+                            WebBodyFormatMessageProperty.JsonProperty
+                        );
                         break;
                     case WebContentFormat.Xml:
-                        message = TextMessageEncoder.ReadMessage(buffer, bufferManager, contentType);
-                        message.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.XmlProperty);
+                        message = TextMessageEncoder.ReadMessage(
+                            buffer,
+                            bufferManager,
+                            contentType
+                        );
+                        message.Properties.Add(
+                            WebBodyFormatMessageProperty.Name,
+                            WebBodyFormatMessageProperty.XmlProperty
+                        );
                         break;
                     case WebContentFormat.Raw:
                         message = RawMessageEncoder.ReadMessage(buffer, bufferManager, contentType);
-                        message.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.RawProperty);
+                        message.Properties.Add(
+                            WebBodyFormatMessageProperty.Name,
+                            WebBodyFormatMessageProperty.RawProperty
+                        );
                         break;
                     default:
-                        throw Fx.AssertAndThrow("This should never get hit because GetFormatForContentType shouldn't return a WebContentFormat other than Json, Xml, and Raw");
+                        throw Fx.AssertAndThrow(
+                            "This should never get hit because GetFormatForContentType shouldn't return a WebContentFormat other than Json, Xml, and Raw"
+                        );
                 }
                 return message;
             }
 
-            public override Message ReadMessage(Stream stream, int maxSizeOfHeaders, string contentType)
+            public override Message ReadMessage(
+                Stream stream,
+                int maxSizeOfHeaders,
+                string contentType
+            )
             {
                 if (stream == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("stream"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("stream")
+                    );
                 }
 
                 WebContentFormat format = GetFormatForContentType(contentType);
@@ -220,42 +301,87 @@ namespace System.ServiceModel.Channels
                 switch (format)
                 {
                     case WebContentFormat.Json:
-                        message = JsonMessageEncoder.ReadMessage(stream, maxSizeOfHeaders, contentType);
-                        message.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.JsonProperty);
+                        message = JsonMessageEncoder.ReadMessage(
+                            stream,
+                            maxSizeOfHeaders,
+                            contentType
+                        );
+                        message.Properties.Add(
+                            WebBodyFormatMessageProperty.Name,
+                            WebBodyFormatMessageProperty.JsonProperty
+                        );
                         break;
                     case WebContentFormat.Xml:
-                        message = TextMessageEncoder.ReadMessage(stream, maxSizeOfHeaders, contentType);
-                        message.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.XmlProperty);
+                        message = TextMessageEncoder.ReadMessage(
+                            stream,
+                            maxSizeOfHeaders,
+                            contentType
+                        );
+                        message.Properties.Add(
+                            WebBodyFormatMessageProperty.Name,
+                            WebBodyFormatMessageProperty.XmlProperty
+                        );
                         break;
                     case WebContentFormat.Raw:
-                        message = RawMessageEncoder.ReadMessage(stream, maxSizeOfHeaders, contentType);
-                        message.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.RawProperty);
+                        message = RawMessageEncoder.ReadMessage(
+                            stream,
+                            maxSizeOfHeaders,
+                            contentType
+                        );
+                        message.Properties.Add(
+                            WebBodyFormatMessageProperty.Name,
+                            WebBodyFormatMessageProperty.RawProperty
+                        );
                         break;
                     default:
-                        throw Fx.AssertAndThrow("This should never get hit because GetFormatForContentType shouldn't return a WebContentFormat other than Json, Xml, and Raw");
+                        throw Fx.AssertAndThrow(
+                            "This should never get hit because GetFormatForContentType shouldn't return a WebContentFormat other than Json, Xml, and Raw"
+                        );
                 }
                 return message;
             }
 
-            public override ArraySegment<byte> WriteMessage(Message message, int maxMessageSize, BufferManager bufferManager, int messageOffset)
+            public override ArraySegment<byte> WriteMessage(
+                Message message,
+                int maxMessageSize,
+                BufferManager bufferManager,
+                int messageOffset
+            )
             {
                 if (message == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("message"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("message")
+                    );
                 }
                 if (bufferManager == null)
                 {
-                    throw TraceUtility.ThrowHelperError(new ArgumentNullException("bufferManager"), message);
+                    throw TraceUtility.ThrowHelperError(
+                        new ArgumentNullException("bufferManager"),
+                        message
+                    );
                 }
                 if (maxMessageSize < 0)
                 {
-                    throw TraceUtility.ThrowHelperError(new ArgumentOutOfRangeException("maxMessageSize", maxMessageSize,
-                        SR2.GetString(SR2.ValueMustBeNonNegative)), message);
+                    throw TraceUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "maxMessageSize",
+                            maxMessageSize,
+                            SR2.GetString(SR2.ValueMustBeNonNegative)
+                        ),
+                        message
+                    );
                 }
                 if (messageOffset < 0 || messageOffset > maxMessageSize)
                 {
-                    throw TraceUtility.ThrowHelperError(new ArgumentOutOfRangeException("messageOffset", messageOffset,
-                        SR2.GetString(SR2.JsonValueMustBeInRange, 0, maxMessageSize)), message);
+                    throw TraceUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "messageOffset",
+                            messageOffset,
+                            SR2.GetString(SR2.JsonValueMustBeInRange, 0, maxMessageSize)
+                        ),
+                        message
+                    );
                 }
                 ThrowIfMismatchedMessageVersion(message);
 
@@ -264,25 +390,62 @@ namespace System.ServiceModel.Channels
                 switch (messageFormat)
                 {
                     case WebContentFormat.Json:
-                        return JsonMessageEncoder.WriteMessage(message, maxMessageSize, bufferManager, messageOffset);
+                        return JsonMessageEncoder.WriteMessage(
+                            message,
+                            maxMessageSize,
+                            bufferManager,
+                            messageOffset
+                        );
                     case WebContentFormat.Xml:
-                        if (message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(JavascriptCallbackResponseMessageProperty.Name, out javascriptResponseMessageProperty) &&
-                            javascriptResponseMessageProperty != null &&
-                            !String.IsNullOrEmpty(javascriptResponseMessageProperty.CallbackFunctionName))
+                        if (
+                            message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(
+                                JavascriptCallbackResponseMessageProperty.Name,
+                                out javascriptResponseMessageProperty
+                            )
+                            && javascriptResponseMessageProperty != null
+                            && !String.IsNullOrEmpty(
+                                javascriptResponseMessageProperty.CallbackFunctionName
+                            )
+                        )
                         {
-                            throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR2.JavascriptCallbackNotsupported), message);
+                            throw TraceUtility.ThrowHelperError(
+                                new InvalidOperationException(SR2.JavascriptCallbackNotsupported),
+                                message
+                            );
                         }
-                        return TextMessageEncoder.WriteMessage(message, maxMessageSize, bufferManager, messageOffset);
+                        return TextMessageEncoder.WriteMessage(
+                            message,
+                            maxMessageSize,
+                            bufferManager,
+                            messageOffset
+                        );
                     case WebContentFormat.Raw:
-                        if (message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(JavascriptCallbackResponseMessageProperty.Name, out javascriptResponseMessageProperty) &&
-                            javascriptResponseMessageProperty != null &&
-                            !String.IsNullOrEmpty(javascriptResponseMessageProperty.CallbackFunctionName))
+                        if (
+                            message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(
+                                JavascriptCallbackResponseMessageProperty.Name,
+                                out javascriptResponseMessageProperty
+                            )
+                            && javascriptResponseMessageProperty != null
+                            && !String.IsNullOrEmpty(
+                                javascriptResponseMessageProperty.CallbackFunctionName
+                            )
+                        )
                         {
-                            throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR2.JavascriptCallbackNotsupported), message);
+                            throw TraceUtility.ThrowHelperError(
+                                new InvalidOperationException(SR2.JavascriptCallbackNotsupported),
+                                message
+                            );
                         }
-                        return RawMessageEncoder.WriteMessage(message, maxMessageSize, bufferManager, messageOffset);
+                        return RawMessageEncoder.WriteMessage(
+                            message,
+                            maxMessageSize,
+                            bufferManager,
+                            messageOffset
+                        );
                     default:
-                        throw Fx.AssertAndThrow("This should never get hit because GetFormatForContentType shouldn't return a WebContentFormat other than Json, Xml, and Raw");
+                        throw Fx.AssertAndThrow(
+                            "This should never get hit because GetFormatForContentType shouldn't return a WebContentFormat other than Json, Xml, and Raw"
+                        );
                 }
             }
 
@@ -290,11 +453,16 @@ namespace System.ServiceModel.Channels
             {
                 if (message == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("message"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("message")
+                    );
                 }
                 if (stream == null)
                 {
-                    throw TraceUtility.ThrowHelperError(new ArgumentNullException("stream"), message);
+                    throw TraceUtility.ThrowHelperError(
+                        new ArgumentNullException("stream"),
+                        message
+                    );
                 }
                 ThrowIfMismatchedMessageVersion(message);
 
@@ -306,37 +474,69 @@ namespace System.ServiceModel.Channels
                         JsonMessageEncoder.WriteMessage(message, stream);
                         break;
                     case WebContentFormat.Xml:
-                        if (message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(JavascriptCallbackResponseMessageProperty.Name, out javascriptResponseMessageProperty) &&
-                            javascriptResponseMessageProperty != null &&
-                            !String.IsNullOrEmpty(javascriptResponseMessageProperty.CallbackFunctionName))
+                        if (
+                            message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(
+                                JavascriptCallbackResponseMessageProperty.Name,
+                                out javascriptResponseMessageProperty
+                            )
+                            && javascriptResponseMessageProperty != null
+                            && !String.IsNullOrEmpty(
+                                javascriptResponseMessageProperty.CallbackFunctionName
+                            )
+                        )
                         {
-                            throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR2.JavascriptCallbackNotsupported), message);
+                            throw TraceUtility.ThrowHelperError(
+                                new InvalidOperationException(SR2.JavascriptCallbackNotsupported),
+                                message
+                            );
                         }
                         TextMessageEncoder.WriteMessage(message, stream);
                         break;
                     case WebContentFormat.Raw:
-                        if (message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(JavascriptCallbackResponseMessageProperty.Name, out javascriptResponseMessageProperty) &&
-                            javascriptResponseMessageProperty != null &&
-                            !String.IsNullOrEmpty(javascriptResponseMessageProperty.CallbackFunctionName))
+                        if (
+                            message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(
+                                JavascriptCallbackResponseMessageProperty.Name,
+                                out javascriptResponseMessageProperty
+                            )
+                            && javascriptResponseMessageProperty != null
+                            && !String.IsNullOrEmpty(
+                                javascriptResponseMessageProperty.CallbackFunctionName
+                            )
+                        )
                         {
-                            throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR2.JavascriptCallbackNotsupported), message);
+                            throw TraceUtility.ThrowHelperError(
+                                new InvalidOperationException(SR2.JavascriptCallbackNotsupported),
+                                message
+                            );
                         }
                         RawMessageEncoder.WriteMessage(message, stream);
                         break;
                     default:
-                        throw Fx.AssertAndThrow("This should never get hit because GetFormatForContentType shouldn't return a WebContentFormat other than Json, Xml, and Raw");
+                        throw Fx.AssertAndThrow(
+                            "This should never get hit because GetFormatForContentType shouldn't return a WebContentFormat other than Json, Xml, and Raw"
+                        );
                 }
             }
 
-            public override IAsyncResult BeginWriteMessage(Message message, Stream stream, AsyncCallback callback, object state)
+            public override IAsyncResult BeginWriteMessage(
+                Message message,
+                Stream stream,
+                AsyncCallback callback,
+                object state
+            )
             {
                 if (message == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("message"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("message")
+                    );
                 }
                 if (stream == null)
                 {
-                    throw TraceUtility.ThrowHelperError(new ArgumentNullException("stream"), message);
+                    throw TraceUtility.ThrowHelperError(
+                        new ArgumentNullException("stream"),
+                        message
+                    );
                 }
 
                 ThrowIfMismatchedMessageVersion(message);
@@ -358,15 +558,21 @@ namespace System.ServiceModel.Channels
             WebContentFormat ExtractFormatFromMessage(Message message)
             {
                 object messageFormatProperty;
-                message.Properties.TryGetValue(WebBodyFormatMessageProperty.Name, out messageFormatProperty);
+                message.Properties.TryGetValue(
+                    WebBodyFormatMessageProperty.Name,
+                    out messageFormatProperty
+                );
                 if (messageFormatProperty == null)
                 {
                     return WebContentFormat.Xml;
                 }
 
-                WebBodyFormatMessageProperty typedMessageFormatProperty = messageFormatProperty as WebBodyFormatMessageProperty;
-                if ((typedMessageFormatProperty == null) ||
-                    (typedMessageFormatProperty.Format == WebContentFormat.Default))
+                WebBodyFormatMessageProperty typedMessageFormatProperty =
+                    messageFormatProperty as WebBodyFormatMessageProperty;
+                if (
+                    (typedMessageFormatProperty == null)
+                    || (typedMessageFormatProperty.Format == WebContentFormat.Default)
+                )
                 {
                     return WebContentFormat.Xml;
                 }
@@ -378,8 +584,10 @@ namespace System.ServiceModel.Channels
             {
                 WebContentFormat messageFormat;
 
-                if (TryGetContentTypeMapping(contentType, out messageFormat) &&
-                    (messageFormat != WebContentFormat.Default))
+                if (
+                    TryGetContentTypeMapping(contentType, out messageFormat)
+                    && (messageFormat != WebContentFormat.Default)
+                )
                 {
                     if (DiagnosticUtility.ShouldTraceInformation)
                     {
@@ -387,9 +595,15 @@ namespace System.ServiceModel.Channels
                         {
                             contentType = "<null>";
                         }
-                        TraceUtility.TraceEvent(TraceEventType.Information,
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Information,
                             TraceCode.RequestFormatSelectedFromContentTypeMapper,
-                            SR2.GetString(SR2.TraceCodeRequestFormatSelectedFromContentTypeMapper, messageFormat.ToString(), contentType));
+                            SR2.GetString(
+                                SR2.TraceCodeRequestFormatSelectedFromContentTypeMapper,
+                                messageFormat.ToString(),
+                                contentType
+                            )
+                        );
                     }
                     return messageFormat;
                 }
@@ -416,9 +630,15 @@ namespace System.ServiceModel.Channels
 
                 if (DiagnosticUtility.ShouldTraceInformation)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Information,
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Information,
                         TraceCode.RequestFormatSelectedByEncoderDefaults,
-                        SR2.GetString(SR2.TraceCodeRequestFormatSelectedByEncoderDefaults, messageFormat.ToString(), contentType));
+                        SR2.GetString(
+                            SR2.TraceCodeRequestFormatSelectedByEncoderDefaults,
+                            messageFormat.ToString(),
+                            contentType
+                        )
+                    );
                 }
 
                 return messageFormat;
@@ -437,7 +657,11 @@ namespace System.ServiceModel.Channels
                     format = contentTypeMapper.GetMessageFormatForContentType(contentType);
                     if (!WebContentFormatHelper.IsDefined(format))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR2.GetString(SR2.UnknownWebEncodingFormat, contentType, format)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentException(
+                                SR2.GetString(SR2.UnknownWebEncodingFormat, contentType, format)
+                            )
+                        );
                     }
                     return true;
                 }
@@ -448,8 +672,12 @@ namespace System.ServiceModel.Channels
                         throw;
                     }
 
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(
-                        SR2.GetString(SR2.ErrorEncounteredInContentTypeMapper), e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CommunicationException(
+                            SR2.GetString(SR2.ErrorEncounteredInContentTypeMapper),
+                            e
+                        )
+                    );
                 }
             }
 
@@ -461,14 +689,22 @@ namespace System.ServiceModel.Channels
                 WebMessageEncoder webMessageEncoder;
                 static AsyncCompletion handleEndWriteMessage;
 
-                public WriteMessageAsyncResult(Message message, Stream stream, WebMessageEncoder webMessageEncoder, AsyncCallback callback, object state)
+                public WriteMessageAsyncResult(
+                    Message message,
+                    Stream stream,
+                    WebMessageEncoder webMessageEncoder,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.message = message;
                     this.stream = stream;
                     this.webMessageEncoder = webMessageEncoder;
 
-                    WebContentFormat messageFormat = webMessageEncoder.ExtractFormatFromMessage(message);
+                    WebContentFormat messageFormat = webMessageEncoder.ExtractFormatFromMessage(
+                        message
+                    );
                     JavascriptCallbackResponseMessageProperty javascriptResponseMessageProperty;
 
                     switch (messageFormat)
@@ -479,26 +715,56 @@ namespace System.ServiceModel.Channels
                             break;
 
                         case WebContentFormat.Xml:
-                            if (message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(JavascriptCallbackResponseMessageProperty.Name, out javascriptResponseMessageProperty) &&
-                                javascriptResponseMessageProperty != null &&
-                                !String.IsNullOrEmpty(javascriptResponseMessageProperty.CallbackFunctionName))
+                            if (
+                                message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(
+                                    JavascriptCallbackResponseMessageProperty.Name,
+                                    out javascriptResponseMessageProperty
+                                )
+                                && javascriptResponseMessageProperty != null
+                                && !String.IsNullOrEmpty(
+                                    javascriptResponseMessageProperty.CallbackFunctionName
+                                )
+                            )
                             {
-                                throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR2.JavascriptCallbackNotsupported), message);
+                                throw TraceUtility.ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR2.JavascriptCallbackNotsupported
+                                    ),
+                                    message
+                                );
                             }
                             this.encoder = webMessageEncoder.TextMessageEncoder;
                             this.Schedule();
                             break;
 
                         case WebContentFormat.Raw:
-                            if (message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(JavascriptCallbackResponseMessageProperty.Name, out javascriptResponseMessageProperty) &&
-                                javascriptResponseMessageProperty != null &&
-                                !String.IsNullOrEmpty(javascriptResponseMessageProperty.CallbackFunctionName))
+                            if (
+                                message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(
+                                    JavascriptCallbackResponseMessageProperty.Name,
+                                    out javascriptResponseMessageProperty
+                                )
+                                && javascriptResponseMessageProperty != null
+                                && !String.IsNullOrEmpty(
+                                    javascriptResponseMessageProperty.CallbackFunctionName
+                                )
+                            )
                             {
-                                throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR2.JavascriptCallbackNotsupported), message);
+                                throw TraceUtility.ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR2.JavascriptCallbackNotsupported
+                                    ),
+                                    message
+                                );
                             }
 
                             handleEndWriteMessage = new AsyncCompletion(HandleEndWriteMessage);
-                            IAsyncResult result = webMessageEncoder.RawMessageEncoder.BeginWriteMessage(message, stream, PrepareAsyncCompletion(HandleEndWriteMessage), this);
+                            IAsyncResult result =
+                                webMessageEncoder.RawMessageEncoder.BeginWriteMessage(
+                                    message,
+                                    stream,
+                                    PrepareAsyncCompletion(HandleEndWriteMessage),
+                                    this
+                                );
                             if (SyncContinue(result))
                             {
                                 this.Complete(true);
@@ -506,10 +772,11 @@ namespace System.ServiceModel.Channels
                             break;
 
                         default:
-                            throw Fx.AssertAndThrow("This should never get hit because GetFormatForContentType shouldn't return a WebContentFormat other than Json, Xml, and Raw");
+                            throw Fx.AssertAndThrow(
+                                "This should never get hit because GetFormatForContentType shouldn't return a WebContentFormat other than Json, Xml, and Raw"
+                            );
                     }
                 }
-
 
                 protected override void OnDoWork()
                 {

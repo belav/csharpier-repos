@@ -48,12 +48,13 @@ namespace System.Linq.Expressions.Compiler
     internal sealed class SpilledExpressionBlock : BlockN
     {
         internal SpilledExpressionBlock(IReadOnlyList<Expression> expressions)
-            : base(expressions)
-        {
-        }
+            : base(expressions) { }
 
         [ExcludeFromCodeCoverage(Justification = "Unreachable")]
-        internal override BlockExpression Rewrite(ReadOnlyCollection<ParameterExpression>? variables, Expression[] args)
+        internal override BlockExpression Rewrite(
+            ReadOnlyCollection<ParameterExpression>? variables,
+            Expression[] args
+        )
         {
             throw ContractUtils.Unreachable;
         }

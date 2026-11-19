@@ -122,9 +122,8 @@ public class ActionSelectionTableTest
         var matches = table.Select(values);
 
         // Assert
-        Assert.Collection(
-            matches,
-            (e) => Assert.Same(actions[0], e.Metadata.GetMetadata<ActionDescriptor>())
+        Assert.Collection(matches, (e) =>
+            Assert.Same(actions[0], e.Metadata.GetMetadata<ActionDescriptor>())
         );
     }
 

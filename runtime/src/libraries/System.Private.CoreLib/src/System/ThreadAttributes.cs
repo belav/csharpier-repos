@@ -9,9 +9,7 @@ namespace System
     [AttributeUsage(AttributeTargets.Method)]
     public sealed class STAThreadAttribute : Attribute
     {
-        public STAThreadAttribute()
-        {
-        }
+        public STAThreadAttribute() { }
     }
 
     /// <summary>
@@ -20,8 +18,6 @@ namespace System
     [AttributeUsage(AttributeTargets.Method)]
     public sealed class MTAThreadAttribute : Attribute
     {
-        public MTAThreadAttribute()
-        {
-        }
+        public MTAThreadAttribute() { }
     }
 }

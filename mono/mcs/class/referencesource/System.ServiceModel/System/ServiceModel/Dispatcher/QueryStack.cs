@@ -18,7 +18,7 @@ namespace System.ServiceModel.Dispatcher
             this.basePtr = basePtr;
             this.endPtr = this.basePtr - 1;
         }
-        
+
         internal StackFrame(int basePtr, int count)
         {
             Fx.Assert(basePtr >= 0, "");
@@ -26,21 +26,16 @@ namespace System.ServiceModel.Dispatcher
             this.endPtr = basePtr + count - 1;
         }
 #endif
+
         internal int Count
         {
-            get
-            {
-                return this.endPtr - this.basePtr + 1;
-            }
+            get { return this.endPtr - this.basePtr + 1; }
         }
 
         internal int EndPtr
         {
 #if NO
-            get
-            {
-                return this.endPtr;
-            }
+            get { return this.endPtr; }
 #endif
             set
             {
@@ -48,12 +43,14 @@ namespace System.ServiceModel.Dispatcher
                 this.endPtr = value;
             }
         }
-#if NO 
+
+#if NO
         internal void Clear()
         {
             this.endPtr = this.basePtr - 1;
         }
 #endif
+
         internal int this[int offset]
         {
             get
@@ -62,6 +59,7 @@ namespace System.ServiceModel.Dispatcher
                 return this.basePtr + offset;
             }
         }
+
 #if NO
         internal void Set(int basePtr)
         {
@@ -70,6 +68,7 @@ namespace System.ServiceModel.Dispatcher
             this.endPtr = this.basePtr - 1;
         }
 #endif
+
         internal bool IsValidPtr(int ptr)
         {
             return (ptr >= this.basePtr && ptr <= this.endPtr);
@@ -86,6 +85,7 @@ namespace System.ServiceModel.Dispatcher
             this.bounds = bounds;
             this.stackPtr = bounds.start - 1;
         }
+
 #if NO
         internal StackRegion(QueryRange bounds, int stackPtr)
         {
@@ -94,28 +94,20 @@ namespace System.ServiceModel.Dispatcher
             this.stackPtr = stackPtr;
         }
 #endif
+
         internal int Count
         {
-            get
-            {
-                return this.stackPtr - this.bounds.start + 1;
-            }
+            get { return this.stackPtr - this.bounds.start + 1; }
         }
 #if NO
         internal bool IsReady
         {
-            get
-            {
-                return this.bounds.IsNotEmpty;
-            }
+            get { return this.bounds.IsNotEmpty; }
         }
 #endif
         internal bool NeedsGrowth
         {
-            get
-            {
-                return (this.stackPtr > this.bounds.end);
-            }
+            get { return (this.stackPtr > this.bounds.end); }
         }
 
         internal void Clear()
@@ -137,6 +129,7 @@ namespace System.ServiceModel.Dispatcher
         {
             return this.bounds.IsInRange(stackPtr);
         }
+
 #if NO
         internal void Set(int start, int end)
         {
@@ -144,6 +137,7 @@ namespace System.ServiceModel.Dispatcher
             this.stackPtr += start;
         }
 #endif
+
         internal void Shift(int shiftBy)
         {
             this.bounds.Shift(shiftBy);
@@ -169,11 +163,14 @@ namespace System.ServiceModel.Dispatcher
             this.buffer = new QueryBuffer<Value>(frameCapacity + stackCapacity);
             this.stack = new StackRegion(new QueryRange(0, stackCapacity - 1));
             this.buffer.Reserve(stackCapacity);
-            this.frames = new StackRegion(new QueryRange(stackCapacity, stackCapacity + frameCapacity - 1));
+            this.frames = new StackRegion(
+                new QueryRange(stackCapacity, stackCapacity + frameCapacity - 1)
+            );
             this.buffer.Reserve(frameCapacity);
             this.contextOnTopOfStack = false;
         }
-#if NO 
+
+#if NO
         internal EvalStack(ref EvalStack stack)
         {
             this.buffer = new QueryBuffer<Value>(stack.buffer);
@@ -183,68 +180,45 @@ namespace System.ServiceModel.Dispatcher
             this.frames = stack.frames;
         }
 #endif
+
         internal Value[] Buffer
         {
-            get
-            {
-                return this.buffer.buffer;
-            }
+            get { return this.buffer.buffer; }
         }
-#if NO        
+#if NO
         internal int FrameCount
         {
-            get
-            {
-                return this.frames.Count;
-            }
+            get { return this.frames.Count; }
         }
 
         internal int FramePtr
         {
-            get
-            {
-                return this.frames.stackPtr;
-            }
+            get { return this.frames.stackPtr; }
         }
 #endif
         internal StackFrame this[int frameIndex]
         {
-            get
-            {
-                return this.buffer.buffer[this.frames.stackPtr - frameIndex].Frame;
-            }
+            get { return this.buffer.buffer[this.frames.stackPtr - frameIndex].Frame; }
         }
-#if NO        
+#if NO
         internal bool IsReady
         {
-            get
-            {
-                return (this.buffer.count > 0);
-            }
+            get { return (this.buffer.count > 0); }
         }
 #endif
         internal StackFrame SecondArg
         {
-            get
-            {
-                return this[1];
-            }
+            get { return this[1]; }
         }
-#if NO        
+#if NO
         internal int StackPtr
         {
-            get
-            {
-                return this.stack.stackPtr;
-            }
+            get { return this.stack.stackPtr; }
         }
 #endif
         internal StackFrame TopArg
         {
-            get
-            {
-                return this[0];
-            }
+            get { return this[0]; }
         }
 
         internal void Clear()
@@ -280,12 +254,14 @@ namespace System.ServiceModel.Dispatcher
 
             return count;
         }
-#if NO        
+
+#if NO
         internal void Erase()
         {
             this.buffer.Erase();
         }
 #endif
+
         void GrowFrames()
         {
             int growBy = this.frames.Count;
@@ -305,7 +281,8 @@ namespace System.ServiceModel.Dispatcher
             this.stack.Grow(growBy);
             this.frames.Shift(growBy);
         }
-#if NO        
+
+#if NO
         internal void Init()
         {
             this.buffer.Reserve(this.stackCapacity);
@@ -313,20 +290,23 @@ namespace System.ServiceModel.Dispatcher
             this.buffer.Reserve(this.frameCapacity);
             this.frames.Set(stackCapacity, stackCapacity + frameCapacity - 1);
         }
-                
+
         internal void Init(Value[] buffer, int stackCapacity, int frameCapacity)
         {
             Fx.Assert(null != buffer, "");
             this.stackCapacity = stackCapacity;
             this.frameCapacity = frameCapacity;
-            
+
             this.buffer = new QueryBuffer<Value>(buffer);
             this.stack = new StackRegion(new QueryRange(0, stackCapacity - 1));
             this.buffer.Reserve(stackCapacity);
-            this.frames = new StackRegion(new QueryRange(stackCapacity, stackCapacity + frameCapacity - 1));
+            this.frames = new StackRegion(
+                new QueryRange(stackCapacity, stackCapacity + frameCapacity - 1)
+            );
             this.buffer.Reserve(frameCapacity);
         }
 #endif
+
         internal bool InUse
         {
             get
@@ -349,6 +329,7 @@ namespace System.ServiceModel.Dispatcher
             Fx.Assert(this.stack.IsValidStackPtr(index), "");
             return this.buffer.buffer[index].GetDouble();
         }
+
 #if NO
         internal int PeekInteger(int index)
         {
@@ -356,6 +337,7 @@ namespace System.ServiceModel.Dispatcher
             return (int)this.buffer.buffer[index].GetDouble();
         }
 #endif
+
         internal NodeSequence PeekSequence(int index)
         {
             Fx.Assert(this.stack.IsValidStackPtr(index), "");
@@ -367,6 +349,7 @@ namespace System.ServiceModel.Dispatcher
             Fx.Assert(this.stack.IsValidStackPtr(index), "");
             return this.buffer.buffer[index].GetString();
         }
+
 #if NO
         internal void Pop()
         {
@@ -382,6 +365,7 @@ namespace System.ServiceModel.Dispatcher
             this.frames.stackPtr--;
         }
 #endif
+
         internal void PopFrame(ProcessingContext context)
         {
             Fx.Assert(this.frames.IsValidStackPtr(), "");
@@ -431,10 +415,11 @@ namespace System.ServiceModel.Dispatcher
                     break;
             }
 
-            // Pop original fame 
+            // Pop original fame
             this.stack.stackPtr = topFrame.basePtr - 1;
             this.frames.stackPtr--;
         }
+
 #if NO
         internal void Push()
         {
@@ -608,15 +593,25 @@ namespace System.ServiceModel.Dispatcher
                 this.buffer.buffer[this.frames.stackPtr].FrameEndPtr = this.stack.stackPtr;
             }
         }
+
 #if NO
         internal void Push(ref EvalStack source)
         {
-            this.Push(source.buffer.buffer, source.stack.bounds.start, source.frames.bounds.end + 1);
+            this.Push(
+                source.buffer.buffer,
+                source.stack.bounds.start,
+                source.frames.bounds.end + 1
+            );
         }
 #endif
+
         internal void ReplaceAt(int index, NodeSequence seq)
         {
-            Fx.Assert(this.stack.IsValidStackPtr(index) && this.buffer.buffer[index].IsType(ValueDataType.Sequence), "");
+            Fx.Assert(
+                this.stack.IsValidStackPtr(index)
+                    && this.buffer.buffer[index].IsType(ValueDataType.Sequence),
+                ""
+            );
             this.buffer.buffer[index].Sequence = seq;
         }
 
@@ -687,47 +682,40 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
         }
-#if NO        
+
+#if NO
         internal void Trim()
         {
             this.buffer.TrimToCount();
         }
 #endif
     }
-#if NO 
+
+#if NO
     internal struct BoundedStack<T>
     {
         QueryBuffer<T> buffer;
         int maxSize;
-        
+
         internal BoundedStack(int capacity)
         {
             this.buffer = new QueryBuffer<T>(0);
             this.maxSize = capacity;
         }
-        
+
         internal bool HasItems
         {
-            get
-            {
-                return (this.buffer.count > 0);
-            }
+            get { return (this.buffer.count > 0); }
         }
-        
+
         internal bool HasSpace
         {
-            get
-            {
-                return (this.buffer.count < this.maxSize);
-            }
+            get { return (this.buffer.count < this.maxSize); }
         }
-        
+
         internal int MaxSize
         {
-            get
-            {
-                return this.maxSize;
-            }
+            get { return this.maxSize; }
             set
             {
                 Fx.Assert(value >= 0, "");
@@ -739,22 +727,22 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
         }
-                
+
         internal T Pop()
         {
             return this.buffer.Pop();
         }
-        
+
         internal void Push(T t)
         {
             if (this.buffer.count == this.maxSize)
             {
                 return;
             }
-            
+
             this.buffer.Push(t);
         }
-        
+
         internal void Trim()
         {
             this.buffer.TrimToCount();

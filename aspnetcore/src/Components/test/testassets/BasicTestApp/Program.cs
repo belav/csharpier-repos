@@ -45,10 +45,8 @@ public class Program
         >();
         builder.Services.AddAuthorizationCore(options =>
         {
-            options.AddPolicy(
-                "NameMustStartWithB",
-                policy =>
-                    policy.RequireAssertion(ctx => ctx.User.Identity.Name?.StartsWith('B') ?? false)
+            options.AddPolicy("NameMustStartWithB", policy =>
+                policy.RequireAssertion(ctx => ctx.User.Identity.Name?.StartsWith('B') ?? false)
             );
         });
 

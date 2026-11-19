@@ -10,6 +10,11 @@ internal static partial class Interop
     {
         [LibraryImport(Libraries.Advapi32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CryptGenKey(SafeProvHandle hProv, int Algid, int dwFlags, out SafeCapiKeyHandle phKey);
+        internal static partial bool CryptGenKey(
+            SafeProvHandle hProv,
+            int Algid,
+            int dwFlags,
+            out SafeCapiKeyHandle phKey
+        );
     }
 }

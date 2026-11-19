@@ -2,24 +2,22 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.DirectoryServices;
+using System.Text;
 
 #endregion
 
 namespace System.Workflow.Activities
 {
     [Serializable]
-    sealed internal class DirectoryRedirect : IDirectoryOperation
+    internal sealed class DirectoryRedirect : IDirectoryOperation
     {
         private String m_getPropertyName;
         private String m_searchPropertyName;
         private bool m_recursive;
 
         public DirectoryRedirect(String getPropertyName, String searchPropertyName)
-            : this(getPropertyName, searchPropertyName, false)
-        {
-        }
+            : this(getPropertyName, searchPropertyName, false) { }
 
         public DirectoryRedirect(String getPropertyName, String searchPropertyName, bool recursive)
         {
@@ -33,7 +31,11 @@ namespace System.Workflow.Activities
             this.m_recursive = recursive;
         }
 
-        public void GetResult(DirectoryEntry rootEntry, DirectoryEntry currentEntry, List<DirectoryEntry> response)
+        public void GetResult(
+            DirectoryEntry rootEntry,
+            DirectoryEntry currentEntry,
+            List<DirectoryEntry> response
+        )
         {
             if (rootEntry == null)
                 throw new ArgumentNullException("rootEntry");
@@ -77,7 +79,10 @@ namespace System.Workflow.Activities
             }
         }
 
-        private DirectorySearcher CreateSearcher(DirectoryEntry rootEntry, DirectoryEntry currentEntry)
+        private DirectorySearcher CreateSearcher(
+            DirectoryEntry rootEntry,
+            DirectoryEntry currentEntry
+        )
         {
             DirectorySearcher searcher = new DirectorySearcher(rootEntry);
 

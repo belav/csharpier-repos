@@ -9,13 +9,20 @@ namespace System.CodeDom
 
         public CodeRemoveEventStatement() { }
 
-        public CodeRemoveEventStatement(CodeEventReferenceExpression eventRef, CodeExpression listener)
+        public CodeRemoveEventStatement(
+            CodeEventReferenceExpression eventRef,
+            CodeExpression listener
+        )
         {
             _eventRef = eventRef;
             Listener = listener;
         }
 
-        public CodeRemoveEventStatement(CodeExpression targetObject, string eventName, CodeExpression listener)
+        public CodeRemoveEventStatement(
+            CodeExpression targetObject,
+            string eventName,
+            CodeExpression listener
+        )
         {
             _eventRef = new CodeEventReferenceExpression(targetObject, eventName);
             Listener = listener;

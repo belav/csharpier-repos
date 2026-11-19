@@ -20,7 +20,10 @@ namespace System.Web.Http
 
         private readonly string _virtualPathRoot;
         private readonly List<IHttpRoute> _collection = new List<IHttpRoute>();
-        private readonly IDictionary<string, IHttpRoute> _dictionary = new Dictionary<string, IHttpRoute>(StringComparer.OrdinalIgnoreCase);
+        private readonly IDictionary<string, IHttpRoute> _dictionary = new Dictionary<
+            string,
+            IHttpRoute
+        >(StringComparer.OrdinalIgnoreCase);
         private bool _disposed;
 
         /// <summary>
@@ -28,11 +31,13 @@ namespace System.Web.Http
         /// value of "/".
         /// </summary>
         public HttpRouteCollection()
-            : this("/")
-        {
-        }
+            : this("/") { }
 
-        [SuppressMessage("Microsoft.Usage", "CA2234:PassSystemUriObjectsInsteadOfStrings", Justification = "Relative URIs are not URIs")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2234:PassSystemUriObjectsInsteadOfStrings",
+            Justification = "Relative URIs are not URIs"
+        )]
         public HttpRouteCollection(string virtualPathRoot)
         {
             if (virtualPathRoot == null)
@@ -90,7 +95,11 @@ namespace System.Web.Http
             return null;
         }
 
-        public virtual IHttpVirtualPathData GetVirtualPath(HttpRequestMessage request, string name, IDictionary<string, object> values)
+        public virtual IHttpVirtualPathData GetVirtualPath(
+            HttpRequestMessage request,
+            string name,
+            IDictionary<string, object> values
+        )
         {
             if (request == null)
             {
@@ -122,7 +131,10 @@ namespace System.Web.Http
 
             // Note: The virtual path root here always ends with a "/" and the
             // virtual path never starts with a "/" (that's how routes work).
-            return new HttpVirtualPathData(virtualPath.Route, virtualPathRoot + virtualPath.VirtualPath);
+            return new HttpVirtualPathData(
+                virtualPath.Route,
+                virtualPathRoot + virtualPath.VirtualPath
+            );
         }
 
         // Returns the virtual path root on the request context if present
@@ -141,15 +153,32 @@ namespace System.Web.Http
         {
             IDictionary<string, object> dataTokens = new Dictionary<string, object>();
 
-            return CreateRoute(routeTemplate, new HttpRouteValueDictionary(defaults), new HttpRouteValueDictionary(constraints), dataTokens, handler: null);
+            return CreateRoute(
+                routeTemplate,
+                new HttpRouteValueDictionary(defaults),
+                new HttpRouteValueDictionary(constraints),
+                dataTokens,
+                handler: null
+            );
         }
 
-        public IHttpRoute CreateRoute(string routeTemplate, IDictionary<string, object> defaults, IDictionary<string, object> constraints, IDictionary<string, object> dataTokens)
+        public IHttpRoute CreateRoute(
+            string routeTemplate,
+            IDictionary<string, object> defaults,
+            IDictionary<string, object> constraints,
+            IDictionary<string, object> dataTokens
+        )
         {
             return CreateRoute(routeTemplate, defaults, constraints, dataTokens, handler: null);
         }
 
-        public virtual IHttpRoute CreateRoute(string routeTemplate, IDictionary<string, object> defaults, IDictionary<string, object> constraints, IDictionary<string, object> dataTokens, HttpMessageHandler handler)
+        public virtual IHttpRoute CreateRoute(
+            string routeTemplate,
+            IDictionary<string, object> defaults,
+            IDictionary<string, object> constraints,
+            IDictionary<string, object> dataTokens,
+            HttpMessageHandler handler
+        )
         {
             HttpRouteValueDictionary routeDefaults = new HttpRouteValueDictionary(defaults);
             HttpRouteValueDictionary routeConstraints = new HttpRouteValueDictionary(constraints);
@@ -160,7 +189,13 @@ namespace System.Web.Http
                 ValidateConstraint(routeTemplate, constraint.Key, constraint.Value);
             }
 
-            return new HttpRoute(routeTemplate, routeDefaults, routeConstraints, routeDataTokens, handler);
+            return new HttpRoute(
+                routeTemplate,
+                routeDefaults,
+                routeConstraints,
+                routeDataTokens,
+                handler
+            );
         }
 
         /// <summary>
@@ -174,7 +209,11 @@ namespace System.Web.Http
         /// Implement this method when deriving from <see cref="HttpRouteCollection"/> to allow contraints of
         /// types other than <see cref="string"/> and <see cref="IHttpRouteConstraint"/>.
         /// </remarks>
-        protected virtual void ValidateConstraint(string routeTemplate, string name, object constraint)
+        protected virtual void ValidateConstraint(
+            string routeTemplate,
+            string name,
+            object constraint
+        )
         {
             if (name == null)
             {
@@ -191,7 +230,10 @@ namespace System.Web.Http
 
         void ICollection<IHttpRoute>.Add(IHttpRoute route)
         {
-            throw Error.NotSupported(SRResources.Route_AddRemoveWithNoKeyNotSupported, typeof(HttpRouteCollection).Name);
+            throw Error.NotSupported(
+                SRResources.Route_AddRemoveWithNoKeyNotSupported,
+                typeof(HttpRouteCollection).Name
+            );
         }
 
         public virtual void Add(string name, IHttpRoute route)
@@ -268,7 +310,10 @@ namespace System.Web.Http
 
         bool ICollection<IHttpRoute>.Remove(IHttpRoute route)
         {
-            throw Error.NotSupported(SRResources.Route_AddRemoveWithNoKeyNotSupported, typeof(HttpRouteCollection).Name);
+            throw Error.NotSupported(
+                SRResources.Route_AddRemoveWithNoKeyNotSupported,
+                typeof(HttpRouteCollection).Name
+            );
         }
 
         public virtual bool Remove(string name)

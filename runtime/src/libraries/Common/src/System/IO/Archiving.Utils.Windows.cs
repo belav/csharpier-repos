@@ -9,15 +9,24 @@ namespace System.IO
     internal static partial class ArchivingUtils
     {
         private static readonly SearchValues<char> s_illegalChars = SearchValues.Create(
-            "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u0009\u000A\u000B\u000C\u000D\u000E\u000F" +
-            "\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001A\u001B\u001C\u001D\u001E\u001F" +
-            "\"*:<>?|");
+            "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u0009\u000A\u000B\u000C\u000D\u000E\u000F"
+                + "\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001A\u001B\u001C\u001D\u001E\u001F"
+                + "\"*:<>?|"
+        );
 
-        internal static string SanitizeEntryFilePath(string entryPath, bool preserveDriveRoot = false)
+        internal static string SanitizeEntryFilePath(
+            string entryPath,
+            bool preserveDriveRoot = false
+        )
         {
             // When preserveDriveRoot is set, preserve the colon in 'c:\'.
             int offset = 0;
-            if (preserveDriveRoot && entryPath.Length >= 3 && entryPath[1] == ':' && Path.IsPathFullyQualified(entryPath))
+            if (
+                preserveDriveRoot
+                && entryPath.Length >= 3
+                && entryPath[1] == ':'
+                && Path.IsPathFullyQualified(entryPath)
+            )
             {
                 offset = 3;
             }
@@ -50,7 +59,10 @@ namespace System.IO
             });
         }
 
-        public static unsafe string EntryFromPath(ReadOnlySpan<char> path, bool appendPathSeparator = false)
+        public static unsafe string EntryFromPath(
+            ReadOnlySpan<char> path,
+            bool appendPathSeparator = false
+        )
         {
             // Remove leading separators.
             int nonSlash = path.IndexOfAnyExcept('/', '\\');
@@ -64,26 +76,28 @@ namespace System.IO
 
             if (path.IsEmpty)
             {
-                return appendPathSeparator ?
-                    "/" :
-                    string.Empty;
+                return appendPathSeparator ? "/" : string.Empty;
             }
 
 #pragma warning disable CS8500 // takes address of managed type
             ReadOnlySpan<char> tmpPath = path; // avoid address exposing the span and impacting the other code in the method that uses it
-            return string.Create(appendPathSeparator ? tmpPath.Length + 1 : tmpPath.Length, (appendPathSeparator, RosPtr: (IntPtr)(&tmpPath)), static (dest, state) =>
-            {
-                var path = *(ReadOnlySpan<char>*)state.RosPtr;
-                path.CopyTo(dest);
-                if (state.appendPathSeparator)
+            return string.Create(
+                appendPathSeparator ? tmpPath.Length + 1 : tmpPath.Length,
+                (appendPathSeparator, RosPtr: (IntPtr)(&tmpPath)),
+                static (dest, state) =>
                 {
-                    dest[^1] = '/';
-                }
+                    var path = *(ReadOnlySpan<char>*)state.RosPtr;
+                    path.CopyTo(dest);
+                    if (state.appendPathSeparator)
+                    {
+                        dest[^1] = '/';
+                    }
 
-                // To ensure tar files remain compatible with Unix, and per the ZIP File Format Specification 4.4.17.1,
-                // all slashes should be forward slashes.
-                dest.Replace('\\', '/');
-            });
+                    // To ensure tar files remain compatible with Unix, and per the ZIP File Format Specification 4.4.17.1,
+                    // all slashes should be forward slashes.
+                    dest.Replace('\\', '/');
+                }
+            );
 #pragma warning restore CS8500
         }
     }

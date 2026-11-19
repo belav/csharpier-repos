@@ -15,7 +15,10 @@ namespace System.Data.Common
             private readonly DataColumnCollection _schemaColumns;
             private readonly DataRow _schemaRow;
 
-            public DataRowDbColumn(DataRow readerSchemaRow, DataColumnCollection readerSchemaColumns)
+            public DataRowDbColumn(
+                DataRow readerSchemaRow,
+                DataColumnCollection readerSchemaColumns
+            )
             {
                 _schemaRow = readerSchemaRow;
                 _schemaColumns = readerSchemaColumns;
@@ -25,16 +28,22 @@ namespace System.Data.Common
             private void PopulateFields()
             {
                 AllowDBNull = GetDbColumnValue<bool?>(SchemaTableColumn.AllowDBNull);
-                BaseCatalogName = GetDbColumnValue<string?>(SchemaTableOptionalColumn.BaseCatalogName);
+                BaseCatalogName = GetDbColumnValue<string?>(
+                    SchemaTableOptionalColumn.BaseCatalogName
+                );
                 BaseColumnName = GetDbColumnValue<string?>(SchemaTableColumn.BaseColumnName);
                 BaseSchemaName = GetDbColumnValue<string?>(SchemaTableColumn.BaseSchemaName);
-                BaseServerName = GetDbColumnValue<string?>(SchemaTableOptionalColumn.BaseServerName);
+                BaseServerName = GetDbColumnValue<string?>(
+                    SchemaTableOptionalColumn.BaseServerName
+                );
                 BaseTableName = GetDbColumnValue<string?>(SchemaTableColumn.BaseTableName);
                 ColumnName = GetDbColumnValue<string>(SchemaTableColumn.ColumnName)!;
                 ColumnOrdinal = GetDbColumnValue<int?>(SchemaTableColumn.ColumnOrdinal);
                 ColumnSize = GetDbColumnValue<int?>(SchemaTableColumn.ColumnSize);
                 IsAliased = GetDbColumnValue<bool?>(SchemaTableColumn.IsAliased);
-                IsAutoIncrement = GetDbColumnValue<bool?>(SchemaTableOptionalColumn.IsAutoIncrement);
+                IsAutoIncrement = GetDbColumnValue<bool?>(
+                    SchemaTableOptionalColumn.IsAutoIncrement
+                );
                 IsExpression = GetDbColumnValue<bool>(SchemaTableColumn.IsExpression);
                 IsHidden = GetDbColumnValue<bool?>(SchemaTableOptionalColumn.IsHidden);
                 IsIdentity = GetDbColumnValue<bool?>("IsIdentity");
@@ -49,7 +58,10 @@ namespace System.Data.Common
                 DataTypeName = GetDbColumnValue<string?>("DataTypeName");
             }
 
-            private T? GetDbColumnValue<T>(string columnName) => _schemaColumns.Contains(columnName) && _schemaRow[columnName] is T value ? value : default;
+            private T? GetDbColumnValue<T>(string columnName) =>
+                _schemaColumns.Contains(columnName) && _schemaRow[columnName] is T value
+                    ? value
+                    : default;
         }
 
         public static ReadOnlyCollection<DbColumn> GetColumnSchema(this DbDataReader reader)
@@ -68,7 +80,9 @@ namespace System.Data.Common
             return true;
         }
 
-        private static ReadOnlyCollection<DbColumn> GetColumnSchemaCompatibility(DbDataReader reader)
+        private static ReadOnlyCollection<DbColumn> GetColumnSchemaCompatibility(
+            DbDataReader reader
+        )
         {
             var columnSchema = new List<DbColumn>();
             DataTable? schemaTable = reader.GetSchemaTable();

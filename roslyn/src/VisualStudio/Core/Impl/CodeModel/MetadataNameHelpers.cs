@@ -13,8 +13,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 {
     internal static class MetadataNameHelpers
     {
-        private static void AppendNamespace(INamespaceSymbol namespaceSymbol, StringBuilder builder)
-            => builder.Append(namespaceSymbol.Name);
+        private static void AppendNamespace(
+            INamespaceSymbol namespaceSymbol,
+            StringBuilder builder
+        ) => builder.Append(namespaceSymbol.Name);
 
         private static void AppendNamedType(INamedTypeSymbol namedTypeSymbol, StringBuilder builder)
         {
@@ -64,7 +66,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         {
             if (typeSymbol.Kind == SymbolKind.TypeParameter)
             {
-                throw new ArgumentException("Type parameters are not suppported", nameof(typeSymbol));
+                throw new ArgumentException(
+                    "Type parameters are not suppported",
+                    nameof(typeSymbol)
+                );
             }
 
             var parts = new Stack<ISymbol>();

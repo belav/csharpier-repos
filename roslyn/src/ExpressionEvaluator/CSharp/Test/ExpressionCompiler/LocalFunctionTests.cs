@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         public void NoLocals()
         {
             var source =
-@"class C
+                @"class C
 {
     void F(int x)
     {
@@ -39,7 +39,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                 var testData = new CompilationTestData();
                 var locals = ArrayBuilder<LocalAndMethod>.GetInstance();
                 string typeName;
-                var assembly = context.CompileGetLocals(locals, argumentsOnly: false, typeName: out typeName, testData: testData);
+                var assembly = context.CompileGetLocals(
+                    locals,
+                    argumentsOnly: false,
+                    typeName: out typeName,
+                    testData: testData
+                );
                 Assert.NotNull(assembly);
                 Assert.Equal(0, assembly.Count);
                 Assert.Equal(0, locals.Count);
@@ -51,7 +56,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         public void Locals()
         {
             var source =
-@"class C
+                @"class C
 {
     void F(int x)
     {
@@ -70,30 +75,50 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                 var testData = new CompilationTestData();
                 var locals = ArrayBuilder<LocalAndMethod>.GetInstance();
                 string typeName;
-                var assembly = context.CompileGetLocals(locals, argumentsOnly: false, typeName: out typeName, testData: testData);
+                var assembly = context.CompileGetLocals(
+                    locals,
+                    argumentsOnly: false,
+                    typeName: out typeName,
+                    testData: testData
+                );
                 Assert.Equal(2, locals.Count);
-                VerifyLocal(testData, typeName, locals[0], "<>m0", "y", expectedILOpt:
-@"{
+                VerifyLocal(
+                    testData,
+                    typeName,
+                    locals[0],
+                    "<>m0",
+                    "y",
+                    expectedILOpt: @"{
   // Code size        2 (0x2)
   .maxstack  1
   .locals init (int V_0, //z
                 int V_1)
   IL_0000:  ldarg.0
   IL_0001:  ret
-}");
-                VerifyLocal(testData, typeName, locals[1], "<>m1", "z", expectedILOpt:
-@"{
+}"
+                );
+                VerifyLocal(
+                    testData,
+                    typeName,
+                    locals[1],
+                    "<>m1",
+                    "z",
+                    expectedILOpt: @"{
   // Code size        2 (0x2)
   .maxstack  1
   .locals init (int V_0, //z
                 int V_1)
   IL_0000:  ldloc.0
   IL_0001:  ret
-}");
+}"
+                );
                 locals.Free();
                 string error;
                 context.CompileExpression("this.F(1)", out error, testData);
-                Assert.Equal("error CS0027: Keyword 'this' is not available in the current context", error);
+                Assert.Equal(
+                    "error CS0027: Keyword 'this' is not available in the current context",
+                    error
+                );
             });
         }
 
@@ -101,7 +126,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         public void CapturedVariable()
         {
             var source =
-@"class C
+                @"class C
 {
     int x;
     void F(int y)
@@ -120,33 +145,52 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                 var testData = new CompilationTestData();
                 var locals = ArrayBuilder<LocalAndMethod>.GetInstance();
                 string typeName;
-                var assembly = context.CompileGetLocals(locals, argumentsOnly: false, typeName: out typeName, testData: testData);
+                var assembly = context.CompileGetLocals(
+                    locals,
+                    argumentsOnly: false,
+                    typeName: out typeName,
+                    testData: testData
+                );
                 Assert.Equal(2, locals.Count);
-                VerifyLocal(testData, typeName, locals[0], "<>m0", "this", expectedILOpt:
-@"{
+                VerifyLocal(
+                    testData,
+                    typeName,
+                    locals[0],
+                    "<>m0",
+                    "this",
+                    expectedILOpt: @"{
   // Code size        7 (0x7)
   .maxstack  1
   .locals init (int V_0)
   IL_0000:  ldarg.1
   IL_0001:  ldfld      ""C C.<>c__DisplayClass1_0.<>4__this""
   IL_0006:  ret
-}");
-                VerifyLocal(testData, typeName, locals[1], "<>m1", "y", expectedILOpt:
-@"{
+}"
+                );
+                VerifyLocal(
+                    testData,
+                    typeName,
+                    locals[1],
+                    "<>m1",
+                    "y",
+                    expectedILOpt: @"{
   // Code size        7 (0x7)
   .maxstack  1
   .locals init (int V_0)
   IL_0000:  ldarg.1
   IL_0001:  ldfld      ""int C.<>c__DisplayClass1_0.y""
   IL_0006:  ret
-}");
+}"
+                );
                 locals.Free();
                 testData = new CompilationTestData();
                 string error;
                 context.CompileExpression("this.F(1)", out error, testData);
                 Assert.Null(error);
-                testData.GetMethodData("<>x.<>m0").VerifyIL(
- @"{
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"{
   // Code size       13 (0xd)
   .maxstack  2
   .locals init (int V_0)
@@ -155,7 +199,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0006:  ldc.i4.1
   IL_0007:  callvirt   ""void C.F(int)""
   IL_000c:  ret
-}");
+}"
+                    );
             });
         }
 
@@ -163,7 +208,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         public void MultipleDisplayClasses()
         {
             var source =
-@"class C
+                @"class C
 {
     void F1(int x)
     {
@@ -182,31 +227,50 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                 var testData = new CompilationTestData();
                 var locals = ArrayBuilder<LocalAndMethod>.GetInstance();
                 string typeName;
-                var assembly = context.CompileGetLocals(locals, argumentsOnly: false, typeName: out typeName, testData: testData);
+                var assembly = context.CompileGetLocals(
+                    locals,
+                    argumentsOnly: false,
+                    typeName: out typeName,
+                    testData: testData
+                );
                 Assert.Equal(2, locals.Count);
-                VerifyLocal(testData, typeName, locals[0], "<>m0", "x", expectedILOpt:
-@"{
+                VerifyLocal(
+                    testData,
+                    typeName,
+                    locals[0],
+                    "<>m0",
+                    "x",
+                    expectedILOpt: @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  ldfld      ""int C.<>c__DisplayClass0_0.x""
   IL_0006:  ret
-}");
-                VerifyLocal(testData, typeName, locals[1], "<>m1", "y", expectedILOpt:
-@"{
+}"
+                );
+                VerifyLocal(
+                    testData,
+                    typeName,
+                    locals[1],
+                    "<>m1",
+                    "y",
+                    expectedILOpt: @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.1
   IL_0001:  ldfld      ""int C.<>c__DisplayClass0_1.y""
   IL_0006:  ret
-}");
+}"
+                );
                 locals.Free();
                 testData = new CompilationTestData();
                 string error;
                 context.CompileExpression("x + y", out error, testData);
                 Assert.Null(error);
-                testData.GetMethodData("<>x.<>m0").VerifyIL(
- @"{
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"{
   // Code size       14 (0xe)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -215,7 +279,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0007:  ldfld      ""int C.<>c__DisplayClass0_1.y""
   IL_000c:  add
   IL_000d:  ret
-}");
+}"
+                    );
             });
         }
 
@@ -225,7 +290,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         public void CapturedVariableNamedValue()
         {
             var source =
-@"class C
+                @"class C
 {
     void F(int value)
     {
@@ -243,31 +308,45 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                 var testData = new CompilationTestData();
                 var locals = ArrayBuilder<LocalAndMethod>.GetInstance();
                 string typeName;
-                var assembly = context.CompileGetLocals(locals, argumentsOnly: false, typeName: out typeName, testData: testData);
+                var assembly = context.CompileGetLocals(
+                    locals,
+                    argumentsOnly: false,
+                    typeName: out typeName,
+                    testData: testData
+                );
                 Assert.Equal(1, locals.Count);
-                VerifyLocal(testData, typeName, locals[0], "<>m0", "value", expectedILOpt:
-@"{
+                VerifyLocal(
+                    testData,
+                    typeName,
+                    locals[0],
+                    "<>m0",
+                    "value",
+                    expectedILOpt: @"{
   // Code size        7 (0x7)
   .maxstack  1
   .locals init (int V_0)
   IL_0000:  ldarg.0
   IL_0001:  ldfld      ""int C.<>c__DisplayClass0_0.value""
   IL_0006:  ret
-}");
+}"
+                );
                 locals.Free();
                 testData = new CompilationTestData();
                 string error;
                 context.CompileExpression("value", out error, testData);
                 Assert.Null(error);
-                testData.GetMethodData("<>x.<>m0").VerifyIL(
- @"{
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"{
   // Code size        7 (0x7)
   .maxstack  1
   .locals init (int V_0)
   IL_0000:  ldarg.0
   IL_0001:  ldfld      ""int C.<>c__DisplayClass0_0.value""
   IL_0006:  ret
-}");
+}"
+                    );
             });
         }
 
@@ -278,7 +357,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         public void DisplayClassParameter_01()
         {
             var source =
-@"class C
+                @"class C
 {
     void F(int x)
     {
@@ -296,7 +375,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                 var testData = new CompilationTestData();
                 string error;
                 context.CompileExpression("value", out error, testData);
-                Assert.Equal("error CS0103: The name 'value' does not exist in the current context", error);
+                Assert.Equal(
+                    "error CS0103: The name 'value' does not exist in the current context",
+                    error
+                );
             });
         }
 
@@ -305,7 +387,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         public void DisplayClassParameter_02()
         {
             var source =
-@"class C
+                @"class C
 {
     void F(int x)
     {
@@ -328,15 +410,19 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                 var data = testData.GetMethodData("<>x.<>m0");
 
                 Assert.True(data.Method.IsStatic);
-                Assert.Equal("System.Int32 <>x.<>m0(System.Int32 value, ref C.<>c__DisplayClass0_0 value)", ((Symbol)data.Method).ToTestDisplayString());
+                Assert.Equal(
+                    "System.Int32 <>x.<>m0(System.Int32 value, ref C.<>c__DisplayClass0_0 value)",
+                    ((Symbol)data.Method).ToTestDisplayString()
+                );
                 data.VerifyIL(
- @"{
+                    @"{
   // Code size        2 (0x2)
   .maxstack  1
   .locals init (int V_0)
   IL_0000:  ldarg.0
   IL_0001:  ret
-}");
+}"
+                );
             });
         }
 
@@ -345,7 +431,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         public void DisplayClassParameter_03()
         {
             var source =
-@"class C
+                @"class C
 {
     void F(int x)
     {
@@ -371,9 +457,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                 var data = testData.GetMethodData("<>x.<>m0");
 
                 Assert.True(data.Method.IsStatic);
-                Assert.Equal("System.Int32 <>x.<>m0(ref C.<>c__DisplayClass0_0 value)", ((Symbol)data.Method).ToTestDisplayString());
+                Assert.Equal(
+                    "System.Int32 <>x.<>m0(ref C.<>c__DisplayClass0_0 value)",
+                    ((Symbol)data.Method).ToTestDisplayString()
+                );
                 data.VerifyIL(
- @"{
+                    @"{
   // Code size        7 (0x7)
   .maxstack  1
   .locals init (C.<>c__DisplayClass0_1 V_0, //CS$<>8__locals0
@@ -381,14 +470,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0000:  ldloc.0
   IL_0001:  ldfld      ""int C.<>c__DisplayClass0_1.value""
   IL_0006:  ret
-}");
+}"
+                );
             });
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/59093")]
         public void DeclaringCompilationIsNotNull()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class C
@@ -404,7 +495,8 @@ class C
                 var context = CreateMethodContext(runtime, "C.Main");
                 string error;
                 var testData = new CompilationTestData();
-                context.CompileExpression(@"
+                context.CompileExpression(
+                    @"
 new Action<int>(x =>
 {
     int F(int y)
@@ -419,7 +511,10 @@ new Action<int>(x =>
     }
     F(x);
 }).Invoke(1)
-", out error, testData);
+",
+                    out error,
+                    testData
+                );
                 Assert.Null(error);
             });
         }

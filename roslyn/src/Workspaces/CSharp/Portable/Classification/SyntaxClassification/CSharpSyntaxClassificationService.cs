@@ -20,21 +20,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification;
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
 internal sealed class CSharpSyntaxClassificationService() : AbstractSyntaxClassificationService
 {
-    private static readonly ImmutableArray<ISyntaxClassifier> s_defaultSyntaxClassifiers = ImmutableArray.Create<ISyntaxClassifier>(
-        new NameSyntaxClassifier(),
-        new OperatorOverloadSyntaxClassifier(),
-        new SyntaxTokenClassifier(),
-        new UsingDirectiveSyntaxClassifier(),
-        new DiscardSyntaxClassifier(),
-        new FunctionPointerUnmanagedCallingConventionClassifier());
+    private static readonly ImmutableArray<ISyntaxClassifier> s_defaultSyntaxClassifiers =
+        ImmutableArray.Create<ISyntaxClassifier>(
+            new NameSyntaxClassifier(),
+            new OperatorOverloadSyntaxClassifier(),
+            new SyntaxTokenClassifier(),
+            new UsingDirectiveSyntaxClassifier(),
+            new DiscardSyntaxClassifier(),
+            new FunctionPointerUnmanagedCallingConventionClassifier()
+        );
 
-    public override ImmutableArray<ISyntaxClassifier> GetDefaultSyntaxClassifiers()
-        => s_defaultSyntaxClassifiers;
+    public override ImmutableArray<ISyntaxClassifier> GetDefaultSyntaxClassifiers() =>
+        s_defaultSyntaxClassifiers;
 
-    public override void AddLexicalClassifications(SourceText text, TextSpan textSpan, SegmentedList<ClassifiedSpan> result, CancellationToken cancellationToken)
-        => ClassificationHelpers.AddLexicalClassifications(text, textSpan, result, cancellationToken);
+    public override void AddLexicalClassifications(
+        SourceText text,
+        TextSpan textSpan,
+        SegmentedList<ClassifiedSpan> result,
+        CancellationToken cancellationToken
+    ) => ClassificationHelpers.AddLexicalClassifications(text, textSpan, result, cancellationToken);
 
-    public override void AddSyntacticClassifications(SyntaxNode root, ImmutableArray<TextSpan> textSpans, SegmentedList<ClassifiedSpan> result, CancellationToken cancellationToken)
+    public override void AddSyntacticClassifications(
+        SyntaxNode root,
+        ImmutableArray<TextSpan> textSpans,
+        SegmentedList<ClassifiedSpan> result,
+        CancellationToken cancellationToken
+    )
     {
         foreach (var textSpan in textSpans)
         {
@@ -42,9 +53,11 @@ internal sealed class CSharpSyntaxClassificationService() : AbstractSyntaxClassi
         }
     }
 
-    public override ClassifiedSpan FixClassification(SourceText rawText, ClassifiedSpan classifiedSpan)
-        => ClassificationHelpers.AdjustStaleClassification(rawText, classifiedSpan);
+    public override ClassifiedSpan FixClassification(
+        SourceText rawText,
+        ClassifiedSpan classifiedSpan
+    ) => ClassificationHelpers.AdjustStaleClassification(rawText, classifiedSpan);
 
-    public override string? GetSyntacticClassificationForIdentifier(SyntaxToken identifier)
-        => ClassificationHelpers.GetSyntacticClassificationForIdentifier(identifier);
+    public override string? GetSyntacticClassificationForIdentifier(SyntaxToken identifier) =>
+        ClassificationHelpers.GetSyntacticClassificationForIdentifier(identifier);
 }

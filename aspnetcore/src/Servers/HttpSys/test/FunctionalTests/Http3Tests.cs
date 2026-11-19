@@ -238,8 +238,8 @@ public class Http3Tests : LoggedTest
         var response = await client.GetAsync(address, HttpCompletionOption.ResponseHeadersRead);
         headersReceived.SetResult();
         response.EnsureSuccessStatusCode();
-        var ex = await Assert.ThrowsAsync<HttpRequestException>(
-            () => response.Content.ReadAsStringAsync()
+        var ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+            response.Content.ReadAsStringAsync()
         );
         var qex = Assert.IsType<QuicException>(ex.InnerException?.InnerException?.InnerException);
         Assert.Equal(QuicError.StreamAborted, qex.QuicError);
@@ -273,8 +273,8 @@ public class Http3Tests : LoggedTest
         var response = await client.GetAsync(address, HttpCompletionOption.ResponseHeadersRead);
         headersReceived.SetResult();
         response.EnsureSuccessStatusCode();
-        var ex = await Assert.ThrowsAsync<HttpRequestException>(
-            () => response.Content.ReadAsStringAsync()
+        var ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+            response.Content.ReadAsStringAsync()
         );
         var qex = Assert.IsType<QuicException>(ex.InnerException?.InnerException?.InnerException);
         Assert.Equal(QuicError.StreamAborted, qex.QuicError);

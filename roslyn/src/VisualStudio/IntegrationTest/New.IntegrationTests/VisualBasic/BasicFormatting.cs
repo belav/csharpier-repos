@@ -20,9 +20,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicFormatting()
-            : base(nameof(BasicFormatting))
-        {
-        }
+            : base(nameof(BasicFormatting)) { }
 
         [IdeFact]
         public async Task VerifyFormattingIndent()
@@ -39,43 +37,63 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
 
             await TestServices.Editor.FormatDocumentAsync(HangMitigatingCancellationToken);
             await TestServices.EditorVerifier.TextContainsAsync(
-@"Module A
+                @"Module A
     Sub Main(args As String())
 
     End Sub
-End Module", cancellationToken: HangMitigatingCancellationToken);
+End Module",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
         public async Task VerifyCaseCorrection()
         {
-            await SetUpEditorAsync(@"
+            await SetUpEditorAsync(
+                @"
 $$module A
-end module", HangMitigatingCancellationToken);
+end module",
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.FormatDocumentAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.TextContainsAsync(@"
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 Module A
-End Module", cancellationToken: HangMitigatingCancellationToken);
+End Module",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
         public async Task ShiftEnterWithIntelliSenseAndBraceMatching()
         {
-            await SetUpEditorAsync(@"
+            await SetUpEditorAsync(
+                @"
 Module Program
     Function Main(ooo As Object) As Object
         Return Main$$
     End Function
-End Module", HangMitigatingCancellationToken);
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.Workspace, HangMitigatingCancellationToken);
-            await TestServices.Input.SendAsync(["(o", (VirtualKeyCode.RETURN, VirtualKeyCode.SHIFT), "'comment"], HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.TextContainsAsync(@"
+End Module",
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.Workspace,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Input.SendAsync(
+                ["(o", (VirtualKeyCode.RETURN, VirtualKeyCode.SHIFT), "'comment"],
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 Module Program
     Function Main(ooo As Object) As Object
         Return Main(ooo)
         'comment
     End Function
-End Module", cancellationToken: HangMitigatingCancellationToken);
+End Module",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
     }
 }

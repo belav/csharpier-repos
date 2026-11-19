@@ -152,13 +152,10 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
 
         // Assert
         Assert.True(result.HasError);
-        Assert.Collection(
-            formatterContext.ModelState.OrderBy(k => k.Key),
-            kvp =>
-            {
-                Assert.Equal(expectedKey, kvp.Key);
-            }
-        );
+        Assert.Collection(formatterContext.ModelState.OrderBy(k => k.Key), kvp =>
+        {
+            Assert.Equal(expectedKey, kvp.Key);
+        });
     }
 
     [Fact]
@@ -183,13 +180,10 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
 
         // Assert
         Assert.True(result.HasError);
-        Assert.Collection(
-            formatterContext.ModelState.OrderBy(k => k.Key),
-            kvp =>
-            {
-                Assert.Equal(expectedKey, kvp.Key);
-            }
-        );
+        Assert.Collection(formatterContext.ModelState.OrderBy(k => k.Key), kvp =>
+        {
+            Assert.Equal(expectedKey, kvp.Key);
+        });
     }
 
     [Fact]
@@ -214,13 +208,10 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
 
         // Assert
         Assert.True(result.HasError);
-        Assert.Collection(
-            formatterContext.ModelState.OrderBy(k => k.Key),
-            kvp =>
-            {
-                Assert.Equal(expectedKey, kvp.Key);
-            }
-        );
+        Assert.Collection(formatterContext.ModelState.OrderBy(k => k.Key), kvp =>
+        {
+            Assert.Equal(expectedKey, kvp.Key);
+        });
     }
 
     [Fact]
@@ -343,14 +334,11 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
 
         // Assert
         Assert.True(result.HasError, "Model should have had an error!");
-        Assert.Collection(
-            formatterContext.ModelState.OrderBy(k => k.Key),
-            kvp =>
-            {
-                Assert.Equal(expectedKey, kvp.Key);
-                Assert.Single(kvp.Value.Errors);
-            }
-        );
+        Assert.Collection(formatterContext.ModelState.OrderBy(k => k.Key), kvp =>
+        {
+            Assert.Equal(expectedKey, kvp.Key);
+            Assert.Single(kvp.Value.Errors);
+        });
     }
 
     [Fact]
@@ -371,14 +359,11 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
 
         // Assert
         Assert.True(result.HasError, "Model should have had an error!");
-        Assert.Collection(
-            formatterContext.ModelState.OrderBy(k => k.Key),
-            kvp =>
-            {
-                Assert.Equal(expectedKey, kvp.Key);
-                Assert.Single(kvp.Value.Errors);
-            }
-        );
+        Assert.Collection(formatterContext.ModelState.OrderBy(k => k.Key), kvp =>
+        {
+            Assert.Equal(expectedKey, kvp.Key);
+            Assert.Single(kvp.Value.Errors);
+        });
     }
 
     [Fact]
@@ -400,13 +385,10 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
 
         // Assert
         Assert.True(result.HasError, "Model should have produced an error!");
-        Assert.Collection(
-            formatterContext.ModelState.OrderBy(k => k.Key),
-            kvp =>
-            {
-                Assert.Equal(expectedValue, kvp.Key);
-            }
-        );
+        Assert.Collection(formatterContext.ModelState.OrderBy(k => k.Key), kvp =>
+        {
+            Assert.Equal(expectedValue, kvp.Key);
+        });
     }
 
     [Fact]
@@ -432,14 +414,11 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
 
         // Assert
         Assert.True(result.HasError);
-        Assert.Collection(
-            formatterContext.ModelState.OrderBy(k => k.Key),
-            kvp =>
-            {
-                Assert.Equal(expectedKey, kvp.Key);
-                Assert.Single(kvp.Value.Errors);
-            }
-        );
+        Assert.Collection(formatterContext.ModelState.OrderBy(k => k.Key), kvp =>
+        {
+            Assert.Equal(expectedKey, kvp.Key);
+            Assert.Single(kvp.Value.Errors);
+        });
     }
 
     [Fact]
@@ -518,14 +497,11 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
 
         // Assert
         Assert.True(result.HasError, "Model should have had an error!");
-        Assert.Collection(
-            formatterContext.ModelState.OrderBy(k => k.Key),
-            kvp =>
-            {
-                Assert.Equal(expectedKey, kvp.Key);
-                Assert.Single(kvp.Value.Errors);
-            }
-        );
+        Assert.Collection(formatterContext.ModelState.OrderBy(k => k.Key), kvp =>
+        {
+            Assert.Equal(expectedKey, kvp.Key);
+            Assert.Single(kvp.Value.Errors);
+        });
     }
 
     [Fact]
@@ -544,13 +520,10 @@ public abstract class JsonInputFormatterTestBase : LoggedTest
 
         // Assert
         Assert.True(result.HasError, "Model should have had an error!");
-        Assert.Collection(
-            formatterContext.ModelState.OrderBy(k => k.Key),
-            kvp =>
-            {
-                Assert.Equal(ReadAsync_NestedParseError_Expected, kvp.Key);
-            }
-        );
+        Assert.Collection(formatterContext.ModelState.OrderBy(k => k.Key), kvp =>
+        {
+            Assert.Equal(ReadAsync_NestedParseError_Expected, kvp.Key);
+        });
     }
 
     [Fact]

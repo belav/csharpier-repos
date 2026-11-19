@@ -29,26 +29,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public override string Display
         {
-            get
-            {
-                return CodeAnalysisResources.Unresolved + FullPath;
-            }
+            get { return CodeAnalysisResources.Unresolved + FullPath; }
         }
 
         public override string FullPath
         {
-            get
-            {
-                return _unresolvedPath;
-            }
+            get { return _unresolvedPath; }
         }
 
         public override object Id
         {
-            get
-            {
-                return _unresolvedPath;
-            }
+            get { return _unresolvedPath; }
         }
 
         public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzersForAllLanguages()

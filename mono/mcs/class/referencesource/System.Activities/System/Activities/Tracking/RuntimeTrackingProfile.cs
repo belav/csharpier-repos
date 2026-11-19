@@ -7,12 +7,12 @@ namespace System.Activities.Tracking
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Collections.Specialized;
     using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.Linq;
     using System.Runtime;
     using System.Runtime.CompilerServices;
+    using System.Text;
 
     class RuntimeTrackingProfile
     {
@@ -86,10 +86,7 @@ namespace System.Activities.Tracking
 
         internal TrackingRecordPreFilter Filter
         {
-            get
-            {
-                return this.trackingRecordPreFilter;
-            }
+            get { return this.trackingRecordPreFilter; }
         }
 
         internal IEnumerable<string> GetSubscribedActivityNames()
@@ -110,8 +107,10 @@ namespace System.Activities.Tracking
                 }
                 else
                 {
-                    if ((activityInfo.Activity.MemberOf.ParentId != 0)
-                        && (activityInfo.Activity.MemberOf.Parent.ParentId != 0))
+                    if (
+                        (activityInfo.Activity.MemberOf.ParentId != 0)
+                        && (activityInfo.Activity.MemberOf.Parent.ParentId != 0)
+                    )
                     {
                         return false;
                     }
@@ -130,7 +129,10 @@ namespace System.Activities.Tracking
             this.activityNames.Add(name);
         }
 
-        internal static RuntimeTrackingProfile GetRuntimeTrackingProfile(TrackingProfile profile, Activity rootElement)
+        internal static RuntimeTrackingProfile GetRuntimeTrackingProfile(
+            TrackingProfile profile,
+            Activity rootElement
+        )
         {
             return RuntimeTrackingProfile.Cache.GetRuntimeTrackingProfile(profile, rootElement);
         }
@@ -159,7 +161,8 @@ namespace System.Activities.Tracking
 
             if (this.activitySubscriptions == null)
             {
-                this.activitySubscriptions = new Dictionary<string, HybridCollection<ActivityStateQuery>>();
+                this.activitySubscriptions =
+                    new Dictionary<string, HybridCollection<ActivityStateQuery>>();
             }
 
             HybridCollection<ActivityStateQuery> subscription;
@@ -277,7 +280,7 @@ namespace System.Activities.Tracking
             {
                 resultQuery = Match((FaultPropagationRecord)record);
             }
-            
+
             return resultQuery == null ? null : PrepareRecord(record, resultQuery, shouldClone);
         }
 
@@ -288,16 +291,36 @@ namespace System.Activities.Tracking
             {
                 HybridCollection<ActivityStateQuery> eventSubscriptions;
                 //first look for a specific match, if not found, look for a generic match.
-                if (this.activitySubscriptions.TryGetValue(activityStateRecord.Activity.Name, out eventSubscriptions))
+                if (
+                    this.activitySubscriptions.TryGetValue(
+                        activityStateRecord.Activity.Name,
+                        out eventSubscriptions
+                    )
+                )
                 {
-                    query = MatchActivityState(activityStateRecord, eventSubscriptions.AsReadOnly());
+                    query = MatchActivityState(
+                        activityStateRecord,
+                        eventSubscriptions.AsReadOnly()
+                    );
                 }
 
-                if (query == null && this.activitySubscriptions.TryGetValue("*", out eventSubscriptions))
+                if (
+                    query == null
+                    && this.activitySubscriptions.TryGetValue("*", out eventSubscriptions)
+                )
                 {
-                    query = MatchActivityState(activityStateRecord, eventSubscriptions.AsReadOnly());
+                    query = MatchActivityState(
+                        activityStateRecord,
+                        eventSubscriptions.AsReadOnly()
+                    );
 
-                    if ((query != null) && (this.associatedProfile.ImplementationVisibility == ImplementationVisibility.RootScope))
+                    if (
+                        (query != null)
+                        && (
+                            this.associatedProfile.ImplementationVisibility
+                            == ImplementationVisibility.RootScope
+                        )
+                    )
                     {
                         if (!ShouldTrackActivity(activityStateRecord.Activity, "*"))
                         {
@@ -310,7 +333,10 @@ namespace System.Activities.Tracking
             return query;
         }
 
-        static ActivityStateQuery MatchActivityState(ActivityStateRecord activityRecord, ReadOnlyCollection<ActivityStateQuery> subscriptions)
+        static ActivityStateQuery MatchActivityState(
+            ActivityStateRecord activityRecord,
+            ReadOnlyCollection<ActivityStateQuery> subscriptions
+        )
         {
             ActivityStateQuery genericMatch = null;
             for (int i = 0; i < subscriptions.Count; i++)
@@ -335,7 +361,12 @@ namespace System.Activities.Tracking
             WorkflowInstanceQuery trackingQuery = null;
             if (this.workflowEventSubscriptions != null)
             {
-                if (!this.workflowEventSubscriptions.TryGetValue(workflowRecord.State, out trackingQuery))
+                if (
+                    !this.workflowEventSubscriptions.TryGetValue(
+                        workflowRecord.State,
+                        out trackingQuery
+                    )
+                )
                 {
                     this.workflowEventSubscriptions.TryGetValue("*", out trackingQuery);
                 }
@@ -350,7 +381,10 @@ namespace System.Activities.Tracking
             {
                 if (bookmarkRecord.BookmarkName != null)
                 {
-                    this.bookmarkSubscriptions.TryGetValue(bookmarkRecord.BookmarkName, out trackingQuery);
+                    this.bookmarkSubscriptions.TryGetValue(
+                        bookmarkRecord.BookmarkName,
+                        out trackingQuery
+                    );
                 }
                 if (trackingQuery == null)
                 {
@@ -368,19 +402,41 @@ namespace System.Activities.Tracking
                 for (int i = 0; i < this.activityScheduledSubscriptions.Count; i++)
                 {
                     //check specific and then generic
-                    string activityName = activityScheduledRecord.Activity == null ? null : activityScheduledRecord.Activity.Name;
-                    if (string.CompareOrdinal(this.activityScheduledSubscriptions[i].ActivityName, activityName) == 0)
+                    string activityName =
+                        activityScheduledRecord.Activity == null
+                            ? null
+                            : activityScheduledRecord.Activity.Name;
+                    if (
+                        string.CompareOrdinal(
+                            this.activityScheduledSubscriptions[i].ActivityName,
+                            activityName
+                        ) == 0
+                    )
                     {
-                        if (CheckSubscription(this.activityScheduledSubscriptions[i].ChildActivityName, activityScheduledRecord.Child.Name))
+                        if (
+                            CheckSubscription(
+                                this.activityScheduledSubscriptions[i].ChildActivityName,
+                                activityScheduledRecord.Child.Name
+                            )
+                        )
                         {
                             query = this.activityScheduledSubscriptions[i];
                             break;
                         }
-
                     }
-                    else if (string.CompareOrdinal(this.activityScheduledSubscriptions[i].ActivityName, "*") == 0)
+                    else if (
+                        string.CompareOrdinal(
+                            this.activityScheduledSubscriptions[i].ActivityName,
+                            "*"
+                        ) == 0
+                    )
                     {
-                        if (CheckSubscription(this.activityScheduledSubscriptions[i].ChildActivityName, activityScheduledRecord.Child.Name))
+                        if (
+                            CheckSubscription(
+                                this.activityScheduledSubscriptions[i].ChildActivityName,
+                                activityScheduledRecord.Child.Name
+                            )
+                        )
                         {
                             query = this.activityScheduledSubscriptions[i];
                             break;
@@ -389,10 +445,20 @@ namespace System.Activities.Tracking
                 }
             }
 
-            if ((query != null) && (this.associatedProfile.ImplementationVisibility == ImplementationVisibility.RootScope))
+            if (
+                (query != null)
+                && (
+                    this.associatedProfile.ImplementationVisibility
+                    == ImplementationVisibility.RootScope
+                )
+            )
             {
-                if ((!ShouldTrackActivity(activityScheduledRecord.Activity, query.ActivityName)) ||
-                        (!ShouldTrackActivity(activityScheduledRecord.Child, query.ChildActivityName)))
+                if (
+                    (!ShouldTrackActivity(activityScheduledRecord.Activity, query.ActivityName))
+                    || (
+                        !ShouldTrackActivity(activityScheduledRecord.Child, query.ChildActivityName)
+                    )
+                )
                 {
                     return null;
                 }
@@ -409,18 +475,39 @@ namespace System.Activities.Tracking
                 for (int i = 0; i < this.faultPropagationSubscriptions.Count; i++)
                 {
                     //check specific and then generic
-                    string faultHandlerName = faultRecord.FaultHandler == null ? null : faultRecord.FaultHandler.Name;
-                    if (string.CompareOrdinal(this.faultPropagationSubscriptions[i].FaultSourceActivityName, faultRecord.FaultSource.Name) == 0)
+                    string faultHandlerName =
+                        faultRecord.FaultHandler == null ? null : faultRecord.FaultHandler.Name;
+                    if (
+                        string.CompareOrdinal(
+                            this.faultPropagationSubscriptions[i].FaultSourceActivityName,
+                            faultRecord.FaultSource.Name
+                        ) == 0
+                    )
                     {
-                        if (CheckSubscription(this.faultPropagationSubscriptions[i].FaultHandlerActivityName, faultHandlerName))
+                        if (
+                            CheckSubscription(
+                                this.faultPropagationSubscriptions[i].FaultHandlerActivityName,
+                                faultHandlerName
+                            )
+                        )
                         {
                             query = this.faultPropagationSubscriptions[i];
                             break;
                         }
                     }
-                    else if (string.CompareOrdinal(this.faultPropagationSubscriptions[i].FaultSourceActivityName, "*") == 0)
+                    else if (
+                        string.CompareOrdinal(
+                            this.faultPropagationSubscriptions[i].FaultSourceActivityName,
+                            "*"
+                        ) == 0
+                    )
                     {
-                        if (CheckSubscription(this.faultPropagationSubscriptions[i].FaultHandlerActivityName, faultHandlerName))
+                        if (
+                            CheckSubscription(
+                                this.faultPropagationSubscriptions[i].FaultHandlerActivityName,
+                                faultHandlerName
+                            )
+                        )
                         {
                             query = this.faultPropagationSubscriptions[i];
                             break;
@@ -429,10 +516,20 @@ namespace System.Activities.Tracking
                 }
             }
 
-            if ((query != null) && (this.associatedProfile.ImplementationVisibility == ImplementationVisibility.RootScope))
+            if (
+                (query != null)
+                && (
+                    this.associatedProfile.ImplementationVisibility
+                    == ImplementationVisibility.RootScope
+                )
+            )
             {
-                if ((!ShouldTrackActivity(faultRecord.FaultHandler, query.FaultHandlerActivityName)) ||
-                    (!ShouldTrackActivity(faultRecord.FaultSource, query.FaultSourceActivityName)))
+                if (
+                    (!ShouldTrackActivity(faultRecord.FaultHandler, query.FaultHandlerActivityName))
+                    || (
+                        !ShouldTrackActivity(faultRecord.FaultSource, query.FaultSourceActivityName)
+                    )
+                )
                 {
                     return null;
                 }
@@ -450,18 +547,39 @@ namespace System.Activities.Tracking
                 for (int i = 0; i < this.cancelRequestedSubscriptions.Count; i++)
                 {
                     //check specific and then generic
-                    string activityName = cancelRecord.Activity == null ? null : cancelRecord.Activity.Name;
-                    if (string.CompareOrdinal(this.cancelRequestedSubscriptions[i].ActivityName, activityName) == 0)
+                    string activityName =
+                        cancelRecord.Activity == null ? null : cancelRecord.Activity.Name;
+                    if (
+                        string.CompareOrdinal(
+                            this.cancelRequestedSubscriptions[i].ActivityName,
+                            activityName
+                        ) == 0
+                    )
                     {
-                        if (CheckSubscription(this.cancelRequestedSubscriptions[i].ChildActivityName, cancelRecord.Child.Name))
+                        if (
+                            CheckSubscription(
+                                this.cancelRequestedSubscriptions[i].ChildActivityName,
+                                cancelRecord.Child.Name
+                            )
+                        )
                         {
                             query = this.cancelRequestedSubscriptions[i];
                             break;
                         }
                     }
-                    else if (string.CompareOrdinal(this.cancelRequestedSubscriptions[i].ActivityName, "*") == 0)
+                    else if (
+                        string.CompareOrdinal(
+                            this.cancelRequestedSubscriptions[i].ActivityName,
+                            "*"
+                        ) == 0
+                    )
                     {
-                        if (CheckSubscription(this.cancelRequestedSubscriptions[i].ChildActivityName, cancelRecord.Child.Name))
+                        if (
+                            CheckSubscription(
+                                this.cancelRequestedSubscriptions[i].ChildActivityName,
+                                cancelRecord.Child.Name
+                            )
+                        )
                         {
                             query = this.cancelRequestedSubscriptions[i];
                             break;
@@ -470,10 +588,18 @@ namespace System.Activities.Tracking
                 }
             }
 
-            if ((query != null) && (this.associatedProfile.ImplementationVisibility == ImplementationVisibility.RootScope))
+            if (
+                (query != null)
+                && (
+                    this.associatedProfile.ImplementationVisibility
+                    == ImplementationVisibility.RootScope
+                )
+            )
             {
-                if ((!ShouldTrackActivity(cancelRecord.Activity, query.ActivityName)) ||
-                    (!ShouldTrackActivity(cancelRecord.Child, query.ChildActivityName)))
+                if (
+                    (!ShouldTrackActivity(cancelRecord.Activity, query.ActivityName))
+                    || (!ShouldTrackActivity(cancelRecord.Child, query.ChildActivityName))
+                )
                 {
                     return null;
                 }
@@ -491,17 +617,35 @@ namespace System.Activities.Tracking
                 for (int i = 0; i < this.customTrackingQuerySubscriptions.Count; i++)
                 {
                     //check specific and then generic
-                    if (string.CompareOrdinal(this.customTrackingQuerySubscriptions[i].Name, customRecord.Name) == 0)
+                    if (
+                        string.CompareOrdinal(
+                            this.customTrackingQuerySubscriptions[i].Name,
+                            customRecord.Name
+                        ) == 0
+                    )
                     {
-                        if (CheckSubscription(this.customTrackingQuerySubscriptions[i].ActivityName, customRecord.Activity.Name))
+                        if (
+                            CheckSubscription(
+                                this.customTrackingQuerySubscriptions[i].ActivityName,
+                                customRecord.Activity.Name
+                            )
+                        )
                         {
                             query = this.customTrackingQuerySubscriptions[i];
                             break;
                         }
                     }
-                    else if (string.CompareOrdinal(this.customTrackingQuerySubscriptions[i].Name, "*") == 0)
+                    else if (
+                        string.CompareOrdinal(this.customTrackingQuerySubscriptions[i].Name, "*")
+                        == 0
+                    )
                     {
-                        if (CheckSubscription(this.customTrackingQuerySubscriptions[i].ActivityName, customRecord.Activity.Name))
+                        if (
+                            CheckSubscription(
+                                this.customTrackingQuerySubscriptions[i].ActivityName,
+                                customRecord.Activity.Name
+                            )
+                        )
                         {
                             query = this.customTrackingQuerySubscriptions[i];
                             break;
@@ -515,15 +659,21 @@ namespace System.Activities.Tracking
         static bool CheckSubscription(string name, string value)
         {
             //check specific and then generic
-            return (string.CompareOrdinal(name, value) == 0 ||
-                string.CompareOrdinal(name, "*") == 0);
+            return (
+                string.CompareOrdinal(name, value) == 0 || string.CompareOrdinal(name, "*") == 0
+            );
         }
 
-        static void ExtractVariables(ActivityStateRecord activityStateRecord, ActivityStateQuery activityStateQuery)
+        static void ExtractVariables(
+            ActivityStateRecord activityStateRecord,
+            ActivityStateQuery activityStateQuery
+        )
         {
             if (activityStateQuery.HasVariables)
             {
-                activityStateRecord.Variables = activityStateRecord.GetVariables(activityStateQuery.Variables);
+                activityStateRecord.Variables = activityStateRecord.GetVariables(
+                    activityStateQuery.Variables
+                );
             }
             else
             {
@@ -531,11 +681,16 @@ namespace System.Activities.Tracking
             }
         }
 
-        static void ExtractArguments(ActivityStateRecord activityStateRecord, ActivityStateQuery activityStateQuery)
+        static void ExtractArguments(
+            ActivityStateRecord activityStateRecord,
+            ActivityStateQuery activityStateQuery
+        )
         {
             if (activityStateQuery.HasArguments)
             {
-                activityStateRecord.Arguments = activityStateRecord.GetArguments(activityStateQuery.Arguments);
+                activityStateRecord.Arguments = activityStateRecord.GetArguments(
+                    activityStateQuery.Arguments
+                );
             }
             else
             {
@@ -543,35 +698,47 @@ namespace System.Activities.Tracking
             }
         }
 
-        static TrackingRecord PrepareRecord(TrackingRecord record, TrackingQuery query, bool shouldClone)
+        static TrackingRecord PrepareRecord(
+            TrackingRecord record,
+            TrackingQuery query,
+            bool shouldClone
+        )
         {
             TrackingRecord preparedRecord = shouldClone ? record.Clone() : record;
 
             if (query.HasAnnotations)
             {
-                preparedRecord.Annotations = new ReadOnlyDictionaryInternal<string, string>(query.QueryAnnotations);
+                preparedRecord.Annotations = new ReadOnlyDictionaryInternal<string, string>(
+                    query.QueryAnnotations
+                );
             }
 
             if (query is ActivityStateQuery)
             {
                 ExtractArguments((ActivityStateRecord)preparedRecord, (ActivityStateQuery)query);
-                ExtractVariables((ActivityStateRecord)preparedRecord, (ActivityStateQuery)query);                
+                ExtractVariables((ActivityStateRecord)preparedRecord, (ActivityStateQuery)query);
             }
             return preparedRecord;
         }
 
-
         class RuntimeTrackingProfileCache
         {
-            [Fx.Tag.Cache(typeof(RuntimeTrackingProfile), Fx.Tag.CacheAttrition.PartialPurgeOnEachAccess)]
+            [Fx.Tag.Cache(
+                typeof(RuntimeTrackingProfile),
+                Fx.Tag.CacheAttrition.PartialPurgeOnEachAccess
+            )]
             ConditionalWeakTable<Activity, HybridCollection<RuntimeTrackingProfile>> cache;
 
             public RuntimeTrackingProfileCache()
             {
-                this.cache = new ConditionalWeakTable<Activity, HybridCollection<RuntimeTrackingProfile>>();
+                this.cache =
+                    new ConditionalWeakTable<Activity, HybridCollection<RuntimeTrackingProfile>>();
             }
 
-            public RuntimeTrackingProfile GetRuntimeTrackingProfile(TrackingProfile profile, Activity rootElement)
+            public RuntimeTrackingProfile GetRuntimeTrackingProfile(
+                TrackingProfile profile,
+                Activity rootElement
+            )
             {
                 Fx.Assert(rootElement != null, "Root element must be valid");
 
@@ -590,11 +757,20 @@ namespace System.Activities.Tracking
                     }
                     else
                     {
-                        ReadOnlyCollection<RuntimeTrackingProfile> runtimeProfileCollection = runtimeProfileList.AsReadOnly();
+                        ReadOnlyCollection<RuntimeTrackingProfile> runtimeProfileCollection =
+                            runtimeProfileList.AsReadOnly();
                         foreach (RuntimeTrackingProfile runtimeProfile in runtimeProfileCollection)
                         {
-                            if (string.CompareOrdinal(profile.Name, runtimeProfile.associatedProfile.Name) == 0 &&
-                                string.CompareOrdinal(profile.ActivityDefinitionId, runtimeProfile.associatedProfile.ActivityDefinitionId) == 0)
+                            if (
+                                string.CompareOrdinal(
+                                    profile.Name,
+                                    runtimeProfile.associatedProfile.Name
+                                ) == 0
+                                && string.CompareOrdinal(
+                                    profile.ActivityDefinitionId,
+                                    runtimeProfile.associatedProfile.ActivityDefinitionId
+                                ) == 0
+                            )
                             {
                                 foundRuntimeProfile = runtimeProfile;
                                 break;

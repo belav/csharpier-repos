@@ -21,9 +21,16 @@ namespace System.Runtime.CompilerServices
         /// <param name="hoistedLocals">The hoisted local state provided by the compiler.</param>
         /// <param name="locals">The actual hoisted local values.</param>
         /// <returns>The quoted expression.</returns>
-        [Obsolete("RuntimeOps has been deprecated and is not supported.", true), EditorBrowsable(EditorBrowsableState.Never)]
+        [
+            Obsolete("RuntimeOps has been deprecated and is not supported.", true),
+            EditorBrowsable(EditorBrowsableState.Never)
+        ]
         [return: NotNullIfNotNull(nameof(expression))]
-        public static Expression? Quote(Expression? expression, object hoistedLocals, object[] locals)
+        public static Expression? Quote(
+            Expression? expression,
+            object hoistedLocals,
+            object[] locals
+        )
         {
             Debug.Assert(hoistedLocals != null && locals != null);
             var quoter = new ExpressionQuoter((HoistedLocals)hoistedLocals, locals);
@@ -37,8 +44,15 @@ namespace System.Runtime.CompilerServices
         /// <param name="second">The second list.</param>
         /// <param name="indexes">The index array indicating which list to get variables from.</param>
         /// <returns>The merged runtime variables.</returns>
-        [Obsolete("RuntimeOps has been deprecated and is not supported.", true), EditorBrowsable(EditorBrowsableState.Never)]
-        public static IRuntimeVariables MergeRuntimeVariables(IRuntimeVariables first, IRuntimeVariables second, int[] indexes)
+        [
+            Obsolete("RuntimeOps has been deprecated and is not supported.", true),
+            EditorBrowsable(EditorBrowsableState.Never)
+        ]
+        public static IRuntimeVariables MergeRuntimeVariables(
+            IRuntimeVariables first,
+            IRuntimeVariables second,
+            int[] indexes
+        )
         {
             return new MergedRuntimeVariables(first, second, indexes);
         }
@@ -57,7 +71,8 @@ namespace System.Runtime.CompilerServices
             // A stack of variables that are defined in nested scopes. We search
             // this first when resolving a variable in case a nested scope shadows
             // one of our variable instances.
-            private readonly Stack<HashSet<ParameterExpression>> _shadowedVars = new Stack<HashSet<ParameterExpression>>();
+            private readonly Stack<HashSet<ParameterExpression>> _shadowedVars =
+                new Stack<HashSet<ParameterExpression>>();
 
             internal ExpressionQuoter(HoistedLocals scope, object[] locals)
             {
@@ -127,7 +142,9 @@ namespace System.Runtime.CompilerServices
                 return Expression.MakeCatchBlock(node.Test, node.Variable, b, f);
             }
 
-            protected internal override Expression VisitRuntimeVariables(RuntimeVariablesExpression node)
+            protected internal override Expression VisitRuntimeVariables(
+                RuntimeVariablesExpression node
+            )
             {
                 int count = node.Variables.Count;
                 var boxes = new List<IStrongBox>();
@@ -154,7 +171,10 @@ namespace System.Runtime.CompilerServices
                     return node;
                 }
 
-                ConstantExpression boxesConst = Expression.Constant(new RuntimeVariables(boxes.ToArray()), typeof(IRuntimeVariables));
+                ConstantExpression boxesConst = Expression.Constant(
+                    new RuntimeVariables(boxes.ToArray()),
+                    typeof(IRuntimeVariables)
+                );
                 // All of them were rewritten. Just return the array as a constant
                 if (vars.Count == 0)
                 {
@@ -164,7 +184,9 @@ namespace System.Runtime.CompilerServices
                 // Otherwise, we need to return an object that merges them
                 return Expression.Call(
                     RuntimeOps_MergeRuntimeVariables,
-                    Expression.RuntimeVariables(new TrueReadOnlyCollection<ParameterExpression>(vars.ToArray())),
+                    Expression.RuntimeVariables(
+                        new TrueReadOnlyCollection<ParameterExpression>(vars.ToArray())
+                    ),
                     boxesConst,
                     Expression.Constant(indexes)
                 );

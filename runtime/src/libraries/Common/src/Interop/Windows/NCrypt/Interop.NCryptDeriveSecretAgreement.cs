@@ -15,7 +15,7 @@ internal static partial class Interop
         internal enum SecretAgreementFlags
         {
             None = 0x00000000,
-            UseSecretAsHmacKey = 0x00000001             // KDF_USE_SECRET_AS_HMAC_KEY_FLAG
+            UseSecretAsHmacKey = 0x00000001, // KDF_USE_SECRET_AS_HMAC_KEY_FLAG
         }
 
         /// <summary>
@@ -26,21 +26,23 @@ internal static partial class Interop
             SafeNCryptKeyHandle hPrivKey,
             SafeNCryptKeyHandle hPubKey,
             out SafeNCryptSecretHandle phSecret,
-            int dwFlags);
-
+            int dwFlags
+        );
 
         /// <summary>
         /// Generate a secret agreement value for between two parties
         /// </summary>
         internal static SafeNCryptSecretHandle DeriveSecretAgreement(
             SafeNCryptKeyHandle privateKey,
-            SafeNCryptKeyHandle otherPartyPublicKey)
+            SafeNCryptKeyHandle otherPartyPublicKey
+        )
         {
             ErrorCode error = NCryptSecretAgreement(
                 privateKey,
                 otherPartyPublicKey,
                 out SafeNCryptSecretHandle secretAgreement,
-                0);
+                0
+            );
 
             if (error != ErrorCode.ERROR_SUCCESS)
             {

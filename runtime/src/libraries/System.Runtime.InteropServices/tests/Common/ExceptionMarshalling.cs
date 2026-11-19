@@ -11,7 +11,8 @@ namespace Microsoft.Interop
     {
         // Use a custom marshaller to implement marshalling an exception to a return value
         Custom = 0,
+
         // Provide some COM-style defaults
-        Com = 1
+        Com = 1,
     }
 }

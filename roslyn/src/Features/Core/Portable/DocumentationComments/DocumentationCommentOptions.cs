@@ -12,12 +12,13 @@ internal readonly record struct DocumentationCommentOptions
 {
     public static readonly DocumentationCommentOptions Default = new();
 
-    [DataMember] public LineFormattingOptions LineFormatting { get; init; } = LineFormattingOptions.Default;
-    [DataMember] public bool AutoXmlDocCommentGeneration { get; init; } = true;
+    [DataMember]
+    public LineFormattingOptions LineFormatting { get; init; } = LineFormattingOptions.Default;
 
-    public DocumentationCommentOptions()
-    {
-    }
+    [DataMember]
+    public bool AutoXmlDocCommentGeneration { get; init; } = true;
+
+    public DocumentationCommentOptions() { }
 
     public bool UseTabs => LineFormatting.UseTabs;
     public int TabSize => LineFormatting.TabSize;

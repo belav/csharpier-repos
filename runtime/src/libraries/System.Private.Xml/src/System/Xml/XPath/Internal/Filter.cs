@@ -16,10 +16,22 @@ namespace MS.Internal.Xml.XPath
             _condition = condition;
         }
 
-        public override AstType Type { get { return AstType.Filter; } }
-        public override XPathResultType ReturnType { get { return XPathResultType.NodeSet; } }
+        public override AstType Type
+        {
+            get { return AstType.Filter; }
+        }
+        public override XPathResultType ReturnType
+        {
+            get { return XPathResultType.NodeSet; }
+        }
 
-        public AstNode Input { get { return _input; } }
-        public AstNode Condition { get { return _condition; } }
+        public AstNode Input
+        {
+            get { return _input; }
+        }
+        public AstNode Condition
+        {
+            get { return _condition; }
+        }
     }
 }

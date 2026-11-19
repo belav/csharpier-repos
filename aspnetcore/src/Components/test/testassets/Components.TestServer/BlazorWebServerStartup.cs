@@ -41,16 +41,13 @@ public class BlazorWebServerStartup
         }
 
         // Mount the server-side Blazor app on /subdir
-        app.Map(
-            "/subdir",
-            app =>
+        app.Map("/subdir", app =>
+        {
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
             {
-                app.UseRouting();
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapRazorComponents<Root>().AddInteractiveServerRenderMode();
-                });
-            }
-        );
+                endpoints.MapRazorComponents<Root>().AddInteractiveServerRenderMode();
+            });
+        });
     }
 }

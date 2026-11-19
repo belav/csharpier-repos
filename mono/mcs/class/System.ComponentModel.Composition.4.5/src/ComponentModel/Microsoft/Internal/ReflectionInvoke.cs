@@ -21,7 +21,11 @@ namespace Microsoft.Internal
             return constructor.Invoke(arguments);
         }
 
-        public static object SafeInvoke(this MethodInfo method, object instance, params object[] arguments)
+        public static object SafeInvoke(
+            this MethodInfo method,
+            object instance,
+            params object[] arguments
+        )
         {
             DemandMemberAccessIfNeeded(method);
 
@@ -43,9 +47,12 @@ namespace Microsoft.Internal
         }
 
 #if FEATURE_CAS_APTCA
-        private static readonly ReflectionPermission _memberAccess = new ReflectionPermission(ReflectionPermissionFlag.MemberAccess);
-        private static readonly ReflectionPermission _restrictedMemberAccess = new ReflectionPermission(ReflectionPermissionFlag.RestrictedMemberAccess);
-        
+        private static readonly ReflectionPermission _memberAccess = new ReflectionPermission(
+            ReflectionPermissionFlag.MemberAccess
+        );
+        private static readonly ReflectionPermission _restrictedMemberAccess =
+            new ReflectionPermission(ReflectionPermissionFlag.RestrictedMemberAccess);
+
         public static void DemandMemberAccessIfNeeded(MethodInfo method)
         {
             if (!method.IsVisible())
@@ -64,7 +71,7 @@ namespace Microsoft.Internal
 
         public static void DemandMemberAccessIfNeeded(Type type)
         {
-            // Consult UnderlyingSystemType this is the type that Activator.CreateInstance creates            
+            // Consult UnderlyingSystemType this is the type that Activator.CreateInstance creates
             if (!type.UnderlyingSystemType.IsVisible)
             {
                 DemandMemberAccess(type);
@@ -87,7 +94,7 @@ namespace Microsoft.Internal
                 _memberAccess.Demand();
             }
             catch (SecurityException)
-            {   // The caller doesn't have member access, but let's see whether they have access to
+            { // The caller doesn't have member access, but let's see whether they have access to
                 // members of assemblies with less or equal permissions (this mimics Reflection's behavior)
 
                 DemandRestrictedMemberAccess(target);
@@ -111,8 +118,11 @@ namespace Microsoft.Internal
         }
 #else
         public static void DemandMemberAccessIfNeeded(MethodInfo method) { }
+
         private static void DemandMemberAccessIfNeeded(ConstructorInfo constructor) { }
+
         private static void DemandMemberAccessIfNeeded(FieldInfo field) { }
+
         public static void DemandMemberAccessIfNeeded(Type type) { }
 #endif //FEATURE_CAS_APTCA
     }

@@ -37,7 +37,8 @@ namespace Microsoft.Extensions.Configuration
                     {
                         Thread.Sleep(Source.ReloadDelay);
                         Load(reload: true);
-                    });
+                    }
+                );
             }
         }
 
@@ -50,8 +51,8 @@ namespace Microsoft.Extensions.Configuration
         /// Generates a string representing this provider name and relevant details.
         /// </summary>
         /// <returns> The configuration name. </returns>
-        public override string ToString()
-            => $"{GetType().Name} for '{Source.Path}' ({(Source.Optional ? "Optional" : "Required")})";
+        public override string ToString() =>
+            $"{GetType().Name} for '{Source.Path}' ({(Source.Optional ? "Optional" : "Required")})";
 
         private void Load(bool reload)
         {
@@ -69,7 +70,9 @@ namespace Microsoft.Extensions.Configuration
                     {
                         error.Append(SR.Format(SR.Error_ExpectedPhysicalPath, file.PhysicalPath));
                     }
-                    HandleException(ExceptionDispatchInfo.Capture(new FileNotFoundException(error.ToString())));
+                    HandleException(
+                        ExceptionDispatchInfo.Capture(new FileNotFoundException(error.ToString()))
+                    );
                 }
             }
             else
@@ -87,7 +90,8 @@ namespace Microsoft.Extensions.Configuration
                             FileAccess.Read,
                             FileShare.ReadWrite,
                             bufferSize: 1,
-                            FileOptions.SequentialScan);
+                            FileOptions.SequentialScan
+                        );
                     }
 
                     return fileInfo.CreateReadStream();
@@ -104,7 +108,10 @@ namespace Microsoft.Extensions.Configuration
                     {
                         Data = new Dictionary<string, string?>(StringComparer.OrdinalIgnoreCase);
                     }
-                    var exception = new InvalidDataException(SR.Format(SR.Error_FailedToLoad, file.PhysicalPath), ex);
+                    var exception = new InvalidDataException(
+                        SR.Format(SR.Error_FailedToLoad, file.PhysicalPath),
+                        ex
+                    );
                     HandleException(ExceptionDispatchInfo.Capture(exception));
                 }
             }
@@ -141,7 +148,7 @@ namespace Microsoft.Extensions.Configuration
                 var exceptionContext = new FileLoadExceptionContext
                 {
                     Provider = this,
-                    Exception = info.SourceException
+                    Exception = info.SourceException,
                 };
                 Source.OnLoadException.Invoke(exceptionContext);
                 ignoreException = exceptionContext.Ignore;

@@ -16,8 +16,7 @@ public abstract class ConsumesAttributeTestsBase<TStartup> : IClassFixture<MvcTe
 {
     protected ConsumesAttributeTestsBase(MvcTestFixture<TStartup> fixture)
     {
-        var factory =
-            fixture.Factories.FirstOrDefault()
+        var factory = fixture.Factories.FirstOrDefault()
             ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }

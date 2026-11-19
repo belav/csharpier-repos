@@ -3,13 +3,24 @@
 
 namespace System.Reflection
 {
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Interface | AttributeTargets.Enum | AttributeTargets.Delegate,
-        AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Method
+            | AttributeTargets.Parameter
+            | AttributeTargets.Field
+            | AttributeTargets.Property
+            | AttributeTargets.Event
+            | AttributeTargets.Interface
+            | AttributeTargets.Enum
+            | AttributeTargets.Delegate,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     public sealed class ObfuscationAttribute : Attribute
     {
-        public ObfuscationAttribute()
-        {
-        }
+        public ObfuscationAttribute() { }
 
         public bool StripAfterObfuscation { get; set; } = true;
         public bool Exclude { get; set; } = true;

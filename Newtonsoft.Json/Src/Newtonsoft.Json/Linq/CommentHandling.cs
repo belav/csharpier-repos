@@ -38,6 +38,6 @@ namespace Newtonsoft.Json.Linq
         /// <summary>
         /// Load comments as a <see cref="JValue"/> with type <see cref="JTokenType.Comment"/>.
         /// </summary>
-        Load = 1
+        Load = 1,
     }
 }

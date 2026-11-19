@@ -7,9 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using Internal.TypeSystem;
 using ILCompiler.Diagnostics;
+using Internal.TypeSystem;
 
 namespace ILCompiler.PEWriter
 {
@@ -26,9 +25,15 @@ namespace ILCompiler.PEWriter
 
         public void SavePdb(string pdbPath, string dllFileName)
         {
-            Console.WriteLine("Emitting PDB file: {0}", Path.Combine(pdbPath, Path.GetFileNameWithoutExtension(dllFileName) + ".ni.pdb"));
+            Console.WriteLine(
+                "Emitting PDB file: {0}",
+                Path.Combine(pdbPath, Path.GetFileNameWithoutExtension(dllFileName) + ".ni.pdb")
+            );
 
-            new PdbWriter(pdbPath, PDBExtraData.None, _details).WritePDBData(dllFileName, _outputInfoBuilder.EnumerateMethods());
+            new PdbWriter(pdbPath, PDBExtraData.None, _details).WritePDBData(
+                dllFileName,
+                _outputInfoBuilder.EnumerateMethods()
+            );
         }
 
         public void SavePerfMap(string perfMapPath, int perfMapFormatVersion, string dllFileName)
@@ -37,7 +42,9 @@ namespace ILCompiler.PEWriter
             if (perfMapFormatVersion == PerfMapWriter.LegacyCrossgen1FormatVersion)
             {
                 string mvidComponent = null;
-                foreach (AssemblyInfo inputAssembly in _outputInfoBuilder.EnumerateInputAssemblies())
+                foreach (
+                    AssemblyInfo inputAssembly in _outputInfoBuilder.EnumerateInputAssemblies()
+                )
                 {
                     if (mvidComponent == null)
                     {
@@ -56,9 +63,18 @@ namespace ILCompiler.PEWriter
                 perfMapExtension = ".ni.r2rmap";
             }
 
-            string perfMapFileName = Path.Combine(perfMapPath, Path.GetFileNameWithoutExtension(dllFileName) + perfMapExtension);
+            string perfMapFileName = Path.Combine(
+                perfMapPath,
+                Path.GetFileNameWithoutExtension(dllFileName) + perfMapExtension
+            );
             Console.WriteLine("Emitting PerfMap file: {0}", perfMapFileName);
-            PerfMapWriter.Write(perfMapFileName, perfMapFormatVersion, _outputInfoBuilder.EnumerateMethods(), _outputInfoBuilder.EnumerateInputAssemblies(), _details);
+            PerfMapWriter.Write(
+                perfMapFileName,
+                perfMapFormatVersion,
+                _outputInfoBuilder.EnumerateMethods(),
+                _outputInfoBuilder.EnumerateInputAssemblies(),
+                _details
+            );
         }
     }
 }

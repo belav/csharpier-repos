@@ -22,17 +22,32 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
 
         private void ValueTrackingTree_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            e.Handled = e.Handled || e.Key switch
-            {
-                Key.Down => TrySelectItem(GetNextItem(expandNode: false), navigate: true),
-                Key.Up => TrySelectItem(GetPreviousItem(), navigate: true),
-                Key.F8 => e.KeyboardDevice.Modifiers == ModifierKeys.Shift ? TrySelectItem(GetPreviousItem(), navigate: true) : TrySelectItem(GetNextItem(expandNode: true), navigate: true),
-                Key.Enter => TrySelectItem(ValueTrackingTreeView.SelectedItem as TreeViewItemBase, navigate: true),
-                Key.Right => TrySetExpanded(ValueTrackingTreeView.SelectedItem as TreeViewItemBase, true),
-                Key.Left => TrySetExpanded(ValueTrackingTreeView.SelectedItem as TreeViewItemBase, false),
-                Key.Space => TryToggleExpanded(ValueTrackingTreeView.SelectedItem as TreeViewItemBase),
-                _ => false
-            };
+            e.Handled =
+                e.Handled
+                || e.Key switch
+                {
+                    Key.Down => TrySelectItem(GetNextItem(expandNode: false), navigate: true),
+                    Key.Up => TrySelectItem(GetPreviousItem(), navigate: true),
+                    Key.F8 => e.KeyboardDevice.Modifiers == ModifierKeys.Shift
+                        ? TrySelectItem(GetPreviousItem(), navigate: true)
+                        : TrySelectItem(GetNextItem(expandNode: true), navigate: true),
+                    Key.Enter => TrySelectItem(
+                        ValueTrackingTreeView.SelectedItem as TreeViewItemBase,
+                        navigate: true
+                    ),
+                    Key.Right => TrySetExpanded(
+                        ValueTrackingTreeView.SelectedItem as TreeViewItemBase,
+                        true
+                    ),
+                    Key.Left => TrySetExpanded(
+                        ValueTrackingTreeView.SelectedItem as TreeViewItemBase,
+                        false
+                    ),
+                    Key.Space => TryToggleExpanded(
+                        ValueTrackingTreeView.SelectedItem as TreeViewItemBase
+                    ),
+                    _ => false,
+                };
 
             // Local Functions
 
@@ -64,7 +79,10 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
             }
         }
 
-        private void ValueTrackingTree_MouseDoubleClickPreview(object sender, MouseButtonEventArgs e)
+        private void ValueTrackingTree_MouseDoubleClickPreview(
+            object sender,
+            MouseButtonEventArgs e
+        )
         {
             if (e.ChangedButton != MouseButton.Left)
             {
@@ -114,14 +132,18 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
         {
             if (ValueTrackingTreeView.SelectedItem is null)
             {
-                return (TreeViewItemBase)ValueTrackingTreeView.Items[ValueTrackingTreeView.Items.Count - 1];
+                return (TreeViewItemBase)
+                    ValueTrackingTreeView.Items[ValueTrackingTreeView.Items.Count - 1];
             }
 
             var item = (TreeViewItemBase)ValueTrackingTreeView.SelectedItem;
             return item.GetPreviousInTree();
         }
 
-        private void ValueTrackingTree_SelectedItemChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<object> e)
+        private void ValueTrackingTree_SelectedItemChanged(
+            object sender,
+            System.Windows.RoutedPropertyChangedEventArgs<object> e
+        )
         {
             _viewModel.SelectedItem = ValueTrackingTreeView.SelectedItem as TreeViewItemBase;
         }

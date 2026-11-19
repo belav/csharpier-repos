@@ -155,8 +155,8 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
             return;
         }
 
-        var container =
-            TryFindMinimalApiArgument(token.Parent) ?? TryFindMvcActionParameter(token.Parent);
+        var container = TryFindMinimalApiArgument(token.Parent)
+            ?? TryFindMvcActionParameter(token.Parent);
         if (container == null)
         {
             return;

@@ -13,7 +13,8 @@ namespace System.Runtime.Serialization
 
         internal MemberHolder(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
-            StreamingContext ctx)
+            StreamingContext ctx
+        )
         {
             _memberType = type;
             _context = ctx;
@@ -23,9 +24,9 @@ namespace System.Runtime.Serialization
 
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
-            return obj is MemberHolder mh &&
-                ReferenceEquals(mh._memberType, _memberType) &&
-                mh._context.State == _context.State;
+            return obj is MemberHolder mh
+                && ReferenceEquals(mh._memberType, _memberType)
+                && mh._context.State == _context.State;
         }
     }
 }

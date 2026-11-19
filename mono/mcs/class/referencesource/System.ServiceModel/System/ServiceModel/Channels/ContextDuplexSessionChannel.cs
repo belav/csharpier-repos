@@ -8,19 +8,36 @@ namespace System.ServiceModel.Channels
     using System.Collections.Generic;
     using System.ServiceModel;
 
-    class ContextDuplexSessionChannel : ContextOutputChannelBase<IDuplexSessionChannel>, IDuplexSessionChannel
+    class ContextDuplexSessionChannel
+        : ContextOutputChannelBase<IDuplexSessionChannel>,
+            IDuplexSessionChannel
     {
         ContextProtocol contextProtocol;
 
-        public ContextDuplexSessionChannel(ChannelManagerBase channelManager, IDuplexSessionChannel innerChannel,
-            ContextExchangeMechanism contextExchangeMechanism, Uri address, Uri callbackAddress, bool contextManagementEnabled)
+        public ContextDuplexSessionChannel(
+            ChannelManagerBase channelManager,
+            IDuplexSessionChannel innerChannel,
+            ContextExchangeMechanism contextExchangeMechanism,
+            Uri address,
+            Uri callbackAddress,
+            bool contextManagementEnabled
+        )
             : base(channelManager, innerChannel)
         {
-            this.contextProtocol = new ClientContextProtocol(contextExchangeMechanism, address, this, callbackAddress, contextManagementEnabled);
+            this.contextProtocol = new ClientContextProtocol(
+                contextExchangeMechanism,
+                address,
+                this,
+                callbackAddress,
+                contextManagementEnabled
+            );
         }
 
-        public ContextDuplexSessionChannel(ChannelManagerBase channelManager, IDuplexSessionChannel innerChannel,
-            ContextExchangeMechanism contextExchangeMechanism)
+        public ContextDuplexSessionChannel(
+            ChannelManagerBase channelManager,
+            IDuplexSessionChannel innerChannel,
+            ContextExchangeMechanism contextExchangeMechanism
+        )
             : base(channelManager, innerChannel)
         {
             this.contextProtocol = new ServiceContextProtocol(contextExchangeMechanism);
@@ -61,7 +78,11 @@ namespace System.ServiceModel.Channels
             return this.InnerChannel.BeginTryReceive(timeout, callback, state);
         }
 
-        public IAsyncResult BeginWaitForMessage(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForMessage(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.InnerChannel.BeginWaitForMessage(timeout, callback, state);
         }

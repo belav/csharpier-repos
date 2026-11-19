@@ -25,7 +25,10 @@ namespace System.Web.Http.ModelBinding
                 throw Error.ArgumentNull("dictionary");
             }
 
-            _innerDictionary = new Dictionary<string, ModelState>(dictionary, StringComparer.OrdinalIgnoreCase);
+            _innerDictionary = new Dictionary<string, ModelState>(
+                dictionary,
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         public int Count

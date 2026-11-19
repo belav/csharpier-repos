@@ -17,7 +17,11 @@ namespace System.Data.Metadata.Edm
     /// <summary>
     /// Represents the edm member class
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Edm"
+    )]
     public abstract class EdmMember : MetadataItem
     {
         /// <summary>
@@ -42,10 +46,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         internal override string Identity
         {
-            get
-            {
-                return this.Name;
-            }
+            get { return this.Name; }
         }
 
         /// <summary>
@@ -54,10 +55,7 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(PrimitiveTypeKind.String, false)]
         public String Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         /// <summary>
@@ -65,10 +63,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public StructuralType DeclaringType
         {
-            get
-            {
-                return _declaringType;
-            }
+            get { return _declaringType; }
         }
 
         /// <summary>
@@ -78,21 +73,17 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(BuiltInTypeKind.TypeUsage, false)]
         public TypeUsage TypeUsage
         {
-            get
-            {
-                return _typeUsage;
-            }
+            get { return _typeUsage; }
         }
 
         /// <summary>
-        /// Overriding System.Object.ToString to provide better String representation 
+        /// Overriding System.Object.ToString to provide better String representation
         /// for this type.
         /// </summary>
         public override string ToString()
         {
             return Name;
         }
-
 
         /// <summary>
         /// Sets the member to read only mode. Once this is done, there are no changes
@@ -123,9 +114,15 @@ namespace System.Data.Metadata.Edm
         {
             get
             {
-                Facet item=null;
-                if (TypeUsage.Facets.TryGetValue(EdmProviderManifest.StoreGeneratedPatternFacetName, false, out item))
-                { 
+                Facet item = null;
+                if (
+                    TypeUsage.Facets.TryGetValue(
+                        EdmProviderManifest.StoreGeneratedPatternFacetName,
+                        false,
+                        out item
+                    )
+                )
+                {
                     return ((StoreGeneratedPattern)item.Value) == StoreGeneratedPattern.Computed;
                 }
                 return false;
@@ -140,8 +137,14 @@ namespace System.Data.Metadata.Edm
             get
             {
                 Facet item = null;
-                if (TypeUsage.Facets.TryGetValue(EdmProviderManifest.StoreGeneratedPatternFacetName, false, out item))
-                { 
+                if (
+                    TypeUsage.Facets.TryGetValue(
+                        EdmProviderManifest.StoreGeneratedPatternFacetName,
+                        false,
+                        out item
+                    )
+                )
+                {
                     return ((StoreGeneratedPattern)item.Value) == StoreGeneratedPattern.Identity;
                 }
                 return false;

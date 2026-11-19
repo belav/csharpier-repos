@@ -17,8 +17,8 @@ public static class PropertyExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static bool ForAdd(this ValueGenerated valueGenerated)
-        => (valueGenerated & ValueGenerated.OnAdd) != 0;
+    public static bool ForAdd(this ValueGenerated valueGenerated) =>
+        (valueGenerated & ValueGenerated.OnAdd) != 0;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -26,8 +26,8 @@ public static class PropertyExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static bool ForUpdate(this ValueGenerated valueGenerated)
-        => (valueGenerated & ValueGenerated.OnUpdate) != 0;
+    public static bool ForUpdate(this ValueGenerated valueGenerated) =>
+        (valueGenerated & ValueGenerated.OnUpdate) != 0;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -64,7 +64,11 @@ public static class PropertyExtensions
 
             foreach (var foreignKey in currentProperty.GetContainingForeignKeys())
             {
-                for (var propertyIndex = 0; propertyIndex < foreignKey.Properties.Count; propertyIndex++)
+                for (
+                    var propertyIndex = 0;
+                    propertyIndex < foreignKey.Properties.Count;
+                    propertyIndex++
+                )
                 {
                     if (currentProperty == foreignKey.Properties[propertyIndex])
                     {
@@ -89,13 +93,21 @@ public static class PropertyExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static bool RequiresValueGenerator(this IReadOnlyProperty property)
-        => (property.ValueGenerated.ForAdd()
-                && property.IsKey()
-                && (!property.IsForeignKey()
-                    || property.IsForeignKeyToSelf()
-                    || (property.GetContainingForeignKeys().All(fk => fk.Properties.Any(p => p != property && p.IsNullable)))))
-            || property.GetValueGeneratorFactory() != null;
+    public static bool RequiresValueGenerator(this IReadOnlyProperty property) =>
+        (
+            property.ValueGenerated.ForAdd()
+            && property.IsKey()
+            && (
+                !property.IsForeignKey()
+                || property.IsForeignKeyToSelf()
+                || (
+                    property
+                        .GetContainingForeignKeys()
+                        .All(fk => fk.Properties.Any(p => p != property && p.IsNullable))
+                )
+            )
+        )
+        || property.GetValueGeneratorFactory() != null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -105,7 +117,10 @@ public static class PropertyExtensions
     /// </summary>
     public static bool IsForeignKeyToSelf(this IReadOnlyProperty property)
     {
-        Check.DebugAssert(property.IsKey(), "Only call this method for properties known to be part of a key.");
+        Check.DebugAssert(
+            property.IsKey(),
+            "Only call this method for properties known to be part of a key."
+        );
 
         foreach (var foreignKey in property.GetContainingForeignKeys())
         {
@@ -125,8 +140,7 @@ public static class PropertyExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static bool IsKey(this Property property)
-        => property.Keys != null;
+    public static bool IsKey(this Property property) => property.Keys != null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -136,8 +150,7 @@ public static class PropertyExtensions
     /// </summary>
     public static bool MayBeStoreGenerated(this IProperty property)
     {
-        if (property.ValueGenerated != ValueGenerated.Never
-            || property.IsForeignKey())
+        if (property.ValueGenerated != ValueGenerated.Never || property.IsForeignKey())
         {
             return true;
         }
@@ -158,12 +171,13 @@ public static class PropertyExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static bool RequiresOriginalValue(this IReadOnlyProperty property)
-        => property.DeclaringType.GetChangeTrackingStrategy() != ChangeTrackingStrategy.ChangingAndChangedNotifications
-            || property.IsConcurrencyToken
-            || property.IsKey()
-            || property.IsForeignKey()
-            || property.IsUniqueIndex();
+    public static bool RequiresOriginalValue(this IReadOnlyProperty property) =>
+        property.DeclaringType.GetChangeTrackingStrategy()
+            != ChangeTrackingStrategy.ChangingAndChangedNotifications
+        || property.IsConcurrencyToken
+        || property.IsKey()
+        || property.IsForeignKey()
+        || property.IsUniqueIndex();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -171,6 +185,7 @@ public static class PropertyExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static bool RequiresOriginalValue(this IReadOnlyComplexProperty property)
-        => property.ComplexType.ContainingEntityType.GetChangeTrackingStrategy() != ChangeTrackingStrategy.ChangingAndChangedNotifications;
+    public static bool RequiresOriginalValue(this IReadOnlyComplexProperty property) =>
+        property.ComplexType.ContainingEntityType.GetChangeTrackingStrategy()
+        != ChangeTrackingStrategy.ChangingAndChangedNotifications;
 }

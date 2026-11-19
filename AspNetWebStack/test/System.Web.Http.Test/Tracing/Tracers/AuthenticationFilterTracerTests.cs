@@ -37,14 +37,23 @@ namespace System.Web.Http.Tracing.Tracers
             CancellationToken expectedCancellationToken = CreateCancellationToken();
             Mock<IAuthenticationFilter> mock = new Mock<IAuthenticationFilter>();
             int calls = 0;
-            mock.Setup(f => f.AuthenticateAsync(expectedAuthenticationContext, expectedCancellationToken)).Callback(
-                () => { calls++; }).Returns(() => Task.FromResult<object>(null));
+            mock.Setup(f =>
+                    f.AuthenticateAsync(expectedAuthenticationContext, expectedCancellationToken)
+                )
+                .Callback(() =>
+                {
+                    calls++;
+                })
+                .Returns(() => Task.FromResult<object>(null));
             IAuthenticationFilter filter = mock.Object;
             ITraceWriter tracer = CreateStubTracer();
             IAuthenticationFilter product = CreateProductUnderTest(filter, tracer);
 
             // Act
-            await product.AuthenticateAsync(expectedAuthenticationContext, expectedCancellationToken);
+            await product.AuthenticateAsync(
+                expectedAuthenticationContext,
+                expectedCancellationToken
+            );
 
             // Assert
             Assert.Equal(1, calls);
@@ -52,29 +61,46 @@ namespace System.Web.Http.Tracing.Tracers
 
         [Theory]
         [ReplaceCulture]
-        [InlineData(true, "The authentication filter successfully set a principal "
-                        + "to a known identity. Identity.Name='User'. "
-                        + "Identity.AuthenticationType='Basic'.")]
+        [InlineData(
+            true,
+            "The authentication filter successfully set a principal "
+                + "to a known identity. Identity.Name='User'. "
+                + "Identity.AuthenticationType='Basic'."
+        )]
         [InlineData(false, "The authentication filter set a principal to an unknown identity.")]
         public async Task AuthenticateAsync_Traces(bool withIdentity, string expectedMessage)
         {
             // Arrange
             CancellationToken cancellationToken = CreateCancellationToken();
             Mock<IAuthenticationFilter> filterMock = new Mock<IAuthenticationFilter>();
-            filterMock.Setup(f => f.AuthenticateAsync(It.IsAny<HttpAuthenticationContext>(),
-                                                      It.IsAny<CancellationToken>()))
-                .Callback((HttpAuthenticationContext context,
-                           CancellationToken token) => context.Principal = CreateDummyPrincipal(withIdentity))
+            filterMock
+                .Setup(f =>
+                    f.AuthenticateAsync(
+                        It.IsAny<HttpAuthenticationContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+                )
+                .Callback(
+                    (HttpAuthenticationContext context, CancellationToken token) =>
+                        context.Principal = CreateDummyPrincipal(withIdentity)
+                )
                 .Returns(Task.FromResult<object>(null));
             IAuthenticationFilter filter = filterMock.Object;
             TraceRecord record = null;
-            ITraceWriter tracer = CreateTracer((r) => { record = r; });
+            ITraceWriter tracer = CreateTracer(
+                (r) =>
+                {
+                    record = r;
+                }
+            );
             IAuthenticationFilter product = CreateProductUnderTest(filter, tracer);
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                HttpAuthenticationContext authenticationContext = CreateAuthenticationContext(expectedRequest,
-                                                                                              isPrincipalSet: false);
+                HttpAuthenticationContext authenticationContext = CreateAuthenticationContext(
+                    expectedRequest,
+                    isPrincipalSet: false
+                );
 
                 // Act
                 await product.AuthenticateAsync(authenticationContext, cancellationToken);
@@ -100,20 +126,35 @@ namespace System.Web.Http.Tracing.Tracers
             IHttpActionResult result = new AuthenticationFailureResult();
             CancellationToken cancellationToken = CreateCancellationToken();
             Mock<IAuthenticationFilter> filterMock = new Mock<IAuthenticationFilter>();
-            filterMock.Setup(f => f.AuthenticateAsync(It.IsAny<HttpAuthenticationContext>(),
-                                                      It.IsAny<CancellationToken>()))
-                .Callback((HttpAuthenticationContext context,
-                           CancellationToken token) => context.ErrorResult = result)
+            filterMock
+                .Setup(f =>
+                    f.AuthenticateAsync(
+                        It.IsAny<HttpAuthenticationContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+                )
+                .Callback(
+                    (HttpAuthenticationContext context, CancellationToken token) =>
+                        context.ErrorResult = result
+                )
                 .Returns(Task.FromResult<object>(null));
             TraceRecord record = null;
-            ITraceWriter tracer = CreateTracer((r) => { record = r; });
+            ITraceWriter tracer = CreateTracer(
+                (r) =>
+                {
+                    record = r;
+                }
+            );
             IAuthenticationFilter product = CreateProductUnderTest(filterMock.Object, tracer);
-            const string expectedMessage = "The authentication filter encountered an error. ErrorResult="
+            const string expectedMessage =
+                "The authentication filter encountered an error. ErrorResult="
                 + "'System.Web.Http.Tracing.Tracers.AuthenticationFilterTracerTests+AuthenticationFailureResult'.";
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                HttpAuthenticationContext authenticationContext = CreateAuthenticationContext(expectedRequest);
+                HttpAuthenticationContext authenticationContext = CreateAuthenticationContext(
+                    expectedRequest
+                );
 
                 // Act
                 await product.AuthenticateAsync(authenticationContext, cancellationToken);
@@ -139,13 +180,21 @@ namespace System.Web.Http.Tracing.Tracers
             CancellationToken cancellationToken = CreateCancellationToken();
             IAuthenticationFilter filter = CreateStubFilter();
             TraceRecord record = null;
-            ITraceWriter tracer = CreateTracer((r) => { record = r; });
+            ITraceWriter tracer = CreateTracer(
+                (r) =>
+                {
+                    record = r;
+                }
+            );
             IAuthenticationFilter product = CreateProductUnderTest(filter, tracer);
-            const string expectedMessage = "The authentication filter did not encounter an error or set a principal.";
+            const string expectedMessage =
+                "The authentication filter did not encounter an error or set a principal.";
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                HttpAuthenticationContext authenticationContext = CreateAuthenticationContext(expectedRequest);
+                HttpAuthenticationContext authenticationContext = CreateAuthenticationContext(
+                    expectedRequest
+                );
 
                 // Act
                 await product.AuthenticateAsync(authenticationContext, cancellationToken);
@@ -170,7 +219,12 @@ namespace System.Web.Http.Tracing.Tracers
             CancellationToken cancellationToken = CreateCancellationToken();
             IAuthenticationFilter filter = CreateStubFilter();
             TraceRecord record = null;
-            ITraceWriter tracer = CreateTracer((r) => { record = r; });
+            ITraceWriter tracer = CreateTracer(
+                (r) =>
+                {
+                    record = r;
+                }
+            );
             IAuthenticationFilter product = CreateProductUnderTest(filter, tracer);
             HttpAuthenticationContext authenticationContext = null;
 
@@ -193,7 +247,10 @@ namespace System.Web.Http.Tracing.Tracers
             Mock<IAuthenticationFilter> mock = new Mock<IAuthenticationFilter>();
             int calls = 0;
             mock.Setup(f => f.ChallengeAsync(expectedChallengeContext, expectedCancellationToken))
-                .Callback(() => { calls++; })
+                .Callback(() =>
+                {
+                    calls++;
+                })
                 .Returns(() => Task.FromResult(expectedResult));
             IAuthenticationFilter filter = mock.Object;
             ITraceWriter tracer = CreateStubTracer();
@@ -213,13 +270,21 @@ namespace System.Web.Http.Tracing.Tracers
             CancellationToken cancellationToken = CreateCancellationToken();
             IAuthenticationFilter filter = CreateStubFilter();
             TraceRecord record = null;
-            ITraceWriter tracer = CreateTracer((r) => { record = r; });
+            ITraceWriter tracer = CreateTracer(
+                (r) =>
+                {
+                    record = r;
+                }
+            );
             IAuthenticationFilter product = CreateProductUnderTest(filter, tracer);
             IHttpActionResult innerResult = CreateDummyActionResult();
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                HttpAuthenticationChallengeContext context = CreateChallengeContext(expectedRequest, innerResult);
+                HttpAuthenticationChallengeContext context = CreateChallengeContext(
+                    expectedRequest,
+                    innerResult
+                );
 
                 // Act
                 await product.ChallengeAsync(context, cancellationToken);
@@ -244,7 +309,12 @@ namespace System.Web.Http.Tracing.Tracers
             CancellationToken cancellationToken = CreateCancellationToken();
             IAuthenticationFilter filter = CreateStubFilter();
             TraceRecord record = null;
-            ITraceWriter tracer = CreateTracer((r) => { record = r; });
+            ITraceWriter tracer = CreateTracer(
+                (r) =>
+                {
+                    record = r;
+                }
+            );
             IAuthenticationFilter product = CreateProductUnderTest(filter, tracer);
             HttpAuthenticationChallengeContext context = null;
 
@@ -277,8 +347,10 @@ namespace System.Web.Http.Tracing.Tracers
             return new HttpAuthenticationContext(actionContext, principal);
         }
 
-        private static HttpAuthenticationContext CreateAuthenticationContext(HttpRequestMessage request,
-                                                                             bool isPrincipalSet = true)
+        private static HttpAuthenticationContext CreateAuthenticationContext(
+            HttpRequestMessage request,
+            bool isPrincipalSet = true
+        )
         {
             HttpActionContext actionContext = CreateActionContext(request);
             IPrincipal principal = (isPrincipalSet) ? CreateDummyPrincipal() : null;
@@ -297,8 +369,10 @@ namespace System.Web.Http.Tracing.Tracers
             return new HttpAuthenticationChallengeContext(actionContext, result);
         }
 
-        private static HttpAuthenticationChallengeContext CreateChallengeContext(HttpRequestMessage request,
-            IHttpActionResult result)
+        private static HttpAuthenticationChallengeContext CreateChallengeContext(
+            HttpRequestMessage request,
+            IHttpActionResult result
+        )
         {
             HttpActionContext actionContext = CreateActionContext(request);
             return new HttpAuthenticationChallengeContext(actionContext, result);
@@ -339,8 +413,10 @@ namespace System.Web.Http.Tracing.Tracers
             return new Mock<ITraceWriter>(MockBehavior.Strict).Object;
         }
 
-        private static AuthenticationFilterTracer CreateProductUnderTest(IAuthenticationFilter innerFilter,
-            ITraceWriter traceWriter)
+        private static AuthenticationFilterTracer CreateProductUnderTest(
+            IAuthenticationFilter innerFilter,
+            ITraceWriter traceWriter
+        )
         {
             return new AuthenticationFilterTracer(innerFilter, traceWriter);
         }
@@ -353,10 +429,19 @@ namespace System.Web.Http.Tracing.Tracers
         private static IAuthenticationFilter CreateStubFilter()
         {
             Mock<IAuthenticationFilter> mock = new Mock<IAuthenticationFilter>();
-            mock.Setup(f => f.AuthenticateAsync(It.IsAny<HttpAuthenticationContext>(), It.IsAny<CancellationToken>()))
+            mock.Setup(f =>
+                    f.AuthenticateAsync(
+                        It.IsAny<HttpAuthenticationContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+                )
                 .Returns(Task.FromResult<object>(null));
-            mock.Setup(f => f.ChallengeAsync(It.IsAny<HttpAuthenticationChallengeContext>(),
-                It.IsAny<CancellationToken>()))
+            mock.Setup(f =>
+                    f.ChallengeAsync(
+                        It.IsAny<HttpAuthenticationChallengeContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+                )
                 .Returns(Task.FromResult<object>(null));
             return mock.Object;
         }
@@ -370,14 +455,22 @@ namespace System.Web.Http.Tracing.Tracers
         {
             Mock<ITraceWriter> mock = new Mock<ITraceWriter>(MockBehavior.Strict);
             TraceRecord record = null;
-            mock.Setup(t => t.Trace(It.IsAny<HttpRequestMessage>(), It.IsAny<string>(), It.IsAny<TraceLevel>(),
-                It.IsAny<Action<TraceRecord>>()))
-                .Callback<HttpRequestMessage, string, TraceLevel, Action<TraceRecord>>((r, c, l, a) =>
+            mock.Setup(t =>
+                    t.Trace(
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<string>(),
+                        It.IsAny<TraceLevel>(),
+                        It.IsAny<Action<TraceRecord>>()
+                    )
+                )
+                .Callback<HttpRequestMessage, string, TraceLevel, Action<TraceRecord>>(
+                    (r, c, l, a) =>
                     {
                         record = new TraceRecord(r, c, l);
                         a.Invoke(record);
                         trace.Invoke(record);
-                    });
+                    }
+                );
             return mock.Object;
         }
 

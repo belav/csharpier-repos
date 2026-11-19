@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,69 +32,75 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Description
 {
-	public class ServiceDebugBehavior : IServiceBehavior
-	{
-		public ServiceDebugBehavior ()
-		{
-			HttpHelpPageEnabled = true;
-			HttpsHelpPageEnabled = true;
-		}
+    public class ServiceDebugBehavior : IServiceBehavior
+    {
+        public ServiceDebugBehavior()
+        {
+            HttpHelpPageEnabled = true;
+            HttpsHelpPageEnabled = true;
+        }
 
-		public bool IncludeExceptionDetailInFaults { get; set; }
+        public bool IncludeExceptionDetailInFaults { get; set; }
 
-		public bool HttpHelpPageEnabled { get; set; }
+        public bool HttpHelpPageEnabled { get; set; }
 
-		public Uri HttpHelpPageUrl { get; set; }
+        public Uri HttpHelpPageUrl { get; set; }
 
-		public bool HttpsHelpPageEnabled { get; set; }
+        public bool HttpsHelpPageEnabled { get; set; }
 
-		public Uri HttpsHelpPageUrl { get; set; }
+        public Uri HttpsHelpPageUrl { get; set; }
 
-		public Binding HttpHelpPageBinding { get; set; }
+        public Binding HttpHelpPageBinding { get; set; }
 
-		public Binding HttpsHelpPageBinding { get; set; }
+        public Binding HttpsHelpPageBinding { get; set; }
 
-		void IServiceBehavior.AddBindingParameters (
-			ServiceDescription description,
-			ServiceHostBase serviceHostBase,
-			Collection<ServiceEndpoint> endpoints,
-			BindingParameterCollection parameters)
-		{
-			// do nothing
-		}
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters
+        )
+        {
+            // do nothing
+        }
 
-		void IServiceBehavior.ApplyDispatchBehavior (
-			ServiceDescription description,
-			ServiceHostBase serviceHostBase)
-		{
-			ServiceMetadataExtension sme = ServiceMetadataExtension.EnsureServiceMetadataExtension (serviceHostBase);
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        )
+        {
+            ServiceMetadataExtension sme = ServiceMetadataExtension.EnsureServiceMetadataExtension(
+                serviceHostBase
+            );
 
-			foreach (var dispatcherBase in serviceHostBase.ChannelDispatchers) {
-				var dispatcher = dispatcherBase as ChannelDispatcher;
-				if (dispatcher == null) // non-ChannelDispatcher ChannelDispatcherBase instance.
-					continue;
-				if (IncludeExceptionDetailInFaults) // may be set also in ServiceBehaviorAttribute
-					dispatcher.IncludeExceptionDetailInFaults = true;
-			}
+            foreach (var dispatcherBase in serviceHostBase.ChannelDispatchers)
+            {
+                var dispatcher = dispatcherBase as ChannelDispatcher;
+                if (dispatcher == null) // non-ChannelDispatcher ChannelDispatcherBase instance.
+                    continue;
+                if (IncludeExceptionDetailInFaults) // may be set also in ServiceBehaviorAttribute
+                    dispatcher.IncludeExceptionDetailInFaults = true;
+            }
 
-			if (HttpHelpPageEnabled) {
-				Uri uri = serviceHostBase.CreateUri ("http", HttpHelpPageUrl);
-				if (uri != null)
-					sme.EnsureChannelDispatcher (false, "http", uri, HttpHelpPageBinding);
-			}
+            if (HttpHelpPageEnabled)
+            {
+                Uri uri = serviceHostBase.CreateUri("http", HttpHelpPageUrl);
+                if (uri != null)
+                    sme.EnsureChannelDispatcher(false, "http", uri, HttpHelpPageBinding);
+            }
 
-			if (HttpsHelpPageEnabled) {
-				Uri uri = serviceHostBase.CreateUri ("https", HttpsHelpPageUrl);
-				if (uri != null)
-					sme.EnsureChannelDispatcher (false, "https", uri, HttpsHelpPageBinding);
-			}
-		}
+            if (HttpsHelpPageEnabled)
+            {
+                Uri uri = serviceHostBase.CreateUri("https", HttpsHelpPageUrl);
+                if (uri != null)
+                    sme.EnsureChannelDispatcher(false, "https", uri, HttpsHelpPageBinding);
+            }
+        }
 
-		[MonoTODO]
-		void IServiceBehavior.Validate (
-			ServiceDescription description,
-			ServiceHostBase serviceHostBase)
-		{
-		}
-	}
+        [MonoTODO]
+        void IServiceBehavior.Validate(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        ) { }
+    }
 }

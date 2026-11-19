@@ -3,7 +3,6 @@
 
 using System;
 using System.IO;
-
 using FluentAssertions;
 using Microsoft.DotNet.Cli.Build.Framework;
 using Microsoft.DotNet.CoreSetup.Test;
@@ -25,11 +24,13 @@ namespace HostActivation.Tests
         public void Default()
         {
             string appExe = sharedTestState.App.AppExe;
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
                 .And.HaveStdOutContaining(TestContext.MicrosoftNETCoreAppVersion);
 
@@ -37,9 +38,14 @@ namespace HostActivation.Tests
             {
                 // App sets FileVersion to NETCoreApp version. On Windows, this should be copied to app resources.
                 string expectedVersion = TestContext.MicrosoftNETCoreAppVersion.Contains('-')
-                    ? TestContext.MicrosoftNETCoreAppVersion[..TestContext.MicrosoftNETCoreAppVersion.IndexOf('-')]
+                    ? TestContext.MicrosoftNETCoreAppVersion[
+                        ..TestContext.MicrosoftNETCoreAppVersion.IndexOf('-')
+                    ]
                     : TestContext.MicrosoftNETCoreAppVersion;
-                Assert.Equal(expectedVersion, System.Diagnostics.FileVersionInfo.GetVersionInfo(appExe).FileVersion);
+                Assert.Equal(
+                    expectedVersion,
+                    System.Diagnostics.FileVersionInfo.GetVersionInfo(appExe).FileVersion
+                );
             }
         }
 
@@ -52,23 +58,35 @@ namespace HostActivation.Tests
             File.Delete(app.DepsJson);
 
             // Make sure normal run succeeds and doesn't print any errors
-            Command.Create(app.AppExe)
+            Command
+                .Create(app.AppExe)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 // Note that this is an exact match - we don't expect any output from the host itself
-                .And.HaveStdOut($"Hello World!{Environment.NewLine}{Environment.NewLine}.NET {TestContext.MicrosoftNETCoreAppVersion}{Environment.NewLine}")
+                .And.HaveStdOut(
+                    $"Hello World!{Environment.NewLine}{Environment.NewLine}.NET {TestContext.MicrosoftNETCoreAppVersion}{Environment.NewLine}"
+                )
                 .And.NotHaveStdErr();
 
             // Make sure tracing indicates there is no runtime config and no deps json
-            Command.Create(app.AppExe)
+            Command
+                .Create(app.AppExe)
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdOut($"Hello World!{Environment.NewLine}{Environment.NewLine}.NET {TestContext.MicrosoftNETCoreAppVersion}{Environment.NewLine}")
-                .And.HaveStdErrContaining($"Runtime config does not exist at [{app.RuntimeConfigJson}]")
-                .And.HaveStdErrContaining($"Dependencies manifest does not exist at [{app.DepsJson}]");
+                .Should()
+                .Pass()
+                .And.HaveStdOut(
+                    $"Hello World!{Environment.NewLine}{Environment.NewLine}.NET {TestContext.MicrosoftNETCoreAppVersion}{Environment.NewLine}"
+                )
+                .And.HaveStdErrContaining(
+                    $"Runtime config does not exist at [{app.RuntimeConfigJson}]"
+                )
+                .And.HaveStdErrContaining(
+                    $"Dependencies manifest does not exist at [{app.DepsJson}]"
+                );
         }
 
         [Fact]
@@ -79,11 +97,13 @@ namespace HostActivation.Tests
             var renamedAppExe = app.AppExe + Binaries.GetExeFileNameForCurrentPlatform("renamed");
             File.Move(app.AppExe, renamedAppExe, true);
 
-            Command.Create(renamedAppExe)
+            Command
+                .Create(renamedAppExe)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
                 .And.HaveStdOutContaining(TestContext.MicrosoftNETCoreAppVersion);
         }
@@ -103,13 +123,16 @@ namespace HostActivation.Tests
             HostWriter.CreateAppHost(
                 Binaries.AppHost.FilePath,
                 appExe,
-                Path.GetRelativePath(subDir, app.AppDll));
+                Path.GetRelativePath(subDir, app.AppDll)
+            );
 
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
                 .And.HaveStdOutContaining(TestContext.MicrosoftNETCoreAppVersion);
         }
@@ -128,13 +151,20 @@ namespace HostActivation.Tests
 
             // This verifies a self-contained apphost cannot use DOTNET_ROOT to reference a flat
             // self-contained layout since a flat layout of the shared framework is not supported.
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .EnableTracingAndCaptureOutputs()
                 .DotNetRoot(app.Location)
                 .Execute(expectedToFail: true)
-                .Should().Fail()
-                .And.HaveUsedDotNetRootInstallLocation(Path.GetFullPath(app.Location), TestContext.TargetRID)
-                .And.HaveStdErrContaining($"The required library {Binaries.HostFxr.FileName} could not be found.");
+                .Should()
+                .Fail()
+                .And.HaveUsedDotNetRootInstallLocation(
+                    Path.GetFullPath(app.Location),
+                    TestContext.TargetRID
+                )
+                .And.HaveStdErrContaining(
+                    $"The required library {Binaries.HostFxr.FileName} could not be found."
+                );
         }
 
         public class SharedTestState : IDisposable
@@ -155,4 +185,3 @@ namespace HostActivation.Tests
         }
     }
 }
-

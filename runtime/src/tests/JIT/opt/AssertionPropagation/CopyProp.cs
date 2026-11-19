@@ -8,7 +8,9 @@ using Xunit;
 
 public class Sample2
 {
-    [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+    [System.Runtime.CompilerServices.MethodImplAttribute(
+        System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+    )]
     private static sbyte func(int a, int b)
     {
         int res = 1000;

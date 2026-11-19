@@ -71,19 +71,68 @@ namespace VariantStaticInterfaceDispatchRegressionTest
             TestTheBarString<FooBarBazBoz2, Derived>("IBoz");
         }
 
-        static string GetTheFooString<T, U>() where T : IFoo<U> { try { return T.GetString(); } catch (AmbiguousImplementationException) { return "AmbiguousImplementationException"; } }
-        static string GetTheBarString<T, U>() where T : IBar<U> { try { return T.GetString(); } catch (AmbiguousImplementationException) { return "AmbiguousImplementationException"; } }
-        static string GetTheFooStringInstance<T, U>() where T : IFoo<U>, new() { try { return (new T()).GetStringInstance(); } catch (AmbiguousImplementationException) { return "AmbiguousImplementationException"; } }
-        static string GetTheBarStringInstance<T, U>() where T : IBar<U>, new() { try { return (new T()).GetStringInstance(); } catch (AmbiguousImplementationException) { return "AmbiguousImplementationException"; } }
+        static string GetTheFooString<T, U>()
+            where T : IFoo<U>
+        {
+            try
+            {
+                return T.GetString();
+            }
+            catch (AmbiguousImplementationException)
+            {
+                return "AmbiguousImplementationException";
+            }
+        }
 
-        static void TestTheFooString<T, U>(string expected) where T : IFoo<U>, new()
+        static string GetTheBarString<T, U>()
+            where T : IBar<U>
+        {
+            try
+            {
+                return T.GetString();
+            }
+            catch (AmbiguousImplementationException)
+            {
+                return "AmbiguousImplementationException";
+            }
+        }
+
+        static string GetTheFooStringInstance<T, U>()
+            where T : IFoo<U>, new()
+        {
+            try
+            {
+                return (new T()).GetStringInstance();
+            }
+            catch (AmbiguousImplementationException)
+            {
+                return "AmbiguousImplementationException";
+            }
+        }
+
+        static string GetTheBarStringInstance<T, U>()
+            where T : IBar<U>, new()
+        {
+            try
+            {
+                return (new T()).GetStringInstance();
+            }
+            catch (AmbiguousImplementationException)
+            {
+                return "AmbiguousImplementationException";
+            }
+        }
+
+        static void TestTheFooString<T, U>(string expected)
+            where T : IFoo<U>, new()
         {
             Console.WriteLine($"TestTheFooString {typeof(T).Name} {typeof(T).Name} {expected}");
             Assert.Equal(expected, GetTheFooString<T, U>());
             Assert.Equal(expected, GetTheFooStringInstance<T, U>());
         }
 
-        static void TestTheBarString<T, U>(string expected) where T : IBar<U>, new()
+        static void TestTheBarString<T, U>(string expected)
+            where T : IBar<U>, new()
         {
             Console.WriteLine($"TestTheBarString {typeof(T).Name} {typeof(T).Name} {expected}");
             Assert.Equal(expected, GetTheBarString<T, U>());
@@ -102,7 +151,6 @@ namespace VariantStaticInterfaceDispatchRegressionTest
             virtual string GetStringInstance() => $"IBar<{typeof(T).Name}>";
         };
 
-
         interface IBaz : IFoo<Mid>, IBar<Mid>
         {
             static string IFoo<Mid>.GetString() => "IBaz";
@@ -120,14 +168,21 @@ namespace VariantStaticInterfaceDispatchRegressionTest
         }
 
         class FooBar : IFoo<Base>, IBar<Derived> { }
+
         class FooBar2 : IFoo<Base>, IBar<Derived>, IFoo<Mid>, IBar<Mid> { }
+
         class FooBarBaz : FooBar, IBaz { }
+
         class FooBarBaz2 : IFoo<Base>, IBar<Derived>, IBaz { } // Implementation with all interfaces defined on the same type
+
         class FooBarBazBoz : FooBarBaz, IBoz { }
+
         class FooBarBazBoz2 : IFoo<Base>, IBar<Derived>, IBaz, IBoz { } // Implementation with all interfaces defined on the same type
 
         class Base { }
+
         class Mid : Base { }
+
         class Derived : Mid { }
     }
 }

@@ -22,30 +22,18 @@ namespace System.ComponentModel
 
         public int Count
         {
-            get
-            {
-                return _attributes.Count;
-            }
+            get { return _attributes.Count; }
         }
 
         public bool IsReadOnly
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public Attribute this[int index]
         {
-            get
-            {
-                return _attributes[index];
-            }
-            set
-            {
-                throw new NotSupportedException();
-            }
+            get { return _attributes[index]; }
+            set { throw new NotSupportedException(); }
         }
 
         public void Add(Attribute attribute)
@@ -85,10 +73,10 @@ namespace System.ComponentModel
         {
             for (int i = 0; i < _attributes.Count; i++)
             {
-                if (attribute == _attributes[i]) 
+                if (attribute == _attributes[i])
                 {
                     return i;
-                }                
+                }
             }
             return -1;
         }

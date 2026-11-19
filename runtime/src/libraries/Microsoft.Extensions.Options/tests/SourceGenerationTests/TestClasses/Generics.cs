@@ -29,7 +29,5 @@ namespace Generics
     }
 
     [OptionsValidator]
-    public partial class FirstValidator<T> : IValidateOptions<FirstModel<T>>
-    {
-    }
+    public partial class FirstValidator<T> : IValidateOptions<FirstModel<T>> { }
 }

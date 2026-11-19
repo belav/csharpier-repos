@@ -43,7 +43,8 @@ namespace System.Security.Cryptography.X509Certificates
         /// </exception>
         public static X509Extension BuildCrlDistributionPointExtension(
             IEnumerable<string> uris,
-            bool critical = false)
+            bool critical = false
+        )
         {
             ArgumentNullException.ThrowIfNull(uris);
 
@@ -89,11 +90,15 @@ namespace System.Security.Cryptography.X509Certificates
                                 writer.WriteCharacterString(
                                     UniversalTagNumber.IA5String,
                                     uri,
-                                    new Asn1Tag(TagClass.ContextSpecific, 6));
+                                    new Asn1Tag(TagClass.ContextSpecific, 6)
+                                );
                             }
                             catch (System.Text.EncoderFallbackException e)
                             {
-                                throw new CryptographicException(SR.Cryptography_Invalid_IA5String, e);
+                                throw new CryptographicException(
+                                    SR.Cryptography_Invalid_IA5String,
+                                    e
+                                );
                             }
                         }
                     }
@@ -102,7 +107,10 @@ namespace System.Security.Cryptography.X509Certificates
 
             if (writer is null)
             {
-                throw new ArgumentException(SR.Cryptography_X509_CDP_MustNotBuildEmpty, nameof(uris));
+                throw new ArgumentException(
+                    SR.Cryptography_X509_CDP_MustNotBuildEmpty,
+                    nameof(uris)
+                );
             }
 
             // CRLDistributionPoints

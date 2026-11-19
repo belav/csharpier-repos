@@ -31,9 +31,8 @@ public class NewtonsoftJsonMvcCoreBuilderExtensionsTest
             );
 
         // Assert
-        Assert.Single(
-            services,
-            d => d.ServiceType == typeof(IConfigureOptions<MvcNewtonsoftJsonOptions>)
+        Assert.Single(services, d =>
+            d.ServiceType == typeof(IConfigureOptions<MvcNewtonsoftJsonOptions>)
         );
     }
 
@@ -64,9 +63,8 @@ public class NewtonsoftJsonMvcCoreBuilderExtensionsTest
         NewtonsoftJsonMvcCoreBuilderExtensions.AddServicesCore(services);
 
         // Assert
-        var tempDataSerializer = Assert.Single(
-            services,
-            d => d.ServiceType == typeof(TempDataSerializer)
+        var tempDataSerializer = Assert.Single(services, d =>
+            d.ServiceType == typeof(TempDataSerializer)
         );
         Assert.Same(typeof(BsonTempDataSerializer), tempDataSerializer.ImplementationType);
     }
@@ -84,9 +82,8 @@ public class NewtonsoftJsonMvcCoreBuilderExtensionsTest
         NewtonsoftJsonMvcCoreBuilderExtensions.AddServicesCore(services);
 
         // Assert
-        var jsonResultExecutor = Assert.Single(
-            services,
-            d => d.ServiceType == typeof(IActionResultExecutor<JsonResult>)
+        var jsonResultExecutor = Assert.Single(services, d =>
+            d.ServiceType == typeof(IActionResultExecutor<JsonResult>)
         );
         Assert.Same(typeof(NewtonsoftJsonResultExecutor), jsonResultExecutor.ImplementationType);
     }

@@ -13,9 +13,9 @@ namespace System.Collections.Generic
         /// <summary>
         /// Returns a zero length array of type. Only allocates once per distinct type.
         /// </summary>
-        public static T[] Array 
-        { 
-            get { return _emptyArray; } 
+        public static T[] Array
+        {
+            get { return _emptyArray; }
         }
     }
 }

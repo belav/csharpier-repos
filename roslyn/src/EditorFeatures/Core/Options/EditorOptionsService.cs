@@ -17,7 +17,11 @@ namespace Microsoft.CodeAnalysis.Options;
 [Export(typeof(EditorOptionsService)), Shared]
 [method: ImportingConstructor]
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-internal sealed class EditorOptionsService(IGlobalOptionService globalOptions, IEditorOptionsFactoryService factory, IIndentationManagerService indentationManager)
+internal sealed class EditorOptionsService(
+    IGlobalOptionService globalOptions,
+    IEditorOptionsFactoryService factory,
+    IIndentationManagerService indentationManager
+)
 {
     public readonly IGlobalOptionService GlobalOptions = globalOptions;
     public readonly IEditorOptionsFactoryService Factory = factory;

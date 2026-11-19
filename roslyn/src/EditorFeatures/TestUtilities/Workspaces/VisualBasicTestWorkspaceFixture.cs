@@ -21,9 +21,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         {
             return TestWorkspace.CreateWithSingleEmptySourceFile(
                 LanguageNames.VisualBasic,
-                compilationOptions: new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary),
+                compilationOptions: new VisualBasicCompilationOptions(
+                    OutputKind.DynamicallyLinkedLibrary
+                ),
                 parseOptions: new VisualBasicParseOptions(kind: SourceCodeKind.Regular),
-                composition: composition);
+                composition: composition
+            );
         }
     }
 }

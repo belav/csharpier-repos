@@ -21,7 +21,7 @@ namespace System.Diagnostics
             Default = 0x1,
             DisableOptimizations = 0x100,
             IgnoreSymbolStoreSequencePoints = 0x2,
-            EnableEditAndContinue = 0x4
+            EnableEditAndContinue = 0x4,
         }
 
         public DebuggableAttribute(bool isJITTrackingEnabled, bool isJITOptimizerDisabled)
@@ -46,7 +46,8 @@ namespace System.Diagnostics
 
         public bool IsJITTrackingEnabled => (DebuggingFlags & DebuggingModes.Default) != 0;
 
-        public bool IsJITOptimizerDisabled => (DebuggingFlags & DebuggingModes.DisableOptimizations) != 0;
+        public bool IsJITOptimizerDisabled =>
+            (DebuggingFlags & DebuggingModes.DisableOptimizations) != 0;
 
         public DebuggingModes DebuggingFlags { get; }
     }

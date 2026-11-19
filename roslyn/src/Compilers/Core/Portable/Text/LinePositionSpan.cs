@@ -30,7 +30,10 @@ namespace Microsoft.CodeAnalysis.Text
         {
             if (end < start)
             {
-                throw new ArgumentException(string.Format(CodeAnalysisResources.EndMustNotBeLessThanStart, start, end), nameof(end));
+                throw new ArgumentException(
+                    string.Format(CodeAnalysisResources.EndMustNotBeLessThanStart, start, end),
+                    nameof(end)
+                );
             }
 
             _start = start;
@@ -60,8 +63,7 @@ namespace Microsoft.CodeAnalysis.Text
 
         public bool Equals(LinePositionSpan other)
         {
-            return _start.Equals(other._start)
-                && _end.Equals(other._end);
+            return _start.Equals(other._start) && _end.Equals(other._end);
         }
 
         public override int GetHashCode()

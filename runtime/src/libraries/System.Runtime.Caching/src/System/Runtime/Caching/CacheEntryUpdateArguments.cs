@@ -46,7 +46,12 @@ namespace System.Runtime.Caching
             set { _updatedCacheItemPolicy = value; }
         }
 
-        public CacheEntryUpdateArguments(ObjectCache source, CacheEntryRemovedReason reason, string key, string regionName)
+        public CacheEntryUpdateArguments(
+            ObjectCache source,
+            CacheEntryRemovedReason reason,
+            string key,
+            string regionName
+        )
         {
             if (source is null)
             {

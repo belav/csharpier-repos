@@ -1,9 +1,9 @@
-﻿namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc
+{
     using System;
 
-    public interface IRouteWithArea {
-
+    public interface IRouteWithArea
+    {
         string Area { get; }
-
     }
 }

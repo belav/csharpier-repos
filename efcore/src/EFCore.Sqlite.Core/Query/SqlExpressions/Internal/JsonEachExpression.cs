@@ -27,8 +27,7 @@ public class JsonEachExpression : TableValuedFunctionExpression, IClonableTableE
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual SqlExpression JsonExpression
-        => Arguments[0];
+    public virtual SqlExpression JsonExpression => Arguments[0];
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -47,7 +46,8 @@ public class JsonEachExpression : TableValuedFunctionExpression, IClonableTableE
     public JsonEachExpression(
         string alias,
         SqlExpression jsonExpression,
-        IReadOnlyList<PathSegment>? path = null)
+        IReadOnlyList<PathSegment>? path = null
+    )
         : base(alias, "json_each", schema: null, builtIn: true, new[] { jsonExpression })
     {
         Path = path;
@@ -117,11 +117,15 @@ public class JsonEachExpression : TableValuedFunctionExpression, IClonableTableE
     /// </summary>
     public virtual JsonEachExpression Update(
         SqlExpression jsonExpression,
-        IReadOnlyList<PathSegment>? path)
-        => jsonExpression == JsonExpression
-            && (ReferenceEquals(path, Path) || path is not null && Path is not null && path.SequenceEqual(Path))
-                ? this
-                : new JsonEachExpression(Alias, jsonExpression, path);
+        IReadOnlyList<PathSegment>? path
+    ) =>
+        jsonExpression == JsonExpression
+        && (
+            ReferenceEquals(path, Path)
+            || path is not null && Path is not null && path.SequenceEqual(Path)
+        )
+            ? this
+            : new JsonEachExpression(Alias, jsonExpression, path);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -171,15 +175,17 @@ public class JsonEachExpression : TableValuedFunctionExpression, IClonableTableE
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => ReferenceEquals(this, obj) || (obj is JsonEachExpression jsonEachExpression && Equals(jsonEachExpression));
+    public override bool Equals(object? obj) =>
+        ReferenceEquals(this, obj)
+        || (obj is JsonEachExpression jsonEachExpression && Equals(jsonEachExpression));
 
-    private bool Equals(JsonEachExpression other)
-        => base.Equals(other)
-            && (ReferenceEquals(Path, other.Path)
-                || (Path is not null && other.Path is not null && Path.SequenceEqual(other.Path)));
+    private bool Equals(JsonEachExpression other) =>
+        base.Equals(other)
+        && (
+            ReferenceEquals(Path, other.Path)
+            || (Path is not null && other.Path is not null && Path.SequenceEqual(other.Path))
+        );
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 }

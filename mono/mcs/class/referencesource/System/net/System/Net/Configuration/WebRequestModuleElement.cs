@@ -7,8 +7,8 @@
 namespace System.Net.Configuration
 {
     using System;
-    using System.Configuration;
     using System.ComponentModel;
+    using System.Configuration;
     using System.Globalization;
     using System.Reflection;
     using System.Security.Permissions;
@@ -21,13 +21,15 @@ namespace System.Net.Configuration
             this.properties.Add(this.type);
         }
 
-        public WebRequestModuleElement(string prefix, string type) : this()
+        public WebRequestModuleElement(string prefix, string type)
+            : this()
         {
             this.Prefix = prefix;
             this[this.type] = new TypeAndName(type);
         }
-        
-        public WebRequestModuleElement(string prefix, Type type) : this()
+
+        public WebRequestModuleElement(string prefix, Type type)
+            : this()
         {
             this.Prefix = prefix;
             this.Type = type;
@@ -35,13 +37,10 @@ namespace System.Net.Configuration
 
         protected override ConfigurationPropertyCollection Properties
         {
-            get 
-            {
-                return this.properties;
-            }
+            get { return this.properties; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Prefix, IsRequired=true, IsKey = true)]
+        [ConfigurationProperty(ConfigurationStrings.Prefix, IsRequired = true, IsKey = true)]
         public string Prefix
         {
             get { return (string)this[this.prefix]; }
@@ -52,7 +51,7 @@ namespace System.Net.Configuration
         [TypeConverter(typeof(TypeTypeConverter))]
         public Type Type
         {
-            get 
+            get
             {
                 TypeAndName typeName = (TypeAndName)this[this.type];
                 if (typeName != null)
@@ -71,23 +70,24 @@ namespace System.Net.Configuration
         {
             get { return this.Prefix; }
         }
-        
+
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        readonly ConfigurationProperty prefix = 
-            new ConfigurationProperty(ConfigurationStrings.Prefix, 
-                                      typeof(string), 
-                                      null, 
-                                      ConfigurationPropertyOptions.IsKey);
+        readonly ConfigurationProperty prefix = new ConfigurationProperty(
+            ConfigurationStrings.Prefix,
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.IsKey
+        );
 
-        readonly ConfigurationProperty type =
-            new ConfigurationProperty(ConfigurationStrings.Type, 
-                                      typeof(TypeAndName), 
-                                      null, 
-                                      new TypeTypeConverter(), 
-                                      null, 
-                                      ConfigurationPropertyOptions.None);
-
+        readonly ConfigurationProperty type = new ConfigurationProperty(
+            ConfigurationStrings.Type,
+            typeof(TypeAndName),
+            null,
+            new TypeTypeConverter(),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
         class TypeAndName
         {
@@ -109,33 +109,51 @@ namespace System.Net.Configuration
 
             public override bool Equals(object comparand)
             {
-                return type.Equals(((TypeAndName) comparand).type);
+                return type.Equals(((TypeAndName)comparand).type);
             }
 
             public readonly Type type;
             public readonly string name;
         }
 
-        class TypeTypeConverter : TypeConverter {
-            public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) {
-                if (sourceType == typeof(string)) {
+        class TypeTypeConverter : TypeConverter
+        {
+            public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+            {
+                if (sourceType == typeof(string))
+                {
                     return true;
                 }
                 return base.CanConvertFrom(context, sourceType);
             }
-        
-            public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value) {
-                if (value is string) {
-                    return new TypeAndName((string) value);
+
+            public override object ConvertFrom(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value
+            )
+            {
+                if (value is string)
+                {
+                    return new TypeAndName((string)value);
                 }
 
                 return base.ConvertFrom(context, culture, value);
             }
 
-            public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) {
-                if (destinationType == typeof(string)) {
-                    TypeAndName castedValue = (TypeAndName) value;
-                    return castedValue.name == null ? castedValue.type.AssemblyQualifiedName : castedValue.name;
+            public override object ConvertTo(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value,
+                Type destinationType
+            )
+            {
+                if (destinationType == typeof(string))
+                {
+                    TypeAndName castedValue = (TypeAndName)value;
+                    return castedValue.name == null
+                        ? castedValue.type.AssemblyQualifiedName
+                        : castedValue.name;
                 }
 
                 return base.ConvertTo(context, culture, value, destinationType);
@@ -143,4 +161,3 @@ namespace System.Net.Configuration
         }
     }
 }
-

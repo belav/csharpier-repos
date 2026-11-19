@@ -34,210 +34,250 @@ using System.Windows.Forms;
 
 namespace System.ComponentModel.Design
 {
-	
-	internal class SelectionService : ISelectionService
-	{
-		
-		private IServiceProvider _serviceProvider;
-		private ArrayList _selection;
-		private IComponent _primarySelection;
-		
-		public SelectionService (IServiceProvider provider)
-		{
-			_serviceProvider = provider;
-			_selection = new ArrayList();
+    internal class SelectionService : ISelectionService
+    {
+        private IServiceProvider _serviceProvider;
+        private ArrayList _selection;
+        private IComponent _primarySelection;
 
-			IComponentChangeService changeService = provider.GetService (typeof (IComponentChangeService)) as IComponentChangeService;
-			if (changeService != null)
-				changeService.ComponentRemoving += new ComponentEventHandler (OnComponentRemoving);
-		}
-		
-		private void OnComponentRemoving (object sender, ComponentEventArgs args)
-		{
-			if (this.GetComponentSelected (args.Component))
-				this.SetSelectedComponents (new IComponent[] { args.Component }, SelectionTypes.Remove);
-		}
-		
-		public event EventHandler SelectionChanging;
-		public event EventHandler SelectionChanged;
-		
-		public ICollection GetSelectedComponents() 
-		{
-			if (_selection != null)
-				return _selection.ToArray ();
+        public SelectionService(IServiceProvider provider)
+        {
+            _serviceProvider = provider;
+            _selection = new ArrayList();
 
-			return new object[0];
-		}
+            IComponentChangeService changeService =
+                provider.GetService(typeof(IComponentChangeService)) as IComponentChangeService;
+            if (changeService != null)
+                changeService.ComponentRemoving += new ComponentEventHandler(OnComponentRemoving);
+        }
 
-		protected virtual void OnSelectionChanging ()
-		{
-			if (SelectionChanging != null)
-				SelectionChanging (this, EventArgs.Empty);
-		}
-		
-		protected virtual void OnSelectionChanged ()
-		{
-			if (SelectionChanged != null)
-				SelectionChanged (this, EventArgs.Empty);
-		}
+        private void OnComponentRemoving(object sender, ComponentEventArgs args)
+        {
+            if (this.GetComponentSelected(args.Component))
+                this.SetSelectedComponents(
+                    new IComponent[] { args.Component },
+                    SelectionTypes.Remove
+                );
+        }
 
-		public object PrimarySelection {
-			get { return _primarySelection; }
-		}
- 		
-		public int SelectionCount {
-			get {
-				if (_selection != null)
-					return _selection.Count;
+        public event EventHandler SelectionChanging;
+        public event EventHandler SelectionChanged;
 
-				return 0;
-			}
-		}
+        public ICollection GetSelectedComponents()
+        {
+            if (_selection != null)
+                return _selection.ToArray();
 
+            return new object[0];
+        }
 
-		private IComponent RootComponent {
-			get {
-				if (_serviceProvider != null) {
-					IDesignerHost designerHost = _serviceProvider.GetService (typeof (IDesignerHost)) as IDesignerHost;
-					if (designerHost != null)
-						return designerHost.RootComponent;
-				}
-				return null;
-			}
-		}
-		
-		public bool GetComponentSelected (object component) 
-		{
-			if (_selection != null)
-				return _selection.Contains (component);
+        protected virtual void OnSelectionChanging()
+        {
+            if (SelectionChanging != null)
+                SelectionChanging(this, EventArgs.Empty);
+        }
 
-			return false;
-		}
+        protected virtual void OnSelectionChanged()
+        {
+            if (SelectionChanged != null)
+                SelectionChanged(this, EventArgs.Empty);
+        }
 
-		public void SetSelectedComponents (ICollection components) 
-		{
-			SetSelectedComponents (components, SelectionTypes.Auto);
-		}
+        public object PrimarySelection
+        {
+            get { return _primarySelection; }
+        }
 
-		// If the array is a null reference or does not contain any components,
-		// SetSelectedComponents selects the top-level component in the designer.
-		//
-		public void SetSelectedComponents (ICollection components, SelectionTypes selectionType)
-		{
-			bool primary, add, remove, replace, toggle, auto;
-			primary = add = remove = replace = toggle = auto = false;
-			
-			OnSelectionChanging ();
+        public int SelectionCount
+        {
+            get
+            {
+                if (_selection != null)
+                    return _selection.Count;
 
-			if (_selection == null)
-				throw new InvalidOperationException("_selection == null");
-			
-			if (components == null || components.Count == 0) {
-				components = new ArrayList ();
-				((ArrayList) components).Add (this.RootComponent);
-				selectionType = SelectionTypes.Replace;
-			}
-			
-			if (!Enum.IsDefined (typeof (SelectionTypes), selectionType)) {
-				selectionType = SelectionTypes.Auto;
-			}
+                return 0;
+            }
+        }
 
-			auto = ((selectionType & SelectionTypes.Auto) == SelectionTypes.Auto);
-			
-			
-			if (auto) {
-				if ((((Control.ModifierKeys & Keys.Control) == Keys.Control) || ((Control.ModifierKeys & Keys.Shift) == Keys.Shift))) {
-					toggle = true;
-				}
-				else if (components.Count == 1) {
-					object component = null;
-					foreach (object c in components) {
-						component = c;
-						break;
-					}
+        private IComponent RootComponent
+        {
+            get
+            {
+                if (_serviceProvider != null)
+                {
+                    IDesignerHost designerHost =
+                        _serviceProvider.GetService(typeof(IDesignerHost)) as IDesignerHost;
+                    if (designerHost != null)
+                        return designerHost.RootComponent;
+                }
+                return null;
+            }
+        }
 
-					if (this.GetComponentSelected (component))
-						primary = true;
-					else
-						replace = true;
-				}
-				else {
-					replace = true;
-				}
-			}
-			else {
-				primary = ((selectionType & SelectionTypes.Primary) == SelectionTypes.Primary);
-				add = ((selectionType & SelectionTypes.Add) == SelectionTypes.Add);
-				remove = ((selectionType & SelectionTypes.Remove) == SelectionTypes.Remove);
-				toggle = ((selectionType & SelectionTypes.Toggle) == SelectionTypes.Toggle);
-				replace = ((selectionType & SelectionTypes.Replace) == SelectionTypes.Replace);
-				
-			}
+        public bool GetComponentSelected(object component)
+        {
+            if (_selection != null)
+                return _selection.Contains(component);
 
-			
-			if (replace) {
-				_selection.Clear ();
-				add = true;
-			}
-						
-			if (add) {
-				foreach (object component in components) {
-					if (component is IComponent && !_selection.Contains (component)) {
-						_selection.Add (component);
-						_primarySelection = (IComponent) component;
-					}
-				}
-			}
+            return false;
+        }
 
-			if (remove) {
-				bool rootRemoved = false;
-				foreach (object component in components) {
-					if (component is IComponent && _selection.Contains (component))
-						_selection.Remove (component);
-					if (component == this.RootComponent)
-						rootRemoved = true;
-				}
-				if (_selection.Count == 0) {
-					if (rootRemoved) {
-						_primarySelection = null;
-					} else {
-						_primarySelection = this.RootComponent;
-						_selection.Add (this.RootComponent);
-					}
-				}
-			}
+        public void SetSelectedComponents(ICollection components)
+        {
+            SetSelectedComponents(components, SelectionTypes.Auto);
+        }
 
-			if (toggle) {
-				foreach (object component in components) {
-					if (component is IComponent) {
-						if (_selection.Contains (component)) {
-							_selection.Remove (component);
-							if (component == _primarySelection)
-								_primarySelection = this.RootComponent;
-						}
-						else {
-							_selection.Add (component);
-							_primarySelection = (IComponent) component;
-						}
-					}
-				}
-			}
-				
-			if (primary) {
-				object primarySelection = null;
+        // If the array is a null reference or does not contain any components,
+        // SetSelectedComponents selects the top-level component in the designer.
+        //
+        public void SetSelectedComponents(ICollection components, SelectionTypes selectionType)
+        {
+            bool primary,
+                add,
+                remove,
+                replace,
+                toggle,
+                auto;
+            primary = add = remove = replace = toggle = auto = false;
 
-				foreach (object component in components) {
-					primarySelection = component;
-					break;
-				}
+            OnSelectionChanging();
 
-				if (!this.GetComponentSelected (primarySelection))
-					_selection.Add (primarySelection);
+            if (_selection == null)
+                throw new InvalidOperationException("_selection == null");
 
-				_primarySelection = (IComponent) primarySelection;
-			}				
-						
-			OnSelectionChanged ();
-		}
-	}
+            if (components == null || components.Count == 0)
+            {
+                components = new ArrayList();
+                ((ArrayList)components).Add(this.RootComponent);
+                selectionType = SelectionTypes.Replace;
+            }
+
+            if (!Enum.IsDefined(typeof(SelectionTypes), selectionType))
+            {
+                selectionType = SelectionTypes.Auto;
+            }
+
+            auto = ((selectionType & SelectionTypes.Auto) == SelectionTypes.Auto);
+
+            if (auto)
+            {
+                if (
+                    (
+                        ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+                        || ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+                    )
+                )
+                {
+                    toggle = true;
+                }
+                else if (components.Count == 1)
+                {
+                    object component = null;
+                    foreach (object c in components)
+                    {
+                        component = c;
+                        break;
+                    }
+
+                    if (this.GetComponentSelected(component))
+                        primary = true;
+                    else
+                        replace = true;
+                }
+                else
+                {
+                    replace = true;
+                }
+            }
+            else
+            {
+                primary = ((selectionType & SelectionTypes.Primary) == SelectionTypes.Primary);
+                add = ((selectionType & SelectionTypes.Add) == SelectionTypes.Add);
+                remove = ((selectionType & SelectionTypes.Remove) == SelectionTypes.Remove);
+                toggle = ((selectionType & SelectionTypes.Toggle) == SelectionTypes.Toggle);
+                replace = ((selectionType & SelectionTypes.Replace) == SelectionTypes.Replace);
+            }
+
+            if (replace)
+            {
+                _selection.Clear();
+                add = true;
+            }
+
+            if (add)
+            {
+                foreach (object component in components)
+                {
+                    if (component is IComponent && !_selection.Contains(component))
+                    {
+                        _selection.Add(component);
+                        _primarySelection = (IComponent)component;
+                    }
+                }
+            }
+
+            if (remove)
+            {
+                bool rootRemoved = false;
+                foreach (object component in components)
+                {
+                    if (component is IComponent && _selection.Contains(component))
+                        _selection.Remove(component);
+                    if (component == this.RootComponent)
+                        rootRemoved = true;
+                }
+                if (_selection.Count == 0)
+                {
+                    if (rootRemoved)
+                    {
+                        _primarySelection = null;
+                    }
+                    else
+                    {
+                        _primarySelection = this.RootComponent;
+                        _selection.Add(this.RootComponent);
+                    }
+                }
+            }
+
+            if (toggle)
+            {
+                foreach (object component in components)
+                {
+                    if (component is IComponent)
+                    {
+                        if (_selection.Contains(component))
+                        {
+                            _selection.Remove(component);
+                            if (component == _primarySelection)
+                                _primarySelection = this.RootComponent;
+                        }
+                        else
+                        {
+                            _selection.Add(component);
+                            _primarySelection = (IComponent)component;
+                        }
+                    }
+                }
+            }
+
+            if (primary)
+            {
+                object primarySelection = null;
+
+                foreach (object component in components)
+                {
+                    primarySelection = component;
+                    break;
+                }
+
+                if (!this.GetComponentSelected(primarySelection))
+                    _selection.Add(primarySelection);
+
+                _primarySelection = (IComponent)primarySelection;
+            }
+
+            OnSelectionChanged();
+        }
+    }
 }

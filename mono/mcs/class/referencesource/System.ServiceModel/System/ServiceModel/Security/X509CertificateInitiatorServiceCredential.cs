@@ -22,7 +22,9 @@ namespace System.ServiceModel.Security
             this.authentication = new X509ClientCertificateAuthentication();
         }
 
-        internal X509CertificateInitiatorServiceCredential(X509CertificateInitiatorServiceCredential other)
+        internal X509CertificateInitiatorServiceCredential(
+            X509CertificateInitiatorServiceCredential other
+        )
         {
             this.certificate = other.certificate;
             this.authentication = new X509ClientCertificateAuthentication(other.authentication);
@@ -31,10 +33,7 @@ namespace System.ServiceModel.Security
 
         public X509Certificate2 Certificate
         {
-            get
-            {
-                return this.certificate;
-            }
+            get { return this.certificate; }
             set
             {
                 ThrowIfImmutable();
@@ -44,13 +43,14 @@ namespace System.ServiceModel.Security
 
         public X509ClientCertificateAuthentication Authentication
         {
-            get
-            {
-                return this.authentication;
-            }
+            get { return this.authentication; }
         }
 
-        public void SetCertificate(string subjectName, StoreLocation storeLocation, StoreName storeName)
+        public void SetCertificate(
+            string subjectName,
+            StoreLocation storeLocation,
+            StoreName storeName
+        )
         {
             if (subjectName == null)
             {
@@ -59,14 +59,25 @@ namespace System.ServiceModel.Security
             this.SetCertificate(storeLocation, storeName, DefaultFindType, subjectName);
         }
 
-        public void SetCertificate(StoreLocation storeLocation, StoreName storeName, X509FindType findType, object findValue)
+        public void SetCertificate(
+            StoreLocation storeLocation,
+            StoreName storeName,
+            X509FindType findType,
+            object findValue
+        )
         {
             if (findValue == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("findValue");
             }
             ThrowIfImmutable();
-            this.certificate = SecurityUtils.GetCertificateFromStore(storeName, storeLocation, findType, findValue, null);
+            this.certificate = SecurityUtils.GetCertificateFromStore(
+                storeName,
+                storeLocation,
+                findType,
+                findValue,
+                null
+            );
         }
 
         internal void MakeReadOnly()
@@ -79,7 +90,9 @@ namespace System.ServiceModel.Security
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             }
         }
     }

@@ -45,9 +45,24 @@ namespace System.ComponentModel.Tests
             // .NET Framework throws a NullReferenceException.
             if (!PlatformDetection.IsNetFramework)
             {
-                yield return new object[] { new CategoryAttribute(null), new CategoryAttribute(null), true };
-                yield return new object[] { new CategoryAttribute(null), new CategoryAttribute("category"), false };
-                yield return new object[] { new CategoryAttribute(null), new CategoryAttribute(string.Empty), false };
+                yield return new object[]
+                {
+                    new CategoryAttribute(null),
+                    new CategoryAttribute(null),
+                    true,
+                };
+                yield return new object[]
+                {
+                    new CategoryAttribute(null),
+                    new CategoryAttribute("category"),
+                    false,
+                };
+                yield return new object[]
+                {
+                    new CategoryAttribute(null),
+                    new CategoryAttribute(string.Empty),
+                    false,
+                };
             }
 
             yield return new object[] { new CategoryAttribute("category"), new object(), false };
@@ -58,7 +73,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(CategoryAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            CategoryAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is CategoryAttribute otherAttribute)
@@ -69,24 +88,79 @@ namespace System.ComponentModel.Tests
 
         public static IEnumerable<object[]> Properties_TestData()
         {
-            yield return new object[] { (Func<CategoryAttribute>)(() => CategoryAttribute.Appearance), "Appearance" };
-            yield return new object[] { (Func<CategoryAttribute>)(() => CategoryAttribute.Asynchronous), "Asynchronous" };
-            yield return new object[] { (Func<CategoryAttribute>)(() => CategoryAttribute.Behavior), "Behavior" };
-            yield return new object[] { (Func<CategoryAttribute>)(() => CategoryAttribute.Data), "Data" };
-            yield return new object[] { (Func<CategoryAttribute>)(() => CategoryAttribute.Default), "Misc" };
-            yield return new object[] { (Func<CategoryAttribute>)(() => CategoryAttribute.Design), "Design" };
-            yield return new object[] { (Func<CategoryAttribute>)(() => CategoryAttribute.DragDrop), "Drag Drop" };
-            yield return new object[] { (Func<CategoryAttribute>)(() => CategoryAttribute.Focus), "Focus" };
-            yield return new object[] { (Func<CategoryAttribute>)(() => CategoryAttribute.Format), "Format" };
-            yield return new object[] { (Func<CategoryAttribute>)(() => CategoryAttribute.Key), "Key" };
-            yield return new object[] { (Func<CategoryAttribute>)(() => CategoryAttribute.Layout), "Layout" };
-            yield return new object[] { (Func<CategoryAttribute>)(() => CategoryAttribute.Mouse), "Mouse" };
-            yield return new object[] { (Func<CategoryAttribute>)(() => CategoryAttribute.WindowStyle), "Window Style" };
+            yield return new object[]
+            {
+                (Func<CategoryAttribute>)(() => CategoryAttribute.Appearance),
+                "Appearance",
+            };
+            yield return new object[]
+            {
+                (Func<CategoryAttribute>)(() => CategoryAttribute.Asynchronous),
+                "Asynchronous",
+            };
+            yield return new object[]
+            {
+                (Func<CategoryAttribute>)(() => CategoryAttribute.Behavior),
+                "Behavior",
+            };
+            yield return new object[]
+            {
+                (Func<CategoryAttribute>)(() => CategoryAttribute.Data),
+                "Data",
+            };
+            yield return new object[]
+            {
+                (Func<CategoryAttribute>)(() => CategoryAttribute.Default),
+                "Misc",
+            };
+            yield return new object[]
+            {
+                (Func<CategoryAttribute>)(() => CategoryAttribute.Design),
+                "Design",
+            };
+            yield return new object[]
+            {
+                (Func<CategoryAttribute>)(() => CategoryAttribute.DragDrop),
+                "Drag Drop",
+            };
+            yield return new object[]
+            {
+                (Func<CategoryAttribute>)(() => CategoryAttribute.Focus),
+                "Focus",
+            };
+            yield return new object[]
+            {
+                (Func<CategoryAttribute>)(() => CategoryAttribute.Format),
+                "Format",
+            };
+            yield return new object[]
+            {
+                (Func<CategoryAttribute>)(() => CategoryAttribute.Key),
+                "Key",
+            };
+            yield return new object[]
+            {
+                (Func<CategoryAttribute>)(() => CategoryAttribute.Layout),
+                "Layout",
+            };
+            yield return new object[]
+            {
+                (Func<CategoryAttribute>)(() => CategoryAttribute.Mouse),
+                "Mouse",
+            };
+            yield return new object[]
+            {
+                (Func<CategoryAttribute>)(() => CategoryAttribute.WindowStyle),
+                "Window Style",
+            };
         }
 
         [Theory]
         [MemberData(nameof(Properties_TestData))]
-        public void Properties_Get_ReturnsExpected(Func<CategoryAttribute> attributeThunk, string expectedCategory)
+        public void Properties_Get_ReturnsExpected(
+            Func<CategoryAttribute> attributeThunk,
+            string expectedCategory
+        )
         {
             CategoryAttribute attribute = attributeThunk();
             Assert.Same(attribute, attributeThunk());
@@ -144,13 +218,11 @@ namespace System.ComponentModel.Tests
 
         private class AlwaysEqualAttribute : CategoryAttribute
         {
-            public AlwaysEqualAttribute() : base()
-            {
-            }
+            public AlwaysEqualAttribute()
+                : base() { }
 
-            public AlwaysEqualAttribute(string category) : base(category)
-            {
-            }
+            public AlwaysEqualAttribute(string category)
+                : base(category) { }
 
             public override bool Equals(object obj) => true;
 

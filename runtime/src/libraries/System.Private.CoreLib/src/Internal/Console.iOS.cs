@@ -15,6 +15,7 @@ namespace Internal
                 Interop.Sys.Log((byte*)ptr, s.Length * 2);
             }
         }
+
         public static partial class Error
         {
             public static unsafe void Write(string s)

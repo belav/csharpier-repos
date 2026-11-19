@@ -41,7 +41,8 @@ public interface ISqlExpressionFactory
         ExpressionType operatorType,
         SqlExpression left,
         SqlExpression right,
-        CoreTypeMapping? typeMapping);
+        CoreTypeMapping? typeMapping
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -116,7 +117,8 @@ public interface ISqlExpressionFactory
     SqlBinaryExpression Add(
         SqlExpression left,
         SqlExpression right,
-        CoreTypeMapping? typeMapping = null);
+        CoreTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -127,7 +129,8 @@ public interface ISqlExpressionFactory
     SqlBinaryExpression Subtract(
         SqlExpression left,
         SqlExpression right,
-        CoreTypeMapping? typeMapping = null);
+        CoreTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -138,7 +141,8 @@ public interface ISqlExpressionFactory
     SqlBinaryExpression Multiply(
         SqlExpression left,
         SqlExpression right,
-        CoreTypeMapping? typeMapping = null);
+        CoreTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -149,7 +153,8 @@ public interface ISqlExpressionFactory
     SqlBinaryExpression Divide(
         SqlExpression left,
         SqlExpression right,
-        CoreTypeMapping? typeMapping = null);
+        CoreTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -160,7 +165,8 @@ public interface ISqlExpressionFactory
     SqlBinaryExpression Modulo(
         SqlExpression left,
         SqlExpression right,
-        CoreTypeMapping? typeMapping = null);
+        CoreTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -171,7 +177,8 @@ public interface ISqlExpressionFactory
     SqlBinaryExpression And(
         SqlExpression left,
         SqlExpression right,
-        CoreTypeMapping? typeMapping = null);
+        CoreTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -182,7 +189,8 @@ public interface ISqlExpressionFactory
     SqlBinaryExpression Or(
         SqlExpression left,
         SqlExpression right,
-        CoreTypeMapping? typeMapping = null);
+        CoreTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -209,7 +217,8 @@ public interface ISqlExpressionFactory
     SqlUnaryExpression Convert(
         SqlExpression operand,
         Type type,
-        CoreTypeMapping? typeMapping = null);
+        CoreTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -237,7 +246,8 @@ public interface ISqlExpressionFactory
         string functionName,
         IEnumerable<SqlExpression> arguments,
         Type returnType,
-        CoreTypeMapping? typeMapping = null);
+        CoreTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -248,7 +258,8 @@ public interface ISqlExpressionFactory
     SqlConditionalExpression Condition(
         SqlExpression test,
         SqlExpression ifTrue,
-        SqlExpression ifFalse);
+        SqlExpression ifFalse
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

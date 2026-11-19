@@ -38,19 +38,27 @@ namespace System.Web.Http.Cors.Tracing
                 _innerCorsEngine.GetType().Name,
                 MethodName,
                 beginTrace: null,
-                execute: () => { corsResult = _innerCorsEngine.EvaluatePolicy(requestContext, policy); },
+                execute: () =>
+                {
+                    corsResult = _innerCorsEngine.EvaluatePolicy(requestContext, policy);
+                },
                 endTrace: (tr) =>
                 {
                     if (corsResult != null)
                     {
-                        tr.Message = String.Format(CultureInfo.CurrentCulture, SRResources.TraceEndCorsResultReturned, corsResult);
+                        tr.Message = String.Format(
+                            CultureInfo.CurrentCulture,
+                            SRResources.TraceEndCorsResultReturned,
+                            corsResult
+                        );
                     }
                     else
                     {
                         tr.Message = SRResources.TraceEndNoCorsResultReturned;
                     }
                 },
-                errorTrace: null);
+                errorTrace: null
+            );
 
             return corsResult;
         }

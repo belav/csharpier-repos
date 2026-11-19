@@ -28,7 +28,10 @@ namespace System.Speech.Internal.Synthesis
         /// <summary>
         /// Adds events directly to an event sink.
         /// </summary>
-        void ISpEngineSite.AddEvents([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] SpeechEventSapi[] eventsSapi, int ulCount)
+        void ISpEngineSite.AddEvents(
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] SpeechEventSapi[] eventsSapi,
+            int ulCount
+        )
         {
             SpeechEventInfo[] events = new SpeechEventInfo[eventsSapi.Length];
             for (int i = 0; i < eventsSapi.Length; i++)
@@ -119,9 +122,14 @@ namespace System.Speech.Internal.Synthesis
             try
             {
                 // Get the mime type
-                Stream localStream = _site.LoadResource(new Uri(uri, UriKind.RelativeOrAbsolute), mediaType);
+                Stream localStream = _site.LoadResource(
+                    new Uri(uri, UriKind.RelativeOrAbsolute),
+                    mediaType
+                );
                 BinaryReader reader = new(localStream);
-                byte[] waveFormat = System.Speech.Internal.Synthesis.AudioBase.GetWaveFormat(reader);
+                byte[] waveFormat = System.Speech.Internal.Synthesis.AudioBase.GetWaveFormat(
+                    reader
+                );
                 mediaType = null;
                 if (waveFormat != null)
                 {
@@ -162,11 +170,19 @@ namespace System.Speech.Internal.Synthesis
     }
 
     #region Internal Interfaces
-    [ComImport, Guid("9880499B-CCE9-11D2-B503-00C04F797396"), System.Runtime.InteropServices.InterfaceTypeAttribute(1)]
+    [
+        ComImport,
+        Guid("9880499B-CCE9-11D2-B503-00C04F797396"),
+        System.Runtime.InteropServices.InterfaceTypeAttribute(1)
+    ]
     internal interface ISpEngineSite
     {
-        void AddEvents([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] SpeechEventSapi[] events, int count);
+        void AddEvents(
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] SpeechEventSapi[] events,
+            int count
+        );
         void GetEventInterest(out long eventInterest);
+
         [PreserveSig]
         int GetActions();
         void Write(IntPtr data, int count, IntPtr bytesWritten);
@@ -174,7 +190,11 @@ namespace System.Speech.Internal.Synthesis
         void GetVolume(out short volume);
         void GetSkipInfo(out int type, out int count);
         void CompleteSkip(int skipped);
-        void LoadResource([MarshalAs(UnmanagedType.LPWStr)] string resource, ref string mediaType, out IStream stream);
+        void LoadResource(
+            [MarshalAs(UnmanagedType.LPWStr)] string resource,
+            ref string mediaType,
+            out IStream stream
+        );
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -184,22 +204,24 @@ namespace System.Speech.Internal.Synthesis
         public short ParameterType;
         public int StreamNumber;
         public long AudioStreamOffset;
-        public nint Param1;   // Always just a numeric type - contains no unmanaged resources so does not need special clean-up.
-        public IntPtr Param2;   // Can be a numeric type, or pointer to string or object. Use SafeSapiLParamHandle to cleanup.
+        public nint Param1; // Always just a numeric type - contains no unmanaged resources so does not need special clean-up.
+        public IntPtr Param2; // Can be a numeric type, or pointer to string or object. Use SafeSapiLParamHandle to cleanup.
 
-        public static bool operator ==(SpeechEventSapi event1, SpeechEventSapi event2) => event1.Equals(event2);
-        public static bool operator !=(SpeechEventSapi event1, SpeechEventSapi event2) => !event1.Equals(event2);
+        public static bool operator ==(SpeechEventSapi event1, SpeechEventSapi event2) =>
+            event1.Equals(event2);
 
-        public override bool Equals(object obj) =>
-            obj is SpeechEventSapi other && Equals(other);
+        public static bool operator !=(SpeechEventSapi event1, SpeechEventSapi event2) =>
+            !event1.Equals(event2);
+
+        public override bool Equals(object obj) => obj is SpeechEventSapi other && Equals(other);
 
         public bool Equals(SpeechEventSapi other) =>
-            EventId == other.EventId &&
-            ParameterType == other.ParameterType &&
-            StreamNumber == other.StreamNumber &&
-            AudioStreamOffset == other.AudioStreamOffset &&
-            Param1 == other.Param1 &&
-            Param2 == other.Param2;
+            EventId == other.EventId
+            && ParameterType == other.ParameterType
+            && StreamNumber == other.StreamNumber
+            && AudioStreamOffset == other.AudioStreamOffset
+            && Param1 == other.Param1
+            && Param2 == other.Param2;
 
         public override int GetHashCode() => base.GetHashCode();
     }

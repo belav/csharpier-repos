@@ -13,8 +13,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// </summary>
         private sealed class EventProcessedState
         {
-            public static readonly EventProcessedState Processed = new EventProcessedState(EventProcessedStateKind.Processed);
-            public static readonly EventProcessedState NotProcessed = new EventProcessedState(EventProcessedStateKind.NotProcessed);
+            public static readonly EventProcessedState Processed = new EventProcessedState(
+                EventProcessedStateKind.Processed
+            );
+            public static readonly EventProcessedState NotProcessed = new EventProcessedState(
+                EventProcessedStateKind.NotProcessed
+            );
 
             public EventProcessedStateKind Kind { get; }
 
@@ -36,7 +40,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 Kind = EventProcessedStateKind.PartiallyProcessed;
             }
 
-            public static EventProcessedState CreatePartiallyProcessed(ImmutableArray<DiagnosticAnalyzer> subsetProcessedAnalyzers)
+            public static EventProcessedState CreatePartiallyProcessed(
+                ImmutableArray<DiagnosticAnalyzer> subsetProcessedAnalyzers
+            )
             {
                 return new EventProcessedState(subsetProcessedAnalyzers);
             }
@@ -46,7 +52,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             Processed,
             NotProcessed,
-            PartiallyProcessed
+            PartiallyProcessed,
         }
     }
 }

@@ -25,7 +25,8 @@ public interface IMigrationCommandExecutor
     /// <param name="connection">The connection to use.</param>
     void ExecuteNonQuery(
         IEnumerable<MigrationCommand> migrationCommands,
-        IRelationalConnection connection);
+        IRelationalConnection connection
+    );
 
     /// <summary>
     ///     Executes the given commands using the given database connection.
@@ -38,5 +39,6 @@ public interface IMigrationCommandExecutor
     Task ExecuteNonQueryAsync(
         IEnumerable<MigrationCommand> migrationCommands,
         IRelationalConnection connection,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 }

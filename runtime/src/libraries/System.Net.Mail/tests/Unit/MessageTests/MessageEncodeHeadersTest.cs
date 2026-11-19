@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Text;
 using System.Net.Mime;
+using System.Text;
 using Xunit;
 
 namespace System.Net.Mail.Tests
@@ -11,7 +11,8 @@ namespace System.Net.Mail.Tests
     {
         private HeaderCollection _headers = new HeaderCollection();
         private Message _message = new Message();
-        private const string CustomUnicodeHeaderValue = "START\u00EA\u00EB\u00EFf\u00DA\u00EA\u00EB\u00EF\u00EF\u00DAaasubject\u00EA\u00EB\u00EFf\u00DAEND";
+        private const string CustomUnicodeHeaderValue =
+            "START\u00EA\u00EB\u00EFf\u00DA\u00EA\u00EB\u00EF\u00EF\u00DAaasubject\u00EA\u00EB\u00EFf\u00DAEND";
 
         [Fact]
         public void EncodeHeaders_WithCustomUnicodeHeaders_ShouldEncodeHeaders()
@@ -108,7 +109,10 @@ namespace System.Net.Mail.Tests
             string encodedHeader = _headers.Get("X-Custom");
             Assert.True(encodedHeader.StartsWith("="), "didn't start with =");
             Assert.True(encodedHeader.EndsWith("="), "didn't end with =");
-            string[] splits = encodedHeader.Split(new char[] { '?' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] splits = encodedHeader.Split(
+                new char[] { '?' },
+                StringSplitOptions.RemoveEmptyEntries
+            );
             Assert.Equal("utf-32", splits[1]);
             Assert.Equal(encoding, _message.HeadersEncoding);
 
@@ -132,7 +136,10 @@ namespace System.Net.Mail.Tests
             string encodedHeader = _headers.Get("X-Custom");
             Assert.True(encodedHeader.StartsWith("="), "didn't start with =");
             Assert.True(encodedHeader.EndsWith("="), "didn't end with =");
-            string[] splits = encodedHeader.Split(new char[] { '?' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] splits = encodedHeader.Split(
+                new char[] { '?' },
+                StringSplitOptions.RemoveEmptyEntries
+            );
             Assert.Equal("utf-8", splits[1]);
             Assert.Equal(Encoding.UTF8, _message.HeadersEncoding);
         }

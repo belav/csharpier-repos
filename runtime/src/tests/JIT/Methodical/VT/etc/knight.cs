@@ -8,9 +8,11 @@ namespace KnightMove_knight_cs
 {
     internal struct MV
     {
-        public int x, y;
+        public int x,
+            y;
         public int v;
     }
+
     public struct SQ
     {
         public int visited;

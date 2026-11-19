@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,76 +27,77 @@
 //
 using System;
 using System.Collections.Generic;
-using System.Xml;
 using System.IdentityModel.Policy;
 using System.Security.Cryptography;
+using System.Xml;
 
 namespace System.IdentityModel.Tokens
 {
-	public class RsaKeyIdentifierClause : SecurityKeyIdentifierClause
-	{
-		public RsaKeyIdentifierClause (RSA rsa)
-			: base (null)
-		{
-			this.rsa = rsa;
-		}
+    public class RsaKeyIdentifierClause : SecurityKeyIdentifierClause
+    {
+        public RsaKeyIdentifierClause(RSA rsa)
+            : base(null)
+        {
+            this.rsa = rsa;
+        }
 
-		RSA rsa;
+        RSA rsa;
 
-		public RSA Rsa {
-			get { return rsa; }
-		}
+        public RSA Rsa
+        {
+            get { return rsa; }
+        }
 
-		public override bool CanCreateKey {
-			get { return true; }
-		}
+        public override bool CanCreateKey
+        {
+            get { return true; }
+        }
 
-		public override SecurityKey CreateKey ()
-		{
-			return new RsaSecurityKey (rsa);
-		}
+        public override SecurityKey CreateKey()
+        {
+            return new RsaSecurityKey(rsa);
+        }
 
-		public byte [] GetExponent ()
-		{
-			return rsa.ExportParameters (false).Exponent;
-		}
+        public byte[] GetExponent()
+        {
+            return rsa.ExportParameters(false).Exponent;
+        }
 
-		[MonoTODO]
-		public void WriteExponentAsBase64 (XmlWriter writer)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void WriteExponentAsBase64(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
 
-		public byte [] GetModulus ()
-		{
-			return rsa.ExportParameters (false).Modulus;
-		}
+        public byte[] GetModulus()
+        {
+            return rsa.ExportParameters(false).Modulus;
+        }
 
-		[MonoTODO]
-		public void WriteModulusAsBase64 (XmlWriter writer)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void WriteModulusAsBase64(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override bool Matches (SecurityKeyIdentifierClause keyIdentifierClause)
-		{
-			if (keyIdentifierClause == null)
-				throw new ArgumentNullException ("keyIdentifierClause");
-			RsaKeyIdentifierClause rkic =
-				keyIdentifierClause as RsaKeyIdentifierClause;
-			return rkic != null && Matches (rkic.Rsa);
-		}
+        public override bool Matches(SecurityKeyIdentifierClause keyIdentifierClause)
+        {
+            if (keyIdentifierClause == null)
+                throw new ArgumentNullException("keyIdentifierClause");
+            RsaKeyIdentifierClause rkic = keyIdentifierClause as RsaKeyIdentifierClause;
+            return rkic != null && Matches(rkic.Rsa);
+        }
 
-		public bool Matches (RSA rsa)
-		{
-			// hmm, there should be more decent way to compare ...
-			return rsa.ToXmlString (false) == this.rsa.ToXmlString (false);
-		}
+        public bool Matches(RSA rsa)
+        {
+            // hmm, there should be more decent way to compare ...
+            return rsa.ToXmlString(false) == this.rsa.ToXmlString(false);
+        }
 
-		[MonoTODO]
-		public override string ToString ()
-		{
-			return base.ToString ();
-		}
-	}
+        [MonoTODO]
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+    }
 }

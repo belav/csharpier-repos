@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,22 +28,40 @@ using System.Collections.ObjectModel;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
 using System.ServiceModel.Discovery;
+using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery.VersionCD1
 {
-	[ServiceContract (Name = "DiscoveryProxy", Namespace = MessageContractsCD1.NS)]
-	internal interface IDiscoveryProxyContractCD1
-	{
-		[OperationContract (Name = "ProbeCD1", Action = MessageContractsCD1.ProbeAction, AsyncPattern = true, ReplyAction = MessageContractsCD1.ProbeMatchAction)]
-		IAsyncResult BeginFind (MessageContractsCD1.FindRequest message, AsyncCallback callback, object state);
+    [ServiceContract(Name = "DiscoveryProxy", Namespace = MessageContractsCD1.NS)]
+    internal interface IDiscoveryProxyContractCD1
+    {
+        [OperationContract(
+            Name = "ProbeCD1",
+            Action = MessageContractsCD1.ProbeAction,
+            AsyncPattern = true,
+            ReplyAction = MessageContractsCD1.ProbeMatchAction
+        )]
+        IAsyncResult BeginFind(
+            MessageContractsCD1.FindRequest message,
+            AsyncCallback callback,
+            object state
+        );
 
-		MessageContractsCD1.FindResponse EndFind (IAsyncResult result);
+        MessageContractsCD1.FindResponse EndFind(IAsyncResult result);
 
-		[OperationContract (Name = "ResolveCD1", Action = MessageContractsCD1.ResolveAction, AsyncPattern = true, ReplyAction = MessageContractsCD1.ResolveMatchAction)]
-		IAsyncResult BeginResolve (MessageContractsCD1.ResolveRequest message, AsyncCallback callback, object state);
+        [OperationContract(
+            Name = "ResolveCD1",
+            Action = MessageContractsCD1.ResolveAction,
+            AsyncPattern = true,
+            ReplyAction = MessageContractsCD1.ResolveMatchAction
+        )]
+        IAsyncResult BeginResolve(
+            MessageContractsCD1.ResolveRequest message,
+            AsyncCallback callback,
+            object state
+        );
 
-		MessageContractsCD1.ResolveResponse EndResolve (IAsyncResult result);
-	}
+        MessageContractsCD1.ResolveResponse EndResolve(IAsyncResult result);
+    }
 }

@@ -10,9 +10,9 @@
 namespace System.Data.Common.EntitySql.AST
 {
     using System;
-    using System.Globalization;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Globalization;
 
     /// <summary>
     /// Represents base class for nodes in the eSQL abstract syntax tree OM.
@@ -50,9 +50,7 @@ namespace System.Data.Common.EntitySql.AST
         /// <summary>
         /// Default constructor.
         /// </summary>
-        internal NodeList()
-        {
-        }
+        internal NodeList() { }
 
         /// <summary>
         /// Initializes adding one item to the list.

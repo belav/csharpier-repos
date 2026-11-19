@@ -35,8 +35,12 @@ namespace Microsoft.Web.Mvc.Test
 
             // Act & assert
             Assert.Throws<InvalidOperationException>(
-                delegate { ExpressionHelper.GetRouteValuesFromExpression(expr); },
-                @"The method 'AsynchronousCompleted' is an asynchronous completion method and cannot be called directly.");
+                delegate
+                {
+                    ExpressionHelper.GetRouteValuesFromExpression(expr);
+                },
+                @"The method 'AsynchronousCompleted' is an asynchronous completion method and cannot be called directly."
+            );
         }
 
         [Fact]
@@ -62,8 +66,12 @@ namespace Microsoft.Web.Mvc.Test
 
             // Act & assert
             Assert.Throws<InvalidOperationException>(
-                delegate { ExpressionHelper.GetRouteValuesFromExpression(expr); },
-                @"The method 'NotAnAction' is marked [NonAction] and cannot be called directly.");
+                delegate
+                {
+                    ExpressionHelper.GetRouteValuesFromExpression(expr);
+                },
+                @"The method 'NotAnAction' is marked [NonAction] and cannot be called directly."
+            );
         }
 
         [Fact]
@@ -101,7 +109,8 @@ namespace Microsoft.Web.Mvc.Test
         {
             Assert.ThrowsArgumentNull(
                 () => ExpressionHelper.GetRouteValuesFromExpression<TestController>(null),
-                "action");
+                "action"
+            );
         }
 
         [Fact]
@@ -113,8 +122,8 @@ namespace Microsoft.Web.Mvc.Test
             // Act & Assert
             Assert.Throws<ArgumentException>(
                 () => ExpressionHelper.GetRouteValuesFromExpression(expression),
-                "Expression must be a method call." + Environment.NewLine
-              + "Parameter name: action");
+                "Expression must be a method call." + Environment.NewLine + "Parameter name: action"
+            );
         }
 
         [Fact]
@@ -126,8 +135,10 @@ namespace Microsoft.Web.Mvc.Test
             // Act & Assert
             Assert.Throws<ArgumentException>(
                 () => ExpressionHelper.GetRouteValuesFromExpression(index),
-                "Controller name must end in 'Controller'." + Environment.NewLine
-              + "Parameter name: action");
+                "Controller name must end in 'Controller'."
+                    + Environment.NewLine
+                    + "Parameter name: action"
+            );
         }
 
         [Fact]
@@ -139,8 +150,10 @@ namespace Microsoft.Web.Mvc.Test
             // Act & Assert
             Assert.Throws<ArgumentException>(
                 () => ExpressionHelper.GetRouteValuesFromExpression(index),
-                "Cannot route to class named 'Controller'." + Environment.NewLine
-              + "Parameter name: action");
+                "Cannot route to class named 'Controller'."
+                    + Environment.NewLine
+                    + "Parameter name: action"
+            );
         }
 
         [Fact]
@@ -216,7 +229,8 @@ namespace Microsoft.Web.Mvc.Test
         public void GetInputNameFromPropertyWithTwoMethodCallExpressionReturnsPropertyName()
         {
             // Arrange
-            Expression<Func<TestModel, string>> expression = m => m.IntProperty.ToString().ToUpper();
+            Expression<Func<TestModel, string>> expression = m =>
+                m.IntProperty.ToString().ToUpper();
 
             // Act
             string name = ExpressionHelper.GetInputName(expression);
@@ -251,29 +265,19 @@ namespace Microsoft.Web.Mvc.Test
             }
 
             [ActionName("NewName")]
-            public void Renamed()
-            {
-            }
+            public void Renamed() { }
 
             [NonAction]
-            public void NotAnAction()
-            {
-            }
+            public void NotAnAction() { }
         }
 
         public class TestAsyncController : AsyncController
         {
-            public void Synchronous()
-            {
-            }
+            public void Synchronous() { }
 
-            public void AsynchronousAsync()
-            {
-            }
+            public void AsynchronousAsync() { }
 
-            public void AsynchronousCompleted()
-            {
-            }
+            public void AsynchronousCompleted() { }
         }
 
         public string Foo

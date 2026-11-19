@@ -22,7 +22,7 @@ namespace System.ComponentModel.Composition
         {
             //Create and dispose an empty immutable catalog, I.e no INotifyComposablePartCatalogChanged interface
             var catalog = new TypeCatalog();
-            using(var cs = catalog.CreateCompositionService())
+            using (var cs = catalog.CreateCompositionService())
             {
                 //Do nothing
             }

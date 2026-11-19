@@ -1,19 +1,22 @@
 using System.Diagnostics.Contracts;
+
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 //
 // MD5CryptoServiceProvider.cs
 //
 
-namespace System.Security.Cryptography {
-[System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class MD5CryptoServiceProvider : MD5 {
+namespace System.Security.Cryptography
+{
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class MD5CryptoServiceProvider : MD5
+    {
         [System.Security.SecurityCritical] // auto-generated
         private SafeHashHandle _safeHashHandle = null;
 
@@ -21,10 +24,13 @@ namespace System.Security.Cryptography {
         // public constructors
         //
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        public MD5CryptoServiceProvider() {
+        [System.Security.SecuritySafeCritical] // auto-generated
+        public MD5CryptoServiceProvider()
+        {
             if (CryptoConfig.AllowOnlyFipsAlgorithms)
-                throw new InvalidOperationException(Environment.GetResourceString("Cryptography_NonCompliantFIPSAlgorithm"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("Cryptography_NonCompliantFIPSAlgorithm")
+                );
             Contract.EndContractBlock();
 
             // _CreateHash will check for failures and throw the appropriate exception
@@ -43,11 +49,12 @@ namespace System.Security.Cryptography {
         // public methods
         //
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        public override void Initialize() {
+        [System.Security.SecuritySafeCritical] // auto-generated
+        public override void Initialize()
+        {
             if (_safeHashHandle != null && !_safeHashHandle.IsClosed)
                 _safeHashHandle.Dispose();
-            
+
             // _CreateHash will check for failures and throw the appropriate exception
             _safeHashHandle = Utils.CreateHash(Utils.StaticProvHandle, Constants.CALG_MD5);
         }
@@ -59,7 +66,8 @@ namespace System.Security.Cryptography {
         }
 
         [System.Security.SecuritySafeCritical] // overrides protected transparent member
-        protected override byte[] HashFinal() {
+        protected override byte[] HashFinal()
+        {
             return Utils.EndHash(_safeHashHandle);
         }
     }

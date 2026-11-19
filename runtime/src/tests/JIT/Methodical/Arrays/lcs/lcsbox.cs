@@ -13,7 +13,8 @@ namespace JitTest_lcsbox_lcs_cs
         private static String buildLCS(int[,,,] b, char[] X, int[] ind)
         {
             for (int i = 0; i < RANK; i++)
-                if (ind[i] == 0) return "";
+                if (ind[i] == 0)
+                    return "";
 
             int L = (int)b.GetValue(ind);
             if (L == RANK)
@@ -54,7 +55,10 @@ namespace JitTest_lcsbox_lcs_cs
 
                             if (eqFlag)
                             {
-                                c.SetValue(c[ind[0] - 1, ind[1] - 1, ind[2] - 1, ind[3] - 1] + 1, ind);
+                                c.SetValue(
+                                    c[ind[0] - 1, ind[1] - 1, ind[2] - 1, ind[3] - 1] + 1,
+                                    ind
+                                );
                                 b.SetValue(RANK, ind);
                                 continue;
                             }
@@ -87,12 +91,7 @@ namespace JitTest_lcsbox_lcs_cs
         public static int TestEntryPoint()
         {
             Console.WriteLine("Test searches for longest common subsequence of 4 strings\n\n");
-            String[] str = new String[RANK] {
-                "abbdccd",
-                "abcbdcd",
-                "abbcdcd",
-                "bdabccd"
-            };
+            String[] str = new String[RANK] { "abbdccd", "abcbdcd", "abbcdcd", "bdabccd" };
 
             int[] len = new int[RANK];
             char[][] seq = new char[RANK][];

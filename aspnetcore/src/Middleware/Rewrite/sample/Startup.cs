@@ -49,15 +49,11 @@ public class Startup
                     .UseKestrel(options =>
                     {
                         options.Listen(IPAddress.Loopback, 5000);
-                        options.Listen(
-                            IPAddress.Loopback,
-                            5001,
-                            listenOptions =>
-                            {
-                                // Configure SSL
-                                listenOptions.UseHttps("testCert.pfx", "testPassword");
-                            }
-                        );
+                        options.Listen(IPAddress.Loopback, 5001, listenOptions =>
+                        {
+                            // Configure SSL
+                            listenOptions.UseHttps("testCert.pfx", "testPassword");
+                        });
                     })
                     .UseStartup<Startup>()
                     .UseContentRoot(Directory.GetCurrentDirectory());

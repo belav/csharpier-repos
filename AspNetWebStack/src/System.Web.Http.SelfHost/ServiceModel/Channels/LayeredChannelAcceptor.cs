@@ -5,13 +5,17 @@ using System.ServiceModel.Channels;
 
 namespace System.Web.Http.SelfHost.ServiceModel.Channels
 {
-    internal abstract class LayeredChannelAcceptor<TChannel, TInnerChannel> : ChannelAcceptor<TChannel>
+    internal abstract class LayeredChannelAcceptor<TChannel, TInnerChannel>
+        : ChannelAcceptor<TChannel>
         where TChannel : class, IChannel
         where TInnerChannel : class, IChannel
     {
         private IChannelListener<TInnerChannel> _innerListener;
 
-        protected LayeredChannelAcceptor(ChannelManagerBase channelManager, IChannelListener<TInnerChannel> innerListener)
+        protected LayeredChannelAcceptor(
+            ChannelManagerBase channelManager,
+            IChannelListener<TInnerChannel> innerListener
+        )
             : base(channelManager)
         {
             _innerListener = innerListener;
@@ -30,7 +34,11 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             }
         }
 
-        public override IAsyncResult BeginAcceptChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return _innerListener.BeginAcceptChannel(timeout, callback, state);
         }
@@ -53,7 +61,11 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             return _innerListener.WaitForChannel(timeout);
         }
 
-        public override IAsyncResult BeginWaitForChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return _innerListener.BeginWaitForChannel(timeout, callback, state);
         }

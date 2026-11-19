@@ -9,10 +9,12 @@ namespace System.Runtime
 
     sealed class BackoffTimeoutHelper
     {
-        readonly static int maxSkewMilliseconds = (int)(IOThreadTimer.SystemTimeResolutionTicks / TimeSpan.TicksPerMillisecond);
-        readonly static long maxDriftTicks = IOThreadTimer.SystemTimeResolutionTicks * 2;
-        readonly static TimeSpan defaultInitialWaitTime = TimeSpan.FromMilliseconds(1);
-        readonly static TimeSpan defaultMaxWaitTime = TimeSpan.FromMinutes(1);
+        static readonly int maxSkewMilliseconds = (int)(
+            IOThreadTimer.SystemTimeResolutionTicks / TimeSpan.TicksPerMillisecond
+        );
+        static readonly long maxDriftTicks = IOThreadTimer.SystemTimeResolutionTicks * 2;
+        static readonly TimeSpan defaultInitialWaitTime = TimeSpan.FromMilliseconds(1);
+        static readonly TimeSpan defaultMaxWaitTime = TimeSpan.FromMinutes(1);
 
         DateTime deadline;
         TimeSpan maxWaitTime;
@@ -24,16 +26,16 @@ namespace System.Runtime
         TimeSpan originalTimeout;
 
         internal BackoffTimeoutHelper(TimeSpan timeout)
-            : this(timeout, BackoffTimeoutHelper.defaultMaxWaitTime)
-        {
-        }
+            : this(timeout, BackoffTimeoutHelper.defaultMaxWaitTime) { }
 
         internal BackoffTimeoutHelper(TimeSpan timeout, TimeSpan maxWaitTime)
-            : this(timeout, maxWaitTime, BackoffTimeoutHelper.defaultInitialWaitTime)
-        {
-        }
+            : this(timeout, maxWaitTime, BackoffTimeoutHelper.defaultInitialWaitTime) { }
 
-        internal BackoffTimeoutHelper(TimeSpan timeout, TimeSpan maxWaitTime, TimeSpan initialWaitTime)
+        internal BackoffTimeoutHelper(
+            TimeSpan timeout,
+            TimeSpan maxWaitTime,
+            TimeSpan initialWaitTime
+        )
         {
             this.random = new Random(GetHashCode());
             this.maxWaitTime = maxWaitTime;
@@ -43,10 +45,7 @@ namespace System.Runtime
 
         public TimeSpan OriginalTimeout
         {
-            get
-            {
-                return this.originalTimeout;
-            }
+            get { return this.originalTimeout; }
         }
 
         void Reset(TimeSpan timeout, TimeSpan initialWaitTime)
@@ -84,7 +83,12 @@ namespace System.Runtime
                 }
                 this.backoffCallback = callback;
                 this.backoffState = state;
-                this.backoffTimer = new IOThreadTimer(callback, state, false, BackoffTimeoutHelper.maxSkewMilliseconds);
+                this.backoffTimer = new IOThreadTimer(
+                    callback,
+                    state,
+                    false,
+                    BackoffTimeoutHelper.maxSkewMilliseconds
+                );
             }
 
             TimeSpan backoffTime = WaitTimeWithDrift();
@@ -100,10 +104,17 @@ namespace System.Runtime
 
         TimeSpan WaitTimeWithDrift()
         {
-            return Ticks.ToTimeSpan(Math.Max(
-                Ticks.FromTimeSpan(BackoffTimeoutHelper.defaultInitialWaitTime),
-                Ticks.Add(Ticks.FromTimeSpan(this.waitTime),
-                    (long)(uint)this.random.Next() % (2 * BackoffTimeoutHelper.maxDriftTicks + 1) - BackoffTimeoutHelper.maxDriftTicks)));
+            return Ticks.ToTimeSpan(
+                Math.Max(
+                    Ticks.FromTimeSpan(BackoffTimeoutHelper.defaultInitialWaitTime),
+                    Ticks.Add(
+                        Ticks.FromTimeSpan(this.waitTime),
+                        (long)(uint)this.random.Next()
+                            % (2 * BackoffTimeoutHelper.maxDriftTicks + 1)
+                            - BackoffTimeoutHelper.maxDriftTicks
+                    )
+                )
+            );
         }
 
         void Backoff()

@@ -39,6 +39,13 @@ public class Program
 
     struct S32
     {
-        public int A, B, C, D, E, F, G, H;
+        public int A,
+            B,
+            C,
+            D,
+            E,
+            F,
+            G,
+            H;
     }
 }

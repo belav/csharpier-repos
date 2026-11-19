@@ -24,6 +24,6 @@ namespace System.Runtime.InteropServices.Marshalling
         /// Implementation will be provided by a source generator if not explicitly implemented.
         /// This property can return <c>null</c>. If it does, then the interface is not supported for passing managed implementations to unmanaged code.
         /// </remarks>
-        public abstract static void* VirtualMethodTableManagedImplementation { get; }
+        public static abstract void* VirtualMethodTableManagedImplementation { get; }
     }
 }

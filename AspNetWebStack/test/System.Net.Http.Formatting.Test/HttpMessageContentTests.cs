@@ -40,13 +40,17 @@ namespace System.Net.Http
             httpResponse.ReasonPhrase = ParserData.HttpReasonPhrase;
             httpResponse.Version = new Version("1.2");
             AddMessageHeaders(httpResponse.Headers);
-            httpResponse.Content =
-                containsEntity ? new StringContent(ParserData.HttpMessageEntity) : new StreamContent(Stream.Null);
+            httpResponse.Content = containsEntity
+                ? new StringContent(ParserData.HttpMessageEntity)
+                : new StreamContent(Stream.Null);
 
             return httpResponse;
         }
 
-        private static async Task<string> ReadContentAsync(HttpContent content, bool unBuffered = false)
+        private static async Task<string> ReadContentAsync(
+            HttpContent content,
+            bool unBuffered = false
+        )
         {
             if (unBuffered)
             {
@@ -67,7 +71,11 @@ namespace System.Net.Http
             }
         }
 
-        private static async Task ValidateRequest(HttpContent content, bool containsEntity, bool unBuffered = false)
+        private static async Task ValidateRequest(
+            HttpContent content,
+            bool containsEntity,
+            bool unBuffered = false
+        )
         {
             Assert.Equal(ParserData.HttpRequestMediaType, content.Headers.ContentType);
             long? length = content.Headers.ContentLength;
@@ -86,7 +94,11 @@ namespace System.Net.Http
             }
         }
 
-        private static async Task ValidateResponse(HttpContent content, bool containsEntity, bool unBuffered = false)
+        private static async Task ValidateResponse(
+            HttpContent content,
+            bool containsEntity,
+            bool unBuffered = false
+        )
         {
             Assert.Equal(ParserData.HttpResponseMediaType, content.Headers.ContentType);
 
@@ -109,7 +121,10 @@ namespace System.Net.Http
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert.Type.HasProperties<HttpMessageContent, HttpContent>(TypeAssert.TypeProperties.IsPublicVisibleClass | TypeAssert.TypeProperties.IsDisposable);
+            Assert.Type.HasProperties<HttpMessageContent, HttpContent>(
+                TypeAssert.TypeProperties.IsPublicVisibleClass
+                    | TypeAssert.TypeProperties.IsDisposable
+            );
         }
 
         [Fact]
@@ -125,7 +140,13 @@ namespace System.Net.Http
         [Fact]
         public void RequestConstructorThrowsOnNull()
         {
-            Assert.ThrowsArgumentNull(() => { new HttpMessageContent((HttpRequestMessage)null); }, "httpRequest");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    new HttpMessageContent((HttpRequestMessage)null);
+                },
+                "httpRequest"
+            );
         }
 
         [Fact]
@@ -141,9 +162,14 @@ namespace System.Net.Http
         [Fact]
         public void ResponseConstructorThrowsOnNull()
         {
-            Assert.ThrowsArgumentNull(() => { new HttpMessageContent((HttpResponseMessage)null); }, "httpResponse");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    new HttpMessageContent((HttpResponseMessage)null);
+                },
+                "httpResponse"
+            );
         }
-
 
         [Fact]
         public async Task SerializeRequest()
@@ -172,7 +198,10 @@ namespace System.Net.Http
         [InlineData(true)]
         public async Task SerializeRequestMultipleTimes(bool unBuffered)
         {
-            HttpRequestMessage request = CreateRequest(ParserData.HttpRequestUri, containsEntity: false);
+            HttpRequestMessage request = CreateRequest(
+                ParserData.HttpRequestUri,
+                containsEntity: false
+            );
             HttpMessageContent instance = new(request);
             for (int cnt = 0; cnt < iterations; cnt++)
             {
@@ -220,7 +249,10 @@ namespace System.Net.Http
         [InlineData(true)]
         public async Task SerializeRequestWithEntityMultipleTimes(bool unBuffered)
         {
-            HttpRequestMessage request = CreateRequest(ParserData.HttpRequestUri, containsEntity: true);
+            HttpRequestMessage request = CreateRequest(
+                ParserData.HttpRequestUri,
+                containsEntity: true
+            );
             HttpMessageContent instance = new(request);
             for (int cnt = 0; cnt < iterations; cnt++)
             {
@@ -279,7 +311,10 @@ namespace System.Net.Http
         {
             for (int cnt = 0; cnt < iterations; cnt++)
             {
-                HttpRequestMessage request = CreateRequest(ParserData.HttpRequestUriWithPortAndQuery, false);
+                HttpRequestMessage request = CreateRequest(
+                    ParserData.HttpRequestUriWithPortAndQuery,
+                    false
+                );
                 HttpMessageContent instance = new HttpMessageContent(request);
                 string message = await ReadContentAsync(instance);
                 Assert.Equal(ParserData.HttpRequestWithPortAndQuery, message);
@@ -314,7 +349,13 @@ namespace System.Net.Http
             HttpRequestMessage request = CreateRequest(ParserData.HttpRequestUri, false);
             HttpMessageContent instance = new HttpMessageContent(request);
             instance.Dispose();
-            Assert.ThrowsObjectDisposed(() => { request.Method = HttpMethod.Get; }, typeof(HttpRequestMessage).FullName);
+            Assert.ThrowsObjectDisposed(
+                () =>
+                {
+                    request.Method = HttpMethod.Get;
+                },
+                typeof(HttpRequestMessage).FullName
+            );
         }
 
         [Fact]
@@ -323,7 +364,13 @@ namespace System.Net.Http
             HttpResponseMessage response = CreateResponse(false);
             HttpMessageContent instance = new HttpMessageContent(response);
             instance.Dispose();
-            Assert.ThrowsObjectDisposed(() => { response.StatusCode = HttpStatusCode.OK; }, typeof(HttpResponseMessage).FullName);
+            Assert.ThrowsObjectDisposed(
+                () =>
+                {
+                    response.StatusCode = HttpStatusCode.OK;
+                },
+                typeof(HttpResponseMessage).FullName
+            );
         }
 
         [Fact]
@@ -354,7 +401,10 @@ namespace System.Net.Http
         [Theory]
         [InlineData(false, true)]
         [InlineData(true, false)]
-        public async Task Request_NoContentLength_IfNotRequested(bool readOnlyStream, bool unBuffered)
+        public async Task Request_NoContentLength_IfNotRequested(
+            bool readOnlyStream,
+            bool unBuffered
+        )
         {
             var request = CreateRequest(ParserData.HttpRequestUri, containsEntity: false);
             if (readOnlyStream)
@@ -367,7 +417,10 @@ namespace System.Net.Http
             {
                 var contentString = await ReadContentAsync(instance, unBuffered);
 
-                Assert.Equal(ParserData.HttpRequest.Replace("Content-Length: 0\r\n", ""), contentString);
+                Assert.Equal(
+                    ParserData.HttpRequest.Replace("Content-Length: 0\r\n", ""),
+                    contentString
+                );
             }
         }
 
@@ -375,7 +428,10 @@ namespace System.Net.Http
         [Theory]
         [InlineData(false, true)]
         [InlineData(true, false)]
-        public async Task Response_NoContentLength_IfNotRequested(bool readOnlyStream, bool unBuffered)
+        public async Task Response_NoContentLength_IfNotRequested(
+            bool readOnlyStream,
+            bool unBuffered
+        )
         {
             var response = CreateResponse(containsEntity: false);
             if (readOnlyStream)
@@ -388,7 +444,10 @@ namespace System.Net.Http
             {
                 var contentString = await ReadContentAsync(instance, unBuffered);
 
-                Assert.Equal(ParserData.HttpResponse.Replace("Content-Length: 0\r\n", ""), contentString);
+                Assert.Equal(
+                    ParserData.HttpResponse.Replace("Content-Length: 0\r\n", ""),
+                    contentString
+                );
             }
         }
 
@@ -432,12 +491,16 @@ namespace System.Net.Http
             var contentString = await ReadContentAsync(instance, unBuffered: true);
 
             // Assert #1
-            Assert.Equal(ParserData.HttpRequest.Replace("Content-Length: 0\r\n", ""), contentString);
+            Assert.Equal(
+                ParserData.HttpRequest.Replace("Content-Length: 0\r\n", ""),
+                contentString
+            );
 
             // Act #2
             await Assert.ThrowsAsync<InvalidOperationException>(
                 () => ReadContentAsync(instance, unBuffered: true),
-                "The 'HttpContent' of the 'HttpRequestMessage' has already been read.");
+                "The 'HttpContent' of the 'HttpRequestMessage' has already been read."
+            );
         }
 
         // Covers the true, true case of Response_NoContentLength_IfNotRequested(...).
@@ -452,12 +515,16 @@ namespace System.Net.Http
             var contentString = await ReadContentAsync(instance, unBuffered: true);
 
             // Assert #1
-            Assert.Equal(ParserData.HttpResponse.Replace("Content-Length: 0\r\n", ""), contentString);
+            Assert.Equal(
+                ParserData.HttpResponse.Replace("Content-Length: 0\r\n", ""),
+                contentString
+            );
 
             // Act #2
             await Assert.ThrowsAsync<InvalidOperationException>(
                 () => ReadContentAsync(instance, unBuffered: true),
-                "The 'HttpContent' of the 'HttpResponseMessage' has already been read.");
+                "The 'HttpContent' of the 'HttpResponseMessage' has already been read."
+            );
         }
 
         [Theory]
@@ -471,7 +538,8 @@ namespace System.Net.Http
 
             await Assert.ThrowsAsync<NotSupportedException>(
                 () => ReadContentAsync(instance, unBuffered),
-                "Stream does not support reading.");
+                "Stream does not support reading."
+            );
         }
 
         [Theory]
@@ -485,7 +553,8 @@ namespace System.Net.Http
 
             await Assert.ThrowsAsync<NotSupportedException>(
                 () => ReadContentAsync(instance, unBuffered),
-                "Stream does not support reading.");
+                "Stream does not support reading."
+            );
         }
 
         // Unlike Stream.Null, this stream does not support seeking. Bit more like (say) a network stream or
@@ -511,11 +580,13 @@ namespace System.Net.Http
 
             public override int Read(byte[] buffer, int offset, int count) => 0;
 
-            public override long Seek(long offset, SeekOrigin origin) => throw new NotImplementedException();
+            public override long Seek(long offset, SeekOrigin origin) =>
+                throw new NotImplementedException();
 
             public override void SetLength(long value) => throw new NotImplementedException();
 
-            public override void Write(byte[] buffer, int offset, int count) => throw new NotImplementedException();
+            public override void Write(byte[] buffer, int offset, int count) =>
+                throw new NotImplementedException();
         }
 
         // Unlike Stream.Null, this stream does not support seeking. Bit more like (say) a network stream.
@@ -536,9 +607,11 @@ namespace System.Net.Http
                 // Do nothing.
             }
 
-            public override int Read(byte[] buffer, int offset, int count) => throw new NotImplementedException();
+            public override int Read(byte[] buffer, int offset, int count) =>
+                throw new NotImplementedException();
 
-            public override long Seek(long offset, SeekOrigin origin) => throw new NotImplementedException();
+            public override long Seek(long offset, SeekOrigin origin) =>
+                throw new NotImplementedException();
 
             public override void SetLength(long value) => throw new NotImplementedException();
 

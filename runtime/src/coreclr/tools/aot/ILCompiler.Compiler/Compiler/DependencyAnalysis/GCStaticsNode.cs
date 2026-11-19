@@ -2,10 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
 using Internal.Text;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 using GCStaticRegionConstants = Internal.Runtime.GCStaticRegionConstants;
 
@@ -29,7 +27,8 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
@@ -56,10 +55,17 @@ namespace ILCompiler.DependencyAnalysis
 
             if (factory.PreinitializationManager.HasEagerStaticConstructor(_type))
             {
-                dependencyList.Add(factory.EagerCctorIndirection(_type.GetStaticConstructor()), "Eager .cctor");
+                dependencyList.Add(
+                    factory.EagerCctorIndirection(_type.GetStaticConstructor()),
+                    "Eager .cctor"
+                );
             }
 
-            ModuleUseBasedDependencyAlgorithm.AddDependenciesDueToModuleUse(ref dependencyList, factory, _type.Module);
+            ModuleUseBasedDependencyAlgorithm.AddDependenciesDueToModuleUse(
+                ref dependencyList,
+                factory,
+                _type.Module
+            );
 
             dependencyList.Add(factory.GCStaticsRegion, "GCStatics Region");
 
@@ -68,23 +74,32 @@ namespace ILCompiler.DependencyAnalysis
             return dependencyList;
         }
 
-        public override bool HasConditionalStaticDependencies => _type.ConvertToCanonForm(CanonicalFormKind.Specific) != _type;
+        public override bool HasConditionalStaticDependencies =>
+            _type.ConvertToCanonForm(CanonicalFormKind.Specific) != _type;
 
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory)
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        )
         {
             // If we have a type loader template for this type, we need to keep track of the generated
             // bases in the type info hashtable. The type symbol node does such accounting.
             return new CombinedDependencyListEntry[]
             {
-                new CombinedDependencyListEntry(factory.NecessaryTypeSymbol(_type),
-                    factory.NativeLayout.TemplateTypeLayout(_type.ConvertToCanonForm(CanonicalFormKind.Specific)),
-                    "Keeping track of template-constructable type static bases"),
+                new CombinedDependencyListEntry(
+                    factory.NecessaryTypeSymbol(_type),
+                    factory.NativeLayout.TemplateTypeLayout(
+                        _type.ConvertToCanonForm(CanonicalFormKind.Specific)
+                    ),
+                    "Keeping track of template-constructable type static bases"
+                ),
             };
         }
 
         public override bool StaticDependenciesAreComputed => true;
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.DataSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.DataSection;
+
         public override bool IsShareable => EETypeNode.IsTypeNodeShareable(_type);
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
@@ -103,7 +118,11 @@ namespace ILCompiler.DependencyAnalysis
                 delta |= GCStaticRegionConstants.HasPreInitializedData;
 
             if (factory.Target.SupportsRelativePointers)
-                builder.EmitReloc(GetGCStaticEETypeNode(factory), RelocType.IMAGE_REL_BASED_RELPTR32, delta);
+                builder.EmitReloc(
+                    GetGCStaticEETypeNode(factory),
+                    RelocType.IMAGE_REL_BASED_RELPTR32,
+                    delta
+                );
             else
                 builder.EmitPointerReloc(GetGCStaticEETypeNode(factory), delta);
 

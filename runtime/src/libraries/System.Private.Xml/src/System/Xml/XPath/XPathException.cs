@@ -12,7 +12,9 @@ namespace System.Xml.XPath
     // Represents the exception that is thrown when there is error processing an
     // XPath expression.
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class XPathException : SystemException
     {
         // we need to keep this members for V1 serialization compatibility
@@ -23,9 +25,14 @@ namespace System.Xml.XPath
         // message == null for created V2 exceptions; the exception message is stored in Exception._message
         private readonly string? _message;
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected XPathException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected XPathException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             _res = (string)info.GetValue("res", typeof(string))!;
             _args = (string[]?)info.GetValue("args", typeof(string[]));
@@ -52,7 +59,11 @@ namespace System.Xml.XPath
             }
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -62,14 +73,14 @@ namespace System.Xml.XPath
             info.AddValue("version", "2.0");
         }
 
-        public XPathException() : this(string.Empty, (Exception?)null) { }
+        public XPathException()
+            : this(string.Empty, (Exception?)null) { }
 
-        public XPathException(string? message) : this(message, (Exception?)null) { }
+        public XPathException(string? message)
+            : this(message, (Exception?)null) { }
 
-        public XPathException(string? message, Exception? innerException) :
-            this(SR.Xml_UserException, new string?[] { message }, innerException)
-        {
-        }
+        public XPathException(string? message, Exception? innerException)
+            : this(SR.Xml_UserException, new string?[] { message }, innerException) { }
 
         internal static XPathException Create(string res)
         {
@@ -91,13 +102,11 @@ namespace System.Xml.XPath
             return new XPathException(res, new string[] { arg }, innerException);
         }
 
-        private XPathException(string res, string[]? args) :
-            this(res, args, null)
-        {
-        }
+        private XPathException(string res, string[]? args)
+            : this(res, args, null) { }
 
-        private XPathException(string res, string?[]? args, Exception? inner) :
-            base(CreateMessage(res, args), inner)
+        private XPathException(string res, string?[]? args, Exception? inner)
+            : base(CreateMessage(res, args), inner)
         {
             HResult = HResults.XmlXPath;
             _res = res;
@@ -121,10 +130,7 @@ namespace System.Xml.XPath
 
         public override string Message
         {
-            get
-            {
-                return _message ?? base.Message;
-            }
+            get { return _message ?? base.Message; }
         }
     }
 }

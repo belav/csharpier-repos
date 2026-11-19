@@ -10,25 +10,25 @@
 using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
-using System.IO;
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
-using System.Data.SqlClient;
-using System.Data.Metadata.Edm;
-using System.Data.Mapping;
+using System.Data.Common.CommandTrees;
+using System.Data.Common.Utils;
+using System.Data.Entity.Design.Common;
 using System.Data.EntityClient;
 using System.Data.EntityModel;
-using System.Data.Common.CommandTrees;
-using System.Reflection;
-using System.Security.Cryptography;
-using System.Data.Entity.Design.Common;
+using System.Data.Mapping;
+using System.Data.Metadata.Edm;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Globalization;
-using System.Data.Common.Utils;
-using Microsoft.Build.Utilities;
-using System.Runtime.Versioning;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.Versioning;
+using System.Security.Cryptography;
+using System.Text;
+using Microsoft.Build.Utilities;
 
 namespace System.Data.Entity.Design
 {
@@ -37,10 +37,10 @@ namespace System.Data.Entity.Design
     /// The views are written as code to the passed in output stream. There are a set of options that user
     /// can use to control the code generation process. The options should be apssed into the constrcutor.
     /// While storing the views in the code, the view generator class also stores a Hash value produced based
-    /// on the content of the views and the names of extents. We also generate a hash for each schema file( csdl, ssdl and msl) 
+    /// on the content of the views and the names of extents. We also generate a hash for each schema file( csdl, ssdl and msl)
     /// that was used in view generation process and store the hash in the generated code.The entity runtime will try to discover this
     /// type and if it does discover it will use the generated views in this type. The discovery process is
-    /// explained in detail in the comments for StorageMappingItemCollection class. 
+    /// explained in detail in the comments for StorageMappingItemCollection class.
     /// The runtime will throw an exception if any of the the hash values produced in the design time does not match
     /// the hash values produced at the runtime.
     /// </summary>
@@ -53,17 +53,18 @@ namespace System.Data.Entity.Design
         /// <param name="languageOption">Language Option for generated code.</param>
         public EntityViewGenerator(LanguageOption languageOption)
         {
-            m_languageOption = EDesignUtil.CheckLanguageOptionArgument(languageOption, "languageOption");
+            m_languageOption = EDesignUtil.CheckLanguageOptionArgument(
+                languageOption,
+                "languageOption"
+            );
         }
 
         /// <summary>
-        /// Create the instance of ViewGenerator using C# as the default 
+        /// Create the instance of ViewGenerator using C# as the default
         /// language option.
         /// </summary>
         public EntityViewGenerator()
-            : this(LanguageOption.GenerateCSharpCode)
-        {
-        }
+            : this(LanguageOption.GenerateCSharpCode) { }
 
         #endregion
 
@@ -89,7 +90,7 @@ namespace System.Data.Entity.Design
         /// <summary>
         /// Generates the views for the extents in the mapping item collection and produces
         /// the code for a type that will cache these views. The methods also produces
-        /// a hash based on the StorageEntityContainerMapping, which contains all the 
+        /// a hash based on the StorageEntityContainerMapping, which contains all the
         /// metadata and mapping. It also produces a hash based
         /// on the view content and the name of the extents.
         /// </summary>
@@ -98,7 +99,10 @@ namespace System.Data.Entity.Design
         [ResourceExposure(ResourceScope.Machine)] //Exposes the outputPath as part of ConnectionString which are a Machine resource.
         [ResourceConsumption(ResourceScope.Machine)] //For StreamWriter constructor call. But the path to the stream is not created in this method.
         [CLSCompliant(false)]
-        public IList<EdmSchemaError> GenerateViews(StorageMappingItemCollection mappingCollection, string outputPath)
+        public IList<EdmSchemaError> GenerateViews(
+            StorageMappingItemCollection mappingCollection,
+            string outputPath
+        )
         {
             EDesignUtil.CheckArgumentNull(mappingCollection, "mappingCollection");
             EDesignUtil.CheckStringArgument(outputPath, "outputPath");
@@ -106,7 +110,11 @@ namespace System.Data.Entity.Design
             TextWriter outputWriter = null;
             try
             {
-                return InternalGenerateViews(mappingCollection, () => new StreamWriter(outputPath), out outputWriter);
+                return InternalGenerateViews(
+                    mappingCollection,
+                    () => new StreamWriter(outputPath),
+                    out outputWriter
+                );
             }
             finally
             {
@@ -120,78 +128,125 @@ namespace System.Data.Entity.Design
         /// <summary>
         /// Generates the views for the extents in the mapping item collection and produces
         /// the code for a type that will cache these views. The methods also produces
-        /// a hash based on the storageEntityContainerMapping object, which contains all the 
+        /// a hash based on the storageEntityContainerMapping object, which contains all the
         /// metadata and mapping. It also produces a hash based
         /// on the view content and the name of the extents.
         /// </summary>
         /// <param name="mappingCollection">Mapping Item Collection for which views should be generated</param>
         /// <param name="outputWriter">Output writer to which we want to write the code</param>
         [CLSCompliant(false)]
-        public IList<EdmSchemaError> GenerateViews(StorageMappingItemCollection mappingCollection, TextWriter outputWriter)
+        public IList<EdmSchemaError> GenerateViews(
+            StorageMappingItemCollection mappingCollection,
+            TextWriter outputWriter
+        )
         {
             EDesignUtil.CheckArgumentNull(mappingCollection, "mappingCollection");
 
             Version targetEntityFrameworkVersion;
-            IList<EdmSchemaError> errorList = GetMinimumTargetFrameworkVersion(mappingCollection, out targetEntityFrameworkVersion);
+            IList<EdmSchemaError> errorList = GetMinimumTargetFrameworkVersion(
+                mappingCollection,
+                out targetEntityFrameworkVersion
+            );
 
-            return GenerateViews(mappingCollection, outputWriter, targetEntityFrameworkVersion).Concat(errorList).ToList();
+            return GenerateViews(mappingCollection, outputWriter, targetEntityFrameworkVersion)
+                .Concat(errorList)
+                .ToList();
         }
 
         /// <summary>
         /// Generates the views for the extents in the mapping item collection and produces
         /// the code for a type that will cache these views. The methods also produces
-        /// a hash based on the storageEntityContainerMapping object, which contains all the 
+        /// a hash based on the storageEntityContainerMapping object, which contains all the
         /// metadata and mapping. It also produces a hash based
         /// on the view content and the name of the extents.
         /// </summary>
         /// <param name="mappingCollection">Mapping Item Collection for which views should be generated</param>
         /// <param name="outputWriter">Output writer to which we want to write the code</param>
         [CLSCompliant(false)]
-        public IList<EdmSchemaError> GenerateViews(StorageMappingItemCollection mappingCollection, TextWriter outputWriter, Version targetEntityFrameworkVersion)
+        public IList<EdmSchemaError> GenerateViews(
+            StorageMappingItemCollection mappingCollection,
+            TextWriter outputWriter,
+            Version targetEntityFrameworkVersion
+        )
         {
             EDesignUtil.CheckArgumentNull(mappingCollection, "mappingCollection");
             EDesignUtil.CheckArgumentNull(outputWriter, "outputWriter");
 
-            EDesignUtil.CheckTargetEntityFrameworkVersionArgument(targetEntityFrameworkVersion, "targetEntityFrameworkVersion");
+            EDesignUtil.CheckTargetEntityFrameworkVersionArgument(
+                targetEntityFrameworkVersion,
+                "targetEntityFrameworkVersion"
+            );
             CheckForCompatibleSchemaAndTarget(mappingCollection, targetEntityFrameworkVersion);
 
             TextWriter writer;
             return InternalGenerateViews(mappingCollection, () => outputWriter, out writer);
         }
 
-        private static void CheckForCompatibleSchemaAndTarget(StorageMappingItemCollection mappingCollection, Version targetEntityFrameworkVersion)
+        private static void CheckForCompatibleSchemaAndTarget(
+            StorageMappingItemCollection mappingCollection,
+            Version targetEntityFrameworkVersion
+        )
         {
-            Version mappingVersion = EntityFrameworkVersionsUtil.ConvertToVersion(mappingCollection.MappingVersion);
+            Version mappingVersion = EntityFrameworkVersionsUtil.ConvertToVersion(
+                mappingCollection.MappingVersion
+            );
             if (targetEntityFrameworkVersion < mappingVersion)
             {
-                throw EDesignUtil.Argument(Strings.TargetVersionSchemaVersionMismatch(targetEntityFrameworkVersion, mappingVersion), null);
+                throw EDesignUtil.Argument(
+                    Strings.TargetVersionSchemaVersionMismatch(
+                        targetEntityFrameworkVersion,
+                        mappingVersion
+                    ),
+                    null
+                );
             }
 
-            Version edmVersion = EntityFrameworkVersionsUtil.ConvertToVersion(mappingCollection.EdmItemCollection.EdmVersion);
+            Version edmVersion = EntityFrameworkVersionsUtil.ConvertToVersion(
+                mappingCollection.EdmItemCollection.EdmVersion
+            );
             if (targetEntityFrameworkVersion < edmVersion)
             {
-                throw EDesignUtil.Argument(Strings.TargetVersionSchemaVersionMismatch(targetEntityFrameworkVersion, edmVersion), null);
+                throw EDesignUtil.Argument(
+                    Strings.TargetVersionSchemaVersionMismatch(
+                        targetEntityFrameworkVersion,
+                        edmVersion
+                    ),
+                    null
+                );
             }
         }
 
         private IList<EdmSchemaError> InternalGenerateViews(
             StorageMappingItemCollection mappingCollection,
             Func<TextWriter> GetWriter,
-            out TextWriter outputWriter)
+            out TextWriter outputWriter
+        )
         {
             IList<EdmSchemaError> schemaErrors;
             CodeDomProvider provider;
             Dictionary<EntitySetBase, string> generatedViews;
-            if (GetViewsWithErrors(mappingCollection, out provider, out schemaErrors, out generatedViews))
+            if (
+                GetViewsWithErrors(
+                    mappingCollection,
+                    out provider,
+                    out schemaErrors,
+                    out generatedViews
+                )
+            )
             {
                 outputWriter = null;
                 return schemaErrors;
             }
 
             outputWriter = GetWriter();
-            GenerateAndStoreViews(mappingCollection, generatedViews,
-                outputWriter, provider, schemaErrors);
-            
+            GenerateAndStoreViews(
+                mappingCollection,
+                generatedViews,
+                outputWriter,
+                provider,
+                schemaErrors
+            );
+
             return schemaErrors;
         }
 
@@ -206,20 +261,31 @@ namespace System.Data.Entity.Design
             EDesignUtil.CheckArgumentNull(mappingCollection, "mappingCollection");
 
             Version targetEntityFrameworkVersion;
-            IList<EdmSchemaError> errorList = GetMinimumTargetFrameworkVersion(mappingCollection, out targetEntityFrameworkVersion);
+            IList<EdmSchemaError> errorList = GetMinimumTargetFrameworkVersion(
+                mappingCollection,
+                out targetEntityFrameworkVersion
+            );
 
-            return Validate(mappingCollection, targetEntityFrameworkVersion).Concat(errorList).ToList();
+            return Validate(mappingCollection, targetEntityFrameworkVersion)
+                .Concat(errorList)
+                .ToList();
         }
-        
+
         /// <summary>
         /// Validates the mappingCollections and returns the schemaErrors.
         /// </summary>
         /// <param name="mappingCollection"></param>
         /// <returns>list of EdmSchemaError</returns>
         [CLSCompliant(false)]
-        public static IList<EdmSchemaError> Validate(StorageMappingItemCollection mappingCollection, Version targetEntityFrameworkVersion)
+        public static IList<EdmSchemaError> Validate(
+            StorageMappingItemCollection mappingCollection,
+            Version targetEntityFrameworkVersion
+        )
         {
-            EDesignUtil.CheckTargetEntityFrameworkVersionArgument(targetEntityFrameworkVersion, "targetEntityFrameworkVersion");
+            EDesignUtil.CheckTargetEntityFrameworkVersionArgument(
+                targetEntityFrameworkVersion,
+                "targetEntityFrameworkVersion"
+            );
             CheckForCompatibleSchemaAndTarget(mappingCollection, targetEntityFrameworkVersion);
 
             // purpose of this API is to validate the mappingCollection, it basically will call GetEntitySetViews
@@ -235,24 +301,36 @@ namespace System.Data.Entity.Design
             GetEntitySetViews(mappingCollection, out schemaErrors, out generatedViews);
 
             // Validate function imports and their mapping.
-            foreach (var containerMapping in mappingCollection.GetItems<StorageEntityContainerMapping>())
+            foreach (
+                var containerMapping in mappingCollection.GetItems<StorageEntityContainerMapping>()
+            )
             {
                 foreach (var functionImport in containerMapping.EdmEntityContainer.FunctionImports)
                 {
                     FunctionImportMapping functionImportMapping;
-                    if (containerMapping.TryGetFunctionImportMapping(functionImport, out functionImportMapping))
+                    if (
+                        containerMapping.TryGetFunctionImportMapping(
+                            functionImport,
+                            out functionImportMapping
+                        )
+                    )
                     {
                         if (functionImport.IsComposableAttribute)
                         {
-                            ((FunctionImportMappingComposable)functionImportMapping).ValidateFunctionView(schemaErrors);
+                            (
+                                (FunctionImportMappingComposable)functionImportMapping
+                            ).ValidateFunctionView(schemaErrors);
                         }
                     }
                     else
                     {
-                        schemaErrors.Add(new EdmSchemaError(
-                            Strings.UnmappedFunctionImport(functionImport.Identity),
-                            (int)StorageMappingErrorCode.UnmappedFunctionImport,
-                            EdmSchemaErrorSeverity.Warning));
+                        schemaErrors.Add(
+                            new EdmSchemaError(
+                                Strings.UnmappedFunctionImport(functionImport.Identity),
+                                (int)StorageMappingErrorCode.UnmappedFunctionImport,
+                                EdmSchemaErrorSeverity.Warning
+                            )
+                        );
                     }
                 }
             }
@@ -261,27 +339,44 @@ namespace System.Data.Entity.Design
             return HandleValidationErrors(schemaErrors);
         }
 
-        private static IList<EdmSchemaError> HandleValidationErrors(IList<EdmSchemaError> schemaErrors)
+        private static IList<EdmSchemaError> HandleValidationErrors(
+            IList<EdmSchemaError> schemaErrors
+        )
         {
-            IEnumerable<EdmSchemaError> warningsToRemove = 
-                schemaErrors.Where(s => 
-                    s.ErrorCode == ERRORCODE_MAPPINGALLQUERYVIEWATCOMPILETIME); // When EntityContainerMapping only has QueryView, the mapping is valid
+            IEnumerable<EdmSchemaError> warningsToRemove = schemaErrors.Where(s =>
+                s.ErrorCode == ERRORCODE_MAPPINGALLQUERYVIEWATCOMPILETIME
+            ); // When EntityContainerMapping only has QueryView, the mapping is valid
 
             return schemaErrors.Except(warningsToRemove).ToList();
         }
 
-        private bool GetViewsWithErrors(StorageMappingItemCollection mappingCollection, out CodeDomProvider provider, out IList<EdmSchemaError> schemaErrors, out Dictionary<EntitySetBase, string> generatedViews)
+        private bool GetViewsWithErrors(
+            StorageMappingItemCollection mappingCollection,
+            out CodeDomProvider provider,
+            out IList<EdmSchemaError> schemaErrors,
+            out Dictionary<EntitySetBase, string> generatedViews
+        )
         {
-            GetViewsAndCodeDomProvider(mappingCollection, out provider, out schemaErrors, out generatedViews);
+            GetViewsAndCodeDomProvider(
+                mappingCollection,
+                out provider,
+                out schemaErrors,
+                out generatedViews
+            );
             //If the generated views are empty because of errors or warnings, then don't create an output file.
             if (generatedViews.Count == 0 && schemaErrors.Count > 0)
-            {                
+            {
                 return true;
             }
             return false;
         }
 
-        private void GetViewsAndCodeDomProvider(StorageMappingItemCollection mappingCollection, out CodeDomProvider provider, out IList<EdmSchemaError> schemaErrors, out Dictionary<EntitySetBase, string> generatedViews)
+        private void GetViewsAndCodeDomProvider(
+            StorageMappingItemCollection mappingCollection,
+            out CodeDomProvider provider,
+            out IList<EdmSchemaError> schemaErrors,
+            out Dictionary<EntitySetBase, string> generatedViews
+        )
         {
             //Create a CodeDomProvider based on options.
             provider = null;
@@ -300,21 +395,45 @@ namespace System.Data.Entity.Design
             GetEntitySetViews(mappingCollection, out schemaErrors, out generatedViews);
         }
 
-        private static void GetEntitySetViews(StorageMappingItemCollection mappingCollection,
-            out IList<EdmSchemaError> schemaErrors, out Dictionary<EntitySetBase, string> generatedViews)
+        private static void GetEntitySetViews(
+            StorageMappingItemCollection mappingCollection,
+            out IList<EdmSchemaError> schemaErrors,
+            out Dictionary<EntitySetBase, string> generatedViews
+        )
         {
             generatedViews = mappingCollection.GenerateEntitySetViews(out schemaErrors);
         }
-        
-        private static IList<EdmSchemaError> GetMinimumTargetFrameworkVersion(StorageMappingItemCollection mappingCollection, out Version targetFrameworkVersion)
+
+        private static IList<EdmSchemaError> GetMinimumTargetFrameworkVersion(
+            StorageMappingItemCollection mappingCollection,
+            out Version targetFrameworkVersion
+        )
         {
             List<EdmSchemaError> errorList = new List<EdmSchemaError>();
 
-            targetFrameworkVersion = EntityFrameworkVersionsUtil.ConvertToVersion(mappingCollection.EdmItemCollection.EdmVersion);
+            targetFrameworkVersion = EntityFrameworkVersionsUtil.ConvertToVersion(
+                mappingCollection.EdmItemCollection.EdmVersion
+            );
 
             if (targetFrameworkVersion > EntityFrameworkVersions.Default)
             {
-                errorList.Add(new EdmSchemaError(Strings.DefaultTargetVersionTooLow(EntityFrameworkVersions.Default, targetFrameworkVersion), (int)System.Data.Entity.Design.SsdlGenerator.ModelBuilderErrorCode.SchemaVersionHigherThanTargetVersion, EdmSchemaErrorSeverity.Warning));
+                errorList.Add(
+                    new EdmSchemaError(
+                        Strings.DefaultTargetVersionTooLow(
+                            EntityFrameworkVersions.Default,
+                            targetFrameworkVersion
+                        ),
+                        (int)
+                            System
+                                .Data
+                                .Entity
+                                .Design
+                                .SsdlGenerator
+                                .ModelBuilderErrorCode
+                                .SchemaVersionHigherThanTargetVersion,
+                        EdmSchemaErrorSeverity.Warning
+                    )
+                );
             }
 
             return errorList;
@@ -329,8 +448,13 @@ namespace System.Data.Entity.Design
         /// <param name="sourceWriter"></param>
         /// <param name="provider"></param>
         /// <returns></returns>
-        private static void GenerateAndStoreViews(StorageMappingItemCollection mappingCollection,
-            Dictionary<EntitySetBase, string> generatedViews, TextWriter sourceWriter, CodeDomProvider provider, IList<EdmSchemaError> schemaErrors)
+        private static void GenerateAndStoreViews(
+            StorageMappingItemCollection mappingCollection,
+            Dictionary<EntitySetBase, string> generatedViews,
+            TextWriter sourceWriter,
+            CodeDomProvider provider,
+            IList<EdmSchemaError> schemaErrors
+        )
         {
             EdmItemCollection edmCollection = mappingCollection.EdmItemCollection;
             StoreItemCollection storeCollection = mappingCollection.StoreItemCollection;
@@ -339,79 +463,124 @@ namespace System.Data.Entity.Design
             CodeCompileUnit compileUnit = new CodeCompileUnit();
 
             //Add the namespace for generated code
-            CodeNamespace codeNamespace = new CodeNamespace(EntityViewGenerationConstants.NamespaceName);
+            CodeNamespace codeNamespace = new CodeNamespace(
+                EntityViewGenerationConstants.NamespaceName
+            );
             //Add copyright notice to the namespace comment.
             compileUnit.Namespaces.Add(codeNamespace);
 
-            foreach (var storageEntityContainerMapping in mappingCollection.GetItems<StorageEntityContainerMapping>())
+            foreach (
+                var storageEntityContainerMapping in mappingCollection.GetItems<StorageEntityContainerMapping>()
+            )
             {
                 //Throw warning when containerMapping contains query view for bug 547285.
                 if (HasQueryView(storageEntityContainerMapping))
                 {
-                    schemaErrors.Add(new EdmSchemaError(
-                        Strings.UnsupportedQueryViewInEntityContainerMapping(storageEntityContainerMapping.Identity), 
-                        (int)StorageMappingErrorCode.UnsupportedQueryViewInEntityContainerMapping, 
-                        EdmSchemaErrorSeverity.Warning));
+                    schemaErrors.Add(
+                        new EdmSchemaError(
+                            Strings.UnsupportedQueryViewInEntityContainerMapping(
+                                storageEntityContainerMapping.Identity
+                            ),
+                            (int)
+                                StorageMappingErrorCode.UnsupportedQueryViewInEntityContainerMapping,
+                            EdmSchemaErrorSeverity.Warning
+                        )
+                    );
                     continue;
                 }
 
                 #region Class Declaration
 
                 string edmContainerName = storageEntityContainerMapping.EdmEntityContainer.Name;
-                string storeContainerName = storageEntityContainerMapping.StorageEntityContainer.Name;
+                string storeContainerName = storageEntityContainerMapping
+                    .StorageEntityContainer
+                    .Name;
 
-                string hashOverMappingClosure = MetadataMappingHasherVisitor.GetMappingClosureHash(edmCollection.EdmVersion, storageEntityContainerMapping);
+                string hashOverMappingClosure = MetadataMappingHasherVisitor.GetMappingClosureHash(
+                    edmCollection.EdmVersion,
+                    storageEntityContainerMapping
+                );
 
                 StringBuilder inputForTypeNameContent = new StringBuilder(hashOverMappingClosure);
 
-                string viewStorageTypeName = EntityViewGenerationConstants.ViewGenerationTypeNamePrefix + StringHashBuilder.ComputeHash(MetadataHelper.CreateMetadataHashAlgorithm(edmCollection.EdmVersion),  inputForTypeNameContent.ToString()).ToUpperInvariant();
+                string viewStorageTypeName =
+                    EntityViewGenerationConstants.ViewGenerationTypeNamePrefix
+                    + StringHashBuilder
+                        .ComputeHash(
+                            MetadataHelper.CreateMetadataHashAlgorithm(edmCollection.EdmVersion),
+                            inputForTypeNameContent.ToString()
+                        )
+                        .ToUpperInvariant();
 
-                //Add typeof expression to get the type that contains ViewGen type. This will help us in avoiding to go through 
+                //Add typeof expression to get the type that contains ViewGen type. This will help us in avoiding to go through
                 //all the types in the assembly. I have also verified that this works with VB with a root namespace prepended to the
                 //namespace since VB is picking up the type correctly as long as it is in the same assembly even with out the root namespace.
-                CodeTypeOfExpression viewGenTypeOfExpression = new CodeTypeOfExpression(EntityViewGenerationConstants.NamespaceName + "." + viewStorageTypeName);
+                CodeTypeOfExpression viewGenTypeOfExpression = new CodeTypeOfExpression(
+                    EntityViewGenerationConstants.NamespaceName + "." + viewStorageTypeName
+                );
                 //Add the assembly attribute that marks the assembly as the one that contains the generated views
-                CodeAttributeDeclaration viewGenAttribute = new CodeAttributeDeclaration(EntityViewGenerationConstants.ViewGenerationCustomAttributeName);
-                CodeAttributeArgument viewGenTypeArgument = new CodeAttributeArgument(viewGenTypeOfExpression);
+                CodeAttributeDeclaration viewGenAttribute = new CodeAttributeDeclaration(
+                    EntityViewGenerationConstants.ViewGenerationCustomAttributeName
+                );
+                CodeAttributeArgument viewGenTypeArgument = new CodeAttributeArgument(
+                    viewGenTypeOfExpression
+                );
                 viewGenAttribute.Arguments.Add(viewGenTypeArgument);
                 compileUnit.AssemblyCustomAttributes.Add(viewGenAttribute);
 
                 //Add the type which will be the class that contains all the views in this assembly
-                CodeTypeDeclaration viewStoringType = CreateTypeForStoringViews(viewStorageTypeName);
+                CodeTypeDeclaration viewStoringType = CreateTypeForStoringViews(
+                    viewStorageTypeName
+                );
 
                 //Add the constructor, this will be the only method that this type will contain
                 //Create empty constructor.
                 CodeConstructor viewStoringTypeConstructor = CreateConstructorForViewStoringType();
                 viewStoringType.Attributes = MemberAttributes.Public;
 
-
                 //Get an expression that expresses this instance
                 CodeThisReferenceExpression thisRef = new CodeThisReferenceExpression();
 
+                string viewHash = MetadataHelper.GenerateHashForAllExtentViewsContent(
+                    edmCollection.EdmVersion,
+                    GenerateDictionaryForEntitySetNameAndView(generatedViews)
+                );
 
-                string viewHash = MetadataHelper.GenerateHashForAllExtentViewsContent(edmCollection.EdmVersion, GenerateDictionaryForEntitySetNameAndView(generatedViews));
-
-
-                CodeAssignStatement EdmEntityContainerNameStatement = 
-                    new CodeAssignStatement(
-                        new CodeFieldReferenceExpression(thisRef, EntityViewGenerationConstants.EdmEntityContainerName), 
-                        new CodePrimitiveExpression(edmContainerName));
-                CodeAssignStatement StoreEntityContainerNameStatement =
-                    new CodeAssignStatement(
-                        new CodeFieldReferenceExpression(thisRef, EntityViewGenerationConstants.StoreEntityContainerName),
-                        new CodePrimitiveExpression(storeContainerName));
-                CodeAssignStatement HashOverMappingClosureStatement =
-                    new CodeAssignStatement(
-                        new CodeFieldReferenceExpression(thisRef, EntityViewGenerationConstants.HashOverMappingClosure),
-                        new CodePrimitiveExpression(hashOverMappingClosure));
-                CodeAssignStatement HashOverAllExtentViewsStatement =
-                    new CodeAssignStatement(
-                        new CodeFieldReferenceExpression(thisRef, EntityViewGenerationConstants.HashOverAllExtentViews),
-                        new CodePrimitiveExpression(viewHash));
-                CodeAssignStatement ViewCountStatement =
-                    new CodeAssignStatement(
-                        new CodeFieldReferenceExpression(thisRef, EntityViewGenerationConstants.ViewCountPropertyName),
-                        new CodePrimitiveExpression(generatedViews.Count));
+                CodeAssignStatement EdmEntityContainerNameStatement = new CodeAssignStatement(
+                    new CodeFieldReferenceExpression(
+                        thisRef,
+                        EntityViewGenerationConstants.EdmEntityContainerName
+                    ),
+                    new CodePrimitiveExpression(edmContainerName)
+                );
+                CodeAssignStatement StoreEntityContainerNameStatement = new CodeAssignStatement(
+                    new CodeFieldReferenceExpression(
+                        thisRef,
+                        EntityViewGenerationConstants.StoreEntityContainerName
+                    ),
+                    new CodePrimitiveExpression(storeContainerName)
+                );
+                CodeAssignStatement HashOverMappingClosureStatement = new CodeAssignStatement(
+                    new CodeFieldReferenceExpression(
+                        thisRef,
+                        EntityViewGenerationConstants.HashOverMappingClosure
+                    ),
+                    new CodePrimitiveExpression(hashOverMappingClosure)
+                );
+                CodeAssignStatement HashOverAllExtentViewsStatement = new CodeAssignStatement(
+                    new CodeFieldReferenceExpression(
+                        thisRef,
+                        EntityViewGenerationConstants.HashOverAllExtentViews
+                    ),
+                    new CodePrimitiveExpression(viewHash)
+                );
+                CodeAssignStatement ViewCountStatement = new CodeAssignStatement(
+                    new CodeFieldReferenceExpression(
+                        thisRef,
+                        EntityViewGenerationConstants.ViewCountPropertyName
+                    ),
+                    new CodePrimitiveExpression(generatedViews.Count)
+                );
 
                 viewStoringTypeConstructor.Statements.Add(EdmEntityContainerNameStatement);
                 viewStoringTypeConstructor.Statements.Add(StoreEntityContainerNameStatement);
@@ -437,9 +606,15 @@ namespace System.Data.Entity.Design
             }
         }
 
-        private static bool HasQueryView(StorageEntityContainerMapping storageEntityContainerMapping)
+        private static bool HasQueryView(
+            StorageEntityContainerMapping storageEntityContainerMapping
+        )
         {
-            foreach (EntitySetBase extent in storageEntityContainerMapping.EdmEntityContainer.BaseEntitySets)
+            foreach (
+                EntitySetBase extent in storageEntityContainerMapping
+                    .EdmEntityContainer
+                    .BaseEntitySets
+            )
             {
                 if (storageEntityContainerMapping.HasQueryViewForSetMap(extent.Name))
                 {
@@ -449,7 +624,9 @@ namespace System.Data.Entity.Design
             return false;
         }
 
-        private static Dictionary<string, string> GenerateDictionaryForEntitySetNameAndView(Dictionary<EntitySetBase, string> dictionary)
+        private static Dictionary<string, string> GenerateDictionaryForEntitySetNameAndView(
+            Dictionary<EntitySetBase, string> dictionary
+        )
         {
             Dictionary<string, string> newDictionary = new Dictionary<string, string>();
             foreach (var item in dictionary)
@@ -465,7 +642,11 @@ namespace System.Data.Entity.Design
         /// <param name="sourceWriter"></param>
         /// <param name="provider"></param>
         /// <param name="compileUnit"></param>
-        private static void GenerateCode(TextWriter sourceWriter, CodeDomProvider provider, CodeCompileUnit compileUnit)
+        private static void GenerateCode(
+            TextWriter sourceWriter,
+            CodeDomProvider provider,
+            CodeCompileUnit compileUnit
+        )
         {
             CodeGeneratorOptions styleOptions = new CodeGeneratorOptions();
             styleOptions.BracingStyle = "C";
@@ -480,25 +661,50 @@ namespace System.Data.Entity.Design
         /// <param name="typeDeclaration"></param>
         /// <param name="generatedViews"></param>
         /// <returns></returns>
-        private static void CreateAndAddGetViewAtMethod(CodeTypeDeclaration typeDeclaration, Dictionary<EntitySetBase, string> generatedViews)
+        private static void CreateAndAddGetViewAtMethod(
+            CodeTypeDeclaration typeDeclaration,
+            Dictionary<EntitySetBase, string> generatedViews
+        )
         {
-
             //Add the views to a method
             CodeMemberMethod getViewAtMethod = new CodeMemberMethod();
             getViewAtMethod.Name = EntityViewGenerationConstants.GetViewAtMethodName;
-            getViewAtMethod.ReturnType = new CodeTypeReference(typeof(KeyValuePair<,>).MakeGenericType(new Type[] { typeof(string), typeof(string) }));
-            CodeParameterDeclarationExpression parameter = new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(int)), "index");
+            getViewAtMethod.ReturnType = new CodeTypeReference(
+                typeof(KeyValuePair<,>).MakeGenericType(
+                    new Type[] { typeof(string), typeof(string) }
+                )
+            );
+            CodeParameterDeclarationExpression parameter = new CodeParameterDeclarationExpression(
+                new CodeTypeReference(typeof(int)),
+                "index"
+            );
             getViewAtMethod.Parameters.Add(parameter);
-            getViewAtMethod.Comments.Add(new CodeCommentStatement(EntityViewGenerationConstants.SummaryStartElement, true /*docComment*/));
-            getViewAtMethod.Comments.Add(new CodeCommentStatement(Strings.GetViewAtMethodComments, true /*docComment*/));
-            getViewAtMethod.Comments.Add(new CodeCommentStatement(EntityViewGenerationConstants.SummaryEndElement, true /*docComment*/));
+            getViewAtMethod.Comments.Add(
+                new CodeCommentStatement(
+                    EntityViewGenerationConstants.SummaryStartElement,
+                    true /*docComment*/
+                )
+            );
+            getViewAtMethod.Comments.Add(
+                new CodeCommentStatement(
+                    Strings.GetViewAtMethodComments,
+                    true /*docComment*/
+                )
+            );
+            getViewAtMethod.Comments.Add(
+                new CodeCommentStatement(
+                    EntityViewGenerationConstants.SummaryEndElement,
+                    true /*docComment*/
+                )
+            );
 
             getViewAtMethod.Attributes = MemberAttributes.Family | MemberAttributes.Override;
 
             typeDeclaration.Members.Add(getViewAtMethod);
-            
+
             int index = 0;
-            CodeVariableReferenceExpression indexParameterReference = new CodeVariableReferenceExpression(getViewAtMethod.Parameters[0].Name);
+            CodeVariableReferenceExpression indexParameterReference =
+                new CodeVariableReferenceExpression(getViewAtMethod.Parameters[0].Name);
 
             foreach (KeyValuePair<EntitySetBase, string> generatedViewPair in generatedViews)
             {
@@ -511,39 +717,80 @@ namespace System.Data.Entity.Design
                 // Given the not supported scenarios in CodeDom, we choose only use if statement in this case
 
                 // if(index == 0)
-                CodeConditionStatement currentIf = new CodeConditionStatement(new CodeBinaryOperatorExpression(
-                indexParameterReference, CodeBinaryOperatorType.ValueEquality, new CodePrimitiveExpression(index)));
+                CodeConditionStatement currentIf = new CodeConditionStatement(
+                    new CodeBinaryOperatorExpression(
+                        indexParameterReference,
+                        CodeBinaryOperatorType.ValueEquality,
+                        new CodePrimitiveExpression(index)
+                    )
+                );
 
                 getViewAtMethod.Statements.Add(currentIf);
 
                 EntitySetBase entitySet = generatedViewPair.Key;
                 string extentFullName = GetExtentFullName(entitySet);
-                CodeMemberMethod viewMethod = CreateViewReturnMethod(extentFullName, index, generatedViewPair.Value);
+                CodeMemberMethod viewMethod = CreateViewReturnMethod(
+                    extentFullName,
+                    index,
+                    generatedViewPair.Value
+                );
                 typeDeclaration.Members.Add(viewMethod);
 
                 // return GetNorthwindContext_Customers();
-                CodeMethodReturnStatement returnViewMethodCall = new CodeMethodReturnStatement(new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(null, viewMethod.Name)));
+                CodeMethodReturnStatement returnViewMethodCall = new CodeMethodReturnStatement(
+                    new CodeMethodInvokeExpression(
+                        new CodeMethodReferenceExpression(null, viewMethod.Name)
+                    )
+                );
                 currentIf.TrueStatements.Add(returnViewMethodCall);
 
                 index++;
             }
-            
+
             // if an invalid index is asked for throw
-            getViewAtMethod.Statements.Add(new CodeThrowExceptionStatement(
-                                            new CodeObjectCreateExpression(new CodeTypeReference(typeof(IndexOutOfRangeException)))));
+            getViewAtMethod.Statements.Add(
+                new CodeThrowExceptionStatement(
+                    new CodeObjectCreateExpression(
+                        new CodeTypeReference(typeof(IndexOutOfRangeException))
+                    )
+                )
+            );
         }
 
-        private static CodeMemberMethod CreateViewReturnMethod(string extentFullName, int index, string viewText)
+        private static CodeMemberMethod CreateViewReturnMethod(
+            string extentFullName,
+            int index,
+            string viewText
+        )
         {
             //Add the views to a method
             CodeMemberMethod viewMethod = new CodeMemberMethod();
             viewMethod.Name = "GetView" + index.ToString(CultureInfo.InvariantCulture);
 
             viewMethod.Attributes = MemberAttributes.Private;
-            viewMethod.ReturnType = new CodeTypeReference(typeof(KeyValuePair<,>).MakeGenericType(new Type[] { typeof(string), typeof(string) }));
-            viewMethod.Comments.Add(new CodeCommentStatement(EntityViewGenerationConstants.SummaryStartElement, true /*docComment*/));
-            viewMethod.Comments.Add(new CodeCommentStatement(Strings.IndividualViewComments(extentFullName), true /*docComment*/));
-            viewMethod.Comments.Add(new CodeCommentStatement(EntityViewGenerationConstants.SummaryEndElement, true /*docComment*/));
+            viewMethod.ReturnType = new CodeTypeReference(
+                typeof(KeyValuePair<,>).MakeGenericType(
+                    new Type[] { typeof(string), typeof(string) }
+                )
+            );
+            viewMethod.Comments.Add(
+                new CodeCommentStatement(
+                    EntityViewGenerationConstants.SummaryStartElement,
+                    true /*docComment*/
+                )
+            );
+            viewMethod.Comments.Add(
+                new CodeCommentStatement(
+                    Strings.IndividualViewComments(extentFullName),
+                    true /*docComment*/
+                )
+            );
+            viewMethod.Comments.Add(
+                new CodeCommentStatement(
+                    EntityViewGenerationConstants.SummaryEndElement,
+                    true /*docComment*/
+                )
+            );
 
             CodeExpression viewTextExpression;
             // only use the StringBuilder if we have to.
@@ -556,7 +803,10 @@ namespace System.Data.Entity.Design
                     viewMethod.Statements.Add(appendExpression);
                 }
 
-                viewTextExpression = new CodeMethodInvokeExpression(GetViewStringBuilderVariable(), "ToString");
+                viewTextExpression = new CodeMethodInvokeExpression(
+                    GetViewStringBuilderVariable(),
+                    "ToString"
+                );
             }
             else
             {
@@ -566,21 +816,28 @@ namespace System.Data.Entity.Design
             // return new System.Collections.Generic.KeyValuePair<string, string>("dbo.Products", viewString.ToString());
             // or
             // return new System.Collections.Generic.KeyValuePair<string, string>("dbo.Products", "SELECT value c...");
-            CodeObjectCreateExpression newExpression =
-                new CodeObjectCreateExpression(
-                    viewMethod.ReturnType,
-                    new CodePrimitiveExpression(extentFullName),
-                    viewTextExpression);
+            CodeObjectCreateExpression newExpression = new CodeObjectCreateExpression(
+                viewMethod.ReturnType,
+                new CodePrimitiveExpression(extentFullName),
+                viewTextExpression
+            );
             viewMethod.Statements.Add(new CodeMethodReturnStatement(newExpression));
 
             return viewMethod;
         }
 
-        private static void CreateSizedStringBuilder(CodeStatementCollection statements, int capacity)
+        private static void CreateSizedStringBuilder(
+            CodeStatementCollection statements,
+            int capacity
+        )
         {
             // StringBuilder viewString = new StringBuilder(237);
-            CodeVariableDeclarationStatement viewStringDeclaration = new CodeVariableDeclarationStatement(typeof(StringBuilder), "viewString");
-            CodeObjectCreateExpression viewStringConstruct = new CodeObjectCreateExpression(typeof(StringBuilder), new CodePrimitiveExpression(capacity));
+            CodeVariableDeclarationStatement viewStringDeclaration =
+                new CodeVariableDeclarationStatement(typeof(StringBuilder), "viewString");
+            CodeObjectCreateExpression viewStringConstruct = new CodeObjectCreateExpression(
+                typeof(StringBuilder),
+                new CodePrimitiveExpression(capacity)
+            );
             viewStringDeclaration.InitExpression = viewStringConstruct;
 
             statements.Add(viewStringDeclaration);
@@ -603,12 +860,16 @@ namespace System.Data.Entity.Design
         }
 
         private static IEnumerable<CodeMethodInvokeExpression> GetViewStringsAppendToStringBuilder(
-            params string[] viewStrings)
+            params string[] viewStrings
+        )
         {
             foreach (var viewString in viewStrings)
             {
                 // viewString.Append("xxx");
-                yield return AppendStringToStringBuilder(GetViewStringBuilderVariable(), viewString);
+                yield return AppendStringToStringBuilder(
+                    GetViewStringBuilderVariable(),
+                    viewString
+                );
             }
         }
 
@@ -618,19 +879,28 @@ namespace System.Data.Entity.Design
         }
 
         private static CodeMethodInvokeExpression AppendStringToStringBuilder(
-            CodeVariableReferenceExpression stringBuilder, string stringToAppend)
+            CodeVariableReferenceExpression stringBuilder,
+            string stringToAppend
+        )
         {
             return new CodeMethodInvokeExpression(
-                stringBuilder, "Append", new CodePrimitiveExpression(stringToAppend));
+                stringBuilder,
+                "Append",
+                new CodePrimitiveExpression(stringToAppend)
+            );
         }
 
-        private static IEnumerable<CodeMethodInvokeExpression> GetAppendViewStringsExpressions(string viewString)
+        private static IEnumerable<CodeMethodInvokeExpression> GetAppendViewStringsExpressions(
+            string viewString
+        )
         {
             if (viewString.Length > MAXONELINELENGTH)
             {
                 // if the string is longer than 2046 charactors, we splitted them in to 80 each
                 // and append them using StringBuilder
-                return GetViewStringsAppendToStringBuilder(SplitViewStrings(viewString).ToArray<string>());
+                return GetViewStringsAppendToStringBuilder(
+                    SplitViewStrings(viewString).ToArray<string>()
+                );
             }
             else
             {
@@ -642,8 +912,9 @@ namespace System.Data.Entity.Design
         {
             //We store the full Extent Name in the generated code which is
             //EntityContainer name + "." + entitysetName
-            return entitySet.EntityContainer.Name + EntityViewGenerationConstants.QualificationCharacter + entitySet.Name;
-
+            return entitySet.EntityContainer.Name
+                + EntityViewGenerationConstants.QualificationCharacter
+                + entitySet.Name;
         }
 
         /// <summary>
@@ -656,9 +927,24 @@ namespace System.Data.Entity.Design
             //Mark it as public
             constructor.Attributes = MemberAttributes.Public;
             //Add constructor comments
-            constructor.Comments.Add(new CodeCommentStatement(EntityViewGenerationConstants.SummaryStartElement, true /*docComment*/));
-            constructor.Comments.Add(new CodeCommentStatement(Strings.ConstructorComments, true /*docComment*/));
-            constructor.Comments.Add(new CodeCommentStatement(EntityViewGenerationConstants.SummaryEndElement, true /*docComment*/));
+            constructor.Comments.Add(
+                new CodeCommentStatement(
+                    EntityViewGenerationConstants.SummaryStartElement,
+                    true /*docComment*/
+                )
+            );
+            constructor.Comments.Add(
+                new CodeCommentStatement(
+                    Strings.ConstructorComments,
+                    true /*docComment*/
+                )
+            );
+            constructor.Comments.Add(
+                new CodeCommentStatement(
+                    EntityViewGenerationConstants.SummaryEndElement,
+                    true /*docComment*/
+                )
+            );
             return constructor;
         }
 
@@ -674,9 +960,24 @@ namespace System.Data.Entity.Design
             //of generated code
             typeDecl.BaseTypes.Add(EntityViewGenerationConstants.BaseTypeName);
             //Add type comments
-            typeDecl.Comments.Add(new CodeCommentStatement(EntityViewGenerationConstants.SummaryStartElement, true /*docComment*/));
-            typeDecl.Comments.Add(new CodeCommentStatement(Strings.TypeComments, true /*docComment*/));
-            typeDecl.Comments.Add(new CodeCommentStatement(EntityViewGenerationConstants.SummaryEndElement, true /*docComment*/));
+            typeDecl.Comments.Add(
+                new CodeCommentStatement(
+                    EntityViewGenerationConstants.SummaryStartElement,
+                    true /*docComment*/
+                )
+            );
+            typeDecl.Comments.Add(
+                new CodeCommentStatement(
+                    Strings.TypeComments,
+                    true /*docComment*/
+                )
+            );
+            typeDecl.Comments.Add(
+                new CodeCommentStatement(
+                    EntityViewGenerationConstants.SummaryEndElement,
+                    true /*docComment*/
+                )
+            );
             return typeDecl;
         }
         #endregion

@@ -29,7 +29,7 @@ namespace System.Tests
         [Fact]
         public void FromChar()
         {
-            char[] testValues = { 'A', char.MinValue, };
+            char[] testValues = { 'A', char.MinValue };
             sbyte[] expectedValues = { 65, (sbyte)char.MinValue };
             Verify(Convert.ToSByte, testValues, expectedValues);
         }
@@ -97,7 +97,11 @@ namespace System.Tests
             VerifyFromObject(Convert.ToSByte, Convert.ToSByte, testValues, expectedValues);
 
             object[] invalidValues = { new object(), DateTime.Now };
-            VerifyFromObjectThrows<InvalidCastException>(Convert.ToSByte, Convert.ToSByte, invalidValues);
+            VerifyFromObjectThrows<InvalidCastException>(
+                Convert.ToSByte,
+                Convert.ToSByte,
+                invalidValues
+            );
         }
 
         [Fact]
@@ -111,8 +115,8 @@ namespace System.Tests
         [Fact]
         public void FromSingle()
         {
-            float[] testValues = { 100.0f, -100.0f, 0.0f, };
-            sbyte[] expectedValues = { 100, -100, 0, };
+            float[] testValues = { 100.0f, -100.0f, 0.0f };
+            sbyte[] expectedValues = { 100, -100, 0 };
             Verify(Convert.ToSByte, testValues, expectedValues);
 
             float[] overflowValues = { float.MaxValue, float.MinValue };
@@ -122,41 +126,98 @@ namespace System.Tests
         [Fact]
         public void FromString()
         {
-            string[] testValues = { "100", "-100", "0", SByte.MinValue.ToString(), SByte.MaxValue.ToString() };
+            string[] testValues =
+            {
+                "100",
+                "-100",
+                "0",
+                SByte.MinValue.ToString(),
+                SByte.MaxValue.ToString(),
+            };
             sbyte[] expectedValues = { 100, -100, 0, sbyte.MinValue, sbyte.MaxValue };
             VerifyFromString(Convert.ToSByte, Convert.ToSByte, testValues, expectedValues);
 
             string[] overflowValues = { Int16.MinValue.ToString(), Int16.MaxValue.ToString() };
-            VerifyFromStringThrows<OverflowException>(Convert.ToSByte, Convert.ToSByte, overflowValues);
+            VerifyFromStringThrows<OverflowException>(
+                Convert.ToSByte,
+                Convert.ToSByte,
+                overflowValues
+            );
 
             string[] formatExceptionValues = { "abba" };
-            VerifyFromStringThrows<FormatException>(Convert.ToSByte, Convert.ToSByte, formatExceptionValues);
+            VerifyFromStringThrows<FormatException>(
+                Convert.ToSByte,
+                Convert.ToSByte,
+                formatExceptionValues
+            );
 
             // Note: Only the Convert.ToSByte(String, IFormatProvider) overload throws an ArgumentNullException.
             // This is inconsistent with the other numeric conversions, but fixing this behavior is not worth making
             // a breaking change.
-            Assert.Throws<ArgumentNullException>(() => Convert.ToSByte((string)null, TestFormatProvider.s_instance));
+            Assert.Throws<ArgumentNullException>(() =>
+                Convert.ToSByte((string)null, TestFormatProvider.s_instance)
+            );
         }
 
         [Fact]
         public void FromStringWithBase()
         {
-            string[] testValues = { null, null, null, null, "7f", "127", "177", "1111111", "80", "-128", "200", "10000000" };
+            string[] testValues =
+            {
+                null,
+                null,
+                null,
+                null,
+                "7f",
+                "127",
+                "177",
+                "1111111",
+                "80",
+                "-128",
+                "200",
+                "10000000",
+            };
             int[] testBases = { 10, 2, 8, 16, 16, 10, 8, 2, 16, 10, 8, 2 };
-            sbyte[] expectedValues = { 0, 0, 0, 0, sbyte.MaxValue, sbyte.MaxValue, sbyte.MaxValue, sbyte.MaxValue, sbyte.MinValue, sbyte.MinValue, sbyte.MinValue, sbyte.MinValue };
+            sbyte[] expectedValues =
+            {
+                0,
+                0,
+                0,
+                0,
+                sbyte.MaxValue,
+                sbyte.MaxValue,
+                sbyte.MaxValue,
+                sbyte.MaxValue,
+                sbyte.MinValue,
+                sbyte.MinValue,
+                sbyte.MinValue,
+                sbyte.MinValue,
+            };
             VerifyFromStringWithBase(Convert.ToSByte, testValues, testBases, expectedValues);
 
             string[] overflowValues = { "128", "-129", "111111111", "1FF", "777" };
             int[] overflowBases = { 10, 10, 2, 16, 8 };
-            VerifyFromStringWithBaseThrows<OverflowException>(Convert.ToSByte, overflowValues, overflowBases);
+            VerifyFromStringWithBaseThrows<OverflowException>(
+                Convert.ToSByte,
+                overflowValues,
+                overflowBases
+            );
 
             string[] formatExceptionValues = { "12", "ffffffffffffffffffff" };
             int[] formatExceptionBases = { 2, 8 };
-            VerifyFromStringWithBaseThrows<FormatException>(Convert.ToSByte, formatExceptionValues, formatExceptionBases);
+            VerifyFromStringWithBaseThrows<FormatException>(
+                Convert.ToSByte,
+                formatExceptionValues,
+                formatExceptionBases
+            );
 
             string[] argumentExceptionValues = { "10", "11", "abba", "-ab" };
             int[] argumentExceptionBases = { -1, 3, 0, 16 };
-            VerifyFromStringWithBaseThrows<ArgumentException>(Convert.ToSByte, argumentExceptionValues, argumentExceptionBases);
+            VerifyFromStringWithBaseThrows<ArgumentException>(
+                Convert.ToSByte,
+                argumentExceptionValues,
+                argumentExceptionBases
+            );
         }
 
         [Fact]

@@ -31,9 +31,8 @@ namespace System.Xml.Serialization
         private readonly bool _shallow;
         private readonly XmlMappingAccess _access;
 
-        internal XmlMapping(TypeScope? scope, ElementAccessor accessor) : this(scope, accessor, XmlMappingAccess.Read | XmlMappingAccess.Write)
-        {
-        }
+        internal XmlMapping(TypeScope? scope, ElementAccessor accessor)
+            : this(scope, accessor, XmlMappingAccess.Read | XmlMappingAccess.Write) { }
 
         internal XmlMapping(TypeScope? scope, ElementAccessor accessor, XmlMappingAccess access)
         {
@@ -117,7 +116,10 @@ namespace System.Xml.Serialization
             return $"{type.FullName}:{(root == null ? string.Empty : root.GetKey())}:{ns ?? string.Empty}";
         }
 
-        internal string? Key { get { return _key; } }
+        internal string? Key
+        {
+            get { return _key; }
+        }
 
         internal void CheckShallow()
         {

@@ -28,86 +28,89 @@
 //
 
 using System;
-
-using NUnit.Framework;
-
 using Mono.Data.Tds.Protocol;
-
+using NUnit.Framework;
 
 namespace Mono.Data.Tds.Tests
 {
+    [TestFixture]
+    public class ConnLifetime
+    {
+        [Test]
+        public void LifeTimeIsTakenInAccount()
+        {
+            var SMALLEST_LIFETIME_TO_TEST = 1;
+            var WAIT_TO_MAKE_LIFETIME_PASSED = 2;
 
-	[TestFixture]
-	public class ConnLifetime
-	{
-		[Test]
-		public void LifeTimeIsTakenInAccount ()
-		{
-			var SMALLEST_LIFETIME_TO_TEST = 1;
-			var WAIT_TO_MAKE_LIFETIME_PASSED = 2;
+            TdsConnectionPoolManager sqlConnectionPools = new FakeConnectionPoolManager();
+            TdsConnectionInfo info = new TdsConnectionInfo(
+                "dummy",
+                0,
+                0,
+                0,
+                1 /*minpoolsize*/
+                ,
+                1 /*maxpoolsize*/
+                ,
+                SMALLEST_LIFETIME_TO_TEST /*lifetime*/
+            );
 
-			TdsConnectionPoolManager sqlConnectionPools = new FakeConnectionPoolManager ();
-			TdsConnectionInfo info = new TdsConnectionInfo ("dummy", 0, 0, 0,
-			                                               1 /*minpoolsize*/,
-			                                               1 /*maxpoolsize*/,
-			                                               SMALLEST_LIFETIME_TO_TEST/*lifetime*/);
+            TdsConnectionPool pool = sqlConnectionPools.GetConnectionPool("test", info);
+            Mono.Data.Tds.Protocol.Tds tds,
+                tds2 = null;
 
-			TdsConnectionPool pool = sqlConnectionPools.GetConnectionPool ("test",info);
-			Mono.Data.Tds.Protocol.Tds tds, tds2 = null;
+            tds = pool.GetConnection();
 
-			tds = pool.GetConnection();
+            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(WAIT_TO_MAKE_LIFETIME_PASSED));
+            pool.ReleaseConnection(tds);
 
-			System.Threading.Thread.Sleep (TimeSpan.FromSeconds (WAIT_TO_MAKE_LIFETIME_PASSED));
-			pool.ReleaseConnection (tds);
+            tds2 = pool.GetConnection();
 
-			tds2 = pool.GetConnection ();
+            Assert.IsFalse(object.ReferenceEquals(tds, tds2));
+            pool.ReleaseConnection(tds2);
+        }
 
+        class FakeConnectionPoolManager : TdsConnectionPoolManager
+        {
+            internal FakeConnectionPoolManager()
+                : base(Mono.Data.Tds.Protocol.TdsVersion.tds90) { }
 
-			Assert.IsFalse (object.ReferenceEquals (tds, tds2));
-			pool.ReleaseConnection(tds2);
-		}
+            public override Mono.Data.Tds.Protocol.Tds CreateConnection(TdsConnectionInfo info)
+            {
+                return new FakeTds(info.LifeTime);
+            }
+        }
 
-		class FakeConnectionPoolManager : TdsConnectionPoolManager {
+        class FakeTds : Mono.Data.Tds.Protocol.Tds
+        {
+            internal FakeTds(int lifetime)
+                : base(null, 0, 0, 0, lifetime, Mono.Data.Tds.Protocol.TdsVersion.tds90) { }
 
-			internal FakeConnectionPoolManager () : base (Mono.Data.Tds.Protocol.TdsVersion.tds90)
-			{
-			}
+            public override bool Connect(TdsConnectionParameters connectionParameters)
+            {
+                throw new NotImplementedException();
+            }
 
-			public override Mono.Data.Tds.Protocol.Tds CreateConnection (TdsConnectionInfo info)
-			{
-	 			return new FakeTds (info.LifeTime);
-			}
-		}
+            protected override void ProcessColumnInfo()
+            {
+                throw new NotImplementedException();
+            }
 
-		class FakeTds : Mono.Data.Tds.Protocol.Tds {
-			internal FakeTds(int lifetime) : base (null, 0, 0, 0, lifetime, Mono.Data.Tds.Protocol.TdsVersion.tds90){
-			}
+            protected override void InitComm(int port, int timeout)
+            {
+                //do nothing, not relevant for the test
+            }
 
-			public override bool Connect (TdsConnectionParameters connectionParameters)
-			{
-				throw new NotImplementedException ();
-			}
+            public override bool IsConnected
+            {
+                get { return true; }
+                set { }
+            }
 
-			protected override void ProcessColumnInfo ()
-			{
-				throw new NotImplementedException ();
-			}
-
-			protected override void InitComm (int port, int timeout)
-			{
-				//do nothing, not relevant for the test
-			}
-
-			public override bool IsConnected {
-				get { return true; }
-				set { }
-			}
-
-			public override void Disconnect ()
-			{
-				// do nothing, not relevant for the test
-			}
-		}
-	}
+            public override void Disconnect()
+            {
+                // do nothing, not relevant for the test
+            }
+        }
+    }
 }
-

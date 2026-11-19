@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Security.Tokens
 {
     using System.Collections.ObjectModel;
-    using System.ServiceModel;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Tokens;
+    using System.ServiceModel;
 
     sealed class DerivedKeySecurityTokenStub : SecurityToken
     {
@@ -21,9 +21,16 @@ namespace System.ServiceModel.Security.Tokens
         int generation;
         SecurityKeyIdentifierClause tokenToDeriveIdentifier;
 
-        public DerivedKeySecurityTokenStub(int generation, int offset, int length,
-            string label, byte[] nonce,
-            SecurityKeyIdentifierClause tokenToDeriveIdentifier, string derivationAlgorithm, string id)
+        public DerivedKeySecurityTokenStub(
+            int generation,
+            int offset,
+            int length,
+            string label,
+            byte[] nonce,
+            SecurityKeyIdentifierClause tokenToDeriveIdentifier,
+            string derivationAlgorithm,
+            string id
+        )
         {
             this.id = id;
             this.generation = generation;
@@ -43,13 +50,23 @@ namespace System.ServiceModel.Security.Tokens
         public override DateTime ValidFrom
         {
 #pragma warning suppress 56503 // Property does not make sense for Derived Key tokens.
-            get { throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException()); }
+            get
+            {
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotImplementedException()
+                );
+            }
         }
 
         public override DateTime ValidTo
         {
 #pragma warning suppress 56503 // Property does not make sense for Derived Key tokens.
-            get { throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException()); }
+            get
+            {
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotImplementedException()
+                );
+            }
         }
 
         public override ReadOnlyCollection<SecurityKey> SecurityKeys
@@ -64,11 +81,19 @@ namespace System.ServiceModel.Security.Tokens
 
         public DerivedKeySecurityToken CreateToken(SecurityToken tokenToDerive, int maxKeyLength)
         {
-            DerivedKeySecurityToken result = new DerivedKeySecurityToken(this.generation, this.offset, this.length,
-                this.label, this.nonce, tokenToDerive, this.tokenToDeriveIdentifier, this.derivationAlgorithm, this.Id);
+            DerivedKeySecurityToken result = new DerivedKeySecurityToken(
+                this.generation,
+                this.offset,
+                this.length,
+                this.label,
+                this.nonce,
+                tokenToDerive,
+                this.tokenToDeriveIdentifier,
+                this.derivationAlgorithm,
+                this.Id
+            );
             result.InitializeDerivedKey(maxKeyLength);
             return result;
         }
     }
 }
-

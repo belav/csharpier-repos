@@ -23,7 +23,10 @@ namespace System.Security.Cryptography.X509Certificates
             if (certStoreHandle == null || certStoreHandle.IsInvalid)
             {
                 certStoreHandle?.Dispose();
-                throw new CryptographicException(SR.Cryptography_InvalidStoreHandle, nameof(storeHandle));
+                throw new CryptographicException(
+                    SR.Cryptography_InvalidStoreHandle,
+                    nameof(storeHandle)
+                );
             }
 
             var pal = new StorePal(certStoreHandle);
@@ -49,25 +52,49 @@ namespace System.Security.Cryptography.X509Certificates
 
         public void Add(ICertificatePal certificate)
         {
-            using (SafeCertContextHandle certContext = ((CertificatePal)certificate).GetCertContext())
+            using (
+                SafeCertContextHandle certContext = ((CertificatePal)certificate).GetCertContext()
+            )
             {
-                if (!Interop.Crypt32.CertAddCertificateContextToStore(_certStore, certContext, Interop.Crypt32.CertStoreAddDisposition.CERT_STORE_ADD_REPLACE_EXISTING_INHERIT_PROPERTIES, IntPtr.Zero))
+                if (
+                    !Interop.Crypt32.CertAddCertificateContextToStore(
+                        _certStore,
+                        certContext,
+                        Interop
+                            .Crypt32
+                            .CertStoreAddDisposition
+                            .CERT_STORE_ADD_REPLACE_EXISTING_INHERIT_PROPERTIES,
+                        IntPtr.Zero
+                    )
+                )
                     throw Marshal.GetLastPInvokeError().ToCryptographicException();
             }
         }
 
         public unsafe void Remove(ICertificatePal certificate)
         {
-            using (SafeCertContextHandle existingCertContext = ((CertificatePal)certificate).GetCertContext())
+            using (
+                SafeCertContextHandle existingCertContext = (
+                    (CertificatePal)certificate
+                ).GetCertContext()
+            )
             {
                 SafeCertContextHandle? enumCertContext = null;
                 // We can use DangerousCertContext safely here because GetCertContext returns a duplicated context
                 // that we own and doesn't escape.
-                Interop.Crypt32.CERT_CONTEXT* pCertContext = existingCertContext.DangerousCertContext;
-                if (!Interop.crypt32.CertFindCertificateInStore(_certStore, Interop.Crypt32.CertFindType.CERT_FIND_EXISTING, pCertContext, ref enumCertContext))
+                Interop.Crypt32.CERT_CONTEXT* pCertContext =
+                    existingCertContext.DangerousCertContext;
+                if (
+                    !Interop.crypt32.CertFindCertificateInStore(
+                        _certStore,
+                        Interop.Crypt32.CertFindType.CERT_FIND_EXISTING,
+                        pCertContext,
+                        ref enumCertContext
+                    )
+                )
                     return; // The certificate is not present in the store, simply return.
 
-                Interop.Crypt32.CERT_CONTEXT* pCertContextToDelete = enumCertContext.Disconnect();  // CertDeleteCertificateFromContext always frees the context (even on error)
+                Interop.Crypt32.CERT_CONTEXT* pCertContextToDelete = enumCertContext.Disconnect(); // CertDeleteCertificateFromContext always frees the context (even on error)
                 enumCertContext.Dispose();
 
                 if (!Interop.Crypt32.CertDeleteCertificateFromStore(pCertContextToDelete))

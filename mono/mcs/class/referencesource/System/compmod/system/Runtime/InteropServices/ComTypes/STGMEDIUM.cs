@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------
 // <copyright file="STGMEDIUM.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Runtime.InteropServices.ComTypes {
-
+namespace System.Runtime.InteropServices.ComTypes
+{
     using System;
 
     /// <devdoc>
     /// </devdoc>
-    public struct STGMEDIUM {
-        public TYMED  tymed;
+    public struct STGMEDIUM
+    {
+        public TYMED tymed;
         public IntPtr unionmember;
-        [MarshalAs(UnmanagedType.IUnknown)] 
+
+        [MarshalAs(UnmanagedType.IUnknown)]
         public object pUnkForRelease;
     }
 }
-
-

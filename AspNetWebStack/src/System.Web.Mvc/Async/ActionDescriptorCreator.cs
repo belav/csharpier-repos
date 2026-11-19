@@ -3,5 +3,8 @@
 
 namespace System.Web.Mvc.Async
 {
-    internal delegate ActionDescriptor ActionDescriptorCreator(string actionName, ControllerDescriptor controllerDescriptor);
+    internal delegate ActionDescriptor ActionDescriptorCreator(
+        string actionName,
+        ControllerDescriptor controllerDescriptor
+    );
 }

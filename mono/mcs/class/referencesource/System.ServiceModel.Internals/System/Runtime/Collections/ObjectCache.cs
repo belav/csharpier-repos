@@ -8,16 +8,16 @@ namespace System.Runtime.Collections
 
     // free-threaded so that it can deal with items releasing references and timer interactions
     // interaction pattern is:
-    // 1) item = cache.Take(key); 
+    // 1) item = cache.Take(key);
     // 2) if (item == null) { Create and Open Item; cache.Add(key, value); }
     // 2) use item, including performing any blocking operations like open/close/etc
     // 3) item.ReleaseReference();
-    // 
+    //
     // for usability purposes, if a CacheItem is non-null you can always call Release on it
     class ObjectCache<TKey, TValue>
         where TValue : class
     {
-        // for performance reasons we don't just blindly start a timer up to clean up 
+        // for performance reasons we don't just blindly start a timer up to clean up
         // idle cache items. However, if we're above a certain threshold of items, then we'll start the timer.
         const int timerThreshold = 1;
 
@@ -30,9 +30,7 @@ namespace System.Runtime.Collections
         bool disposed;
 
         public ObjectCache(ObjectCacheSettings settings)
-            : this(settings, null)
-        {
-        }
+            : this(settings, null) { }
 
         public ObjectCache(ObjectCacheSettings settings, IEqualityComparer<TKey> comparer)
         {
@@ -49,25 +47,15 @@ namespace System.Runtime.Collections
 
         object ThisLock
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         // Users like ServiceModel can hook this for ICommunicationObject or to handle other non-IDisposable objects
-        public Action<TValue> DisposeItemCallback
-        {
-            get;
-            set;
-        }
+        public Action<TValue> DisposeItemCallback { get; set; }
 
         public int Count
         {
-            get
-            {
-                return this.cacheItems.Count;
-            }
+            get { return this.cacheItems.Count; }
         }
 
         public ObjectCacheItem<TValue> Add(TKey key, TValue value)
@@ -110,12 +98,15 @@ namespace System.Runtime.Collections
                 {
                     if (initializerDelegate == null)
                     {
-                        // not found in cache, no way to create. 
+                        // not found in cache, no way to create.
                         return null;
                     }
 
                     TValue createdObject = initializerDelegate();
-                    Fx.Assert(createdObject != null, "initializer delegate must always give us a valid object");
+                    Fx.Assert(
+                        createdObject != null,
+                        "initializer delegate must always give us a valid object"
+                    );
 
                     if (this.Count >= this.settings.CacheLimit)
                     {
@@ -198,7 +189,7 @@ namespace System.Runtime.Collections
             cache.PurgeCache(true);
         }
 
-        static void Add<T>(ref List<T> list, T item) 
+        static void Add<T>(ref List<T> list, T item)
         {
             Fx.Assert(!item.Equals(default(T)), "item should never be null");
             if (list == null)
@@ -217,13 +208,14 @@ namespace System.Runtime.Collections
                 return false;
             }
 
-            if (this.idleTimeoutEnabled &&
-                now >= (cacheItem.LastUsage + this.settings.IdleTimeout))
+            if (this.idleTimeoutEnabled && now >= (cacheItem.LastUsage + this.settings.IdleTimeout))
             {
                 return true;
             }
-            else if (this.leaseTimeoutEnabled &&
-                (now - cacheItem.CreationTime) >= this.settings.LeaseTimeout)
+            else if (
+                this.leaseTimeoutEnabled
+                && (now - cacheItem.CreationTime) >= this.settings.LeaseTimeout
+            )
             {
                 return true;
             }
@@ -231,7 +223,10 @@ namespace System.Runtime.Collections
             return false;
         }
 
-        void GatherExpiredItems(ref List<KeyValuePair<TKey, Item>> expiredItems, bool calledFromTimer)
+        void GatherExpiredItems(
+            ref List<KeyValuePair<TKey, Item>> expiredItems,
+            bool calledFromTimer
+        )
         {
             if (this.Count == 0)
             {
@@ -315,7 +310,6 @@ namespace System.Runtime.Collections
                     this.idleTimer = null;
                 }
             }
-            
         }
 
         // public surface area is synchronized through this.parent.ThisLock
@@ -349,31 +343,17 @@ namespace System.Runtime.Collections
 
             public int ReferenceCount
             {
-                get
-                {
-                    return this.referenceCount;
-                }
+                get { return this.referenceCount; }
             }
 
             public override TValue Value
             {
-                get
-                {
-                    return this.value;
-                }
+                get { return this.value; }
             }
 
-            public DateTime CreationTime
-            {
-                get;
-                set;
-            }
+            public DateTime CreationTime { get; set; }
 
-            public DateTime LastUsage
-            {
-                get;
-                set;
-            }
+            public DateTime LastUsage { get; set; }
 
             public override bool TryAddReference()
             {
@@ -393,7 +373,10 @@ namespace System.Runtime.Collections
                         {
                             result = false;
                         }
-                        else if (this.referenceCount == 0 && this.parent.ShouldPurgeItem(this, DateTime.UtcNow))
+                        else if (
+                            this.referenceCount == 0
+                            && this.parent.ShouldPurgeItem(this, DateTime.UtcNow)
+                        )
                         {
                             LockedDispose();
                             disposeSelf = true;
@@ -404,7 +387,10 @@ namespace System.Runtime.Collections
                         {
                             // we're still in use, simply add-ref and be done
                             this.referenceCount++;
-                            Fx.Assert(this.parent.cacheItems.ContainsValue(this), "should have a valid value");
+                            Fx.Assert(
+                                this.parent.cacheItems.ContainsValue(this),
+                                "should have a valid value"
+                            );
                             Fx.Assert(this.Value != null, "should have a valid value");
                             result = true;
                         }
@@ -425,7 +411,10 @@ namespace System.Runtime.Collections
 
                 if (this.parent == null)
                 {
-                    Fx.Assert(this.referenceCount == 1, "reference count should have never increased");
+                    Fx.Assert(
+                        this.referenceCount == 1,
+                        "reference count should have never increased"
+                    );
                     this.referenceCount = -1; // not under a lock since we're not really in the cache
                     disposeItem = true;
                 }
@@ -468,7 +457,10 @@ namespace System.Runtime.Collections
             // call this part under the lock, and Dispose outside the lock
             public void LockedDispose()
             {
-                Fx.Assert(this.referenceCount == 0, "we should only dispose items without references");
+                Fx.Assert(
+                    this.referenceCount == 0,
+                    "we should only dispose items without references"
+                );
                 this.referenceCount = -1;
             }
 
@@ -479,7 +471,10 @@ namespace System.Runtime.Collections
                     Action<TValue> localDisposeItemCallback = this.disposeItemCallback;
                     if (this.parent != null)
                     {
-                        Fx.Assert(localDisposeItemCallback == null, "shouldn't have both this.disposeItemCallback and this.parent");
+                        Fx.Assert(
+                            localDisposeItemCallback == null,
+                            "shouldn't have both this.disposeItemCallback and this.parent"
+                        );
                         localDisposeItemCallback = this.parent.DisposeItemCallback;
                     }
 
@@ -499,10 +494,12 @@ namespace System.Runtime.Collections
 
             public void LocalDispose()
             {
-                Fx.Assert(this.referenceCount == -1, "we should only dispose items that have had LockedDispose called on them");
+                Fx.Assert(
+                    this.referenceCount == -1,
+                    "we should only dispose items that have had LockedDispose called on them"
+                );
                 this.Dispose();
             }
         }
-
     }
 }

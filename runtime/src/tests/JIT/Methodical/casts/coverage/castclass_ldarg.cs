@@ -66,5 +66,6 @@ namespace JitTest_castclass_ldarg_cs
     }
 
     internal class DerivedClass : TestClass { }
+
     internal class OtherClass { }
 }

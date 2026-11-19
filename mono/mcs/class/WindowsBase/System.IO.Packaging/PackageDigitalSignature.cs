@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,73 +29,80 @@ using System.Collections.ObjectModel;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
 
-namespace System.IO.Packaging {
+namespace System.IO.Packaging
+{
+    public class PackageDigitalSignature
+    {
+        internal PackageDigitalSignature() { }
 
-	public class PackageDigitalSignature
-	{
-		internal PackageDigitalSignature ()
-		{
-		}
-
-		public CertificateEmbeddingOption CertificateEmbeddingOption {
-			get { throw new NotImplementedException (); }
-		}
+        public CertificateEmbeddingOption CertificateEmbeddingOption
+        {
+            get { throw new NotImplementedException(); }
+        }
 
 #if notyet
-		public System.Security.Cryptography.Xml.Signature Signature {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        public System.Security.Cryptography.Xml.Signature Signature
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 #endif
 
-		public PackagePart SignaturePart {
-			get { throw new NotImplementedException (); }
-		}
+        public PackagePart SignaturePart
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public string SignatureType {
-			get { throw new NotImplementedException (); }
-		}
+        public string SignatureType
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public byte[] SignatureValue {
-			get { throw new NotImplementedException (); }
-		}
+        public byte[] SignatureValue
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public ReadOnlyCollection<Uri> SignedParts {
-			get { throw new NotImplementedException (); }
-		}
+        public ReadOnlyCollection<Uri> SignedParts
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public ReadOnlyCollection<PackageRelationshipSelector> SignedRelationshipSelectors {
-			get { throw new NotImplementedException (); }
-		}
+        public ReadOnlyCollection<PackageRelationshipSelector> SignedRelationshipSelectors
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public X509Certificate Signer {
-			get { throw new NotImplementedException (); }
-		}
+        public X509Certificate Signer
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public DateTime SigningTime {
-			get { throw new NotImplementedException (); }
-		}
+        public DateTime SigningTime
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public string TimeFormat {
-			get { throw new NotImplementedException (); }
-		}
+        public string TimeFormat
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public List<string> GetPartTransformList(Uri partName)
-		{
-			throw new NotImplementedException ();
-		}
+        public List<string> GetPartTransformList(Uri partName)
+        {
+            throw new NotImplementedException();
+        }
 
-		public VerifyResult Verify()
-		{
-			throw new NotImplementedException ();
-		}
+        public VerifyResult Verify()
+        {
+            throw new NotImplementedException();
+        }
 
-		[SecurityCritical]
-		[SecurityTreatAsSafe]
-		public VerifyResult Verify(X509Certificate signingCertificate)
-		{
-			throw new NotImplementedException ();
-		}
-
-	}
+        [SecurityCritical]
+        [SecurityTreatAsSafe]
+        public VerifyResult Verify(X509Certificate signingCertificate)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

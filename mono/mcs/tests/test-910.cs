@@ -2,12 +2,10 @@ using System.Security;
 using System.Security.Permissions;
 
 [HostProtection]
-delegate void D ();
+delegate void D();
 
 [HostProtection]
 class X
 {
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

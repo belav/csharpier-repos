@@ -27,7 +27,6 @@ namespace System.Text
         public abstract int MaxCharCount { get; }
     }
 
-
     public abstract class EncoderFallbackBuffer
     {
         // Most implementations will probably need an implementation-specific constructor
@@ -56,7 +55,8 @@ namespace System.Text
 
         public virtual void Reset()
         {
-            while (GetNextChar() != (char)0) ;
+            while (GetNextChar() != (char)0)
+                ;
         }
 
         // Internal items to help us figure out what we're doing as far as error messages, etc.
@@ -84,7 +84,12 @@ namespace System.Text
 
         // Set the above values
         // This can't be part of the constructor because EncoderFallbacks would have to know how to implement these.
-        internal unsafe void InternalInitialize(char* charStart, char* charEnd, EncoderNLS? encoder, bool setEncoder)
+        internal unsafe void InternalInitialize(
+            char* charStart,
+            char* charEnd,
+            EncoderNLS? encoder,
+            bool setEncoder
+        )
         {
             this.charStart = charStart;
             this.charEnd = charEnd;
@@ -95,14 +100,21 @@ namespace System.Text
             this.iRecursionCount = 0;
         }
 
-        internal static EncoderFallbackBuffer CreateAndInitialize(Encoding encoding, EncoderNLS? encoder, int originalCharCount)
+        internal static EncoderFallbackBuffer CreateAndInitialize(
+            Encoding encoding,
+            EncoderNLS? encoder,
+            int originalCharCount
+        )
         {
             // The original char count is only used for keeping track of what 'index' value needs
             // to be passed to the abstract Fallback method. The index value is calculated by subtracting
             // 'chars.Length' (where chars is expected to be the entire remaining input buffer)
             // from the 'originalCharCount' value specified here.
 
-            EncoderFallbackBuffer fallbackBuffer = (encoder is null) ? encoding.EncoderFallback.CreateFallbackBuffer() : encoder.FallbackBuffer;
+            EncoderFallbackBuffer fallbackBuffer =
+                (encoder is null)
+                    ? encoding.EncoderFallback.CreateFallbackBuffer()
+                    : encoder.FallbackBuffer;
 
             fallbackBuffer.encoding = encoding;
             fallbackBuffer.encoder = encoder;
@@ -115,13 +127,17 @@ namespace System.Text
         {
             char ch = GetNextChar();
             bFallingBack = (ch != 0);
-            if (ch == 0) iRecursionCount = 0;
+            if (ch == 0)
+                iRecursionCount = 0;
             return ch;
         }
 
         private bool InternalFallback(ReadOnlySpan<char> chars, out int charsConsumed)
         {
-            Debug.Assert(!chars.IsEmpty, "Caller shouldn't invoke this if there's no data to fall back.");
+            Debug.Assert(
+                !chars.IsEmpty,
+                "Caller shouldn't invoke this if there's no data to fall back."
+            );
 
             // First, try falling back a single BMP character or a standalone low surrogate.
             // If the first char is a high surrogate, we'll try to combine it with the next
@@ -173,7 +189,12 @@ namespace System.Text
             return bytesWritten;
         }
 
-        internal bool TryInternalFallbackGetBytes(ReadOnlySpan<char> chars, Span<byte> bytes, out int charsConsumed, out int bytesWritten)
+        internal bool TryInternalFallbackGetBytes(
+            ReadOnlySpan<char> chars,
+            Span<byte> bytes,
+            out int charsConsumed,
+            out int bytesWritten
+        )
         {
             if (InternalFallback(chars, out charsConsumed))
             {
@@ -259,7 +280,10 @@ namespace System.Text
                     ThrowLastCharRecursive(thisRune.Value);
                 }
 
-                Debug.Assert(byteCountThisIteration >= 0, "Encoding shouldn't have returned a negative byte count.");
+                Debug.Assert(
+                    byteCountThisIteration >= 0,
+                    "Encoding shouldn't have returned a negative byte count."
+                );
 
                 // We need to check for overflow while tallying the fallback byte count.
 
@@ -277,7 +301,10 @@ namespace System.Text
         private Rune GetNextRune()
         {
             char firstChar = GetNextChar();
-            if (Rune.TryCreate(firstChar, out Rune value) || Rune.TryCreate(firstChar, GetNextChar(), out value))
+            if (
+                Rune.TryCreate(firstChar, out Rune value)
+                || Rune.TryCreate(firstChar, GetNextChar(), out value)
+            )
             {
                 return value;
             }
@@ -296,8 +323,10 @@ namespace System.Text
         internal virtual unsafe bool InternalFallback(char ch, ref char* chars)
         {
             // Shouldn't have null charStart
-            Debug.Assert(charStart != null,
-                "[EncoderFallback.InternalFallbackBuffer]Fallback buffer is not initialized");
+            Debug.Assert(
+                charStart != null,
+                "[EncoderFallback.InternalFallbackBuffer]Fallback buffer is not initialized"
+            );
 
             // Get our index, remember chars was preincremented to point at next char, so have to -1
             int index = (int)(chars - charStart) - 1;
@@ -354,6 +383,9 @@ namespace System.Text
         [DoesNotReturn]
         internal static void ThrowLastCharRecursive(int charRecursive) =>
             // Throw it, using our complete character
-            throw new ArgumentException(SR.Format(SR.Argument_RecursiveFallback, charRecursive), "chars");
+            throw new ArgumentException(
+                SR.Format(SR.Argument_RecursiveFallback, charRecursive),
+                "chars"
+            );
     }
 }

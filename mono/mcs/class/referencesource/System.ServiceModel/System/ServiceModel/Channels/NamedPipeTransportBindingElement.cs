@@ -5,23 +5,24 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using Collections.ObjectModel;
     using System.Security.Principal;
     using System.ServiceModel.Activation;
+    using Collections.ObjectModel;
 
     public class NamedPipeTransportBindingElement : ConnectionOrientedTransportBindingElement
     {
         List<SecurityIdentifier> allowedUsers = new List<SecurityIdentifier>();
         Collection<SecurityIdentifier> allowedUsersCollection;
-        NamedPipeConnectionPoolSettings connectionPoolSettings = new NamedPipeConnectionPoolSettings();
+        NamedPipeConnectionPoolSettings connectionPoolSettings =
+            new NamedPipeConnectionPoolSettings();
         NamedPipeSettings settings = new NamedPipeSettings();
 
         public NamedPipeTransportBindingElement()
-            : base()
-        {
-        }
+            : base() { }
 
-        protected NamedPipeTransportBindingElement(NamedPipeTransportBindingElement elementToBeCloned)
+        protected NamedPipeTransportBindingElement(
+            NamedPipeTransportBindingElement elementToBeCloned
+        )
             : base(elementToBeCloned)
         {
             if (elementToBeCloned.allowedUsers != null)
@@ -39,14 +40,8 @@ namespace System.ServiceModel.Channels
         // Used by SMSvcHost (see Activation\SharingService.cs)
         internal List<SecurityIdentifier> AllowedUsers
         {
-            get
-            {
-                return this.allowedUsers;
-            }
-            set
-            {
-                this.allowedUsers = value;
-            }
+            get { return this.allowedUsers; }
+            set { this.allowedUsers = value; }
         }
 
         public Collection<SecurityIdentifier> AllowedSecurityIdentifiers
@@ -55,7 +50,9 @@ namespace System.ServiceModel.Channels
             {
                 if (this.allowedUsersCollection == null)
                 {
-                    this.allowedUsersCollection = new Collection<SecurityIdentifier>(this.allowedUsers);
+                    this.allowedUsersCollection = new Collection<SecurityIdentifier>(
+                        this.allowedUsers
+                    );
                 }
 
                 return this.allowedUsersCollection;
@@ -69,7 +66,7 @@ namespace System.ServiceModel.Channels
 
         public NamedPipeSettings PipeSettings
         {
-            get { return this.settings; }            
+            get { return this.settings; }
         }
 
         public override string Scheme
@@ -79,10 +76,7 @@ namespace System.ServiceModel.Channels
 
         internal override string WsdlTransportUri
         {
-            get
-            {
-                return TransportPolicyConstants.NamedPipeTransportUri;
-            }
+            get { return TransportPolicyConstants.NamedPipeTransportUri; }
         }
 
         public override BindingElement Clone()
@@ -90,7 +84,9 @@ namespace System.ServiceModel.Channels
             return new NamedPipeTransportBindingElement(this);
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -99,13 +95,19 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelFactory<TChannel>(context))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel", SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
-            return (IChannelFactory<TChannel>)(object)new NamedPipeChannelFactory<TChannel>(this, context);
+            return (IChannelFactory<TChannel>)
+                (object)new NamedPipeChannelFactory<TChannel>(this, context);
         }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -114,7 +116,10 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelListener<TChannel>(context))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel", SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
             NamedPipeChannelListener listener;
@@ -128,7 +133,10 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel", SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
             AspNetEnvironment.Current.ApplyHostedContext(listener, context);
@@ -183,9 +191,8 @@ namespace System.ServiceModel.Channels
 
         class BindingDeliveryCapabilitiesHelper : IBindingDeliveryCapabilities
         {
-            internal BindingDeliveryCapabilitiesHelper()
-            {
-            }
+            internal BindingDeliveryCapabilitiesHelper() { }
+
             bool IBindingDeliveryCapabilities.AssuresOrderedDelivery
             {
                 get { return true; }

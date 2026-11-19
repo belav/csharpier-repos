@@ -60,8 +60,18 @@ namespace System.ComponentModel.Tests
             yield return new object[] { attribute, attribute, true };
             yield return new object[] { attribute, new DesignTimeVisibleAttribute(true), true };
             yield return new object[] { attribute, new DesignTimeVisibleAttribute(false), false };
-            yield return new object[] { new DesignTimeVisibleAttribute(false), new DesignTimeVisibleAttribute(false), true };
-            yield return new object[] { new DesignTimeVisibleAttribute(false), new DesignTimeVisibleAttribute(true), false };
+            yield return new object[]
+            {
+                new DesignTimeVisibleAttribute(false),
+                new DesignTimeVisibleAttribute(false),
+                true,
+            };
+            yield return new object[]
+            {
+                new DesignTimeVisibleAttribute(false),
+                new DesignTimeVisibleAttribute(true),
+                false,
+            };
 
             yield return new object[] { attribute, new object(), false };
             yield return new object[] { attribute, null, false };
@@ -69,7 +79,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(DesignTimeVisibleAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            DesignTimeVisibleAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is DesignTimeVisibleAttribute)

@@ -22,7 +22,10 @@ namespace System.Collections.Generic
         bool IsReadOnly
         {
 #if MONO
-            [DynamicDependency(nameof(Array.InternalArray__ICollection_get_IsReadOnly), typeof(Array))]
+            [DynamicDependency(
+                nameof(Array.InternalArray__ICollection_get_IsReadOnly),
+                typeof(Array)
+            )]
 #endif
             get;
         }
@@ -38,7 +41,10 @@ namespace System.Collections.Generic
         void Clear();
 
 #if MONO
-        [DynamicDependency(nameof(Array.InternalArray__ICollection_Contains) + "``1", typeof(Array))]
+        [DynamicDependency(
+            nameof(Array.InternalArray__ICollection_Contains) + "``1",
+            typeof(Array)
+        )]
 #endif
         bool Contains(T item);
 

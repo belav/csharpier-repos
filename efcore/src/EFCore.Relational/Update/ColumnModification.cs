@@ -87,33 +87,36 @@ public class ColumnModification : IColumnModification
     public virtual bool IsKey { get; set; }
 
     /// <inheritdoc />
-    public virtual bool UseOriginalValueParameter
-        => UseParameter && UseOriginalValue;
+    public virtual bool UseOriginalValueParameter => UseParameter && UseOriginalValue;
 
     /// <inheritdoc />
-    public virtual bool UseCurrentValueParameter
-        => (UseParameter && UseCurrentValue)
-            || (Column is IStoreStoredProcedureParameter { Direction: ParameterDirection.Output or ParameterDirection.InputOutput }
-                or IStoreStoredProcedureReturnValue);
+    public virtual bool UseCurrentValueParameter =>
+        (UseParameter && UseCurrentValue)
+        || (
+            Column
+            is IStoreStoredProcedureParameter
+                {
+                    Direction: ParameterDirection.Output or ParameterDirection.InputOutput
+                }
+                or IStoreStoredProcedureReturnValue
+        );
 
     /// <inheritdoc />
-    public virtual bool UseOriginalValue
-        => IsCondition;
+    public virtual bool UseOriginalValue => IsCondition;
 
     /// <inheritdoc />
-    public virtual bool UseCurrentValue
-        => IsWrite;
+    public virtual bool UseCurrentValue => IsWrite;
 
     /// <inheritdoc />
     public virtual bool UseParameter { get; }
 
     /// <inheritdoc />
-    public virtual string? ParameterName
-        => _parameterName ??= UseCurrentValueParameter ? _generateParameterName!() : null;
+    public virtual string? ParameterName =>
+        _parameterName ??= UseCurrentValueParameter ? _generateParameterName!() : null;
 
     /// <inheritdoc />
-    public virtual string? OriginalParameterName
-        => _originalParameterName ??= UseOriginalValueParameter ? _generateParameterName!() : null;
+    public virtual string? OriginalParameterName =>
+        _originalParameterName ??= UseOriginalValueParameter ? _generateParameterName!() : null;
 
     /// <inheritdoc />
     public virtual string ColumnName { get; }
@@ -124,11 +127,10 @@ public class ColumnModification : IColumnModification
     /// <inheritdoc />
     public virtual object? OriginalValue
     {
-        get => Entry == null
-            ? _originalValue
-            : Entry.SharedIdentityEntry == null
-                ? GetOriginalValue(Entry, Property!)
-                : GetOriginalValue(Entry.SharedIdentityEntry, Property!);
+        get =>
+            Entry == null ? _originalValue
+            : Entry.SharedIdentityEntry == null ? GetOriginalValue(Entry, Property!)
+            : GetOriginalValue(Entry.SharedIdentityEntry, Property!);
         set
         {
             if (Entry == null)
@@ -152,11 +154,10 @@ public class ColumnModification : IColumnModification
     /// <inheritdoc />
     public virtual object? Value
     {
-        get => Entry == null
-            ? _value
-            : Entry.EntityState == EntityState.Deleted
-                ? null
-                : GetCurrentValue(Entry, Property!);
+        get =>
+            Entry == null ? _value
+            : Entry.EntityState == EntityState.Deleted ? null
+            : GetCurrentValue(Entry, Property!);
         set
         {
             if (Entry == null)
@@ -183,8 +184,8 @@ public class ColumnModification : IColumnModification
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static object? GetOriginalValue(IUpdateEntry entry, IProperty property)
-        => entry.GetOriginalValue(property);
+    public static object? GetOriginalValue(IUpdateEntry entry, IProperty property) =>
+        entry.GetOriginalValue(property);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -192,20 +193,10 @@ public class ColumnModification : IColumnModification
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static object? GetOriginalProviderValue(IUpdateEntry entry, IProperty property)
-        => entry.GetOriginalProviderValue(property);
+    public static object? GetOriginalProviderValue(IUpdateEntry entry, IProperty property) =>
+        entry.GetOriginalProviderValue(property);
 
-    private void SetOriginalValue(object? value)
-        => Entry!.SetOriginalValue(Property!, value);
-
-    /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
-    /// </summary>
-    public static object? GetCurrentValue(IUpdateEntry entry, IProperty property)
-        => entry.GetCurrentValue(property);
+    private void SetOriginalValue(object? value) => Entry!.SetOriginalValue(Property!, value);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -213,8 +204,8 @@ public class ColumnModification : IColumnModification
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static object? GetCurrentProviderValue(IUpdateEntry entry, IProperty property)
-        => entry.GetCurrentProviderValue(property);
+    public static object? GetCurrentValue(IUpdateEntry entry, IProperty property) =>
+        entry.GetCurrentValue(property);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -222,8 +213,8 @@ public class ColumnModification : IColumnModification
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static void SetStoreGeneratedValue(IUpdateEntry entry, IProperty property, object? value)
-        => entry.SetStoreGeneratedValue(property, value);
+    public static object? GetCurrentProviderValue(IUpdateEntry entry, IProperty property) =>
+        entry.GetCurrentProviderValue(property);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -231,8 +222,11 @@ public class ColumnModification : IColumnModification
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static bool IsModified(IUpdateEntry entry, IProperty property)
-        => entry.IsModified(property);
+    public static void SetStoreGeneratedValue(
+        IUpdateEntry entry,
+        IProperty property,
+        object? value
+    ) => entry.SetStoreGeneratedValue(property, value);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -240,8 +234,17 @@ public class ColumnModification : IColumnModification
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static bool IsStoreGenerated(IUpdateEntry entry, IProperty property)
-        => entry.IsStoreGenerated(property);
+    public static bool IsModified(IUpdateEntry entry, IProperty property) =>
+        entry.IsModified(property);
+
+    /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    public static bool IsStoreGenerated(IUpdateEntry entry, IProperty property) =>
+        entry.IsStoreGenerated(property);
 
     /// <inheritdoc />
     public virtual string? JsonPath { get; }
@@ -256,10 +259,15 @@ public class ColumnModification : IColumnModification
 
         _sharedColumnModifications ??= new List<IColumnModification>();
 
-        if (UseCurrentValueParameter
-            && !Property.GetProviderValueComparer().Equals(
-                GetCurrentProviderValue(Entry, Property),
-                GetCurrentProviderValue(modification.Entry, modification.Property)))
+        if (
+            UseCurrentValueParameter
+            && !Property
+                .GetProviderValueComparer()
+                .Equals(
+                    GetCurrentProviderValue(Entry, Property),
+                    GetCurrentProviderValue(modification.Entry, modification.Property)
+                )
+        )
         {
             var existingEntry = Entry;
             var newEntry = modification.Entry;
@@ -270,10 +278,14 @@ public class ColumnModification : IColumnModification
                     RelationalStrings.ConflictingRowValuesSensitive(
                         existingEntry.EntityType.DisplayName(),
                         newEntry.EntityType.DisplayName(),
-                        Entry.BuildCurrentValuesString(Entry.EntityType.FindPrimaryKey()!.Properties),
+                        Entry.BuildCurrentValuesString(
+                            Entry.EntityType.FindPrimaryKey()!.Properties
+                        ),
                         Entry.BuildCurrentValuesString(new[] { Property }),
                         newEntry.BuildCurrentValuesString(new[] { modification.Property }),
-                        ColumnName));
+                        ColumnName
+                    )
+                );
             }
 
             throw new InvalidOperationException(
@@ -282,27 +294,40 @@ public class ColumnModification : IColumnModification
                     newEntry.EntityType.DisplayName(),
                     new[] { Property }.Format(),
                     new[] { modification.Property }.Format(),
-                    ColumnName));
+                    ColumnName
+                )
+            );
         }
 
         if (UseOriginalValueParameter)
         {
-            var originalValue = Entry.SharedIdentityEntry == null
-                ? GetOriginalProviderValue(Entry, Property)
-                : GetOriginalProviderValue(Entry.SharedIdentityEntry, Property);
-            if (Property.GetProviderValueComparer().Equals(
-                    originalValue,
-                    modification.Entry.SharedIdentityEntry == null
-                        ? GetOriginalProviderValue(modification.Entry, modification.Property)
-                        : GetOriginalProviderValue(modification.Entry.SharedIdentityEntry, modification.Property)))
+            var originalValue =
+                Entry.SharedIdentityEntry == null
+                    ? GetOriginalProviderValue(Entry, Property)
+                    : GetOriginalProviderValue(Entry.SharedIdentityEntry, Property);
+            if (
+                Property
+                    .GetProviderValueComparer()
+                    .Equals(
+                        originalValue,
+                        modification.Entry.SharedIdentityEntry == null
+                            ? GetOriginalProviderValue(modification.Entry, modification.Property)
+                            : GetOriginalProviderValue(
+                                modification.Entry.SharedIdentityEntry,
+                                modification.Property
+                            )
+                    )
+            )
             {
                 _sharedColumnModifications.Add(modification);
                 return;
             }
 
-            if (Entry.EntityState == EntityState.Modified
+            if (
+                Entry.EntityState == EntityState.Modified
                 && modification.Entry.EntityState == EntityState.Added
-                && modification.Entry.SharedIdentityEntry == null)
+                && modification.Entry.SharedIdentityEntry == null
+            )
             {
                 var typeMapping = modification.Property.GetTypeMapping();
                 var converter = typeMapping.Converter;
@@ -323,10 +348,14 @@ public class ColumnModification : IColumnModification
                         RelationalStrings.ConflictingOriginalRowValuesSensitive(
                             existingEntry.EntityType.DisplayName(),
                             newEntry.EntityType.DisplayName(),
-                            Entry.BuildCurrentValuesString(Entry.EntityType.FindPrimaryKey()!.Properties),
+                            Entry.BuildCurrentValuesString(
+                                Entry.EntityType.FindPrimaryKey()!.Properties
+                            ),
                             existingEntry.BuildOriginalValuesString(new[] { Property }),
                             newEntry.BuildOriginalValuesString(new[] { modification.Property }),
-                            ColumnName));
+                            ColumnName
+                        )
+                    );
                 }
 
                 throw new InvalidOperationException(
@@ -335,7 +364,9 @@ public class ColumnModification : IColumnModification
                         newEntry.EntityType.DisplayName(),
                         new[] { Property }.Format(),
                         new[] { modification.Property }.Format(),
-                        ColumnName));
+                        ColumnName
+                    )
+                );
             }
         }
 
@@ -343,6 +374,5 @@ public class ColumnModification : IColumnModification
     }
 
     /// <inheritdoc />
-    public virtual void ResetParameterNames()
-        => _parameterName = _originalParameterName = null;
+    public virtual void ResetParameterNames() => _parameterName = _originalParameterName = null;
 }

@@ -3,28 +3,25 @@ using System;
 
 namespace Testing
 {
-	public class Test
-	{
-		public static void Main ()
-		{
-		}
+    public class Test
+    {
+        public static void Main() { }
 
-		/// <summary>
-		/// comment for private field
-		/// </summary>
-		private string PrivateField;
+        /// <summary>
+        /// comment for private field
+        /// </summary>
+        private string PrivateField;
 
-		/// <summary>
-		/// incorrect markup comment for private field
-		/// </incorrect>
-		private string PrivateField2;
+        /// <summary>
+        /// incorrect markup comment for private field
+        /// </incorrect>
+        private string PrivateField2;
 
-		/**
-		<summary>
-		Javadoc comment for private field
-		</summary>
-		*/
-		private string PrivateField3;
-	}
+        /**
+        <summary>
+        Javadoc comment for private field
+        </summary>
+        */
+        private string PrivateField3;
+    }
 }
-

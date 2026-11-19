@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
-
 using Internal.TypeSystem.Ecma;
 
 namespace Internal.IL
@@ -37,7 +36,8 @@ namespace Internal.IL
             {
                 PdbSymbolReader reader = _method.Module.PdbReader;
                 return reader != null
-                    ? reader.GetStateMachineKickoffMethod(MetadataTokens.GetToken(_method.Handle)) != 0
+                    ? reader.GetStateMachineKickoffMethod(MetadataTokens.GetToken(_method.Handle))
+                        != 0
                     : false;
             }
         }
@@ -60,7 +60,9 @@ namespace Internal.IL
 
         public override IEnumerable<string> GetParameterNames()
         {
-            ParameterHandleCollection parameters = _method.MetadataReader.GetMethodDefinition(_method.Handle).GetParameters();
+            ParameterHandleCollection parameters = _method
+                .MetadataReader.GetMethodDefinition(_method.Handle)
+                .GetParameters();
 
             if (!_method.Signature.IsStatic)
             {

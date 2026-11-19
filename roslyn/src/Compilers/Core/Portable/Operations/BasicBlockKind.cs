@@ -24,7 +24,6 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         /// <summary>
         /// Indicates an intermediate block for a <see cref="ControlFlowGraph"/>.
         /// </summary>
-        Block
+        Block,
     }
 }
-

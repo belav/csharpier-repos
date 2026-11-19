@@ -24,12 +24,20 @@ public class SetError
     [Fact]
     public static void SetErrorRead()
     {
-        Helpers.SetAndReadHelper(tw => Console.SetError(tw), () => Console.Error, sr => sr.ReadLine());
+        Helpers.SetAndReadHelper(
+            tw => Console.SetError(tw),
+            () => Console.Error,
+            sr => sr.ReadLine()
+        );
     }
 
     [Fact]
     public static void SetErrorReadToEnd()
     {
-        Helpers.SetAndReadHelper(tw => Console.SetError(tw), () => Console.Error, sr => sr.ReadToEnd());
+        Helpers.SetAndReadHelper(
+            tw => Console.SetError(tw),
+            () => Console.Error,
+            sr => sr.ReadToEnd()
+        );
     }
 }

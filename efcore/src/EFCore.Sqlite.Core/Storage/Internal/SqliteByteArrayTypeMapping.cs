@@ -20,7 +20,8 @@ public class SqliteByteArrayTypeMapping : ByteArrayTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static new SqliteByteArrayTypeMapping Default { get; } = new(SqliteTypeMappingSource.BlobTypeName);
+    public static new SqliteByteArrayTypeMapping Default { get; } =
+        new(SqliteTypeMappingSource.BlobTypeName);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -33,11 +34,12 @@ public class SqliteByteArrayTypeMapping : ByteArrayTypeMapping
             new RelationalTypeMappingParameters(
                 new CoreTypeMappingParameters(
                     typeof(byte[]),
-                    jsonValueReaderWriter: SqliteJsonByteArrayReaderWriter.Instance),
+                    jsonValueReaderWriter: SqliteJsonByteArrayReaderWriter.Instance
+                ),
                 storeType,
-                dbType: dbType))
-    {
-    }
+                dbType: dbType
+            )
+        ) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -46,15 +48,13 @@ public class SqliteByteArrayTypeMapping : ByteArrayTypeMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected SqliteByteArrayTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.
     /// </summary>
     /// <param name="parameters">The parameters for this mapping.</param>
     /// <returns>The newly created mapping.</returns>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new SqliteByteArrayTypeMapping(parameters);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new SqliteByteArrayTypeMapping(parameters);
 }

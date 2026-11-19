@@ -1,7 +1,7 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>ShawnFa</OWNER>
@@ -21,6 +21,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         object ActivateInstance([MarshalAs(UnmanagedType.HString)] string activatableClassId);
 
         [SecurityCritical]
-        IntPtr GetActivationFactory([MarshalAs(UnmanagedType.HString)] string activatableClassId, ref Guid iid);
+        IntPtr GetActivationFactory(
+            [MarshalAs(UnmanagedType.HString)] string activatableClassId,
+            ref Guid iid
+        );
     }
 }

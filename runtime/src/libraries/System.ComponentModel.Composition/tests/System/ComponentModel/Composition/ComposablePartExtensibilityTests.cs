@@ -81,11 +81,15 @@ namespace System.ComponentModel.Composition
             batch.AddPart(new ConstructorInjectionComposablePart(typeof(AClass)));
             batch.AddPart(new ConstructorInjectionComposablePart(typeof(BClass)));
 
-            CompositionAssert.ThrowsErrors(ErrorId.ImportEngine_PartCannotSetImport,
-                                           ErrorId.ImportEngine_PartCannotSetImport, RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsErrors(
+                ErrorId.ImportEngine_PartCannotSetImport,
+                ErrorId.ImportEngine_PartCannotSetImport,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
     }
 
@@ -93,15 +97,14 @@ namespace System.ComponentModel.Composition
     {
         public Queue<string> CallOrder = new Queue<string>();
 
-        public OrderingTestComposablePart()
-        {
-        }
+        public OrderingTestComposablePart() { }
 
-        public new  void AddExport(string contractName, object value)
+        public new void AddExport(string contractName, object value)
         {
             var export = ExportFactory.Create(contractName, () =>
             {
-                this.OnGetExport(contractName); return value;
+                this.OnGetExport(contractName);
+                return value;
             });
 
             base.AddExport(export);
@@ -114,8 +117,12 @@ namespace System.ComponentModel.Composition
 
         public override void SetImport(ImportDefinition definition, IEnumerable<Export> exports)
         {
-            ContractBasedImportDefinition contractBasedImportDefinition = (ContractBasedImportDefinition)definition;
-            Assert.Equal("Import:" + contractBasedImportDefinition.ContractName, CallOrder.Dequeue());
+            ContractBasedImportDefinition contractBasedImportDefinition =
+                (ContractBasedImportDefinition)definition;
+            Assert.Equal(
+                "Import:" + contractBasedImportDefinition.ContractName,
+                CallOrder.Dequeue()
+            );
             base.SetImport(definition, exports);
         }
 
@@ -167,6 +174,7 @@ namespace System.ComponentModel.Composition
         {
             Value = value;
         }
+
         public string Value { get; private set; }
     }
 
@@ -178,9 +186,7 @@ namespace System.ComponentModel.Composition
 
     public class AClass
     {
-        public AClass(BClass b)
-        {
-        }
+        public AClass(BClass b) { }
 
         public BClass B { get; private set; }
     }
@@ -220,10 +226,7 @@ namespace System.ComponentModel.Composition
             var metadata = new Dictionary<string, object>();
             metadata.Add(CompositionConstants.ExportTypeIdentityMetadataName, typeIdentity);
 
-            Export composableExport = ExportFactory.Create(
-                contractName,
-                metadata,
-                GetInstance);
+            Export composableExport = ExportFactory.Create(contractName, metadata, GetInstance);
             this.AddExport(composableExport);
 
             this._imports = new Dictionary<ImportDefinition, object>();
@@ -246,14 +249,21 @@ namespace System.ComponentModel.Composition
             {
                 List<object> constructorArgs = new List<object>();
 
-                foreach (ImportDefinition import in this.ImportDefinitions
-                    .Where(i => i.IsPrerequisite))
+                foreach (
+                    ImportDefinition import in this.ImportDefinitions.Where(i => i.IsPrerequisite)
+                )
                 {
                     object importValue;
                     if (!this._imports.TryGetValue(import, out importValue))
                     {
-                        result = result.MergeError(CompositionError.Create(CompositionErrorId.ImportNotSetOnPart,
-                            "The import '{0}' is required for construction of '{1}'", import.ToString(), _type.FullName));
+                        result = result.MergeError(
+                            CompositionError.Create(
+                                CompositionErrorId.ImportNotSetOnPart,
+                                "The import '{0}' is required for construction of '{1}'",
+                                import.ToString(),
+                                _type.FullName
+                            )
+                        );
 
                         continue;
                     }
@@ -270,9 +280,7 @@ namespace System.ComponentModel.Composition
 
                 return obj;
             }
-            finally
-            {
-            }
+            finally { }
         }
 
         public override void SetImport(ImportDefinition definition, IEnumerable<Export> exports)

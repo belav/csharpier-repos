@@ -13,7 +13,6 @@ namespace System.Data.Common.QueryCache
     using System.Collections.Generic;
     using System.Text;
 
-
     /// <summary>
     /// represents an abstract cache key
     /// </summary>
@@ -49,12 +48,12 @@ namespace System.Data.Common.QueryCache
 
         #region Abstract Methods
         /// <summary>
-        /// Determines whether two instances of QueryCacheContext are equal. 
+        /// Determines whether two instances of QueryCacheContext are equal.
         /// Equality is value based.
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public abstract override bool Equals( object obj );
+        public abstract override bool Equals(object obj);
 
         /// <summary>
         /// Returns QueryCacheContext instance HashCode
@@ -69,15 +68,8 @@ namespace System.Data.Common.QueryCache
         /// </summary>
         internal uint HitCount
         {
-            get 
-            { 
-                return _hitCount; 
-            }
-            
-            set 
-            { 
-                _hitCount = value; 
-            }
+            get { return _hitCount; }
+            set { _hitCount = value; }
         }
 
         /// <summary>
@@ -85,15 +77,8 @@ namespace System.Data.Common.QueryCache
         /// </summary>
         internal int AgingIndex
         {
-            get 
-            { 
-                return _agingIndex; 
-            }
-            
-            set 
-            { 
-                _agingIndex = value; 
-            }
+            get { return _agingIndex; }
+            set { _agingIndex = value; }
         }
 
         /// <summary>
@@ -103,7 +88,10 @@ namespace System.Data.Common.QueryCache
         {
             if (uint.MaxValue != _hitCount)
             {
-                unchecked { _hitCount++; }
+                unchecked
+                {
+                    _hitCount++;
+                }
             }
         }
 
@@ -113,7 +101,7 @@ namespace System.Data.Common.QueryCache
         /// <param name="s"></param>
         /// <param name="t"></param>
         /// <returns></returns>
-        protected virtual bool Equals( string s, string t )
+        protected virtual bool Equals(string s, string t)
         {
             return String.Equals(s, t, _stringComparison);
         }

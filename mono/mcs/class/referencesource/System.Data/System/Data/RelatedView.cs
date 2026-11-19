@@ -6,19 +6,23 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
     using System.Diagnostics;
 
-    internal sealed class RelatedView : DataView, IFilter {
-        private readonly Nullable<DataKey> parentKey;  
+    internal sealed class RelatedView : DataView, IFilter
+    {
+        private readonly Nullable<DataKey> parentKey;
         private readonly DataKey childKey;
         private readonly DataRowView parentRowView;
         private readonly object[] filterValues;
 
         public RelatedView(DataColumn[] columns, object[] values)
-            : base(columns[0].Table, false) {
-            if (values == null) {
+            : base(columns[0].Table, false)
+        {
+            if (values == null)
+            {
                 throw ExceptionBuilder.ArgumentNull("values");
             }
             this.parentRowView = null;
@@ -29,32 +33,40 @@ namespace System.Data {
             base.ResetRowViewCache();
         }
 
-
-        public RelatedView(DataRowView parentRowView, DataKey parentKey, DataColumn[] childKeyColumns) : base(childKeyColumns[0].Table, false) {
+        public RelatedView(
+            DataRowView parentRowView,
+            DataKey parentKey,
+            DataColumn[] childKeyColumns
+        )
+            : base(childKeyColumns[0].Table, false)
+        {
             this.filterValues = null;
             this.parentRowView = parentRowView;
             this.parentKey = parentKey;
             this.childKey = new DataKey(childKeyColumns, true);
-            Debug.Assert (this.Table == childKey.Table, "Key.Table Must be equal to Current Table");
+            Debug.Assert(this.Table == childKey.Table, "Key.Table Must be equal to Current Table");
             base.ResetRowViewCache();
         }
 
         private object[] GetParentValues()
         {
-            if (filterValues != null) {
+            if (filterValues != null)
+            {
                 return filterValues;
             }
-          
-            if (!parentRowView.HasRecord()) {
+
+            if (!parentRowView.HasRecord())
+            {
                 return null;
             }
             return parentKey.Value.GetKeyValues(parentRowView.GetRecord());
         }
 
-
-        public bool Invoke(DataRow row, DataRowVersion version) {
+        public bool Invoke(DataRow row, DataRowVersion version)
+        {
             object[] parentValues = GetParentValues();
-            if (parentValues == null) {
+            if (parentValues == null)
+            {
                 return false;
             }
 
@@ -68,12 +80,16 @@ namespace System.Data {
             }
 #endif
             bool allow = true;
-            if (childValues.Length != parentValues.Length) {
+            if (childValues.Length != parentValues.Length)
+            {
                 allow = false;
             }
-            else {
-                for (int i = 0; i < childValues.Length; i++) {
-                    if (!childValues[i].Equals(parentValues[i])) {
+            else
+            {
+                for (int i = 0; i < childValues.Length; i++)
+                {
+                    if (!childValues[i].Equals(parentValues[i]))
+                    {
                         allow = false;
                         break;
                     }
@@ -81,57 +97,82 @@ namespace System.Data {
             }
 
             IFilter baseFilter = base.GetFilter();
-            if (baseFilter != null) {
+            if (baseFilter != null)
+            {
                 allow &= baseFilter.Invoke(row, version);
             }
 
             return allow;
         }
 
-        internal override IFilter GetFilter() {
+        internal override IFilter GetFilter()
+        {
             return this;
         }
 
         // move to OnModeChanged
-        public override DataRowView AddNew() {
+        public override DataRowView AddNew()
+        {
             DataRowView addNewRowView = base.AddNew();
             addNewRowView.Row.SetKeyValues(childKey, GetParentValues());
             return addNewRowView;
         }
 
-        internal override void SetIndex(string newSort, DataViewRowState newRowStates, IFilter newRowFilter) {
+        internal override void SetIndex(
+            string newSort,
+            DataViewRowState newRowStates,
+            IFilter newRowFilter
+        )
+        {
             SetIndex2(newSort, newRowStates, newRowFilter, false);
             Reset();
         }
 
-        public override bool Equals( DataView dv) {
+        public override bool Equals(DataView dv)
+        {
             RelatedView other = dv as RelatedView;
-            if (other == null) {
+            if (other == null)
+            {
                 return false;
             }
-            if (!base.Equals(dv)) {
+            if (!base.Equals(dv))
+            {
                 return false;
             }
-            if (filterValues != null) {
-                return (CompareArray(this.childKey.ColumnsReference, other.childKey.ColumnsReference) && CompareArray(this.filterValues, other.filterValues));
+            if (filterValues != null)
+            {
+                return (
+                    CompareArray(this.childKey.ColumnsReference, other.childKey.ColumnsReference)
+                    && CompareArray(this.filterValues, other.filterValues)
+                );
             }
-            else {
+            else
+            {
                 if (other.filterValues != null)
                     return false;
-                return (CompareArray(this.childKey.ColumnsReference, other.childKey.ColumnsReference) &&
-                        CompareArray(this.parentKey.Value.ColumnsReference, this.parentKey.Value.ColumnsReference) &&
-                        parentRowView.Equals(other.parentRowView));
+                return (
+                    CompareArray(this.childKey.ColumnsReference, other.childKey.ColumnsReference)
+                    && CompareArray(
+                        this.parentKey.Value.ColumnsReference,
+                        this.parentKey.Value.ColumnsReference
+                    )
+                    && parentRowView.Equals(other.parentRowView)
+                );
             }
         }
 
-        private bool CompareArray(object[] value1, object[] value2) {
-            if (value1 == null || value2 == null) {
+        private bool CompareArray(object[] value1, object[] value2)
+        {
+            if (value1 == null || value2 == null)
+            {
                 return value1 == value2;
             }
-            if (value1.Length != value2.Length) {
+            if (value1.Length != value2.Length)
+            {
                 return false;
             }
-            for(int i = 0; i < value1.Length; i++) {
+            for (int i = 0; i < value1.Length; i++)
+            {
                 if (value1[i] != value2[i])
                     return false;
             }

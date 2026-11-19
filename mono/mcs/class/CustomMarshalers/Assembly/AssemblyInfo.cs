@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,22 +33,22 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion (Consts.FxVersion)]
-[assembly: SatelliteContractVersion (Consts.FxVersion)]
+[assembly: AssemblyVersion(Consts.FxVersion)]
+[assembly: SatelliteContractVersion(Consts.FxVersion)]
 
-[assembly: NeutralResourcesLanguage ("en-US")]
+[assembly: NeutralResourcesLanguage("en-US")]
 
-[assembly: AssemblyDelaySign (true)]
+[assembly: AssemblyDelaySign(true)]
 
-[assembly: AssemblyTitle ("CustomMarshalers.dll")]
-[assembly: AssemblyDescription ("CustomMarshalers.dll")]
-[assembly: AssemblyDefaultAlias ("CustomMarshalers.dll")]
+[assembly: AssemblyTitle("CustomMarshalers.dll")]
+[assembly: AssemblyDescription("CustomMarshalers.dll")]
+[assembly: AssemblyDefaultAlias("CustomMarshalers.dll")]
 
-[assembly: AssemblyCompany (Consts.MonoCompany)]
-[assembly: AssemblyProduct (Consts.MonoProduct)]
-[assembly: AssemblyCopyright (Consts.MonoCopyright)]
-[assembly: AssemblyFileVersion (Consts.FxFileVersion)]
-[assembly: AssemblyInformationalVersion (Consts.FxFileVersion)]
+[assembly: AssemblyCompany(Consts.MonoCompany)]
+[assembly: AssemblyProduct(Consts.MonoProduct)]
+[assembly: AssemblyCopyright(Consts.MonoCopyright)]
+[assembly: AssemblyFileVersion(Consts.FxFileVersion)]
+[assembly: AssemblyInformationalVersion(Consts.FxFileVersion)]
 
-[assembly: CLSCompliant (true)]
-[assembly: ComVisible (false)]
+[assembly: CLSCompliant(true)]
+[assembly: ComVisible(false)]

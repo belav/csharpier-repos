@@ -15,7 +15,10 @@ namespace Microsoft.VisualStudio.LanguageServices
     /// </summary>
     internal interface IAnalyzerNodeSetup
     {
-        Task InitializeAsync(IAsyncServiceProvider serviceProvider, CancellationToken cancellationToken);
+        Task InitializeAsync(
+            IAsyncServiceProvider serviceProvider,
+            CancellationToken cancellationToken
+        );
         void Unregister();
     }
 }

@@ -45,55 +45,47 @@ internal sealed class RouteUsageCache
         CancellationToken cancellationToken
     )
     {
-        return _lazyRoutePatterns.GetOrAdd(
-            syntaxToken,
-            token =>
+        return _lazyRoutePatterns.GetOrAdd(syntaxToken, token =>
+        {
+            if (syntaxToken.SyntaxTree == null)
             {
-                if (syntaxToken.SyntaxTree == null)
-                {
-                    return null;
-                }
+                return null;
+            }
 
-                var semanticModel = _compilation.GetSemanticModel(syntaxToken.SyntaxTree);
+            var semanticModel = _compilation.GetSemanticModel(syntaxToken.SyntaxTree);
 
-                if (
-                    !RouteStringSyntaxDetector.IsRouteStringSyntaxToken(
-                        token,
-                        semanticModel,
-                        cancellationToken,
-                        out var options
-                    )
-                )
-                {
-                    return null;
-                }
-
-                var wellKnownTypes = WellKnownTypes.GetOrCreate(_compilation);
-                var usageContext = RouteUsageDetector.BuildContext(
-                    options,
+            if (
+                !RouteStringSyntaxDetector.IsRouteStringSyntaxToken(
                     token,
                     semanticModel,
-                    wellKnownTypes,
-                    cancellationToken
-                );
-
-                var virtualChars = CSharpVirtualCharService.Instance.TryConvertToVirtualChars(
-                    token
-                );
-                var isMvc =
-                    usageContext.UsageType == RouteUsageType.MvcAction
-                    || usageContext.UsageType == RouteUsageType.MvcController;
-                var tree = RoutePatternParser.TryParse(
-                    virtualChars,
-                    usageContext.RoutePatternOptions
-                );
-                if (tree == null)
-                {
-                    return null;
-                }
-
-                return new RouteUsageModel { RoutePattern = tree, UsageContext = usageContext };
+                    cancellationToken,
+                    out var options
+                )
+            )
+            {
+                return null;
             }
-        );
+
+            var wellKnownTypes = WellKnownTypes.GetOrCreate(_compilation);
+            var usageContext = RouteUsageDetector.BuildContext(
+                options,
+                token,
+                semanticModel,
+                wellKnownTypes,
+                cancellationToken
+            );
+
+            var virtualChars = CSharpVirtualCharService.Instance.TryConvertToVirtualChars(token);
+            var isMvc =
+                usageContext.UsageType == RouteUsageType.MvcAction
+                || usageContext.UsageType == RouteUsageType.MvcController;
+            var tree = RoutePatternParser.TryParse(virtualChars, usageContext.RoutePatternOptions);
+            if (tree == null)
+            {
+                return null;
+            }
+
+            return new RouteUsageModel { RoutePattern = tree, UsageContext = usageContext };
+        });
     }
 }

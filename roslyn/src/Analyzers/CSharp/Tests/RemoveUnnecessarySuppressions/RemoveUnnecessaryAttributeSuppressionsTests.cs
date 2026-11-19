@@ -10,7 +10,8 @@ using Roslyn.Test.Utilities;
 using Xunit;
 using VerifyCS = Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions.CSharpCodeFixVerifier<
     Microsoft.CodeAnalysis.CSharp.RemoveUnnecessarySuppressions.CSharpRemoveUnnecessaryAttributeSuppressionsDiagnosticAnalyzer,
-    Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions.RemoveUnnecessaryAttributeSuppressionsCodeFixProvider>;
+    Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions.RemoveUnnecessaryAttributeSuppressionsCodeFixProvider
+>;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessarySuppressions
 {
@@ -19,8 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessarySuppre
     public class RemoveUnnecessaryAttributeSuppressionsTests
     {
         [Theory, CombinatorialData]
-        public void TestStandardProperty(AnalyzerProperty property)
-            => VerifyCS.VerifyStandardProperty(property);
+        public void TestStandardProperty(AnalyzerProperty property) =>
+            VerifyCS.VerifyStandardProperty(property);
 
         [Theory]
         // Field
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessarySuppre
             var scopeString = scope != null ? $@", {scope}" : string.Empty;
             var targetString = target != null ? $@", {target}" : string.Empty;
 
-            var input = $@"
+            var input =
+                $@"
 [{attributeTarget}: System.Diagnostics.CodeAnalysis.SuppressMessage(""Category"", ""Id: Title"", Justification = ""Pending""{scopeString}{targetString})]
 
 namespace N
@@ -110,7 +112,8 @@ namespace N
             var scopeString = scope != null ? $@", {scope}" : string.Empty;
             var targetString = target != null ? $@", {target}" : string.Empty;
 
-            var input = $@"
+            var input =
+                $@"
 [{attributeTarget}: [|System.Diagnostics.CodeAnalysis.SuppressMessage(""Category"", ""Id: Title"", Justification = ""Pending""{scopeString}{targetString})|]]
 
 namespace N
@@ -123,7 +126,8 @@ namespace N
     }}
 }}";
 
-            var fixedCode = $@"
+            var fixedCode =
+                $@"
 
 namespace N
 {{
@@ -140,11 +144,13 @@ namespace N
         [Fact]
         public async Task ValidAndInvalidSuppressions()
         {
-            var attributePrefix = @"System.Diagnostics.CodeAnalysis.SuppressMessage(""Category"", ""Id: Title"", Justification = ""Pending""";
+            var attributePrefix =
+                @"System.Diagnostics.CodeAnalysis.SuppressMessage(""Category"", ""Id: Title"", Justification = ""Pending""";
             var validSuppression = $@"{attributePrefix}, Scope = ""member"", Target = ""~T:C"")";
             var invalidSuppression = $@"[|{attributePrefix}, Scope = ""member"", Target = """")|]";
 
-            var input = $@"
+            var input =
+                $@"
 [assembly: {validSuppression}]
 [assembly: {invalidSuppression}]
 [assembly: {validSuppression}, {validSuppression}]
@@ -156,7 +162,8 @@ namespace N
 class C {{ }}
 ";
 
-            var fixedCode = $@"
+            var fixedCode =
+                $@"
 [assembly: {validSuppression}]
 [assembly: {validSuppression}, {validSuppression}]
 [assembly: {validSuppression}]
@@ -174,7 +181,8 @@ class C {{ }}
         [InlineData(@", Scope = ""invalid"", Target = ""invalid""")]
         public async Task LocalSuppressions(string scopeAndTarget)
         {
-            var input = $@"
+            var input =
+                $@"
 [System.Diagnostics.CodeAnalysis.SuppressMessage(""Category"", ""Id: Title"", Justification = ""Pending""{scopeAndTarget})]
 class C
 {{
@@ -187,16 +195,20 @@ class C
         public async Task LegacyModeGlobalSuppressionWithNamespaceAndDescendantsScope()
         {
             var target = "N:N.InvalidChild";
-            var input = $@"
+            var input =
+                $@"
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage(""Category"", ""Id: Title"", Scope = ""namespaceanddescendants"", Target = {{|#0:""{target}""|}})]
 
 namespace N
 {{
     class C {{ }}
 }}";
-            var expectedDiagnostic = VerifyCS.Diagnostic(AbstractRemoveUnnecessaryAttributeSuppressionsDiagnosticAnalyzer.LegacyFormatTargetDescriptor)
-                                        .WithLocation(0)
-                                        .WithArguments(target);
+            var expectedDiagnostic = VerifyCS
+                .Diagnostic(
+                    AbstractRemoveUnnecessaryAttributeSuppressionsDiagnosticAnalyzer.LegacyFormatTargetDescriptor
+                )
+                .WithLocation(0)
+                .WithArguments(target);
 
             await VerifyCS.VerifyCodeFixAsync(input, expectedDiagnostic, input);
         }

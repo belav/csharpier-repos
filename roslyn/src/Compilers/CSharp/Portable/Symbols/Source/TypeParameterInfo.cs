@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static readonly TypeParameterInfo Empty = new TypeParameterInfo
         {
             LazyTypeParameters = ImmutableArray<TypeParameterSymbol>.Empty,
-            LazyTypeParameterConstraintTypes = ImmutableArray<ImmutableArray<TypeWithAnnotations>>.Empty,
+            LazyTypeParameterConstraintTypes = ImmutableArray<
+                ImmutableArray<TypeWithAnnotations>
+            >.Empty,
             LazyTypeParameterConstraintKinds = ImmutableArray<TypeParameterConstraintKind>.Empty,
         };
     }

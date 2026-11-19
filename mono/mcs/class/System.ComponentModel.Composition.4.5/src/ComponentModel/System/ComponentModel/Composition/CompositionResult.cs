@@ -3,10 +3,10 @@
 // -----------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.Internal.Collections;
-using System.ComponentModel.Composition.Hosting;
 
 namespace System.ComponentModel.Composition
 {
@@ -16,9 +16,7 @@ namespace System.ComponentModel.Composition
         private readonly IEnumerable<CompositionError> _errors;
 
         public CompositionResult(params CompositionError[] errors)
-            : this((IEnumerable<CompositionError>)errors)
-        {            
-        }
+            : this((IEnumerable<CompositionError>)errors) { }
 
         public CompositionResult(IEnumerable<CompositionError> errors)
         {
@@ -60,7 +58,7 @@ namespace System.ComponentModel.Composition
 
         public CompositionResult<T> ToResult<T>(T value)
         {
-            return new CompositionResult<T>(value, this._errors); 
+            return new CompositionResult<T>(value, this._errors);
         }
 
         public void ThrowOnErrors()

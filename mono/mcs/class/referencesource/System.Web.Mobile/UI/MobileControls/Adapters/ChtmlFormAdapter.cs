@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="ChtmlFormAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System.Globalization;
@@ -20,13 +20,22 @@ namespace System.Web.UI.MobileControls.Adapters
      * Copyright (c) 2000 Microsoft Corporation
      */
     /// <include file='doc\ChtmlFormAdapter.uex' path='docs/doc[@for="ChtmlFormAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class ChtmlFormAdapter : HtmlFormAdapter
     {
-        private static readonly String _contentTypeMetaTag = "<meta http-equiv=\"Content-Type\" content=\"{0}; charset={1}\">\r\n";
-        
+        private static readonly String _contentTypeMetaTag =
+            "<meta http-equiv=\"Content-Type\" content=\"{0}; charset={1}\">\r\n";
+
         /// <include file='doc\ChtmlFormAdapter.uex' path='docs/doc[@for="ChtmlFormAdapter.ShouldRenderFormTag"]/*' />
         protected override bool ShouldRenderFormTag()
         {
@@ -65,8 +74,7 @@ namespace System.Web.UI.MobileControls.Adapters
                     return true;
                 }
             }
-            else if (!(control is UserControl) &&
-                     !(control is LiteralControl))
+            else if (!(control is UserControl) && !(control is LiteralControl))
             {
                 // UserControl simply acts as a container, so the checking
                 // should be delegated to its children below.
@@ -100,7 +108,7 @@ namespace System.Web.UI.MobileControls.Adapters
         protected override bool RenderExtraHeadElements(HtmlMobileTextWriter writer)
         {
             bool result = false;
-            
+
             String metaTagName = Device.RequiredMetaTagNameValue;
             if (metaTagName != null)
             {
@@ -112,12 +120,18 @@ namespace System.Web.UI.MobileControls.Adapters
             }
 
             String charset = Page.Response.Charset;
-            if (Device.RequiresContentTypeMetaTag &&
-                charset != null && charset.Length > 0)
+            if (Device.RequiresContentTypeMetaTag && charset != null && charset.Length > 0)
             {
                 if (writer != null)
                 {
-                    writer.Write(String.Format(CultureInfo.InvariantCulture, _contentTypeMetaTag, Device.PreferredRenderingMime, charset));
+                    writer.Write(
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            _contentTypeMetaTag,
+                            Device.PreferredRenderingMime,
+                            charset
+                        )
+                    );
                 }
                 result = true;
             }
@@ -129,7 +143,8 @@ namespace System.Web.UI.MobileControls.Adapters
         protected internal override void RenderPagerTag(
             HtmlMobileTextWriter writer,
             int pageToNavigate,
-            String text)
+            String text
+        )
         {
             writer.EnterLayout(Style);
             writer.EnterFormat(Style);

@@ -13,20 +13,28 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.CSharp.GenerateEqualsAndGetHashCodeFromMembers
 {
-    [ExportLanguageService(typeof(IGenerateEqualsAndGetHashCodeService), LanguageNames.CSharp), Shared]
-    internal class CSharpGenerateEqualsAndGetHashCodeService : AbstractGenerateEqualsAndGetHashCodeService
+    [
+        ExportLanguageService(typeof(IGenerateEqualsAndGetHashCodeService), LanguageNames.CSharp),
+        Shared
+    ]
+    internal class CSharpGenerateEqualsAndGetHashCodeService
+        : AbstractGenerateEqualsAndGetHashCodeService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpGenerateEqualsAndGetHashCodeService()
-        {
-        }
+        public CSharpGenerateEqualsAndGetHashCodeService() { }
 
-        protected override bool TryWrapWithUnchecked(ImmutableArray<SyntaxNode> statements, out ImmutableArray<SyntaxNode> wrappedStatements)
+        protected override bool TryWrapWithUnchecked(
+            ImmutableArray<SyntaxNode> statements,
+            out ImmutableArray<SyntaxNode> wrappedStatements
+        )
         {
             wrappedStatements = ImmutableArray.Create<SyntaxNode>(
-                SyntaxFactory.CheckedStatement(SyntaxKind.UncheckedStatement,
-                    SyntaxFactory.Block(statements.OfType<StatementSyntax>())));
+                SyntaxFactory.CheckedStatement(
+                    SyntaxKind.UncheckedStatement,
+                    SyntaxFactory.Block(statements.OfType<StatementSyntax>())
+                )
+            );
             return true;
         }
     }

@@ -93,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Quantifier("5"),
                 Regex.Quantifier("}"),
                 Regex.Quantifier("?"),
-                Regex.Anchor("^"));
+                Regex.Anchor("^")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -176,7 +177,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Quantifier("5"),
                 Regex.Quantifier("}"),
                 Regex.Quantifier("?"),
-                Regex.Anchor("^"));
+                Regex.Anchor("^")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -194,7 +196,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """,
-                testHost, Namespace("System"),
+                testHost,
+                Namespace("System"),
                 Namespace("Text"),
                 Namespace("RegularExpressions"),
                 Keyword("var"),
@@ -259,7 +262,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Quantifier("5"),
                 Regex.Quantifier("}"),
                 Regex.Quantifier("?"),
-                Regex.Anchor("^"));
+                Regex.Anchor("^")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -277,14 +281,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """,
-                testHost, Namespace("System"),
+                testHost,
+                Namespace("System"),
                 Namespace("Text"),
                 Namespace("RegularExpressions"),
                 Keyword("var"),
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -302,14 +308,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """,
-                testHost, Namespace("System"),
+                testHost,
+                Namespace("System"),
                 Namespace("Text"),
                 Namespace("RegularExpressions"),
                 Keyword("var"),
                 Regex.Anchor("$"),
                 Regex.OtherEscape(@"\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -327,14 +335,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """,
-                testHost, Namespace("System"),
+                testHost,
+                Namespace("System"),
                 Namespace("Text"),
                 Namespace("RegularExpressions"),
                 Keyword("var"),
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -352,14 +362,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """,
-                testHost, Namespace("System"),
+                testHost,
+                Namespace("System"),
                 Namespace("Text"),
                 Namespace("RegularExpressions"),
                 Keyword("var"),
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -377,7 +389,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """,
-                testHost, Namespace("System"),
+                testHost,
+                Namespace("System"),
                 Namespace("Text"),
                 Namespace("RegularExpressions"),
                 Keyword("var"),
@@ -385,7 +398,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
                 Regex.Comment("(?#comment)"),
-                Regex.Text(" # not end of line comment"));
+                Regex.Text(" # not end of line comment")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -403,7 +417,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """,
-                testHost, Namespace("System"),
+                testHost,
+                Namespace("System"),
                 Namespace("Text"),
                 Namespace("RegularExpressions"),
                 Keyword("var"),
@@ -411,7 +426,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
                 Regex.Comment("(?#comment)"),
-                Regex.Comment("# is end of line comment"));
+                Regex.Comment("# is end of line comment")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -429,7 +445,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """,
-                testHost, Namespace("System"),
+                testHost,
+                Namespace("System"),
                 Namespace("Text"),
                 Namespace("RegularExpressions"),
                 Keyword("var"),
@@ -437,7 +454,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
                 Regex.Comment("(?#comment)"),
-                Regex.Comment("# is end of line comment"));
+                Regex.Comment("# is end of line comment")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -455,7 +473,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """,
-                testHost, Namespace("System"),
+                testHost,
+                Namespace("System"),
                 Namespace("Text"),
                 Namespace("RegularExpressions"),
                 Keyword("var"),
@@ -466,7 +485,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Comment("(?#comment)"),
                 Regex.Comment("# is end of line comment"),
                 Enum("RegexOptions"),
-                EnumMember("IgnorePatternWhitespace"));
+                EnumMember("IgnorePatternWhitespace")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -484,7 +504,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """,
-                testHost, Namespace("System"),
+                testHost,
+                Namespace("System"),
                 Namespace("Text"),
                 Namespace("RegularExpressions"),
                 Keyword("var"),
@@ -493,7 +514,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
                 Regex.Comment("(?#comment)"),
-                Regex.Text(" # is not end of line comment"));
+                Regex.Text(" # is not end of line comment")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -512,7 +534,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """,
-                testHost, Namespace("System"),
+                testHost,
+                Namespace("System"),
                 Namespace("Text"),
                 Namespace("RegularExpressions"),
                 Keyword("var"),
@@ -520,7 +543,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
                 Regex.Comment("(?#comment)"),
-                Regex.Text(" # is not end of line comment"));
+                Regex.Text(" # is not end of line comment")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -536,7 +560,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     private static string myRegex = @"$(\a\t\u0020)";
                 }
                 """,
-                testHost, Namespace("System"),
+                testHost,
+                Namespace("System"),
                 Namespace("Text"),
                 Namespace("RegularExpressions"),
                 Regex.Anchor("$"),
@@ -548,7 +573,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("u"),
                 Regex.OtherEscape("0020"),
-                Regex.Grouping(")"));
+                Regex.Grouping(")")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -566,14 +592,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """",
-                testHost, Namespace("System"),
+                testHost,
+                Namespace("System"),
                 Namespace("Text"),
                 Namespace("RegularExpressions"),
                 Keyword("var"),
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -591,14 +619,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """",
-                testHost, Namespace("System"),
+                testHost,
+                Namespace("System"),
                 Namespace("Text"),
                 Namespace("RegularExpressions"),
                 Keyword("var"),
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -618,14 +648,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """",
-                testHost, Namespace("System"),
+                testHost,
+                Namespace("System"),
                 Namespace("Text"),
                 Namespace("RegularExpressions"),
                 Keyword("var"),
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -645,14 +677,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """",
-                testHost, Namespace("System"),
+                testHost,
+                Namespace("System"),
                 Namespace("Text"),
                 Namespace("RegularExpressions"),
                 Keyword("var"),
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/47079")]
@@ -677,7 +711,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("Regex"),
                 Regex.Anchor("^"),
                 Regex.Text(@" """" "),
-                Regex.Anchor("$"));
+                Regex.Anchor("$")
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/47079")]
@@ -700,7 +735,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("RegularExpressions"),
                 Regex.Anchor("^"),
                 Regex.Text(@" """" "),
-                Regex.Anchor("$"));
+                Regex.Anchor("$")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -727,7 +763,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -748,7 +785,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -775,7 +813,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -796,7 +835,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -824,7 +864,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -852,7 +893,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/64549")]
@@ -885,7 +927,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -913,11 +956,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestRegexOnApiWithStringSyntaxAttribute_ImplicitArrayArgument(TestHost testHost)
+        public async Task TestRegexOnApiWithStringSyntaxAttribute_ImplicitArrayArgument(
+            TestHost testHost
+        )
         {
             await TestAsync(
                 """
@@ -941,11 +987,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestRegexOnApiWithStringSyntaxAttribute_CollectionArgument(TestHost testHost)
+        public async Task TestRegexOnApiWithStringSyntaxAttribute_CollectionArgument(
+            TestHost testHost
+        )
         {
             await TestAsync(
                 """
@@ -971,11 +1020,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestRegexOnApiWithStringSyntaxAttribute_ImplicitCollectionArgument(TestHost testHost)
+        public async Task TestRegexOnApiWithStringSyntaxAttribute_ImplicitCollectionArgument(
+            TestHost testHost
+        )
         {
             await TestAsync(
                 """
@@ -1000,11 +1052,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestRegexOnApiWithStringSyntaxAttribute_Argument_Options(TestHost testHost)
+        public async Task TestRegexOnApiWithStringSyntaxAttribute_Argument_Options(
+            TestHost testHost
+        )
         {
             await TestAsync(
                 """
@@ -1031,7 +1086,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Comment("(?#comment)"),
                 Regex.Comment("# is end of line comment"),
                 Enum("RegexOptions"),
-                EnumMember("IgnorePatternWhitespace"));
+                EnumMember("IgnorePatternWhitespace")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1060,7 +1116,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1094,12 +1151,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
         [WorkItem("https://github.com/dotnet/roslyn/issues/61947")]
-        public async Task TestRegexOnApiWithStringSyntaxAttribute_AttributeProperty(TestHost testHost)
+        public async Task TestRegexOnApiWithStringSyntaxAttribute_AttributeProperty(
+            TestHost testHost
+        )
         {
             await TestAsync(
                 """
@@ -1128,7 +1188,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1157,7 +1218,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1186,11 +1248,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestRegexOnApiWithStringSyntaxAttribute_ImplicitArrayAttribute(TestHost testHost)
+        public async Task TestRegexOnApiWithStringSyntaxAttribute_ImplicitArrayAttribute(
+            TestHost testHost
+        )
         {
             await TestAsync(
                 """
@@ -1215,11 +1280,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestIncompleteRegexLeadingToStringInsideSkippedTokensInsideADirective(TestHost testHost)
+        public async Task TestIncompleteRegexLeadingToStringInsideSkippedTokensInsideADirective(
+            TestHost testHost
+        )
         {
             await TestAsync(
                 """
@@ -1241,11 +1309,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """,
-                testHost, Namespace("System"),
+                testHost,
+                Namespace("System"),
                 Namespace("Text"),
                 Namespace("RegularExpressions"),
                 Keyword("var"),
-                Class("Regex"));
+                Class("Regex")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1266,7 +1336,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1287,7 +1358,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Regex.Anchor("$"),
                 Regex.OtherEscape("\\"),
                 Regex.OtherEscape("a"),
-                Regex.Comment("(?#comment)"));
+                Regex.Comment("(?#comment)")
+            );
         }
     }
 }

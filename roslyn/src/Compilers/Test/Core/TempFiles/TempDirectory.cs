@@ -16,9 +16,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         private readonly TempRoot _root;
 
         protected TempDirectory(TempRoot root)
-            : this(CreateUniqueDirectory(TempRoot.Root), root)
-        {
-        }
+            : this(CreateUniqueDirectory(TempRoot.Root), root) { }
 
         private TempDirectory(string path, TempRoot root)
         {
@@ -77,7 +75,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         /// </summary>
         public TempFile CopyFile(string originalPath, string name = null)
         {
-            string filePath = System.IO.Path.Combine(_path, name ?? System.IO.Path.GetFileName(originalPath));
+            string filePath = System.IO.Path.Combine(
+                _path,
+                name ?? System.IO.Path.GetFileName(originalPath)
+            );
             File.Copy(originalPath, filePath);
             return _root.AddFile(new DisposableFile(filePath));
         }

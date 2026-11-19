@@ -16,13 +16,17 @@ namespace System.Net.Http.Internal
         {
             // Arrange
             Mock<Stream> mockInnerStream = new Mock<Stream>() { CallBase = true };
-            MockNonClosingDelegatingStream mockStream = new MockNonClosingDelegatingStream(mockInnerStream.Object);
+            MockNonClosingDelegatingStream mockStream = new MockNonClosingDelegatingStream(
+                mockInnerStream.Object
+            );
 
             // Act
             mockStream.Dispose();
 
             // Assert
-            mockInnerStream.Protected().Verify("Dispose", Times.Never(), exactParameterMatch: true, args: true);
+            mockInnerStream
+                .Protected()
+                .Verify("Dispose", Times.Never(), exactParameterMatch: true, args: true);
             mockInnerStream.Verify(s => s.Close(), Times.Never());
         }
 
@@ -31,13 +35,17 @@ namespace System.Net.Http.Internal
         {
             // Arrange
             Mock<Stream> mockInnerStream = new Mock<Stream>() { CallBase = true };
-            MockNonClosingDelegatingStream mockStream = new MockNonClosingDelegatingStream(mockInnerStream.Object);
+            MockNonClosingDelegatingStream mockStream = new MockNonClosingDelegatingStream(
+                mockInnerStream.Object
+            );
 
             // Act
             mockStream.Close();
 
             // Assert
-            mockInnerStream.Protected().Verify("Dispose", Times.Never(), exactParameterMatch: true, args: true);
+            mockInnerStream
+                .Protected()
+                .Verify("Dispose", Times.Never(), exactParameterMatch: true, args: true);
             mockInnerStream.Verify(s => s.Close(), Times.Never());
         }
     }

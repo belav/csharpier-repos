@@ -27,15 +27,16 @@ namespace System.Web.Http.ModelBinding
 
         public override string ErrorMessage
         {
-            get
-            {
-                return _message;
-            }
+            get { return _message; }
         }
 
-        public override Task ExecuteBindingAsync(ModelMetadataProvider metadataProvider, HttpActionContext actionContext, CancellationToken cancellationToken)
+        public override Task ExecuteBindingAsync(
+            ModelMetadataProvider metadataProvider,
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken
+        )
         {
-            // Caller should have already checked IsError before executing, so we shoulnd't be here. 
+            // Caller should have already checked IsError before executing, so we shoulnd't be here.
             return TaskHelpers.FromError(new InvalidOperationException());
         }
     }

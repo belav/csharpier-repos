@@ -5,8 +5,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 public class EnumToNumberConverterTest
 {
-    private static readonly ValueConverter<Beatles, int> _enumToNumber
-        = new EnumToNumberConverter<Beatles, int>();
+    private static readonly ValueConverter<Beatles, int> _enumToNumber =
+        new EnumToNumberConverter<Beatles, int>();
 
     [ConditionalFact]
     public void Can_convert_enums_to_numbers()
@@ -63,11 +63,17 @@ public class EnumToNumberConverterTest
     }
 
     [ConditionalFact]
-    public void Ordering_preserved_for_enums_to_numbers()
-        => ValueConverterTest.OrderingTest(_enumToNumber, Beatles.Ringo, Beatles.George, Beatles.Paul, Beatles.John);
+    public void Ordering_preserved_for_enums_to_numbers() =>
+        ValueConverterTest.OrderingTest(
+            _enumToNumber,
+            Beatles.Ringo,
+            Beatles.George,
+            Beatles.Paul,
+            Beatles.John
+        );
 
-    private static readonly ValueConverter<Beatles, double> _enumToDouble
-        = new EnumToNumberConverter<Beatles, double>();
+    private static readonly ValueConverter<Beatles, double> _enumToDouble =
+        new EnumToNumberConverter<Beatles, double>();
 
     [ConditionalFact]
     public void Can_convert_enums_to_doubles()
@@ -95,8 +101,8 @@ public class EnumToNumberConverterTest
         Assert.Equal(default, converter(0));
     }
 
-    private static readonly ValueConverter<Beatles, decimal> _enumToDecimal
-        = new EnumToNumberConverter<Beatles, decimal>();
+    private static readonly ValueConverter<Beatles, decimal> _enumToDecimal =
+        new EnumToNumberConverter<Beatles, decimal>();
 
     [ConditionalFact]
     public void Can_convert_enums_to_decimals()
@@ -124,8 +130,8 @@ public class EnumToNumberConverterTest
         Assert.Equal(default, converter(0));
     }
 
-    private static readonly ValueConverter<Beatles, float> _enumToFloat
-        = new EnumToNumberConverter<Beatles, float>();
+    private static readonly ValueConverter<Beatles, float> _enumToFloat =
+        new EnumToNumberConverter<Beatles, float>();
 
     [ConditionalFact]
     public void Can_convert_enums_to_floats()
@@ -153,8 +159,8 @@ public class EnumToNumberConverterTest
         Assert.Equal(default, converter(0));
     }
 
-    private static readonly ValueConverter<Beatles, byte> _enumToByte
-        = new EnumToNumberConverter<Beatles, byte>();
+    private static readonly ValueConverter<Beatles, byte> _enumToByte =
+        new EnumToNumberConverter<Beatles, byte>();
 
     [ConditionalFact]
     public void Can_convert_enums_to_bytes()
@@ -180,8 +186,8 @@ public class EnumToNumberConverterTest
         Assert.Equal(default, converter(0));
     }
 
-    private static readonly ValueConverter<Beatles, sbyte> _enumToSByte
-        = new EnumToNumberConverter<Beatles, sbyte>();
+    private static readonly ValueConverter<Beatles, sbyte> _enumToSByte =
+        new EnumToNumberConverter<Beatles, sbyte>();
 
     [ConditionalFact]
     public void Can_convert_enums_to_sbytes()
@@ -209,8 +215,8 @@ public class EnumToNumberConverterTest
         Assert.Equal(default, converter(0));
     }
 
-    private static readonly ValueConverter<Beatles, long> _enumToLong
-        = new EnumToNumberConverter<Beatles, long>();
+    private static readonly ValueConverter<Beatles, long> _enumToLong =
+        new EnumToNumberConverter<Beatles, long>();
 
     [ConditionalFact]
     public void Can_convert_enums_to_longs()
@@ -238,8 +244,8 @@ public class EnumToNumberConverterTest
         Assert.Equal(default, converter(0));
     }
 
-    private static readonly ValueConverter<Beatles, ulong> _enumToULong
-        = new EnumToNumberConverter<Beatles, ulong>();
+    private static readonly ValueConverter<Beatles, ulong> _enumToULong =
+        new EnumToNumberConverter<Beatles, ulong>();
 
     [ConditionalFact]
     public void Can_convert_enums_to_ulongs()
@@ -270,6 +276,6 @@ public class EnumToNumberConverterTest
         John = 7,
         Paul = 4,
         George = 1,
-        Ringo = -1
+        Ringo = -1,
     }
 }

@@ -37,7 +37,5 @@ public sealed record RelationalCSharpRuntimeAnnotationCodeGeneratorDependencies
     ///     the constructor at any point in this process.
     /// </remarks>
     [EntityFrameworkInternal]
-    public RelationalCSharpRuntimeAnnotationCodeGeneratorDependencies()
-    {
-    }
+    public RelationalCSharpRuntimeAnnotationCodeGeneratorDependencies() { }
 }

@@ -304,15 +304,11 @@ public abstract class HubLifetimeManagerTestsBase<THub>
             Assert.Equal("test", invocation.Arguments[0]);
 
             var ex = await Assert
-                .ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        manager.SetConnectionResultAsync(
-                            connection2.ConnectionId,
-                            CompletionMessage.WithError(
-                                invocation.InvocationId,
-                                "Error from client"
-                            )
-                        )
+                .ThrowsAsync<InvalidOperationException>(() =>
+                    manager.SetConnectionResultAsync(
+                        connection2.ConnectionId,
+                        CompletionMessage.WithError(invocation.InvocationId, "Error from client")
+                    )
                 )
                 .DefaultTimeout();
 
@@ -351,14 +347,13 @@ public abstract class HubLifetimeManagerTestsBase<THub>
 
             // No client with this ID
             await Assert
-                .ThrowsAsync<IOException>(
-                    () =>
-                        manager1.InvokeConnectionAsync<int>(
-                            "none",
-                            "Result",
-                            new object[] { "test" },
-                            cancellationToken: default
-                        )
+                .ThrowsAsync<IOException>(() =>
+                    manager1.InvokeConnectionAsync<int>(
+                        "none",
+                        "Result",
+                        new object[] { "test" },
+                        cancellationToken: default
+                    )
                 )
                 .DefaultTimeout();
         }

@@ -28,7 +28,15 @@ namespace System.Diagnostics.Tests
         public static void CounterSample_Constructor_CounterSample()
         {
             long timeStamp = DateTime.Now.ToFileTime();
-            CounterSample counterSample = new CounterSample(1, 2, 3, 4, timeStamp, timeStamp, PerformanceCounterType.SampleFraction);
+            CounterSample counterSample = new CounterSample(
+                1,
+                2,
+                3,
+                4,
+                timeStamp,
+                timeStamp,
+                PerformanceCounterType.SampleFraction
+            );
 
             Assert.Equal(2, counterSample.BaseValue);
             Assert.Equal(3, counterSample.CounterFrequency);
@@ -42,17 +50,46 @@ namespace System.Diagnostics.Tests
         [Fact]
         public static void CounterSample_Calculate_CalculateCounterSample()
         {
-            CounterSample counterSample = new CounterSample(5, 0, 0, 0, 0, 0, PerformanceCounterType.NumberOfItems32);
+            CounterSample counterSample = new CounterSample(
+                5,
+                0,
+                0,
+                0,
+                0,
+                0,
+                PerformanceCounterType.NumberOfItems32
+            );
 
             Assert.Equal(5, CounterSample.Calculate(counterSample));
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/60403", typeof(PlatformDetection), nameof(PlatformDetection.IsArm64Process), nameof(PlatformDetection.IsWindows))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/60403",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsArm64Process),
+            nameof(PlatformDetection.IsWindows)
+        )]
         public static void CounterSample_Calculate_CalculateCounterSampleCounterSample()
         {
-            CounterSample counterSample1 = new CounterSample(5, 0, 0, 1, 0, 0, PerformanceCounterType.CounterDelta32);
-            CounterSample counterSample2 = new CounterSample(15, 0, 0, 1, 0, 0, PerformanceCounterType.CounterDelta32);
+            CounterSample counterSample1 = new CounterSample(
+                5,
+                0,
+                0,
+                1,
+                0,
+                0,
+                PerformanceCounterType.CounterDelta32
+            );
+            CounterSample counterSample2 = new CounterSample(
+                15,
+                0,
+                0,
+                1,
+                0,
+                0,
+                PerformanceCounterType.CounterDelta32
+            );
 
             Assert.Equal(10, CounterSample.Calculate(counterSample1, counterSample2));
         }
@@ -60,8 +97,24 @@ namespace System.Diagnostics.Tests
         [Fact]
         public static void CounterSample_Equal()
         {
-            CounterSample counterSample1 = new CounterSample(5, 0, 0, 1, 0, 0, PerformanceCounterType.CounterDelta32);
-            CounterSample counterSample2 = new CounterSample(5, 0, 0, 1, 0, 0, PerformanceCounterType.CounterDelta32);
+            CounterSample counterSample1 = new CounterSample(
+                5,
+                0,
+                0,
+                1,
+                0,
+                0,
+                PerformanceCounterType.CounterDelta32
+            );
+            CounterSample counterSample2 = new CounterSample(
+                5,
+                0,
+                0,
+                1,
+                0,
+                0,
+                PerformanceCounterType.CounterDelta32
+            );
 
             Assert.Equal(counterSample1, counterSample2);
         }
@@ -69,8 +122,24 @@ namespace System.Diagnostics.Tests
         [Fact]
         public static void CounterSample_opInequality()
         {
-            CounterSample counterSample1 = new CounterSample(5, 0, 0, 1, 0, 0, PerformanceCounterType.CounterDelta32);
-            CounterSample counterSample2 = new CounterSample(15, 0, 0, 1, 0, 0, PerformanceCounterType.CounterDelta32);
+            CounterSample counterSample1 = new CounterSample(
+                5,
+                0,
+                0,
+                1,
+                0,
+                0,
+                PerformanceCounterType.CounterDelta32
+            );
+            CounterSample counterSample2 = new CounterSample(
+                15,
+                0,
+                0,
+                1,
+                0,
+                0,
+                PerformanceCounterType.CounterDelta32
+            );
 
             Assert.True(counterSample1 != counterSample2);
         }
@@ -78,8 +147,24 @@ namespace System.Diagnostics.Tests
         [Fact]
         public static void CounterSample_opEquality()
         {
-            CounterSample counterSample1 = new CounterSample(5, 0, 0, 1, 0, 0, PerformanceCounterType.CounterDelta32);
-            CounterSample counterSample2 = new CounterSample(5, 0, 0, 1, 0, 0, PerformanceCounterType.CounterDelta32);
+            CounterSample counterSample1 = new CounterSample(
+                5,
+                0,
+                0,
+                1,
+                0,
+                0,
+                PerformanceCounterType.CounterDelta32
+            );
+            CounterSample counterSample2 = new CounterSample(
+                5,
+                0,
+                0,
+                1,
+                0,
+                0,
+                PerformanceCounterType.CounterDelta32
+            );
 
             Assert.True(counterSample1 == counterSample2);
         }
@@ -87,8 +172,24 @@ namespace System.Diagnostics.Tests
         [Fact]
         public static void CounterSample_GetHashCode()
         {
-            CounterSample counterSample1 = new CounterSample(5, 0, 0, 1, 0, 0, PerformanceCounterType.CounterDelta32);
-            CounterSample counterSample2 = new CounterSample(5, 0, 0, 1, 0, 0, PerformanceCounterType.CounterDelta32);
+            CounterSample counterSample1 = new CounterSample(
+                5,
+                0,
+                0,
+                1,
+                0,
+                0,
+                PerformanceCounterType.CounterDelta32
+            );
+            CounterSample counterSample2 = new CounterSample(
+                5,
+                0,
+                0,
+                1,
+                0,
+                0,
+                PerformanceCounterType.CounterDelta32
+            );
 
             Assert.Equal(counterSample1.GetHashCode(), counterSample2.GetHashCode());
         }

@@ -1,5 +1,3 @@
 // Compiler options: -t:module
 
-public class M2 {
-}
-
+public class M2 { }

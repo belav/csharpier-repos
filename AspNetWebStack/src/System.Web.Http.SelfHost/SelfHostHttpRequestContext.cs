@@ -46,8 +46,11 @@ namespace System.Web.Http.SelfHost
         private string _virtualPathRoot;
         private bool _virtualPathRootSet;
 
-        public SelfHostHttpRequestContext(RequestContext requestContext, HttpConfiguration configuration,
-            HttpRequestMessage request)
+        public SelfHostHttpRequestContext(
+            RequestContext requestContext,
+            HttpConfiguration configuration,
+            HttpRequestMessage request
+        )
         {
             Contract.Assert(requestContext != null);
             Contract.Assert(configuration != null);
@@ -90,14 +93,8 @@ namespace System.Web.Http.SelfHost
 
         public override HttpConfiguration Configuration
         {
-            get
-            {
-                return _configuration;
-            }
-            set
-            {
-                _configuration = value;
-            }
+            get { return _configuration; }
+            set { _configuration = value; }
         }
 
         public override bool IncludeErrorDetail
@@ -170,14 +167,8 @@ namespace System.Web.Http.SelfHost
 
         public override IPrincipal Principal
         {
-            get
-            {
-                return Thread.CurrentPrincipal;
-            }
-            set
-            {
-                Thread.CurrentPrincipal = value;
-            }
+            get { return Thread.CurrentPrincipal; }
+            set { Thread.CurrentPrincipal = value; }
         }
 
         public override UrlHelper Url

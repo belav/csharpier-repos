@@ -15,10 +15,7 @@ class Program
             new Customer() { Name = "Pat", Age = 20 },
         };
 
-        var query = customers.AsQueryable()
-            .OrderByDescending(c => c.Age)
-            .Skip(1)
-            .Take(1);
+        var query = customers.AsQueryable().OrderByDescending(c => c.Age).Skip(1).Take(1);
         Customer c = query.Single();
 
         if (c.Name != "Bob" && c.Age != 23)

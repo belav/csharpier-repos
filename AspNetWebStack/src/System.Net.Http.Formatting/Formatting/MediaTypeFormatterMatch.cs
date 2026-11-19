@@ -18,7 +18,12 @@ namespace System.Net.Http.Formatting
         /// <param name="mediaType">The media type. Can be <c>null</c> in which case the media type <c>application/octet-stream</c> is used.</param>
         /// <param name="quality">The quality of the match. Can be <c>null</c> in which case it is considered a full match with a value of 1.0</param>
         /// <param name="ranking">The kind of match.</param>
-        public MediaTypeFormatterMatch(MediaTypeFormatter formatter, MediaTypeHeaderValue mediaType, double? quality, MediaTypeFormatterMatchRanking ranking)
+        public MediaTypeFormatterMatch(
+            MediaTypeFormatter formatter,
+            MediaTypeHeaderValue mediaType,
+            double? quality,
+            MediaTypeFormatterMatchRanking ranking
+        )
         {
             if (formatter == null)
             {
@@ -26,7 +31,10 @@ namespace System.Net.Http.Formatting
             }
 
             Formatter = formatter;
-            MediaType = mediaType != null ? mediaType.Clone() : MediaTypeConstants.ApplicationOctetStreamMediaType;
+            MediaType =
+                mediaType != null
+                    ? mediaType.Clone()
+                    : MediaTypeConstants.ApplicationOctetStreamMediaType;
             Quality = quality ?? FormattingUtilities.Match;
             Ranking = ranking;
         }

@@ -29,6 +29,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Features.Diagnostics
         /// <summary>
         /// Represents a hinted suggestion.
         /// </summary>
-        HintedSuggestion
+        HintedSuggestion,
     }
 }

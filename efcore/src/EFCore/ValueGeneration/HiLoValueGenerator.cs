@@ -35,8 +35,7 @@ public abstract class HiLoValueGenerator<TValue> : ValueGenerator<TValue>
     /// </summary>
     /// <param name="entry">The change tracking entry of the entity for which the value is being generated.</param>
     /// <returns>The value to be assigned to a property.</returns>
-    public override TValue Next(EntityEntry entry)
-        => _generatorState.Next<TValue>(GetNewLowValue);
+    public override TValue Next(EntityEntry entry) => _generatorState.Next<TValue>(GetNewLowValue);
 
     /// <summary>
     ///     Gets a value to be assigned to a property.
@@ -47,8 +46,8 @@ public abstract class HiLoValueGenerator<TValue> : ValueGenerator<TValue>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     public override ValueTask<TValue> NextAsync(
         EntityEntry entry,
-        CancellationToken cancellationToken = default)
-        => _generatorState.NextAsync<TValue>(GetNewLowValueAsync, cancellationToken);
+        CancellationToken cancellationToken = default
+    ) => _generatorState.NextAsync<TValue>(GetNewLowValueAsync, cancellationToken);
 
     /// <summary>
     ///     Gets the low value for the next block of values to be used.
@@ -62,6 +61,7 @@ public abstract class HiLoValueGenerator<TValue> : ValueGenerator<TValue>
     /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <returns>The low value for the next block of values to be used.</returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    protected virtual Task<long> GetNewLowValueAsync(CancellationToken cancellationToken = default)
-        => Task.FromResult(GetNewLowValue());
+    protected virtual Task<long> GetNewLowValueAsync(
+        CancellationToken cancellationToken = default
+    ) => Task.FromResult(GetNewLowValue());
 }

@@ -20,7 +20,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
 {
     public static class LocalFunctionTestsUtil
     {
-        public static IMethodSymbol FindLocalFunction(this CompilationVerifier verifier, string localFunctionName)
+        public static IMethodSymbol FindLocalFunction(
+            this CompilationVerifier verifier,
+            string localFunctionName
+        )
         {
             localFunctionName = (char)GeneratedNameKind.LocalFunction + "__" + localFunctionName;
             var methods = verifier.TestData.GetMethodsByName();
@@ -45,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         [WorkItem(37459, "https://github.com/dotnet/roslyn/pull/37459")]
         public void StaticLocalFunctionCaptureConstants()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -70,10 +74,15 @@ class C
     }
 }
 ";
-            var verifier = CompileAndVerify(src, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                src,
+                expectedOutput: @"
 1
-5");
-            verifier.VerifyIL("C.<M>g__local|1_0", @"
+5"
+            );
+            verifier.VerifyIL(
+                "C.<M>g__local|1_0",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  1
@@ -82,14 +91,16 @@ class C
   IL_0006:  ldc.i4.5
   IL_0007:  call       ""void System.Console.WriteLine(int)""
   IL_000c:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         [WorkItem(481125, "https://devdiv.visualstudio.com/DevDiv/_workitems?id=481125")]
         public void Repro481125()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System;
 using System.Linq;
 
@@ -123,9 +134,14 @@ internal class D : IDisposable
 public class E
 {
     public int Id;
-}", options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp, expectedOutput: @"1
-0");
+}",
+                options: TestOptions.ReleaseExe
+            );
+            CompileAndVerify(
+                comp,
+                expectedOutput: @"1
+0"
+            );
         }
 
         [Fact]
@@ -133,30 +149,40 @@ public class E
         [WorkItem(24647, "https://github.com/dotnet/roslyn/issues/24647")]
         public void Repro24647()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 class Program
 {
     static void Main(string[] args)
     {
         void local() { } => new object();
     }
-}");
+}"
+            );
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
-            var localFunction = tree.GetRoot().DescendantNodes().OfType<LocalFunctionStatementSyntax>().Single();
-            var creation = localFunction.DescendantNodes().OfType<ObjectCreationExpressionSyntax>().Single();
+            var localFunction = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<LocalFunctionStatementSyntax>()
+                .Single();
+            var creation = localFunction
+                .DescendantNodes()
+                .OfType<ObjectCreationExpressionSyntax>()
+                .Single();
 
             var objectCreationOperation = model.GetOperation(creation);
             var localFunctionOperation = (ILocalFunctionOperation)model.GetOperation(localFunction);
             Assert.NotNull(objectCreationOperation);
 
-            comp.VerifyOperationTree(creation, expectedOperationTree:
-@"
+            comp.VerifyOperationTree(
+                creation,
+                expectedOperationTree: @"
 IObjectCreationOperation (Constructor: System.Object..ctor()) (OperationKind.ObjectCreation, Type: System.Object, IsInvalid) (Syntax: 'new object()')
   Arguments(0)
   Initializer: 
     null
-");
+"
+            );
 
             Assert.Equal(OperationKind.ExpressionStatement, objectCreationOperation.Parent.Kind);
             Assert.Equal(OperationKind.Block, objectCreationOperation.Parent.Parent.Kind);
@@ -171,7 +197,8 @@ IObjectCreationOperation (Constructor: System.Object..ctor()) (OperationKind.Obj
         [WorkItem(22027, "https://github.com/dotnet/roslyn/issues/22027")]
         public void Repro22027()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 class Program
 {
 static void Main(string[] args)
@@ -196,14 +223,16 @@ static void Main(string[] args)
      }
      catch { throw; }
  }
-}");
+}"
+            );
         }
 
         [Fact]
         [WorkItem(21768, "https://github.com/dotnet/roslyn/issues/21768")]
         public void Repro21768()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System;
 using System.Linq;
 class C
@@ -229,7 +258,8 @@ class C
     {
         public int SomeField { get; set; }
     }
-}");
+}"
+            );
             CompileAndVerify(comp);
         }
 
@@ -237,7 +267,8 @@ class C
         [WorkItem(21811, "https://github.com/dotnet/roslyn/issues/21811")]
         public void Repro21811()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -264,14 +295,16 @@ class Program
                 }
             });
     }
-}");
+}"
+            );
         }
 
         [Fact]
         [WorkItem(21645, "https://github.com/dotnet/roslyn/issues/21645")]
         public void Repro21645()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 public class Class1
 {
     private void Test()
@@ -292,14 +325,16 @@ public class Class1
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         [WorkItem(21543, "https://github.com/dotnet/roslyn/issues/21543")]
         public void Repro21543()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 using System;
 
 class Program
@@ -322,14 +357,16 @@ class Program
             }
         });
     }
-}");
+}"
+            );
         }
 
         [Fact]
         [WorkItem(472056, "https://devdiv.visualstudio.com/DevDiv/_workitems?id=472056")]
         public void Repro472056()
         {
-            var comp = CreateCompilationWithMscorlib46(@"
+            var comp = CreateCompilationWithMscorlib46(
+                @"
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -362,7 +399,9 @@ namespace ConsoleApp2
             }
         }
     }
-}", options: TestOptions.ReleaseExe);
+}",
+                options: TestOptions.ReleaseExe
+            );
 
             CompileAndVerify(comp, expectedOutput: "Great success!");
         }
@@ -370,7 +409,8 @@ namespace ConsoleApp2
         [Fact]
         public void AsyncStructClosure()
         {
-            var comp = CreateCompilationWithMscorlib46(@"
+            var comp = CreateCompilationWithMscorlib46(
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -386,15 +426,20 @@ class C
         Console.WriteLine(L());
         await Task.FromResult(false);
     }
-}", options: TestOptions.ReleaseExe);
+}",
+                options: TestOptions.ReleaseExe
+            );
             var verifier = CompileAndVerify(comp, expectedOutput: "5");
             // No field captures
-            verifier.VerifySynthesizedFields("C.<M>d__1",
+            verifier.VerifySynthesizedFields(
+                "C.<M>d__1",
                 "int <>1__state",
                 "System.Runtime.CompilerServices.AsyncTaskMethodBuilder <>t__builder",
-                "System.Runtime.CompilerServices.TaskAwaiter<bool> <>u__1");
+                "System.Runtime.CompilerServices.TaskAwaiter<bool> <>u__1"
+            );
 
-            comp = CreateCompilationWithMscorlib46(@"
+            comp = CreateCompilationWithMscorlib46(
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -412,21 +457,27 @@ class C
         x++;
         Console.WriteLine(x);
     }
-}", options: TestOptions.ReleaseExe);
-            verifier = CompileAndVerify(comp, expectedOutput: @"5
-3");
-            verifier.VerifySynthesizedFields("C.<M>d__1",
+}",
+                options: TestOptions.ReleaseExe
+            );
+            verifier = CompileAndVerify(
+                comp,
+                expectedOutput: @"5
+3"
+            );
+            verifier.VerifySynthesizedFields(
+                "C.<M>d__1",
                 "int <>1__state",
                 "System.Runtime.CompilerServices.AsyncTaskMethodBuilder <>t__builder",
                 // Display class capture
                 "C.<>c__DisplayClass1_0 <>8__1",
-                "System.Runtime.CompilerServices.TaskAwaiter<bool> <>u__1");
+                "System.Runtime.CompilerServices.TaskAwaiter<bool> <>u__1"
+            );
 
-            verifier.VerifySynthesizedFields("C.<>c__DisplayClass1_0",
-                "int x",
-                "int y");
+            verifier.VerifySynthesizedFields("C.<>c__DisplayClass1_0", "int x", "int y");
 
-            comp = CreateCompilationWithMscorlib46(@"
+            comp = CreateCompilationWithMscorlib46(
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -445,20 +496,28 @@ class C
         y = 7;
         Console.WriteLine(L());
     }
-}", options: TestOptions.ReleaseExe);
-            verifier = CompileAndVerify(comp, expectedOutput: @"5
-12");
+}",
+                options: TestOptions.ReleaseExe
+            );
+            verifier = CompileAndVerify(
+                comp,
+                expectedOutput: @"5
+12"
+            );
             // Nothing captured across await
-            verifier.VerifySynthesizedFields("C.<M>d__1",
+            verifier.VerifySynthesizedFields(
+                "C.<M>d__1",
                 "int <>1__state",
                 "System.Runtime.CompilerServices.AsyncTaskMethodBuilder <>t__builder",
-                "System.Runtime.CompilerServices.TaskAwaiter<bool> <>u__1");
+                "System.Runtime.CompilerServices.TaskAwaiter<bool> <>u__1"
+            );
         }
 
         [Fact]
         public void IteratorStructClosure()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -479,14 +538,19 @@ class C
         int L() => x + y;
         yield return L();
     }
-}", expectedOutput: "5");
+}",
+                expectedOutput: "5"
+            );
             // No field captures
-            verifier.VerifySynthesizedFields("C.<M>d__1",
+            verifier.VerifySynthesizedFields(
+                "C.<M>d__1",
                 "int <>1__state",
                 "int <>2__current",
-                "int <>l__initialThreadId");
+                "int <>l__initialThreadId"
+            );
 
-            verifier = CompileAndVerify(@"
+            verifier = CompileAndVerify(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -509,20 +573,23 @@ class C
         x++;
         yield return x;
     }
-}", expectedOutput: @"5
-3");
-            verifier.VerifySynthesizedFields("C.<M>d__1",
+}",
+                expectedOutput: @"5
+3"
+            );
+            verifier.VerifySynthesizedFields(
+                "C.<M>d__1",
                 "int <>1__state",
                 "int <>2__current",
                 "int <>l__initialThreadId",
                 // Display class capture
-                "C.<>c__DisplayClass1_0 <>8__1");
+                "C.<>c__DisplayClass1_0 <>8__1"
+            );
 
-            verifier.VerifySynthesizedFields("C.<>c__DisplayClass1_0",
-                "int x",
-                "int y");
+            verifier.VerifySynthesizedFields("C.<>c__DisplayClass1_0", "int x", "int y");
 
-            verifier = CompileAndVerify(@"
+            verifier = CompileAndVerify(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -546,13 +613,17 @@ class C
         y = 7;
         yield return L();
     }
-}", expectedOutput: @"5
-12");
+}",
+                expectedOutput: @"5
+12"
+            );
             // No captures
-            verifier.VerifySynthesizedFields("C.<M>d__1",
+            verifier.VerifySynthesizedFields(
+                "C.<M>d__1",
                 "int <>1__state",
                 "int <>2__current",
-                "int <>l__initialThreadId");
+                "int <>l__initialThreadId"
+            );
         }
 
         [Fact]
@@ -560,7 +631,7 @@ class C
         public void Repro21409()
         {
             CompileAndVerify(
-@"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -619,17 +690,20 @@ namespace Buggles
         }
     }
 }
-", expectedOutput: @"
+",
+                expectedOutput: @"
 0
 1
-2");
+2"
+            );
         }
 
         [Fact]
         [WorkItem(294554, "https://devdiv.visualstudio.com/DevDiv/_workitems?id=294554")]
         public void ThisOnlyClosureBetweenStructCaptures()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 using System;
 class C
 {
@@ -658,13 +732,15 @@ class C
         }
         L1();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void CaptureThisInDifferentScopes()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 using System;
 class C
 {
@@ -680,13 +756,15 @@ class C
             Func<int> f2 = () => _x + y;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void CaptureThisInDifferentScopes2()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 using System;
 class C
 {
@@ -702,13 +780,15 @@ class C
             int L2() => _x + y;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void CaptureFramePointerInDifferentScopes()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 using System;
 class C
 {
@@ -724,13 +804,15 @@ class C
             Func<int> f3 = () => x + z;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void EnvironmentChainContainsStructEnvironment()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 using System;
 class C
 {
@@ -749,14 +831,17 @@ class C
         }
     }
     public static void Main() => new C().M(3);
-}", expectedOutput: @"8
-10");
+}",
+                expectedOutput: @"8
+10"
+            );
         }
 
         [Fact]
         public void Repro20577()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System.Linq;
 
 public class Program {
@@ -771,14 +856,16 @@ public class Program {
             }
         }
     }
-}");
+}"
+            );
             CompileAndVerify(comp);
         }
 
         [Fact]
         public void Repro19033()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 using System;
 
 class Program
@@ -795,13 +882,15 @@ class Program
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void Repro19033_2()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 using System;
 class C
 {
@@ -816,7 +905,8 @@ class C
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -824,7 +914,8 @@ class C
         [WorkItem(18918, "https://github.com/dotnet/roslyn/issues/18918")]
         public void IntermediateStructClosures1()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                @"
 using System;
 class C
 {
@@ -862,10 +953,13 @@ class C
         L1();
         Console.WriteLine(_x);
     }
-}", expectedOutput:
-@"0
-1");
-            verifier.VerifyIL("C.M()", @"
+}",
+                expectedOutput: @"0
+1"
+            );
+            verifier.VerifyIL(
+                "C.M()",
+                @"
 {
   // Code size       47 (0x2f)
   .maxstack  2
@@ -886,10 +980,13 @@ class C
   IL_0024:  ldfld      ""int C._x""
   IL_0029:  call       ""void System.Console.WriteLine(int)""
   IL_002e:  ret
-}");
+}"
+            );
 
             // L1
-            verifier.VerifyIL("C.<M>g__L1|2_0(ref C.<>c__DisplayClass2_0)", @"
+            verifier.VerifyIL(
+                "C.<M>g__L1|2_0(ref C.<>c__DisplayClass2_0)",
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  2
@@ -897,9 +994,12 @@ class C
   IL_0001:  ldarg.1
   IL_0002:  call       ""void C.<M>g__L2|2_1(ref C.<>c__DisplayClass2_0)""
   IL_0007:  ret
-}");
+}"
+            );
             // L2
-            verifier.VerifyIL("C.<M>g__L2|2_1(ref C.<>c__DisplayClass2_0)", @"
+            verifier.VerifyIL(
+                "C.<M>g__L2|2_1(ref C.<>c__DisplayClass2_0)",
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  2
@@ -907,9 +1007,12 @@ class C
   IL_0001:  ldarg.1
   IL_0002:  call       ""void C.<M>g__L3|2_3(ref C.<>c__DisplayClass2_0)""
   IL_0007:  ret
-}");
+}"
+            );
             // Skip some... L5
-            verifier.VerifyIL("C.<M>g__L5|2_5(ref C.<>c__DisplayClass2_0, ref C.<>c__DisplayClass2_1)", @"
+            verifier.VerifyIL(
+                "C.<M>g__L5|2_5(ref C.<>c__DisplayClass2_0, ref C.<>c__DisplayClass2_1)",
+                @"
 {
   // Code size       10 (0xa)
   .maxstack  3
@@ -919,9 +1022,12 @@ class C
   IL_0003:  call       ""int C.<M>g__L6|2_6(ref C.<>c__DisplayClass2_0, ref C.<>c__DisplayClass2_1)""
   IL_0008:  pop
   IL_0009:  ret
-}");
+}"
+            );
             // L6
-            verifier.VerifyIL("C.<M>g__L6|2_6(ref C.<>c__DisplayClass2_0, ref C.<>c__DisplayClass2_1)", @"
+            verifier.VerifyIL(
+                "C.<M>g__L6|2_6(ref C.<>c__DisplayClass2_0, ref C.<>c__DisplayClass2_1)",
+                @"
 {
   // Code size       25 (0x19)
   .maxstack  4
@@ -939,7 +1045,8 @@ class C
   IL_0016:  ldloc.0
   IL_0017:  add
   IL_0018:  ret
-}");
+}"
+            );
         }
 
         [Fact]
@@ -947,7 +1054,8 @@ class C
         [WorkItem(18918, "https://github.com/dotnet/roslyn/issues/18918")]
         public void IntermediateStructClosures2()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 class C
 {
     int _x;
@@ -964,14 +1072,16 @@ class C
             y++;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         [WorkItem(18814, "https://github.com/dotnet/roslyn/issues/18814")]
         public void Repro18814()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 class Program
 {
     private void ResolvingPackages()
@@ -988,14 +1098,16 @@ class Program
             modifyState();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         [WorkItem(18918, "https://github.com/dotnet/roslyn/issues/18918")]
         public void Repro18918()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 public class Test
 {
     private int _field;
@@ -1020,14 +1132,16 @@ public class Test
             }  
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         [WorkItem(17719, "https://github.com/dotnet/roslyn/issues/17719")]
         public void Repro17719()
         {
-            var comp = CompileAndVerify(@"
+            var comp = CompileAndVerify(
+                @"
 using System;
 class C
 {
@@ -1039,14 +1153,17 @@ class C
         }
         Console.WriteLine(GetField<int>(string.Empty));
     }
-}", expectedOutput: "0");
+}",
+                expectedOutput: "0"
+            );
         }
 
         [Fact]
         [WorkItem(17890, "https://github.com/dotnet/roslyn/issues/17890")]
         public void Repro17890()
         {
-            var comp = CreateCompilationWithMscorlib46(@"
+            var comp = CreateCompilationWithMscorlib46(
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1086,7 +1203,9 @@ public class Class
          }
       }
    }
-}", references: new[] { LinqAssemblyRef });
+}",
+                references: new[] { LinqAssemblyRef }
+            );
             CompileAndVerify(comp);
         }
 
@@ -1094,7 +1213,8 @@ public class Class
         [WorkItem(16783, "https://github.com/dotnet/roslyn/issues/16783")]
         public void GenericDefaultParams()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 using System;
 class C
 {
@@ -1114,13 +1234,16 @@ class C2
     {
         new C().M();
     }
-}", expectedOutput: "0");
+}",
+                expectedOutput: "0"
+            );
         }
 
         [Fact]
         public void GenericCaptureDefaultParams()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 using System;
 class C<T>
 {
@@ -1140,13 +1263,16 @@ class C2
     {
         new C<int>().M();
     }
-}", expectedOutput: "0");
+}",
+                expectedOutput: "0"
+            );
         }
 
         [Fact]
         public void NameofRecursiveDefaultParameter()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System;
 class C
 {
@@ -1158,7 +1284,9 @@ class C
         }
         Local();
     }
-}", options: TestOptions.ReleaseExe);
+}",
+                options: TestOptions.ReleaseExe
+            );
             comp.VerifyDiagnostics();
             comp.DeclarationDiagnostics.Verify();
             CompileAndVerify(comp, expectedOutput: "Local");
@@ -1168,7 +1296,8 @@ class C
         [WorkItem(16895, "https://github.com/dotnet/roslyn/issues/16895")]
         public void CaptureVarNestedLambdaSkipScope()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -1198,7 +1327,8 @@ class C
         [WorkItem(16895, "https://github.com/dotnet/roslyn/issues/16895")]
         public void CaptureVarNestedLambdaSkipScope2()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -1229,7 +1359,8 @@ class C
         [WorkItem(16895, "https://github.com/dotnet/roslyn/issues/16895")]
         public void CaptureVarNestedLambdaSkipScope3()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -1260,7 +1391,8 @@ class C
         [WorkItem(16895, "https://github.com/dotnet/roslyn/issues/16895")]
         public void CaptureVarNestedLambdaSkipScope4()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -1294,7 +1426,8 @@ class C
         [WorkItem(16895, "https://github.com/dotnet/roslyn/issues/16895")]
         public void CaptureVarNestedLambdaSkipScope5()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -1329,7 +1462,8 @@ class C
         [WorkItem(16895, "https://github.com/dotnet/roslyn/issues/16895")]
         public void CaptureVarNestedLambdaSkipScope6()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -1361,16 +1495,20 @@ class C
         Console.WriteLine(x);
     }
 }";
-            CompileAndVerify(src, expectedOutput: @"1
+            CompileAndVerify(
+                src,
+                expectedOutput: @"1
 1
-1");
+1"
+            );
         }
 
         [ConditionalFact(typeof(DesktopOnly))]
         [WorkItem(16895, "https://github.com/dotnet/roslyn/issues/16895")]
         public void CaptureVarNestedLambdaSkipScope7()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 using System.Threading.Tasks;
 class C
@@ -1399,17 +1537,20 @@ class C
         Console.WriteLine(x);
     }
 }";
-            CompileAndVerify(src,
+            CompileAndVerify(
+                src,
                 targetFramework: TargetFramework.Mscorlib46,
                 expectedOutput: @"1
-0");
+0"
+            );
         }
 
         [Fact]
         [WorkItem(16895, "https://github.com/dotnet/roslyn/issues/16895")]
         public void CaptureVarNestedLambdaSkipScope8()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 using System.Collections.Generic;
 class C
@@ -1438,16 +1579,19 @@ class C
         Console.WriteLine(x);
     }
 }";
-            CompileAndVerifyWithMscorlib46(src,
+            CompileAndVerifyWithMscorlib46(
+                src,
                 expectedOutput: @"1
-0");
+0"
+            );
         }
 
         [Fact]
         [WorkItem(16895, "https://github.com/dotnet/roslyn/issues/16895")]
         public void LocalFunctionCaptureSkipScope()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -1472,7 +1616,8 @@ class C
         [WorkItem(16399, "https://github.com/dotnet/roslyn/issues/16399")]
         public void RecursiveGenericLocalFunctionIterator()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1514,17 +1659,24 @@ public static class EnumerableExtensions
         }
     }
 }";
-            VerifyOutput(src, @"a
+            VerifyOutput(
+                src,
+                @"a
 b
 c
-d");
+d"
+            );
         }
 
         [Fact]
-        [WorkItem(243633, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems/edit/243633")]
+        [WorkItem(
+            243633,
+            "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems/edit/243633"
+        )]
         public void CaptureGenericFieldAndParameter()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -1548,7 +1700,8 @@ class Test<T>
         [Fact]
         public void CaptureGenericField()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C<T>
 {
@@ -1574,7 +1727,8 @@ class C2
         [Fact]
         public void CaptureGenericParam()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C<T>
 {
@@ -1595,14 +1749,18 @@ class C2
     public static void Main(string[] args) => new C<int>().M(10);
 }
 ";
-            VerifyOutput(src, @"0
-10");
+            VerifyOutput(
+                src,
+                @"0
+10"
+            );
         }
 
         [Fact]
         public void CaptureGenericParamInGenericLocalFunc()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C<T>
 {
@@ -1624,15 +1782,19 @@ class C2
     public static void Main(string[] args) => new C<int>().M(10);
 }
 ";
-            VerifyOutput(src, @"0
+            VerifyOutput(
+                src,
+                @"0
 10
-0");
+0"
+            );
         }
 
         [Fact]
         public void DeepNestedLocalFuncsWithDifferentCaptures()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -1661,16 +1823,20 @@ class C
     }
     public static void Main() => new C().M();
 }";
-            VerifyOutput(src, @"100001
+            VerifyOutput(
+                src,
+                @"100001
 100010
 100111
-100000");
+100000"
+            );
         }
 
         [Fact]
         public void LotsOfMutuallyRecursiveLocalFunctions()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     int P = 0;
@@ -1711,7 +1877,8 @@ class C
         [Fact]
         public void LocalFuncAndLambdaWithDifferentThis()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -1737,7 +1904,8 @@ class C
         [Fact]
         public void LocalFuncAndLambdaWithDifferentThis2()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -1764,7 +1932,8 @@ class C
         [Fact]
         public void LocalFuncAndLambdaWithDifferentThis3()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -1796,13 +1965,13 @@ class C
     }
 }";
             VerifyOutput(src, "111");
-
         }
 
         [Fact]
         public void LocalFuncAndLambdaWithDifferentThis4()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -1832,7 +2001,8 @@ class C
         [Fact]
         public void LocalFuncAndLambdaWithDifferentThis5()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -1862,7 +2032,8 @@ class C
         [Fact]
         public void TwoFrames()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -1893,7 +2064,8 @@ class C
         [Fact]
         public void SameFrame()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -1920,7 +2092,8 @@ class C
         [Fact]
         public void MutuallyRecursiveThisCapture()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -1950,7 +2123,8 @@ class C
         [CompilerTrait(CompilerFeature.Dynamic)]
         public void DynamicParameterLocalFunction()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 
 class C
@@ -1977,7 +2151,8 @@ class C
         [Fact]
         public void EndToEnd()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -1999,7 +2174,8 @@ class Program
         [CompilerTrait(CompilerFeature.ExpressionBody)]
         public void ExpressionBody()
         {
-            var source = @"
+            var source =
+                @"
 int Local() => 2;
 Console.Write(Local());
 Console.Write(' ');
@@ -2012,7 +2188,8 @@ VoidLocal();
         [Fact]
         public void EmptyStatementAfter()
         {
-            var source = @"
+            var source =
+                @"
 void Local()
 {
     Console.Write(2);
@@ -2026,7 +2203,8 @@ Local();
         [CompilerTrait(CompilerFeature.Params)]
         public void Params()
         {
-            var source = @"
+            var source =
+                @"
 void Params(params int[] x)
 {
     Console.WriteLine(string.Join("","", x));
@@ -2039,7 +2217,8 @@ Params(2);
         [Fact]
         public void RefAndOut()
         {
-            var source = @"
+            var source =
+                @"
 void RefOut(ref int x, out int y)
 {
     y = ++x;
@@ -2057,7 +2236,8 @@ Console.Write(b);
         [Fact]
         public void NamedAndOptional()
         {
-            var source = @"
+            var source =
+                @"
 void NamedOptional(int x = 2)
 {
     Console.Write(x);
@@ -2072,7 +2252,8 @@ NamedOptional();
         [Fact, WorkItem(51518, "https://github.com/dotnet/roslyn/issues/51518")]
         public void OptionalParameterCodeGen()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public static void Main()
@@ -2082,31 +2263,50 @@ public class C
     }
 }
 ";
-            var comp = CreateCompilationWithMscorlib45AndCSharp(source, options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp, expectedSignatures: new SignatureDescription[]
-            {
-                Signature("C", "Main", ".method public hidebysig static System.Void Main() cil managed"),
-                Signature("C", "<Main>g__LocalFunc|0_0", ".method [System.Runtime.CompilerServices.CompilerGeneratedAttribute()] assembly hidebysig static System.Void <Main>g__LocalFunc|0_0([opt] System.Int32 a = 2) cil managed")
-            });
+            var comp = CreateCompilationWithMscorlib45AndCSharp(
+                source,
+                options: TestOptions.ReleaseExe
+            );
+            CompileAndVerify(
+                comp,
+                expectedSignatures: new SignatureDescription[]
+                {
+                    Signature(
+                        "C",
+                        "Main",
+                        ".method public hidebysig static System.Void Main() cil managed"
+                    ),
+                    Signature(
+                        "C",
+                        "<Main>g__LocalFunc|0_0",
+                        ".method [System.Runtime.CompilerServices.CompilerGeneratedAttribute()] assembly hidebysig static System.Void <Main>g__LocalFunc|0_0([opt] System.Int32 a = 2) cil managed"
+                    ),
+                }
+            );
         }
 
         [Fact, WorkItem(53478, "https://github.com/dotnet/roslyn/issues/53478")]
         public void OptionalParameterCodeGen_Reflection()
         {
-            VerifyOutputInMain(@"void TestAction(int i = 5) { }
+            VerifyOutputInMain(
+                @"void TestAction(int i = 5) { }
 
         var d = (Action<int>)TestAction;
         var p2 = d.Method.GetParameters();
         Console.WriteLine(p2[0].HasDefaultValue);
-        Console.WriteLine(p2[0].DefaultValue);", @"True
-5", new[] { "System" });
+        Console.WriteLine(p2[0].DefaultValue);",
+                @"True
+5",
+                new[] { "System" }
+            );
         }
 
         [Fact]
         [CompilerTrait(CompilerFeature.Dynamic)]
         public void DynamicArgShadowing()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -2127,7 +2327,8 @@ class C
         [CompilerTrait(CompilerFeature.Dynamic)]
         public void DynamicParameter()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Program
 {
@@ -2148,7 +2349,8 @@ class Program
         [CompilerTrait(CompilerFeature.Dynamic)]
         public void DynamicReturn()
         {
-            var source = @"
+            var source =
+                @"
 dynamic RetDyn()
 {
     return 2;
@@ -2162,7 +2364,8 @@ Console.Write(RetDyn());
         [CompilerTrait(CompilerFeature.Dynamic)]
         public void DynamicDelegate()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Program
 {
@@ -2195,7 +2398,8 @@ class Program
         [Fact]
         public void Nameof()
         {
-            var source = @"
+            var source =
+                @"
 void Local()
 {
 }
@@ -2207,7 +2411,8 @@ Console.Write(nameof(Local));
         [Fact]
         public void ExpressionTreeParameter()
         {
-            var source = @"
+            var source =
+                @"
 Expression<Func<int, int>> Local(Expression<Func<int, int>> f)
 {
     return f;
@@ -2220,20 +2425,28 @@ Console.Write(Local(x => x));
         [Fact]
         public void LinqInLocalFunction()
         {
-            var source = @"
+            var source =
+                @"
 IEnumerable<int> Query(IEnumerable<int> values)
 {
     return from x in values where x < 5 select x * x;
 }
 Console.Write(string.Join("","", Query(Enumerable.Range(0, 10))));
 ";
-            VerifyOutputInMain(source, "0,1,4,9,16", "System", "System.Linq", "System.Collections.Generic");
+            VerifyOutputInMain(
+                source,
+                "0,1,4,9,16",
+                "System",
+                "System.Linq",
+                "System.Collections.Generic"
+            );
         }
 
         [Fact]
         public void ConstructorWithoutArg()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Base
@@ -2267,7 +2480,8 @@ class Program : Base
         [Fact]
         public void ConstructorWithArg()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Base
@@ -2303,7 +2517,8 @@ class Program : Base
         [Fact]
         public void IfDef()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -2332,7 +2547,8 @@ class Program
         [Fact]
         public void PragmaWarningDisableEntersLocfunc()
         {
-            var source = @"
+            var source =
+                @"
 #pragma warning disable CS0168
 void Local()
 {
@@ -2349,7 +2565,8 @@ Local();
         [Fact]
         public void ObsoleteAttributeRecursion()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -2375,7 +2592,8 @@ class Program
         [Fact]
         public void MainLocfuncIsntEntry()
         {
-            var source = @"
+            var source =
+                @"
 void Main()
 {
     Console.Write(4);
@@ -2390,7 +2608,8 @@ Main();
         [Fact]
         public void Shadows()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -2416,7 +2635,8 @@ class Program
         [Fact]
         public void ExtensionMethodClosure()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 static class Program
@@ -2442,7 +2662,8 @@ static class Program
         [Fact]
         public void Scoping()
         {
-            var source = @"
+            var source =
+                @"
 void Local()
 {
     Console.Write(2);
@@ -2458,7 +2679,8 @@ if (true)
         [Fact]
         public void Property()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -2485,7 +2707,8 @@ class Program
         [Fact]
         public void PropertyIterator()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -2518,7 +2741,8 @@ class Program
         [Fact]
         public void DelegateFunc()
         {
-            var source = @"
+            var source =
+                @"
 int Local(int x) => x;
 Func<int, int> local = Local;
 Console.Write(local(2));
@@ -2529,7 +2753,8 @@ Console.Write(local(2));
         [Fact]
         public void DelegateFuncGenericImplicit()
         {
-            var source = @"
+            var source =
+                @"
 T Local<T>(T x) => x;
 Func<int, int> local = Local;
 Console.Write(local(2));
@@ -2540,7 +2765,8 @@ Console.Write(local(2));
         [Fact]
         public void DelegateFuncGenericExplicit()
         {
-            var source = @"
+            var source =
+                @"
 T Local<T>(T x) => x;
 Func<int, int> local = Local<int>;
 Console.Write(local(2));
@@ -2551,7 +2777,8 @@ Console.Write(local(2));
         [Fact]
         public void DelegateAction()
         {
-            var source = @"
+            var source =
+                @"
 void Local()
 {
     Console.Write(2);
@@ -2568,7 +2795,8 @@ local();
         [Fact]
         public void InterpolatedString()
         {
-            var source = @"
+            var source =
+                @"
 int x = 1;
 int Bar() => ++x;
 var str = $@""{((Func<int>)(() => { int Goo() => Bar(); return Goo(); }))()}"";
@@ -2582,7 +2810,8 @@ Console.Write(str + ' ' + x);
         [Fact]
         public void StaticNoClosure()
         {
-            var source = @"
+            var source =
+                @"
 T Goo<T>(T x)
 {
     return x;
@@ -2598,7 +2827,8 @@ Console.Write(Goo(2));
         [Fact]
         public void StaticNoClosureDelegate()
         {
-            var source = @"
+            var source =
+                @"
 T Goo<T>(T x)
 {
     return x;
@@ -2616,7 +2846,8 @@ Console.Write(goo(2));
         [Fact]
         public void ClosureBasic()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -2661,7 +2892,8 @@ class Program
         [Fact]
         public void ClosureThisOnly()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -2696,7 +2928,8 @@ class Program
         [Fact]
         public void ClosureGeneralThisOnly()
         {
-            var source = @"
+            var source =
+                @"
 var x = 0;
 void Outer()
 {
@@ -2722,7 +2955,8 @@ Outer();
         [Fact]
         public void ClosureStaticInInstance()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -2757,7 +2991,8 @@ class Program
         [Fact]
         public void ClosureGeneric()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -2804,7 +3039,8 @@ class Program
         [Fact]
         public void ClosureLambdasAndLocfuncs()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -2845,7 +3081,8 @@ class Program
         [Fact]
         public void ClosureTripleNested()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -3040,7 +3277,9 @@ class Program
     }
 }
 ";
-            VerifyOutput(source, @"
+            VerifyOutput(
+                source,
+                @"
  0 0 0 2 2 2
  0 0 2 2 2
  0 0 2 2 2
@@ -3048,13 +3287,15 @@ class Program
  0 2 2 2
  0 2 2
  0 2
-");
+"
+            );
         }
 
         [Fact]
         public void InstanceClosure()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -3089,7 +3330,8 @@ class Program
         [Fact]
         public void SelfClosure()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -3120,7 +3362,8 @@ class Program
         [Fact]
         public void StructClosure()
         {
-            var source = @"
+            var source =
+                @"
 int x = 2;
 void Goo()
 {
@@ -3140,7 +3383,8 @@ Goo();
         [Fact]
         public void StructClosureGeneric()
         {
-            var source = @"
+            var source =
+                @"
 int x = 2;
 void Goo<T1>()
 {
@@ -3164,7 +3408,10 @@ Goo<int>();
             Assert.True(goo.Parameters[0].Type.IsValueType);
             Assert.True(bar.Parameters[0].Type.IsValueType);
             Assert.True(bar.Parameters[1].Type.IsValueType);
-            Assert.Equal(goo.Parameters[0].Type.OriginalDefinition, bar.Parameters[0].Type.OriginalDefinition);
+            Assert.Equal(
+                goo.Parameters[0].Type.OriginalDefinition,
+                bar.Parameters[0].Type.OriginalDefinition
+            );
             var gooFrame = (INamedTypeSymbol)goo.Parameters[0].Type;
             var barFrame = (INamedTypeSymbol)bar.Parameters[1].Type;
             Assert.Equal(0, gooFrame.Arity);
@@ -3174,7 +3421,8 @@ Goo<int>();
         [Fact]
         public void ClosureOfStructClosure()
         {
-            var source = @"
+            var source =
+                @"
 void Outer()
 {
     int a = 0;
@@ -3222,7 +3470,8 @@ Outer();
         [Fact]
         public void ThisClosureCallingOtherClosure()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -3255,7 +3504,8 @@ class Program
         [Fact]
         public void RecursiveStructClosure()
         {
-            var source = @"
+            var source =
+                @"
 int x = 0;
 void Goo()
 {
@@ -3283,7 +3533,8 @@ Goo();
         [Fact]
         public void MutuallyRecursiveStructClosure()
         {
-            var source = @"
+            var source =
+                @"
 int x = 0;
 void Goo(int depth)
 {
@@ -3326,7 +3577,8 @@ Goo(0);
         [Fact]
         public void Recursion()
         {
-            var source = @"
+            var source =
+                @"
 void Goo(int depth)
 {
     if (depth > 10)
@@ -3344,7 +3596,8 @@ Goo(0);
         [Fact]
         public void MutualRecursion()
         {
-            var source = @"
+            var source =
+                @"
 void Goo(int depth)
 {
     if (depth > 10)
@@ -3366,7 +3619,8 @@ Goo(0);
         [Fact]
         public void RecursionThisOnlyClosure()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -3402,7 +3656,8 @@ class Program
         public void RecursionFrameCaptureTest()
         {
             // ensures that referring to a local function in an otherwise noncapturing Inner captures the frame of Outer.
-            var source = @"
+            var source =
+                @"
 int x = 0;
 int Outer(bool isRecursive)
 {
@@ -3432,7 +3687,8 @@ Console.Write(x);
         [CompilerTrait(CompilerFeature.Iterator)]
         public void IteratorBasic()
         {
-            var source = @"
+            var source =
+                @"
 IEnumerable<int> Local()
 {
     yield return 2;
@@ -3446,7 +3702,8 @@ Console.Write(string.Join("","", Local()));
         [CompilerTrait(CompilerFeature.Iterator)]
         public void IteratorGeneric()
         {
-            var source = @"
+            var source =
+                @"
 IEnumerable<T> LocalGeneric<T>(T val)
 {
     yield return val;
@@ -3460,7 +3717,8 @@ Console.Write(string.Join("","", LocalGeneric(2)));
         [CompilerTrait(CompilerFeature.Iterator)]
         public void IteratorNonGeneric()
         {
-            var source = @"
+            var source =
+                @"
 IEnumerable LocalNongen()
 {
     yield return 2;
@@ -3477,7 +3735,8 @@ foreach (int x in LocalNongen())
         [CompilerTrait(CompilerFeature.Iterator)]
         public void IteratorEnumerator()
         {
-            var source = @"
+            var source =
+                @"
 IEnumerator LocalEnumerator()
 {
     yield return 2;
@@ -3492,7 +3751,8 @@ Console.Write(y.Current);
         [Fact]
         public void Generic()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -3588,7 +3848,8 @@ class Program
     }
 }
 ";
-            var output = @"
+            var output =
+                @"
 2
 2
 2
@@ -3605,7 +3866,8 @@ class Program
         [Fact]
         public void GenericConstraint()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -3651,7 +3913,8 @@ class Program
     }
 }
 ";
-            var output = @"
+            var output =
+                @"
 2
 2
 2
@@ -3663,7 +3926,8 @@ class Program
         [Fact]
         public void GenericTripleNestedNoClosure()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -3768,7 +4032,8 @@ class Program
     }
 }
 ";
-            var output = @"
+            var output =
+                @"
 2
 2
 2
@@ -3783,7 +4048,8 @@ class Program
         [Fact]
         public void GenericTripleNestedMiddleClosure()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -3888,7 +4154,8 @@ class Program
     }
 }
 ";
-            var output = @"
+            var output =
+                @"
 2
 2
 2
@@ -3903,7 +4170,8 @@ class Program
         [Fact]
         public void GenericTripleNestedOuterClosure()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -4008,7 +4276,8 @@ class Program
     }
 }
 ";
-            var output = @"
+            var output =
+                @"
 2
 2
 2
@@ -4023,7 +4292,8 @@ class Program
         [Fact]
         public void GenericTripleNestedNoClosureLambda()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -4102,7 +4372,8 @@ class Program
     }
 }
 ";
-            var output = @"
+            var output =
+                @"
 2
 2
 2
@@ -4115,7 +4386,8 @@ class Program
         [Fact]
         public void GenericUpperCall()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -4188,7 +4460,8 @@ class Program
     }
 }
 ";
-            var output = @"
+            var output =
+                @"
 System.Object
 System.Object
 System.Object
@@ -4200,7 +4473,8 @@ System.Object
         [Fact]
         public void CompoundOperatorExecutesOnce()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -4226,7 +4500,8 @@ class Program
         [Fact]
         public void ConstValueDoesntMakeClosure()
         {
-            var source = @"
+            var source =
+                @"
 const int x = 2;
 void Local()
 {
@@ -4245,7 +4520,8 @@ Local();
         [CompilerTrait(CompilerFeature.Dynamic)]
         public void DynamicArgument()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Program
 {
@@ -4279,8 +4555,11 @@ class Program
     }
 }
 ";
-            VerifyOutput(source, output: @"202
-00222");
+            VerifyOutput(
+                source,
+                output: @"202
+00222"
+            );
         }
 
         [Fact]
@@ -4288,7 +4567,8 @@ class Program
         [CompilerTrait(CompilerFeature.Dynamic)]
         public void DynamicGenericArg()
         {
-            var src = @"
+            var src =
+                @"
 void L1<T>(T x)
 {
     Console.WriteLine($""{x}: {typeof(T)}"");
@@ -4316,7 +4596,8 @@ L5<int>(val, 3, 4);
 L5<int>(1, 3, val);
 L5<dynamic>(1, 3, val);
 ";
-            var output = @"
+            var output =
+                @"
 2: System.Object
 2: System.Int32
 2: System.Object
@@ -4338,7 +4619,8 @@ L5<dynamic>(1, 3, val);
         [CompilerTrait(CompilerFeature.Dynamic)]
         public void DynamicGenericClassMethod()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C1<T1>
 {
@@ -4389,7 +4671,8 @@ class Program
     }
 }
 ";
-            var output = @"
+            var output =
+                @"
 C1<System.Int32>.M1<System.Single>.F(2)
 C1<System.Int32>.M2.F(2)
 C2.M1<System.Single>.F(2)
@@ -4402,7 +4685,8 @@ C2.M2.F(2)
         [CompilerTrait(CompilerFeature.Dynamic, CompilerFeature.Params)]
         public void DynamicArgsAndParams()
         {
-            var src = @"
+            var src =
+                @"
 int capture1 = 0;
 void L1(int x, params int[] ys)
 {
@@ -4426,7 +4710,8 @@ L1(val, val, val);
         [Fact]
         public void Basic()
         {
-            var source = @"
+            var source =
+                @"
 async Task<int> Local()
 {
     return await Task.FromResult(2);
@@ -4439,7 +4724,8 @@ Console.Write(Local().Result);
         [Fact]
         public void Param()
         {
-            var source = @"
+            var source =
+                @"
 async Task<int> LocalParam(int x)
 {
     return await Task.FromResult(x);
@@ -4453,7 +4739,8 @@ Console.Write(LocalParam(2).Result);
         [CompilerTrait(CompilerFeature.Async)]
         public void GenericAsync()
         {
-            var source = @"
+            var source =
+                @"
 async Task<T> LocalGeneric<T>(T x)
 {
     return await Task.FromResult(x);
@@ -4467,7 +4754,8 @@ Console.Write(LocalGeneric(2).Result);
         [CompilerTrait(CompilerFeature.Async)]
         public void Void()
         {
-            var source = @"
+            var source =
+                @"
 // had bug with parser where 'async [keyword]' didn't parse.
 async void LocalVoid()
 {
@@ -4483,7 +4771,8 @@ LocalVoid();
         [CompilerTrait(CompilerFeature.Async)]
         public void AwaitAwait()
         {
-            var source = @"
+            var source =
+                @"
 Task<int> Fun(int x)
 {
     return Task.FromResult(x);
@@ -4503,7 +4792,8 @@ Console.WriteLine(AwaitAwait().Result);
         [CompilerTrait(CompilerFeature.Async)]
         public void Keyword()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 struct @async
@@ -4559,7 +4849,8 @@ class Program
     }
 }
 ";
-            var output = @"
+            var output =
+                @"
 2
 2
 2
@@ -4572,7 +4863,8 @@ class Program
         [CompilerTrait(CompilerFeature.Async)]
         public void UnsafeKeyword()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -4602,17 +4894,24 @@ class Program
     }
 }
 ";
-            var output = @"
+            var output =
+                @"
 2
 2
 ";
-            VerifyOutput(source, output, TestOptions.ReleaseExe.WithAllowUnsafe(true).WithWarningLevel(0), verify: Verification.Passes);
+            VerifyOutput(
+                source,
+                output,
+                TestOptions.ReleaseExe.WithAllowUnsafe(true).WithWarningLevel(0),
+                verify: Verification.Passes
+            );
         }
 
         [Fact]
         public void UnsafeBasic()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -4632,13 +4931,19 @@ class Program
     }
 }
 ";
-            VerifyOutput(source, "2", TestOptions.ReleaseExe.WithAllowUnsafe(true), verify: Verification.Fails);
+            VerifyOutput(
+                source,
+                "2",
+                TestOptions.ReleaseExe.WithAllowUnsafe(true),
+                verify: Verification.Fails
+            );
         }
 
         [Fact]
         public void UnsafeParameter()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -4658,13 +4963,19 @@ class Program
     }
 }
 ";
-            VerifyOutput(source, "2", TestOptions.ReleaseExe.WithAllowUnsafe(true), verify: Verification.Fails);
+            VerifyOutput(
+                source,
+                "2",
+                TestOptions.ReleaseExe.WithAllowUnsafe(true),
+                verify: Verification.Fails
+            );
         }
 
         [Fact]
         public void UnsafeClosure()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -4685,13 +4996,19 @@ class Program
     }
 }
 ";
-            VerifyOutput(source, "2", TestOptions.ReleaseExe.WithAllowUnsafe(true), verify: Verification.Fails);
+            VerifyOutput(
+                source,
+                "2",
+                TestOptions.ReleaseExe.WithAllowUnsafe(true),
+                verify: Verification.Fails
+            );
         }
 
         [Fact]
         public void UnsafeCalls()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -4725,14 +5042,20 @@ class C
         Console.WriteLine(y);
     }
 }";
-            VerifyOutput(src, $"10{Environment.NewLine}4", TestOptions.ReleaseExe.WithAllowUnsafe(true), verify: Verification.Fails);
+            VerifyOutput(
+                src,
+                $"10{Environment.NewLine}4",
+                TestOptions.ReleaseExe.WithAllowUnsafe(true),
+                verify: Verification.Fails
+            );
         }
 
         [Fact]
         [WorkItem(15322, "https://github.com/dotnet/roslyn/issues/15322")]
         public void UseBeforeDeclaration()
         {
-            var src = @"
+            var src =
+                @"
 Assign();
 Local();
 int x;
@@ -4746,7 +5069,8 @@ void Assign() { x = 5; }";
         [WorkItem(15558, "https://github.com/dotnet/roslyn/issues/15558")]
         public void CapturingSharesVar()
         {
-            var src = @"
+            var src =
+                @"
 int i = 0;
 
 int oldi<T>()
@@ -4762,7 +5086,9 @@ int @sizeof<T>()
 while (i < 10)
     System.Console.WriteLine(oldi<byte>());";
 
-            VerifyOutputInMain(src, @"0
+            VerifyOutputInMain(
+                src,
+                @"0
 1
 2
 3
@@ -4771,14 +5097,16 @@ while (i < 10)
 6
 7
 8
-9");
+9"
+            );
         }
 
         [Fact]
         [WorkItem(15599, "https://github.com/dotnet/roslyn/issues/15599")]
         public void NestedLocalFuncCapture()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 public class C {
     int instance = 11;
@@ -4801,7 +5129,8 @@ public class C {
         [WorkItem(15599, "https://github.com/dotnet/roslyn/issues/15599")]
         public void NestedLocalFuncCapture2()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 public class C {
     int instance = 0b1;
@@ -4825,7 +5154,8 @@ public class C {
         [WorkItem(15751, "https://github.com/dotnet/roslyn/issues/15751")]
         public void RecursiveGenericLocalFunction()
         {
-            var src = @"
+            var src =
+                @"
 void Local<T>(T t, int count)
 {
     if (count > 0)
@@ -4844,7 +5174,8 @@ Local(""A"", 5);
         [WorkItem(15751, "https://github.com/dotnet/roslyn/issues/15751")]
         public void RecursiveGenericLocalFunction2()
         {
-            var src = @"
+            var src =
+                @"
 void Local<T>(T t, int count)
 {
     if (count > 0)
@@ -4864,7 +5195,8 @@ Local(""A"", 5);
         [WorkItem(15751, "https://github.com/dotnet/roslyn/issues/15751")]
         public void RecursiveGenericLocalFunction3()
         {
-            var src = @"
+            var src =
+                @"
 void Local<T>(T t, int count)
 {
     if (count > 0)
@@ -4884,7 +5216,8 @@ Local(""A"", 5);
         [WorkItem(15751, "https://github.com/dotnet/roslyn/issues/15751")]
         public void RecursiveGenericLocalFunction4()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -4914,7 +5247,8 @@ class C
         [WorkItem(15751, "https://github.com/dotnet/roslyn/issues/15751")]
         public void RecursiveGenericLocalFunction5()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C<T1>
 {
@@ -4967,7 +5301,8 @@ class Program
         [WorkItem(15751, "https://github.com/dotnet/roslyn/issues/15751")]
         public void RecursiveGenericLocalFunction6()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C<T1>
 {
@@ -5024,7 +5359,8 @@ class Program
         [WorkItem(15751, "https://github.com/dotnet/roslyn/issues/15751")]
         public void RecursiveGenericLocalFunction7()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C<T1>
 {
@@ -5081,7 +5417,8 @@ class Program
         [WorkItem(16038, "https://github.com/dotnet/roslyn/issues/16038")]
         public void RecursiveGenericLocalFunction8()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C<T0>
 {
@@ -5130,7 +5467,8 @@ class Program
         [WorkItem(19119, "https://github.com/dotnet/roslyn/issues/19119")]
         public void StructFrameInitUnnecessary()
         {
-            var c = CompileAndVerify(@"
+            var c = CompileAndVerify(
+                @"
     class Program
     {
         static void Main(string[] args)
@@ -5152,11 +5490,15 @@ class Program
                 }
             }
         }
-    }", expectedOutput: "6");
+    }",
+                expectedOutput: "6"
+            );
 
             //NOTE: the following code should not have "initobj" instructions.
 
-            c.VerifyIL("Program.Main", @"
+            c.VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       63 (0x3f)
   .maxstack  3
@@ -5190,13 +5532,15 @@ class Program
   IL_0039:  call       ""void Program.<Main>g__Print|0_0(ref Program.<>c__DisplayClass0_0, ref Program.<>c__DisplayClass0_1, ref Program.<>c__DisplayClass0_2)""
   IL_003e:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void LocalFunctionAttribute()
         {
-            var source = @"
+            var source =
+                @"
 class A : System.Attribute { }
 
 class C
@@ -5227,7 +5571,8 @@ class C
                 source,
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular9,
-                symbolValidator: validate);
+                symbolValidator: validate
+            );
 
             static void validate(ModuleSymbol module)
             {
@@ -5236,7 +5581,8 @@ class C
                 var attrs1 = localFn1.GetAttributes();
                 Assert.Equal(
                     expected: new[] { "CompilerGeneratedAttribute", "A" },
-                    actual: GetAttributeNames(attrs1));
+                    actual: GetAttributeNames(attrs1)
+                );
 
                 var localFn2 = cClass.GetMethod("<M>g__local2|0_1");
                 var attrs2 = localFn2.GetReturnTypeAttributes();
@@ -5255,7 +5601,8 @@ class C
         [Fact]
         public void LocalFunctionAttribute_Complex()
         {
-            var source = @"
+            var source =
+                @"
 class A1 : System.Attribute { }
 class A2 : System.Attribute { internal A2(int i, string s) { } }
 class A3 : System.Attribute { internal A3(params int[] values) { } }
@@ -5276,7 +5623,8 @@ class C
                 source,
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular9,
-                symbolValidator: validate);
+                symbolValidator: validate
+            );
 
             static void validate(ModuleSymbol module)
             {
@@ -5285,11 +5633,15 @@ class C
                 var attrs = localFn1.GetAttributes();
                 Assert.Equal(
                     expected: new[] { "CompilerGeneratedAttribute", "A1", "A2", "A3" },
-                    actual: GetAttributeNames(attrs));
+                    actual: GetAttributeNames(attrs)
+                );
 
                 Assert.Empty(attrs[0].ConstructorArguments);
                 Assert.Empty(attrs[1].ConstructorArguments);
-                Assert.Equal(new object[] { 1, "hello" }, attrs[2].ConstructorArguments.Select(a => a.Value));
+                Assert.Equal(
+                    new object[] { 1, "hello" },
+                    attrs[2].ConstructorArguments.Select(a => a.Value)
+                );
 
                 var attr3Args = attrs[3].ConstructorArguments.Single().Values;
                 Assert.Equal(new object[] { 1, 2, 3, 4, 5 }, attr3Args.Select(a => a.Value));
@@ -5299,7 +5651,8 @@ class C
         [Fact]
         public void LocalFunctionAttributeArgument()
         {
-            var source = @"
+            var source =
+                @"
 class A : System.Attribute { internal A(int i) { } }
 
 class C
@@ -5317,7 +5670,8 @@ class C
                 source,
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular9,
-                symbolValidator: validate);
+                symbolValidator: validate
+            );
 
             static void validate(ModuleSymbol module)
             {
@@ -5326,7 +5680,8 @@ class C
                 var attrs1 = localFn1.GetAttributes();
                 Assert.Equal(
                     expected: new[] { "CompilerGeneratedAttribute", "A" },
-                    actual: GetAttributeNames(attrs1));
+                    actual: GetAttributeNames(attrs1)
+                );
 
                 var arg = attrs1[1].ConstructorArguments.Single();
                 Assert.Equal(42, arg.Value);
@@ -5336,7 +5691,8 @@ class C
         [Fact]
         public void LocalFunction_EmitNullableAttribute()
         {
-            var source = @"
+            var source =
+                @"
 #nullable enable
 class C
 {
@@ -5350,28 +5706,39 @@ class C
                 source,
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular9,
-                symbolValidator: validate);
+                symbolValidator: validate
+            );
 
             static void validate(ModuleSymbol module)
             {
                 var cClass = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
                 var localFn1 = cClass.GetMethod("<M>g__local1|0_0");
                 var attrs1 = localFn1.GetAttributes();
-                AssertEx.Equal(new[] { "NullableContextAttribute", "CompilerGeneratedAttribute" }, attrs1.Select(a => a.AttributeClass.Name));
+                AssertEx.Equal(
+                    new[] { "NullableContextAttribute", "CompilerGeneratedAttribute" },
+                    attrs1.Select(a => a.AttributeClass.Name)
+                );
 
                 Assert.Empty(localFn1.GetReturnTypeAttributes());
-                Assert.Equal(NullableAnnotation.Annotated, localFn1.ReturnTypeWithAnnotations.NullableAnnotation);
+                Assert.Equal(
+                    NullableAnnotation.Annotated,
+                    localFn1.ReturnTypeWithAnnotations.NullableAnnotation
+                );
 
                 var param = localFn1.Parameters.Single();
                 Assert.Empty(param.GetAttributes());
-                Assert.Equal(NullableAnnotation.Annotated, param.TypeWithAnnotations.NullableAnnotation);
+                Assert.Equal(
+                    NullableAnnotation.Annotated,
+                    param.TypeWithAnnotations.NullableAnnotation
+                );
             }
         }
 
         [Fact]
         public void LocalFunctionDynamicAttribute()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     public void M()
@@ -5384,7 +5751,8 @@ class C
                 source,
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular9,
-                symbolValidator: validate);
+                symbolValidator: validate
+            );
 
             static void validate(ModuleSymbol module)
             {
@@ -5393,17 +5761,24 @@ class C
                 var attrs1 = localFn1.GetAttributes();
                 Assert.Equal("CompilerGeneratedAttribute", attrs1.Single().AttributeClass.Name);
 
-                Assert.Equal("DynamicAttribute", localFn1.GetReturnTypeAttributes().Single().AttributeClass.Name);
+                Assert.Equal(
+                    "DynamicAttribute",
+                    localFn1.GetReturnTypeAttributes().Single().AttributeClass.Name
+                );
 
                 var param = localFn1.Parameters.Single();
-                Assert.Equal("DynamicAttribute", param.GetAttributes().Single().AttributeClass.Name);
+                Assert.Equal(
+                    "DynamicAttribute",
+                    param.GetAttributes().Single().AttributeClass.Name
+                );
             }
         }
 
         [Fact]
         public void LocalFunctionParamsArray_NoParamArrayAttribute()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M()
@@ -5417,7 +5792,8 @@ class C
                 source,
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular9,
-                symbolValidator: validate);
+                symbolValidator: validate
+            );
 
             static void validate(ModuleSymbol module)
             {
@@ -5436,7 +5812,8 @@ class C
         [Fact]
         public void LocalFunction_ConditionalAttributeDisallowed()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 
 class C
@@ -5453,13 +5830,17 @@ class C
             comp.VerifyDiagnostics(
                 // (9,10): error CS8764: Local function 'local1()' must be 'static' in order to use the Conditional attribute
                 //         [Conditional("DEBUG")] // 1
-                Diagnostic(ErrorCode.ERR_ConditionalOnLocalFunction, @"Conditional(""DEBUG"")").WithArguments("local1()").WithLocation(9, 10));
+                Diagnostic(ErrorCode.ERR_ConditionalOnLocalFunction, @"Conditional(""DEBUG"")")
+                    .WithArguments("local1()")
+                    .WithLocation(9, 10)
+            );
         }
 
         [Fact]
         public void StaticLocalFunction_ConditionalAttribute_Errors()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 
 class C
@@ -5488,19 +5869,27 @@ class C
             comp.VerifyDiagnostics(
                 // (9,22): error CS0633: The argument to the 'Conditional' attribute must be a valid identifier
                 //         [Conditional("hello world")] // 1
-                Diagnostic(ErrorCode.ERR_BadArgumentToAttribute, @"""hello world""").WithArguments("Conditional").WithLocation(9, 22),
+                Diagnostic(ErrorCode.ERR_BadArgumentToAttribute, @"""hello world""")
+                    .WithArguments("Conditional")
+                    .WithLocation(9, 22),
                 // (12,10): error CS0578: The Conditional attribute is not valid on 'local2()' because its return type is not void
                 //         [Conditional("DEBUG")] // 2
-                Diagnostic(ErrorCode.ERR_ConditionalMustReturnVoid, @"Conditional(""DEBUG"")").WithArguments("local2()").WithLocation(12, 10),
+                Diagnostic(ErrorCode.ERR_ConditionalMustReturnVoid, @"Conditional(""DEBUG"")")
+                    .WithArguments("local2()")
+                    .WithLocation(12, 10),
                 // (18,10): error CS0685: Conditional member 'local3(out string)' cannot have an out parameter
                 //         [Conditional("DEBUG")] // 3
-                Diagnostic(ErrorCode.ERR_ConditionalWithOutParam, @"Conditional(""DEBUG"")").WithArguments("local3(out string)").WithLocation(18, 10));
+                Diagnostic(ErrorCode.ERR_ConditionalWithOutParam, @"Conditional(""DEBUG"")")
+                    .WithArguments("local3(out string)")
+                    .WithLocation(18, 10)
+            );
         }
 
         [Fact]
         public void StaticLocalFunction_ConditionalAttribute()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 using System;
 
@@ -5523,28 +5912,34 @@ class C
                 options: TestOptions.DebugExe.WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular9.WithPreprocessorSymbols("DEBUG"),
                 symbolValidator: validate,
-                expectedOutput: "hello");
+                expectedOutput: "hello"
+            );
 
             CompileAndVerify(
                 source,
                 options: TestOptions.DebugExe.WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular9,
                 symbolValidator: validate,
-                expectedOutput: "");
+                expectedOutput: ""
+            );
 
             static void validate(ModuleSymbol module)
             {
                 var cClass = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
                 var localFn1 = cClass.GetMethod("<Main>g__local1|0_0");
                 var attrs1 = localFn1.GetAttributes();
-                Assert.Equal(new[] { "CompilerGeneratedAttribute", "ConditionalAttribute" }, GetAttributeNames(attrs1));
+                Assert.Equal(
+                    new[] { "CompilerGeneratedAttribute", "ConditionalAttribute" },
+                    GetAttributeNames(attrs1)
+                );
             }
         }
 
         [Fact]
         public void StaticLocalFunction_ConditionalAttribute_NoUnreferencedWarning()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 using System;
 
@@ -5564,13 +5959,18 @@ class C
 ";
             CreateCompilation(source, parseOptions: TestOptions.Regular9).VerifyDiagnostics();
 
-            CreateCompilation(source, parseOptions: TestOptions.Regular9.WithPreprocessorSymbols("DEBUG")).VerifyDiagnostics();
+            CreateCompilation(
+                    source,
+                    parseOptions: TestOptions.Regular9.WithPreprocessorSymbols("DEBUG")
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         public void StaticLocalFunction_IfDirective_Unreferenced()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class C
@@ -5587,18 +5987,27 @@ class C
     }
 }
 ";
-            CreateCompilation(source, parseOptions: TestOptions.Regular9).VerifyDiagnostics(
-                // (11,21): warning CS8321: The local function 'local1' is declared but never used
-                //         static void local1() // 1
-                Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "local1").WithArguments("local1").WithLocation(11, 21));
+            CreateCompilation(source, parseOptions: TestOptions.Regular9)
+                .VerifyDiagnostics(
+                    // (11,21): warning CS8321: The local function 'local1' is declared but never used
+                    //         static void local1() // 1
+                    Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "local1")
+                        .WithArguments("local1")
+                        .WithLocation(11, 21)
+                );
 
-            CreateCompilation(source, parseOptions: TestOptions.Regular9.WithPreprocessorSymbols("DEBUG")).VerifyDiagnostics();
+            CreateCompilation(
+                    source,
+                    parseOptions: TestOptions.Regular9.WithPreprocessorSymbols("DEBUG")
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         public void LocalFunction_AttributeMarkedConditional()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 using System;
 
@@ -5620,23 +6029,37 @@ class C
                 source,
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular9.WithPreprocessorSymbols("DEBUG"),
-                symbolValidator: validate1);
+                symbolValidator: validate1
+            );
 
             CompileAndVerify(
                 source,
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular9,
-                symbolValidator: validate2);
+                symbolValidator: validate2
+            );
 
             static void validate1(ModuleSymbol module)
             {
                 var cClass = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
                 var localFn1 = cClass.GetMethod("<M>g__local1|0_0");
                 var attrs1 = localFn1.GetAttributes();
-                Assert.Equal(new[] { "CompilerGeneratedAttribute", "Attr" }, GetAttributeNames(attrs1));
-                Assert.Equal(new[] { "Attr" }, GetAttributeNames(localFn1.GetReturnTypeAttributes()));
-                Assert.Equal(new[] { "Attr" }, GetAttributeNames(localFn1.TypeParameters.Single().GetAttributes()));
-                Assert.Equal(new[] { "Attr" }, GetAttributeNames(localFn1.Parameters.Single().GetAttributes()));
+                Assert.Equal(
+                    new[] { "CompilerGeneratedAttribute", "Attr" },
+                    GetAttributeNames(attrs1)
+                );
+                Assert.Equal(
+                    new[] { "Attr" },
+                    GetAttributeNames(localFn1.GetReturnTypeAttributes())
+                );
+                Assert.Equal(
+                    new[] { "Attr" },
+                    GetAttributeNames(localFn1.TypeParameters.Single().GetAttributes())
+                );
+                Assert.Equal(
+                    new[] { "Attr" },
+                    GetAttributeNames(localFn1.Parameters.Single().GetAttributes())
+                );
             }
 
             static void validate2(ModuleSymbol module)
@@ -5654,7 +6077,8 @@ class C
         [ConditionalFact(typeof(DesktopOnly))]
         public void LocalFunctionAttribute_TypeIL()
         {
-            var source = @"
+            var source =
+                @"
 class A : System.Attribute { internal A(int i) { } }
 
 class C
@@ -5671,9 +6095,12 @@ class C
             var verifier = CompileAndVerify(
                 source,
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
-                parseOptions: TestOptions.Regular9);
+                parseOptions: TestOptions.Regular9
+            );
 
-            verifier.VerifyTypeIL("C", @"
+            verifier.VerifyTypeIL(
+                "C",
+                @"
     .class private auto ansi beforefieldinit C
     	extends [mscorlib]System.Object
     {
@@ -5714,13 +6141,15 @@ class C
     		IL_0000: nop
     		IL_0001: ret
     	} // end of method C::'<M>g__local1|0_0'
-    } // end of class C");
+    } // end of class C"
+            );
         }
 
         [Fact]
         public void ExternLocalFunction()
         {
-            var source = @"
+            var source =
+                @"
 using System.Runtime.InteropServices;
 
 class C
@@ -5739,17 +6168,27 @@ class C
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular9,
                 symbolValidator: validate,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
 
             var comp = verifier.Compilation;
             var syntaxTree = comp.SyntaxTrees.Single();
             var semanticModel = comp.GetSemanticModel(syntaxTree);
 
             var localFunction = semanticModel
-                .GetDeclaredSymbol(syntaxTree.GetRoot().DescendantNodes().OfType<LocalFunctionStatementSyntax>().Single())
+                .GetDeclaredSymbol(
+                    syntaxTree
+                        .GetRoot()
+                        .DescendantNodes()
+                        .OfType<LocalFunctionStatementSyntax>()
+                        .Single()
+                )
                 .GetSymbol<LocalFunctionSymbol>();
 
-            Assert.Equal(new[] { "DllImportAttribute" }, GetAttributeNames(localFunction.GetAttributes()));
+            Assert.Equal(
+                new[] { "DllImportAttribute" },
+                GetAttributeNames(localFunction.GetAttributes())
+            );
             validateLocalFunction(localFunction);
 
             void validate(ModuleSymbol module)
@@ -5760,7 +6199,8 @@ class C
                 var attrs1 = localFn1.GetAttributes().As<CSharpAttributeData>();
                 Assert.Equal(
                     expected: new[] { "CompilerGeneratedAttribute" },
-                    actual: GetAttributeNames(attrs1));
+                    actual: GetAttributeNames(attrs1)
+                );
 
                 validateLocalFunction(localFn1);
             }
@@ -5776,7 +6216,10 @@ class C
                 Assert.Equal(CharSet.None, importData.CharacterSet);
                 Assert.False(importData.SetLastError);
                 Assert.False(importData.ExactSpelling);
-                Assert.Equal(MethodImplAttributes.PreserveSig, localFunction.ImplementationAttributes);
+                Assert.Equal(
+                    MethodImplAttributes.PreserveSig,
+                    localFunction.ImplementationAttributes
+                );
                 Assert.Equal(CallingConvention.Winapi, importData.CallingConvention);
                 Assert.Null(importData.BestFitMapping);
                 Assert.Null(importData.ThrowOnUnmappableCharacter);
@@ -5786,7 +6229,8 @@ class C
         [Fact]
         public void ExternLocalFunction_ComplexDllImport()
         {
-            var source = @"
+            var source =
+                @"
 using System.Runtime.InteropServices;
 
 class C
@@ -5814,17 +6258,27 @@ class C
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular9,
                 symbolValidator: validate,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
 
             var comp = verifier.Compilation;
             var syntaxTree = comp.SyntaxTrees.Single();
             var semanticModel = comp.GetSemanticModel(syntaxTree);
 
             var localFunction = semanticModel
-                .GetDeclaredSymbol(syntaxTree.GetRoot().DescendantNodes().OfType<LocalFunctionStatementSyntax>().Single())
+                .GetDeclaredSymbol(
+                    syntaxTree
+                        .GetRoot()
+                        .DescendantNodes()
+                        .OfType<LocalFunctionStatementSyntax>()
+                        .Single()
+                )
                 .GetSymbol<LocalFunctionSymbol>();
 
-            Assert.Equal(new[] { "DllImportAttribute" }, GetAttributeNames(localFunction.GetAttributes()));
+            Assert.Equal(
+                new[] { "DllImportAttribute" },
+                GetAttributeNames(localFunction.GetAttributes())
+            );
             validateLocalFunction(localFunction);
 
             void validate(ModuleSymbol module)
@@ -5858,7 +6312,8 @@ class C
         [Fact]
         public void LocalFunction_MethodImpl()
         {
-            var source = @"
+            var source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C
@@ -5889,12 +6344,17 @@ class C
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular9,
                 assemblyValidator: validateAssembly,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
 
             var comp = verifier.Compilation;
             var syntaxTree = comp.SyntaxTrees.Single();
             var semanticModel = comp.GetSemanticModel(syntaxTree);
-            var localFunctions = syntaxTree.GetRoot().DescendantNodes().OfType<LocalFunctionStatementSyntax>().ToList();
+            var localFunctions = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<LocalFunctionStatementSyntax>()
+                .ToList();
 
             checkImplAttributes(localFunctions[0], MethodImplAttributes.ForwardRef);
             checkImplAttributes(localFunctions[1], MethodImplAttributes.NoInlining);
@@ -5902,9 +6362,14 @@ class C
             checkImplAttributes(localFunctions[3], MethodImplAttributes.Synchronized);
             checkImplAttributes(localFunctions[4], MethodImplAttributes.InternalCall);
 
-            void checkImplAttributes(LocalFunctionStatementSyntax localFunctionStatement, MethodImplAttributes expectedFlags)
+            void checkImplAttributes(
+                LocalFunctionStatementSyntax localFunctionStatement,
+                MethodImplAttributes expectedFlags
+            )
             {
-                var localFunction = semanticModel.GetDeclaredSymbol(localFunctionStatement).GetSymbol<LocalFunctionSymbol>();
+                var localFunction = semanticModel
+                    .GetDeclaredSymbol(localFunctionStatement)
+                    .GetSymbol<LocalFunctionSymbol>();
                 Assert.Equal(expectedFlags, localFunction.ImplementationAttributes);
             }
 
@@ -5927,7 +6392,7 @@ class C
                         "<M>g__internalCallStatic|0_4" => MethodImplAttributes.InternalCall,
                         ".ctor" => MethodImplAttributes.IL,
                         "M" => MethodImplAttributes.IL,
-                        _ => throw TestExceptionUtilities.UnexpectedValue(methodName)
+                        _ => throw TestExceptionUtilities.UnexpectedValue(methodName),
                     };
 
                     Assert.Equal(expectedFlags, actualFlags);
@@ -5938,7 +6403,8 @@ class C
         [Fact]
         public void LocalFunction_SpecialName()
         {
-            var source = @"
+            var source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C
@@ -5956,7 +6422,8 @@ class C
                 source,
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular9,
-                symbolValidator: validate);
+                symbolValidator: validate
+            );
 
             static void validate(ModuleSymbol module)
             {
@@ -5970,7 +6437,8 @@ class C
         [WorkItem(57325, "https://github.com/dotnet/roslyn/issues/57325")]
         public void InOutAttributes()
         {
-            var source = @"
+            var source =
+                @"
 using System.Runtime.InteropServices;
 
 class State
@@ -5994,22 +6462,32 @@ class Program
                 source,
                 targetFramework: TargetFramework.StandardAndCSharp,
                 symbolValidator: validateMetadata,
-                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All));
-            var methodParam = ((CSharpCompilation)verifier.Compilation).GetMember<MethodSymbol>("Program.M").Parameters[0];
+                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
+            var methodParam = ((CSharpCompilation)verifier.Compilation)
+                .GetMember<MethodSymbol>("Program.M")
+                .Parameters[0];
             Assert.True(methodParam.IsMetadataIn);
             Assert.True(methodParam.IsMetadataOut);
 
-            var localFunctionParam = verifier.FindLocalFunction("local").Parameters[0].GetSymbol<ParameterSymbol>();
+            var localFunctionParam = verifier
+                .FindLocalFunction("local")
+                .Parameters[0]
+                .GetSymbol<ParameterSymbol>();
             Assert.True(localFunctionParam.IsMetadataIn);
             Assert.True(localFunctionParam.IsMetadataOut);
 
             void validateMetadata(ModuleSymbol module)
             {
-                var methodParam = module.GlobalNamespace.GetMember<MethodSymbol>("Program.M").Parameters[0];
+                var methodParam = module
+                    .GlobalNamespace.GetMember<MethodSymbol>("Program.M")
+                    .Parameters[0];
                 Assert.True(methodParam.IsMetadataIn);
                 Assert.True(methodParam.IsMetadataOut);
 
-                var localFunctionParam = module.GlobalNamespace.GetMember<MethodSymbol>("Program.<M>g__local|0_0").Parameters[0];
+                var localFunctionParam = module
+                    .GlobalNamespace.GetMember<MethodSymbol>("Program.<M>g__local|0_0")
+                    .Parameters[0];
                 Assert.True(localFunctionParam.IsMetadataIn);
                 Assert.True(localFunctionParam.IsMetadataOut);
             }
@@ -6050,22 +6528,32 @@ class Program
                 source,
                 targetFramework: TargetFramework.StandardAndCSharp,
                 symbolValidator: validateMetadata,
-                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All));
-            var methodParam = ((CSharpCompilation)verifier.Compilation).GetMember<MethodSymbol>("Program.M").Parameters[0];
+                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
+            var methodParam = ((CSharpCompilation)verifier.Compilation)
+                .GetMember<MethodSymbol>("Program.M")
+                .Parameters[0];
             Assert.True(methodParam.IsMetadataIn);
             Assert.False(methodParam.IsMetadataOut);
 
-            var localFunctionParam = verifier.FindLocalFunction("local").Parameters[0].GetSymbol<ParameterSymbol>();
+            var localFunctionParam = verifier
+                .FindLocalFunction("local")
+                .Parameters[0]
+                .GetSymbol<ParameterSymbol>();
             Assert.True(localFunctionParam.IsMetadataIn);
             Assert.False(localFunctionParam.IsMetadataOut);
 
             void validateMetadata(ModuleSymbol module)
             {
-                var methodParam = module.GlobalNamespace.GetMember<MethodSymbol>("Program.M").Parameters[0];
+                var methodParam = module
+                    .GlobalNamespace.GetMember<MethodSymbol>("Program.M")
+                    .Parameters[0];
                 Assert.True(methodParam.IsMetadataIn);
                 Assert.False(methodParam.IsMetadataOut);
 
-                var localFunctionParam = module.GlobalNamespace.GetMember<MethodSymbol>("Program.<M>g__local|0_0").Parameters[0];
+                var localFunctionParam = module
+                    .GlobalNamespace.GetMember<MethodSymbol>("Program.<M>g__local|0_0")
+                    .Parameters[0];
                 Assert.True(localFunctionParam.IsMetadataIn);
                 Assert.False(localFunctionParam.IsMetadataOut);
             }
@@ -6107,22 +6595,32 @@ class Program
                 source,
                 targetFramework: TargetFramework.StandardAndCSharp,
                 symbolValidator: validateMetadata,
-                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All));
-            var methodParam = ((CSharpCompilation)verifier.Compilation).GetMember<MethodSymbol>("Program.M").Parameters[0];
+                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
+            var methodParam = ((CSharpCompilation)verifier.Compilation)
+                .GetMember<MethodSymbol>("Program.M")
+                .Parameters[0];
             Assert.False(methodParam.IsMetadataIn);
             Assert.True(methodParam.IsMetadataOut);
 
-            var localFunctionParam = verifier.FindLocalFunction("local").Parameters[0].GetSymbol<ParameterSymbol>();
+            var localFunctionParam = verifier
+                .FindLocalFunction("local")
+                .Parameters[0]
+                .GetSymbol<ParameterSymbol>();
             Assert.False(localFunctionParam.IsMetadataIn);
             Assert.True(localFunctionParam.IsMetadataOut);
 
             void validateMetadata(ModuleSymbol module)
             {
-                var methodParam = module.GlobalNamespace.GetMember<MethodSymbol>("Program.M").Parameters[0];
+                var methodParam = module
+                    .GlobalNamespace.GetMember<MethodSymbol>("Program.M")
+                    .Parameters[0];
                 Assert.False(methodParam.IsMetadataIn);
                 Assert.True(methodParam.IsMetadataOut);
 
-                var localFunctionParam = module.GlobalNamespace.GetMember<MethodSymbol>("Program.<M>g__local|0_0").Parameters[0];
+                var localFunctionParam = module
+                    .GlobalNamespace.GetMember<MethodSymbol>("Program.<M>g__local|0_0")
+                    .Parameters[0];
                 Assert.False(localFunctionParam.IsMetadataIn);
                 Assert.True(localFunctionParam.IsMetadataOut);
             }
@@ -6159,15 +6657,27 @@ static class Program
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
-            var localFunctionSyntax = tree.GetRoot().DescendantNodes().OfType<LocalFunctionStatementSyntax>().Single();
-            var localFunction = model.GetDeclaredSymbol(localFunctionSyntax).GetSymbol<LocalFunctionSymbol>();
+            var localFunctionSyntax = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<LocalFunctionStatementSyntax>()
+                .Single();
+            var localFunction = model
+                .GetDeclaredSymbol(localFunctionSyntax)
+                .GetSymbol<LocalFunctionSymbol>();
             var param = localFunction.Parameters[0];
             Assert.True(param.IsMetadataIn);
             Assert.False(param.IsMetadataOut);
 
             // Test a scenario where the baseParameterAttributes has a different RefKind than the synthesized parameter.
             // We expect the RefKind of the base parameter to be ignored here.
-            var synthesizedParam = SynthesizedParameterSymbol.Create(localFunction, param.TypeWithAnnotations, ordinal: 0, RefKind.Out, param.Name, baseParameterForAttributes: (SourceComplexParameterSymbolBase)param);
+            var synthesizedParam = SynthesizedParameterSymbol.Create(
+                localFunction,
+                param.TypeWithAnnotations,
+                ordinal: 0,
+                RefKind.Out,
+                param.Name,
+                baseParameterForAttributes: (SourceComplexParameterSymbolBase)param
+            );
             Assert.False(synthesizedParam.IsMetadataIn);
             Assert.True(synthesizedParam.IsMetadataOut);
         }
@@ -6176,7 +6686,8 @@ static class Program
         [WorkItem(49599, "https://github.com/dotnet/roslyn/issues/49599")]
         public void MultipleLocalFunctionsUsingDynamic_01()
         {
-            var source = @"
+            var source =
+                @"
 public class Program
 {
     static void Main()
@@ -6194,14 +6705,19 @@ public class Program
     }
 }
 ";
-            CompileAndVerify(source, targetFramework: TargetFramework.StandardAndCSharp, expectedOutput: "44");
+            CompileAndVerify(
+                source,
+                targetFramework: TargetFramework.StandardAndCSharp,
+                expectedOutput: "44"
+            );
         }
 
         [Fact]
         [WorkItem(49599, "https://github.com/dotnet/roslyn/issues/49599")]
         public void MultipleLocalFunctionsUsingDynamic_02()
         {
-            var source = @"
+            var source =
+                @"
 public class Program
 {
     static void Main()
@@ -6219,14 +6735,19 @@ public class Program
     }
 }
 ";
-            CompileAndVerify(source, targetFramework: TargetFramework.StandardAndCSharp, expectedOutput: "44");
+            CompileAndVerify(
+                source,
+                targetFramework: TargetFramework.StandardAndCSharp,
+                expectedOutput: "44"
+            );
         }
 
         [Fact]
         [WorkItem(49599, "https://github.com/dotnet/roslyn/issues/49599")]
         public void MultipleLocalFunctionsUsingDynamic_03()
         {
-            var source = @"
+            var source =
+                @"
 public class Program
 {
     static void Main()
@@ -6244,14 +6765,19 @@ public class Program
     }
 }
 ";
-            CompileAndVerify(source, targetFramework: TargetFramework.StandardAndCSharp, expectedOutput: "44");
+            CompileAndVerify(
+                source,
+                targetFramework: TargetFramework.StandardAndCSharp,
+                expectedOutput: "44"
+            );
         }
 
         [Fact]
         [WorkItem(49599, "https://github.com/dotnet/roslyn/issues/49599")]
         public void MultipleLocalFunctionsUsingDynamic_04()
         {
-            var source = @"
+            var source =
+                @"
 public class Program
 {
     static void Main()
@@ -6269,14 +6795,19 @@ public class Program
     }
 }
 ";
-            CompileAndVerify(source, targetFramework: TargetFramework.StandardAndCSharp, expectedOutput: "44");
+            CompileAndVerify(
+                source,
+                targetFramework: TargetFramework.StandardAndCSharp,
+                expectedOutput: "44"
+            );
         }
 
         [Fact]
         [WorkItem(49599, "https://github.com/dotnet/roslyn/issues/49599")]
         public void MultipleLocalFunctionsUsingDynamic_05()
         {
-            var source = @"
+            var source =
+                @"
 public class Program
 {
     static void Main()
@@ -6295,34 +6826,55 @@ public class Program
     }
 }
 ";
-            CompileAndVerify(source, targetFramework: TargetFramework.StandardAndCSharp, expectedOutput: "44");
+            CompileAndVerify(
+                source,
+                targetFramework: TargetFramework.StandardAndCSharp,
+                expectedOutput: "44"
+            );
         }
 
-        internal CompilationVerifier VerifyOutput(string source, string output, CSharpCompilationOptions options, Verification verify = default)
+        internal CompilationVerifier VerifyOutput(
+            string source,
+            string output,
+            CSharpCompilationOptions options,
+            Verification verify = default
+        )
         {
             var comp = CreateCompilationWithMscorlib45AndCSharp(source, options: options);
-            return CompileAndVerify(comp, expectedOutput: output, verify: verify).VerifyDiagnostics(); // no diagnostics
+            return CompileAndVerify(comp, expectedOutput: output, verify: verify)
+                .VerifyDiagnostics(); // no diagnostics
         }
 
         internal CompilationVerifier VerifyOutput(string source, string output)
         {
-            var comp = CreateCompilationWithMscorlib45AndCSharp(source, options: TestOptions.ReleaseExe);
+            var comp = CreateCompilationWithMscorlib45AndCSharp(
+                source,
+                options: TestOptions.ReleaseExe
+            );
             return CompileAndVerify(comp, expectedOutput: output).VerifyDiagnostics(); // no diagnostics
         }
 
-        internal CompilationVerifier VerifyOutputInMain(string methodBody, string output, params string[] usings)
+        internal CompilationVerifier VerifyOutputInMain(
+            string methodBody,
+            string output,
+            params string[] usings
+        )
         {
             for (var i = 0; i < usings.Length; i++)
             {
                 usings[i] = "using " + usings[i] + ";";
             }
             var usingBlock = string.Join(Environment.NewLine, usings);
-            var source = usingBlock + @"
+            var source =
+                usingBlock
+                + @"
 class Program
 {
     static void Main()
     {
-" + methodBody + @"
+"
+                + methodBody
+                + @"
     }
 }";
             return VerifyOutput(source, output);

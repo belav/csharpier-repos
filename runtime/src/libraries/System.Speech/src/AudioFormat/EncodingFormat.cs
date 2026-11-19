@@ -8,6 +8,6 @@ namespace System.Speech.AudioFormat
     {
         Pcm = 0x0001,
         ALaw = 0x0006,
-        ULaw = 0x0007
+        ULaw = 0x0007,
     }
 }

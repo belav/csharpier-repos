@@ -28,12 +28,19 @@ namespace System.Net.Http.Formatting.Parsers
         /// </summary>
         /// <param name="nameValuePairs">The collection to which name value pairs are added as they are parsed.</param>
         /// <param name="maxMessageSize">Maximum length of all the individual name value pairs.</param>
-        public FormUrlEncodedParser(ICollection<KeyValuePair<string, string>> nameValuePairs, long maxMessageSize)
+        public FormUrlEncodedParser(
+            ICollection<KeyValuePair<string, string>> nameValuePairs,
+            long maxMessageSize
+        )
         {
             // The minimum length which would be an empty buffer
             if (maxMessageSize < MinMessageSize)
             {
-                throw Error.ArgumentMustBeGreaterThanOrEqualTo("maxMessageSize", maxMessageSize, MinMessageSize);
+                throw Error.ArgumentMustBeGreaterThanOrEqualTo(
+                    "maxMessageSize",
+                    maxMessageSize,
+                    MinMessageSize
+                );
             }
 
             if (nameValuePairs == null)
@@ -49,7 +56,7 @@ namespace System.Net.Http.Formatting.Parsers
         private enum NameValueState
         {
             Name = 0,
-            Value
+            Value,
         }
 
         /// <summary>
@@ -62,12 +69,17 @@ namespace System.Net.Http.Formatting.Parsers
         /// <param name="bytesConsumed">Offset into buffer</param>
         /// <param name="isFinal">Indicates whether the end of the URL form-encoded data has been reached.</param>
         /// <returns>State of the parser. Call this method with new data until it reaches a final state.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception is translated to parse state.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Exception is translated to parse state."
+        )]
         public ParserState ParseBuffer(
             byte[] buffer,
             int bytesReady,
             ref int bytesConsumed,
-            bool isFinal)
+            bool isFinal
+        )
         {
             if (buffer == null)
             {
@@ -97,7 +109,8 @@ namespace System.Net.Http.Formatting.Parsers
                     _maxMessageSize,
                     ref _totalBytesConsumed,
                     _currentNameValuePair,
-                    _nameValuePairs);
+                    _nameValuePairs
+                );
 
                 if (isFinal)
                 {
@@ -112,7 +125,11 @@ namespace System.Net.Http.Formatting.Parsers
             return parseStatus;
         }
 
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "This is a parser which cannot be split up for performance reasons.")]
+        [SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1502:AvoidExcessiveComplexity",
+            Justification = "This is a parser which cannot be split up for performance reasons."
+        )]
         private static ParserState ParseNameValuePairs(
             byte[] buffer,
             int bytesReady,
@@ -121,10 +138,17 @@ namespace System.Net.Http.Formatting.Parsers
             long maximumLength,
             ref long totalBytesConsumed,
             CurrentNameValuePair currentNameValuePair,
-            ICollection<KeyValuePair<string, string>> nameValuePairs)
+            ICollection<KeyValuePair<string, string>> nameValuePairs
+        )
         {
-            Contract.Assert((bytesReady - bytesConsumed) >= 0, "ParseNameValuePairs()|(inputBufferLength - bytesParsed) < 0");
-            Contract.Assert(maximumLength <= 0 || totalBytesConsumed <= maximumLength, "ParseNameValuePairs()|Headers already read exceeds limit.");
+            Contract.Assert(
+                (bytesReady - bytesConsumed) >= 0,
+                "ParseNameValuePairs()|(inputBufferLength - bytesParsed) < 0"
+            );
+            Contract.Assert(
+                maximumLength <= 0 || totalBytesConsumed <= maximumLength,
+                "ParseNameValuePairs()|Headers already read exceeds limit."
+            );
 
             // Remember where we started.
             int initialBytesParsed = bytesConsumed;
@@ -132,14 +156,20 @@ namespace System.Net.Http.Formatting.Parsers
 
             // Set up parsing status with what will happen if we exceed the buffer.
             ParserState parseStatus = ParserState.DataTooBig;
-            long effectiveMax = maximumLength <= 0 ? Int64.MaxValue : maximumLength - totalBytesConsumed + initialBytesParsed;
+            long effectiveMax =
+                maximumLength <= 0
+                    ? Int64.MaxValue
+                    : maximumLength - totalBytesConsumed + initialBytesParsed;
             if (bytesReady < effectiveMax)
             {
                 parseStatus = ParserState.NeedMoreData;
                 effectiveMax = bytesReady;
             }
 
-            Contract.Assert(bytesConsumed < effectiveMax, "We have already consumed more than the max buffer length.");
+            Contract.Assert(
+                bytesConsumed < effectiveMax,
+                "We have already consumed more than the max buffer length."
+            );
 
             switch (nameValueState)
             {
@@ -149,7 +179,11 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         if (++bytesConsumed == effectiveMax)
                         {
-                            string name = Encoding.UTF8.GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                            string name = Encoding.UTF8.GetString(
+                                buffer,
+                                segmentStart,
+                                bytesConsumed - segmentStart
+                            );
                             currentNameValuePair.Name.Append(name);
                             goto quit;
                         }
@@ -157,7 +191,11 @@ namespace System.Net.Http.Formatting.Parsers
 
                     if (bytesConsumed > segmentStart)
                     {
-                        string name = Encoding.UTF8.GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                        string name = Encoding.UTF8.GetString(
+                            buffer,
+                            segmentStart,
+                            bytesConsumed - segmentStart
+                        );
                         currentNameValuePair.Name.Append(name);
                     }
 
@@ -193,7 +231,11 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         if (++bytesConsumed == effectiveMax)
                         {
-                            string value = Encoding.UTF8.GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                            string value = Encoding.UTF8.GetString(
+                                buffer,
+                                segmentStart,
+                                bytesConsumed - segmentStart
+                            );
                             currentNameValuePair.Value.Append(value);
                             goto quit;
                         }
@@ -201,7 +243,11 @@ namespace System.Net.Http.Formatting.Parsers
 
                     if (bytesConsumed > segmentStart)
                     {
-                        string value = Encoding.UTF8.GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                        string value = Encoding.UTF8.GetString(
+                            buffer,
+                            segmentStart,
+                            bytesConsumed - segmentStart
+                        );
                         currentNameValuePair.Value.Append(value);
                     }
 
@@ -218,7 +264,7 @@ namespace System.Net.Http.Formatting.Parsers
                     goto case NameValueState.Name;
             }
 
-        quit:
+            quit:
             totalBytesConsumed += bytesConsumed - initialBytesParsed;
             return parseStatus;
         }

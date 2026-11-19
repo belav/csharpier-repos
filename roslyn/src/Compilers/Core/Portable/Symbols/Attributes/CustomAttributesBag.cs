@@ -4,12 +4,12 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Threading;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
-using System;
 
 namespace Microsoft.CodeAnalysis
 {
@@ -27,36 +27,43 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Instance representing sealed custom attribute bag with no attributes.
         /// </summary>
-        public static readonly CustomAttributesBag<T> Empty = new CustomAttributesBag<T>(CustomAttributeBagCompletionPart.All, ImmutableArray<T>.Empty);
+        public static readonly CustomAttributesBag<T> Empty = new CustomAttributesBag<T>(
+            CustomAttributeBagCompletionPart.All,
+            ImmutableArray<T>.Empty
+        );
 
-        private CustomAttributesBag(CustomAttributeBagCompletionPart part, ImmutableArray<T> customAttributes)
+        private CustomAttributesBag(
+            CustomAttributeBagCompletionPart part,
+            ImmutableArray<T> customAttributes
+        )
         {
             _customAttributes = customAttributes;
             this.NotePartComplete(part);
         }
 
         public CustomAttributesBag()
-            : this(CustomAttributeBagCompletionPart.None, default(ImmutableArray<T>))
-        {
-        }
+            : this(CustomAttributeBagCompletionPart.None, default(ImmutableArray<T>)) { }
 
         /// <summary>
         /// Returns a non-sealed custom attribute bag with null initialized <see cref="_earlyDecodedWellKnownAttributeData"/>, null initialized <see cref="_decodedWellKnownAttributeData"/> and uninitialized <see cref="_customAttributes"/>.
         /// </summary>
         public static CustomAttributesBag<T> WithEmptyData()
         {
-            return new CustomAttributesBag<T>(CustomAttributeBagCompletionPart.EarlyDecodedWellKnownAttributeData | CustomAttributeBagCompletionPart.DecodedWellKnownAttributeData, default(ImmutableArray<T>));
+            return new CustomAttributesBag<T>(
+                CustomAttributeBagCompletionPart.EarlyDecodedWellKnownAttributeData
+                    | CustomAttributeBagCompletionPart.DecodedWellKnownAttributeData,
+                default(ImmutableArray<T>)
+            );
         }
 
         public bool IsEmpty
         {
             get
             {
-                return
-                    this.IsSealed &&
-                    _customAttributes.IsEmpty &&
-                    _decodedWellKnownAttributeData == null &&
-                    _earlyDecodedWellKnownAttributeData == null;
+                return this.IsSealed
+                    && _customAttributes.IsEmpty
+                    && _decodedWellKnownAttributeData == null
+                    && _earlyDecodedWellKnownAttributeData == null;
             }
         }
 
@@ -69,14 +76,21 @@ namespace Microsoft.CodeAnalysis
         {
             WellKnownAttributeData.Seal(data);
             // Early decode must complete before full decode
-            Debug.Assert(!IsPartComplete(CustomAttributeBagCompletionPart.DecodedWellKnownAttributeData) || IsPartComplete(CustomAttributeBagCompletionPart.EarlyDecodedWellKnownAttributeData));
-            var setOnOurThread = Interlocked.CompareExchange(ref _earlyDecodedWellKnownAttributeData, data, null) == null;
+            Debug.Assert(
+                !IsPartComplete(CustomAttributeBagCompletionPart.DecodedWellKnownAttributeData)
+                    || IsPartComplete(
+                        CustomAttributeBagCompletionPart.EarlyDecodedWellKnownAttributeData
+                    )
+            );
+            var setOnOurThread =
+                Interlocked.CompareExchange(ref _earlyDecodedWellKnownAttributeData, data, null)
+                == null;
             NotePartComplete(CustomAttributeBagCompletionPart.EarlyDecodedWellKnownAttributeData);
             return setOnOurThread;
         }
 
         /// <summary>
-        /// Sets the decoded well-known attribute data (except the early data) on the bag in a thread safe manner. 
+        /// Sets the decoded well-known attribute data (except the early data) on the bag in a thread safe manner.
         /// Stored decoded data is immutable and cannot be updated further.
         /// </summary>
         /// <returns>Returns true if decoded data were stored into the bag on this thread.</returns>
@@ -84,8 +98,11 @@ namespace Microsoft.CodeAnalysis
         {
             WellKnownAttributeData.Seal(data);
             // Early decode must complete before full decode
-            Debug.Assert(IsPartComplete(CustomAttributeBagCompletionPart.EarlyDecodedWellKnownAttributeData));
-            var setOnOurThread = Interlocked.CompareExchange(ref _decodedWellKnownAttributeData, data, null) == null;
+            Debug.Assert(
+                IsPartComplete(CustomAttributeBagCompletionPart.EarlyDecodedWellKnownAttributeData)
+            );
+            var setOnOurThread =
+                Interlocked.CompareExchange(ref _decodedWellKnownAttributeData, data, null) == null;
             NotePartComplete(CustomAttributeBagCompletionPart.DecodedWellKnownAttributeData);
             return setOnOurThread;
         }
@@ -98,7 +115,12 @@ namespace Microsoft.CodeAnalysis
         public bool SetAttributes(ImmutableArray<T> newCustomAttributes)
         {
             Debug.Assert(!newCustomAttributes.IsDefault);
-            var setOnOurThread = ImmutableInterlocked.InterlockedCompareExchange(ref _customAttributes, newCustomAttributes, default(ImmutableArray<T>)) == default(ImmutableArray<T>);
+            var setOnOurThread =
+                ImmutableInterlocked.InterlockedCompareExchange(
+                    ref _customAttributes,
+                    newCustomAttributes,
+                    default(ImmutableArray<T>)
+                ) == default(ImmutableArray<T>);
             NotePartComplete(CustomAttributeBagCompletionPart.Attributes);
             return setOnOurThread;
         }
@@ -118,41 +140,41 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Gets the decoded well-known attribute data (except the early data) in the bag. 
+        /// Gets the decoded well-known attribute data (except the early data) in the bag.
         /// </summary>
         /// <remarks>This property can only be accessed on the bag after <see cref="SetDecodedWellKnownAttributeData"/> has been invoked.</remarks>
         public WellKnownAttributeData DecodedWellKnownAttributeData
         {
             get
             {
-                Debug.Assert(IsPartComplete(CustomAttributeBagCompletionPart.DecodedWellKnownAttributeData));
+                Debug.Assert(
+                    IsPartComplete(CustomAttributeBagCompletionPart.DecodedWellKnownAttributeData)
+                );
                 return _decodedWellKnownAttributeData;
             }
         }
 
         /// <summary>
-        /// Gets the early decoded well-known attribute data in the bag. 
+        /// Gets the early decoded well-known attribute data in the bag.
         /// </summary>
         /// <remarks>This property can only be accessed on the bag after <see cref="SetEarlyDecodedWellKnownAttributeData"/> has been invoked.</remarks>
         public EarlyWellKnownAttributeData EarlyDecodedWellKnownAttributeData
         {
             get
             {
-                Debug.Assert(IsPartComplete(CustomAttributeBagCompletionPart.EarlyDecodedWellKnownAttributeData));
+                Debug.Assert(
+                    IsPartComplete(
+                        CustomAttributeBagCompletionPart.EarlyDecodedWellKnownAttributeData
+                    )
+                );
                 return _earlyDecodedWellKnownAttributeData;
             }
         }
 
         private CustomAttributeBagCompletionPart State
         {
-            get
-            {
-                return (CustomAttributeBagCompletionPart)_state;
-            }
-            set
-            {
-                _state = (int)value;
-            }
+            get { return (CustomAttributeBagCompletionPart)_state; }
+            set { _state = (int)value; }
         }
 
         private void NotePartComplete(CustomAttributeBagCompletionPart part)
@@ -176,7 +198,12 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         internal bool IsEarlyDecodedWellKnownAttributeDataComputed
         {
-            get { return IsPartComplete(CustomAttributeBagCompletionPart.EarlyDecodedWellKnownAttributeData); }
+            get
+            {
+                return IsPartComplete(
+                    CustomAttributeBagCompletionPart.EarlyDecodedWellKnownAttributeData
+                );
+            }
         }
 
         /// <summary>
@@ -185,7 +212,12 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         internal bool IsDecodedWellKnownAttributeDataComputed
         {
-            get { return IsPartComplete(CustomAttributeBagCompletionPart.DecodedWellKnownAttributeData); }
+            get
+            {
+                return IsPartComplete(
+                    CustomAttributeBagCompletionPart.DecodedWellKnownAttributeData
+                );
+            }
         }
 
         /// <summary>

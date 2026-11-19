@@ -14,7 +14,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor.FindUsage
         private readonly IFindUsagesContext _context;
         private readonly CancellationToken _cancellationToken;
 
-        public FSharpFindUsagesContext(IFindUsagesContext context, CancellationToken cancellationToken)
+        public FSharpFindUsagesContext(
+            IFindUsagesContext context,
+            CancellationToken cancellationToken
+        )
         {
             _context = context;
             _cancellationToken = cancellationToken;
@@ -24,12 +27,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor.FindUsage
 
         public Task OnDefinitionFoundAsync(FSharp.FindUsages.FSharpDefinitionItem definition)
         {
-            return _context.OnDefinitionFoundAsync(definition.RoslynDefinitionItem, _cancellationToken).AsTask();
+            return _context
+                .OnDefinitionFoundAsync(definition.RoslynDefinitionItem, _cancellationToken)
+                .AsTask();
         }
 
         public Task OnReferenceFoundAsync(FSharp.FindUsages.FSharpSourceReferenceItem reference)
         {
-            return _context.OnReferenceFoundAsync(reference.RoslynSourceReferenceItem, _cancellationToken).AsTask();
+            return _context
+                .OnReferenceFoundAsync(reference.RoslynSourceReferenceItem, _cancellationToken)
+                .AsTask();
         }
 
         public Task ReportMessageAsync(string message)

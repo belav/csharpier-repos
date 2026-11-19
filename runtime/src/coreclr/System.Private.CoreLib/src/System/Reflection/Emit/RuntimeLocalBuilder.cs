@@ -15,7 +15,13 @@ namespace System.Reflection.Emit
         #region Constructor
         internal RuntimeLocalBuilder(int localIndex, Type localType, MethodInfo methodBuilder)
             : this(localIndex, localType, methodBuilder, false) { }
-        internal RuntimeLocalBuilder(int localIndex, Type localType, MethodInfo methodBuilder, bool isPinned)
+
+        internal RuntimeLocalBuilder(
+            int localIndex,
+            Type localType,
+            MethodInfo methodBuilder,
+            bool isPinned
+        )
         {
             m_isPinned = isPinned;
             m_localIndex = localIndex;

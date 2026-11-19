@@ -35,68 +35,67 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms
 {
-	[TestFixture]
-	public class PrintDialogTest : TestHelper
-	{
-		[Test]
-		[Category("Printing")]
-		public void DefaultValues ()
-		{
-			PrintDialog pd = new PrintDialog ();
+    [TestFixture]
+    public class PrintDialogTest : TestHelper
+    {
+        [Test]
+        [Category("Printing")]
+        public void DefaultValues()
+        {
+            PrintDialog pd = new PrintDialog();
 
-			Assert.IsTrue (pd.AllowPrintToFile, "#1");
-			Assert.IsFalse (pd.AllowSelection, "#2");
-			Assert.IsFalse (pd.AllowSomePages, "#3");
-			Assert.IsNull (pd.Document, "#4");
-			Assert.IsNotNull (pd.PrinterSettings, "#5");
-			Assert.IsFalse (pd.PrintToFile, "#6");
-			Assert.IsFalse (pd.ShowHelp, "#7");
-			Assert.IsTrue (pd.ShowNetwork, "#8");
-		}
+            Assert.IsTrue(pd.AllowPrintToFile, "#1");
+            Assert.IsFalse(pd.AllowSelection, "#2");
+            Assert.IsFalse(pd.AllowSomePages, "#3");
+            Assert.IsNull(pd.Document, "#4");
+            Assert.IsNotNull(pd.PrinterSettings, "#5");
+            Assert.IsFalse(pd.PrintToFile, "#6");
+            Assert.IsFalse(pd.ShowHelp, "#7");
+            Assert.IsTrue(pd.ShowNetwork, "#8");
+        }
 
-		[Test]
-		[Category("Printing")]
-		public void DocumentTest ()
-		{
-			PrintDialog pd = new PrintDialog ();
+        [Test]
+        [Category("Printing")]
+        public void DocumentTest()
+        {
+            PrintDialog pd = new PrintDialog();
 
-			PrintDocument pdoc1 = new PrintDocument ();
-			PrinterSettings ps1 = new PrinterSettings ();
-			pdoc1.PrinterSettings = ps1;
-			pd.Document = pdoc1;
-			Assert.AreEqual (pdoc1, pd.Document, "#1");
-			Assert.AreEqual (ps1, pd.PrinterSettings, "#2");
+            PrintDocument pdoc1 = new PrintDocument();
+            PrinterSettings ps1 = new PrinterSettings();
+            pdoc1.PrinterSettings = ps1;
+            pd.Document = pdoc1;
+            Assert.AreEqual(pdoc1, pd.Document, "#1");
+            Assert.AreEqual(ps1, pd.PrinterSettings, "#2");
 
-			PrinterSettings ps2 = new PrinterSettings ();
-			pdoc1.PrinterSettings = ps2;
-			pd.Document = pdoc1;
-			Assert.AreEqual (pdoc1, pd.Document, "#3");
-			Assert.AreEqual (ps2, pd.PrinterSettings, "#4");
+            PrinterSettings ps2 = new PrinterSettings();
+            pdoc1.PrinterSettings = ps2;
+            pd.Document = pdoc1;
+            Assert.AreEqual(pdoc1, pd.Document, "#3");
+            Assert.AreEqual(ps2, pd.PrinterSettings, "#4");
 
-			pd.Document = null;
-			Assert.IsNull (pd.Document, "#5");
-			Assert.IsNotNull (pd.PrinterSettings, "#6");
-			if (pd.PrinterSettings == ps1)
-				Assert.Fail ("#7");
-		}
+            pd.Document = null;
+            Assert.IsNull(pd.Document, "#5");
+            Assert.IsNotNull(pd.PrinterSettings, "#6");
+            if (pd.PrinterSettings == ps1)
+                Assert.Fail("#7");
+        }
 
-		[Test]
-		[Category("Printing")]
-		public void PrinterSettingsTest ()
-		{
-			PrintDialog pd = new PrintDialog ();
+        [Test]
+        [Category("Printing")]
+        public void PrinterSettingsTest()
+        {
+            PrintDialog pd = new PrintDialog();
 
-			PrinterSettings ps1 = new PrinterSettings ();
-			pd.PrinterSettings = ps1;
-			Assert.AreEqual (ps1, pd.PrinterSettings, "#1");
-			Assert.IsNull (pd.Document, "#2");
+            PrinterSettings ps1 = new PrinterSettings();
+            pd.PrinterSettings = ps1;
+            Assert.AreEqual(ps1, pd.PrinterSettings, "#1");
+            Assert.IsNull(pd.Document, "#2");
 
-			pd.PrinterSettings = null;
-			Assert.IsNotNull (pd.PrinterSettings, "#3");
-			Assert.IsNull (pd.Document, "#4");
-			if (pd.PrinterSettings == ps1)
-				Assert.Fail ("#5");
-		}
-	}
+            pd.PrinterSettings = null;
+            Assert.IsNotNull(pd.PrinterSettings, "#3");
+            Assert.IsNull(pd.Document, "#4");
+            if (pd.PrinterSettings == ps1)
+                Assert.Fail("#5");
+        }
+    }
 }
-

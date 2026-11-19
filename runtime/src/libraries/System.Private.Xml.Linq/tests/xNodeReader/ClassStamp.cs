@@ -1,10 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Xml;
 using System.IO;
-using Microsoft.Test.ModuleCore;
+using System.Xml;
 using System.Xml.Linq;
+using Microsoft.Test.ModuleCore;
 using Xunit;
 
 namespace CoreXml.Test.XLinq
@@ -14,7 +14,8 @@ namespace CoreXml.Test.XLinq
         [Fact]
         public void IncorrentBehaviorOfReadAttributeValue()
         {
-            string xml = @"<?xml version='1.0' encoding='utf-8' ?>
+            string xml =
+                @"<?xml version='1.0' encoding='utf-8' ?>
 									<!DOCTYPE text [
 										<!ATTLIST book id CDATA #REQUIRED>
 										<!ENTITY a '123'>
@@ -57,29 +58,30 @@ namespace CoreXml.Test.XLinq
             }
         }
 
-         [Fact]
-         public void EnsureReadToFollowingMovesToAttributeAndNotToDtd()
-         {
-            string xml = @"<?xml version='1.0' encoding='utf-8' ?>
+        [Fact]
+        public void EnsureReadToFollowingMovesToAttributeAndNotToDtd()
+        {
+            string xml =
+                @"<?xml version='1.0' encoding='utf-8' ?>
 									<!DOCTYPE text [
 										<!ATTLIST book id CDATA #REQUIRED>
 										<!ENTITY a '123'>
 									]>
 									<text id1='a 123 b' id2='2'/>";
-             XmlReaderSettings rs = new XmlReaderSettings();
-             rs.DtdProcessing = DtdProcessing.Ignore;
-             using (XmlReader tr = XmlReader.Create(new StringReader(xml), rs))
-             {
-                 using (XmlReader reader = XDocument.Load(tr).CreateReader())
-                 {
-                     reader.ReadToFollowing("text");
-                     Assert.True(reader.MoveToNextAttribute());
-                     Assert.True(reader.ReadAttributeValue());
-                     Assert.Equal(XmlNodeType.Text, reader.NodeType);
-                     Assert.Equal("", reader.Name);
-                     Assert.Equal("a 123 b", reader.Value);
-                 }
-             }
+            XmlReaderSettings rs = new XmlReaderSettings();
+            rs.DtdProcessing = DtdProcessing.Ignore;
+            using (XmlReader tr = XmlReader.Create(new StringReader(xml), rs))
+            {
+                using (XmlReader reader = XDocument.Load(tr).CreateReader())
+                {
+                    reader.ReadToFollowing("text");
+                    Assert.True(reader.MoveToNextAttribute());
+                    Assert.True(reader.ReadAttributeValue());
+                    Assert.Equal(XmlNodeType.Text, reader.NodeType);
+                    Assert.Equal("", reader.Name);
+                    Assert.Equal("a 123 b", reader.Value);
+                }
+            }
         }
     }
 }

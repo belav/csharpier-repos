@@ -1,14 +1,14 @@
 using System;
-using System.Data;
-using System.Configuration;
 using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Drawing;
 using System.Web;
 using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
-using System.Web.UI;
-using System.Drawing;
 
 namespace UpdatePanelTutorialCustom.CS
 {
@@ -29,7 +29,8 @@ namespace UpdatePanelTutorialCustom.CS
             get { return _cart; }
         }
 
-        protected override void CreateChildControls() {
+        protected override void CreateChildControls()
+        {
             base.CreateChildControls();
 
             Control parent;
@@ -42,14 +43,14 @@ namespace UpdatePanelTutorialCustom.CS
             if (sm == null || !sm.EnablePartialRendering)
             {
                 // If partial rendering is not enabled, set the parent
-                // and container as a basic control. 
+                // and container as a basic control.
                 container = new Control();
                 parent = container;
             }
             else
             {
                 // If partial rendering is enabled, set the parent as
-                // a new UpdatePanel object and the container to the 
+                // a new UpdatePanel object and the container to the
                 // content template of the UpdatePanel object.
                 UpdatePanel up = new UpdatePanel();
                 container = up.ContentTemplateContainer;
@@ -64,11 +65,16 @@ namespace UpdatePanelTutorialCustom.CS
         private void GridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             string productID;
-            
+
             if (e.CommandName == "AddToCart")
             {
-                productID = ((GridView)sender).DataKeys[Convert.ToInt32(e.CommandArgument)].Value.ToString();
-                if (_cart == null) { GetCart(); }
+                productID = ((GridView)sender)
+                    .DataKeys[Convert.ToInt32(e.CommandArgument)]
+                    .Value.ToString();
+                if (_cart == null)
+                {
+                    GetCart();
+                }
                 if (_cart.IndexOf(productID) == -1)
                     _cart.Add(productID);
                 ViewState["Cart"] = _cart;
@@ -76,8 +82,13 @@ namespace UpdatePanelTutorialCustom.CS
 
             if (e.CommandName == "RemoveFromCart")
             {
-                productID = ((GridView)sender).DataKeys[Convert.ToInt32(e.CommandArgument)].Value.ToString();
-                if (_cart == null) { GetCart(); }
+                productID = ((GridView)sender)
+                    .DataKeys[Convert.ToInt32(e.CommandArgument)]
+                    .Value.ToString();
+                if (_cart == null)
+                {
+                    GetCart();
+                }
                 _cart.Remove(productID);
                 ViewState["Cart"] = _cart;
             }
@@ -112,18 +123,19 @@ namespace UpdatePanelTutorialCustom.CS
         {
             SqlDataSource ds = new SqlDataSource();
             ds.ID = "ProductsSqlDataSource";
-            ds.ConnectionString = 
-              ConfigurationManager.ConnectionStrings["AdventureWorksConnectionString"].ConnectionString;
+            ds.ConnectionString = ConfigurationManager
+                .ConnectionStrings["AdventureWorksConnectionString"]
+                .ConnectionString;
             ds.SelectCommand =
-              "SELECT Production.ProductDescription.Description, Production.Product.Name, Production.ProductPhoto.ThumbnailPhotoFileName, " +
-              "Production.Product.ProductID " +
-              "FROM Production.Product INNER JOIN " +
-              "Production.ProductProductPhoto ON Production.Product.ProductID = Production.ProductProductPhoto.ProductID INNER JOIN " +
-              "Production.ProductPhoto ON Production.ProductProductPhoto.ProductPhotoID = Production.ProductPhoto.ProductPhotoID INNER JOIN " +
-              "Production.ProductModelProductDescriptionCulture ON  " +
-              "Production.Product.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID INNER JOIN " +
-              "Production.ProductDescription ON  " +
-              "Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID";
+                "SELECT Production.ProductDescription.Description, Production.Product.Name, Production.ProductPhoto.ThumbnailPhotoFileName, "
+                + "Production.Product.ProductID "
+                + "FROM Production.Product INNER JOIN "
+                + "Production.ProductProductPhoto ON Production.Product.ProductID = Production.ProductProductPhoto.ProductID INNER JOIN "
+                + "Production.ProductPhoto ON Production.ProductProductPhoto.ProductPhotoID = Production.ProductPhoto.ProductPhotoID INNER JOIN "
+                + "Production.ProductModelProductDescriptionCulture ON  "
+                + "Production.Product.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID INNER JOIN "
+                + "Production.ProductDescription ON  "
+                + "Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID";
 
             GridView gv = new GridView();
             gv.ID = "ProductsGridView";
@@ -136,7 +148,7 @@ namespace UpdatePanelTutorialCustom.CS
             gv.AllowPaging = true;
             gv.PageSize = _pageSize;
             gv.RowCommand += this.GridView_RowCommand;
-           
+
             ImageField if1 = new ImageField();
             if1.HeaderText = "Product";
             if1.DataImageUrlField = "ThumbnailPhotoFileName";

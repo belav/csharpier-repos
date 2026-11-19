@@ -18,7 +18,10 @@ namespace Microsoft.Interop
         private readonly string _nativeIdentifier;
         private readonly PointerTypeSyntax _nativeType;
 
-        public PointerNativeTypeAssignmentRewriter(string nativeIdentifier, PointerTypeSyntax nativeType)
+        public PointerNativeTypeAssignmentRewriter(
+            string nativeIdentifier,
+            PointerTypeSyntax nativeType
+        )
         {
             _nativeIdentifier = nativeIdentifier;
             _nativeType = nativeType;
@@ -35,13 +38,15 @@ namespace Microsoft.Interop
             {
                 return node.WithInitializer(
                     EqualsValueClause(
-                        CastExpression(TypeSyntaxes.System_IntPtr, node.Initializer.Value)));
+                        CastExpression(TypeSyntaxes.System_IntPtr, node.Initializer.Value)
+                    )
+                );
             }
             if (node.Initializer.Value.ToString() == _nativeIdentifier)
             {
                 return node.WithInitializer(
-                    EqualsValueClause(
-                        CastExpression(_nativeType, node.Initializer.Value)));
+                    EqualsValueClause(CastExpression(_nativeType, node.Initializer.Value))
+                );
             }
 
             return base.VisitVariableDeclarator(node);
@@ -51,8 +56,7 @@ namespace Microsoft.Interop
         {
             if (node.Left.ToString() == _nativeIdentifier)
             {
-                return node.WithRight(
-                    CastExpression(TypeSyntaxes.System_IntPtr, node.Right));
+                return node.WithRight(CastExpression(TypeSyntaxes.System_IntPtr, node.Right));
             }
             if (node.Right.ToString() == _nativeIdentifier)
             {
@@ -66,8 +70,7 @@ namespace Microsoft.Interop
         {
             if (node.Expression.ToString() == _nativeIdentifier)
             {
-                return node.WithExpression(
-                    CastExpression(_nativeType, node.Expression));
+                return node.WithExpression(CastExpression(_nativeType, node.Expression));
             }
             return base.VisitArgument(node);
         }

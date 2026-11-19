@@ -6,9 +6,11 @@ namespace System.Net.Security
     public enum ProtectionLevel
     {
         None = 0,
+
         // Data integrity only
         Sign = 1,
+
         // Both data confidentiality and integrity
-        EncryptAndSign = 2
+        EncryptAndSign = 2,
     }
 }

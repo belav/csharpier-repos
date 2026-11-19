@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EmbeddedLanguages.StackFrame
             StackFrameMethodDeclarationNode? methodDeclaration = null,
             bool expectFailure = false,
             StackFrameFileInformationNode? fileInformation = null,
-            StackFrameToken? eolTokenOpt = null)
+            StackFrameToken? eolTokenOpt = null
+        )
         {
             FuzzyTest(input);
 
@@ -89,9 +90,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EmbeddedLanguages.StackFrame
             AssertEx.EqualOrDiff(originalText, tree.Root.ToFullString());
 
             // Manually enumerate to verify that it works as expected and the spans align.
-            // This should be the same as ToFullString, but this tests that enumeration of the 
+            // This should be the same as ToFullString, but this tests that enumeration of the
             // tokens yields the correct order (which we can't guarantee with ToFullString depending
-            // on implementation). 
+            // on implementation).
             var textSeq = VirtualCharSequence.Create(0, originalText);
             var index = 0;
             List<VirtualChar> enumeratedParsedCharacters = new();
@@ -124,7 +125,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EmbeddedLanguages.StackFrame
                 sb.AppendLine();
 
                 sb.Append("Actual: \t");
-                var enumeratedString = new string(enumeratedParsedCharacters.Select(ch => (char)ch.Value).ToArray());
+                var enumeratedString = new string(
+                    enumeratedParsedCharacters.Select(ch => (char)ch.Value).ToArray()
+                );
                 PrintString(enumeratedString, start, end, sb);
                 sb.AppendLine();
 

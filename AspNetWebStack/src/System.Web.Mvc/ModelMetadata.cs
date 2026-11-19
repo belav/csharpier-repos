@@ -27,7 +27,9 @@ namespace System.Web.Mvc
         /// Explicit backing store for the things we want initialized by default, so don't have to call
         /// the protected virtual setters of an auto-generated property
         /// </summary>
-        private Dictionary<string, object> _additionalValues = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+        private Dictionary<string, object> _additionalValues = new Dictionary<string, object>(
+            StringComparer.OrdinalIgnoreCase
+        );
         private bool _convertEmptyStringToNull = true;
         private bool _htmlEncode = true;
         private bool _isRequired;
@@ -42,7 +44,13 @@ namespace System.Web.Mvc
         private bool _showForEdit = true;
         private string _simpleDisplayText;
 
-        public ModelMetadata(ModelMetadataProvider provider, Type containerType, Func<object> modelAccessor, Type modelType, string propertyName)
+        public ModelMetadata(
+            ModelMetadataProvider provider,
+            Type containerType,
+            Func<object> modelAccessor,
+            Type modelType,
+            string propertyName
+        )
         {
             if (provider == null)
             {
@@ -89,7 +97,11 @@ namespace System.Web.Mvc
 
         public virtual string DisplayFormatString { get; set; }
 
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "The method is a delegating helper to choose among multiple property values")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1721:PropertyNamesShouldNotMatchGetMethods",
+            Justification = "The method is a delegating helper to choose among multiple property values"
+        )]
         public virtual string DisplayName { get; set; }
 
         public virtual string EditFormatString { get; set; }
@@ -161,7 +173,8 @@ namespace System.Web.Mvc
             {
                 if (_properties == null)
                 {
-                    IEnumerable<ModelMetadata> originalProperties = Provider.GetMetadataForProperties(Model, RealModelType);
+                    IEnumerable<ModelMetadata> originalProperties =
+                        Provider.GetMetadataForProperties(Model, RealModelType);
                     // This will be returned as a copied out array in the common case, so reuse the returned array for performance.
                     _propertiesInternal = SortProperties(originalProperties.AsArray());
                     _properties = new ReadOnlyCollection<ModelMetadata>(_propertiesInternal);
@@ -170,7 +183,7 @@ namespace System.Web.Mvc
             }
         }
 
-        internal ModelMetadata[] PropertiesAsArray 
+        internal ModelMetadata[] PropertiesAsArray
         {
             get
             {
@@ -231,7 +244,11 @@ namespace System.Web.Mvc
             set { _showForEdit = value; }
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "This property delegates to the method when the user has not yet set a simple display text value.")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1721:PropertyNamesShouldNotMatchGetMethods",
+            Justification = "This property delegates to the method when the user has not yet set a simple display text value."
+        )]
         public virtual string SimpleDisplayText
         {
             get
@@ -249,16 +266,24 @@ namespace System.Web.Mvc
 
         public virtual string Watermark { get; set; }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        public static ModelMetadata FromLambdaExpression<TParameter, TValue>(Expression<Func<TParameter, TValue>> expression,
-                                                                             ViewDataDictionary<TParameter> viewData)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        public static ModelMetadata FromLambdaExpression<TParameter, TValue>(
+            Expression<Func<TParameter, TValue>> expression,
+            ViewDataDictionary<TParameter> viewData
+        )
         {
             return FromLambdaExpression(expression, viewData, metadataProvider: null);
         }
 
-        internal static ModelMetadata FromLambdaExpression<TParameter, TValue>(Expression<Func<TParameter, TValue>> expression,
-                                                                               ViewDataDictionary<TParameter> viewData,
-                                                                               ModelMetadataProvider metadataProvider)
+        internal static ModelMetadata FromLambdaExpression<TParameter, TValue>(
+            Expression<Func<TParameter, TValue>> expression,
+            ViewDataDictionary<TParameter> viewData,
+            ModelMetadataProvider metadataProvider
+        )
         {
             if (expression == null)
             {
@@ -291,7 +316,10 @@ namespace System.Web.Mvc
                 case ExpressionType.MemberAccess:
                     // Property/field access is always legal
                     MemberExpression memberExpression = (MemberExpression)expression.Body;
-                    propertyName = memberExpression.Member is PropertyInfo ? memberExpression.Member.Name : null;
+                    propertyName =
+                        memberExpression.Member is PropertyInfo
+                            ? memberExpression.Member.Name
+                            : null;
                     containerType = memberExpression.Expression.Type;
                     legalExpression = true;
                     break;
@@ -303,7 +331,9 @@ namespace System.Web.Mvc
 
             if (!legalExpression)
             {
-                throw new InvalidOperationException(MvcResources.TemplateHelpers_TemplateLimitations);
+                throw new InvalidOperationException(
+                    MvcResources.TemplateHelpers_TemplateLimitations
+                );
             }
 
             TParameter container = viewData.Model;
@@ -319,20 +349,45 @@ namespace System.Web.Mvc
                 }
             };
 
-            return GetMetadataFromProvider(modelAccessor, typeof(TValue), propertyName, container, containerType, metadataProvider);
+            return GetMetadataFromProvider(
+                modelAccessor,
+                typeof(TValue),
+                propertyName,
+                container,
+                containerType,
+                metadataProvider
+            );
         }
 
-        private static ModelMetadata FromModel(ViewDataDictionary viewData, ModelMetadataProvider metadataProvider)
+        private static ModelMetadata FromModel(
+            ViewDataDictionary viewData,
+            ModelMetadataProvider metadataProvider
+        )
         {
-            return viewData.ModelMetadata ?? GetMetadataFromProvider(null, typeof(string), null, null, null, metadataProvider);
+            return viewData.ModelMetadata
+                ?? GetMetadataFromProvider(
+                    null,
+                    typeof(string),
+                    null,
+                    null,
+                    null,
+                    metadataProvider
+                );
         }
 
-        public static ModelMetadata FromStringExpression(string expression, ViewDataDictionary viewData)
+        public static ModelMetadata FromStringExpression(
+            string expression,
+            ViewDataDictionary viewData
+        )
         {
             return FromStringExpression(expression, viewData, metadataProvider: null);
         }
 
-        internal static ModelMetadata FromStringExpression(string expression, ViewDataDictionary viewData, ModelMetadataProvider metadataProvider)
+        internal static ModelMetadata FromStringExpression(
+            string expression,
+            ViewDataDictionary viewData,
+            ModelMetadataProvider metadataProvider
+        )
         {
             if (expression == null)
             {
@@ -379,28 +434,52 @@ namespace System.Web.Mvc
             else if (viewData.ModelMetadata != null)
             {
                 //  Try getting a property from ModelMetadata if we couldn't find an answer in ViewData
-                ModelMetadata propertyMetadata = viewData.ModelMetadata.Properties.Where(p => p.PropertyName == expression).FirstOrDefault();
+                ModelMetadata propertyMetadata = viewData
+                    .ModelMetadata.Properties.Where(p => p.PropertyName == expression)
+                    .FirstOrDefault();
                 if (propertyMetadata != null)
                 {
                     return propertyMetadata;
                 }
             }
 
-            return GetMetadataFromProvider(modelAccessor, modelType ?? typeof(string), propertyName, container, containerType, metadataProvider);
+            return GetMetadataFromProvider(
+                modelAccessor,
+                modelType ?? typeof(string),
+                propertyName,
+                container,
+                containerType,
+                metadataProvider
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "The method is a delegating helper to choose among multiple property values")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "The method is a delegating helper to choose among multiple property values"
+        )]
         public string GetDisplayName()
         {
             return DisplayName ?? PropertyName ?? ModelType.Name;
         }
 
-        private static ModelMetadata GetMetadataFromProvider(Func<object> modelAccessor, Type modelType, string propertyName, object container, Type containerType, ModelMetadataProvider metadataProvider)
+        private static ModelMetadata GetMetadataFromProvider(
+            Func<object> modelAccessor,
+            Type modelType,
+            string propertyName,
+            object container,
+            Type containerType,
+            ModelMetadataProvider metadataProvider
+        )
         {
             metadataProvider = metadataProvider ?? ModelMetadataProviders.Current;
             if (containerType != null && !String.IsNullOrEmpty(propertyName))
             {
-                ModelMetadata metadata = metadataProvider.GetMetadataForProperty(modelAccessor, containerType, propertyName);
+                ModelMetadata metadata = metadataProvider.GetMetadataForProperty(
+                    modelAccessor,
+                    containerType,
+                    propertyName
+                );
                 if (metadata != null)
                 {
                     metadata.Container = container;
@@ -410,7 +489,11 @@ namespace System.Web.Mvc
             return metadataProvider.GetMetadataForType(modelAccessor, modelType);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "This method is used to resolve the simple display text when it was not explicitly set through other means.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This method is used to resolve the simple display text when it was not explicitly set through other means."
+        )]
         protected virtual string GetSimpleDisplayText()
         {
             if (Model == null)

@@ -24,6 +24,6 @@ public class TemporaryStringValueGeneratorTest
     }
 
     [ConditionalFact]
-    public void Generates_temp_values()
-        => Assert.True(new TemporaryStringValueGenerator().GeneratesTemporaryValues);
+    public void Generates_temp_values() =>
+        Assert.True(new TemporaryStringValueGenerator().GeneratesTemporaryValues);
 }

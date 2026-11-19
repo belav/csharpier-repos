@@ -4,11 +4,11 @@
 
 #nullable disable
 
+using System;
+using System.Linq;
 using Microsoft.CodeAnalysis.ExpressionEvaluator;
 using Microsoft.VisualStudio.Debugger.Evaluation;
 using Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation;
-using System;
-using System.Linq;
 using Roslyn.Test.Utilities;
 using Xunit;
 
@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         public void Proxy()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerTypeProxy(typeof(P))]
 class C
 {
@@ -62,25 +62,54 @@ class P
             var value = CreateDkmClrValue(
                 value: type.Instantiate(2),
                 type: type,
-                evalFlags: DkmEvaluationResultFlags.None);
+                evalFlags: DkmEvaluationResultFlags.None
+            );
             var evalResult = FormatResult(rootExpr, value);
-            Verify(evalResult,
-                EvalResult(rootExpr, "{C}", "C", "new C(2)", DkmEvaluationResultFlags.Expandable));
+            Verify(
+                evalResult,
+                EvalResult(rootExpr, "{C}", "C", "new C(2)", DkmEvaluationResultFlags.Expandable)
+            );
 
             var children = GetChildren(evalResult);
-            Verify(children,
+            Verify(
+                children,
                 EvalResult("F1", "2", "int", "new P(new C(2)).F1"),
                 EvalResult("F3", "4", "int", "new P(new C(2)).F3"),
                 EvalResult("F4", "5", "int", "new P(new C(2)).F4"),
-                EvalResult("P1", "2", "object {int}", "new P(new C(2)).P1", DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("P3", "4", "object {int}", "new P(new C(2)).P3", DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("P4", "5", "object {int}", "new P(new C(2)).P4", DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("Raw View", null, "", "new C(2), raw", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
+                EvalResult(
+                    "P1",
+                    "2",
+                    "object {int}",
+                    "new P(new C(2)).P1",
+                    DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "P3",
+                    "4",
+                    "object {int}",
+                    "new P(new C(2)).P3",
+                    DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "P4",
+                    "5",
+                    "object {int}",
+                    "new P(new C(2)).P4",
+                    DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "new C(2), raw",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                )
+            );
 
             // "Raw View".
             children = GetChildren(children[children.Length - 1]);
-            Verify(children,
-                EvalResult("F", "2", "int", "(new C(2)).F"));
+            Verify(children, EvalResult("F", "2", "int", "(new C(2)).F"));
         }
 
         /// <summary>
@@ -90,7 +119,7 @@ class P
         public void ProxyOnBase()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerTypeProxy(typeof(P))]
 class A
 {
@@ -131,19 +160,51 @@ class P
             var value = CreateDkmClrValue(
                 value: type.Instantiate(3),
                 type: type,
-                evalFlags: DkmEvaluationResultFlags.None);
+                evalFlags: DkmEvaluationResultFlags.None
+            );
             var rootExpr = "new C(3)";
             var evalResult = FormatResult(rootExpr, value);
-            Verify(evalResult,
-                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable));
+            Verify(
+                evalResult,
+                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable)
+            );
             var children = GetChildren(evalResult);
-            Verify(children,
-                EvalResult("PF", "3", "object {int}", "new P(new C(3)).PF", DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("Raw View", null, "", "new C(3), raw", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
+            Verify(
+                children,
+                EvalResult(
+                    "PF",
+                    "3",
+                    "object {int}",
+                    "new P(new C(3)).PF",
+                    DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "new C(3), raw",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                )
+            );
             children = GetChildren(children[1]);
-            Verify(children,
-                EvalResult("F", "3", "object {int}", "(new C(3)).F", DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("G", "4", "object {int}", "(new C(3)).G", DkmEvaluationResultFlags.ReadOnly));
+            Verify(
+                children,
+                EvalResult(
+                    "F",
+                    "3",
+                    "object {int}",
+                    "(new C(3)).F",
+                    DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "G",
+                    "4",
+                    "object {int}",
+                    "(new C(3)).G",
+                    DkmEvaluationResultFlags.ReadOnly
+                )
+            );
         }
 
         /// <summary>
@@ -153,7 +214,7 @@ class P
         public void ProxyOnRuntimeTypeBase()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerTypeProxy(typeof(P))]
 class A
 {
@@ -190,21 +251,55 @@ class P
             var value = CreateDkmClrValue(
                 value: type.Instantiate(),
                 type: type,
-                evalFlags: DkmEvaluationResultFlags.None);
+                evalFlags: DkmEvaluationResultFlags.None
+            );
             var rootExpr = "new C()";
             var evalResult = FormatResult(rootExpr, value);
-            Verify(evalResult,
-                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable));
+            Verify(
+                evalResult,
+                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable)
+            );
             var children = GetChildren(evalResult);
-            Verify(children,
-                EvalResult("A", "{B}", "A {B}", "(new C()).A", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite));
+            Verify(
+                children,
+                EvalResult(
+                    "A",
+                    "{B}",
+                    "A {B}",
+                    "(new C()).A",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite
+                )
+            );
             children = GetChildren(children[0]);
-            Verify(children,
-                EvalResult("G", "4", "object {int}", "new P((new C()).A).G", DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("Raw View", null, "", "(new C()).A, raw", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
+            Verify(
+                children,
+                EvalResult(
+                    "G",
+                    "4",
+                    "object {int}",
+                    "new P((new C()).A).G",
+                    DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "(new C()).A, raw",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                )
+            );
             children = GetChildren(children[1]);
-            Verify(children,
-                EvalResult("F", "4", "object {int}", "(new C()).A.F", DkmEvaluationResultFlags.ReadOnly));
+            Verify(
+                children,
+                EvalResult(
+                    "F",
+                    "4",
+                    "object {int}",
+                    "(new C()).A.F",
+                    DkmEvaluationResultFlags.ReadOnly
+                )
+            );
         }
 
         /// <summary>
@@ -214,7 +309,7 @@ class P
         public void ProxyOnRuntimeType()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 class A
 {
     internal A(object f)
@@ -251,28 +346,62 @@ class P
             var value = CreateDkmClrValue(
                 value: type.Instantiate(),
                 type: type,
-                evalFlags: DkmEvaluationResultFlags.None);
+                evalFlags: DkmEvaluationResultFlags.None
+            );
             var rootExpr = "new C()";
             var evalResult = FormatResult(rootExpr, value);
-            Verify(evalResult,
-                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable));
+            Verify(
+                evalResult,
+                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable)
+            );
             var children = GetChildren(evalResult);
-            Verify(children,
-                EvalResult("A", "{B}", "A {B}", "(new C()).A", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite));
+            Verify(
+                children,
+                EvalResult(
+                    "A",
+                    "{B}",
+                    "A {B}",
+                    "(new C()).A",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite
+                )
+            );
             children = GetChildren(children[0]);
-            Verify(children,
-                EvalResult("G", "4", "object {int}", "new P((new C()).A).G", DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("Raw View", null, "", "(new C()).A, raw", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
+            Verify(
+                children,
+                EvalResult(
+                    "G",
+                    "4",
+                    "object {int}",
+                    "new P((new C()).A).G",
+                    DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "(new C()).A, raw",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                )
+            );
             children = GetChildren(children[1]);
-            Verify(children,
-                EvalResult("F", "4", "object {int}", "(new C()).A.F", DkmEvaluationResultFlags.ReadOnly));
+            Verify(
+                children,
+                EvalResult(
+                    "F",
+                    "4",
+                    "object {int}",
+                    "(new C()).A.F",
+                    DkmEvaluationResultFlags.ReadOnly
+                )
+            );
         }
 
         [Fact]
         public void GenericTypeWithGenericTypeArgument()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerTypeProxy(typeof(PA<>))]
 class A<T>
 {
@@ -316,35 +445,92 @@ class C
             var value = CreateDkmClrValue(
                 value: type.Instantiate(),
                 type: type,
-                evalFlags: DkmEvaluationResultFlags.None);
+                evalFlags: DkmEvaluationResultFlags.None
+            );
             var rootExpr = "new C()";
             var evalResult = FormatResult(rootExpr, value);
-            Verify(evalResult,
-                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable));
+            Verify(
+                evalResult,
+                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable)
+            );
             var children = GetChildren(evalResult);
-            Verify(children,
-                EvalResult("b", "{B<A<string>>}", "B<A<string>>", "(new C()).b", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite));
+            Verify(
+                children,
+                EvalResult(
+                    "b",
+                    "{B<A<string>>}",
+                    "B<A<string>>",
+                    "(new C()).b",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite
+                )
+            );
             children = GetChildren(children[0]);
-            Verify(children,
-                EvalResult("PG", "{A<string>}", "A<string>", "new PB<A<string>>((new C()).b).PG", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("Raw View", null, "", "(new C()).b, raw", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
+            Verify(
+                children,
+                EvalResult(
+                    "PG",
+                    "{A<string>}",
+                    "A<string>",
+                    "new PB<A<string>>((new C()).b).PG",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "(new C()).b, raw",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                )
+            );
             var moreChildren = GetChildren(children[1]);
-            Verify(moreChildren,
-                EvalResult("G", "{A<string>}", "A<string>", "(new C()).b.G", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly));
+            Verify(
+                moreChildren,
+                EvalResult(
+                    "G",
+                    "{A<string>}",
+                    "A<string>",
+                    "(new C()).b.G",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly
+                )
+            );
             moreChildren = GetChildren(children[0]);
-            Verify(moreChildren,
-                EvalResult("PF", "\"A\"", "string", "new PA<string>(new PB<A<string>>((new C()).b).PG).PF", DkmEvaluationResultFlags.RawString | DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("Raw View", null, "", "new PB<A<string>>((new C()).b).PG, raw", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
+            Verify(
+                moreChildren,
+                EvalResult(
+                    "PF",
+                    "\"A\"",
+                    "string",
+                    "new PA<string>(new PB<A<string>>((new C()).b).PG).PF",
+                    DkmEvaluationResultFlags.RawString | DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "new PB<A<string>>((new C()).b).PG, raw",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                )
+            );
             moreChildren = GetChildren(moreChildren[1]);
-            Verify(moreChildren,
-                EvalResult("F", "\"A\"", "string", "(new PB<A<string>>((new C()).b).PG).F", DkmEvaluationResultFlags.RawString | DkmEvaluationResultFlags.ReadOnly));
+            Verify(
+                moreChildren,
+                EvalResult(
+                    "F",
+                    "\"A\"",
+                    "string",
+                    "(new PB<A<string>>((new C()).b).PG).F",
+                    DkmEvaluationResultFlags.RawString | DkmEvaluationResultFlags.ReadOnly
+                )
+            );
         }
 
         [Fact]
         public void GenericTypeProxyWrongArity()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerTypeProxy(typeof(PA<,>))]
 class A<T>
 {
@@ -407,42 +593,98 @@ class C
             var value = CreateDkmClrValue(
                 value: type.Instantiate(),
                 type: type,
-                evalFlags: DkmEvaluationResultFlags.None);
+                evalFlags: DkmEvaluationResultFlags.None
+            );
             var rootExpr = "new C()";
             var evalResult = FormatResult(rootExpr, value);
-            Verify(evalResult,
-                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable));
+            Verify(
+                evalResult,
+                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable)
+            );
             var children = GetChildren(evalResult);
-            Verify(children,
-                EvalResult("a", "{A<int>}", "A<int>", "(new C()).a", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite),
-                EvalResult("b", "{B<object>}", "B<object>", "(new C()).b", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite),
-                EvalResult("c", "{C<short>}", "C<short>", "(new C()).c", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite));
+            Verify(
+                children,
+                EvalResult(
+                    "a",
+                    "{A<int>}",
+                    "A<int>",
+                    "(new C()).a",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite
+                ),
+                EvalResult(
+                    "b",
+                    "{B<object>}",
+                    "B<object>",
+                    "(new C()).b",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite
+                ),
+                EvalResult(
+                    "c",
+                    "{C<short>}",
+                    "C<short>",
+                    "(new C()).c",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite
+                )
+            );
 
             // A<int> a = new A<int>(1);
             var more = GetChildren(children[0]);
-            Verify(more,
-                EvalResult("F", "1", "int", "(new C()).a.F", DkmEvaluationResultFlags.ReadOnly | DkmEvaluationResultFlags.CanFavorite));
+            Verify(
+                more,
+                EvalResult(
+                    "F",
+                    "1",
+                    "int",
+                    "(new C()).a.F",
+                    DkmEvaluationResultFlags.ReadOnly | DkmEvaluationResultFlags.CanFavorite
+                )
+            );
 
             // B<object> b = new B<object>(2);
             more = GetChildren(children[1]);
-            Verify(more,
-                EvalResult("F", "2", "object {int}", "(new C()).b.F", DkmEvaluationResultFlags.ReadOnly | DkmEvaluationResultFlags.CanFavorite));
+            Verify(
+                more,
+                EvalResult(
+                    "F",
+                    "2",
+                    "object {int}",
+                    "(new C()).b.F",
+                    DkmEvaluationResultFlags.ReadOnly | DkmEvaluationResultFlags.CanFavorite
+                )
+            );
 
             // C<short> c = new C<short>((short)3);
             more = GetChildren(children[2]);
-            Verify(more,
-                EvalResult("PF", "3", "short", "new C<short>.PC((new C()).c).PF", DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("Raw View", null, "", "(new C()).c, raw", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
+            Verify(
+                more,
+                EvalResult(
+                    "PF",
+                    "3",
+                    "short",
+                    "new C<short>.PC((new C()).c).PF",
+                    DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "(new C()).c, raw",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                )
+            );
             more = GetChildren(more[1]);
-            Verify(more,
-                EvalResult("F", "3", "short", "(new C()).c.F", DkmEvaluationResultFlags.ReadOnly));
+            Verify(
+                more,
+                EvalResult("F", "3", "short", "(new C()).c.F", DkmEvaluationResultFlags.ReadOnly)
+            );
         }
 
         [Fact]
         public void ProxyOnGenericBase()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerTypeProxy(typeof(P<,>))]
 class A<T, U>
 {
@@ -516,40 +758,153 @@ class C
             var value = CreateDkmClrValue(
                 value: type.Instantiate(),
                 type: type,
-                evalFlags: DkmEvaluationResultFlags.None);
+                evalFlags: DkmEvaluationResultFlags.None
+            );
             var rootExpr = "new C()";
             var evalResult = FormatResult(rootExpr, value);
-            Verify(evalResult,
-                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable));
+            Verify(
+                evalResult,
+                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable)
+            );
             var children = GetChildren(evalResult);
-            Verify(children,
-                EvalResult("_1", "{B1<int, object>}", "B1<int, object>", "(new C())._1", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite),
-                EvalResult("_2", "{B2<object>}", "B2<object>", "(new C())._2", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite),
-                EvalResult("_3", "{B3<int>}", "B3<int>", "(new C())._3", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite),
-                EvalResult("_4", "{C4<string>}", "C4<string>", "(new C())._4", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite));
-            Verify(GetChildren(children[0]),
-                EvalResult("PF", "{int[3]}", "int[]", "new P<int[], object[,,]>((new C())._1).PF", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("PG", "{object[1, 1, 1]}", "object[,,]", "new P<int[], object[,,]>((new C())._1).PG", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("Raw View", null, "", "(new C())._1, raw", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
-            Verify(GetChildren(children[1]),
-                EvalResult("PF", "null", "A<int*[], object>", "new P<A<int*[], object>, A<object, void**[]>>((new C())._2).PF", DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("PG", "null", "A<object, void**[]>", "new P<A<int*[], object>, A<object, void**[]>>((new C())._2).PG", DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("Raw View", null, "", "(new C())._2, raw", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
-            Verify(GetChildren(children[2]),
-                EvalResult("PF", "{B3<int>.C1}", "B3<int>.C1", "new P<B3<int>.C1, B3<int>.C2<object>>((new C())._3).PF", DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("PG", "{B3<int>.C2<object>}", "B3<int>.C2<object>", "new P<B3<int>.C1, B3<int>.C2<object>>((new C())._3).PG", DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("Raw View", null, "", "(new C())._3, raw", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
-            Verify(GetChildren(children[3]),
-                EvalResult("PF", "\"\"", "object {string}", "new P<object, object>((new C())._4).PF", DkmEvaluationResultFlags.RawString | DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("PG", "\"\"", "object {string}", "new P<object, object>((new C())._4).PG", DkmEvaluationResultFlags.RawString | DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("Raw View", null, "", "(new C())._4, raw", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
+            Verify(
+                children,
+                EvalResult(
+                    "_1",
+                    "{B1<int, object>}",
+                    "B1<int, object>",
+                    "(new C())._1",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite
+                ),
+                EvalResult(
+                    "_2",
+                    "{B2<object>}",
+                    "B2<object>",
+                    "(new C())._2",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite
+                ),
+                EvalResult(
+                    "_3",
+                    "{B3<int>}",
+                    "B3<int>",
+                    "(new C())._3",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite
+                ),
+                EvalResult(
+                    "_4",
+                    "{C4<string>}",
+                    "C4<string>",
+                    "(new C())._4",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.CanFavorite
+                )
+            );
+            Verify(
+                GetChildren(children[0]),
+                EvalResult(
+                    "PF",
+                    "{int[3]}",
+                    "int[]",
+                    "new P<int[], object[,,]>((new C())._1).PF",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "PG",
+                    "{object[1, 1, 1]}",
+                    "object[,,]",
+                    "new P<int[], object[,,]>((new C())._1).PG",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "(new C())._1, raw",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                )
+            );
+            Verify(
+                GetChildren(children[1]),
+                EvalResult(
+                    "PF",
+                    "null",
+                    "A<int*[], object>",
+                    "new P<A<int*[], object>, A<object, void**[]>>((new C())._2).PF",
+                    DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "PG",
+                    "null",
+                    "A<object, void**[]>",
+                    "new P<A<int*[], object>, A<object, void**[]>>((new C())._2).PG",
+                    DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "(new C())._2, raw",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                )
+            );
+            Verify(
+                GetChildren(children[2]),
+                EvalResult(
+                    "PF",
+                    "{B3<int>.C1}",
+                    "B3<int>.C1",
+                    "new P<B3<int>.C1, B3<int>.C2<object>>((new C())._3).PF",
+                    DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "PG",
+                    "{B3<int>.C2<object>}",
+                    "B3<int>.C2<object>",
+                    "new P<B3<int>.C1, B3<int>.C2<object>>((new C())._3).PG",
+                    DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "(new C())._3, raw",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                )
+            );
+            Verify(
+                GetChildren(children[3]),
+                EvalResult(
+                    "PF",
+                    "\"\"",
+                    "object {string}",
+                    "new P<object, object>((new C())._4).PF",
+                    DkmEvaluationResultFlags.RawString | DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "PG",
+                    "\"\"",
+                    "object {string}",
+                    "new P<object, object>((new C())._4).PG",
+                    DkmEvaluationResultFlags.RawString | DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "(new C())._4, raw",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1024016")]
         public void NonGenericProxyOnGenericBase()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 class A
 {
     internal object F = 1;
@@ -572,18 +927,41 @@ class P
             var value = CreateDkmClrValue(
                 value: type.Instantiate(),
                 type: type,
-                evalFlags: DkmEvaluationResultFlags.None);
+                evalFlags: DkmEvaluationResultFlags.None
+            );
             var rootExpr = "o"; // var o = new B<object>();
             var evalResult = FormatResult(rootExpr, value);
-            Verify(evalResult,
-                EvalResult(rootExpr, "{B<object>}", "B<object>", rootExpr, DkmEvaluationResultFlags.Expandable));
+            Verify(
+                evalResult,
+                EvalResult(
+                    rootExpr,
+                    "{B<object>}",
+                    "B<object>",
+                    rootExpr,
+                    DkmEvaluationResultFlags.Expandable
+                )
+            );
             var children = GetChildren(evalResult);
-            Verify(children,
-                EvalResult("G", "2", "object {int}", "new P(o).G", DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("Raw View", null, "", "o, raw", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
+            Verify(
+                children,
+                EvalResult(
+                    "G",
+                    "2",
+                    "object {int}",
+                    "new P(o).G",
+                    DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "o, raw",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                )
+            );
             children = GetChildren(children[1]);
-            Verify(children,
-                EvalResult("F", "1", "object {int}", "o.F"));
+            Verify(children, EvalResult("F", "1", "object {int}", "o.F"));
         }
 
         /// <summary>
@@ -593,7 +971,7 @@ class P
         public void NullInstance()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerTypeProxy(typeof(P))]
 class A
 {
@@ -617,21 +995,26 @@ class B
             var value = CreateDkmClrValue(
                 value: type.Instantiate(),
                 type: type,
-                evalFlags: DkmEvaluationResultFlags.None);
+                evalFlags: DkmEvaluationResultFlags.None
+            );
             var rootExpr = "new C()";
             var evalResult = FormatResult(rootExpr, value);
-            Verify(evalResult,
-                EvalResult(rootExpr, "{B}", "B", rootExpr, DkmEvaluationResultFlags.Expandable));
+            Verify(
+                evalResult,
+                EvalResult(rootExpr, "{B}", "B", rootExpr, DkmEvaluationResultFlags.Expandable)
+            );
             var children = GetChildren(evalResult);
-            Verify(children,
-                EvalResult("a", "null", "A", "(new C()).a", DkmEvaluationResultFlags.CanFavorite));
+            Verify(
+                children,
+                EvalResult("a", "null", "A", "(new C()).a", DkmEvaluationResultFlags.CanFavorite)
+            );
         }
 
         [Fact]
         public void EmptyProxy()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerTypeProxy(typeof(P))]
 class C
 {
@@ -648,17 +1031,28 @@ class P
             var value = CreateDkmClrValue(
                 value: type.Instantiate(),
                 type: type,
-                evalFlags: DkmEvaluationResultFlags.None);
+                evalFlags: DkmEvaluationResultFlags.None
+            );
             var rootExpr = "new C()";
             var evalResult = FormatResult(rootExpr, value);
-            Verify(evalResult,
-                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable));
+            Verify(
+                evalResult,
+                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable)
+            );
             var children = GetChildren(evalResult);
-            Verify(children,
-                EvalResult("Raw View", null, "", "new C(), raw", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
+            Verify(
+                children,
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "new C(), raw",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                )
+            );
             children = GetChildren(children[0]);
-            Verify(children,
-                EvalResult("F", "1", "int", "(new C()).F"));
+            Verify(children, EvalResult("F", "1", "int", "(new C()).F"));
         }
 
         /// <summary>
@@ -669,7 +1063,7 @@ class P
         public void EmptyRawView()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerTypeProxy(typeof(P))]
 class C
 {
@@ -695,15 +1089,33 @@ class P
             var value = CreateDkmClrValue(
                 value: type.Instantiate(),
                 type: type,
-                evalFlags: DkmEvaluationResultFlags.None);
+                evalFlags: DkmEvaluationResultFlags.None
+            );
             var rootExpr = "new C()";
             var evalResult = FormatResult(rootExpr, value);
-            Verify(evalResult,
-                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable));
+            Verify(
+                evalResult,
+                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable)
+            );
             var children = GetChildren(evalResult);
-            Verify(children,
-                EvalResult("F", "3", "object {int}", "new P(new C()).F", DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("Raw View", null, "", "new C(), raw", DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
+            Verify(
+                children,
+                EvalResult(
+                    "F",
+                    "3",
+                    "object {int}",
+                    "new P(new C()).F",
+                    DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "new C(), raw",
+                    DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                )
+            );
         }
 
         /// <summary>
@@ -713,7 +1125,7 @@ class P
         public void ValueTypeProxy()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerTypeProxy(typeof(S))]
 class C
 {
@@ -736,18 +1148,35 @@ struct S
             var value = CreateDkmClrValue(
                 value: type.Instantiate(),
                 type: type,
-                evalFlags: DkmEvaluationResultFlags.None);
+                evalFlags: DkmEvaluationResultFlags.None
+            );
             var rootExpr = "new C()";
             var evalResult = FormatResult(rootExpr, value);
-            Verify(evalResult,
-                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable));
+            Verify(
+                evalResult,
+                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable)
+            );
             var children = GetChildren(evalResult);
-            Verify(children,
-                EvalResult("P", "4", "object {int}", "new S(new C()).P", DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("Raw View", null, "", "new C(), raw", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
+            Verify(
+                children,
+                EvalResult(
+                    "P",
+                    "4",
+                    "object {int}",
+                    "new S(new C()).P",
+                    DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "new C(), raw",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                )
+            );
             children = GetChildren(children[1]);
-            Verify(children,
-                EvalResult("F", "3", "int", "(new C()).F"));
+            Verify(children, EvalResult("F", "3", "int", "(new C()).F"));
         }
 
         /// <summary>
@@ -757,7 +1186,7 @@ struct S
         public void ProxyWithBaseType()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerTypeProxy(typeof(B))]
 class C
 {
@@ -779,18 +1208,29 @@ class B : A
             var value = CreateDkmClrValue(
                 value: type.Instantiate(),
                 type: type,
-                evalFlags: DkmEvaluationResultFlags.None);
+                evalFlags: DkmEvaluationResultFlags.None
+            );
             var rootExpr = "new C()";
             var evalResult = FormatResult(rootExpr, value);
-            Verify(evalResult,
-                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable));
+            Verify(
+                evalResult,
+                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable)
+            );
             var children = GetChildren(evalResult);
-            Verify(children,
+            Verify(
+                children,
                 EvalResult("G", "5", "object {int}", "new B(new C()).G"),
-                EvalResult("Raw View", null, "", "new C(), raw", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "new C(), raw",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                )
+            );
             var more = GetChildren(children[1]);
-            Verify(more,
-                EvalResult("F", "4", "int", "(new C()).F"));
+            Verify(more, EvalResult("F", "4", "int", "(new C()).F"));
         }
 
         /// <summary>
@@ -801,7 +1241,7 @@ class B : A
         public void HideIndexers()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerTypeProxy(typeof(P))]
 class C
 {
@@ -835,22 +1275,40 @@ class P
             var value = CreateDkmClrValue(
                 value: type.Instantiate(),
                 type: type,
-                evalFlags: DkmEvaluationResultFlags.None);
+                evalFlags: DkmEvaluationResultFlags.None
+            );
             var rootExpr = "new C()";
             var evalResult = FormatResult(rootExpr, value);
-            Verify(evalResult,
-                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable));
+            Verify(
+                evalResult,
+                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable)
+            );
             var children = GetChildren(evalResult);
-            Verify(children,
-                EvalResult("F", "3", "object {int}", "new P(new C()).F", DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("Raw View", null, "", "new C(), raw", DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
+            Verify(
+                children,
+                EvalResult(
+                    "F",
+                    "3",
+                    "object {int}",
+                    "new P(new C()).F",
+                    DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "new C(), raw",
+                    DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                )
+            );
         }
 
         [Fact]
         public void Pointers()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerTypeProxy(typeof(P))]
 unsafe class C
 {
@@ -881,24 +1339,48 @@ unsafe class P
                 var value = CreateDkmClrValue(
                     value: ReflectionUtilities.Instantiate(type, p),
                     type: type,
-                    evalFlags: DkmEvaluationResultFlags.None);
+                    evalFlags: DkmEvaluationResultFlags.None
+                );
                 var rootExpr = "new C()";
                 var evalResult = FormatResult(rootExpr, value);
-                Verify(evalResult,
-                    EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable));
+                Verify(
+                    evalResult,
+                    EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable)
+                );
                 var children = GetChildren(evalResult);
-                Verify(children,
-                    EvalResult("Q", PointerToString(new IntPtr(p)), "int*", "new P(new C()).Q", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly),
-                    EvalResult("Raw View", null, "", "new C(), raw", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
+                Verify(
+                    children,
+                    EvalResult(
+                        "Q",
+                        PointerToString(new IntPtr(p)),
+                        "int*",
+                        "new P(new C()).Q",
+                        DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly
+                    ),
+                    EvalResult(
+                        "Raw View",
+                        null,
+                        "",
+                        "new C(), raw",
+                        DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                        DkmEvaluationResultCategory.Data
+                    )
+                );
                 var more = GetChildren(children[0]);
-                Verify(more,
-                    EvalResult("*new P(new C()).Q", "4", "int", "*new P(new C()).Q"));
+                Verify(more, EvalResult("*new P(new C()).Q", "4", "int", "*new P(new C()).Q"));
                 more = GetChildren(children[1]);
-                Verify(more,
-                    EvalResult("P", PointerToString(new IntPtr(p)), "int*", "(new C()).P", DkmEvaluationResultFlags.Expandable));
+                Verify(
+                    more,
+                    EvalResult(
+                        "P",
+                        PointerToString(new IntPtr(p)),
+                        "int*",
+                        "(new C()).P",
+                        DkmEvaluationResultFlags.Expandable
+                    )
+                );
                 more = GetChildren(more[0]);
-                Verify(more,
-                    EvalResult("*(new C()).P", "4", "int", "*(new C()).P"));
+                Verify(more, EvalResult("*(new C()).P", "4", "int", "*(new C()).P"));
             }
         }
 
@@ -906,7 +1388,7 @@ unsafe class P
         public void StaticMembers()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerTypeProxy(typeof(PA))]
 class A
 {
@@ -943,54 +1425,118 @@ class PB
             var value = CreateDkmClrValue(
                 value: typeA.Instantiate(),
                 type: typeA,
-                evalFlags: DkmEvaluationResultFlags.None);
+                evalFlags: DkmEvaluationResultFlags.None
+            );
             var rootExpr = "new C()";
             var evalResult = FormatResult(rootExpr, value);
-            Verify(evalResult,
-                EvalResult(rootExpr, "{A}", "A", rootExpr, DkmEvaluationResultFlags.Expandable));
+            Verify(
+                evalResult,
+                EvalResult(rootExpr, "{A}", "A", rootExpr, DkmEvaluationResultFlags.Expandable)
+            );
             var children = GetChildren(evalResult);
-            Verify(children,
-                EvalResult("P", "1", "object {int}", "new PA(new C()).P", DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("Static members", null, "", "PA", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Class),
-                EvalResult("Raw View", null, "", "new C(), raw", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
-            Verify(GetChildren(children[1]),
-                EvalResult("Q", "2", "object {int}", "PA.Q", DkmEvaluationResultFlags.ReadOnly));
+            Verify(
+                children,
+                EvalResult(
+                    "P",
+                    "1",
+                    "object {int}",
+                    "new PA(new C()).P",
+                    DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "Static members",
+                    null,
+                    "",
+                    "PA",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Class
+                ),
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "new C(), raw",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                )
+            );
+            Verify(
+                GetChildren(children[1]),
+                EvalResult("Q", "2", "object {int}", "PA.Q", DkmEvaluationResultFlags.ReadOnly)
+            );
             children = GetChildren(children[2]);
-            Verify(children,
+            Verify(
+                children,
                 EvalResult("F", "1", "object {int}", "(new C()).F"),
-                EvalResult("Static members", null, "", "A", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Class));
+                EvalResult(
+                    "Static members",
+                    null,
+                    "",
+                    "A",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Class
+                )
+            );
             children = GetChildren(children[1]);
-            Verify(children,
-                EvalResult("P", "2", "object {int}", "A.P", DkmEvaluationResultFlags.ReadOnly));
+            Verify(
+                children,
+                EvalResult("P", "2", "object {int}", "A.P", DkmEvaluationResultFlags.ReadOnly)
+            );
 
             // B
             value = CreateDkmClrValue(
                 value: typeB.Instantiate(),
                 type: typeB,
-                evalFlags: DkmEvaluationResultFlags.None);
+                evalFlags: DkmEvaluationResultFlags.None
+            );
             rootExpr = "new B()";
             evalResult = FormatResult(rootExpr, value);
-            Verify(evalResult,
-                EvalResult(rootExpr, "{B}", "B", rootExpr, DkmEvaluationResultFlags.Expandable));
+            Verify(
+                evalResult,
+                EvalResult(rootExpr, "{B}", "B", rootExpr, DkmEvaluationResultFlags.Expandable)
+            );
             children = GetChildren(evalResult);
-            Verify(children,
-                EvalResult("Static members", null, "", "PB", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Class),
-                EvalResult("Raw View", null, "", "new B(), raw", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
-            Verify(GetChildren(children[0]),
-                EvalResult("G", "3", "object {int}", "PB.G"));
+            Verify(
+                children,
+                EvalResult(
+                    "Static members",
+                    null,
+                    "",
+                    "PB",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Class
+                ),
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "new B(), raw",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                )
+            );
+            Verify(GetChildren(children[0]), EvalResult("G", "3", "object {int}", "PB.G"));
             children = GetChildren(children[1]);
-            Verify(children,
-                EvalResult("Static members", null, "", "B", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Class));
+            Verify(
+                children,
+                EvalResult(
+                    "Static members",
+                    null,
+                    "",
+                    "B",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Class
+                )
+            );
             children = GetChildren(children[0]);
-            Verify(children,
-                EvalResult("F", "3", "object {int}", "B.F"));
+            Verify(children, EvalResult("F", "3", "object {int}", "B.F"));
         }
 
         [Fact]
         public void NullInstanceStaticMembers()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerTypeProxy(typeof(P))]
 class C
 {
@@ -1008,19 +1554,33 @@ class P
             var value = CreateDkmClrValue(
                 value: null,
                 type: type,
-                evalFlags: DkmEvaluationResultFlags.None);
+                evalFlags: DkmEvaluationResultFlags.None
+            );
             var rootExpr = "new C()";
             var evalResult = FormatResult(rootExpr, value);
-            Verify(evalResult,
-                EvalResult(rootExpr, "null", "C", rootExpr, DkmEvaluationResultFlags.Expandable));
+            Verify(
+                evalResult,
+                EvalResult(rootExpr, "null", "C", rootExpr, DkmEvaluationResultFlags.Expandable)
+            );
             var children = GetChildren(evalResult);
-            Verify(children,
-                EvalResult("Static members", null, "", "C", DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Class));
+            Verify(
+                children,
+                EvalResult(
+                    "Static members",
+                    null,
+                    "",
+                    "C",
+                    DkmEvaluationResultFlags.Expandable | DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Class
+                )
+            );
             // Note: The native EE uses the proxy type, even for
             // null instances, so statics on the proxy type are
             // displayed. That case is not supported currently.
-            Verify(GetChildren(children[0]),
-                EvalResult("P", "2", "object {int}", "C.P", DkmEvaluationResultFlags.ReadOnly));
+            Verify(
+                GetChildren(children[0]),
+                EvalResult("P", "2", "object {int}", "C.P", DkmEvaluationResultFlags.ReadOnly)
+            );
         }
 
         /// <summary>
@@ -1030,7 +1590,7 @@ class P
         public void OrderedMembers()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerTypeProxy(typeof(P))]
 class C
 {
@@ -1050,25 +1610,49 @@ class P
             var value = CreateDkmClrValue(
                 value: type.Instantiate(),
                 type: type,
-                evalFlags: DkmEvaluationResultFlags.None);
+                evalFlags: DkmEvaluationResultFlags.None
+            );
             var rootExpr = "new C()";
             var evalResult = FormatResult(rootExpr, value);
-            Verify(evalResult,
-                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable));
+            Verify(
+                evalResult,
+                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable)
+            );
             var children = GetChildren(evalResult);
-            Verify(children,
+            Verify(
+                children,
                 EvalResult("A", "1", "object {int}", "new P(new C()).A"),
-                EvalResult("B", "3", "object {int}", "new P(new C()).B", DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("C", "2", "object {int}", "new P(new C()).C", DkmEvaluationResultFlags.ReadOnly),
+                EvalResult(
+                    "B",
+                    "3",
+                    "object {int}",
+                    "new P(new C()).B",
+                    DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "C",
+                    "2",
+                    "object {int}",
+                    "new P(new C()).C",
+                    DkmEvaluationResultFlags.ReadOnly
+                ),
                 EvalResult("D", "0", "object {int}", "new P(new C()).D"),
-                EvalResult("Raw View", null, "", "new C(), raw", DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "new C(), raw",
+                    DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                )
+            );
         }
 
         [Fact]
         public void InstantiateProxyTypeException()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerTypeProxy(typeof(P))]
 class C
 {
@@ -1091,25 +1675,32 @@ class P
             var value = CreateDkmClrValue(
                 value: type.Instantiate(3),
                 type: type,
-                evalFlags: DkmEvaluationResultFlags.None);
+                evalFlags: DkmEvaluationResultFlags.None
+            );
             var rootExpr = "new C(3)";
-            var actualProxyType = ((DkmClrDebuggerTypeProxyAttribute)value.Type.GetEvalAttributes().First()).ProxyType;
+            var actualProxyType = (
+                (DkmClrDebuggerTypeProxyAttribute)value.Type.GetEvalAttributes().First()
+            ).ProxyType;
             Assert.Equal(((TypeImpl)actualProxyType.GetLmrType()).Type, typeP);
             var evalResult = FormatResult(rootExpr, value);
-            Verify(evalResult,
-                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable));
+            Verify(
+                evalResult,
+                EvalResult(rootExpr, "{C}", "C", rootExpr, DkmEvaluationResultFlags.Expandable)
+            );
             // Exception from InstantiateProxyType should
             // have been caught and proxy type dropped.
             var children = GetChildren(evalResult);
-            Verify(children,
-                EvalResult("F", "3", "int", "(new C(3)).F", DkmEvaluationResultFlags.CanFavorite));
+            Verify(
+                children,
+                EvalResult("F", "3", "int", "(new C(3)).F", DkmEvaluationResultFlags.CanFavorite)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18581")]
         public void AccessibilityTrumpedByAttribute()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerTypeProxy(typeof(P))]
 class C
 {
@@ -1137,17 +1728,47 @@ class P
             var value = CreateDkmClrValue(
                 value: type.Instantiate(),
                 type: type,
-                evalFlags: DkmEvaluationResultFlags.None);
-            var evalResult = FormatResult("new C()", value, inspectionContext: CreateDkmInspectionContext(DkmEvaluationFlags.HideNonPublicMembers));
-            Verify(evalResult,
-                EvalResult("new C()", "{C}", "C", "new C()", DkmEvaluationResultFlags.Expandable));
+                evalFlags: DkmEvaluationResultFlags.None
+            );
+            var evalResult = FormatResult(
+                "new C()",
+                value,
+                inspectionContext: CreateDkmInspectionContext(
+                    DkmEvaluationFlags.HideNonPublicMembers
+                )
+            );
+            Verify(
+                evalResult,
+                EvalResult("new C()", "{C}", "C", "new C()", DkmEvaluationResultFlags.Expandable)
+            );
             var children = GetChildren(evalResult);
-            Verify(children,
-                EvalResult("InternalCollapsed", "1", "object {int}", "new P(new C()).InternalCollapsed", DkmEvaluationResultFlags.ReadOnly),
-                EvalResult("PrivateCollapsed", "3", "object {int}", "new P(new C()).PrivateCollapsed", DkmEvaluationResultFlags.ReadOnly),
+            Verify(
+                children,
+                EvalResult(
+                    "InternalCollapsed",
+                    "1",
+                    "object {int}",
+                    "new P(new C()).InternalCollapsed",
+                    DkmEvaluationResultFlags.ReadOnly
+                ),
+                EvalResult(
+                    "PrivateCollapsed",
+                    "3",
+                    "object {int}",
+                    "new P(new C()).PrivateCollapsed",
+                    DkmEvaluationResultFlags.ReadOnly
+                ),
                 EvalResult("[0]", "10", "int", "new P(new C()).PrivateRootHidden[0]"),
                 EvalResult("[1]", "20", "int", "new P(new C()).PrivateRootHidden[1]"),
-                EvalResult("Raw View", null, "", "new C(), raw", DkmEvaluationResultFlags.ReadOnly, DkmEvaluationResultCategory.Data));
+                EvalResult(
+                    "Raw View",
+                    null,
+                    "",
+                    "new C(), raw",
+                    DkmEvaluationResultFlags.ReadOnly,
+                    DkmEvaluationResultCategory.Data
+                )
+            );
         }
     }
 }

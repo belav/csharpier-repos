@@ -3,15 +3,12 @@
 
 using System;
 using System.Collections.Generic;
-
-using Internal.TypeSystem;
-
-using ILCompiler.Metadata;
 using ILCompiler.DependencyAnalysis;
-
+using ILCompiler.Metadata;
+using Internal.TypeSystem;
+using CustomAttributeHandle = System.Reflection.Metadata.CustomAttributeHandle;
 using Debug = System.Diagnostics.Debug;
 using EcmaModule = Internal.TypeSystem.Ecma.EcmaModule;
-using CustomAttributeHandle = System.Reflection.Metadata.CustomAttributeHandle;
 using ExportedTypeHandle = System.Reflection.Metadata.ExportedTypeHandle;
 
 namespace ILCompiler
@@ -19,26 +16,40 @@ namespace ILCompiler
     /// <summary>
     /// A metadata manager that knows the full set of metadata ahead of time.
     /// </summary>
-    public sealed class AnalysisBasedMetadataManager : GeneratingMetadataManager, ICompilationRootProvider
+    public sealed class AnalysisBasedMetadataManager
+        : GeneratingMetadataManager,
+            ICompilationRootProvider
     {
         private readonly List<ModuleDesc> _modulesWithMetadata;
         private readonly List<MetadataType> _typesWithRootedCctorContext;
         private readonly List<TypeDesc> _forcedTypes;
 
-        private readonly Dictionary<TypeDesc, MetadataCategory> _reflectableTypes = new Dictionary<TypeDesc, MetadataCategory>();
-        private readonly Dictionary<MethodDesc, MetadataCategory> _reflectableMethods = new Dictionary<MethodDesc, MetadataCategory>();
-        private readonly Dictionary<FieldDesc, MetadataCategory> _reflectableFields = new Dictionary<FieldDesc, MetadataCategory>();
-        private readonly HashSet<ReflectableCustomAttribute> _reflectableAttributes = new HashSet<ReflectableCustomAttribute>();
+        private readonly Dictionary<TypeDesc, MetadataCategory> _reflectableTypes =
+            new Dictionary<TypeDesc, MetadataCategory>();
+        private readonly Dictionary<MethodDesc, MetadataCategory> _reflectableMethods =
+            new Dictionary<MethodDesc, MetadataCategory>();
+        private readonly Dictionary<FieldDesc, MetadataCategory> _reflectableFields =
+            new Dictionary<FieldDesc, MetadataCategory>();
+        private readonly HashSet<ReflectableCustomAttribute> _reflectableAttributes =
+            new HashSet<ReflectableCustomAttribute>();
 
         public AnalysisBasedMetadataManager(CompilerTypeSystemContext typeSystemContext)
-            : this(typeSystemContext, new FullyBlockedMetadataBlockingPolicy(),
-                new FullyBlockedManifestResourceBlockingPolicy(), null, new NoStackTraceEmissionPolicy(),
-                new NoDynamicInvokeThunkGenerationPolicy(), Array.Empty<ModuleDesc>(), Array.Empty<TypeDesc>(),
-                Array.Empty<ReflectableEntity<TypeDesc>>(), Array.Empty<ReflectableEntity<MethodDesc>>(),
-                Array.Empty<ReflectableEntity<FieldDesc>>(), Array.Empty<ReflectableCustomAttribute>(),
-                Array.Empty<MetadataType>(), default)
-        {
-        }
+            : this(
+                typeSystemContext,
+                new FullyBlockedMetadataBlockingPolicy(),
+                new FullyBlockedManifestResourceBlockingPolicy(),
+                null,
+                new NoStackTraceEmissionPolicy(),
+                new NoDynamicInvokeThunkGenerationPolicy(),
+                Array.Empty<ModuleDesc>(),
+                Array.Empty<TypeDesc>(),
+                Array.Empty<ReflectableEntity<TypeDesc>>(),
+                Array.Empty<ReflectableEntity<MethodDesc>>(),
+                Array.Empty<ReflectableEntity<FieldDesc>>(),
+                Array.Empty<ReflectableCustomAttribute>(),
+                Array.Empty<MetadataType>(),
+                default
+            ) { }
 
         public AnalysisBasedMetadataManager(
             CompilerTypeSystemContext typeSystemContext,
@@ -54,8 +65,17 @@ namespace ILCompiler
             IEnumerable<ReflectableEntity<FieldDesc>> reflectableFields,
             IEnumerable<ReflectableCustomAttribute> reflectableAttributes,
             IEnumerable<MetadataType> rootedCctorContexts,
-            MetadataManagerOptions options)
-            : base(typeSystemContext, blockingPolicy, resourceBlockingPolicy, logFile, stackTracePolicy, invokeThunkGenerationPolicy, options)
+            MetadataManagerOptions options
+        )
+            : base(
+                typeSystemContext,
+                blockingPolicy,
+                resourceBlockingPolicy,
+                logFile,
+                stackTracePolicy,
+                invokeThunkGenerationPolicy,
+                options
+            )
         {
             _modulesWithMetadata = new List<ModuleDesc>(modulesWithMetadata);
             _typesWithRootedCctorContext = new List<MetadataType>(rootedCctorContexts);
@@ -70,10 +90,20 @@ namespace ILCompiler
             {
                 // Asking for description or runtime mapping for a member without asking
                 // for the owning type would mean we can't actually satisfy the request.
-                Debug.Assert((refMethod.Category & MetadataCategory.Description) == 0
-                    || (_reflectableTypes[refMethod.Entity.OwningType] & MetadataCategory.Description) != 0);
-                Debug.Assert((refMethod.Category & MetadataCategory.RuntimeMapping) == 0
-                    || (_reflectableTypes[refMethod.Entity.OwningType] & MetadataCategory.RuntimeMapping) != 0);
+                Debug.Assert(
+                    (refMethod.Category & MetadataCategory.Description) == 0
+                        || (
+                            _reflectableTypes[refMethod.Entity.OwningType]
+                            & MetadataCategory.Description
+                        ) != 0
+                );
+                Debug.Assert(
+                    (refMethod.Category & MetadataCategory.RuntimeMapping) == 0
+                        || (
+                            _reflectableTypes[refMethod.Entity.OwningType]
+                            & MetadataCategory.RuntimeMapping
+                        ) != 0
+                );
                 _reflectableMethods.Add(refMethod.Entity, refMethod.Category);
             }
 
@@ -81,10 +111,20 @@ namespace ILCompiler
             {
                 // Asking for description or runtime mapping for a member without asking
                 // for the owning type would mean we can't actually satisfy the request.
-                Debug.Assert((refField.Category & MetadataCategory.Description) == 0
-                    || (_reflectableTypes[refField.Entity.OwningType] & MetadataCategory.Description) != 0);
-                Debug.Assert((refField.Category & MetadataCategory.RuntimeMapping) == 0
-                    || (_reflectableTypes[refField.Entity.OwningType] & MetadataCategory.RuntimeMapping) != 0);
+                Debug.Assert(
+                    (refField.Category & MetadataCategory.Description) == 0
+                        || (
+                            _reflectableTypes[refField.Entity.OwningType]
+                            & MetadataCategory.Description
+                        ) != 0
+                );
+                Debug.Assert(
+                    (refField.Category & MetadataCategory.RuntimeMapping) == 0
+                        || (
+                            _reflectableTypes[refField.Entity.OwningType]
+                            & MetadataCategory.RuntimeMapping
+                        ) != 0
+                );
                 _reflectableFields.Add(refField.Entity, refField.Category);
             }
 
@@ -99,29 +139,49 @@ namespace ILCompiler
             {
                 // The instantiated types need to agree on the Description bit with the definition.
                 // GetMetadataCategory relies on that.
-                Debug.Assert((GetMetadataCategory(refType.Entity.GetTypeDefinition()) & MetadataCategory.Description)
-                    == (GetMetadataCategory(refType.Entity) & MetadataCategory.Description));
+                Debug.Assert(
+                    (
+                        GetMetadataCategory(refType.Entity.GetTypeDefinition())
+                        & MetadataCategory.Description
+                    ) == (GetMetadataCategory(refType.Entity) & MetadataCategory.Description)
+                );
 
-                Debug.Assert(!(refType.Entity is MetadataType) || moduleHash.Contains(((MetadataType)refType.Entity).Module));
+                Debug.Assert(
+                    !(refType.Entity is MetadataType)
+                        || moduleHash.Contains(((MetadataType)refType.Entity).Module)
+                );
             }
 
             foreach (var refMethod in reflectableMethods)
             {
                 // The instantiated methods need to agree on the Description bit with the definition.
                 // GetMetadataCategory relies on that.
-                Debug.Assert((GetMetadataCategory(refMethod.Entity.GetTypicalMethodDefinition()) & MetadataCategory.Description)
-                    == (GetMetadataCategory(refMethod.Entity) & MetadataCategory.Description));
+                Debug.Assert(
+                    (
+                        GetMetadataCategory(refMethod.Entity.GetTypicalMethodDefinition())
+                        & MetadataCategory.Description
+                    ) == (GetMetadataCategory(refMethod.Entity) & MetadataCategory.Description)
+                );
 
                 // Canonical form of the method needs to agree with the logical form
-                Debug.Assert(GetMetadataCategory(refMethod.Entity) == GetMetadataCategory(refMethod.Entity.GetCanonMethodTarget(CanonicalFormKind.Specific)));
+                Debug.Assert(
+                    GetMetadataCategory(refMethod.Entity)
+                        == GetMetadataCategory(
+                            refMethod.Entity.GetCanonMethodTarget(CanonicalFormKind.Specific)
+                        )
+                );
             }
 
             foreach (var refField in reflectableFields)
             {
                 // The instantiated fields need to agree on the Description bit with the definition.
                 // GetMetadataCategory relies on that.
-                Debug.Assert((GetMetadataCategory(refField.Entity.GetTypicalFieldDefinition()) & MetadataCategory.Description)
-                    == (GetMetadataCategory(refField.Entity) & MetadataCategory.Description));
+                Debug.Assert(
+                    (
+                        GetMetadataCategory(refField.Entity.GetTypicalFieldDefinition())
+                        & MetadataCategory.Description
+                    ) == (GetMetadataCategory(refField.Entity) & MetadataCategory.Description)
+                );
             }
 #endif
         }
@@ -131,19 +191,24 @@ namespace ILCompiler
             return _modulesWithMetadata;
         }
 
-        protected override void ComputeMetadata(NodeFactory factory,
+        protected override void ComputeMetadata(
+            NodeFactory factory,
             out byte[] metadataBlob,
             out List<MetadataMapping<MetadataType>> typeMappings,
             out List<MetadataMapping<MethodDesc>> methodMappings,
             out List<MetadataMapping<FieldDesc>> fieldMappings,
-            out List<StackTraceMapping> stackTraceMapping)
+            out List<StackTraceMapping> stackTraceMapping
+        )
         {
-            ComputeMetadata(new Policy(_blockingPolicy, this), factory,
+            ComputeMetadata(
+                new Policy(_blockingPolicy, this),
+                factory,
                 out metadataBlob,
                 out typeMappings,
                 out methodMappings,
                 out fieldMappings,
-                out stackTraceMapping);
+                out stackTraceMapping
+            );
         }
 
         protected sealed override MetadataCategory GetMetadataCategory(MethodDesc method)
@@ -217,8 +282,10 @@ namespace ILCompiler
             private readonly MetadataBlockingPolicy _blockingPolicy;
             private readonly AnalysisBasedMetadataManager _parent;
 
-            public Policy(MetadataBlockingPolicy blockingPolicy,
-                AnalysisBasedMetadataManager parent)
+            public Policy(
+                MetadataBlockingPolicy blockingPolicy,
+                AnalysisBasedMetadataManager parent
+            )
             {
                 _blockingPolicy = blockingPolicy;
                 _parent = parent;
@@ -241,7 +308,9 @@ namespace ILCompiler
 
             public bool GeneratesMetadata(EcmaModule module, CustomAttributeHandle caHandle)
             {
-                return _parent._reflectableAttributes.Contains(new ReflectableCustomAttribute(module, caHandle));
+                return _parent._reflectableAttributes.Contains(
+                    new ReflectableCustomAttribute(module, caHandle)
+                );
             }
 
             public bool GeneratesMetadata(EcmaModule module, ExportedTypeHandle exportedTypeHandle)
@@ -250,7 +319,8 @@ namespace ILCompiler
                 // with compilation modes that generate multiple metadata blobs.
                 // (Multi-module or .NET Native style shared library.)
                 // We are currently missing type forwarders pointing to the other blobs.
-                var targetType = (MetadataType)module.GetObject(exportedTypeHandle, NotFoundBehavior.ReturnNull);
+                var targetType = (MetadataType)
+                    module.GetObject(exportedTypeHandle, NotFoundBehavior.ReturnNull);
                 if (targetType == null)
                 {
                     // No harm in generating a forwarder that didn't resolve.
@@ -290,13 +360,16 @@ namespace ILCompiler
         public readonly EcmaModule Module;
         public readonly CustomAttributeHandle CustomAttributeHandle;
 
-        public ReflectableCustomAttribute(EcmaModule module, CustomAttributeHandle caHandle)
-            => (Module, CustomAttributeHandle) = (module, caHandle);
+        public ReflectableCustomAttribute(EcmaModule module, CustomAttributeHandle caHandle) =>
+            (Module, CustomAttributeHandle) = (module, caHandle);
 
-        public bool Equals(ReflectableCustomAttribute other)
-            => other.Module == Module && other.CustomAttributeHandle == CustomAttributeHandle;
-        public override bool Equals(object obj)
-            => obj is ReflectableCustomAttribute other && Equals(other);
-        public override int GetHashCode() => Module.GetHashCode() ^ CustomAttributeHandle.GetHashCode();
+        public bool Equals(ReflectableCustomAttribute other) =>
+            other.Module == Module && other.CustomAttributeHandle == CustomAttributeHandle;
+
+        public override bool Equals(object obj) =>
+            obj is ReflectableCustomAttribute other && Equals(other);
+
+        public override int GetHashCode() =>
+            Module.GetHashCode() ^ CustomAttributeHandle.GetHashCode();
     }
 }

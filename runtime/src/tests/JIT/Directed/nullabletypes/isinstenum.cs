@@ -3,7 +3,6 @@
 
 #pragma warning disable 0184
 
-
 using System;
 using System.Runtime.InteropServices;
 using Xunit;
@@ -12,7 +11,10 @@ public class Program
 {
     private static void Eval(int testCase, bool b1, bool b2)
     {
-        if (b1 != b2) throw new Exception(string.Format("case {0:000} failed: v1 {1} v2 {2}", testCase, b1, b2));
+        if (b1 != b2)
+            throw new Exception(
+                string.Format("case {0:000} failed: v1 {1} v2 {2}", testCase, b1, b2)
+            );
     }
 
     private static void TestCase0001()
@@ -221,7 +223,8 @@ public class Program
             Eval(0191, o is SealedClass, false);
             Eval(0192, o is SealedClass[], false);
         }
-    }  // end of test case 0001
+    } // end of test case 0001
+
     private static void TestCase0002()
     {
         {
@@ -428,7 +431,8 @@ public class Program
             Eval(0383, o is SealedClass, false);
             Eval(0384, o is SealedClass[], false);
         }
-    }  // end of test case 0002
+    } // end of test case 0002
+
     private static void TestCase0003()
     {
         {
@@ -635,7 +639,7 @@ public class Program
             Eval(0575, o is SealedClass, false);
             Eval(0576, o is SealedClass[], false);
         }
-    }  // end of test case 0003
+    } // end of test case 0003
 
     [Fact]
     public static int TestEntryPoint()

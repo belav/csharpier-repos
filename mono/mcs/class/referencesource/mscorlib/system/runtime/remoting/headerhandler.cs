@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -13,9 +13,11 @@
 **
 **
 ===========================================================*/
-namespace System.Runtime.Remoting.Messaging {
+namespace System.Runtime.Remoting.Messaging
+{
     using System.Runtime.Remoting;
+
     //Define the required delegate
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public delegate Object HeaderHandler(Header[] headers);
 }

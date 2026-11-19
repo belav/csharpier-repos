@@ -18,7 +18,12 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
 
         public SettingLocation Location { get; private set; }
 
-        protected Setting(OptionKey2 optionKey, string description, OptionUpdater updater, SettingLocation location)
+        protected Setting(
+            OptionKey2 optionKey,
+            string description,
+            OptionUpdater updater,
+            SettingLocation location
+        )
         {
             Key = optionKey;
             Description = description;
@@ -43,25 +48,47 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             Option2<TValue> option,
             string description,
             TieredAnalyzerConfigOptions options,
-            OptionUpdater updater)
+            OptionUpdater updater
+        )
             where TValue : notnull
         {
             var optionKey = new OptionKey2(option);
-            options.GetInitialLocationAndValue<TValue>(option, out var initialLocation, out var initialValue);
-            return new Setting<TValue>(optionKey, description, updater, initialLocation, initialValue);
+            options.GetInitialLocationAndValue<TValue>(
+                option,
+                out var initialLocation,
+                out var initialValue
+            );
+            return new Setting<TValue>(
+                optionKey,
+                description,
+                updater,
+                initialLocation,
+                initialValue
+            );
         }
 
         public static Setting<TValue> Create<TValue>(
             PerLanguageOption2<TValue> option,
             string description,
             TieredAnalyzerConfigOptions options,
-            OptionUpdater updater)
+            OptionUpdater updater
+        )
             where TValue : notnull
         {
             // TODO: Support for other languages https://github.com/dotnet/roslyn/issues/65859
             var optionKey = new OptionKey2(option, LanguageNames.CSharp);
-            options.GetInitialLocationAndValue<TValue>(option, out var initialLocation, out var initialValue);
-            return new Setting<TValue>(optionKey, description, updater, initialLocation, initialValue);
+            options.GetInitialLocationAndValue<TValue>(
+                option,
+                out var initialLocation,
+                out var initialValue
+            );
+            return new Setting<TValue>(
+                optionKey,
+                description,
+                updater,
+                initialLocation,
+                initialValue
+            );
         }
 
         public static EnumFlagsSetting<TValue> CreateEnumFlags<TValue>(
@@ -71,13 +98,26 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             StrongBox<TValue> valueStorage,
             Conversions<TValue, int> conversions,
             TieredAnalyzerConfigOptions options,
-            OptionUpdater updater)
+            OptionUpdater updater
+        )
             where TValue : struct, Enum
         {
             var optionKey = new OptionKey2(option);
-            options.GetInitialLocationAndValue<TValue>(option, out var initialLocation, out var initialValue);
+            options.GetInitialLocationAndValue<TValue>(
+                option,
+                out var initialLocation,
+                out var initialValue
+            );
             valueStorage.Value = initialValue;
-            return new EnumFlagsSetting<TValue>(optionKey, description, updater, initialLocation, flag, valueStorage, conversions);
+            return new EnumFlagsSetting<TValue>(
+                optionKey,
+                description,
+                updater,
+                initialLocation,
+                flag,
+                valueStorage,
+                conversions
+            );
         }
     }
 }

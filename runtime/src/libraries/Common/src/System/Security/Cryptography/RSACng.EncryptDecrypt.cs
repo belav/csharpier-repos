@@ -24,16 +24,42 @@ namespace System.Security.Cryptography
             EncryptOrDecrypt(data, padding, encrypt: false);
 
         /// <summary>Encrypts data using the public key.</summary>
-        public override bool TryEncrypt(ReadOnlySpan<byte> data, Span<byte> destination, RSAEncryptionPadding padding, out int bytesWritten) =>
-            TryEncryptOrDecrypt(data, destination, padding, encrypt: true, bytesWritten: out bytesWritten);
+        public override bool TryEncrypt(
+            ReadOnlySpan<byte> data,
+            Span<byte> destination,
+            RSAEncryptionPadding padding,
+            out int bytesWritten
+        ) =>
+            TryEncryptOrDecrypt(
+                data,
+                destination,
+                padding,
+                encrypt: true,
+                bytesWritten: out bytesWritten
+            );
 
         /// <summary>Decrypts data using the private key.</summary>
-        public override bool TryDecrypt(ReadOnlySpan<byte> data, Span<byte> destination, RSAEncryptionPadding padding, out int bytesWritten) =>
-            TryEncryptOrDecrypt(data, destination, padding, encrypt: false, bytesWritten: out bytesWritten);
+        public override bool TryDecrypt(
+            ReadOnlySpan<byte> data,
+            Span<byte> destination,
+            RSAEncryptionPadding padding,
+            out int bytesWritten
+        ) =>
+            TryEncryptOrDecrypt(
+                data,
+                destination,
+                padding,
+                encrypt: false,
+                bytesWritten: out bytesWritten
+            );
 
         // Conveniently, Encrypt() and Decrypt() are identical save for the actual P/Invoke call to CNG. Thus, both
         // array-based APIs invoke this common helper with the "encrypt" parameter determining whether encryption or decryption is done.
-        private unsafe byte[] EncryptOrDecrypt(byte[] data, RSAEncryptionPadding padding, bool encrypt)
+        private unsafe byte[] EncryptOrDecrypt(
+            byte[] data,
+            RSAEncryptionPadding padding,
+            bool encrypt
+        )
         {
             ArgumentNullException.ThrowIfNull(data);
             ArgumentNullException.ThrowIfNull(padding);
@@ -45,12 +71,18 @@ namespace System.Security.Cryptography
                 throw new CryptographicException(SR.Cryptography_RSA_DecryptWrongSize);
             }
 
-            if (encrypt &&
-                padding.Mode == RSAEncryptionPaddingMode.Pkcs1 &&
-                data.Length > modulusSizeInBytes - Pkcs1PaddingOverhead)
+            if (
+                encrypt
+                && padding.Mode == RSAEncryptionPaddingMode.Pkcs1
+                && data.Length > modulusSizeInBytes - Pkcs1PaddingOverhead
+            )
             {
                 throw new CryptographicException(
-                    SR.Format(SR.Cryptography_Encryption_MessageTooLong, modulusSizeInBytes - Pkcs1PaddingOverhead));
+                    SR.Format(
+                        SR.Cryptography_Encryption_MessageTooLong,
+                        modulusSizeInBytes - Pkcs1PaddingOverhead
+                    )
+                );
             }
 
             using (SafeNCryptKeyHandle keyHandle = GetDuplicatedKeyHandle())
@@ -68,14 +100,26 @@ namespace System.Security.Cryptography
                         }
                         else if (padding.Mode == RSAEncryptionPaddingMode.Oaep)
                         {
-                            RsaPaddingProcessor.PadOaep(padding.OaepHashAlgorithm, data, paddedMessage);
+                            RsaPaddingProcessor.PadOaep(
+                                padding.OaepHashAlgorithm,
+                                data,
+                                paddedMessage
+                            );
                         }
                         else
                         {
-                            throw new CryptographicException(SR.Cryptography_UnsupportedPaddingMode);
+                            throw new CryptographicException(
+                                SR.Cryptography_UnsupportedPaddingMode
+                            );
                         }
 
-                        return EncryptOrDecrypt(keyHandle, paddedMessage, AsymmetricPaddingMode.NCRYPT_NO_PADDING_FLAG, null, encrypt);
+                        return EncryptOrDecrypt(
+                            keyHandle,
+                            paddedMessage,
+                            AsymmetricPaddingMode.NCRYPT_NO_PADDING_FLAG,
+                            null,
+                            encrypt
+                        );
                     }
                     finally
                     {
@@ -87,7 +131,13 @@ namespace System.Security.Cryptography
                 switch (padding.Mode)
                 {
                     case RSAEncryptionPaddingMode.Pkcs1:
-                        return EncryptOrDecrypt(keyHandle, data, AsymmetricPaddingMode.NCRYPT_PAD_PKCS1_FLAG, null, encrypt);
+                        return EncryptOrDecrypt(
+                            keyHandle,
+                            data,
+                            AsymmetricPaddingMode.NCRYPT_PAD_PKCS1_FLAG,
+                            null,
+                            encrypt
+                        );
 
                     case RSAEncryptionPaddingMode.Oaep:
                         IntPtr namePtr = Marshal.StringToHGlobalUni(padding.OaepHashAlgorithm.Name);
@@ -101,7 +151,13 @@ namespace System.Security.Cryptography
                                 pbLabel = IntPtr.Zero,
                                 cbLabel = 0,
                             };
-                            return EncryptOrDecrypt(keyHandle, data, AsymmetricPaddingMode.NCRYPT_PAD_OAEP_FLAG, &paddingInfo, encrypt);
+                            return EncryptOrDecrypt(
+                                keyHandle,
+                                data,
+                                AsymmetricPaddingMode.NCRYPT_PAD_OAEP_FLAG,
+                                &paddingInfo,
+                                encrypt
+                            );
                         }
                         finally
                         {
@@ -116,7 +172,13 @@ namespace System.Security.Cryptography
 
         // Conveniently, Encrypt() and Decrypt() are identical save for the actual P/Invoke call to CNG. Thus, both
         // span-based APIs invoke this common helper with the "encrypt" parameter determining whether encryption or decryption is done.
-        private unsafe bool TryEncryptOrDecrypt(ReadOnlySpan<byte> data, Span<byte> destination, RSAEncryptionPadding padding, bool encrypt, out int bytesWritten)
+        private unsafe bool TryEncryptOrDecrypt(
+            ReadOnlySpan<byte> data,
+            Span<byte> destination,
+            RSAEncryptionPadding padding,
+            bool encrypt,
+            out int bytesWritten
+        )
         {
             ArgumentNullException.ThrowIfNull(padding);
 
@@ -127,12 +189,18 @@ namespace System.Security.Cryptography
                 throw new CryptographicException(SR.Cryptography_RSA_DecryptWrongSize);
             }
 
-            if (encrypt &&
-                padding.Mode == RSAEncryptionPaddingMode.Pkcs1 &&
-                data.Length > modulusSizeInBytes - Pkcs1PaddingOverhead)
+            if (
+                encrypt
+                && padding.Mode == RSAEncryptionPaddingMode.Pkcs1
+                && data.Length > modulusSizeInBytes - Pkcs1PaddingOverhead
+            )
             {
                 throw new CryptographicException(
-                    SR.Format(SR.Cryptography_Encryption_MessageTooLong, modulusSizeInBytes - Pkcs1PaddingOverhead));
+                    SR.Format(
+                        SR.Cryptography_Encryption_MessageTooLong,
+                        modulusSizeInBytes - Pkcs1PaddingOverhead
+                    )
+                );
             }
 
             using (SafeNCryptKeyHandle keyHandle = GetDuplicatedKeyHandle())
@@ -150,14 +218,28 @@ namespace System.Security.Cryptography
                         }
                         else if (padding.Mode == RSAEncryptionPaddingMode.Oaep)
                         {
-                            RsaPaddingProcessor.PadOaep(padding.OaepHashAlgorithm, data, paddedMessage);
+                            RsaPaddingProcessor.PadOaep(
+                                padding.OaepHashAlgorithm,
+                                data,
+                                paddedMessage
+                            );
                         }
                         else
                         {
-                            throw new CryptographicException(SR.Cryptography_UnsupportedPaddingMode);
+                            throw new CryptographicException(
+                                SR.Cryptography_UnsupportedPaddingMode
+                            );
                         }
 
-                        return TryEncryptOrDecrypt(keyHandle, paddedMessage, destination, AsymmetricPaddingMode.NCRYPT_NO_PADDING_FLAG, null, encrypt, out bytesWritten);
+                        return TryEncryptOrDecrypt(
+                            keyHandle,
+                            paddedMessage,
+                            destination,
+                            AsymmetricPaddingMode.NCRYPT_NO_PADDING_FLAG,
+                            null,
+                            encrypt,
+                            out bytesWritten
+                        );
                     }
                     finally
                     {
@@ -169,7 +251,15 @@ namespace System.Security.Cryptography
                 switch (padding.Mode)
                 {
                     case RSAEncryptionPaddingMode.Pkcs1:
-                        return TryEncryptOrDecrypt(keyHandle, data, destination, AsymmetricPaddingMode.NCRYPT_PAD_PKCS1_FLAG, null, encrypt, out bytesWritten);
+                        return TryEncryptOrDecrypt(
+                            keyHandle,
+                            data,
+                            destination,
+                            AsymmetricPaddingMode.NCRYPT_PAD_PKCS1_FLAG,
+                            null,
+                            encrypt,
+                            out bytesWritten
+                        );
 
                     case RSAEncryptionPaddingMode.Oaep:
                         IntPtr namePtr = Marshal.StringToHGlobalUni(padding.OaepHashAlgorithm.Name);
@@ -181,7 +271,15 @@ namespace System.Security.Cryptography
                                 pbLabel = IntPtr.Zero, // It would nice to put randomized data here but RSAEncryptionPadding does not at this point provide support for this.
                                 cbLabel = 0,
                             };
-                            return TryEncryptOrDecrypt(keyHandle, data, destination, AsymmetricPaddingMode.NCRYPT_PAD_OAEP_FLAG, &paddingInfo, encrypt, out bytesWritten);
+                            return TryEncryptOrDecrypt(
+                                keyHandle,
+                                data,
+                                destination,
+                                AsymmetricPaddingMode.NCRYPT_PAD_OAEP_FLAG,
+                                &paddingInfo,
+                                encrypt,
+                                out bytesWritten
+                            );
                         }
                         finally
                         {
@@ -195,11 +293,17 @@ namespace System.Security.Cryptography
         }
 
         // Now that the padding mode and information have been marshaled to their native counterparts, perform the encryption or decryption.
-        private unsafe byte[] EncryptOrDecrypt(SafeNCryptKeyHandle key, ReadOnlySpan<byte> input, AsymmetricPaddingMode paddingMode, void* paddingInfo, bool encrypt)
+        private unsafe byte[] EncryptOrDecrypt(
+            SafeNCryptKeyHandle key,
+            ReadOnlySpan<byte> input,
+            AsymmetricPaddingMode paddingMode,
+            void* paddingInfo,
+            bool encrypt
+        )
         {
             int estimatedSize = GetMaxOutputSize();
 #if DEBUG
-            estimatedSize = 2;  // Make sure the NTE_BUFFER_TOO_SMALL scenario gets exercised.
+            estimatedSize = 2; // Make sure the NTE_BUFFER_TOO_SMALL scenario gets exercised.
 #endif
 
             byte[] output = new byte[estimatedSize];
@@ -209,8 +313,15 @@ namespace System.Security.Cryptography
 
             for (int i = 0; i <= StatusUnsuccessfulRetryCount; i++)
             {
-                errorCode =
-                    EncryptOrDecrypt(key, input, output, paddingMode, paddingInfo, encrypt, out numBytesNeeded);
+                errorCode = EncryptOrDecrypt(
+                    key,
+                    input,
+                    output,
+                    paddingMode,
+                    paddingInfo,
+                    encrypt,
+                    out numBytesNeeded
+                );
 
                 if (errorCode != ErrorCode.STATUS_UNSUCCESSFUL)
                 {
@@ -225,8 +336,15 @@ namespace System.Security.Cryptography
 
                 for (int i = 0; i <= StatusUnsuccessfulRetryCount; i++)
                 {
-                    errorCode =
-                        EncryptOrDecrypt(key, input, output, paddingMode, paddingInfo, encrypt, out numBytesNeeded);
+                    errorCode = EncryptOrDecrypt(
+                        key,
+                        input,
+                        output,
+                        paddingMode,
+                        paddingInfo,
+                        encrypt,
+                        out numBytesNeeded
+                    );
 
                     if (errorCode != ErrorCode.STATUS_UNSUCCESSFUL)
                     {
@@ -251,13 +369,28 @@ namespace System.Security.Cryptography
         }
 
         // Now that the padding mode and information have been marshaled to their native counterparts, perform the encryption or decryption.
-        private static unsafe bool TryEncryptOrDecrypt(SafeNCryptKeyHandle key, ReadOnlySpan<byte> input, Span<byte> output, AsymmetricPaddingMode paddingMode, void* paddingInfo, bool encrypt, out int bytesWritten)
+        private static unsafe bool TryEncryptOrDecrypt(
+            SafeNCryptKeyHandle key,
+            ReadOnlySpan<byte> input,
+            Span<byte> output,
+            AsymmetricPaddingMode paddingMode,
+            void* paddingInfo,
+            bool encrypt,
+            out int bytesWritten
+        )
         {
             for (int i = 0; i <= StatusUnsuccessfulRetryCount; i++)
             {
                 int numBytesNeeded;
-                ErrorCode errorCode =
-                    EncryptOrDecrypt(key, input, output, paddingMode, paddingInfo, encrypt, out numBytesNeeded);
+                ErrorCode errorCode = EncryptOrDecrypt(
+                    key,
+                    input,
+                    output,
+                    paddingMode,
+                    paddingInfo,
+                    encrypt,
+                    out numBytesNeeded
+                );
 
                 switch (errorCode)
                 {
@@ -284,11 +417,30 @@ namespace System.Security.Cryptography
             AsymmetricPaddingMode paddingMode,
             void* paddingInfo,
             bool encrypt,
-            out int bytesNeeded)
+            out int bytesNeeded
+        )
         {
-            ErrorCode errorCode = encrypt ?
-                Interop.NCrypt.NCryptEncrypt(key, input, input.Length, paddingInfo, output, output.Length, out bytesNeeded, paddingMode) :
-                Interop.NCrypt.NCryptDecrypt(key, input, input.Length, paddingInfo, output, output.Length, out bytesNeeded, paddingMode);
+            ErrorCode errorCode = encrypt
+                ? Interop.NCrypt.NCryptEncrypt(
+                    key,
+                    input,
+                    input.Length,
+                    paddingInfo,
+                    output,
+                    output.Length,
+                    out bytesNeeded,
+                    paddingMode
+                )
+                : Interop.NCrypt.NCryptDecrypt(
+                    key,
+                    input,
+                    input.Length,
+                    paddingInfo,
+                    output,
+                    output.Length,
+                    out bytesNeeded,
+                    paddingMode
+                );
 
             // Windows 10.1903 can return success when it meant NTE_BUFFER_TOO_SMALL.
             if (errorCode == ErrorCode.ERROR_SUCCESS && bytesNeeded > output.Length)

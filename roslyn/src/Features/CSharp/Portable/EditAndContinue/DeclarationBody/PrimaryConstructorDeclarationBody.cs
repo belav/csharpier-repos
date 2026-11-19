@@ -15,15 +15,12 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue;
 internal abstract class PrimaryConstructorDeclarationBody(TypeDeclarationSyntax typeDeclaration)
     : InstanceConstructorDeclarationBody
 {
-    public TypeDeclarationSyntax TypeDeclaration
-        => typeDeclaration;
+    public TypeDeclarationSyntax TypeDeclaration => typeDeclaration;
 
-    public sealed override SyntaxNode? ExplicitBody
-        => null;
+    public sealed override SyntaxNode? ExplicitBody => null;
 
-    public sealed override OneOrMany<SyntaxNode> RootNodes
-        => OneOrMany.Create(InitializerActiveStatement);
+    public sealed override OneOrMany<SyntaxNode> RootNodes =>
+        OneOrMany.Create(InitializerActiveStatement);
 
-    public sealed override TextSpan Envelope
-        => InitializerActiveStatementSpan;
+    public sealed override TextSpan Envelope => InitializerActiveStatementSpan;
 }

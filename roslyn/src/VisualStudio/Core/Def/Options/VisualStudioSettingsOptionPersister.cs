@@ -25,19 +25,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
     {
         private readonly ISettingsManager _settingManager;
         private readonly Action<OptionKey2, object?> _refreshOption;
-        private readonly ImmutableDictionary<string, Lazy<IVisualStudioStorageReadFallback, OptionNameMetadata>> _readFallbacks;
+        private readonly ImmutableDictionary<
+            string,
+            Lazy<IVisualStudioStorageReadFallback, OptionNameMetadata>
+        > _readFallbacks;
 
         /// <summary>
         /// Storage keys that have been been fetched from <see cref="_settingManager"/>.
         /// We track this so if a later change happens, we know to refresh that value.
         /// </summary>
-        private ImmutableDictionary<string, (OptionKey2 primaryOptionKey, string primaryStorageKey)> _storageKeysToMonitorForChanges
-            = ImmutableDictionary<string, (OptionKey2, string)>.Empty;
+        private ImmutableDictionary<
+            string,
+            (OptionKey2 primaryOptionKey, string primaryStorageKey)
+        > _storageKeysToMonitorForChanges = ImmutableDictionary<string, (OptionKey2, string)>.Empty;
 
         /// <remarks>
         /// We make sure this code is from the UI by asking for all <see cref="IOptionPersister"/> in <see cref="RoslynPackage.InitializeAsync"/>
         /// </remarks>
-        public VisualStudioSettingsOptionPersister(Action<OptionKey2, object?> refreshOption, ImmutableDictionary<string, Lazy<IVisualStudioStorageReadFallback, OptionNameMetadata>> readFallbacks, ISettingsManager settingsManager)
+        public VisualStudioSettingsOptionPersister(
+            Action<OptionKey2, object?> refreshOption,
+            ImmutableDictionary<
+                string,
+                Lazy<IVisualStudioStorageReadFallback, OptionNameMetadata>
+            > readFallbacks,
+            ISettingsManager settingsManager
+        )
         {
             _settingManager = settingsManager;
             _refreshOption = refreshOption;
@@ -51,8 +63,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
         {
             Contract.ThrowIfNull(_settingManager);
 
-            if (_storageKeysToMonitorForChanges.TryGetValue(args.PropertyName, out var entry) &&
-                TryFetch(entry.primaryOptionKey, entry.primaryStorageKey, out var newValue))
+            if (
+                _storageKeysToMonitorForChanges.TryGetValue(args.PropertyName, out var entry)
+                && TryFetch(entry.primaryOptionKey, entry.primaryStorageKey, out var newValue)
+            )
             {
                 _refreshOption(entry.primaryOptionKey, newValue);
             }
@@ -62,18 +76,37 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
 
         public bool TryFetch(OptionKey2 optionKey, string storageKey, out object? value)
         {
-            var result = TryReadAndMonitorOptionValue(optionKey, storageKey, storageKey, optionKey.Option.Type, optionKey.Option.DefaultValue);
+            var result = TryReadAndMonitorOptionValue(
+                optionKey,
+                storageKey,
+                storageKey,
+                optionKey.Option.Type,
+                optionKey.Option.DefaultValue
+            );
             if (result.HasValue)
             {
                 value = result.Value;
                 return true;
             }
 
-            if (_readFallbacks.TryGetValue(optionKey.Option.Definition.ConfigName, out var lazyReadFallback))
+            if (
+                _readFallbacks.TryGetValue(
+                    optionKey.Option.Definition.ConfigName,
+                    out var lazyReadFallback
+                )
+            )
             {
                 var fallbackResult = lazyReadFallback.Value.TryRead(
                     optionKey.Language,
-                    (altStorageKey, altStorageType, altDefaultValue) => TryReadAndMonitorOptionValue(optionKey, storageKey, altStorageKey, altStorageType, altDefaultValue));
+                    (altStorageKey, altStorageType, altDefaultValue) =>
+                        TryReadAndMonitorOptionValue(
+                            optionKey,
+                            storageKey,
+                            altStorageKey,
+                            altStorageType,
+                            altDefaultValue
+                        )
+                );
 
                 if (fallbackResult.HasValue)
                 {
@@ -86,14 +119,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
             return false;
         }
 
-        public Optional<object?> TryReadAndMonitorOptionValue(OptionKey2 primaryOptionKey, string primaryStorageKey, string storageKey, Type storageType, object? defaultValue)
+        public Optional<object?> TryReadAndMonitorOptionValue(
+            OptionKey2 primaryOptionKey,
+            string primaryStorageKey,
+            string storageKey,
+            Type storageType,
+            object? defaultValue
+        )
         {
             Contract.ThrowIfNull(_settingManager);
-            ImmutableInterlocked.GetOrAdd(ref _storageKeysToMonitorForChanges, storageKey, static (_, arg) => arg, factoryArgument: (primaryOptionKey, primaryStorageKey));
+            ImmutableInterlocked.GetOrAdd(
+                ref _storageKeysToMonitorForChanges,
+                storageKey,
+                static (_, arg) => arg,
+                factoryArgument: (primaryOptionKey, primaryStorageKey)
+            );
             return TryReadOptionValue(_settingManager, storageKey, storageType, defaultValue);
         }
 
-        internal static Optional<object?> TryReadOptionValue(ISettingsManager manager, string storageKey, Type storageType, object? defaultValue)
+        internal static Optional<object?> TryReadOptionValue(
+            ISettingsManager manager,
+            string storageKey,
+            Type storageType,
+            object? defaultValue
+        )
         {
             if (storageType == typeof(bool))
                 return Read<bool>();
@@ -105,11 +154,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
                 return Read<int>();
 
             if (storageType.IsEnum)
-                return manager.TryGetValue(storageKey, out int value) == GetValueResult.Success ? Enum.ToObject(storageType, value) : default(Optional<object?>);
+                return manager.TryGetValue(storageKey, out int value) == GetValueResult.Success
+                    ? Enum.ToObject(storageType, value)
+                    : default(Optional<object?>);
 
             var underlyingType = Nullable.GetUnderlyingType(storageType);
             if (underlyingType?.IsEnum == true)
-                return manager.TryGetValue(storageKey, out int? value) == GetValueResult.Success ? (value.HasValue ? Enum.ToObject(underlyingType, value.Value) : null) : default(Optional<object?>);
+                return manager.TryGetValue(storageKey, out int? value) == GetValueResult.Success
+                    ? (value.HasValue ? Enum.ToObject(underlyingType, value.Value) : null)
+                    : default(Optional<object?>);
 
             if (storageType == typeof(NamingStylePreferences))
             {
@@ -171,11 +224,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
 
             throw ExceptionUtilities.UnexpectedValue(storageType);
 
-            Optional<object?> Read<T>()
-                => manager.TryGetValue(storageKey, out T value) == GetValueResult.Success ? value : default(Optional<object?>);
+            Optional<object?> Read<T>() =>
+                manager.TryGetValue(storageKey, out T value) == GetValueResult.Success
+                    ? value
+                    : default(Optional<object?>);
 
-            Optional<object?> ReadImmutableArray<T>()
-                => manager.TryGetValue(storageKey, out T[] value) == GetValueResult.Success ? (value is null ? default : value.ToImmutableArray()) : default(Optional<object?>);
+            Optional<object?> ReadImmutableArray<T>() =>
+                manager.TryGetValue(storageKey, out T[] value) == GetValueResult.Success
+                    ? (value is null ? default : value.ToImmutableArray())
+                    : default(Optional<object?>);
         }
 
         public Task PersistAsync(string storageKey, object? value)

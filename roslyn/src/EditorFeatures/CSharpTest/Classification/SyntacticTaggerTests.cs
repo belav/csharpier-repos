@@ -12,8 +12,8 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Classification;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces;
-using Microsoft.CodeAnalysis.Shared.TestHooks;
 using Microsoft.CodeAnalysis.Options;
+using Microsoft.CodeAnalysis.Shared.TestHooks;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Text.Shared.Extensions;
 using Microsoft.VisualStudio.Text;
@@ -30,8 +30,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         [WpfFact]
         public async Task TestTagsChangedForPortionThatChanged()
         {
-            var code =
-                """
+            var code = """
                 class Program2
                 {
                     string x = @"/// <summary>$$
@@ -49,9 +48,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     workspace.GetService<IThreadingContext>(),
                     typeMap: null,
                     workspace.GetService<IGlobalOptionService>(),
-                    AsynchronousOperationListenerProvider.NullProvider),
+                    AsynchronousOperationListenerProvider.NullProvider
+                ),
                 subjectBuffer,
-                diffTimeout: TimeSpan.MaxValue);
+                diffTimeout: TimeSpan.MaxValue
+            );
 
             // Capture the expected value before the await, in case it changes.
             var expectedLength = subjectBuffer.CurrentSnapshot.Length;
@@ -74,9 +75,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
             checkpoint = new Checkpoint();
 
             // Now apply an edit that require us to reclassify more that just the current line
-            var snapshot = subjectBuffer.Insert(document.CursorPosition.Value, """
+            var snapshot = subjectBuffer.Insert(
+                document.CursorPosition.Value,
+                """
                 "
-                """);
+                """
+            );
             expectedLength = snapshot.Length;
 
             // NOTE: TagsChanged is raised on the UI thread, so there is no race between
@@ -92,8 +96,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         [WpfFact]
         public async Task TestTagsChangedAfterDelete()
         {
-            var code =
-@"class Goo";
+            var code = @"class Goo";
             using var workspace = TestWorkspace.CreateCSharp(code);
             var document = workspace.Documents.First();
             var subjectBuffer = document.GetTextBuffer();
@@ -107,9 +110,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     workspace.GetService<IThreadingContext>(),
                     typeMap,
                     workspace.GetService<IGlobalOptionService>(),
-                    AsynchronousOperationListenerProvider.NullProvider),
+                    AsynchronousOperationListenerProvider.NullProvider
+                ),
                 subjectBuffer,
-                diffTimeout: TimeSpan.MaxValue);
+                diffTimeout: TimeSpan.MaxValue
+            );
 
             // Capture the expected value before the await, in case it changes.
             var expectedLength = subjectBuffer.CurrentSnapshot.Length;
@@ -132,12 +137,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
             checkpoint = new Checkpoint();
 
             // Now delete the last character.
-            var snapshot = subjectBuffer.Delete(new Span(subjectBuffer.CurrentSnapshot.Length - 1, 1));
+            var snapshot = subjectBuffer.Delete(
+                new Span(subjectBuffer.CurrentSnapshot.Length - 1, 1)
+            );
 
             // Try to get the tags prior to TagsChanged firing.  This will force us to use the previous data we've
             // cached to produce the new results.  We don't actually care about the tags, so we just pass an empty
             // buffer for them to go into.
-            tagComputer.AddTags(new NormalizedSnapshotSpanCollection(subjectBuffer.CurrentSnapshot.GetFullSpan()), tags: []);
+            tagComputer.AddTags(
+                new NormalizedSnapshotSpanCollection(subjectBuffer.CurrentSnapshot.GetFullSpan()),
+                tags: []
+            );
 
             expectedLength = snapshot.Length;
 

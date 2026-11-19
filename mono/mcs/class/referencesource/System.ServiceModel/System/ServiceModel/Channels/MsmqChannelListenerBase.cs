@@ -23,10 +23,12 @@ namespace System.ServiceModel.Channels
     {
         MsmqReceiveParameters receiveParameters;
 
-        protected MsmqChannelListenerBase(MsmqBindingElementBase bindingElement,
-                                          BindingContext context,
-                                          MsmqReceiveParameters receiveParameters,
-                                          MessageEncoderFactory messageEncoderFactory)
+        protected MsmqChannelListenerBase(
+            MsmqBindingElementBase bindingElement,
+            BindingContext context,
+            MsmqReceiveParameters receiveParameters,
+            MessageEncoderFactory messageEncoderFactory
+        )
             : base(bindingElement, context, messageEncoderFactory)
         {
             this.receiveParameters = receiveParameters;
@@ -40,12 +42,16 @@ namespace System.ServiceModel.Channels
         internal Exception NormalizePoisonException(long lookupId, Exception innerException)
         {
             if (this.ReceiveParameters.ExactlyOnce)
-                return DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MsmqPoisonMessageException(lookupId, innerException));
+                return DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MsmqPoisonMessageException(lookupId, innerException)
+                );
             else if (null != innerException)
                 return DiagnosticUtility.ExceptionUtility.ThrowHelperError(innerException);
             else
             {
-                throw Fx.AssertAndThrow("System.ServiceModel.Channels.MsmqChannelListenerBase.NormalizePoisonException(): (innerException == null)");
+                throw Fx.AssertAndThrow(
+                    "System.ServiceModel.Channels.MsmqChannelListenerBase.NormalizePoisonException(): (innerException == null)"
+                );
             }
         }
 
@@ -56,17 +62,19 @@ namespace System.ServiceModel.Channels
     }
 
     abstract class MsmqChannelListenerBase<TChannel>
-        : MsmqChannelListenerBase, IChannelListener<TChannel>
-    where TChannel : class, IChannel
+        : MsmqChannelListenerBase,
+            IChannelListener<TChannel>
+        where TChannel : class, IChannel
     {
         SecurityTokenAuthenticator x509SecurityTokenAuthenticator;
 
-        protected MsmqChannelListenerBase(MsmqBindingElementBase bindingElement,
-                                          BindingContext context,
-                                          MsmqReceiveParameters receiveParameters,
-                                          MessageEncoderFactory messageEncoderFactory)
-            : base(bindingElement, context, receiveParameters, messageEncoderFactory)
-        { }
+        protected MsmqChannelListenerBase(
+            MsmqBindingElementBase bindingElement,
+            BindingContext context,
+            MsmqReceiveParameters receiveParameters,
+            MessageEncoderFactory messageEncoderFactory
+        )
+            : base(bindingElement, context, receiveParameters, messageEncoderFactory) { }
 
         public override string Scheme
         {
@@ -78,21 +86,32 @@ namespace System.ServiceModel.Channels
             get { return Msmq.StaticTransportManagerTable; }
         }
 
-        internal override ITransportManagerRegistration CreateTransportManagerRegistration(Uri listenUri)
+        internal override ITransportManagerRegistration CreateTransportManagerRegistration(
+            Uri listenUri
+        )
         {
             return null;
         }
 
-        protected virtual void OnCloseCore(bool isAborting)
-        { }
+        protected virtual void OnCloseCore(bool isAborting) { }
 
         protected virtual void OnOpenCore(TimeSpan timeout)
         {
-            if (MsmqAuthenticationMode.Certificate == this.ReceiveParameters.TransportSecurity.MsmqAuthenticationMode)
-                SecurityUtils.OpenTokenAuthenticatorIfRequired(this.x509SecurityTokenAuthenticator, timeout);
+            if (
+                MsmqAuthenticationMode.Certificate
+                == this.ReceiveParameters.TransportSecurity.MsmqAuthenticationMode
+            )
+                SecurityUtils.OpenTokenAuthenticatorIfRequired(
+                    this.x509SecurityTokenAuthenticator,
+                    timeout
+                );
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             OnCloseCore(false);
             return base.OnBeginClose(timeout, callback, state);
@@ -110,7 +129,11 @@ namespace System.ServiceModel.Channels
             base.OnAbort();
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             IAsyncResult result = base.OnBeginOpen(timeoutHelper.RemainingTime(), callback, state);
@@ -125,7 +148,6 @@ namespace System.ServiceModel.Channels
             OnOpenCore(timeoutHelper.RemainingTime());
         }
 
-
         internal override IList<TransportManager> SelectTransportManagers()
         {
             lock (this.TransportManagerTable)
@@ -133,7 +155,13 @@ namespace System.ServiceModel.Channels
                 // Look up an existing transport manager registration. We use registration only
                 // for WebHosted case.
                 ITransportManagerRegistration registration;
-                if (this.TransportManagerTable.TryLookupUri(this.Uri, TransportDefaults.HostNameComparisonMode, out registration))
+                if (
+                    this.TransportManagerTable.TryLookupUri(
+                        this.Uri,
+                        TransportDefaults.HostNameComparisonMode,
+                        out registration
+                    )
+                )
                 {
                     // no need to use TransportManagerContainer because we never use the transport manager from channels
                     // Use the registration to select a set of compatible transport managers.
@@ -153,21 +181,29 @@ namespace System.ServiceModel.Channels
 
         protected void SetSecurityTokenAuthenticator(string scheme, BindingContext context)
         {
-            if (this.ReceiveParameters.TransportSecurity.MsmqAuthenticationMode == MsmqAuthenticationMode.Certificate)
+            if (
+                this.ReceiveParameters.TransportSecurity.MsmqAuthenticationMode
+                == MsmqAuthenticationMode.Certificate
+            )
             {
-                SecurityCredentialsManager credentials = context.BindingParameters.Find<SecurityCredentialsManager>();
+                SecurityCredentialsManager credentials =
+                    context.BindingParameters.Find<SecurityCredentialsManager>();
                 if (credentials == null)
                 {
                     credentials = ServiceCredentials.CreateDefaultCredentials();
                 }
                 SecurityTokenManager tokenManager = credentials.CreateSecurityTokenManager();
-                RecipientServiceModelSecurityTokenRequirement x509Requirement = new RecipientServiceModelSecurityTokenRequirement();
+                RecipientServiceModelSecurityTokenRequirement x509Requirement =
+                    new RecipientServiceModelSecurityTokenRequirement();
                 x509Requirement.TokenType = SecurityTokenTypes.X509Certificate;
                 x509Requirement.TransportScheme = scheme;
                 x509Requirement.ListenUri = this.Uri;
                 x509Requirement.KeyUsage = SecurityKeyUsage.Signature;
                 SecurityTokenResolver dummy;
-                this.x509SecurityTokenAuthenticator = tokenManager.CreateSecurityTokenAuthenticator(x509Requirement, out dummy);
+                this.x509SecurityTokenAuthenticator = tokenManager.CreateSecurityTokenAuthenticator(
+                    x509Requirement,
+                    out dummy
+                );
             }
         }
 
@@ -178,32 +214,56 @@ namespace System.ServiceModel.Channels
             WindowsSidIdentity wsid = null;
             try
             {
-                if (MsmqAuthenticationMode.Certificate == this.ReceiveParameters.TransportSecurity.MsmqAuthenticationMode)
+                if (
+                    MsmqAuthenticationMode.Certificate
+                    == this.ReceiveParameters.TransportSecurity.MsmqAuthenticationMode
+                )
                 {
                     try
                     {
-                        certificate = new X509Certificate2(msmqMessage.SenderCertificate.GetBufferCopy(msmqMessage.SenderCertificateLength.Value));
+                        certificate = new X509Certificate2(
+                            msmqMessage.SenderCertificate.GetBufferCopy(
+                                msmqMessage.SenderCertificateLength.Value
+                            )
+                        );
                         X509SecurityToken token = new X509SecurityToken(certificate, false);
-                        ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies = this.x509SecurityTokenAuthenticator.ValidateToken(token);
+                        ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies =
+                            this.x509SecurityTokenAuthenticator.ValidateToken(token);
                         SecurityMessageProperty security = new SecurityMessageProperty();
-                        security.TransportToken = new SecurityTokenSpecification(token, authorizationPolicies);
-                        security.ServiceSecurityContext = new ServiceSecurityContext(authorizationPolicies);
+                        security.TransportToken = new SecurityTokenSpecification(
+                            token,
+                            authorizationPolicies
+                        );
+                        security.ServiceSecurityContext = new ServiceSecurityContext(
+                            authorizationPolicies
+                        );
                         result = security;
                     }
                     catch (SecurityTokenValidationException ex)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ProtocolException(SR.GetString(SR.MsmqBadCertificate), ex));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ProtocolException(SR.GetString(SR.MsmqBadCertificate), ex)
+                        );
                     }
                     catch (System.Security.Cryptography.CryptographicException ex)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ProtocolException(SR.GetString(SR.MsmqBadCertificate), ex));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ProtocolException(SR.GetString(SR.MsmqBadCertificate), ex)
+                        );
                     }
                 }
-                else if (MsmqAuthenticationMode.WindowsDomain == this.ReceiveParameters.TransportSecurity.MsmqAuthenticationMode)
+                else if (
+                    MsmqAuthenticationMode.WindowsDomain
+                    == this.ReceiveParameters.TransportSecurity.MsmqAuthenticationMode
+                )
                 {
-                    byte[] sid = msmqMessage.SenderId.GetBufferCopy(msmqMessage.SenderIdLength.Value);
+                    byte[] sid = msmqMessage.SenderId.GetBufferCopy(
+                        msmqMessage.SenderIdLength.Value
+                    );
                     if (0 == sid.Length)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ProtocolException(SR.GetString(SR.MsmqNoSid)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ProtocolException(SR.GetString(SR.MsmqNoSid))
+                        );
 
                     SecurityIdentifier securityIdentifier = new SecurityIdentifier(sid, 0);
                     List<Claim> claims = new List<Claim>(2);
@@ -215,10 +275,16 @@ namespace System.ServiceModel.Channels
                     wsid = new WindowsSidIdentity(securityIdentifier);
                     policies.Add(new UnconditionalPolicy(wsid, claimSet));
 
-                    ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies = policies.AsReadOnly();
+                    ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies =
+                        policies.AsReadOnly();
                     SecurityMessageProperty security = new SecurityMessageProperty();
-                    security.TransportToken = new SecurityTokenSpecification(null, authorizationPolicies);
-                    security.ServiceSecurityContext = new ServiceSecurityContext(authorizationPolicies);
+                    security.TransportToken = new SecurityTokenSpecification(
+                        null,
+                        authorizationPolicies
+                    );
+                    security.ServiceSecurityContext = new ServiceSecurityContext(
+                        authorizationPolicies
+                    );
                     result = security;
                 }
             }
@@ -229,20 +295,32 @@ namespace System.ServiceModel.Channels
                     throw;
 
                 // Audit Authentication failure
-                if (AuditLevel.Failure == (this.AuditBehavior.MessageAuthenticationAuditLevel & AuditLevel.Failure))
+                if (
+                    AuditLevel.Failure
+                    == (this.AuditBehavior.MessageAuthenticationAuditLevel & AuditLevel.Failure)
+                )
                     WriteAuditEvent(AuditLevel.Failure, certificate, wsid, null);
 
                 throw;
             }
 
             // Audit Authentication success
-            if (result != null && AuditLevel.Success == (this.AuditBehavior.MessageAuthenticationAuditLevel & AuditLevel.Success))
+            if (
+                result != null
+                && AuditLevel.Success
+                    == (this.AuditBehavior.MessageAuthenticationAuditLevel & AuditLevel.Success)
+            )
                 WriteAuditEvent(AuditLevel.Success, certificate, wsid, null);
 
             return result;
         }
 
-        void WriteAuditEvent(AuditLevel auditLevel, X509Certificate2 certificate, WindowsSidIdentity wsid, Exception exception)
+        void WriteAuditEvent(
+            AuditLevel auditLevel,
+            X509Certificate2 certificate,
+            WindowsSidIdentity wsid,
+            Exception exception
+        )
         {
             try
             {
@@ -258,13 +336,24 @@ namespace System.ServiceModel.Channels
 
                 if (auditLevel == AuditLevel.Success)
                 {
-                    SecurityAuditHelper.WriteTransportAuthenticationSuccessEvent(this.AuditBehavior.AuditLogLocation,
-                        this.AuditBehavior.SuppressAuditFailure, null, this.Uri, primaryIdentity);
+                    SecurityAuditHelper.WriteTransportAuthenticationSuccessEvent(
+                        this.AuditBehavior.AuditLogLocation,
+                        this.AuditBehavior.SuppressAuditFailure,
+                        null,
+                        this.Uri,
+                        primaryIdentity
+                    );
                 }
                 else
                 {
-                    SecurityAuditHelper.WriteTransportAuthenticationFailureEvent(this.AuditBehavior.AuditLogLocation,
-                        this.AuditBehavior.SuppressAuditFailure, null, this.Uri, primaryIdentity, exception);
+                    SecurityAuditHelper.WriteTransportAuthenticationFailureEvent(
+                        this.AuditBehavior.AuditLogLocation,
+                        this.AuditBehavior.SuppressAuditFailure,
+                        null,
+                        this.Uri,
+                        primaryIdentity,
+                        exception
+                    );
                 }
             }
 #pragma warning suppress 56500
@@ -280,7 +369,11 @@ namespace System.ServiceModel.Channels
         public abstract TChannel AcceptChannel();
         public abstract IAsyncResult BeginAcceptChannel(AsyncCallback callback, object state);
         public abstract TChannel AcceptChannel(TimeSpan timeout);
-        public abstract IAsyncResult BeginAcceptChannel(TimeSpan timeout, AsyncCallback callback, object state);
+        public abstract IAsyncResult BeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
         public abstract TChannel EndAcceptChannel(IAsyncResult result);
     }
 }

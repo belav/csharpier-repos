@@ -14,39 +14,35 @@ namespace System.Activities.Expressions
         FieldInfo fieldInfo;
 
         public FieldReference()
-            : base()
-        {
-        }
+            : base() { }
 
         [DefaultValue(null)]
-        public string FieldName
-        {
-            get;
-            set;
-        }
+        public string FieldName { get; set; }
 
         [DefaultValue(null)]
-        public InArgument<TOperand> Operand
-        {
-            get;
-            set;
-        }
+        public InArgument<TOperand> Operand { get; set; }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
             bool isRequired = false;
             if (typeof(TOperand).IsEnum)
             {
-                metadata.AddValidationError(SR.TargetTypeCannotBeEnum(this.GetType().Name, this.DisplayName));
+                metadata.AddValidationError(
+                    SR.TargetTypeCannotBeEnum(this.GetType().Name, this.DisplayName)
+                );
             }
             else if (typeof(TOperand).IsValueType)
             {
-                metadata.AddValidationError(SR.TargetTypeIsValueType(this.GetType().Name, this.DisplayName));
+                metadata.AddValidationError(
+                    SR.TargetTypeIsValueType(this.GetType().Name, this.DisplayName)
+                );
             }
 
             if (string.IsNullOrEmpty(this.FieldName))
             {
-                metadata.AddValidationError(SR.ActivityPropertyMustBeSet("FieldName", this.DisplayName));
+                metadata.AddValidationError(
+                    SR.ActivityPropertyMustBeSet("FieldName", this.DisplayName)
+                );
             }
             else
             {
@@ -55,13 +51,17 @@ namespace System.Activities.Expressions
 
                 if (this.fieldInfo == null)
                 {
-                    metadata.AddValidationError(SR.MemberNotFound(this.FieldName, typeof(TOperand).Name));
+                    metadata.AddValidationError(
+                        SR.MemberNotFound(this.FieldName, typeof(TOperand).Name)
+                    );
                 }
                 else
                 {
                     if (fieldInfo.IsInitOnly)
                     {
-                        metadata.AddValidationError(SR.MemberIsReadOnly(this.FieldName, typeof(TOperand).Name));
+                        metadata.AddValidationError(
+                            SR.MemberIsReadOnly(this.FieldName, typeof(TOperand).Name)
+                        );
                     }
                     isRequired = !this.fieldInfo.IsStatic;
                 }
@@ -95,7 +95,7 @@ namespace System.Activities.Expressions
                 {
                     //if (!this.fieldInfo.IsStatic && this.owner == null)
                     //{
-                    //    // The field is non-static, and obj is a null reference 
+                    //    // The field is non-static, and obj is a null reference
                     //    if (this.fieldInfo.DeclaringType != null)
                     //    {
                     //        throw FxTrace.Exception.AsError(new ValidationException(SR.NullReferencedMemberAccess(this.fieldInfo.DeclaringType.Name, this.fieldInfo.Name)));
@@ -113,7 +113,7 @@ namespace System.Activities.Expressions
                     //{
                     //    if (this.fieldInfo.DeclaringType != null)
                     //    {
-                    //        // The field is non-static, and obj is a null reference 
+                    //        // The field is non-static, and obj is a null reference
                     //        throw FxTrace.Exception.AsError(new ValidationException(SR.NullReferencedMemberAccess(this.fieldInfo.DeclaringType.Name, this.fieldInfo.Name)));
                     //    }
                     //    else

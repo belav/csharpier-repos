@@ -95,7 +95,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        internal IAsyncResult BeginTryReceive(TimeSpan timeout, AsyncCallback callback, object state)
+        internal IAsyncResult BeginTryReceive(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             try
             {
@@ -132,7 +136,8 @@ namespace System.ServiceModel.Dispatcher
 
         internal bool EndTryReceive(IAsyncResult result, out RequestContext requestContext)
         {
-            ErrorHandlingCompletedAsyncResult handlerResult = result as ErrorHandlingCompletedAsyncResult;
+            ErrorHandlingCompletedAsyncResult handlerResult =
+                result as ErrorHandlingCompletedAsyncResult;
             if (handlerResult != null)
             {
                 requestContext = null;
@@ -263,18 +268,18 @@ namespace System.ServiceModel.Dispatcher
 
         class ErrorHandlingCompletedAsyncResult : CompletedAsyncResult<bool>
         {
-            internal ErrorHandlingCompletedAsyncResult(bool data, AsyncCallback callback, object state)
-                : base(data, callback, state)
-            {
-            }
+            internal ErrorHandlingCompletedAsyncResult(
+                bool data,
+                AsyncCallback callback,
+                object state
+            )
+                : base(data, callback, state) { }
         }
 
         class WaitCompletedAsyncResult : CompletedAsyncResult
         {
             internal WaitCompletedAsyncResult(AsyncCallback callback, object state)
-                : base(callback, state)
-            {
-            }
+                : base(callback, state) { }
         }
     }
 }

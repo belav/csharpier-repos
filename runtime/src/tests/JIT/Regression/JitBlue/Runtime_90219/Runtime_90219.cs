@@ -9,14 +9,13 @@ using Xunit;
 // Reduced from 12.0 KiB to 2.2 KiB in 00:01:06
 // Debug: Outputs 1
 // Release: Outputs 2
-public interface I0
-{
-}
+public interface I0 { }
 
 public class C0 : I0
 {
     public ulong F0;
     public uint F4;
+
     public C0(ulong f0, uint f4)
     {
         F0 = f0;
@@ -29,17 +28,20 @@ public class Runtime_90219
     public static IRuntime s_rt;
     public static I0 s_1;
     public static uint s_2;
-    public static byte[] s_4 = new byte[]{0};
+    public static byte[] s_4 = new byte[] { 0 };
     public static byte Result;
 
     [Fact]
     public static int TestEntryPoint()
     {
         CollectibleALC alc = new CollectibleALC();
-        System.Reflection.Assembly asm = alc.LoadFromAssemblyPath(System.Reflection.Assembly.GetExecutingAssembly().Location);
-        System.Reflection.MethodInfo mi = asm.GetType(typeof(Runtime_90219).FullName).GetMethod(nameof(MainInner));
+        System.Reflection.Assembly asm = alc.LoadFromAssemblyPath(
+            System.Reflection.Assembly.GetExecutingAssembly().Location
+        );
+        System.Reflection.MethodInfo mi = asm.GetType(typeof(Runtime_90219).FullName)
+            .GetMethod(nameof(MainInner));
         System.Type runtimeTy = asm.GetType(typeof(Runtime).FullName);
-        return (int)mi.Invoke(null, new object[]{System.Activator.CreateInstance(runtimeTy)});
+        return (int)mi.Invoke(null, new object[] { System.Activator.CreateInstance(runtimeTy) });
     }
 
     public static int MainInner(IRuntime rt)
@@ -48,7 +50,7 @@ public class Runtime_90219
         var vr8 = new C0(0, 0);
         var vr12 = s_4[0];
         vr8.F0 *= M2(vr12);
-        long[] vr9 = new long[]{0};
+        long[] vr9 = new long[] { 0 };
         bool vr10 = (int)M2(0) <= vr9[0];
         return Result == 1 ? 100 : 101;
     }
@@ -104,7 +106,6 @@ public class Runtime : IRuntime
 
 public class CollectibleALC : System.Runtime.Loader.AssemblyLoadContext
 {
-    public CollectibleALC(): base(true)
-    {
-    }
+    public CollectibleALC()
+        : base(true) { }
 }

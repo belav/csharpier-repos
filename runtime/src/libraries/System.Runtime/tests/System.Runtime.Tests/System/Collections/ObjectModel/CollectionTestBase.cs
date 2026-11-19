@@ -8,8 +8,30 @@ namespace System.Collections.ObjectModel.Tests
 {
     public class CollectionTestBase
     {
-        protected static readonly int[] s_intArray = new[] { -4, 5, -2, 3, 1, 2, -1, -3, 0, 4, -5, 3, 3 };
-        protected static readonly int[] s_excludedFromIntArray = new int[] { 100, -34, 42, int.MaxValue, int.MinValue };
+        protected static readonly int[] s_intArray = new[]
+        {
+            -4,
+            5,
+            -2,
+            3,
+            1,
+            2,
+            -1,
+            -3,
+            0,
+            4,
+            -5,
+            3,
+            3,
+        };
+        protected static readonly int[] s_excludedFromIntArray = new int[]
+        {
+            100,
+            -34,
+            42,
+            int.MaxValue,
+            int.MinValue,
+        };
 
         [Flags]
         protected enum IListApi
@@ -27,7 +49,7 @@ namespace System.Collections.ObjectModel.Tests
             Insert = 0x200,
             RemoveAt = 0x400,
             GetEnumerator = 0x800,
-            End
+            End,
         }
 
         protected class CallTrackingIList<T> : IList<T>
@@ -58,10 +80,7 @@ namespace System.Collections.ObjectModel.Tests
                     _calledMembers |= IListApi.IndexerGet;
                     return default(T);
                 }
-                set
-                {
-                    _calledMembers |= IListApi.IndexerSet;
-                }
+                set { _calledMembers |= IListApi.IndexerSet; }
             }
 
             public int Count

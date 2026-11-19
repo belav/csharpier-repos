@@ -42,7 +42,11 @@ internal readonly partial struct BKTree
             for (var i = 0; i < edgeCount; i++)
                 edges.Add(Edge.ReadFrom(reader));
 
-            return new BKTree(concatenatedLowerCaseWords, nodes.ToImmutableAndClear(), edges.ToImmutableAndClear());
+            return new BKTree(
+                concatenatedLowerCaseWords,
+                nodes.ToImmutableAndClear(),
+                edges.ToImmutableAndClear()
+            );
         }
         catch
         {

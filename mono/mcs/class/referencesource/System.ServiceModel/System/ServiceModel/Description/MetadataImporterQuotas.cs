@@ -9,7 +9,7 @@ namespace System.ServiceModel.Description
         const int DefaultMaxPolicyNodes = 4096;
         const int DefaultMaxPolicyAssertions = 1024;
         const int DefaultMaxYields = 1024;
-        
+
         int maxPolicyConversionContexts;
         int maxPolicyNodes;
         int maxPolicyAssertions;
@@ -22,17 +22,11 @@ namespace System.ServiceModel.Description
 
         public static MetadataImporterQuotas Defaults
         {
-            get
-            {
-                return CreateDefaultSettings();
-            }
+            get { return CreateDefaultSettings(); }
         }
         public static MetadataImporterQuotas Max
         {
-            get
-            {
-                return CreateMaxSettings();
-            }
+            get { return CreateMaxSettings(); }
         }
 
         internal int MaxPolicyConversionContexts
@@ -66,6 +60,7 @@ namespace System.ServiceModel.Description
 
             return settings;
         }
+
         static MetadataImporterQuotas CreateMaxSettings()
         {
             MetadataImporterQuotas settings = new MetadataImporterQuotas();

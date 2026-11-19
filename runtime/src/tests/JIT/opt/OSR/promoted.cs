@@ -50,5 +50,5 @@ public class OSRMethodStructPromotion
         int result = F(0, final);
         int expected = 1783293664;
         return result == expected ? 100 : -1;
-    }  
+    }
 }

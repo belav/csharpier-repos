@@ -28,14 +28,16 @@ namespace System.IO.MemoryMappedFiles.Tests
                 Interop.Kernel32.PageOptions.PAGE_EXECUTE_READWRITE,
                 0,
                 BUF_SIZE,
-                CreateUniqueMapName());
+                CreateUniqueMapName()
+            );
 
             using SafeMemoryMappedViewHandle handle = Interop.Kernel32.MapViewOfFile(
                 fileHandle,
                 Interop.Kernel32.FileMapOptions.FILE_MAP_READ,
                 0,
                 0,
-                (UIntPtr)BUF_SIZE);
+                (UIntPtr)BUF_SIZE
+            );
 
             Assert.NotNull(handle);
         }
@@ -61,12 +63,20 @@ namespace System.IO.MemoryMappedFiles.Tests
                 PROT_READ | PROT_WRITE,
                 MAP_PRIVATE | MAP_ANONYMOUS,
                 -1,
-                0);
+                0
+            );
 
             Assert.NotNull(handle);
         }
 
         [LibraryImport("libc")]
-        private static unsafe partial SafeMemoryMappedViewHandle mmap(IntPtr addr, nint lengthint, int prot, int flags, int fd, nuint offset);
+        private static unsafe partial SafeMemoryMappedViewHandle mmap(
+            IntPtr addr,
+            nint lengthint,
+            int prot,
+            int flags,
+            int fd,
+            nuint offset
+        );
     }
 }

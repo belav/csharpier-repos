@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         /// <summary>
         /// Register new IDiagnosticUpdateSource
-        /// 
+        ///
         /// Currently, it doesn't support unregister since our event is asynchronous and unregistering source that deal with asynchronous event is not straight forward.
         /// </summary>
         void Register(IDiagnosticUpdateSource source);

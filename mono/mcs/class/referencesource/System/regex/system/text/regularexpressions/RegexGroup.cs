@@ -1,43 +1,48 @@
 //------------------------------------------------------------------------------
 // <copyright file="RegexGroup.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 // Group represents the substring or substrings that
 // are captured by a single capturing group after one
 // regular expression match.
 
-namespace System.Text.RegularExpressions {
-    using System.Security.Permissions;
+namespace System.Text.RegularExpressions
+{
     using System.Runtime.Serialization;
+    using System.Security.Permissions;
 
     /// <devdoc>
-    ///    Group 
+    ///    Group
     ///       represents the results from a single capturing group. A capturing group can
     ///       capture zero, one, or more strings in a single match because of quantifiers, so
-    ///       Group supplies a collection of Capture objects. 
+    ///       Group supplies a collection of Capture objects.
     ///    </devdoc>
 #if !SILVERLIGHT
-    [ Serializable() ] 
+    [Serializable()]
 #endif
-    public class Group : Capture {
+    public class Group : Capture
+    {
         // the empty group object
         internal static Group _emptygroup = new Group(String.Empty, new int[0], 0, string.Empty);
-        
+
         internal int[] _caps;
         internal int _capcount;
         internal CaptureCollection _capcoll;
+
 #if !SILVERLIGHT
         [OptionalField]
 #endif
         internal string _name;
 
         internal Group(String text, int[] caps, int capcount, string name)
-
-        : base(text, capcount == 0 ? 0 : caps[(capcount - 1) * 2],
-               capcount == 0 ? 0 : caps[(capcount * 2) - 1]) {
-
+            : base(
+                text,
+                capcount == 0 ? 0 : caps[(capcount - 1) * 2],
+                capcount == 0 ? 0 : caps[(capcount * 2) - 1]
+            )
+        {
             _caps = caps;
             _capcount = capcount;
             _name = name;
@@ -49,10 +54,9 @@ namespace System.Text.RegularExpressions {
         /// <devdoc>
         ///    <para>Indicates whether the match is successful.</para>
         /// </devdoc>
-        public bool Success {
-            get {
-                return _capcount != 0;
-            }
+        public bool Success
+        {
+            get { return _capcount != 0; }
         }
 
         /// <summary>
@@ -60,10 +64,7 @@ namespace System.Text.RegularExpressions {
         /// </summary>
         public string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         /*
@@ -76,8 +77,10 @@ namespace System.Text.RegularExpressions {
         ///       compiled with the "r" option). The collection may have zero or more items.
         ///    </para>
         /// </devdoc>
-        public CaptureCollection Captures {
-            get {
+        public CaptureCollection Captures
+        {
+            get
+            {
                 if (_capcoll == null)
                     _capcoll = new CaptureCollection(this);
 
@@ -89,17 +92,19 @@ namespace System.Text.RegularExpressions {
          * Convert to a thread-safe object by precomputing cache contents
          */
         /// <devdoc>
-        ///    <para>Returns 
+        ///    <para>Returns
         ///       a Group object equivalent to the one supplied that is safe to share between
         ///       multiple threads.</para>
         /// </devdoc>
 #if !SILVERLIGHT
 #if MONO_FEATURE_CAS
-        [HostProtection(Synchronization=true)]
+        [HostProtection(Synchronization = true)]
 #endif
-        static public Group Synchronized(Group inner) {
+        static public Group Synchronized(Group inner)
+        {
 #else
-        static internal Group Synchronized(Group inner) {
+        static internal Group Synchronized(Group inner)
+        {
 #endif
             if (inner == null)
                 throw new ArgumentNullException("inner");
@@ -117,6 +122,4 @@ namespace System.Text.RegularExpressions {
             return inner;
         }
     }
-
-
 }

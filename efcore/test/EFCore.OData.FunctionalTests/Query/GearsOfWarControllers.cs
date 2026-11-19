@@ -19,26 +19,24 @@ public class GearsController : TestODataController, IDisposable
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<Gear> Get()
-        => _context.Gears;
+    public IEnumerable<Gear> Get() => _context.Gears;
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<Officer> GetFromOfficer()
-        => _context.Gears.OfType<Officer>();
+    public IEnumerable<Officer> GetFromOfficer() => _context.Gears.OfType<Officer>();
 
     [HttpGet]
     [EnableQuery]
     public ITestActionResult Get([FromODataUri] string keyNickname, [FromODataUri] int keySquadId)
     {
-        var result = _context.Gears.FirstOrDefault(e => e.Nickname == keyNickname && e.SquadId == keySquadId);
+        var result = _context.Gears.FirstOrDefault(e =>
+            e.Nickname == keyNickname && e.SquadId == keySquadId
+        );
 
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }
 
 public class SquadsController : TestODataController, IDisposable
@@ -52,8 +50,7 @@ public class SquadsController : TestODataController, IDisposable
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<Squad> Get()
-        => _context.Squads;
+    public IEnumerable<Squad> Get() => _context.Squads;
 
     [HttpGet]
     [EnableQuery]
@@ -64,9 +61,7 @@ public class SquadsController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }
 
 public class TagsController : TestODataController, IDisposable
@@ -80,8 +75,7 @@ public class TagsController : TestODataController, IDisposable
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<CogTag> Get()
-        => _context.Tags;
+    public IEnumerable<CogTag> Get() => _context.Tags;
 
     [HttpGet]
     [EnableQuery]
@@ -92,9 +86,7 @@ public class TagsController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }
 
 public class WeaponsController : TestODataController, IDisposable
@@ -108,8 +100,7 @@ public class WeaponsController : TestODataController, IDisposable
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<Weapon> Get()
-        => _context.Weapons;
+    public IEnumerable<Weapon> Get() => _context.Weapons;
 
     [HttpGet]
     [EnableQuery]
@@ -120,9 +111,7 @@ public class WeaponsController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }
 
 public class CitiesController : TestODataController, IDisposable
@@ -136,8 +125,7 @@ public class CitiesController : TestODataController, IDisposable
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<City> Get()
-        => _context.Cities;
+    public IEnumerable<City> Get() => _context.Cities;
 
     [HttpGet]
     [EnableQuery]
@@ -148,9 +136,7 @@ public class CitiesController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }
 
 public class MissionsController : TestODataController, IDisposable
@@ -164,8 +150,7 @@ public class MissionsController : TestODataController, IDisposable
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<Mission> Get()
-        => _context.Missions;
+    public IEnumerable<Mission> Get() => _context.Missions;
 
     [HttpGet]
     [EnableQuery]
@@ -176,9 +161,7 @@ public class MissionsController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }
 
 public class SquadMissionsController : TestODataController, IDisposable
@@ -192,21 +175,20 @@ public class SquadMissionsController : TestODataController, IDisposable
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<SquadMission> Get()
-        => _context.SquadMissions;
+    public IEnumerable<SquadMission> Get() => _context.SquadMissions;
 
     [HttpGet]
     [EnableQuery]
     public ITestActionResult Get([FromODataUri] int keySquadId, [FromODataUri] int keyMissionId)
     {
-        var result = _context.SquadMissions.FirstOrDefault(e => e.SquadId == keySquadId && e.MissionId == keyMissionId);
+        var result = _context.SquadMissions.FirstOrDefault(e =>
+            e.SquadId == keySquadId && e.MissionId == keyMissionId
+        );
 
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }
 
 public class FactionsController : TestODataController, IDisposable
@@ -220,13 +202,11 @@ public class FactionsController : TestODataController, IDisposable
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<Faction> Get()
-        => _context.Factions;
+    public IEnumerable<Faction> Get() => _context.Factions;
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<LocustHorde> GetFromLocustHorde()
-        => _context.Factions.OfType<LocustHorde>();
+    public IEnumerable<LocustHorde> GetFromLocustHorde() => _context.Factions.OfType<LocustHorde>();
 
     [HttpGet]
     [EnableQuery]
@@ -237,9 +217,7 @@ public class FactionsController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }
 
 public class LocustLeadersController : TestODataController, IDisposable
@@ -253,13 +231,12 @@ public class LocustLeadersController : TestODataController, IDisposable
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<LocustLeader> Get()
-        => _context.LocustLeaders;
+    public IEnumerable<LocustLeader> Get() => _context.LocustLeaders;
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<LocustCommander> GetFromLocustCommander()
-        => _context.LocustLeaders.OfType<LocustCommander>();
+    public IEnumerable<LocustCommander> GetFromLocustCommander() =>
+        _context.LocustLeaders.OfType<LocustCommander>();
 
     [HttpGet]
     [EnableQuery]
@@ -270,9 +247,7 @@ public class LocustLeadersController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }
 
 public class LocustHighCommandsController : TestODataController, IDisposable
@@ -286,8 +261,7 @@ public class LocustHighCommandsController : TestODataController, IDisposable
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<LocustHighCommand> Get()
-        => _context.LocustHighCommands;
+    public IEnumerable<LocustHighCommand> Get() => _context.LocustHighCommands;
 
     [HttpGet]
     [EnableQuery]
@@ -298,7 +272,5 @@ public class LocustHighCommandsController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }

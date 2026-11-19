@@ -36,18 +36,37 @@ namespace System.Text.Encodings.Web
         /// </remarks>
         [CLSCompliant(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public abstract unsafe bool TryEncodeUnicodeScalar(int unicodeScalar, char* buffer, int bufferLength, out int numberOfCharactersWritten);
+        public abstract unsafe bool TryEncodeUnicodeScalar(
+            int unicodeScalar,
+            char* buffer,
+            int bufferLength,
+            out int numberOfCharactersWritten
+        );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe bool TryEncodeUnicodeScalar(uint unicodeScalar, Span<char> buffer, out int charsWritten)
+        private unsafe bool TryEncodeUnicodeScalar(
+            uint unicodeScalar,
+            Span<char> buffer,
+            out int charsWritten
+        )
         {
             fixed (char* pBuffer = &MemoryMarshal.GetReference(buffer))
             {
-                return TryEncodeUnicodeScalar((int)unicodeScalar, pBuffer, buffer.Length, out charsWritten);
+                return TryEncodeUnicodeScalar(
+                    (int)unicodeScalar,
+                    pBuffer,
+                    buffer.Length,
+                    out charsWritten
+                );
             }
         }
 
-        private bool TryEncodeUnicodeScalarUtf8(uint unicodeScalar, Span<char> utf16ScratchBuffer, Span<byte> utf8Destination, out int bytesWritten)
+        private bool TryEncodeUnicodeScalarUtf8(
+            uint unicodeScalar,
+            Span<char> utf16ScratchBuffer,
+            Span<byte> utf8Destination,
+            out int bytesWritten
+        )
         {
             if (!TryEncodeUnicodeScalar(unicodeScalar, utf16ScratchBuffer, out int charsWritten))
             {
@@ -64,13 +83,20 @@ namespace System.Text.Encodings.Web
 
             while (!utf16ScratchBuffer.IsEmpty)
             {
-                if (Rune.DecodeFromUtf16(utf16ScratchBuffer, out Rune nextScalarValue, out int scalarUtf16CodeUnitCount) != OperationStatus.Done)
+                if (
+                    Rune.DecodeFromUtf16(
+                        utf16ScratchBuffer,
+                        out Rune nextScalarValue,
+                        out int scalarUtf16CodeUnitCount
+                    ) != OperationStatus.Done
+                )
                 {
                     // Wrote bad UTF-16 data, we cannot transcode to UTF-8.
                     ThrowArgumentException_MaxOutputCharsPerInputChar();
                 }
 
-                uint utf8lsb = (uint)UnicodeHelpers.GetUtf8RepresentationForScalarValue((uint)nextScalarValue.Value);
+                uint utf8lsb = (uint)
+                    UnicodeHelpers.GetUtf8RepresentationForScalarValue((uint)nextScalarValue.Value);
                 do
                 {
                     if (SpanUtility.IsValidIndex(utf8Destination, dstIdx))
@@ -148,7 +174,9 @@ namespace System.Text.Encodings.Web
         private string EncodeToNewString(ReadOnlySpan<char> value, int indexOfFirstCharToEncode)
         {
             ReadOnlySpan<char> remainingInput = value.Slice(indexOfFirstCharToEncode);
-            ValueStringBuilder stringBuilder = new ValueStringBuilder(stackalloc char[EncodeStartingOutputBufferSize]);
+            ValueStringBuilder stringBuilder = new ValueStringBuilder(
+                stackalloc char[EncodeStartingOutputBufferSize]
+            );
 
 #if !NETCOREAPP
             // Can't call string.Concat later in the method, so memcpy now.
@@ -158,13 +186,24 @@ namespace System.Text.Encodings.Web
             // On each iteration of the main loop, we'll make sure we have at least this many chars left in the
             // destination buffer. This should prevent us from making very chatty calls where we only make progress
             // one char at a time.
-            int minBufferBumpEachIteration = Math.Max(MaxOutputCharactersPerInputCharacter, EncodeStartingOutputBufferSize);
+            int minBufferBumpEachIteration = Math.Max(
+                MaxOutputCharactersPerInputCharacter,
+                EncodeStartingOutputBufferSize
+            );
 
             do
             {
                 // AppendSpan mutates the VSB length to include the newly-added span. This potentially overallocates.
-                Span<char> destBuffer = stringBuilder.AppendSpan(Math.Max(remainingInput.Length, minBufferBumpEachIteration));
-                EncodeCore(remainingInput, destBuffer, out int charsConsumedJustNow, out int charsWrittenJustNow, isFinalBlock: true);
+                Span<char> destBuffer = stringBuilder.AppendSpan(
+                    Math.Max(remainingInput.Length, minBufferBumpEachIteration)
+                );
+                EncodeCore(
+                    remainingInput,
+                    destBuffer,
+                    out int charsConsumedJustNow,
+                    out int charsWrittenJustNow,
+                    isFinalBlock: true
+                );
                 if (charsWrittenJustNow == 0 || (uint)charsWrittenJustNow > (uint)destBuffer.Length)
                 {
                     ThrowArgumentException_MaxOutputCharsPerInputChar(); // couldn't make forward progress or returned bogus data
@@ -176,7 +215,10 @@ namespace System.Text.Encodings.Web
             } while (!remainingInput.IsEmpty);
 
 #if NETCOREAPP
-            string retVal = string.Concat(value.Slice(0, indexOfFirstCharToEncode), stringBuilder.AsSpan());
+            string retVal = string.Concat(
+                value.Slice(0, indexOfFirstCharToEncode),
+                stringBuilder.AsSpan()
+            );
             stringBuilder.Dispose();
             return retVal;
 #else
@@ -201,7 +243,12 @@ namespace System.Text.Encodings.Web
         /// <param name="value">String whose substring is to be encoded.</param>
         /// <param name="startIndex">The index where the substring starts.</param>
         /// <param name="characterCount">Number of characters in the substring.</param>
-        public virtual void Encode(TextWriter output, string value, int startIndex, int characterCount)
+        public virtual void Encode(
+            TextWriter output,
+            string value,
+            int startIndex,
+            int characterCount
+        )
         {
             if (output is null)
             {
@@ -214,7 +261,9 @@ namespace System.Text.Encodings.Web
 
             ValidateRanges(startIndex, characterCount, actualInputLength: value.Length);
 
-            int indexOfFirstCharToEncode = FindFirstCharacterToEncode(value.AsSpan(startIndex, characterCount));
+            int indexOfFirstCharToEncode = FindFirstCharacterToEncode(
+                value.AsSpan(startIndex, characterCount)
+            );
             if (indexOfFirstCharToEncode < 0)
             {
                 indexOfFirstCharToEncode = characterCount;
@@ -225,7 +274,13 @@ namespace System.Text.Encodings.Web
             output.WritePartialString(value, startIndex, indexOfFirstCharToEncode);
             if (indexOfFirstCharToEncode != characterCount)
             {
-                EncodeCore(output, value.AsSpan(startIndex + indexOfFirstCharToEncode, characterCount - indexOfFirstCharToEncode));
+                EncodeCore(
+                    output,
+                    value.AsSpan(
+                        startIndex + indexOfFirstCharToEncode,
+                        characterCount - indexOfFirstCharToEncode
+                    )
+                );
             }
         }
 
@@ -236,7 +291,12 @@ namespace System.Text.Encodings.Web
         /// <param name="value">Array of characters to be encoded.</param>
         /// <param name="startIndex">The index where the substring starts.</param>
         /// <param name="characterCount">Number of characters in the substring.</param>
-        public virtual void Encode(TextWriter output, char[] value, int startIndex, int characterCount)
+        public virtual void Encode(
+            TextWriter output,
+            char[] value,
+            int startIndex,
+            int characterCount
+        )
         {
             if (output is null)
             {
@@ -249,7 +309,9 @@ namespace System.Text.Encodings.Web
 
             ValidateRanges(startIndex, characterCount, actualInputLength: value.Length);
 
-            int indexOfFirstCharToEncode = FindFirstCharacterToEncode(value.AsSpan(startIndex, characterCount));
+            int indexOfFirstCharToEncode = FindFirstCharacterToEncode(
+                value.AsSpan(startIndex, characterCount)
+            );
             if (indexOfFirstCharToEncode < 0)
             {
                 indexOfFirstCharToEncode = characterCount;
@@ -258,7 +320,13 @@ namespace System.Text.Encodings.Web
 
             if (indexOfFirstCharToEncode != characterCount)
             {
-                EncodeCore(output, value.AsSpan(startIndex + indexOfFirstCharToEncode, characterCount - indexOfFirstCharToEncode));
+                EncodeCore(
+                    output,
+                    value.AsSpan(
+                        startIndex + indexOfFirstCharToEncode,
+                        characterCount - indexOfFirstCharToEncode
+                    )
+                );
             }
         }
 
@@ -279,7 +347,8 @@ namespace System.Text.Encodings.Web
             Span<byte> utf8Destination,
             out int bytesConsumed,
             out int bytesWritten,
-            bool isFinalBlock = true)
+            bool isFinalBlock = true
+        )
         {
             // The Encode method is intended to be called in a loop, potentially where the source buffer
             // is much larger than the destination buffer. We don't want to walk the entire source buffer
@@ -312,7 +381,13 @@ namespace System.Text.Encodings.Web
             // If we got to this point, we couldn't memcpy the entire source buffer into the destination.
             // Either the destination was too short or we found data that needs to be encoded.
 
-            OperationStatus status = EncodeUtf8Core(utf8Source.Slice(idxOfFirstByteToEncode), utf8Destination.Slice(idxOfFirstByteToEncode), out int innerBytesConsumed, out int innerBytesWritten, isFinalBlock);
+            OperationStatus status = EncodeUtf8Core(
+                utf8Source.Slice(idxOfFirstByteToEncode),
+                utf8Destination.Slice(idxOfFirstByteToEncode),
+                out int innerBytesConsumed,
+                out int innerBytesWritten,
+                isFinalBlock
+            );
             bytesConsumed = idxOfFirstByteToEncode + innerBytesConsumed;
             bytesWritten = idxOfFirstByteToEncode + innerBytesWritten;
             return status;
@@ -324,7 +399,8 @@ namespace System.Text.Encodings.Web
             Span<byte> utf8Destination,
             out int bytesConsumed,
             out int bytesWritten,
-            bool isFinalBlock)
+            bool isFinalBlock
+        )
         {
             int originalUtf8SourceLength = utf8Source.Length;
             int originalUtf8DestinationLength = utf8Destination.Length;
@@ -334,7 +410,11 @@ namespace System.Text.Encodings.Web
 
             while (!utf8Source.IsEmpty)
             {
-                OperationStatus opStatus = Rune.DecodeFromUtf8(utf8Source, out Rune scalarValue, out int bytesConsumedJustNow);
+                OperationStatus opStatus = Rune.DecodeFromUtf8(
+                    utf8Source,
+                    out Rune scalarValue,
+                    out int bytesConsumedJustNow
+                );
                 if (opStatus != OperationStatus.Done)
                 {
                     if (!isFinalBlock && opStatus == OperationStatus.NeedMoreData)
@@ -348,7 +428,8 @@ namespace System.Text.Encodings.Web
 
                 if (!WillEncode(scalarValue.Value))
                 {
-                    uint utf8lsb = (uint)UnicodeHelpers.GetUtf8RepresentationForScalarValue((uint)scalarValue.Value);
+                    uint utf8lsb = (uint)
+                        UnicodeHelpers.GetUtf8RepresentationForScalarValue((uint)scalarValue.Value);
                     int dstIdxTemp = 0;
                     do
                     {
@@ -363,9 +444,16 @@ namespace System.Text.Encodings.Web
                     continue;
                 }
 
-            MustEncode:
+                MustEncode:
 
-                if (!TryEncodeUnicodeScalarUtf8((uint)scalarValue.Value, utf16ScratchBuffer, utf8Destination, out int bytesWrittenJustNow))
+                if (
+                    !TryEncodeUnicodeScalarUtf8(
+                        (uint)scalarValue.Value,
+                        utf16ScratchBuffer,
+                        utf8Destination,
+                        out int bytesWrittenJustNow
+                    )
+                )
                 {
                     goto DestinationTooSmall;
                 }
@@ -378,16 +466,16 @@ namespace System.Text.Encodings.Web
 
             OperationStatus retVal = OperationStatus.Done;
 
-        ReturnCommon:
+            ReturnCommon:
             bytesConsumed = originalUtf8SourceLength - utf8Source.Length;
             bytesWritten = originalUtf8DestinationLength - utf8Destination.Length;
             return retVal;
 
-        NeedMoreData:
+            NeedMoreData:
             retVal = OperationStatus.NeedMoreData;
             goto ReturnCommon;
 
-        DestinationTooSmall:
+            DestinationTooSmall:
             retVal = OperationStatus.DestinationTooSmall;
             goto ReturnCommon;
         }
@@ -409,7 +497,8 @@ namespace System.Text.Encodings.Web
             Span<char> destination,
             out int charsConsumed,
             out int charsWritten,
-            bool isFinalBlock = true)
+            bool isFinalBlock = true
+        )
         {
             // The Encode method is intended to be called in a loop, potentially where the source buffer
             // is much larger than the destination buffer. We don't want to walk the entire source buffer
@@ -442,21 +531,37 @@ namespace System.Text.Encodings.Web
             // If we got to this point, we couldn't memcpy the entire source buffer into the destination.
             // Either the destination was too short or we found data that needs to be encoded.
 
-            OperationStatus status = EncodeCore(source.Slice(idxOfFirstCharToEncode), destination.Slice(idxOfFirstCharToEncode), out int innerCharsConsumed, out int innerCharsWritten, isFinalBlock);
+            OperationStatus status = EncodeCore(
+                source.Slice(idxOfFirstCharToEncode),
+                destination.Slice(idxOfFirstCharToEncode),
+                out int innerCharsConsumed,
+                out int innerCharsWritten,
+                isFinalBlock
+            );
             charsConsumed = idxOfFirstCharToEncode + innerCharsConsumed;
             charsWritten = idxOfFirstCharToEncode + innerCharsWritten;
             return status;
         }
 
         // skips the call to FindFirstCharacterToEncode
-        private protected virtual OperationStatus EncodeCore(ReadOnlySpan<char> source, Span<char> destination, out int charsConsumed, out int charsWritten, bool isFinalBlock)
+        private protected virtual OperationStatus EncodeCore(
+            ReadOnlySpan<char> source,
+            Span<char> destination,
+            out int charsConsumed,
+            out int charsWritten,
+            bool isFinalBlock
+        )
         {
             int originalSourceLength = source.Length;
             int originalDestinationLength = destination.Length;
 
             while (!source.IsEmpty)
             {
-                OperationStatus status = Rune.DecodeFromUtf16(source, out Rune scalarValue, out int charsConsumedJustNow);
+                OperationStatus status = Rune.DecodeFromUtf16(
+                    source,
+                    out Rune scalarValue,
+                    out int charsConsumedJustNow
+                );
                 if (status != OperationStatus.Done)
                 {
                     if (!isFinalBlock && status == OperationStatus.NeedMoreData)
@@ -479,9 +584,15 @@ namespace System.Text.Encodings.Web
                     continue;
                 }
 
-            MustEncode:
+                MustEncode:
 
-                if (!TryEncodeUnicodeScalar((uint)scalarValue.Value, destination, out int charsWrittenJustNow))
+                if (
+                    !TryEncodeUnicodeScalar(
+                        (uint)scalarValue.Value,
+                        destination,
+                        out int charsWrittenJustNow
+                    )
+                )
                 {
                     goto DestinationTooSmall;
                 }
@@ -494,16 +605,16 @@ namespace System.Text.Encodings.Web
 
             OperationStatus retVal = OperationStatus.Done;
 
-        ReturnCommon:
+            ReturnCommon:
             charsConsumed = originalSourceLength - source.Length;
             charsWritten = originalDestinationLength - destination.Length;
             return retVal;
 
-        NeedMoreData:
+            NeedMoreData:
             retVal = OperationStatus.NeedMoreData;
             goto ReturnCommon;
 
-        DestinationTooSmall:
+            DestinationTooSmall:
             retVal = OperationStatus.DestinationTooSmall;
             goto ReturnCommon;
         }
@@ -517,14 +628,28 @@ namespace System.Text.Encodings.Web
             // On each iteration of the main loop, we'll make sure we have at least this many chars left in the
             // destination buffer. This should prevent us from making very chatty calls where we only make progress
             // one char at a time.
-            int minBufferBumpEachIteration = Math.Max(MaxOutputCharactersPerInputCharacter, EncodeStartingOutputBufferSize);
-            char[] rentedArray = ArrayPool<char>.Shared.Rent(Math.Max(value.Length, minBufferBumpEachIteration));
+            int minBufferBumpEachIteration = Math.Max(
+                MaxOutputCharactersPerInputCharacter,
+                EncodeStartingOutputBufferSize
+            );
+            char[] rentedArray = ArrayPool<char>.Shared.Rent(
+                Math.Max(value.Length, minBufferBumpEachIteration)
+            );
             Span<char> scratchBuffer = rentedArray;
 
             do
             {
-                EncodeCore(value, scratchBuffer, out int charsConsumedJustNow, out int charsWrittenJustNow, isFinalBlock: true);
-                if (charsWrittenJustNow == 0 || (uint)charsWrittenJustNow > (uint)scratchBuffer.Length)
+                EncodeCore(
+                    value,
+                    scratchBuffer,
+                    out int charsConsumedJustNow,
+                    out int charsWrittenJustNow,
+                    isFinalBlock: true
+                );
+                if (
+                    charsWrittenJustNow == 0
+                    || (uint)charsWrittenJustNow > (uint)scratchBuffer.Length
+                )
                 {
                     ThrowArgumentException_MaxOutputCharsPerInputChar(); // couldn't make forward progress or returned bogus data
                 }
@@ -562,7 +687,11 @@ namespace System.Text.Encodings.Web
 
             while (!utf8Text.IsEmpty)
             {
-                OperationStatus opStatus = Rune.DecodeFromUtf8(utf8Text, out Rune scalarValue, out int bytesConsumed);
+                OperationStatus opStatus = Rune.DecodeFromUtf8(
+                    utf8Text,
+                    out Rune scalarValue,
+                    out int bytesConsumed
+                );
                 if (opStatus != OperationStatus.Done || WillEncode(scalarValue.Value))
                 {
                     break;
@@ -573,7 +702,11 @@ namespace System.Text.Encodings.Web
             return (utf8Text.IsEmpty) ? -1 : utf8TextOriginalLength - utf8Text.Length;
         }
 
-        internal static bool TryCopyCharacters(string source, Span<char> destination, out int numberOfCharactersWritten)
+        internal static bool TryCopyCharacters(
+            string source,
+            Span<char> destination,
+            out int numberOfCharactersWritten
+        )
         {
             Debug.Assert(!string.IsNullOrEmpty(source));
 
@@ -593,7 +726,11 @@ namespace System.Text.Encodings.Web
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryWriteScalarAsChar(int unicodeScalar, Span<char> destination, out int numberOfCharactersWritten)
+        internal static bool TryWriteScalarAsChar(
+            int unicodeScalar,
+            Span<char> destination,
+            out int numberOfCharactersWritten
+        )
         {
             Debug.Assert(unicodeScalar < ushort.MaxValue);
             if (destination.IsEmpty)
@@ -606,7 +743,11 @@ namespace System.Text.Encodings.Web
             return true;
         }
 
-        private static void ValidateRanges(int startIndex, int characterCount, int actualInputLength)
+        private static void ValidateRanges(
+            int startIndex,
+            int characterCount,
+            int actualInputLength
+        )
         {
             if (startIndex < 0 || startIndex > actualInputLength)
             {

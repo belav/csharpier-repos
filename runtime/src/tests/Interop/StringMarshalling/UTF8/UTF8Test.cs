@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Collections.Generic;
 using Xunit;
 
 // UTF8
@@ -12,7 +12,11 @@ class UTF8StringTests
 {
     [DllImport("UTF8TestNative", CallingConvention = CallingConvention.Cdecl)]
     [return: MarshalAs(UnmanagedType.LPUTF8Str)]
-    public static extern string StringParameterInOut([In, Out][MarshalAs(UnmanagedType.LPUTF8Str)]string s, int index);
+    public static extern string StringParameterInOut(
+        [In, Out] [MarshalAs(UnmanagedType.LPUTF8Str)] string s,
+        int index
+    );
+
     public static void TestInOutStringParameter(string orgString, int index)
     {
         string passedString = orgString;
@@ -27,7 +31,11 @@ class UTF8StringTests
 
     [DllImport("UTF8TestNative", CallingConvention = CallingConvention.Cdecl)]
     [return: MarshalAs(UnmanagedType.LPUTF8Str)]
-    public static extern string StringParameterOut([Out][MarshalAs(UnmanagedType.LPUTF8Str)]string s, int index);
+    public static extern string StringParameterOut(
+        [Out] [MarshalAs(UnmanagedType.LPUTF8Str)] string s,
+        int index
+    );
+
     public static void TestOutStringParameter(string orgString, int index)
     {
         string passedString = orgString;
@@ -40,7 +48,11 @@ class UTF8StringTests
     }
 
     [DllImport("UTF8TestNative", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void StringParameterRefOut([MarshalAs(UnmanagedType.LPUTF8Str)]out string s, int index);
+    public static extern void StringParameterRefOut(
+        [MarshalAs(UnmanagedType.LPUTF8Str)] out string s,
+        int index
+    );
+
     public static void TestStringPassByOut(string orgString, int index)
     {
         // out string
@@ -53,7 +65,11 @@ class UTF8StringTests
     }
 
     [DllImport("UTF8TestNative", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void StringParameterRef([MarshalAs(UnmanagedType.LPUTF8Str)]ref string s, int index);
+    public static extern void StringParameterRef(
+        [MarshalAs(UnmanagedType.LPUTF8Str)] ref string s,
+        int index
+    );
+
     public static void TestStringPassByRef(string orgString, int index)
     {
         string orgCopy = new string(orgString.ToCharArray());
@@ -75,7 +91,11 @@ class UTF8StringTests
 class UTF8StringBuilderTests
 {
     [DllImport("UTF8TestNative", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void StringBuilderParameterInOut([In, Out][MarshalAs(UnmanagedType.LPUTF8Str)]StringBuilder s, int index);
+    public static extern void StringBuilderParameterInOut(
+        [In, Out] [MarshalAs(UnmanagedType.LPUTF8Str)] StringBuilder s,
+        int index
+    );
+
     public static void TestInOutStringBuilderParameter(string expectedString, int index)
     {
         StringBuilder nativeStrBuilder = new StringBuilder(expectedString);
@@ -83,12 +103,18 @@ class UTF8StringBuilderTests
 
         if (!nativeStrBuilder.ToString().Equals(expectedString))
         {
-            throw new Exception("TestInOutStringBuilderParameter: nativeString != expectedNativeString ");
+            throw new Exception(
+                "TestInOutStringBuilderParameter: nativeString != expectedNativeString "
+            );
         }
     }
 
     [DllImport("UTF8TestNative", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void StringBuilderParameterOut([Out][MarshalAs(UnmanagedType.LPUTF8Str)]StringBuilder s, int index);
+    public static extern void StringBuilderParameterOut(
+        [Out] [MarshalAs(UnmanagedType.LPUTF8Str)] StringBuilder s,
+        int index
+    );
+
     public static void TestOutStringBuilderParameter(string expectedString, int index)
     {
         // string builder capacity
@@ -101,16 +127,22 @@ class UTF8StringBuilderTests
         }
     }
 
-
     [DllImport("UTF8TestNative", CallingConvention = CallingConvention.Cdecl)]
-    [return: MarshalAs(UnmanagedType.LPUTF8Str,SizeConst = 512)]
+    [return: MarshalAs(UnmanagedType.LPUTF8Str, SizeConst = 512)]
     public static extern StringBuilder StringBuilderParameterReturn(int index);
+
     public static void TestReturnStringBuilder(string expectedReturn, int index)
     {
         StringBuilder nativeString = StringBuilderParameterReturn(index);
         if (!expectedReturn.Equals(nativeString.ToString()))
         {
-            throw new Exception(string.Format( "TestReturnStringBuilder: nativeString {0} != expectedNativeString {1}",nativeString.ToString(),expectedReturn) );
+            throw new Exception(
+                string.Format(
+                    "TestReturnStringBuilder: nativeString {0} != expectedNativeString {1}",
+                    nativeString.ToString(),
+                    expectedReturn
+                )
+            );
         }
     }
 }
@@ -127,21 +159,24 @@ class UTF8StructMarshalling
 
     unsafe struct UnmanagedStruct
     {
-      public fixed byte psz[8];
+        public fixed byte psz[8];
     }
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     struct ManagedStruct
     {
-      [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 8)]
-      public string str;
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 8)]
+        public string str;
     }
 
     [DllImport("UTF8TestNative", CallingConvention = CallingConvention.Cdecl)]
     public static extern void TestStructWithUtf8Field(Utf8Struct utfStruct);
 
     [DllImport("UTF8TestNative", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void SetStringInStruct(ref Utf8Struct utfStruct, [MarshalAs(UnmanagedType.LPUTF8Str)] string str);
+    public static extern void SetStringInStruct(
+        ref Utf8Struct utfStruct,
+        [MarshalAs(UnmanagedType.LPUTF8Str)] string str
+    );
 
     public static void TestUTF8StructMarshalling(string[] utf8Strings)
     {
@@ -153,7 +188,7 @@ class UTF8StructMarshalling
             TestStructWithUtf8Field(utf8Struct);
         }
         if (!OperatingSystem.IsWindows())
-         CompareWithUTF8Encoding();
+            CompareWithUTF8Encoding();
 
         string testString = "StructTestString\uD83D\uDE00";
 
@@ -163,11 +198,11 @@ class UTF8StructMarshalling
         {
             throw new Exception("Incorrect UTF8 string marshalled back from native to managed.");
         }
-   }
+    }
 
-   unsafe static void CompareWithUTF8Encoding()
-   {
-       // Compare results with UTF8Encoding
+    static unsafe void CompareWithUTF8Encoding()
+    {
+        // Compare results with UTF8Encoding
         UnmanagedStruct ums;
         ums.psz[0] = 0xFF;
         ums.psz[1] = (byte)'a';
@@ -178,10 +213,10 @@ class UTF8StructMarshalling
 
         IntPtr ptr = (IntPtr)(&ums);
         ManagedStruct ms = Marshal.PtrToStructure<ManagedStruct>(ptr);
-	string actual = ms.str;
+        string actual = ms.str;
 
         UTF8Encoding uTF8Encoding = new UTF8Encoding();
-        byte [] b = new byte[5];
+        byte[] b = new byte[5];
         b[0] = 0xFF;
         b[1] = (byte)'a';
         b[2] = (byte)'b';
@@ -189,24 +224,27 @@ class UTF8StructMarshalling
         b[4] = (byte)'d';
         string expected = uTF8Encoding.GetString(b);
         if (actual != expected)
-	{
-           Console.WriteLine("Actual:" + actual + " Length:" + actual.Length);
-           Console.WriteLine("Expected:" + expected + " Length:" + expected.Length);
-           throw new Exception("UTF8Encoding.GetString doesn't match with Utf8 String Marshaller result");
+        {
+            Console.WriteLine("Actual:" + actual + " Length:" + actual.Length);
+            Console.WriteLine("Expected:" + expected + " Length:" + expected.Length);
+            throw new Exception(
+                "UTF8Encoding.GetString doesn't match with Utf8 String Marshaller result"
+            );
         }
-   }
+    }
 }
 
 // UTF8 string as delegate parameter
 class UTF8DelegateMarshalling
 {
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void DelegateUTF8Parameter([MarshalAs(UnmanagedType.LPUTF8Str)]string utf8String, int index);
-
+    public delegate void DelegateUTF8Parameter(
+        [MarshalAs(UnmanagedType.LPUTF8Str)] string utf8String,
+        int index
+    );
 
     [DllImport("UTF8TestNative", CallingConvention = CallingConvention.Cdecl)]
     public static extern void Utf8DelegateAsParameter(DelegateUTF8Parameter param);
-
 
     public static void TestUTF8DelegateMarshalling()
     {
@@ -222,19 +260,19 @@ class UTF8DelegateMarshalling
     }
 }
 
-
 public class Test
 {
     //test strings
-    public static string[] utf8Strings = {
-                                "Managed",
-                                 "S\u00EEne kl\u00E2wen durh die wolken sint geslagen" ,
-                                 "\u0915\u093E\u091A\u0902 \u0936\u0915\u094D\u0928\u094B\u092E\u094D\u092F\u0924\u094D\u0924\u0941\u092E\u094D \u0964 \u0928\u094B\u092A\u0939\u093F\u0928\u0938\u094D\u0924\u093F \u092E\u093E\u092E\u094D",
-                                 "\u6211\u80FD\u541E\u4E0B\u73BB\u7483\u800C\u4E0D\u4F24\u8EAB\u4F53",
-                                 "\u10E6\u10DB\u10D4\u10E0\u10D7\u10E1\u10D8 \u10E8\u10D4\u10DB\u10D5\u10D4\u10D3\u10E0\u10D4,\u10E8\u10D4\u10DB\u10D5\u10D4\u10D3\u10E0\u10D4, \u10DC\u10E3\u10D7\u10E3 \u10D9\u10D5\u10DA\u10D0 \u10D3\u10D0\u10DB\u10EE\u10E1\u10DC\u10D0\u10E1 \u10E8\u10D4\u10DB\u10D5\u10D4\u10D3\u10E0\u10D4,\u10E1\u10DD\u10E4\u10DA\u10D8\u10E1\u10D0 \u10E8\u10D4\u10DB\u10D5\u10D4\u10D3\u10E0\u10D4, \u10E8\u10D4\u10DB\u10D5\u10D4\u10D3\u10E0\u10D4,\u10E8\u10D4\u10DB\u10D5\u10D4\u10D3\u10E0\u10D4,\u10E8\u10D4\u10DB\u10D5\u10D4\u10D3\u10E0\u10D4,\u10E8\u10E0\u10DD\u10DB\u10D0\u10E1\u10D0, \u10EA\u10D4\u10EA\u10EE\u10DA\u10E1, \u10EC\u10E7\u10D0\u10DA\u10E1\u10D0 \u10D3\u10D0 \u10DB\u10D8\u10EC\u10D0\u10E1\u10D0, \u10F0\u10D0\u10D4\u10E0\u10D7\u10D0 \u10D7\u10D0\u10DC\u10D0 \u10DB\u10E0\u10DD\u10DB\u10D0\u10E1\u10D0; \u10DB\u10DD\u10DB\u10EA\u10DC\u10D4\u10E1 \u10E4\u10E0\u10D7\u10D4\u10DC\u10D8 \u10D3\u10D0 \u10D0\u10E6\u10D5\u10E4\u10E0\u10D8\u10DC\u10D3\u10D4, \u10DB\u10D8\u10D5\u10F0\u10EE\u10D5\u10D3\u10D4 \u10DB\u10D0\u10E1 \u10E9\u10D4\u10DB\u10E1\u10D0 \u10DC\u10D3\u10DD\u10DB\u10D0\u10E1\u10D0, \u10D3\u10E6\u10D8\u10E1\u10D8\u10D7 \u10D3\u10D0 \u10E6\u10D0\u10DB\u10D8\u10D7 \u10D5\u10F0\u10EE\u10D4\u10D3\u10D5\u10D8\u10D3\u10D4 \u10DB\u10D6\u10D8\u10E1\u10D0 \u10D4\u10DA\u10D5\u10D0\u10D7\u10D0 \u10D9\u10E0\u10D7\u10DD\u10DB\u10D0\u10D0\u10E1\u10D0\u10E8\u10D4\u10DB\u10D5\u10D4\u10D3\u10E0\u10D4,\u10E8\u10D4\u10DB\u10D5\u10D4\u10D3\u10E0\u10D4,",
-                                 "\u03A4\u03B7 \u03B3\u03BB\u03CE\u03C3\u03C3\u03B1 \u03BC\u03BF\u03C5 \u03AD\u03B4\u03C9\u03C3\u03B1\u03BD \u03B5\u03BB\u03BB\u03B7\u03BD\u03B9\u03BA\u03AE",
-                                 null,
-                               };
+    public static string[] utf8Strings =
+    {
+        "Managed",
+        "S\u00EEne kl\u00E2wen durh die wolken sint geslagen",
+        "\u0915\u093E\u091A\u0902 \u0936\u0915\u094D\u0928\u094B\u092E\u094D\u092F\u0924\u094D\u0924\u0941\u092E\u094D \u0964 \u0928\u094B\u092A\u0939\u093F\u0928\u0938\u094D\u0924\u093F \u092E\u093E\u092E\u094D",
+        "\u6211\u80FD\u541E\u4E0B\u73BB\u7483\u800C\u4E0D\u4F24\u8EAB\u4F53",
+        "\u10E6\u10DB\u10D4\u10E0\u10D7\u10E1\u10D8 \u10E8\u10D4\u10DB\u10D5\u10D4\u10D3\u10E0\u10D4,\u10E8\u10D4\u10DB\u10D5\u10D4\u10D3\u10E0\u10D4, \u10DC\u10E3\u10D7\u10E3 \u10D9\u10D5\u10DA\u10D0 \u10D3\u10D0\u10DB\u10EE\u10E1\u10DC\u10D0\u10E1 \u10E8\u10D4\u10DB\u10D5\u10D4\u10D3\u10E0\u10D4,\u10E1\u10DD\u10E4\u10DA\u10D8\u10E1\u10D0 \u10E8\u10D4\u10DB\u10D5\u10D4\u10D3\u10E0\u10D4, \u10E8\u10D4\u10DB\u10D5\u10D4\u10D3\u10E0\u10D4,\u10E8\u10D4\u10DB\u10D5\u10D4\u10D3\u10E0\u10D4,\u10E8\u10D4\u10DB\u10D5\u10D4\u10D3\u10E0\u10D4,\u10E8\u10E0\u10DD\u10DB\u10D0\u10E1\u10D0, \u10EA\u10D4\u10EA\u10EE\u10DA\u10E1, \u10EC\u10E7\u10D0\u10DA\u10E1\u10D0 \u10D3\u10D0 \u10DB\u10D8\u10EC\u10D0\u10E1\u10D0, \u10F0\u10D0\u10D4\u10E0\u10D7\u10D0 \u10D7\u10D0\u10DC\u10D0 \u10DB\u10E0\u10DD\u10DB\u10D0\u10E1\u10D0; \u10DB\u10DD\u10DB\u10EA\u10DC\u10D4\u10E1 \u10E4\u10E0\u10D7\u10D4\u10DC\u10D8 \u10D3\u10D0 \u10D0\u10E6\u10D5\u10E4\u10E0\u10D8\u10DC\u10D3\u10D4, \u10DB\u10D8\u10D5\u10F0\u10EE\u10D5\u10D3\u10D4 \u10DB\u10D0\u10E1 \u10E9\u10D4\u10DB\u10E1\u10D0 \u10DC\u10D3\u10DD\u10DB\u10D0\u10E1\u10D0, \u10D3\u10E6\u10D8\u10E1\u10D8\u10D7 \u10D3\u10D0 \u10E6\u10D0\u10DB\u10D8\u10D7 \u10D5\u10F0\u10EE\u10D4\u10D3\u10D5\u10D8\u10D3\u10D4 \u10DB\u10D6\u10D8\u10E1\u10D0 \u10D4\u10DA\u10D5\u10D0\u10D7\u10D0 \u10D9\u10E0\u10D7\u10DD\u10DB\u10D0\u10D0\u10E1\u10D0\u10E8\u10D4\u10DB\u10D5\u10D4\u10D3\u10E0\u10D4,\u10E8\u10D4\u10DB\u10D5\u10D4\u10D3\u10E0\u10D4,",
+        "\u03A4\u03B7 \u03B3\u03BB\u03CE\u03C3\u03C3\u03B1 \u03BC\u03BF\u03C5 \u03AD\u03B4\u03C9\u03C3\u03B1\u03BD \u03B5\u03BB\u03BB\u03B7\u03BD\u03B9\u03BA\u03AE",
+        null,
+    };
 
     [Fact]
     public static void TestEntryPoint()
@@ -252,7 +290,6 @@ public class Test
 
         for (int i = 0; i < utf8Strings.Length - 1; i++)
             UTF8StringTests.TestStringPassByRef(utf8Strings[i], i);
-
 
         // Test StringBuilder as [In,Out] parameter
         for (int i = 0; i < utf8Strings.Length - 1; i++)

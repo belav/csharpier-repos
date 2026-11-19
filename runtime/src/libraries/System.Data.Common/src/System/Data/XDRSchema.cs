@@ -35,9 +35,11 @@ namespace System.Data
             _ds = ds;
             _schemaName = schemaRoot.GetAttribute(Keywords.NAME);
 
-
             _schemaUri = string.Empty;
-            Debug.Assert(FEqualIdentity(schemaRoot, Keywords.XDR_SCHEMA, Keywords.XDRNS), "Illegal node");
+            Debug.Assert(
+                FEqualIdentity(schemaRoot, Keywords.XDR_SCHEMA, Keywords.XDRNS),
+                "Illegal node"
+            );
 
             // Get Locale and CaseSensitive properties
 
@@ -71,19 +73,23 @@ namespace System.Data
             XmlNode? vn;
             XmlNode vnRoof;
 
-            Debug.Assert(FEqualIdentity(node, Keywords.XDR_ELEMENT, Keywords.XDRNS) ||
-                         FEqualIdentity(node, Keywords.XDR_SCHEMA, Keywords.XDRNS) ||
-                         FEqualIdentity(node, Keywords.XDR_ATTRIBUTE, Keywords.XDRNS) ||
-                         FEqualIdentity(node, Keywords.XDR_ELEMENTTYPE, Keywords.XDRNS),
-                         "Invalid node type " + node.LocalName);
+            Debug.Assert(
+                FEqualIdentity(node, Keywords.XDR_ELEMENT, Keywords.XDRNS)
+                    || FEqualIdentity(node, Keywords.XDR_SCHEMA, Keywords.XDRNS)
+                    || FEqualIdentity(node, Keywords.XDR_ATTRIBUTE, Keywords.XDRNS)
+                    || FEqualIdentity(node, Keywords.XDR_ELEMENTTYPE, Keywords.XDRNS),
+                "Invalid node type " + node.LocalName
+            );
 
             if (FEqualIdentity(node, Keywords.XDR_ELEMENTTYPE, Keywords.XDRNS))
                 return node;
 
             strType = node.GetAttribute(Keywords.TYPE);
 
-            if (FEqualIdentity(node, Keywords.XDR_ELEMENT, Keywords.XDRNS) ||
-                FEqualIdentity(node, Keywords.XDR_ATTRIBUTE, Keywords.XDRNS))
+            if (
+                FEqualIdentity(node, Keywords.XDR_ELEMENT, Keywords.XDRNS)
+                || FEqualIdentity(node, Keywords.XDR_ATTRIBUTE, Keywords.XDRNS)
+            )
             {
                 if (string.IsNullOrEmpty(strType))
                     return null;
@@ -94,12 +100,21 @@ namespace System.Data
 
                 while (vn != vnRoof)
                 {
-                    if ((FEqualIdentity(vn, Keywords.XDR_ELEMENTTYPE, Keywords.XDRNS) &&
-                         FEqualIdentity(node, Keywords.XDR_ELEMENT, Keywords.XDRNS)) ||
-                        (FEqualIdentity(vn, Keywords.XDR_ATTRIBUTETYPE, Keywords.XDRNS) &&
-                         FEqualIdentity(node, Keywords.XDR_ATTRIBUTE, Keywords.XDRNS)))
+                    if (
+                        (
+                            FEqualIdentity(vn, Keywords.XDR_ELEMENTTYPE, Keywords.XDRNS)
+                            && FEqualIdentity(node, Keywords.XDR_ELEMENT, Keywords.XDRNS)
+                        )
+                        || (
+                            FEqualIdentity(vn, Keywords.XDR_ATTRIBUTETYPE, Keywords.XDRNS)
+                            && FEqualIdentity(node, Keywords.XDR_ATTRIBUTE, Keywords.XDRNS)
+                        )
+                    )
                     {
-                        if (vn is XmlElement && ((XmlElement)vn).GetAttribute(Keywords.NAME) == strType)
+                        if (
+                            vn is XmlElement
+                            && ((XmlElement)vn).GetAttribute(Keywords.NAME) == strType
+                        )
                             return (XmlElement)vn;
                     }
 
@@ -130,7 +145,10 @@ namespace System.Data
 
         internal static bool IsTextOnlyContent(XmlElement node)
         {
-            Debug.Assert(FEqualIdentity(node, Keywords.XDR_ELEMENTTYPE, Keywords.XDRNS), $"Invalid node type {node.LocalName}");
+            Debug.Assert(
+                FEqualIdentity(node, Keywords.XDR_ELEMENTTYPE, Keywords.XDRNS),
+                $"Invalid node type {node.LocalName}"
+            );
 
             string value = node.GetAttribute(Keywords.CONTENT);
             if (string.IsNullOrEmpty(value))
@@ -139,7 +157,12 @@ namespace System.Data
                 return !string.IsNullOrEmpty(type);
             }
 
-            if (value == Keywords.EMPTY || value == Keywords.ELTONLY || value == Keywords.ELEMENTONLY || value == Keywords.MIXED)
+            if (
+                value == Keywords.EMPTY
+                || value == Keywords.ELTONLY
+                || value == Keywords.ELEMENTONLY
+                || value == Keywords.MIXED
+            )
             {
                 return false;
             }
@@ -161,8 +184,10 @@ namespace System.Data
 
             for (XmlNode? n = typeNode.FirstChild; n != null; n = n.NextSibling)
             {
-                if (FEqualIdentity(n, Keywords.XDR_ELEMENT, Keywords.XDRNS) ||
-                    FEqualIdentity(n, Keywords.XDR_ATTRIBUTE, Keywords.XDRNS))
+                if (
+                    FEqualIdentity(n, Keywords.XDR_ELEMENT, Keywords.XDRNS)
+                    || FEqualIdentity(n, Keywords.XDR_ATTRIBUTE, Keywords.XDRNS)
+                )
                     return false;
             }
 
@@ -181,9 +206,11 @@ namespace System.Data
         {
             XmlElement? typeNode;
 
-            Debug.Assert(FEqualIdentity(node, Keywords.XDR_ELEMENTTYPE, Keywords.XDRNS) ||
-                         FEqualIdentity(node, Keywords.XDR_ELEMENT, Keywords.XDRNS), "Invalid node type");
-
+            Debug.Assert(
+                FEqualIdentity(node, Keywords.XDR_ELEMENTTYPE, Keywords.XDRNS)
+                    || FEqualIdentity(node, Keywords.XDR_ELEMENT, Keywords.XDRNS),
+                "Invalid node type"
+            );
 
             // Figure out if this really is a table.  If not, bail out.
             typeNode = FindTypeNode(node);
@@ -191,7 +218,10 @@ namespace System.Data
             string occurs = node.GetAttribute(Keywords.MINOCCURS);
 
             if (occurs != null && occurs.Length > 0)
-                if ((Convert.ToInt32(occurs, CultureInfo.InvariantCulture) > 1) && (typeNode == null))
+                if (
+                    (Convert.ToInt32(occurs, CultureInfo.InvariantCulture) > 1)
+                    && (typeNode == null)
+                )
                 {
                     return InstantiateSimpleTable(_ds, node);
                 }
@@ -203,7 +233,6 @@ namespace System.Data
                 {
                     return InstantiateSimpleTable(_ds, node);
                 }
-
 
             if (typeNode == null)
                 return null;
@@ -217,54 +246,71 @@ namespace System.Data
         private sealed class NameType : IComparable
         {
             public string name;
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)]
+
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicFields
+            )]
             public Type type;
-            public NameType(string n, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)] Type t)
+
+            public NameType(
+                string n,
+                [DynamicallyAccessedMembers(
+                    DynamicallyAccessedMemberTypes.PublicProperties
+                        | DynamicallyAccessedMemberTypes.PublicFields
+                )]
+                    Type t
+            )
             {
                 name = n;
                 type = t;
             }
-            public int CompareTo(object? obj) { return string.Compare(name, (string?)obj, StringComparison.Ordinal); }
+
+            public int CompareTo(object? obj)
+            {
+                return string.Compare(name, (string?)obj, StringComparison.Ordinal);
+            }
         };
 
         // XDR spec: http://www.ltg.ed.ac.uk/~ht/XMLData-Reduced.htm
-        private static readonly NameType[] s_mapNameTypeXdr = {
-            new NameType("bin.base64",  typeof(byte[])  ),
-            new NameType("bin.hex",     typeof(byte[])  ),
-            new NameType("boolean",     typeof(bool)    ),
-            new NameType("byte",        typeof(sbyte)   ),
-            new NameType("char",        typeof(char)    ),
-            new NameType("date",        typeof(DateTime)),
-            new NameType("dateTime",    typeof(DateTime)),
+        private static readonly NameType[] s_mapNameTypeXdr =
+        {
+            new NameType("bin.base64", typeof(byte[])),
+            new NameType("bin.hex", typeof(byte[])),
+            new NameType("boolean", typeof(bool)),
+            new NameType("byte", typeof(sbyte)),
+            new NameType("char", typeof(char)),
+            new NameType("date", typeof(DateTime)),
+            new NameType("dateTime", typeof(DateTime)),
             new NameType("dateTime.tz", typeof(DateTime)),
-            new NameType("entities",    typeof(string)  ),
-            new NameType("entity",      typeof(string)  ),
-            new NameType("enumeration", typeof(string)  ),
-            new NameType("fixed.14.4",  typeof(decimal) ),
-            new NameType("float",       typeof(double)  ),
-            new NameType("i1",          typeof(sbyte)   ),
-            new NameType("i2",          typeof(short)   ),
-            new NameType("i4",          typeof(int)     ),
-            new NameType("i8",          typeof(long)    ),
-            new NameType("id",          typeof(string)  ),
-            new NameType("idref",       typeof(string)  ),
-            new NameType("idrefs",      typeof(string)  ),
-            new NameType("int",         typeof(int)     ),
-            new NameType("nmtoken",     typeof(string)  ),
-            new NameType("nmtokens",    typeof(string)  ),
-            new NameType("notation",    typeof(string)  ),
-            new NameType("number",      typeof(decimal) ),
-            new NameType("r4",          typeof(float)   ),
-            new NameType("r8",          typeof(double)  ),
-            new NameType("string",      typeof(string)  ),
-            new NameType("time",        typeof(DateTime)),
-            new NameType("time.tz",     typeof(DateTime)),
-            new NameType("ui1",         typeof(byte)    ),
-            new NameType("ui2",         typeof(ushort)  ),
-            new NameType("ui4",         typeof(uint)    ),
-            new NameType("ui8",         typeof(ulong)   ),
-            new NameType("uri",         typeof(string)  ),
-            new NameType("uuid",        typeof(Guid)    ),
+            new NameType("entities", typeof(string)),
+            new NameType("entity", typeof(string)),
+            new NameType("enumeration", typeof(string)),
+            new NameType("fixed.14.4", typeof(decimal)),
+            new NameType("float", typeof(double)),
+            new NameType("i1", typeof(sbyte)),
+            new NameType("i2", typeof(short)),
+            new NameType("i4", typeof(int)),
+            new NameType("i8", typeof(long)),
+            new NameType("id", typeof(string)),
+            new NameType("idref", typeof(string)),
+            new NameType("idrefs", typeof(string)),
+            new NameType("int", typeof(int)),
+            new NameType("nmtoken", typeof(string)),
+            new NameType("nmtokens", typeof(string)),
+            new NameType("notation", typeof(string)),
+            new NameType("number", typeof(decimal)),
+            new NameType("r4", typeof(float)),
+            new NameType("r8", typeof(double)),
+            new NameType("string", typeof(string)),
+            new NameType("time", typeof(DateTime)),
+            new NameType("time.tz", typeof(DateTime)),
+            new NameType("ui1", typeof(byte)),
+            new NameType("ui2", typeof(ushort)),
+            new NameType("ui4", typeof(uint)),
+            new NameType("ui8", typeof(ulong)),
+            new NameType("uri", typeof(string)),
+            new NameType("uuid", typeof(Guid)),
         };
 
         private static NameType FindNameType(string name)
@@ -272,7 +318,10 @@ namespace System.Data
 #if DEBUG
             for (int i = 1; i < s_mapNameTypeXdr.Length; ++i)
             {
-                Debug.Assert((s_mapNameTypeXdr[i - 1].CompareTo(s_mapNameTypeXdr[i].name)) < 0, "incorrect sorting");
+                Debug.Assert(
+                    (s_mapNameTypeXdr[i - 1].CompareTo(s_mapNameTypeXdr[i].name)) < 0,
+                    "incorrect sorting"
+                );
             }
 #endif
             int index = Array.BinarySearch(s_mapNameTypeXdr, name);
@@ -282,12 +331,18 @@ namespace System.Data
                 // Let's check that we really don't have this name:
                 foreach (NameType nt in s_mapNameTypeXdr)
                 {
-                    Debug.Assert(nt.name != name, $"FindNameType('{name}') -- failed. Existed name not found");
+                    Debug.Assert(
+                        nt.name != name,
+                        $"FindNameType('{name}') -- failed. Existed name not found"
+                    );
                 }
 #endif
                 throw ExceptionBuilder.UndefinedDatatype(name);
             }
-            Debug.Assert(s_mapNameTypeXdr[index].name == name, $"FindNameType('{name}') -- failed. Wrong name found");
+            Debug.Assert(
+                s_mapNameTypeXdr[index].name == name,
+                $"FindNameType('{name}') -- failed. Wrong name found"
+            );
             return s_mapNameTypeXdr[index];
         }
 
@@ -320,8 +375,10 @@ namespace System.Data
         {
             string instanceName;
 
-            if (FEqualIdentity(node, Keywords.XDR_ELEMENTTYPE, Keywords.XDRNS) ||
-                FEqualIdentity(node, Keywords.XDR_ATTRIBUTETYPE, Keywords.XDRNS))
+            if (
+                FEqualIdentity(node, Keywords.XDR_ELEMENTTYPE, Keywords.XDRNS)
+                || FEqualIdentity(node, Keywords.XDR_ATTRIBUTETYPE, Keywords.XDRNS)
+            )
             {
                 instanceName = node.GetAttribute(Keywords.NAME);
                 if (instanceName == null || instanceName.Length == 0)
@@ -342,8 +399,11 @@ namespace System.Data
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         internal void HandleColumn(XmlElement node, DataTable table)
         {
-            Debug.Assert(FEqualIdentity(node, Keywords.XDR_ELEMENT, Keywords.XDRNS) ||
-                         FEqualIdentity(node, Keywords.XDR_ATTRIBUTE, Keywords.XDRNS), "Illegal node type");
+            Debug.Assert(
+                FEqualIdentity(node, Keywords.XDR_ELEMENT, Keywords.XDRNS)
+                    || FEqualIdentity(node, Keywords.XDR_ATTRIBUTE, Keywords.XDRNS),
+                "Illegal node type"
+            );
 
             string instanceName;
             string strName;
@@ -420,7 +480,6 @@ namespace System.Data
                     xsdType = SimpleType.CreateSimpleType(StorageType.Char, type);
                 }
 
-
                 if (strType == "enumeration")
                 {
                     strType = string.Empty;
@@ -447,11 +506,14 @@ namespace System.Data
             // Does XDR has default?
             strDefault = node.GetAttribute(Keywords.DEFAULT);
 
-
             bool bNullable = false;
 
-            column = new DataColumn(XmlConvert.DecodeName(instanceName), type, null,
-                isAttribute ? MappingType.Attribute : MappingType.Element);
+            column = new DataColumn(
+                XmlConvert.DecodeName(instanceName),
+                type,
+                null,
+                isAttribute ? MappingType.Attribute : MappingType.Element
+            );
 
             SetProperties(column, node.Attributes); // xmlschema.SetProperties will skipp setting expressions
             column.XmlDataType = strType;
@@ -510,7 +572,10 @@ namespace System.Data
                 {
                     maxOccurs = -1;
                 }
-                else if (!int.TryParse(occurs, CultureInfo.InvariantCulture, out maxOccurs) || maxOccurs != 1)
+                else if (
+                    !int.TryParse(occurs, CultureInfo.InvariantCulture, out maxOccurs)
+                    || maxOccurs != 1
+                )
                 {
                     throw ExceptionBuilder.AttributeValues(nameof(maxOccurs), "1", Keywords.STAR);
                 }
@@ -537,8 +602,10 @@ namespace System.Data
                     }
                 }
 
-                if (FEqualIdentity(n, Keywords.XDR_ATTRIBUTE, Keywords.XDRNS) ||
-                    FEqualIdentity(n, Keywords.XDR_ELEMENT, Keywords.XDRNS))
+                if (
+                    FEqualIdentity(n, Keywords.XDR_ATTRIBUTE, Keywords.XDRNS)
+                    || FEqualIdentity(n, Keywords.XDR_ELEMENT, Keywords.XDRNS)
+                )
                 {
                     HandleColumn((XmlElement)n, table);
                     continue;
@@ -556,8 +623,6 @@ namespace System.Data
             int maxOccurs = 1;
             string? keys = null;
             ArrayList tableChildren = new ArrayList();
-
-
 
             if (attrs.Count > 0)
             {
@@ -603,7 +668,6 @@ namespace System.Data
                 table.PrimaryKey = cols;
             }
 
-
             foreach (DataTable _tableChild in tableChildren)
             {
                 DataRelation? relation = null;
@@ -627,7 +691,12 @@ namespace System.Data
                 DataColumn childKey = _tableChild.AddForeignKey(parentKey);
                 // create relationship
                 // setup relationship between parent and this table
-                relation = new DataRelation(table.TableName + "_" + _tableChild.TableName, parentKey, childKey, true);
+                relation = new DataRelation(
+                    table.TableName + "_" + _tableChild.TableName,
+                    parentKey,
+                    childKey,
+                    true
+                );
 
                 relation.CheckMultipleNested = false; // disable the check for multiple nested parent
 
@@ -668,7 +737,6 @@ namespace System.Data
 
             table.Columns[0].ColumnName = tbName + "_Column";
             _ds.Tables.Add(table);
-
 
             return table;
         }

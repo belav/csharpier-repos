@@ -12,7 +12,8 @@ namespace Microsoft.Interop
         public static Diagnostic CreateDiagnostic(
             this ISymbol symbol,
             DiagnosticDescriptor descriptor,
-            params object[] args)
+            params object[] args
+        )
         {
             return symbol.Locations.CreateDiagnostic(descriptor, args);
         }
@@ -21,7 +22,8 @@ namespace Microsoft.Interop
             this ISymbol symbol,
             DiagnosticDescriptor descriptor,
             ImmutableDictionary<string, string> properties,
-            params object[] args)
+            params object[] args
+        )
         {
             return symbol.Locations.CreateDiagnostic(descriptor, properties, args);
         }
@@ -29,7 +31,8 @@ namespace Microsoft.Interop
         public static Diagnostic CreateDiagnostic(
             this AttributeData attributeData,
             DiagnosticDescriptor descriptor,
-            params object[] args)
+            params object[] args
+        )
         {
             SyntaxReference? syntaxReference = attributeData.ApplicationSyntaxReference;
             Location location = syntaxReference is not null
@@ -43,7 +46,8 @@ namespace Microsoft.Interop
             this AttributeData attributeData,
             DiagnosticDescriptor descriptor,
             ImmutableDictionary<string, string> properties,
-            params object[] args)
+            params object[] args
+        )
         {
             SyntaxReference? syntaxReference = attributeData.ApplicationSyntaxReference;
             Location location = syntaxReference is not null
@@ -56,7 +60,8 @@ namespace Microsoft.Interop
         public static Diagnostic CreateDiagnostic(
             this ImmutableArray<Location> locations,
             DiagnosticDescriptor descriptor,
-            params object[] args)
+            params object[] args
+        )
         {
             return CreateDiagnostic(locations, descriptor, properties: null, args);
         }
@@ -65,7 +70,8 @@ namespace Microsoft.Interop
             this ImmutableArray<Location> locations,
             DiagnosticDescriptor descriptor,
             ImmutableDictionary<string, string> properties,
-            params object[] args)
+            params object[] args
+        )
         {
             Location firstLocation = null;
             List<Location> additionalLocations = null;
@@ -84,39 +90,50 @@ namespace Microsoft.Interop
                 }
             }
 
-            return firstLocation is null ?
-                Diagnostic.Create(descriptor, Location.None, properties: properties, args) :
-                Diagnostic.Create(descriptor, firstLocation, additionalLocations: additionalLocations, properties: properties, messageArgs: args);
+            return firstLocation is null
+                ? Diagnostic.Create(descriptor, Location.None, properties: properties, args)
+                : Diagnostic.Create(
+                    descriptor,
+                    firstLocation,
+                    additionalLocations: additionalLocations,
+                    properties: properties,
+                    messageArgs: args
+                );
         }
 
         public static Diagnostic CreateDiagnostic(
             this Location location,
             DiagnosticDescriptor descriptor,
-            params object[] args)
+            params object[] args
+        )
         {
             return Diagnostic.Create(
                 descriptor,
                 location: location.IsInSource ? location : Location.None,
-                messageArgs: args);
+                messageArgs: args
+            );
         }
 
         public static Diagnostic CreateDiagnostic(
             this Location location,
             DiagnosticDescriptor descriptor,
             ImmutableDictionary<string, string> properties,
-            params object[] args)
+            params object[] args
+        )
         {
             return Diagnostic.Create(
                 descriptor,
                 location: location.IsInSource ? location : Location.None,
                 properties: properties,
-                messageArgs: args);
+                messageArgs: args
+            );
         }
 
         public static DiagnosticInfo CreateDiagnosticInfo(
             this ISymbol symbol,
             DiagnosticDescriptor descriptor,
-            params object[] args)
+            params object[] args
+        )
         {
             return symbol.Locations.CreateDiagnosticInfo(descriptor, args);
         }
@@ -125,7 +142,8 @@ namespace Microsoft.Interop
             this ISymbol symbol,
             DiagnosticDescriptor descriptor,
             ImmutableDictionary<string, string> properties,
-            params object[] args)
+            params object[] args
+        )
         {
             return symbol.Locations.CreateDiagnosticInfo(descriptor, properties, args);
         }
@@ -133,7 +151,8 @@ namespace Microsoft.Interop
         public static DiagnosticInfo CreateDiagnosticInfo(
             this AttributeData attributeData,
             DiagnosticDescriptor descriptor,
-            params object[] args)
+            params object[] args
+        )
         {
             SyntaxReference? syntaxReference = attributeData.ApplicationSyntaxReference;
             Location location = syntaxReference is not null
@@ -147,7 +166,8 @@ namespace Microsoft.Interop
             this AttributeData attributeData,
             DiagnosticDescriptor descriptor,
             ImmutableDictionary<string, string> properties,
-            params object[] args)
+            params object[] args
+        )
         {
             SyntaxReference? syntaxReference = attributeData.ApplicationSyntaxReference;
             Location location = syntaxReference is not null
@@ -160,7 +180,8 @@ namespace Microsoft.Interop
         public static DiagnosticInfo CreateDiagnosticInfo(
             this ImmutableArray<Location> locations,
             DiagnosticDescriptor descriptor,
-            params object[] args)
+            params object[] args
+        )
         {
             return CreateDiagnosticInfo(locations, descriptor, properties: null, args);
         }
@@ -169,7 +190,8 @@ namespace Microsoft.Interop
             this ImmutableArray<Location> locations,
             DiagnosticDescriptor descriptor,
             ImmutableDictionary<string, string> properties,
-            params object[] args)
+            params object[] args
+        )
         {
             Location firstLocation = null;
             List<Location> additionalLocations = null;
@@ -188,33 +210,43 @@ namespace Microsoft.Interop
                 }
             }
 
-            return firstLocation is null ?
-                DiagnosticInfo.Create(descriptor, Location.None, properties: properties, args) :
-                DiagnosticInfo.Create(descriptor, firstLocation, additionalLocations: additionalLocations, properties: properties, messageArgs: args);
+            return firstLocation is null
+                ? DiagnosticInfo.Create(descriptor, Location.None, properties: properties, args)
+                : DiagnosticInfo.Create(
+                    descriptor,
+                    firstLocation,
+                    additionalLocations: additionalLocations,
+                    properties: properties,
+                    messageArgs: args
+                );
         }
 
         public static DiagnosticInfo CreateDiagnosticInfo(
             this Location location,
             DiagnosticDescriptor descriptor,
-            params object[] args)
+            params object[] args
+        )
         {
             return DiagnosticInfo.Create(
                 descriptor,
                 location: location.IsInSource ? location : Location.None,
-                messageArgs: args);
+                messageArgs: args
+            );
         }
 
         public static DiagnosticInfo CreateDiagnosticInfo(
             this Location location,
             DiagnosticDescriptor descriptor,
             ImmutableDictionary<string, string> properties,
-            params object[] args)
+            params object[] args
+        )
         {
             return DiagnosticInfo.Create(
                 descriptor,
                 location: location.IsInSource ? location : Location.None,
                 properties: properties,
-                messageArgs: args);
+                messageArgs: args
+            );
         }
     }
 }

@@ -9,42 +9,136 @@ namespace System.Xml.XmlReaderTests
 {
     public class MyXmlReader : XmlReader
     {
-        public MyXmlReader() { IsDisposed = false; }
+        public MyXmlReader()
+        {
+            IsDisposed = false;
+        }
+
         public bool IsDisposed { get; private set; }
-        protected override void Dispose(bool disposing) { IsDisposed = true; }
+
+        protected override void Dispose(bool disposing)
+        {
+            IsDisposed = true;
+        }
 
         // Implementation of the abstract class
-        public override int AttributeCount { get { return default(int); } }
-        public override string BaseURI { get { return default(string); } }
-        public override int Depth { get { return default(int); } }
-        public override bool EOF { get { return default(bool); } }
-        public override string GetAttribute(int i) { return default(string); }
-        public override string GetAttribute(string name, string namespaceURI) { return default(string); }
-        public override string GetAttribute(string name) { return default(string); }
-        public override bool IsEmptyElement { get { return default(bool); } }
-        public override string LocalName { get { return default(string); } }
-        public override string LookupNamespace(string prefix) { return default(string); }
-        public override bool MoveToAttribute(string name, string ns) { return default(bool); }
-        public override bool MoveToAttribute(string name) { return default(bool); }
-        public override bool MoveToElement() { return default(bool); }
-        public override bool MoveToFirstAttribute() { return default(bool); }
-        public override bool MoveToNextAttribute() { return default(bool); }
-        public override XmlNameTable NameTable { get { return default(XmlNameTable); } }
-        public override string NamespaceURI { get { return default(string); } }
-        public override XmlNodeType NodeType { get { return default(XmlNodeType); } }
-        public override string Prefix { get { return default(string); } }
-        public override bool Read() { return default(bool); }
-        public override bool ReadAttributeValue() { return default(bool); }
-        public override ReadState ReadState { get { return default(ReadState); } }
+        public override int AttributeCount
+        {
+            get { return default(int); }
+        }
+        public override string BaseURI
+        {
+            get { return default(string); }
+        }
+        public override int Depth
+        {
+            get { return default(int); }
+        }
+        public override bool EOF
+        {
+            get { return default(bool); }
+        }
+
+        public override string GetAttribute(int i)
+        {
+            return default(string);
+        }
+
+        public override string GetAttribute(string name, string namespaceURI)
+        {
+            return default(string);
+        }
+
+        public override string GetAttribute(string name)
+        {
+            return default(string);
+        }
+
+        public override bool IsEmptyElement
+        {
+            get { return default(bool); }
+        }
+        public override string LocalName
+        {
+            get { return default(string); }
+        }
+
+        public override string LookupNamespace(string prefix)
+        {
+            return default(string);
+        }
+
+        public override bool MoveToAttribute(string name, string ns)
+        {
+            return default(bool);
+        }
+
+        public override bool MoveToAttribute(string name)
+        {
+            return default(bool);
+        }
+
+        public override bool MoveToElement()
+        {
+            return default(bool);
+        }
+
+        public override bool MoveToFirstAttribute()
+        {
+            return default(bool);
+        }
+
+        public override bool MoveToNextAttribute()
+        {
+            return default(bool);
+        }
+
+        public override XmlNameTable NameTable
+        {
+            get { return default(XmlNameTable); }
+        }
+        public override string NamespaceURI
+        {
+            get { return default(string); }
+        }
+        public override XmlNodeType NodeType
+        {
+            get { return default(XmlNodeType); }
+        }
+        public override string Prefix
+        {
+            get { return default(string); }
+        }
+
+        public override bool Read()
+        {
+            return default(bool);
+        }
+
+        public override bool ReadAttributeValue()
+        {
+            return default(bool);
+        }
+
+        public override ReadState ReadState
+        {
+            get { return default(ReadState); }
+        }
+
         public override void ResolveEntity() { }
-        public override string Value { get { return default(string); } }
+
+        public override string Value
+        {
+            get { return default(string); }
+        }
     }
 
     public static class XmlReaderDisposeTests
     {
         public static Stream CreateXmlStream()
         {
-            const string xml = @"<?xml version=""1.0""?>
+            const string xml =
+                @"<?xml version=""1.0""?>
 <test>
    <asd id=""testid0"">
       <a>test test</author>
@@ -71,41 +165,41 @@ namespace System.Xml.XmlReaderTests
             bool[] closeInputValues = { false, true };
 
             foreach (var async in asyncValues)
-                foreach (var closeInput in closeInputValues)
+            foreach (var closeInput in closeInputValues)
+            {
+                using (Stream s = CreateXmlStream())
                 {
-                    using (Stream s = CreateXmlStream())
-                    {
-                        XmlReaderSettings settings = new XmlReaderSettings();
-                        settings.Async = async;
-                        settings.CloseInput = closeInput;
+                    XmlReaderSettings settings = new XmlReaderSettings();
+                    settings.Async = async;
+                    settings.CloseInput = closeInput;
 
-                        XmlReader reader = XmlReader.Create(s, settings);
-                        if (async)
-                        {
-                            // Underlying Stream is not being disposed when using async and not reading anything
-                            // async is delaying initialization until you start to read (allegedly to not block on IO when creating reader)
-                            reader.Read();
-                        }
-                        reader.Dispose();
-                        if (closeInput)
-                        {
-                            Assert.Throws<ObjectDisposedException>(() =>
-                            {
-                                s.Position = 0;
-                                s.ReadByte();
-                            });
-                        }
-                        else
+                    XmlReader reader = XmlReader.Create(s, settings);
+                    if (async)
+                    {
+                        // Underlying Stream is not being disposed when using async and not reading anything
+                        // async is delaying initialization until you start to read (allegedly to not block on IO when creating reader)
+                        reader.Read();
+                    }
+                    reader.Dispose();
+                    if (closeInput)
+                    {
+                        Assert.Throws<ObjectDisposedException>(() =>
                         {
                             s.Position = 0;
                             s.ReadByte();
-                            // does not throw ObjectDisposedException
-                        }
-
-                        // should not throw
-                        reader.Dispose();
+                        });
                     }
+                    else
+                    {
+                        s.Position = 0;
+                        s.ReadByte();
+                        // does not throw ObjectDisposedException
+                    }
+
+                    // should not throw
+                    reader.Dispose();
                 }
+            }
         }
 
         [Fact]

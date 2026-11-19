@@ -26,31 +26,26 @@ namespace System.Runtime.Caching.Configuration
 #endif
     internal sealed class MemoryCacheSection : ConfigurationSection
     {
-        private static readonly ConfigurationProperty s_propNamedCaches = new ConfigurationProperty("namedCaches",
+        private static readonly ConfigurationProperty s_propNamedCaches = new ConfigurationProperty(
+            "namedCaches",
             typeof(MemoryCacheSettingsCollection),
             null, // defaultValue
-            ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationPropertyCollection s_properties = new ConfigurationPropertyCollection() { s_propNamedCaches };
+            ConfigurationPropertyOptions.None
+        );
+        private static readonly ConfigurationPropertyCollection s_properties =
+            new ConfigurationPropertyCollection() { s_propNamedCaches };
 
-        public MemoryCacheSection()
-        {
-        }
+        public MemoryCacheSection() { }
 
         protected override ConfigurationPropertyCollection Properties
         {
-            get
-            {
-                return s_properties;
-            }
+            get { return s_properties; }
         }
 
         [ConfigurationProperty("namedCaches")]
         public MemoryCacheSettingsCollection NamedCaches
         {
-            get
-            {
-                return (MemoryCacheSettingsCollection)base[s_propNamedCaches];
-            }
+            get { return (MemoryCacheSettingsCollection)base[s_propNamedCaches]; }
         }
     }
 }

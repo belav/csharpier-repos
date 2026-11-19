@@ -10,7 +10,9 @@ namespace System.Web.WebPages.Test
     {
         private static HttpApplicationStateBase CreateAppStateInstance()
         {
-            return new HttpApplicationStateWrapper((HttpApplicationState)Activator.CreateInstance(typeof(HttpApplicationState), true));
+            return new HttpApplicationStateWrapper(
+                (HttpApplicationState)Activator.CreateInstance(typeof(HttpApplicationState), true)
+            );
         }
 
         [Fact]
@@ -27,7 +29,10 @@ namespace System.Web.WebPages.Test
             Assert.Equal("bar", d.Foo);
             Assert.Null(d.XYZ);
             Assert.Null(d["xyz"]);
-            Assert.Throws<ArgumentOutOfRangeException>(() => { var x = d[5]; });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                var x = d[5];
+            });
             var a = d.Baz = 42;
             Assert.Equal(42, a);
             var b = d["test"] = 666;
@@ -37,41 +42,53 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void InvalidNumberOfIndexes()
         {
-            Assert.Throws<ArgumentException>(() =>
-            {
-                HttpApplicationStateBase appState = CreateAppStateInstance();
-                dynamic d = new DynamicHttpApplicationState(appState);
-                d[1, 2] = 3;
-            }, WebPageResources.DynamicDictionary_InvalidNumberOfIndexes);
+            Assert.Throws<ArgumentException>(
+                () =>
+                {
+                    HttpApplicationStateBase appState = CreateAppStateInstance();
+                    dynamic d = new DynamicHttpApplicationState(appState);
+                    d[1, 2] = 3;
+                },
+                WebPageResources.DynamicDictionary_InvalidNumberOfIndexes
+            );
 
-            Assert.Throws<ArgumentException>(() =>
-            {
-                HttpApplicationStateBase appState = CreateAppStateInstance();
-                dynamic d = new DynamicHttpApplicationState(appState);
-                var x = d[1, 2];
-            }, WebPageResources.DynamicDictionary_InvalidNumberOfIndexes);
+            Assert.Throws<ArgumentException>(
+                () =>
+                {
+                    HttpApplicationStateBase appState = CreateAppStateInstance();
+                    dynamic d = new DynamicHttpApplicationState(appState);
+                    var x = d[1, 2];
+                },
+                WebPageResources.DynamicDictionary_InvalidNumberOfIndexes
+            );
         }
 
         [Fact]
         public void InvalidTypeWhenSetting()
         {
-            Assert.Throws<ArgumentException>(() =>
-            {
-                HttpApplicationStateBase appState = CreateAppStateInstance();
-                dynamic d = new DynamicHttpApplicationState(appState);
-                d[new object()] = 3;
-            }, WebPageResources.DynamicHttpApplicationState_UseOnlyStringToSet);
+            Assert.Throws<ArgumentException>(
+                () =>
+                {
+                    HttpApplicationStateBase appState = CreateAppStateInstance();
+                    dynamic d = new DynamicHttpApplicationState(appState);
+                    d[new object()] = 3;
+                },
+                WebPageResources.DynamicHttpApplicationState_UseOnlyStringToSet
+            );
         }
 
         [Fact]
         public void InvalidTypeWhenGetting()
         {
-            Assert.Throws<ArgumentException>(() =>
-            {
-                HttpApplicationStateBase appState = CreateAppStateInstance();
-                dynamic d = new DynamicHttpApplicationState(appState);
-                var x = d[new object()];
-            }, WebPageResources.DynamicHttpApplicationState_UseOnlyStringOrIntToGet);
+            Assert.Throws<ArgumentException>(
+                () =>
+                {
+                    HttpApplicationStateBase appState = CreateAppStateInstance();
+                    dynamic d = new DynamicHttpApplicationState(appState);
+                    var x = d[new object()];
+                },
+                WebPageResources.DynamicHttpApplicationState_UseOnlyStringOrIntToGet
+            );
         }
     }
 }

@@ -35,7 +35,8 @@ internal sealed class InstallPackageAndAddImportCodeAction : AddImportCodeAction
         Document originalDocument,
         AddImportFixData fixData,
         string title,
-        InstallPackageDirectlyCodeActionOperation installOperation)
+        InstallPackageDirectlyCodeActionOperation installOperation
+    )
         : base(originalDocument, fixData, RequiresNonDocumentChangeTags)
     {
         Contract.ThrowIfFalse(fixData.Kind == AddImportFixKind.PackageSymbol);
@@ -44,20 +45,28 @@ internal sealed class InstallPackageAndAddImportCodeAction : AddImportCodeAction
     }
 
     /// <summary>
-    /// For preview purposes we return all the operations in a list.  This way the 
+    /// For preview purposes we return all the operations in a list.  This way the
     /// preview system stiches things together in the UI to make a suitable display.
-    /// i.e. if we have a SolutionChangedOperation and some other operation with a 
+    /// i.e. if we have a SolutionChangedOperation and some other operation with a
     /// Title, then the UI will show that nicely to the user.
     /// </summary>
-    protected override async Task<IEnumerable<CodeActionOperation>> ComputePreviewOperationsAsync(CancellationToken cancellationToken)
+    protected override async Task<IEnumerable<CodeActionOperation>> ComputePreviewOperationsAsync(
+        CancellationToken cancellationToken
+    )
     {
         // Make a SolutionChangeAction.  This way we can let it generate the diff
         // preview appropriately.
         var solutionChangeAction = SolutionChangeAction.Create("", GetUpdatedSolutionAsync, "");
 
         using var _ = ArrayBuilder<CodeActionOperation>.GetInstance(out var result);
-        result.AddRange(await solutionChangeAction.GetPreviewOperationsAsync(
-            this.OriginalDocument.Project.Solution, cancellationToken).ConfigureAwait(false));
+        result.AddRange(
+            await solutionChangeAction
+                .GetPreviewOperationsAsync(
+                    this.OriginalDocument.Project.Solution,
+                    cancellationToken
+                )
+                .ConfigureAwait(false)
+        );
         result.Add(_installOperation);
         return result.ToImmutable();
     }
@@ -67,7 +76,7 @@ internal sealed class InstallPackageAndAddImportCodeAction : AddImportCodeAction
         var newDocument = await GetUpdatedDocumentAsync(cancellationToken).ConfigureAwait(false);
         var newRoot = await newDocument.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 
-        // Suppress diagnostics on the import we create.  Because we only get here when we are 
+        // Suppress diagnostics on the import we create.  Because we only get here when we are
         // adding a nuget package, it is certainly the case that in the preview this will not
         // bind properly.  It will look silly to show such an error, so we just suppress things.
         var updatedRoot = newRoot.WithAdditionalAnnotations(SuppressDiagnosticsAnnotation.Create());
@@ -82,23 +91,35 @@ internal sealed class InstallPackageAndAddImportCodeAction : AddImportCodeAction
     /// one of them fails.
     /// </summary>
     protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
-        var updatedDocument = await GetUpdatedDocumentAsync(cancellationToken).ConfigureAwait(false);
+        var updatedDocument = await GetUpdatedDocumentAsync(cancellationToken)
+            .ConfigureAwait(false);
 
-        var oldText = await OriginalDocument.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
-        var newText = await updatedDocument.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
+        var oldText = await OriginalDocument
+            .GetValueTextAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var newText = await updatedDocument
+            .GetValueTextAsync(cancellationToken)
+            .ConfigureAwait(false);
 
         return ImmutableArray.Create<CodeActionOperation>(
             new InstallPackageAndAddImportOperation(
-                OriginalDocument.Id, oldText, newText, _installOperation));
+                OriginalDocument.Id,
+                oldText,
+                newText,
+                _installOperation
+            )
+        );
     }
 
     private sealed class InstallPackageAndAddImportOperation(
         DocumentId changedDocumentId,
         SourceText oldText,
         SourceText newText,
-        InstallPackageDirectlyCodeActionOperation item2) : CodeActionOperation
+        InstallPackageDirectlyCodeActionOperation item2
+    ) : CodeActionOperation
     {
         private readonly DocumentId _changedDocumentId = changedDocumentId;
         private readonly SourceText _oldText = oldText;
@@ -109,22 +130,39 @@ internal sealed class InstallPackageAndAddImportCodeAction : AddImportCodeAction
         public override string Title => _installPackageOperation.Title;
 
         internal override async Task<bool> TryApplyAsync(
-            Workspace workspace, Solution originalSolution, IProgress<CodeAnalysisProgress> progressTracker, CancellationToken cancellationToken)
+            Workspace workspace,
+            Solution originalSolution,
+            IProgress<CodeAnalysisProgress> progressTracker,
+            CancellationToken cancellationToken
+        )
         {
             var newSolution = workspace.CurrentSolution.WithDocumentText(
-                _changedDocumentId, _newText);
+                _changedDocumentId,
+                _newText
+            );
 
             // First make the changes to add the import to the document.
             if (workspace.TryApplyChanges(newSolution, progressTracker))
             {
-                if (await _installPackageOperation.TryApplyAsync(workspace, originalSolution, progressTracker, cancellationToken).ConfigureAwait(true))
+                if (
+                    await _installPackageOperation
+                        .TryApplyAsync(
+                            workspace,
+                            originalSolution,
+                            progressTracker,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(true)
+                )
                 {
                     return true;
                 }
 
                 // Installing the nuget package failed.  Roll back the workspace.
                 var rolledBackSolution = workspace.CurrentSolution.WithDocumentText(
-                    _changedDocumentId, _oldText);
+                    _changedDocumentId,
+                    _oldText
+                );
                 workspace.TryApplyChanges(rolledBackSolution, progressTracker);
             }
 

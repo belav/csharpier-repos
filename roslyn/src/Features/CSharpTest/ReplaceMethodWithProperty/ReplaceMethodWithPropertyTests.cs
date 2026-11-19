@@ -16,45 +16,77 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
 {
     public class ReplaceMethodWithPropertyTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new ReplaceMethodWithPropertyCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new ReplaceMethodWithPropertyCodeRefactoringProvider();
 
         private async Task TestWithAllCodeStyleOff(
-            string initialMarkup, string expectedMarkup,
-            ParseOptions? parseOptions = null, int index = 0)
+            string initialMarkup,
+            string expectedMarkup,
+            ParseOptions? parseOptions = null,
+            int index = 0
+        )
         {
             await TestAsync(
-                initialMarkup, expectedMarkup, parseOptions,
+                initialMarkup,
+                expectedMarkup,
+                parseOptions,
                 index: index,
-                options: AllCodeStyleOff);
+                options: AllCodeStyleOff
+            );
         }
 
-        private OptionsCollection AllCodeStyleOff
-            => new(GetLanguage())
+        private OptionsCollection AllCodeStyleOff =>
+            new(GetLanguage())
             {
-                { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
             };
 
-        private OptionsCollection PreferExpressionBodiedAccessors
-            => new(GetLanguage())
+        private OptionsCollection PreferExpressionBodiedAccessors =>
+            new(GetLanguage())
             {
-                { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement },
-                { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
             };
 
-        private OptionsCollection PreferExpressionBodiedProperties
-            => new(GetLanguage())
+        private OptionsCollection PreferExpressionBodiedProperties =>
+            new(GetLanguage())
             {
-                { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                    CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
+                },
             };
 
-        private OptionsCollection PreferExpressionBodiedAccessorsAndProperties
-            => new(GetLanguage())
+        private OptionsCollection PreferExpressionBodiedAccessorsAndProperties =>
+            new(GetLanguage())
             {
-                { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement },
-                { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                    CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
+                },
             };
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -79,7 +111,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -104,7 +137,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -129,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -147,7 +182,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
                 {
                     int Goo { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -172,7 +208,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -199,7 +236,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -226,7 +264,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -253,7 +292,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
                         return P == 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -289,7 +329,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
                         Mdelegate del = new Mdelegate({|Conflict:P|} );
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -326,7 +367,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -356,7 +398,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
                     }
                 #endif
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -394,7 +437,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
                     }
                 #endif
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -432,7 +476,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
                     }
                 #endif
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -470,7 +516,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
                     }
                 #endif
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -510,7 +557,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
                     }
                 #endif
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -547,7 +596,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceMeth
                     }
                 }
                 """,
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -572,7 +622,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -607,7 +658,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -642,7 +694,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -657,7 +710,8 @@ index: 1);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -672,7 +726,8 @@ index: 1);
                 [||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -686,7 +741,8 @@ index: 1);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -700,7 +756,8 @@ index: 1);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -714,7 +771,8 @@ index: 1);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -728,7 +786,8 @@ index: 1);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -742,7 +801,8 @@ index: 1);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -756,7 +816,8 @@ index: 1);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -771,7 +832,8 @@ index: 1);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -786,7 +848,8 @@ index: 1);
                 [||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -821,7 +884,8 @@ index: 1);
                         var x = Goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -856,7 +920,8 @@ index: 1);
                         var x = Goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -891,7 +956,8 @@ index: 1);
                         var x = this.Goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -928,7 +994,8 @@ index: 1);
                         var v = x?.Goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -955,7 +1022,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -997,7 +1065,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1036,7 +1105,8 @@ index: 1);
                         Action<int> i = {|Conflict:Goo|};
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1079,7 +1149,8 @@ index: 1);
                         }|}
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1117,7 +1188,8 @@ index: 1);
                     }
                 }
                 """,
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1165,7 +1237,8 @@ index: 1);
                     }
                 }
                 """,
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1203,7 +1276,8 @@ index: 1);
                     }
                 }
                 """,
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1238,7 +1312,8 @@ index: 1);
                     }
                 }
                 """,
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1286,7 +1361,8 @@ index: 1);
                     }
                 }
                 """,
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1326,7 +1402,8 @@ index: 1);
                     }
                 }
                 """,
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1366,7 +1443,8 @@ index: 1);
                     }
                 }
                 """,
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1406,7 +1484,8 @@ index: 1);
                     }
                 }
                 """,
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1449,7 +1528,8 @@ index: 1);
                     }
                 }
                 """,
-index: 0);
+                index: 0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1494,7 +1574,8 @@ index: 0);
                     }
                 }
                 """,
-index: 0);
+                index: 0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1530,7 +1611,8 @@ index: 0);
                     }
                 }
                 """,
-index: 0);
+                index: 0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1571,7 +1653,8 @@ index: 0);
                 {
                 }
                 """,
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1609,7 +1692,8 @@ index: 1);
                     }
                 }
                 """,
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1634,7 +1718,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1672,7 +1757,8 @@ index: 1);
                     }
                 }
                 """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1710,7 +1796,8 @@ index: 1);
                     }
                 }
                 """ + TestResources.NetFX.ValueTuple.tuplelib_cs,
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1732,7 +1819,9 @@ index: 1);
                     }
                 }
                 """,
-count: 1, new TestParameters(options: AllCodeStyleOff));
+                count: 1,
+                new TestParameters(options: AllCodeStyleOff)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1779,7 +1868,8 @@ count: 1, new TestParameters(options: AllCodeStyleOff));
                     }
                 }
                 """,
-index: 0);
+                index: 0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1826,7 +1916,8 @@ index: 0);
                     }
                 }
                 """,
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1851,7 +1942,8 @@ index: 1);
                         SetGoo(out int i);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1876,7 +1968,8 @@ index: 1);
                         var y = GetGoo(out int i);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1914,7 +2007,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1936,7 +2030,9 @@ index: 1);
                 {
                     int Goo { get => 1; }
                 }
-                """, options: PreferExpressionBodiedAccessors);
+                """,
+                options: PreferExpressionBodiedAccessors
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1958,7 +2054,9 @@ index: 1);
                 {
                     int Goo => 1;
                 }
-                """, options: PreferExpressionBodiedProperties);
+                """,
+                options: PreferExpressionBodiedProperties
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -1980,7 +2078,9 @@ index: 1);
                 {
                     int Goo => 1;
                 }
-                """, options: PreferExpressionBodiedAccessorsAndProperties);
+                """,
+                options: PreferExpressionBodiedAccessorsAndProperties
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2008,8 +2108,9 @@ index: 1);
                     int Goo { get => 1; set => _i = value; }
                 }
                 """,
-index: 1,
-options: PreferExpressionBodiedAccessors);
+                index: 1,
+                options: PreferExpressionBodiedAccessors
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2048,8 +2149,9 @@ options: PreferExpressionBodiedAccessors);
                     }
                 }
                 """,
-index: 1,
-options: PreferExpressionBodiedProperties);
+                index: 1,
+                options: PreferExpressionBodiedProperties
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2077,8 +2179,9 @@ options: PreferExpressionBodiedProperties);
                     int Goo { get => 1; set => _i = value; }
                 }
                 """,
-index: 1,
-options: PreferExpressionBodiedAccessorsAndProperties);
+                index: 1,
+                options: PreferExpressionBodiedAccessorsAndProperties
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2097,7 +2200,9 @@ options: PreferExpressionBodiedAccessorsAndProperties);
                 {
                     int Goo => 0;
                 }
-                """, options: PreferExpressionBodiedProperties);
+                """,
+                options: PreferExpressionBodiedProperties
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2116,7 +2221,9 @@ options: PreferExpressionBodiedAccessorsAndProperties);
                 {
                     int Goo { get => 0; }
                 }
-                """, options: PreferExpressionBodiedAccessors);
+                """,
+                options: PreferExpressionBodiedAccessors
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2135,7 +2242,9 @@ options: PreferExpressionBodiedAccessorsAndProperties);
                 {
                     int Goo { get => throw e; }
                 }
-                """, options: PreferExpressionBodiedAccessors);
+                """,
+                options: PreferExpressionBodiedAccessors
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2154,7 +2263,9 @@ options: PreferExpressionBodiedAccessorsAndProperties);
                 {
                     int Goo => throw e;
                 }
-                """, options: PreferExpressionBodiedProperties);
+                """,
+                options: PreferExpressionBodiedProperties
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2172,7 +2283,12 @@ options: PreferExpressionBodiedAccessorsAndProperties);
                 {
                     int Goo => throw e;
                 }
-                """, options: Option(CSharpCodeStyleOptions.PreferExpressionBodiedProperties, CSharpCodeStyleOptions.WhenOnSingleLineWithSilentEnforcement));
+                """,
+                options: Option(
+                    CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                    CSharpCodeStyleOptions.WhenOnSingleLineWithSilentEnforcement
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2198,11 +2314,19 @@ options: PreferExpressionBodiedAccessorsAndProperties);
                         }
                     }
                 }
-                """, options: new OptionsCollection(GetLanguage())
-    {
-        { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, CSharpCodeStyleOptions.WhenOnSingleLineWithSilentEnforcement },
-        { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.WhenOnSingleLineWithSilentEnforcement },
-    });
+                """,
+                options: new OptionsCollection(GetLanguage())
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                        CSharpCodeStyleOptions.WhenOnSingleLineWithSilentEnforcement
+                    },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                        CSharpCodeStyleOptions.WhenOnSingleLineWithSilentEnforcement
+                    },
+                }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2239,7 +2363,8 @@ options: PreferExpressionBodiedAccessorsAndProperties);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2254,7 +2379,8 @@ options: PreferExpressionBodiedAccessorsAndProperties);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2280,7 +2406,8 @@ options: PreferExpressionBodiedAccessorsAndProperties);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2319,7 +2446,8 @@ options: PreferExpressionBodiedAccessorsAndProperties);
 
                     public string? Name => this.name;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2358,7 +2486,8 @@ options: PreferExpressionBodiedAccessorsAndProperties);
 
                     public string Name => this.name ?? "";
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2397,7 +2526,8 @@ options: PreferExpressionBodiedAccessorsAndProperties);
 
                     public IEnumerable<string?> Names => this.names;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2440,7 +2570,8 @@ options: PreferExpressionBodiedAccessorsAndProperties);
 
                     public IEnumerable<string> Names => this.names.Where(n => n is object);
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2469,7 +2600,8 @@ options: PreferExpressionBodiedAccessorsAndProperties);
 
                     public string? Name => name;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2499,7 +2631,9 @@ options: PreferExpressionBodiedAccessorsAndProperties);
                         { }
                     }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2529,7 +2663,9 @@ options: PreferExpressionBodiedAccessorsAndProperties);
                         { }
                     }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2554,7 +2690,8 @@ options: PreferExpressionBodiedAccessorsAndProperties);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2579,7 +2716,8 @@ options: PreferExpressionBodiedAccessorsAndProperties);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2606,7 +2744,8 @@ options: PreferExpressionBodiedAccessorsAndProperties);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2622,7 +2761,8 @@ options: PreferExpressionBodiedAccessorsAndProperties);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2649,7 +2789,8 @@ options: PreferExpressionBodiedAccessorsAndProperties);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2664,7 +2805,8 @@ options: PreferExpressionBodiedAccessorsAndProperties);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2679,7 +2821,8 @@ options: PreferExpressionBodiedAccessorsAndProperties);
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2707,7 +2850,8 @@ options: PreferExpressionBodiedAccessorsAndProperties);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2730,7 +2874,8 @@ options: PreferExpressionBodiedAccessorsAndProperties);
                     //Vital Comment
                     int Goo => 1;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2766,7 +2911,8 @@ options: PreferExpressionBodiedAccessorsAndProperties);
                     }
                 }
                 """,
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplacePropertyWithMethods)]
@@ -2812,7 +2958,8 @@ index: 1);
                         <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2851,7 +2998,9 @@ index: 1);
 
                     public IEnumerable<string?> Names { get => this.names.Where(n => n is object); set => this.names = value; }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2886,7 +3035,9 @@ index: 1);
 
                     public Task<string> SomeTask { get => this.someTask; set => this.someTask = value; }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2919,7 +3070,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2952,7 +3104,8 @@ index: 1);
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -2981,7 +3134,8 @@ index: 1);
                         var valueAsDelegate = /*test*/{|Conflict:Value|};
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsReplaceMethodWithProperty)]
@@ -3010,7 +3164,8 @@ index: 1);
                         var valueAsDelegate = {|Conflict:Value|}/*test*/;
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

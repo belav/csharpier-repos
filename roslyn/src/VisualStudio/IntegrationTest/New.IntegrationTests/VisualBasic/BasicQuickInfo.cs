@@ -16,28 +16,35 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicQuickInfo()
-            : base(nameof(BasicQuickInfo))
-        {
-        }
+            : base(nameof(BasicQuickInfo)) { }
 
         [IdeFact]
         public async Task QuickInfo1()
         {
-            await SetUpEditorAsync(@"
+            await SetUpEditorAsync(
+                @"
 ''' <summary>Hello!</summary>
 Class Program
     Sub Main(ByVal args As String$$())
     End Sub
-End Class", HangMitigatingCancellationToken);
+End Class",
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.InvokeQuickInfoAsync(HangMitigatingCancellationToken);
-            var quickInfo = await TestServices.Editor.GetQuickInfoAsync(HangMitigatingCancellationToken);
-            Assert.Equal("Class System.String\r\nRepresents text as a sequence of UTF-16 code units.To browse the .NET Framework source code for this type, see the Reference Source.", quickInfo);
+            var quickInfo = await TestServices.Editor.GetQuickInfoAsync(
+                HangMitigatingCancellationToken
+            );
+            Assert.Equal(
+                "Class System.String\r\nRepresents text as a sequence of UTF-16 code units.To browse the .NET Framework source code for this type, see the Reference Source.",
+                quickInfo
+            );
         }
 
         [IdeFact]
         public async Task International()
         {
-            await SetUpEditorAsync(@"
+            await SetUpEditorAsync(
+                @"
 ''' <summary>
 ''' This is an XML doc comment defined in code.
 ''' </summary>
@@ -45,11 +52,18 @@ Class العربية123
     Shared Sub Goo()
          Dim goo as العربية123$$
     End Sub
-End Class", HangMitigatingCancellationToken);
+End Class",
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.InvokeQuickInfoAsync(HangMitigatingCancellationToken);
-            var quickInfo = await TestServices.Editor.GetQuickInfoAsync(HangMitigatingCancellationToken);
-            Assert.Equal(@"Class TestProj.العربية123
-This is an XML doc comment defined in code.", quickInfo);
+            var quickInfo = await TestServices.Editor.GetQuickInfoAsync(
+                HangMitigatingCancellationToken
+            );
+            Assert.Equal(
+                @"Class TestProj.العربية123
+This is an XML doc comment defined in code.",
+                quickInfo
+            );
         }
     }
 }

@@ -10,7 +10,7 @@ public static class Test_DevDiv_653853
 {
     [Fact]
     public static int TestEntryPoint()
-    {        
+    {
         if (RunTest(0) == 5)
         {
             Console.WriteLine("SUCCESS");
@@ -34,7 +34,7 @@ public static class Test_DevDiv_653853
         // assumption that constant nodes have known constant value numbers.
         if (arg != (sbyte)f)
         {
-            return 2*arg;
+            return 2 * arg;
         }
         else
         {

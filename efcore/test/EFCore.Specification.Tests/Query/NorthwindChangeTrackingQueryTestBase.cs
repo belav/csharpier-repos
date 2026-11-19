@@ -31,13 +31,19 @@ public abstract class NorthwindChangeTrackingQueryTestBase<TFixture> : IClassFix
 
         context.ChangeTracker.DetectChanges();
 
-        Assert.Equal(customer.CustomerID, firstTrackedEntity.Property(c => c.CustomerID).CurrentValue);
+        Assert.Equal(
+            customer.CustomerID,
+            firstTrackedEntity.Property(c => c.CustomerID).CurrentValue
+        );
         Assert.Equal(EntityState.Modified, firstTrackedEntity.State);
         Assert.Equal("425-882-8080", firstTrackedEntity.Property(c => c.Phone).CurrentValue);
 
         firstTrackedEntity.State = EntityState.Unchanged;
 
-        Assert.Equal(customer.CustomerID, firstTrackedEntity.Property(c => c.CustomerID).CurrentValue);
+        Assert.Equal(
+            customer.CustomerID,
+            firstTrackedEntity.Property(c => c.CustomerID).CurrentValue
+        );
         Assert.Equal(originalPhoneNumber, firstTrackedEntity.Property(c => c.Phone).CurrentValue);
         Assert.Equal(EntityState.Unchanged, firstTrackedEntity.State);
     }
@@ -89,7 +95,10 @@ public abstract class NorthwindChangeTrackingQueryTestBase<TFixture> : IClassFix
 
         context.Attach(customer);
 
-        Assert.Equal(customer.CustomerID, firstTrackedEntity.Property(c => c.CustomerID).CurrentValue);
+        Assert.Equal(
+            customer.CustomerID,
+            firstTrackedEntity.Property(c => c.CustomerID).CurrentValue
+        );
         Assert.Equal(EntityState.Unchanged, firstTrackedEntity.State);
         Assert.Equal("425-882-8080", firstTrackedEntity.Property(c => c.Phone).CurrentValue);
         Assert.Equal("425-882-8080", firstTrackedEntity.Property(c => c.Phone).OriginalValue);
@@ -113,7 +122,10 @@ public abstract class NorthwindChangeTrackingQueryTestBase<TFixture> : IClassFix
 
         context.Customers.Attach(customer);
 
-        Assert.Equal(customer.CustomerID, firstTrackedEntity.Property(c => c.CustomerID).CurrentValue);
+        Assert.Equal(
+            customer.CustomerID,
+            firstTrackedEntity.Property(c => c.CustomerID).CurrentValue
+        );
         Assert.Equal(EntityState.Unchanged, firstTrackedEntity.State);
         Assert.Equal("425-882-8080", firstTrackedEntity.Property(c => c.Phone).CurrentValue);
         Assert.Equal("425-882-8080", firstTrackedEntity.Property(c => c.Phone).OriginalValue);
@@ -195,6 +207,7 @@ public abstract class NorthwindChangeTrackingQueryTestBase<TFixture> : IClassFix
         Assert.Equal("425-882-8080", trackedEntity0.Property(c => c.Phone).OriginalValue);
         Assert.Equal("425-882-8080", trackedEntity1.Property(c => c.Phone).OriginalValue);
     }
+
     // ReSharper restore PossibleMultipleEnumeration
 
     [ConditionalFact]
@@ -251,7 +264,10 @@ public abstract class NorthwindChangeTrackingQueryTestBase<TFixture> : IClassFix
     {
         using (var context = CreateContext())
         {
-            Assert.Equal(QueryTrackingBehavior.TrackAll, context.ChangeTracker.QueryTrackingBehavior);
+            Assert.Equal(
+                QueryTrackingBehavior.TrackAll,
+                context.ChangeTracker.QueryTrackingBehavior
+            );
 
             var results = context.Employees.ToList();
 
@@ -277,7 +293,10 @@ public abstract class NorthwindChangeTrackingQueryTestBase<TFixture> : IClassFix
     {
         using (var context = CreateContext())
         {
-            Assert.Equal(QueryTrackingBehavior.TrackAll, context.ChangeTracker.QueryTrackingBehavior);
+            Assert.Equal(
+                QueryTrackingBehavior.TrackAll,
+                context.ChangeTracker.QueryTrackingBehavior
+            );
 
             var results = context.Employees.ToList();
 
@@ -287,7 +306,10 @@ public abstract class NorthwindChangeTrackingQueryTestBase<TFixture> : IClassFix
 
         using (var context = CreateNoTrackingContext())
         {
-            Assert.Equal(QueryTrackingBehavior.NoTracking, context.ChangeTracker.QueryTrackingBehavior);
+            Assert.Equal(
+                QueryTrackingBehavior.NoTracking,
+                context.ChangeTracker.QueryTrackingBehavior
+            );
 
             var results = context.Employees.ToList();
 
@@ -351,13 +373,12 @@ public abstract class NorthwindChangeTrackingQueryTestBase<TFixture> : IClassFix
     public virtual void Precedence_of_tracking_modifiers3()
     {
         using var context = CreateContext();
-        var customers
-            = (from c in context.Set<Customer>().AsNoTracking()
-               join o in context.Set<Order>().AsTracking()
-                   on c.CustomerID equals o.CustomerID
-               where c.CustomerID == "ALFKI"
-               select o)
-            .ToList();
+        var customers = (
+            from c in context.Set<Customer>().AsNoTracking()
+            join o in context.Set<Order>().AsTracking() on c.CustomerID equals o.CustomerID
+            where c.CustomerID == "ALFKI"
+            select o
+        ).ToList();
 
         Assert.Equal(6, customers.Count);
         Assert.Equal(6, context.ChangeTracker.Entries().Count());
@@ -367,13 +388,12 @@ public abstract class NorthwindChangeTrackingQueryTestBase<TFixture> : IClassFix
     public virtual void Precedence_of_tracking_modifiers4()
     {
         using var context = CreateContext();
-        var customers
-            = (from c in context.Set<Customer>().AsTracking()
-               join o in context.Set<Order>().AsNoTracking()
-                   on c.CustomerID equals o.CustomerID
-               where c.CustomerID == "ALFKI"
-               select o)
-            .ToList();
+        var customers = (
+            from c in context.Set<Customer>().AsTracking()
+            join o in context.Set<Order>().AsNoTracking() on c.CustomerID equals o.CustomerID
+            where c.CustomerID == "ALFKI"
+            select o
+        ).ToList();
 
         Assert.Equal(6, customers.Count);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -383,12 +403,12 @@ public abstract class NorthwindChangeTrackingQueryTestBase<TFixture> : IClassFix
     public virtual void Precedence_of_tracking_modifiers5()
     {
         using var context = CreateContext();
-        var customers
-            = (from c in context.Set<Customer>().AsTracking()
-               join o in context.Set<Order>()
-                   on c.CustomerID equals o.CustomerID
-               where c.CustomerID == "ALFKI"
-               select o)
+        var customers = (
+            from c in context.Set<Customer>().AsTracking()
+            join o in context.Set<Order>() on c.CustomerID equals o.CustomerID
+            where c.CustomerID == "ALFKI"
+            select o
+        )
             .AsNoTracking()
             .ToList();
 
@@ -396,11 +416,12 @@ public abstract class NorthwindChangeTrackingQueryTestBase<TFixture> : IClassFix
         Assert.Empty(context.ChangeTracker.Entries());
     }
 
-    protected NorthwindContext CreateContext()
-        => Fixture.CreateContext();
+    protected NorthwindContext CreateContext() => Fixture.CreateContext();
 
-    protected virtual NorthwindContext CreateNoTrackingContext()
-        => new(
+    protected virtual NorthwindContext CreateNoTrackingContext() =>
+        new(
             new DbContextOptionsBuilder(Fixture.CreateOptions())
-                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking).Options);
+                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+                .Options
+        );
 }

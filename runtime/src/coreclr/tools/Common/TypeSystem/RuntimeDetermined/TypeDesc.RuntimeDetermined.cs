@@ -11,10 +11,7 @@ namespace Internal.TypeSystem
         /// unknown at compile time. Use <see cref="IsRuntimeDeterminedType"/> to check if
         /// this is a runtime determined type without checking constituents.
         /// </summary>
-        public abstract bool IsRuntimeDeterminedSubtype
-        {
-            get;
-        }
+        public abstract bool IsRuntimeDeterminedSubtype { get; }
 
         /// <summary>
         /// Gets a value indicating whether this is a runtime determined type. This will not
@@ -23,12 +20,12 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsRuntimeDeterminedType
         {
-            get
-            {
-                return this.GetType() == typeof(RuntimeDeterminedType);
-            }
+            get { return this.GetType() == typeof(RuntimeDeterminedType); }
         }
 
-        public abstract TypeDesc GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(Instantiation typeInstantiation, Instantiation methodInstantiation);
+        public abstract TypeDesc GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        );
     }
 }

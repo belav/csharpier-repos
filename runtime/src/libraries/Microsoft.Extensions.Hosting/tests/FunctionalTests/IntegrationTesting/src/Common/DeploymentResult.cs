@@ -31,11 +31,23 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
         /// </summary>
         public CancellationToken HostShutdownToken { get; }
 
-        public DeploymentResult(ILoggerFactory loggerFactory, DeploymentParameters deploymentParameters)
-            : this(loggerFactory, deploymentParameters: deploymentParameters, contentRoot: string.Empty, hostShutdownToken: CancellationToken.None)
-        { }
+        public DeploymentResult(
+            ILoggerFactory loggerFactory,
+            DeploymentParameters deploymentParameters
+        )
+            : this(
+                loggerFactory,
+                deploymentParameters: deploymentParameters,
+                contentRoot: string.Empty,
+                hostShutdownToken: CancellationToken.None
+            ) { }
 
-        public DeploymentResult(ILoggerFactory loggerFactory, DeploymentParameters deploymentParameters, string contentRoot, CancellationToken hostShutdownToken)
+        public DeploymentResult(
+            ILoggerFactory loggerFactory,
+            DeploymentParameters deploymentParameters,
+            string contentRoot,
+            CancellationToken hostShutdownToken
+        )
         {
             _loggerFactory = loggerFactory;
 

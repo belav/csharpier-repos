@@ -1,16 +1,18 @@
 ﻿//------------------------------------------------------------------------------
 // <copyright file="HTTP_COOKED_URL.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Hosting {
+namespace System.Web.Hosting
+{
     using System;
     using System.Runtime.InteropServices;
 
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa364519.aspx
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe struct HTTP_COOKED_URL {
+    internal unsafe struct HTTP_COOKED_URL
+    {
         // WARNING: Lengths are specified in bytes, not wide chars!
         // Length does not include a null terminator.
         internal readonly ushort FullUrlLength;

@@ -11,7 +11,12 @@ namespace System.Reflection.Emit.Tests
         public void ILOffset_NothingEmitted_ReturnsZero()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            MethodBuilder method = module.DefineGlobalMethod("method1", MethodAttributes.Public | MethodAttributes.Static, typeof(Type), new Type[0]);
+            MethodBuilder method = module.DefineGlobalMethod(
+                "method1",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(Type),
+                new Type[0]
+            );
             ILGenerator ilGenerator = method.GetILGenerator();
 
             // Method has not been emitted.
@@ -22,7 +27,12 @@ namespace System.Reflection.Emit.Tests
         public void ILOffset_SomethingEmitted_ReturnsNonZero()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            MethodBuilder method = module.DefineGlobalMethod("method1", MethodAttributes.Public | MethodAttributes.Static, typeof(Type), new Type[0]);
+            MethodBuilder method = module.DefineGlobalMethod(
+                "method1",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(Type),
+                new Type[0]
+            );
             ILGenerator ilGenerator = method.GetILGenerator();
             ilGenerator.Emit(OpCodes.Ret);
 

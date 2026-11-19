@@ -10,6 +10,7 @@ namespace Microsoft.Extensions.DependencyInjection.Specification.Fakes
         {
             Value = value;
         }
+
         public TVal Value { get; }
     }
 }

@@ -3,17 +3,17 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Windows.Controls;
 using System.Runtime.InteropServices;
-using Microsoft.VisualStudio.Shell;
-using Roslyn.Utilities;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Markup;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
-using System.Diagnostics.CodeAnalysis;
+using Microsoft.VisualStudio.Shell;
+using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
 {
@@ -22,7 +22,12 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
     {
         private readonly ValueTrackingRoot _root = new();
 
-        [MemberNotNullWhen(returnValue: true, nameof(_workspace), nameof(_threadingContext), nameof(ViewModel))]
+        [MemberNotNullWhen(
+            returnValue: true,
+            nameof(_workspace),
+            nameof(_threadingContext),
+            nameof(ViewModel)
+        )]
         public bool Initialized { get; private set; }
 
         private Workspace? _workspace;
@@ -54,15 +59,20 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
         /// This paramterless constructor is used when
         /// the tool window is initialized on open without any
         /// context. If the tool window is left open across shutdown/restart
-        /// of VS for example, then this gets called. 
+        /// of VS for example, then this gets called.
         /// </summary>
-        public ValueTrackingToolWindow() : base(null)
+        public ValueTrackingToolWindow()
+            : base(null)
         {
             Caption = ServicesVSResources.Value_Tracking;
             Content = _root;
         }
 
-        public void Initialize(ValueTrackingTreeViewModel viewModel, Workspace workspace, IThreadingContext threadingContext)
+        public void Initialize(
+            ValueTrackingTreeViewModel viewModel,
+            Workspace workspace,
+            IThreadingContext threadingContext
+        )
         {
             Contract.ThrowIfTrue(Initialized);
 
@@ -78,8 +88,9 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
         {
             Contract.ThrowIfFalse(Initialized);
 
-            if (e.Kind is WorkspaceChangeKind.SolutionCleared
-                       or WorkspaceChangeKind.SolutionRemoved)
+            if (
+                e.Kind is WorkspaceChangeKind.SolutionCleared or WorkspaceChangeKind.SolutionRemoved
+            )
             {
                 _ = _threadingContext.JoinableTaskFactory.RunAsync(async () =>
                 {

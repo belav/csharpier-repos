@@ -18,21 +18,37 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
         TExpressionSyntax,
         TStatementSyntax,
         TExpressionStatementSyntax,
-        TLocalDeclarationStatementSyntax> : CodeRefactoringProvider
+        TLocalDeclarationStatementSyntax
+    > : CodeRefactoringProvider
         where TExpressionSyntax : SyntaxNode
         where TStatementSyntax : SyntaxNode
         where TExpressionStatementSyntax : TStatementSyntax
         where TLocalDeclarationStatementSyntax : TStatementSyntax
     {
-        protected abstract bool IsValid(TExpressionStatementSyntax expressionStatement, TextSpan span);
-        protected abstract TLocalDeclarationStatementSyntax FixupLocalDeclaration(TExpressionStatementSyntax expressionStatement, TLocalDeclarationStatementSyntax localDeclaration);
-        protected abstract TExpressionStatementSyntax FixupDeconstruction(TExpressionStatementSyntax expressionStatement, TExpressionStatementSyntax localDeclaration);
+        protected abstract bool IsValid(
+            TExpressionStatementSyntax expressionStatement,
+            TextSpan span
+        );
+        protected abstract TLocalDeclarationStatementSyntax FixupLocalDeclaration(
+            TExpressionStatementSyntax expressionStatement,
+            TLocalDeclarationStatementSyntax localDeclaration
+        );
+        protected abstract TExpressionStatementSyntax FixupDeconstruction(
+            TExpressionStatementSyntax expressionStatement,
+            TExpressionStatementSyntax localDeclaration
+        );
         protected abstract Task<TExpressionStatementSyntax> CreateTupleDeconstructionAsync(
-            Document document, CodeActionOptionsProvider optionsProvider, INamedTypeSymbol tupleType, TExpressionSyntax expression, CancellationToken cancellationToken);
+            Document document,
+            CodeActionOptionsProvider optionsProvider,
+            INamedTypeSymbol tupleType,
+            TExpressionSyntax expression,
+            CancellationToken cancellationToken
+        );
 
         public sealed override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
-            var expressionStatement = await GetExpressionStatementAsync(context).ConfigureAwait(false);
+            var expressionStatement = await GetExpressionStatementAsync(context)
+                .ConfigureAwait(false);
             if (expressionStatement == null)
                 return;
 
@@ -40,37 +56,65 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var expression = syntaxFacts.GetExpressionOfExpressionStatement(expressionStatement);
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var type = semanticModel.GetTypeInfo(expression).Type;
-            if (type == null ||
-                type.SpecialType == SpecialType.System_Void)
+            if (type == null || type.SpecialType == SpecialType.System_Void)
             {
                 return;
             }
 
             var nodeString = syntaxFacts.ConvertToSingleLine(expression).ToString();
-            if (type.IsTupleType && syntaxFacts.SupportsTupleDeconstruction(expression.SyntaxTree.Options))
+            if (
+                type.IsTupleType
+                && syntaxFacts.SupportsTupleDeconstruction(expression.SyntaxTree.Options)
+            )
             {
                 // prefer to emit as `var (x, y) = ...` or `(T x, T y) = ...`
                 context.RegisterRefactoring(
                     CodeAction.Create(
                         string.Format(FeaturesResources.Deconstruct_locals_for_0, nodeString),
-                        cancellationToken => IntroduceLocalAsync(document, context.Options, expressionStatement, type, deconstruct: true, cancellationToken),
-                        nameof(FeaturesResources.Deconstruct_locals_for_0) + "_" + nodeString),
-                    expressionStatement.Span);
+                        cancellationToken =>
+                            IntroduceLocalAsync(
+                                document,
+                                context.Options,
+                                expressionStatement,
+                                type,
+                                deconstruct: true,
+                                cancellationToken
+                            ),
+                        nameof(FeaturesResources.Deconstruct_locals_for_0) + "_" + nodeString
+                    ),
+                    expressionStatement.Span
+                );
             }
 
             context.RegisterRefactoring(
                 CodeAction.Create(
                     string.Format(FeaturesResources.Introduce_local_for_0, nodeString),
-                    cancellationToken => IntroduceLocalAsync(document, context.Options, expressionStatement, type, deconstruct: false, cancellationToken),
-                    nameof(FeaturesResources.Introduce_local_for_0) + "_" + nodeString),
-                expressionStatement.Span);
+                    cancellationToken =>
+                        IntroduceLocalAsync(
+                            document,
+                            context.Options,
+                            expressionStatement,
+                            type,
+                            deconstruct: false,
+                            cancellationToken
+                        ),
+                    nameof(FeaturesResources.Introduce_local_for_0) + "_" + nodeString
+                ),
+                expressionStatement.Span
+            );
         }
 
-        protected async Task<TExpressionStatementSyntax?> GetExpressionStatementAsync(CodeRefactoringContext context)
+        protected async Task<TExpressionStatementSyntax?> GetExpressionStatementAsync(
+            CodeRefactoringContext context
+        )
         {
-            var expressionStatement = await context.TryGetRelevantNodeAsync<TExpressionStatementSyntax>().ConfigureAwait(false);
+            var expressionStatement = await context
+                .TryGetRelevantNodeAsync<TExpressionStatementSyntax>()
+                .ConfigureAwait(false);
             return expressionStatement != null && IsValid(expressionStatement, context.Span)
                 ? expressionStatement
                 : null;
@@ -82,26 +126,35 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             TExpressionStatementSyntax expressionStatement,
             ITypeSymbol type,
             bool deconstruct,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var generator = SyntaxGenerator.GetGenerator(document);
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var expression = (TExpressionSyntax)syntaxFacts.GetExpressionOfExpressionStatement(expressionStatement);
+            var expression = (TExpressionSyntax)
+                syntaxFacts.GetExpressionOfExpressionStatement(expressionStatement);
 
             var localStatement = await CreateLocalDeclarationAsync().ConfigureAwait(false);
 
             localStatement = localStatement.WithLeadingTrivia(expression.GetLeadingTrivia());
 
             // Because expr-statements and local decl statements are so close, we can allow
-            // each language to do a little extra work to ensure the resultant local decl 
+            // each language to do a little extra work to ensure the resultant local decl
             // feels right. For example, C# will want to transport the semicolon from the
             // expr statement to the local decl if it has one.
             localStatement = localStatement is TLocalDeclarationStatementSyntax localDeclaration
                 ? FixupLocalDeclaration(expressionStatement, localDeclaration)
-                : FixupDeconstruction(expressionStatement, (TExpressionStatementSyntax)localStatement);
+                : FixupDeconstruction(
+                    expressionStatement,
+                    (TExpressionStatementSyntax)localStatement
+                );
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var newRoot = root.ReplaceNode(expressionStatement, localStatement);
 
             return document.WithSyntaxRoot(newRoot);
@@ -112,27 +165,56 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 {
                     Contract.ThrowIfNull(type);
                     return await this.CreateTupleDeconstructionAsync(
-                        document, optionsProvider, (INamedTypeSymbol)type, expression, cancellationToken).ConfigureAwait(false);
+                            document,
+                            optionsProvider,
+                            (INamedTypeSymbol)type,
+                            expression,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
                 else
                 {
-                    var nameToken = await GenerateUniqueNameAsync(document, expression, cancellationToken).ConfigureAwait(false);
-                    return (TLocalDeclarationStatementSyntax)generator.LocalDeclarationStatement(
-                        generator.TypeExpression(type ?? semanticModel.Compilation.ObjectType),
-                        nameToken.WithAdditionalAnnotations(RenameAnnotation.Create()),
-                        expression.WithoutLeadingTrivia());
+                    var nameToken = await GenerateUniqueNameAsync(
+                            document,
+                            expression,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                    return (TLocalDeclarationStatementSyntax)
+                        generator.LocalDeclarationStatement(
+                            generator.TypeExpression(type ?? semanticModel.Compilation.ObjectType),
+                            nameToken.WithAdditionalAnnotations(RenameAnnotation.Create()),
+                            expression.WithoutLeadingTrivia()
+                        );
                 }
             }
         }
 
         protected static async Task<SyntaxToken> GenerateUniqueNameAsync(
-            Document document, TExpressionSyntax expression, CancellationToken cancellationToken)
+            Document document,
+            TExpressionSyntax expression,
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var semanticFacts = document.GetRequiredLanguageService<ISemanticFactsService>();
 
-            var baseName = semanticFacts.GenerateNameForExpression(semanticModel, expression, capitalize: false, cancellationToken);
-            return semanticFacts.GenerateUniqueLocalName(semanticModel, expression, container: null, baseName, cancellationToken);
+            var baseName = semanticFacts.GenerateNameForExpression(
+                semanticModel,
+                expression,
+                capitalize: false,
+                cancellationToken
+            );
+            return semanticFacts.GenerateUniqueLocalName(
+                semanticModel,
+                expression,
+                container: null,
+                baseName,
+                cancellationToken
+            );
         }
     }
 }

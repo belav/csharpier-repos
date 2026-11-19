@@ -4,45 +4,63 @@
 
 namespace System.Workflow.Runtime.Hosting
 {
+    using System.Diagnostics;
     using System.Runtime;
     using System.Runtime.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Dispatcher;
     using System.Threading;
-    using System.Diagnostics;
 
     class SynchronizationContextWorkflowSchedulerService : DefaultWorkflowSchedulerService
     {
         SynchronizationContext syncContext;
 
-        public SynchronizationContextWorkflowSchedulerService()
-        {
-        }
+        public SynchronizationContextWorkflowSchedulerService() { }
 
         protected internal override void Cancel(Guid timerId)
         {
             base.Cancel(timerId);
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                string traceText = SR.GetString(SR.TraceCodeSyncContextSchedulerServiceTimerCancelled, timerId);
-                TraceUtility.TraceEvent(TraceEventType.Information,
-                    TraceCode.SyncContextSchedulerServiceTimerCancelled, traceText,
+                string traceText = SR.GetString(
+                    SR.TraceCodeSyncContextSchedulerServiceTimerCancelled,
+                    timerId
+                );
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SyncContextSchedulerServiceTimerCancelled,
+                    traceText,
                     new StringTraceRecord("TimerDetail", traceText),
-                    this, null);
+                    this,
+                    null
+                );
             }
         }
 
-        protected internal override void Schedule(WaitCallback callback, Guid workflowInstanceId, DateTime whenUtc, Guid timerId)
+        protected internal override void Schedule(
+            WaitCallback callback,
+            Guid workflowInstanceId,
+            DateTime whenUtc,
+            Guid timerId
+        )
         {
             base.Schedule(callback, workflowInstanceId, whenUtc, timerId);
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                string traceText = SR.GetString(SR.TraceCodeSyncContextSchedulerServiceTimerCreated, timerId, workflowInstanceId);
-                TraceUtility.TraceEvent(TraceEventType.Information,
-                    TraceCode.SyncContextSchedulerServiceTimerCreated, traceText,
+                string traceText = SR.GetString(
+                    SR.TraceCodeSyncContextSchedulerServiceTimerCreated,
+                    timerId,
+                    workflowInstanceId
+                );
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SyncContextSchedulerServiceTimerCreated,
+                    traceText,
                     new StringTraceRecord("TimerDetail", traceText),
-                    this, null);
+                    this,
+                    null
+                );
             }
         }
 
@@ -63,7 +81,11 @@ namespace System.Workflow.Runtime.Hosting
             {
                 if (this.syncContext != null)
                 {
-                    SynchronizationContextPostHelper.Post(this.syncContext, Fx.ThunkCallback(new SendOrPostCallback(callback)), workflowInstanceId);
+                    SynchronizationContextPostHelper.Post(
+                        this.syncContext,
+                        Fx.ThunkCallback(new SendOrPostCallback(callback)),
+                        workflowInstanceId
+                    );
                 }
                 else
                 {
@@ -79,16 +101,24 @@ namespace System.Workflow.Runtime.Hosting
 
         internal static class SynchronizationContextPostHelper
         {
-            static SendOrPostCallback wrapperCallback = 
-                Fx.ThunkCallback(new SendOrPostCallback(SynchronizationContextPostHelper.Callback));
+            static SendOrPostCallback wrapperCallback = Fx.ThunkCallback(
+                new SendOrPostCallback(SynchronizationContextPostHelper.Callback)
+            );
 
-            public static void Post(SynchronizationContext synchronizationContext, SendOrPostCallback callback, object state)
+            public static void Post(
+                SynchronizationContext synchronizationContext,
+                SendOrPostCallback callback,
+                object state
+            )
             {
                 Fx.Assert(synchronizationContext != null, "Null Sync Context");
                 Fx.Assert(callback != null, "Null Callback");
 
                 synchronizationContext.OperationStarted();
-                synchronizationContext.Post(wrapperCallback, new PostCallbackState(synchronizationContext, callback, state));
+                synchronizationContext.Post(
+                    wrapperCallback,
+                    new PostCallbackState(synchronizationContext, callback, state)
+                );
             }
 
             static void Callback(object state)
@@ -99,7 +129,10 @@ namespace System.Workflow.Runtime.Hosting
                 }
 
                 PostCallbackState postCallbackState = state as PostCallbackState;
-                Fx.Assert(postCallbackState != null, "Invalid state object passed to callback function");
+                Fx.Assert(
+                    postCallbackState != null,
+                    "Invalid state object passed to callback function"
+                );
                 try
                 {
                     postCallbackState.Callback(postCallbackState.State);
@@ -116,7 +149,11 @@ namespace System.Workflow.Runtime.Hosting
                 object callbackState;
                 SynchronizationContext synchronizationContext;
 
-                public PostCallbackState(SynchronizationContext synchronizationContext, SendOrPostCallback callback, object callbackState)
+                public PostCallbackState(
+                    SynchronizationContext synchronizationContext,
+                    SendOrPostCallback callback,
+                    object callbackState
+                )
                 {
                     this.synchronizationContext = synchronizationContext;
                     this.callback = callback;
@@ -125,26 +162,17 @@ namespace System.Workflow.Runtime.Hosting
 
                 public SendOrPostCallback Callback
                 {
-                    get
-                    {
-                        return this.callback;
-                    }
+                    get { return this.callback; }
                 }
 
                 public object State
                 {
-                    get
-                    {
-                        return this.callbackState;
-                    }
+                    get { return this.callbackState; }
                 }
 
                 public SynchronizationContext SynchronizationContext
                 {
-                    get
-                    {
-                        return this.synchronizationContext;
-                    }
+                    get { return this.synchronizationContext; }
                 }
             }
         }

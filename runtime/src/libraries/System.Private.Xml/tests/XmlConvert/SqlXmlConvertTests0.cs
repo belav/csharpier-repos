@@ -13,7 +13,13 @@ namespace System.Xml.XmlConvertTests
         {
             foreach (string token in strEncode)
             {
-                AddVariation(new CVariation(this, "EncodeNmToken-EncodeLocalNmToken with " + token, XmlEncodeName2));
+                AddVariation(
+                    new CVariation(
+                        this,
+                        "EncodeNmToken-EncodeLocalNmToken with " + token,
+                        XmlEncodeName2
+                    )
+                );
             }
         }
 

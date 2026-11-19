@@ -12,7 +12,7 @@ using System.Security.Claims;
 namespace System.ServiceModel.Security
 {
     /// <summary>
-    /// Wraps a X509SecurityTokenHandler. Delegates the token authentication call the inner tokenAuthenticator. 
+    /// Wraps a X509SecurityTokenHandler. Delegates the token authentication call the inner tokenAuthenticator.
     /// Wraps the returned ClaimsIdentities into an AuthorizationPolicy that supports IAuthorizationPolicy
     /// </summary>
     internal class WrappedX509SecurityTokenAuthenticator : X509SecurityTokenAuthenticator
@@ -25,19 +25,26 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="wrappedX509SecurityTokenHandler">X509SecurityTokenHandler to wrap.</param>
         /// <param name="exceptionMapper">Converts token validation exceptions to SOAP faults.</param>
-        public WrappedX509SecurityTokenAuthenticator( 
-            X509SecurityTokenHandler wrappedX509SecurityTokenHandler, 
-            ExceptionMapper exceptionMapper )
-            : base( X509CertificateValidator.None, GetMapToWindowsSetting( wrappedX509SecurityTokenHandler ), true )
+        public WrappedX509SecurityTokenAuthenticator(
+            X509SecurityTokenHandler wrappedX509SecurityTokenHandler,
+            ExceptionMapper exceptionMapper
+        )
+            : base(
+                X509CertificateValidator.None,
+                GetMapToWindowsSetting(wrappedX509SecurityTokenHandler),
+                true
+            )
         {
-            if ( wrappedX509SecurityTokenHandler == null )
+            if (wrappedX509SecurityTokenHandler == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "wrappedX509SecurityTokenHandler" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "wrappedX509SecurityTokenHandler"
+                );
             }
 
-            if ( exceptionMapper == null )
+            if (exceptionMapper == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "exceptionMapper" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("exceptionMapper");
             }
 
             _wrappedX509SecurityTokenHandler = wrappedX509SecurityTokenHandler;
@@ -50,16 +57,18 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="token">Token to be validated.</param>
         /// <returns>Read-only collection of IAuthorizationPolicy</returns>
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore( SecurityToken token )
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
         {
             ReadOnlyCollection<ClaimsIdentity> identities = null;
             try
             {
                 identities = _wrappedX509SecurityTokenHandler.ValidateToken(token);
             }
-            catch ( Exception ex )
+            catch (Exception ex)
             {
-                if ( !_exceptionMapper.HandleSecurityTokenProcessingException( ex ) )
+                if (!_exceptionMapper.HandleSecurityTokenProcessingException(ex))
                 {
                     throw;
                 }
@@ -67,26 +76,32 @@ namespace System.ServiceModel.Security
 
             // tlsnego will dispose of the x509, when we write out the bootstrap we will get a dispose error.
 
-            bool shouldSaveBootstrapContext = SecurityTokenHandlerConfiguration.DefaultSaveBootstrapContext;
-            if ( _wrappedX509SecurityTokenHandler.Configuration != null )
+            bool shouldSaveBootstrapContext =
+                SecurityTokenHandlerConfiguration.DefaultSaveBootstrapContext;
+            if (_wrappedX509SecurityTokenHandler.Configuration != null)
             {
-                shouldSaveBootstrapContext = _wrappedX509SecurityTokenHandler.Configuration.SaveBootstrapContext;
+                shouldSaveBootstrapContext = _wrappedX509SecurityTokenHandler
+                    .Configuration
+                    .SaveBootstrapContext;
             }
 
-            if ( shouldSaveBootstrapContext )
+            if (shouldSaveBootstrapContext)
             {
                 X509SecurityToken x509Token = token as X509SecurityToken;
                 SecurityToken tokenToCache;
-                if ( x509Token != null )
+                if (x509Token != null)
                 {
-                    tokenToCache = new X509SecurityToken( x509Token.Certificate );
+                    tokenToCache = new X509SecurityToken(x509Token.Certificate);
                 }
                 else
                 {
                     tokenToCache = token;
                 }
 
-                BootstrapContext bootstrapContext = new BootstrapContext(tokenToCache, _wrappedX509SecurityTokenHandler);
+                BootstrapContext bootstrapContext = new BootstrapContext(
+                    tokenToCache,
+                    _wrappedX509SecurityTokenHandler
+                );
                 foreach (ClaimsIdentity identity in identities)
                 {
                     identity.BootstrapContext = bootstrapContext;
@@ -99,11 +114,13 @@ namespace System.ServiceModel.Security
             return policies.AsReadOnly();
         }
 
-        static bool GetMapToWindowsSetting( X509SecurityTokenHandler securityTokenHandler )
+        static bool GetMapToWindowsSetting(X509SecurityTokenHandler securityTokenHandler)
         {
-            if ( securityTokenHandler == null )
+            if (securityTokenHandler == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "securityTokenHandler" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityTokenHandler"
+                );
             }
 
             return securityTokenHandler.MapToWindows;

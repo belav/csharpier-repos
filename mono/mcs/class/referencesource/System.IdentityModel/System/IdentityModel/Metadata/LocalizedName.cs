@@ -17,9 +17,7 @@ namespace System.IdentityModel.Metadata
         /// Empty constructor.
         /// </summary>
         public LocalizedName()
-            : this(null, null)
-        {
-        }
+            : this(null, null) { }
 
         /// <summary>
         /// Constructs a localized name with the input <paramref name="name"/> and <paramref name="language"/>.

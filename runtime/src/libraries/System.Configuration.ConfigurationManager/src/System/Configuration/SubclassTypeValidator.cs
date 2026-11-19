@@ -23,15 +23,18 @@ namespace System.Configuration
 
         public override void Validate(object value)
         {
-            if (value == null) return;
+            if (value == null)
+                return;
 
             // Make a check here since value.GetType() returns RuntimeType rather then Type
-            if (!(value is Type)) ValidatorUtils.HelperParamValidation(value, typeof(Type));
+            if (!(value is Type))
+                ValidatorUtils.HelperParamValidation(value, typeof(Type));
 
             if (!_base.IsAssignableFrom((Type)value))
             {
-                throw new ArgumentException(SR.Format(SR.Subclass_validator_error, ((Type)value).FullName,
-                    _base.FullName));
+                throw new ArgumentException(
+                    SR.Format(SR.Subclass_validator_error, ((Type)value).FullName, _base.FullName)
+                );
             }
         }
     }

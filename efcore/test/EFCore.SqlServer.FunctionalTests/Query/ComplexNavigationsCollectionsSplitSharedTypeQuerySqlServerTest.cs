@@ -8,7 +8,8 @@ public class ComplexNavigationsCollectionsSplitSharedTypeQuerySqlServerTest
 {
     public ComplexNavigationsCollectionsSplitSharedTypeQuerySqlServerTest(
         ComplexNavigationsSharedTypeQuerySqlServerFixture fixture,
-        ITestOutputHelper testOutputHelper)
+        ITestOutputHelper testOutputHelper
+    )
         : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();

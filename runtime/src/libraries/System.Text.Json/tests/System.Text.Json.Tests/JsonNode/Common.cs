@@ -8,11 +8,13 @@ namespace System.Text.Json.Nodes.Tests
 {
     public static partial class JsonNodeTests
     {
-        internal const string ExpectedDomJson = "{\"MyString\":\"Hello!\",\"MyNull\":null,\"MyBoolean\":false,\"MyArray\":[2,3,42]," +
-            "\"MyInt\":43,\"MyDateTime\":\"2020-07-08T00:00:00\",\"MyGuid\":\"ed957609-cdfe-412f-88c1-02daca1b4f51\"," +
-            "\"MyObject\":{\"MyString\":\"Hello!!\"},\"Child\":{\"ChildProp\":1}}";
+        internal const string ExpectedDomJson =
+            "{\"MyString\":\"Hello!\",\"MyNull\":null,\"MyBoolean\":false,\"MyArray\":[2,3,42],"
+            + "\"MyInt\":43,\"MyDateTime\":\"2020-07-08T00:00:00\",\"MyGuid\":\"ed957609-cdfe-412f-88c1-02daca1b4f51\","
+            + "\"MyObject\":{\"MyString\":\"Hello!!\"},\"Child\":{\"ChildProp\":1}}";
 
-        internal const string Linq_Query_Json = @"
+        internal const string Linq_Query_Json =
+            @"
         [
           {
             ""OrderId"":100, ""Customer"":
@@ -43,13 +45,14 @@ namespace System.Text.Json.Nodes.Tests
         internal static class EmployeesDatabase
         {
             private static int s_id = 0;
+
             public static KeyValuePair<string, JsonNode?> GetNextEmployee()
             {
                 var employee = new JsonObject()
                 {
-                    { "name", "John" } ,
-                    { "surname", "Smith"},
-                    { "age", 45 }
+                    { "name", "John" },
+                    { "surname", "Smith" },
+                    { "age", 45 },
                 };
 
                 return new KeyValuePair<string, JsonNode?>("employee" + s_id++, employee);
@@ -65,14 +68,14 @@ namespace System.Text.Json.Nodes.Tests
             /// Returns following JsonObject:
             /// {
             ///     "phone numbers" : { "work" :  "425-555-0123", "home": "425-555-0134"  }
-            ///     "reporting employees" : 
+            ///     "reporting employees" :
             ///     {
             ///         "software developers" :
             ///         {
-            ///             "full time employees" : /JsonObject of 3 employees from database/ 
-            ///             "intern employees" : /JsonObject of 2 employees from database/ 
+            ///             "full time employees" : /JsonObject of 3 employees from database/
+            ///             "intern employees" : /JsonObject of 2 employees from database/
             ///         },
-            ///         "HR" : /JsonObject of 10 employees from database/ 
+            ///         "HR" : /JsonObject of 10 employees from database/
             ///     }
             /// }
             /// </summary>
@@ -81,47 +84,48 @@ namespace System.Text.Json.Nodes.Tests
             {
                 var manager = GetNextEmployee().Value as JsonObject;
 
-                manager.Add
-                (
+                manager.Add(
                     "phone numbers",
-                    new JsonObject()
-                    {
-                    { "work", "425-555-0123" }, { "home", "425-555-0134" }
-                    }
+                    new JsonObject() { { "work", "425-555-0123" }, { "home", "425-555-0134" } }
                 );
 
-                manager.Add
-                (
-                    "reporting employees", new JsonObject
+                manager.Add(
+                    "reporting employees",
+                    new JsonObject
                     {
-                    {
-                        "software developers", new JsonObject
                         {
+                            "software developers",
+                            new JsonObject
                             {
-                                "full time employees", new JsonObject
                                 {
-                                    EmployeesDatabase.GetNextEmployee(),
-                                    EmployeesDatabase.GetNextEmployee(),
-                                    EmployeesDatabase.GetNextEmployee(),
-                                }
-                            },
-                            {
-                                "intern employees", new JsonObject
+                                    "full time employees",
+                                    new JsonObject
+                                    {
+                                        EmployeesDatabase.GetNextEmployee(),
+                                        EmployeesDatabase.GetNextEmployee(),
+                                        EmployeesDatabase.GetNextEmployee(),
+                                    }
+                                },
                                 {
-                                    EmployeesDatabase.GetNextEmployee(),
-                                    EmployeesDatabase.GetNextEmployee(),
-                                }
+                                    "intern employees",
+                                    new JsonObject
+                                    {
+                                        EmployeesDatabase.GetNextEmployee(),
+                                        EmployeesDatabase.GetNextEmployee(),
+                                    }
+                                },
                             }
-                        }
-                    },
-                    {
-                        "HR", new JsonObject
+                        },
                         {
+                            "HR",
+                            new JsonObject
                             {
-                                "full time employees", new JsonObject(EmployeesDatabase.GetTenBestEmployees())
+                                {
+                                    "full time employees",
+                                    new JsonObject(EmployeesDatabase.GetTenBestEmployees())
+                                },
                             }
-                        }
-                    }
+                        },
                     }
                 );
 

@@ -7,7 +7,10 @@ using Xunit;
 
 namespace System.DirectoryServices.Protocols.Tests
 {
-    [ConditionalClass(typeof(DirectoryServicesTestHelpers), nameof(DirectoryServicesTestHelpers.IsWindowsOrLibLdapIsInstalled))]
+    [ConditionalClass(
+        typeof(DirectoryServicesTestHelpers),
+        nameof(DirectoryServicesTestHelpers.IsWindowsOrLibLdapIsInstalled)
+    )]
     public class AsqRequestControlTests
     {
         [Fact]
@@ -19,7 +22,10 @@ namespace System.DirectoryServices.Protocols.Tests
             Assert.True(control.ServerSide);
             Assert.Equal("1.2.840.113556.1.4.1504", control.Type);
 
-            var expected = (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? new byte[] { 48, 132, 0, 0, 0, 2, 4, 0 } : new byte[] { 48, 2, 4, 0 };
+            var expected =
+                (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    ? new byte[] { 48, 132, 0, 0, 0, 2, 4, 0 }
+                    : new byte[] { 48, 2, 4, 0 };
 
             Assert.Equal(expected, control.GetValue());
         }

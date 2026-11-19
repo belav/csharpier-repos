@@ -81,15 +81,12 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.PrependFrame, 1);
-                Assert.Equal(0, entry.ReferenceFrameIndex);
-                AssertFrame.Text(referenceFrames[0], "text1", 1);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.PrependFrame, 1);
+            Assert.Equal(0, entry.ReferenceFrameIndex);
+            AssertFrame.Text(referenceFrames[0], "text1", 1);
+        });
     }
 
     [Fact]
@@ -106,9 +103,8 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry => AssertEdit(entry, RenderTreeEditType.RemoveFrame, 1)
+        Assert.Collection(result.Edits, entry =>
+            AssertEdit(entry, RenderTreeEditType.RemoveFrame, 1)
         );
     }
 
@@ -138,15 +134,12 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.PrependFrame, 0);
-                Assert.Equal(0, entry.ReferenceFrameIndex);
-                Assert.Equal("new key", referenceFrames[entry.ReferenceFrameIndex].ElementKey);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.PrependFrame, 0);
+            Assert.Equal(0, entry.ReferenceFrameIndex);
+            Assert.Equal("new key", referenceFrames[entry.ReferenceFrameIndex].ElementKey);
+        });
     }
 
     [Fact]
@@ -175,9 +168,8 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry => AssertEdit(entry, RenderTreeEditType.RemoveFrame, 0)
+        Assert.Collection(result.Edits, entry =>
+            AssertEdit(entry, RenderTreeEditType.RemoveFrame, 0)
         );
     }
 
@@ -247,9 +239,8 @@ public class RenderTreeDiffBuilderTest : IDisposable
 
         // Assert: Inserts new component at position 0
         Assert.Equal(1, batchBuilder.UpdatedComponents.Count);
-        Assert.Collection(
-            batchBuilder.UpdatedComponents.Array[0].Edits,
-            entry => AssertEdit(entry, RenderTreeEditType.PrependFrame, 0)
+        Assert.Collection(batchBuilder.UpdatedComponents.Array[0].Edits, entry =>
+            AssertEdit(entry, RenderTreeEditType.PrependFrame, 0)
         );
 
         // Assert: Retains old component instance in position 1, and updates its params
@@ -299,9 +290,8 @@ public class RenderTreeDiffBuilderTest : IDisposable
 
         // Assert
         Assert.Same(oldComponents[1], newComponent);
-        Assert.Collection(
-            result.Edits,
-            entry => AssertEdit(entry, RenderTreeEditType.RemoveFrame, 0)
+        Assert.Collection(result.Edits, entry =>
+            AssertEdit(entry, RenderTreeEditType.RemoveFrame, 0)
         );
     }
 
@@ -341,9 +331,8 @@ public class RenderTreeDiffBuilderTest : IDisposable
 
         // Assert
         Assert.Same(oldComponents[1], newComponent);
-        Assert.Collection(
-            result.Edits,
-            entry => AssertEdit(entry, RenderTreeEditType.RemoveFrame, 0)
+        Assert.Collection(result.Edits, entry =>
+            AssertEdit(entry, RenderTreeEditType.RemoveFrame, 0)
         );
     }
 
@@ -372,9 +361,8 @@ public class RenderTreeDiffBuilderTest : IDisposable
 
         // Assert
         Assert.Same(oldComponents[0], newComponents[1]);
-        Assert.Collection(
-            result.Edits,
-            entry => AssertEdit(entry, RenderTreeEditType.PrependFrame, 0)
+        Assert.Collection(result.Edits, entry =>
+            AssertEdit(entry, RenderTreeEditType.PrependFrame, 0)
         );
     }
 
@@ -934,14 +922,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
-                Assert.Equal(0, entry.ReferenceFrameIndex);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
+            Assert.Equal(0, entry.ReferenceFrameIndex);
+        });
         AssertFrame.Attribute(referenceFrames[0], "added", "added value");
     }
 
@@ -961,14 +946,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.RemoveAttribute, 0);
-                Assert.Equal("will be removed", entry.RemovedAttributeName);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.RemoveAttribute, 0);
+            Assert.Equal("will be removed", entry.RemovedAttributeName);
+        });
     }
 
     [Fact]
@@ -988,14 +970,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
-                Assert.Equal(0, entry.ReferenceFrameIndex);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
+            Assert.Equal(0, entry.ReferenceFrameIndex);
+        });
         AssertFrame.Attribute(referenceFrames[0], "will change", "did change value");
     }
 
@@ -1022,14 +1001,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var removedEventHandlerFrame = oldTree.GetFrames().Array[2];
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
-                Assert.Equal(0, entry.ReferenceFrameIndex);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
+            Assert.Equal(0, entry.ReferenceFrameIndex);
+        });
         AssertFrame.Attribute(referenceFrames[0], "onbar", addedHandler);
         Assert.NotEqual(default, removedEventHandlerFrame.AttributeEventHandlerId);
         Assert.Equal(
@@ -1087,14 +1063,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
-                Assert.Equal(0, entry.ReferenceFrameIndex);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
+            Assert.Equal(0, entry.ReferenceFrameIndex);
+        });
         Assert.Collection(referenceFrames, frame => AssertFrame.Attribute(frame, "attr1", 0));
     }
 
@@ -1116,14 +1089,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
-                Assert.Equal(0, entry.ReferenceFrameIndex);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
+            Assert.Equal(0, entry.ReferenceFrameIndex);
+        });
 
         Assert.Collection(referenceFrames, frame => AssertFrame.Attribute(frame, "attr2", 0));
     }
@@ -1146,14 +1116,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
-                Assert.Equal(0, entry.ReferenceFrameIndex);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
+            Assert.Equal(0, entry.ReferenceFrameIndex);
+        });
 
         Assert.Collection(referenceFrames, frame => AssertFrame.Attribute(frame, "attr3", 0));
     }
@@ -1176,14 +1143,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
-                Assert.Equal(0, entry.ReferenceFrameIndex);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
+            Assert.Equal(0, entry.ReferenceFrameIndex);
+        });
         Assert.Collection(referenceFrames, frame => AssertFrame.Attribute(frame, "attr1", 1));
     }
 
@@ -1205,14 +1169,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
-                Assert.Equal(0, entry.ReferenceFrameIndex);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
+            Assert.Equal(0, entry.ReferenceFrameIndex);
+        });
 
         Assert.Collection(referenceFrames, frame => AssertFrame.Attribute(frame, "attr2", 2));
     }
@@ -1235,14 +1196,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
-                Assert.Equal(0, entry.ReferenceFrameIndex);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
+            Assert.Equal(0, entry.ReferenceFrameIndex);
+        });
 
         Assert.Collection(referenceFrames, frame => AssertFrame.Attribute(frame, "attr3", 3));
     }
@@ -1265,14 +1223,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.RemoveAttribute, 0);
-                Assert.Equal("attr1", entry.RemovedAttributeName);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.RemoveAttribute, 0);
+            Assert.Equal("attr1", entry.RemovedAttributeName);
+        });
     }
 
     [Fact]
@@ -1293,14 +1248,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.RemoveAttribute, 0);
-                Assert.Equal("attr2", entry.RemovedAttributeName);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.RemoveAttribute, 0);
+            Assert.Equal("attr2", entry.RemovedAttributeName);
+        });
     }
 
     [Fact]
@@ -1321,14 +1273,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.RemoveAttribute, 0);
-                Assert.Equal("attr3", entry.RemovedAttributeName);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.RemoveAttribute, 0);
+            Assert.Equal("attr3", entry.RemovedAttributeName);
+        });
     }
 
     [Fact]
@@ -1349,14 +1298,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.RemoveAttribute, 0);
-                Assert.Equal("attr1", entry.RemovedAttributeName);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.RemoveAttribute, 0);
+            Assert.Equal("attr1", entry.RemovedAttributeName);
+        });
     }
 
     [Fact]
@@ -1377,14 +1323,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.RemoveAttribute, 0);
-                Assert.Equal("attr2", entry.RemovedAttributeName);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.RemoveAttribute, 0);
+            Assert.Equal("attr2", entry.RemovedAttributeName);
+        });
     }
 
     [Fact]
@@ -1405,14 +1348,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.RemoveAttribute, 0);
-                Assert.Equal("attr3", entry.RemovedAttributeName);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.RemoveAttribute, 0);
+            Assert.Equal("attr3", entry.RemovedAttributeName);
+        });
     }
 
     [Fact]
@@ -1514,14 +1454,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.UpdateText, 1);
-                Assert.Equal(0, entry.ReferenceFrameIndex);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.UpdateText, 1);
+            Assert.Equal(0, entry.ReferenceFrameIndex);
+        });
         AssertFrame.Text(referenceFrames[0], "text2modified", 11);
     }
 
@@ -1541,14 +1478,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.PrependFrame, 1);
-                Assert.Equal(0, entry.ReferenceFrameIndex);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.PrependFrame, 1);
+            Assert.Equal(0, entry.ReferenceFrameIndex);
+        });
         Assert.Collection(
             referenceFrames,
             frame => AssertFrame.Element(frame, "root", 3, 1),
@@ -2055,14 +1989,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
         Assert.NotEqual(ref1.Id, ref2.Id);
 
         // Assert: Also specified in diff
-        Assert.Collection(
-            diff.Edits,
-            edit =>
-            {
-                AssertEdit(edit, RenderTreeEditType.PrependFrame, 0);
-                Assert.Equal(0, edit.ReferenceFrameIndex);
-            }
-        );
+        Assert.Collection(diff.Edits, edit =>
+        {
+            AssertEdit(edit, RenderTreeEditType.PrependFrame, 0);
+            Assert.Equal(0, edit.ReferenceFrameIndex);
+        });
         Assert.Collection(
             referenceFrames,
             frame => AssertFrame.Element(frame, "My element", 3),
@@ -2141,14 +2072,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
 
         // Assert: Also in diff, even though we have no use for it there
         // (it would be costly to exclude given how the array range is copied)
-        Assert.Collection(
-            diff.Edits,
-            edit =>
-            {
-                AssertEdit(edit, RenderTreeEditType.PrependFrame, 0);
-                Assert.Equal(0, edit.ReferenceFrameIndex);
-            }
-        );
+        Assert.Collection(diff.Edits, edit =>
+        {
+            AssertEdit(edit, RenderTreeEditType.PrependFrame, 0);
+            Assert.Equal(0, edit.ReferenceFrameIndex);
+        });
         Assert.Collection(
             referenceFrames,
             frame =>
@@ -2488,15 +2416,12 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames, batch) = GetSingleUpdatedComponentWithBatch(componentId: 123);
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.PrependFrame, 1);
-                Assert.Equal(0, entry.ReferenceFrameIndex);
-                Assert.Equal("new element", referenceFrames[entry.ReferenceFrameIndex].ElementName);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.PrependFrame, 1);
+            Assert.Equal(0, entry.ReferenceFrameIndex);
+            Assert.Equal("new element", referenceFrames[entry.ReferenceFrameIndex].ElementName);
+        });
         Assert.Collection(
             batch.NamedEventChanges.Value.AsEnumerable(),
             entry =>
@@ -2539,9 +2464,8 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames, batch) = GetSingleUpdatedComponentWithBatch(componentId: 123);
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry => AssertEdit(entry, RenderTreeEditType.RemoveFrame, 1)
+        Assert.Collection(result.Edits, entry =>
+            AssertEdit(entry, RenderTreeEditType.RemoveFrame, 1)
         );
         Assert.Collection(
             batch.NamedEventChanges.Value.AsEnumerable(),
@@ -2582,15 +2506,12 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames, batch) = GetSingleUpdatedComponentWithBatch(componentId: 123);
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
-                Assert.Equal(0, entry.ReferenceFrameIndex);
-                Assert.Equal("attr1", referenceFrames[entry.ReferenceFrameIndex].AttributeName);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
+            Assert.Equal(0, entry.ReferenceFrameIndex);
+            Assert.Equal("attr1", referenceFrames[entry.ReferenceFrameIndex].AttributeName);
+        });
         Assert.Collection(
             batch.NamedEventChanges.Value.AsEnumerable(),
             entry =>
@@ -2681,15 +2602,12 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
-                Assert.Equal(0, entry.ReferenceFrameIndex);
-                AssertFrame.Attribute(referenceFrames[0], "myattribute_final", "value", 1);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.SetAttribute, 0);
+            Assert.Equal(0, entry.ReferenceFrameIndex);
+            AssertFrame.Attribute(referenceFrames[0], "myattribute_final", "value", 1);
+        });
     }
 
     [Fact]
@@ -2716,14 +2634,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
         var (result, referenceFrames) = GetSingleUpdatedComponent();
 
         // Assert
-        Assert.Collection(
-            result.Edits,
-            entry =>
-            {
-                AssertEdit(entry, RenderTreeEditType.RemoveAttribute, 0);
-                Assert.Equal("myattribute_final", entry.RemovedAttributeName);
-            }
-        );
+        Assert.Collection(result.Edits, entry =>
+        {
+            AssertEdit(entry, RenderTreeEditType.RemoveAttribute, 0);
+            Assert.Equal("myattribute_final", entry.RemovedAttributeName);
+        });
     }
 
     private (RenderTreeDiff, RenderTreeFrame[]) GetSingleUpdatedComponent(

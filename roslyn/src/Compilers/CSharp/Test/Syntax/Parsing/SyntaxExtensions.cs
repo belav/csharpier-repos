@@ -53,12 +53,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         internal static ImmutableArray<DiagnosticInfo> Errors(this SyntaxToken token)
         {
-            return ((Syntax.InternalSyntax.CSharpSyntaxNode)token.Node).ErrorsOrWarnings(errorsOnly: true);
+            return ((Syntax.InternalSyntax.CSharpSyntaxNode)token.Node).ErrorsOrWarnings(
+                errorsOnly: true
+            );
         }
 
         internal static ImmutableArray<DiagnosticInfo> Warnings(this SyntaxToken token)
         {
-            return ((Syntax.InternalSyntax.CSharpSyntaxNode)token.Node).ErrorsOrWarnings(errorsOnly: false);
+            return ((Syntax.InternalSyntax.CSharpSyntaxNode)token.Node).ErrorsOrWarnings(
+                errorsOnly: false
+            );
         }
 
         internal static ImmutableArray<DiagnosticInfo> ErrorsAndWarnings(this SyntaxToken token)
@@ -78,7 +82,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return nodeOrToken.UnderlyingNode.ErrorsOrWarnings(errorsOnly: false);
         }
 
-        internal static ImmutableArray<DiagnosticInfo> ErrorsAndWarnings(this SyntaxNodeOrToken nodeOrToken)
+        internal static ImmutableArray<DiagnosticInfo> ErrorsAndWarnings(
+            this SyntaxNodeOrToken nodeOrToken
+        )
         {
             return nodeOrToken.UnderlyingNode.ErrorsAndWarnings();
         }
@@ -87,12 +93,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         # region SyntaxTriviaExtensions
         internal static ImmutableArray<DiagnosticInfo> Errors(this SyntaxTrivia trivia)
         {
-            return ((InternalSyntax.CSharpSyntaxNode)trivia.UnderlyingNode).ErrorsOrWarnings(errorsOnly: true);
+            return ((InternalSyntax.CSharpSyntaxNode)trivia.UnderlyingNode).ErrorsOrWarnings(
+                errorsOnly: true
+            );
         }
 
         internal static ImmutableArray<DiagnosticInfo> Warnings(this SyntaxTrivia trivia)
         {
-            return ((InternalSyntax.CSharpSyntaxNode)trivia.UnderlyingNode).ErrorsOrWarnings(errorsOnly: false);
+            return ((InternalSyntax.CSharpSyntaxNode)trivia.UnderlyingNode).ErrorsOrWarnings(
+                errorsOnly: false
+            );
         }
 
         internal static ImmutableArray<DiagnosticInfo> ErrorsAndWarnings(this SyntaxTrivia trivia)
@@ -101,7 +111,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         }
         #endregion
 
-        private static ImmutableArray<DiagnosticInfo> ErrorsOrWarnings(this GreenNode node, bool errorsOnly)
+        private static ImmutableArray<DiagnosticInfo> ErrorsOrWarnings(
+            this GreenNode node,
+            bool errorsOnly
+        )
         {
             ArrayBuilder<DiagnosticInfo> b = ArrayBuilder<DiagnosticInfo>.GetInstance();
 
@@ -109,7 +122,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             foreach (var item in l)
             {
-                if (item.Severity == (errorsOnly ? DiagnosticSeverity.Error : DiagnosticSeverity.Warning))
+                if (
+                    item.Severity
+                    == (errorsOnly ? DiagnosticSeverity.Error : DiagnosticSeverity.Warning)
+                )
                     b.Add(item);
             }
 

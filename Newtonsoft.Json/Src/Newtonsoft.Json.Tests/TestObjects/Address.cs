@@ -59,7 +59,10 @@ namespace Newtonsoft.Json.Tests.TestObjects
             set { _Entered = value; }
         }
 
-        private DateTime _Entered = DateTime.Parse("01/01/2007", CultureInfo.CurrentCulture.DateTimeFormat);
+        private DateTime _Entered = DateTime.Parse(
+            "01/01/2007",
+            CultureInfo.CurrentCulture.DateTimeFormat
+        );
     }
 #endif
 }

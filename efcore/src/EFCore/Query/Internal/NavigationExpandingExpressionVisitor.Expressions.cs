@@ -7,7 +7,10 @@ public partial class NavigationExpandingExpressionVisitor
 {
     private sealed class EntityReference : Expression, IPrintableExpression
     {
-        public EntityReference(IEntityType entityType, EntityQueryRootExpression? entityQueryRootExpression)
+        public EntityReference(
+            IEntityType entityType,
+            EntityQueryRootExpression? entityQueryRootExpression
+        )
         {
             EntityType = entityType;
             IncludePaths = new IncludeTreeNode(entityType, this, setLoaded: true);
@@ -23,28 +26,27 @@ public partial class NavigationExpandingExpressionVisitor
         public IncludeTreeNode? LastIncludeTreeNode { get; private set; }
         public EntityQueryRootExpression? EntityQueryRootExpression { get; }
 
-        public override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public override ExpressionType NodeType => ExpressionType.Extension;
 
-        public override Type Type
-            => EntityType.ClrType;
+        public override Type Type => EntityType.ClrType;
 
-        protected override Expression VisitChildren(ExpressionVisitor visitor)
-            => this;
+        protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
         public EntityReference Snapshot()
         {
-            var result = new EntityReference(EntityType, EntityQueryRootExpression) { IsOptional = IsOptional };
+            var result = new EntityReference(EntityType, EntityQueryRootExpression)
+            {
+                IsOptional = IsOptional,
+            };
             result.IncludePaths = IncludePaths.Snapshot(result);
 
             return result;
         }
 
-        public void SetLastInclude(IncludeTreeNode lastIncludeTree)
-            => LastIncludeTreeNode = lastIncludeTree;
+        public void SetLastInclude(IncludeTreeNode lastIncludeTree) =>
+            LastIncludeTreeNode = lastIncludeTree;
 
-        public void MarkAsOptional()
-            => IsOptional = true;
+        public void MarkAsOptional() => IsOptional = true;
 
         void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
         {
@@ -90,11 +92,13 @@ public partial class NavigationExpandingExpressionVisitor
         private EntityReference? _entityReference;
 
         public IncludeTreeNode(IEntityType entityType)
-            : this(entityType, null, setLoaded: true)
-        {
-        }
+            : this(entityType, null, setLoaded: true) { }
 
-        public IncludeTreeNode(IEntityType entityType, EntityReference? entityReference, bool setLoaded)
+        public IncludeTreeNode(
+            IEntityType entityType,
+            EntityReference? entityReference,
+            bool setLoaded
+        )
         {
             EntityType = entityType;
             _entityReference = entityReference;
@@ -120,19 +124,33 @@ public partial class NavigationExpandingExpressionVisitor
             IncludeTreeNode? nodeToAdd = null;
             if (_entityReference != null)
             {
-                if (navigation is INavigation concreteNavigation
+                if (
+                    navigation is INavigation concreteNavigation
                     && _entityReference.ForeignKeyExpansionMap.TryGetValue(
-                        (concreteNavigation.ForeignKey, concreteNavigation.IsOnDependent), out var expansion))
+                        (concreteNavigation.ForeignKey, concreteNavigation.IsOnDependent),
+                        out var expansion
+                    )
+                )
                 {
                     // Value known to be non-null
                     nodeToAdd = UnwrapEntityReference(expansion)!.IncludePaths;
                 }
-                else if (navigation is ISkipNavigation skipNavigation
-                         && _entityReference.ForeignKeyExpansionMap.TryGetValue(
-                             (skipNavigation.ForeignKey, skipNavigation.IsOnDependent), out var firstExpansion)
-                         // Value known to be non-null
-                         && UnwrapEntityReference(firstExpansion)!.ForeignKeyExpansionMap.TryGetValue(
-                             (skipNavigation.Inverse.ForeignKey, !skipNavigation.Inverse.IsOnDependent), out var secondExpansion))
+                else if (
+                    navigation is ISkipNavigation skipNavigation
+                    && _entityReference.ForeignKeyExpansionMap.TryGetValue(
+                        (skipNavigation.ForeignKey, skipNavigation.IsOnDependent),
+                        out var firstExpansion
+                    )
+                    // Value known to be non-null
+                    && UnwrapEntityReference(firstExpansion)!
+                        .ForeignKeyExpansionMap.TryGetValue(
+                            (
+                                skipNavigation.Inverse.ForeignKey,
+                                !skipNavigation.Inverse.IsOnDependent
+                            ),
+                            out var secondExpansion
+                        )
+                )
                 {
                     // Value known to be non-null
                     nodeToAdd = UnwrapEntityReference(secondExpansion)!.IncludePaths;
@@ -148,7 +166,10 @@ public partial class NavigationExpandingExpressionVisitor
 
         public IncludeTreeNode Snapshot(EntityReference? entityReference)
         {
-            var result = new IncludeTreeNode(EntityType, entityReference, SetLoaded) { FilterExpression = FilterExpression };
+            var result = new IncludeTreeNode(EntityType, entityReference, SetLoaded)
+            {
+                FilterExpression = FilterExpression,
+            };
 
             foreach (var (navigationBase, includeTreeNode) in this)
             {
@@ -168,17 +189,18 @@ public partial class NavigationExpandingExpressionVisitor
             }
         }
 
-        public void AssignEntityReference(EntityReference entityReference)
-            => _entityReference = entityReference;
+        public void AssignEntityReference(EntityReference entityReference) =>
+            _entityReference = entityReference;
 
-        public void ApplyFilter(LambdaExpression filterExpression)
-            => FilterExpression = filterExpression;
+        public void ApplyFilter(LambdaExpression filterExpression) =>
+            FilterExpression = filterExpression;
 
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is IncludeTreeNode includeTreeNode
-                    && Equals(includeTreeNode));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is IncludeTreeNode includeTreeNode && Equals(includeTreeNode)
+            );
 
         private bool Equals(IncludeTreeNode includeTreeNode)
         {
@@ -189,8 +211,10 @@ public partial class NavigationExpandingExpressionVisitor
 
             foreach (var (navigationBase, value) in this)
             {
-                if (!includeTreeNode.TryGetValue(navigationBase, out var otherIncludeTreeNode)
-                    || !value.Equals(otherIncludeTreeNode))
+                if (
+                    !includeTreeNode.TryGetValue(navigationBase, out var otherIncludeTreeNode)
+                    || !value.Equals(otherIncludeTreeNode)
+                )
                 {
                     return false;
                 }
@@ -199,8 +223,7 @@ public partial class NavigationExpandingExpressionVisitor
             return true;
         }
 
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), EntityType);
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), EntityType);
     }
 
     /// <summary>
@@ -209,7 +232,10 @@ public partial class NavigationExpandingExpressionVisitor
     /// </summary>
     private sealed class NavigationExpansionExpression : Expression, IPrintableExpression
     {
-        private readonly List<(MethodInfo OrderingMethod, Expression KeySelector)> _pendingOrderings = new();
+        private readonly List<(
+            MethodInfo OrderingMethod,
+            Expression KeySelector
+        )> _pendingOrderings = new();
 
         private readonly string _parameterName;
 
@@ -219,7 +245,8 @@ public partial class NavigationExpandingExpressionVisitor
             Expression source,
             NavigationTreeNode currentTree,
             Expression pendingSelector,
-            string parameterName)
+            string parameterName
+        )
         {
             Source = source;
             _parameterName = parameterName;
@@ -231,7 +258,8 @@ public partial class NavigationExpandingExpressionVisitor
 
         public ParameterExpression CurrentParameter
             // CurrentParameter would be non-null if CurrentTree is non-null
-            => CurrentTree.CurrentParameter!;
+            =>
+            CurrentTree.CurrentParameter!;
 
         public NavigationTreeNode CurrentTree
         {
@@ -248,20 +276,18 @@ public partial class NavigationExpandingExpressionVisitor
         public MethodInfo? CardinalityReducingGenericMethodInfo { get; private set; }
         public List<Expression> CardinalityReducingMethodArguments { get; } = new();
 
-        public Type SourceElementType
-            => CurrentParameter.Type;
+        public Type SourceElementType => CurrentParameter.Type;
 
-        public IReadOnlyList<(MethodInfo OrderingMethod, Expression KeySelector)> PendingOrderings
-            => _pendingOrderings;
+        public IReadOnlyList<(
+            MethodInfo OrderingMethod,
+            Expression KeySelector
+        )> PendingOrderings => _pendingOrderings;
 
-        public void UpdateSource(Expression source)
-            => Source = source;
+        public void UpdateSource(Expression source) => Source = source;
 
-        public void UpdateCurrentTree(NavigationTreeNode currentTree)
-            => CurrentTree = currentTree;
+        public void UpdateCurrentTree(NavigationTreeNode currentTree) => CurrentTree = currentTree;
 
-        public void ApplySelector(Expression selector)
-            => PendingSelector = selector;
+        public void ApplySelector(Expression selector) => PendingSelector = selector;
 
         public void AddPendingOrdering(MethodInfo orderingMethod, Expression keySelector)
         {
@@ -269,11 +295,10 @@ public partial class NavigationExpandingExpressionVisitor
             _pendingOrderings.Add((orderingMethod, keySelector));
         }
 
-        public void AppendPendingOrdering(MethodInfo orderingMethod, Expression keySelector)
-            => _pendingOrderings.Add((orderingMethod, keySelector));
+        public void AppendPendingOrdering(MethodInfo orderingMethod, Expression keySelector) =>
+            _pendingOrderings.Add((orderingMethod, keySelector));
 
-        public void ClearPendingOrderings()
-            => _pendingOrderings.Clear();
+        public void ClearPendingOrderings() => _pendingOrderings.Clear();
 
         public void ConvertToSingleResult(MethodInfo genericMethod, params Expression[] arguments)
         {
@@ -281,16 +306,14 @@ public partial class NavigationExpandingExpressionVisitor
             CardinalityReducingMethodArguments.AddRange(arguments);
         }
 
-        public override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public override ExpressionType NodeType => ExpressionType.Extension;
 
-        public override Type Type
-            => CardinalityReducingGenericMethodInfo == null
+        public override Type Type =>
+            CardinalityReducingGenericMethodInfo == null
                 ? typeof(IQueryable<>).MakeGenericType(PendingSelector.Type)
                 : PendingSelector.Type;
 
-        protected override Expression VisitChildren(ExpressionVisitor visitor)
-            => this;
+        protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
         void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
         {
@@ -305,7 +328,9 @@ public partial class NavigationExpandingExpressionVisitor
                 expressionPrinter.AppendLine();
                 if (CardinalityReducingGenericMethodInfo != null)
                 {
-                    expressionPrinter.AppendLine("CardinalityReducingMethod: " + CardinalityReducingGenericMethodInfo.Name);
+                    expressionPrinter.AppendLine(
+                        "CardinalityReducingMethod: " + CardinalityReducingGenericMethodInfo.Name
+                    );
                 }
             }
         }
@@ -318,16 +343,23 @@ public partial class NavigationExpandingExpressionVisitor
             ParameterExpression groupingParameter,
             NavigationTreeNode currentTree,
             Expression pendingSelector,
-            string innerParameterName)
+            string innerParameterName
+        )
         {
             Source = source;
             CurrentParameter = groupingParameter;
             Type = source.Type;
             GroupingEnumerable = new NavigationExpansionExpression(
-                Call(QueryableMethods.AsQueryable.MakeGenericMethod(CurrentParameter.Type.GetGenericArguments()[1]), CurrentParameter),
+                Call(
+                    QueryableMethods.AsQueryable.MakeGenericMethod(
+                        CurrentParameter.Type.GetGenericArguments()[1]
+                    ),
+                    CurrentParameter
+                ),
                 currentTree,
                 pendingSelector,
-                innerParameterName);
+                innerParameterName
+            );
         }
 
         public Expression Source { get; private set; }
@@ -336,19 +368,15 @@ public partial class NavigationExpandingExpressionVisitor
 
         public NavigationExpansionExpression GroupingEnumerable { get; }
 
-        public Type SourceElementType
-            => CurrentParameter.Type;
+        public Type SourceElementType => CurrentParameter.Type;
 
-        public void UpdateSource(Expression source)
-            => Source = source;
+        public void UpdateSource(Expression source) => Source = source;
 
-        public override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public override ExpressionType NodeType => ExpressionType.Extension;
 
         public override Type Type { get; }
 
-        protected override Expression VisitChildren(ExpressionVisitor visitor)
-            => this;
+        protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
         void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
         {
@@ -390,8 +418,7 @@ public partial class NavigationExpandingExpressionVisitor
             return this;
         }
 
-        public override Type Type
-            => Value.Type;
+        public override Type Type => Value.Type;
 
         void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
         {
@@ -420,8 +447,7 @@ public partial class NavigationExpandingExpressionVisitor
         {
             Left = left;
             Right = right;
-            if (left != null
-                && right != null)
+            if (left != null && right != null)
             {
                 left._parent = this;
                 left.CurrentParameter = null;
@@ -434,15 +460,15 @@ public partial class NavigationExpandingExpressionVisitor
         public NavigationTreeNode? Right { get; }
         public ParameterExpression? CurrentParameter { get; private set; }
 
-        public void SetParameter(string parameterName)
-            => CurrentParameter = Parameter(Type, parameterName);
+        public void SetParameter(string parameterName) =>
+            CurrentParameter = Parameter(Type, parameterName);
 
-        public override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public override ExpressionType NodeType => ExpressionType.Extension;
 
         public override Type Type
             // Left/Right could be null for NavigationTreeExpression (derived type) but it overrides this property.
-            => TransparentIdentifierFactory.Create(Left!.Type, Right!.Type);
+            =>
+            TransparentIdentifierFactory.Create(Left!.Type, Right!.Type);
 
         public Expression GetExpression()
         {
@@ -465,7 +491,11 @@ public partial class NavigationExpandingExpressionVisitor
     /// </summary>
     private sealed class OwnedNavigationReference : Expression, IPrintableExpression
     {
-        public OwnedNavigationReference(Expression parent, INavigation navigation, EntityReference entityReference)
+        public OwnedNavigationReference(
+            Expression parent,
+            INavigation navigation,
+            EntityReference entityReference
+        )
         {
             Parent = parent;
             Navigation = navigation;
@@ -483,11 +513,9 @@ public partial class NavigationExpandingExpressionVisitor
         public INavigation Navigation { get; }
         public EntityReference EntityReference { get; }
 
-        public override Type Type
-            => Navigation.ClrType;
+        public override Type Type => Navigation.ClrType;
 
-        public override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public override ExpressionType NodeType => ExpressionType.Extension;
 
         void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
         {
@@ -523,11 +551,9 @@ public partial class NavigationExpandingExpressionVisitor
         public Expression Parent { get; private set; }
         public new IProperty Property { get; }
 
-        public override Type Type
-            => Property.ClrType;
+        public override Type Type => Property.ClrType;
 
-        public override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public override ExpressionType NodeType => ExpressionType.Extension;
 
         void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
         {

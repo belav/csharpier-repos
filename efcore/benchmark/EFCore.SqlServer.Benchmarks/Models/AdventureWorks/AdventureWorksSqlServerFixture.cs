@@ -5,9 +5,10 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks;
 
 public static class AdventureWorksSqlServerFixture
 {
-    private static readonly string _connectionString = SqlServerBenchmarkEnvironment.CreateConnectionString("AdventureWorks2014");
+    private static readonly string _connectionString =
+        SqlServerBenchmarkEnvironment.CreateConnectionString("AdventureWorks2014");
 
     // This method is called from timed code, be careful when changing it
-    public static AdventureWorksContextBase CreateContext()
-        => new AdventureWorksSqlServerContext(_connectionString);
+    public static AdventureWorksContextBase CreateContext() =>
+        new AdventureWorksSqlServerContext(_connectionString);
 }

@@ -4,25 +4,30 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Hosting {
+namespace System.Web.Hosting
+{
     using System;
 
-    internal sealed class TlsTokenBindingInfo : ITlsTokenBindingInfo {
+    internal sealed class TlsTokenBindingInfo : ITlsTokenBindingInfo
+    {
         private readonly byte[] _providedTokenBindingId;
         private readonly byte[] _referredTokenBindingId;
 
-        internal TlsTokenBindingInfo(byte[] providedTokenBindingId, byte[] referredTokenBindingId) {
+        internal TlsTokenBindingInfo(byte[] providedTokenBindingId, byte[] referredTokenBindingId)
+        {
             _providedTokenBindingId = providedTokenBindingId;
             _referredTokenBindingId = referredTokenBindingId;
         }
 
-        public byte[] GetProvidedTokenBindingId() {
+        public byte[] GetProvidedTokenBindingId()
+        {
             return (_providedTokenBindingId != null)
                 ? (byte[])_providedTokenBindingId.Clone()
                 : null;
         }
 
-        public byte[] GetReferredTokenBindingId() {
+        public byte[] GetReferredTokenBindingId()
+        {
             return (_referredTokenBindingId != null)
                 ? (byte[])_referredTokenBindingId.Clone()
                 : null;

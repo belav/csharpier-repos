@@ -3,7 +3,6 @@
 
 using System.Runtime.CompilerServices;
 using System.Runtime.Versioning;
-
 using Internal.Runtime.CompilerServices;
 
 namespace System.Runtime.InteropServices
@@ -21,8 +20,7 @@ namespace System.Runtime.InteropServices
         /// </remarks>
         [Intrinsic]
         [NonVersionable]
-        public static ref T GetArrayDataReference<T>(T[] array) =>
-            ref GetArrayDataReference(array);
+        public static ref T GetArrayDataReference<T>(T[] array) => ref GetArrayDataReference(array);
 
         /// <summary>
         /// Returns a reference to the 0th element of <paramref name="array"/>. If the array is empty, returns a reference to where the 0th element
@@ -43,7 +41,10 @@ namespace System.Runtime.InteropServices
             // to special-case arrays of known type and dimension.
 
             // See comment on RawArrayData (in RuntimeHelpers.CoreCLR.cs) for details
-            return ref Unsafe.AddByteOffset(ref Unsafe.As<RawData>(array).Data, (nuint)array.GetMethodTable()->BaseSize - (nuint)(2 * sizeof(IntPtr)));
+            return ref Unsafe.AddByteOffset(
+                ref Unsafe.As<RawData>(array).Data,
+                (nuint)array.GetMethodTable()->BaseSize - (nuint)(2 * sizeof(IntPtr))
+            );
         }
     }
 }

@@ -41,9 +41,7 @@ namespace System.Net.Http
         /// <param name="range">The range or ranges, typically obtained from the Range HTTP request header field.</param>
         /// <param name="mediaType">The media type of the content stream.</param>
         public ByteRangeStreamContent(Stream content, RangeHeaderValue range, string mediaType)
-            : this(content, range, new MediaTypeHeaderValue(mediaType), DefaultBufferSize)
-        {
-        }
+            : this(content, range, new MediaTypeHeaderValue(mediaType), DefaultBufferSize) { }
 
         /// <summary>
         /// <see cref="HttpContent"/> implementation which provides a byte range view over a stream used to generate HTTP
@@ -55,10 +53,13 @@ namespace System.Net.Http
         /// <param name="range">The range or ranges, typically obtained from the Range HTTP request header field.</param>
         /// <param name="mediaType">The media type of the content stream.</param>
         /// <param name="bufferSize">The buffer size used when copying the content stream.</param>
-        public ByteRangeStreamContent(Stream content, RangeHeaderValue range, string mediaType, int bufferSize)
-            : this(content, range, new MediaTypeHeaderValue(mediaType), bufferSize)
-        {
-        }
+        public ByteRangeStreamContent(
+            Stream content,
+            RangeHeaderValue range,
+            string mediaType,
+            int bufferSize
+        )
+            : this(content, range, new MediaTypeHeaderValue(mediaType), bufferSize) { }
 
         /// <summary>
         /// <see cref="HttpContent"/> implementation which provides a byte range view over a stream used to generate HTTP
@@ -69,10 +70,12 @@ namespace System.Net.Http
         /// <param name="content">The stream over which to generate a byte range view.</param>
         /// <param name="range">The range or ranges, typically obtained from the Range HTTP request header field.</param>
         /// <param name="mediaType">The media type of the content stream.</param>
-        public ByteRangeStreamContent(Stream content, RangeHeaderValue range, MediaTypeHeaderValue mediaType)
-            : this(content, range, mediaType, DefaultBufferSize)
-        {
-        }
+        public ByteRangeStreamContent(
+            Stream content,
+            RangeHeaderValue range,
+            MediaTypeHeaderValue mediaType
+        )
+            : this(content, range, mediaType, DefaultBufferSize) { }
 
         /// <summary>
         /// <see cref="HttpContent"/> implementation which provides a byte range view over a stream used to generate HTTP
@@ -84,7 +87,12 @@ namespace System.Net.Http
         /// <param name="range">The range or ranges, typically obtained from the Range HTTP request header field.</param>
         /// <param name="mediaType">The media type of the content stream.</param>
         /// <param name="bufferSize">The buffer size used when copying the content stream.</param>
-        public ByteRangeStreamContent(Stream content, RangeHeaderValue range, MediaTypeHeaderValue mediaType, int bufferSize)
+        public ByteRangeStreamContent(
+            Stream content,
+            RangeHeaderValue range,
+            MediaTypeHeaderValue mediaType,
+            int bufferSize
+        )
         {
             if (content == null)
             {
@@ -92,7 +100,11 @@ namespace System.Net.Http
             }
             if (!content.CanSeek)
             {
-                throw Error.Argument("content", Properties.Resources.ByteRangeStreamNotSeekable, typeof(ByteRangeStreamContent).Name);
+                throw Error.Argument(
+                    "content",
+                    Properties.Resources.ByteRangeStreamNotSeekable,
+                    typeof(ByteRangeStreamContent).Name
+                );
             }
             if (range == null)
             {
@@ -104,11 +116,20 @@ namespace System.Net.Http
             }
             if (bufferSize < MinBufferSize)
             {
-                throw Error.ArgumentMustBeGreaterThanOrEqualTo("bufferSize", bufferSize, MinBufferSize);
+                throw Error.ArgumentMustBeGreaterThanOrEqualTo(
+                    "bufferSize",
+                    bufferSize,
+                    MinBufferSize
+                );
             }
             if (!range.Unit.Equals(SupportedRangeUnit, StringComparison.OrdinalIgnoreCase))
             {
-                throw Error.Argument("range", Properties.Resources.ByteRangeStreamContentNotBytesRange, range.Unit, SupportedRangeUnit);
+                throw Error.Argument(
+                    "range",
+                    Properties.Resources.ByteRangeStreamContentNotBytesRange,
+                    range.Unit,
+                    SupportedRangeUnit
+                );
             }
 
             try
@@ -140,8 +161,13 @@ namespace System.Net.Http
                     // If no overlapping ranges were found then stop
                     if (!rangeContent.Any())
                     {
-                        ContentRangeHeaderValue actualContentRange = new ContentRangeHeaderValue(content.Length);
-                        string msg = Error.Format(Properties.Resources.ByteRangeStreamNoneOverlap, range.ToString());
+                        ContentRangeHeaderValue actualContentRange = new ContentRangeHeaderValue(
+                            content.Length
+                        );
+                        string msg = Error.Format(
+                            Properties.Resources.ByteRangeStreamNoneOverlap,
+                            range.ToString()
+                        );
                         throw new InvalidByteRangeException(actualContentRange, msg);
                     }
                 }
@@ -149,21 +175,32 @@ namespace System.Net.Http
                 {
                     try
                     {
-                        ByteRangeStream rangeStream = new ByteRangeStream(content, range.Ranges.First());
+                        ByteRangeStream rangeStream = new ByteRangeStream(
+                            content,
+                            range.Ranges.First()
+                        );
                         _byteRangeContent = new StreamContent(rangeStream, bufferSize);
                         _byteRangeContent.Headers.ContentType = mediaType;
                         _byteRangeContent.Headers.ContentRange = rangeStream.ContentRange;
                     }
                     catch (ArgumentOutOfRangeException)
                     {
-                        ContentRangeHeaderValue actualContentRange = new ContentRangeHeaderValue(content.Length);
-                        string msg = Error.Format(Properties.Resources.ByteRangeStreamNoOverlap, range.ToString());
+                        ContentRangeHeaderValue actualContentRange = new ContentRangeHeaderValue(
+                            content.Length
+                        );
+                        string msg = Error.Format(
+                            Properties.Resources.ByteRangeStreamNoOverlap,
+                            range.ToString()
+                        );
                         throw new InvalidByteRangeException(actualContentRange, msg);
                     }
                 }
                 else
                 {
-                    throw Error.Argument("range", Properties.Resources.ByteRangeStreamContentNoRanges);
+                    throw Error.Argument(
+                        "range",
+                        Properties.Resources.ByteRangeStreamContentNoRanges
+                    );
                 }
 
                 // Copy headers from byte range content so that we get the right content type etc.

@@ -10,9 +10,7 @@ namespace System.Web.Http.Dependencies
     {
         private static readonly IDependencyResolver _instance = new EmptyResolver();
 
-        private EmptyResolver()
-        {
-        }
+        private EmptyResolver() { }
 
         public static IDependencyResolver Instance
         {
@@ -24,9 +22,7 @@ namespace System.Web.Http.Dependencies
             return this;
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public object GetService(Type serviceType)
         {

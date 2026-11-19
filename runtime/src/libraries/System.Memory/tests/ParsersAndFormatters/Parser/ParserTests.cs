@@ -128,7 +128,12 @@ namespace System.Buffers.Text.Tests
             // due to the overflow associated with adding the UTC offset. Make sure the call doesn't
             // surface the ArgumentOutOfRangeException.
             ReadOnlySpan<byte> utf8Text = text.ToUtf8Span();
-            Utf8Parser.TryParse(utf8Text, out DateTimeOffset dto, out int bytesConsumed, formatSymbol);
+            Utf8Parser.TryParse(
+                utf8Text,
+                out DateTimeOffset dto,
+                out int bytesConsumed,
+                formatSymbol
+            );
         }
     }
 }

@@ -20,12 +20,14 @@ public class Runtime_57061_2
     static uint[] s_13;
     static sbyte[][] s_110;
     static int[] s_111;
+
     [Fact]
     public static int TestEntryPoint()
     {
         s_2 = s_2;
         return Foo();
     }
+
     public static int Foo()
     {
         if (M34())

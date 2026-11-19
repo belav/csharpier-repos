@@ -64,38 +64,33 @@ public class Startup
         );
 
         // "/errors/400"
-        app.Map(
-            "/errors",
-            error =>
+        app.Map("/errors", error =>
+        {
+            error.Run(async context =>
             {
-                error.Run(async context =>
+                var builder = new StringBuilder();
+                builder.AppendLine("<html><body>");
+                builder.AppendLine(
+                    "An error occurred, Status Code: "
+                        + HtmlEncoder.Default.Encode(context.Request.Path.ToString().Substring(1))
+                        + "<br>"
+                );
+                var referrer = context.Request.Headers["referer"];
+                if (!string.IsNullOrEmpty(referrer))
                 {
-                    var builder = new StringBuilder();
-                    builder.AppendLine("<html><body>");
                     builder.AppendLine(
-                        "An error occurred, Status Code: "
-                            + HtmlEncoder.Default.Encode(
-                                context.Request.Path.ToString().Substring(1)
-                            )
-                            + "<br>"
+                        "<a href=\""
+                            + HtmlEncoder.Default.Encode(referrer)
+                            + "\">Retry "
+                            + WebUtility.HtmlEncode(referrer)
+                            + "</a><br>"
                     );
-                    var referrer = context.Request.Headers["referer"];
-                    if (!string.IsNullOrEmpty(referrer))
-                    {
-                        builder.AppendLine(
-                            "<a href=\""
-                                + HtmlEncoder.Default.Encode(referrer)
-                                + "\">Retry "
-                                + WebUtility.HtmlEncode(referrer)
-                                + "</a><br>"
-                        );
-                    }
-                    builder.AppendLine("</body></html>");
-                    context.Response.ContentType = "text/html";
-                    await context.Response.WriteAsync(builder.ToString());
-                });
-            }
-        );
+                }
+                builder.AppendLine("</body></html>");
+                context.Response.ContentType = "text/html";
+                await context.Response.WriteAsync(builder.ToString());
+            });
+        });
 
         app.Run(async context =>
         {

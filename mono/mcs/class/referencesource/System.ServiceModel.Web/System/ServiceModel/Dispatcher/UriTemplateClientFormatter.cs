@@ -13,9 +13,9 @@ namespace System.ServiceModel.Dispatcher
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Web;
     using System.Text;
     using System.Xml;
-    using System.ServiceModel.Web;
 
     class UriTemplateClientFormatter : IClientMessageFormatter
     {
@@ -30,26 +30,39 @@ namespace System.ServiceModel.Dispatcher
         int totalNumUTVars;
         UriTemplate uriTemplate;
 
-        public UriTemplateClientFormatter(OperationDescription operationDescription, IClientMessageFormatter inner, QueryStringConverter qsc, Uri baseUri, bool innerIsUntypedMessage, string contractName)
+        public UriTemplateClientFormatter(
+            OperationDescription operationDescription,
+            IClientMessageFormatter inner,
+            QueryStringConverter qsc,
+            Uri baseUri,
+            bool innerIsUntypedMessage,
+            string contractName
+        )
         {
             this.inner = inner;
             this.qsc = qsc;
             this.baseUri = baseUri;
             this.innerIsUntypedMessage = innerIsUntypedMessage;
-            Populate(out this.pathMapping,
+            Populate(
+                out this.pathMapping,
                 out this.queryMapping,
                 out this.totalNumUTVars,
                 out this.uriTemplate,
                 operationDescription,
                 qsc,
-                contractName);
+                contractName
+            );
             this.method = WebHttpBehavior.GetWebMethod(operationDescription);
             isGet = this.method == WebHttpBehavior.GET;
         }
 
         public object DeserializeReply(Message message, object[] parameters)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR2.GetString(SR2.QueryStringFormatterOperationNotSupportedClientSide)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(
+                    SR2.GetString(SR2.QueryStringFormatterOperationNotSupportedClientSide)
+                )
+            );
         }
 
         public Message SerializeRequest(MessageVersion messageVersion, object[] parameters)
@@ -67,7 +80,10 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (parameters[i] != null)
                     {
-                        nvc[this.queryMapping[i].Key] = this.qsc.ConvertValueToString(parameters[i], this.queryMapping[i].Value);
+                        nvc[this.queryMapping[i].Key] = this.qsc.ConvertValueToString(
+                            parameters[i],
+                            this.queryMapping[i].Value
+                        );
                     }
                 }
                 else
@@ -78,7 +94,10 @@ namespace System.ServiceModel.Dispatcher
             }
             Message m = inner.SerializeRequest(messageVersion, innerParameters);
             bool userSetTheToOnMessage = (this.innerIsUntypedMessage && m.Headers.To != null);
-            bool userSetTheToOnOutgoingHeaders = (OperationContext.Current != null && OperationContext.Current.OutgoingMessageHeaders.To != null);
+            bool userSetTheToOnOutgoingHeaders = (
+                OperationContext.Current != null
+                && OperationContext.Current.OutgoingMessageHeaders.To != null
+            );
             if (!userSetTheToOnMessage && !userSetTheToOnOutgoingHeaders)
             {
                 m.Headers.To = this.uriTemplate.BindByName(this.baseUri, nvc);
@@ -89,7 +108,10 @@ namespace System.ServiceModel.Dispatcher
                 {
                     WebOperationContext.Current.OutgoingRequest.SuppressEntityBody = true;
                 }
-                if (this.method != WebHttpBehavior.WildcardMethod && WebOperationContext.Current.OutgoingRequest.Method != null)
+                if (
+                    this.method != WebHttpBehavior.WildcardMethod
+                    && WebOperationContext.Current.OutgoingRequest.Method != null
+                )
                 {
                     WebOperationContext.Current.OutgoingRequest.Method = this.method;
                 }
@@ -99,7 +121,8 @@ namespace System.ServiceModel.Dispatcher
                 HttpRequestMessageProperty hrmp;
                 if (m.Properties.ContainsKey(HttpRequestMessageProperty.Name))
                 {
-                    hrmp = m.Properties[HttpRequestMessageProperty.Name] as HttpRequestMessageProperty;
+                    hrmp =
+                        m.Properties[HttpRequestMessageProperty.Name] as HttpRequestMessageProperty;
                 }
                 else
                 {
@@ -121,7 +144,10 @@ namespace System.ServiceModel.Dispatcher
         internal static string GetUTStringOrDefault(OperationDescription operationDescription)
         {
             string utString = WebHttpBehavior.GetWebUriTemplate(operationDescription);
-            if (utString == null && WebHttpBehavior.GetWebMethod(operationDescription) == WebHttpBehavior.GET)
+            if (
+                utString == null
+                && WebHttpBehavior.GetWebMethod(operationDescription) == WebHttpBehavior.GET
+            )
             {
                 utString = MakeDefaultGetUTString(operationDescription);
             }
@@ -132,13 +158,15 @@ namespace System.ServiceModel.Dispatcher
             return utString;
         }
 
-        internal static void Populate(out Dictionary<int, string> pathMapping,
+        internal static void Populate(
+            out Dictionary<int, string> pathMapping,
             out Dictionary<int, KeyValuePair<string, Type>> queryMapping,
             out int totalNumUTVars,
             out UriTemplate uriTemplate,
             OperationDescription operationDescription,
             QueryStringConverter qsc,
-            string contractName)
+            string contractName
+        )
         {
             pathMapping = new Dictionary<int, string>();
             queryMapping = new Dictionary<int, KeyValuePair<string, Type>>();
@@ -146,7 +174,9 @@ namespace System.ServiceModel.Dispatcher
             uriTemplate = new UriTemplate(utString);
             List<string> neededPathVars = new List<string>(uriTemplate.PathSegmentVariableNames);
             List<string> neededQueryVars = new List<string>(uriTemplate.QueryValueVariableNames);
-            Dictionary<string, byte> alreadyGotVars = new Dictionary<string, byte>(StringComparer.OrdinalIgnoreCase);
+            Dictionary<string, byte> alreadyGotVars = new Dictionary<string, byte>(
+                StringComparer.OrdinalIgnoreCase
+            );
             totalNumUTVars = neededPathVars.Count + neededQueryVars.Count;
             for (int i = 0; i < operationDescription.Messages[0].Body.Parts.Count; ++i)
             {
@@ -154,18 +184,37 @@ namespace System.ServiceModel.Dispatcher
                 string parameterName = mpd.XmlName.DecodedName;
                 if (alreadyGotVars.ContainsKey(parameterName))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                        SR2.GetString(SR2.UriTemplateVarCaseDistinction, operationDescription.XmlName.DecodedName, contractName, parameterName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.UriTemplateVarCaseDistinction,
+                                operationDescription.XmlName.DecodedName,
+                                contractName,
+                                parameterName
+                            )
+                        )
+                    );
                 }
                 List<string> neededPathCopy = new List<string>(neededPathVars);
                 foreach (string pathVar in neededPathCopy)
                 {
-                    if (string.Compare(parameterName, pathVar, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (
+                        string.Compare(parameterName, pathVar, StringComparison.OrdinalIgnoreCase)
+                        == 0
+                    )
                     {
                         if (mpd.Type != typeof(string))
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                                SR2.GetString(SR2.UriTemplatePathVarMustBeString, operationDescription.XmlName.DecodedName, contractName, parameterName)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR2.GetString(
+                                        SR2.UriTemplatePathVarMustBeString,
+                                        operationDescription.XmlName.DecodedName,
+                                        contractName,
+                                        parameterName
+                                    )
+                                )
+                            );
                         }
                         pathMapping.Add(i, parameterName);
                         alreadyGotVars.Add(parameterName, 0);
@@ -175,14 +224,30 @@ namespace System.ServiceModel.Dispatcher
                 List<string> neededQueryCopy = new List<string>(neededQueryVars);
                 foreach (string queryVar in neededQueryCopy)
                 {
-                    if (string.Compare(parameterName, queryVar, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (
+                        string.Compare(parameterName, queryVar, StringComparison.OrdinalIgnoreCase)
+                        == 0
+                    )
                     {
                         if (!qsc.CanConvert(mpd.Type))
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                                SR2.GetString(SR2.UriTemplateQueryVarMustBeConvertible, operationDescription.XmlName.DecodedName, contractName, parameterName, mpd.Type, qsc.GetType().Name)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR2.GetString(
+                                        SR2.UriTemplateQueryVarMustBeConvertible,
+                                        operationDescription.XmlName.DecodedName,
+                                        contractName,
+                                        parameterName,
+                                        mpd.Type,
+                                        qsc.GetType().Name
+                                    )
+                                )
+                            );
                         }
-                        queryMapping.Add(i, new KeyValuePair<string, Type>(parameterName, mpd.Type));
+                        queryMapping.Add(
+                            i,
+                            new KeyValuePair<string, Type>(parameterName, mpd.Type)
+                        );
                         alreadyGotVars.Add(parameterName, 0);
                         neededQueryVars.Remove(queryVar);
                     }
@@ -190,13 +255,29 @@ namespace System.ServiceModel.Dispatcher
             }
             if (neededPathVars.Count != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(
-                    SR2.UriTemplateMissingVar, operationDescription.XmlName.DecodedName, contractName, neededPathVars[0])));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(
+                            SR2.UriTemplateMissingVar,
+                            operationDescription.XmlName.DecodedName,
+                            contractName,
+                            neededPathVars[0]
+                        )
+                    )
+                );
             }
             if (neededQueryVars.Count != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString
-                    (SR2.UriTemplateMissingVar, operationDescription.XmlName.DecodedName, contractName, neededQueryVars[0])));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(
+                            SR2.UriTemplateMissingVar,
+                            operationDescription.XmlName.DecodedName,
+                            contractName,
+                            neededQueryVars[0]
+                        )
+                    )
+                );
             }
         }
 

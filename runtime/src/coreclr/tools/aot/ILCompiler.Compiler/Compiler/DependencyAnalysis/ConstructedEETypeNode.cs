@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
-
 using Internal.Runtime;
 using Internal.TypeSystem;
 
@@ -10,13 +9,15 @@ namespace ILCompiler.DependencyAnalysis
 {
     public class ConstructedEETypeNode : EETypeNode
     {
-        public ConstructedEETypeNode(NodeFactory factory, TypeDesc type) : base(factory, type)
+        public ConstructedEETypeNode(NodeFactory factory, TypeDesc type)
+            : base(factory, type)
         {
             Debug.Assert(!type.IsCanonicalDefinitionType(CanonicalFormKind.Any));
             CheckCanGenerateConstructedEEType(factory, type);
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler) + " constructed";
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler) + " constructed";
 
         public override bool ShouldSkipEmittingObjectNode(NodeFactory factory) => false;
 
@@ -29,10 +30,17 @@ namespace ILCompiler.DependencyAnalysis
             // Ensure that we track the necessary type symbol if we are working with a constructed type symbol.
             // The emitter will ensure we don't emit both, but this allows us assert that we only generate
             // relocs to nodes we emit.
-            dependencyList.Add(factory.NecessaryTypeSymbol(_type), "NecessaryType for constructed type");
+            dependencyList.Add(
+                factory.NecessaryTypeSymbol(_type),
+                "NecessaryType for constructed type"
+            );
 
             if (_type is MetadataType mdType)
-                ModuleUseBasedDependencyAlgorithm.AddDependenciesDueToModuleUse(ref dependencyList, factory, mdType.Module);
+                ModuleUseBasedDependencyAlgorithm.AddDependenciesDueToModuleUse(
+                    ref dependencyList,
+                    factory,
+                    mdType.Module
+                );
 
             DefType closestDefType = _type.GetClosestDefType();
 
@@ -40,14 +48,20 @@ namespace ILCompiler.DependencyAnalysis
             {
                 // Array MethodTable depends on System.Array's virtuals. Array EETypes don't point to
                 // their base type (i.e. there's no reloc based dependency making this "just work").
-                dependencyList.Add(factory.ConstructedTypeSymbol(_type.BaseType), "Array base type");
+                dependencyList.Add(
+                    factory.ConstructedTypeSymbol(_type.BaseType),
+                    "Array base type"
+                );
 
                 ArrayType arrayType = (ArrayType)_type;
                 if (arrayType.IsMdArray && arrayType.Rank == 1)
                 {
                     // Allocating an MDArray of Rank 1 with zero lower bounds results in allocating
                     // an SzArray instead. Make sure the type loader can find the SzArray type.
-                    dependencyList.Add(factory.ConstructedTypeSymbol(arrayType.ElementType.MakeArrayType()), "Rank 1 array");
+                    dependencyList.Add(
+                        factory.ConstructedTypeSymbol(arrayType.ElementType.MakeArrayType()),
+                        "Rank 1 array"
+                    );
                 }
             }
 
@@ -63,16 +77,28 @@ namespace ILCompiler.DependencyAnalysis
                         // critical, but in the presence of universal generics the compiler may generate a Box followed by calls to ToString,
                         // GetHashcode or Equals in ways that cannot otherwise be detected by dependency analysis. Thus force all struct type
                         // generic parameters to be considered constructed when walking dependencies of a constructed generic
-                        dependencyList.Add(factory.ConstructedTypeSymbol(instantiationType.ConvertToCanonForm(CanonicalFormKind.Specific)),
-                        "Struct generic parameters in constructed types may be assumed to be used as constructed in constructed generic types");
+                        dependencyList.Add(
+                            factory.ConstructedTypeSymbol(
+                                instantiationType.ConvertToCanonForm(CanonicalFormKind.Specific)
+                            ),
+                            "Struct generic parameters in constructed types may be assumed to be used as constructed in constructed generic types"
+                        );
                     }
                 }
             }
 
             // Ask the metadata manager if we have any dependencies due to the presence of the EEType.
-            factory.MetadataManager.GetDependenciesDueToEETypePresence(ref dependencyList, factory, _type);
+            factory.MetadataManager.GetDependenciesDueToEETypePresence(
+                ref dependencyList,
+                factory,
+                _type
+            );
 
-            factory.InteropStubManager.AddInterestingInteropConstructedTypeDependencies(ref dependencyList, factory, _type);
+            factory.InteropStubManager.AddInterestingInteropConstructedTypeDependencies(
+                ref dependencyList,
+                factory,
+                _type
+            );
 
             return dependencyList;
         }
@@ -87,12 +113,17 @@ namespace ILCompiler.DependencyAnalysis
             return factory.SerializedConstructedRuntimeTypeObject(_type);
         }
 
-        protected override ISymbolNode GetNonNullableValueTypeArrayElementTypeNode(NodeFactory factory)
+        protected override ISymbolNode GetNonNullableValueTypeArrayElementTypeNode(
+            NodeFactory factory
+        )
         {
             return factory.ConstructedTypeSymbol(((ArrayType)_type).ElementType);
         }
 
-        protected override IEETypeNode GetInterfaceTypeNode(NodeFactory factory, TypeDesc interfaceType)
+        protected override IEETypeNode GetInterfaceTypeNode(
+            NodeFactory factory,
+            TypeDesc interfaceType
+        )
         {
             // The interface type will be visible to reflection and should be considered constructed.
             return factory.ConstructedTypeSymbol(interfaceType);

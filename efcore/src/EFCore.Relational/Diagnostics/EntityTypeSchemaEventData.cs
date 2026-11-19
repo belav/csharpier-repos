@@ -23,7 +23,8 @@ public class EntityTypeSchemaEventData : EventData
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         IEntityType entityType,
-        string schema)
+        string schema
+    )
         : base(eventDefinition, messageGenerator)
     {
         EntityType = entityType;

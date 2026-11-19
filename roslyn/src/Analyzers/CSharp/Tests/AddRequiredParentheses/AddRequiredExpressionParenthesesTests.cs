@@ -18,21 +18,29 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsAddRequiredParentheses)]
-    public partial class AddRequiredExpressionParenthesesTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class AddRequiredExpressionParenthesesTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public AddRequiredExpressionParenthesesTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpAddRequiredExpressionParenthesesDiagnosticAnalyzer(), new AddRequiredParenthesesCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpAddRequiredExpressionParenthesesDiagnosticAnalyzer(),
+                new AddRequiredParenthesesCodeFixProvider()
+            );
 
-        private Task TestMissingAsync(string initialMarkup, OptionsCollection options)
-            => TestMissingInRegularAndScriptAsync(initialMarkup, new TestParameters(options: options));
+        private Task TestMissingAsync(string initialMarkup, OptionsCollection options) =>
+            TestMissingInRegularAndScriptAsync(initialMarkup, new TestParameters(options: options));
 
-        private Task TestAsync(string initialMarkup, string expected, OptionsCollection options)
-            => TestInRegularAndScript1Async(initialMarkup, expected, parameters: new TestParameters(options: options));
+        private Task TestAsync(string initialMarkup, string expected, OptionsCollection options) =>
+            TestInRegularAndScript1Async(
+                initialMarkup,
+                expected,
+                parameters: new TestParameters(options: options)
+            );
 
         [Fact]
         public async Task TestArithmeticPrecedence()
@@ -55,7 +63,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = 1 + (2 * 3);
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -70,7 +80,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = 1 $$+ 2 * 3;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -85,7 +97,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = 1 + 2 $$+ 3;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -100,7 +114,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = 1 + 2 $$+ 3;
                     }
                 }
-                """, RequireOtherBinaryParenthesesForClarity);
+                """,
+                RequireOtherBinaryParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -115,7 +131,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = 1 + 2 $$* 3;
                     }
                 }
-                """, RequireOtherBinaryParenthesesForClarity);
+                """,
+                RequireOtherBinaryParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -139,7 +157,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = (a > b) == c;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -163,7 +183,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = a || (b && c);
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -178,7 +200,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = a $$|| b && c;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -193,7 +217,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = a || b $$|| c;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -208,7 +234,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = a || b $$|| c;
                     }
                 }
-                """, RequireArithmeticBinaryParenthesesForClarity);
+                """,
+                RequireArithmeticBinaryParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -223,7 +251,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = a == b $$&& c == d;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -247,7 +277,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = a || (b && c && d);
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -271,7 +303,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = a || (b && c && d);
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -295,7 +329,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = (1 + 2) << 3;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -319,7 +355,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = (1 + 2) << 3;
                     }
                 }
-                """, RequireArithmeticBinaryParenthesesForClarity);
+                """,
+                RequireArithmeticBinaryParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -334,7 +372,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = 1 $$+ 2 << 3;
                     }
                 }
-                """, RequireOtherBinaryParenthesesForClarity);
+                """,
+                RequireOtherBinaryParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -349,7 +389,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = 1 $$<< 2 << 3;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -364,7 +406,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = 1 << 2 $$<< 3;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -379,7 +423,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = 1 $$+ 2 == 2 + 3;
                     }
                 }
-                """, RequireOtherBinaryParenthesesForClarity);
+                """,
+                RequireOtherBinaryParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -394,7 +440,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = 1 + 2 == 2 $$+ 3;
                     }
                 }
-                """, RequireOtherBinaryParenthesesForClarity);
+                """,
+                RequireOtherBinaryParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -409,7 +457,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = 1 $$+ 2 == 2 + 3;
                     }
                 }
-                """, RequireRelationalBinaryParenthesesForClarity);
+                """,
+                RequireRelationalBinaryParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -424,7 +474,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = 1 + 2 == 2 $$+ 3;
                     }
                 }
-                """, RequireRelationalBinaryParenthesesForClarity);
+                """,
+                RequireRelationalBinaryParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -439,7 +491,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = a $$+ b ?? c;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -454,7 +508,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = a $$?? b ?? c;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -469,7 +525,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = a ?? b $$?? c;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -493,7 +551,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = (1 + 2) & 3;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -508,7 +568,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = a $$| b | c;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -532,7 +594,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = a | (b & c);
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -547,7 +611,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = a $$| b & c;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -562,7 +628,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = 1 $$== 2;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -577,7 +645,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = a $$+= 2;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -592,7 +662,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         x $$= y == z;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -607,7 +679,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         x = y $$== z;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -622,7 +696,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = (int)$$-y;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -637,7 +713,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = (int)$$-y;
                     }
                 }
-                """, IgnoreAllParentheses);
+                """,
+                IgnoreAllParentheses
+            );
         }
 
         [Fact]
@@ -652,7 +730,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = (int)$$-y;
                     }
                 }
-                """, RemoveAllUnnecessaryParentheses);
+                """,
+                RemoveAllUnnecessaryParentheses
+            );
         }
 
         [Fact]
@@ -667,7 +747,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = (int)$$+y;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -682,7 +764,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = (int)$$&y;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -697,7 +781,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = (int)$$*y;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -712,7 +798,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = (int)$$y;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -727,7 +815,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = (int)$$y.z;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -742,7 +832,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = (int)$$(y);
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -757,7 +849,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = (int)$$!y;
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -774,7 +868,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         }
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -802,7 +898,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         }
                     }
                 }
-                """, options: RequireAllParenthesesForClarity);
+                """,
+                options: RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -819,7 +917,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         }
                     }
                 }
-                """, RequireAllParenthesesForClarity);
+                """,
+                RequireAllParenthesesForClarity
+            );
         }
 
         [Fact]
@@ -843,7 +943,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddRequiredParentheses
                         int x = 1 + (2 * 3) == 1 + (2 * 3);
                     }
                 }
-                """, options: RequireAllParenthesesForClarity);
+                """,
+                options: RequireAllParenthesesForClarity
+            );
         }
     }
 }

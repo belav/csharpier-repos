@@ -4,7 +4,8 @@
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
-    public class CSharpWhileSnippetCompletionProviderTests : AbstractCSharpConditionalBlockSnippetCompletionProviderTests
+    public class CSharpWhileSnippetCompletionProviderTests
+        : AbstractCSharpConditionalBlockSnippetCompletionProviderTests
     {
         protected override string ItemToCommit => "while";
     }

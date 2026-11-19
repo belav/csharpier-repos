@@ -5,15 +5,13 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.Net;
     using System.Configuration;
+    using System.Net;
     using System.ServiceModel.Channels;
 
     internal class PeerTransportListenAddressValidator : ConfigurationValidatorBase
     {
-        public PeerTransportListenAddressValidator()
-        {
-        }
+        public PeerTransportListenAddressValidator() { }
 
         public override bool CanValidate(Type type)
         {

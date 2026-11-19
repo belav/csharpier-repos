@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,40 +27,39 @@ using System;
 using System.Security;
 using System.Threading;
 
-namespace System.Windows.Threading {
+namespace System.Windows.Threading
+{
+    public sealed class DispatcherSynchronizationContext : SynchronizationContext
+    {
+        public DispatcherSynchronizationContext()
+        {
+            throw new NotImplementedException();
+        }
 
-	public sealed class DispatcherSynchronizationContext : SynchronizationContext
-	{
-		public DispatcherSynchronizationContext ()
-		{
-			throw new NotImplementedException ();
-		}
+        public DispatcherSynchronizationContext(Dispatcher dispatcher)
+        {
+            throw new NotImplementedException();
+        }
 
-		public DispatcherSynchronizationContext (Dispatcher dispatcher)
-		{
-			throw new NotImplementedException ();
-		}
+        public override SynchronizationContext CreateCopy()
+        {
+            throw new NotImplementedException();
+        }
 
-		public override SynchronizationContext CreateCopy ()
-		{
-			throw new NotImplementedException ();
-		}
+        public override void Post(SendOrPostCallback d, object state)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override void Post (SendOrPostCallback d, object state)
-		{
-			throw new NotImplementedException ();
-		}
+        public override void Send(SendOrPostCallback d, object state)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override void Send (SendOrPostCallback d, object state)
-		{
-			throw new NotImplementedException ();
-		}
-
-		[SecurityCritical]
-		public override int Wait (IntPtr[] waitHandles, bool waitAll, int millisecondsTimeout)
-		{
-			throw new NotImplementedException ();
-		}
-	}
-
+        [SecurityCritical]
+        public override int Wait(IntPtr[] waitHandles, bool waitAll, int millisecondsTimeout)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

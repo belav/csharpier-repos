@@ -44,12 +44,11 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 context =>
                 {
                     context.Response.OnStarting(() => Task.Run(() => onStartingCalled = true));
-                    context.Response.OnCompleted(
-                        () =>
-                            Task.Run(() =>
-                            {
-                                onCompletedTcs.SetResult();
-                            })
+                    context.Response.OnCompleted(() =>
+                        Task.Run(() =>
+                        {
+                            onCompletedTcs.SetResult();
+                        })
                     );
 
                     // Prevent OnStarting call (see HttpProtocol.ProcessRequestsAsync()).
@@ -88,8 +87,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 {
                     await context.Response.WriteAsync("hello, world");
                     await context.Response.BodyWriter.FlushAsync();
-                    ex = Assert.Throws<InvalidOperationException>(
-                        () => context.Response.OnStarting(_ => Task.CompletedTask, null)
+                    ex = Assert.Throws<InvalidOperationException>(() =>
+                        context.Response.OnStarting(_ => Task.CompletedTask, null)
                     );
                 },
                 new TestServiceContext(LoggerFactory)
@@ -127,8 +126,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 async context =>
                 {
                     await context.Response.StartAsync();
-                    ex = Assert.Throws<InvalidOperationException>(
-                        () => context.Response.OnStarting(_ => Task.CompletedTask, null)
+                    ex = Assert.Throws<InvalidOperationException>(() =>
+                        context.Response.OnStarting(_ => Task.CompletedTask, null)
                     );
                 },
                 new TestServiceContext(LoggerFactory)
@@ -477,12 +476,11 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 httpContext =>
                 {
-                    httpContext.Response.OnCompleted(
-                        () =>
-                            Task.Run(() =>
-                            {
-                                onCompletedTcs.SetResult();
-                            })
+                    httpContext.Response.OnCompleted(() =>
+                        Task.Run(() =>
+                        {
+                            onCompletedTcs.SetResult();
+                        })
                     );
                     return Task.CompletedTask;
                 },
@@ -528,7 +526,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 #pragma warning disable CS0618 // Type or member is obsolete
                     readException = await Assert.ThrowsAsync<BadHttpRequestException>(
 #pragma warning restore CS0618 // Type or member is obsolete
-                        async () => await httpContext.Request.Body.ReadAsync(new byte[1], 0, 1)
+                        async () =>
+                        await httpContext.Request.Body.ReadAsync(new byte[1], 0, 1)
                     );
                 },
                 new TestServiceContext(LoggerFactory)
@@ -557,14 +556,11 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
         Assert.NotNull(readException);
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        Assert.Contains(
-            TestSink.Writes,
-            w =>
-                w.EventId.Id == 17
-                && w.LogLevel <= LogLevel.Debug
-                && w.Exception is BadHttpRequestException
-                && ((BadHttpRequestException)w.Exception).StatusCode
-                    == StatusCodes.Status400BadRequest
+        Assert.Contains(TestSink.Writes, w =>
+            w.EventId.Id == 17
+            && w.LogLevel <= LogLevel.Debug
+            && w.Exception is BadHttpRequestException
+            && ((BadHttpRequestException)w.Exception).StatusCode == StatusCodes.Status400BadRequest
         );
 #pragma warning restore CS0618 // Type or member is obsolete
     }
@@ -1060,9 +1056,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             }
         }
 
-        var logMessage = Assert.Single(
-            LogMessages,
-            message => message.EventId.Name == "ConnectionHeadResponseBodyWrite"
+        var logMessage = Assert.Single(LogMessages, message =>
+            message.EventId.Name == "ConnectionHeadResponseBodyWrite"
         );
 
         Assert.Contains(
@@ -1286,15 +1281,13 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             }
         }
 
-        Assert.Contains(
-            TestSink.Writes,
-            m =>
-                m.EventId.Name == "ApplicationError"
-                && m.Exception is InvalidOperationException ex
-                && ex.Message.Equals(
-                    CoreStrings.FormatTooFewBytesWritten(12, 13),
-                    StringComparison.Ordinal
-                )
+        Assert.Contains(TestSink.Writes, m =>
+            m.EventId.Name == "ApplicationError"
+            && m.Exception is InvalidOperationException ex
+            && ex.Message.Equals(
+                CoreStrings.FormatTooFewBytesWritten(12, 13),
+                StringComparison.Ordinal
+            )
         );
     }
 
@@ -1320,8 +1313,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     httpContext.Response.ContentLength = 13;
                     await httpContext.Response.WriteAsync("hello, world");
 
-                    completeEx = Assert.Throws<InvalidOperationException>(
-                        () => httpContext.Response.BodyWriter.Complete()
+                    completeEx = Assert.Throws<InvalidOperationException>(() =>
+                        httpContext.Response.BodyWriter.Complete()
                     );
                 },
                 new TestServiceContext(LoggerFactory)
@@ -1352,15 +1345,13 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             }
         }
 
-        Assert.Contains(
-            TestSink.Writes,
-            m =>
-                m.EventId.Name == "ApplicationError"
-                && m.Exception is InvalidOperationException ex
-                && ex.Message.Equals(
-                    CoreStrings.FormatTooFewBytesWritten(12, 13),
-                    StringComparison.Ordinal
-                )
+        Assert.Contains(TestSink.Writes, m =>
+            m.EventId.Name == "ApplicationError"
+            && m.Exception is InvalidOperationException ex
+            && ex.Message.Equals(
+                CoreStrings.FormatTooFewBytesWritten(12, 13),
+                StringComparison.Ordinal
+            )
         );
 
         Assert.NotNull(completeEx);
@@ -1460,9 +1451,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         var error = LogMessages.Where(message => message.LogLevel == LogLevel.Error);
         Assert.Equal(2, error.Count());
-        Assert.All(
-            error,
-            message => message.Message.Equals(CoreStrings.FormatTooFewBytesWritten(0, 5))
+        Assert.All(error, message =>
+            message.Message.Equals(CoreStrings.FormatTooFewBytesWritten(0, 5))
         );
     }
 
@@ -2288,14 +2278,11 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
         }
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        Assert.Contains(
-            LogMessages,
-            w =>
-                w.EventId.Id == 17
-                && w.LogLevel <= LogLevel.Debug
-                && w.Exception is BadHttpRequestException
-                && ((BadHttpRequestException)w.Exception).StatusCode
-                    == StatusCodes.Status400BadRequest
+        Assert.Contains(LogMessages, w =>
+            w.EventId.Id == 17
+            && w.LogLevel <= LogLevel.Debug
+            && w.Exception is BadHttpRequestException
+            && ((BadHttpRequestException)w.Exception).StatusCode == StatusCodes.Status400BadRequest
         );
 #pragma warning restore CS0618 // Type or member is obsolete
     }
@@ -2420,14 +2407,11 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
         }
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        Assert.Contains(
-            LogMessages,
-            w =>
-                w.EventId.Id == 17
-                && w.LogLevel <= LogLevel.Debug
-                && w.Exception is BadHttpRequestException
-                && ((BadHttpRequestException)w.Exception).StatusCode
-                    == StatusCodes.Status400BadRequest
+        Assert.Contains(LogMessages, w =>
+            w.EventId.Id == 17
+            && w.LogLevel <= LogLevel.Debug
+            && w.Exception is BadHttpRequestException
+            && ((BadHttpRequestException)w.Exception).StatusCode == StatusCodes.Status400BadRequest
         );
 #pragma warning restore CS0618 // Type or member is obsolete
     }
@@ -2795,7 +2779,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     );
 
                     var writeException = await Assert.ThrowsAsync<ObjectDisposedException>(
-                        async () => await response.BodyWriter.FlushAsync()
+                        async () =>
+                            await response.BodyWriter.FlushAsync()
                     );
                     Assert.Same(onStartingException, writeException.InnerException);
                 },
@@ -3834,8 +3819,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     context.Response.ContentLength = 6;
 
                     // Synchronous writes now throw.
-                    var ioEx = Assert.Throws<InvalidOperationException>(
-                        () => context.Response.Body.Write(Encoding.ASCII.GetBytes("What!?"), 0, 6)
+                    var ioEx = Assert.Throws<InvalidOperationException>(() =>
+                        context.Response.Body.Write(Encoding.ASCII.GetBytes("What!?"), 0, 6)
                     );
                     Assert.Equal(CoreStrings.SynchronousWritesDisallowed, ioEx.Message);
                     await context.Response.Body.WriteAsync(Encoding.ASCII.GetBytes("Hello1"), 0, 6);
@@ -3945,8 +3930,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     context.Response.ContentLength = 6;
 
                     // Synchronous writes now throw.
-                    var ioEx = Assert.Throws<InvalidOperationException>(
-                        () => context.Response.Body.Write(Encoding.ASCII.GetBytes("What!?"), 0, 6)
+                    var ioEx = Assert.Throws<InvalidOperationException>(() =>
+                        context.Response.Body.Write(Encoding.ASCII.GetBytes("What!?"), 0, 6)
                     );
                     Assert.Equal(CoreStrings.SynchronousWritesDisallowed, ioEx.Message);
 
@@ -4018,8 +4003,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
                     await response.StartAsync();
 
-                    Assert.Throws<ArgumentOutOfRangeException>(
-                        () => response.BodyWriter.Advance(-1)
+                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        response.BodyWriter.Advance(-1)
                     );
                 },
                 testContext
@@ -4053,8 +4038,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 {
                     var response = httpContext.Response;
 
-                    Assert.Throws<ArgumentOutOfRangeException>(
-                        () => response.BodyWriter.Advance(-1)
+                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        response.BodyWriter.Advance(-1)
                     );
                     return Task.CompletedTask;
                 },
@@ -4304,8 +4289,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 async httpContext =>
                 {
                     httpContext.Response.BodyWriter.Complete();
-                    writeEx = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => httpContext.Response.WriteAsync("test")
+                    writeEx = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        httpContext.Response.WriteAsync("test")
                     );
                 },
                 new TestServiceContext(LoggerFactory)
@@ -4531,8 +4516,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 {
                     if (secondRequest)
                     {
-                        Assert.Throws<InvalidOperationException>(
-                            () => httpContext.Response.BodyWriter.Advance(1)
+                        Assert.Throws<InvalidOperationException>(() =>
+                            httpContext.Response.BodyWriter.Advance(1)
                         );
                         return Task.CompletedTask;
                     }
@@ -4592,13 +4577,11 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     "",
                     ""
                 );
-                Assert.Contains(
-                    TestSink.Writes,
-                    w =>
-                        w.EventId.Id == 13
-                        && w.LogLevel == LogLevel.Error
-                        && w.Exception is ConnectionAbortedException
-                        && w.Exception.InnerException == expectedException
+                Assert.Contains(TestSink.Writes, w =>
+                    w.EventId.Id == 13
+                    && w.LogLevel == LogLevel.Error
+                    && w.Exception is ConnectionAbortedException
+                    && w.Exception.InnerException == expectedException
                 );
             }
         }
@@ -4716,8 +4699,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
                     await httpContext.Response.StartAsync();
 
-                    Assert.Throws<InvalidOperationException>(
-                        () => httpContext.Response.BodyWriter.Advance(1)
+                    Assert.Throws<InvalidOperationException>(() =>
+                        httpContext.Response.BodyWriter.Advance(1)
                     );
                 },
                 new TestServiceContext(LoggerFactory)
@@ -4751,8 +4734,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 {
                     httpContext.Response.BodyWriter.Complete();
 
-                    writeEx = Assert.Throws<InvalidOperationException>(
-                        () => httpContext.Response.BodyWriter.GetMemory()
+                    writeEx = Assert.Throws<InvalidOperationException>(() =>
+                        httpContext.Response.BodyWriter.GetMemory()
                     );
 
                     return Task.CompletedTask;
@@ -5177,14 +5160,12 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
         if (sendMalformedRequest)
         {
 #pragma warning disable CS0618 // Type or member is obsolete
-            Assert.Contains(
-                testSink.Writes,
-                w =>
-                    w.EventId.Id == 17
-                    && w.LogLevel <= LogLevel.Debug
-                    && w.Exception is BadHttpRequestException
-                    && ((BadHttpRequestException)w.Exception).StatusCode
-                        == StatusCodes.Status400BadRequest
+            Assert.Contains(testSink.Writes, w =>
+                w.EventId.Id == 17
+                && w.LogLevel <= LogLevel.Debug
+                && w.Exception is BadHttpRequestException
+                && ((BadHttpRequestException)w.Exception).StatusCode
+                    == StatusCodes.Status400BadRequest
             );
 #pragma warning restore CS0618 // Type or member is obsolete
         }

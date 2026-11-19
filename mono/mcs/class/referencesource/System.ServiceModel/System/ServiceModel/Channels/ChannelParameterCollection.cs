@@ -11,9 +11,7 @@ namespace System.ServiceModel.Channels
     {
         IChannel channel;
 
-        public ChannelParameterCollection()
-        {
-        }
+        public ChannelParameterCollection() { }
 
         public ChannelParameterCollection(IChannel channel)
         {
@@ -34,7 +32,8 @@ namespace System.ServiceModel.Channels
 
             this.ThrowIfMutable();
 
-            ChannelParameterCollection innerCollection = innerChannel.GetProperty<ChannelParameterCollection>();
+            ChannelParameterCollection innerCollection =
+                innerChannel.GetProperty<ChannelParameterCollection>();
             if (innerCollection != null)
             {
                 for (int i = 0; i < this.Count; i++)
@@ -86,19 +85,27 @@ namespace System.ServiceModel.Channels
                     case CommunicationState.Closing:
                     case CommunicationState.Closed:
                     case CommunicationState.Faulted:
-                        text = SR.GetString(SR.ChannelParametersCannotBeModified,
-                                            channel.GetType().ToString(), state.ToString());
+                        text = SR.GetString(
+                            SR.ChannelParametersCannotBeModified,
+                            channel.GetType().ToString(),
+                            state.ToString()
+                        );
                         break;
 
                     default:
-                        text = SR.GetString(SR.CommunicationObjectInInvalidState,
-                                            channel.GetType().ToString(), state.ToString());
+                        text = SR.GetString(
+                            SR.CommunicationObjectInInvalidState,
+                            channel.GetType().ToString(),
+                            state.ToString()
+                        );
                         break;
                 }
 
                 if (text != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(text));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(text)
+                    );
                 }
             }
         }
@@ -114,8 +121,11 @@ namespace System.ServiceModel.Channels
                 switch (state)
                 {
                     case CommunicationState.Created:
-                        text = SR.GetString(SR.ChannelParametersCannotBePropagated,
-                                            channel.GetType().ToString(), state.ToString());
+                        text = SR.GetString(
+                            SR.ChannelParametersCannotBePropagated,
+                            channel.GetType().ToString(),
+                            state.ToString()
+                        );
                         break;
 
                     case CommunicationState.Opening:
@@ -126,14 +136,19 @@ namespace System.ServiceModel.Channels
                         break;
 
                     default:
-                        text = SR.GetString(SR.CommunicationObjectInInvalidState,
-                                            channel.GetType().ToString(), state.ToString());
+                        text = SR.GetString(
+                            SR.CommunicationObjectInInvalidState,
+                            channel.GetType().ToString(),
+                            state.ToString()
+                        );
                         break;
                 }
 
                 if (text != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(text));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(text)
+                    );
                 }
             }
         }

@@ -7,6 +7,6 @@ namespace System.Text.Json.Serialization
     {
         None,
         Preserve,
-        IgnoreCycles
+        IgnoreCycles,
     }
 }

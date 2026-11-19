@@ -7,27 +7,40 @@ namespace System.ServiceModel.Channels
     using System.Runtime;
     using System.Transactions;
 
-    sealed class MsmqInputSessionChannelListener
-        : MsmqChannelListenerBase<IInputSessionChannel>
+    sealed class MsmqInputSessionChannelListener : MsmqChannelListenerBase<IInputSessionChannel>
     {
         MsmqReceiveHelper receiver;
         MsmqReceiveContextLockManager receiveContextManager;
 
-        internal MsmqInputSessionChannelListener(MsmqBindingElementBase bindingElement, BindingContext context, MsmqReceiveParameters receiveParameters)
-            : base(bindingElement, context, receiveParameters, TransportDefaults.GetDefaultMessageEncoderFactory())
+        internal MsmqInputSessionChannelListener(
+            MsmqBindingElementBase bindingElement,
+            BindingContext context,
+            MsmqReceiveParameters receiveParameters
+        )
+            : base(
+                bindingElement,
+                context,
+                receiveParameters,
+                TransportDefaults.GetDefaultMessageEncoderFactory()
+            )
         {
             SetSecurityTokenAuthenticator(MsmqUri.NetMsmqAddressTranslator.Scheme, context);
             this.receiver = new MsmqReceiveHelper(
                 this.ReceiveParameters,
                 this.Uri,
-                new MsmqInputMessagePool((this.ReceiveParameters as MsmqTransportReceiveParameters).MaxPoolSize),
+                new MsmqInputMessagePool(
+                    (this.ReceiveParameters as MsmqTransportReceiveParameters).MaxPoolSize
+                ),
                 null,
                 this
-                );
+            );
 
             if (this.ReceiveParameters.ReceiveContextSettings.Enabled)
             {
-                this.receiveContextManager = new MsmqReceiveContextLockManager(this.ReceiveParameters.ReceiveContextSettings, this.receiver.Queue);
+                this.receiveContextManager = new MsmqReceiveContextLockManager(
+                    this.ReceiveParameters.ReceiveContextSettings,
+                    this.receiver.Queue
+                );
             }
         }
 
@@ -66,29 +79,45 @@ namespace System.ServiceModel.Channels
         {
             return AcceptChannel(this.DefaultReceiveTimeout);
         }
+
         //
         public override IInputSessionChannel AcceptChannel(TimeSpan timeout)
         {
             if (DoneReceivingInCurrentState())
                 return null;
 
-            if (!this.ReceiveParameters.ReceiveContextSettings.Enabled && (Transaction.Current == null))
+            if (
+                !this.ReceiveParameters.ReceiveContextSettings.Enabled
+                && (Transaction.Current == null)
+            )
             {
                 // In the absence of Receive context, Msmq Sessions can work only with the current transaction,
                 this.Fault();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MsmqTransactionRequired)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.MsmqTransactionRequired))
+                );
             }
 
             MsmqInputMessage msmqMessage = this.receiver.TakeMessage();
             try
             {
                 MsmqMessageProperty property;
-                bool retval = this.receiver.TryReceive(msmqMessage, timeout, MsmqTransactionMode.CurrentOrThrow, out property);
+                bool retval = this.receiver.TryReceive(
+                    msmqMessage,
+                    timeout,
+                    MsmqTransactionMode.CurrentOrThrow,
+                    out property
+                );
                 if (retval)
                 {
                     if (null != property)
                     {
-                        return MsmqDecodeHelper.DecodeTransportSessiongram(this, msmqMessage, property, this.receiveContextManager);
+                        return MsmqDecodeHelper.DecodeTransportSessiongram(
+                            this,
+                            msmqMessage,
+                            property,
+                            this.receiveContextManager
+                        );
                     }
                     else
                     {
@@ -101,7 +130,9 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new TimeoutException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new TimeoutException()
+                    );
                 }
             }
             catch (MsmqException ex)
@@ -115,22 +146,33 @@ namespace System.ServiceModel.Channels
                 this.receiver.ReturnMessage(msmqMessage);
             }
         }
+
         //
         public override IAsyncResult BeginAcceptChannel(AsyncCallback callback, object state)
         {
             return BeginAcceptChannel(this.DefaultReceiveTimeout, callback, state);
         }
+
         //
-        public override IAsyncResult BeginAcceptChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (DoneReceivingInCurrentState())
                 return new DoneReceivingAsyncResult(callback, state);
 
-            if (!this.ReceiveParameters.ReceiveContextSettings.Enabled && (Transaction.Current == null))
+            if (
+                !this.ReceiveParameters.ReceiveContextSettings.Enabled
+                && (Transaction.Current == null)
+            )
             {
                 // In the absence of Receive context, Msmq Sessions can work only with the current transaction,
                 this.Fault();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MsmqTransactionRequired)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.MsmqTransactionRequired))
+                );
             }
 
             MsmqInputMessage msmqMessage = this.receiver.TakeMessage();
@@ -139,8 +181,10 @@ namespace System.ServiceModel.Channels
                 timeout,
                 MsmqTransactionMode.CurrentOrThrow,
                 callback,
-                state);
+                state
+            );
         }
+
         //
         public override IInputSessionChannel EndAcceptChannel(IAsyncResult result)
         {
@@ -163,7 +207,12 @@ namespace System.ServiceModel.Channels
                 {
                     if (null != property)
                     {
-                        return MsmqDecodeHelper.DecodeTransportSessiongram(this, msmqMessage, property, this.receiveContextManager);
+                        return MsmqDecodeHelper.DecodeTransportSessiongram(
+                            this,
+                            msmqMessage,
+                            property,
+                            this.receiveContextManager
+                        );
                     }
                     else
                     {
@@ -176,7 +225,9 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new TimeoutException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new TimeoutException()
+                    );
                 }
             }
             catch (MsmqException ex)
@@ -209,14 +260,20 @@ namespace System.ServiceModel.Channels
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(ex.Normalized);
             }
         }
+
         //
-        protected override IAsyncResult OnBeginWaitForChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (DoneReceivingInCurrentState())
                 return new DoneAsyncResult(true, callback, state);
 
             return this.receiver.BeginWaitForMessage(timeout, callback, state);
         }
+
         //
         protected override bool OnEndWaitForChannel(IAsyncResult result)
         {
@@ -250,8 +307,7 @@ namespace System.ServiceModel.Channels
         class DoneAsyncResult : CompletedAsyncResult<bool>
         {
             internal DoneAsyncResult(bool data, AsyncCallback callback, object state)
-                : base(data, callback, state)
-            { }
+                : base(data, callback, state) { }
         }
     }
 }

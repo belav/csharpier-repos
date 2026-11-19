@@ -14,14 +14,23 @@ namespace System.Web.Razor.Editor
     // Manages edits to a span
     public class SpanEditHandler
     {
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "Func<T> is the recommended delegate type and requires this level of nesting.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "Func<T> is the recommended delegate type and requires this level of nesting."
+        )]
         public SpanEditHandler(Func<string, IEnumerable<ISymbol>> tokenizer)
-            : this(tokenizer, AcceptedCharacters.Any)
-        {
-        }
+            : this(tokenizer, AcceptedCharacters.Any) { }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "Func<T> is the recommended delegate type and requires this level of nesting.")]
-        public SpanEditHandler(Func<string, IEnumerable<ISymbol>> tokenizer, AcceptedCharacters accepted)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "Func<T> is the recommended delegate type and requires this level of nesting."
+        )]
+        public SpanEditHandler(
+            Func<string, IEnumerable<ISymbol>> tokenizer,
+            AcceptedCharacters accepted
+        )
         {
             AcceptedCharacters = accepted;
             Tokenizer = tokenizer;
@@ -34,7 +43,11 @@ namespace System.Web.Razor.Editor
         /// </summary>
         public EditorHints EditorHints { get; set; }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "Func<T> is the recommended delegate type and requires this level of nesting.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "Func<T> is the recommended delegate type and requires this level of nesting."
+        )]
         public Func<string, IEnumerable<ISymbol>> Tokenizer { get; set; }
 
         public static SpanEditHandler CreateDefault()
@@ -42,7 +55,11 @@ namespace System.Web.Razor.Editor
             return CreateDefault(s => Enumerable.Empty<ISymbol>());
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "Func<T> is the recommended delegate type and requires this level of nesting.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "Func<T> is the recommended delegate type and requires this level of nesting."
+        )]
         public static SpanEditHandler CreateDefault(Func<string, IEnumerable<ISymbol>> tokenizer)
         {
             return new SpanEditHandler(tokenizer);
@@ -74,11 +91,17 @@ namespace System.Web.Razor.Editor
         {
             int end = target.Start.AbsoluteIndex + target.Length;
             int changeOldEnd = change.OldPosition + change.OldLength;
-            return change.OldPosition >= target.Start.AbsoluteIndex &&
-                   (changeOldEnd < end || (changeOldEnd == end && AcceptedCharacters != AcceptedCharacters.None));
+            return change.OldPosition >= target.Start.AbsoluteIndex
+                && (
+                    changeOldEnd < end
+                    || (changeOldEnd == end && AcceptedCharacters != AcceptedCharacters.None)
+                );
         }
 
-        protected virtual PartialParseResult CanAcceptChange(Span target, TextChange normalizedChange)
+        protected virtual PartialParseResult CanAcceptChange(
+            Span target,
+            TextChange normalizedChange
+        )
         {
             return PartialParseResult.Rejected;
         }
@@ -95,7 +118,10 @@ namespace System.Web.Razor.Editor
             }
             if (target.Next != null)
             {
-                SourceLocation newEnd = SourceLocationTracker.CalculateNewLocation(target.Start, newContent);
+                SourceLocation newEnd = SourceLocationTracker.CalculateNewLocation(
+                    target.Start,
+                    newContent
+                );
                 target.Next.ChangeStart(newEnd);
             }
             return newSpan;
@@ -103,8 +129,13 @@ namespace System.Web.Razor.Editor
 
         protected internal static bool IsAtEndOfFirstLine(Span target, TextChange change)
         {
-            int endOfFirstLine = target.Content.IndexOfAny(new char[] { (char)0x000d, (char)0x000a, (char)0x2028, (char)0x2029 });
-            return (endOfFirstLine == -1 || (change.OldPosition - target.Start.AbsoluteIndex) <= endOfFirstLine);
+            int endOfFirstLine = target.Content.IndexOfAny(
+                new char[] { (char)0x000d, (char)0x000a, (char)0x2028, (char)0x2029 }
+            );
+            return (
+                endOfFirstLine == -1
+                || (change.OldPosition - target.Start.AbsoluteIndex) <= endOfFirstLine
+            );
         }
 
         /// <summary>
@@ -131,10 +162,15 @@ namespace System.Web.Razor.Editor
             return change.IsReplace && IsAtEndOfSpan(target, change);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "This method should only be used on Spans")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "This method should only be used on Spans"
+        )]
         protected internal static bool IsAtEndOfSpan(Span target, TextChange change)
         {
-            return (change.OldPosition + change.OldLength) == (target.Start.AbsoluteIndex + target.Length);
+            return (change.OldPosition + change.OldLength)
+                == (target.Start.AbsoluteIndex + target.Length);
         }
 
         /// <summary>
@@ -145,40 +181,49 @@ namespace System.Web.Razor.Editor
         /// </remarks>
         protected internal static string GetOldText(Span target, TextChange change)
         {
-            return target.Content.Substring(change.OldPosition - target.Start.AbsoluteIndex, change.OldLength);
+            return target.Content.Substring(
+                change.OldPosition - target.Start.AbsoluteIndex,
+                change.OldLength
+            );
         }
 
         // Is the specified span to the right of this span and immediately adjacent?
         internal static bool IsAdjacentOnRight(Span target, Span other)
         {
-            return target.Start.AbsoluteIndex < other.Start.AbsoluteIndex && target.Start.AbsoluteIndex + target.Length == other.Start.AbsoluteIndex;
+            return target.Start.AbsoluteIndex < other.Start.AbsoluteIndex
+                && target.Start.AbsoluteIndex + target.Length == other.Start.AbsoluteIndex;
         }
 
         // Is the specified span to the left of this span and immediately adjacent?
         internal static bool IsAdjacentOnLeft(Span target, Span other)
         {
-            return other.Start.AbsoluteIndex < target.Start.AbsoluteIndex && other.Start.AbsoluteIndex + other.Length == target.Start.AbsoluteIndex;
+            return other.Start.AbsoluteIndex < target.Start.AbsoluteIndex
+                && other.Start.AbsoluteIndex + other.Length == target.Start.AbsoluteIndex;
         }
 
         public override string ToString()
         {
-            return GetType().Name + ";Accepts:" + AcceptedCharacters + ((EditorHints == EditorHints.None) ? String.Empty : (";Hints: " + EditorHints.ToString()));
+            return GetType().Name
+                + ";Accepts:"
+                + AcceptedCharacters
+                + (
+                    (EditorHints == EditorHints.None)
+                        ? String.Empty
+                        : (";Hints: " + EditorHints.ToString())
+                );
         }
 
         public override bool Equals(object obj)
         {
             SpanEditHandler other = obj as SpanEditHandler;
-            return other != null &&
-                   AcceptedCharacters == other.AcceptedCharacters &&
-                   EditorHints == other.EditorHints;
+            return other != null
+                && AcceptedCharacters == other.AcceptedCharacters
+                && EditorHints == other.EditorHints;
         }
 
         public override int GetHashCode()
         {
-            return HashCodeCombiner.Start()
-                .Add(AcceptedCharacters)
-                .Add(EditorHints)
-                .CombinedHash;
+            return HashCodeCombiner.Start().Add(AcceptedCharacters).Add(EditorHints).CombinedHash;
         }
     }
 }

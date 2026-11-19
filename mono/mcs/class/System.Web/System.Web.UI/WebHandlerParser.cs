@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,44 +28,45 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.IO;
 using System.Web;
 using System.Web.Compilation;
-using System.IO;
 
 namespace System.Web.UI
 {
-	class WebHandlerParser : SimpleWebHandlerParser
-	{
-		WebHandlerParser (HttpContext context, string virtualPath, string physicalPath)
-			: base (context, virtualPath, physicalPath)
-		{
-		}
+    class WebHandlerParser : SimpleWebHandlerParser
+    {
+        WebHandlerParser(HttpContext context, string virtualPath, string physicalPath)
+            : base(context, virtualPath, physicalPath) { }
 
-		internal WebHandlerParser (HttpContext context, VirtualPath virtualPath, TextReader reader)
-			: this (context, virtualPath, null, reader)
-		{
-		}
-		
-		internal WebHandlerParser (HttpContext context, VirtualPath virtualPath, string physicalPath, TextReader reader)
-			: base (context, virtualPath.Original, physicalPath, reader)
-		{
-		}
+        internal WebHandlerParser(HttpContext context, VirtualPath virtualPath, TextReader reader)
+            : this(context, virtualPath, null, reader) { }
 
-		public static Type GetCompiledType (HttpContext context, string virtualPath, string physicalPath)
-		{
-			WebHandlerParser parser = new WebHandlerParser (context, virtualPath, physicalPath);
-			Type type = parser.GetCompiledTypeFromCache ();
-			if (type != null)
-				return type;
+        internal WebHandlerParser(
+            HttpContext context,
+            VirtualPath virtualPath,
+            string physicalPath,
+            TextReader reader
+        )
+            : base(context, virtualPath.Original, physicalPath, reader) { }
 
-			return WebServiceCompiler.CompileIntoType (parser);
-		}
+        public static Type GetCompiledType(
+            HttpContext context,
+            string virtualPath,
+            string physicalPath
+        )
+        {
+            WebHandlerParser parser = new WebHandlerParser(context, virtualPath, physicalPath);
+            Type type = parser.GetCompiledTypeFromCache();
+            if (type != null)
+                return type;
 
-		protected override string DefaultDirectiveName {
-			get {
-				return "webhandler";
-			}
-		}
-	}
+            return WebServiceCompiler.CompileIntoType(parser);
+        }
+
+        protected override string DefaultDirectiveName
+        {
+            get { return "webhandler"; }
+        }
+    }
 }
-

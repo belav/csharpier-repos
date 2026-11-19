@@ -4,33 +4,38 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Util {
+namespace System.Web.Util
+{
     using System;
     using System.Collections;
 
     // Compares two non-generic IList objects for equality.
 
-    internal sealed class ListEqualityComparer : IEqualityComparer {
-
+    internal sealed class ListEqualityComparer : IEqualityComparer
+    {
         internal static readonly ListEqualityComparer Instance = new ListEqualityComparer();
 
-        private ListEqualityComparer() {
-        }
+        private ListEqualityComparer() { }
 
-        bool IEqualityComparer.Equals(object x, object y) {
-            if (Object.ReferenceEquals(x, y)) {
+        bool IEqualityComparer.Equals(object x, object y)
+        {
+            if (Object.ReferenceEquals(x, y))
+            {
                 return true;
             }
 
             IList xList = (IList)x;
             IList yList = (IList)y;
 
-            if (xList.Count != yList.Count) {
+            if (xList.Count != yList.Count)
+            {
                 return false;
             }
 
-            for (int i = 0; i < xList.Count; i++) {
-                if (!Object.Equals(xList[i], yList[i])) {
+            for (int i = 0; i < xList.Count; i++)
+            {
+                if (!Object.Equals(xList[i], yList[i]))
+                {
                     return false;
                 }
             }
@@ -38,18 +43,20 @@ namespace System.Web.Util {
             return true;
         }
 
-        int IEqualityComparer.GetHashCode(object obj) {
-            if (obj == null) {
+        int IEqualityComparer.GetHashCode(object obj)
+        {
+            if (obj == null)
+            {
                 return 0;
             }
 
             HashCodeCombiner combiner = new HashCodeCombiner();
-            foreach (object item in (IList)obj) {
+            foreach (object item in (IList)obj)
+            {
                 combiner.AddObject(item);
             }
 
             return combiner.CombinedHash32;
         }
-
     }
 }

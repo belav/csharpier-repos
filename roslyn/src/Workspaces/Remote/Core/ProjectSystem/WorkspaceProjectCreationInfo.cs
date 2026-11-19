@@ -12,4 +12,5 @@ internal record WorkspaceProjectCreationInfo(
     [property: DataMember(Order = 0)] string Language,
     [property: DataMember(Order = 1)] string DisplayName,
     [property: DataMember(Order = 2)] string? FilePath,
-    [property: DataMember(Order = 3)] IReadOnlyDictionary<string, string> BuildSystemProperties);
+    [property: DataMember(Order = 3)] IReadOnlyDictionary<string, string> BuildSystemProperties
+);

@@ -43,19 +43,34 @@ namespace System.Reflection
         }
 
         public static void WriteUInt16(this byte[] buffer, int start, ushort value) =>
-            Unsafe.WriteUnaligned(ref buffer[start], !BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness(value) : value);
+            Unsafe.WriteUnaligned(
+                ref buffer[start],
+                !BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness(value) : value
+            );
 
         public static void WriteUInt16BE(this byte[] buffer, int start, ushort value) =>
-            Unsafe.WriteUnaligned(ref buffer[start], BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness(value) : value);
+            Unsafe.WriteUnaligned(
+                ref buffer[start],
+                BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness(value) : value
+            );
 
         public static void WriteUInt32BE(this byte[] buffer, int start, uint value) =>
-            Unsafe.WriteUnaligned(ref buffer[start], BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness(value) : value);
+            Unsafe.WriteUnaligned(
+                ref buffer[start],
+                BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness(value) : value
+            );
 
         public static void WriteUInt32(this byte[] buffer, int start, uint value) =>
-            Unsafe.WriteUnaligned(ref buffer[start], !BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness(value) : value);
+            Unsafe.WriteUnaligned(
+                ref buffer[start],
+                !BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness(value) : value
+            );
 
         public static void WriteUInt64(this byte[] buffer, int start, ulong value) =>
-            Unsafe.WriteUnaligned(ref buffer[start], !BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness(value) : value);
+            Unsafe.WriteUnaligned(
+                ref buffer[start],
+                !BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness(value) : value
+            );
 
         public const int SizeOfSerializedDecimal = sizeof(byte) + 3 * sizeof(uint);
 
@@ -63,7 +78,9 @@ namespace System.Reflection
         {
             bool isNegative;
             byte scale;
-            uint low, mid, high;
+            uint low,
+                mid,
+                high;
             value.GetBits(out isNegative, out scale, out low, out mid, out high);
 
             WriteByte(buffer, start, (byte)(scale | (isNegative ? 0x80 : 0x00)));
@@ -114,7 +131,14 @@ namespace System.Reflection
 #endif
         }
 
-        public static void WriteUTF8(this byte[] buffer, int start, char* charPtr, int charCount, int byteCount, bool allowUnpairedSurrogates)
+        public static void WriteUTF8(
+            this byte[] buffer,
+            int start,
+            char* charPtr,
+            int charCount,
+            int byteCount,
+            bool allowUnpairedSurrogates
+        )
         {
             Debug.Assert(byteCount >= charCount);
             const char ReplacementCharacter = '\uFFFD';
@@ -155,11 +179,17 @@ namespace System.Reflection
                         if (IsSurrogateChar(c))
                         {
                             // surrogate pair
-                            if (IsHighSurrogateChar(c) && charPtr < strEnd && IsLowSurrogateChar(*charPtr))
+                            if (
+                                IsHighSurrogateChar(c)
+                                && charPtr < strEnd
+                                && IsLowSurrogateChar(*charPtr)
+                            )
                             {
                                 int highSurrogate = c;
                                 int lowSurrogate = *charPtr++;
-                                int codepoint = (((highSurrogate - 0xd800) << 10) + lowSurrogate - 0xdc00) + 0x10000;
+                                int codepoint =
+                                    (((highSurrogate - 0xd800) << 10) + lowSurrogate - 0xdc00)
+                                    + 0x10000;
                                 ptr[0] = (byte)(((codepoint >> 18) & 0x7) | 0xF0);
                                 ptr[1] = (byte)(((codepoint >> 12) & 0x3F) | 0x80);
                                 ptr[2] = (byte)(((codepoint >> 6) & 0x3F) | 0x80);
@@ -200,7 +230,12 @@ namespace System.Reflection
             return GetUTF8ByteCount(str, charCount, int.MaxValue, out _);
         }
 
-        internal static int GetUTF8ByteCount(char* str, int charCount, int byteLimit, out char* remainder)
+        internal static int GetUTF8ByteCount(
+            char* str,
+            int charCount,
+            int byteLimit,
+            out char* remainder
+        )
         {
             char* end = str + charCount;
 
@@ -258,7 +293,12 @@ namespace System.Reflection
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static void ValidateRange(int bufferLength, int start, int byteCount, string byteCountParameterName)
+        internal static void ValidateRange(
+            int bufferLength,
+            int start,
+            int byteCount,
+            string byteCountParameterName
+        )
         {
             if (start < 0 || start > bufferLength)
             {

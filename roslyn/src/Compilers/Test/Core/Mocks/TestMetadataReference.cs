@@ -16,7 +16,11 @@ namespace Roslyn.Test.Utilities
         private readonly Metadata _metadata;
         private readonly string _display;
 
-        public TestMetadataReference(Metadata metadata = null, string fullPath = null, string display = null)
+        public TestMetadataReference(
+            Metadata metadata = null,
+            string fullPath = null,
+            string display = null
+        )
             : base(MetadataReferenceProperties.Assembly, fullPath)
         {
             _metadata = metadata;
@@ -25,10 +29,7 @@ namespace Roslyn.Test.Utilities
 
         public override string Display
         {
-            get
-            {
-                return _display;
-            }
+            get { return _display; }
         }
 
         protected override DocumentationProvider CreateDocumentationProvider()
@@ -46,7 +47,9 @@ namespace Roslyn.Test.Utilities
             return _metadata;
         }
 
-        protected override PortableExecutableReference WithPropertiesImpl(MetadataReferenceProperties properties)
+        protected override PortableExecutableReference WithPropertiesImpl(
+            MetadataReferenceProperties properties
+        )
         {
             throw new NotImplementedException();
         }
@@ -58,9 +61,7 @@ namespace Roslyn.Test.Utilities
         private readonly string _display;
 
         public TestImageReference(byte[] metadataBytes, string display)
-            : this(ImmutableArray.Create(metadataBytes), display)
-        {
-        }
+            : this(ImmutableArray.Create(metadataBytes), display) { }
 
         public TestImageReference(ImmutableArray<byte> metadataBytes, string display)
             : base(MetadataReferenceProperties.Assembly)
@@ -71,10 +72,7 @@ namespace Roslyn.Test.Utilities
 
         public override string Display
         {
-            get
-            {
-                return _display;
-            }
+            get { return _display; }
         }
 
         protected override DocumentationProvider CreateDocumentationProvider()
@@ -87,7 +85,9 @@ namespace Roslyn.Test.Utilities
             return AssemblyMetadata.CreateFromImage(_metadataBytes);
         }
 
-        protected override PortableExecutableReference WithPropertiesImpl(MetadataReferenceProperties properties)
+        protected override PortableExecutableReference WithPropertiesImpl(
+            MetadataReferenceProperties properties
+        )
         {
             throw new NotImplementedException();
         }

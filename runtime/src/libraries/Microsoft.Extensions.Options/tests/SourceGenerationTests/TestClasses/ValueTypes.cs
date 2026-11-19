@@ -23,7 +23,11 @@ namespace ValueTypes
         public SecondModel P3 { get; set; }
 
         [ValidateObjectMembers]
-        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1125:Use shorthand for nullable types", Justification = "Testing System>Nullable<T>")]
+        [SuppressMessage(
+            "StyleCop.CSharp.ReadabilityRules",
+            "SA1125:Use shorthand for nullable types",
+            Justification = "Testing System>Nullable<T>"
+        )]
         public Nullable<SecondModel> P4 { get; set; }
     }
 
@@ -33,13 +37,9 @@ namespace ValueTypes
         [MinLength(5)]
         public string P4 { get; set; } = string.Empty;
 
-        public SecondModel(object _)
-        {
-        }
+        public SecondModel(object _) { }
     }
 
     [OptionsValidator]
-    public partial struct FirstValidator : IValidateOptions<FirstModel>
-    {
-    }
+    public partial struct FirstValidator : IValidateOptions<FirstModel> { }
 }

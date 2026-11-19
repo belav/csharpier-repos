@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,54 +30,62 @@
 
 namespace System.Xml
 {
-	public static class XmlDocumentXPathExtensions
-	{
-		[MonoTODO]
-		public static XmlNodeList SelectNodes (this XmlNode node, string xpath)
-		{
-			throw new NotImplementedException ();
-		}
+    public static class XmlDocumentXPathExtensions
+    {
+        [MonoTODO]
+        public static XmlNodeList SelectNodes(this XmlNode node, string xpath)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public static XmlNodeList SelectNodes (this XmlNode node, string xpath, XmlNamespaceManager nsmgr)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static XmlNodeList SelectNodes(
+            this XmlNode node,
+            string xpath,
+            XmlNamespaceManager nsmgr
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public static XmlNode SelectSingleNode (this XmlNode node, string xpath)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static XmlNode SelectSingleNode(this XmlNode node, string xpath)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public static XmlNode SelectSingleNode (this XmlNode node, string xpath, XmlNamespaceManager nsmgr)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static XmlNode SelectSingleNode(
+            this XmlNode node,
+            string xpath,
+            XmlNamespaceManager nsmgr
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public static XPath.XPathNavigator CreateNavigator (this XmlNode node)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static XPath.XPathNavigator CreateNavigator(this XmlNode node)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public static XPath.IXPathNavigable ToXPathNavigable (this XmlNode node)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static XPath.IXPathNavigable ToXPathNavigable(this XmlNode node)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public static XPath.XPathNavigator CreateNavigator (this XmlDocument document)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static XPath.XPathNavigator CreateNavigator(this XmlDocument document)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public static XPath.XPathNavigator CreateNavigator (this XmlDocument document, XmlNode node)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public static XPath.XPathNavigator CreateNavigator(this XmlDocument document, XmlNode node)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

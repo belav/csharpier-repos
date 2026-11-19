@@ -1,15 +1,15 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
-using System.Reflection;
 using System.Diagnostics.Contracts;
+using System.Reflection;
 
 namespace System.Runtime.CompilerServices
 {
     [Serializable]
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter, Inherited=false)]
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter, Inherited = false)]
     [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class DateTimeConstantAttribute : CustomConstantAttribute
     {
@@ -20,10 +20,7 @@ namespace System.Runtime.CompilerServices
 
         public override Object Value
         {
-            get
-            {
-                return date;
-            }
+            get { return date; }
         }
 
         internal static DateTime GetRawDateTimeConstant(CustomAttributeData attr)
@@ -46,4 +43,3 @@ namespace System.Runtime.CompilerServices
         private System.DateTime date;
     }
 }
-

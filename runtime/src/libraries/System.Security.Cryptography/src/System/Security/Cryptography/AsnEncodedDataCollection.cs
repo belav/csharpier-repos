@@ -39,18 +39,12 @@ namespace System.Security.Cryptography
 
         public AsnEncodedData this[int index]
         {
-            get
-            {
-                return _list[index];
-            }
+            get { return _list[index]; }
         }
 
         public int Count
         {
-            get
-            {
-                return _list.Count;
-            }
+            get { return _list.Count; }
         }
 
         public AsnEncodedDataEnumerator GetEnumerator()
@@ -70,7 +64,10 @@ namespace System.Security.Cryptography
             if (array.Rank != 1)
                 throw new ArgumentException(SR.Arg_RankMultiDimNotSupported);
             if (index < 0 || index >= array.Length)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexMustBeLess);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_IndexMustBeLess
+                );
             if (Count > array.Length - index)
                 throw new ArgumentException(SR.Argument_InvalidOffLen);
 
@@ -89,25 +86,22 @@ namespace System.Security.Cryptography
             // ArgumentOutOfRangeException where List<>.CopyTo() throws ArgumentException.
 
             if (index < 0 || index >= array.Length)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexMustBeLess);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_IndexMustBeLess
+                );
 
             _list.CopyTo(array, index);
         }
 
         public bool IsSynchronized
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public object SyncRoot
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         private readonly List<AsnEncodedData> _list;

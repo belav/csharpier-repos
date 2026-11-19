@@ -42,7 +42,12 @@ namespace TestLibrary
                 }
                 else
                 {
-                    TestFramework.LogVerbose("Attempt to seed Random to " + value.ToString() + " rejected it was already seeded to: " + seed.Value.ToString());
+                    TestFramework.LogVerbose(
+                        "Attempt to seed Random to "
+                            + value.ToString()
+                            + " rejected it was already seeded to: "
+                            + seed.Value.ToString()
+                    );
                 }
             }
         }
@@ -53,10 +58,13 @@ namespace TestLibrary
             Seed = new_seed;
             GetBytes(buffer);
         }
+
         public static void GetBytes(byte[] buffer)
         {
             m_rand.NextBytes(buffer);
-            TestFramework.LogVerbose("Random Byte[] produced: " + Utilities.ByteArrayToString(buffer));
+            TestFramework.LogVerbose(
+                "Random Byte[] produced: " + Utilities.ByteArrayToString(buffer)
+            );
         }
 
         // returns a non-negative Int64 between 0 and Int64.MaxValue
@@ -65,6 +73,7 @@ namespace TestLibrary
             Seed = new_seed;
             return GetInt64();
         }
+
         public static Int64 GetInt64()
         {
             byte[] buffer = new byte[8];
@@ -79,7 +88,8 @@ namespace TestLibrary
                 iVal |= ((Int64)buffer[i] << (i * 8));
             }
 
-            if (0 > iVal) iVal *= -1;
+            if (0 > iVal)
+                iVal *= -1;
 
             TestFramework.LogVerbose("Random Int64 produced: " + iVal.ToString());
             return iVal;
@@ -91,6 +101,7 @@ namespace TestLibrary
             Seed = new_seed;
             return GetUInt64();
         }
+
         public static UInt64 GetUInt64()
         {
             byte[] buffer = new byte[8];
@@ -115,6 +126,7 @@ namespace TestLibrary
             Seed = new_seed;
             return GetInt32();
         }
+
         public static Int32 GetInt32()
         {
             Int32 i = m_rand.Next();
@@ -128,6 +140,7 @@ namespace TestLibrary
             Seed = new_seed;
             return GetUInt32();
         }
+
         public static UInt32 GetUInt32()
         {
             byte[] buffer = new byte[4];
@@ -152,6 +165,7 @@ namespace TestLibrary
             Seed = new_seed;
             return GetInt16();
         }
+
         public static Int16 GetInt16()
         {
             Int16 i = Convert.ToInt16(m_rand.Next() % (1 + Int16.MaxValue));
@@ -165,6 +179,7 @@ namespace TestLibrary
             Seed = new_seed;
             return GetUInt16();
         }
+
         public static UInt16 GetUInt16()
         {
             UInt16 i = Convert.ToUInt16(m_rand.Next() % (1 + UInt16.MaxValue));
@@ -178,6 +193,7 @@ namespace TestLibrary
             Seed = new_seed;
             return GetByte();
         }
+
         public static Byte GetByte()
         {
             Byte i = Convert.ToByte(m_rand.Next() % (1 + Byte.MaxValue));
@@ -191,6 +207,7 @@ namespace TestLibrary
             Seed = new_seed;
             return GetSByte();
         }
+
         public static SByte GetSByte()
         {
             SByte i = Convert.ToSByte(m_rand.Next() % (1 + SByte.MaxValue));
@@ -204,6 +221,7 @@ namespace TestLibrary
             Seed = new_seed;
             return GetDouble();
         }
+
         public static Double GetDouble()
         {
             Double i = m_rand.NextDouble();
@@ -217,23 +235,26 @@ namespace TestLibrary
             Seed = new_seed;
             return GetSingle();
         }
+
         public static Single GetSingle()
         {
             Single i = Convert.ToSingle(m_rand.NextDouble());
             TestFramework.LogVerbose("Random Single produced: " + i.ToString());
             return i;
         }
-        
+
         // returns a valid char that is a letter
         public static Char GetCharLetter(Int32 new_seed)
         {
             Seed = new_seed;
             return GetCharLetter();
         }
+
         public static Char GetCharLetter()
         {
             return GetCharLetter(true);
         }
+
         //returns a valid char that is a letter
         //if allowsurrogate is true then surrogates are valid return values
         public static Char GetCharLetter(Int32 new_seed, bool allowsurrogate)
@@ -241,6 +262,7 @@ namespace TestLibrary
             Seed = new_seed;
             return GetCharLetter(allowsurrogate);
         }
+
         public static Char GetCharLetter(bool allowsurrogate)
         {
             return GetCharLetter(allowsurrogate, true);
@@ -254,6 +276,7 @@ namespace TestLibrary
             Seed = new_seed;
             return GetCharLetter(allowsurrogate, allownoweight);
         }
+
         public static Char GetCharLetter(bool allowsurrogate, bool allownoweight)
         {
             Int16 iVal;
@@ -267,18 +290,22 @@ namespace TestLibrary
             {
                 counter--;
                 iVal = GetInt16();
-                TestFramework.LogVerbose("Random CharLetter produced: " + Convert.ToChar(iVal).ToString());
+                TestFramework.LogVerbose(
+                    "Random CharLetter produced: " + Convert.ToChar(iVal).ToString()
+                );
 
                 if (false == allownoweight)
                 {
-                    throw new NotSupportedException("allownoweight = false is not supported in TestLibrary with FEATURE_NOPINVOKES");
+                    throw new NotSupportedException(
+                        "allownoweight = false is not supported in TestLibrary with FEATURE_NOPINVOKES"
+                    );
                 }
 
                 c = Convert.ToChar(iVal);
-                loopCondition = allowsurrogate ? (!Char.IsLetter(c)) : (!Char.IsLetter(c) || Char.IsSurrogate(c));
-            }
-            while (loopCondition && 0 < counter);
-
+                loopCondition = allowsurrogate
+                    ? (!Char.IsLetter(c))
+                    : (!Char.IsLetter(c) || Char.IsSurrogate(c));
+            } while (loopCondition && 0 < counter);
 
             if (!Char.IsLetter(c))
             {
@@ -297,6 +324,7 @@ namespace TestLibrary
             Seed = new_seed;
             return GetCharNumber();
         }
+
         public static char GetCharNumber()
         {
             return GetCharNumber(true);
@@ -309,6 +337,7 @@ namespace TestLibrary
             Seed = new_seed;
             return GetCharNumber(allownoweight);
         }
+
         public static char GetCharNumber(bool allownoweight)
         {
             Char c = '0'; //this value is never used
@@ -322,17 +351,20 @@ namespace TestLibrary
             {
                 counter--;
                 iVal = GetInt16();
-                TestFramework.LogVerbose("Random Char produced: " + Convert.ToChar(iVal).ToString());
+                TestFramework.LogVerbose(
+                    "Random Char produced: " + Convert.ToChar(iVal).ToString()
+                );
 
                 if (false == allownoweight)
                 {
-                    throw new InvalidOperationException("allownoweight = false is not supported in TestLibrary with FEATURE_NOPINVOKES");
+                    throw new InvalidOperationException(
+                        "allownoweight = false is not supported in TestLibrary with FEATURE_NOPINVOKES"
+                    );
                 }
 
                 c = Convert.ToChar(iVal);
                 loopCondition = !Char.IsNumber(c);
-            }
-            while (loopCondition && 0 < counter);
+            } while (loopCondition && 0 < counter);
 
             if (!Char.IsNumber(c))
             {
@@ -351,6 +383,7 @@ namespace TestLibrary
             Seed = new_seed;
             return GetChar();
         }
+
         public static Char GetChar()
         {
             return GetChar(true);
@@ -363,6 +396,7 @@ namespace TestLibrary
             Seed = new_seed;
             return GetChar(allowsurrogate);
         }
+
         public static Char GetChar(bool allowsurrogate)
         {
             return GetChar(allowsurrogate, true);
@@ -376,17 +410,18 @@ namespace TestLibrary
             Seed = new_seed;
             return GetChar(allowsurrogate, allownoweight);
         }
+
         public static Char GetChar(bool allowsurrogate, bool allownoweight)
-        {			
+        {
             Int16 iVal = GetInt16();
-            
+
             Char c = (char)(iVal);
 
             if (!Char.IsLetter(c))
             {
                 // we tried and failed to get a letter
                 // Just grab an ASCII letter
-				// This is a hack but will work for now
+                // This is a hack but will work for now
                 c = (char)(GetInt16() % 26 + 'A');
             }
 
@@ -395,41 +430,75 @@ namespace TestLibrary
 
         // returns a  string.  If "validPath" is set, only valid path characters
         //  will be included
-        public static string GetString(Int32 new_seed, Boolean validPath, Int32 minLength, Int32 maxLength)
+        public static string GetString(
+            Int32 new_seed,
+            Boolean validPath,
+            Int32 minLength,
+            Int32 maxLength
+        )
         {
             Seed = new_seed;
             return GetString(validPath, minLength, maxLength);
         }
+
         public static string GetString(Boolean validPath, Int32 minLength, Int32 maxLength)
         {
             return GetString(validPath, true, true, minLength, maxLength);
         }
 
         // several string APIs don't like nulls in them, so this generates a string without nulls
-        public static string GetString(Int32 new_seed, Boolean validPath, Boolean allowNulls, Int32 minLength, Int32 maxLength)
+        public static string GetString(
+            Int32 new_seed,
+            Boolean validPath,
+            Boolean allowNulls,
+            Int32 minLength,
+            Int32 maxLength
+        )
         {
             Seed = new_seed;
             return GetString(validPath, allowNulls, minLength, maxLength);
         }
-        public static string GetString(Boolean validPath, Boolean allowNulls, Int32 minLength, Int32 maxLength)
+
+        public static string GetString(
+            Boolean validPath,
+            Boolean allowNulls,
+            Int32 minLength,
+            Int32 maxLength
+        )
         {
             return GetString(validPath, allowNulls, true, minLength, maxLength);
         }
 
         // some string operations don't like no-weight characters
-        public static string GetString(Int32 new_seed, Boolean validPath, Boolean allowNulls, Boolean allowNoWeight, Int32 minLength, Int32 maxLength)
+        public static string GetString(
+            Int32 new_seed,
+            Boolean validPath,
+            Boolean allowNulls,
+            Boolean allowNoWeight,
+            Int32 minLength,
+            Int32 maxLength
+        )
         {
             Seed = new_seed;
             return GetString(validPath, allowNulls, allowNoWeight, minLength, maxLength);
         }
-        public static string GetString(Boolean validPath, Boolean allowNulls, Boolean allowNoWeight, Int32 minLength, Int32 maxLength)
+
+        public static string GetString(
+            Boolean validPath,
+            Boolean allowNulls,
+            Boolean allowNoWeight,
+            Int32 minLength,
+            Int32 maxLength
+        )
         {
             StringBuilder sVal = new StringBuilder();
             Char c;
             Int32 length;
 
-            if (0 == minLength && 0 == maxLength) return String.Empty;
-            if (minLength > maxLength) return null;
+            if (0 == minLength && 0 == maxLength)
+                return String.Empty;
+            if (minLength > maxLength)
+                return null;
 
             length = minLength;
 
@@ -472,11 +541,17 @@ namespace TestLibrary
             return s;
         }
 
-        public static string[] GetStrings(Int32 new_seed, Boolean validPath, Int32 minLength, Int32 maxLength)
+        public static string[] GetStrings(
+            Int32 new_seed,
+            Boolean validPath,
+            Int32 minLength,
+            Int32 maxLength
+        )
         {
             Seed = new_seed;
             return GetStrings(validPath, minLength, maxLength);
         }
+
         public static string[] GetStrings(Boolean validPath, Int32 minLength, Int32 maxLength)
         {
             string validString;
@@ -494,7 +569,8 @@ namespace TestLibrary
             int numConsts = 12;
             string[] retStrings;
 
-            if (2 >= minLength && 2 >= maxLength || minLength > maxLength) return null;
+            if (2 >= minLength && 2 >= maxLength || minLength > maxLength)
+                return null;
 
             retStrings = new string[numConsts];
 
@@ -505,8 +581,12 @@ namespace TestLibrary
             retStrings[3] = validString + c_UPPER_A;
             retStrings[4] = validString + c_ZERO_WEIGHT;
             retStrings[5] = validString + c_DOUBLE_WIDE_A;
-            retStrings[6] = TestLibrary.Generator.GetString(validPath, minLength - 2, maxLength - 2) + c_SURROGATE_UPPER;
-            retStrings[7] = TestLibrary.Generator.GetString(validPath, minLength - 2, maxLength - 2) + c_SURROGATE_LOWER;
+            retStrings[6] =
+                TestLibrary.Generator.GetString(validPath, minLength - 2, maxLength - 2)
+                + c_SURROGATE_UPPER;
+            retStrings[7] =
+                TestLibrary.Generator.GetString(validPath, minLength - 2, maxLength - 2)
+                + c_SURROGATE_LOWER;
             retStrings[8] = validString + c_LOWER_SIGMA1;
             retStrings[9] = validString + c_LOWER_SIGMA2;
             retStrings[10] = validString + c_UPPER_SIGMA;
@@ -514,7 +594,7 @@ namespace TestLibrary
 
             return retStrings;
         }
-        
+
         [SecuritySafeCritical]
         public static object GetType(Type t)
         {

@@ -27,7 +27,12 @@ namespace System.Buffers.Tests
             bufferWriter.Advance(numStrings);
         }
 
-        private static string GetRandomString(Random r, int length, int minCodePoint, int maxCodePoint)
+        private static string GetRandomString(
+            Random r,
+            int length,
+            int minCodePoint,
+            int maxCodePoint
+        )
         {
             StringBuilder sb = new StringBuilder(length);
             while (length-- != 0)

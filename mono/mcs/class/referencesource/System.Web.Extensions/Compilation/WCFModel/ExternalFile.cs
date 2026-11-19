@@ -9,7 +9,6 @@ using System;
 using System.Globalization;
 using System.IO;
 using XmlSerialization = System.Xml.Serialization;
-
 #if WEB_EXTENSIONS_CODE
 using System.Web.Resources;
 #else
@@ -68,14 +67,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlIgnore()]
         public Exception ErrorInLoading
         {
-            get
-            {
-                return m_ErrorInLoading;
-            }
-            set
-            {
-                m_ErrorInLoading = value;
-            }
+            get { return m_ErrorInLoading; }
+            set { m_ErrorInLoading = value; }
         }
 
         /// <summary>
@@ -86,10 +79,7 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute()]
         public string FileName
         {
-            get
-            {
-                return m_FileName;
-            }
+            get { return m_FileName; }
             set
             {
                 if (value == null)
@@ -99,7 +89,13 @@ namespace Microsoft.VSDesigner.WCFModel
 
                 if (!IsLocalFileName(value))
                 {
-                    throw new NotSupportedException(String.Format(CultureInfo.CurrentCulture, WCFModelStrings.ReferenceGroup_InvalidFileName, value));
+                    throw new NotSupportedException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            WCFModelStrings.ReferenceGroup_InvalidFileName,
+                            value
+                        )
+                    );
                 }
 
                 m_FileName = value;
@@ -107,21 +103,15 @@ namespace Microsoft.VSDesigner.WCFModel
         }
 
         /// <summary>
-        /// Is the item loaded from the file? If it is false, we need create a new file when we save to the disket 
+        /// Is the item loaded from the file? If it is false, we need create a new file when we save to the disket
         /// </summary>
         /// <value></value>
         /// <remarks></remarks>
         [XmlSerialization.XmlIgnore()]
         public bool IsExistingFile
         {
-            get
-            {
-                return m_IsExistingFile;
-            }
-            set
-            {
-                m_IsExistingFile = value;
-            }
+            get { return m_IsExistingFile; }
+            set { m_IsExistingFile = value; }
         }
 
         /// <summary>
@@ -136,14 +126,22 @@ namespace Microsoft.VSDesigner.WCFModel
                 throw new ArgumentNullException("fileName");
             }
 
-            if (fileName.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0 || fileName.IndexOfAny(new Char[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar, Path.VolumeSeparatorChar }) >= 0)
+            if (
+                fileName.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0
+                || fileName.IndexOfAny(
+                    new Char[]
+                    {
+                        Path.DirectorySeparatorChar,
+                        Path.AltDirectorySeparatorChar,
+                        Path.VolumeSeparatorChar,
+                    }
+                ) >= 0
+            )
             {
                 return false;
             }
 
             return true;
         }
-
     }
 }
-

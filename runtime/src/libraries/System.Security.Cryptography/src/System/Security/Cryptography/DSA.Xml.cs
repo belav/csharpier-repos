@@ -13,14 +13,16 @@ namespace System.Security.Cryptography
         private static byte[] ReadRequiredElement(
             ref XmlKeyHelper.ParseState state,
             string name,
-            int sizeHint = -1)
+            int sizeHint = -1
+        )
         {
             byte[]? ret = XmlKeyHelper.ReadCryptoBinary(ref state, name, sizeHint);
 
             if (ret == null)
             {
                 throw new CryptographicException(
-                    SR.Format(SR.Cryptography_InvalidFromXmlString, nameof(DSA), name));
+                    SR.Format(SR.Cryptography_InvalidFromXmlString, nameof(DSA), name)
+                );
             }
 
             return ret;
@@ -68,7 +70,9 @@ namespace System.Security.Cryptography
                         SR.Format(
                             SR.Cryptography_InvalidFromXmlString,
                             nameof(DSA),
-                            nameof(DSAParameters.Seed)));
+                            nameof(DSAParameters.Seed)
+                        )
+                    );
                 }
             }
 
@@ -118,7 +122,11 @@ namespace System.Security.Cryptography
 
             if (keyParameters.Seed != null)
             {
-                XmlKeyHelper.WriteCryptoBinary(nameof(DSAParameters.Seed), keyParameters.Seed, builder);
+                XmlKeyHelper.WriteCryptoBinary(
+                    nameof(DSAParameters.Seed),
+                    keyParameters.Seed,
+                    builder
+                );
                 XmlKeyHelper.WriteCryptoBinary(CounterElementName, keyParameters.Counter, builder);
             }
 

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,111 +26,110 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Security;
 using System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Reflection {
+namespace MonoCasTests.System.Reflection
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class ModuleCas
+    {
+        private MonoTests.System.Reflection.ModuleTest mt;
+        private Module main;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ModuleCas {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            mt = new MonoTests.System.Reflection.ModuleTest();
+            main = typeof(int).Module;
+        }
 
-		private MonoTests.System.Reflection.ModuleTest mt;
-		private Module main;
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+            mt.SetUp();
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			mt = new MonoTests.System.Reflection.ModuleTest ();
-			main = typeof (int).Module;
-		}
+        [TearDown]
+        public void TearDown()
+        {
+            mt.TearDown();
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-			mt.SetUp ();
-		}
+        // Partial Trust Tests
 
-		[TearDown]
-		public void TearDown ()
-		{
-			mt.TearDown ();
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void PartialTrust_DenyUnrestricted()
+        {
+            // call "normal" unit with reduced privileges
+            mt.FindTypes();
+            mt.ResolveType();
+            mt.ResolveMethod();
+            mt.ResolveField();
+            mt.ResolveMember();
+            // properties
+            Assert.IsNotNull(main.Assembly, "Assembly");
+            Assert.IsNotNull(main.ScopeName, "ScopeName");
 
-		// Partial Trust Tests
+            // methods (incomplete)
+            Assert.IsNotNull(main.ToString(), "ToString");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void PartialTrust_DenyUnrestricted ()
-		{
-			// call "normal" unit with reduced privileges
-			mt.FindTypes ();
-			mt.ResolveType ();
-			mt.ResolveMethod ();
-			mt.ResolveField ();
-			mt.ResolveMember ();
-			// properties
-			Assert.IsNotNull (main.Assembly, "Assembly");
-			Assert.IsNotNull (main.ScopeName, "ScopeName");
+        [Test]
+        [FileIOPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void FullyQualifiedName_Deny_FileIOPermission()
+        {
+            Assert.IsNotNull(main.FullyQualifiedName, "FullyQualifiedName");
+        }
 
-			// methods (incomplete)
-			Assert.IsNotNull (main.ToString (), "ToString");
-		}
+        [Test]
+        [FileIOPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        public void FullyQualifiedName_PermitOnly_FileIOPermission()
+        {
+            Assert.IsNotNull(main.FullyQualifiedName, "FullyQualifiedName");
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void FullyQualifiedName_Deny_FileIOPermission ()
-		{
-			Assert.IsNotNull (main.FullyQualifiedName, "FullyQualifiedName");
-		}
+        // Note: we do not ask for PathDiscovery because no path is returned here.
+        // However MS Fx requires it (see FDBK23572 for details).
+        [Category("NotWorking")] // on purpose ;-)
+        [Test]
+        [FileIOPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Name_Deny_FileIOPermission()
+        {
+            Assert.IsNotNull(main.Name, "Name");
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-		public void FullyQualifiedName_PermitOnly_FileIOPermission ()
-		{
-			Assert.IsNotNull (main.FullyQualifiedName, "FullyQualifiedName");
-		}
+        [Test]
+        [FileIOPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        public void Name_PermitOnly_FileIOPermission()
+        {
+            Assert.IsNotNull(main.Name, "Name");
+        }
 
-		// Note: we do not ask for PathDiscovery because no path is returned here.
-		// However MS Fx requires it (see FDBK23572 for details).
-		[Category ("NotWorking")] // on purpose ;-)
-		[Test]
-		[FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Name_Deny_FileIOPermission ()
-		{
-			Assert.IsNotNull (main.Name, "Name");
-		}
+        // we use reflection to call Module as the GetObjectData method is protected
+        // by LinkDemand (which will be converted into full demand, i.e. a stack walk)
+        // when reflection is used (i.e. it gets testable).
 
-		[Test]
-		[FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-		public void Name_PermitOnly_FileIOPermission ()
-		{
-			Assert.IsNotNull (main.Name, "Name");
-		}
-
-		// we use reflection to call Module as the GetObjectData method is protected 
-		// by LinkDemand (which will be converted into full demand, i.e. a stack walk)
-		// when reflection is used (i.e. it gets testable).
-
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void GetObjectData ()
-		{
-			SerializationInfo info = null;
-			StreamingContext context = new StreamingContext (StreamingContextStates.All);
-			Module[] modules = Assembly.GetExecutingAssembly ().GetModules ();
-			MethodInfo mi = typeof (Module).GetMethod ("GetObjectData");
-			mi.Invoke (modules [0], new object [2] { info, context });
-		}
-	}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, SerializationFormatter = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void GetObjectData()
+        {
+            SerializationInfo info = null;
+            StreamingContext context = new StreamingContext(StreamingContextStates.All);
+            Module[] modules = Assembly.GetExecutingAssembly().GetModules();
+            MethodInfo mi = typeof(Module).GetMethod("GetObjectData");
+            mi.Invoke(modules[0], new object[2] { info, context });
+        }
+    }
 }

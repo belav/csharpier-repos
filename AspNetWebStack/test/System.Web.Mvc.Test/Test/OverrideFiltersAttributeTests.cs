@@ -31,8 +31,8 @@ namespace System.Web.Mvc.Test
         public void AttributeUsage_IsAsSpecified()
         {
             // Act
-            AttributeUsageAttribute usage = (AttributeUsageAttribute)Attribute.GetCustomAttribute(ProductUnderTestType,
-                typeof(AttributeUsageAttribute));
+            AttributeUsageAttribute usage = (AttributeUsageAttribute)
+                Attribute.GetCustomAttribute(ProductUnderTestType, typeof(AttributeUsageAttribute));
 
             // Assert
             Assert.NotNull(usage);
@@ -51,7 +51,10 @@ namespace System.Web.Mvc.Test
             ControllerContext controllerContext = CreateControllerContext();
 
             // Act
-            IEnumerable<Filter> filters = integrator.GetFilters(controllerContext, actionDescriptor);
+            IEnumerable<Filter> filters = integrator.GetFilters(
+                controllerContext,
+                actionDescriptor
+            );
 
             // Assert
             Assert.NotNull(filters);
@@ -65,15 +68,19 @@ namespace System.Web.Mvc.Test
             Mock<ActionDescriptor> mock = new Mock<ActionDescriptor>(MockBehavior.Strict);
             FilterAttribute attribute = filter as FilterAttribute;
             mock.Setup(d => d.GetFilterAttributes(It.IsAny<bool>()))
-                .Returns(attribute != null ? new FilterAttribute[] { attribute } : new FilterAttribute[0]);
-            mock.Setup(d => d.ControllerDescriptor).Returns(new Mock<ControllerDescriptor>().Object);
+                .Returns(
+                    attribute != null ? new FilterAttribute[] { attribute } : new FilterAttribute[0]
+                );
+            mock.Setup(d => d.ControllerDescriptor)
+                .Returns(new Mock<ControllerDescriptor>().Object);
             return mock.Object;
         }
 
         private static ControllerContext CreateControllerContext()
         {
             Mock<ControllerContext> mock = new Mock<ControllerContext>();
-            mock.SetupGet(c => c.Controller).Returns(new Mock<ControllerBase>(MockBehavior.Strict).Object);
+            mock.SetupGet(c => c.Controller)
+                .Returns(new Mock<ControllerBase>(MockBehavior.Strict).Object);
             return mock.Object;
         }
 

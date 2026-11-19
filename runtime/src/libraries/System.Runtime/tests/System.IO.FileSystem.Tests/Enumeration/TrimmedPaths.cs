@@ -22,11 +22,17 @@ namespace System.IO.Tests.Enumeration
 
             FileInfo[] files = directory.GetFiles();
             Assert.Equal(2, files.Count());
-            FSAssert.EqualWhenOrdered(new string[] { "Trailing space ", "Trailing period." }, files.Select(f => f.Name));
+            FSAssert.EqualWhenOrdered(
+                new string[] { "Trailing space ", "Trailing period." },
+                files.Select(f => f.Name)
+            );
 
             var paths = Directory.GetFiles(directory.FullName);
             Assert.Equal(2, paths.Count());
-            FSAssert.EqualWhenOrdered(new string[] { "Trailing space ", "Trailing period." }, paths.Select(p => Path.GetFileName(p)));
+            FSAssert.EqualWhenOrdered(
+                new string[] { "Trailing space ", "Trailing period." },
+                paths.Select(p => Path.GetFileName(p))
+            );
         }
 
         [Fact]
@@ -86,16 +92,13 @@ namespace System.IO.Tests.Enumeration
             foreach (FileInfo fi in directory.GetFiles())
             {
                 // Shouldn't throw hitting any of the Open overloads
-                using (FileStream stream = fi.Open(FileMode.Open))
-                { }
-                using (FileStream stream = fi.Open(FileMode.Open, FileAccess.Read))
-                { }
-                using (FileStream stream = fi.Open(FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                { }
-                using (FileStream stream = fi.OpenRead())
-                { }
-                using (FileStream stream = fi.OpenWrite())
-                { }
+                using (FileStream stream = fi.Open(FileMode.Open)) { }
+                using (FileStream stream = fi.Open(FileMode.Open, FileAccess.Read)) { }
+                using (
+                    FileStream stream = fi.Open(FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
+                ) { }
+                using (FileStream stream = fi.OpenRead()) { }
+                using (FileStream stream = fi.OpenWrite()) { }
             }
         }
 
@@ -176,7 +179,10 @@ namespace System.IO.Tests.Enumeration
             {
                 FileInfo newInfo = fi.CopyTo(Path.Join(directory.FullName, GetTestFileName()));
                 Assert.True(newInfo.Exists);
-                FileInfo newerInfo = fi.CopyTo(Path.Join(directory.FullName, GetTestFileName()), overwrite: true);
+                FileInfo newerInfo = fi.CopyTo(
+                    Path.Join(directory.FullName, GetTestFileName()),
+                    overwrite: true
+                );
                 Assert.True(newerInfo.Exists);
             }
 
@@ -234,8 +240,12 @@ namespace System.IO.Tests.Enumeration
             // without the special syntax from the info class when enumerating.
 
             DirectoryInfo directory = Directory.CreateDirectory(GetTestFilePath());
-            DirectoryInfo spaceDirectory = Directory.CreateDirectory(Path.Join(@"\\?\", directory.FullName, "Trailing space "));
-            DirectoryInfo periodDirectory = Directory.CreateDirectory(Path.Join(@"\\?\", directory.FullName, "Trailing period."));
+            DirectoryInfo spaceDirectory = Directory.CreateDirectory(
+                Path.Join(@"\\?\", directory.FullName, "Trailing space ")
+            );
+            DirectoryInfo periodDirectory = Directory.CreateDirectory(
+                Path.Join(@"\\?\", directory.FullName, "Trailing period.")
+            );
             string spaceFile = Path.Join(spaceDirectory.FullName, "space");
             string periodFile = Path.Join(periodDirectory.FullName, "period");
             File.Create(spaceFile).Dispose();

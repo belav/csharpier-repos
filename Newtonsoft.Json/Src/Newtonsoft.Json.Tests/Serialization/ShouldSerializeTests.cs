@@ -27,15 +27,16 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Reflection;
+using System.Text;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using System.Reflection;
-using System.Text;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
+
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -50,9 +51,7 @@ namespace Newtonsoft.Json.Tests.Serialization
     [TestFixture]
     public class ShouldSerializeTests : TestFixtureBase
     {
-        public class A
-        {
-        }
+        public class A { }
 
         public class B
         {
@@ -86,29 +85,20 @@ namespace Newtonsoft.Json.Tests.Serialization
                         new Baz1()
                         {
                             name = Guid.NewGuid().ToString(),
-                            myFrob = new Frob1[]
-                            {
-                                new Frob1 { name = Guid.NewGuid().ToString() }
-                            }
+                            myFrob = new Frob1[] { new Frob1 { name = Guid.NewGuid().ToString() } },
                         },
                         new Baz1()
                         {
                             name = Guid.NewGuid().ToString(),
-                            myFrob = new Frob1[]
-                            {
-                                new Frob1 { name = Guid.NewGuid().ToString() }
-                            }
+                            myFrob = new Frob1[] { new Frob1 { name = Guid.NewGuid().ToString() } },
                         },
                         new Baz1()
                         {
                             name = Guid.NewGuid().ToString(),
-                            myFrob = new Frob1[]
-                            {
-                                new Frob1 { name = Guid.NewGuid().ToString() }
-                            }
+                            myFrob = new Frob1[] { new Frob1 { name = Guid.NewGuid().ToString() } },
                         },
-                    }
-                }
+                    },
+                },
             };
 
             var setFooJson = Serialize(setFoo);
@@ -121,13 +111,22 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(setFoo.myBar.myBaz.Length, deserializedSetFoo.myBar.myBaz.Length);
             Assert.AreEqual(setFoo.myBar.myBaz[0].name, deserializedSetFoo.myBar.myBaz[0].name);
             Assert.IsNotNull(deserializedSetFoo.myBar.myBaz[0].myFrob[0]);
-            Assert.AreEqual(setFoo.myBar.myBaz[0].myFrob[0].name, deserializedSetFoo.myBar.myBaz[0].myFrob[0].name);
+            Assert.AreEqual(
+                setFoo.myBar.myBaz[0].myFrob[0].name,
+                deserializedSetFoo.myBar.myBaz[0].myFrob[0].name
+            );
             Assert.AreEqual(setFoo.myBar.myBaz[1].name, deserializedSetFoo.myBar.myBaz[1].name);
             Assert.IsNotNull(deserializedSetFoo.myBar.myBaz[2].myFrob[0]);
-            Assert.AreEqual(setFoo.myBar.myBaz[1].myFrob[0].name, deserializedSetFoo.myBar.myBaz[1].myFrob[0].name);
+            Assert.AreEqual(
+                setFoo.myBar.myBaz[1].myFrob[0].name,
+                deserializedSetFoo.myBar.myBaz[1].myFrob[0].name
+            );
             Assert.AreEqual(setFoo.myBar.myBaz[2].name, deserializedSetFoo.myBar.myBaz[2].name);
             Assert.IsNotNull(deserializedSetFoo.myBar.myBaz[2].myFrob[0]);
-            Assert.AreEqual(setFoo.myBar.myBaz[2].myFrob[0].name, deserializedSetFoo.myBar.myBaz[2].myFrob[0].name);
+            Assert.AreEqual(
+                setFoo.myBar.myBaz[2].myFrob[0].name,
+                deserializedSetFoo.myBar.myBaz[2].myFrob[0].name
+            );
 
             Assert.AreEqual(true, setFoo.myBar.ShouldSerializemyBazCalled);
         }
@@ -159,19 +158,26 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Age"": 27
-}", json);
+}",
+                json
+            );
 
             c._shouldSerializeName = true;
             json = JsonConvert.SerializeObject(c, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""James"",
   ""Age"": 27
-}", json);
+}",
+                json
+            );
 
-            ShouldSerializeTestClass deserialized = JsonConvert.DeserializeObject<ShouldSerializeTestClass>(json);
+            ShouldSerializeTestClass deserialized =
+                JsonConvert.DeserializeObject<ShouldSerializeTestClass>(json);
             Assert.AreEqual("James", deserialized.Name);
             Assert.AreEqual(27, deserialized.Age);
         }
@@ -200,7 +206,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             //   }
             // ]
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""Name"": ""Joe Employee"",
     ""Manager"": {
@@ -210,7 +217,9 @@ namespace Newtonsoft.Json.Tests.Serialization
   {
     ""Name"": ""Mike Manager""
   }
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
@@ -223,11 +232,16 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Age"": 27
-}", json);
+}",
+                json
+            );
 
-            SpecifiedTestClass deserialized = JsonConvert.DeserializeObject<SpecifiedTestClass>(json);
+            SpecifiedTestClass deserialized = JsonConvert.DeserializeObject<SpecifiedTestClass>(
+                json
+            );
             Assert.IsNull(deserialized.Name);
             Assert.IsFalse(deserialized.NameSpecified);
             Assert.IsFalse(deserialized.WeightSpecified);
@@ -241,13 +255,16 @@ namespace Newtonsoft.Json.Tests.Serialization
             c.FavoriteNumber = 23;
             json = JsonConvert.SerializeObject(c, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""James"",
   ""Age"": 27,
   ""Weight"": 0,
   ""Height"": 0,
   ""FavoriteNumber"": 23
-}", json);
+}",
+                json
+            );
 
             deserialized = JsonConvert.DeserializeObject<SpecifiedTestClass>(json);
             Assert.AreEqual("James", deserialized.Name);
@@ -301,10 +318,11 @@ namespace Newtonsoft.Json.Tests.Serialization
 
         public class OptionalOrder
         {
-            // This field shouldn't be serialized 
+            // This field shouldn't be serialized
             // if it is uninitialized.
             public string FirstOrder;
-            // Use the XmlIgnoreAttribute to ignore the 
+
+            // Use the XmlIgnoreAttribute to ignore the
             // special field named "FirstOrderSpecified".
             [System.Xml.Serialization.XmlIgnoreAttribute]
             public bool FirstOrderSpecified;
@@ -343,7 +361,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             //  }
             //]
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""Name"": ""Joe Family Details"",
     ""NumberOfChildren"": 4
@@ -351,14 +370,17 @@ namespace Newtonsoft.Json.Tests.Serialization
   {
     ""Name"": ""Martha Family Details""
   }
-]", json);
+]",
+                json
+            );
 
             string mikeString = "{\"Name\": \"Mike Person\"}";
             FamilyDetails mike = JsonConvert.DeserializeObject<FamilyDetails>(mikeString);
 
             Assert.AreEqual(false, mike.NumberOfChildrenSpecified);
 
-            string mikeFullDisclosureString = "{\"Name\": \"Mike Person\", \"NumberOfChildren\": \"0\"}";
+            string mikeFullDisclosureString =
+                "{\"Name\": \"Mike Person\", \"NumberOfChildren\": \"0\"}";
             mike = JsonConvert.DeserializeObject<FamilyDetails>(mikeFullDisclosureString);
 
             Assert.AreEqual(true, mike.NumberOfChildrenSpecified);
@@ -389,13 +411,16 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string json = JsonConvert.SerializeObject(joe, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Age"": 100,
   ""Name"": ""Joe Employee"",
   ""Manager"": {
     ""Name"": ""Mike Manager""
   }
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
@@ -404,17 +429,29 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json = @"{'HasName':true,'Name':'Name!'}";
 
             MemoryTraceWriter traceWriter = new MemoryTraceWriter();
-            ShouldDeserializeTestClass c = JsonConvert.DeserializeObject<ShouldDeserializeTestClass>(json, new JsonSerializerSettings
-            {
-                ContractResolver = ShouldDeserializeContractResolver.Instance,
-                TraceWriter = traceWriter
-            });
+            ShouldDeserializeTestClass c =
+                JsonConvert.DeserializeObject<ShouldDeserializeTestClass>(
+                    json,
+                    new JsonSerializerSettings
+                    {
+                        ContractResolver = ShouldDeserializeContractResolver.Instance,
+                        TraceWriter = traceWriter,
+                    }
+                );
 
             Assert.AreEqual(null, c.ExtensionData);
             Assert.AreEqual(true, c.HasName);
             Assert.AreEqual("Name!", c.Name);
 
-            Assert.IsTrue(traceWriter.GetTraceMessages().Any(m => m.EndsWith("Verbose ShouldDeserialize result for property 'Name' on Newtonsoft.Json.Tests.Serialization.ShouldDeserializeTestClass: True. Path 'Name'.")));
+            Assert.IsTrue(
+                traceWriter
+                    .GetTraceMessages()
+                    .Any(m =>
+                        m.EndsWith(
+                            "Verbose ShouldDeserialize result for property 'Name' on Newtonsoft.Json.Tests.Serialization.ShouldDeserializeTestClass: True. Path 'Name'."
+                        )
+                    )
+            );
         }
 
         [Test]
@@ -423,18 +460,30 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json = @"{'HasName':false,'Name':'Name!'}";
 
             MemoryTraceWriter traceWriter = new MemoryTraceWriter();
-            ShouldDeserializeTestClass c = JsonConvert.DeserializeObject<ShouldDeserializeTestClass>(json, new JsonSerializerSettings
-            {
-                ContractResolver = ShouldDeserializeContractResolver.Instance,
-                TraceWriter = traceWriter
-            });
+            ShouldDeserializeTestClass c =
+                JsonConvert.DeserializeObject<ShouldDeserializeTestClass>(
+                    json,
+                    new JsonSerializerSettings
+                    {
+                        ContractResolver = ShouldDeserializeContractResolver.Instance,
+                        TraceWriter = traceWriter,
+                    }
+                );
 
             Assert.AreEqual(1, c.ExtensionData.Count);
             Assert.AreEqual("Name!", (string)c.ExtensionData["Name"]);
             Assert.AreEqual(false, c.HasName);
             Assert.AreEqual(null, c.Name);
 
-            Assert.IsTrue(traceWriter.GetTraceMessages().Any(m => m.EndsWith("Verbose ShouldDeserialize result for property 'Name' on Newtonsoft.Json.Tests.Serialization.ShouldDeserializeTestClass: False. Path 'Name'.")));
+            Assert.IsTrue(
+                traceWriter
+                    .GetTraceMessages()
+                    .Any(m =>
+                        m.EndsWith(
+                            "Verbose ShouldDeserialize result for property 'Name' on Newtonsoft.Json.Tests.Serialization.ShouldDeserializeTestClass: False. Path 'Name'."
+                        )
+                    )
+            );
         }
 
         public class Employee
@@ -622,17 +671,26 @@ namespace Newtonsoft.Json.Tests.Serialization
 
     public class ShouldDeserializeContractResolver : DefaultContractResolver
     {
-        public static new readonly ShouldDeserializeContractResolver Instance = new ShouldDeserializeContractResolver();
+        public static new readonly ShouldDeserializeContractResolver Instance =
+            new ShouldDeserializeContractResolver();
 
-        protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+        protected override JsonProperty CreateProperty(
+            MemberInfo member,
+            MemberSerialization memberSerialization
+        )
         {
             JsonProperty property = base.CreateProperty(member, memberSerialization);
 
-            MethodInfo shouldDeserializeMethodInfo = member.DeclaringType.GetMethod("ShouldDeserialize" + member.Name);
+            MethodInfo shouldDeserializeMethodInfo = member.DeclaringType.GetMethod(
+                "ShouldDeserialize" + member.Name
+            );
 
             if (shouldDeserializeMethodInfo != null)
             {
-                property.ShouldDeserialize = o => { return (bool)shouldDeserializeMethodInfo.Invoke(o, null); };
+                property.ShouldDeserialize = o =>
+                {
+                    return (bool)shouldDeserializeMethodInfo.Invoke(o, null);
+                };
             }
 
             return property;

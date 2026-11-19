@@ -12,11 +12,15 @@ internal static partial class Interop
         internal enum MemoryMappedSyncFlags
         {
             MS_ASYNC = 0x1,
-            MS_SYNC  = 0x2,
+            MS_SYNC = 0x2,
             MS_INVALIDATE = 0x10,
         }
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_MSync", SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_MSync",
+            SetLastError = true
+        )]
         internal static partial int MSync(IntPtr addr, ulong len, MemoryMappedSyncFlags flags);
     }
 }

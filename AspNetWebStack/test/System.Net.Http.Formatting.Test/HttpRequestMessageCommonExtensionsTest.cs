@@ -10,19 +10,28 @@ namespace System.Net.Http
         [Fact]
         public void IsCorrectType()
         {
-            Assert.Type.HasProperties(typeof(HttpRequestMessageExtensions), TypeAssert.TypeProperties.IsStatic | TypeAssert.TypeProperties.IsPublicVisibleClass);
+            Assert.Type.HasProperties(
+                typeof(HttpRequestMessageExtensions),
+                TypeAssert.TypeProperties.IsStatic | TypeAssert.TypeProperties.IsPublicVisibleClass
+            );
         }
 
         [Fact]
         public void CreateResponseThrowsOnNull()
         {
-            Assert.ThrowsArgumentNull(() => HttpRequestMessageExtensions.CreateResponse(null), "request");
+            Assert.ThrowsArgumentNull(
+                () => HttpRequestMessageExtensions.CreateResponse(null),
+                "request"
+            );
         }
 
         [Fact]
         public void CreateResponseWithStatusThrowsOnNull()
         {
-            Assert.ThrowsArgumentNull(() => HttpRequestMessageExtensions.CreateResponse(null, HttpStatusCode.OK), "request");
+            Assert.ThrowsArgumentNull(
+                () => HttpRequestMessageExtensions.CreateResponse(null, HttpStatusCode.OK),
+                "request"
+            );
         }
 
         [Fact]

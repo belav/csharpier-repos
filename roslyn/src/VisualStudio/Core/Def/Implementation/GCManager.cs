@@ -16,7 +16,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {
     /// <summary>
     /// This class manages setting the GC mode to SustainedLowLatency.
-    /// 
+    ///
     /// It is safe to call from any thread, but is intended to be called from
     /// the UI thread whenever user keyboard or mouse input is received.
     /// </summary>
@@ -33,13 +33,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             // Allow disabling SustainedLowLatency by setting the reg key value to 0
             System.Threading.Tasks.Task.Run(() =>
             {
-                using (var root = VSRegistry.RegistryRoot(__VsLocalRegistryType.RegType_UserSettings))
+                using (
+                    var root = VSRegistry.RegistryRoot(__VsLocalRegistryType.RegType_UserSettings)
+                )
                 {
                     if (root != null)
                     {
                         using var key = root.OpenSubKey("Performance");
                         const string name = "SustainedLowLatencyDuration";
-                        if (key != null && key.GetValue(name) != null && key.GetValueKind(name) == Microsoft.Win32.RegistryValueKind.DWord)
+                        if (
+                            key != null
+                            && key.GetValue(name) != null
+                            && key.GetValueKind(name) == Microsoft.Win32.RegistryValueKind.DWord
+                        )
                         {
                             s_delayMilliseconds = (int)key.GetValue(name, s_delayMilliseconds);
                             return;
@@ -53,7 +59,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
         /// <summary>
         /// Turn off low latency GC mode.
-        /// 
+        ///
         /// if there is a pending low latency mode request, Latency mode will go back to its original status as
         /// pending request timeout. once it goes back to its original status, it will not go back to low latency mode again.
         /// </summary>
@@ -66,8 +72,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         /// <summary>
         /// Call this method to suppress expensive blocking Gen 2 garbage GCs in
         /// scenarios where high-latency is unacceptable (e.g. processing typing input).
-        /// 
-        /// Blocking GCs will be re-enabled automatically after a short duration unless 
+        ///
+        /// Blocking GCs will be re-enabled automatically after a short duration unless
         /// UseLowLatencyModeForProcessingUserInput is called again.
         /// </summary>
         internal static void UseLowLatencyModeForProcessingUserInput()
@@ -87,8 +93,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
                 // Restore the LatencyMode a short duration after the
                 // last request to UseLowLatencyModeForProcessingUserInput.
-                currentDelay = new ResettableDelay(s_delayMilliseconds, AsynchronousOperationListenerProvider.NullListener);
-                currentDelay.Task.SafeContinueWith(_ => RestoreGCLatencyMode(currentMode), TaskScheduler.Default);
+                currentDelay = new ResettableDelay(
+                    s_delayMilliseconds,
+                    AsynchronousOperationListenerProvider.NullListener
+                );
+                currentDelay.Task.SafeContinueWith(
+                    _ => RestoreGCLatencyMode(currentMode),
+                    TaskScheduler.Default
+                );
                 s_delay = currentDelay;
             }
 

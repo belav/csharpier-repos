@@ -17,7 +17,8 @@ namespace Microsoft.Interop.Analyzers
     [ExportCodeFixProvider(LanguageNames.CSharp), Shared]
     public class AddGeneratedComClassFixer : ConvertToSourceGeneratedInteropFixer
     {
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(AnalyzerDiagnostics.Ids.AddGeneratedComClassAttribute);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(AnalyzerDiagnostics.Ids.AddGeneratedComClassAttribute);
 
         protected override string BaseEquivalenceKey => nameof(AddGeneratedComClassFixer);
 
@@ -25,12 +26,22 @@ namespace Microsoft.Interop.Analyzers
         {
             editor.ReplaceNode(node, (node, gen) =>
             {
-                var attribute = gen.Attribute(gen.TypeExpression(editor.SemanticModel.Compilation.GetBestTypeByMetadataName(TypeNames.GeneratedComClassAttribute)).WithAdditionalAnnotations(Simplifier.AddImportsAnnotation));
+                var attribute = gen.Attribute(
+                    gen.TypeExpression(
+                            editor.SemanticModel.Compilation.GetBestTypeByMetadataName(
+                                TypeNames.GeneratedComClassAttribute
+                            )
+                        )
+                        .WithAdditionalAnnotations(Simplifier.AddImportsAnnotation)
+                );
                 var updatedNode = gen.AddAttributes(node, attribute);
                 var declarationModifiers = gen.GetModifiers(updatedNode);
                 if (!declarationModifiers.IsPartial)
                 {
-                    updatedNode = gen.WithModifiers(updatedNode, declarationModifiers.WithPartial(true));
+                    updatedNode = gen.WithModifiers(
+                        updatedNode,
+                        declarationModifiers.WithPartial(true)
+                    );
                 }
                 return updatedNode;
             });
@@ -40,21 +51,34 @@ namespace Microsoft.Interop.Analyzers
             return Task.CompletedTask;
         }
 
-        protected override Func<DocumentEditor, CancellationToken, Task> CreateFixForSelectedOptions(SyntaxNode node, ImmutableDictionary<string, Option> selectedOptions)
+        protected override Func<
+            DocumentEditor,
+            CancellationToken,
+            Task
+        > CreateFixForSelectedOptions(
+            SyntaxNode node,
+            ImmutableDictionary<string, Option> selectedOptions
+        )
         {
             return (editor, _) => AddGeneratedComClassAsync(editor, node);
         }
 
-        protected override string GetDiagnosticTitle(ImmutableDictionary<string, Option> selectedOptions)
+        protected override string GetDiagnosticTitle(
+            ImmutableDictionary<string, Option> selectedOptions
+        )
         {
-            bool allowUnsafe = selectedOptions.TryGetValue(Option.AllowUnsafe, out var allowUnsafeOption) && allowUnsafeOption is Option.Bool(true);
+            bool allowUnsafe =
+                selectedOptions.TryGetValue(Option.AllowUnsafe, out var allowUnsafeOption)
+                && allowUnsafeOption is Option.Bool(true);
 
             return allowUnsafe
                 ? SR.AddGeneratedComClassAttributeTitle
                 : SR.AddGeneratedComClassAddUnsafe;
         }
 
-        protected override ImmutableDictionary<string, Option> ParseOptionsFromDiagnostic(Diagnostic diagnostic)
+        protected override ImmutableDictionary<string, Option> ParseOptionsFromDiagnostic(
+            Diagnostic diagnostic
+        )
         {
             return ImmutableDictionary<string, Option>.Empty;
         }

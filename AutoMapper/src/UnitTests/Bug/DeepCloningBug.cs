@@ -10,16 +10,14 @@ public class DeepCloningBug : AutoMapperSpecBase
         public Inner Foo { get; set; }
     }
 
-    public class Inner
-    {
+    public class Inner { }
 
-    }
-
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Outer, Outer>();
-        cfg.CreateMap<Inner, Inner>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Outer, Outer>();
+            cfg.CreateMap<Inner, Inner>();
+        });
 
     protected override void Because_of()
     {

@@ -59,15 +59,12 @@ public class TlsTests : LoggedTest
                 listenOptions =>
                 {
                     listenOptions.Protocols = HttpProtocols.Http2;
-                    listenOptions.UseHttps(
-                        _x509Certificate2,
-                        httpsOptions =>
-                        {
+                    listenOptions.UseHttps(_x509Certificate2, httpsOptions =>
+                    {
 #pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
-                            httpsOptions.SslProtocols = SslProtocols.Tls11 | SslProtocols.Tls12;
+                        httpsOptions.SslProtocols = SslProtocols.Tls11 | SslProtocols.Tls12;
 #pragma warning restore SYSLIB0039
-                        }
-                    );
+                    });
                 }
             )
         )

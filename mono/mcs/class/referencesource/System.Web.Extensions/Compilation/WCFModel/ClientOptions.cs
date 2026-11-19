@@ -51,10 +51,7 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlElement()]
         public bool GenerateAsynchronousMethods
         {
-            get
-            {
-                return m_GenerateAsynchronousMethods;
-            }
+            get { return m_GenerateAsynchronousMethods; }
             set
             {
                 m_GenerateAsynchronousMethods = value;
@@ -75,10 +72,7 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlElement()]
         public bool GenerateTaskBasedAsynchronousMethod
         {
-            get
-            {
-                return m_GenerateTaskBasedAsynchronousMethod;
-            }
+            get { return m_GenerateTaskBasedAsynchronousMethod; }
             set
             {
                 // In order to maximally keep compatible with Dev10 and previous VS, if GenerateTaskBasedAsynchronousMethod is false,
@@ -102,10 +96,7 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlIgnore()]
         public bool GenerateTaskBasedAsynchronousMethodSpecified
         {
-            get
-            {
-                return m_GenerateTaskBasedAsynchronousMethodSpecified;
-            }
+            get { return m_GenerateTaskBasedAsynchronousMethodSpecified; }
         }
 
         /// <summary>
@@ -116,14 +107,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlElement()]
         public bool EnableDataBinding
         {
-            get
-            {
-                return m_EnableDataBinding;
-            }
-            set
-            {
-                m_EnableDataBinding = value;
-            }
+            get { return m_EnableDataBinding; }
+            set { m_EnableDataBinding = value; }
         }
 
         /// <summary>
@@ -153,14 +138,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlElement()]
         public bool ImportXmlTypes
         {
-            get
-            {
-                return m_ImportXmlTypes;
-            }
-            set
-            {
-                m_ImportXmlTypes = value;
-            }
+            get { return m_ImportXmlTypes; }
+            set { m_ImportXmlTypes = value; }
         }
 
         /// <summary>
@@ -171,14 +150,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlElement()]
         public bool GenerateInternalTypes
         {
-            get
-            {
-                return m_GenerateInternalTypes;
-            }
-            set
-            {
-                m_GenerateInternalTypes = value;
-            }
+            get { return m_GenerateInternalTypes; }
+            set { m_GenerateInternalTypes = value; }
         }
 
         /// <summary>
@@ -189,14 +162,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlElement()]
         public bool GenerateMessageContracts
         {
-            get
-            {
-                return m_GenerateMessageContracts;
-            }
-            set
-            {
-                m_GenerateMessageContracts = value;
-            }
+            get { return m_GenerateMessageContracts; }
+            set { m_GenerateMessageContracts = value; }
         }
 
         /// <summary>
@@ -245,14 +212,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlElement()]
         public bool GenerateSerializableTypes
         {
-            get
-            {
-                return m_GenerateSerializableTypes;
-            }
-            set
-            {
-                m_GenerateSerializableTypes = value;
-            }
+            get { return m_GenerateSerializableTypes; }
+            set { m_GenerateSerializableTypes = value; }
         }
 
         /// <summary>
@@ -263,18 +224,12 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlElement()]
         public ProxySerializerType Serializer
         {
-            get
-            {
-                return m_Serializer;
-            }
-            set
-            {
-                m_Serializer = value;
-            }
+            get { return m_Serializer; }
+            set { m_Serializer = value; }
         }
 
         /// <summary>
-        /// Control whether or not to UseSerializerForFaults.  The System.ServiceModel.FaultImportOptions 
+        /// Control whether or not to UseSerializerForFaults.  The System.ServiceModel.FaultImportOptions
         /// will set its UseMessageFormat Property using this value.
         /// </summary>
         /// <value></value>
@@ -308,10 +263,7 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlIgnore()]
         public bool UseSerializerForFaultsSpecified
         {
-            get
-            {
-                return m_UseSerializerForFaultsSpecified;
-            }
+            get { return m_UseSerializerForFaultsSpecified; }
         }
 
         /// <summary>
@@ -349,10 +301,7 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlIgnore()]
         public bool WrappedSpecified
         {
-            get
-            {
-                return m_WrappedSpecified;
-            }
+            get { return m_WrappedSpecified; }
         }
 
         /// <summary>
@@ -363,14 +312,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlElement()]
         public bool ReferenceAllAssemblies
         {
-            get
-            {
-                return m_ReferenceAllAssemblies;
-            }
-            set
-            {
-                m_ReferenceAllAssemblies = value;
-            }
+            get { return m_ReferenceAllAssemblies; }
+            set { m_ReferenceAllAssemblies = value; }
         }
 
         /// <summary>
@@ -430,7 +373,6 @@ namespace Microsoft.VSDesigner.WCFModel
             }
         }
 
-
         /// <summary>
         /// Serializer used in proxy generator
         /// </summary>
@@ -448,4 +390,3 @@ namespace Microsoft.VSDesigner.WCFModel
         }
     }
 }
-

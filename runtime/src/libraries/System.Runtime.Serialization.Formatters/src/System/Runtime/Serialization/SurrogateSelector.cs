@@ -6,13 +6,21 @@ using System.Diagnostics;
 
 namespace System.Runtime.Serialization
 {
-    [Obsolete(Obsoletions.LegacyFormatterMessage, DiagnosticId = Obsoletions.LegacyFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.LegacyFormatterMessage,
+        DiagnosticId = Obsoletions.LegacyFormatterDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     public class SurrogateSelector : ISurrogateSelector
     {
         internal readonly SurrogateHashtable _surrogates = new SurrogateHashtable(32);
         internal ISurrogateSelector? _nextSelector;
 
-        public virtual void AddSurrogate(Type type, StreamingContext context, ISerializationSurrogate surrogate)
+        public virtual void AddSurrogate(
+            Type type,
+            StreamingContext context,
+            ISerializationSurrogate surrogate
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
             ArgumentNullException.ThrowIfNull(surrogate);
@@ -25,7 +33,8 @@ namespace System.Runtime.Serialization
         {
             Debug.Assert(selector != null, "[HasCycle]selector!=null");
 
-            ISurrogateSelector? head = selector, tail = selector;
+            ISurrogateSelector? head = selector,
+                tail = selector;
             while (head != null)
             {
                 head = head.GetNextSelector();
@@ -64,7 +73,10 @@ namespace System.Runtime.Serialization
             // Verify that the argument doesn't contain a cycle.
             if (!HasCycle(selector))
             {
-                throw new ArgumentException(SR.Serialization_SurrogateCycleInArgument, nameof(selector));
+                throw new ArgumentException(
+                    SR.Serialization_SurrogateCycleInArgument,
+                    nameof(selector)
+                );
             }
 
             // Check for a cycle that would lead back to this.  We find the end of the list that we're being asked to
@@ -112,7 +124,6 @@ namespace System.Runtime.Serialization
                     tempCurr = tempCurr.GetNextSelector();
                 }
 
-
                 if (tempPrev == tempEnd)
                 {
                     tempPrev = GetNextSelector();
@@ -142,7 +153,11 @@ namespace System.Runtime.Serialization
 
         // Gets the surrogate for a particular type.  If this selector can't
         // provide a surrogate, it checks with all of it's children before returning null.
-        public virtual ISerializationSurrogate? GetSurrogate(Type type, StreamingContext context, out ISurrogateSelector selector)
+        public virtual ISerializationSurrogate? GetSurrogate(
+            Type type,
+            StreamingContext context,
+            out ISurrogateSelector selector
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -190,9 +205,8 @@ namespace System.Runtime.Serialization
     // Subclass to override KeyEquals.
     internal sealed class SurrogateHashtable : Hashtable
     {
-        internal SurrogateHashtable(int size) : base(size)
-        {
-        }
+        internal SurrogateHashtable(int size)
+            : base(size) { }
 
         // Must return true if the context to serialize for (givenContext)
         // is a subset of the context for which the serialization selector is provided (presentContext)
@@ -205,9 +219,10 @@ namespace System.Runtime.Serialization
         {
             SurrogateKey givenValue = (SurrogateKey)item;
             SurrogateKey presentValue = (SurrogateKey)key;
-            return presentValue._type == givenValue._type &&
-                   (presentValue._context.State & givenValue._context.State) == givenValue._context.State &&
-                   presentValue._context.Context == givenValue._context.Context;
+            return presentValue._type == givenValue._type
+                && (presentValue._context.State & givenValue._context.State)
+                    == givenValue._context.State
+                && presentValue._context.Context == givenValue._context.Context;
         }
     }
 }

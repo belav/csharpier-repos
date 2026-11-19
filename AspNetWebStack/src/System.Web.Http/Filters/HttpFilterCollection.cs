@@ -47,8 +47,13 @@ namespace System.Web.Http.Filters
                 if (cachedFilters[i] == null)
                 {
                     throw new ArgumentException(
-                        String.Format(CultureInfo.CurrentCulture, SRResources.CollectionParameterContainsNullElement, "filters"),
-                        "filters");
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            SRResources.CollectionParameterContainsNullElement,
+                            "filters"
+                        ),
+                        "filters"
+                    );
                 }
             }
 

@@ -13,50 +13,56 @@ using System.Data.Sql;
 using System.Security;
 using System.Security.Permissions;
 
-namespace System.Data.SqlClient {
-
-    public sealed class SqlClientFactory : DbProviderFactory, IServiceProvider {
-
+namespace System.Data.SqlClient
+{
+    public sealed class SqlClientFactory : DbProviderFactory, IServiceProvider
+    {
         public static readonly SqlClientFactory Instance = new SqlClientFactory();
 
-        private SqlClientFactory() {
+        private SqlClientFactory() { }
+
+        public override bool CanCreateDataSourceEnumerator
+        {
+            get { return true; }
         }
 
-        public override bool CanCreateDataSourceEnumerator {
-            get { 
-                return true;
-            }
-        }
-
-        public override DbCommand CreateCommand() {
+        public override DbCommand CreateCommand()
+        {
             return new SqlCommand();
         }
 
-        public override DbCommandBuilder CreateCommandBuilder() {
+        public override DbCommandBuilder CreateCommandBuilder()
+        {
             return new SqlCommandBuilder();
         }
 
-        public override DbConnection CreateConnection() {
+        public override DbConnection CreateConnection()
+        {
             return new SqlConnection();
         }
 
-        public override DbConnectionStringBuilder CreateConnectionStringBuilder() {
+        public override DbConnectionStringBuilder CreateConnectionStringBuilder()
+        {
             return new SqlConnectionStringBuilder();
         }
 
-        public override DbDataAdapter CreateDataAdapter() {
+        public override DbDataAdapter CreateDataAdapter()
+        {
             return new SqlDataAdapter();
         }
 
-        public override DbParameter CreateParameter() {
+        public override DbParameter CreateParameter()
+        {
             return new SqlParameter();
         }
 
-        public override CodeAccessPermission CreatePermission(PermissionState state) {
+        public override CodeAccessPermission CreatePermission(PermissionState state)
+        {
             return new SqlClientPermission(state);
         }
 
-        public override DbDataSourceEnumerator CreateDataSourceEnumerator() {
+        public override DbDataSourceEnumerator CreateDataSourceEnumerator()
+        {
             return SqlDataSourceEnumerator.Instance;
         }
 
@@ -65,13 +71,14 @@ namespace System.Data.SqlClient {
         /// supported is the DbProviderServices
         /// </summary>
         /// <returns>requested service provider or null.</returns>
-        object IServiceProvider.GetService(Type serviceType) {
+        object IServiceProvider.GetService(Type serviceType)
+        {
             object result = null;
-            if (serviceType == GreenMethods.SystemDataCommonDbProviderServices_Type) {
+            if (serviceType == GreenMethods.SystemDataCommonDbProviderServices_Type)
+            {
                 result = GreenMethods.SystemDataSqlClientSqlProviderServices_Instance();
             }
             return result;
         }
     }
 }
-

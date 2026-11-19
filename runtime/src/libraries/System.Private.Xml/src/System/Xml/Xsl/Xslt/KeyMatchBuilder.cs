@@ -19,7 +19,8 @@ namespace System.Xml.Xsl.Xslt
         private int _depth;
         private readonly PathConvertor _convertor;
 
-        public KeyMatchBuilder(IXPathEnvironment env) : base(env)
+        public KeyMatchBuilder(IXPathEnvironment env)
+            : base(env)
         {
             _convertor = new PathConvertor(env.Factory);
         }
@@ -66,7 +67,9 @@ namespace System.Xml.Xsl.Xslt
         {
             private new readonly XPathQilFactory f;
             private QilNode? _fixup;
-            public PathConvertor(XPathQilFactory f) : base(f.BaseFactory)
+
+            public PathConvertor(XPathQilFactory f)
+                : base(f.BaseFactory)
             {
                 this.f = f;
             }
@@ -84,21 +87,25 @@ namespace System.Xml.Xsl.Xslt
             protected override QilNode Visit(QilNode n)
             {
                 if (
-                    n.NodeType == QilNodeType.Union ||
-                    n.NodeType == QilNodeType.DocOrderDistinct ||
-                    n.NodeType == QilNodeType.Filter ||
-                    n.NodeType == QilNodeType.Loop
+                    n.NodeType == QilNodeType.Union
+                    || n.NodeType == QilNodeType.DocOrderDistinct
+                    || n.NodeType == QilNodeType.Filter
+                    || n.NodeType == QilNodeType.Loop
                 )
                 {
                     return base.Visit(n);
                 }
                 return n;
             }
+
             // Filers that travers Content being converted to global travers:
             // Filter($j= ... Filter($i = Content(fixup), ...))  -> Filter($j= ... Filter($i = Loop($j = DesendentOrSelf(Root(fixup)), Content($j), ...)))
             protected override QilNode VisitLoop(QilLoop n)
             {
-                if (n.Variable.Binding!.NodeType == QilNodeType.Root || n.Variable.Binding.NodeType == QilNodeType.Deref)
+                if (
+                    n.Variable.Binding!.NodeType == QilNodeType.Root
+                    || n.Variable.Binding.NodeType == QilNodeType.Deref
+                )
                 {
                     // This is absolute path already. We shouldn't touch it
                     return n;

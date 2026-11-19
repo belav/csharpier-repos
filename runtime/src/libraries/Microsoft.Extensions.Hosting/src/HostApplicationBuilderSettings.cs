@@ -15,9 +15,7 @@ namespace Microsoft.Extensions.Hosting
         /// <summary>
         /// Initializes an instance of the <see cref="HostApplicationBuilderSettings"/> class.
         /// </summary>
-        public HostApplicationBuilderSettings()
-        {
-        }
+        public HostApplicationBuilderSettings() { }
 
         /// <summary>
         /// If <see langword="false"/>, configures the <see cref="HostApplicationBuilder"/> instance with pre-configured defaults.

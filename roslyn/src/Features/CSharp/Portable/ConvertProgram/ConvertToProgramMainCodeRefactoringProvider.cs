@@ -21,14 +21,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
     using static ConvertProgramAnalysis;
     using static ConvertProgramTransform;
 
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.ConvertToProgramMain), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.ConvertToProgramMain
+        ),
+        Shared
+    ]
     internal class ConvertToProgramMainCodeRefactoringProvider : CodeRefactoringProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ConvertToProgramMainCodeRefactoringProvider()
-        {
-        }
+        public ConvertToProgramMainCodeRefactoringProvider() { }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
@@ -40,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
                 return;
 
             var position = span.Start;
-            var root = (CompilationUnitSyntax)await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = (CompilationUnitSyntax)
+                await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 
             if (!root.IsTopLevelProgram())
                 return;
@@ -49,17 +54,36 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
             if (!acceptableLocation.SourceSpan.IntersectsWith(position))
                 return;
 
-            var options = await document.GetCSharpCodeFixOptionsProviderAsync(context.Options, cancellationToken).ConfigureAwait(false);
+            var options = await document
+                .GetCSharpCodeFixOptionsProviderAsync(context.Options, cancellationToken)
+                .ConfigureAwait(false);
 
-            var compilation = await document.Project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
-            if (!CanOfferUseProgramMain(options.PreferTopLevelStatements, root, compilation, forAnalyzer: false))
+            var compilation = await document
+                .Project.GetRequiredCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
+            if (
+                !CanOfferUseProgramMain(
+                    options.PreferTopLevelStatements,
+                    root,
+                    compilation,
+                    forAnalyzer: false
+                )
+            )
                 return;
 
-            context.RegisterRefactoring(CodeAction.Create(
-                CSharpAnalyzersResources.Convert_to_Program_Main_style_program,
-                c => ConvertToProgramMainAsync(document, options.AccessibilityModifiersRequired.Value, c),
-                nameof(CSharpAnalyzersResources.Convert_to_Program_Main_style_program),
-                CodeActionPriority.Low));
+            context.RegisterRefactoring(
+                CodeAction.Create(
+                    CSharpAnalyzersResources.Convert_to_Program_Main_style_program,
+                    c =>
+                        ConvertToProgramMainAsync(
+                            document,
+                            options.AccessibilityModifiersRequired.Value,
+                            c
+                        ),
+                    nameof(CSharpAnalyzersResources.Convert_to_Program_Main_style_program),
+                    CodeActionPriority.Low
+                )
+            );
         }
     }
 }

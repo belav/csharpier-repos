@@ -70,7 +70,9 @@ namespace System
 
                 if (shareResult != 0 && shareResult != NERR_DuplicateShare)
                 {
-                    throw new Exception($"Failed to create a file share, NetShareAdd returned {shareResult}");
+                    throw new Exception(
+                        $"Failed to create a file share, NetShareAdd returned {shareResult}"
+                    );
                 }
             }
             finally
@@ -80,10 +82,19 @@ namespace System
         }
 
         [LibraryImport(Interop.Libraries.Netapi32)]
-        private static partial int NetShareAdd([MarshalAs(UnmanagedType.LPWStr)] string servername, int level, IntPtr buf, IntPtr parm_err);
+        private static partial int NetShareAdd(
+            [MarshalAs(UnmanagedType.LPWStr)] string servername,
+            int level,
+            IntPtr buf,
+            IntPtr parm_err
+        );
 
         [LibraryImport(Interop.Libraries.Netapi32)]
-        private static partial int NetShareDel([MarshalAs(UnmanagedType.LPWStr)] string servername, [MarshalAs(UnmanagedType.LPWStr)] string netname, int reserved);
+        private static partial int NetShareDel(
+            [MarshalAs(UnmanagedType.LPWStr)] string servername,
+            [MarshalAs(UnmanagedType.LPWStr)] string netname,
+            int reserved
+        );
 
         public void Dispose()
         {
@@ -102,11 +113,13 @@ namespace System
             [MarshalAs(UnmanagedType.LPWStr)]
             public string shi502_netname;
             public uint shi502_type;
+
             [MarshalAs(UnmanagedType.LPWStr)]
             public string shi502_remark;
             public int shi502_permissions;
             public int shi502_max_uses;
             public int shi502_current_uses;
+
             [MarshalAs(UnmanagedType.LPWStr)]
             public string shi502_path;
             public IntPtr shi502_passwd;
@@ -115,4 +128,3 @@ namespace System
         }
     }
 }
-

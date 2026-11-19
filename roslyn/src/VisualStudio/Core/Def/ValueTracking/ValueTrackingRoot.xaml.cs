@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
     /// </summary>
     internal partial class ValueTrackingRoot : UserControl
     {
-        public string EmptyText => ServicesVSResources.Select_an_appropriate_symbol_to_start_value_tracking;
+        public string EmptyText =>
+            ServicesVSResources.Select_an_appropriate_symbol_to_start_value_tracking;
 
         public ValueTrackingRoot()
         {

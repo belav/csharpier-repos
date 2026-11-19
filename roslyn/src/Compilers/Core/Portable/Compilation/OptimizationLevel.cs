@@ -43,24 +43,32 @@ namespace Microsoft.CodeAnalysis
         /// Corresponds to command line argument /optimize+.
         /// </para>
         /// </summary>
-        Release = 1
+        Release = 1,
     }
 
     internal static class OptimizationLevelFacts
     {
-        internal static (OptimizationLevel OptimizationLevel, bool DebugPlus) DefaultValues => (OptimizationLevel.Debug, false);
+        internal static (OptimizationLevel OptimizationLevel, bool DebugPlus) DefaultValues =>
+            (OptimizationLevel.Debug, false);
 
-        public static string ToPdbSerializedString(this OptimizationLevel optimization, bool debugPlusMode)
-            => (optimization, debugPlusMode) switch
+        public static string ToPdbSerializedString(
+            this OptimizationLevel optimization,
+            bool debugPlusMode
+        ) =>
+            (optimization, debugPlusMode) switch
             {
                 (OptimizationLevel.Release, true) => "release-debug-plus",
                 (OptimizationLevel.Release, false) => "release",
                 (OptimizationLevel.Debug, true) => "debug-plus",
                 (OptimizationLevel.Debug, false) => "debug",
-                _ => throw ExceptionUtilities.UnexpectedValue(optimization)
+                _ => throw ExceptionUtilities.UnexpectedValue(optimization),
             };
 
-        public static bool TryParsePdbSerializedString(string value, out OptimizationLevel optimizationLevel, out bool debugPlusMode)
+        public static bool TryParsePdbSerializedString(
+            string value,
+            out OptimizationLevel optimizationLevel,
+            out bool debugPlusMode
+        )
         {
             switch (value)
             {

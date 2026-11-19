@@ -25,9 +25,16 @@ namespace System.Diagnostics.Tests
         [InlineData(65535)]
         public unsafe void CanFormatMessage(uint messageId)
         {
-            string messageDllPath = Path.Combine(Path.GetDirectoryName(typeof(EventLog).Assembly.Location), "System.Diagnostics.EventLog.Messages.dll");
+            string messageDllPath = Path.Combine(
+                Path.GetDirectoryName(typeof(EventLog).Assembly.Location),
+                "System.Diagnostics.EventLog.Messages.dll"
+            );
             Assert.True(File.Exists(messageDllPath));
-            using SafeLibraryHandle hMessageDll = Interop.Kernel32.LoadLibraryExW(messageDllPath, IntPtr.Zero, Interop.Kernel32.LOAD_LIBRARY_AS_DATAFILE);
+            using SafeLibraryHandle hMessageDll = Interop.Kernel32.LoadLibraryExW(
+                messageDllPath,
+                IntPtr.Zero,
+                Interop.Kernel32.LOAD_LIBRARY_AS_DATAFILE
+            );
 
             string messageString = "hello message";
             char[] buffer = new char[1024];
@@ -35,13 +42,15 @@ namespace System.Diagnostics.Tests
             {
                 IntPtr[] insertion = new[] { (IntPtr)pMessageString };
                 int messageLength = Interop.Kernel32.FormatMessage(
-                    Interop.Kernel32.FORMAT_MESSAGE_FROM_HMODULE | Interop.Kernel32.FORMAT_MESSAGE_ARGUMENT_ARRAY,
+                    Interop.Kernel32.FORMAT_MESSAGE_FROM_HMODULE
+                        | Interop.Kernel32.FORMAT_MESSAGE_ARGUMENT_ARRAY,
                     hMessageDll,
                     messageId,
                     0,
                     buffer,
                     buffer.Length,
-                    insertion);
+                    insertion
+                );
 
                 Assert.True(messageLength > 0);
                 string formattedMessage = new string(buffer, 0, messageLength);
@@ -49,13 +58,22 @@ namespace System.Diagnostics.Tests
             }
         }
 
-        [ConditionalFact(typeof(Helpers), nameof(Helpers.HasAssemblyFilesIsElevatedAndSupportsEventLogs))]
+        [ConditionalFact(
+            typeof(Helpers),
+            nameof(Helpers.HasAssemblyFilesIsElevatedAndSupportsEventLogs)
+        )]
         public void CanReadAndWriteMessages()
         {
-            string messageDllPath = Path.Combine(Path.GetDirectoryName(typeof(EventLog).Assembly.Location), "System.Diagnostics.EventLog.Messages.dll");
-            EventSourceCreationData log = new EventSourceCreationData($"TestEventMessageSource {Guid.NewGuid()}", "Application")
+            string messageDllPath = Path.Combine(
+                Path.GetDirectoryName(typeof(EventLog).Assembly.Location),
+                "System.Diagnostics.EventLog.Messages.dll"
+            );
+            EventSourceCreationData log = new EventSourceCreationData(
+                $"TestEventMessageSource {Guid.NewGuid()}",
+                "Application"
+            )
             {
-                MessageResourceFile = messageDllPath
+                MessageResourceFile = messageDllPath,
             };
             try
             {
@@ -68,7 +86,15 @@ namespace System.Diagnostics.Tests
                 string message = $"Hello {Guid.NewGuid()}";
                 Helpers.Retry(() => EventLog.WriteEntry(log.Source, message));
 
-                using (EventLogReader reader = new EventLogReader(new EventLogQuery("Application", PathType.LogName, $"*[System/Provider/@Name=\"{log.Source}\"]")))
+                using (
+                    EventLogReader reader = new EventLogReader(
+                        new EventLogQuery(
+                            "Application",
+                            PathType.LogName,
+                            $"*[System/Provider/@Name=\"{log.Source}\"]"
+                        )
+                    )
+                )
                 {
                     EventRecord evt = reader.ReadEvent();
 

@@ -5,21 +5,29 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
-
 using Microsoft.Win32.SafeHandles;
 
 internal static partial class Interop
 {
     internal static partial class Crypto
     {
-        [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_ObjTxt2Obj", StringMarshalling = StringMarshalling.Utf8)]
+        [LibraryImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_ObjTxt2Obj",
+            StringMarshalling = StringMarshalling.Utf8
+        )]
         internal static partial SafeAsn1ObjectHandle ObjTxt2Obj(string s);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_ObjObj2Txt")]
         private static unsafe partial int ObjObj2Txt(byte* buf, int buf_len, IntPtr a);
 
-        [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetObjectDefinitionByName", StringMarshalling = StringMarshalling.Utf8)]
+        [LibraryImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_GetObjectDefinitionByName",
+            StringMarshalling = StringMarshalling.Utf8
+        )]
         private static partial IntPtr CryptoNative_GetObjectDefinitionByName(string friendlyName);
+
         internal static IntPtr GetObjectDefinitionByName(string friendlyName)
         {
             IntPtr ret = CryptoNative_GetObjectDefinitionByName(friendlyName);
@@ -49,7 +57,11 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_Asn1OctetStringSet")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool Asn1OctetStringSet(SafeAsn1OctetStringHandle o, byte[] d, int len);
+        internal static partial bool Asn1OctetStringSet(
+            SafeAsn1OctetStringHandle o,
+            byte[] d,
+            int len
+        );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_Asn1OctetStringFree")]
         internal static partial void Asn1OctetStringFree(IntPtr o);
@@ -91,7 +103,8 @@ internal static partial class Interop
 
                 Debug.Assert(
                     bytesNeeded == initialBytesNeeded,
-                    "OBJ_obj2txt changed the required number of bytes for the realloc call");
+                    "OBJ_obj2txt changed the required number of bytes for the realloc call"
+                );
 
                 if (bytesNeeded > initialBytesNeeded)
                 {

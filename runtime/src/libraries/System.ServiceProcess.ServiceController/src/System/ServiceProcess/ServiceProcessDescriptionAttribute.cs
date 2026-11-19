@@ -18,9 +18,8 @@ namespace System.ServiceProcess
         /// <summary>
         /// Constructs a new sys description
         /// </summary>
-        public ServiceProcessDescriptionAttribute(string description) : base(description)
-        {
-        }
+        public ServiceProcessDescriptionAttribute(string description)
+            : base(description) { }
 
         /// <summary>
         /// Retrieves the description text.

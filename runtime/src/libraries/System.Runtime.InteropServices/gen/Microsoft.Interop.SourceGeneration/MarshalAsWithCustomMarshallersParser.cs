@@ -25,18 +25,37 @@ namespace Microsoft.Interop
         /// <param name="compilation">The compilation that the attributes are defined within.</param>
         /// <param name="diagnostics">The diagnostics bag to which to report diagnostics.</param>
         /// <param name="marshalAsAttributeParser">The parser that will do basic parsing of a MarshalAsAttribute into a <see cref="MarshalAsInfo"/> element.</param>
-        public MarshalAsWithCustomMarshallersParser(Compilation compilation, GeneratorDiagnosticsBag diagnostics, IMarshallingInfoAttributeParser marshalAsAttributeParser)
+        public MarshalAsWithCustomMarshallersParser(
+            Compilation compilation,
+            GeneratorDiagnosticsBag diagnostics,
+            IMarshallingInfoAttributeParser marshalAsAttributeParser
+        )
         {
             _compilation = compilation;
             _diagnostics = diagnostics;
             _marshalAsAttributeParser = marshalAsAttributeParser;
         }
 
-        public bool CanParseAttributeType(INamedTypeSymbol attributeType) => attributeType.ToDisplayString() == TypeNames.System_Runtime_InteropServices_MarshalAsAttribute;
+        public bool CanParseAttributeType(INamedTypeSymbol attributeType) =>
+            attributeType.ToDisplayString()
+            == TypeNames.System_Runtime_InteropServices_MarshalAsAttribute;
 
-        MarshallingInfo? IMarshallingInfoAttributeParser.ParseAttribute(AttributeData attributeData, ITypeSymbol type, int indirectionDepth, UseSiteAttributeProvider useSiteAttributes, GetMarshallingInfoCallback marshallingInfoCallback)
+        MarshallingInfo? IMarshallingInfoAttributeParser.ParseAttribute(
+            AttributeData attributeData,
+            ITypeSymbol type,
+            int indirectionDepth,
+            UseSiteAttributeProvider useSiteAttributes,
+            GetMarshallingInfoCallback marshallingInfoCallback
+        )
         {
-            var marshalAsInfo = (MarshalAsInfo)_marshalAsAttributeParser.ParseAttribute(attributeData, type, indirectionDepth, useSiteAttributes, marshallingInfoCallback);
+            var marshalAsInfo = (MarshalAsInfo)
+                _marshalAsAttributeParser.ParseAttribute(
+                    attributeData,
+                    type,
+                    indirectionDepth,
+                    useSiteAttributes,
+                    marshallingInfoCallback
+                );
 
             // We'll support the UnmanagedType.Interface option, but we'll explicitly
             // leave ComImport types with the MarshalAs info instead of the custom marshaller
@@ -45,39 +64,72 @@ namespace Microsoft.Interop
             {
                 return type is INamedTypeSymbol { IsComImport: true }
                     ? marshalAsInfo
-                    : ComInterfaceMarshallingInfoProvider.CreateComInterfaceMarshallingInfo(_compilation, type);
+                    : ComInterfaceMarshallingInfoProvider.CreateComInterfaceMarshallingInfo(
+                        _compilation,
+                        type
+                    );
             }
 
             if (marshalAsInfo is MarshalAsArrayInfo arrayInfo)
             {
                 if (type is not IArrayTypeSymbol { ElementType: ITypeSymbol elementType })
                 {
-                    _diagnostics.ReportConfigurationNotSupported(attributeData, nameof(UnmanagedType), arrayInfo.UnmanagedType.ToString());
+                    _diagnostics.ReportConfigurationNotSupported(
+                        attributeData,
+                        nameof(UnmanagedType),
+                        arrayInfo.UnmanagedType.ToString()
+                    );
                     return NoMarshallingInfo.Instance;
                 }
 
                 MarshallingInfo elementMarshallingInfo = NoMarshallingInfo.Instance;
-                if (arrayInfo.ArraySubType != (UnmanagedType)SizeAndParamIndexInfo.UnspecifiedConstSize)
+                if (
+                    arrayInfo.ArraySubType
+                    != (UnmanagedType)SizeAndParamIndexInfo.UnspecifiedConstSize
+                )
                 {
                     if (elementType.SpecialType == SpecialType.System_String)
                     {
-                        elementMarshallingInfo = CreateStringMarshallingInfo(elementType, new MarshalAsScalarInfo(arrayInfo.ArraySubType, arrayInfo.CharEncoding));
+                        elementMarshallingInfo = CreateStringMarshallingInfo(
+                            elementType,
+                            new MarshalAsScalarInfo(arrayInfo.ArraySubType, arrayInfo.CharEncoding)
+                        );
                     }
-                    else if (arrayInfo.ArraySubType == UnmanagedType.Interface && elementType is not INamedTypeSymbol { IsComImport: true })
+                    else if (
+                        arrayInfo.ArraySubType == UnmanagedType.Interface
+                        && elementType is not INamedTypeSymbol { IsComImport: true }
+                    )
                     {
-                        elementMarshallingInfo = ComInterfaceMarshallingInfoProvider.CreateComInterfaceMarshallingInfo(_compilation, elementType);
+                        elementMarshallingInfo =
+                            ComInterfaceMarshallingInfoProvider.CreateComInterfaceMarshallingInfo(
+                                _compilation,
+                                elementType
+                            );
                     }
                     else
                     {
-                        elementMarshallingInfo = new MarshalAsScalarInfo(arrayInfo.ArraySubType, arrayInfo.CharEncoding);
+                        elementMarshallingInfo = new MarshalAsScalarInfo(
+                            arrayInfo.ArraySubType,
+                            arrayInfo.CharEncoding
+                        );
                     }
                 }
                 else
                 {
-                    elementMarshallingInfo = marshallingInfoCallback(elementType, useSiteAttributes, indirectionDepth + 1);
+                    elementMarshallingInfo = marshallingInfoCallback(
+                        elementType,
+                        useSiteAttributes,
+                        indirectionDepth + 1
+                    );
                 }
 
-                return ArrayMarshallingInfoProvider.CreateArrayMarshallingInfo(_compilation, type, elementType, arrayInfo.CountInfo, elementMarshallingInfo);
+                return ArrayMarshallingInfoProvider.CreateArrayMarshallingInfo(
+                    _compilation,
+                    type,
+                    elementType,
+                    arrayInfo.CountInfo,
+                    elementMarshallingInfo
+                );
             }
 
             if (type.SpecialType == SpecialType.System_String)
@@ -85,9 +137,16 @@ namespace Microsoft.Interop
                 return CreateStringMarshallingInfo(type, marshalAsInfo);
             }
 
-            if (type.SpecialType == SpecialType.System_Object && marshalAsInfo is MarshalAsScalarInfo(UnmanagedType.Struct, _))
+            if (
+                type.SpecialType == SpecialType.System_Object
+                && marshalAsInfo is MarshalAsScalarInfo(UnmanagedType.Struct, _)
+            )
             {
-                return CustomMarshallingInfoHelper.CreateMarshallingInfoByMarshallerTypeName(_compilation, type, TypeNames.ComVariantMarshaller);
+                return CustomMarshallingInfoHelper.CreateMarshallingInfoByMarshallerTypeName(
+                    _compilation,
+                    type,
+                    TypeNames.ComVariantMarshaller
+                );
             }
 
             return marshalAsInfo;
@@ -95,7 +154,8 @@ namespace Microsoft.Interop
 
         private MarshallingInfo CreateStringMarshallingInfo(
             ITypeSymbol type,
-            MarshalAsInfo marshalAsInfo)
+            MarshalAsInfo marshalAsInfo
+        )
         {
             string? marshallerName = marshalAsInfo.UnmanagedType switch
             {
@@ -103,7 +163,7 @@ namespace Microsoft.Interop
                 UnmanagedType.LPStr => TypeNames.AnsiStringMarshaller,
                 UnmanagedType.LPTStr or UnmanagedType.LPWStr => TypeNames.Utf16StringMarshaller,
                 MarshalAsInfo.UnmanagedType_LPUTF8Str => TypeNames.Utf8StringMarshaller,
-                _ => null
+                _ => null,
             };
 
             if (marshallerName is null)
@@ -111,7 +171,11 @@ namespace Microsoft.Interop
                 return marshalAsInfo;
             }
 
-            return CustomMarshallingInfoHelper.CreateMarshallingInfoByMarshallerTypeName(_compilation, type, marshallerName);
+            return CustomMarshallingInfoHelper.CreateMarshallingInfoByMarshallerTypeName(
+                _compilation,
+                type,
+                marshallerName
+            );
         }
     }
 }

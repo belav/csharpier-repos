@@ -8,7 +8,9 @@ namespace Microsoft.CodeAnalysis
 {
     internal static class SymbolDisplayPartKindTags
     {
-        public static SymbolDisplayPartKind GetSymbolDisplayPartKind(this INamedTypeSymbol namedType)
+        public static SymbolDisplayPartKind GetSymbolDisplayPartKind(
+            this INamedTypeSymbol namedType
+        )
         {
             if (namedType.IsEnumType())
                 return SymbolDisplayPartKind.EnumName;
@@ -20,7 +22,9 @@ namespace Microsoft.CodeAnalysis
                 return SymbolDisplayPartKind.InterfaceName;
 
             if (namedType.IsRecord)
-                return namedType.IsValueType ? SymbolDisplayPartKind.RecordStructName : SymbolDisplayPartKind.RecordClassName;
+                return namedType.IsValueType
+                    ? SymbolDisplayPartKind.RecordStructName
+                    : SymbolDisplayPartKind.RecordClassName;
 
             if (namedType.IsStructType())
                 return SymbolDisplayPartKind.StructName;
@@ -34,8 +38,8 @@ namespace Microsoft.CodeAnalysis
             return SymbolDisplayPartKind.ClassName;
         }
 
-        public static string GetTag(SymbolDisplayPartKind kind)
-            => kind switch
+        public static string GetTag(SymbolDisplayPartKind kind) =>
+            kind switch
             {
                 SymbolDisplayPartKind.AliasName => TextTags.Alias,
                 SymbolDisplayPartKind.AssemblyName => TextTags.Assembly,

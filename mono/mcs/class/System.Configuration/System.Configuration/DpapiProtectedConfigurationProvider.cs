@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,43 +26,46 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Xml;
 using System.Collections.Specialized;
+using System.Xml;
 
 namespace System.Configuration
 {
-	public sealed class DpapiProtectedConfigurationProvider: ProtectedConfigurationProvider
-	{
-		bool useMachineProtection;
-		const string NotSupportedReason = @"DpapiProtectedConfigurationProvider depends on the Microsoft Data
+    public sealed class DpapiProtectedConfigurationProvider : ProtectedConfigurationProvider
+    {
+        bool useMachineProtection;
+        const string NotSupportedReason =
+            @"DpapiProtectedConfigurationProvider depends on the Microsoft Data
 Protection API, and is unimplemented in Mono.  For portability's sake,
 it is suggested that you use the RsaProtectedConfigurationProvider.";
-		[MonoNotSupported (NotSupportedReason)]
-		public override XmlNode Decrypt (XmlNode encryptedNode)
-		{
-			throw new NotSupportedException (NotSupportedReason);
-		}
 
-		[MonoNotSupported (NotSupportedReason)]
-		public override XmlNode Encrypt (XmlNode node)
-		{
-			throw new NotSupportedException (NotSupportedReason);
-		}
+        [MonoNotSupported(NotSupportedReason)]
+        public override XmlNode Decrypt(XmlNode encryptedNode)
+        {
+            throw new NotSupportedException(NotSupportedReason);
+        }
 
-		[MonoTODO]
-		public override void Initialize (string name, NameValueCollection configurationValues)
-		{
-			base.Initialize (name, configurationValues);
+        [MonoNotSupported(NotSupportedReason)]
+        public override XmlNode Encrypt(XmlNode node)
+        {
+            throw new NotSupportedException(NotSupportedReason);
+        }
 
-			string flag;
+        [MonoTODO]
+        public override void Initialize(string name, NameValueCollection configurationValues)
+        {
+            base.Initialize(name, configurationValues);
 
-			flag = configurationValues ["useMachineProtection"];
-			if (flag != null && flag.ToLowerInvariant () == "true")
-				useMachineProtection = true;
-		}
+            string flag;
 
-		public bool UseMachineProtection {
-			get { return useMachineProtection; }
-		}
-	}
+            flag = configurationValues["useMachineProtection"];
+            if (flag != null && flag.ToLowerInvariant() == "true")
+                useMachineProtection = true;
+        }
+
+        public bool UseMachineProtection
+        {
+            get { return useMachineProtection; }
+        }
+    }
 }

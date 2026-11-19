@@ -9,6 +9,9 @@ internal static partial class Interop
     {
         [LibraryImport(Libraries.Kernel32)]
         [SuppressGCTransition]
-        internal static unsafe partial BOOL FileTimeToSystemTime(ulong* lpFileTime, SYSTEMTIME* lpSystemTime);
+        internal static unsafe partial BOOL FileTimeToSystemTime(
+            ulong* lpFileTime,
+            SYSTEMTIME* lpSystemTime
+        );
     }
 }

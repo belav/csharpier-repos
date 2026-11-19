@@ -36,7 +36,8 @@ namespace Internal.Cryptography
             AsymmetricAlgorithm? privateKey,
             X509Certificate2Collection originatorCerts,
             X509Certificate2Collection extraStore,
-            out Exception? exception);
+            out Exception? exception
+        );
 
         public abstract void Dispose();
     }

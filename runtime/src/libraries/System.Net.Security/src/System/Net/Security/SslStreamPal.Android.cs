@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Security.Authentication;
 using System.Security.Authentication.ExtendedProtection;
 using System.Security.Cryptography.X509Certificates;
-
 using PAL_SSLStreamStatus = Interop.AndroidCrypto.PAL_SSLStreamStatus;
 
 #pragma warning disable IDE0060
@@ -16,21 +15,21 @@ namespace System.Net.Security
     {
         public static Exception GetException(SecurityStatusPal status)
         {
-            return status.Exception ?? new Interop.AndroidCrypto.SslException((int)status.ErrorCode);
+            return status.Exception
+                ?? new Interop.AndroidCrypto.SslException((int)status.ErrorCode);
         }
 
         internal const bool StartMutualAuthAsAnonymous = false;
         internal const bool CanEncryptEmptyMessage = false;
 
-        public static void VerifyPackageInfo()
-        {
-        }
+        public static void VerifyPackageInfo() { }
 
         public static SecurityStatusPal SelectApplicationProtocol(
             SafeFreeCredentials? credentialsHandle,
             SafeDeleteSslContext? context,
             SslAuthenticationOptions sslAuthenticationOptions,
-            ReadOnlySpan<byte> clientProtocols)
+            ReadOnlySpan<byte> clientProtocols
+        )
         {
             throw new PlatformNotSupportedException(nameof(SelectApplicationProtocol));
         }
@@ -40,9 +39,16 @@ namespace System.Net.Security
             ref SafeDeleteSslContext? context,
             ReadOnlySpan<byte> inputBuffer,
             ref byte[]? outputBuffer,
-            SslAuthenticationOptions sslAuthenticationOptions)
+            SslAuthenticationOptions sslAuthenticationOptions
+        )
         {
-            return HandshakeInternal(credential, ref context, inputBuffer, ref outputBuffer, sslAuthenticationOptions);
+            return HandshakeInternal(
+                credential,
+                ref context,
+                inputBuffer,
+                ref outputBuffer,
+                sslAuthenticationOptions
+            );
         }
 
         public static SecurityStatusPal InitializeSecurityContext(
@@ -51,21 +57,32 @@ namespace System.Net.Security
             string? targetName,
             ReadOnlySpan<byte> inputBuffer,
             ref byte[]? outputBuffer,
-            SslAuthenticationOptions sslAuthenticationOptions)
+            SslAuthenticationOptions sslAuthenticationOptions
+        )
         {
-            return HandshakeInternal(credential, ref context, inputBuffer, ref outputBuffer, sslAuthenticationOptions);
+            return HandshakeInternal(
+                credential,
+                ref context,
+                inputBuffer,
+                ref outputBuffer,
+                sslAuthenticationOptions
+            );
         }
 
         public static SecurityStatusPal Renegotiate(
             ref SafeFreeCredentials? credentialsHandle,
             ref SafeDeleteSslContext? context,
             SslAuthenticationOptions sslAuthenticationOptions,
-            out byte[]? outputBuffer)
+            out byte[]? outputBuffer
+        )
         {
             throw new PlatformNotSupportedException();
         }
 
-        public static SafeFreeCredentials? AcquireCredentialsHandle(SslAuthenticationOptions _1, bool _2)
+        public static SafeFreeCredentials? AcquireCredentialsHandle(
+            SslAuthenticationOptions _1,
+            bool _2
+        )
         {
             return null;
         }
@@ -76,10 +93,14 @@ namespace System.Net.Security
             int headerSize,
             int trailerSize,
             ref byte[] output,
-            out int resultSize)
+            out int resultSize
+        )
         {
             resultSize = 0;
-            Debug.Assert(input.Length > 0, $"{nameof(input.Length)} > 0 since {nameof(CanEncryptEmptyMessage)} is false");
+            Debug.Assert(
+                input.Length > 0,
+                $"{nameof(input.Length)} > 0 since {nameof(CanEncryptEmptyMessage)} is false"
+            );
 
             try
             {
@@ -92,7 +113,7 @@ namespace System.Net.Security
                     PAL_SSLStreamStatus.NeedData => SecurityStatusPalErrorCode.ContinueNeeded,
                     PAL_SSLStreamStatus.Renegotiate => SecurityStatusPalErrorCode.Renegotiate,
                     PAL_SSLStreamStatus.Closed => SecurityStatusPalErrorCode.ContextExpired,
-                    _ => SecurityStatusPalErrorCode.InternalError
+                    _ => SecurityStatusPalErrorCode.InternalError,
                 };
 
                 if (securityContext.BytesReadyForConnection <= output?.Length)
@@ -117,7 +138,8 @@ namespace System.Net.Security
             SafeDeleteSslContext securityContext,
             Span<byte> buffer,
             out int offset,
-            out int count)
+            out int count
+        )
         {
             offset = 0;
             count = 0;
@@ -128,7 +150,11 @@ namespace System.Net.Security
 
                 securityContext.Write(buffer);
 
-                PAL_SSLStreamStatus ret = Interop.AndroidCrypto.SSLStreamRead(sslHandle, buffer, out int read);
+                PAL_SSLStreamStatus ret = Interop.AndroidCrypto.SSLStreamRead(
+                    sslHandle,
+                    buffer,
+                    out int read
+                );
                 if (ret == PAL_SSLStreamStatus.Error)
                     return new SecurityStatusPal(SecurityStatusPalErrorCode.InternalError);
 
@@ -140,7 +166,7 @@ namespace System.Net.Security
                     PAL_SSLStreamStatus.NeedData => SecurityStatusPalErrorCode.OK,
                     PAL_SSLStreamStatus.Renegotiate => SecurityStatusPalErrorCode.Renegotiate,
                     PAL_SSLStreamStatus.Closed => SecurityStatusPalErrorCode.ContextExpired,
-                    _ => SecurityStatusPalErrorCode.InternalError
+                    _ => SecurityStatusPalErrorCode.InternalError,
                 };
 
                 return new SecurityStatusPal(statusCode);
@@ -153,7 +179,8 @@ namespace System.Net.Security
 
         public static ChannelBinding? QueryContextChannelBinding(
             SafeDeleteContext securityContext,
-            ChannelBindingKind attribute)
+            ChannelBindingKind attribute
+        )
         {
             if (attribute == ChannelBindingKind.Endpoint)
                 return EndpointChannelBindingToken.Build(securityContext);
@@ -165,14 +192,16 @@ namespace System.Net.Security
 
         public static void QueryContextStreamSizes(
             SafeDeleteContext? securityContext,
-            out StreamSizes streamSizes)
+            out StreamSizes streamSizes
+        )
         {
             streamSizes = StreamSizes.Default;
         }
 
         public static void QueryContextConnectionInfo(
             SafeDeleteSslContext securityContext,
-            ref SslConnectionInfo connectionInfo)
+            ref SslConnectionInfo connectionInfo
+        )
         {
             connectionInfo.UpdateSslConnectionInfo(securityContext.SslContext);
         }
@@ -180,7 +209,8 @@ namespace System.Net.Security
         public static bool TryUpdateClintCertificate(
             SafeFreeCredentials? _1,
             SafeDeleteSslContext? _2,
-            SslAuthenticationOptions _3)
+            SslAuthenticationOptions _3
+        )
         {
             return false;
         }
@@ -190,7 +220,8 @@ namespace System.Net.Security
             ref SafeDeleteSslContext? context,
             ReadOnlySpan<byte> inputBuffer,
             ref byte[]? outputBuffer,
-            SslAuthenticationOptions sslAuthenticationOptions)
+            SslAuthenticationOptions sslAuthenticationOptions
+        )
         {
             try
             {
@@ -214,7 +245,7 @@ namespace System.Net.Security
                 {
                     PAL_SSLStreamStatus.OK => SecurityStatusPalErrorCode.OK,
                     PAL_SSLStreamStatus.NeedData => SecurityStatusPalErrorCode.ContinueNeeded,
-                    _ => SecurityStatusPalErrorCode.InternalError
+                    _ => SecurityStatusPalErrorCode.InternalError,
                 };
 
                 outputBuffer = sslContext.ReadPendingWrites();
@@ -231,18 +262,17 @@ namespace System.Net.Security
         public static SecurityStatusPal ApplyAlertToken(
             SafeDeleteContext? securityContext,
             TlsAlertType alertType,
-            TlsAlertMessage alertMessage)
+            TlsAlertMessage alertMessage
+        )
         {
             // There doesn't seem to be an exposed API for writing an alert.
             // The API seems to assume that all alerts are generated internally.
             return new SecurityStatusPal(SecurityStatusPalErrorCode.OK);
         }
 
-        public static SecurityStatusPal ApplyShutdownToken(
-            SafeDeleteSslContext securityContext)
+        public static SecurityStatusPal ApplyShutdownToken(SafeDeleteSslContext securityContext)
         {
             SafeSslHandle sslHandle = securityContext.SslContext;
-
 
             bool success = Interop.AndroidCrypto.SSLStreamShutdown(sslHandle);
             if (success)

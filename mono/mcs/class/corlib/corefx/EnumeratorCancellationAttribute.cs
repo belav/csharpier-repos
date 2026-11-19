@@ -7,8 +7,6 @@ namespace System.Runtime.CompilerServices
     [System.AttributeUsage(AttributeTargets.Parameter, Inherited = false)]
     public sealed class EnumeratorCancellationAttribute : Attribute
     {
-        public EnumeratorCancellationAttribute()
-        {
-        }
+        public EnumeratorCancellationAttribute() { }
     }
 }

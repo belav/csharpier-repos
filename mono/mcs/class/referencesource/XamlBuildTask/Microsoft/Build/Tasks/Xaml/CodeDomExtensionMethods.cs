@@ -9,35 +9,53 @@ namespace Microsoft.Build.Tasks.Xaml
 
     static class CodeDomExtensionMethods
     {
-        internal static CodeVariableReferenceExpression DeclareVar(this CodeStatementCollection block, Type type,
-            string name, CodeExpression initExpression)
+        internal static CodeVariableReferenceExpression DeclareVar(
+            this CodeStatementCollection block,
+            Type type,
+            string name,
+            CodeExpression initExpression
+        )
         {
-            block.Add(new CodeVariableDeclarationStatement()
+            block.Add(
+                new CodeVariableDeclarationStatement()
                 {
                     Name = name,
                     Type = new CodeTypeReference(type),
-                    InitExpression = initExpression
-                });
+                    InitExpression = initExpression,
+                }
+            );
             return new CodeVariableReferenceExpression(name);
         }
 
-        internal static CodeFieldReferenceExpression Field(this CodeExpression targetObject, string fieldName)
+        internal static CodeFieldReferenceExpression Field(
+            this CodeExpression targetObject,
+            string fieldName
+        )
         {
             return new CodeFieldReferenceExpression(targetObject, fieldName);
         }
 
-        internal static CodeMethodInvokeExpression Invoke(this CodeExpression targetObject, string methodName,
-            params CodeExpression[] parameters)
+        internal static CodeMethodInvokeExpression Invoke(
+            this CodeExpression targetObject,
+            string methodName,
+            params CodeExpression[] parameters
+        )
         {
             return new CodeMethodInvokeExpression(targetObject, methodName, parameters);
         }
 
-        internal static CodeObjectCreateExpression New(this Type type, params CodeExpression[] parameters)
+        internal static CodeObjectCreateExpression New(
+            this Type type,
+            params CodeExpression[] parameters
+        )
         {
             return new CodeObjectCreateExpression(type, parameters);
         }
 
-        internal static CodePropertyReferenceExpression Property(this CodeExpression targetObject, string propertyName)
+        internal static CodePropertyReferenceExpression Property(
+            this CodeExpression targetObject,
+            string propertyName
+        )
         {
             return new CodePropertyReferenceExpression(targetObject, propertyName);
         }

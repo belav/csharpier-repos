@@ -34,22 +34,65 @@ namespace System.ComponentModel
         [Fact]
         public void Ctor_NullReceiverType_ThrowsNullReferenceException()
         {
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>("receiverType", () => new ProvidePropertyAttribute("propertyName", (Type)null));
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
+                "receiverType",
+                () => new ProvidePropertyAttribute("propertyName", (Type)null)
+            );
         }
 
         public static IEnumerable<object[]> Equals_TestData()
         {
             var attribute = new ProvidePropertyAttribute("propertyName", "receiverTypeName");
             yield return new object[] { attribute, attribute, true };
-            yield return new object[] { attribute, new ProvidePropertyAttribute("propertyName", "receiverTypeName"), true };
-            yield return new object[] { attribute, new ProvidePropertyAttribute("propertyname", "receiverTypeName"), false };
-            yield return new object[] { attribute, new ProvidePropertyAttribute(null, "receiverTypeName"), false };
-            yield return new object[] { attribute, new ProvidePropertyAttribute("propertyName", "receivertypename"), false };
-            yield return new object[] { attribute, new ProvidePropertyAttribute("propertyName", (string)null), false };
+            yield return new object[]
+            {
+                attribute,
+                new ProvidePropertyAttribute("propertyName", "receiverTypeName"),
+                true,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new ProvidePropertyAttribute("propertyname", "receiverTypeName"),
+                false,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new ProvidePropertyAttribute(null, "receiverTypeName"),
+                false,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new ProvidePropertyAttribute("propertyName", "receivertypename"),
+                false,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new ProvidePropertyAttribute("propertyName", (string)null),
+                false,
+            };
 
-            yield return new object[] { new ProvidePropertyAttribute(null, (string)null), new ProvidePropertyAttribute(null, (string)null), true };
-            yield return new object[] { new ProvidePropertyAttribute(null, (string)null), new ProvidePropertyAttribute("propertyName", (string)null), false };
-            yield return new object[] { new ProvidePropertyAttribute(null, (string)null), new ProvidePropertyAttribute(null, "receiverTypeName"), false };
+            yield return new object[]
+            {
+                new ProvidePropertyAttribute(null, (string)null),
+                new ProvidePropertyAttribute(null, (string)null),
+                true,
+            };
+            yield return new object[]
+            {
+                new ProvidePropertyAttribute(null, (string)null),
+                new ProvidePropertyAttribute("propertyName", (string)null),
+                false,
+            };
+            yield return new object[]
+            {
+                new ProvidePropertyAttribute(null, (string)null),
+                new ProvidePropertyAttribute(null, "receiverTypeName"),
+                false,
+            };
 
             yield return new object[] { attribute, new object(), false };
             yield return new object[] { attribute, null, false };
@@ -57,7 +100,11 @@ namespace System.ComponentModel
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Other_ReturnsExpected(ProvidePropertyAttribute attribute, object other, bool expected)
+        public void Equals_Other_ReturnsExpected(
+            ProvidePropertyAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is DesignerAttribute)

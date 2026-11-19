@@ -34,7 +34,7 @@ namespace Newtonsoft.Json.Linq
     {
         internal static readonly JsonCloneSettings SkipCopyAnnotations = new JsonCloneSettings
         {
-            CopyAnnotations = false
+            CopyAnnotations = false,
         };
 
         /// <summary>

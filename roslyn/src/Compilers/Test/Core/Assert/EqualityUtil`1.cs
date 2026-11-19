@@ -26,7 +26,8 @@ namespace Roslyn.Test.Utilities
         public EqualityUtil(
             IEnumerable<EqualityUnit<T>> equalityUnits,
             Func<T, T, bool> compEquality = null,
-            Func<T, T, bool> compInequality = null)
+            Func<T, T, bool> compInequality = null
+        )
         {
             _equalityUnits = equalityUnits.ToList().AsReadOnly();
             _compareWithEqualityOperator = compEquality;

@@ -18,47 +18,59 @@ namespace System.ServiceModel.Dispatcher
             this.matcher = new InverseQueryMatcher(false);
         }
 
-        public override IEnumerable<KeyValuePair<MessageQuery, TResult>> Evaluate<TResult>(Message message)
+        public override IEnumerable<KeyValuePair<MessageQuery, TResult>> Evaluate<TResult>(
+            Message message
+        )
         {
             if (message == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("message");
             }
 
-            if (typeof(TResult) == typeof(XPathResult) ||
-                typeof(TResult) == typeof(string) ||
-                typeof(TResult) == typeof(bool) ||
-                typeof(TResult) == typeof(object))
+            if (
+                typeof(TResult) == typeof(XPathResult)
+                || typeof(TResult) == typeof(string)
+                || typeof(TResult) == typeof(bool)
+                || typeof(TResult) == typeof(object)
+            )
             {
-                return (IEnumerable<KeyValuePair<MessageQuery, TResult>>)(object)
-                    this.matcher.Evaluate<TResult>(message, false);
+                return (IEnumerable<KeyValuePair<MessageQuery, TResult>>)
+                    (object)this.matcher.Evaluate<TResult>(message, false);
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TResult",
-                    SR.GetString(SR.UnsupportedMessageQueryResultType, typeof(TResult)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TResult",
+                    SR.GetString(SR.UnsupportedMessageQueryResultType, typeof(TResult))
+                );
             }
         }
 
-        public override IEnumerable<KeyValuePair<MessageQuery, TResult>> Evaluate<TResult>(MessageBuffer buffer)
+        public override IEnumerable<KeyValuePair<MessageQuery, TResult>> Evaluate<TResult>(
+            MessageBuffer buffer
+        )
         {
             if (buffer == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("buffer");
             }
 
-            if (typeof(TResult) == typeof(XPathResult) ||
-                typeof(TResult) == typeof(string) ||
-                typeof(TResult) == typeof(bool) ||
-                typeof(TResult) == typeof(object))
+            if (
+                typeof(TResult) == typeof(XPathResult)
+                || typeof(TResult) == typeof(string)
+                || typeof(TResult) == typeof(bool)
+                || typeof(TResult) == typeof(object)
+            )
             {
-                return (IEnumerable<KeyValuePair<MessageQuery, TResult>>)(object)
-                    this.matcher.Evaluate<TResult>(buffer);
+                return (IEnumerable<KeyValuePair<MessageQuery, TResult>>)
+                    (object)this.matcher.Evaluate<TResult>(buffer);
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TResult",
-                    SR.GetString(SR.UnsupportedMessageQueryResultType, typeof(TResult)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TResult",
+                    SR.GetString(SR.UnsupportedMessageQueryResultType, typeof(TResult))
+                );
             }
         }
 
@@ -76,14 +88,14 @@ namespace System.ServiceModel.Dispatcher
 
             base.InsertItem(index, item);
 
-            XPathMessageQuery query = (XPathMessageQuery) item;
+            XPathMessageQuery query = (XPathMessageQuery)item;
 
             this.matcher.Add(query.Expression, query.Namespaces, query, false);
         }
 
         protected override void RemoveItem(int index)
         {
-            this.matcher.Remove((XPathMessageQuery) this[index]);
+            this.matcher.Remove((XPathMessageQuery)this[index]);
             base.RemoveItem(index);
         }
 
@@ -94,9 +106,9 @@ namespace System.ServiceModel.Dispatcher
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("item");
             }
 
-            this.matcher.Remove((XPathMessageQuery) this[index]);
+            this.matcher.Remove((XPathMessageQuery)this[index]);
 
-            XPathMessageQuery query = (XPathMessageQuery) item;
+            XPathMessageQuery query = (XPathMessageQuery)item;
 
             base.SetItem(index, item);
             this.matcher.Add(query.Expression, query.Namespaces, query, false);

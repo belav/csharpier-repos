@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,61 +27,56 @@
 //
 using System;
 using System.Collections.Generic;
+using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Security;
-using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Channels
 {
-	public abstract class BindingElement
-	{
-		protected BindingElement ()
-		{
-		}
+    public abstract class BindingElement
+    {
+        protected BindingElement() { }
 
-		[MonoTODO]
-		protected BindingElement (BindingElement elementToBeCloned)
-		{
-		}
+        [MonoTODO]
+        protected BindingElement(BindingElement elementToBeCloned) { }
 
-		public virtual IChannelFactory<TChannel>
-			BuildChannelFactory<TChannel> (BindingContext context)
-		{
-			if (context == null)
-				throw new ArgumentNullException ("context");
-			return context.BuildInnerChannelFactory<TChannel> ();
-		}
+        public virtual IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
+        {
+            if (context == null)
+                throw new ArgumentNullException("context");
+            return context.BuildInnerChannelFactory<TChannel>();
+        }
 
 #if !MOBILE
-		public virtual IChannelListener<TChannel>
-			BuildChannelListener<TChannel> (
-			BindingContext context)
-			where TChannel : class, IChannel
-		{
-			if (context == null)
-				throw new ArgumentNullException ("context");
-			return context.BuildInnerChannelListener<TChannel> ();
-		}
+        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
+            where TChannel : class, IChannel
+        {
+            if (context == null)
+                throw new ArgumentNullException("context");
+            return context.BuildInnerChannelListener<TChannel>();
+        }
 #endif
 
-		public virtual bool CanBuildChannelFactory<TChannel> (
-			BindingContext context)
-		{
-			return context.CanBuildInnerChannelFactory<TChannel> ();
-		}
+        public virtual bool CanBuildChannelFactory<TChannel>(BindingContext context)
+        {
+            return context.CanBuildInnerChannelFactory<TChannel>();
+        }
 
 #if !MOBILE
-		public virtual bool CanBuildChannelListener<TChannel> (
-			BindingContext context)
-			where TChannel : class, IChannel
-		{
-			return context.CanBuildInnerChannelListener<TChannel> ();
-		}
+        public virtual bool CanBuildChannelListener<TChannel>(BindingContext context)
+            where TChannel : class, IChannel
+        {
+            return context.CanBuildInnerChannelListener<TChannel>();
+        }
 #endif
 
-		public abstract BindingElement Clone ();
+        public abstract BindingElement Clone();
 
-		public abstract T GetProperty<T> (BindingContext context)
-			where T : class;
-	}
+        public abstract T GetProperty<T>(BindingContext context)
+            where T : class;
+    }
 }

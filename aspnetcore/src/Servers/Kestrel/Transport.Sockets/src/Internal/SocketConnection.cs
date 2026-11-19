@@ -391,8 +391,7 @@ internal sealed partial class SocketConnection : TransportConnection
             // The shutdownReason argument should only be null if the output was completed gracefully, so no one should ever
             // ever observe this ConnectionAbortedException except for connection middleware attempting
             // to half close the connection which is currently unsupported. The message is always logged though.
-            _shutdownReason =
-                shutdownReason
+            _shutdownReason = shutdownReason
                 ?? new ConnectionAbortedException(
                     "The Socket transport's send loop completed gracefully."
                 );

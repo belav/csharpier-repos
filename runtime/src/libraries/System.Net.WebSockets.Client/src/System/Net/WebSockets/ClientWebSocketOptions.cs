@@ -31,15 +31,14 @@ namespace System.Net.WebSockets
         private bool _collectHttpResponseDetails;
 
         internal bool AreCompatibleWithCustomInvoker() =>
-            !UseDefaultCredentials &&
-            Credentials is null &&
-            (_clientCertificates?.Count ?? 0) == 0 &&
-            RemoteCertificateValidationCallback is null &&
-            Cookies is null &&
-            (Proxy is null || Proxy == WebSocketHandle.DefaultWebProxy.Instance);
+            !UseDefaultCredentials
+            && Credentials is null
+            && (_clientCertificates?.Count ?? 0) == 0
+            && RemoteCertificateValidationCallback is null
+            && Cookies is null
+            && (Proxy is null || Proxy == WebSocketHandle.DefaultWebProxy.Instance);
 
         internal ClientWebSocketOptions() { } // prevent external instantiation
-
         #region HTTP Settings
 
         /// <summary>Gets or sets the HTTP version to use.</summary>
@@ -79,9 +78,11 @@ namespace System.Net.WebSockets
             RequestHeaders.Set(headerName, headerValue);
         }
 
-        internal WebHeaderCollection RequestHeaders => _requestHeaders ??= new WebHeaderCollection();
+        internal WebHeaderCollection RequestHeaders =>
+            _requestHeaders ??= new WebHeaderCollection();
 
-        internal List<string> RequestedSubProtocols => _requestedSubProtocols ??= new List<string>();
+        internal List<string> RequestedSubProtocols =>
+            _requestedSubProtocols ??= new List<string>();
 
         [UnsupportedOSPlatform("browser")]
         public bool UseDefaultCredentials
@@ -165,7 +166,10 @@ namespace System.Net.WebSockets
             {
                 if (string.Equals(item, subProtocol, StringComparison.OrdinalIgnoreCase))
                 {
-                    throw new ArgumentException(SR.Format(SR.net_WebSockets_NoDuplicateProtocol, subProtocol), nameof(subProtocol));
+                    throw new ArgumentException(
+                        SR.Format(SR.net_WebSockets_NoDuplicateProtocol, subProtocol),
+                        nameof(subProtocol)
+                    );
                 }
             }
             subprotocols.Add(subProtocol);
@@ -180,9 +184,14 @@ namespace System.Net.WebSockets
                 ThrowIfReadOnly();
                 if (value != Timeout.InfiniteTimeSpan && value < TimeSpan.Zero)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value,
-                        SR.Format(SR.net_WebSockets_ArgumentOutOfRange_TooSmall,
-                        Timeout.InfiniteTimeSpan.ToString()));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        SR.Format(
+                            SR.net_WebSockets_ArgumentOutOfRange_TooSmall,
+                            Timeout.InfiniteTimeSpan.ToString()
+                        )
+                    );
                 }
                 _keepAliveInterval = value;
             }

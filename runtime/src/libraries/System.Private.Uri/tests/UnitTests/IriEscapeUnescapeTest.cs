@@ -1,9 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Text;
 using System.Tests;
-
+using System.Text;
 using Xunit;
 
 namespace System.Net.Test.Uri.IriTest
@@ -198,7 +197,8 @@ namespace System.Net.Test.Uri.IriTest
                 {
                     Assert.True(
                         0 == string.CompareOrdinal(results_en[i], results_zh[i]),
-                        "Detected locale differences when processing UriComponents." + components[i]);
+                        "Detected locale differences when processing UriComponents." + components[i]
+                    );
                 }
             }
         }
@@ -212,7 +212,12 @@ namespace System.Net.Test.Uri.IriTest
             {
                 fixed (char* pInput = hc.Buffer)
                 {
-                    ret = IriHelper.EscapeUnescapeIri(pInput + HeapCheck.PaddingLength, 0, uriInput.Length, component);
+                    ret = IriHelper.EscapeUnescapeIri(
+                        pInput + HeapCheck.PaddingLength,
+                        0,
+                        uriInput.Length,
+                        component
+                    );
                 }
             }
 
@@ -237,7 +242,8 @@ namespace System.Net.Test.Uri.IriTest
                 Array.Fill(Buffer, PaddingValue);
             }
 
-            public HeapCheck(string input) : this(input.Length)
+            public HeapCheck(string input)
+                : this(input.Length)
             {
                 input.CopyTo(0, Buffer, PaddingLength, _length);
             }
@@ -249,7 +255,9 @@ namespace System.Net.Test.Uri.IriTest
                 {
                     if (front[i] != PaddingValue)
                     {
-                        Assert.Fail("Heap corruption detected: unexpected padding value at index: " + i);
+                        Assert.Fail(
+                            "Heap corruption detected: unexpected padding value at index: " + i
+                        );
                     }
                 }
 
@@ -258,7 +266,10 @@ namespace System.Net.Test.Uri.IriTest
                 {
                     if (back[i] != PaddingValue)
                     {
-                        Assert.Fail("Heap corruption detected: unexpected padding value at index: " + (PaddingLength + _length + i));
+                        Assert.Fail(
+                            "Heap corruption detected: unexpected padding value at index: "
+                                + (PaddingLength + _length + i)
+                        );
                     }
                 }
             }

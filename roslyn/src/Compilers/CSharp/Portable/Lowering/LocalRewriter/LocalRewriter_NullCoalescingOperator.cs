@@ -16,7 +16,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression rewrittenRight = VisitExpression(node.RightOperand);
             TypeSymbol? rewrittenResultType = VisitType(node.Type);
 
-            return MakeNullCoalescingOperator(node.Syntax, rewrittenLeft, rewrittenRight, node.LeftPlaceholder, node.LeftConversion, node.OperatorResultKind, rewrittenResultType);
+            return MakeNullCoalescingOperator(
+                node.Syntax,
+                rewrittenLeft,
+                rewrittenRight,
+                node.LeftPlaceholder,
+                node.LeftConversion,
+                node.OperatorResultKind,
+                rewrittenResultType
+            );
         }
 
         private BoundExpression MakeNullCoalescingOperator(
@@ -26,14 +34,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundValuePlaceholder? leftPlaceholder,
             BoundExpression? leftConversion,
             BoundNullCoalescingOperatorResultKind resultKind,
-            TypeSymbol? rewrittenResultType)
+            TypeSymbol? rewrittenResultType
+        )
         {
             Debug.Assert(rewrittenLeft != null);
             Debug.Assert(rewrittenRight != null);
             Debug.Assert(BoundNode.GetConversion(leftConversion, leftPlaceholder).IsValid);
             Debug.Assert(rewrittenResultType is { });
             Debug.Assert(rewrittenRight.Type is { });
-            Debug.Assert(rewrittenRight.Type.Equals(rewrittenResultType, TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes));
+            Debug.Assert(
+                rewrittenRight.Type.Equals(
+                    rewrittenResultType,
+                    TypeCompareKind.IgnoreDynamicAndTupleNames
+                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                )
+            );
 
             if (_inExpressionLambda)
             {
@@ -45,18 +60,37 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     Debug.Assert(leftPlaceholder is not null);
 
-                    leftConversion = ApplyConversion(leftConversion, leftPlaceholder, leftPlaceholder);
+                    leftConversion = ApplyConversion(
+                        leftConversion,
+                        leftPlaceholder,
+                        leftPlaceholder
+                    );
 
                     if (leftConversion is not BoundConversion { Conversion: { Exists: true } })
                     {
-                        return BadExpression(syntax, rewrittenResultType, rewrittenLeft, rewrittenRight);
+                        return BadExpression(
+                            syntax,
+                            rewrittenResultType,
+                            rewrittenLeft,
+                            rewrittenRight
+                        );
                     }
                 }
 
-                return new BoundNullCoalescingOperator(syntax, rewrittenLeft, rewrittenRight, leftPlaceholder, leftConversion, resultKind, @checked: false, rewrittenResultType);
+                return new BoundNullCoalescingOperator(
+                    syntax,
+                    rewrittenLeft,
+                    rewrittenRight,
+                    leftPlaceholder,
+                    leftConversion,
+                    resultKind,
+                    @checked: false,
+                    rewrittenResultType
+                );
             }
 
-            var isUnconstrainedTypeParameter = rewrittenLeft.Type is { IsReferenceType: false, IsValueType: false };
+            var isUnconstrainedTypeParameter =
+                rewrittenLeft.Type is { IsReferenceType: false, IsValueType: false };
 
             // first we can make a small optimization:
             // If left is a constant then we already know whether it is null or not. If it is null then we
@@ -74,7 +108,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     Debug.Assert(!rewrittenLeft.ConstantValueOpt.IsNull);
 
-                    return GetConvertedLeftForNullCoalescingOperator(rewrittenLeft, leftPlaceholder, leftConversion, rewrittenResultType);
+                    return GetConvertedLeftForNullCoalescingOperator(
+                        rewrittenLeft,
+                        leftPlaceholder,
+                        leftConversion,
+                        rewrittenResultType
+                    );
                 }
             }
 
@@ -82,25 +121,55 @@ namespace Microsoft.CodeAnalysis.CSharp
             // interpolated string lowering may introduce redundant null coalescing, which we have to remove.
             if (IsStringConcat(rewrittenLeft))
             {
-                return GetConvertedLeftForNullCoalescingOperator(rewrittenLeft, leftPlaceholder, leftConversion, rewrittenResultType);
+                return GetConvertedLeftForNullCoalescingOperator(
+                    rewrittenLeft,
+                    leftPlaceholder,
+                    leftConversion,
+                    rewrittenResultType
+                );
             }
 
             // if left conversion is intrinsic implicit (always succeeds) and results in a reference type
             // we can apply conversion before doing the null check that allows for a more efficient IL emit.
             Debug.Assert(rewrittenLeft.Type is { });
-            if (rewrittenLeft.Type.IsReferenceType &&
-                BoundNode.GetConversion(leftConversion, leftPlaceholder) is { IsImplicit: true, IsUserDefined: false })
+            if (
+                rewrittenLeft.Type.IsReferenceType
+                && BoundNode.GetConversion(leftConversion, leftPlaceholder)
+                    is { IsImplicit: true, IsUserDefined: false }
+            )
             {
-                rewrittenLeft = ApplyConversionIfNotIdentity(leftConversion, leftPlaceholder, rewrittenLeft);
+                rewrittenLeft = ApplyConversionIfNotIdentity(
+                    leftConversion,
+                    leftPlaceholder,
+                    rewrittenLeft
+                );
 
-                return new BoundNullCoalescingOperator(syntax, rewrittenLeft, rewrittenRight, leftPlaceholder: null, leftConversion: null, resultKind, @checked: false, rewrittenResultType);
+                return new BoundNullCoalescingOperator(
+                    syntax,
+                    rewrittenLeft,
+                    rewrittenRight,
+                    leftPlaceholder: null,
+                    leftConversion: null,
+                    resultKind,
+                    @checked: false,
+                    rewrittenResultType
+                );
             }
 
-            if (BoundNode.GetConversion(leftConversion, leftPlaceholder) is { IsIdentity: true } or { Kind: ConversionKind.ExplicitNullable })
+            if (
+                BoundNode.GetConversion(leftConversion, leftPlaceholder)
+                is { IsIdentity: true }
+                    or { Kind: ConversionKind.ExplicitNullable }
+            )
             {
                 var conditionalAccess = rewrittenLeft as BoundLoweredConditionalAccess;
-                if (conditionalAccess != null &&
-                    (conditionalAccess.WhenNullOpt == null || NullableNeverHasValue(conditionalAccess.WhenNullOpt)))
+                if (
+                    conditionalAccess != null
+                    && (
+                        conditionalAccess.WhenNullOpt == null
+                        || NullableNeverHasValue(conditionalAccess.WhenNullOpt)
+                    )
+                )
                 {
                     var notNullAccess = NullableAlwaysHasValue(conditionalAccess.WhenNotNull);
                     if (notNullAccess != null)
@@ -112,7 +181,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                             notNullAccess = conditionalAccess.WhenNotNull;
                         }
 
-                        if (whenNullOpt.IsDefaultValue() && whenNullOpt.Type.SpecialType != SpecialType.System_Decimal)
+                        if (
+                            whenNullOpt.IsDefaultValue()
+                            && whenNullOpt.Type.SpecialType != SpecialType.System_Decimal
+                        )
                         {
                             whenNullOpt = null;
                         }
@@ -130,23 +202,58 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            if (rewrittenLeft.Type.IsNullableType() &&
-                rewrittenRight.Type.Equals(rewrittenLeft.Type.GetNullableUnderlyingType(), TypeCompareKind.AllIgnoreOptions))
+            if (
+                rewrittenLeft.Type.IsNullableType()
+                && rewrittenRight.Type.Equals(
+                    rewrittenLeft.Type.GetNullableUnderlyingType(),
+                    TypeCompareKind.AllIgnoreOptions
+                )
+            )
             {
                 var unwrappedRight = RemoveIdentityConversions(rewrittenRight);
 
                 // Optimize left ?? right to left.GetValueOrDefault() when left is T? and right is the default value of T
-                if (unwrappedRight.IsDefaultValue() &&
-                    TryGetNullableMethod(rewrittenLeft.Syntax, rewrittenLeft.Type, SpecialMember.System_Nullable_T_GetValueOrDefault, out MethodSymbol? getValueOrDefault, isOptional: true))
+                if (
+                    unwrappedRight.IsDefaultValue()
+                    && TryGetNullableMethod(
+                        rewrittenLeft.Syntax,
+                        rewrittenLeft.Type,
+                        SpecialMember.System_Nullable_T_GetValueOrDefault,
+                        out MethodSymbol? getValueOrDefault,
+                        isOptional: true
+                    )
+                )
                 {
-                    return BoundCall.Synthesized(rewrittenLeft.Syntax, rewrittenLeft, initialBindingReceiverIsSubjectToCloning: ThreeState.Unknown, getValueOrDefault);
+                    return BoundCall.Synthesized(
+                        rewrittenLeft.Syntax,
+                        rewrittenLeft,
+                        initialBindingReceiverIsSubjectToCloning: ThreeState.Unknown,
+                        getValueOrDefault
+                    );
                 }
 
                 // Optimize left ?? right to left.GetValueOrDefault(right) when left is T? and right is a side-effectless expression of type T
-                if (unwrappedRight is { ConstantValueOpt: not null } or BoundLocal { LocalSymbol.IsRef: false } or BoundParameter { ParameterSymbol.RefKind: RefKind.None } &&
-                    TryGetNullableMethod(rewrittenLeft.Syntax, rewrittenLeft.Type, SpecialMember.System_Nullable_T_GetValueOrDefaultDefaultValue, out MethodSymbol? getValueOrDefaultDefaultValue, isOptional: true))
+                if (
+                    unwrappedRight
+                        is { ConstantValueOpt: not null }
+                            or BoundLocal { LocalSymbol.IsRef: false }
+                            or BoundParameter { ParameterSymbol.RefKind: RefKind.None }
+                    && TryGetNullableMethod(
+                        rewrittenLeft.Syntax,
+                        rewrittenLeft.Type,
+                        SpecialMember.System_Nullable_T_GetValueOrDefaultDefaultValue,
+                        out MethodSymbol? getValueOrDefaultDefaultValue,
+                        isOptional: true
+                    )
+                )
                 {
-                    return BoundCall.Synthesized(rewrittenLeft.Syntax, rewrittenLeft, initialBindingReceiverIsSubjectToCloning: ThreeState.Unknown, getValueOrDefaultDefaultValue, rewrittenRight);
+                    return BoundCall.Synthesized(
+                        rewrittenLeft.Syntax,
+                        rewrittenLeft,
+                        initialBindingReceiverIsSubjectToCloning: ThreeState.Unknown,
+                        getValueOrDefaultDefaultValue,
+                        rewrittenRight
+                    );
                 }
             }
 
@@ -160,11 +267,27 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundLocal boundTemp = _factory.StoreToTemp(rewrittenLeft, out tempAssignment);
 
             // temp != null
-            BoundExpression nullCheck = _factory.MakeNullCheck(syntax, boundTemp, BinaryOperatorKind.NotEqual);
+            BoundExpression nullCheck = _factory.MakeNullCheck(
+                syntax,
+                boundTemp,
+                BinaryOperatorKind.NotEqual
+            );
 
             // MakeConversion(temp, rewrittenResultType)
-            BoundExpression convertedLeft = GetConvertedLeftForNullCoalescingOperator(boundTemp, leftPlaceholder, leftConversion, rewrittenResultType);
-            Debug.Assert(convertedLeft.HasErrors || convertedLeft.Type!.Equals(rewrittenResultType, TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes));
+            BoundExpression convertedLeft = GetConvertedLeftForNullCoalescingOperator(
+                boundTemp,
+                leftPlaceholder,
+                leftConversion,
+                rewrittenResultType
+            );
+            Debug.Assert(
+                convertedLeft.HasErrors
+                    || convertedLeft.Type!.Equals(
+                        rewrittenResultType,
+                        TypeCompareKind.IgnoreDynamicAndTupleNames
+                            | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    )
+            );
 
             // (temp != null) ? MakeConversion(temp, LeftConversion) : RightOperand
             BoundExpression conditionalExpression = RewriteConditionalOperator(
@@ -174,17 +297,25 @@ namespace Microsoft.CodeAnalysis.CSharp
                 rewrittenAlternative: rewrittenRight,
                 constantValueOpt: null,
                 rewrittenType: rewrittenResultType,
-                isRef: false);
+                isRef: false
+            );
 
             Debug.Assert(conditionalExpression.ConstantValueOpt == null); // we shouldn't have hit this else case otherwise
-            Debug.Assert(conditionalExpression.Type!.Equals(rewrittenResultType, TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes));
+            Debug.Assert(
+                conditionalExpression.Type!.Equals(
+                    rewrittenResultType,
+                    TypeCompareKind.IgnoreDynamicAndTupleNames
+                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                )
+            );
 
             return new BoundSequence(
                 syntax: syntax,
                 locals: ImmutableArray.Create(boundTemp.LocalSymbol),
                 sideEffects: ImmutableArray.Create<BoundExpression>(tempAssignment),
                 value: conditionalExpression,
-                type: rewrittenResultType);
+                type: rewrittenResultType
+            );
         }
 
         private bool IsStringConcat(BoundExpression expression)
@@ -200,14 +331,48 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (method.IsStatic && method.ContainingType.SpecialType == SpecialType.System_String)
             {
-                if ((object)method == (object)_compilation.GetSpecialTypeMember(SpecialMember.System_String__ConcatStringString) ||
-                    (object)method == (object)_compilation.GetSpecialTypeMember(SpecialMember.System_String__ConcatStringStringString) ||
-                    (object)method == (object)_compilation.GetSpecialTypeMember(SpecialMember.System_String__ConcatStringStringStringString) ||
-                    (object)method == (object)_compilation.GetSpecialTypeMember(SpecialMember.System_String__ConcatObject) ||
-                    (object)method == (object)_compilation.GetSpecialTypeMember(SpecialMember.System_String__ConcatObjectObject) ||
-                    (object)method == (object)_compilation.GetSpecialTypeMember(SpecialMember.System_String__ConcatObjectObjectObject) ||
-                    (object)method == (object)_compilation.GetSpecialTypeMember(SpecialMember.System_String__ConcatStringArray) ||
-                    (object)method == (object)_compilation.GetSpecialTypeMember(SpecialMember.System_String__ConcatObjectArray))
+                if (
+                    (object)method
+                        == (object)
+                            _compilation.GetSpecialTypeMember(
+                                SpecialMember.System_String__ConcatStringString
+                            )
+                    || (object)method
+                        == (object)
+                            _compilation.GetSpecialTypeMember(
+                                SpecialMember.System_String__ConcatStringStringString
+                            )
+                    || (object)method
+                        == (object)
+                            _compilation.GetSpecialTypeMember(
+                                SpecialMember.System_String__ConcatStringStringStringString
+                            )
+                    || (object)method
+                        == (object)
+                            _compilation.GetSpecialTypeMember(
+                                SpecialMember.System_String__ConcatObject
+                            )
+                    || (object)method
+                        == (object)
+                            _compilation.GetSpecialTypeMember(
+                                SpecialMember.System_String__ConcatObjectObject
+                            )
+                    || (object)method
+                        == (object)
+                            _compilation.GetSpecialTypeMember(
+                                SpecialMember.System_String__ConcatObjectObjectObject
+                            )
+                    || (object)method
+                        == (object)
+                            _compilation.GetSpecialTypeMember(
+                                SpecialMember.System_String__ConcatStringArray
+                            )
+                    || (object)method
+                        == (object)
+                            _compilation.GetSpecialTypeMember(
+                                SpecialMember.System_String__ConcatObjectArray
+                            )
+                )
                 {
                     return true;
                 }
@@ -232,7 +397,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             return expression;
         }
 
-        private BoundExpression GetConvertedLeftForNullCoalescingOperator(BoundExpression rewrittenLeft, BoundValuePlaceholder? leftPlaceholder, BoundExpression? leftConversion, TypeSymbol rewrittenResultType)
+        private BoundExpression GetConvertedLeftForNullCoalescingOperator(
+            BoundExpression rewrittenLeft,
+            BoundValuePlaceholder? leftPlaceholder,
+            BoundExpression? leftConversion,
+            TypeSymbol rewrittenResultType
+        )
         {
             Debug.Assert(rewrittenLeft != null);
             Debug.Assert(rewrittenLeft.Type is { });
@@ -249,20 +419,45 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var conversionTakesNullableType = leftPlaceholder?.Type?.IsNullableType() == true;
 
-            if (!TypeSymbol.Equals(rewrittenLeftType, rewrittenResultType, TypeCompareKind.ConsiderEverything2)
+            if (
+                !TypeSymbol.Equals(
+                    rewrittenLeftType,
+                    rewrittenResultType,
+                    TypeCompareKind.ConsiderEverything2
+                )
                 && rewrittenLeftType.IsNullableType()
-                && !conversionTakesNullableType)
+                && !conversionTakesNullableType
+            )
             {
                 TypeSymbol strippedLeftType = rewrittenLeftType.GetNullableUnderlyingType();
-                MethodSymbol getValueOrDefault = UnsafeGetNullableMethod(rewrittenLeft.Syntax, rewrittenLeftType, SpecialMember.System_Nullable_T_GetValueOrDefault);
-                rewrittenLeft = BoundCall.Synthesized(rewrittenLeft.Syntax, rewrittenLeft, initialBindingReceiverIsSubjectToCloning: ThreeState.Unknown, getValueOrDefault);
-                if (TypeSymbol.Equals(strippedLeftType, rewrittenResultType, TypeCompareKind.ConsiderEverything2))
+                MethodSymbol getValueOrDefault = UnsafeGetNullableMethod(
+                    rewrittenLeft.Syntax,
+                    rewrittenLeftType,
+                    SpecialMember.System_Nullable_T_GetValueOrDefault
+                );
+                rewrittenLeft = BoundCall.Synthesized(
+                    rewrittenLeft.Syntax,
+                    rewrittenLeft,
+                    initialBindingReceiverIsSubjectToCloning: ThreeState.Unknown,
+                    getValueOrDefault
+                );
+                if (
+                    TypeSymbol.Equals(
+                        strippedLeftType,
+                        rewrittenResultType,
+                        TypeCompareKind.ConsiderEverything2
+                    )
+                )
                 {
                     return rewrittenLeft;
                 }
             }
 
-            rewrittenLeft = ApplyConversionIfNotIdentity(leftConversion, leftPlaceholder, rewrittenLeft);
+            rewrittenLeft = ApplyConversionIfNotIdentity(
+                leftConversion,
+                leftPlaceholder,
+                rewrittenLeft
+            );
 
             return rewrittenLeft;
         }

@@ -29,9 +29,7 @@ namespace System.IO.Tests
             {
                 new ThreadSafeRepro().Execute(directory);
             }
-            catch (Exception e) when (!(e is IOException))
-            {
-            }
+            catch (Exception e) when (!(e is IOException)) { }
         }
 
         [Fact]
@@ -41,79 +39,97 @@ namespace System.IO.Tests
             DirectoryInfo subDirectory1 = rootDirectory.CreateSubdirectory("\u00A0");
             DirectoryInfo subDirectory2 = subDirectory1.CreateSubdirectory(GetTestFileName());
 
-            FSAssert.EqualWhenOrdered(new string[] { subDirectory1.FullName, subDirectory2.FullName }, Directory.EnumerateDirectories(rootDirectory.FullName, string.Empty, SearchOption.AllDirectories));
+            FSAssert.EqualWhenOrdered(
+                new string[] { subDirectory1.FullName, subDirectory2.FullName },
+                Directory.EnumerateDirectories(
+                    rootDirectory.FullName,
+                    string.Empty,
+                    SearchOption.AllDirectories
+                )
+            );
         }
 
-         [Fact]
-         [PlatformSpecific(TestPlatforms.Windows)]
-         public void EnumerateDirectories_TrailingDot()
-         {
-             string prefix = @"\\?\";
-             string tempPath = GetTestFilePath();
-             string fileName = "Test.txt";
+        [Fact]
+        [PlatformSpecific(TestPlatforms.Windows)]
+        public void EnumerateDirectories_TrailingDot()
+        {
+            string prefix = @"\\?\";
+            string tempPath = GetTestFilePath();
+            string fileName = "Test.txt";
 
-             string[] dirPaths = {
-                 Path.Join(prefix, tempPath, "Test"),
-                 Path.Join(prefix, tempPath, "TestDot."),
-                 Path.Join(prefix, tempPath, "TestDotDot..")
-             };
+            string[] dirPaths =
+            {
+                Path.Join(prefix, tempPath, "Test"),
+                Path.Join(prefix, tempPath, "TestDot."),
+                Path.Join(prefix, tempPath, "TestDotDot.."),
+            };
 
-             // Create directories and their files using "\\?\C:\" paths
-             foreach (string dirPath in dirPaths)
-             {
-                 if (Directory.Exists(dirPath))
-                 {
-                     Directory.Delete(dirPath, recursive: true);
-                 }
+            // Create directories and their files using "\\?\C:\" paths
+            foreach (string dirPath in dirPaths)
+            {
+                if (Directory.Exists(dirPath))
+                {
+                    Directory.Delete(dirPath, recursive: true);
+                }
 
-                 Directory.CreateDirectory(dirPath);
+                Directory.CreateDirectory(dirPath);
 
-                 // Directory.Exists should work with directories containing trailing dots and prefixed with \\?\
-                 Assert.True(Directory.Exists(dirPath));
+                // Directory.Exists should work with directories containing trailing dots and prefixed with \\?\
+                Assert.True(Directory.Exists(dirPath));
 
-                 string filePath = Path.Join(dirPath, fileName);
-                 using FileStream fs = File.Create(filePath);
+                string filePath = Path.Join(dirPath, fileName);
+                using FileStream fs = File.Create(filePath);
 
-                 // File.Exists should work with directories containing trailing dots and prefixed with \\?\
-                 Assert.True(File.Exists(filePath));
-             }
+                // File.Exists should work with directories containing trailing dots and prefixed with \\?\
+                Assert.True(File.Exists(filePath));
+            }
 
-             try
-             {
-                 // Enumerate directories and their files using "C:\" paths
-                 DirectoryInfo sourceInfo = new DirectoryInfo(tempPath);
-                 foreach (DirectoryInfo dirInfo in sourceInfo.EnumerateDirectories("*", SearchOption.AllDirectories))
-                 {
-                     // DirectoryInfo.Exists should work with or without \\?\ for folders with trailing dots
-                     Assert.True(dirInfo.Exists);
+            try
+            {
+                // Enumerate directories and their files using "C:\" paths
+                DirectoryInfo sourceInfo = new DirectoryInfo(tempPath);
+                foreach (
+                    DirectoryInfo dirInfo in sourceInfo.EnumerateDirectories(
+                        "*",
+                        SearchOption.AllDirectories
+                    )
+                )
+                {
+                    // DirectoryInfo.Exists should work with or without \\?\ for folders with trailing dots
+                    Assert.True(dirInfo.Exists);
 
-                     if (dirInfo.FullName.EndsWith("."))
-                     {
-                         // Directory.Exists is not expected to work with directories containing trailing dots and not prefixed with \\?\
-                         Assert.False(Directory.Exists(dirInfo.FullName));
-                     }
+                    if (dirInfo.FullName.EndsWith("."))
+                    {
+                        // Directory.Exists is not expected to work with directories containing trailing dots and not prefixed with \\?\
+                        Assert.False(Directory.Exists(dirInfo.FullName));
+                    }
 
-                     foreach (FileInfo fileInfo in dirInfo.EnumerateFiles("*.*", SearchOption.TopDirectoryOnly))
-                     {
-                         // FileInfo.Exists should work with or without \\?\ for folders with trailing dots
-                         Assert.True(fileInfo.Exists);
+                    foreach (
+                        FileInfo fileInfo in dirInfo.EnumerateFiles(
+                            "*.*",
+                            SearchOption.TopDirectoryOnly
+                        )
+                    )
+                    {
+                        // FileInfo.Exists should work with or without \\?\ for folders with trailing dots
+                        Assert.True(fileInfo.Exists);
 
-                         if (fileInfo.Directory.FullName.EndsWith("."))
-                         {
-                             // File.Exists is not expected to work with directories containing trailing dots and not prefixed with \\?\
-                             Assert.False(File.Exists(fileInfo.FullName));
-                         }
-                     }
-                 }
-             }
-             finally
-             {
-                 foreach (string dirPath in dirPaths)
-                 {
-                     Directory.Delete(dirPath, recursive: true);
-                 }
-             }
-         }
+                        if (fileInfo.Directory.FullName.EndsWith("."))
+                        {
+                            // File.Exists is not expected to work with directories containing trailing dots and not prefixed with \\?\
+                            Assert.False(File.Exists(fileInfo.FullName));
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                foreach (string dirPath in dirPaths)
+                {
+                    Directory.Delete(dirPath, recursive: true);
+                }
+            }
+        }
 
         class ThreadSafeRepro
         {
@@ -121,8 +137,7 @@ namespace System.IO.Tests
 
             void Enumerate(IEnumerator<string> s)
             {
-                while (s.MoveNext())
-                { }
+                while (s.MoveNext()) { }
                 s.Dispose();
             }
 

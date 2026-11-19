@@ -59,12 +59,23 @@ namespace System.ComponentModel.Tests
         public static IEnumerable<object[]> Ctor_Type_Object_String_Exception_TestData()
         {
             yield return new object[] { null, null, "message", null };
-            yield return new object[] { typeof(LicenseException), new object(), "message", new DivideByZeroException() };
+            yield return new object[]
+            {
+                typeof(LicenseException),
+                new object(),
+                "message",
+                new DivideByZeroException(),
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_Type_Object_String_Exception_TestData))]
-        public void Ctor_Type_Object_String_Exception(Type type, object instance, string message, Exception innerException)
+        public void Ctor_Type_Object_String_Exception(
+            Type type,
+            object instance,
+            string message,
+            Exception innerException
+        )
         {
             var exception = new LicenseException(type, instance, message, innerException);
             Assert.Same(innerException, exception.InnerException);
@@ -73,7 +84,10 @@ namespace System.ComponentModel.Tests
             Assert.Equal(message, exception.Message);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported)
+        )]
         public void Ctor_SerializationInfo_StreamingContext()
         {
             using (var stream = new MemoryStream())

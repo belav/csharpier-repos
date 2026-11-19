@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,103 +29,114 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
-using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
+using Mono;
 #if !MOBILE
 using System.Security.Permissions;
 #endif
-using Mono;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-	static partial class X509Helper
-	{
-		static ISystemCertificateProvider CertificateProvider => DependencyInjector.SystemProvider.CertificateProvider;
+    static partial class X509Helper
+    {
+        static ISystemCertificateProvider CertificateProvider =>
+            DependencyInjector.SystemProvider.CertificateProvider;
 
-		public static X509CertificateImpl InitFromCertificate (X509Certificate cert)
-		{
-			return CertificateProvider.Import (cert, CertificateImportFlags.None);
-		}
+        public static X509CertificateImpl InitFromCertificate(X509Certificate cert)
+        {
+            return CertificateProvider.Import(cert, CertificateImportFlags.None);
+        }
 
-		public static X509CertificateImpl InitFromCertificate (X509CertificateImpl impl)
-		{
-			return impl?.Clone ();
-		}
+        public static X509CertificateImpl InitFromCertificate(X509CertificateImpl impl)
+        {
+            return impl?.Clone();
+        }
 
-		public static bool IsValid (X509CertificateImpl impl)
-		{
-			return impl != null && impl.IsValid;
-		}
+        public static bool IsValid(X509CertificateImpl impl)
+        {
+            return impl != null && impl.IsValid;
+        }
 
-		internal static void ThrowIfContextInvalid (X509CertificateImpl impl)
-		{
-			if (!IsValid (impl))
-				throw GetInvalidContextException ();
-		}
+        internal static void ThrowIfContextInvalid(X509CertificateImpl impl)
+        {
+            if (!IsValid(impl))
+                throw GetInvalidContextException();
+        }
 
-		internal static Exception GetInvalidContextException ()
-		{
-			return new CryptographicException (Locale.GetText ("Certificate instance is empty."));
-		}
+        internal static Exception GetInvalidContextException()
+        {
+            return new CryptographicException(Locale.GetText("Certificate instance is empty."));
+        }
 
-		public static X509CertificateImpl Import (byte[] rawData)
-		{
-			return CertificateProvider.Import (rawData);
-		}
+        public static X509CertificateImpl Import(byte[] rawData)
+        {
+            return CertificateProvider.Import(rawData);
+        }
 
-		public static X509CertificateImpl Import (byte[] rawData, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
-		{
-			return CertificateProvider.Import (rawData, password, keyStorageFlags);
-		}
+        public static X509CertificateImpl Import(
+            byte[] rawData,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
+        {
+            return CertificateProvider.Import(rawData, password, keyStorageFlags);
+        }
 
-		public static byte[] Export (X509CertificateImpl impl, X509ContentType contentType, SafePasswordHandle password)
-		{
-			ThrowIfContextInvalid (impl);
-			return impl.Export (contentType, password);
-		}
+        public static byte[] Export(
+            X509CertificateImpl impl,
+            X509ContentType contentType,
+            SafePasswordHandle password
+        )
+        {
+            ThrowIfContextInvalid(impl);
+            return impl.Export(contentType, password);
+        }
 
-		public static bool Equals (X509CertificateImpl first, X509CertificateImpl second)
-		{
-			if (!IsValid (first) || !IsValid (second))
-				return false;
+        public static bool Equals(X509CertificateImpl first, X509CertificateImpl second)
+        {
+            if (!IsValid(first) || !IsValid(second))
+                return false;
 
-			bool result;
-			if (first.Equals (second, out result))
-				return result;
+            bool result;
+            if (first.Equals(second, out result))
+                return result;
 
-			var firstRaw = first.RawData;
-			var secondRaw = second.RawData;
+            var firstRaw = first.RawData;
+            var secondRaw = second.RawData;
 
-			if (firstRaw == null)
-				return secondRaw == null;
-			else if (secondRaw == null)
-				return false;
+            if (firstRaw == null)
+                return secondRaw == null;
+            else if (secondRaw == null)
+                return false;
 
-			if (firstRaw.Length != secondRaw.Length)
-				return false;
+            if (firstRaw.Length != secondRaw.Length)
+                return false;
 
-			for (int i = 0; i < firstRaw.Length; i++) {
-				if (firstRaw [i] != secondRaw [i])
-					return false;
-			}
+            for (int i = 0; i < firstRaw.Length; i++)
+            {
+                if (firstRaw[i] != secondRaw[i])
+                    return false;
+            }
 
-			return true;
-		}
+            return true;
+        }
 
-		// almost every byte[] returning function has a string equivalent
-		// sadly the BitConverter insert dash between bytes :-(
-		public static string ToHexString (byte[] data)
-		{
-			if (data != null) {
-				StringBuilder sb = new StringBuilder ();
-				for (int i = 0; i < data.Length; i++)
-					sb.Append (data[i].ToString ("X2"));
-				return sb.ToString ();
-			}
-			else
-				return null;
-		}
-	}
+        // almost every byte[] returning function has a string equivalent
+        // sadly the BitConverter insert dash between bytes :-(
+        public static string ToHexString(byte[] data)
+        {
+            if (data != null)
+            {
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < data.Length; i++)
+                    sb.Append(data[i].ToString("X2"));
+                return sb.ToString();
+            }
+            else
+                return null;
+        }
+    }
 }

@@ -20,13 +20,17 @@ namespace Nested
             [MinLength(5)]
             public string P1 { get; set; } = string.Empty;
 
-            [Microsoft.Extensions.Options.ValidateObjectMembers(typeof(Container2.Container3.SecondValidator))]
+            [Microsoft.Extensions.Options.ValidateObjectMembers(
+                typeof(Container2.Container3.SecondValidator)
+            )]
             public SecondModel? P2 { get; set; }
 
             [Microsoft.Extensions.Options.ValidateObjectMembers]
             public ThirdModel P3 { get; set; }
 
-            [Microsoft.Extensions.Options.ValidateObjectMembers(typeof(Container4.Container5.ThirdValidator))]
+            [Microsoft.Extensions.Options.ValidateObjectMembers(
+                typeof(Container4.Container5.ThirdValidator)
+            )]
             public SecondModel? P4 { get; set; }
         }
 
@@ -39,9 +43,7 @@ namespace Nested
 
         public struct ThirdModel
         {
-            public ThirdModel(int _)
-            {
-            }
+            public ThirdModel(int _) { }
 
             [Required]
             [MinLength(5)]
@@ -59,14 +61,10 @@ namespace Nested
             }
 
             [OptionsValidator]
-            public partial struct FirstValidator : IValidateOptions<Container1.FirstModel>
-            {
-            }
+            public partial struct FirstValidator : IValidateOptions<Container1.FirstModel> { }
 
             [OptionsValidator]
-            public partial struct SecondValidator : IValidateOptions<Container1.SecondModel>
-            {
-            }
+            public partial struct SecondValidator : IValidateOptions<Container1.SecondModel> { }
         }
     }
 
@@ -80,26 +78,20 @@ namespace Nested
             }
 
             [OptionsValidator]
-            public partial struct ThirdValidator : IValidateOptions<Container1.SecondModel>
-            {
-            }
+            public partial struct ThirdValidator : IValidateOptions<Container1.SecondModel> { }
         }
     }
 
     public partial struct Container6
     {
         [OptionsValidator]
-        public partial struct FourthValidator : IValidateOptions<Container1.SecondModel>
-        {
-        }
+        public partial struct FourthValidator : IValidateOptions<Container1.SecondModel> { }
     }
 
     public partial record struct Container7
     {
         [OptionsValidator]
-        public partial record struct FifthValidator : IValidateOptions<Container1.SecondModel>
-        {
-        }
+        public partial record struct FifthValidator : IValidateOptions<Container1.SecondModel> { }
     }
 }
 

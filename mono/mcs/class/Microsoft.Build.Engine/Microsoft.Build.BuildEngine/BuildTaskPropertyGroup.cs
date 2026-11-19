@@ -24,39 +24,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-
 using System;
 using System.Collections.Generic;
 using System.Xml;
 
-namespace Microsoft.Build.BuildEngine {
-	
-	internal class BuildTaskPropertyGroup : BuildPropertyGroup, IBuildTask {
-		
-		public bool ContinueOnError {
-			get; set;
-		}
-		
-		internal BuildTaskPropertyGroup (XmlElement element, Target target)
-			: base (element, target.Project, null, false, true)
-		{
-		}
-		
-		public bool Execute ()
-		{
-			Evaluate ();
-			return true;
-		}
+namespace Microsoft.Build.BuildEngine
+{
+    internal class BuildTaskPropertyGroup : BuildPropertyGroup, IBuildTask
+    {
+        public bool ContinueOnError { get; set; }
 
-		IEnumerable<string> IBuildTask.GetAttributes ()
-		{
-			return GetAttributes ();
-		}
+        internal BuildTaskPropertyGroup(XmlElement element, Target target)
+            : base(element, target.Project, null, false, true) { }
 
-		public bool ResolveOutputItems ()
-		{
-			return true;
-		}
-	}
+        public bool Execute()
+        {
+            Evaluate();
+            return true;
+        }
+
+        IEnumerable<string> IBuildTask.GetAttributes()
+        {
+            return GetAttributes();
+        }
+
+        public bool ResolveOutputItems()
+        {
+            return true;
+        }
+    }
 }
-

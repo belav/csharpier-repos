@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Util {
+namespace System.Web.Util
+{
     using System;
     using System.Collections.Generic;
     using System.Web;
@@ -17,16 +18,19 @@ namespace System.Web.Util {
     //
     // Type is not thread safe.
 
-    internal struct SubscriptionQueue<T> {
-
+    internal struct SubscriptionQueue<T>
+    {
         private LinkedList<T> _list;
 
-        public bool IsEmpty {
+        public bool IsEmpty
+        {
             get { return (_list == null || _list.Count == 0); }
         }
 
-        public ISubscriptionToken Enqueue(T value) {
-            if (_list == null) {
+        public ISubscriptionToken Enqueue(T value)
+        {
+            if (_list == null)
+            {
                 // lazily instantiate the list
                 _list = new LinkedList<T>();
             }
@@ -35,51 +39,62 @@ namespace System.Web.Util {
             return new SubscriptionToken(node);
         }
 
-        public void FireAndComplete(Action<T> action) {
-            try {
+        public void FireAndComplete(Action<T> action)
+        {
+            try
+            {
                 T value;
                 // Use a while loop instead of a foreach since the list might be changing
-                while (TryDequeue(out value)) {
+                while (TryDequeue(out value))
+                {
                     action(value);
                 }
             }
-            finally {
+            finally
+            {
                 _list = null;
             }
         }
 
-        private bool TryDequeue(out T result) {
-            if (_list != null && _list.First != null) {
+        private bool TryDequeue(out T result)
+        {
+            if (_list != null && _list.First != null)
+            {
                 LinkedListNode<T> theNode = _list.First;
                 _list.RemoveFirst(); // also marks the SubscriptionToken as inactive
                 result = theNode.Value;
                 theNode.Value = default(T); // unroot the value in case it's large
                 return true;
             }
-            else {
+            else
+            {
                 result = default(T); // unroot the value in case it's large
                 return false;
             }
         }
 
-        private sealed class SubscriptionToken : ISubscriptionToken {
+        private sealed class SubscriptionToken : ISubscriptionToken
+        {
             private readonly LinkedListNode<T> _node;
 
-            public SubscriptionToken(LinkedListNode<T> node) {
+            public SubscriptionToken(LinkedListNode<T> node)
+            {
                 _node = node;
             }
 
-            public bool IsActive {
+            public bool IsActive
+            {
                 get { return (_node.List != null); }
             }
 
-            public void Unsubscribe() {
-                if (IsActive) {
+            public void Unsubscribe()
+            {
+                if (IsActive)
+                {
                     _node.List.Remove(_node);
                     _node.Value = default(T); // unroot the value in case it's large
                 }
             }
         }
-
     }
 }

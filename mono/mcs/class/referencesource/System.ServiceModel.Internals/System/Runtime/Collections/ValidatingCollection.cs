@@ -5,14 +5,12 @@
 namespace System.Runtime.Collections
 {
     using System.Collections.ObjectModel;
- 
+
     // simple helper class to allow passing in a func that performs validations of
     // acceptible values
     class ValidatingCollection<T> : Collection<T>
     {
-        public ValidatingCollection()
-        {
-        }
+        public ValidatingCollection() { }
 
         public Action<T> OnAddValidationCallback { get; set; }
         public Action OnMutateValidationCallback { get; set; }

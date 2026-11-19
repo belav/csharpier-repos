@@ -12,7 +12,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
     /// </summary>
     internal partial class StaticMemberSelection : UserControl
     {
-
         public string SelectDependents => ServicesVSResources.Select_Dependents;
         public string MembersHeader => ServicesVSResources.Members;
         public string SelectAll => ServicesVSResources.Select_All;
@@ -27,13 +26,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
             InitializeComponent();
         }
 
-        private void SelectDependentsButton_Click(object sender, RoutedEventArgs e)
-            => ViewModel.SelectDependents();
+        private void SelectDependentsButton_Click(object sender, RoutedEventArgs e) =>
+            ViewModel.SelectDependents();
 
-        private void SelectAllButton_Click(object sender, RoutedEventArgs e)
-            => ViewModel.SelectAll();
+        private void SelectAllButton_Click(object sender, RoutedEventArgs e) =>
+            ViewModel.SelectAll();
 
-        private void DeselectAllButton_Click(object sender, RoutedEventArgs e)
-            => ViewModel.DeselectAll();
+        private void DeselectAllButton_Click(object sender, RoutedEventArgs e) =>
+            ViewModel.DeselectAll();
     }
 }

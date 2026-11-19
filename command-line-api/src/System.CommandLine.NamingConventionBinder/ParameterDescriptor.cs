@@ -14,9 +14,7 @@ public class ParameterDescriptor : IValueDescriptor
     private readonly ParameterInfo _parameterInfo;
     private bool? _allowsNull;
 
-    internal ParameterDescriptor(
-        ParameterInfo parameterInfo,
-        IMethodDescriptor parent)
+    internal ParameterDescriptor(ParameterInfo parameterInfo, IMethodDescriptor parent)
     {
         Parent = parent;
         _parameterInfo = parameterInfo;
@@ -51,9 +49,9 @@ public class ParameterDescriptor : IValueDescriptor
         }
     }
 
-    internal static bool CalculateAllowsNull(ParameterInfo parameterInfo) 
-        => parameterInfo.ParameterType.IsNullable() ||
-           parameterInfo.HasDefaultValue && parameterInfo.DefaultValue is null;
+    internal static bool CalculateAllowsNull(ParameterInfo parameterInfo) =>
+        parameterInfo.ParameterType.IsNullable()
+        || parameterInfo.HasDefaultValue && parameterInfo.DefaultValue is null;
 
     /// <inheritdoc />
     public object? GetDefaultValue() =>

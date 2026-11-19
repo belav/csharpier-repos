@@ -14,14 +14,13 @@ namespace System.IdentityModel.Metadata
     public class ApplicationServiceDescriptor : WebServiceDescriptor
     {
         Collection<EndpointReference> endpoints = new Collection<EndpointReference>();
-        Collection<EndpointReference> passiveRequestorEndpoints = new Collection<EndpointReference>();
+        Collection<EndpointReference> passiveRequestorEndpoints =
+            new Collection<EndpointReference>();
 
         /// <summary>
         /// Empty constructor.
         /// </summary>
-        public ApplicationServiceDescriptor()
-        {
-        }
+        public ApplicationServiceDescriptor() { }
 
         /// <summary>
         /// Gets the endpoints of this application service.

@@ -10,10 +10,24 @@ namespace System.Reflection.Emit
         internal readonly MethodBuilderImpl _methodBuilder;
         internal bool _isDefaultConstructor;
 
-        public ConstructorBuilderImpl(string name, MethodAttributes attributes, CallingConventions callingConvention,
-            Type[]? parameterTypes, ModuleBuilderImpl mod, TypeBuilderImpl type)
+        public ConstructorBuilderImpl(
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type[]? parameterTypes,
+            ModuleBuilderImpl mod,
+            TypeBuilderImpl type
+        )
         {
-            _methodBuilder = new MethodBuilderImpl(name, attributes, callingConvention, null, parameterTypes, mod, type);
+            _methodBuilder = new MethodBuilderImpl(
+                name,
+                attributes,
+                callingConvention,
+                null,
+                parameterTypes,
+                mod,
+                type
+            );
 
             type._methodDefinitions.Add(_methodBuilder);
         }
@@ -24,8 +38,11 @@ namespace System.Reflection.Emit
             set => _methodBuilder.InitLocals = value;
         }
 
-        protected override ParameterBuilder DefineParameterCore(int iSequence, ParameterAttributes attributes, string strParamName) =>
-            _methodBuilder.DefineParameter(iSequence, attributes, strParamName);
+        protected override ParameterBuilder DefineParameterCore(
+            int iSequence,
+            ParameterAttributes attributes,
+            string strParamName
+        ) => _methodBuilder.DefineParameter(iSequence, attributes, strParamName);
 
         protected override ILGenerator GetILGeneratorCore(int streamSize)
         {
@@ -37,8 +54,10 @@ namespace System.Reflection.Emit
             return _methodBuilder.GetILGenerator(streamSize);
         }
 
-        protected override void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute) =>
-            _methodBuilder.SetCustomAttribute(con, binaryAttribute);
+        protected override void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        ) => _methodBuilder.SetCustomAttribute(con, binaryAttribute);
 
         protected override void SetImplementationFlagsCore(MethodImplAttributes attributes) =>
             _methodBuilder.SetImplementationFlags(attributes);
@@ -68,16 +87,36 @@ namespace System.Reflection.Emit
 
         public override Type? ReflectedType => _methodBuilder.ReflectedType;
 
-        public override MethodImplAttributes GetMethodImplementationFlags() => _methodBuilder.GetMethodImplementationFlags();
+        public override MethodImplAttributes GetMethodImplementationFlags() =>
+            _methodBuilder.GetMethodImplementationFlags();
 
-        public override RuntimeMethodHandle MethodHandle => throw new NotSupportedException(SR.NotSupported_DynamicModule);
-        public override object[] GetCustomAttributes(bool inherit) => throw new NotSupportedException(SR.NotSupported_DynamicModule);
-        public override object[] GetCustomAttributes(Type attributeType, bool inherit) => throw new NotSupportedException(SR.NotSupported_DynamicModule);
-        public override ParameterInfo[] GetParameters() => _methodBuilder.GetParameters();
-        public override object Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
-            => throw new NotSupportedException(SR.NotSupported_DynamicModule);
-        public override object Invoke(BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture) =>
+        public override RuntimeMethodHandle MethodHandle =>
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
-        public override bool IsDefined(Type attributeType, bool inherit) => throw new NotSupportedException(SR.NotSupported_DynamicModule);
+
+        public override object[] GetCustomAttributes(bool inherit) =>
+            throw new NotSupportedException(SR.NotSupported_DynamicModule);
+
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
+            throw new NotSupportedException(SR.NotSupported_DynamicModule);
+
+        public override ParameterInfo[] GetParameters() => _methodBuilder.GetParameters();
+
+        public override object Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        ) => throw new NotSupportedException(SR.NotSupported_DynamicModule);
+
+        public override object Invoke(
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        ) => throw new NotSupportedException(SR.NotSupported_DynamicModule);
+
+        public override bool IsDefined(Type attributeType, bool inherit) =>
+            throw new NotSupportedException(SR.NotSupported_DynamicModule);
     }
 }

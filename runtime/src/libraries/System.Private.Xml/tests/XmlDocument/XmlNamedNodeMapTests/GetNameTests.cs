@@ -11,7 +11,9 @@ namespace System.Xml.XmlDocumentTests
         public static void EmptyElementCountTest()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<elem1 child1='' child2='duu' child3='e1;e2;' child4='a1' child5='goody'> text node two text node three </elem1>");
+            xmlDocument.LoadXml(
+                "<elem1 child1='' child2='duu' child3='e1;e2;' child4='a1' child5='goody'> text node two text node three </elem1>"
+            );
 
             var namedNodeMap = (XmlNamedNodeMap)xmlDocument.FirstChild.Attributes;
 

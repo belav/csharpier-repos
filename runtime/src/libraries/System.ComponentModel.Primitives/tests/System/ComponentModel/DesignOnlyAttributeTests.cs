@@ -21,7 +21,12 @@ namespace System.ComponentModel.Tests
         public static IEnumerable<object[]> Equals_TestData()
         {
             yield return new object[] { DesignOnlyAttribute.Yes, DesignOnlyAttribute.Yes, true };
-            yield return new object[] { DesignOnlyAttribute.No, new DesignOnlyAttribute(false), true };
+            yield return new object[]
+            {
+                DesignOnlyAttribute.No,
+                new DesignOnlyAttribute(false),
+                true,
+            };
             yield return new object[] { DesignOnlyAttribute.Yes, DesignOnlyAttribute.No, false };
 
             yield return new object[] { DesignOnlyAttribute.Yes, new object(), false };
@@ -30,7 +35,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(DesignOnlyAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            DesignOnlyAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is DesignOnlyAttribute otherAttribute)
@@ -48,7 +57,10 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(DefaultProperties_TestData))]
-        public void DefaultProperties_GetDesignOnly_ReturnsExpected(DesignOnlyAttribute attribute, bool expectedDesignOnly)
+        public void DefaultProperties_GetDesignOnly_ReturnsExpected(
+            DesignOnlyAttribute attribute,
+            bool expectedDesignOnly
+        )
         {
             Assert.Equal(expectedDesignOnly, attribute.IsDesignOnly);
             Assert.Equal(!expectedDesignOnly, attribute.IsDefaultAttribute());

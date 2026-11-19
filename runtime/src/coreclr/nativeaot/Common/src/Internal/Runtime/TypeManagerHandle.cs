@@ -34,18 +34,12 @@ namespace Internal.Runtime
 
         public bool IsNull
         {
-            get
-            {
-                return _handleValue == null;
-            }
+            get { return _handleValue == null; }
         }
 
         public unsafe IntPtr OsModuleBase
         {
-            get
-            {
-                return _handleValue->OsHandle;
-            }
+            get { return _handleValue->OsHandle; }
         }
     }
 }

@@ -19,7 +19,8 @@ namespace System.CommandLine.Suggest
 
             var provider = new CombineSuggestionRegistration(
                 new GlobalToolsSuggestionRegistration(),
-                new FileSuggestionRegistration());
+                new FileSuggestionRegistration()
+            );
             var dispatcher = new SuggestionDispatcher(provider);
             return await dispatcher.InvokeAsync(args);
         }

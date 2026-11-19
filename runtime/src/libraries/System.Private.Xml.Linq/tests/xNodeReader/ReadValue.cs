@@ -16,7 +16,12 @@ namespace CoreXml.Test.XLinq
             //[TestCase(Name = "ReadValue", Desc = "ReadValue")]
             public partial class TCReadValue : BridgeHelpers
             {
-                private bool VerifyInvalidReadValue(int iBufferSize, int iIndex, int iCount, Type exceptionType)
+                private bool VerifyInvalidReadValue(
+                    int iBufferSize,
+                    int iIndex,
+                    int iCount,
+                    Type exceptionType
+                )
                 {
                     bool bPassed = false;
                     char[] buffer = new char[iBufferSize];
@@ -74,7 +79,11 @@ namespace CoreXml.Test.XLinq
                         }
                     }
 
-                    TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, 5), 5, "Didn't read 5 chars");
+                    TestLog.Compare(
+                        DataReader.ReadValueChunk(buffer, 0, 5),
+                        5,
+                        "Didn't read 5 chars"
+                    );
                     TestLog.Compare("value", new string(buffer), "Strings don't match");
                 }
 
@@ -114,7 +123,9 @@ namespace CoreXml.Test.XLinq
                 public void TestReadValueOnAttribute0()
                 {
                     char[] buffer = new char[5];
-                    XmlReader DataReader = GetReader(new StringReader("<root name=\"value\">value</root>"));
+                    XmlReader DataReader = GetReader(
+                        new StringReader("<root name=\"value\">value</root>")
+                    );
                     PositionOnElement(DataReader, "root");
                     DataReader.MoveToNextAttribute();
 
@@ -130,7 +141,11 @@ namespace CoreXml.Test.XLinq
                             return;
                         }
                     }
-                    TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, 5), 5, "Didn't read 5 chars");
+                    TestLog.Compare(
+                        DataReader.ReadValueChunk(buffer, 0, 5),
+                        5,
+                        "Didn't read 5 chars"
+                    );
                     TestLog.Compare("value", new string(buffer), "Strings don't match");
                     TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, 5), 0, "Did read 5 chars");
                 }
@@ -139,7 +154,9 @@ namespace CoreXml.Test.XLinq
                 public void TestReadValueOnAttribute1()
                 {
                     char[] buffer = new char[5];
-                    XmlReader DataReader = GetReader(new StringReader("<root name=\"value\">value</root>"));
+                    XmlReader DataReader = GetReader(
+                        new StringReader("<root name=\"value\">value</root>")
+                    );
                     PositionOnElement(DataReader, "root");
                     // This takes to text node of attribute.
                     DataReader.MoveToNextAttribute();
@@ -156,16 +173,36 @@ namespace CoreXml.Test.XLinq
                             return;
                         }
                     }
-                    TestLog.Compare(DataReader.ReadAttributeValue(), true, "Didn't read attribute value");
-                    TestLog.Compare(DataReader.Value, "value", "Didn't read correct attribute value");
-                    TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, 5), 5, "Didn't read 5 chars");
+                    TestLog.Compare(
+                        DataReader.ReadAttributeValue(),
+                        true,
+                        "Didn't read attribute value"
+                    );
+                    TestLog.Compare(
+                        DataReader.Value,
+                        "value",
+                        "Didn't read correct attribute value"
+                    );
+                    TestLog.Compare(
+                        DataReader.ReadValueChunk(buffer, 0, 5),
+                        5,
+                        "Didn't read 5 chars"
+                    );
                     TestLog.Compare("value", new string(buffer), "Strings don't match");
                     TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, 5), 0, "Did read 5 chars");
                     DataReader.MoveToElement();
                     DataReader.Read();
-                    TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, 5), 5, "Didn't read 5 chars on text node");
+                    TestLog.Compare(
+                        DataReader.ReadValueChunk(buffer, 0, 5),
+                        5,
+                        "Didn't read 5 chars on text node"
+                    );
                     TestLog.Compare("value", new string(buffer), "Strings don't match");
-                    TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, 5), 0, "Did read 5 chars on text node");
+                    TestLog.Compare(
+                        DataReader.ReadValueChunk(buffer, 0, 5),
+                        0,
+                        "Did read 5 chars on text node"
+                    );
                 }
 
                 //[Variation("ReadValue on empty buffer", Priority = 0)]
@@ -286,10 +323,18 @@ namespace CoreXml.Test.XLinq
                         }
                     }
 
-                    TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, 5), 5, "Didn't read first 5");
+                    TestLog.Compare(
+                        DataReader.ReadValueChunk(buffer, 0, 5),
+                        5,
+                        "Didn't read first 5"
+                    );
                     TestLog.Compare("01234", new string(buffer), "First strings don't match");
 
-                    TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, 5), 5, "Didn't read second 5 chars");
+                    TestLog.Compare(
+                        DataReader.ReadValueChunk(buffer, 0, 5),
+                        5,
+                        "Didn't read second 5 chars"
+                    );
                     TestLog.Compare("56789", new string(buffer), "Second strings don't match");
                 }
 
@@ -343,7 +388,11 @@ namespace CoreXml.Test.XLinq
 
                     for (index = 0; index < buffer.Length; index++)
                     {
-                        TestLog.Compare(DataReader.ReadValueChunk(buffer, index, 1), 1, "Read " + index);
+                        TestLog.Compare(
+                            DataReader.ReadValueChunk(buffer, index, 1),
+                            1,
+                            "Read " + index
+                        );
                     }
 
                     TestLog.Compare("0123456789", new string(buffer), "Strings don't match");
@@ -376,7 +425,11 @@ namespace CoreXml.Test.XLinq
                     int index = 0;
                     for (index = 0; index < buffer.Length; index++)
                     {
-                        TestLog.Compare(DataReader.ReadValueChunk(buffer, index, 1), 1, "Read " + index);
+                        TestLog.Compare(
+                            DataReader.ReadValueChunk(buffer, index, 1),
+                            1,
+                            "Read " + index
+                        );
                     }
 
                     TestLog.Compare(val, new string(buffer), "Strings don't match");
@@ -390,7 +443,9 @@ namespace CoreXml.Test.XLinq
                     string val = new string('x', size);
                     try
                     {
-                        XmlReader DataReader = GetReader(new StringReader("<root>" + val + "</notroot>"));
+                        XmlReader DataReader = GetReader(
+                            new StringReader("<root>" + val + "</notroot>")
+                        );
                         PositionOnElement(DataReader, "root");
                         DataReader.Read();
                         if (!DataReader.CanReadValueChunk)
@@ -408,7 +463,11 @@ namespace CoreXml.Test.XLinq
                         int index = 0;
                         for (index = 0; index < buffer.Length; index++)
                         {
-                            TestLog.Compare(DataReader.ReadValueChunk(buffer, index, 1), 1, "Read " + index);
+                            TestLog.Compare(
+                                DataReader.ReadValueChunk(buffer, index, 1),
+                                1,
+                                "Read " + index
+                            );
                         }
                         TestLog.Compare(val, new string(buffer), "Strings don't match");
                         DataReader.Read();
@@ -442,28 +501,41 @@ namespace CoreXml.Test.XLinq
                         }
                     }
 
-                    TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, strExpected.Length), strExpected.Length, "ReadValue1");
+                    TestLog.Compare(
+                        DataReader.ReadValueChunk(buffer, 0, strExpected.Length),
+                        strExpected.Length,
+                        "ReadValue1"
+                    );
                     TestLog.Compare(new string(buffer), strExpected, "Str1");
                     TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, 1), 0, "ReadValue2");
-                    TestLog.Compare(VerifyNode(DataReader, XmlNodeType.Element, "ENTITY2", string.Empty), "Verify");
+                    TestLog.Compare(
+                        VerifyNode(DataReader, XmlNodeType.Element, "ENTITY2", string.Empty),
+                        "Verify"
+                    );
                 }
 
                 //[Variation("ReadValue with count > buffer size")]
                 public void TestReadValue7()
                 {
-                    BoolToLTMResult(VerifyInvalidReadValue(5, 0, 6, typeof(ArgumentOutOfRangeException)));
+                    BoolToLTMResult(
+                        VerifyInvalidReadValue(5, 0, 6, typeof(ArgumentOutOfRangeException))
+                    );
                 }
 
                 //[Variation("ReadValue with index > buffer size")]
                 public void TestReadValue8()
                 {
-                    BoolToLTMResult(VerifyInvalidReadValue(5, 5, 1, typeof(ArgumentOutOfRangeException)));
+                    BoolToLTMResult(
+                        VerifyInvalidReadValue(5, 5, 1, typeof(ArgumentOutOfRangeException))
+                    );
                 }
 
                 //[Variation("ReadValue with index + count exceeds buffer")]
                 public void TestReadValue10()
                 {
-                    BoolToLTMResult(VerifyInvalidReadValue(5, 2, 5, typeof(ArgumentOutOfRangeException)));
+                    BoolToLTMResult(
+                        VerifyInvalidReadValue(5, 2, 5, typeof(ArgumentOutOfRangeException))
+                    );
                 }
 
                 //[Variation("ReadValue with combination Text, CDATA and Whitespace")]
@@ -489,7 +561,11 @@ namespace CoreXml.Test.XLinq
                         }
                     }
 
-                    TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, buffer.Length), strExpected.Length, "ReadValue");
+                    TestLog.Compare(
+                        DataReader.ReadValueChunk(buffer, 0, buffer.Length),
+                        strExpected.Length,
+                        "ReadValue"
+                    );
                     TestLog.Compare(new string(buffer), strExpected, "str");
                 }
 
@@ -515,7 +591,11 @@ namespace CoreXml.Test.XLinq
                         }
                     }
 
-                    TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, buffer.Length), strExpected.Length, "ReadValue");
+                    TestLog.Compare(
+                        DataReader.ReadValueChunk(buffer, 0, buffer.Length),
+                        strExpected.Length,
+                        "ReadValue"
+                    );
                     TestLog.Compare(new string(buffer), strExpected, "str");
                 }
 
@@ -573,17 +653,29 @@ namespace CoreXml.Test.XLinq
                             return;
                         }
                     }
-                    TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, buffer.Length), strExpected.Length, "ReadValue1");
+                    TestLog.Compare(
+                        DataReader.ReadValueChunk(buffer, 0, buffer.Length),
+                        strExpected.Length,
+                        "ReadValue1"
+                    );
                     TestLog.Compare(new string(buffer), strExpected, "str1");
 
                     // Now on CDATA.
                     DataReader.Read();
-                    TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, buffer.Length), strExpected.Length, "ReadValue2");
+                    TestLog.Compare(
+                        DataReader.ReadValueChunk(buffer, 0, buffer.Length),
+                        strExpected.Length,
+                        "ReadValue2"
+                    );
                     TestLog.Compare(new string(buffer), strExpected, "str2");
 
                     // Now back on Text
                     DataReader.Read();
-                    TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, buffer.Length), strExpected.Length, "ReadValue3");
+                    TestLog.Compare(
+                        DataReader.ReadValueChunk(buffer, 0, buffer.Length),
+                        strExpected.Length,
+                        "ReadValue3"
+                    );
                     TestLog.Compare(new string(buffer), strExpected, "str3");
                 }
 
@@ -616,7 +708,11 @@ namespace CoreXml.Test.XLinq
                     }
                     catch (ArgumentException)
                     {
-                        TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, buffer.Length), strExpected.Length, "ReadValue Count");
+                        TestLog.Compare(
+                            DataReader.ReadValueChunk(buffer, 0, buffer.Length),
+                            strExpected.Length,
+                            "ReadValue Count"
+                        );
                         TestLog.Compare(new string(buffer), strExpected, "str");
                         return;
                     }
@@ -650,7 +746,10 @@ namespace CoreXml.Test.XLinq
                     int nChars = DataReader.ReadValueChunk(buffer, 0, 2);
                     TestLog.Compare(nChars, 2, "Read 2");
                     DataReader.Read();
-                    TestLog.Compare(VerifyNode(DataReader, XmlNodeType.EndElement, "ROOT", string.Empty), "1vn");
+                    TestLog.Compare(
+                        VerifyNode(DataReader, XmlNodeType.EndElement, "ROOT", string.Empty),
+                        "1vn"
+                    );
                 }
 
                 //[Variation("Test error after successful ReadValue")]
@@ -677,10 +776,15 @@ namespace CoreXml.Test.XLinq
                         int index = 0;
                         for (index = 0; index < buffer.Length; index++)
                         {
-                            TestLog.Compare(DataReader.ReadValueChunk(buffer, index, 1), 1, "Read " + index);
+                            TestLog.Compare(
+                                DataReader.ReadValueChunk(buffer, index, 1),
+                                1,
+                                "Read " + index
+                            );
                         }
                         TestLog.Compare("somevalue", new string(buffer), "Strings don't match");
-                        while (DataReader.Read()) ;
+                        while (DataReader.Read())
+                            ;
                     }
                     catch (XmlException)
                     {
@@ -693,7 +797,10 @@ namespace CoreXml.Test.XLinq
                 public void TestReadChar21()
                 {
                     string somechar = new string('x', 5000);
-                    string strxml = string.Format("<ROOT>a" + somechar + "{0}c</ROOT>", Convert.ToChar(0));
+                    string strxml = string.Format(
+                        "<ROOT>a" + somechar + "{0}c</ROOT>",
+                        Convert.ToChar(0)
+                    );
                     try
                     {
                         XmlReader DataReader = GetReaderStr(strxml);
@@ -712,7 +819,8 @@ namespace CoreXml.Test.XLinq
                             }
                         }
                         DataReader.Read();
-                        while (DataReader.ReadValueChunk(buffer, 0, 1) > 0) ;
+                        while (DataReader.ReadValueChunk(buffer, 0, 1) > 0)
+                            ;
                     }
                     catch (XmlException)
                     {
@@ -727,7 +835,8 @@ namespace CoreXml.Test.XLinq
                 {
                     string strExpected = "somevalue";
                     char[] buffer = new char[strExpected.Length];
-                    string strxml = "<ROOT>somevalue<![CDATA[somevalue]]><test1/>    <test2/></ROOT>";
+                    string strxml =
+                        "<ROOT>somevalue<![CDATA[somevalue]]><test1/>    <test2/></ROOT>";
                     XmlReader DataReader = GetReaderStr(strxml);
                     PositionOnElement(DataReader, "ROOT");
 
@@ -744,12 +853,20 @@ namespace CoreXml.Test.XLinq
                             return;
                         }
                     }
-                    TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, buffer.Length), strExpected.Length, "ReadValue1");
+                    TestLog.Compare(
+                        DataReader.ReadValueChunk(buffer, 0, buffer.Length),
+                        strExpected.Length,
+                        "ReadValue1"
+                    );
                     TestLog.Compare(new string(buffer), strExpected, "str1");
 
                     // Now on CDATA.
                     DataReader.Read();
-                    TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, buffer.Length), strExpected.Length, "ReadValue2");
+                    TestLog.Compare(
+                        DataReader.ReadValueChunk(buffer, 0, buffer.Length),
+                        strExpected.Length,
+                        "ReadValue2"
+                    );
                     TestLog.Compare(new string(buffer), strExpected, "str2");
 
                     // Now on test
@@ -758,7 +875,11 @@ namespace CoreXml.Test.XLinq
                     char[] spaces = new char[4];
                     // Now on whitespace.
                     DataReader.Read();
-                    TestLog.Compare(DataReader.ReadValueChunk(spaces, 0, spaces.Length), spaces.Length, "ReadValue3");
+                    TestLog.Compare(
+                        DataReader.ReadValueChunk(spaces, 0, spaces.Length),
+                        spaces.Length,
+                        "ReadValue3"
+                    );
                     TestLog.Compare(new string(spaces), "    ", "str3");
                 }
 
@@ -783,7 +904,11 @@ namespace CoreXml.Test.XLinq
                                 return;
                             }
                         }
-                        TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, 5), 5, "Didn't read 5 chars");
+                        TestLog.Compare(
+                            DataReader.ReadValueChunk(buffer, 0, 5),
+                            5,
+                            "Didn't read 5 chars"
+                        );
                         TestLog.Compare("value", new string(buffer), "Strings don't match");
                         DataReader.Read();
                         throw new TestException(TestResult.Failed, "");
@@ -814,7 +939,8 @@ namespace CoreXml.Test.XLinq
                         }
                     }
 
-                    while (DataReader.ReadValueChunk(buffer, 0, 1) > 0) ;
+                    while (DataReader.ReadValueChunk(buffer, 0, 1) > 0)
+                        ;
 
                     DataReader.Read();
                     DataReader.Read();
@@ -826,7 +952,9 @@ namespace CoreXml.Test.XLinq
                 public void TestCharEntities1()
                 {
                     char[] buffer = new char[1];
-                    XmlReader DataReader = GetReaderStr("<root>va" + new string('x', 5000) + "l&lt;/root&gt;ue</root>");
+                    XmlReader DataReader = GetReaderStr(
+                        "<root>va" + new string('x', 5000) + "l&lt;/root&gt;ue</root>"
+                    );
 
                     DataReader.Read();
                     if (!DataReader.CanReadValueChunk)
@@ -842,7 +970,8 @@ namespace CoreXml.Test.XLinq
                         }
                     }
 
-                    while (DataReader.ReadValueChunk(buffer, 0, 1) > 0) ;
+                    while (DataReader.ReadValueChunk(buffer, 0, 1) > 0)
+                        ;
 
                     DataReader.Read();
                     DataReader.Read();
@@ -854,7 +983,9 @@ namespace CoreXml.Test.XLinq
                 public void TestCharEntities2()
                 {
                     char[] buffer = new char[1];
-                    XmlReader DataReader = GetReaderStr("<!DOCTYPE root[<!ENTITY x \"somevalue\"><!ELEMENT root ANY>]><root>value&amp;x;</root>");
+                    XmlReader DataReader = GetReaderStr(
+                        "<!DOCTYPE root[<!ENTITY x \"somevalue\"><!ELEMENT root ANY>]><root>value&amp;x;</root>"
+                    );
 
                     DataReader.Read();
                     if (!DataReader.CanReadValueChunk)
@@ -870,7 +1001,8 @@ namespace CoreXml.Test.XLinq
                         }
                     }
 
-                    while (DataReader.ReadValueChunk(buffer, 0, 1) > 0) ;
+                    while (DataReader.ReadValueChunk(buffer, 0, 1) > 0)
+                        ;
 
                     DataReader.Read();
                     DataReader.Read();
@@ -899,8 +1031,7 @@ namespace CoreXml.Test.XLinq
                                 {
                                     break;
                                 }
-                            }
-                            while (DataReader.ReadValueChunk(buffer, 0, count) > 0);
+                            } while (DataReader.ReadValueChunk(buffer, 0, count) > 0);
                         }
                         else
                         {
@@ -911,9 +1042,7 @@ namespace CoreXml.Test.XLinq
                                     buffer = new char[1];
                                     DataReader.ReadValueChunk(buffer, 0, 1);
                                 }
-                                catch (NotSupportedException)
-                                {
-                                }
+                                catch (NotSupportedException) { }
                             }
                             else
                             {
@@ -922,9 +1051,7 @@ namespace CoreXml.Test.XLinq
                                     buffer = new char[1];
                                     DataReader.ReadValueChunk(buffer, 0, 1);
                                 }
-                                catch (InvalidOperationException)
-                                {
-                                }
+                                catch (InvalidOperationException) { }
                             }
                         }
                     }
@@ -942,7 +1069,11 @@ namespace CoreXml.Test.XLinq
                     DataReader.Read();
                     try
                     {
-                        TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, 3), 3, "Didn't read 3 chars");
+                        TestLog.Compare(
+                            DataReader.ReadValueChunk(buffer, 0, 3),
+                            3,
+                            "Didn't read 3 chars"
+                        );
                         throw new TestException(TestResult.Failed, "");
                     }
                     catch (NotSupportedException) { }
@@ -951,12 +1082,17 @@ namespace CoreXml.Test.XLinq
                     DataReader.Read();
                     try
                     {
-                        TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, 2), 2, "Didn't read 2 chars");
+                        TestLog.Compare(
+                            DataReader.ReadValueChunk(buffer, 0, 2),
+                            2,
+                            "Didn't read 2 chars"
+                        );
                         throw new TestException(TestResult.Failed, "");
                     }
                     catch (NotSupportedException) { }
 
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Dispose();
                 }
 
@@ -970,7 +1106,11 @@ namespace CoreXml.Test.XLinq
                     DataReader.Read();
                     try
                     {
-                        TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, 3), 3, "Didn't read 3 chars");
+                        TestLog.Compare(
+                            DataReader.ReadValueChunk(buffer, 0, 3),
+                            3,
+                            "Didn't read 3 chars"
+                        );
                         throw new TestException(TestResult.Failed, "");
                     }
                     catch (NotSupportedException) { }
@@ -979,12 +1119,17 @@ namespace CoreXml.Test.XLinq
                     DataReader.Read();
                     try
                     {
-                        TestLog.Compare(DataReader.ReadValueChunk(buffer, 0, 2), 2, "Didn't read 2 chars");
+                        TestLog.Compare(
+                            DataReader.ReadValueChunk(buffer, 0, 2),
+                            2,
+                            "Didn't read 2 chars"
+                        );
                         throw new TestException(TestResult.Failed, "");
                     }
                     catch (NotSupportedException) { }
 
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Dispose();
                 }
 
@@ -993,7 +1138,12 @@ namespace CoreXml.Test.XLinq
                 {
                     XmlReaderSettings settings = new XmlReaderSettings();
                     settings.DtdProcessing = DtdProcessing.Ignore;
-                    XmlReader r = XmlReader.Create(FilePathUtil.getStream(Path.Combine("StandardTests", "XML10", "ms_xml", "vs084.xml")), settings);
+                    XmlReader r = XmlReader.Create(
+                        FilePathUtil.getStream(
+                            Path.Combine("StandardTests", "XML10", "ms_xml", "vs084.xml")
+                        ),
+                        settings
+                    );
                     XmlReader reader = GetReader(r);
                     reader.ReadToFollowing("a");
                     reader.MoveToNextAttribute();

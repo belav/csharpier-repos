@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,131 +26,153 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.ServiceModel.Channels;
+using System.ServiceModel.Security;
+using System.Text;
 #if !MOBILE && !XAMMAC_4_5
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 #endif
-using System.ServiceModel.Channels;
-using System.ServiceModel.Security;
-using System.Text;
 
 namespace System.ServiceModel.Security.Tokens
 {
-	public abstract class SecurityTokenParameters
-	{
-		protected SecurityTokenParameters ()
-		{
-		}
+    public abstract class SecurityTokenParameters
+    {
+        protected SecurityTokenParameters() { }
 
-		protected SecurityTokenParameters (SecurityTokenParameters other)
-		{
-			inclusion_mode = other.inclusion_mode;
-			reference_style = other.reference_style;
-			require_derived_keys = other.require_derived_keys;
-			issuer_binding_context = other.issuer_binding_context != null ? other.issuer_binding_context.Clone () : null;
-		}
+        protected SecurityTokenParameters(SecurityTokenParameters other)
+        {
+            inclusion_mode = other.inclusion_mode;
+            reference_style = other.reference_style;
+            require_derived_keys = other.require_derived_keys;
+            issuer_binding_context =
+                other.issuer_binding_context != null ? other.issuer_binding_context.Clone() : null;
+        }
 
-		SecurityTokenInclusionMode inclusion_mode;
-		SecurityTokenReferenceStyle reference_style;
-		bool require_derived_keys = true;
-		BindingContext issuer_binding_context;
+        SecurityTokenInclusionMode inclusion_mode;
+        SecurityTokenReferenceStyle reference_style;
+        bool require_derived_keys = true;
+        BindingContext issuer_binding_context;
 
-		public SecurityTokenInclusionMode InclusionMode {
-			get { return inclusion_mode; }
-			set { inclusion_mode = value; }
-		}
+        public SecurityTokenInclusionMode InclusionMode
+        {
+            get { return inclusion_mode; }
+            set { inclusion_mode = value; }
+        }
 
-		public SecurityTokenReferenceStyle ReferenceStyle {
-			get { return reference_style; }
-			set { reference_style = value; }
-		}
+        public SecurityTokenReferenceStyle ReferenceStyle
+        {
+            get { return reference_style; }
+            set { reference_style = value; }
+        }
 
-		public bool RequireDerivedKeys {
-			get { return require_derived_keys; }
-			set { require_derived_keys = value; }
-		}
+        public bool RequireDerivedKeys
+        {
+            get { return require_derived_keys; }
+            set { require_derived_keys = value; }
+        }
 
-		public SecurityTokenParameters Clone ()
-		{
-			return CloneCore ();
-		}
+        public SecurityTokenParameters Clone()
+        {
+            return CloneCore();
+        }
 
-		public override string ToString ()
-		{
-			var sb = new StringBuilder ();
-			sb.Append (GetType ().FullName).Append (":\n");
-			foreach (var pi in GetType ().GetProperties ()) {
-				var simple = Type.GetTypeCode (pi.PropertyType) != TypeCode.Object;
-				var val = pi.GetValue (this, null);
-				sb.Append (pi.Name).Append (':');
-				if (val != null)
-					sb.AppendFormat ("{0}{1}{2}", simple ? " " : "\n", simple ? "" : "  ", String.Join ("\n  ", val.ToString ().Split ('\n')));
-				sb.Append ('\n');
-			}
-			sb.Length--; // chop trailing EOL.
-			return sb.ToString ();
-		}
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.Append(GetType().FullName).Append(":\n");
+            foreach (var pi in GetType().GetProperties())
+            {
+                var simple = Type.GetTypeCode(pi.PropertyType) != TypeCode.Object;
+                var val = pi.GetValue(this, null);
+                sb.Append(pi.Name).Append(':');
+                if (val != null)
+                    sb.AppendFormat(
+                        "{0}{1}{2}",
+                        simple ? " " : "\n",
+                        simple ? "" : "  ",
+                        String.Join("\n  ", val.ToString().Split('\n'))
+                    );
+                sb.Append('\n');
+            }
+            sb.Length--; // chop trailing EOL.
+            return sb.ToString();
+        }
 
-		protected abstract bool HasAsymmetricKey { get; }
+        protected abstract bool HasAsymmetricKey { get; }
 
-		protected abstract bool SupportsClientAuthentication { get; }
+        protected abstract bool SupportsClientAuthentication { get; }
 
-		protected abstract bool SupportsClientWindowsIdentity { get; }
+        protected abstract bool SupportsClientWindowsIdentity { get; }
 
-		protected abstract bool SupportsServerAuthentication { get; }
+        protected abstract bool SupportsServerAuthentication { get; }
 
-		internal bool InternalHasAsymmetricKey {
-			get { return HasAsymmetricKey; }
-		}
+        internal bool InternalHasAsymmetricKey
+        {
+            get { return HasAsymmetricKey; }
+        }
 
-		internal bool InternalSupportsClientAuthentication {
-			get { return SupportsClientAuthentication; }
-		}
+        internal bool InternalSupportsClientAuthentication
+        {
+            get { return SupportsClientAuthentication; }
+        }
 
-		internal bool InternalSupportsClientWindowsIdentity {
-			get { return SupportsClientWindowsIdentity; }
-		}
+        internal bool InternalSupportsClientWindowsIdentity
+        {
+            get { return SupportsClientWindowsIdentity; }
+        }
 
-		internal bool InternalSupportsServerAuthentication {
-			get { return SupportsServerAuthentication; }
-		}
+        internal bool InternalSupportsServerAuthentication
+        {
+            get { return SupportsServerAuthentication; }
+        }
 
-		protected abstract SecurityTokenParameters CloneCore ();
-
-#if !MOBILE && !XAMMAC_4_5
-		protected abstract SecurityKeyIdentifierClause CreateKeyIdentifierClause (
-			SecurityToken token, SecurityTokenReferenceStyle referenceStyle);
-
-		// internalized call to CreateKeyIdentifierClause()
-		internal SecurityKeyIdentifierClause CallCreateKeyIdentifierClause (
-			SecurityToken token, SecurityTokenReferenceStyle referenceStyle)
-		{
-			return CreateKeyIdentifierClause (token, referenceStyle);
-		}
-
-		protected internal abstract void InitializeSecurityTokenRequirement (SecurityTokenRequirement requirement);
-#endif
-
-		internal BindingContext IssuerBindingContext {
-			set { issuer_binding_context = value; }
-		}
+        protected abstract SecurityTokenParameters CloneCore();
 
 #if !MOBILE && !XAMMAC_4_5
-		internal void CallInitializeSecurityTokenRequirement (SecurityTokenRequirement requirement)
-		{
-			if (issuer_binding_context != null)
-				requirement.Properties [ServiceModelSecurityTokenRequirement.IssuerBindingContextProperty] = issuer_binding_context;
-			InitializeSecurityTokenRequirement (requirement);
-		}
+        protected abstract SecurityKeyIdentifierClause CreateKeyIdentifierClause(
+            SecurityToken token,
+            SecurityTokenReferenceStyle referenceStyle
+        );
 
-		[MonoTODO]
-		protected virtual bool MatchesKeyIdentifierClause (
-			SecurityToken token,
-			SecurityKeyIdentifierClause keyIdentifierClause,
-			SecurityTokenReferenceStyle referenceStyle)
-		{
-			throw new NotImplementedException ();
-		}
+        // internalized call to CreateKeyIdentifierClause()
+        internal SecurityKeyIdentifierClause CallCreateKeyIdentifierClause(
+            SecurityToken token,
+            SecurityTokenReferenceStyle referenceStyle
+        )
+        {
+            return CreateKeyIdentifierClause(token, referenceStyle);
+        }
+
+        protected internal abstract void InitializeSecurityTokenRequirement(
+            SecurityTokenRequirement requirement
+        );
 #endif
-	}
+
+        internal BindingContext IssuerBindingContext
+        {
+            set { issuer_binding_context = value; }
+        }
+
+#if !MOBILE && !XAMMAC_4_5
+        internal void CallInitializeSecurityTokenRequirement(SecurityTokenRequirement requirement)
+        {
+            if (issuer_binding_context != null)
+                requirement.Properties[
+                    ServiceModelSecurityTokenRequirement.IssuerBindingContextProperty
+                ] = issuer_binding_context;
+            InitializeSecurityTokenRequirement(requirement);
+        }
+
+        [MonoTODO]
+        protected virtual bool MatchesKeyIdentifierClause(
+            SecurityToken token,
+            SecurityKeyIdentifierClause keyIdentifierClause,
+            SecurityTokenReferenceStyle referenceStyle
+        )
+        {
+            throw new NotImplementedException();
+        }
+#endif
+    }
 }

@@ -17,15 +17,20 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeLens
             LspWorkspaceRegistrationService lspWorkspaceRegistrationService,
             LspWorkspaceManager lspWorkspaceManager,
             IClientLanguageServerManager notificationManager,
-            IGlobalOptionService globalOptionService)
-            : base(asynchronousOperationListenerProvider, lspWorkspaceRegistrationService, lspWorkspaceManager, notificationManager)
+            IGlobalOptionService globalOptionService
+        )
+            : base(
+                asynchronousOperationListenerProvider,
+                lspWorkspaceRegistrationService,
+                lspWorkspaceManager,
+                notificationManager
+            )
         {
             _globalOptionService = globalOptionService;
             _globalOptionService.AddOptionChangedHandler(this, OnOptionChanged);
         }
 
-        protected override string GetFeatureAttribute()
-            => FeatureAttribute.CodeLens;
+        protected override string GetFeatureAttribute() => FeatureAttribute.CodeLens;
 
         protected override bool? GetRefreshSupport(ClientCapabilities clientCapabilities)
         {
@@ -39,8 +44,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeLens
 
         private void OnOptionChanged(object? sender, OptionChangedEventArgs e)
         {
-            if (e.Option.Equals(LspOptionsStorage.LspEnableReferencesCodeLens) ||
-                e.Option.Equals(LspOptionsStorage.LspEnableTestsCodeLens))
+            if (
+                e.Option.Equals(LspOptionsStorage.LspEnableReferencesCodeLens)
+                || e.Option.Equals(LspOptionsStorage.LspEnableTestsCodeLens)
+            )
             {
                 EnqueueRefreshNotification(documentUri: null);
             }

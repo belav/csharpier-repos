@@ -15,30 +15,26 @@ namespace System.Activities.Expressions
         Func<TOperand, TResult> operationFunction;
         bool isOperationFunctionStatic;
 
-        public InArgument<TOperand> Operand
-        {
-            get;
-            set;
-        }
+        public InArgument<TOperand> Operand { get; set; }
 
         [DefaultValue(null)]
-        public string PropertyName
-        {
-            get;
-            set;
-        }
+        public string PropertyName { get; set; }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
             bool isRequired = false;
             if (typeof(TOperand).IsEnum)
             {
-                metadata.AddValidationError(SR.TargetTypeCannotBeEnum(this.GetType().Name, this.DisplayName));
+                metadata.AddValidationError(
+                    SR.TargetTypeCannotBeEnum(this.GetType().Name, this.DisplayName)
+                );
             }
 
             if (string.IsNullOrEmpty(this.PropertyName))
             {
-                metadata.AddValidationError(SR.ActivityPropertyMustBeSet("PropertyName", this.DisplayName));
+                metadata.AddValidationError(
+                    SR.ActivityPropertyMustBeSet("PropertyName", this.DisplayName)
+                );
             }
             else
             {
@@ -48,17 +44,30 @@ namespace System.Activities.Expressions
 
                 if (propertyInfo == null)
                 {
-                    metadata.AddValidationError(SR.MemberNotFound(this.PropertyName, typeof(TOperand).Name));
+                    metadata.AddValidationError(
+                        SR.MemberNotFound(this.PropertyName, typeof(TOperand).Name)
+                    );
                 }
                 else
                 {
-                    Fx.Assert(propertyInfo.GetAccessors().Length > 0, "Property should have at least 1 accessor.");
+                    Fx.Assert(
+                        propertyInfo.GetAccessors().Length > 0,
+                        "Property should have at least 1 accessor."
+                    );
 
                     this.isOperationFunctionStatic = propertyInfo.GetAccessors()[0].IsStatic;
                     isRequired = !this.isOperationFunctionStatic;
 
                     ValidationError validationError;
-                    if (!MemberExpressionHelper.TryGenerateLinqDelegate(this.PropertyName, false, this.isOperationFunctionStatic, out this.operationFunction, out validationError))
+                    if (
+                        !MemberExpressionHelper.TryGenerateLinqDelegate(
+                            this.PropertyName,
+                            false,
+                            this.isOperationFunctionStatic,
+                            out this.operationFunction,
+                            out validationError
+                        )
+                    )
                     {
                         metadata.AddValidationError(validationError);
                     }
@@ -66,7 +75,10 @@ namespace System.Activities.Expressions
                     MethodInfo getMethod = propertyInfo.GetGetMethod();
                     MethodInfo setMethod = propertyInfo.GetSetMethod();
 
-                    if ((getMethod != null && !getMethod.IsStatic) || (setMethod != null && !setMethod.IsStatic))
+                    if (
+                        (getMethod != null && !getMethod.IsStatic)
+                        || (setMethod != null && !setMethod.IsStatic)
+                    )
                     {
                         isRequired = true;
                     }
@@ -81,7 +93,11 @@ namespace System.Activities.Expressions
 
             if (!this.isOperationFunctionStatic && operandValue == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.MemberCannotBeNull("Operand", this.GetType().Name, this.DisplayName)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.MemberCannotBeNull("Operand", this.GetType().Name, this.DisplayName)
+                    )
+                );
             }
 
             TResult result = this.operationFunction(operandValue);

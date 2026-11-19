@@ -17,12 +17,13 @@ public unsafe class Test
     [DllImport("*", EntryPoint = "UnmanagedFunc")]
     public static extern void MyImport(); // calls ManagedFunc aka MyExport
 
-    public unsafe static int Main(string[] args)
+    public static unsafe int Main(string[] args)
     {
         Console.WriteLine($"main: {args.Length}");
         // workaround to force the interpreter to initialize wasm_native_to_interp_ftndesc for MyExport
-        if (args.Length > 10000) {
-            ((IntPtr)(delegate* unmanaged<int,int>)&MyExport).ToString();
+        if (args.Length > 10000)
+        {
+            ((IntPtr)(delegate* unmanaged<int, int>)&MyExport).ToString();
         }
 
         MyImport();

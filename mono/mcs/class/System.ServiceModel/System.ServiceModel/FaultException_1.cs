@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,70 +32,80 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel
 {
-	[Serializable]
-	public class FaultException<TDetail> : FaultException
-	{
-		TDetail detail;
+    [Serializable]
+    public class FaultException<TDetail> : FaultException
+    {
+        TDetail detail;
 
 #if FULL_AOT_RUNTIME
-		// WCF creates FaultExceptions using reflection, so unless we reference
-		// the corresponding ctor, it will not be possible to use FaultExceptions
-		// in MonoTouch. This ctor reference will work as long as TDetail
-		// is a reference type.
-		static FaultException<object> ctor_reference = new FaultException<object> (new object (), new FaultReason ("reason"), new FaultCode ("code"), "action");
+        // WCF creates FaultExceptions using reflection, so unless we reference
+        // the corresponding ctor, it will not be possible to use FaultExceptions
+        // in MonoTouch. This ctor reference will work as long as TDetail
+        // is a reference type.
+        static FaultException<object> ctor_reference = new FaultException<object>(
+            new object(),
+            new FaultReason("reason"),
+            new FaultCode("code"),
+            "action"
+        );
 #endif
 
-		public FaultException (TDetail detail)
-			: this (detail, "Unspecified ServiceModel Fault.")
-		{
-		}
+        public FaultException(TDetail detail)
+            : this(detail, "Unspecified ServiceModel Fault.") { }
 
-		[MonoTODO]
-		protected FaultException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected FaultException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            throw new NotImplementedException();
+        }
 
-		public FaultException (TDetail detail, string reason)
-			: this (detail, new FaultReason (reason)) {}
-		
-		public FaultException (TDetail detail, FaultReason reason)
-			: this (detail, reason, FaultCode.CreateSenderFaultCode (null)) {}
+        public FaultException(TDetail detail, string reason)
+            : this(detail, new FaultReason(reason)) { }
 
-		public FaultException (TDetail detail, string reason, FaultCode code)
-			: this (detail, new FaultReason (reason), code) {}
-		
-		public FaultException (TDetail detail, FaultReason reason, FaultCode code)
-			: this (detail, reason, code, null) {}
+        public FaultException(TDetail detail, FaultReason reason)
+            : this(detail, reason, FaultCode.CreateSenderFaultCode(null)) { }
 
-		public FaultException (TDetail detail, string reason, FaultCode code, string action)
-			: this (detail, new FaultReason (reason), code, action) {}
+        public FaultException(TDetail detail, string reason, FaultCode code)
+            : this(detail, new FaultReason(reason), code) { }
 
-		public FaultException (TDetail detail, FaultReason reason, FaultCode code, string action)
-			: base (reason, code, action)
-		{
-			this.detail = detail;
-		}
+        public FaultException(TDetail detail, FaultReason reason, FaultCode code)
+            : this(detail, reason, code, null) { }
 
-		public override MessageFault CreateMessageFault ()
-		{
-			return MessageFault.CreateFault (Code, Reason, detail);
-		}
+        public FaultException(TDetail detail, string reason, FaultCode code, string action)
+            : this(detail, new FaultReason(reason), code, action) { }
 
-		[MonoTODO ("see FaultException.TestGetObjectData to see how it's serialized")]
-		public override void GetObjectData (SerializationInfo info, StreamingContext context)
-		{
-			base.GetObjectData (info, context);
-			info.AddValue ("detail", detail);
-		}
+        public FaultException(TDetail detail, FaultReason reason, FaultCode code, string action)
+            : base(reason, code, action)
+        {
+            this.detail = detail;
+        }
 
-		public override string ToString ()
-		{
-			return String.Format ("{0}: {1} (Fault Detail is equal to {2}).",
-					      this.GetType (), Message, Detail);
-		}
+        public override MessageFault CreateMessageFault()
+        {
+            return MessageFault.CreateFault(Code, Reason, detail);
+        }
 
-		public TDetail Detail { get { return detail ; } }
-	}
+        [MonoTODO("see FaultException.TestGetObjectData to see how it's serialized")]
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("detail", detail);
+        }
+
+        public override string ToString()
+        {
+            return String.Format(
+                "{0}: {1} (Fault Detail is equal to {2}).",
+                this.GetType(),
+                Message,
+                Detail
+            );
+        }
+
+        public TDetail Detail
+        {
+            get { return detail; }
+        }
+    }
 }

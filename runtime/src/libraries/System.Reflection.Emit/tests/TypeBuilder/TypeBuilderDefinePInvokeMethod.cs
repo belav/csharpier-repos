@@ -1,11 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Linq;
-using System.Text;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
 using Xunit;
 
 namespace System.Reflection.Emit.Tests
@@ -13,7 +13,8 @@ namespace System.Reflection.Emit.Tests
     public sealed class DpmParams
     {
         public string MethodName;
-        public MethodAttributes Attributes = MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.PinvokeImpl;
+        public MethodAttributes Attributes =
+            MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.PinvokeImpl;
         public string LibName;
         public string EntrypointName;
         public CallingConventions ManagedCallConv = CallingConventions.Standard;
@@ -26,12 +27,21 @@ namespace System.Reflection.Emit.Tests
         public Type[][] ParameterTypeReqMods;
         public Type[][] ParameterTypeOptMods;
 
-        public bool NoCMods => ReturnTypeReqMods == null && ReturnTypeOptMods == null && ParameterTypeReqMods == null && ParameterTypeOptMods == null;
+        public bool NoCMods =>
+            ReturnTypeReqMods == null
+            && ReturnTypeOptMods == null
+            && ParameterTypeReqMods == null
+            && ParameterTypeOptMods == null;
 
         public sealed override string ToString() => MethodName;
     }
 
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/2389", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/2389",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public class TypeBuilderDefinePInvokeMethodTests
     {
         public static IEnumerable<DpmParams> TestData
@@ -41,19 +51,74 @@ namespace System.Reflection.Emit.Tests
                 // The Dll/Entrypoint names can be arbitrary as these tests only generate the P/Invoke metadata and do not attempt to invoke them.
                 // Keep the "MethodNames" unique so that if a test fails, the theory member that failed can be identified easily from the log output.
 
-                yield return new DpmParams() { MethodName = "A1", LibName = "Foo1.dll", EntrypointName = "Wha1", ReturnType = typeof(int), ParameterTypes = new Type[] { typeof(string) } };
-                yield return new DpmParams() { MethodName = "A2", LibName = "Foo2.dll", EntrypointName = "Wha2", ReturnType = typeof(int), ParameterTypes = new Type[] { typeof(int) },
-                    NativeCallConv = CallingConvention.Cdecl};
-                yield return new DpmParams() { MethodName = "A3", LibName = "Foo3.dll", EntrypointName = "Wha3", ReturnType = typeof(double), ParameterTypes = new Type[] { typeof(string) },
-                    Charset = CharSet.Ansi};
-                yield return new DpmParams() { MethodName = "A4", LibName = "Foo4.dll", EntrypointName = "Wha4", ReturnType = typeof(IntPtr), ParameterTypes = new Type[] { typeof(string) },
-                    Charset = CharSet.Unicode};
-                yield return new DpmParams() { MethodName = "A5", LibName = "Foo5.dll", EntrypointName = "Wha5", ReturnType = typeof(int), ParameterTypes = new Type[] { typeof(object) },
-                    Charset = CharSet.Auto};
-                yield return new DpmParams() { MethodName = "A6", LibName = "Foo6.dll", EntrypointName = "Wha6", ReturnType = typeof(char), ParameterTypes = new Type[] { typeof(string) },
-                    Charset = CharSet.None};
-                yield return new DpmParams() { MethodName = "B1", LibName = "Foo7.dll", EntrypointName = "B1", ReturnType = typeof(void), ParameterTypes = new Type[] { typeof(string) } };
-                yield return new DpmParams() { MethodName = "C1", LibName = "Foo8.dll", EntrypointName = "Wha7", ReturnType = typeof(int), ParameterTypes = new Type[] { typeof(string) },
+                yield return new DpmParams()
+                {
+                    MethodName = "A1",
+                    LibName = "Foo1.dll",
+                    EntrypointName = "Wha1",
+                    ReturnType = typeof(int),
+                    ParameterTypes = new Type[] { typeof(string) },
+                };
+                yield return new DpmParams()
+                {
+                    MethodName = "A2",
+                    LibName = "Foo2.dll",
+                    EntrypointName = "Wha2",
+                    ReturnType = typeof(int),
+                    ParameterTypes = new Type[] { typeof(int) },
+                    NativeCallConv = CallingConvention.Cdecl,
+                };
+                yield return new DpmParams()
+                {
+                    MethodName = "A3",
+                    LibName = "Foo3.dll",
+                    EntrypointName = "Wha3",
+                    ReturnType = typeof(double),
+                    ParameterTypes = new Type[] { typeof(string) },
+                    Charset = CharSet.Ansi,
+                };
+                yield return new DpmParams()
+                {
+                    MethodName = "A4",
+                    LibName = "Foo4.dll",
+                    EntrypointName = "Wha4",
+                    ReturnType = typeof(IntPtr),
+                    ParameterTypes = new Type[] { typeof(string) },
+                    Charset = CharSet.Unicode,
+                };
+                yield return new DpmParams()
+                {
+                    MethodName = "A5",
+                    LibName = "Foo5.dll",
+                    EntrypointName = "Wha5",
+                    ReturnType = typeof(int),
+                    ParameterTypes = new Type[] { typeof(object) },
+                    Charset = CharSet.Auto,
+                };
+                yield return new DpmParams()
+                {
+                    MethodName = "A6",
+                    LibName = "Foo6.dll",
+                    EntrypointName = "Wha6",
+                    ReturnType = typeof(char),
+                    ParameterTypes = new Type[] { typeof(string) },
+                    Charset = CharSet.None,
+                };
+                yield return new DpmParams()
+                {
+                    MethodName = "B1",
+                    LibName = "Foo7.dll",
+                    EntrypointName = "B1",
+                    ReturnType = typeof(void),
+                    ParameterTypes = new Type[] { typeof(string) },
+                };
+                yield return new DpmParams()
+                {
+                    MethodName = "C1",
+                    LibName = "Foo8.dll",
+                    EntrypointName = "Wha7",
+                    ReturnType = typeof(int),
+                    ParameterTypes = new Type[] { typeof(string) },
                     ReturnTypeReqMods = new Type[] { typeof(int) },
                     ReturnTypeOptMods = new Type[] { typeof(short) },
                     ParameterTypeOptMods = new Type[][] { new Type[] { typeof(double) } },
@@ -62,7 +127,9 @@ namespace System.Reflection.Emit.Tests
             }
         }
 
-        public static IEnumerable<object[]> TheoryData1 => TestData.Where(dpm => dpm.NoCMods).Select(dpm => new object[] { dpm });
+        public static IEnumerable<object[]> TheoryData1 =>
+            TestData.Where(dpm => dpm.NoCMods).Select(dpm => new object[] { dpm });
+
         [Theory]
         [MemberData(nameof(TheoryData1))]
         public static void TestDefinePInvokeMethod1(DpmParams p)
@@ -77,16 +144,26 @@ namespace System.Reflection.Emit.Tests
                 p.ReturnType,
                 p.ParameterTypes,
                 p.NativeCallConv,
-                p.Charset);
-            mb.SetImplementationFlags(mb.GetMethodImplementationFlags() | MethodImplAttributes.PreserveSig);
+                p.Charset
+            );
+            mb.SetImplementationFlags(
+                mb.GetMethodImplementationFlags() | MethodImplAttributes.PreserveSig
+            );
 
             Type t = tb.CreateType();
-            MethodInfo m = t.GetMethod(p.MethodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo m = t.GetMethod(
+                p.MethodName,
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+            );
             Assert.NotNull(m);
             VerifyPInvokeMethod(t, m, p);
         }
 
-        public static IEnumerable<object[]> TheoryData2 => TestData.Where(dpm => dpm.NoCMods && dpm.EntrypointName == dpm.MethodName).Select(dpm => new object[] { dpm });
+        public static IEnumerable<object[]> TheoryData2 =>
+            TestData
+                .Where(dpm => dpm.NoCMods && dpm.EntrypointName == dpm.MethodName)
+                .Select(dpm => new object[] { dpm });
+
         [Theory]
         [MemberData(nameof(TheoryData2))]
         public static void TestDefinePInvokeMethod2(DpmParams p)
@@ -100,16 +177,24 @@ namespace System.Reflection.Emit.Tests
                 p.ReturnType,
                 p.ParameterTypes,
                 p.NativeCallConv,
-                p.Charset);
-            mb.SetImplementationFlags(mb.GetMethodImplementationFlags() | MethodImplAttributes.PreserveSig);
+                p.Charset
+            );
+            mb.SetImplementationFlags(
+                mb.GetMethodImplementationFlags() | MethodImplAttributes.PreserveSig
+            );
 
             Type t = tb.CreateType();
-            MethodInfo m = t.GetMethod(p.MethodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo m = t.GetMethod(
+                p.MethodName,
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+            );
             Assert.NotNull(m);
             VerifyPInvokeMethod(t, m, p);
         }
 
-        public static IEnumerable<object[]> TheoryData3 => TestData.Select(dpm => new object[] { dpm });
+        public static IEnumerable<object[]> TheoryData3 =>
+            TestData.Select(dpm => new object[] { dpm });
+
         [Theory]
         [MemberData(nameof(TheoryData3))]
         public static void TestDefinePInvokeMethod3(DpmParams p)
@@ -128,11 +213,17 @@ namespace System.Reflection.Emit.Tests
                 p.ParameterTypeReqMods,
                 p.ParameterTypeOptMods,
                 p.NativeCallConv,
-                p.Charset);
-            mb.SetImplementationFlags(mb.GetMethodImplementationFlags() | MethodImplAttributes.PreserveSig);
+                p.Charset
+            );
+            mb.SetImplementationFlags(
+                mb.GetMethodImplementationFlags() | MethodImplAttributes.PreserveSig
+            );
 
             Type t = tb.CreateType();
-            MethodInfo m = t.GetMethod(p.MethodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo m = t.GetMethod(
+                p.MethodName,
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+            );
             Assert.NotNull(m);
             VerifyPInvokeMethod(t, m, p);
         }
@@ -152,16 +243,23 @@ namespace System.Reflection.Emit.Tests
                 typeof(int),
                 new Type[] { typeof(string), typeof(StringBuilder), typeof(int) },
                 CallingConvention.StdCall,
-                CharSet.Unicode);
-            mb.SetImplementationFlags(mb.GetMethodImplementationFlags() | MethodImplAttributes.PreserveSig);
+                CharSet.Unicode
+            );
+            mb.SetImplementationFlags(
+                mb.GetMethodImplementationFlags() | MethodImplAttributes.PreserveSig
+            );
 
             Type t = tb.CreateType();
-            MethodInfo m = t.GetMethod("GetEnvironmentVariableW", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo m = t.GetMethod(
+                "GetEnvironmentVariableW",
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+            );
             Assert.NotNull(m);
 
             string expected = Environment.GetEnvironmentVariable(EnvironmentVariable);
 
-            int numCharsRequired = (int)m.Invoke(null, new object[] { EnvironmentVariable, null, 0 });
+            int numCharsRequired = (int)
+                m.Invoke(null, new object[] { EnvironmentVariable, null, 0 });
             if (numCharsRequired == 0)
             {
                 // Environment variable is not defined. Make sure we got that result using both techniques.
@@ -170,7 +268,8 @@ namespace System.Reflection.Emit.Tests
             else
             {
                 StringBuilder sb = new StringBuilder(numCharsRequired);
-                int numCharsWritten = (int)m.Invoke(null, new object[] { EnvironmentVariable, sb, numCharsRequired });
+                int numCharsWritten = (int)
+                    m.Invoke(null, new object[] { EnvironmentVariable, sb, numCharsRequired });
                 Assert.NotEqual(0, numCharsWritten);
                 string actual = sb.ToString();
                 Assert.Equal(expected, actual);

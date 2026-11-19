@@ -17,6 +17,5 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 [DebuggerDisplay("{DebuggerDisplay(),nq}")]
 public readonly record struct ColumnValueSetter(ColumnExpression Column, SqlExpression Value)
 {
-    private string DebuggerDisplay()
-        => $"{Column.Print()} = {Value.Print()}";
+    private string DebuggerDisplay() => $"{Column.Print()} = {Value.Print()}";
 }

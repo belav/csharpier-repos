@@ -4,11 +4,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web {
-
+namespace System.Web
+{
     public delegate void TraceContextEventHandler(object sender, TraceContextEventArgs e);
-
 }
-
-
-

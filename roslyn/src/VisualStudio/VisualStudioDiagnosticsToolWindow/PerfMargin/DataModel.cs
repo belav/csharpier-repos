@@ -18,9 +18,10 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
 
         public DataModel()
         {
-            var fields = from field in typeof(FunctionId).GetFields()
-                         where !field.IsSpecialName
-                         select field;
+            var fields =
+                from field in typeof(FunctionId).GetFields()
+                where !field.IsSpecialName
+                select field;
 
             var builder = new ArrayBuilder<ActivityLevel?>();
 
@@ -48,10 +49,8 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
             RootNode = root;
         }
 
-        public void BlockStart(FunctionId functionId)
-            => _activities[(int)functionId]!.Start();
+        public void BlockStart(FunctionId functionId) => _activities[(int)functionId]!.Start();
 
-        public void BlockDisposed(FunctionId functionId)
-            => _activities[(int)functionId]!.Stop();
+        public void BlockDisposed(FunctionId functionId) => _activities[(int)functionId]!.Stop();
     }
 }

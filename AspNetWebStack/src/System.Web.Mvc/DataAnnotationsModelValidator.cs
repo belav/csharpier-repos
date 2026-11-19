@@ -9,7 +9,11 @@ namespace System.Web.Mvc
 {
     public class DataAnnotationsModelValidator : ModelValidator
     {
-        public DataAnnotationsModelValidator(ModelMetadata metadata, ControllerContext context, ValidationAttribute attribute)
+        public DataAnnotationsModelValidator(
+            ModelMetadata metadata,
+            ControllerContext context,
+            ValidationAttribute attribute
+        )
             : base(metadata, context)
         {
             if (attribute == null)
@@ -32,7 +36,11 @@ namespace System.Web.Mvc
             get { return Attribute is RequiredAttribute; }
         }
 
-        internal static ModelValidator Create(ModelMetadata metadata, ControllerContext context, ValidationAttribute attribute)
+        internal static ModelValidator Create(
+            ModelMetadata metadata,
+            ControllerContext context,
+            ValidationAttribute attribute
+        )
         {
             return new DataAnnotationsModelValidator(metadata, context, attribute);
         }
@@ -44,7 +52,9 @@ namespace System.Web.Mvc
             IClientValidatable clientValidatable = Attribute as IClientValidatable;
             if (clientValidatable != null)
             {
-                results = results.Concat(clientValidatable.GetClientValidationRules(Metadata, ControllerContext));
+                results = results.Concat(
+                    clientValidatable.GetClientValidationRules(Metadata, ControllerContext)
+                );
             }
 
             return results;
@@ -58,17 +68,17 @@ namespace System.Web.Mvc
             ValidationContext context = new ValidationContext(container ?? Metadata.Model)
             {
                 DisplayName = Metadata.GetDisplayName(),
-                MemberName = memberName
+                MemberName = memberName,
             };
 
             ValidationResult result = Attribute.GetValidationResult(Metadata.Model, context);
             if (result != ValidationResult.Success)
             {
-                // ModelValidationResult.MemberName is used by invoking validators (such as ModelValidator) to 
-                // construct the ModelKey for ModelStateDictionary. When validating at type level we want to append the 
-                // returned MemberNames if specified (e.g. person.Address.FirstName). For property validation, the 
-                // ModelKey can be constructed using the ModelMetadata and we should ignore MemberName (we don't want 
-                // (person.Name.Name). However the invoking validator does not have a way to distinguish between these two 
+                // ModelValidationResult.MemberName is used by invoking validators (such as ModelValidator) to
+                // construct the ModelKey for ModelStateDictionary. When validating at type level we want to append the
+                // returned MemberNames if specified (e.g. person.Address.FirstName). For property validation, the
+                // ModelKey can be constructed using the ModelMetadata and we should ignore MemberName (we don't want
+                // (person.Name.Name). However the invoking validator does not have a way to distinguish between these two
                 // cases. Consequently we'll only set MemberName if this validation returns a MemberName that is different
                 // from the property being validated.
 
@@ -81,7 +91,7 @@ namespace System.Web.Mvc
                 var validationResult = new ModelValidationResult
                 {
                     Message = result.ErrorMessage,
-                    MemberName = errorMemberName
+                    MemberName = errorMemberName,
                 };
 
                 return new ModelValidationResult[] { validationResult };

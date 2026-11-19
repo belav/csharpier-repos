@@ -63,10 +63,17 @@ namespace System.Formats.Cbor
         /// <param name="allowMultipleRootLevelValues"><see langword="true" /> to allow multiple root-level values to be written by the writer; otherwise, <see langword="false" />.</param>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="conformanceMode" /> is not a defined <see cref="CborConformanceMode" />.</exception>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public CborWriter(CborConformanceMode conformanceMode, bool convertIndefiniteLengthEncodings, bool allowMultipleRootLevelValues)
-            : this(conformanceMode, convertIndefiniteLengthEncodings, allowMultipleRootLevelValues, DefaultCapacitySentinel)
-        {
-        }
+        public CborWriter(
+            CborConformanceMode conformanceMode,
+            bool convertIndefiniteLengthEncodings,
+            bool allowMultipleRootLevelValues
+        )
+            : this(
+                conformanceMode,
+                convertIndefiniteLengthEncodings,
+                allowMultipleRootLevelValues,
+                DefaultCapacitySentinel
+            ) { }
 
         /// <summary>Initializes a new instance of <see cref="CborWriter" /> class using the specified configuration.</summary>
         /// <param name="conformanceMode">One of the enumeration values that specifies the guidance on the conformance checks performed on the encoded data.
@@ -83,7 +90,8 @@ namespace System.Formats.Cbor
             CborConformanceMode conformanceMode = CborConformanceMode.Strict,
             bool convertIndefiniteLengthEncodings = false,
             bool allowMultipleRootLevelValues = false,
-            int initialCapacity = DefaultCapacitySentinel)
+            int initialCapacity = DefaultCapacitySentinel
+        )
         {
             CborConformanceModeHelpers.Validate(conformanceMode);
 
@@ -150,12 +158,19 @@ namespace System.Formats.Cbor
 
             AdvanceDataItemCounters();
 
-            static unsafe void ValidateEncoding(ReadOnlySpan<byte> encodedValue, CborConformanceMode conformanceMode)
+            static unsafe void ValidateEncoding(
+                ReadOnlySpan<byte> encodedValue,
+                CborConformanceMode conformanceMode
+            )
             {
                 fixed (byte* ptr = &MemoryMarshal.GetReference(encodedValue))
                 {
                     using var manager = new PointerMemoryManager<byte>(ptr, encodedValue.Length);
-                    var reader = new CborReader(manager.Memory, conformanceMode: conformanceMode, allowMultipleRootLevelValues: false);
+                    var reader = new CborReader(
+                        manager.Memory,
+                        conformanceMode: conformanceMode,
+                        allowMultipleRootLevelValues: false
+                    );
 
                     try
                     {
@@ -171,7 +186,6 @@ namespace System.Formats.Cbor
                         throw new ArgumentException(SR.Cbor_Writer_PayloadIsNotValidCbor);
                     }
                 }
-
             }
         }
 
@@ -191,7 +205,10 @@ namespace System.Formats.Cbor
 
             if (encoding.Length > destination.Length)
             {
-                throw new ArgumentException(SR.Argument_EncodeDestinationTooSmall, nameof(destination));
+                throw new ArgumentException(
+                    SR.Argument_EncodeDestinationTooSmall,
+                    nameof(destination)
+                );
             }
 
             encoding.CopyTo(destination);
@@ -292,7 +309,9 @@ namespace System.Formats.Cbor
             {
                 if (_currentMajorType.HasValue)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.Cbor_PopMajorTypeMismatch, (int)_currentMajorType));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.Cbor_PopMajorTypeMismatch, (int)_currentMajorType)
+                    );
                 }
                 else
                 {
@@ -305,7 +324,9 @@ namespace System.Formats.Cbor
             if (_isTagContext)
             {
                 // writer expecting value after a tag data item, cannot pop the current context
-                throw new InvalidOperationException(SR.Format(SR.Cbor_PopMajorTypeMismatch, (int)CborMajorType.Tag));
+                throw new InvalidOperationException(
+                    SR.Format(SR.Cbor_PopMajorTypeMismatch, (int)CborMajorType.Tag)
+                );
             }
 
             if (_definiteLength - _itemsWritten > 0)
@@ -373,10 +394,14 @@ namespace System.Formats.Cbor
                     // 1) Definite-length string chunks of the same major type OR
                     // 2) a break byte denoting the end of the indefinite-length string context.
                     // NB the second check is not needed here, as we use a separate mechanism to append the break byte
-                    if (initialByte.MajorType != _currentMajorType ||
-                        initialByte.AdditionalInfo == CborAdditionalInfo.IndefiniteLength)
+                    if (
+                        initialByte.MajorType != _currentMajorType
+                        || initialByte.AdditionalInfo == CborAdditionalInfo.IndefiniteLength
+                    )
                     {
-                        throw new InvalidOperationException(SR.Cbor_Writer_CannotNestDataItemsInIndefiniteLengthStrings);
+                        throw new InvalidOperationException(
+                            SR.Cbor_Writer_CannotNestDataItemsInIndefiniteLengthStrings
+                        );
                     }
 
                     break;
@@ -429,7 +454,8 @@ namespace System.Formats.Cbor
                 int? currentValueOffset,
                 bool keysRequireSorting,
                 List<KeyValuePairEncodingRange>? keyValuePairEncodingRanges,
-                HashSet<(int Offset, int Length)>? keyEncodingRanges)
+                HashSet<(int Offset, int Length)>? keyEncodingRanges
+            )
             {
                 MajorType = type;
                 FrameOffset = frameOffset;

@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Microsoft.CodeAnalysis.Text;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.CodeAnalysis.Text;
 
 namespace Roslyn.Test.Utilities.Syntax
 {
@@ -28,13 +28,15 @@ namespace Roslyn.Test.Utilities.Syntax
 
         public override int Length
         {
-            get
-            {
-                return 40 * 1000 * 1000;
-            }
+            get { return 40 * 1000 * 1000; }
         }
 
-        public override void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count)
+        public override void CopyTo(
+            int sourceIndex,
+            char[] destination,
+            int destinationIndex,
+            int count
+        )
         {
             for (var i = 0; i < count; i++)
             {

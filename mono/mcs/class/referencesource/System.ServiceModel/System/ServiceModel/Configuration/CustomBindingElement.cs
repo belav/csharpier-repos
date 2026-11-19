@@ -12,18 +12,19 @@ namespace System.ServiceModel.Configuration
 
     public partial class CustomBindingElement
         : NamedServiceModelExtensionCollectionElement<BindingElementExtensionElement>,
-        ICollection<BindingElementExtensionElement>,
-        IBindingConfigurationElement
+            ICollection<BindingElementExtensionElement>,
+            IBindingConfigurationElement
     {
         public CustomBindingElement()
-            : this(null)
-        { }
+            : this(null) { }
 
-        public CustomBindingElement(string name) :
-            base(ConfigurationStrings.BindingElementExtensions, name)
-        { }
+        public CustomBindingElement(string name)
+            : base(ConfigurationStrings.BindingElementExtensions, name) { }
 
-        [ConfigurationProperty(ConfigurationStrings.CloseTimeout, DefaultValue = ServiceDefaults.CloseTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.CloseTimeout,
+            DefaultValue = ServiceDefaults.CloseTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan CloseTimeout
@@ -36,7 +37,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.OpenTimeout, DefaultValue = ServiceDefaults.OpenTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.OpenTimeout,
+            DefaultValue = ServiceDefaults.OpenTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan OpenTimeout
@@ -49,7 +53,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ReceiveTimeout, DefaultValue = ServiceDefaults.ReceiveTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ReceiveTimeout,
+            DefaultValue = ServiceDefaults.ReceiveTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan ReceiveTimeout
@@ -62,7 +69,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.SendTimeout, DefaultValue = ServiceDefaults.SendTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.SendTimeout,
+            DefaultValue = ServiceDefaults.SendTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan SendTimeout
@@ -85,21 +95,39 @@ namespace System.ServiceModel.Configuration
             BindingElementExtensionElement existingElement = null;
             if (!this.CanAddEncodingElement(element, ref existingElement))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigMessageEncodingAlreadyInBinding,
-                    existingElement.ConfigurationElementName,
-                    existingElement.GetType().AssemblyQualifiedName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigMessageEncodingAlreadyInBinding,
+                            existingElement.ConfigurationElementName,
+                            existingElement.GetType().AssemblyQualifiedName
+                        )
+                    )
+                );
             }
             else if (!this.CanAddStreamUpgradeElement(element, ref existingElement))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigStreamUpgradeElementAlreadyInBinding,
-                    existingElement.ConfigurationElementName,
-                    existingElement.GetType().AssemblyQualifiedName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigStreamUpgradeElementAlreadyInBinding,
+                            existingElement.ConfigurationElementName,
+                            existingElement.GetType().AssemblyQualifiedName
+                        )
+                    )
+                );
             }
             else if (!this.CanAddTransportElement(element, ref existingElement))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigTransportAlreadyInBinding,
-                    existingElement.ConfigurationElementName,
-                    existingElement.GetType().AssemblyQualifiedName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigTransportAlreadyInBinding,
+                            existingElement.ConfigurationElementName,
+                            existingElement.GetType().AssemblyQualifiedName
+                        )
+                    )
+                );
             }
             else
             {
@@ -115,9 +143,13 @@ namespace System.ServiceModel.Configuration
             }
             if (binding.GetType() != typeof(CustomBinding))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.ConfigInvalidTypeForBinding,
-                    typeof(CustomBinding).AssemblyQualifiedName,
-                    binding.GetType().AssemblyQualifiedName));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(
+                        SR.ConfigInvalidTypeForBinding,
+                        typeof(CustomBinding).AssemblyQualifiedName,
+                        binding.GetType().AssemblyQualifiedName
+                    )
+                );
             }
 
             binding.CloseTimeout = this.CloseTimeout;
@@ -136,16 +168,29 @@ namespace System.ServiceModel.Configuration
             }
 
             BindingElementExtensionElement existingElement = null;
-            return !this.ContainsKey(element.GetType()) && this.CanAddEncodingElement(element, ref existingElement) &&
-                this.CanAddStreamUpgradeElement(element, ref existingElement) && this.CanAddTransportElement(element, ref existingElement);
+            return !this.ContainsKey(element.GetType())
+                && this.CanAddEncodingElement(element, ref existingElement)
+                && this.CanAddStreamUpgradeElement(element, ref existingElement)
+                && this.CanAddTransportElement(element, ref existingElement);
         }
 
-        bool CanAddEncodingElement(BindingElementExtensionElement element, ref BindingElementExtensionElement existingElement)
+        bool CanAddEncodingElement(
+            BindingElementExtensionElement element,
+            ref BindingElementExtensionElement existingElement
+        )
         {
-            return this.CanAddExclusiveElement(typeof(MessageEncodingBindingElement), element.BindingElementType, ref existingElement);
+            return this.CanAddExclusiveElement(
+                typeof(MessageEncodingBindingElement),
+                element.BindingElementType,
+                ref existingElement
+            );
         }
 
-        bool CanAddExclusiveElement(Type exclusiveType, Type bindingElementType, ref BindingElementExtensionElement existingElement)
+        bool CanAddExclusiveElement(
+            Type exclusiveType,
+            Type bindingElementType,
+            ref BindingElementExtensionElement existingElement
+        )
         {
             bool retval = true;
             if (exclusiveType.IsAssignableFrom(bindingElementType))
@@ -163,14 +208,28 @@ namespace System.ServiceModel.Configuration
             return retval;
         }
 
-        bool CanAddStreamUpgradeElement(BindingElementExtensionElement element, ref BindingElementExtensionElement existingElement)
+        bool CanAddStreamUpgradeElement(
+            BindingElementExtensionElement element,
+            ref BindingElementExtensionElement existingElement
+        )
         {
-            return this.CanAddExclusiveElement(typeof(StreamUpgradeBindingElement), element.BindingElementType, ref existingElement);
+            return this.CanAddExclusiveElement(
+                typeof(StreamUpgradeBindingElement),
+                element.BindingElementType,
+                ref existingElement
+            );
         }
 
-        bool CanAddTransportElement(BindingElementExtensionElement element, ref BindingElementExtensionElement existingElement)
+        bool CanAddTransportElement(
+            BindingElementExtensionElement element,
+            ref BindingElementExtensionElement existingElement
+        )
         {
-            return this.CanAddExclusiveElement(typeof(TransportBindingElement), element.BindingElementType, ref existingElement);
+            return this.CanAddExclusiveElement(
+                typeof(TransportBindingElement),
+                element.BindingElementType,
+                ref existingElement
+            );
         }
 
         protected void OnApplyConfiguration(Binding binding)
@@ -183,4 +242,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-

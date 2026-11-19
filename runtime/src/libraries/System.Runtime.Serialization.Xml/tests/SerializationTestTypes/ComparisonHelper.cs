@@ -14,7 +14,7 @@ namespace SerializationTestTypes
     public enum ComparisonType
     {
         DCS,
-        POCO
+        POCO,
     }
 
     #region ComparisonType passed as parameter
@@ -25,9 +25,14 @@ namespace SerializationTestTypes
     /// </summary>
     public static class ComparisonHelper
     {
-        private const string LogMessage = "Comparing Type = {0} & Value = {1} with Type {2} & Value = {3}";
+        private const string LogMessage =
+            "Comparing Type = {0} & Value = {1} with Type {2} & Value = {3}";
 
-        public static void CompareRecursively(object originalData, object deserializedData, bool approxComparisonForFloatingPointAnd64BitValues = false)
+        public static void CompareRecursively(
+            object originalData,
+            object deserializedData,
+            bool approxComparisonForFloatingPointAnd64BitValues = false
+        )
         {
             ComparisonType cmpType = ComparisonType.DCS;
             SerializationMechanism att = ComparisonHelper.GetSerializationMechanism(originalData);
@@ -40,20 +45,22 @@ namespace SerializationTestTypes
 
         private static SerializationMechanism GetSerializationMechanism(object data)
         {
-            if (data == null) return SerializationMechanism.POCO;
+            if (data == null)
+                return SerializationMechanism.POCO;
             SerializationMechanism att = SerializationMechanism.POCO;
 
-            bool hasDataContractAttribute = data.GetType().GetCustomAttributes(typeof(DataContractAttribute), false).Length > 0;
+            bool hasDataContractAttribute =
+                data.GetType().GetCustomAttributes(typeof(DataContractAttribute), false).Length > 0;
             bool hasSerializableAttribute = data.GetType().IsSerializable;
             bool hasISerializable = typeof(ISerializable).IsAssignableFrom(data.GetType());
             bool hasIXmlSerializable = typeof(IXmlSerializable).IsAssignableFrom(data.GetType());
 
             if (
-                (!hasDataContractAttribute) &&
-                (!hasISerializable) &&
-                (!hasIXmlSerializable) &&
-                (!hasSerializableAttribute)
-                )
+                (!hasDataContractAttribute)
+                && (!hasISerializable)
+                && (!hasIXmlSerializable)
+                && (!hasSerializableAttribute)
+            )
             {
                 att = SerializationMechanism.POCO;
             }
@@ -64,7 +71,11 @@ namespace SerializationTestTypes
                     att = SerializationMechanism.DataContractAttribute;
                 }
                 //CollectionDataContract is handled as part of DataContract containerTypeAttribute
-                if (data.GetType().GetCustomAttributes(typeof(CollectionDataContractAttribute), false).Length > 0)
+                if (
+                    data.GetType()
+                        .GetCustomAttributes(typeof(CollectionDataContractAttribute), false)
+                        .Length > 0
+                )
                 {
                     hasDataContractAttribute = true;
                 }
@@ -84,7 +95,10 @@ namespace SerializationTestTypes
                 {
                     att = SerializationMechanism.DataContractAttribute;
                 }
-                else if (hasDataContractAttribute == false && (hasISerializable == true || hasSerializableAttribute == true))
+                else if (
+                    hasDataContractAttribute == false
+                    && (hasISerializable == true || hasSerializableAttribute == true)
+                )
                 {
                     att = SerializationMechanism.SerializableAttribute;
                 }
@@ -98,14 +112,23 @@ namespace SerializationTestTypes
         /// </summary>
         /// <param name="originalData"></param>
         /// <param name="deserializedData"></param>
-        private static void CompareData(object originalData, object deserializedData, SerializationMechanism containerTypeAttribute, ComparisonType cmpType)
+        private static void CompareData(
+            object originalData,
+            object deserializedData,
+            SerializationMechanism containerTypeAttribute,
+            ComparisonType cmpType
+        )
         {
             if (originalData == null) // both are null, comparison succeeded
             {
                 return;
             }
 
-            if (originalData.GetType().Name.Equals(typeof(System.Runtime.Serialization.ExtensionDataObject).Name))
+            if (
+                originalData
+                    .GetType()
+                    .Name.Equals(typeof(System.Runtime.Serialization.ExtensionDataObject).Name)
+            )
             {
                 return;
             }
@@ -113,16 +136,25 @@ namespace SerializationTestTypes
             //Fail if only one of the objects is null
             if ((null == originalData) != (null == deserializedData))
             {
-                string message = string.Format("Comparison failed: Original data is {0}, deserialized data is {1}",
-                    originalData == null ? "null" : "not null", deserializedData == null ? "null" : "not null");
+                string message = string.Format(
+                    "Comparison failed: Original data is {0}, deserialized data is {1}",
+                    originalData == null ? "null" : "not null",
+                    deserializedData == null ? "null" : "not null"
+                );
 
                 if (originalData != null)
                 {
-                    message += string.Format("Contents of Original data are {0}", originalData.ToString());
+                    message += string.Format(
+                        "Contents of Original data are {0}",
+                        originalData.ToString()
+                    );
                 }
                 if (deserializedData != null)
                 {
-                    message += string.Format("Contents of Deserialized data are {0}", deserializedData.ToString());
+                    message += string.Format(
+                        "Contents of Deserialized data are {0}",
+                        deserializedData.ToString()
+                    );
                 }
                 throw new Exception(message);
             }
@@ -133,7 +165,9 @@ namespace SerializationTestTypes
                 bool result = originalData.Equals(deserializedData);
                 if (!result)
                 {
-                    throw new Exception("Comparison failed for type " + originalData.GetType().Name);
+                    throw new Exception(
+                        "Comparison failed for type " + originalData.GetType().Name
+                    );
                 }
                 return;
             }
@@ -144,20 +178,33 @@ namespace SerializationTestTypes
 
             if (!originalDataType.Equals(deserializedDataType))
             {
-                throw new Exception(string.Format("Comparison failed : Original type {0} not same as deserialized type {1}", originalDataType.ToString(), deserializedDataType.ToString()));
+                throw new Exception(
+                    string.Format(
+                        "Comparison failed : Original type {0} not same as deserialized type {1}",
+                        originalDataType.ToString(),
+                        deserializedDataType.ToString()
+                    )
+                );
             }
 
-            object[] dataContractAttributes = originalDataType.GetCustomAttributes(typeof(DataContractAttribute), false);
+            object[] dataContractAttributes = originalDataType.GetCustomAttributes(
+                typeof(DataContractAttribute),
+                false
+            );
             if (dataContractAttributes != null && dataContractAttributes.Length > 0)
             {
-                DataContractAttribute dataContractAttribute = (DataContractAttribute)dataContractAttributes[0];
+                DataContractAttribute dataContractAttribute = (DataContractAttribute)
+                    dataContractAttributes[0];
                 if (dataContractAttribute.IsReference)
                 {
                     return;
                 }
             }
 
-            MethodInfo equalsMethod = originalDataType.GetMethod("Equals", new Type[] { typeof(object) });
+            MethodInfo equalsMethod = originalDataType.GetMethod(
+                "Equals",
+                new Type[] { typeof(object) }
+            );
 
             #region "new object()"
             if (originalDataType == typeof(object))
@@ -171,22 +218,43 @@ namespace SerializationTestTypes
             {
                 if (!originalData.Equals(deserializedData))
                 {
-                    throw new Exception(string.Format("Comparison failed: Original string data {0} is not same as deserialized string data {1}", originalData, deserializedData));
+                    throw new Exception(
+                        string.Format(
+                            "Comparison failed: Original string data {0} is not same as deserialized string data {1}",
+                            originalData,
+                            deserializedData
+                        )
+                    );
                 }
             }
             #endregion
 
             #region XML types
-            else if (originalDataType.Equals(typeof(XmlElement)) ||
-                originalDataType.Equals(typeof(XmlNode)))
+            else if (
+                originalDataType.Equals(typeof(XmlElement))
+                || originalDataType.Equals(typeof(XmlNode))
+            )
             {
                 string originalDataXml = ((XmlNode)originalData).InnerXml;
                 string deserializedDataXml = ((XmlNode)deserializedData).InnerXml;
-                Trace.WriteLine(string.Format(LogMessage, originalDataType, originalDataXml, deserializedDataType, deserializedDataXml));
+                Trace.WriteLine(
+                    string.Format(
+                        LogMessage,
+                        originalDataType,
+                        originalDataXml,
+                        deserializedDataType,
+                        deserializedDataXml
+                    )
+                );
                 if (!originalDataXml.Equals(deserializedDataXml))
                 {
-                    throw new Exception(string.Format("Comparison failed: Original XML data ({0}) is not the same as the deserialized XML data ({1})",
-                        originalDataXml, deserializedDataXml));
+                    throw new Exception(
+                        string.Format(
+                            "Comparison failed: Original XML data ({0}) is not the same as the deserialized XML data ({1})",
+                            originalDataXml,
+                            deserializedDataXml
+                        )
+                    );
                 }
             }
             #endregion
@@ -195,16 +263,37 @@ namespace SerializationTestTypes
             else if (originalDataType == typeof(DBNull))
             {
                 // only 1 possible value, DBNull.Value
-                if ((((DBNull)originalData) == DBNull.Value) != (((DBNull)deserializedData) == DBNull.Value))
+                if (
+                    (((DBNull)originalData) == DBNull.Value)
+                    != (((DBNull)deserializedData) == DBNull.Value)
+                )
                 {
-                    throw new Exception(string.Format("Different instances of DBNull: original={0}, deserialized={1}", originalData, deserializedData));
+                    throw new Exception(
+                        string.Format(
+                            "Different instances of DBNull: original={0}, deserialized={1}",
+                            originalData,
+                            deserializedData
+                        )
+                    );
                 }
             }
             else if (originalDataType.Equals(typeof(DateTime)))
             {
-                if (!(((DateTime)originalData).ToUniversalTime().Equals(((DateTime)deserializedData).ToUniversalTime())))
+                if (
+                    !(
+                        ((DateTime)originalData)
+                            .ToUniversalTime()
+                            .Equals(((DateTime)deserializedData).ToUniversalTime())
+                    )
+                )
                 {
-                    throw new Exception(string.Format("Comparison failed: Original Datetime ticks {0} is not same as deserialized Datetime ticks {1}", ((DateTime)originalData).Ticks.ToString(), ((DateTime)deserializedData).Ticks.ToString()));
+                    throw new Exception(
+                        string.Format(
+                            "Comparison failed: Original Datetime ticks {0} is not same as deserialized Datetime ticks {1}",
+                            ((DateTime)originalData).Ticks.ToString(),
+                            ((DateTime)deserializedData).Ticks.ToString()
+                        )
+                    );
                 }
             }
             else if (
@@ -214,14 +303,19 @@ namespace SerializationTestTypes
                 || (originalDataType.Equals(typeof(Guid)))
                 || (originalDataType.Equals(typeof(decimal)))
                 || (originalDataType.Equals(typeof(DateTimeOffset)))
-             )
+            )
             {
                 if (!originalData.Equals(deserializedData))
                 {
-                    throw new Exception(string.Format("Comparison failed : Original type data {0} is not same as deserialized type data {1}", originalData.ToString(), deserializedData.ToString()));
+                    throw new Exception(
+                        string.Format(
+                            "Comparison failed : Original type data {0} is not same as deserialized type data {1}",
+                            originalData.ToString(),
+                            deserializedData.ToString()
+                        )
+                    );
                 }
             }
-
             #endregion
 
             #region Value Types
@@ -237,7 +331,13 @@ namespace SerializationTestTypes
                     bool different = !originalData.Equals(deserializedData);
                     if (different)
                     {
-                        throw new Exception(string.Format("Comparison failed: Original primitive data {0} is not same as deserialized primitive data {1}", originalData.ToString(), deserializedData.ToString()));
+                        throw new Exception(
+                            string.Format(
+                                "Comparison failed: Original primitive data {0} is not same as deserialized primitive data {1}",
+                                originalData.ToString(),
+                                deserializedData.ToString()
+                            )
+                        );
                     }
                 }
                 #endregion
@@ -255,7 +355,13 @@ namespace SerializationTestTypes
                             //Verify this will work for all scenarios
                             if (!originalData.ToString().Equals(deserializedData.ToString()))
                             {
-                                throw new Exception(string.Format("Comparison failed: Original enum data {0} is not same as deserialized enum data {1}", originalData.ToString(), deserializedData.ToString()));
+                                throw new Exception(
+                                    string.Format(
+                                        "Comparison failed: Original enum data {0} is not same as deserialized enum data {1}",
+                                        originalData.ToString(),
+                                        deserializedData.ToString()
+                                    )
+                                );
                             }
                         }
                     }
@@ -267,13 +373,22 @@ namespace SerializationTestTypes
                 else
                 {
                     #region Compare Fields
-                    ComparisonHelper.CompareFields(originalData, deserializedData, containerTypeAttribute, cmpType);
+                    ComparisonHelper.CompareFields(
+                        originalData,
+                        deserializedData,
+                        containerTypeAttribute,
+                        cmpType
+                    );
                     #endregion
 
                     #region Compare properties
-                    ComparisonHelper.CompareProperties(originalData, deserializedData, containerTypeAttribute, cmpType);
+                    ComparisonHelper.CompareProperties(
+                        originalData,
+                        deserializedData,
+                        containerTypeAttribute,
+                        cmpType
+                    );
                     #endregion
-
                 }
                 #endregion
             }
@@ -285,7 +400,13 @@ namespace SerializationTestTypes
                 // the type knows how to compare itself, we'll use it
                 if (!originalData.Equals(deserializedData))
                 {
-                    throw new Exception(string.Format("Comparison failed: Original type data {0} is not same as deserialized type data {1}", originalData.ToString(), deserializedData.ToString()));
+                    throw new Exception(
+                        string.Format(
+                            "Comparison failed: Original type data {0} is not same as deserialized type data {1}",
+                            originalData.ToString(),
+                            deserializedData.ToString()
+                        )
+                    );
                 }
             }
             #endregion
@@ -297,21 +418,41 @@ namespace SerializationTestTypes
             {
                 if (deserializedData is IDictionary)
                 {
-                    IDictionaryEnumerator originalDataEnum = ((IDictionary)originalData).GetEnumerator();
-                    IDictionaryEnumerator deserializedDataEnum = ((IDictionary)deserializedData).GetEnumerator();
+                    IDictionaryEnumerator originalDataEnum = (
+                        (IDictionary)originalData
+                    ).GetEnumerator();
+                    IDictionaryEnumerator deserializedDataEnum = (
+                        (IDictionary)deserializedData
+                    ).GetEnumerator();
                     while (originalDataEnum.MoveNext())
                     {
                         deserializedDataEnum.MoveNext();
                         DictionaryEntry originalEntry = originalDataEnum.Entry;
                         DictionaryEntry deserializedEntry = deserializedDataEnum.Entry;
                         //Compare the keys and then the values
-                        CompareData(originalEntry.Key, deserializedEntry.Key, containerTypeAttribute, cmpType);
-                        CompareData(originalEntry.Value, deserializedEntry.Value, containerTypeAttribute, cmpType);
+                        CompareData(
+                            originalEntry.Key,
+                            deserializedEntry.Key,
+                            containerTypeAttribute,
+                            cmpType
+                        );
+                        CompareData(
+                            originalEntry.Value,
+                            deserializedEntry.Value,
+                            containerTypeAttribute,
+                            cmpType
+                        );
                     }
                 }
                 else
                 {
-                    throw new Exception(string.Format("Comparison failed: Original IDictionary type {0} and deserialized IDictionary type {1} are not of same", originalDataType.GetType().ToString(), deserializedDataType.GetType().ToString()));
+                    throw new Exception(
+                        string.Format(
+                            "Comparison failed: Original IDictionary type {0} and deserialized IDictionary type {1} are not of same",
+                            originalDataType.GetType().ToString(),
+                            deserializedDataType.GetType().ToString()
+                        )
+                    );
                 }
             }
             #endregion
@@ -321,32 +462,54 @@ namespace SerializationTestTypes
             else if (originalData is IEnumerable)
             {
                 IEnumerator originalDataEnumerator = ((IEnumerable)originalData).GetEnumerator();
-                IEnumerator deserializedDataEnumerator = ((IEnumerable)deserializedData).GetEnumerator();
+                IEnumerator deserializedDataEnumerator = (
+                    (IEnumerable)deserializedData
+                ).GetEnumerator();
                 if (null != originalDataEnumerator && null != deserializedDataEnumerator)
                 {
                     while (originalDataEnumerator.MoveNext())
                     {
                         deserializedDataEnumerator.MoveNext();
-                        CompareData(originalDataEnumerator.Current, deserializedDataEnumerator.Current, containerTypeAttribute, cmpType);
+                        CompareData(
+                            originalDataEnumerator.Current,
+                            deserializedDataEnumerator.Current,
+                            containerTypeAttribute,
+                            cmpType
+                        );
                     }
                 }
                 else
                 {
-                    throw new Exception(string.Format("Comparison failed: Original type {0} and deserialized type {1} are not IEnumerable", originalDataType.GetType().ToString(), deserializedDataType.GetType().ToString()));
+                    throw new Exception(
+                        string.Format(
+                            "Comparison failed: Original type {0} and deserialized type {1} are not IEnumerable",
+                            originalDataType.GetType().ToString(),
+                            deserializedDataType.GetType().ToString()
+                        )
+                    );
                 }
             }
-
             #endregion
 
             #region Class
             else if (originalDataType.IsClass)
             {
                 #region Compare Fields
-                ComparisonHelper.CompareFields(originalData, deserializedData, containerTypeAttribute, cmpType);
+                ComparisonHelper.CompareFields(
+                    originalData,
+                    deserializedData,
+                    containerTypeAttribute,
+                    cmpType
+                );
                 #endregion
 
                 #region Compare properties
-                ComparisonHelper.CompareProperties(originalData, deserializedData, containerTypeAttribute, cmpType);
+                ComparisonHelper.CompareProperties(
+                    originalData,
+                    deserializedData,
+                    containerTypeAttribute,
+                    cmpType
+                );
                 #endregion
             }
             #endregion
@@ -365,11 +528,11 @@ namespace SerializationTestTypes
             FieldInfo info = data.GetType().GetField(data.ToString(), flag);
             if (null != info)
             {
-                isEnumMember = info.GetCustomAttributes(typeof(EnumMemberAttribute), false).Length > 0;
+                isEnumMember =
+                    info.GetCustomAttributes(typeof(EnumMemberAttribute), false).Length > 0;
             }
             return isEnumMember;
         }
-
 
         /// <summary>
         /// Iterates through the properties and invokes compare method
@@ -377,7 +540,12 @@ namespace SerializationTestTypes
         /// <param name="originalData"></param>
         /// <param name="deserializedData"></param>
         /// <param name="containerTypeAttribute"></param>
-        private static void CompareProperties(object originalData, object deserializedData, SerializationMechanism containerTypeAttribute, ComparisonType cmpType)
+        private static void CompareProperties(
+            object originalData,
+            object deserializedData,
+            SerializationMechanism containerTypeAttribute,
+            ComparisonType cmpType
+        )
         {
             BindingFlags flag = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
             //Include private fields for DCS types
@@ -386,43 +554,82 @@ namespace SerializationTestTypes
                 flag = flag | BindingFlags.NonPublic;
             }
 
-            foreach (System.Reflection.PropertyInfo property in originalData.GetType().GetProperties(flag))
+            foreach (
+                System.Reflection.PropertyInfo property in originalData
+                    .GetType()
+                    .GetProperties(flag)
+            )
             {
                 object newData = property.GetValue(originalData, null);
-                SerializationMechanism fieldAttribute = ComparisonHelper.GetSerializationMechanism(newData);
+                SerializationMechanism fieldAttribute = ComparisonHelper.GetSerializationMechanism(
+                    newData
+                );
                 if (cmpType.Equals(ComparisonType.DCS))
                 {
                     if (containerTypeAttribute.Equals(SerializationMechanism.DataContractAttribute))
                     {
                         if (
-                            (property.GetCustomAttributes(typeof(DataMemberAttribute), false).Length > 0)
-                            ||
-                            (property.GetCustomAttributes(typeof(EnumMemberAttribute), false).Length > 0)
+                            (
+                                property
+                                    .GetCustomAttributes(typeof(DataMemberAttribute), false)
+                                    .Length > 0
                             )
+                            || (
+                                property
+                                    .GetCustomAttributes(typeof(EnumMemberAttribute), false)
+                                    .Length > 0
+                            )
+                        )
                         {
                             //Pass attribute of the complex type for further evaluation
                             if (IsComplexType(newData))
                             {
-                                CompareData(newData, property.GetValue(deserializedData, null), fieldAttribute, cmpType);
+                                CompareData(
+                                    newData,
+                                    property.GetValue(deserializedData, null),
+                                    fieldAttribute,
+                                    cmpType
+                                );
                             }
                             else //Is a simple type
                             {
-                                CompareData(newData, property.GetValue(deserializedData, null), containerTypeAttribute, cmpType);
+                                CompareData(
+                                    newData,
+                                    property.GetValue(deserializedData, null),
+                                    containerTypeAttribute,
+                                    cmpType
+                                );
                             }
                         }
                     }
-                    else if (containerTypeAttribute.Equals(SerializationMechanism.SerializableAttribute))
+                    else if (
+                        containerTypeAttribute.Equals(SerializationMechanism.SerializableAttribute)
+                    )
                     {
-                        if (property.GetCustomAttributes(typeof(NonSerializedAttribute), false).Length == 0)
+                        if (
+                            property
+                                .GetCustomAttributes(typeof(NonSerializedAttribute), false)
+                                .Length == 0
+                        )
                         {
                             //Pass attribute of the complex type for further evaluation
                             if (IsComplexType(newData))
                             {
-                                CompareData(newData, property.GetValue(deserializedData, null), fieldAttribute, cmpType);
+                                CompareData(
+                                    newData,
+                                    property.GetValue(deserializedData, null),
+                                    fieldAttribute,
+                                    cmpType
+                                );
                             }
                             else //Is a simple type, so pass Parents attribute
                             {
-                                CompareData(newData, property.GetValue(deserializedData, null), containerTypeAttribute, cmpType);
+                                CompareData(
+                                    newData,
+                                    property.GetValue(deserializedData, null),
+                                    containerTypeAttribute,
+                                    cmpType
+                                );
                             }
                         }
                     }
@@ -430,7 +637,11 @@ namespace SerializationTestTypes
                 else if (cmpType.Equals(ComparisonType.POCO))
                 {
                     //Ignore member with [IgnoreDataMember] attribute on a POCO type
-                    if (property.GetCustomAttributes(typeof(IgnoreDataMemberAttribute), false).Length == 0)
+                    if (
+                        property
+                            .GetCustomAttributes(typeof(IgnoreDataMemberAttribute), false)
+                            .Length == 0
+                    )
                     {
                         //On POCO types, Properties which have both getter and setter will be serialized otherwise ignored
                         if (property.CanRead && property.CanWrite)
@@ -438,11 +649,21 @@ namespace SerializationTestTypes
                             //Pass attribute of the complex type for further evaluation
                             if (IsComplexType(newData))
                             {
-                                CompareData(newData, property.GetValue(deserializedData, null), fieldAttribute, cmpType);
+                                CompareData(
+                                    newData,
+                                    property.GetValue(deserializedData, null),
+                                    fieldAttribute,
+                                    cmpType
+                                );
                             }
                             else //Is a simple type, so pass Parents attribute
                             {
-                                CompareData(newData, property.GetValue(deserializedData, null), containerTypeAttribute, cmpType);
+                                CompareData(
+                                    newData,
+                                    property.GetValue(deserializedData, null),
+                                    containerTypeAttribute,
+                                    cmpType
+                                );
                             }
                         }
                         else if (property.CanRead && !property.CanWrite) //Get-Only collection
@@ -450,11 +671,21 @@ namespace SerializationTestTypes
                             //Pass attribute of the complex type for further evaluation
                             if (IsComplexType(newData))
                             {
-                                CompareData(newData, property.GetValue(deserializedData, null), fieldAttribute, cmpType);
+                                CompareData(
+                                    newData,
+                                    property.GetValue(deserializedData, null),
+                                    fieldAttribute,
+                                    cmpType
+                                );
                             }
                             else //Is a simple type, so pass Parents attribute
                             {
-                                CompareData(newData, property.GetValue(deserializedData, null), containerTypeAttribute, cmpType);
+                                CompareData(
+                                    newData,
+                                    property.GetValue(deserializedData, null),
+                                    containerTypeAttribute,
+                                    cmpType
+                                );
                             }
                         }
                     }
@@ -469,26 +700,27 @@ namespace SerializationTestTypes
         public static bool IsComplexType(object data)
         {
             bool complexType = false;
-            if (data == null) return false;
+            if (data == null)
+                return false;
             if (
-                ((data.GetType().IsValueType)
-                &&
-                (!data.GetType().IsPrimitive)
-                &&
-                (!data.GetType().IsEnum))
-                ||
-                ((data.GetType().IsClass)
-                &&
-                (!(data.GetType().Equals(typeof(string)))
-                ))
-                )
+                (
+                    (data.GetType().IsValueType)
+                    && (!data.GetType().IsPrimitive)
+                    && (!data.GetType().IsEnum)
+                ) || ((data.GetType().IsClass) && (!(data.GetType().Equals(typeof(string)))))
+            )
             {
                 complexType = true;
             }
             return complexType;
         }
 
-        private static void CompareFields(object originalData, object deserializedData, SerializationMechanism containerTypeAttribute, ComparisonType cmpType)
+        private static void CompareFields(
+            object originalData,
+            object deserializedData,
+            SerializationMechanism containerTypeAttribute,
+            ComparisonType cmpType
+        )
         {
             //Compare fields
             //Non-public members are not serialized for POCO types
@@ -507,34 +739,61 @@ namespace SerializationTestTypes
                     if (containerTypeAttribute.Equals(SerializationMechanism.DataContractAttribute))
                     {
                         if (
-                            (field.GetCustomAttributes(typeof(DataMemberAttribute), false).Length > 0)
-                            ||
-                            (field.GetCustomAttributes(typeof(EnumMemberAttribute), false).Length > 0)
+                            (
+                                field.GetCustomAttributes(typeof(DataMemberAttribute), false).Length
+                                > 0
                             )
+                            || (
+                                field.GetCustomAttributes(typeof(EnumMemberAttribute), false).Length
+                                > 0
+                            )
+                        )
                         {
                             //Pass attribute of the complex type for further evaluation
                             if (ComparisonHelper.IsComplexType(newData))
                             {
-                                ComparisonHelper.CompareData(field.GetValue(originalData), field.GetValue(deserializedData), fieldAttribute, cmpType);
+                                ComparisonHelper.CompareData(
+                                    field.GetValue(originalData),
+                                    field.GetValue(deserializedData),
+                                    fieldAttribute,
+                                    cmpType
+                                );
                             }
                             else //Is a simple type
                             {
-                                ComparisonHelper.CompareData(field.GetValue(originalData), field.GetValue(deserializedData), containerTypeAttribute, cmpType);
+                                ComparisonHelper.CompareData(
+                                    field.GetValue(originalData),
+                                    field.GetValue(deserializedData),
+                                    containerTypeAttribute,
+                                    cmpType
+                                );
                             }
                         }
                     }
-                    else if (containerTypeAttribute.Equals(SerializationMechanism.SerializableAttribute))
+                    else if (
+                        containerTypeAttribute.Equals(SerializationMechanism.SerializableAttribute)
+                    )
                     {
                         //Do not compare [NonSerialized] members
                         if (!field.IsNotSerialized)
                         {
                             if (ComparisonHelper.IsComplexType(newData))
                             {
-                                ComparisonHelper.CompareData(field.GetValue(originalData), field.GetValue(deserializedData), fieldAttribute, cmpType);
+                                ComparisonHelper.CompareData(
+                                    field.GetValue(originalData),
+                                    field.GetValue(deserializedData),
+                                    fieldAttribute,
+                                    cmpType
+                                );
                             }
                             else //Is a simple type
                             {
-                                ComparisonHelper.CompareData(field.GetValue(originalData), field.GetValue(deserializedData), containerTypeAttribute, cmpType);
+                                ComparisonHelper.CompareData(
+                                    field.GetValue(originalData),
+                                    field.GetValue(deserializedData),
+                                    containerTypeAttribute,
+                                    cmpType
+                                );
                             }
                         }
                     }
@@ -543,15 +802,32 @@ namespace SerializationTestTypes
                 {
                     //ReadOnly fields should be ignored for POCO type
                     //Ignore member with [IgnoreDataMember] attribute on a POCO type
-                    if ((!field.IsInitOnly) && (field.GetCustomAttributes(typeof(IgnoreDataMemberAttribute), false).Length == 0))
+                    if (
+                        (!field.IsInitOnly)
+                        && (
+                            field
+                                .GetCustomAttributes(typeof(IgnoreDataMemberAttribute), false)
+                                .Length == 0
+                        )
+                    )
                     {
                         if (ComparisonHelper.IsComplexType(newData))
                         {
-                            ComparisonHelper.CompareData(field.GetValue(originalData), field.GetValue(deserializedData), fieldAttribute, cmpType);
+                            ComparisonHelper.CompareData(
+                                field.GetValue(originalData),
+                                field.GetValue(deserializedData),
+                                fieldAttribute,
+                                cmpType
+                            );
                         }
                         else //Is a simple type
                         {
-                            ComparisonHelper.CompareData(field.GetValue(originalData), field.GetValue(deserializedData), containerTypeAttribute, cmpType);
+                            ComparisonHelper.CompareData(
+                                field.GetValue(originalData),
+                                field.GetValue(deserializedData),
+                                containerTypeAttribute,
+                                cmpType
+                            );
                         }
                     }
                 }
@@ -560,12 +836,14 @@ namespace SerializationTestTypes
 
         public static bool CompareDoubleApproximately(double d1, double d2)
         {
-            if ((d1 < 0) != (d2 < 0)) return false;
+            if ((d1 < 0) != (d2 < 0))
+                return false;
             d1 = Math.Abs(d1);
             d2 = Math.Abs(d2);
             double max = Math.Max(d1, d2);
             double min = Math.Min(d1, d2);
-            if (min == 0) return (max == 0);
+            if (min == 0)
+                return (max == 0);
             double difference = max - min;
             double ratio = difference / min;
             return (ratio < 0.0000001);

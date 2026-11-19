@@ -10,9 +10,11 @@ namespace System.ServiceModel.Channels
 
     class ContextInputChannel : ContextInputChannelBase<IInputChannel>, IInputChannel
     {
-        public ContextInputChannel(ChannelManagerBase channelManager, IInputChannel innerChannel, ContextExchangeMechanism contextExchangeMechanism)
-            : base(channelManager, innerChannel, contextExchangeMechanism)
-        {
-        }
+        public ContextInputChannel(
+            ChannelManagerBase channelManager,
+            IInputChannel innerChannel,
+            ContextExchangeMechanism contextExchangeMechanism
+        )
+            : base(channelManager, innerChannel, contextExchangeMechanism) { }
     }
 }

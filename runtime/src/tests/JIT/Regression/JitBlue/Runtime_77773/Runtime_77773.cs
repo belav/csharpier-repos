@@ -32,7 +32,11 @@ public unsafe class Runtime_77773
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static bool ProblemWithCopyPropagation(StructWithField* pS1, StructWithField* pS2, nint idx)
+    private static bool ProblemWithCopyPropagation(
+        StructWithField* pS1,
+        StructWithField* pS2,
+        nint idx
+    )
     {
         int* pIdx = &pS1[idx].Field;
         JitUse(pIdx);

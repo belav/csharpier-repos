@@ -5,13 +5,15 @@
 namespace System.ServiceModel.Syndication
 {
     using System.Runtime;
+    using System.Runtime.CompilerServices;
     using System.Runtime.Serialization;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Runtime.CompilerServices;
 
     // NOTE: This class implements Clone so if you add any members, please update the copy ctor
-    [TypeForwardedFrom("System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public class XmlSyndicationContent : SyndicationContent
     {
         XmlBuffer contentBuffer;
@@ -48,7 +50,11 @@ namespace System.ServiceModel.Syndication
             }
             this.type = string.IsNullOrEmpty(this.type) ? Atom10Constants.XmlMediaType : this.type;
             this.contentBuffer = new XmlBuffer(int.MaxValue);
-            using (XmlDictionaryWriter writer = this.contentBuffer.OpenSection(XmlDictionaryReaderQuotas.Max))
+            using (
+                XmlDictionaryWriter writer = this.contentBuffer.OpenSection(
+                    XmlDictionaryReaderQuotas.Max
+                )
+            )
             {
                 writer.WriteNode(reader, false);
             }
@@ -56,13 +62,24 @@ namespace System.ServiceModel.Syndication
             contentBuffer.Close();
         }
 
-        public XmlSyndicationContent(string type, object dataContractExtension, XmlObjectSerializer dataContractSerializer)
+        public XmlSyndicationContent(
+            string type,
+            object dataContractExtension,
+            XmlObjectSerializer dataContractSerializer
+        )
         {
             this.type = string.IsNullOrEmpty(type) ? Atom10Constants.XmlMediaType : type;
-            this.extension = new SyndicationElementExtension(dataContractExtension, dataContractSerializer);
+            this.extension = new SyndicationElementExtension(
+                dataContractExtension,
+                dataContractSerializer
+            );
         }
 
-        public XmlSyndicationContent(string type, object xmlSerializerExtension, XmlSerializer serializer)
+        public XmlSyndicationContent(
+            string type,
+            object xmlSerializerExtension,
+            XmlSerializer serializer
+        )
         {
             this.type = string.IsNullOrEmpty(type) ? Atom10Constants.XmlMediaType : type;
             this.extension = new SyndicationElementExtension(xmlSerializerExtension, serializer);
@@ -92,10 +109,7 @@ namespace System.ServiceModel.Syndication
 
         public SyndicationElementExtension Extension
         {
-            get
-            {
-                return this.extension;
-            }
+            get { return this.extension; }
         }
 
         public override string Type
@@ -116,7 +130,7 @@ namespace System.ServiceModel.Syndication
 
         public TContent ReadContent<TContent>()
         {
-            return ReadContent<TContent>((DataContractSerializer) null);
+            return ReadContent<TContent>((DataContractSerializer)null);
         }
 
         public TContent ReadContent<TContent>(XmlObjectSerializer dataContractSerializer)
@@ -136,7 +150,7 @@ namespace System.ServiceModel.Syndication
                 {
                     // skip past the content element
                     reader.ReadStartElement();
-                    return (TContent) dataContractSerializer.ReadObject(reader, false);
+                    return (TContent)dataContractSerializer.ReadObject(reader, false);
                 }
             }
         }
@@ -158,7 +172,7 @@ namespace System.ServiceModel.Syndication
                 {
                     // skip past the content element
                     reader.ReadStartElement();
-                    return (TContent) serializer.Deserialize(reader);
+                    return (TContent)serializer.Deserialize(reader);
                 }
             }
         }
@@ -198,7 +212,11 @@ namespace System.ServiceModel.Syndication
                 XmlBuffer tmp = new XmlBuffer(int.MaxValue);
                 using (XmlDictionaryWriter writer = tmp.OpenSection(XmlDictionaryReaderQuotas.Max))
                 {
-                    this.WriteTo(writer, Atom10Constants.ContentTag, Atom10Constants.Atom10Namespace);
+                    this.WriteTo(
+                        writer,
+                        Atom10Constants.ContentTag,
+                        Atom10Constants.Atom10Namespace
+                    );
                 }
                 tmp.CloseSection();
                 tmp.Close();

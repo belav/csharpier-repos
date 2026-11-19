@@ -8,11 +8,14 @@ namespace System.Web.Http
 {
     internal class EmptyReadOnlyDictionary<TKey, TValue>
     {
-        private static readonly ReadOnlyDictionary<TKey, TValue> _value = new ReadOnlyDictionary<TKey, TValue>(new Dictionary<TKey, TValue>());
+        private static readonly ReadOnlyDictionary<TKey, TValue> _value = new ReadOnlyDictionary<
+            TKey,
+            TValue
+        >(new Dictionary<TKey, TValue>());
 
         public static IDictionary<TKey, TValue> Value
         {
             get { return _value; }
-        }        
+        }
     }
 }

@@ -23,7 +23,11 @@ namespace System.Reflection.Metadata
         /// The kind of the type as specified in the signature. To interpret this value use <see cref="Ecma335.MetadataReaderExtensions.ResolveSignatureTypeKind(MetadataReader, EntityHandle, byte)"/>
         /// Note that when the signature comes from a WinMD file additional processing is needed to determine whether the target type is a value type or a reference type.
         /// </param>
-        TType GetTypeFromDefinition(MetadataReader reader, TypeDefinitionHandle handle, byte rawTypeKind);
+        TType GetTypeFromDefinition(
+            MetadataReader reader,
+            TypeDefinitionHandle handle,
+            byte rawTypeKind
+        );
 
         /// <summary>
         /// Gets the type symbol for a type reference.
@@ -38,6 +42,10 @@ namespace System.Reflection.Metadata
         /// The kind of the type as specified in the signature. To interpret this value use <see cref="Ecma335.MetadataReaderExtensions.ResolveSignatureTypeKind(MetadataReader, EntityHandle, byte)"/>
         /// Note that when the signature comes from a WinMD file additional processing is needed to determine whether the target type is a value type or a reference type.
         /// </param>
-        TType GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte rawTypeKind);
+        TType GetTypeFromReference(
+            MetadataReader reader,
+            TypeReferenceHandle handle,
+            byte rawTypeKind
+        );
     }
 }

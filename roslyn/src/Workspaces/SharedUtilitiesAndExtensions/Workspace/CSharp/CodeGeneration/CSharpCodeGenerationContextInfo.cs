@@ -11,7 +11,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
     {
         public readonly LanguageVersion LanguageVersion;
 
-        public CSharpCodeGenerationContextInfo(CodeGenerationContext context, CSharpCodeGenerationOptions options, CSharpCodeGenerationService service, LanguageVersion languageVersion)
+        public CSharpCodeGenerationContextInfo(
+            CodeGenerationContext context,
+            CSharpCodeGenerationOptions options,
+            CSharpCodeGenerationService service,
+            LanguageVersion languageVersion
+        )
             : base(context)
         {
             Options = options;
@@ -22,19 +27,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         public new CSharpCodeGenerationOptions Options { get; }
         public new CSharpCodeGenerationService Service { get; }
 
-        protected override SyntaxGenerator GeneratorImpl
-            => Service.LanguageServices.GetRequiredService<SyntaxGenerator>();
+        protected override SyntaxGenerator GeneratorImpl =>
+            Service.LanguageServices.GetRequiredService<SyntaxGenerator>();
 
-        protected override CodeGenerationOptions OptionsImpl
-            => Options;
+        protected override CodeGenerationOptions OptionsImpl => Options;
 
-        protected override ICodeGenerationService ServiceImpl
-            => Service;
+        protected override ICodeGenerationService ServiceImpl => Service;
 
-        public new CSharpCodeGenerationContextInfo WithContext(CodeGenerationContext value)
-            => (Context == value) ? this : new(value, Options, Service, LanguageVersion);
+        public new CSharpCodeGenerationContextInfo WithContext(CodeGenerationContext value) =>
+            (Context == value) ? this : new(value, Options, Service, LanguageVersion);
 
-        protected override CodeGenerationContextInfo WithContextImpl(CodeGenerationContext value)
-            => WithContext(value);
+        protected override CodeGenerationContextInfo WithContextImpl(CodeGenerationContext value) =>
+            WithContext(value);
     }
 }

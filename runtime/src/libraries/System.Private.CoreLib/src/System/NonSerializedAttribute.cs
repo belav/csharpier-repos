@@ -9,8 +9,6 @@ namespace System
     [EditorBrowsable(EditorBrowsableState.Never)]
     public sealed class NonSerializedAttribute : Attribute
     {
-        public NonSerializedAttribute()
-        {
-        }
+        public NonSerializedAttribute() { }
     }
 }

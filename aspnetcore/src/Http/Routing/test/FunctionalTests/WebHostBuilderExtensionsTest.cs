@@ -22,25 +22,19 @@ public class WebHostBuilderExtensionsTest
             {
                 {
                     (rb) =>
-                        rb.MapGet(
-                            "greeting/{name}",
-                            (req, resp, routeData) =>
-                                resp.WriteAsync($"Hello! {routeData.Values["name"]}")
+                        rb.MapGet("greeting/{name}", (req, resp, routeData) =>
+                            resp.WriteAsync($"Hello! {routeData.Values["name"]}")
                         ),
                     new HttpRequestMessage(HttpMethod.Get, "greeting/James"),
                     "Hello! James"
                 },
                 {
-                    (rb) =>
-                        rb.MapPost(
-                            "greeting/{name}",
-                            async (req, resp, routeData) =>
-                            {
-                                var streamReader = new StreamReader(req.Body);
-                                var data = await streamReader.ReadToEndAsync();
-                                await resp.WriteAsync($"{routeData.Values["name"]} {data}");
-                            }
-                        ),
+                    (rb) => rb.MapPost("greeting/{name}", async (req, resp, routeData) =>
+                        {
+                            var streamReader = new StreamReader(req.Body);
+                            var data = await streamReader.ReadToEndAsync();
+                            await resp.WriteAsync($"{routeData.Values["name"]} {data}");
+                        }),
                     new HttpRequestMessage(HttpMethod.Post, "greeting/James")
                     {
                         Content = new StringContent("Biography"),
@@ -48,16 +42,12 @@ public class WebHostBuilderExtensionsTest
                     "James Biography"
                 },
                 {
-                    (rb) =>
-                        rb.MapPut(
-                            "greeting/{name}",
-                            async (req, resp, routeData) =>
-                            {
-                                var streamReader = new StreamReader(req.Body);
-                                var data = await streamReader.ReadToEndAsync();
-                                await resp.WriteAsync($"{routeData.Values["name"]} {data}");
-                            }
-                        ),
+                    (rb) => rb.MapPut("greeting/{name}", async (req, resp, routeData) =>
+                        {
+                            var streamReader = new StreamReader(req.Body);
+                            var data = await streamReader.ReadToEndAsync();
+                            await resp.WriteAsync($"{routeData.Values["name"]} {data}");
+                        }),
                     new HttpRequestMessage(HttpMethod.Put, "greeting/James")
                     {
                         Content = new StringContent("Biography"),
@@ -66,26 +56,19 @@ public class WebHostBuilderExtensionsTest
                 },
                 {
                     (rb) =>
-                        rb.MapDelete(
-                            "greeting/{name}",
-                            (req, resp, routeData) =>
-                                resp.WriteAsync($"Hello! {routeData.Values["name"]}")
+                        rb.MapDelete("greeting/{name}", (req, resp, routeData) =>
+                            resp.WriteAsync($"Hello! {routeData.Values["name"]}")
                         ),
                     new HttpRequestMessage(HttpMethod.Delete, "greeting/James"),
                     "Hello! James"
                 },
                 {
-                    (rb) =>
-                        rb.MapVerb(
-                            "POST",
-                            "greeting/{name}",
-                            async (req, resp, routeData) =>
-                            {
-                                var streamReader = new StreamReader(req.Body);
-                                var data = await streamReader.ReadToEndAsync();
-                                await resp.WriteAsync($"{routeData.Values["name"]} {data}");
-                            }
-                        ),
+                    (rb) => rb.MapVerb("POST", "greeting/{name}", async (req, resp, routeData) =>
+                        {
+                            var streamReader = new StreamReader(req.Body);
+                            var data = await streamReader.ReadToEndAsync();
+                            await resp.WriteAsync($"{routeData.Values["name"]} {data}");
+                        }),
                     new HttpRequestMessage(HttpMethod.Post, "greeting/James")
                     {
                         Content = new StringContent("Biography"),

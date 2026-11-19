@@ -86,8 +86,10 @@ namespace Roslyn.Utilities
 
         public bool Contains(T value) => _set?.Contains(value) ?? false;
 
-        public IEnumerator<T> GetEnumerator()
-            => _elements is null ? SpecializedCollections.EmptyEnumerator<T>() : ((IEnumerable<T>)_elements).GetEnumerator();
+        public IEnumerator<T> GetEnumerator() =>
+            _elements is null
+                ? SpecializedCollections.EmptyEnumerator<T>()
+                : ((IEnumerable<T>)_elements).GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
@@ -95,25 +97,19 @@ namespace Roslyn.Utilities
 
         public T this[int i] => _elements![i];
 
-        private IReadOnlySet<T> Set
-            => (IReadOnlySet<T>?)_set ?? SpecializedCollections.EmptyReadOnlySet<T>();
+        private IReadOnlySet<T> Set =>
+            (IReadOnlySet<T>?)_set ?? SpecializedCollections.EmptyReadOnlySet<T>();
 
-        public bool IsProperSubsetOf(IEnumerable<T> other)
-            => Set.IsProperSubsetOf(other);
+        public bool IsProperSubsetOf(IEnumerable<T> other) => Set.IsProperSubsetOf(other);
 
-        public bool IsProperSupersetOf(IEnumerable<T> other)
-            => Set.IsProperSupersetOf(other);
+        public bool IsProperSupersetOf(IEnumerable<T> other) => Set.IsProperSupersetOf(other);
 
-        public bool IsSubsetOf(IEnumerable<T> other)
-            => Set.IsSubsetOf(other);
+        public bool IsSubsetOf(IEnumerable<T> other) => Set.IsSubsetOf(other);
 
-        public bool IsSupersetOf(IEnumerable<T> other)
-            => Set.IsSupersetOf(other);
+        public bool IsSupersetOf(IEnumerable<T> other) => Set.IsSupersetOf(other);
 
-        public bool Overlaps(IEnumerable<T> other)
-            => Set.Overlaps(other);
+        public bool Overlaps(IEnumerable<T> other) => Set.Overlaps(other);
 
-        public bool SetEquals(IEnumerable<T> other)
-            => Set.SetEquals(other);
+        public bool SetEquals(IEnumerable<T> other) => Set.SetEquals(other);
     }
 }

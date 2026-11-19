@@ -6,10 +6,10 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using Roslyn.Utilities;
 using Microsoft.CodeAnalysis.CodeGen;
 using Microsoft.CodeAnalysis.Debugging;
 using Microsoft.CodeAnalysis.Symbols;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Emit.NoPia
 {
@@ -34,16 +34,22 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
         TEmbeddedEvent,
         TEmbeddedProperty,
         TEmbeddedParameter,
-        TEmbeddedTypeParameter>
+        TEmbeddedTypeParameter
+    >
     {
-        internal abstract class CommonEmbeddedMethod : CommonEmbeddedMember<TMethodSymbol>, Cci.IMethodDefinition
+        internal abstract class CommonEmbeddedMethod
+            : CommonEmbeddedMember<TMethodSymbol>,
+                Cci.IMethodDefinition
         {
             public readonly TEmbeddedType ContainingType;
             private readonly ImmutableArray<TEmbeddedTypeParameter> _typeParameters;
             private readonly ImmutableArray<TEmbeddedParameter> _parameters;
 
-            protected CommonEmbeddedMethod(TEmbeddedType containingType, TMethodSymbol underlyingMethod) :
-                base(underlyingMethod)
+            protected CommonEmbeddedMethod(
+                TEmbeddedType containingType,
+                TMethodSymbol underlyingMethod
+            )
+                : base(underlyingMethod)
             {
                 this.ContainingType = containingType;
                 _typeParameters = GetTypeParameters();
@@ -64,7 +70,9 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             protected abstract bool IsSealed { get; }
             protected abstract bool IsStatic { get; }
             protected abstract bool IsVirtual { get; }
-            protected abstract System.Reflection.MethodImplAttributes GetImplementationAttributes(EmitContext context);
+            protected abstract System.Reflection.MethodImplAttributes GetImplementationAttributes(
+                EmitContext context
+            );
             protected abstract bool ReturnValueIsMarshalledExplicitly { get; }
             protected abstract Cci.IMarshallingInformation ReturnValueMarshallingInformation { get; }
             protected abstract ImmutableArray<byte> ReturnValueMarshallingDescriptor { get; }
@@ -76,25 +84,50 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             public TMethodSymbol UnderlyingMethod => this.UnderlyingSymbol;
 
-            protected sealed override TAttributeData PortAttributeIfNeedTo(TAttributeData attrData, TSyntaxNode syntaxNodeOpt, DiagnosticBag diagnostics)
+            protected sealed override TAttributeData PortAttributeIfNeedTo(
+                TAttributeData attrData,
+                TSyntaxNode syntaxNodeOpt,
+                DiagnosticBag diagnostics
+            )
             {
                 // Note, when porting attributes, we are not using constructors from original symbol.
                 // The constructors might be missing (for example, in metadata case) and doing lookup
                 // will ensure that we report appropriate errors.
 
-                if (TypeManager.IsTargetAttribute(attrData, AttributeDescription.LCIDConversionAttribute, out int signatureIndex))
+                if (
+                    TypeManager.IsTargetAttribute(
+                        attrData,
+                        AttributeDescription.LCIDConversionAttribute,
+                        out int signatureIndex
+                    )
+                )
                 {
-                    if (signatureIndex == 0 && TypeManager.TryGetAttributeArguments(attrData, out var constructorArguments, out var namedArguments, syntaxNodeOpt, diagnostics))
+                    if (
+                        signatureIndex == 0
+                        && TypeManager.TryGetAttributeArguments(
+                            attrData,
+                            out var constructorArguments,
+                            out var namedArguments,
+                            syntaxNodeOpt,
+                            diagnostics
+                        )
+                    )
                     {
-                        return TypeManager.CreateSynthesizedAttribute(WellKnownMember.System_Runtime_InteropServices_LCIDConversionAttribute__ctor, constructorArguments, namedArguments, syntaxNodeOpt, diagnostics);
+                        return TypeManager.CreateSynthesizedAttribute(
+                            WellKnownMember.System_Runtime_InteropServices_LCIDConversionAttribute__ctor,
+                            constructorArguments,
+                            namedArguments,
+                            syntaxNodeOpt,
+                            diagnostics
+                        );
                     }
                 }
 
                 return null;
             }
+
 #nullable enable
-            public bool HasBody
-                => Cci.DefaultImplementations.HasBody(this);
+            public bool HasBody => Cci.DefaultImplementations.HasBody(this);
 
             Cci.IMethodBody? Cci.IMethodDefinition.GetBody(EmitContext context)
             {
@@ -108,6 +141,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
                 return null;
             }
+
 #nullable disable
             private sealed class EmptyBody : Cci.IMethodBody
             {
@@ -134,13 +168,15 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
                 ImmutableArray<byte> Cci.IMethodBody.IL => ImmutableArray<byte>.Empty;
 
-                ImmutableArray<Cci.SequencePoint> Cci.IMethodBody.SequencePoints => ImmutableArray<Cci.SequencePoint>.Empty;
+                ImmutableArray<Cci.SequencePoint> Cci.IMethodBody.SequencePoints =>
+                    ImmutableArray<Cci.SequencePoint>.Empty;
 
                 bool Cci.IMethodBody.HasDynamicLocalVariables => false;
 
                 StateMachineMoveNextBodyDebugInfo Cci.IMethodBody.MoveNextBodyInfo => null;
 
-                ImmutableArray<SourceSpan> Cci.IMethodBody.CodeCoverageSpans => ImmutableArray<SourceSpan>.Empty;
+                ImmutableArray<SourceSpan> Cci.IMethodBody.CodeCoverageSpans =>
+                    ImmutableArray<SourceSpan>.Empty;
 
                 ImmutableArray<Cci.LocalScope> Cci.IMethodBody.LocalScopes =>
                     ImmutableArray<Cci.LocalScope>.Empty;
@@ -164,15 +200,15 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                 ImmutableArray<LambdaDebugInfo> Cci.IMethodBody.LambdaDebugInfo =>
                     default(ImmutableArray<LambdaDebugInfo>);
 
-                public StateMachineStatesDebugInfo StateMachineStatesDebugInfo
-                    => default;
+                public StateMachineStatesDebugInfo StateMachineStatesDebugInfo => default;
 
                 public DebugId MethodId => default(DebugId);
 
                 public bool IsPrimaryConstructor => false;
             }
 
-            IEnumerable<Cci.IGenericMethodParameter> Cci.IMethodDefinition.GenericParameters => _typeParameters;
+            IEnumerable<Cci.IGenericMethodParameter> Cci.IMethodDefinition.GenericParameters =>
+                _typeParameters;
 
             bool Cci.IMethodDefinition.HasDeclarativeSecurity => false;
 
@@ -190,7 +226,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             bool Cci.IMethodDefinition.IsPlatformInvoke => PlatformInvokeData != null;
 
-            Cci.IPlatformInvokeInformation Cci.IMethodDefinition.PlatformInvokeData => PlatformInvokeData;
+            Cci.IPlatformInvokeInformation Cci.IMethodDefinition.PlatformInvokeData =>
+                PlatformInvokeData;
 
             bool Cci.IMethodDefinition.IsRuntimeSpecial => IsRuntimeSpecial;
 
@@ -202,37 +239,42 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             bool Cci.IMethodDefinition.IsVirtual => IsVirtual;
 
-            System.Reflection.MethodImplAttributes Cci.IMethodDefinition.GetImplementationAttributes(EmitContext context)
+            System.Reflection.MethodImplAttributes Cci.IMethodDefinition.GetImplementationAttributes(
+                EmitContext context
+            )
             {
                 return GetImplementationAttributes(context);
             }
 
             ImmutableArray<Cci.IParameterDefinition> Cci.IMethodDefinition.Parameters
             {
-                get
-                {
-                    return StaticCast<Cci.IParameterDefinition>.From(_parameters);
-                }
+                get { return StaticCast<Cci.IParameterDefinition>.From(_parameters); }
             }
 
             bool Cci.IMethodDefinition.RequiresSecurityObject => false;
 
-            IEnumerable<Cci.ICustomAttribute> Cci.IMethodDefinition.GetReturnValueAttributes(EmitContext context)
+            IEnumerable<Cci.ICustomAttribute> Cci.IMethodDefinition.GetReturnValueAttributes(
+                EmitContext context
+            )
             {
                 // TODO:
                 return SpecializedCollections.EmptyEnumerable<Cci.ICustomAttribute>();
             }
 
-            bool Cci.IMethodDefinition.ReturnValueIsMarshalledExplicitly => ReturnValueIsMarshalledExplicitly;
+            bool Cci.IMethodDefinition.ReturnValueIsMarshalledExplicitly =>
+                ReturnValueIsMarshalledExplicitly;
 
-            Cci.IMarshallingInformation Cci.IMethodDefinition.ReturnValueMarshallingInformation => ReturnValueMarshallingInformation;
+            Cci.IMarshallingInformation Cci.IMethodDefinition.ReturnValueMarshallingInformation =>
+                ReturnValueMarshallingInformation;
 
-            ImmutableArray<byte> Cci.IMethodDefinition.ReturnValueMarshallingDescriptor => ReturnValueMarshallingDescriptor;
+            ImmutableArray<byte> Cci.IMethodDefinition.ReturnValueMarshallingDescriptor =>
+                ReturnValueMarshallingDescriptor;
 
             IEnumerable<Cci.SecurityAttribute> Cci.IMethodDefinition.SecurityAttributes =>
                 SpecializedCollections.EmptyEnumerable<Cci.SecurityAttribute>();
 
-            Cci.ITypeDefinition Cci.ITypeDefinitionMember.ContainingTypeDefinition => ContainingType;
+            Cci.ITypeDefinition Cci.ITypeDefinitionMember.ContainingTypeDefinition =>
+                ContainingType;
 
             Cci.INamespace Cci.IMethodDefinition.ContainingNamespace => ContainingNamespace;
 
@@ -268,20 +310,25 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             {
                 get
                 {
-                    // This is a definition, no information about extra parameters 
+                    // This is a definition, no information about extra parameters
                     return ImmutableArray<Cci.IParameterTypeInformation>.Empty;
                 }
             }
 
-            Cci.IGenericMethodInstanceReference Cci.IMethodReference.AsGenericMethodInstanceReference => null;
+            Cci.IGenericMethodInstanceReference Cci.IMethodReference.AsGenericMethodInstanceReference =>
+                null;
 
-            Cci.ISpecializedMethodReference Cci.IMethodReference.AsSpecializedMethodReference => null;
+            Cci.ISpecializedMethodReference Cci.IMethodReference.AsSpecializedMethodReference =>
+                null;
 
-            Cci.CallingConvention Cci.ISignature.CallingConvention => UnderlyingMethodSignature.CallingConvention;
+            Cci.CallingConvention Cci.ISignature.CallingConvention =>
+                UnderlyingMethodSignature.CallingConvention;
 
             ushort Cci.ISignature.ParameterCount => (ushort)_parameters.Length;
 
-            ImmutableArray<Cci.IParameterTypeInformation> Cci.ISignature.GetParameters(EmitContext context)
+            ImmutableArray<Cci.IParameterTypeInformation> Cci.ISignature.GetParameters(
+                EmitContext context
+            )
             {
                 return StaticCast<Cci.IParameterTypeInformation>.From(_parameters);
             }
@@ -304,7 +351,10 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             /// </remarks>
             public override string ToString()
             {
-                return UnderlyingMethod.GetInternalSymbol().GetISymbol().ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat);
+                return UnderlyingMethod
+                    .GetInternalSymbol()
+                    .GetISymbol()
+                    .ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat);
             }
         }
     }

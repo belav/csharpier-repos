@@ -33,11 +33,19 @@ namespace ILCompiler.Reflection.ReadyToRun
         /// </summary>
         public string SignatureString { get; }
 
-        public PgoInfoKey(IAssemblyMetadata componentReader, string owningType, EntityHandle methodHandle, string[] instanceArgs)
+        public PgoInfoKey(
+            IAssemblyMetadata componentReader,
+            string owningType,
+            EntityHandle methodHandle,
+            string[] instanceArgs
+        )
         {
             ComponentReader = componentReader;
             EntityHandle owningTypeHandle;
-            DisassemblingGenericContext genericContext = new DisassemblingGenericContext(typeParameters: Array.Empty<string>(), methodParameters: instanceArgs);
+            DisassemblingGenericContext genericContext = new DisassemblingGenericContext(
+                typeParameters: Array.Empty<string>(),
+                methodParameters: instanceArgs
+            );
             DisassemblingTypeProvider typeProvider = new DisassemblingTypeProvider();
             MethodHandle = methodHandle;
 
@@ -46,18 +54,30 @@ namespace ILCompiler.Reflection.ReadyToRun
             {
                 case HandleKind.MethodDefinition:
                     {
-                        MethodDefinition methodDef = componentReader.MetadataReader.GetMethodDefinition((MethodDefinitionHandle)MethodHandle);
+                        MethodDefinition methodDef =
+                            componentReader.MetadataReader.GetMethodDefinition(
+                                (MethodDefinitionHandle)MethodHandle
+                            );
                         Name = componentReader.MetadataReader.GetString(methodDef.Name);
-                        Signature = methodDef.DecodeSignature<string, DisassemblingGenericContext>(typeProvider, genericContext);
+                        Signature = methodDef.DecodeSignature<string, DisassemblingGenericContext>(
+                            typeProvider,
+                            genericContext
+                        );
                         owningTypeHandle = methodDef.GetDeclaringType();
                     }
                     break;
 
                 case HandleKind.MemberReference:
                     {
-                        MemberReference memberRef = componentReader.MetadataReader.GetMemberReference((MemberReferenceHandle)MethodHandle);
+                        MemberReference memberRef =
+                            componentReader.MetadataReader.GetMemberReference(
+                                (MemberReferenceHandle)MethodHandle
+                            );
                         Name = componentReader.MetadataReader.GetString(memberRef.Name);
-                        Signature = memberRef.DecodeMethodSignature<string, DisassemblingGenericContext>(typeProvider, genericContext);
+                        Signature = memberRef.DecodeMethodSignature<
+                            string,
+                            DisassemblingGenericContext
+                        >(typeProvider, genericContext);
                         owningTypeHandle = memberRef.Parent;
                     }
                     break;
@@ -72,7 +92,10 @@ namespace ILCompiler.Reflection.ReadyToRun
             }
             else
             {
-                DeclaringType = MetadataNameFormatter.FormatHandle(componentReader.MetadataReader, owningTypeHandle);
+                DeclaringType = MetadataNameFormatter.FormatHandle(
+                    componentReader.MetadataReader,
+                    owningTypeHandle
+                );
             }
 
             StringBuilder sb = new StringBuilder();
@@ -119,7 +142,9 @@ namespace ILCompiler.Reflection.ReadyToRun
         }
 
         public override string ToString() => SignatureString;
+
         public override int GetHashCode() => SignatureString.GetHashCode();
+
         public override bool Equals(object obj) => obj is PgoInfoKey other && other.Equals(this);
 
         // Equality check. This isn't precisely accurate, but it should be good enough
@@ -130,7 +155,12 @@ namespace ILCompiler.Reflection.ReadyToRun
 
         public static PgoInfoKey FromReadyToRunMethod(ReadyToRunMethod method)
         {
-            var key = new PgoInfoKey(method.ComponentReader, method.DeclaringType, method.MethodHandle, method.InstanceArgs);
+            var key = new PgoInfoKey(
+                method.ComponentReader,
+                method.DeclaringType,
+                method.MethodHandle,
+                method.InstanceArgs
+            );
             Debug.Assert(key.SignatureString == method.SignatureString);
             return key;
         }

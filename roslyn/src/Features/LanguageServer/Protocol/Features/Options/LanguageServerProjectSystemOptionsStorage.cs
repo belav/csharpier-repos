@@ -13,6 +13,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.HostWorkspace
         /// <summary>
         /// A folder to log binlogs to when running design-time builds.
         /// </summary>
-        public static readonly Option2<string?> BinaryLogPath = new Option2<string?>("dotnet_binary_log_path", defaultValue: null, s_optionGroup);
+        public static readonly Option2<string?> BinaryLogPath = new Option2<string?>(
+            "dotnet_binary_log_path",
+            defaultValue: null,
+            s_optionGroup
+        );
     }
 }

@@ -9,12 +9,13 @@ using System;
 [CLSCompliant(true)]
 public enum E
 {
-	Value
+    Value,
 }
 
 [CLSCompliant(true)]
 public class Foo
 {
-	public E e;
-	public static void Main () {}
+    public E e;
+
+    public static void Main() { }
 }

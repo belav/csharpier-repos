@@ -9,13 +9,9 @@ using System.Threading;
 
 public static class BasicTest
 {
-    public class MCJTestClass
-    {
-    }
+    public class MCJTestClass { }
 
-    public struct MCJTestStruct
-    {
-    }
+    public struct MCJTestStruct { }
 
     public static int Main()
     {
@@ -28,12 +24,16 @@ public static class BasicTest
         Thread.Sleep(100);
 
         MCJTestStruct s;
-        PromoteToTier1(Foo, () => FooWithLoop(2), () => FooWithGeneric<int>(3),
-                       () => FooWithGeneric<string>("MCJ"),
-                       () => FooWithGeneric<MCJTestClass>(null),
-                       () => FooWithGeneric<MCJTestStruct>(s),
-                       () => FooWithGeneric<Regex>(null),
-                       () => FooWithGeneric(RegexOptions.IgnoreCase));
+        PromoteToTier1(
+            Foo,
+            () => FooWithLoop(2),
+            () => FooWithGeneric<int>(3),
+            () => FooWithGeneric<string>("MCJ"),
+            () => FooWithGeneric<MCJTestClass>(null),
+            () => FooWithGeneric<MCJTestStruct>(s),
+            () => FooWithGeneric<Regex>(null),
+            () => FooWithGeneric(RegexOptions.IgnoreCase)
+        );
 
         Foo();
         FooWithLoop(2);
@@ -55,9 +55,7 @@ public static class BasicTest
         Foo2();
     }
 
-    private static void Foo2()
-    {
-    }
+    private static void Foo2() { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int FooWithLoop(int n)
@@ -76,9 +74,7 @@ public static class BasicTest
         FooWithGeneric2();
     }
 
-    private static void FooWithGeneric2()
-    {
-    }
+    private static void FooWithGeneric2() { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void PromoteToTier1(params Action[] actions)

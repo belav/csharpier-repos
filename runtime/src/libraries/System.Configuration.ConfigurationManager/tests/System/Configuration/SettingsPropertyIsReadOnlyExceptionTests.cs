@@ -5,7 +5,6 @@ using Xunit;
 
 namespace System.Configuration
 {
-
     public class SettingsPropertyIsReadOnlyExceptionTests
     {
         [Fact]
@@ -18,7 +17,10 @@ namespace System.Configuration
         [Fact]
         public void ExceptionWithInnerExceptionExceptionReturnsExpected()
         {
-            var exception = new SettingsPropertyWrongTypeException("ThisIsATest", new AggregateException("AlsoATest"));
+            var exception = new SettingsPropertyWrongTypeException(
+                "ThisIsATest",
+                new AggregateException("AlsoATest")
+            );
             Assert.Equal("ThisIsATest", exception.Message);
             Assert.Equal("AlsoATest", exception.InnerException.Message);
             Assert.IsType<AggregateException>(exception.InnerException);

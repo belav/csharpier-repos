@@ -7,8 +7,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Legacy.Support;
-using Xunit;
 using Microsoft.DotNet.XUnitExtensions;
+using Xunit;
 
 namespace System.IO.Ports.Tests
 {
@@ -47,7 +47,9 @@ namespace System.IO.Ports.Tests
         {
             using (SerialPort com = new SerialPort("BAD_PORT_NAME"))
             {
-                Debug.WriteLine("Verifying read method throws exception with a failed call to Open()");
+                Debug.WriteLine(
+                    "Verifying read method throws exception with a failed call to Open()"
+                );
 
                 //Since the PortName is set to a bad port name Open will thrown an exception
                 //however we don't care what it is since we are verifying a read method
@@ -59,7 +61,11 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void ReadAfterClose()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 Debug.WriteLine("Verifying read method throws exception after a call to Close()");
                 com.Open();
@@ -69,11 +75,15 @@ namespace System.IO.Ports.Tests
             }
         }
 
-        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)]  // Timing-sensitive
+        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)] // Timing-sensitive
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Timeout()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 Random rndGen = new Random(-55);
 
@@ -86,11 +96,15 @@ namespace System.IO.Ports.Tests
             }
         }
 
-        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)]  // Timing-sensitive
+        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)] // Timing-sensitive
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void SuccessiveReadTimeoutNoData()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 Random rndGen = new Random(-55);
 
@@ -98,7 +112,10 @@ namespace System.IO.Ports.Tests
                 //        com.Encoding = new System.Text.UTF7Encoding();
                 com.Encoding = Encoding.Unicode;
 
-                Debug.WriteLine("Verifying ReadTimeout={0} with successive call to read method and no data", com.ReadTimeout);
+                Debug.WriteLine(
+                    "Verifying ReadTimeout={0} with successive call to read method and no data",
+                    com.ReadTimeout
+                );
                 com.Open();
 
                 Assert.Throws<TimeoutException>(() => com.ReadByte());
@@ -110,7 +127,11 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void SuccessiveReadTimeoutSomeData()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 Random rndGen = new Random(-55);
                 var t = new Task(WriteToCom1);
@@ -118,7 +139,10 @@ namespace System.IO.Ports.Tests
                 com1.ReadTimeout = rndGen.Next(minRandomTimeout, maxRandomTimeout);
                 com1.Encoding = new UTF8Encoding();
 
-                Debug.WriteLine("Verifying ReadTimeout={0} with successive call to read method and some data being received in the first call", com1.ReadTimeout);
+                Debug.WriteLine(
+                    "Verifying ReadTimeout={0} with successive call to read method and some data being received in the first call",
+                    com1.ReadTimeout
+                );
                 com1.Open();
 
                 //Call WriteToCom1 asynchronously this will write to com1 some time before the following call
@@ -128,9 +152,7 @@ namespace System.IO.Ports.Tests
                 {
                     com1.ReadByte();
                 }
-                catch (TimeoutException)
-                {
-                }
+                catch (TimeoutException) { }
 
                 TCSupport.WaitForTaskCompletion(t);
 
@@ -140,10 +162,13 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
         private void WriteToCom1()
         {
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 Random rndGen = new Random(-55);
                 byte[] xmitBuffer = new byte[1];
@@ -183,13 +208,20 @@ namespace System.IO.Ports.Tests
             VerifyParityReplaceByte(rndGen.Next(0, 128), 0, new UTF8Encoding());
         }
 
-
         [KnownFailure]
         [ConditionalFact(nameof(HasNullModem))]
         public void ParityErrorOnLastByte()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 Random rndGen = new Random(15);
                 byte[] bytesToWrite = new byte[numRndByte];
@@ -199,7 +231,9 @@ namespace System.IO.Ports.Tests
 
                 /* 1 Additional character gets added to the input buffer when the parity error occurs on the last byte of a stream
                  We are verifying that besides this everything gets read in correctly. See NDP Whidbey: 24216 for more info on this */
-                Debug.WriteLine("Verifying default ParityReplace byte with a parity error on the last byte");
+                Debug.WriteLine(
+                    "Verifying default ParityReplace byte with a parity error on the last byte"
+                );
 
                 // Generate random characters without an parity error
                 for (int i = 0; i < bytesToWrite.Length; i++)
@@ -210,7 +244,9 @@ namespace System.IO.Ports.Tests
                     expectedBytes[i] = randByte;
                 }
 
-                bytesToWrite[bytesToWrite.Length - 1] = (byte)(bytesToWrite[bytesToWrite.Length - 1] | 0x80);
+                bytesToWrite[bytesToWrite.Length - 1] = (byte)(
+                    bytesToWrite[bytesToWrite.Length - 1] | 0x80
+                );
                 //Create a parity error on the last byte
                 expectedBytes[expectedBytes.Length - 1] = com1.ParityReplace;
                 // Set the last expected byte to be the ParityReplace Byte
@@ -247,17 +283,27 @@ namespace System.IO.Ports.Tests
                 {
                     if (expectedBytes[i] != actualBytes[i])
                     {
-                        Fail("ERROR!!!: Expected to read {0}  actual read  {1}", (int)expectedBytes[i], (int)actualBytes[i]);
+                        Fail(
+                            "ERROR!!!: Expected to read {0}  actual read  {1}",
+                            (int)expectedBytes[i],
+                            (int)actualBytes[i]
+                        );
                     }
                 }
 
                 if (1 < com1.BytesToRead)
                 {
-                    Debug.WriteLine("ByteRead={0}, {1}", com1.ReadByte(), bytesToWrite[bytesToWrite.Length - 1]);
+                    Debug.WriteLine(
+                        "ByteRead={0}, {1}",
+                        com1.ReadByte(),
+                        bytesToWrite[bytesToWrite.Length - 1]
+                    );
                     Fail("ERROR!!!: Expected BytesToRead=0 actual={0}", com1.BytesToRead);
                 }
 
-                bytesToWrite[bytesToWrite.Length - 1] = (byte)(bytesToWrite[bytesToWrite.Length - 1] & 0x7F);
+                bytesToWrite[bytesToWrite.Length - 1] = (byte)(
+                    bytesToWrite[bytesToWrite.Length - 1] & 0x7F
+                );
                 //Clear the parity error on the last byte
                 expectedBytes[expectedBytes.Length - 1] = bytesToWrite[bytesToWrite.Length - 1];
 
@@ -297,7 +343,12 @@ namespace System.IO.Ports.Tests
             //Verify that the percentage difference between the expected and actual timeout is less then maxPercentageDifference
             if (s_maxPercentageDifference < percentageDifference)
             {
-                Fail("ERROR!!!: The read method timed-out in {0} expected {1} percentage difference: {2}", actualTime, expectedTime, percentageDifference);
+                Fail(
+                    "ERROR!!!: The read method timed-out in {0} expected {1} percentage difference: {2}",
+                    actualTime,
+                    expectedTime,
+                    percentageDifference
+                );
             }
         }
 
@@ -311,10 +362,22 @@ namespace System.IO.Ports.Tests
             VerifyParityReplaceByte(parityReplace, parityErrorIndex, new ASCIIEncoding());
         }
 
-        private void VerifyParityReplaceByte(int parityReplace, int parityErrorIndex, Encoding encoding)
+        private void VerifyParityReplaceByte(
+            int parityReplace,
+            int parityErrorIndex,
+            Encoding encoding
+        )
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 Random rndGen = new Random(-55);
                 byte[] byteBuffer = new byte[numRndByte];
@@ -352,8 +415,11 @@ namespace System.IO.Ports.Tests
                 byteBuffer[parityErrorIndex] = (byte)(byteBuffer[parityErrorIndex] | 0x80);
                 expectedBytes[parityErrorIndex] = (byte)expectedChar;
 
-                Debug.WriteLine("Verifying ParityReplace={0} with an ParityError at: {1} ", com1.ParityReplace,
-                    parityErrorIndex);
+                Debug.WriteLine(
+                    "Verifying ParityReplace={0} with an ParityError at: {1} ",
+                    com1.ParityReplace,
+                    parityErrorIndex
+                );
 
                 com1.Parity = Parity.Space;
                 com1.DataBits = 7;
@@ -365,9 +431,13 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
-        private void VerifyRead(SerialPort com1, SerialPort com2, byte[] bytesToWrite, byte[] expectedBytes,
-            Encoding encoding)
+        private void VerifyRead(
+            SerialPort com1,
+            SerialPort com2,
+            byte[] bytesToWrite,
+            byte[] expectedBytes,
+            Encoding encoding
+        )
         {
             byte[] byteRcvBuffer = new byte[expectedBytes.Length];
             int rcvBufferSize = 0;
@@ -404,14 +474,21 @@ namespace System.IO.Ports.Tests
 
                 if (bytesToWrite.Length - rcvBufferSize != com1.BytesToRead)
                 {
-                    Fail("ERROR!!!: Expected BytesToRead={0} actual={1}", bytesToWrite.Length - rcvBufferSize,
-                        com1.BytesToRead);
+                    Fail(
+                        "ERROR!!!: Expected BytesToRead={0} actual={1}",
+                        bytesToWrite.Length - rcvBufferSize,
+                        com1.BytesToRead
+                    );
                 }
 
                 if (readInt != expectedBytes[i])
                 {
                     //If the bytes read is not the expected byte
-                    Fail("ERROR!!!: Expected to read {0}  actual read byte {1}", expectedBytes[i], (byte)readInt);
+                    Fail(
+                        "ERROR!!!: Expected to read {0}  actual read byte {1}",
+                        expectedBytes[i],
+                        (byte)readInt
+                    );
                 }
 
                 i++;
@@ -419,7 +496,11 @@ namespace System.IO.Ports.Tests
 
             if (rcvBufferSize != expectedBytes.Length)
             {
-                Fail("ERROR!!! Expected to read {0} char actually read {1} chars", bytesToWrite.Length, rcvBufferSize);
+                Fail(
+                    "ERROR!!! Expected to read {0} char actually read {1} chars",
+                    bytesToWrite.Length,
+                    rcvBufferSize
+                );
             }
         }
 

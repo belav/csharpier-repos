@@ -6,7 +6,11 @@
 
 namespace Microsoft.CodeAnalysis.ExtractInterface
 {
-    internal sealed class ExtractInterfaceResult(bool succeeded, Solution updatedSolution = null, DocumentId navigationDocumentId = null)
+    internal sealed class ExtractInterfaceResult(
+        bool succeeded,
+        Solution updatedSolution = null,
+        DocumentId navigationDocumentId = null
+    )
     {
         public bool Succeeded { get; } = succeeded;
         public Solution UpdatedSolution { get; } = updatedSolution;

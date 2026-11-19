@@ -51,7 +51,9 @@ namespace System.Security.Cryptography.Xml
 
         private const string NullString = "(null)";
 
-        private static readonly TraceSource s_traceSource = new TraceSource("System.Security.Cryptography.Xml.SignedXml");
+        private static readonly TraceSource s_traceSource = new TraceSource(
+            "System.Security.Cryptography.Xml.SignedXml"
+        );
         private static volatile bool s_haveVerboseLogging;
         private static volatile bool s_verboseLogging;
         private static volatile bool s_haveInformationLogging;
@@ -164,7 +166,9 @@ namespace System.Security.Cryptography.Xml
             {
                 if (!s_haveInformationLogging)
                 {
-                    s_informationLogging = s_traceSource.Switch.ShouldTrace(TraceEventType.Information);
+                    s_informationLogging = s_traceSource.Switch.ShouldTrace(
+                        TraceEventType.Information
+                    );
                     s_haveInformationLogging = true;
                 }
 
@@ -276,33 +280,44 @@ namespace System.Security.Cryptography.Xml
         /// </summary>
         /// <param name="signedXml">SignedXml object doing the signing or verification</param>
         /// <param name="canonicalizationTransform">transform canonicalizing the input</param>
-        internal static void LogBeginCanonicalization(SignedXml signedXml, Transform canonicalizationTransform)
+        internal static void LogBeginCanonicalization(
+            SignedXml signedXml,
+            Transform canonicalizationTransform
+        )
         {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(canonicalizationTransform != null, "canonicalizationTransform != null");
 
             if (InformationLoggingEnabled)
             {
-                string logMessage = SR.Format(CultureInfo.InvariantCulture,
-                                                  SR.Log_BeginCanonicalization,
-                                                  canonicalizationTransform.Algorithm,
-                                                  canonicalizationTransform.GetType().Name);
-                WriteLine(signedXml,
-                          TraceEventType.Information,
-                          SignedXmlDebugEvent.BeginCanonicalization,
-                          logMessage);
+                string logMessage = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_BeginCanonicalization,
+                    canonicalizationTransform.Algorithm,
+                    canonicalizationTransform.GetType().Name
+                );
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Information,
+                    SignedXmlDebugEvent.BeginCanonicalization,
+                    logMessage
+                );
             }
 
             if (VerboseLoggingEnabled)
             {
-                string canonicalizationSettings = SR.Format(CultureInfo.InvariantCulture,
-                                                                SR.Log_CanonicalizationSettings,
-                                                                canonicalizationTransform.Resolver!.GetType(),
-                                                                canonicalizationTransform.BaseURI);
-                WriteLine(signedXml,
-                          TraceEventType.Verbose,
-                          SignedXmlDebugEvent.BeginCanonicalization,
-                          canonicalizationSettings);
+                string canonicalizationSettings = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_CanonicalizationSettings,
+                    canonicalizationTransform.Resolver!.GetType(),
+                    canonicalizationTransform.BaseURI
+                );
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Verbose,
+                    SignedXmlDebugEvent.BeginCanonicalization,
+                    canonicalizationSettings
+                );
             }
         }
 
@@ -311,7 +326,10 @@ namespace System.Security.Cryptography.Xml
         /// </summary>
         /// <param name="signedXml">SignedXml object doing the verification</param>
         /// <param name="formatValidator">Callback delegate which is being used for format verification</param>
-        internal static void LogBeginCheckSignatureFormat(SignedXml signedXml, Func<SignedXml, bool> formatValidator)
+        internal static void LogBeginCheckSignatureFormat(
+            SignedXml signedXml,
+            Func<SignedXml, bool> formatValidator
+        )
         {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(formatValidator != null, "formatValidator != null");
@@ -320,12 +338,19 @@ namespace System.Security.Cryptography.Xml
             {
                 MethodInfo validationMethod = formatValidator.Method;
 
-                string logMessage = SR.Format(CultureInfo.InvariantCulture,
-                                                  SR.Log_CheckSignatureFormat,
-                                                  validationMethod.Module.Assembly.FullName,
-                                                  validationMethod.DeclaringType!.FullName,
-                                                  validationMethod.Name);
-                WriteLine(signedXml, TraceEventType.Information, SignedXmlDebugEvent.BeginCheckSignatureFormat, logMessage);
+                string logMessage = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_CheckSignatureFormat,
+                    validationMethod.Module.Assembly.FullName,
+                    validationMethod.DeclaringType!.FullName,
+                    validationMethod.Name
+                );
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Information,
+                    SignedXmlDebugEvent.BeginCheckSignatureFormat,
+                    logMessage
+                );
             }
         }
 
@@ -341,10 +366,17 @@ namespace System.Security.Cryptography.Xml
 
             if (InformationLoggingEnabled)
             {
-                string logMessage = SR.Format(CultureInfo.InvariantCulture,
-                                                  SR.Log_CheckSignedInfo,
-                                                  signedInfo.Id ?? NullString);
-                WriteLine(signedXml, TraceEventType.Information, SignedXmlDebugEvent.BeginCheckSignedInfo, logMessage);
+                string logMessage = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_CheckSignedInfo,
+                    signedInfo.Id ?? NullString
+                );
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Information,
+                    SignedXmlDebugEvent.BeginCheckSignedInfo,
+                    logMessage
+                );
             }
         }
 
@@ -359,22 +391,28 @@ namespace System.Security.Cryptography.Xml
 
             if (InformationLoggingEnabled)
             {
-                WriteLine(signedXml,
-                          TraceEventType.Information,
-                          SignedXmlDebugEvent.BeginSignatureComputation,
-                          SR.Log_BeginSignatureComputation);
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Information,
+                    SignedXmlDebugEvent.BeginSignatureComputation,
+                    SR.Log_BeginSignatureComputation
+                );
             }
 
             if (VerboseLoggingEnabled)
             {
-                string contextData = SR.Format(CultureInfo.InvariantCulture,
-                                                   SR.Log_XmlContext,
-                                                   context != null ? context.OuterXml : NullString);
+                string contextData = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_XmlContext,
+                    context != null ? context.OuterXml : NullString
+                );
 
-                WriteLine(signedXml,
-                          TraceEventType.Verbose,
-                          SignedXmlDebugEvent.BeginSignatureComputation,
-                          contextData);
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Verbose,
+                    SignedXmlDebugEvent.BeginSignatureComputation,
+                    contextData
+                );
             }
         }
 
@@ -389,22 +427,28 @@ namespace System.Security.Cryptography.Xml
 
             if (InformationLoggingEnabled)
             {
-                WriteLine(signedXml,
-                          TraceEventType.Information,
-                          SignedXmlDebugEvent.BeginSignatureVerification,
-                          SR.Log_BeginSignatureVerification);
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Information,
+                    SignedXmlDebugEvent.BeginSignatureVerification,
+                    SR.Log_BeginSignatureVerification
+                );
             }
 
             if (VerboseLoggingEnabled)
             {
-                string contextData = SR.Format(CultureInfo.InvariantCulture,
-                                                   SR.Log_XmlContext,
-                                                   context != null ? context.OuterXml : NullString);
+                string contextData = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_XmlContext,
+                    context != null ? context.OuterXml : NullString
+                );
 
-                WriteLine(signedXml,
-                          TraceEventType.Verbose,
-                          SignedXmlDebugEvent.BeginSignatureVerification,
-                          contextData);
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Verbose,
+                    SignedXmlDebugEvent.BeginSignatureVerification,
+                    contextData
+                );
             }
         }
 
@@ -413,22 +457,33 @@ namespace System.Security.Cryptography.Xml
         /// </summary>
         /// <param name="signedXml">SignedXml object doing the signing or verification</param>
         /// <param name="canonicalizationTransform">transform canonicalizing the input</param>
-        internal static void LogCanonicalizedOutput(SignedXml signedXml, Transform canonicalizationTransform)
+        internal static void LogCanonicalizedOutput(
+            SignedXml signedXml,
+            Transform canonicalizationTransform
+        )
         {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(canonicalizationTransform != null, "canonicalizationTransform != null");
 
             if (VerboseLoggingEnabled)
             {
-                using (StreamReader reader = new StreamReader((canonicalizationTransform.GetOutput(typeof(Stream)) as Stream)!))
+                using (
+                    StreamReader reader = new StreamReader(
+                        (canonicalizationTransform.GetOutput(typeof(Stream)) as Stream)!
+                    )
+                )
                 {
-                    string logMessage = SR.Format(CultureInfo.InvariantCulture,
-                                                      SR.Log_CanonicalizedOutput,
-                                                      reader.ReadToEnd());
-                    WriteLine(signedXml,
-                              TraceEventType.Verbose,
-                              SignedXmlDebugEvent.CanonicalizedData,
-                              logMessage);
+                    string logMessage = SR.Format(
+                        CultureInfo.InvariantCulture,
+                        SR.Log_CanonicalizedOutput,
+                        reader.ReadToEnd()
+                    );
+                    WriteLine(
+                        signedXml,
+                        TraceEventType.Verbose,
+                        SignedXmlDebugEvent.CanonicalizedData,
+                        logMessage
+                    );
                 }
             }
         }
@@ -444,9 +499,15 @@ namespace System.Security.Cryptography.Xml
 
             if (InformationLoggingEnabled)
             {
-                string logMessage = result ? SR.Log_FormatValidationSuccessful :
-                                             SR.Log_FormatValidationNotSuccessful;
-                WriteLine(signedXml, TraceEventType.Information, SignedXmlDebugEvent.FormatValidationResult, logMessage);
+                string logMessage = result
+                    ? SR.Log_FormatValidationSuccessful
+                    : SR.Log_FormatValidationNotSuccessful;
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Information,
+                    SignedXmlDebugEvent.FormatValidationResult,
+                    logMessage
+                );
             }
         }
 
@@ -457,7 +518,11 @@ namespace System.Security.Cryptography.Xml
         /// <param name="signedXml">SignedXml object doing the signature verification</param>
         /// <param name="algorithm">Canonicalization algorithm</param>
         /// <param name="validAlgorithms">List of valid canonicalization algorithms</param>
-        internal static void LogUnsafeCanonicalizationMethod(SignedXml signedXml, string algorithm, IEnumerable<string>? validAlgorithms)
+        internal static void LogUnsafeCanonicalizationMethod(
+            SignedXml signedXml,
+            string algorithm,
+            IEnumerable<string>? validAlgorithms
+        )
         {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(validAlgorithms != null, "validAlgorithms != null");
@@ -475,12 +540,19 @@ namespace System.Security.Cryptography.Xml
                     validAlgorithmBuilder.Append('"').Append(validAlgorithm).Append('"');
                 }
 
-                string logMessage = SR.Format(CultureInfo.InvariantCulture,
-                                                  SR.Log_UnsafeCanonicalizationMethod,
-                                                  algorithm,
-                                                  validAlgorithmBuilder.ToString());
+                string logMessage = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_UnsafeCanonicalizationMethod,
+                    algorithm,
+                    validAlgorithmBuilder.ToString()
+                );
 
-                WriteLine(signedXml, TraceEventType.Information, SignedXmlDebugEvent.UnsafeCanonicalizationMethod, logMessage);
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Information,
+                    SignedXmlDebugEvent.UnsafeCanonicalizationMethod,
+                    logMessage
+                );
             }
         }
 
@@ -496,7 +568,8 @@ namespace System.Security.Cryptography.Xml
             SignedXml signedXml,
             string algorithm,
             IEnumerable<string>? validC14nAlgorithms,
-            IEnumerable<string> validTransformAlgorithms)
+            IEnumerable<string> validTransformAlgorithms
+        )
         {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(validC14nAlgorithms != null, "validC14nAlgorithms != null");
@@ -525,12 +598,19 @@ namespace System.Security.Cryptography.Xml
                     validAlgorithmBuilder.Append('"').Append(validAlgorithm).Append('"');
                 }
 
-                string logMessage = SR.Format(CultureInfo.InvariantCulture,
-                                                  SR.Log_UnsafeTransformMethod,
-                                                  algorithm,
-                                                  validAlgorithmBuilder.ToString());
+                string logMessage = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_UnsafeTransformMethod,
+                    algorithm,
+                    validAlgorithmBuilder.ToString()
+                );
 
-                WriteLine(signedXml, TraceEventType.Information, SignedXmlDebugEvent.UnsafeTransformMethod, logMessage);
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Information,
+                    SignedXmlDebugEvent.UnsafeTransformMethod,
+                    logMessage
+                );
             }
         }
 
@@ -549,23 +629,29 @@ namespace System.Security.Cryptography.Xml
                 {
                     foreach (XmlAttribute propagatedNamespace in namespaces)
                     {
-                        string propagationMessage = SR.Format(CultureInfo.InvariantCulture,
-                                                                  SR.Log_PropagatingNamespace,
-                                                                  propagatedNamespace.Name,
-                                                                  propagatedNamespace.Value);
+                        string propagationMessage = SR.Format(
+                            CultureInfo.InvariantCulture,
+                            SR.Log_PropagatingNamespace,
+                            propagatedNamespace.Name,
+                            propagatedNamespace.Value
+                        );
 
-                        WriteLine(signedXml,
-                                  TraceEventType.Information,
-                                  SignedXmlDebugEvent.NamespacePropagation,
-                                  propagationMessage);
+                        WriteLine(
+                            signedXml,
+                            TraceEventType.Information,
+                            SignedXmlDebugEvent.NamespacePropagation,
+                            propagationMessage
+                        );
                     }
                 }
                 else
                 {
-                    WriteLine(signedXml,
-                              TraceEventType.Information,
-                              SignedXmlDebugEvent.NamespacePropagation,
-                              SR.Log_NoNamespacesPropagated);
+                    WriteLine(
+                        signedXml,
+                        TraceEventType.Information,
+                        SignedXmlDebugEvent.NamespacePropagation,
+                        SR.Log_NoNamespacesPropagated
+                    );
                 }
             }
         }
@@ -600,13 +686,17 @@ namespace System.Security.Cryptography.Xml
                 } while (readBytes == buffer.Length);
 
                 // Log out information about it
-                string logMessage = SR.Format(CultureInfo.InvariantCulture,
-                                                  SR.Log_TransformedReferenceContents,
-                                                  Encoding.UTF8.GetString(ms.ToArray()));
-                WriteLine(reference,
-                          TraceEventType.Verbose,
-                          SignedXmlDebugEvent.ReferenceData,
-                          logMessage);
+                string logMessage = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_TransformedReferenceContents,
+                    Encoding.UTF8.GetString(ms.ToArray())
+                );
+                WriteLine(
+                    reference,
+                    TraceEventType.Verbose,
+                    SignedXmlDebugEvent.ReferenceData,
+                    logMessage
+                );
 
                 // Rewind to the beginning, so that the entire input stream is hashed
                 ms.Seek(0, SeekOrigin.Begin);
@@ -626,30 +716,39 @@ namespace System.Security.Cryptography.Xml
         /// <param name="signatureDescription">signature description being used to create the signature</param>
         /// <param name="hash">hash algorithm used to digest the output</param>
         /// <param name="asymmetricSignatureFormatter">signature formatter used to do the signing</param>
-        internal static void LogSigning(SignedXml signedXml,
-                                        object key,
-                                        SignatureDescription signatureDescription,
-                                        HashAlgorithm hash,
-                                        AsymmetricSignatureFormatter asymmetricSignatureFormatter)
+        internal static void LogSigning(
+            SignedXml signedXml,
+            object key,
+            SignatureDescription signatureDescription,
+            HashAlgorithm hash,
+            AsymmetricSignatureFormatter asymmetricSignatureFormatter
+        )
         {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(signatureDescription != null, "signatureDescription != null");
             Debug.Assert(hash != null, "hash != null");
-            Debug.Assert(asymmetricSignatureFormatter != null, "asymmetricSignatureFormatter != null");
+            Debug.Assert(
+                asymmetricSignatureFormatter != null,
+                "asymmetricSignatureFormatter != null"
+            );
 
             if (InformationLoggingEnabled)
             {
-                string logMessage = SR.Format(CultureInfo.InvariantCulture,
-                                                  SR.Log_SigningAsymmetric,
-                                                  GetKeyName(key),
-                                                  signatureDescription.GetType().Name,
-                                                  hash.GetType().Name,
-                                                  asymmetricSignatureFormatter.GetType().Name);
+                string logMessage = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_SigningAsymmetric,
+                    GetKeyName(key),
+                    signatureDescription.GetType().Name,
+                    hash.GetType().Name,
+                    asymmetricSignatureFormatter.GetType().Name
+                );
 
-                WriteLine(signedXml,
-                          TraceEventType.Information,
-                          SignedXmlDebugEvent.Signing,
-                          logMessage);
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Information,
+                    SignedXmlDebugEvent.Signing,
+                    logMessage
+                );
             }
         }
 
@@ -665,14 +764,18 @@ namespace System.Security.Cryptography.Xml
 
             if (InformationLoggingEnabled)
             {
-                string logMessage = SR.Format(CultureInfo.InvariantCulture,
-                                                  SR.Log_SigningHmac,
-                                                  key.GetType().Name);
+                string logMessage = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_SigningHmac,
+                    key.GetType().Name
+                );
 
-                WriteLine(signedXml,
-                          TraceEventType.Information,
-                          SignedXmlDebugEvent.Signing,
-                          logMessage);
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Information,
+                    SignedXmlDebugEvent.Signing,
+                    logMessage
+                );
             }
         }
 
@@ -689,21 +792,27 @@ namespace System.Security.Cryptography.Xml
 
             if (VerboseLoggingEnabled)
             {
-                HashAlgorithm? hashAlgorithm = CryptoHelpers.CreateNonTransformFromName<HashAlgorithm>(reference.DigestMethod);
-                string hashAlgorithmName = hashAlgorithm == null ? "null" : hashAlgorithm.GetType().Name;
-                string logMessage = SR.Format(CultureInfo.InvariantCulture,
-                                                  SR.Log_SigningReference,
-                                                  GetObjectId(reference),
-                                                  reference.Uri,
-                                                  reference.Id,
-                                                  reference.Type,
-                                                  reference.DigestMethod,
-                                                  hashAlgorithmName);
+                HashAlgorithm? hashAlgorithm =
+                    CryptoHelpers.CreateNonTransformFromName<HashAlgorithm>(reference.DigestMethod);
+                string hashAlgorithmName =
+                    hashAlgorithm == null ? "null" : hashAlgorithm.GetType().Name;
+                string logMessage = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_SigningReference,
+                    GetObjectId(reference),
+                    reference.Uri,
+                    reference.Id,
+                    reference.Type,
+                    reference.DigestMethod,
+                    hashAlgorithmName
+                );
 
-                WriteLine(signedXml,
-                          TraceEventType.Verbose,
-                          SignedXmlDebugEvent.SigningReference,
-                          logMessage);
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Verbose,
+                    SignedXmlDebugEvent.SigningReference,
+                    logMessage
+                );
             }
         }
 
@@ -716,14 +825,18 @@ namespace System.Security.Cryptography.Xml
         {
             if (InformationLoggingEnabled)
             {
-                string logMessage = SR.Format(CultureInfo.InvariantCulture,
-                                                  SR.Log_VerificationFailed,
-                                                  failureLocation);
+                string logMessage = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_VerificationFailed,
+                    failureLocation
+                );
 
-                WriteLine(signedXml,
-                          TraceEventType.Information,
-                          SignedXmlDebugEvent.VerificationFailure,
-                          logMessage);
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Information,
+                    SignedXmlDebugEvent.VerificationFailure,
+                    logMessage
+                );
             }
         }
 
@@ -740,16 +853,21 @@ namespace System.Security.Cryptography.Xml
 
             if (InformationLoggingEnabled)
             {
-                string resource = verified ? SR.Log_VerificationWithKeySuccessful :
-                                             SR.Log_VerificationWithKeyNotSuccessful;
-                string logMessage = string.Format(CultureInfo.InvariantCulture,
-                                                  resource,
-                                                  GetKeyName(key));
+                string resource = verified
+                    ? SR.Log_VerificationWithKeySuccessful
+                    : SR.Log_VerificationWithKeyNotSuccessful;
+                string logMessage = string.Format(
+                    CultureInfo.InvariantCulture,
+                    resource,
+                    GetKeyName(key)
+                );
 
-                WriteLine(signedXml,
-                          TraceEventType.Information,
-                          SignedXmlDebugEvent.SignatureVerificationResult,
-                          logMessage);
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Information,
+                    SignedXmlDebugEvent.SignatureVerificationResult,
+                    logMessage
+                );
             }
         }
 
@@ -759,23 +877,31 @@ namespace System.Security.Cryptography.Xml
         /// <param name="signedXml">SignedXml doing the signature verification</param>
         /// <param name="certificate">certificate having its key usages checked</param>
         /// <param name="keyUsages">key usages being examined</param>
-        internal static void LogVerifyKeyUsage(SignedXml signedXml, X509Certificate certificate, X509KeyUsageExtension keyUsages)
+        internal static void LogVerifyKeyUsage(
+            SignedXml signedXml,
+            X509Certificate certificate,
+            X509KeyUsageExtension keyUsages
+        )
         {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(certificate != null, "certificate != null");
 
             if (InformationLoggingEnabled)
             {
-                string logMessage = SR.Format(CultureInfo.InvariantCulture,
-                                                  SR.Log_KeyUsages,
-                                                  keyUsages.KeyUsages,
-                                                  GetOidName(keyUsages.Oid!),
-                                                  GetKeyName(certificate));
+                string logMessage = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_KeyUsages,
+                    keyUsages.KeyUsages,
+                    GetOidName(keyUsages.Oid!),
+                    GetKeyName(certificate)
+                );
 
-                WriteLine(signedXml,
-                          TraceEventType.Verbose,
-                          SignedXmlDebugEvent.X509Verification,
-                          logMessage);
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Verbose,
+                    SignedXmlDebugEvent.X509Verification,
+                    logMessage
+                );
             }
         }
 
@@ -791,17 +917,21 @@ namespace System.Security.Cryptography.Xml
 
             if (InformationLoggingEnabled)
             {
-                string logMessage = SR.Format(CultureInfo.InvariantCulture,
-                                                  SR.Log_VerifyReference,
-                                                  GetObjectId(reference),
-                                                  reference.Uri,
-                                                  reference.Id,
-                                                  reference.Type);
+                string logMessage = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_VerifyReference,
+                    GetObjectId(reference),
+                    reference.Uri,
+                    reference.Id,
+                    reference.Type
+                );
 
-                WriteLine(signedXml,
-                          TraceEventType.Verbose,
-                          SignedXmlDebugEvent.VerifyReference,
-                          logMessage);
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Verbose,
+                    SignedXmlDebugEvent.VerifyReference,
+                    logMessage
+                );
             }
         }
 
@@ -813,10 +943,12 @@ namespace System.Security.Cryptography.Xml
         /// <param name="actualHash">actual hash value of the reference</param>
         /// <param name="expectedHash">hash value the signature expected the reference to have</param>
         [RequiresUnreferencedCode(CryptoHelpers.CreateFromNameUnreferencedCodeMessage)]
-        internal static void LogVerifyReferenceHash(SignedXml signedXml,
-                                                    Reference reference,
-                                                    byte[]? actualHash,
-                                                    byte[]? expectedHash)
+        internal static void LogVerifyReferenceHash(
+            SignedXml signedXml,
+            Reference reference,
+            byte[]? actualHash,
+            byte[]? expectedHash
+        )
         {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(reference != null, "reference != null");
@@ -825,20 +957,26 @@ namespace System.Security.Cryptography.Xml
 
             if (VerboseLoggingEnabled)
             {
-                HashAlgorithm? hashAlgorithm = CryptoHelpers.CreateNonTransformFromName<HashAlgorithm>(reference.DigestMethod);
-                string hashAlgorithmName = hashAlgorithm == null ? "null" : hashAlgorithm.GetType().Name;
-                string logMessage = SR.Format(CultureInfo.InvariantCulture,
-                                                  SR.Log_ReferenceHash,
-                                                  GetObjectId(reference),
-                                                  reference.DigestMethod,
-                                                  hashAlgorithmName,
-                                                  FormatBytes(actualHash),
-                                                  FormatBytes(expectedHash));
+                HashAlgorithm? hashAlgorithm =
+                    CryptoHelpers.CreateNonTransformFromName<HashAlgorithm>(reference.DigestMethod);
+                string hashAlgorithmName =
+                    hashAlgorithm == null ? "null" : hashAlgorithm.GetType().Name;
+                string logMessage = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_ReferenceHash,
+                    GetObjectId(reference),
+                    reference.DigestMethod,
+                    hashAlgorithmName,
+                    FormatBytes(actualHash),
+                    FormatBytes(expectedHash)
+                );
 
-                WriteLine(signedXml,
-                          TraceEventType.Verbose,
-                          SignedXmlDebugEvent.VerifyReference,
-                          logMessage);
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Verbose,
+                    SignedXmlDebugEvent.VerifyReference,
+                    logMessage
+                );
             }
         }
 
@@ -853,44 +991,67 @@ namespace System.Security.Cryptography.Xml
         /// <param name="asymmetricSignatureDeformatter">type of signature deformatter used</param>
         /// <param name="actualHashValue">hash value of the signed info</param>
         /// <param name="signatureValue">raw signature value</param>
-        internal static void LogVerifySignedInfo(SignedXml signedXml,
-                                                 AsymmetricAlgorithm key,
-                                                 SignatureDescription signatureDescription,
-                                                 HashAlgorithm hashAlgorithm,
-                                                 AsymmetricSignatureDeformatter asymmetricSignatureDeformatter,
-                                                 byte[]? actualHashValue,
-                                                 byte[]? signatureValue)
+        internal static void LogVerifySignedInfo(
+            SignedXml signedXml,
+            AsymmetricAlgorithm key,
+            SignatureDescription signatureDescription,
+            HashAlgorithm hashAlgorithm,
+            AsymmetricSignatureDeformatter asymmetricSignatureDeformatter,
+            byte[]? actualHashValue,
+            byte[]? signatureValue
+        )
         {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(signatureDescription != null, "signatureDescription != null");
             Debug.Assert(hashAlgorithm != null, "hashAlgorithm != null");
-            Debug.Assert(asymmetricSignatureDeformatter != null, "asymmetricSignatureDeformatter != null");
+            Debug.Assert(
+                asymmetricSignatureDeformatter != null,
+                "asymmetricSignatureDeformatter != null"
+            );
 
             if (InformationLoggingEnabled)
             {
-                string logMessage = SR.Format(CultureInfo.InvariantCulture,
-                                                  SR.Log_VerifySignedInfoAsymmetric,
-                                                  GetKeyName(key),
-                                                  signatureDescription.GetType().Name,
-                                                  hashAlgorithm.GetType().Name,
-                                                  asymmetricSignatureDeformatter.GetType().Name);
-                WriteLine(signedXml,
-                          TraceEventType.Information,
-                          SignedXmlDebugEvent.VerifySignedInfo,
-                          logMessage);
+                string logMessage = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_VerifySignedInfoAsymmetric,
+                    GetKeyName(key),
+                    signatureDescription.GetType().Name,
+                    hashAlgorithm.GetType().Name,
+                    asymmetricSignatureDeformatter.GetType().Name
+                );
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Information,
+                    SignedXmlDebugEvent.VerifySignedInfo,
+                    logMessage
+                );
             }
 
             if (VerboseLoggingEnabled)
             {
-                string hashLog = SR.Format(CultureInfo.InvariantCulture,
-                                               SR.Log_ActualHashValue,
-                                               FormatBytes(actualHashValue));
-                WriteLine(signedXml, TraceEventType.Verbose, SignedXmlDebugEvent.VerifySignedInfo, hashLog);
+                string hashLog = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_ActualHashValue,
+                    FormatBytes(actualHashValue)
+                );
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Verbose,
+                    SignedXmlDebugEvent.VerifySignedInfo,
+                    hashLog
+                );
 
-                string signatureLog = SR.Format(CultureInfo.InvariantCulture,
-                                                    SR.Log_RawSignatureValue,
-                                                    FormatBytes(signatureValue));
-                WriteLine(signedXml, TraceEventType.Verbose, SignedXmlDebugEvent.VerifySignedInfo, signatureLog);
+                string signatureLog = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_RawSignatureValue,
+                    FormatBytes(signatureValue)
+                );
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Verbose,
+                    SignedXmlDebugEvent.VerifySignedInfo,
+                    signatureLog
+                );
             }
         }
 
@@ -902,36 +1063,56 @@ namespace System.Security.Cryptography.Xml
         /// <param name="mac">hash algorithm doing the verification</param>
         /// <param name="actualHashValue">hash value of the signed info</param>
         /// <param name="signatureValue">raw signature value</param>
-        internal static void LogVerifySignedInfo(SignedXml signedXml,
-                                                 KeyedHashAlgorithm mac,
-                                                 byte[]? actualHashValue,
-                                                 byte[]? signatureValue)
+        internal static void LogVerifySignedInfo(
+            SignedXml signedXml,
+            KeyedHashAlgorithm mac,
+            byte[]? actualHashValue,
+            byte[]? signatureValue
+        )
         {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(mac != null, "mac != null");
 
             if (InformationLoggingEnabled)
             {
-                string logMessage = SR.Format(CultureInfo.InvariantCulture,
-                                                  SR.Log_VerifySignedInfoHmac,
-                                                  mac.GetType().Name);
-                WriteLine(signedXml,
-                          TraceEventType.Information,
-                          SignedXmlDebugEvent.VerifySignedInfo,
-                          logMessage);
+                string logMessage = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_VerifySignedInfoHmac,
+                    mac.GetType().Name
+                );
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Information,
+                    SignedXmlDebugEvent.VerifySignedInfo,
+                    logMessage
+                );
             }
 
             if (VerboseLoggingEnabled)
             {
-                string hashLog = SR.Format(CultureInfo.InvariantCulture,
-                                               SR.Log_ActualHashValue,
-                                               FormatBytes(actualHashValue));
-                WriteLine(signedXml, TraceEventType.Verbose, SignedXmlDebugEvent.VerifySignedInfo, hashLog);
+                string hashLog = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_ActualHashValue,
+                    FormatBytes(actualHashValue)
+                );
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Verbose,
+                    SignedXmlDebugEvent.VerifySignedInfo,
+                    hashLog
+                );
 
-                string signatureLog = SR.Format(CultureInfo.InvariantCulture,
-                                                    SR.Log_RawSignatureValue,
-                                                    FormatBytes(signatureValue));
-                WriteLine(signedXml, TraceEventType.Verbose, SignedXmlDebugEvent.VerifySignedInfo, signatureLog);
+                string signatureLog = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_RawSignatureValue,
+                    FormatBytes(signatureValue)
+                );
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Verbose,
+                    SignedXmlDebugEvent.VerifySignedInfo,
+                    signatureLog
+                );
             }
         }
 
@@ -941,7 +1122,11 @@ namespace System.Security.Cryptography.Xml
         /// <param name="signedXml">SignedXml object building the chain</param>
         /// <param name="chain">chain built for the certificate</param>
         /// <param name="certificate">certificate having the chain built for it</param>
-        internal static void LogVerifyX509Chain(SignedXml signedXml, X509Chain chain, X509Certificate certificate)
+        internal static void LogVerifyX509Chain(
+            SignedXml signedXml,
+            X509Chain chain,
+            X509Certificate certificate
+        )
         {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(certificate != null, "certificate != null");
@@ -949,42 +1134,81 @@ namespace System.Security.Cryptography.Xml
 
             if (InformationLoggingEnabled)
             {
-                string buildMessage = SR.Format(CultureInfo.InvariantCulture,
-                                                    SR.Log_BuildX509Chain,
-                                                    GetKeyName(certificate));
-                WriteLine(signedXml,
-                          TraceEventType.Information,
-                          SignedXmlDebugEvent.X509Verification,
-                          buildMessage);
+                string buildMessage = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_BuildX509Chain,
+                    GetKeyName(certificate)
+                );
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Information,
+                    SignedXmlDebugEvent.X509Verification,
+                    buildMessage
+                );
             }
 
             if (VerboseLoggingEnabled)
             {
                 // Dump out the flags and other miscelanious information used for building
-                string revocationMode = SR.Format(CultureInfo.InvariantCulture,
-                                                      SR.Log_RevocationMode,
-                                                      chain.ChainPolicy.RevocationFlag);
-                WriteLine(signedXml, TraceEventType.Verbose, SignedXmlDebugEvent.X509Verification, revocationMode);
+                string revocationMode = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_RevocationMode,
+                    chain.ChainPolicy.RevocationFlag
+                );
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Verbose,
+                    SignedXmlDebugEvent.X509Verification,
+                    revocationMode
+                );
 
-                string revocationFlag = SR.Format(CultureInfo.InvariantCulture,
-                                                      SR.Log_RevocationFlag,
-                                                      chain.ChainPolicy.RevocationFlag);
-                WriteLine(signedXml, TraceEventType.Verbose, SignedXmlDebugEvent.X509Verification, revocationFlag);
+                string revocationFlag = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_RevocationFlag,
+                    chain.ChainPolicy.RevocationFlag
+                );
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Verbose,
+                    SignedXmlDebugEvent.X509Verification,
+                    revocationFlag
+                );
 
-                string verificationFlags = SR.Format(CultureInfo.InvariantCulture,
-                                                         SR.Log_VerificationFlag,
-                                                         chain.ChainPolicy.VerificationFlags);
-                WriteLine(signedXml, TraceEventType.Verbose, SignedXmlDebugEvent.X509Verification, verificationFlags);
+                string verificationFlags = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_VerificationFlag,
+                    chain.ChainPolicy.VerificationFlags
+                );
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Verbose,
+                    SignedXmlDebugEvent.X509Verification,
+                    verificationFlags
+                );
 
-                string verificationTime = SR.Format(CultureInfo.InvariantCulture,
-                                                        SR.Log_VerificationTime,
-                                                        chain.ChainPolicy.VerificationTime);
-                WriteLine(signedXml, TraceEventType.Verbose, SignedXmlDebugEvent.X509Verification, verificationTime);
+                string verificationTime = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_VerificationTime,
+                    chain.ChainPolicy.VerificationTime
+                );
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Verbose,
+                    SignedXmlDebugEvent.X509Verification,
+                    verificationTime
+                );
 
-                string urlTimeout = SR.Format(CultureInfo.InvariantCulture,
-                                                  SR.Log_UrlTimeout,
-                                                  chain.ChainPolicy.UrlRetrievalTimeout);
-                WriteLine(signedXml, TraceEventType.Verbose, SignedXmlDebugEvent.X509Verification, urlTimeout);
+                string urlTimeout = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_UrlTimeout,
+                    chain.ChainPolicy.UrlRetrievalTimeout
+                );
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Verbose,
+                    SignedXmlDebugEvent.X509Verification,
+                    urlTimeout
+                );
             }
 
             // If there were any errors in the chain, make sure to dump those out
@@ -994,15 +1218,19 @@ namespace System.Security.Cryptography.Xml
                 {
                     if (status.Status != X509ChainStatusFlags.NoError)
                     {
-                        string logMessage = SR.Format(CultureInfo.InvariantCulture,
-                                                          SR.Log_X509ChainError,
-                                                          status.Status,
-                                                          status.StatusInformation);
+                        string logMessage = SR.Format(
+                            CultureInfo.InvariantCulture,
+                            SR.Log_X509ChainError,
+                            status.Status,
+                            status.StatusInformation
+                        );
 
-                        WriteLine(signedXml,
-                                  TraceEventType.Information,
-                                  SignedXmlDebugEvent.X509Verification,
-                                  logMessage);
+                        WriteLine(
+                            signedXml,
+                            TraceEventType.Information,
+                            SignedXmlDebugEvent.X509Verification,
+                            logMessage
+                        );
                     }
                 }
             }
@@ -1018,10 +1246,12 @@ namespace System.Security.Cryptography.Xml
                     chainElements.Append(' ').Append(GetKeyName(element.Certificate));
                 }
 
-                WriteLine(signedXml,
-                          TraceEventType.Verbose,
-                          SignedXmlDebugEvent.X509Verification,
-                          chainElements.ToString());
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Verbose,
+                    SignedXmlDebugEvent.X509Verification,
+                    chainElements.ToString()
+                );
             }
         }
 
@@ -1032,26 +1262,31 @@ namespace System.Security.Cryptography.Xml
         /// <param name="signedXml">SignedXml object verifying the signature</param>
         /// <param name="reference">reference being verified</param>
         [RequiresUnreferencedCode(CryptoHelpers.CreateFromNameUnreferencedCodeMessage)]
-        internal static void LogSignedXmlRecursionLimit(SignedXml signedXml,
-                                                        Reference reference)
+        internal static void LogSignedXmlRecursionLimit(SignedXml signedXml, Reference reference)
         {
             Debug.Assert(signedXml != null, "signedXml != null");
             Debug.Assert(reference != null, "reference != null");
 
             if (InformationLoggingEnabled)
             {
-                HashAlgorithm? hashAlgorithm = CryptoHelpers.CreateNonTransformFromName<HashAlgorithm>(reference.DigestMethod);
-                string hashAlgorithmName = hashAlgorithm == null ? "null" : hashAlgorithm.GetType().Name;
-                string logMessage = SR.Format(CultureInfo.InvariantCulture,
-                                                    SR.Log_SignedXmlRecursionLimit,
-                                                    GetObjectId(reference),
-                                                    reference.DigestMethod,
-                                                    hashAlgorithmName);
+                HashAlgorithm? hashAlgorithm =
+                    CryptoHelpers.CreateNonTransformFromName<HashAlgorithm>(reference.DigestMethod);
+                string hashAlgorithmName =
+                    hashAlgorithm == null ? "null" : hashAlgorithm.GetType().Name;
+                string logMessage = SR.Format(
+                    CultureInfo.InvariantCulture,
+                    SR.Log_SignedXmlRecursionLimit,
+                    GetObjectId(reference),
+                    reference.DigestMethod,
+                    hashAlgorithmName
+                );
 
-                WriteLine(signedXml,
-                            TraceEventType.Information,
-                            SignedXmlDebugEvent.VerifySignedInfo,
-                            logMessage);
+                WriteLine(
+                    signedXml,
+                    TraceEventType.Information,
+                    SignedXmlDebugEvent.VerifySignedInfo,
+                    logMessage
+                );
             }
         }
 
@@ -1062,18 +1297,25 @@ namespace System.Security.Cryptography.Xml
         /// <param name="eventType">severity of the debug event</param>
         /// <param name="data">data being written</param>
         /// <param name="eventId">type of event being traced</param>
-        private static void WriteLine(object source, TraceEventType eventType, SignedXmlDebugEvent eventId, string data)
+        private static void WriteLine(
+            object source,
+            TraceEventType eventType,
+            SignedXmlDebugEvent eventId,
+            string data
+        )
         {
             Debug.Assert(source != null, "source != null");
             Debug.Assert(!string.IsNullOrEmpty(data), "!string.IsNullOrEmpty(data)");
             Debug.Assert(InformationLoggingEnabled, "InformationLoggingEnabled");
 
-            s_traceSource.TraceEvent(eventType,
-                                    (int)eventId,
-                                    "[{0}, {1}] {2}",
-                                    GetObjectId(source),
-                                    eventId,
-                                    data);
+            s_traceSource.TraceEvent(
+                eventType,
+                (int)eventId,
+                "[{0}, {1}] {2}",
+                GetObjectId(source),
+                eventId,
+                data
+            );
         }
     }
 }

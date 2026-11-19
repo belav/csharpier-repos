@@ -30,7 +30,8 @@ namespace Roslyn.Utilities
         /// unnecessary boxing operations.  Unfortunately, we can't constrain
         /// T to "non-enum", so we'll use a more restrictive constraint.
         /// </summary>
-        internal static int Combine<T>(T newKeyPart, int currentKey) where T : class?
+        internal static int Combine<T>(T newKeyPart, int currentKey)
+            where T : class?
         {
             int hash = unchecked(currentKey * (int)0xA5555529);
 
@@ -42,7 +43,10 @@ namespace Roslyn.Utilities
             return hash;
         }
 
-        internal static int CombineValues<T>(IEnumerable<T>? values, int maxItemsToHash = int.MaxValue)
+        internal static int CombineValues<T>(
+            IEnumerable<T>? values,
+            int maxItemsToHash = int.MaxValue
+        )
         {
             if (values == null)
             {
@@ -68,7 +72,10 @@ namespace Roslyn.Utilities
             return hashCode;
         }
 
-        internal static int CombineValues<TKey, TValue>(ImmutableDictionary<TKey, TValue> values, int maxItemsToHash = int.MaxValue)
+        internal static int CombineValues<TKey, TValue>(
+            ImmutableDictionary<TKey, TValue> values,
+            int maxItemsToHash = int.MaxValue
+        )
             where TKey : notnull
         {
             if (values == null)
@@ -111,7 +118,10 @@ namespace Roslyn.Utilities
             return hashCode;
         }
 
-        internal static int CombineValues<T>(ImmutableArray<T> values, int maxItemsToHash = int.MaxValue)
+        internal static int CombineValues<T>(
+            ImmutableArray<T> values,
+            int maxItemsToHash = int.MaxValue
+        )
         {
             if (values.IsDefaultOrEmpty)
             {
@@ -137,7 +147,11 @@ namespace Roslyn.Utilities
             return hashCode;
         }
 
-        internal static int CombineValues(IEnumerable<string?>? values, StringComparer stringComparer, int maxItemsToHash = int.MaxValue)
+        internal static int CombineValues(
+            IEnumerable<string?>? values,
+            StringComparer stringComparer,
+            int maxItemsToHash = int.MaxValue
+        )
         {
             if (values == null)
             {
@@ -162,7 +176,11 @@ namespace Roslyn.Utilities
             return hashCode;
         }
 
-        internal static int CombineValues(ImmutableArray<string> values, StringComparer stringComparer, int maxItemsToHash = int.MaxValue)
+        internal static int CombineValues(
+            ImmutableArray<string> values,
+            StringComparer stringComparer,
+            int maxItemsToHash = int.MaxValue
+        )
         {
             if (values == null)
                 return 0;
@@ -280,8 +298,8 @@ namespace Roslyn.Utilities
         /// <param name="start">The start index of the first character to hash</param>
         /// <param name="length">The number of characters, beginning with <paramref name="start"/> to hash</param>
         /// <returns>The FNV-1a hash code of the substring beginning at <paramref name="start"/> and ending after <paramref name="length"/> characters.</returns>
-        internal static int GetFNVHashCode(string text, int start, int length)
-            => GetFNVHashCode(text.AsSpan(start, length));
+        internal static int GetFNVHashCode(string text, int start, int length) =>
+            GetFNVHashCode(text.AsSpan(start, length));
 
         internal static int GetCaseInsensitiveFNVHashCode(string text)
         {
@@ -294,7 +312,9 @@ namespace Roslyn.Utilities
 
             for (int i = 0; i < data.Length; i++)
             {
-                hashCode = unchecked((hashCode ^ CaseInsensitiveComparison.ToLower(data[i])) * Hash.FnvPrime);
+                hashCode = unchecked(
+                    (hashCode ^ CaseInsensitiveComparison.ToLower(data[i])) * Hash.FnvPrime
+                );
             }
 
             return hashCode;

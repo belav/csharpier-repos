@@ -19,7 +19,8 @@ internal static partial class Interop
             ref CERT_CHAIN_PARA pChainPara,
             CertChainFlags dwFlags,
             IntPtr pvReserved,
-            out SafeX509ChainHandle ppChainContext);
+            out SafeX509ChainHandle ppChainContext
+        );
 
         [StructLayout(LayoutKind.Sequential)]
         internal unsafe struct CERT_CHAIN_PARA

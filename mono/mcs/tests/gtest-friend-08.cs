@@ -3,12 +3,11 @@ using System;
 
 public class Test
 {
-	public static void Main ()
-	{
-		// We should be able to access them
-		new InternalFriendClass ();
-		new FriendClass.NestedInternalClass ();
-		new FriendClass.NestedProtectedInternalClass ();
-	}
+    public static void Main()
+    {
+        // We should be able to access them
+        new InternalFriendClass();
+        new FriendClass.NestedInternalClass();
+        new FriendClass.NestedProtectedInternalClass();
+    }
 }
-

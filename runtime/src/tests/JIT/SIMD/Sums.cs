@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 using System.Collections.Generic;
-using Point = System.Numerics.Vector4;
 using Xunit;
+using Point = System.Numerics.Vector4;
 
 namespace VectorMathTests
 {
@@ -12,9 +12,10 @@ namespace VectorMathTests
         public const int DefaultSeed = 20010415;
         public static int Seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
-            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new Random().Next(),
+            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) =>
+                new Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
-            _ => DefaultSeed
+            _ => DefaultSeed,
         };
 
         static float NextFloat(Random random)

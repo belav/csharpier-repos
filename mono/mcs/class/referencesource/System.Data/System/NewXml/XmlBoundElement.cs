@@ -1,16 +1,18 @@
 //------------------------------------------------------------------------------
 // <copyright file="XmlBoundElement.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">Microsoft</owner>
 // <owner current="false" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 #pragma warning disable 618 // ignore obsolete warning about XmlDataDocument
-namespace System.Xml {
+namespace System.Xml
+{
     using System.Data;
     using System.Diagnostics;
 
-    internal enum ElementState {
+    internal enum ElementState
+    {
         None,
         Defoliated,
         WeakFoliation,
@@ -19,48 +21,69 @@ namespace System.Xml {
         Defoliating,
     }
 
-    internal sealed class XmlBoundElement: XmlElement {
+    internal sealed class XmlBoundElement : XmlElement
+    {
         private DataRow row;
         private ElementState state;
 
-        internal XmlBoundElement( string prefix, string localName, string namespaceURI, XmlDocument doc )
-        : base( prefix, localName, namespaceURI, doc ) {
+        internal XmlBoundElement(
+            string prefix,
+            string localName,
+            string namespaceURI,
+            XmlDocument doc
+        )
+            : base(prefix, localName, namespaceURI, doc)
+        {
             state = ElementState.None;
         }
 
-        public override XmlAttributeCollection Attributes {
-            get {
+        public override XmlAttributeCollection Attributes
+        {
+            get
+            {
                 AutoFoliate();
                 return base.Attributes;
             }
         }
 
-        public override bool HasAttributes {
+        public override bool HasAttributes
+        {
             get { return Attributes.Count > 0; }
         }
 
-        public override XmlNode FirstChild { 
-            get { 
+        public override XmlNode FirstChild
+        {
+            get
+            {
                 AutoFoliate();
                 return base.FirstChild;
             }
         }
 
-        internal XmlNode SafeFirstChild { get { return base.FirstChild; } }
+        internal XmlNode SafeFirstChild
+        {
+            get { return base.FirstChild; }
+        }
 
-        public override XmlNode LastChild { 
-            get { 
+        public override XmlNode LastChild
+        {
+            get
+            {
                 AutoFoliate();
                 return base.LastChild;
             }
         }
 
-        public override XmlNode PreviousSibling { 
-            get { 
+        public override XmlNode PreviousSibling
+        {
+            get
+            {
                 XmlNode prev = base.PreviousSibling;
-                if ( prev == null ) {
+                if (prev == null)
+                {
                     XmlBoundElement parent = ParentNode as XmlBoundElement;
-                    if ( parent != null ) {
+                    if (parent != null)
+                    {
                         parent.AutoFoliate();
                         return base.PreviousSibling;
                     }
@@ -69,231 +92,279 @@ namespace System.Xml {
             }
         }
 
-        internal XmlNode SafePreviousSibling { get { return base.PreviousSibling; } }
+        internal XmlNode SafePreviousSibling
+        {
+            get { return base.PreviousSibling; }
+        }
 
-        public override XmlNode NextSibling { 
-            get { 
+        public override XmlNode NextSibling
+        {
+            get
+            {
                 XmlNode next = base.NextSibling;
-                if ( next == null ) {
+                if (next == null)
+                {
                     XmlBoundElement parent = ParentNode as XmlBoundElement;
-                    if ( parent != null ) {
+                    if (parent != null)
+                    {
                         parent.AutoFoliate();
                         return base.NextSibling;
                     }
                 }
                 return next;
-            } 
+            }
         }
 
-        internal XmlNode SafeNextSibling { get { return base.NextSibling; } }
+        internal XmlNode SafeNextSibling
+        {
+            get { return base.NextSibling; }
+        }
 
-        public override bool HasChildNodes { 
-            get {
+        public override bool HasChildNodes
+        {
+            get
+            {
                 AutoFoliate();
                 return base.HasChildNodes;
             }
         }
-        
-        public override XmlNode InsertBefore(XmlNode newChild, XmlNode refChild) {
+
+        public override XmlNode InsertBefore(XmlNode newChild, XmlNode refChild)
+        {
             AutoFoliate();
-            return base.InsertBefore( newChild, refChild );
+            return base.InsertBefore(newChild, refChild);
         }
 
-        public override XmlNode InsertAfter(XmlNode newChild, XmlNode refChild) {
+        public override XmlNode InsertAfter(XmlNode newChild, XmlNode refChild)
+        {
             AutoFoliate();
-            return base.InsertAfter( newChild, refChild );
+            return base.InsertAfter(newChild, refChild);
         }
 
-        public override XmlNode ReplaceChild(XmlNode newChild, XmlNode oldChild) {
+        public override XmlNode ReplaceChild(XmlNode newChild, XmlNode oldChild)
+        {
             AutoFoliate();
-            return base.ReplaceChild( newChild, oldChild );
+            return base.ReplaceChild(newChild, oldChild);
         }
 
-        public override XmlNode AppendChild(XmlNode newChild) {
+        public override XmlNode AppendChild(XmlNode newChild)
+        {
             AutoFoliate();
-            return base.AppendChild( newChild );
+            return base.AppendChild(newChild);
         }
 
-        internal void RemoveAllChildren() {           
+        internal void RemoveAllChildren()
+        {
             XmlNode child = FirstChild;
             XmlNode sibling = null;
 
-            while ( child != null ) {
+            while (child != null)
+            {
                 sibling = child.NextSibling;
-                RemoveChild( child );
+                RemoveChild(child);
                 child = sibling;
             }
         }
-        
-        public override string InnerXml {
-            get {
-                return base.InnerXml;
-            }
-            set {
-                
+
+        public override string InnerXml
+        {
+            get { return base.InnerXml; }
+            set
+            {
                 RemoveAllChildren();
-                
-                XmlDataDocument doc = (XmlDataDocument) OwnerDocument;
-                
+
+                XmlDataDocument doc = (XmlDataDocument)OwnerDocument;
+
                 bool bOrigIgnoreXmlEvents = doc.IgnoreXmlEvents;
                 bool bOrigIgnoreDataSetEvents = doc.IgnoreDataSetEvents;
-                
+
                 doc.IgnoreXmlEvents = true;
                 doc.IgnoreDataSetEvents = true;
-                
+
                 base.InnerXml = value;
 
-                doc.SyncTree( this );
+                doc.SyncTree(this);
 
                 doc.IgnoreDataSetEvents = bOrigIgnoreDataSetEvents;
                 doc.IgnoreXmlEvents = bOrigIgnoreXmlEvents;
             }
         }
-        
-        internal DataRow Row {
-            get { return row;}
-            set { row = value;}
+
+        internal DataRow Row
+        {
+            get { return row; }
+            set { row = value; }
         }
 
-        internal bool IsFoliated {
-            get { 
-                while ( state == ElementState.Foliating || state == ElementState.Defoliating )
+        internal bool IsFoliated
+        {
+            get
+            {
+                while (state == ElementState.Foliating || state == ElementState.Defoliating)
                     System.Threading.Thread.Sleep(0);
                 //has to be sure that we are either foliated or defoliated when ask for IsFoliated.
                 return state != ElementState.Defoliated;
             }
         }
 
-        internal ElementState ElementState {
-            get { return state;}
-            set { state = value;}
+        internal ElementState ElementState
+        {
+            get { return state; }
+            set { state = value; }
         }
 
-        internal void Foliate( ElementState newState ) {
-            XmlDataDocument doc = (XmlDataDocument) OwnerDocument;
-            if ( doc != null )
-                doc.Foliate( this, newState );
+        internal void Foliate(ElementState newState)
+        {
+            XmlDataDocument doc = (XmlDataDocument)OwnerDocument;
+            if (doc != null)
+                doc.Foliate(this, newState);
         }
 
         // Foliate the node as a side effect of user calling functions on this node (like NextSibling) OR as a side effect of DataDocNav using nodes to do editing
-        private void AutoFoliate() {
-            XmlDataDocument doc = (XmlDataDocument) OwnerDocument;
-            if ( doc != null )
-                doc.Foliate( this, doc.AutoFoliationState );
+        private void AutoFoliate()
+        {
+            XmlDataDocument doc = (XmlDataDocument)OwnerDocument;
+            if (doc != null)
+                doc.Foliate(this, doc.AutoFoliationState);
         }
 
-        public override XmlNode CloneNode(bool deep) {
+        public override XmlNode CloneNode(bool deep)
+        {
             XmlDataDocument doc = (XmlDataDocument)(this.OwnerDocument);
             ElementState oldAutoFoliationState = doc.AutoFoliationState;
             doc.AutoFoliationState = ElementState.WeakFoliation;
             XmlElement element;
-            try {
-                Foliate( ElementState.WeakFoliation );
-                element = (XmlElement)(base.CloneNode( deep ));
+            try
+            {
+                Foliate(ElementState.WeakFoliation);
+                element = (XmlElement)(base.CloneNode(deep));
                 // Clone should create a XmlBoundElement node
-                Debug.Assert( element is XmlBoundElement );
+                Debug.Assert(element is XmlBoundElement);
             }
-            finally {
+            finally
+            {
                 doc.AutoFoliationState = oldAutoFoliationState;
             }
 
             return element;
         }
 
-        public override void WriteContentTo( XmlWriter w ) {
-            DataPointer dp = new DataPointer( (XmlDataDocument)OwnerDocument, this );
-            try {
+        public override void WriteContentTo(XmlWriter w)
+        {
+            DataPointer dp = new DataPointer((XmlDataDocument)OwnerDocument, this);
+            try
+            {
                 dp.AddPointer();
-                WriteBoundElementContentTo( dp, w );            
+                WriteBoundElementContentTo(dp, w);
             }
-            finally {
+            finally
+            {
                 dp.SetNoLongerUse();
             }
         }
 
-        public override void WriteTo( XmlWriter w ) {
-            DataPointer dp = new DataPointer( (XmlDataDocument)OwnerDocument, this );            
-            try {
+        public override void WriteTo(XmlWriter w)
+        {
+            DataPointer dp = new DataPointer((XmlDataDocument)OwnerDocument, this);
+            try
+            {
                 dp.AddPointer();
-                WriteRootBoundElementTo( dp, w );
+                WriteRootBoundElementTo(dp, w);
             }
-            finally {
+            finally
+            {
                 dp.SetNoLongerUse();
             }
         }
 
-        private void WriteRootBoundElementTo(DataPointer dp, XmlWriter w) {            
-            Debug.Assert( dp.NodeType == XmlNodeType.Element );
+        private void WriteRootBoundElementTo(DataPointer dp, XmlWriter w)
+        {
+            Debug.Assert(dp.NodeType == XmlNodeType.Element);
             XmlDataDocument doc = (XmlDataDocument)OwnerDocument;
-            w.WriteStartElement( dp.Prefix, dp.LocalName, dp.NamespaceURI );            
+            w.WriteStartElement(dp.Prefix, dp.LocalName, dp.NamespaceURI);
             int cAttr = dp.AttributeCount;
             bool bHasXSI = false;
-            if ( cAttr > 0 ) {
-                for ( int iAttr = 0; iAttr < cAttr; iAttr++ ) {
-                    dp.MoveToAttribute( iAttr );
-                    if ( dp.Prefix == "xmlns" && dp.LocalName == XmlDataDocument.XSI )
+            if (cAttr > 0)
+            {
+                for (int iAttr = 0; iAttr < cAttr; iAttr++)
+                {
+                    dp.MoveToAttribute(iAttr);
+                    if (dp.Prefix == "xmlns" && dp.LocalName == XmlDataDocument.XSI)
                         bHasXSI = true;
-                    WriteTo( dp, w );
+                    WriteTo(dp, w);
                     dp.MoveToOwnerElement();
                 }
             }
-            
-            if ( !bHasXSI && doc.bLoadFromDataSet && doc.bHasXSINIL ) 
-                w.WriteAttributeString( "xmlns", "xsi", "http://www.w3.org/2000/xmlns/", Keywords.XSINS );
-            
-            
-            WriteBoundElementContentTo( dp, w );
-            
+
+            if (!bHasXSI && doc.bLoadFromDataSet && doc.bHasXSINIL)
+                w.WriteAttributeString(
+                    "xmlns",
+                    "xsi",
+                    "http://www.w3.org/2000/xmlns/",
+                    Keywords.XSINS
+                );
+
+            WriteBoundElementContentTo(dp, w);
+
             // Force long end tag when the elem is not empty, even if there are no children.
-            if ( dp.IsEmptyElement )
+            if (dp.IsEmptyElement)
                 w.WriteEndElement();
             else
                 w.WriteFullEndElement();
         }
 
-        private static void WriteBoundElementTo( DataPointer dp, XmlWriter w ) {
-            Debug.Assert( dp.NodeType == XmlNodeType.Element );
-            w.WriteStartElement( dp.Prefix, dp.LocalName, dp.NamespaceURI );
+        private static void WriteBoundElementTo(DataPointer dp, XmlWriter w)
+        {
+            Debug.Assert(dp.NodeType == XmlNodeType.Element);
+            w.WriteStartElement(dp.Prefix, dp.LocalName, dp.NamespaceURI);
             int cAttr = dp.AttributeCount;
-            if ( cAttr > 0 ) {
-                for ( int iAttr = 0; iAttr < cAttr; iAttr++ ) {
-                    dp.MoveToAttribute( iAttr );
-                    WriteTo( dp, w );
+            if (cAttr > 0)
+            {
+                for (int iAttr = 0; iAttr < cAttr; iAttr++)
+                {
+                    dp.MoveToAttribute(iAttr);
+                    WriteTo(dp, w);
                     dp.MoveToOwnerElement();
                 }
             }
-            
-            WriteBoundElementContentTo( dp, w );
-            
+
+            WriteBoundElementContentTo(dp, w);
+
             // Force long end tag when the elem is not empty, even if there are no children.
-            if ( dp.IsEmptyElement )
+            if (dp.IsEmptyElement)
                 w.WriteEndElement();
             else
                 w.WriteFullEndElement();
         }
 
-        private static void WriteBoundElementContentTo( DataPointer dp, XmlWriter w ) {
-            if ( !dp.IsEmptyElement && dp.MoveToFirstChild() ) {
-                do {
-                    WriteTo( dp, w );
-                }
-                while ( dp.MoveToNextSibling() );
+        private static void WriteBoundElementContentTo(DataPointer dp, XmlWriter w)
+        {
+            if (!dp.IsEmptyElement && dp.MoveToFirstChild())
+            {
+                do
+                {
+                    WriteTo(dp, w);
+                } while (dp.MoveToNextSibling());
 
                 dp.MoveToParent();
             }
         }
-        
-        private static void WriteTo( DataPointer dp, XmlWriter w ) {
-            switch ( dp.NodeType ) {
-                case XmlNodeType.Attribute:
-                    if ( !dp.IsDefault ) {
-                        w.WriteStartAttribute( dp.Prefix, dp.LocalName, dp.NamespaceURI );
 
-                        if ( dp.MoveToFirstChild() ) {
-                            do {
-                                WriteTo( dp, w );
-                            }
-                            while ( dp.MoveToNextSibling() );
+        private static void WriteTo(DataPointer dp, XmlWriter w)
+        {
+            switch (dp.NodeType)
+            {
+                case XmlNodeType.Attribute:
+                    if (!dp.IsDefault)
+                    {
+                        w.WriteStartAttribute(dp.Prefix, dp.LocalName, dp.NamespaceURI);
+
+                        if (dp.MoveToFirstChild())
+                        {
+                            do
+                            {
+                                WriteTo(dp, w);
+                            } while (dp.MoveToNextSibling());
 
                             dp.MoveToParent();
                         }
@@ -303,7 +374,7 @@ namespace System.Xml {
                     break;
 
                 case XmlNodeType.Element:
-                    WriteBoundElementTo( dp, w );
+                    WriteBoundElementTo(dp, w);
                     break;
 
                 case XmlNodeType.Text:
@@ -311,20 +382,21 @@ namespace System.Xml {
                     break;
 
                 default:
-                    Debug.Assert( ((IXmlDataVirtualNode)dp).IsOnColumn( null ) );
-                    if ( dp.GetNode() != null )
-                        dp.GetNode().WriteTo( w );
+                    Debug.Assert(((IXmlDataVirtualNode)dp).IsOnColumn(null));
+                    if (dp.GetNode() != null)
+                        dp.GetNode().WriteTo(w);
                     break;
             }
         }
-        
-        public override XmlNodeList GetElementsByTagName(string name) { 
+
+        public override XmlNodeList GetElementsByTagName(string name)
+        {
             // Retrieving nodes from the returned nodelist may cause foliation which causes new nodes to be created,
             // so the System.Xml iterator will throw if this happens during iteration. To avoid this, foliate everything
             // before iteration, so iteration will not cause foliation (and as a result of this, creation of new nodes).
             XmlNodeList tempNodeList = base.GetElementsByTagName(name);
 
-            int tempint = tempNodeList.Count; 
+            int tempint = tempNodeList.Count;
             return tempNodeList;
         }
     }

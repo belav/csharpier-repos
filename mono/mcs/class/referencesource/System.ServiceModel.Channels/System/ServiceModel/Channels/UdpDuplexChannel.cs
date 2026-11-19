@@ -16,21 +16,31 @@ namespace System.ServiceModel.Channels
     using System.Xml;
 
     abstract class UdpDuplexChannel : UdpChannelBase<Message>, IDuplexChannel
-    {        
+    {
         protected UdpDuplexChannel(
-            ChannelManagerBase channelMananger, 
-            MessageEncoder encoder, 
+            ChannelManagerBase channelMananger,
+            MessageEncoder encoder,
             BufferManager bufferManager,
-            UdpSocket[] sendSockets, 
+            UdpSocket[] sendSockets,
             UdpRetransmissionSettings retransmissionSettings,
-            long maxPendingMessagesTotalSize, 
-            EndpointAddress localAddress, 
-            Uri via, 
-            bool isMulticast, 
-            int maxReceivedMessageSize)
-            : base(channelMananger, encoder, bufferManager, sendSockets, retransmissionSettings, maxPendingMessagesTotalSize, localAddress, via, isMulticast, maxReceivedMessageSize)
-        {
-        }
+            long maxPendingMessagesTotalSize,
+            EndpointAddress localAddress,
+            Uri via,
+            bool isMulticast,
+            int maxReceivedMessageSize
+        )
+            : base(
+                channelMananger,
+                encoder,
+                bufferManager,
+                sendSockets,
+                retransmissionSettings,
+                maxPendingMessagesTotalSize,
+                localAddress,
+                via,
+                isMulticast,
+                maxReceivedMessageSize
+            ) { }
 
         public virtual EndpointAddress RemoteAddress
         {
@@ -52,13 +62,18 @@ namespace System.ServiceModel.Channels
             return this.BeginSend(message, this.DefaultSendTimeout, callback, state);
         }
 
-        public IAsyncResult BeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             ThrowIfDisposedOrNotOpen();
-            
+
             if (message is NullMessage)
             {
-                return new CompletedAsyncResult(callback, state); 
+                return new CompletedAsyncResult(callback, state);
             }
             AddHeadersTo(message);
             return this.UdpOutputChannel.BeginSend(message, timeout, callback, state);
@@ -68,9 +83,9 @@ namespace System.ServiceModel.Channels
         {
             if (result is CompletedAsyncResult)
             {
-                CompletedAsyncResult.End(result); 
+                CompletedAsyncResult.End(result);
             }
-            else 
+            else
             {
                 this.UdpOutputChannel.EndSend(result);
             }
@@ -100,7 +115,9 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                );
             }
 
             this.ThrowPending();
@@ -116,7 +133,9 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                );
             }
 
             this.ThrowPending();
@@ -132,7 +151,9 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                );
             }
 
             this.ThrowPending();
@@ -143,7 +164,9 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                );
             }
 
             this.ThrowPending();
@@ -159,18 +182,26 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                );
             }
 
             this.ThrowPending();
             return base.WaitForItem(timeout);
         }
 
-        public IAsyncResult BeginWaitForMessage(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForMessage(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                );
             }
 
             this.ThrowPending();
@@ -182,12 +213,16 @@ namespace System.ServiceModel.Channels
             return base.EndWaitForItem(result);
         }
 
-        internal override void FinishEnqueueMessage(Message message, Action dequeuedCallback, bool canDispatchOnThisThread)
+        internal override void FinishEnqueueMessage(
+            Message message,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        )
         {
             if (!this.IsMulticast)
             {
                 //When using Multicast, we can't assume that receiving one message means that we are done receiving messages.
-                //For example, Discovery will send one message out and receive n responses that match.  Because of this, we 
+                //For example, Discovery will send one message out and receive n responses that match.  Because of this, we
                 //can only short circuit retransmission when using unicast.
                 this.UdpOutputChannel.CancelRetransmission(message.Headers.RelatesTo);
             }

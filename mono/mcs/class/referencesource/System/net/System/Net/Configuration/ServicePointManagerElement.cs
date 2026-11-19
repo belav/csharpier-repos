@@ -32,21 +32,25 @@ namespace System.Net.Configuration
             if (EvaluationContext.IsMachineLevel)
                 return;
 
-            PropertyInformation[] protectedProperties = {
+            PropertyInformation[] protectedProperties =
+            {
                 ElementInformation.Properties[ConfigurationStrings.CheckCertificateName],
-                ElementInformation.Properties[ConfigurationStrings.CheckCertificateRevocationList]
+                ElementInformation.Properties[ConfigurationStrings.CheckCertificateRevocationList],
             };
 
             foreach (PropertyInformation property in protectedProperties)
                 if (property.ValueOrigin == PropertyValueOrigin.SetHere)
                 {
-                    try {
+                    try
+                    {
                         ExceptionHelper.UnmanagedPermission.Demand();
-                    } catch (Exception exception) {
+                    }
+                    catch (Exception exception)
+                    {
                         throw new ConfigurationErrorsException(
-                                      SR.GetString(SR.net_config_property_permission, 
-                                                   property.Name),
-                                      exception);
+                            SR.GetString(SR.net_config_property_permission, property.Name),
+                            exception
+                        );
                     }
                 }
         }
@@ -58,14 +62,20 @@ namespace System.Net.Configuration
             set { this[this.checkCertificateName] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.CheckCertificateRevocationList, DefaultValue = false)]
+        [ConfigurationProperty(
+            ConfigurationStrings.CheckCertificateRevocationList,
+            DefaultValue = false
+        )]
         public bool CheckCertificateRevocationList
         {
             get { return (bool)this[this.checkCertificateRevocationList]; }
             set { this[this.checkCertificateRevocationList] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.DnsRefreshTimeout, DefaultValue = (int)( 2 * 60 * 1000))]
+        [ConfigurationProperty(
+            ConfigurationStrings.DnsRefreshTimeout,
+            DefaultValue = (int)(2 * 60 * 1000)
+        )]
         public int DnsRefreshTimeout
         {
             get { return (int)this[this.dnsRefreshTimeout]; }
@@ -79,7 +89,10 @@ namespace System.Net.Configuration
             set { this[this.enableDnsRoundRobin] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.EncryptionPolicy, DefaultValue = EncryptionPolicy.RequireEncryption)]
+        [ConfigurationProperty(
+            ConfigurationStrings.EncryptionPolicy,
+            DefaultValue = EncryptionPolicy.RequireEncryption
+        )]
         public EncryptionPolicy EncryptionPolicy
         {
             get { return (EncryptionPolicy)this[this.encryptionPolicy]; }
@@ -93,7 +106,7 @@ namespace System.Net.Configuration
             set { this[this.expect100Continue] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.UseNagleAlgorithm, DefaultValue=true)]
+        [ConfigurationProperty(ConfigurationStrings.UseNagleAlgorithm, DefaultValue = true)]
         public bool UseNagleAlgorithm
         {
             get { return (bool)this[this.useNagleAlgorithm]; }
@@ -102,56 +115,60 @@ namespace System.Net.Configuration
 
         protected override ConfigurationPropertyCollection Properties
         {
-            get 
-            {
-                return this.properties;
-            }
+            get { return this.properties; }
         }
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        readonly ConfigurationProperty checkCertificateName =
-            new ConfigurationProperty(ConfigurationStrings.CheckCertificateName, 
-                                      typeof(bool), 
-                                      true, 
-                                      ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty checkCertificateName = new ConfigurationProperty(
+            ConfigurationStrings.CheckCertificateName,
+            typeof(bool),
+            true,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty checkCertificateRevocationList =
-            new ConfigurationProperty(ConfigurationStrings.CheckCertificateRevocationList, 
-                                      typeof(bool), 
-                                      false, 
-                                      ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty checkCertificateRevocationList = new ConfigurationProperty(
+            ConfigurationStrings.CheckCertificateRevocationList,
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty dnsRefreshTimeout =
-            new ConfigurationProperty(ConfigurationStrings.DnsRefreshTimeout, 
-                                      typeof(int), 2 * 60 * 1000, 
-                                      null, 
-                                      new TimeoutValidator(true), 
-                                      ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty dnsRefreshTimeout = new ConfigurationProperty(
+            ConfigurationStrings.DnsRefreshTimeout,
+            typeof(int),
+            2 * 60 * 1000,
+            null,
+            new TimeoutValidator(true),
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty enableDnsRoundRobin =
-            new ConfigurationProperty(ConfigurationStrings.EnableDnsRoundRobin, 
-                                      typeof(bool), 
-                                      false, 
-                                      ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty enableDnsRoundRobin = new ConfigurationProperty(
+            ConfigurationStrings.EnableDnsRoundRobin,
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty encryptionPolicy =
-            new ConfigurationProperty(ConfigurationStrings.EncryptionPolicy, 
-                                      typeof(EncryptionPolicy), 
-                                      EncryptionPolicy.RequireEncryption, 
-                                      ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty encryptionPolicy = new ConfigurationProperty(
+            ConfigurationStrings.EncryptionPolicy,
+            typeof(EncryptionPolicy),
+            EncryptionPolicy.RequireEncryption,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty expect100Continue =
-            new ConfigurationProperty(ConfigurationStrings.Expect100Continue, 
-                                      typeof(bool), 
-                                      true, 
-                                      ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty expect100Continue = new ConfigurationProperty(
+            ConfigurationStrings.Expect100Continue,
+            typeof(bool),
+            true,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty useNagleAlgorithm =
-            new ConfigurationProperty(ConfigurationStrings.UseNagleAlgorithm, 
-                                      typeof(bool), 
-                                      true, 
-                                      ConfigurationPropertyOptions.None); 
+        readonly ConfigurationProperty useNagleAlgorithm = new ConfigurationProperty(
+            ConfigurationStrings.UseNagleAlgorithm,
+            typeof(bool),
+            true,
+            ConfigurationPropertyOptions.None
+        );
     }
 }
-

@@ -14,9 +14,9 @@ namespace System.IdentityModel.Selectors
     using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Security.Cryptography.X509Certificates;
     using System.Security;
     using System.Security.AccessControl;
+    using System.Security.Cryptography.X509Certificates;
     using System.Security.Permissions;
     using System.Security.Principal;
     using System.Text;
@@ -29,26 +29,27 @@ namespace System.IdentityModel.Selectors
         bool cloneHandle;
 
         public X509SecurityTokenAuthenticator()
-            : this(X509CertificateValidator.ChainTrust)
-        {
-        }
+            : this(X509CertificateValidator.ChainTrust) { }
 
         public X509SecurityTokenAuthenticator(X509CertificateValidator validator)
-            : this(validator, false)
-        {
-        }
+            : this(validator, false) { }
 
         public X509SecurityTokenAuthenticator(X509CertificateValidator validator, bool mapToWindows)
-            : this(validator, mapToWindows, WindowsClaimSet.DefaultIncludeWindowsGroups)
-        {
-        }
+            : this(validator, mapToWindows, WindowsClaimSet.DefaultIncludeWindowsGroups) { }
 
-        public X509SecurityTokenAuthenticator(X509CertificateValidator validator, bool mapToWindows, bool includeWindowsGroups)
-            : this(validator, mapToWindows, includeWindowsGroups, true)
-        {
-        }
+        public X509SecurityTokenAuthenticator(
+            X509CertificateValidator validator,
+            bool mapToWindows,
+            bool includeWindowsGroups
+        )
+            : this(validator, mapToWindows, includeWindowsGroups, true) { }
 
-        internal X509SecurityTokenAuthenticator(X509CertificateValidator validator, bool mapToWindows, bool includeWindowsGroups, bool cloneHandle)
+        internal X509SecurityTokenAuthenticator(
+            X509CertificateValidator validator,
+            bool mapToWindows,
+            bool includeWindowsGroups,
+            bool cloneHandle
+        )
         {
             if (validator == null)
             {
@@ -71,19 +72,29 @@ namespace System.IdentityModel.Selectors
             return token is X509SecurityToken;
         }
 
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(SecurityToken token)
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
         {
             X509SecurityToken x509Token = (X509SecurityToken)token;
             this.validator.Validate(x509Token.Certificate);
 
-            X509CertificateClaimSet x509ClaimSet = new X509CertificateClaimSet(x509Token.Certificate, this.cloneHandle);
+            X509CertificateClaimSet x509ClaimSet = new X509CertificateClaimSet(
+                x509Token.Certificate,
+                this.cloneHandle
+            );
             if (!this.mapToWindows)
                 return SecurityUtils.CreateAuthorizationPolicies(x509ClaimSet, x509Token.ValidTo);
 
             WindowsClaimSet windowsClaimSet;
             if (token is X509WindowsSecurityToken)
             {
-                windowsClaimSet = new WindowsClaimSet( ( (X509WindowsSecurityToken)token ).WindowsIdentity, SecurityUtils.AuthTypeCertMap, this.includeWindowsGroups, this.cloneHandle );
+                windowsClaimSet = new WindowsClaimSet(
+                    ((X509WindowsSecurityToken)token).WindowsIdentity,
+                    SecurityUtils.AuthTypeCertMap,
+                    this.includeWindowsGroups,
+                    this.cloneHandle
+                );
             }
             else
             {
@@ -102,18 +113,37 @@ namespace System.IdentityModel.Selectors
                     string name = x509Token.Certificate.GetNameInfo(X509NameType.UpnName, false);
                     if (string.IsNullOrEmpty(name))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenValidationException(SR.GetString(SR.InvalidNtMapping,
-                            SecurityUtils.GetCertificateId(x509Token.Certificate))));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new SecurityTokenValidationException(
+                                SR.GetString(
+                                    SR.InvalidNtMapping,
+                                    SecurityUtils.GetCertificateId(x509Token.Certificate)
+                                )
+                            )
+                        );
                     }
 
-                    using (WindowsIdentity initialWindowsIdentity = new WindowsIdentity(name, SecurityUtils.AuthTypeCertMap))
+                    using (
+                        WindowsIdentity initialWindowsIdentity = new WindowsIdentity(
+                            name,
+                            SecurityUtils.AuthTypeCertMap
+                        )
+                    )
                     {
                         // This is to make sure that the auth Type is shoved down to the class as the above constructor does not do it.
-                        windowsIdentity = new WindowsIdentity(initialWindowsIdentity.Token, SecurityUtils.AuthTypeCertMap);
+                        windowsIdentity = new WindowsIdentity(
+                            initialWindowsIdentity.Token,
+                            SecurityUtils.AuthTypeCertMap
+                        );
                     }
                 }
 
-                windowsClaimSet = new WindowsClaimSet(windowsIdentity, SecurityUtils.AuthTypeCertMap, this.includeWindowsGroups, false);
+                windowsClaimSet = new WindowsClaimSet(
+                    windowsIdentity,
+                    SecurityUtils.AuthTypeCertMap,
+                    this.includeWindowsGroups,
+                    false
+                );
             }
             List<ClaimSet> claimSets = new List<ClaimSet>(2);
             claimSets.Add(windowsClaimSet);
@@ -127,8 +157,10 @@ namespace System.IdentityModel.Selectors
         // For Vista, LsaLogon supporting mapping cert to NTToken.  W/O SeTcbPrivilege
         // the identify token is returned; otherwise, impersonation.  This is consistent
         // with S4U.  Note: duplicate code partly from CLR's WindowsIdentity Class (S4U).
-        [Fx.Tag.SecurityNote(Critical = "Uses critical type SafeHGlobalHandle.",
-            Safe = "Performs a Demand for full trust.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses critical type SafeHGlobalHandle.",
+            Safe = "Performs a Demand for full trust."
+        )]
         [SecuritySafeCritical]
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
         internal static WindowsIdentity KerberosCertificateLogon(X509Certificate2 certificate)
@@ -142,9 +174,20 @@ namespace System.IdentityModel.Selectors
             SafeCloseHandle tokenHandle = null;
             try
             {
-                pSourceName = SafeHGlobalHandle.AllocHGlobal(NativeMethods.LsaSourceName.Length + 1);
-                Marshal.Copy(NativeMethods.LsaSourceName, 0, pSourceName.DangerousGetHandle(), NativeMethods.LsaSourceName.Length);
-                UNICODE_INTPTR_STRING sourceName = new UNICODE_INTPTR_STRING(NativeMethods.LsaSourceName.Length, NativeMethods.LsaSourceName.Length + 1, pSourceName.DangerousGetHandle());
+                pSourceName = SafeHGlobalHandle.AllocHGlobal(
+                    NativeMethods.LsaSourceName.Length + 1
+                );
+                Marshal.Copy(
+                    NativeMethods.LsaSourceName,
+                    0,
+                    pSourceName.DangerousGetHandle(),
+                    NativeMethods.LsaSourceName.Length
+                );
+                UNICODE_INTPTR_STRING sourceName = new UNICODE_INTPTR_STRING(
+                    NativeMethods.LsaSourceName.Length,
+                    NativeMethods.LsaSourceName.Length + 1,
+                    pSourceName.DangerousGetHandle()
+                );
 
                 Privilege privilege = null;
 
@@ -164,15 +207,24 @@ namespace System.IdentityModel.Selectors
                     }
 
                     IntPtr dummy = IntPtr.Zero;
-                    status = NativeMethods.LsaRegisterLogonProcess(ref sourceName, out logonHandle, out dummy);
-                    if (NativeMethods.ERROR_ACCESS_DENIED == NativeMethods.LsaNtStatusToWinError(status))
+                    status = NativeMethods.LsaRegisterLogonProcess(
+                        ref sourceName,
+                        out logonHandle,
+                        out dummy
+                    );
+                    if (
+                        NativeMethods.ERROR_ACCESS_DENIED
+                        == NativeMethods.LsaNtStatusToWinError(status)
+                    )
                     {
                         // We don't have the Tcb privilege. The best we can hope for is to get an Identification token.
                         status = NativeMethods.LsaConnectUntrusted(out logonHandle);
                     }
                     if (status < 0) // non-negative numbers indicate success
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(NativeMethods.LsaNtStatusToWinError(status)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new Win32Exception(NativeMethods.LsaNtStatusToWinError(status))
+                        );
                     }
                 }
                 finally
@@ -185,7 +237,10 @@ namespace System.IdentityModel.Selectors
                         revertResult = privilege.Revert();
                         if (revertResult != 0)
                         {
-                            message = SR.GetString(SR.RevertingPrivilegeFailed, new Win32Exception(revertResult));
+                            message = SR.GetString(
+                                SR.RevertingPrivilegeFailed,
+                                new Win32Exception(revertResult)
+                            );
                         }
                     }
                     finally
@@ -198,15 +253,32 @@ namespace System.IdentityModel.Selectors
                 }
 
                 // package name ("Kerberos")
-                pPackageName = SafeHGlobalHandle.AllocHGlobal(NativeMethods.LsaKerberosName.Length + 1);
-                Marshal.Copy(NativeMethods.LsaKerberosName, 0, pPackageName.DangerousGetHandle(), NativeMethods.LsaKerberosName.Length);
-                UNICODE_INTPTR_STRING packageName = new UNICODE_INTPTR_STRING(NativeMethods.LsaKerberosName.Length, NativeMethods.LsaKerberosName.Length + 1, pPackageName.DangerousGetHandle());
+                pPackageName = SafeHGlobalHandle.AllocHGlobal(
+                    NativeMethods.LsaKerberosName.Length + 1
+                );
+                Marshal.Copy(
+                    NativeMethods.LsaKerberosName,
+                    0,
+                    pPackageName.DangerousGetHandle(),
+                    NativeMethods.LsaKerberosName.Length
+                );
+                UNICODE_INTPTR_STRING packageName = new UNICODE_INTPTR_STRING(
+                    NativeMethods.LsaKerberosName.Length,
+                    NativeMethods.LsaKerberosName.Length + 1,
+                    pPackageName.DangerousGetHandle()
+                );
 
                 uint packageId = 0;
-                status = NativeMethods.LsaLookupAuthenticationPackage(logonHandle, ref packageName, out packageId);
+                status = NativeMethods.LsaLookupAuthenticationPackage(
+                    logonHandle,
+                    ref packageName,
+                    out packageId
+                );
                 if (status < 0) // non-negative numbers indicate success
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(NativeMethods.LsaNtStatusToWinError(status)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception(NativeMethods.LsaNtStatusToWinError(status))
+                    );
                 }
 
                 // source context
@@ -214,12 +286,16 @@ namespace System.IdentityModel.Selectors
                 if (!NativeMethods.AllocateLocallyUniqueId(out sourceContext.SourceIdentifier))
                 {
                     int dwErrorCode = Marshal.GetLastWin32Error();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(dwErrorCode));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception(dwErrorCode)
+                    );
                 }
 
                 // SourceContext
                 sourceContext.Name = new char[8];
-                sourceContext.Name[0] = 'W'; sourceContext.Name[1] = 'C'; sourceContext.Name[2] = 'F';
+                sourceContext.Name[0] = 'W';
+                sourceContext.Name[1] = 'C';
+                sourceContext.Name[2] = 'F';
 
                 // LogonInfo
                 byte[] certRawData = certificate.RawData;
@@ -227,13 +303,16 @@ namespace System.IdentityModel.Selectors
                 pLogonInfo = SafeHGlobalHandle.AllocHGlobal(logonInfoSize);
                 unsafe
                 {
-                    KERB_CERTIFICATE_S4U_LOGON* pInfo = (KERB_CERTIFICATE_S4U_LOGON*)pLogonInfo.DangerousGetHandle().ToPointer();
+                    KERB_CERTIFICATE_S4U_LOGON* pInfo = (KERB_CERTIFICATE_S4U_LOGON*)
+                        pLogonInfo.DangerousGetHandle().ToPointer();
                     pInfo->MessageType = KERB_LOGON_SUBMIT_TYPE.KerbCertificateS4ULogon;
                     pInfo->Flags = NativeMethods.KERB_CERTIFICATE_S4U_LOGON_FLAG_CHECK_LOGONHOURS;
                     pInfo->UserPrincipalName = new UNICODE_INTPTR_STRING(0, 0, IntPtr.Zero);
                     pInfo->DomainName = new UNICODE_INTPTR_STRING(0, 0, IntPtr.Zero);
                     pInfo->CertificateLength = (uint)certRawData.Length;
-                    pInfo->Certificate = new IntPtr(pLogonInfo.DangerousGetHandle().ToInt64() + KERB_CERTIFICATE_S4U_LOGON.Size);
+                    pInfo->Certificate = new IntPtr(
+                        pLogonInfo.DangerousGetHandle().ToInt64() + KERB_CERTIFICATE_S4U_LOGON.Size
+                    );
                     Marshal.Copy(certRawData, 0, pInfo->Certificate, certRawData.Length);
                 }
 
@@ -258,7 +337,7 @@ namespace System.IdentityModel.Selectors
                     out tokenHandle,
                     out quotas,
                     out subStatus
-                    );
+                );
 
                 // LsaLogon has restriction (eg. password expired).  SubStatus indicates the reason.
                 if ((uint)status == NativeMethods.STATUS_ACCOUNT_RESTRICTION && subStatus < 0)
@@ -267,14 +346,21 @@ namespace System.IdentityModel.Selectors
                 }
                 if (status < 0) // non-negative numbers indicate success
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(NativeMethods.LsaNtStatusToWinError(status)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception(NativeMethods.LsaNtStatusToWinError(status))
+                    );
                 }
                 if (subStatus < 0) // non-negative numbers indicate success
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(NativeMethods.LsaNtStatusToWinError(subStatus)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception(NativeMethods.LsaNtStatusToWinError(subStatus))
+                    );
                 }
 
-                return new WindowsIdentity(tokenHandle.DangerousGetHandle(), SecurityUtils.AuthTypeCertMap);
+                return new WindowsIdentity(
+                    tokenHandle.DangerousGetHandle(),
+                    SecurityUtils.AuthTypeCertMap
+                );
             }
             finally
             {

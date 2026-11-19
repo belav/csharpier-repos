@@ -566,9 +566,8 @@ namespace Moq
 
         static InterfaceMapping GetInterfaceMap(Type type, Type interfaceType)
         {
-            return mappingsCache.GetOrAdd(
-                Tuple.Create(type, interfaceType),
-                tuple => tuple.Item1.GetInterfaceMap(tuple.Item2)
+            return mappingsCache.GetOrAdd(Tuple.Create(type, interfaceType), tuple =>
+                tuple.Item1.GetInterfaceMap(tuple.Item2)
             );
         }
 

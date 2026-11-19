@@ -43,13 +43,8 @@ public class FileLoggerTests : IDisposable
 
         await provider.IntervalControl.Pause;
 
-        logger.Log(
-            _timestampOne,
-            LogLevel.Information,
-            0,
-            "Info message",
-            null,
-            (state, ex) => state
+        logger.Log(_timestampOne, LogLevel.Information, 0, "Info message", null, (state, ex) =>
+            state
         );
         logger.Log(
             _timestampOne.AddHours(1),
@@ -80,13 +75,8 @@ public class FileLoggerTests : IDisposable
 
         await provider.IntervalControl.Pause;
 
-        logger.Log(
-            _timestampOne,
-            LogLevel.Information,
-            0,
-            "Info message",
-            null,
-            (state, ex) => state
+        logger.Log(_timestampOne, LogLevel.Information, 0, "Info message", null, (state, ex) =>
+            state
         );
         logger.Log(
             _timestampOne.AddDays(1),
@@ -125,13 +115,8 @@ public class FileLoggerTests : IDisposable
 
         for (int i = 0; i < 10; i++)
         {
-            logger.Log(
-                timestamp,
-                LogLevel.Information,
-                0,
-                "Info message",
-                null,
-                (state, ex) => state
+            logger.Log(timestamp, LogLevel.Information, 0, "Info message", null, (state, ex) =>
+                state
             );
             logger.Log(
                 timestamp.AddHours(1),

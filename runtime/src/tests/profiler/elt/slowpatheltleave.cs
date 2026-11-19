@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Profiler.Tests;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,12 +11,15 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
+using Profiler.Tests;
 
 namespace SlowPathELTTests
 {
     class SlowPathELTLeave
     {
-        static readonly Guid EventPipeWritingProfilerGuid = new Guid("0B36296B-EC47-44DA-8320-DC5E3071DD06");
+        static readonly Guid EventPipeWritingProfilerGuid = new Guid(
+            "0B36296B-EC47-44DA-8320-DC5E3071DD06"
+        );
 
         public static int Main(string[] args)
         {
@@ -26,9 +28,11 @@ namespace SlowPathELTTests
                 return SlowPathELTHelpers.RunTest();
             }
 
-            return ProfilerTestRunner.Run(profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
-                                          testName: "ELTSlowPathLeave",
-                                          profilerClsid: EventPipeWritingProfilerGuid);
+            return ProfilerTestRunner.Run(
+                profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
+                testName: "ELTSlowPathLeave",
+                profilerClsid: EventPipeWritingProfilerGuid
+            );
         }
     }
 }

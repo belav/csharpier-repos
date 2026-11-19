@@ -16,13 +16,15 @@ namespace System.IO.Compression
         /// <summary>Initializes a new instance of the <see cref="System.IO.Compression.BrotliStream" /> class by using the specified stream and compression level.</summary>
         /// <param name="stream">The stream to which compressed data is written.</param>
         /// <param name="compressionLevel">One of the enumeration values that indicates whether to emphasize speed or compression efficiency when compressing data to the stream.</param>
-        public BrotliStream(Stream stream, CompressionLevel compressionLevel) : this(stream, compressionLevel, leaveOpen: false) { }
+        public BrotliStream(Stream stream, CompressionLevel compressionLevel)
+            : this(stream, compressionLevel, leaveOpen: false) { }
 
         /// <summary>Initializes a new instance of the <see cref="System.IO.Compression.BrotliStream" /> class by using the specified stream and compression level, and optionally leaves the stream open.</summary>
         /// <param name="stream">The stream to which compressed data is written.</param>
         /// <param name="compressionLevel">One of the enumeration values that indicates whether to emphasize speed or compression efficiency when compressing data to the stream.</param>
         /// <param name="leaveOpen"><see langword="true" /> to leave the stream open after disposing the <see cref="System.IO.Compression.BrotliStream" /> object; otherwise, <see langword="false" />.</param>
-        public BrotliStream(Stream stream, CompressionLevel compressionLevel, bool leaveOpen) : this(stream, CompressionMode.Compress, leaveOpen)
+        public BrotliStream(Stream stream, CompressionLevel compressionLevel, bool leaveOpen)
+            : this(stream, CompressionMode.Compress, leaveOpen)
         {
             _encoder.SetQuality(BrotliUtils.GetQualityFromCompressionLevel(compressionLevel));
         }
@@ -62,7 +64,9 @@ namespace System.IO.Compression
         internal void WriteCore(ReadOnlySpan<byte> buffer, bool isFinalBlock = false)
         {
             if (_mode != CompressionMode.Compress)
-                throw new InvalidOperationException(SR.BrotliStream_Decompress_UnsupportedOperation);
+                throw new InvalidOperationException(
+                    SR.BrotliStream_Decompress_UnsupportedOperation
+                );
             EnsureNotDisposed();
 
             OperationStatus lastResult = OperationStatus.DestinationTooSmall;
@@ -71,7 +75,13 @@ namespace System.IO.Compression
             {
                 int bytesConsumed;
                 int bytesWritten;
-                lastResult = _encoder.Compress(buffer, output, out bytesConsumed, out bytesWritten, isFinalBlock);
+                lastResult = _encoder.Compress(
+                    buffer,
+                    output,
+                    out bytesConsumed,
+                    out bytesWritten,
+                    isFinalBlock
+                );
                 if (lastResult == OperationStatus.InvalidData)
                     throw new InvalidOperationException(SR.BrotliStream_Compress_InvalidData);
                 if (bytesWritten > 0)
@@ -93,8 +103,18 @@ namespace System.IO.Compression
         /// <exception cref="System.ObjectDisposedException">Methods were called after the stream was closed.</exception>
         /// <exception cref="System.NotSupportedException">The current <see cref="System.IO.Compression.BrotliStream" /> implementation does not support the write operation.</exception>
         /// <exception cref="System.InvalidOperationException">The write operation cannot be performed because the stream is closed.</exception>
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? asyncCallback, object? asyncState) =>
-            TaskToAsyncResult.Begin(WriteAsync(buffer, offset, count, CancellationToken.None), asyncCallback, asyncState);
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? asyncCallback,
+            object? asyncState
+        ) =>
+            TaskToAsyncResult.Begin(
+                WriteAsync(buffer, offset, count, CancellationToken.None),
+                asyncCallback,
+                asyncState
+            );
 
         /// <summary>Handles the end of an asynchronous write operation. (Consider using the <see cref="System.IO.Stream.WriteAsync(byte[],int,int)" /> method instead.)</summary>
         /// <param name="asyncResult">The object that represents the asynchronous call.</param>
@@ -111,10 +131,16 @@ namespace System.IO.Compression
         /// <remarks><para>This method enables you to perform resource-intensive I/O operations without blocking the main thread. This performance consideration is particularly important in apps where a time-consuming stream operation can block the UI thread and make your app appear as if it is not working. The async methods are used in conjunction with the <see langword="async" /> and <see langword="await" /> keywords in Visual Basic and C#.</para>
         /// <para>Use the <see cref="System.IO.Compression.BrotliStream.CanWrite" /> property to determine whether the current instance supports writing.</para>
         /// <para>If the operation is canceled before it completes, the returned task contains the <see cref="System.Threading.Tasks.TaskStatus.Canceled" /> value for the <see cref="System.Threading.Tasks.Task.Status" /> property.</para></remarks>
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
-            return WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken).AsTask();
+            return WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken)
+                .AsTask();
         }
 
         /// <summary>Asynchronously writes compressed bytes to the underlying Brotli stream from the specified byte memory range.</summary>
@@ -124,19 +150,28 @@ namespace System.IO.Compression
         /// <remarks><para>This method enables you to perform resource-intensive I/O operations without blocking the main thread. This performance consideration is particularly important in apps where a time-consuming stream operation can block the UI thread and make your app appear as if it is not working. The async methods are used in conjunction with the <see langword="async" /> and <see langword="await" /> keywords in Visual Basic and C#.</para>
         /// <para>Use the <see cref="System.IO.Compression.BrotliStream.CanWrite" /> property to determine whether the current instance supports writing.</para>
         /// <para>If the operation is canceled before it completes, the returned task contains the <see cref="System.Threading.Tasks.TaskStatus.Canceled" /> value for the <see cref="System.Threading.Tasks.Task.Status" /> property.</para></remarks>
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default(CancellationToken))
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             if (_mode != CompressionMode.Compress)
-                throw new InvalidOperationException(SR.BrotliStream_Decompress_UnsupportedOperation);
+                throw new InvalidOperationException(
+                    SR.BrotliStream_Decompress_UnsupportedOperation
+                );
             EnsureNoActiveAsyncOperation();
             EnsureNotDisposed();
 
-            return cancellationToken.IsCancellationRequested ?
-                ValueTask.FromCanceled(cancellationToken) :
-                WriteAsyncMemoryCore(buffer, cancellationToken);
+            return cancellationToken.IsCancellationRequested
+                ? ValueTask.FromCanceled(cancellationToken)
+                : WriteAsyncMemoryCore(buffer, cancellationToken);
         }
 
-        private async ValueTask WriteAsyncMemoryCore(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken, bool isFinalBlock = false)
+        private async ValueTask WriteAsyncMemoryCore(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken,
+            bool isFinalBlock = false
+        )
         {
             AsyncOperationStarting();
             try
@@ -147,13 +182,24 @@ namespace System.IO.Compression
                     Memory<byte> output = new Memory<byte>(_buffer);
                     int bytesConsumed = 0;
                     int bytesWritten = 0;
-                    lastResult = _encoder.Compress(buffer, output, out bytesConsumed, out bytesWritten, isFinalBlock);
+                    lastResult = _encoder.Compress(
+                        buffer,
+                        output,
+                        out bytesConsumed,
+                        out bytesWritten,
+                        isFinalBlock
+                    );
                     if (lastResult == OperationStatus.InvalidData)
                         throw new InvalidOperationException(SR.BrotliStream_Compress_InvalidData);
                     if (bytesConsumed > 0)
                         buffer = buffer.Slice(bytesConsumed);
                     if (bytesWritten > 0)
-                        await _stream.WriteAsync(new ReadOnlyMemory<byte>(_buffer, 0, bytesWritten), cancellationToken).ConfigureAwait(false);
+                        await _stream
+                            .WriteAsync(
+                                new ReadOnlyMemory<byte>(_buffer, 0, bytesWritten),
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                 }
             }
             finally
@@ -203,7 +249,9 @@ namespace System.IO.Compression
             if (cancellationToken.IsCancellationRequested)
                 return Task.FromCanceled(cancellationToken);
 
-            return _mode != CompressionMode.Compress ? Task.CompletedTask : FlushAsyncCore(cancellationToken);
+            return _mode != CompressionMode.Compress
+                ? Task.CompletedTask
+                : FlushAsyncCore(cancellationToken);
         }
 
         private async Task FlushAsyncCore(CancellationToken cancellationToken)
@@ -223,7 +271,9 @@ namespace System.IO.Compression
                     if (lastResult == OperationStatus.InvalidData)
                         throw new InvalidDataException(SR.BrotliStream_Compress_InvalidData);
                     if (bytesWritten > 0)
-                        await _stream.WriteAsync(output.Slice(0, bytesWritten), cancellationToken).ConfigureAwait(false);
+                        await _stream
+                            .WriteAsync(output.Slice(0, bytesWritten), cancellationToken)
+                            .ConfigureAwait(false);
                 }
 
                 await _stream.FlushAsync(cancellationToken).ConfigureAwait(false);

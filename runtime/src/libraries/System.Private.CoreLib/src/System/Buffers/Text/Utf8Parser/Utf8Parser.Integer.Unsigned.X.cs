@@ -5,7 +5,11 @@ namespace System.Buffers.Text
 {
     public static partial class Utf8Parser
     {
-        private static bool TryParseByteX(ReadOnlySpan<byte> source, out byte value, out int bytesConsumed)
+        private static bool TryParseByteX(
+            ReadOnlySpan<byte> source,
+            out byte value,
+            out int bytesConsumed
+        )
         {
             if (source.Length < 1)
             {
@@ -61,7 +65,11 @@ namespace System.Buffers.Text
                     }
                     parsedValue = (parsedValue << 4) + nextDigit;
                 }
-                for (int index = ParserHelpers.ByteOverflowLengthHex; index < source.Length; index++)
+                for (
+                    int index = ParserHelpers.ByteOverflowLengthHex;
+                    index < source.Length;
+                    index++
+                )
                 {
                     nextCharacter = source[index];
                     nextDigit = hexLookup[nextCharacter];
@@ -87,7 +95,11 @@ namespace System.Buffers.Text
             return true;
         }
 
-        private static bool TryParseUInt16X(ReadOnlySpan<byte> source, out ushort value, out int bytesConsumed)
+        private static bool TryParseUInt16X(
+            ReadOnlySpan<byte> source,
+            out ushort value,
+            out int bytesConsumed
+        )
         {
             if (source.Length < 1)
             {
@@ -143,7 +155,11 @@ namespace System.Buffers.Text
                     }
                     parsedValue = (parsedValue << 4) + nextDigit;
                 }
-                for (int index = ParserHelpers.Int16OverflowLengthHex; index < source.Length; index++)
+                for (
+                    int index = ParserHelpers.Int16OverflowLengthHex;
+                    index < source.Length;
+                    index++
+                )
                 {
                     nextCharacter = source[index];
                     nextDigit = hexLookup[nextCharacter];
@@ -169,7 +185,11 @@ namespace System.Buffers.Text
             return true;
         }
 
-        private static bool TryParseUInt32X(ReadOnlySpan<byte> source, out uint value, out int bytesConsumed)
+        private static bool TryParseUInt32X(
+            ReadOnlySpan<byte> source,
+            out uint value,
+            out int bytesConsumed
+        )
         {
             if (source.Length < 1)
             {
@@ -225,7 +245,11 @@ namespace System.Buffers.Text
                     }
                     parsedValue = (parsedValue << 4) + nextDigit;
                 }
-                for (int index = ParserHelpers.Int32OverflowLengthHex; index < source.Length; index++)
+                for (
+                    int index = ParserHelpers.Int32OverflowLengthHex;
+                    index < source.Length;
+                    index++
+                )
                 {
                     nextCharacter = source[index];
                     nextDigit = hexLookup[nextCharacter];
@@ -251,7 +275,11 @@ namespace System.Buffers.Text
             return true;
         }
 
-        private static bool TryParseUInt64X(ReadOnlySpan<byte> source, out ulong value, out int bytesConsumed)
+        private static bool TryParseUInt64X(
+            ReadOnlySpan<byte> source,
+            out ulong value,
+            out int bytesConsumed
+        )
         {
             if (source.Length < 1)
             {
@@ -307,7 +335,11 @@ namespace System.Buffers.Text
                     }
                     parsedValue = (parsedValue << 4) + nextDigit;
                 }
-                for (int index = ParserHelpers.Int64OverflowLengthHex; index < source.Length; index++)
+                for (
+                    int index = ParserHelpers.Int64OverflowLengthHex;
+                    index < source.Length;
+                    index++
+                )
                 {
                     nextCharacter = source[index];
                     nextDigit = hexLookup[nextCharacter];

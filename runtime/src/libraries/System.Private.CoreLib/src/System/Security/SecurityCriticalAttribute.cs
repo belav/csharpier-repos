@@ -4,17 +4,19 @@
 namespace System.Security
 {
     // Has no effect in .NET Core
-    [AttributeUsage(AttributeTargets.Assembly |
-                    AttributeTargets.Class |
-                    AttributeTargets.Struct |
-                    AttributeTargets.Enum |
-                    AttributeTargets.Constructor |
-                    AttributeTargets.Method |
-                    AttributeTargets.Field |
-                    AttributeTargets.Interface |
-                    AttributeTargets.Delegate,
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Enum
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method
+            | AttributeTargets.Field
+            | AttributeTargets.Interface
+            | AttributeTargets.Delegate,
         AllowMultiple = false,
-        Inherited = false)]
+        Inherited = false
+    )]
     public sealed class SecurityCriticalAttribute : Attribute
     {
 #pragma warning disable 618    // We still use SecurityCriticalScope for v2 compat

@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 namespace System.Runtime.CompilerServices
 {
@@ -13,7 +13,5 @@ namespace System.Runtime.CompilerServices
     //
     // Indicates that the modified integer is a standard C++ long.
     // Could also be called IsAlternateIntegerType or something else.
-    public static class IsLong
-    {
-    }
+    public static class IsLong { }
 }

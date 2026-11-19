@@ -20,18 +20,27 @@ namespace System
     {
         public static Stream OpenStandardInput()
         {
-            return new UnixConsoleStream(Interop.Sys.FileDescriptors.STDIN_FILENO, FileAccess.Read,
-                                         useReadLine: !Console.IsInputRedirected);
+            return new UnixConsoleStream(
+                Interop.Sys.FileDescriptors.STDIN_FILENO,
+                FileAccess.Read,
+                useReadLine: !Console.IsInputRedirected
+            );
         }
 
         public static Stream OpenStandardOutput()
         {
-            return new UnixConsoleStream(Interop.Sys.FileDescriptors.STDOUT_FILENO, FileAccess.Write);
+            return new UnixConsoleStream(
+                Interop.Sys.FileDescriptors.STDOUT_FILENO,
+                FileAccess.Write
+            );
         }
 
         public static Stream OpenStandardError()
         {
-            return new UnixConsoleStream(Interop.Sys.FileDescriptors.STDERR_FILENO, FileAccess.Write);
+            return new UnixConsoleStream(
+                Interop.Sys.FileDescriptors.STDERR_FILENO,
+                FileAccess.Write
+            );
         }
 
         public static Encoding InputEncoding
@@ -47,19 +56,21 @@ namespace System
         internal static TextReader GetOrCreateReader()
         {
             Stream inputStream = OpenStandardInput();
-            return inputStream == Stream.Null ?
-                StreamReader.Null :
-                new StreamReader(
+            return inputStream == Stream.Null
+                ? StreamReader.Null
+                : new StreamReader(
                     stream: inputStream,
                     encoding: Console.InputEncoding,
                     detectEncodingFromByteOrderMarks: false,
                     bufferSize: Console.ReadBufferSize,
-                    leaveOpen: true);
+                    leaveOpen: true
+                );
         }
 
         public static bool KeyAvailable => false;
 
-        public static ConsoleKeyInfo ReadKey(bool intercept) => throw new PlatformNotSupportedException();
+        public static ConsoleKeyInfo ReadKey(bool intercept) =>
+            throw new PlatformNotSupportedException();
 
         public static bool TreatControlCAsInput
         {
@@ -77,18 +88,24 @@ namespace System
             get => throw new PlatformNotSupportedException();
             set => throw new PlatformNotSupportedException();
         }
+
         public static void ResetColor() => throw new PlatformNotSupportedException();
 
-        public static bool NumberLock { get { throw new PlatformNotSupportedException(); } }
+        public static bool NumberLock
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
 
-        public static bool CapsLock { get { throw new PlatformNotSupportedException(); } }
+        public static bool CapsLock
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
 
         public static int CursorSize
         {
             get { return 100; }
             set { throw new PlatformNotSupportedException(); }
         }
-
 
         public static string Title
         {
@@ -99,9 +116,14 @@ namespace System
         public static void Beep() => throw new PlatformNotSupportedException();
 
         public static void Clear() => throw new PlatformNotSupportedException();
-        public static void SetCursorPosition(int left, int top) => throw new PlatformNotSupportedException();
+
+        public static void SetCursorPosition(int left, int top) =>
+            throw new PlatformNotSupportedException();
+
         public static bool IsInputRedirectedCore() => true;
+
         public static bool IsOutputRedirectedCore() => true;
+
         public static bool IsErrorRedirectedCore() => true;
 
         public static int BufferWidth
@@ -171,10 +193,7 @@ namespace System
         public static bool CursorVisible
         {
             get { throw new PlatformNotSupportedException(); }
-            set
-            {
-                throw new PlatformNotSupportedException();
-            }
+            set { throw new PlatformNotSupportedException(); }
         }
 
         public static (int Left, int Top) GetCursorPosition()
@@ -187,9 +206,7 @@ namespace System
         private static Encoding GetConsoleEncoding()
         {
             Encoding? enc = EncodingHelper.GetEncodingFromCharset();
-            return enc != null ?
-                enc.RemovePreamble() :
-                Encoding.Default;
+            return enc != null ? enc.RemovePreamble() : Encoding.Default;
         }
 
 #pragma warning disable IDE0060
@@ -198,12 +215,29 @@ namespace System
             throw new PlatformNotSupportedException();
         }
 
-        public static void MoveBufferArea(int sourceLeft, int sourceTop, int sourceWidth, int sourceHeight, int targetLeft, int targetTop)
+        public static void MoveBufferArea(
+            int sourceLeft,
+            int sourceTop,
+            int sourceWidth,
+            int sourceHeight,
+            int targetLeft,
+            int targetTop
+        )
         {
             throw new PlatformNotSupportedException();
         }
 
-        public static void MoveBufferArea(int sourceLeft, int sourceTop, int sourceWidth, int sourceHeight, int targetLeft, int targetTop, char sourceChar, ConsoleColor sourceForeColor, ConsoleColor sourceBackColor)
+        public static void MoveBufferArea(
+            int sourceLeft,
+            int sourceTop,
+            int sourceWidth,
+            int sourceHeight,
+            int targetLeft,
+            int targetTop,
+            char sourceChar,
+            ConsoleColor sourceForeColor,
+            ConsoleColor sourceBackColor
+        )
         {
             throw new PlatformNotSupportedException();
         }
@@ -232,9 +266,7 @@ namespace System
 
 #pragma warning restore IDE0060
 
-        internal static void EnsureConsoleInitialized()
-        {
-        }
+        internal static void EnsureConsoleInitialized() { }
 
         /// <summary>Reads data from the file descriptor into the buffer.</summary>
         /// <param name="fd">The file descriptor.</param>
@@ -250,7 +282,10 @@ namespace System
             }
         }
 
-        internal static unsafe void WriteFromConsoleStream(SafeFileHandle fd, ReadOnlySpan<byte> buffer)
+        internal static unsafe void WriteFromConsoleStream(
+            SafeFileHandle fd,
+            ReadOnlySpan<byte> buffer
+        )
         {
             EnsureConsoleInitialized();
 
@@ -289,7 +324,12 @@ namespace System
                             // only the blocking behavior, and thus ignore any poll errors
                             // and loop around to do another write (which may correctly fail
                             // if something else has gone wrong).
-                            Interop.Sys.Poll(fd, Interop.PollEvents.POLLOUT, Timeout.Infinite, out Interop.PollEvents triggered);
+                            Interop.Sys.Poll(
+                                fd,
+                                Interop.PollEvents.POLLOUT,
+                                Timeout.Infinite,
+                                out Interop.PollEvents triggered
+                            );
                             continue;
                         }
                         else

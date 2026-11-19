@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     public partial class UserDefinedConversionTests : CompilingTestBase
     {
         #region "Source"
-        private readonly string _userDefinedConversionTestTemplate = @"
+        private readonly string _userDefinedConversionTestTemplate =
+            @"
 class C1 { }
 class C2 { }
 class D 
@@ -117,7 +118,8 @@ struct T
         public void TestUserDefinedImplicitConversionOverloadResolution()
         {
             string source1 = _userDefinedConversionTestTemplate.Replace("XXX", "implicit");
-            string source2 = @"
+            string source2 =
+                @"
 class Z
 {
   static void MC1(C1 c1) { }
@@ -222,7 +224,8 @@ class Z
   }
 }
 ";
-            string source3 = @"
+            string source3 =
+                @"
 class Z
 {
   static void MC1(C1 c1) { }
@@ -256,33 +259,28 @@ class Z
 
             comp = CreateCompilation(source1 + source3);
             comp.VerifyDiagnostics(
-// (115,8): error CS1503: Argument 1: cannot convert from 'H?' to 'G'
-//     MG(default(H?));
-Diagnostic(ErrorCode.ERR_BadArgType, "default(H?)").WithArguments("1", "H?", "G"),
-
-// (116,8): error CS1503: Argument 1: cannot convert from 'J' to 'G'
-//     MG(default(J));
-Diagnostic(ErrorCode.ERR_BadArgType, "default(J)").WithArguments("1", "J", "G"),
-
-// (117,8): error CS1503: Argument 1: cannot convert from 'J?' to 'G'
-//     MG(default(J?));
-Diagnostic(ErrorCode.ERR_BadArgType, "default(J?)").WithArguments("1", "J?", "G"),
-
-// (119,8): error CS1503: Argument 1: cannot convert from 'K' to 'G'
-//     MG(default(K));  
-Diagnostic(ErrorCode.ERR_BadArgType, "default(K)").WithArguments("1", "K", "G"),
-
-// (120,8): error CS1503: Argument 1: cannot convert from 'K?' to 'G'
-//     MG(default(K?)); 
-Diagnostic(ErrorCode.ERR_BadArgType, "default(K?)").WithArguments("1", "K?", "G"),
-
-// (121,8): error CS1503: Argument 1: cannot convert from 'M?' to 'G'
-//     MG(default(M?)); 
-Diagnostic(ErrorCode.ERR_BadArgType, "default(M?)").WithArguments("1", "M?", "G"),
-
-// (122,8): error CS1503: Argument 1: cannot convert from 'R?' to 'G'
-//     MG(default(R?)); 
-Diagnostic(ErrorCode.ERR_BadArgType, "default(R?)").WithArguments("1", "R?", "G"));
+                // (115,8): error CS1503: Argument 1: cannot convert from 'H?' to 'G'
+                //     MG(default(H?));
+                Diagnostic(ErrorCode.ERR_BadArgType, "default(H?)").WithArguments("1", "H?", "G"),
+                // (116,8): error CS1503: Argument 1: cannot convert from 'J' to 'G'
+                //     MG(default(J));
+                Diagnostic(ErrorCode.ERR_BadArgType, "default(J)").WithArguments("1", "J", "G"),
+                // (117,8): error CS1503: Argument 1: cannot convert from 'J?' to 'G'
+                //     MG(default(J?));
+                Diagnostic(ErrorCode.ERR_BadArgType, "default(J?)").WithArguments("1", "J?", "G"),
+                // (119,8): error CS1503: Argument 1: cannot convert from 'K' to 'G'
+                //     MG(default(K));
+                Diagnostic(ErrorCode.ERR_BadArgType, "default(K)").WithArguments("1", "K", "G"),
+                // (120,8): error CS1503: Argument 1: cannot convert from 'K?' to 'G'
+                //     MG(default(K?));
+                Diagnostic(ErrorCode.ERR_BadArgType, "default(K?)").WithArguments("1", "K?", "G"),
+                // (121,8): error CS1503: Argument 1: cannot convert from 'M?' to 'G'
+                //     MG(default(M?));
+                Diagnostic(ErrorCode.ERR_BadArgType, "default(M?)").WithArguments("1", "M?", "G"),
+                // (122,8): error CS1503: Argument 1: cannot convert from 'R?' to 'G'
+                //     MG(default(R?));
+                Diagnostic(ErrorCode.ERR_BadArgType, "default(R?)").WithArguments("1", "R?", "G")
+            );
         }
 
         [Fact, WorkItem(543716, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543716")]
@@ -292,8 +290,12 @@ Diagnostic(ErrorCode.ERR_BadArgType, "default(R?)").WithArguments("1", "R?", "G"
             // or be ambiguous, but the native compiler allows the conversion. Roslyn emulates the
             // native compiler's behavior to avoid the breaking change.
 
-            string implicitConversions = _userDefinedConversionTestTemplate.Replace("XXX", "implicit");
-            string implicitConversionBadSuccess = @"
+            string implicitConversions = _userDefinedConversionTestTemplate.Replace(
+                "XXX",
+                "implicit"
+            );
+            string implicitConversionBadSuccess =
+                @"
 class Z
 {
     static void MNG(G? g) { }
@@ -320,8 +322,12 @@ class Z
             // More cases where the specification says that the conversion should be bad, but
             // the native compiler and Roslyn allow it.
 
-            string explicitConversions = _userDefinedConversionTestTemplate.Replace("XXX", "explicit");
-            string explicitConversionsBadSuccess = @"
+            string explicitConversions = _userDefinedConversionTestTemplate.Replace(
+                "XXX",
+                "explicit"
+            );
+            string explicitConversionsBadSuccess =
+                @"
 class Z
 {
   static void MG(G g) { }
@@ -341,7 +347,8 @@ class Z
             // These are cases where the specification indicates that a conversion should be legal,
             // but the native compiler disallows it. Roslyn follows the native compiler in these cases.
 
-            string implicitConversionsBadFailures = @"
+            string implicitConversionsBadFailures =
+                @"
 class Z
 {
   static void MNG(G? g) { }
@@ -354,18 +361,31 @@ class Z
 
             comp = CreateCompilation(implicitConversions + implicitConversionsBadFailures);
             comp.VerifyDiagnostics(
-// (103,9): error CS0457: Ambiguous user defined conversions 'N.implicit operator G(N?)' and 'N.implicit operator G?(N)' when converting from 'N?' to 'G?'
-//     MNG(default(N?)); 
-Diagnostic(ErrorCode.ERR_AmbigUDConv, "default(N?)").WithArguments("N.implicit operator G(N?)", "N.implicit operator G?(N)", "N?", "G?"),
-// (104,9): error CS0457: Ambiguous user defined conversions 'P.implicit operator G(P)' and 'P.implicit operator G(P?)' when converting from 'P?' to 'G?'
-//     MNG(default(P?)); 
-Diagnostic(ErrorCode.ERR_AmbigUDConv, "default(P?)").WithArguments("P.implicit operator G(P)", "P.implicit operator G(P?)", "P?", "G?")
-                );
+                // (103,9): error CS0457: Ambiguous user defined conversions 'N.implicit operator G(N?)' and 'N.implicit operator G?(N)' when converting from 'N?' to 'G?'
+                //     MNG(default(N?));
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "default(N?)")
+                    .WithArguments(
+                        "N.implicit operator G(N?)",
+                        "N.implicit operator G?(N)",
+                        "N?",
+                        "G?"
+                    ),
+                // (104,9): error CS0457: Ambiguous user defined conversions 'P.implicit operator G(P)' and 'P.implicit operator G(P?)' when converting from 'P?' to 'G?'
+                //     MNG(default(P?));
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "default(P?)")
+                    .WithArguments(
+                        "P.implicit operator G(P)",
+                        "P.implicit operator G(P?)",
+                        "P?",
+                        "G?"
+                    )
+            );
 
             // More cases where the specification indicates that a conversion should be legal,
             // but the native compiler disallows it. Roslyn follows the native compiler in these cases.
 
-            string explicitConversionsBadFailures = @"
+            string explicitConversionsBadFailures =
+                @"
 class Z
 {
   static void MNG(G? g) { }
@@ -378,13 +398,25 @@ class Z
 
             comp = CreateCompilation(explicitConversions + explicitConversionsBadFailures);
             comp.VerifyDiagnostics(
-// (103,9): error CS0457: Ambiguous user defined conversions 'N.explicit operator G(N?)' and 'N.explicit operator G?(N)' when converting from 'N?' to 'G?'
-//     MNG((G?)default(N?)); 
-Diagnostic(ErrorCode.ERR_AmbigUDConv, "(G?)default(N?)").WithArguments("N.explicit operator G(N?)", "N.explicit operator G?(N)", "N?", "G?"),
-// (104,9): error CS0457: Ambiguous user defined conversions 'P.explicit operator G(P)' and 'P.explicit operator G(P?)' when converting from 'P?' to 'G?'
-//     MNG((G?)default(P?)); 
-Diagnostic(ErrorCode.ERR_AmbigUDConv, "(G?)default(P?)").WithArguments("P.explicit operator G(P)", "P.explicit operator G(P?)", "P?", "G?")
-                );
+                // (103,9): error CS0457: Ambiguous user defined conversions 'N.explicit operator G(N?)' and 'N.explicit operator G?(N)' when converting from 'N?' to 'G?'
+                //     MNG((G?)default(N?));
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(G?)default(N?)")
+                    .WithArguments(
+                        "N.explicit operator G(N?)",
+                        "N.explicit operator G?(N)",
+                        "N?",
+                        "G?"
+                    ),
+                // (104,9): error CS0457: Ambiguous user defined conversions 'P.explicit operator G(P)' and 'P.explicit operator G(P?)' when converting from 'P?' to 'G?'
+                //     MNG((G?)default(P?));
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(G?)default(P?)")
+                    .WithArguments(
+                        "P.explicit operator G(P)",
+                        "P.explicit operator G(P?)",
+                        "P?",
+                        "G?"
+                    )
+            );
         }
 
         [Fact]
@@ -394,13 +426,14 @@ Diagnostic(ErrorCode.ERR_AmbigUDConv, "(G?)default(P?)").WithArguments("P.explic
 
             // It is possible for a user-defined implicit conversion to be ambiguous when processed
             // as an explicit conversion but unambiguous when processed as an implicit conversion.
-            // In that circumstance, the native compiler reports the ambiguity, oddly enough. 
+            // In that circumstance, the native compiler reports the ambiguity, oddly enough.
             // One might expect that if "B b = 1;" succeeds then "B b = (B)1;" ought to as well.
             // Roslyn matches the native compiler.
 
             // This is bug 11202.
 
-            string source1 = @" 
+            string source1 =
+                @" 
 class A
 {
     public static implicit operator A(int d) { return null; }
@@ -433,15 +466,23 @@ class C
             var comp = CreateCompilation(source1);
             comp.VerifyDiagnostics(
                 // (18,13): error CS0457: Ambiguous user defined conversions 'B.implicit operator B(long)' and 'A.implicit operator A(int)' when converting from 'int' to 'B'
-                //         b = (B)1; 
-                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(B)1").WithArguments("B.implicit operator B(long)", "A.implicit operator A(int)", "int", "B"));
+                //         b = (B)1;
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(B)1")
+                    .WithArguments(
+                        "B.implicit operator B(long)",
+                        "A.implicit operator A(int)",
+                        "int",
+                        "B"
+                    )
+            );
 
             // The native compiler incorrectly treats the explicit user-defined
             // conversion operator as inapplicable here. Roslyn allows this.
             // Contrast this with the genuinely incorrect code in the method
             // TestUserDefinedConversionsTypeParameterEdgeCase below.
 
-            string source2 = @"
+            string source2 =
+                @"
 class Animal {}
 class Mammal : Animal {}
 class X<T> where T : Mammal
@@ -467,7 +508,8 @@ class X<T> where T : Mammal
             // explicit conversion from T to Giraffe, this is not a *standard* implicit
             // conversion because there is no implicit conversion from Giraffe to T.
 
-            string source = @"
+            string source =
+                @"
 class Animal {}
 class Mammal : Animal {}
 class Giraffe : Mammal {}
@@ -484,13 +526,15 @@ class X<T> where T : Mammal
             comp.VerifyDiagnostics(
                 // (10,15): error CS0030: Cannot convert type 'T' to 'X<T>'
                 //     X<T> xt = (X<T>)t;
-                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(X<T>)t").WithArguments("T", "X<T>"));
+                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(X<T>)t").WithArguments("T", "X<T>")
+            );
         }
 
         [Fact, WorkItem(605100, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/605100")]
         public void TestUserDefinedConversions_DynamicIdentityBetweenBaseTypes()
         {
-            string source = @"
+            string source =
+                @"
 public class A<U>
 {
    public static explicit operator T(A<U> a) { return null; }
@@ -522,7 +566,8 @@ public class X
         [Fact, WorkItem(605326, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/605326")]
         public void TestUserDefinedConversions_DynamicIdentityBetweenBaseTypeAndTargetType()
         {
-            string source = @"
+            string source =
+                @"
 public class A<T>
 {
 }
@@ -535,7 +580,7 @@ public class B : A<dynamic>
     }
 }
 ";
-            // TODO (tomat): This should report ERR_ConversionWithBase 
+            // TODO (tomat): This should report ERR_ConversionWithBase
             CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics();
         }
 
@@ -547,7 +592,8 @@ public class B : A<dynamic>
 
             string source2 = _userDefinedConversionTestTemplate.Replace("XXX", "explicit");
 
-            string source3 = @"
+            string source3 =
+                @"
 class Z
 {
   static void MC1(C1 c1) { }
@@ -650,7 +696,8 @@ class Z
 }
 ";
 
-            string source4 = @"
+            string source4 =
+                @"
 class Z
 {
   static void MG(G g) { }
@@ -681,10 +728,23 @@ class Z
             comp.VerifyDiagnostics(
                 // (105,8): error CS0457: Ambiguous user defined conversions 'N.implicit operator G(N?)' and 'N.implicit operator G?(N)' when converting from 'N' to 'G'
                 //     MG((G)default(N));
-                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(G)default(N)").WithArguments("N.implicit operator G(N?)", "N.implicit operator G?(N)", "N", "G"),
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(G)default(N)")
+                    .WithArguments(
+                        "N.implicit operator G(N?)",
+                        "N.implicit operator G?(N)",
+                        "N",
+                        "G"
+                    ),
                 // (106,8): error CS0457: Ambiguous user defined conversions 'S.implicit operator G(S?)' and 'S.implicit operator G?(S)' when converting from 'S' to 'G'
                 //     MG((G)default(S));
-                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(G)default(S)").WithArguments("S.implicit operator G(S?)", "S.implicit operator G?(S)", "S", "G"));
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(G)default(S)")
+                    .WithArguments(
+                        "S.implicit operator G(S?)",
+                        "S.implicit operator G?(S)",
+                        "S",
+                        "G"
+                    )
+            );
 
             // When restricted to only use explicit conversions, the conversions
             // truly are ambiguous; the native and Roslyn compilers agree on these cases:
@@ -692,15 +752,29 @@ class Z
             comp = CreateCompilation(source2 + source4);
             comp.VerifyDiagnostics(
                 // (105,8): error CS0457: Ambiguous user defined conversions 'N.explicit operator G(N?)' and 'N.explicit operator G?(N)' when converting from 'N' to 'G'
-                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(G)default(N)").WithArguments("N.explicit operator G(N?)", "N.explicit operator G?(N)", "N", "G"),
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(G)default(N)")
+                    .WithArguments(
+                        "N.explicit operator G(N?)",
+                        "N.explicit operator G?(N)",
+                        "N",
+                        "G"
+                    ),
                 // (106,9): error CS0457: Ambiguous user defined conversions 'N.explicit operator G(N?)' and 'N.explicit operator G?(N)' when converting from 'N?' to 'G?'
-                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(G)default(S)").WithArguments("S.explicit operator G(S?)", "S.explicit operator G?(S)", "S", "G"));
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(G)default(S)")
+                    .WithArguments(
+                        "S.explicit operator G(S?)",
+                        "S.explicit operator G?(S)",
+                        "S",
+                        "G"
+                    )
+            );
         }
 
         [Fact]
         public void TestUserDefinedConversions()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -780,10 +854,11 @@ class F : E
         [WorkItem(39959, "https://github.com/dotnet/roslyn/issues/39959")]
         public void TestIntPtrUserDefinedConversions()
         {
-            // IntPtr and UIntPtr violate the rules of user-defined conversions for 
+            // IntPtr and UIntPtr violate the rules of user-defined conversions for
             // backwards-compatibility reasons. All of these should compile without error.
 
-            string source1 = @"
+            string source1 =
+                @"
 using System;
 unsafe class P
 {
@@ -821,14 +896,16 @@ unsafe class P
 
 ";
 
-            string source2 = @"
+            string source2 =
+                @"
 
         decimal dec = 0;
         decimal? ndec = 0;
         void* pvoid = default(void*);
         int* pint = default(int*);
 ";
-            string source3 = @"
+            string source3 =
+                @"
 
 // The spec requires that there be either an implicit conversion
 // from the argument type to the parameter type, or from the 
@@ -1039,7 +1116,8 @@ unsafe class P
 
 ";
 
-            string source4 = @"
+            string source4 =
+                @"
 
 // Decimal conversion lowering is not yet implemented:
 
@@ -1146,7 +1224,10 @@ unsafe class P
             string source5 = "}}";
 
             // All of the cases above should pass semantic analysis:
-            var comp = CreateCompilation(source1 + source2 + source3 + source4 + source5, options: TestOptions.UnsafeReleaseDll);
+            var comp = CreateCompilation(
+                source1 + source2 + source3 + source4 + source5,
+                options: TestOptions.UnsafeReleaseDll
+            );
             comp.VerifyDiagnostics();
             comp.VerifyEmitDiagnostics();
 
@@ -1154,13 +1235,18 @@ unsafe class P
             // lifted operators, nullable conversions and unsafe code so only generate code for
             // the straightforward intptr/number conversions:
 
-            var verifier = CompileAndVerify(source: source1 + source3 + source5, options: TestOptions.UnsafeReleaseExe, expectedOutput: "");
+            var verifier = CompileAndVerify(
+                source: source1 + source3 + source5,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: ""
+            );
         }
 
         [Fact, WorkItem(543427, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543427")]
         public void Bug11203()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main()
@@ -1184,13 +1270,21 @@ class A
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
                 // (6,15): error CS0457: Ambiguous user defined conversions 'A.implicit operator A(ulong)' and 'A.implicit operator A(long)' when converting from 'int' to 'A'
-                Diagnostic(ErrorCode.ERR_AmbigUDConv, "1").WithArguments("A.implicit operator A(ulong)", "A.implicit operator A(long)", "int", "A"));
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "1")
+                    .WithArguments(
+                        "A.implicit operator A(ulong)",
+                        "A.implicit operator A(long)",
+                        "int",
+                        "A"
+                    )
+            );
         }
 
         [Fact, WorkItem(543430, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543430")]
         public void Bug11205()
         {
-            string source1 = @"
+            string source1 =
+                @"
 using System;
 class A
 {
@@ -1226,7 +1320,8 @@ class A
 }
 ";
 
-            string source2 = @"
+            string source2 =
+                @"
 class A
 {
     public static implicit operator int(A x)
@@ -1246,10 +1341,10 @@ class A
 
             var comp = CreateCompilation(source2);
             comp.VerifyDiagnostics(
-// (13,9): error CS0029: Cannot implicitly convert type 'int' to 'A'
-//         a++;
-Diagnostic(ErrorCode.ERR_NoImplicitConv, "a++").WithArguments("int", "A")
-                );
+                // (13,9): error CS0029: Cannot implicitly convert type 'int' to 'A'
+                //         a++;
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "a++").WithArguments("int", "A")
+            );
         }
 
         [Fact, WorkItem(543435, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543435")]
@@ -1257,9 +1352,10 @@ Diagnostic(ErrorCode.ERR_NoImplicitConv, "a++").WithArguments("int", "A")
         {
             // If we have both a user-defined implicit conversion and a built-in explicit conversion
             // then the built-in explicit conversion "wins" when cast, and the user-defined implicit
-            // conversion "wins" when there is no cast. 
+            // conversion "wins" when there is no cast.
 
-            string source = @"
+            string source =
+                @"
 using System;
 class B
 {
@@ -1287,7 +1383,8 @@ class D<T> : C<T>
         [Fact, WorkItem(543436, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543436")]
         public void TestBug11211()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -1318,12 +1415,13 @@ class C
             // analysis should only consider the type of the source expression and not the
             // source expression itself. The dev10 compiler certainly does not do this;
             // it allows user-defined conversions from null literals, lambdas, method groups,
-            // and so on. 
+            // and so on.
             //
-            // We should update the specification to say that the algorithm takes the 
+            // We should update the specification to say that the algorithm takes the
             // expression being converted into account, not just its type.
 
-            string source = @"
+            string source =
+                @"
 struct C
 {
     string str;
@@ -1346,7 +1444,8 @@ struct C
         [Fact, WorkItem(543440, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543440")]
         public void TestBug11215()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 static class A
 {
@@ -1377,7 +1476,8 @@ class C
             // Goo(B) and Goo(C) are both applicable candidates, and that neither is better,
             // even though the conversion from A to B is ambiguous.
 
-            string source = @"
+            string source =
+                @"
         class Program
         {
             static void Main()
@@ -1407,15 +1507,18 @@ class C
  ";
 
             var comp = CreateCompilation(source);
-            comp.VerifyDiagnostics(// (7,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Goo(B)' and 'Program.Goo(C)'
-                                   //                 Goo(x);
-                                   Diagnostic(ErrorCode.ERR_AmbigCall, "Goo").WithArguments("Program.Goo(B)", "Program.Goo(C)"));
+            comp.VerifyDiagnostics( // (7,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Goo(B)' and 'Program.Goo(C)'
+                //                 Goo(x);
+                Diagnostic(ErrorCode.ERR_AmbigCall, "Goo")
+                    .WithArguments("Program.Goo(B)", "Program.Goo(C)")
+            );
         }
 
         [Fact, WorkItem(543446, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543446")]
         public void TestBug11223()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -1442,7 +1545,8 @@ class C
         [Fact, WorkItem(543595, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543595")]
         public void CompoundAssignment()
         {
-            string source1 = @"
+            string source1 =
+                @"
 class A
 {
     public static implicit operator A(int a)
@@ -1474,7 +1578,8 @@ class Program
         [Fact, WorkItem(543598, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543598")]
         public void ConvertByteLiteralToUserDefinedType()
         {
-            var source = @"
+            var source =
+                @"
 public class Conv
 {
     static public implicit operator byte(Conv test) { return 1; }
@@ -1494,7 +1599,8 @@ class Test
         [Fact, WorkItem(543789, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543789")]
         public void UseImplicitConversionInBase()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -1529,7 +1635,8 @@ class A : B
         [Fact, WorkItem(682456, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/682456")]
         public void GenericUDConversionVersusPredefinedConversion()
         {
-            string source = @"
+            string source =
+                @"
 class InArgument<T>
 {
     public static implicit operator InArgument<T>(T t) { return default(InArgument<T>); }
@@ -1549,7 +1656,8 @@ public struct @start
         [Fact, WorkItem(1063555, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1063555")]
         public void UserDefinedImplicitConversionsOnBuiltinTypes()
         {
-            string source = @"
+            string source =
+                @"
 namespace System
 {
    	public class Object { }
@@ -1604,7 +1712,8 @@ namespace System
         [Fact, WorkItem(34876, "https://github.com/dotnet/roslyn/pull/34876")]
         public void GenericOperatorVoidConversion()
         {
-            var source = @"
+            var source =
+                @"
 class C<T>
 {
     public static implicit operator C<T>(T t) => new C<T>();
@@ -1620,13 +1729,17 @@ class C<T>
             comp.VerifyDiagnostics(
                 // (9,16): error CS0029: Cannot implicitly convert type 'void' to 'C<object>'
                 //         return M1();
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "M1()").WithArguments("void", "C<object>").WithLocation(9, 16));
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "M1()")
+                    .WithArguments("void", "C<object>")
+                    .WithLocation(9, 16)
+            );
         }
 
         [Fact, WorkItem(34876, "https://github.com/dotnet/roslyn/pull/34876")]
         public void GenericOperatorVoidConversion_Cast()
         {
-            var source = @"
+            var source =
+                @"
 class C<T>
 {
     public static explicit operator C<T>(T t) => new C<T>();
@@ -1642,13 +1755,17 @@ class C<T>
             comp.VerifyDiagnostics(
                 // (9,16): error CS0030: Cannot convert type 'void' to 'C<object>'
                 //         return (C<object>) M1();
-                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C<object>) M1()").WithArguments("void", "C<object>").WithLocation(9, 16));
+                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C<object>) M1()")
+                    .WithArguments("void", "C<object>")
+                    .WithLocation(9, 16)
+            );
         }
 
         [Fact, WorkItem(56646, "https://github.com/dotnet/roslyn/issues/56646")]
         public void LiftedConversion_InvalidTypeArgument01()
         {
-            var code = @"
+            var code =
+                @"
 int? i = null;
 C c = i;
 
@@ -1674,14 +1791,17 @@ namespace System
             comp.VerifyDiagnostics(
                 // (3,7): error CS0266: Cannot implicitly convert type 'int?' to 'C'. An explicit conversion exists (are you missing a cast?)
                 // C c = i;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i").WithArguments("int?", "C").WithLocation(3, 7)
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i")
+                    .WithArguments("int?", "C")
+                    .WithLocation(3, 7)
             );
         }
 
         [Fact, WorkItem(56646, "https://github.com/dotnet/roslyn/issues/56646")]
         public void LiftedConversion_InvalidTypeArgument02()
         {
-            var code = @"
+            var code =
+                @"
 C c = null;
 M(c);
 
@@ -1719,7 +1839,9 @@ namespace System
             var verifier = CompileAndVerify(comp, verify: Verification.Skipped);
 
             // Note that no int? is being created.
-            verifier.VerifyIL("<top-level-statements-entry-point>", @"
+            verifier.VerifyIL(
+                "<top-level-statements-entry-point>",
+                @"
 {
   // Code size       18 (0x12)
   .maxstack  1
@@ -1730,13 +1852,15 @@ namespace System
   IL_000c:  call       ""void Program.<<Main>$>g__M|0_0(long?)""
   IL_0011:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(56646, "https://github.com/dotnet/roslyn/issues/56646")]
         public void LiftedConversion_InvalidTypeArgument03()
         {
-            var code = @"
+            var code =
+                @"
 int? i = null;
 C c = (C)i;
 
@@ -1771,7 +1895,9 @@ namespace System
             var comp = CreateEmptyCompilation(code);
             var verifier = CompileAndVerify(comp, verify: Verification.Skipped);
 
-            verifier.VerifyIL("<top-level-statements-entry-point>", @"
+            verifier.VerifyIL(
+                "<top-level-statements-entry-point>",
+                @"
 {
   // Code size       23 (0x17)
   .maxstack  1
@@ -1785,13 +1911,15 @@ namespace System
   IL_0015:  pop
   IL_0016:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(56646, "https://github.com/dotnet/roslyn/issues/56646")]
         public void LiftedConversion_InvalidTypeArgument04()
         {
-            var code = @"
+            var code =
+                @"
 C c = null;
 M((long?)c);
 
@@ -1829,7 +1957,9 @@ namespace System
             var verifier = CompileAndVerify(comp, verify: Verification.Skipped);
 
             // Note that no int? is being created.
-            verifier.VerifyIL("<top-level-statements-entry-point>", @"
+            verifier.VerifyIL(
+                "<top-level-statements-entry-point>",
+                @"
 {
   // Code size       18 (0x12)
   .maxstack  1
@@ -1840,13 +1970,15 @@ namespace System
   IL_000c:  call       ""void Program.<<Main>$>g__M|0_0(long?)""
   IL_0011:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(56646, "https://github.com/dotnet/roslyn/issues/56646")]
         public void LiftedConversion_InvalidTypeArgument05()
         {
-            var code = @"
+            var code =
+                @"
 unsafe
 {
     S? s = null;
@@ -1861,9 +1993,15 @@ public struct S
 ";
 
             var comp = CreateCompilation(code, options: TestOptions.UnsafeReleaseExe);
-            var verifier = CompileAndVerify(comp, expectedOutput: "0", verify: Verification.Skipped);
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: "0",
+                verify: Verification.Skipped
+            );
 
-            verifier.VerifyIL("<top-level-statements-entry-point>", @"
+            verifier.VerifyIL(
+                "<top-level-statements-entry-point>",
+                @"
 {
   // Code size       42 (0x2a)
   .maxstack  1
@@ -1885,13 +2023,15 @@ public struct S
   IL_0024:  call       ""void System.Console.WriteLine(int)""
   IL_0029:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(56646, "https://github.com/dotnet/roslyn/issues/56646")]
         public void LiftedConversion_InvalidTypeArgument06()
         {
-            var code = @"
+            var code =
+                @"
 unsafe
 {
     S? s = null;
@@ -1906,9 +2046,15 @@ public struct S
 ";
 
             var comp = CreateCompilation(code, options: TestOptions.UnsafeReleaseExe);
-            var verifier = CompileAndVerify(comp, expectedOutput: "0", verify: Verification.Skipped);
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: "0",
+                verify: Verification.Skipped
+            );
 
-            verifier.VerifyIL("<top-level-statements-entry-point>", @"
+            verifier.VerifyIL(
+                "<top-level-statements-entry-point>",
+                @"
 {
   // Code size       42 (0x2a)
   .maxstack  1
@@ -1930,7 +2076,8 @@ public struct S
   IL_0024:  call       ""void System.Console.WriteLine(int)""
   IL_0029:  ret
 }
-");
+"
+            );
         }
     }
 }

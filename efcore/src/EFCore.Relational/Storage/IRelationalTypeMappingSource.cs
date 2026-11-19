@@ -70,7 +70,11 @@ public interface IRelationalTypeMappingSource : ITypeMappingSource
     /// <param name="model">The model.</param>
     /// <param name="elementMapping">The element mapping to use, if known.</param>
     /// <returns>The type mapping, or <see langword="null" /> if none was found.</returns>
-    new RelationalTypeMapping? FindMapping(Type type, IModel model, CoreTypeMapping? elementMapping = null);
+    new RelationalTypeMapping? FindMapping(
+        Type type,
+        IModel model,
+        CoreTypeMapping? elementMapping = null
+    );
 
     /// <summary>
     ///     Finds the type mapping for a given database type name.
@@ -112,5 +116,6 @@ public interface IRelationalTypeMappingSource : ITypeMappingSource
         bool? rowVersion = null,
         bool? fixedLength = null,
         int? precision = null,
-        int? scale = null);
+        int? scale = null
+    );
 }

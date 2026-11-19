@@ -10,41 +10,65 @@ namespace System.Runtime.Serialization
 
     class DataMember
     {
-        [Fx.Tag.SecurityNote(Critical = "Holds instance of CriticalHelper which keeps state that is cached statically for serialization."
-            + " Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Holds instance of CriticalHelper which keeps state that is cached statically for serialization."
+                + " Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain."
+        )]
         [SecurityCritical]
         CriticalHelper helper;
 
-        [Fx.Tag.SecurityNote(Critical = "Initializes SecurityCritical field 'helper'.",
-            Safe = "Doesn't leak anything.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Initializes SecurityCritical field 'helper'.",
+            Safe = "Doesn't leak anything."
+        )]
         [SecuritySafeCritical]
         internal DataMember()
         {
             helper = new CriticalHelper();
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Initializes SecurityCritical field 'helper'.",
-            Safe = "Doesn't leak anything.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Initializes SecurityCritical field 'helper'.",
+            Safe = "Doesn't leak anything."
+        )]
         [SecuritySafeCritical]
         internal DataMember(MemberInfo memberInfo)
         {
             helper = new CriticalHelper(memberInfo);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Initializes SecurityCritical field 'helper'.",
-            Safe = "Doesn't leak anything.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Initializes SecurityCritical field 'helper'.",
+            Safe = "Doesn't leak anything."
+        )]
         [SecuritySafeCritical]
         internal DataMember(string name)
         {
             helper = new CriticalHelper(name);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Initializes SecurityCritical field 'helper'.",
-            Safe = "Doesn't leak anything.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Initializes SecurityCritical field 'helper'.",
+            Safe = "Doesn't leak anything."
+        )]
         [SecuritySafeCritical]
-        internal DataMember(DataContract memberTypeContract, string name, bool isNullable, bool isRequired, bool emitDefaultValue, int order)
+        internal DataMember(
+            DataContract memberTypeContract,
+            string name,
+            bool isNullable,
+            bool isRequired,
+            bool emitDefaultValue,
+            int order
+        )
         {
-            helper = new CriticalHelper(memberTypeContract, name, isNullable, isRequired, emitDefaultValue, order);
+            helper = new CriticalHelper(
+                memberTypeContract,
+                name,
+                isNullable,
+                isRequired,
+                emitDefaultValue,
+                order
+            );
         }
 
         internal MemberInfo MemberInfo
@@ -164,7 +188,14 @@ namespace System.Runtime.Serialization
                 this.Name = name;
             }
 
-            internal CriticalHelper(DataContract memberTypeContract, string name, bool isNullable, bool isRequired, bool emitDefaultValue, int order)
+            internal CriticalHelper(
+                DataContract memberTypeContract,
+                string name,
+                bool isNullable,
+                bool isRequired,
+                bool emitDefaultValue,
+                int order
+            )
             {
                 this.MemberTypeContract = memberTypeContract;
                 this.Name = name;
@@ -236,7 +267,12 @@ namespace System.Runtime.Serialization
                         {
                             if (this.IsGetOnlyCollection)
                             {
-                                memberTypeContract = DataContract.GetGetOnlyCollectionDataContract(DataContract.GetId(MemberType.TypeHandle), MemberType.TypeHandle, MemberType, SerializationMode.SharedContract);
+                                memberTypeContract = DataContract.GetGetOnlyCollectionDataContract(
+                                    DataContract.GetId(MemberType.TypeHandle),
+                                    MemberType.TypeHandle,
+                                    MemberType,
+                                    SerializationMode.SharedContract
+                                );
                             }
                             else
                             {
@@ -246,10 +282,7 @@ namespace System.Runtime.Serialization
                     }
                     return memberTypeContract;
                 }
-                set
-                {
-                    memberTypeContract = value;
-                }
+                set { memberTypeContract = value; }
             }
 
             internal bool HasConflictingNameAndType
@@ -266,9 +299,11 @@ namespace System.Runtime.Serialization
         }
 
 #if !NO_DYNAMIC_CODEGEN
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - checks member visibility to calculate if access to it requires MemberAccessPermission for serialization."
-            + " Since this information is used to determine whether to give the generated code access"
-            + " permissions to private members, any changes to the logic should be reviewed.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - checks member visibility to calculate if access to it requires MemberAccessPermission for serialization."
+                + " Since this information is used to determine whether to give the generated code access"
+                + " permissions to private members, any changes to the logic should be reviewed."
+        )]
         internal bool RequiresMemberAccessForGet()
         {
             MemberInfo memberInfo = MemberInfo;
@@ -280,16 +315,21 @@ namespace System.Runtime.Serialization
             else
             {
                 PropertyInfo property = (PropertyInfo)memberInfo;
-                MethodInfo getMethod = property.GetGetMethod(true /*nonPublic*/);
+                MethodInfo getMethod = property.GetGetMethod(
+                    true /*nonPublic*/
+                );
                 if (getMethod != null)
-                    return DataContract.MethodRequiresMemberAccess(getMethod) || !DataContract.IsTypeVisible(property.PropertyType);
+                    return DataContract.MethodRequiresMemberAccess(getMethod)
+                        || !DataContract.IsTypeVisible(property.PropertyType);
             }
             return false;
         }
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - checks member visibility to calculate if access to it requires MemberAccessPermission for deserialization."
-            + " Since this information is used to determine whether to give the generated code access"
-            + " permissions to private members, any changes to the logic should be reviewed.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - checks member visibility to calculate if access to it requires MemberAccessPermission for deserialization."
+                + " Since this information is used to determine whether to give the generated code access"
+                + " permissions to private members, any changes to the logic should be reviewed."
+        )]
         internal bool RequiresMemberAccessForSet()
         {
             MemberInfo memberInfo = MemberInfo;
@@ -301,23 +341,34 @@ namespace System.Runtime.Serialization
             else
             {
                 PropertyInfo property = (PropertyInfo)memberInfo;
-                MethodInfo setMethod = property.GetSetMethod(true /*nonPublic*/);
+                MethodInfo setMethod = property.GetSetMethod(
+                    true /*nonPublic*/
+                );
                 if (setMethod != null)
-                    return DataContract.MethodRequiresMemberAccess(setMethod) || !DataContract.IsTypeVisible(property.PropertyType);
+                    return DataContract.MethodRequiresMemberAccess(setMethod)
+                        || !DataContract.IsTypeVisible(property.PropertyType);
             }
             return false;
         }
 #endif
 
-        internal DataMember BindGenericParameters(DataContract[] paramContracts, Dictionary<DataContract, DataContract> boundContracts)
+        internal DataMember BindGenericParameters(
+            DataContract[] paramContracts,
+            Dictionary<DataContract, DataContract> boundContracts
+        )
         {
-            DataContract memberTypeContract = this.MemberTypeContract.BindGenericParameters(paramContracts, boundContracts);
-            DataMember boundDataMember = new DataMember(memberTypeContract,
+            DataContract memberTypeContract = this.MemberTypeContract.BindGenericParameters(
+                paramContracts,
+                boundContracts
+            );
+            DataMember boundDataMember = new DataMember(
+                memberTypeContract,
                 this.Name,
                 !memberTypeContract.IsValueType,
                 this.IsRequired,
                 this.EmitDefaultValue,
-                this.Order);
+                this.Order
+            );
             return boundDataMember;
         }
 
@@ -330,13 +381,20 @@ namespace System.Runtime.Serialization
             if (dataMember != null)
             {
                 // Note: comparison does not use Order hint since it influences element order but does not specify exact order
-                bool thisIsNullable = (MemberTypeContract == null) ? false : !MemberTypeContract.IsValueType;
-                bool dataMemberIsNullable = (dataMember.MemberTypeContract == null) ? false : !dataMember.MemberTypeContract.IsValueType;
-                return (Name == dataMember.Name
-                        && (IsNullable || thisIsNullable) == (dataMember.IsNullable || dataMemberIsNullable)
-                        && IsRequired == dataMember.IsRequired
-                        && EmitDefaultValue == dataMember.EmitDefaultValue
-                        && MemberTypeContract.Equals(dataMember.MemberTypeContract, checkedContracts));
+                bool thisIsNullable =
+                    (MemberTypeContract == null) ? false : !MemberTypeContract.IsValueType;
+                bool dataMemberIsNullable =
+                    (dataMember.MemberTypeContract == null)
+                        ? false
+                        : !dataMember.MemberTypeContract.IsValueType;
+                return (
+                    Name == dataMember.Name
+                    && (IsNullable || thisIsNullable)
+                        == (dataMember.IsNullable || dataMemberIsNullable)
+                    && IsRequired == dataMember.IsRequired
+                    && EmitDefaultValue == dataMember.EmitDefaultValue
+                    && MemberTypeContract.Equals(dataMember.MemberTypeContract, checkedContracts)
+                );
             }
             return false;
         }

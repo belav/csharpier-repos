@@ -30,9 +30,16 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         /// <param name="handler">The handler for the operation.</param>
         /// <param name="result">The result of the operation.</param>
         /// <returns>true if the operation is complete, false if the call site should determine behavior.</returns>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
-        public override bool TryBinaryOperation(BinaryOperationBinder binder, object handler, out object result)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
+        public override bool TryBinaryOperation(
+            BinaryOperationBinder binder,
+            object handler,
+            out object result
+        )
         {
             if (binder.Operation == ExpressionType.AddAssign)
             {
@@ -81,7 +88,11 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             Requires.NotNull(handler);
             VerifyHandler(handler);
 
-            ComEventsSink comEventSink = ComEventsSink.FromRuntimeCallableWrapper(_rcw, _sourceIid, true);
+            ComEventsSink comEventSink = ComEventsSink.FromRuntimeCallableWrapper(
+                _rcw,
+                _sourceIid,
+                true
+            );
             comEventSink.AddHandler(_dispid, handler);
             return this;
         }
@@ -96,7 +107,11 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             Requires.NotNull(handler);
             VerifyHandler(handler);
 
-            ComEventsSink comEventSink = ComEventsSink.FromRuntimeCallableWrapper(_rcw, _sourceIid, false);
+            ComEventsSink comEventSink = ComEventsSink.FromRuntimeCallableWrapper(
+                _rcw,
+                _sourceIid,
+                false
+            );
             comEventSink?.RemoveHandler(_dispid, handler);
 
             return this;

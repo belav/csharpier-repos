@@ -21,7 +21,12 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.ResultSetTr
         /// Returns an ID of a vertex that is linked from a result set. For example, a <see cref="ResultSet"/> has an edge that points to a <see cref="ReferenceResult"/>, and
         /// item edges from that <see cref="ReferenceResult"/> are the references for the range. This gives you the ID of the <see cref="ReferenceResult"/> in this case.
         /// </summary>
-        Id<T> GetResultIdForSymbol<T>(ISymbol symbol, string edgeKind, Func<IdFactory, T> vertexCreator) where T : Vertex;
+        Id<T> GetResultIdForSymbol<T>(
+            ISymbol symbol,
+            string edgeKind,
+            Func<IdFactory, T> vertexCreator
+        )
+            where T : Vertex;
 
         /// <summary>
         /// Similar to <see cref="GetResultIdForSymbol{T}"/>, but instead of creating the vertex (if needed) and adding an edge, this

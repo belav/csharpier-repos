@@ -27,39 +27,44 @@ namespace System.Data.EntityModel.SchemaObjectModel
             DbProviderManifest providerManifest = ProviderManifest;
             if (providerManifest == null)
             {
-                AddError(new EdmSchemaError(System.Data.Entity.Strings.FailedToRetrieveProviderManifest,
-                                                   (int)ErrorCode.FailedToRetrieveProviderManifest,
-                                                   EdmSchemaErrorSeverity.Error));
+                AddError(
+                    new EdmSchemaError(
+                        System.Data.Entity.Strings.FailedToRetrieveProviderManifest,
+                        (int)ErrorCode.FailedToRetrieveProviderManifest,
+                        EdmSchemaErrorSeverity.Error
+                    )
+                );
             }
             else
             {
                 IList<PrimitiveType> primitiveTypes = providerManifest.GetStoreTypes();
 
                 // EDM Spatial types are only available to V3 and above CSDL.
-                if (schemaManager.DataModel == SchemaDataModelOption.EntityDataModel &&
-                    schemaManager.SchemaVersion < XmlConstants.EdmVersionForV3)
+                if (
+                    schemaManager.DataModel == SchemaDataModelOption.EntityDataModel
+                    && schemaManager.SchemaVersion < XmlConstants.EdmVersionForV3
+                )
                 {
-                    primitiveTypes = primitiveTypes.Where(t => !Helper.IsSpatialType(t))
-                                                   .ToList();
+                    primitiveTypes = primitiveTypes.Where(t => !Helper.IsSpatialType(t)).ToList();
                 }
 
                 foreach (PrimitiveType entry in primitiveTypes)
                 {
-                    TryAddType(new ScalarType(this, entry.Name, entry), false /*doNotAddErrorForEmptyName*/);
+                    TryAddType(
+                        new ScalarType(this, entry.Name, entry),
+                        false /*doNotAddErrorForEmptyName*/
+                    );
                 }
             }
         }
 
         /// <summary>
-        /// Returns the alias that can be used for type in this 
+        /// Returns the alias that can be used for type in this
         /// Namespace instead of the entire namespace name
         /// </summary>
         internal override string Alias
         {
-            get
-            {
-                return ProviderManifest.NamespaceName;
-            }
+            get { return ProviderManifest.NamespaceName; }
         }
 
         /// <summary>

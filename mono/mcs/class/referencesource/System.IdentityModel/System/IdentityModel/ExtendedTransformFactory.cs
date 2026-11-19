@@ -10,7 +10,7 @@ namespace System.IdentityModel
 
         ExtendedTransformFactory() { }
 
-        internal new static ExtendedTransformFactory Instance
+        internal static new ExtendedTransformFactory Instance
         {
             get { return instance; }
         }

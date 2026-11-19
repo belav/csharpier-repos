@@ -31,52 +31,62 @@ using System.Collections;
 using System.IO;
 using NUnit.Framework;
 
-namespace MonoTests {
+namespace MonoTests
+{
+    // now misnamed - we check for the DISTRO env variable
+    public class HostIgnoreList
+    {
+        private const string IgnoreListName = "nunit-host-ignore-list";
 
-	// now misnamed - we check for the DISTRO env variable
-	public class HostIgnoreList {
+        private static ArrayList ignore_list;
 
-		private const string IgnoreListName = "nunit-host-ignore-list";
+        static HostIgnoreList()
+        {
+            string hostname = Environment.GetEnvironmentVariable("DISTRO");
+            if (hostname == null)
+                return;
 
-		private static ArrayList ignore_list;
+            if (File.Exists(IgnoreListName))
+            {
+                using (StreamReader sr = new StreamReader(IgnoreListName))
+                {
+                    string line = sr.ReadLine();
+                    while (line != null)
+                    {
+                        if (line.StartsWith(hostname))
+                        {
+                            IgnoreList.Add(line.Substring(hostname.Length + 1));
+                        }
+                        line = sr.ReadLine();
+                    }
+                }
+            }
+        }
 
-		static HostIgnoreList ()
-		{
-			string hostname = Environment.GetEnvironmentVariable ("DISTRO");
-			if (hostname == null)
-				return;
+        public static IList IgnoreList
+        {
+            get
+            {
+                if (ignore_list == null)
+                    ignore_list = new ArrayList();
+                return ignore_list;
+            }
+        }
 
-			if (File.Exists (IgnoreListName)) {
-				using (StreamReader sr = new StreamReader (IgnoreListName)) {
-					string line = sr.ReadLine ();
-					while (line != null) {
-						if (line.StartsWith (hostname)) {
-							IgnoreList.Add (line.Substring (hostname.Length + 1));
-						}
-						line = sr.ReadLine ();
-					}
-				}
-			}
-		}
+        public static void CheckTest(string testname)
+        {
+            if (ignore_list == null)
+                return;
 
-		public static IList IgnoreList {
-			get {
-				if (ignore_list == null)
-					ignore_list = new ArrayList ();
-				return ignore_list;
-			}
-		}
-
-		public static void CheckTest (string testname)
-		{
-			if (ignore_list == null)
-				return;
-
-			if (IgnoreList.Contains (testname)) {
-				string msg = String.Format ("Test '{0}' was ignored because it's defined in the '{1}' ignore list.", 
-					testname, IgnoreListName);
-				Assert.Ignore (msg);
-			}
-		}
-	}
+            if (IgnoreList.Contains(testname))
+            {
+                string msg = String.Format(
+                    "Test '{0}' was ignored because it's defined in the '{1}' ignore list.",
+                    testname,
+                    IgnoreListName
+                );
+                Assert.Ignore(msg);
+            }
+        }
+    }
 }

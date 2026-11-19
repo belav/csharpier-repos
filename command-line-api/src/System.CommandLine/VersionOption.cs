@@ -17,9 +17,8 @@ namespace System.CommandLine
         /// <summary>
         /// When added to a <see cref="CliCommand"/>, it enables the use of a <c>--version</c> option, which when specified in command line input will short circuit normal command handling and instead write out version information before exiting.
         /// </summary>
-        public VersionOption() : this("--version", Array.Empty<string>())
-        {
-        }
+        public VersionOption()
+            : this("--version", Array.Empty<string>()) { }
 
         /// <summary>
         /// When added to a <see cref="CliCommand"/>, it enables the use of a provided option name and aliases, which when specified in command line input will short circuit normal command handling and instead write out version information before exiting.
@@ -42,10 +41,16 @@ namespace System.CommandLine
         {
             Validators.Add(static result =>
             {
-                if (result.Parent is CommandResult parent &&
-                    parent.Children.Any(r => r is not OptionResult { Option: VersionOption }))
+                if (
+                    result.Parent is CommandResult parent
+                    && parent.Children.Any(r => r is not OptionResult { Option: VersionOption })
+                )
                 {
-                    result.AddError(LocalizationResources.VersionOptionCannotBeCombinedWithOtherArguments(result.IdentifierToken?.Value ?? result.Option.Name));
+                    result.AddError(
+                        LocalizationResources.VersionOptionCannotBeCombinedWithOtherArguments(
+                            result.IdentifierToken?.Value ?? result.Option.Name
+                        )
+                    );
                 }
             });
         }

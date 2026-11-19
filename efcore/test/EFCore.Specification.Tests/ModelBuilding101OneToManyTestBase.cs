@@ -10,8 +10,7 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract partial class ModelBuilding101TestBase
 {
     [ConditionalFact]
-    public virtual void OneToManyRequiredTest()
-        => Model101Test();
+    public virtual void OneToManyRequiredTest() => Model101Test();
 
     protected class OneToManyRequired
     {
@@ -30,25 +29,22 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
-                    .HasMany(e => e.Posts)
-                    .WithOne(e => e.Blog);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>().HasMany(e => e.Posts).WithOne(e => e.Blog);
         }
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
                     .HasForeignKey(e => e.BlogId)
@@ -58,8 +54,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context3 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne(e => e.Blog)
                     .WithMany(e => e.Posts)
                     .HasForeignKey(e => e.BlogId)
@@ -91,17 +88,14 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
     }
 
     [ConditionalFact]
-    public virtual void OneToManyOptionalTest()
-        => Model101Test();
+    public virtual void OneToManyOptionalTest() => Model101Test();
 
     protected class OneToManyOptional
     {
@@ -120,25 +114,22 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
-                    .HasMany(e => e.Posts)
-                    .WithOne(e => e.Blog);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>().HasMany(e => e.Posts).WithOne(e => e.Blog);
         }
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
                     .HasForeignKey(e => e.BlogId)
@@ -148,8 +139,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context3 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne(e => e.Blog)
                     .WithMany(e => e.Posts)
                     .HasForeignKey(e => e.BlogId)
@@ -179,17 +171,14 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
     }
 
     [ConditionalFact]
-    public virtual void OneToManyRequiredWithShadowFkTest()
-        => Model101Test();
+    public virtual void OneToManyRequiredWithShadowFkTest() => Model101Test();
 
     protected class OneToManyRequiredWithShadowFk
     {
@@ -207,30 +196,25 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
-                    .Property<int>("BlogId");
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Post>().Property<int>("BlogId");
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
-                    .HasMany(e => e.Posts)
-                    .WithOne(e => e.Blog)
-                    .IsRequired();
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>().HasMany(e => e.Posts).WithOne(e => e.Blog).IsRequired();
         }
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
                     .HasForeignKey("BlogId")
@@ -240,8 +224,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context3 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne(e => e.Blog)
                     .WithMany(e => e.Posts)
                     .HasForeignKey("BlogId")
@@ -266,11 +251,9 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
 
         public class ContextAnnotated1 : Context101
@@ -293,17 +276,14 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
     }
 
     [ConditionalFact]
-    public virtual void OneToManyOptionalWithShadowFkTest()
-        => Model101Test();
+    public virtual void OneToManyOptionalWithShadowFkTest() => Model101Test();
 
     protected class OneToManyOptionalWithShadowFk
     {
@@ -321,25 +301,22 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
-                    .HasMany(e => e.Posts)
-                    .WithOne(e => e.Blog);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>().HasMany(e => e.Posts).WithOne(e => e.Blog);
         }
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
                     .HasForeignKey("BlogId")
@@ -349,8 +326,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context3 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne(e => e.Blog)
                     .WithMany(e => e.Posts)
                     .HasForeignKey("BlogId")
@@ -377,17 +355,14 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
     }
 
     [ConditionalFact]
-    public virtual void OneToManyRequiredNoNavigationToPrincipalTest()
-        => Model101Test();
+    public virtual void OneToManyRequiredNoNavigationToPrincipalTest() => Model101Test();
 
     protected class OneToManyRequiredNoNavigationToPrincipal
     {
@@ -405,25 +380,22 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
-                    .HasMany(e => e.Posts)
-                    .WithOne();
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>().HasMany(e => e.Posts).WithOne();
         }
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne()
                     .HasForeignKey(e => e.BlogId)
@@ -433,8 +405,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context3 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne<Blog>()
                     .WithMany(e => e.Posts)
                     .HasForeignKey(e => e.BlogId)
@@ -458,17 +431,14 @@ public abstract partial class ModelBuilding101TestBase
                 public int BlogId { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
     }
 
     [ConditionalFact]
-    public virtual void OneToManyOptionalNoNavigationToPrincipalTest()
-        => Model101Test();
+    public virtual void OneToManyOptionalNoNavigationToPrincipalTest() => Model101Test();
 
     protected class OneToManyOptionalNoNavigationToPrincipal
     {
@@ -486,25 +456,22 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
-                    .HasMany(e => e.Posts)
-                    .WithOne();
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>().HasMany(e => e.Posts).WithOne();
         }
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne()
                     .HasForeignKey(e => e.BlogId)
@@ -514,8 +481,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context3 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne<Blog>()
                     .WithMany(e => e.Posts)
                     .HasForeignKey(e => e.BlogId)
@@ -539,17 +507,15 @@ public abstract partial class ModelBuilding101TestBase
                 public int? BlogId { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
     }
 
     [ConditionalFact]
-    public virtual void OneToManyRequiredWithShadowFkAndNoNavigationToPrincipalTest()
-        => Model101Test();
+    public virtual void OneToManyRequiredWithShadowFkAndNoNavigationToPrincipalTest() =>
+        Model101Test();
 
     protected class OneToManyRequiredWithShadowFkAndNoNavigationToPrincipal
     {
@@ -566,23 +532,19 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
-                    .HasMany(e => e.Posts)
-                    .WithOne()
-                    .IsRequired();
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>().HasMany(e => e.Posts).WithOne().IsRequired();
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne()
                     .HasForeignKey("BlogId")
@@ -592,8 +554,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne<Blog>()
                     .WithMany(e => e.Posts)
                     .HasForeignKey("BlogId")
@@ -616,21 +579,18 @@ public abstract partial class ModelBuilding101TestBase
                 public int Id { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
-                    .Property<int>("BlogId");
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Post>().Property<int>("BlogId");
         }
     }
 
     [ConditionalFact]
-    public virtual void OneToManyOptionalWithShadowFkAndNoNavigationToPrincipalTest()
-        => Model101Test();
+    public virtual void OneToManyOptionalWithShadowFkAndNoNavigationToPrincipalTest() =>
+        Model101Test();
 
     protected class OneToManyOptionalWithShadowFkAndNoNavigationToPrincipal
     {
@@ -647,25 +607,22 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
-                    .HasMany(e => e.Posts)
-                    .WithOne();
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>().HasMany(e => e.Posts).WithOne();
         }
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne()
                     .HasForeignKey("BlogId")
@@ -675,8 +632,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context3 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne<Blog>()
                     .WithMany(e => e.Posts)
                     .HasForeignKey("BlogId")
@@ -699,17 +657,14 @@ public abstract partial class ModelBuilding101TestBase
                 public int Id { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
     }
 
     [ConditionalFact]
-    public virtual void OneToManyRequiredNoNavigationToDependentsTest()
-        => Model101Test();
+    public virtual void OneToManyRequiredNoNavigationToDependentsTest() => Model101Test();
 
     protected class OneToManyRequiredNoNavigationToDependents
     {
@@ -727,25 +682,22 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
-                    .HasMany<Post>()
-                    .WithOne(e => e.Blog);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>().HasMany<Post>().WithOne(e => e.Blog);
         }
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany<Post>()
                     .WithOne(e => e.Blog)
                     .HasForeignKey(e => e.BlogId)
@@ -755,8 +707,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context3 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne(e => e.Blog)
                     .WithMany()
                     .HasForeignKey(e => e.BlogId)
@@ -782,17 +735,14 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
     }
 
     [ConditionalFact]
-    public virtual void OneToManyOptionalNoNavigationToDependentsTest()
-        => Model101Test();
+    public virtual void OneToManyOptionalNoNavigationToDependentsTest() => Model101Test();
 
     protected class OneToManyOptionalNoNavigationToDependents
     {
@@ -810,25 +760,22 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
-                    .HasMany<Post>()
-                    .WithOne(e => e.Blog);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>().HasMany<Post>().WithOne(e => e.Blog);
         }
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany<Post>()
                     .WithOne(e => e.Blog)
                     .HasForeignKey(e => e.BlogId)
@@ -838,8 +785,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context3 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne(e => e.Blog)
                     .WithMany()
                     .HasForeignKey(e => e.BlogId)
@@ -865,17 +813,15 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
     }
 
     [ConditionalFact]
-    public virtual void OneToManyRequiredWithShadowFkAndNoNavigationToDependentsTest()
-        => Model101Test();
+    public virtual void OneToManyRequiredWithShadowFkAndNoNavigationToDependentsTest() =>
+        Model101Test();
 
     protected class OneToManyRequiredWithShadowFkAndNoNavigationToDependents
     {
@@ -892,30 +838,25 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
-                    .Property<int>("BlogId");
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Post>().Property<int>("BlogId");
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
-                    .HasMany<Post>()
-                    .WithOne(e => e.Blog)
-                    .IsRequired();
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>().HasMany<Post>().WithOne(e => e.Blog).IsRequired();
         }
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany<Post>()
                     .WithOne(e => e.Blog)
                     .HasForeignKey("BlogId")
@@ -925,8 +866,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context3 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne(e => e.Blog)
                     .WithMany()
                     .HasForeignKey("BlogId")
@@ -949,11 +891,9 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
 
         public class ContextAnnotated1 : Context101
@@ -972,17 +912,15 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
     }
 
     [ConditionalFact]
-    public virtual void OneToManyOptionalWithShadowFkAndNoNavigationToDependentsTest()
-        => Model101Test();
+    public virtual void OneToManyOptionalWithShadowFkAndNoNavigationToDependentsTest() =>
+        Model101Test();
 
     protected class OneToManyOptionalWithShadowFkAndNoNavigationToDependents
     {
@@ -999,25 +937,22 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
-                    .HasMany<Post>()
-                    .WithOne(e => e.Blog);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>().HasMany<Post>().WithOne(e => e.Blog);
         }
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany<Post>()
                     .WithOne(e => e.Blog)
                     .HasForeignKey("BlogId")
@@ -1027,8 +962,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context3 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne(e => e.Blog)
                     .WithMany()
                     .HasForeignKey("BlogId")
@@ -1051,17 +987,14 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
     }
 
     [ConditionalFact]
-    public virtual void OneToManyRequiredNoNavigationsTest()
-        => Model101Test();
+    public virtual void OneToManyRequiredNoNavigationsTest() => Model101Test();
 
     protected class OneToManyRequiredNoNavigations
     {
@@ -1078,22 +1011,19 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
-                    .HasMany<Post>()
-                    .WithOne();
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>().HasMany<Post>().WithOne();
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany<Post>()
                     .WithOne()
                     .HasForeignKey(e => e.BlogId)
@@ -1103,8 +1033,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne<Blog>()
                     .WithMany()
                     .HasForeignKey(e => e.BlogId)
@@ -1114,8 +1045,7 @@ public abstract partial class ModelBuilding101TestBase
     }
 
     [ConditionalFact]
-    public virtual void OneToManyOptionalNoNavigationsTest()
-        => Model101Test();
+    public virtual void OneToManyOptionalNoNavigationsTest() => Model101Test();
 
     protected class OneToManyOptionalNoNavigations
     {
@@ -1132,22 +1062,19 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
-                    .HasMany<Post>()
-                    .WithOne();
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>().HasMany<Post>().WithOne();
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany<Post>()
                     .WithOne()
                     .HasForeignKey(e => e.BlogId)
@@ -1157,8 +1084,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne<Blog>()
                     .WithMany()
                     .HasForeignKey(e => e.BlogId)
@@ -1168,8 +1096,7 @@ public abstract partial class ModelBuilding101TestBase
     }
 
     [ConditionalFact]
-    public virtual void OneToManyRequiredWithShadowFkAndNoNavigationsTest()
-        => Model101Test();
+    public virtual void OneToManyRequiredWithShadowFkAndNoNavigationsTest() => Model101Test();
 
     protected class OneToManyRequiredWithShadowFkAndNoNavigations
     {
@@ -1185,23 +1112,19 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
-                    .HasMany<Post>()
-                    .WithOne()
-                    .IsRequired();
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>().HasMany<Post>().WithOne().IsRequired();
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany<Post>()
                     .WithOne()
                     .HasForeignKey("BlogId")
@@ -1211,8 +1134,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne<Blog>()
                     .WithMany()
                     .HasForeignKey("BlogId")
@@ -1222,8 +1146,7 @@ public abstract partial class ModelBuilding101TestBase
     }
 
     [ConditionalFact]
-    public virtual void OneToManyOptionalWithShadowFkAndNoNavigationsTest()
-        => Model101Test();
+    public virtual void OneToManyOptionalWithShadowFkAndNoNavigationsTest() => Model101Test();
 
     protected class OneToManyOptionalWithShadowFkAndNoNavigations
     {
@@ -1239,22 +1162,19 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
-                    .HasMany<Post>()
-                    .WithOne();
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>().HasMany<Post>().WithOne();
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany<Post>()
                     .WithOne()
                     .HasForeignKey("BlogId")
@@ -1264,8 +1184,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne<Blog>()
                     .WithMany()
                     .HasForeignKey("BlogId")
@@ -1275,8 +1196,7 @@ public abstract partial class ModelBuilding101TestBase
     }
 
     [ConditionalFact]
-    public virtual void OneToManyRequiredWithAlternateKeyTest()
-        => Model101Test();
+    public virtual void OneToManyRequiredWithAlternateKeyTest() => Model101Test();
 
     protected class OneToManyRequiredWithAlternateKey
     {
@@ -1296,14 +1216,13 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
                     .HasPrincipalKey(e => e.AlternateId);
@@ -1311,8 +1230,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
                     .HasPrincipalKey(e => e.AlternateId)
@@ -1322,8 +1242,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne(e => e.Blog)
                     .WithMany(e => e.Posts)
                     .HasPrincipalKey(e => e.AlternateId)
@@ -1355,14 +1276,13 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
                     .HasPrincipalKey(e => e.AlternateId);
@@ -1370,8 +1290,8 @@ public abstract partial class ModelBuilding101TestBase
     }
 
     [ConditionalFact]
-    public virtual void OneToManyOptionalWithAlternateKeyTest()
-        => Assert.Throws<EqualException>(() => Model101Test()); // Issue #30346
+    public virtual void OneToManyOptionalWithAlternateKeyTest() =>
+        Assert.Throws<EqualException>(() => Model101Test()); // Issue #30346
 
     protected class OneToManyOptionalWithAlternateKey
     {
@@ -1391,14 +1311,13 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
                     .HasPrincipalKey(e => e.AlternateId);
@@ -1406,8 +1325,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
                     .HasPrincipalKey(e => e.AlternateId)
@@ -1417,8 +1337,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne(e => e.Blog)
                     .WithMany(e => e.Posts)
                     .HasPrincipalKey(e => e.AlternateId)
@@ -1449,14 +1370,13 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
                     .HasPrincipalKey(e => e.AlternateId);
@@ -1464,8 +1384,7 @@ public abstract partial class ModelBuilding101TestBase
     }
 
     [ConditionalFact]
-    public virtual void OneToManyRequiredWithShadowFkWithAlternateKeyTest()
-        => Model101Test();
+    public virtual void OneToManyRequiredWithShadowFkWithAlternateKeyTest() => Model101Test();
 
     protected class OneToManyRequiredWithShadowFkWithAlternateKey
     {
@@ -1484,14 +1403,13 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
                     .HasPrincipalKey(e => e.AlternateId)
@@ -1500,8 +1418,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
                     .HasPrincipalKey(e => e.AlternateId)
@@ -1511,8 +1430,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne(e => e.Blog)
                     .WithMany(e => e.Posts)
                     .HasPrincipalKey(e => e.AlternateId)
@@ -1537,14 +1457,13 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
                     .HasPrincipalKey(e => e.AlternateId);
@@ -1571,14 +1490,13 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
                     .HasPrincipalKey(e => e.AlternateId);
@@ -1586,8 +1504,8 @@ public abstract partial class ModelBuilding101TestBase
     }
 
     [ConditionalFact]
-    public virtual void OneToManyOptionalWithShadowFkWithAlternateKeyTest()
-        => Assert.Throws<EqualException>(() => Model101Test()); // Issue #30346
+    public virtual void OneToManyOptionalWithShadowFkWithAlternateKeyTest() =>
+        Assert.Throws<EqualException>(() => Model101Test()); // Issue #30346
 
     protected class OneToManyOptionalWithShadowFkWithAlternateKey
     {
@@ -1606,14 +1524,13 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
                     .HasPrincipalKey(e => e.AlternateId);
@@ -1621,8 +1538,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
                     .HasPrincipalKey(e => e.AlternateId)
@@ -1632,8 +1550,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne(e => e.Blog)
                     .WithMany(e => e.Posts)
                     .HasPrincipalKey(e => e.AlternateId)
@@ -1661,14 +1580,13 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
                     .HasPrincipalKey(e => e.AlternateId);
@@ -1676,8 +1594,7 @@ public abstract partial class ModelBuilding101TestBase
     }
 
     [ConditionalFact]
-    public virtual void OneToManyRequiredWithCompositeKeyTest()
-        => Model101Test();
+    public virtual void OneToManyRequiredWithCompositeKeyTest() => Model101Test();
 
     protected class OneToManyRequiredWithCompositeKey
     {
@@ -1698,55 +1615,49 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
-                    .HasKey(e => new { e.Id1, e.Id2 });
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>().HasKey(e => new { e.Id1, e.Id2 });
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>(
-                    nestedBuilder =>
-                    {
-                        nestedBuilder.HasKey(e => new { e.Id1, e.Id2 });
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>(nestedBuilder =>
+                {
+                    nestedBuilder.HasKey(e => new { e.Id1, e.Id2 });
 
-                        nestedBuilder.HasMany(e => e.Posts)
-                            .WithOne(e => e.Blog)
-                            .IsRequired();
-                    });
+                    nestedBuilder.HasMany(e => e.Posts).WithOne(e => e.Blog).IsRequired();
+                });
         }
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>(
-                    nestedBuilder =>
-                    {
-                        nestedBuilder.HasKey(e => new { e.Id1, e.Id2 });
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>(nestedBuilder =>
+                {
+                    nestedBuilder.HasKey(e => new { e.Id1, e.Id2 });
 
-                        nestedBuilder.HasMany(e => e.Posts)
-                            .WithOne(e => e.Blog)
-                            .HasPrincipalKey(e => new { e.Id1, e.Id2 })
-                            .HasForeignKey(e => new { e.BlogId1, e.BlogId2 })
-                            .IsRequired();
-                    });
+                    nestedBuilder
+                        .HasMany(e => e.Posts)
+                        .WithOne(e => e.Blog)
+                        .HasPrincipalKey(e => new { e.Id1, e.Id2 })
+                        .HasForeignKey(e => new { e.BlogId1, e.BlogId2 })
+                        .IsRequired();
+                });
         }
 
         public class Context3 : Context0
         {
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Blog>()
-                    .HasKey(e => new { e.Id1, e.Id2 });
+                modelBuilder.Entity<Blog>().HasKey(e => new { e.Id1, e.Id2 });
 
-                modelBuilder.Entity<Post>()
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne(e => e.Blog)
                     .WithMany(e => e.Posts)
                     .HasPrincipalKey(e => new { e.Id1, e.Id2 })
@@ -1773,11 +1684,9 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
 
         public class ContextAnnotated1 : Context101
@@ -1804,17 +1713,14 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
     }
 
     [ConditionalFact]
-    public virtual void OneToManyOptionalWithCompositeKeyTest()
-        => Model101Test();
+    public virtual void OneToManyOptionalWithCompositeKeyTest() => Model101Test();
 
     protected class OneToManyOptionalWithCompositeKey
     {
@@ -1835,54 +1741,48 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
-                    .HasKey(e => new { e.Id1, e.Id2 });
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>().HasKey(e => new { e.Id1, e.Id2 });
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>(
-                    b =>
-                    {
-                        b.HasKey(e => new { e.Id1, e.Id2 });
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>(b =>
+                {
+                    b.HasKey(e => new { e.Id1, e.Id2 });
 
-                        b.HasMany(e => e.Posts)
-                            .WithOne(e => e.Blog);
-                    });
+                    b.HasMany(e => e.Posts).WithOne(e => e.Blog);
+                });
         }
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>(
-                    b =>
-                    {
-                        b.HasKey(e => new { e.Id1, e.Id2 });
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>(b =>
+                {
+                    b.HasKey(e => new { e.Id1, e.Id2 });
 
-                        b.HasMany(e => e.Posts)
-                            .WithOne(e => e.Blog)
-                            .HasPrincipalKey(e => new { e.Id1, e.Id2 })
-                            .HasForeignKey(e => new { e.BlogId1, e.BlogId2 })
-                            .IsRequired(false);
-                    });
+                    b.HasMany(e => e.Posts)
+                        .WithOne(e => e.Blog)
+                        .HasPrincipalKey(e => new { e.Id1, e.Id2 })
+                        .HasForeignKey(e => new { e.BlogId1, e.BlogId2 })
+                        .IsRequired(false);
+                });
         }
 
         public class Context3 : Context0
         {
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Blog>()
-                    .HasKey(e => new { e.Id1, e.Id2 });
+                modelBuilder.Entity<Blog>().HasKey(e => new { e.Id1, e.Id2 });
 
-                modelBuilder.Entity<Post>()
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne(e => e.Blog)
                     .WithMany(e => e.Posts)
                     .HasPrincipalKey(e => new { e.Id1, e.Id2 })
@@ -1909,11 +1809,9 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
 
         public class ContextAnnotated1 : Context101
@@ -1939,17 +1837,14 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
     }
 
     [ConditionalFact]
-    public virtual void OneToManyRequiredWithShadowFkWithCompositeKeyTest()
-        => Model101Test();
+    public virtual void OneToManyRequiredWithShadowFkWithCompositeKeyTest() => Model101Test();
 
     protected class OneToManyRequiredWithShadowFkWithCompositeKey
     {
@@ -1968,64 +1863,56 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Blog>()
-                    .HasKey(e => new { e.Id1, e.Id2 });
+                modelBuilder.Entity<Blog>().HasKey(e => new { e.Id1, e.Id2 });
 
-                modelBuilder.Entity<Post>(
-                    b =>
-                    {
-                        b.Property<int>("BlogId1");
-                        b.Property<int>("BlogId2");
-                    });
+                modelBuilder.Entity<Post>(b =>
+                {
+                    b.Property<int>("BlogId1");
+                    b.Property<int>("BlogId2");
+                });
             }
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>(
-                    b =>
-                    {
-                        b.HasKey(e => new { e.Id1, e.Id2 });
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>(b =>
+                {
+                    b.HasKey(e => new { e.Id1, e.Id2 });
 
-                        b.HasMany(e => e.Posts)
-                            .WithOne(e => e.Blog)
-                            .IsRequired();
-                    });
+                    b.HasMany(e => e.Posts).WithOne(e => e.Blog).IsRequired();
+                });
         }
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>(
-                    b =>
-                    {
-                        b.HasKey(e => new { e.Id1, e.Id2 });
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>(b =>
+                {
+                    b.HasKey(e => new { e.Id1, e.Id2 });
 
-                        b.HasMany(e => e.Posts)
-                            .WithOne(e => e.Blog)
-                            .HasPrincipalKey(e => new { e.Id1, e.Id2 })
-                            .HasForeignKey("BlogId1", "BlogId2")
-                            .IsRequired();
-                    });
+                    b.HasMany(e => e.Posts)
+                        .WithOne(e => e.Blog)
+                        .HasPrincipalKey(e => new { e.Id1, e.Id2 })
+                        .HasForeignKey("BlogId1", "BlogId2")
+                        .IsRequired();
+                });
         }
 
         public class Context3 : Context0
         {
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Blog>()
-                    .HasKey(e => new { e.Id1, e.Id2 });
+                modelBuilder.Entity<Blog>().HasKey(e => new { e.Id1, e.Id2 });
 
-                modelBuilder.Entity<Post>()
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne(e => e.Blog)
                     .WithMany(e => e.Posts)
                     .HasPrincipalKey(e => new { e.Id1, e.Id2 })
@@ -2052,11 +1939,9 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
 
         public class ContextAnnotated1 : Context101
@@ -2081,17 +1966,14 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
     }
 
     [ConditionalFact]
-    public virtual void OneToManyOptionalWithShadowFkWithCompositeKeyTest()
-        => Model101Test();
+    public virtual void OneToManyOptionalWithShadowFkWithCompositeKeyTest() => Model101Test();
 
     protected class OneToManyOptionalWithShadowFkWithCompositeKey
     {
@@ -2110,54 +1992,48 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
-                    .HasKey(e => new { e.Id1, e.Id2 });
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>().HasKey(e => new { e.Id1, e.Id2 });
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>(
-                    b =>
-                    {
-                        b.HasKey(e => new { e.Id1, e.Id2 });
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>(b =>
+                {
+                    b.HasKey(e => new { e.Id1, e.Id2 });
 
-                        b.HasMany(e => e.Posts)
-                            .WithOne(e => e.Blog);
-                    });
+                    b.HasMany(e => e.Posts).WithOne(e => e.Blog);
+                });
         }
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>(
-                    b =>
-                    {
-                        b.HasKey(e => new { e.Id1, e.Id2 });
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Blog>(b =>
+                {
+                    b.HasKey(e => new { e.Id1, e.Id2 });
 
-                        b.HasMany(e => e.Posts)
-                            .WithOne(e => e.Blog)
-                            .HasPrincipalKey(e => new { e.Id1, e.Id2 })
-                            .HasForeignKey("BlogId1", "BlogId2")
-                            .IsRequired(false);
-                    });
+                    b.HasMany(e => e.Posts)
+                        .WithOne(e => e.Blog)
+                        .HasPrincipalKey(e => new { e.Id1, e.Id2 })
+                        .HasForeignKey("BlogId1", "BlogId2")
+                        .IsRequired(false);
+                });
         }
 
         public class Context3 : Context0
         {
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Blog>()
-                    .HasKey(e => new { e.Id1, e.Id2 });
+                modelBuilder.Entity<Blog>().HasKey(e => new { e.Id1, e.Id2 });
 
-                modelBuilder.Entity<Post>()
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne(e => e.Blog)
                     .WithMany(e => e.Posts)
                     .HasPrincipalKey(e => new { e.Id1, e.Id2 })
@@ -2182,11 +2058,9 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
 
         public class ContextAnnotated1 : Context101
@@ -2210,17 +2084,14 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
     }
 
     [ConditionalFact]
-    public virtual void OneToManySelfReferencingTest()
-        => Model101Test();
+    public virtual void OneToManySelfReferencingTest() => Model101Test();
 
     protected class OneToManySelfReferencing
     {
@@ -2235,22 +2106,20 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Employee> Employees
-                => Set<Employee>();
+            public DbSet<Employee> Employees => Set<Employee>();
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Employee>()
-                    .HasOne(e => e.Manager)
-                    .WithMany(e => e.Reports);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Employee>().HasOne(e => e.Manager).WithMany(e => e.Reports);
         }
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Employee>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Employee>()
                     .HasOne(e => e.Manager)
                     .WithMany(e => e.Reports)
                     .HasForeignKey(e => e.ManagerId)
@@ -2275,14 +2144,12 @@ public abstract partial class ModelBuilding101TestBase
                 public ICollection<Employee> Reports { get; } = new List<Employee>();
             }
 
-            public DbSet<Employee> Employees
-                => Set<Employee>();
+            public DbSet<Employee> Employees => Set<Employee>();
         }
     }
 
     [ConditionalFact]
-    public virtual void OneToManyRequiredWithoutCascadeDeleteTest()
-        => Model101Test();
+    public virtual void OneToManyRequiredWithoutCascadeDeleteTest() => Model101Test();
 
     protected class OneToManyRequiredWithoutCascadeDelete
     {
@@ -2301,14 +2168,13 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
                     .OnDelete(DeleteBehavior.Restrict);
@@ -2316,8 +2182,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Blog>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
                     .HasForeignKey(e => e.BlogId)
@@ -2328,8 +2195,9 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasOne(e => e.Blog)
                     .WithMany(e => e.Posts)
                     .HasForeignKey(e => e.BlogId)
@@ -2355,11 +2223,9 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
 
         public class ContextAnnotated1 : Context101
@@ -2386,11 +2252,9 @@ public abstract partial class ModelBuilding101TestBase
                 public Blog Blog { get; set; }
             }
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
         }
     }
 }

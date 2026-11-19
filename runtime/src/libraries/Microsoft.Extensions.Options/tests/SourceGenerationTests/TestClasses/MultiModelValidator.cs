@@ -27,7 +27,7 @@ namespace MultiModelValidator
     }
 
     [OptionsValidator]
-    public partial struct MultiValidator : IValidateOptions<FirstModel>, IValidateOptions<SecondModel>
-    {
-    }
+    public partial struct MultiValidator
+        : IValidateOptions<FirstModel>,
+            IValidateOptions<SecondModel> { }
 }

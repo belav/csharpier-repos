@@ -1,12 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Runtime.InteropServices;
 using System;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using Xunit;
-
 using static StringMarshalingTestNative;
 
 class CommonStringTests
@@ -49,7 +48,11 @@ class CommonStringTests
 
         Assert.True(VerifyReversed(InitialString, (orig, rev) => rev == Helpers.Reverse(orig)));
 
-        Assert.True(ReverseInCallback(InitialString, (string str, out string rev) => rev = Helpers.Reverse(InitialString)));
+        Assert.True(
+            ReverseInCallback(InitialString, (string str, out string rev) =>
+                rev = Helpers.Reverse(InitialString)
+            )
+        );
 
         Assert.True(ReverseInCallbackReturned(InitialString, str => Helpers.Reverse(str)));
     }
@@ -66,21 +69,22 @@ class CommonStringTests
 
         builder = new StringBuilder(InitialString);
         Assert.True(ReverseInplaceInCallback(builder, b =>
-        {
-            string reversed = Helpers.Reverse(b.ToString());
-            b.Clear();
-            b.Append(reversed);
-        }));
+            {
+                string reversed = Helpers.Reverse(b.ToString());
+                b.Clear();
+                b.Append(reversed);
+            }));
     }
 
     private static void RunStructTests()
     {
-        Assert.True(MatchFunctionNameInStruct(new StringInStruct { str = nameof(MatchFunctionNameInStruct)}));
+        Assert.True(
+            MatchFunctionNameInStruct(
+                new StringInStruct { str = nameof(MatchFunctionNameInStruct) }
+            )
+        );
 
-        var str = new StringInStruct
-        {
-            str = InitialString
-        };
+        var str = new StringInStruct { str = InitialString };
 
         ReverseInplaceByrefInStruct(ref str);
 

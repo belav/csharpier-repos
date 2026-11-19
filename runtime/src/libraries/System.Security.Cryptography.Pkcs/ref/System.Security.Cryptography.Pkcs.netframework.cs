@@ -7,8 +7,12 @@
 using System.Runtime.CompilerServices;
 
 [assembly: TypeForwardedTo(typeof(System.Security.Cryptography.CryptographicAttributeObject))]
-[assembly: TypeForwardedTo(typeof(System.Security.Cryptography.CryptographicAttributeObjectCollection))]
-[assembly: TypeForwardedTo(typeof(System.Security.Cryptography.CryptographicAttributeObjectEnumerator))]
+[assembly: TypeForwardedTo(
+    typeof(System.Security.Cryptography.CryptographicAttributeObjectCollection)
+)]
+[assembly: TypeForwardedTo(
+    typeof(System.Security.Cryptography.CryptographicAttributeObjectEnumerator)
+)]
 [assembly: TypeForwardedTo(typeof(System.Security.Cryptography.Xml.X509IssuerSerial))]
 [assembly: TypeForwardedTo(typeof(System.Security.Cryptography.Pkcs.AlgorithmIdentifier))]
 [assembly: TypeForwardedTo(typeof(System.Security.Cryptography.Pkcs.CmsRecipient))]

@@ -30,10 +30,7 @@ public class Program
             Console.WriteLine("failed " + action.Method.Name);
             returnCode--;
         }
-        catch (Exception)
-        {
-
-        }
+        catch (Exception) { }
     }
 
     private static void RunTestNoThrow(Action action)
@@ -60,7 +57,7 @@ public static class Tests
     {
         for (int i = 0; i < 3; i++)
         {
-            smallArr[i*3] = 17;
+            smallArr[i * 3] = 17;
         }
     }
 
@@ -70,7 +67,7 @@ public static class Tests
     {
         for (int i = 0; i < 3; i++)
         {
-            smallArr[i*5] = 17;
+            smallArr[i * 5] = 17;
         }
     }
 
@@ -86,7 +83,7 @@ public static class Tests
     {
         for (int i = 0; i < 39768215; i++)
         {
-            bigArr[i*402653184] = 17;
+            bigArr[i * 402653184] = 17;
         }
     }
 
@@ -96,7 +93,7 @@ public static class Tests
     {
         for (int i = 0; i < 3; i++)
         {
-            smallArr[i<<1] = 17;
+            smallArr[i << 1] = 17;
         }
     }
 
@@ -106,8 +103,7 @@ public static class Tests
     {
         for (int i = 0; i < 3; i++)
         {
-            smallArr[i<<3] = 17;
+            smallArr[i << 3] = 17;
         }
     }
-
 }

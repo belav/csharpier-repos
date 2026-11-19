@@ -23,20 +23,25 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
     /// <summary>
     /// Helps fix void-returning methods or local functions to return a correct type.
     /// </summary>
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.FixReturnType), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.FixReturnType
+        ),
+        Shared
+    ]
     internal class CSharpFixReturnTypeCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         // error CS0127: Since 'M()' returns void, a return keyword must not be followed by an object expression
         // error CS1997: Since 'M()' is an async method that returns 'Task', a return keyword must not be followed by an object expression
         // error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create("CS0127", "CS1997", "CS0201");
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create("CS0127", "CS1997", "CS0201");
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpFixReturnTypeCodeFixProvider()
-            : base(supportsFixAll: false)
-        {
-        }
+            : base(supportsFixAll: false) { }
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -44,7 +49,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
             var diagnostics = context.Diagnostics;
             var cancellationToken = context.CancellationToken;
 
-            var analyzedTypes = await TryGetOldAndNewReturnTypeAsync(document, diagnostics, cancellationToken).ConfigureAwait(false);
+            var analyzedTypes = await TryGetOldAndNewReturnTypeAsync(
+                    document,
+                    diagnostics,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (analyzedTypes == default)
                 return;
 
@@ -55,21 +65,33 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
                 return;
             }
 
-            RegisterCodeFix(context, CSharpCodeFixesResources.Fix_return_type, nameof(CSharpCodeFixesResources.Fix_return_type));
+            RegisterCodeFix(
+                context,
+                CSharpCodeFixesResources.Fix_return_type,
+                nameof(CSharpCodeFixesResources.Fix_return_type)
+            );
 
             return;
 
-            static bool IsVoid(TypeSyntax typeSyntax)
-                => typeSyntax is PredefinedTypeSyntax { Keyword.RawKind: (int)SyntaxKind.VoidKeyword };
+            static bool IsVoid(TypeSyntax typeSyntax) =>
+                typeSyntax is PredefinedTypeSyntax { Keyword.RawKind: (int)SyntaxKind.VoidKeyword };
         }
 
-        private static async Task<(TypeSyntax declarationToFix, TypeSyntax fixedDeclaration)> TryGetOldAndNewReturnTypeAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics, CancellationToken cancellationToken)
+        private static async Task<(
+            TypeSyntax declarationToFix,
+            TypeSyntax fixedDeclaration
+        )> TryGetOldAndNewReturnTypeAsync(
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(diagnostics.Length == 1);
             var location = diagnostics[0].Location;
             var node = location.FindNode(getInnermostNodeForTie: true, cancellationToken);
-            var returnedValue = node is ReturnStatementSyntax returnStatement ? returnStatement.Expression : node;
+            var returnedValue = node is ReturnStatementSyntax returnStatement
+                ? returnStatement.Expression
+                : node;
             if (returnedValue is null)
                 return default;
 
@@ -77,13 +99,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
             if (declarationTypeToFix is null)
                 return default;
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var returnedType = semanticModel.GetTypeInfo(returnedValue, cancellationToken).Type;
 
             // Special case when tuple has elements with unknown type, e.g. `(null, default)`
             // Need to replace this unknown elements with default `object`s
-            if (returnedType is null &&
-                returnedValue is TupleExpressionSyntax tuple)
+            if (returnedType is null && returnedValue is TupleExpressionSyntax tuple)
             {
                 returnedType = InferTupleType(tuple, semanticModel, cancellationToken);
             }
@@ -93,7 +116,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
             TypeSyntax fixedDeclaration;
             if (isAsync)
             {
-                var previousReturnType = semanticModel.GetTypeInfo(declarationTypeToFix, cancellationToken).Type;
+                var previousReturnType = semanticModel
+                    .GetTypeInfo(declarationTypeToFix, cancellationToken)
+                    .Type;
                 if (previousReturnType is null)
                     return default;
 
@@ -104,8 +129,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
                 // void, Task -> Task<T>
                 // ValueTask -> ValueTask<T>
                 // other type -> we cannot infer anything
-                if (previousReturnType.SpecialType is SpecialType.System_Void ||
-                    Equals(previousReturnType, compilation.TaskType()))
+                if (
+                    previousReturnType.SpecialType is SpecialType.System_Void
+                    || Equals(previousReturnType, compilation.TaskType())
+                )
                 {
                     taskType = compilation.TaskOfTType();
                 }
@@ -117,46 +144,74 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
                 if (taskType is null)
                     return default;
 
-                fixedDeclaration = taskType.Construct(returnedType).GenerateTypeSyntax(allowVar: false);
+                fixedDeclaration = taskType
+                    .Construct(returnedType)
+                    .GenerateTypeSyntax(allowVar: false);
             }
             else
             {
                 fixedDeclaration = returnedType.GenerateTypeSyntax(allowVar: false);
             }
 
-            fixedDeclaration = fixedDeclaration.WithAdditionalAnnotations(Simplifier.Annotation).WithTriviaFrom(declarationTypeToFix);
+            fixedDeclaration = fixedDeclaration
+                .WithAdditionalAnnotations(Simplifier.Annotation)
+                .WithTriviaFrom(declarationTypeToFix);
 
             return (declarationTypeToFix, fixedDeclaration);
         }
 
-        protected override async Task FixAllAsync(Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+        protected override async Task FixAllAsync(
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var (declarationTypeToFix, fixedDeclaration) =
-                await TryGetOldAndNewReturnTypeAsync(document, diagnostics, cancellationToken).ConfigureAwait(false);
+            var (declarationTypeToFix, fixedDeclaration) = await TryGetOldAndNewReturnTypeAsync(
+                    document,
+                    diagnostics,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             editor.ReplaceNode(declarationTypeToFix, fixedDeclaration);
         }
 
         private static (TypeSyntax type, bool isAsync) TryGetDeclarationTypeToFix(SyntaxNode node)
         {
-            return node.GetAncestors().Select(TryGetReturnTypeToFix).FirstOrDefault(p => p.type != null);
+            return node.GetAncestors()
+                .Select(TryGetReturnTypeToFix)
+                .FirstOrDefault(p => p.type != null);
 
-            static (TypeSyntax type, bool isAsync) TryGetReturnTypeToFix(SyntaxNode containingMember)
+            static (TypeSyntax type, bool isAsync) TryGetReturnTypeToFix(
+                SyntaxNode containingMember
+            )
             {
                 return containingMember switch
                 {
                     // void M() { return 1; }
                     // async Task M() { return 1; }
-                    MethodDeclarationSyntax method => (method.ReturnType, method.Modifiers.Any(SyntaxKind.AsyncKeyword)),
+                    MethodDeclarationSyntax method => (
+                        method.ReturnType,
+                        method.Modifiers.Any(SyntaxKind.AsyncKeyword)
+                    ),
                     // void local() { return 1; }
                     // async Task local() { return 1; }
-                    LocalFunctionStatementSyntax localFunction => (localFunction.ReturnType, localFunction.Modifiers.Any(SyntaxKind.AsyncKeyword)),
+                    LocalFunctionStatementSyntax localFunction => (
+                        localFunction.ReturnType,
+                        localFunction.Modifiers.Any(SyntaxKind.AsyncKeyword)
+                    ),
                     _ => default,
                 };
             }
         }
 
-        private static ITypeSymbol? InferTupleType(TupleExpressionSyntax tuple, SemanticModel semanticModel, CancellationToken cancellationToken)
+        private static ITypeSymbol? InferTupleType(
+            TupleExpressionSyntax tuple,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        )
         {
             var compilation = semanticModel.Compilation;
             var argCount = tuple.Arguments.Count;
@@ -173,8 +228,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
                 var type = semanticModel.GetTypeInfo(argumentExpression, cancellationToken).Type;
 
                 // Nested tuple with unknown type, e.g. `(string.Empty, (2, null))`
-                if (type is null &&
-                    argumentExpression is TupleExpressionSyntax nestedTuple)
+                if (type is null && argumentExpression is TupleExpressionSyntax nestedTuple)
                 {
                     type = InferTupleType(nestedTuple, semanticModel, cancellationToken);
                 }

@@ -3,15 +3,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
-using System.Diagnostics;
-using System.IO;
-
-using ILCompiler;
 using System.Runtime.CompilerServices;
+using ILCompiler;
 
 namespace Internal.TypeSystem.Ecma
 {
@@ -19,7 +18,8 @@ namespace Internal.TypeSystem.Ecma
     {
         private class ManagedBinaryEmitterForInternalUse : TypeSystemMetadataEmitter
         {
-            Dictionary<ModuleDesc, EntityHandle> _moduleRefs = new Dictionary<ModuleDesc, EntityHandle>();
+            Dictionary<ModuleDesc, EntityHandle> _moduleRefs =
+                new Dictionary<ModuleDesc, EntityHandle>();
             List<string> _moduleRefStrings = new List<string>();
             readonly Func<ModuleDesc, int> _moduleToIndex;
 
@@ -36,10 +36,19 @@ namespace Internal.TypeSystem.Ecma
                 }
 
                 string moduleRefString;
-                if (!_mutableModule._moduleToModuleRefString.TryGetValue(module, out moduleRefString))
+                if (
+                    !_mutableModule._moduleToModuleRefString.TryGetValue(
+                        module,
+                        out moduleRefString
+                    )
+                )
                 {
-                    Debug.Assert(_mutableModule.ModuleThatIsCurrentlyTheSourceOfNewReferences != null &&
-                        _mutableModule._compilationGroup.CrossModuleInlineableModule(_mutableModule.ModuleThatIsCurrentlyTheSourceOfNewReferences));
+                    Debug.Assert(
+                        _mutableModule.ModuleThatIsCurrentlyTheSourceOfNewReferences != null
+                            && _mutableModule._compilationGroup.CrossModuleInlineableModule(
+                                _mutableModule.ModuleThatIsCurrentlyTheSourceOfNewReferences
+                            )
+                    );
 
                     if (module == _typeSystemContext.SystemModule)
                     {
@@ -47,7 +56,10 @@ namespace Internal.TypeSystem.Ecma
                     }
                     else
                     {
-                        if (_mutableModule._compilationGroup.CrossModuleInlineableModule(module) || _mutableModule._compilationGroup.VersionsWithModule(module))
+                        if (
+                            _mutableModule._compilationGroup.CrossModuleInlineableModule(module)
+                            || _mutableModule._compilationGroup.VersionsWithModule(module)
+                        )
                         {
                             // References to modules that are explicitly permitted are done via ModuleIndex
                             int index = _moduleToIndex(module);
@@ -57,8 +69,13 @@ namespace Internal.TypeSystem.Ecma
                         else
                         {
                             // Further dependencies are handled by specifying a module which has a further assembly dependency on the correct module
-                            string asmReferenceName = GetNameOfAssemblyRefWhichResolvesToType(_mutableModule.ModuleThatIsCurrentlyTheSourceOfNewReferences, metadataType);
-                            int index = _moduleToIndex(_mutableModule.ModuleThatIsCurrentlyTheSourceOfNewReferences);
+                            string asmReferenceName = GetNameOfAssemblyRefWhichResolvesToType(
+                                _mutableModule.ModuleThatIsCurrentlyTheSourceOfNewReferences,
+                                metadataType
+                            );
+                            int index = _moduleToIndex(
+                                _mutableModule.ModuleThatIsCurrentlyTheSourceOfNewReferences
+                            );
                             Debug.Assert(index != -1);
                             moduleRefString = $"#{asmReferenceName}:{index.ToStringInvariant()}";
                         }
@@ -74,20 +91,26 @@ namespace Internal.TypeSystem.Ecma
                 return result;
             }
 
-            public ManagedBinaryEmitterForInternalUse(AssemblyName assemblyName,
-                                                      TypeSystemContext typeSystemContext,
-                                                      AssemblyFlags assemblyFlags,
-                                                      byte[] publicKeyArray,
-                                                      AssemblyHashAlgorithm hashAlgorithm,
-                                                      Func<ModuleDesc, int> moduleToIndex,
-                                                      MutableModule mutableModule)
+            public ManagedBinaryEmitterForInternalUse(
+                AssemblyName assemblyName,
+                TypeSystemContext typeSystemContext,
+                AssemblyFlags assemblyFlags,
+                byte[] publicKeyArray,
+                AssemblyHashAlgorithm hashAlgorithm,
+                Func<ModuleDesc, int> moduleToIndex,
+                MutableModule mutableModule
+            )
                 : base(assemblyName, typeSystemContext, assemblyFlags, publicKeyArray)
             {
                 _moduleToIndex = moduleToIndex;
                 _mutableModule = mutableModule;
             }
 
-            static ConditionalWeakTable<ModuleDesc, Dictionary<MetadataType, string>> s_assemblyNameFromTypeLookups = new ConditionalWeakTable<ModuleDesc, Dictionary<MetadataType, string>>();
+            static ConditionalWeakTable<
+                ModuleDesc,
+                Dictionary<MetadataType, string>
+            > s_assemblyNameFromTypeLookups =
+                new ConditionalWeakTable<ModuleDesc, Dictionary<MetadataType, string>>();
 
             static Dictionary<MetadataType, string> ComputeTypeLookupTable(ModuleDesc module)
             {
@@ -101,28 +124,39 @@ namespace Internal.TypeSystem.Ecma
                 {
                     try
                     {
-                        MetadataType typeFromTypeRef = ecmaModule.GetType(typeRefHandle) as MetadataType;
+                        MetadataType typeFromTypeRef =
+                            ecmaModule.GetType(typeRefHandle) as MetadataType;
                         if (typeFromTypeRef == null)
                             continue;
                         if (!result.ContainsKey(typeFromTypeRef))
                         {
                             var reader = ecmaModule.MetadataReader;
-                            var resolutionScope = reader.GetTypeReference(typeRefHandle).ResolutionScope;
+                            var resolutionScope = reader
+                                .GetTypeReference(typeRefHandle)
+                                .ResolutionScope;
                             if (resolutionScope.Kind == HandleKind.AssemblyReference)
                             {
-                                var assemblyName = reader.GetString(reader.GetAssemblyReference((AssemblyReferenceHandle)resolutionScope).Name);
+                                var assemblyName = reader.GetString(
+                                    reader
+                                        .GetAssemblyReference(
+                                            (AssemblyReferenceHandle)resolutionScope
+                                        )
+                                        .Name
+                                );
 
                                 result.Add(typeFromTypeRef, assemblyName);
                             }
                         }
                     }
                     catch (TypeSystemException) { }
-
                 }
                 return result;
             }
 
-            static string GetNameOfAssemblyRefWhichResolvesToType(ModuleDesc module, MetadataType type)
+            static string GetNameOfAssemblyRefWhichResolvesToType(
+                ModuleDesc module,
+                MetadataType type
+            )
             {
                 if (!s_assemblyNameFromTypeLookups.TryGetValue(module, out var lookupTable))
                 {
@@ -141,7 +175,7 @@ namespace Internal.TypeSystem.Ecma
             TypeSystemMetadataEmitter _currentBinaryEmitter;
             MetadataReader _reader;
             MutableModule _module;
-            List<byte[]> _readers = new List<byte[]> (); // For now, as we don't maintain knowledge of how long these live, keep them around forever
+            List<byte[]> _readers = new List<byte[]>(); // For now, as we don't maintain knowledge of how long these live, keep them around forever
             public Dictionary<int, object> Entities = new Dictionary<int, object>();
             public Dictionary<object, int> ExistingEntities = new Dictionary<object, int>();
             string _assemblyName;
@@ -151,7 +185,15 @@ namespace Internal.TypeSystem.Ecma
             AssemblyHashAlgorithm _hashAlgorithm;
             Func<ModuleDesc, int> _moduleToIndex;
 
-            public Cache(MutableModule module, string assemblyName, AssemblyFlags assemblyFlags, byte[] publicKeyArray, Version version, AssemblyHashAlgorithm hashAlgorithm, Func<ModuleDesc, int> moduleToIndex)
+            public Cache(
+                MutableModule module,
+                string assemblyName,
+                AssemblyFlags assemblyFlags,
+                byte[] publicKeyArray,
+                Version version,
+                AssemblyHashAlgorithm hashAlgorithm,
+                Func<ModuleDesc, int> moduleToIndex
+            )
             {
                 _module = module;
                 _assemblyName = assemblyName;
@@ -170,11 +212,22 @@ namespace Internal.TypeSystem.Ecma
                 assemblyName.Name = _assemblyName;
                 assemblyName.Version = _version;
 
-                _currentBinaryEmitter = new ManagedBinaryEmitterForInternalUse(assemblyName, _module.Context, _assemblyFlags, _publicKeyArray, _hashAlgorithm, _moduleToIndex, _module);
+                _currentBinaryEmitter = new ManagedBinaryEmitterForInternalUse(
+                    assemblyName,
+                    _module.Context,
+                    _assemblyFlags,
+                    _publicKeyArray,
+                    _hashAlgorithm,
+                    _moduleToIndex,
+                    _module
+                );
                 foreach (var entry in _values)
                 {
                     var perMetadata = _perMetadata[entry.Item1];
-                    var handle = perMetadata.HandleGenerationFunction(_currentBinaryEmitter, entry.Item2);
+                    var handle = perMetadata.HandleGenerationFunction(
+                        _currentBinaryEmitter,
+                        entry.Item2
+                    );
                     Debug.Assert(handle == ExistingEntities[entry.Item2]);
                 }
             }
@@ -186,9 +239,15 @@ namespace Internal.TypeSystem.Ecma
                 public int _cacheIndex;
             }
 
-            public Func<T, int?> CreateCacheFunc<T>(Func<TypeSystemMetadataEmitter, object, int> handleFunc)
+            public Func<T, int?> CreateCacheFunc<T>(
+                Func<TypeSystemMetadataEmitter, object, int> handleFunc
+            )
             {
-                var perMetadataTypeCache = new PerMetadataFormCache<T>(_module, handleFunc, _perMetadata.Count);
+                var perMetadataTypeCache = new PerMetadataFormCache<T>(
+                    _module,
+                    handleFunc,
+                    _perMetadata.Count
+                );
                 _perMetadata.Add(perMetadataTypeCache);
                 return perMetadataTypeCache.TryGet;
             }
@@ -212,8 +271,14 @@ namespace Internal.TypeSystem.Ecma
                         }
 
                         byte[] metadataArrayTemp = _currentBinaryEmitter.EmitToMetadataBlob();
-                        byte[] metadataArray = GC.AllocateArray<byte>(metadataArrayTemp.Length, pinned: true);
-                        System.Runtime.InteropServices.GCHandle.Alloc(metadataArray, System.Runtime.InteropServices.GCHandleType.Pinned);
+                        byte[] metadataArray = GC.AllocateArray<byte>(
+                            metadataArrayTemp.Length,
+                            pinned: true
+                        );
+                        System.Runtime.InteropServices.GCHandle.Alloc(
+                            metadataArray,
+                            System.Runtime.InteropServices.GCHandleType.Pinned
+                        );
                         Array.Copy(metadataArrayTemp, metadataArray, metadataArray.Length);
                         _readers.Add(metadataArray);
                         unsafe
@@ -232,7 +297,7 @@ namespace Internal.TypeSystem.Ecma
             {
                 get
                 {
-                    lock(this)
+                    lock (this)
                     {
                         // Ensure the latest metadata blob is up to date which will have the side-effect of ensuring that the metadata blob is accessible
                         var reader = Reader;
@@ -243,7 +308,11 @@ namespace Internal.TypeSystem.Ecma
 
             class PerMetadataFormCache<T> : PerMetadataFormCache
             {
-                public PerMetadataFormCache(MutableModule module, Func<TypeSystemMetadataEmitter, object, int> handleFunc, int cacheIndex)
+                public PerMetadataFormCache(
+                    MutableModule module,
+                    Func<TypeSystemMetadataEmitter, object, int> handleFunc,
+                    int cacheIndex
+                )
                 {
                     _cacheIndex = cacheIndex;
                     _mutableModule = module;
@@ -257,7 +326,12 @@ namespace Internal.TypeSystem.Ecma
                         try
                         {
                             int result;
-                            if (_mutableModule._cache.ExistingEntities.TryGetValue(value, out result))
+                            if (
+                                _mutableModule._cache.ExistingEntities.TryGetValue(
+                                    value,
+                                    out result
+                                )
+                            )
                             {
                                 return result;
                             }
@@ -270,7 +344,10 @@ namespace Internal.TypeSystem.Ecma
                             if (_mutableModule.DisableNewTokens)
                                 throw new DisableNewTokensException();
 
-                            var handle = HandleGenerationFunction(_mutableModule._cache._currentBinaryEmitter, value);
+                            var handle = HandleGenerationFunction(
+                                _mutableModule._cache._currentBinaryEmitter,
+                                value
+                            );
                             _mutableModule._cache.ExistingEntities.Add(value, handle);
                             _mutableModule._cache.Entities.Add(handle, value);
                             _mutableModule._cache._values.Add((_cacheIndex, value));
@@ -285,17 +362,28 @@ namespace Internal.TypeSystem.Ecma
             }
         }
 
-        public MutableModule(TypeSystemContext context,
-                             string assemblyName,
-                             AssemblyFlags assemblyFlags,
-                             byte[] publicKeyArray,
-                             Version version,
-                             AssemblyHashAlgorithm hashAlgorithm,
-                             Func<ModuleDesc, int> moduleToIndex,
-                             ReadyToRunCompilationModuleGroupBase compilationGroup) : base(context, null)
+        public MutableModule(
+            TypeSystemContext context,
+            string assemblyName,
+            AssemblyFlags assemblyFlags,
+            byte[] publicKeyArray,
+            Version version,
+            AssemblyHashAlgorithm hashAlgorithm,
+            Func<ModuleDesc, int> moduleToIndex,
+            ReadyToRunCompilationModuleGroupBase compilationGroup
+        )
+            : base(context, null)
         {
             _compilationGroup = compilationGroup;
-            _cache = new Cache(this, assemblyName, assemblyFlags, publicKeyArray, version, hashAlgorithm, moduleToIndex);
+            _cache = new Cache(
+                this,
+                assemblyName,
+                assemblyFlags,
+                publicKeyArray,
+                version,
+                hashAlgorithm,
+                moduleToIndex
+            );
             TryGetHandle = _cache.CreateCacheFunc<TypeSystemEntity>(GetHandleForTypeSystemEntity);
             TryGetStringHandle = _cache.CreateCacheFunc<string>(GetUserStringHandle);
             TryGetAssemblyRefHandle = _cache.CreateCacheFunc<AssemblyName>(GetAssemblyRefHandle);
@@ -306,11 +394,14 @@ namespace Internal.TypeSystem.Ecma
         public bool DisableNewTokens;
         public ModuleDesc ModuleThatIsCurrentlyTheSourceOfNewReferences;
         private ReadyToRunCompilationModuleGroupBase _compilationGroup;
-        private Dictionary<ModuleDesc, string> _moduleToModuleRefString = new Dictionary<ModuleDesc, string>();
+        private Dictionary<ModuleDesc, string> _moduleToModuleRefString =
+            new Dictionary<ModuleDesc, string>();
 
         private int GetHandleForTypeSystemEntity(TypeSystemMetadataEmitter emitter, object type)
         {
-            return MetadataTokens.GetToken(emitter.EmitMetadataHandleForTypeSystemEntity((TypeSystemEntity)type));
+            return MetadataTokens.GetToken(
+                emitter.EmitMetadataHandleForTypeSystemEntity((TypeSystemEntity)type)
+            );
         }
 
         private int GetUserStringHandle(TypeSystemMetadataEmitter emitter, object str)
@@ -326,6 +417,7 @@ namespace Internal.TypeSystem.Ecma
         public Func<TypeSystemEntity, int?> TryGetHandle { get; }
         public Func<string, int?> TryGetStringHandle { get; }
         public Func<AssemblyName, int?> TryGetAssemblyRefHandle { get; }
+
         public EntityHandle? TryGetEntityHandle(TypeSystemEntity tse)
         {
             var handle = TryGetHandle(tse);
@@ -334,6 +426,7 @@ namespace Internal.TypeSystem.Ecma
             else
                 return null;
         }
+
         public EntityHandle? TryGetExistingEntityHandle(TypeSystemEntity tse)
         {
             lock (_cache)
@@ -369,11 +462,15 @@ namespace Internal.TypeSystem.Ecma
         }
 
         public override IEnumerable<MetadataType> GetAllTypes() => Array.Empty<MetadataType>();
+
         public override MetadataType GetGlobalModuleType() => null;
 
-        public object GetObject(EntityHandle handle, NotFoundBehavior notFoundBehavior = NotFoundBehavior.Throw)
+        public object GetObject(
+            EntityHandle handle,
+            NotFoundBehavior notFoundBehavior = NotFoundBehavior.Throw
+        )
         {
-            lock(_cache)
+            lock (_cache)
             {
                 if (_cache.Entities.TryGetValue(MetadataTokens.GetToken(handle), out var result))
                 {
@@ -388,21 +485,31 @@ namespace Internal.TypeSystem.Ecma
                 }
             }
 
-            throw new ArgumentException($"Invalid EntityHandle {MetadataTokens.GetToken(handle):X}  passed to MutableModule.GetObject");
+            throw new ArgumentException(
+                $"Invalid EntityHandle {MetadataTokens.GetToken(handle):X}  passed to MutableModule.GetObject"
+            );
         }
 
         public string GetUserString(UserStringHandle handle)
         {
-            lock(_cache)
+            lock (_cache)
             {
                 if (_cache.Entities.TryGetValue(MetadataTokens.GetToken(handle), out var result))
                 {
                     return (string)result;
                 }
             }
-            throw new ArgumentException("Invalid UserStringHandle passed to MutableModule.GetObject");
+            throw new ArgumentException(
+                "Invalid UserStringHandle passed to MutableModule.GetObject"
+            );
         }
-        public override object GetType(string nameSpace, string name, NotFoundBehavior notFoundBehavior) => throw new NotImplementedException();
+
+        public override object GetType(
+            string nameSpace,
+            string name,
+            NotFoundBehavior notFoundBehavior
+        ) => throw new NotImplementedException();
+
         public TypeDesc GetType(EntityHandle handle)
         {
             TypeDesc type = GetObject(handle, NotFoundBehavior.Throw) as TypeDesc;

@@ -47,7 +47,10 @@ namespace System.Globalization.Tests
             }
 
             Assert.Equal(expected.AbbreviatedDayNames, value.AbbreviatedDayNames);
-            Assert.Equal(expected.AbbreviatedMonthGenitiveNames, value.AbbreviatedMonthGenitiveNames);
+            Assert.Equal(
+                expected.AbbreviatedMonthGenitiveNames,
+                value.AbbreviatedMonthGenitiveNames
+            );
             Assert.Equal(expected.AbbreviatedMonthNames, value.AbbreviatedMonthNames);
             Assert.Equal(expected.DayNames, value.DayNames);
             Assert.Equal(expected.MonthGenitiveNames, value.MonthGenitiveNames);
@@ -64,7 +67,10 @@ namespace System.Globalization.Tests
             Assert.Equal(expected.ShortDatePattern, value.ShortDatePattern);
             Assert.Equal(expected.ShortTimePattern, value.ShortTimePattern);
             Assert.Equal(expected.SortableDateTimePattern, value.SortableDateTimePattern);
-            Assert.Equal(expected.UniversalSortableDateTimePattern, value.UniversalSortableDateTimePattern);
+            Assert.Equal(
+                expected.UniversalSortableDateTimePattern,
+                value.UniversalSortableDateTimePattern
+            );
             Assert.Equal(expected.YearMonthPattern, value.YearMonthPattern);
             Assert.Equal(expected.CalendarWeekRule, value.CalendarWeekRule);
             Assert.Equal(expected.FirstDayOfWeek, value.FirstDayOfWeek);
@@ -74,7 +80,10 @@ namespace System.Globalization.Tests
         public void GetInstance_ExpectedCurrent_ReturnsExpected()
         {
             AssertSameValues(DateTimeFormatInfo.CurrentInfo, DateTimeFormatInfo.GetInstance(null));
-            AssertSameValues(DateTimeFormatInfo.CurrentInfo, DateTimeFormatInfo.GetInstance(new TestIFormatProviderClass()));
+            AssertSameValues(
+                DateTimeFormatInfo.CurrentInfo,
+                DateTimeFormatInfo.GetInstance(new TestIFormatProviderClass())
+            );
         }
     }
 }

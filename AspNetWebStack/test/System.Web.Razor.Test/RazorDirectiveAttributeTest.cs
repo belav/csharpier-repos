@@ -12,16 +12,24 @@ namespace System.Web.Razor.Test
         public void ConstructorThrowsIfNameIsNullOrEmpty()
         {
             // Act and Assert
-            Assert.ThrowsArgumentNullOrEmptyString(() => new RazorDirectiveAttribute(name: null, value: "blah"), "name");
-            Assert.ThrowsArgumentNullOrEmptyString(() => new RazorDirectiveAttribute(name: "", value: "blah"), "name");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => new RazorDirectiveAttribute(name: null, value: "blah"),
+                "name"
+            );
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => new RazorDirectiveAttribute(name: "", value: "blah"),
+                "name"
+            );
         }
 
         [Fact]
         public void EnsureRazorDirectiveProperties()
         {
             // Arrange
-            var attribute = (AttributeUsageAttribute)typeof(RazorDirectiveAttribute).GetCustomAttributes(typeof(AttributeUsageAttribute), inherit: false)
-                                                                                     .SingleOrDefault();
+            var attribute = (AttributeUsageAttribute)
+                typeof(RazorDirectiveAttribute)
+                    .GetCustomAttributes(typeof(AttributeUsageAttribute), inherit: false)
+                    .SingleOrDefault();
 
             // Assert
             Assert.True(attribute.AllowMultiple);

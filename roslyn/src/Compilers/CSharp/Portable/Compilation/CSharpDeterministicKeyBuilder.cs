@@ -13,11 +13,12 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         internal static readonly CSharpDeterministicKeyBuilder Instance = new();
 
-        private CSharpDeterministicKeyBuilder()
-        {
-        }
+        private CSharpDeterministicKeyBuilder() { }
 
-        protected override void WriteCompilationOptionsCore(JsonWriter writer, CompilationOptions options)
+        protected override void WriteCompilationOptionsCore(
+            JsonWriter writer,
+            CompilationOptions options
+        )
         {
             if (options is not CSharpCompilationOptions csharpOptions)
             {
@@ -52,9 +53,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             writer.WriteKey("preprocessorSymbols");
             writer.WriteArrayStart();
 
-            // Even though tools like the command line parser don't explicitly order the symbols 
+            // Even though tools like the command line parser don't explicitly order the symbols
             // here the order doesn't actually impact determinism.
-            foreach (var symbol in csharpOptions.PreprocessorSymbols.OrderBy(StringComparer.Ordinal))
+            foreach (
+                var symbol in csharpOptions.PreprocessorSymbols.OrderBy(StringComparer.Ordinal)
+            )
             {
                 writer.Write(symbol);
             }

@@ -6,7 +6,11 @@ namespace System
     public sealed partial class TimeZoneInfo
     {
 #pragma warning disable IDE0060
-        static partial void GetFullValueForDisplayNameField(string timeZoneId, TimeSpan baseUtcOffset, ref string? displayName);
+        static partial void GetFullValueForDisplayNameField(
+            string timeZoneId,
+            TimeSpan baseUtcOffset,
+            ref string? displayName
+        );
 
         static partial void GetStandardDisplayName(string timeZoneId, ref string? displayName);
 
@@ -31,13 +35,22 @@ namespace System
             return null;
         }
 
-        private static unsafe bool TryConvertIanaIdToWindowsId(string ianaId, bool allocate, out string? windowsId)
+        private static unsafe bool TryConvertIanaIdToWindowsId(
+            string ianaId,
+            bool allocate,
+            out string? windowsId
+        )
         {
             windowsId = null;
             return false;
         }
 
-        private static unsafe bool TryConvertWindowsIdToIanaId(string windowsId, string? region, bool allocate,  out string? ianaId)
+        private static unsafe bool TryConvertWindowsIdToIanaId(
+            string windowsId,
+            string? region,
+            bool allocate,
+            out string? ianaId
+        )
         {
             ianaId = null;
             return false;

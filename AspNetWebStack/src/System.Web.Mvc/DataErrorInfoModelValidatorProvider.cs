@@ -9,7 +9,10 @@ namespace System.Web.Mvc
 {
     public class DataErrorInfoModelValidatorProvider : ModelValidatorProvider
     {
-        public override IEnumerable<ModelValidator> GetValidators(ModelMetadata metadata, ControllerContext context)
+        public override IEnumerable<ModelValidator> GetValidators(
+            ModelMetadata metadata,
+            ControllerContext context
+        )
         {
             if (metadata == null)
             {
@@ -23,7 +26,10 @@ namespace System.Web.Mvc
             return GetValidatorsImpl(metadata, context);
         }
 
-        private static IEnumerable<ModelValidator> GetValidatorsImpl(ModelMetadata metadata, ControllerContext context)
+        private static IEnumerable<ModelValidator> GetValidatorsImpl(
+            ModelMetadata metadata,
+            ControllerContext context
+        )
         {
             // If the metadata describes a model that implements IDataErrorInfo, we should call its
             // Error property at the appropriate time.
@@ -47,10 +53,11 @@ namespace System.Web.Mvc
 
         internal sealed class DataErrorInfoClassModelValidator : ModelValidator
         {
-            public DataErrorInfoClassModelValidator(ModelMetadata metadata, ControllerContext controllerContext)
-                : base(metadata, controllerContext)
-            {
-            }
+            public DataErrorInfoClassModelValidator(
+                ModelMetadata metadata,
+                ControllerContext controllerContext
+            )
+                : base(metadata, controllerContext) { }
 
             public override IEnumerable<ModelValidationResult> Validate(object container)
             {
@@ -62,7 +69,7 @@ namespace System.Web.Mvc
                     {
                         return new ModelValidationResult[]
                         {
-                            new ModelValidationResult() { Message = errorMessage }
+                            new ModelValidationResult() { Message = errorMessage },
                         };
                     }
                 }
@@ -72,22 +79,30 @@ namespace System.Web.Mvc
 
         internal sealed class DataErrorInfoPropertyModelValidator : ModelValidator
         {
-            public DataErrorInfoPropertyModelValidator(ModelMetadata metadata, ControllerContext controllerContext)
-                : base(metadata, controllerContext)
-            {
-            }
+            public DataErrorInfoPropertyModelValidator(
+                ModelMetadata metadata,
+                ControllerContext controllerContext
+            )
+                : base(metadata, controllerContext) { }
 
             public override IEnumerable<ModelValidationResult> Validate(object container)
             {
                 IDataErrorInfo castContainer = container as IDataErrorInfo;
-                if (castContainer != null && !String.Equals(Metadata.PropertyName, "error", StringComparison.OrdinalIgnoreCase))
+                if (
+                    castContainer != null
+                    && !String.Equals(
+                        Metadata.PropertyName,
+                        "error",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     string errorMessage = castContainer[Metadata.PropertyName];
                     if (!String.IsNullOrEmpty(errorMessage))
                     {
                         return new ModelValidationResult[]
                         {
-                            new ModelValidationResult() { Message = errorMessage }
+                            new ModelValidationResult() { Message = errorMessage },
                         };
                     }
                 }

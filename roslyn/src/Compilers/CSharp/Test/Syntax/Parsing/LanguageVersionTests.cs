@@ -15,11 +15,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void CurrentVersion()
         {
-            var highest = Enum.
-                GetValues(typeof(LanguageVersion)).
-                Cast<LanguageVersion>().
-                Where(x => x != LanguageVersion.Latest && x != LanguageVersion.Preview && x != LanguageVersion.LatestMajor).
-                Max();
+            var highest = Enum.GetValues(typeof(LanguageVersion))
+                .Cast<LanguageVersion>()
+                .Where(x =>
+                    x != LanguageVersion.Latest
+                    && x != LanguageVersion.Preview
+                    && x != LanguageVersion.LatestMajor
+                )
+                .Max();
 
             Assert.Equal(LanguageVersionFacts.CurrentVersion, highest);
         }

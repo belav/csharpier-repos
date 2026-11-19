@@ -7,7 +7,7 @@ namespace System.ServiceModel.Discovery
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
-    
+
     abstract class ResolveDuplexAsyncResult<TResolveMessage, TResponseChannel> : AsyncResult
     {
         readonly IDiscoveryServiceImplementation discoveryServiceImpl;
@@ -16,19 +16,29 @@ namespace System.ServiceModel.Discovery
         readonly DiscoveryOperationContext context;
         readonly TimeoutHelper timeoutHelper;
 
-        static AsyncCompletion onShouldRedirectResolveCompletedCallback = new AsyncCompletion(OnShouldRedirectResolveCompleted);
-        static AsyncCompletion onSendProxyAnnouncementsCompletedCallback = new AsyncCompletion(OnSendProxyAnnouncementsCompleted);
+        static AsyncCompletion onShouldRedirectResolveCompletedCallback = new AsyncCompletion(
+            OnShouldRedirectResolveCompleted
+        );
+        static AsyncCompletion onSendProxyAnnouncementsCompletedCallback = new AsyncCompletion(
+            OnSendProxyAnnouncementsCompleted
+        );
 
-        static AsyncCompletion onOnResolveCompletedCallback = new AsyncCompletion(OnOnResolveCompleted);
-        static AsyncCompletion onSendResolveResponseCompletedCallback = new AsyncCompletion(OnSendResolveResponseCompleted);
+        static AsyncCompletion onOnResolveCompletedCallback = new AsyncCompletion(
+            OnOnResolveCompleted
+        );
+        static AsyncCompletion onSendResolveResponseCompletedCallback = new AsyncCompletion(
+            OnSendResolveResponseCompleted
+        );
         TResponseChannel responseChannel;
 
         [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        protected ResolveDuplexAsyncResult(TResolveMessage resolveMessage,
+        protected ResolveDuplexAsyncResult(
+            TResolveMessage resolveMessage,
             IDiscoveryServiceImplementation discoveryServiceImpl,
             IMulticastSuppressionImplementation multicastSuppressionImpl,
             AsyncCallback callback,
-            object state)
+            object state
+        )
             : base(callback, state)
         {
             Fx.Assert(resolveMessage != null, "The resolveMessage must be non null.");
@@ -67,18 +77,17 @@ namespace System.ServiceModel.Discovery
 
         protected DiscoveryOperationContext Context
         {
-            get
-            {
-                return this.context;
-            }
+            get { return this.context; }
         }
 
         protected virtual bool Validate(TResolveMessage resolveMessage)
         {
-            return (DiscoveryService.EnsureMessageId() &&
-                DiscoveryService.EnsureReplyTo() &&
-                this.ValidateContent(resolveMessage) &&
-                this.EnsureNotDuplicate());
+            return (
+                DiscoveryService.EnsureMessageId()
+                && DiscoveryService.EnsureReplyTo()
+                && this.ValidateContent(resolveMessage)
+                && this.EnsureNotDuplicate()
+            );
         }
 
         protected abstract bool ValidateContent(TResolveMessage resolveMessage);
@@ -87,19 +96,27 @@ namespace System.ServiceModel.Discovery
 
         protected abstract IAsyncResult BeginSendResolveResponse(
             TResponseChannel responseChannel,
-            DiscoveryMessageSequence discoveryMessageSequence, 
-            EndpointDiscoveryMetadata matchingEndpoint, 
-            AsyncCallback callback, 
-            object state);
-        protected abstract void EndSendResolveResponse(TResponseChannel responseChannel, IAsyncResult result);
+            DiscoveryMessageSequence discoveryMessageSequence,
+            EndpointDiscoveryMetadata matchingEndpoint,
+            AsyncCallback callback,
+            object state
+        );
+        protected abstract void EndSendResolveResponse(
+            TResponseChannel responseChannel,
+            IAsyncResult result
+        );
 
         protected abstract IAsyncResult BeginSendProxyAnnouncement(
             TResponseChannel responseChannel,
             DiscoveryMessageSequence discoveryMessageSequence,
             EndpointDiscoveryMetadata proxyEndpointDiscoveryMetadata,
             AsyncCallback callback,
-            object state);
-        protected abstract void EndSendProxyAnnouncement(TResponseChannel responseChannel, IAsyncResult result);
+            object state
+        );
+        protected abstract void EndSendProxyAnnouncement(
+            TResponseChannel responseChannel,
+            IAsyncResult result
+        );
 
         static bool OnShouldRedirectResolveCompleted(IAsyncResult result)
         {
@@ -108,7 +125,12 @@ namespace System.ServiceModel.Discovery
             ResolveDuplexAsyncResult<TResolveMessage, TResponseChannel> thisPtr =
                 (ResolveDuplexAsyncResult<TResolveMessage, TResponseChannel>)result.AsyncState;
 
-            if (thisPtr.multicastSuppressionImpl.EndShouldRedirectResolve(result, out redirectionEndpoints))
+            if (
+                thisPtr.multicastSuppressionImpl.EndShouldRedirectResolve(
+                    result,
+                    out redirectionEndpoints
+                )
+            )
             {
                 return thisPtr.SendProxyAnnouncements(redirectionEndpoints);
             }
@@ -129,7 +151,9 @@ namespace System.ServiceModel.Discovery
             ResolveDuplexAsyncResult<TResolveMessage, TResponseChannel> thisPtr =
                 (ResolveDuplexAsyncResult<TResolveMessage, TResponseChannel>)result.AsyncState;
 
-            EndpointDiscoveryMetadata matchingEndpoint = thisPtr.discoveryServiceImpl.EndResolve(result);
+            EndpointDiscoveryMetadata matchingEndpoint = thisPtr.discoveryServiceImpl.EndResolve(
+                result
+            );
 
             return thisPtr.SendResolveResponse(matchingEndpoint);
         }
@@ -145,7 +169,10 @@ namespace System.ServiceModel.Discovery
 
         void Process()
         {
-            if ((this.multicastSuppressionImpl != null) && (this.context.DiscoveryMode == ServiceDiscoveryMode.Adhoc))
+            if (
+                (this.multicastSuppressionImpl != null)
+                && (this.context.DiscoveryMode == ServiceDiscoveryMode.Adhoc)
+            )
             {
                 if (this.SuppressResolveRequest())
                 {
@@ -168,7 +195,8 @@ namespace System.ServiceModel.Discovery
             IAsyncResult result = this.multicastSuppressionImpl.BeginShouldRedirectResolve(
                 this.resolveCriteria,
                 this.PrepareAsyncCompletion(onShouldRedirectResolveCompletedCallback),
-                this);
+                this
+            );
 
             return (result.CompletedSynchronously && OnShouldRedirectResolveCompleted(result));
         }
@@ -184,7 +212,8 @@ namespace System.ServiceModel.Discovery
                 this,
                 redirectionEndpoints,
                 this.PrepareAsyncCompletion(onSendProxyAnnouncementsCompletedCallback),
-                this);
+                this
+            );
 
             return (result.CompletedSynchronously && OnSendProxyAnnouncementsCompleted(result));
         }
@@ -194,7 +223,8 @@ namespace System.ServiceModel.Discovery
             IAsyncResult result = this.discoveryServiceImpl.BeginResolve(
                 resolveCriteria,
                 PrepareAsyncCompletion(onOnResolveCompletedCallback),
-                this);
+                this
+            );
 
             return (result.CompletedSynchronously && OnOnResolveCompleted(result));
         }
@@ -219,7 +249,8 @@ namespace System.ServiceModel.Discovery
                     this.discoveryServiceImpl.GetNextMessageSequence(),
                     matchingEndpoint,
                     this.PrepareAsyncCompletion(onSendResolveResponseCompletedCallback),
-                    this);
+                    this
+                );
             }
 
             return (result.CompletedSynchronously && OnSendResolveResponseCompleted(result));
@@ -227,14 +258,17 @@ namespace System.ServiceModel.Discovery
 
         bool EnsureNotDuplicate()
         {
-            bool isDuplicate = this.discoveryServiceImpl.IsDuplicate(OperationContext.Current.IncomingMessageHeaders.MessageId);
+            bool isDuplicate = this.discoveryServiceImpl.IsDuplicate(
+                OperationContext.Current.IncomingMessageHeaders.MessageId
+            );
 
             if (isDuplicate && TD.DuplicateDiscoveryMessageIsEnabled())
             {
                 TD.DuplicateDiscoveryMessage(
                     this.context.EventTraceActivity,
                     ProtocolStrings.TracingStrings.Resolve,
-                    OperationContext.Current.IncomingMessageHeaders.MessageId.ToString());
+                    OperationContext.Current.IncomingMessageHeaders.MessageId.ToString()
+                );
             }
 
             return !isDuplicate;
@@ -244,7 +278,8 @@ namespace System.ServiceModel.Discovery
             EndpointDiscoveryMetadata proxyEndpoint,
             TimeSpan timeout,
             AsyncCallback callback,
-            object state)
+            object state
+        )
         {
             IAsyncResult result;
             IContextChannel contextChannel = (IContextChannel)this.ResponseChannel;
@@ -259,7 +294,8 @@ namespace System.ServiceModel.Discovery
                     this.discoveryServiceImpl.GetNextMessageSequence(),
                     proxyEndpoint,
                     callback,
-                    state);
+                    state
+                );
             }
 
             return result;
@@ -276,15 +312,20 @@ namespace System.ServiceModel.Discovery
             Collection<EndpointDiscoveryMetadata> redirectionEndpoints;
 
             public ProxyAnnouncementsSendAsyncResult(
-                ResolveDuplexAsyncResult<TResolveMessage, TResponseChannel> resolveDuplexAsyncResult,
+                ResolveDuplexAsyncResult<
+                    TResolveMessage,
+                    TResponseChannel
+                > resolveDuplexAsyncResult,
                 Collection<EndpointDiscoveryMetadata> redirectionEndpoints,
                 AsyncCallback callback,
-                object state)
+                object state
+            )
                 : base(
-                redirectionEndpoints.Count,
-                resolveDuplexAsyncResult.context.MaxResponseDelay,
-                callback,
-                state)
+                    redirectionEndpoints.Count,
+                    resolveDuplexAsyncResult.context.MaxResponseDelay,
+                    callback,
+                    state
+                )
             {
                 this.resolveDuplexAsyncResult = resolveDuplexAsyncResult;
                 this.redirectionEndpoints = redirectionEndpoints;
@@ -296,13 +337,19 @@ namespace System.ServiceModel.Discovery
                 AsyncResult.End<ProxyAnnouncementsSendAsyncResult>(result);
             }
 
-            protected override IAsyncResult OnBeginSend(int index, TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginSend(
+                int index,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.resolveDuplexAsyncResult.BeginSendProxyAnnouncement(
                     this.redirectionEndpoints[index],
                     timeout,
                     callback,
-                    state);
+                    state
+                );
             }
 
             protected override void OnEndSend(IAsyncResult result)

@@ -4,18 +4,21 @@
 
 namespace System.ServiceModel.Configuration
 {
+    using System.ComponentModel;
     using System.Configuration;
-    using System.ServiceModel.Channels;
     using System.Globalization;
     using System.Net;
     using System.Net.Security;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
-    using System.ComponentModel;
 
     public partial class MessageSecurityOverHttpElement : ServiceModelConfigurationElement
     {
-        [ConfigurationProperty(ConfigurationStrings.ClientCredentialType, DefaultValue = MessageSecurityOverHttp.DefaultClientCredentialType)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ClientCredentialType,
+            DefaultValue = MessageSecurityOverHttp.DefaultClientCredentialType
+        )]
         [ServiceModelEnumValidator(typeof(MessageCredentialTypeHelper))]
         public MessageCredentialType ClientCredentialType
         {
@@ -23,14 +26,20 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.ClientCredentialType] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.NegotiateServiceCredential, DefaultValue = MessageSecurityOverHttp.DefaultNegotiateServiceCredential)]
+        [ConfigurationProperty(
+            ConfigurationStrings.NegotiateServiceCredential,
+            DefaultValue = MessageSecurityOverHttp.DefaultNegotiateServiceCredential
+        )]
         public bool NegotiateServiceCredential
         {
             get { return (bool)base[ConfigurationStrings.NegotiateServiceCredential]; }
             set { base[ConfigurationStrings.NegotiateServiceCredential] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.AlgorithmSuite, DefaultValue = ConfigurationStrings.Default)]
+        [ConfigurationProperty(
+            ConfigurationStrings.AlgorithmSuite,
+            DefaultValue = ConfigurationStrings.Default
+        )]
         [TypeConverter(typeof(SecurityAlgorithmSuiteConverter))]
         public SecurityAlgorithmSuite AlgorithmSuite
         {
@@ -46,7 +55,12 @@ namespace System.ServiceModel.Configuration
             }
             security.ClientCredentialType = this.ClientCredentialType;
             security.NegotiateServiceCredential = this.NegotiateServiceCredential;
-            if (PropertyValueOrigin.Default != this.ElementInformation.Properties[ConfigurationStrings.AlgorithmSuite].ValueOrigin)
+            if (
+                PropertyValueOrigin.Default
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.AlgorithmSuite]
+                    .ValueOrigin
+            )
             {
                 security.AlgorithmSuite = this.AlgorithmSuite;
             }
@@ -58,11 +72,20 @@ namespace System.ServiceModel.Configuration
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("security");
             }
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ClientCredentialType, security.ClientCredentialType);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.NegotiateServiceCredential, security.NegotiateServiceCredential);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.ClientCredentialType,
+                security.ClientCredentialType
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.NegotiateServiceCredential,
+                security.NegotiateServiceCredential
+            );
             if (security.WasAlgorithmSuiteSet)
             {
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.AlgorithmSuite, security.AlgorithmSuite);
+                SetPropertyValueIfNotDefaultValue(
+                    ConfigurationStrings.AlgorithmSuite,
+                    security.AlgorithmSuite
+                );
             }
         }
 

@@ -1,61 +1,64 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //  FirstMatchCodeGroup.cs
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //
 //  Representation for code groups used for the policy mechanism
 //
 
-namespace System.Security.Policy {
-    
+namespace System.Security.Policy
+{
     using System;
-    using System.Security;
-    using System.Security.Util;
     using System.Collections;
     using System.Diagnostics.Contracts;
-    
+    using System.Security;
+    using System.Security.Util;
+
     [Serializable]
-[System.Runtime.InteropServices.ComVisible(true)]
-    [Obsolete("This type is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.")]
-    sealed public class FirstMatchCodeGroup : CodeGroup
+    [System.Runtime.InteropServices.ComVisible(true)]
+    [Obsolete(
+        "This type is obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+    )]
+    public sealed class FirstMatchCodeGroup : CodeGroup
     {
         internal FirstMatchCodeGroup()
-            : base()
-        {
-        }
-        
-        public FirstMatchCodeGroup( IMembershipCondition membershipCondition, PolicyStatement policy )
-            : base( membershipCondition, policy )
-        {
-        }
-        
-        
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        public override PolicyStatement Resolve( Evidence evidence )
+            : base() { }
+
+        public FirstMatchCodeGroup(IMembershipCondition membershipCondition, PolicyStatement policy)
+            : base(membershipCondition, policy) { }
+
+        [System.Security.SecuritySafeCritical] // auto-generated
+        public override PolicyStatement Resolve(Evidence evidence)
         {
             if (evidence == null)
                 throw new ArgumentNullException("evidence");
             Contract.EndContractBlock();
 
             object usedEvidence = null;
-            if (PolicyManager.CheckMembershipCondition(MembershipCondition,
-                                                       evidence,
-                                                       out usedEvidence))
+            if (
+                PolicyManager.CheckMembershipCondition(
+                    MembershipCondition,
+                    evidence,
+                    out usedEvidence
+                )
+            )
             {
                 PolicyStatement childPolicy = null;
 
                 IEnumerator enumerator = this.Children.GetEnumerator();
-                
+
                 while (enumerator.MoveNext())
                 {
-                    childPolicy = PolicyManager.ResolveCodeGroup(enumerator.Current as CodeGroup,
-                                                                 evidence);
+                    childPolicy = PolicyManager.ResolveCodeGroup(
+                        enumerator.Current as CodeGroup,
+                        evidence
+                    );
 
-                    // If the child has a policy, we are done.                    
+                    // If the child has a policy, we are done.
                     if (childPolicy != null)
                     {
                         break;
@@ -65,7 +68,8 @@ namespace System.Security.Policy {
                 // If any delay-evidence was used to generate this grant set, then we need to keep track of
                 // that for potentially later forcing it to be verified.
                 IDelayEvaluatedEvidence delayEvidence = usedEvidence as IDelayEvaluatedEvidence;
-                bool delayEvidenceNeedsVerification = delayEvidence != null && !delayEvidence.IsVerified;
+                bool delayEvidenceNeedsVerification =
+                    delayEvidence != null && !delayEvidence.IsVerified;
 
                 PolicyStatement thisPolicy = this.PolicyStatement; // PolicyStatement getter makes a copy for us
 
@@ -96,7 +100,7 @@ namespace System.Security.Policy {
                     return combined;
                 }
                 else
-                {  
+                {
                     // Otherwise we just copy the this policy.
                     if (delayEvidenceNeedsVerification)
                     {
@@ -109,38 +113,39 @@ namespace System.Security.Policy {
             else
             {
                 return null;
-            }        
+            }
         }
 
-        public override CodeGroup ResolveMatchingCodeGroups( Evidence evidence )
+        public override CodeGroup ResolveMatchingCodeGroups(Evidence evidence)
         {
             if (evidence == null)
                 throw new ArgumentNullException("evidence");
             Contract.EndContractBlock();
 
-            if (this.MembershipCondition.Check( evidence ))
+            if (this.MembershipCondition.Check(evidence))
             {
                 CodeGroup retGroup = this.Copy();
 
                 retGroup.Children = new ArrayList();
 
                 IEnumerator enumerator = this.Children.GetEnumerator();
-                
+
                 while (enumerator.MoveNext())
                 {
-                    CodeGroup matchingGroups = ((CodeGroup)enumerator.Current).ResolveMatchingCodeGroups( evidence );
-                    
+                    CodeGroup matchingGroups = (
+                        (CodeGroup)enumerator.Current
+                    ).ResolveMatchingCodeGroups(evidence);
+
                     // If the child has a policy, we are done.
-                    
+
                     if (matchingGroups != null)
                     {
-                        retGroup.AddChild( matchingGroups );
+                        retGroup.AddChild(matchingGroups);
                         break;
                     }
                 }
 
                 return retGroup;
-                
             }
             else
             {
@@ -151,7 +156,7 @@ namespace System.Security.Policy {
         public override CodeGroup Copy()
         {
             FirstMatchCodeGroup group = new FirstMatchCodeGroup();
-            
+
             group.MembershipCondition = this.MembershipCondition;
             group.PolicyStatement = this.PolicyStatement;
             group.Name = this.Name;
@@ -161,27 +166,20 @@ namespace System.Security.Policy {
 
             while (enumerator.MoveNext())
             {
-                group.AddChild( (CodeGroup)enumerator.Current );
+                group.AddChild((CodeGroup)enumerator.Current);
             }
-           
+
             return group;
         }
-        
-        
+
         public override String MergeLogic
         {
-            get
-            {
-                return Environment.GetResourceString( "MergeLogic_FirstMatch" );
-            }
-        }     
-    
+            get { return Environment.GetResourceString("MergeLogic_FirstMatch"); }
+        }
+
         internal override String GetTypeName()
         {
             return "System.Security.Policy.FirstMatchCodeGroup";
         }
-    
-    }   
-        
-
+    }
 }

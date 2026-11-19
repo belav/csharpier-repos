@@ -33,7 +33,18 @@ namespace GitHub_49078
 
     public struct BigStruct
     {
-        public IntPtr a, b, c, d, e, f, g, h, j, k, l, m;
+        public IntPtr a,
+            b,
+            c,
+            d,
+            e,
+            f,
+            g,
+            h,
+            j,
+            k,
+            l,
+            m;
 
         public BigStruct(IntPtr a1)
         {

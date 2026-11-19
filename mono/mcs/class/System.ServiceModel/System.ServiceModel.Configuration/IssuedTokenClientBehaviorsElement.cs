@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,14 +32,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
-using System.Net;
-using System.Net.Security;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
+using System.Net;
+using System.Net.Security;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -48,72 +49,77 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel.MsmqIntegration;
 using System.ServiceModel.PeerResolvers;
 using System.ServiceModel.Security;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class IssuedTokenClientBehaviorsElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty behavior_configuration;
-		static ConfigurationProperty issuer_address;
+    [MonoTODO]
+    public sealed partial class IssuedTokenClientBehaviorsElement : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty behavior_configuration;
+        static ConfigurationProperty issuer_address;
 
-		static IssuedTokenClientBehaviorsElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			behavior_configuration = new ConfigurationProperty ("behaviorConfiguration",
-				typeof (string), "", new StringConverter (), null,
-				ConfigurationPropertyOptions.None);
+        static IssuedTokenClientBehaviorsElement()
+        {
+            properties = new ConfigurationPropertyCollection();
+            behavior_configuration = new ConfigurationProperty(
+                "behaviorConfiguration",
+                typeof(string),
+                "",
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			issuer_address = new ConfigurationProperty ("issuerAddress",
-				typeof (string), "", new StringConverter (), null,
-				ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
+            issuer_address = new ConfigurationProperty(
+                "issuerAddress",
+                typeof(string),
+                "",
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
 
-			properties.Add (behavior_configuration);
-			properties.Add (issuer_address);
-		}
+            properties.Add(behavior_configuration);
+            properties.Add(issuer_address);
+        }
 
-		public IssuedTokenClientBehaviorsElement ()
-		{
-		}
+        public IssuedTokenClientBehaviorsElement() { }
 
+        // Properties
 
-		// Properties
+        [ConfigurationProperty(
+            "behaviorConfiguration",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = ""
+        )]
+        [StringValidator(MinLength = 0, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        public string BehaviorConfiguration
+        {
+            get { return (string)base[behavior_configuration]; }
+            set { base[behavior_configuration] = value; }
+        }
 
-		[ConfigurationProperty ("behaviorConfiguration",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "")]
-		[StringValidator ( MinLength = 0,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		public string BehaviorConfiguration {
-			get { return (string) base [behavior_configuration]; }
-			set { base [behavior_configuration] = value; }
-		}
+        [StringValidator(MinLength = 0, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        [ConfigurationProperty(
+            "issuerAddress",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
+            DefaultValue = "",
+            IsRequired = true,
+            IsKey = true
+        )]
+        public string IssuerAddress
+        {
+            get { return (string)base[issuer_address]; }
+            set { base[issuer_address] = value; }
+        }
 
-		[StringValidator ( MinLength = 0,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		[ConfigurationProperty ("issuerAddress",
-			 Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
-			 DefaultValue = "",
-			IsRequired = true,
-			IsKey = true)]
-		public string IssuerAddress {
-			get { return (string) base [issuer_address]; }
-			set { base [issuer_address] = value; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-
-	}
-
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }

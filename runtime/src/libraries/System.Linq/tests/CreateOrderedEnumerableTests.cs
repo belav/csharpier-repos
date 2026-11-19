@@ -11,7 +11,9 @@ namespace System.Linq.Tests
         public void ThrowsNullKeySelector()
         {
             var enumerable = new int[0].Order();
-            Assert.Throws<ArgumentNullException>(() => enumerable.CreateOrderedEnumerable((Func<int, int>)null!, null, false));
+            Assert.Throws<ArgumentNullException>(() =>
+                enumerable.CreateOrderedEnumerable((Func<int, int>)null!, null, false)
+            );
         }
     }
 }

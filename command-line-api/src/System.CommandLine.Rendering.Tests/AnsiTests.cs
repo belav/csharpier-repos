@@ -62,7 +62,7 @@ namespace System.CommandLine.Rendering.Tests
             Ansi.Cursor.Move.ToLocation().EscapeSequence.Should().Be($"{Ansi.Esc}[1;1H");
             Ansi.Cursor.Move.ToLocation(3).EscapeSequence.Should().Be($"{Ansi.Esc}[1;3H");
             Ansi.Cursor.Move.ToLocation(top: 2).EscapeSequence.Should().Be($"{Ansi.Esc}[2;1H");
-            Ansi.Cursor.Move.ToLocation(5,4).EscapeSequence.Should().Be($"{Ansi.Esc}[4;5H");
+            Ansi.Cursor.Move.ToLocation(5, 4).EscapeSequence.Should().Be($"{Ansi.Esc}[4;5H");
         }
 
         [Fact]

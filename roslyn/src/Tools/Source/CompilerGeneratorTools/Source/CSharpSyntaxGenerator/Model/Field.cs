@@ -9,9 +9,7 @@ using System.Xml.Serialization;
 
 namespace CSharpSyntaxGenerator
 {
-    public class TreeTypeChild
-    {
-    }
+    public class TreeTypeChild { }
 
     public class Choice : TreeTypeChild
     {

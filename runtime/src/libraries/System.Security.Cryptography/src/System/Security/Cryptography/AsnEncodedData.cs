@@ -39,13 +39,11 @@ namespace System.Security.Cryptography
             Reset(asnEncodedData._oid, asnEncodedData._rawData);
         }
 
-        public AsnEncodedData(Oid? oid, byte[] rawData) : this(oid, rawData, skipCopy: false)
-        {
-        }
+        public AsnEncodedData(Oid? oid, byte[] rawData)
+            : this(oid, rawData, skipCopy: false) { }
 
-        public AsnEncodedData(string oid, byte[] rawData) : this(new Oid(oid), rawData, skipCopy: false)
-        {
-        }
+        public AsnEncodedData(string oid, byte[] rawData)
+            : this(new Oid(oid), rawData, skipCopy: false) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="AsnEncodedData"/> class from an object identifier
@@ -89,7 +87,6 @@ namespace System.Security.Cryptography
             {
                 Reset(oid, rawData);
             }
-
         }
 
         public Oid? Oid
@@ -105,7 +102,6 @@ namespace System.Security.Cryptography
                 // .NET Framework compat demands we return the array without copying.
                 return _rawData;
             }
-
             [MemberNotNull(nameof(_rawData))]
             set
             {

@@ -29,7 +29,6 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         /// If <see cref="BasicBlock.BranchValue"/> evaluates to <code>true</code>,
         /// then the branch <see cref="BasicBlock.ConditionalSuccessor"/> is taken.
         /// </summary>
-        WhenTrue
+        WhenTrue,
     }
 }
-

@@ -34,7 +34,11 @@ namespace System.Reflection.Metadata.Tests
             return Slice(bytes, start, bytes.Length);
         }
 
-        public static ImmutableArray<byte> Slice(this ImmutableArray<byte> bytes, int start, int end)
+        public static ImmutableArray<byte> Slice(
+            this ImmutableArray<byte> bytes,
+            int start,
+            int end
+        )
         {
             if (end < 0)
             {

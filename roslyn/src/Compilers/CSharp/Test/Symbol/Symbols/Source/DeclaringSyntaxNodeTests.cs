@@ -20,20 +20,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Source
     {
         // Check that the given symbol has the expected number of declaring syntax nodes.
         // and that each declared node goes back to the given symbol.
-        private ImmutableArray<SyntaxReference> CheckDeclaringSyntaxNodes(Compilation compilation,
-                                               ISymbol symbol,
-                                               int expectedNumber)
+        private ImmutableArray<SyntaxReference> CheckDeclaringSyntaxNodes(
+            Compilation compilation,
+            ISymbol symbol,
+            int expectedNumber
+        )
         {
             var declaringReferences = symbol.DeclaringSyntaxReferences;
             Assert.Equal(expectedNumber, declaringReferences.Length);
 
             if (expectedNumber == 0)
             {
-                Assert.True(!symbol.GetSymbol().IsFromCompilation((CSharpCompilation)compilation) || symbol.IsImplicitlyDeclared, "non-implicitly declares source symbol should have declaring location");
+                Assert.True(
+                    !symbol.GetSymbol().IsFromCompilation((CSharpCompilation)compilation)
+                        || symbol.IsImplicitlyDeclared,
+                    "non-implicitly declares source symbol should have declaring location"
+                );
             }
             else
             {
-                Assert.True(symbol.GetSymbol().IsFromCompilation((CSharpCompilation)compilation) || symbol.GetSymbol() is MergedNamespaceSymbol, "symbol with declaration should be in source, except for merged namespaces");
+                Assert.True(
+                    symbol.GetSymbol().IsFromCompilation((CSharpCompilation)compilation)
+                        || symbol.GetSymbol() is MergedNamespaceSymbol,
+                    "symbol with declaration should be in source, except for merged namespaces"
+                );
                 Assert.False(symbol.IsImplicitlyDeclared);
 
                 foreach (var node in declaringReferences.Select(d => d.GetSyntax()))
@@ -49,9 +59,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Source
             return declaringReferences;
         }
 
-        private ImmutableArray<SyntaxReference> CheckDeclaringSyntaxNodesIncludingParameters(Compilation compilation,
-                                               ISymbol symbol,
-                                               int expectedNumber)
+        private ImmutableArray<SyntaxReference> CheckDeclaringSyntaxNodesIncludingParameters(
+            Compilation compilation,
+            ISymbol symbol,
+            int expectedNumber
+        )
         {
             var nodes = CheckDeclaringSyntaxNodes(compilation, symbol, expectedNumber);
 
@@ -59,7 +71,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Source
             if (meth != null)
             {
                 foreach (IParameterSymbol p in meth.Parameters)
-                    CheckDeclaringSyntaxNodes(compilation, p, meth.GetSymbol().IsAccessor() ? 0 : expectedNumber);
+                    CheckDeclaringSyntaxNodes(
+                        compilation,
+                        p,
+                        meth.GetSymbol().IsAccessor() ? 0 : expectedNumber
+                    );
             }
 
             var prop = symbol as IPropertySymbol;
@@ -74,23 +90,36 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Source
 
         // Check that the given symbol has the expected number of declaring syntax nodes.
         // and that the syntax has the expected kind. Does NOT test GetDeclaringSymbol
-        private ImmutableArray<SyntaxReference> CheckDeclaringSyntaxNodesWithoutGetDeclaredSymbol(Compilation compilation,
-                                               ISymbol symbol,
-                                               int expectedNumber,
-                                               SyntaxKind expectedSyntaxKind)
+        private ImmutableArray<SyntaxReference> CheckDeclaringSyntaxNodesWithoutGetDeclaredSymbol(
+            Compilation compilation,
+            ISymbol symbol,
+            int expectedNumber,
+            SyntaxKind expectedSyntaxKind
+        )
         {
             var declaringReferences = symbol.DeclaringSyntaxReferences;
             Assert.Equal(expectedNumber, declaringReferences.Length);
 
             if (expectedNumber == 0)
             {
-                Assert.True(!symbol.GetSymbol().IsFromCompilation((CSharpCompilation)compilation) || symbol.IsImplicitlyDeclared, "non-implicitly declares source symbol should have declaring location");
+                Assert.True(
+                    !symbol.GetSymbol().IsFromCompilation((CSharpCompilation)compilation)
+                        || symbol.IsImplicitlyDeclared,
+                    "non-implicitly declares source symbol should have declaring location"
+                );
             }
             else
             {
-                Assert.True(symbol.GetSymbol().IsFromCompilation((CSharpCompilation)compilation) || symbol.GetSymbol() is MergedNamespaceSymbol, "symbol with declaration should be in source, except for merged namespaces");
+                Assert.True(
+                    symbol.GetSymbol().IsFromCompilation((CSharpCompilation)compilation)
+                        || symbol.GetSymbol() is MergedNamespaceSymbol,
+                    "symbol with declaration should be in source, except for merged namespaces"
+                );
 
-                if (symbol.Kind == SymbolKind.Namespace && ((INamespaceSymbol)symbol).IsGlobalNamespace)
+                if (
+                    symbol.Kind == SymbolKind.Namespace
+                    && ((INamespaceSymbol)symbol).IsGlobalNamespace
+                )
                 {
                     Assert.True(symbol.IsImplicitlyDeclared);
                 }
@@ -109,7 +138,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Source
             return declaringReferences;
         }
 
-        private void AssertDeclaringSyntaxNodes(Symbol symbol, CSharpCompilation compilation, params SyntaxNode[] expectedSyntaxNodes)
+        private void AssertDeclaringSyntaxNodes(
+            Symbol symbol,
+            CSharpCompilation compilation,
+            params SyntaxNode[] expectedSyntaxNodes
+        )
         {
             int expectedNumber = expectedSyntaxNodes.Length;
             var declaringReferences = symbol.DeclaringSyntaxReferences;
@@ -117,11 +150,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Source
 
             if (expectedNumber == 0)
             {
-                Assert.True(!symbol.IsFromCompilation(compilation) || symbol.IsImplicitlyDeclared, "non-implicitly declares source symbol should have declaring location");
+                Assert.True(
+                    !symbol.IsFromCompilation(compilation) || symbol.IsImplicitlyDeclared,
+                    "non-implicitly declares source symbol should have declaring location"
+                );
             }
             else
             {
-                Assert.True(symbol.IsFromCompilation(compilation) || symbol is MergedNamespaceSymbol, "symbol with declaration should be in source, except for merged namespaces");
+                Assert.True(
+                    symbol.IsFromCompilation(compilation) || symbol is MergedNamespaceSymbol,
+                    "symbol with declaration should be in source, except for merged namespaces"
+                );
                 Assert.False(symbol.IsImplicitlyDeclared);
 
                 for (int i = 0; i < expectedNumber; i++)
@@ -131,7 +170,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Source
             }
         }
 
-        private void CheckDeclaringSyntax<TNode>(CSharpCompilation comp, SyntaxTree tree, string name, SymbolKind kind)
+        private void CheckDeclaringSyntax<TNode>(
+            CSharpCompilation comp,
+            SyntaxTree tree,
+            string name,
+            SymbolKind kind
+        )
             where TNode : CSharpSyntaxNode
         {
             var model = comp.GetSemanticModel(tree);
@@ -146,19 +190,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Source
             CheckDeclaringSyntaxNodes(comp, sym, 1);
         }
 
-        private void CheckLambdaDeclaringSyntax<TNode>(CSharpCompilation comp, SyntaxTree tree, string textToSearchFor)
+        private void CheckLambdaDeclaringSyntax<TNode>(
+            CSharpCompilation comp,
+            SyntaxTree tree,
+            string textToSearchFor
+        )
             where TNode : ExpressionSyntax
         {
             var model = comp.GetSemanticModel(tree);
             string code = tree.GetText().ToString();
             int position = code.IndexOf(textToSearchFor, StringComparison.Ordinal);
-            var node = tree.GetCompilationUnitRoot().FindToken(position).Parent.FirstAncestorOrSelf<TNode>();
+            var node = tree.GetCompilationUnitRoot()
+                .FindToken(position)
+                .Parent.FirstAncestorOrSelf<TNode>();
             var sym = model.GetSymbolInfo(node).Symbol as IMethodSymbol;
 
             Assert.NotNull(sym);
             Assert.Equal(MethodKind.AnonymousFunction, sym.MethodKind);
 
-            var nodes = CheckDeclaringSyntaxNodesWithoutGetDeclaredSymbol(comp, sym, 1, node.Kind());
+            var nodes = CheckDeclaringSyntaxNodesWithoutGetDeclaredSymbol(
+                comp,
+                sym,
+                1,
+                node.Kind()
+            );
             Assert.Equal(nodes[0].GetSyntax(), node);
 
             foreach (IParameterSymbol p in sym.Parameters)
@@ -171,8 +226,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Source
         public void SourceNamedTypeDeclaringSyntax(string ob, string cb)
         {
             var text =
-@"
-namespace N1 " + ob + @"
+                @"
+namespace N1 "
+                + ob
+                + @"
     class C1<T> {
         class Nested<U> {}
         delegate int NestedDel(string s);
@@ -183,7 +240,9 @@ namespace N1 " + ob + @"
     internal interface I1 {}
     enum E1 { Red }
     delegate void D1(int i);
-" + cb + @"
+"
+                + cb
+                + @"
 ";
             var comp = (Compilation)CreateCompilation(text);
             var global = comp.GlobalNamespace;
@@ -202,7 +261,7 @@ namespace N1 " + ob + @"
             var s1 = n1.GetTypeMembers("S1").Single() as INamedTypeSymbol;
             var f = s1.GetMembers("f").Single() as IFieldSymbol;
 
-            CheckDeclaringSyntaxNodes(comp, f.Type, 1);  // constructed type C1<int>.
+            CheckDeclaringSyntaxNodes(comp, f.Type, 1); // constructed type C1<int>.
 
             // Nested types.
             foreach (ISymbol s in c1.GetTypeMembers())
@@ -215,7 +274,7 @@ namespace N1 " + ob + @"
         public void NonSourceTypeDeclaringSyntax()
         {
             var text =
-@"
+                @"
 namespace N1 {
     class C1 {
         object o;
@@ -245,7 +304,7 @@ namespace N1 {
         public void AnonTypeDeclaringSyntax()
         {
             var text =
-@"
+                @"
 class C1 {
     void f()
     {
@@ -260,13 +319,20 @@ class C1 {
             var global = comp.GlobalNamespace;
             int posA1 = text.IndexOf("a1", StringComparison.Ordinal);
 
-            var declaratorA1 = tree.GetCompilationUnitRoot().FindToken(posA1).Parent.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
+            var declaratorA1 = tree.GetCompilationUnitRoot()
+                .FindToken(posA1)
+                .Parent.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
             var localA1 = (ILocalSymbol)model.GetDeclaredSymbol(declaratorA1);
             var localA1Type = localA1.Type;
             Assert.True(localA1Type.IsAnonymousType);
 
             // Anonymous types don't support GetDeclaredSymbol.
-            CheckDeclaringSyntaxNodesWithoutGetDeclaredSymbol(comp, localA1Type, 1, SyntaxKind.AnonymousObjectCreationExpression);
+            CheckDeclaringSyntaxNodesWithoutGetDeclaredSymbol(
+                comp,
+                localA1Type,
+                1,
+                SyntaxKind.AnonymousObjectCreationExpression
+            );
 
             // Check members of the anonymous type.
             foreach (ISymbol memb in localA1Type.GetMembers())
@@ -275,7 +341,7 @@ class C1 {
 
                 if (memb is IPropertySymbol)
                 {
-                    expectedDeclaringNodes = 1;  // declared property 
+                    expectedDeclaringNodes = 1; // declared property
                 }
 
                 CheckDeclaringSyntaxNodes(comp, memb, expectedDeclaringNodes);
@@ -287,7 +353,7 @@ class C1 {
         public void AnonymousTypeSymbolWithExplicitNew()
         {
             var text =
-@"
+                @"
 class C1 {
     void f()
     {
@@ -304,47 +370,70 @@ class C1 {
 
             // check 'q'
             int posQ = text.IndexOf('q');
-            var declaratorQ = tree.GetCompilationUnitRoot().FindToken(posQ).Parent.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
-            CheckAnonymousType(model,
+            var declaratorQ = tree.GetCompilationUnitRoot()
+                .FindToken(posQ)
+                .Parent.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
+            CheckAnonymousType(
+                model,
                 (ILocalSymbol)model.GetDeclaredSymbol(declaratorQ),
-                (AnonymousObjectCreationExpressionSyntax)declaratorQ.Initializer.Value);
+                (AnonymousObjectCreationExpressionSyntax)declaratorQ.Initializer.Value
+            );
 
             // check 'x'
             int posX = text.IndexOf('x');
-            var declaratorX = tree.GetCompilationUnitRoot().FindToken(posX).Parent.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
-            CheckAnonymousType(model,
+            var declaratorX = tree.GetCompilationUnitRoot()
+                .FindToken(posX)
+                .Parent.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
+            CheckAnonymousType(
+                model,
                 (ILocalSymbol)model.GetDeclaredSymbol(declaratorX),
-                (AnonymousObjectCreationExpressionSyntax)declaratorX.Initializer.Value);
+                (AnonymousObjectCreationExpressionSyntax)declaratorX.Initializer.Value
+            );
 
             // check 'z' --> 'x'
             int posZ = text.IndexOf('z');
-            var declaratorZ = tree.GetCompilationUnitRoot().FindToken(posZ).Parent.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
-            CheckAnonymousType(model,
+            var declaratorZ = tree.GetCompilationUnitRoot()
+                .FindToken(posZ)
+                .Parent.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
+            CheckAnonymousType(
+                model,
                 (ILocalSymbol)model.GetDeclaredSymbol(declaratorZ),
-                (AnonymousObjectCreationExpressionSyntax)declaratorX.Initializer.Value);
+                (AnonymousObjectCreationExpressionSyntax)declaratorX.Initializer.Value
+            );
         }
 
-        private void CheckAnonymousType(SemanticModel model, ILocalSymbol local, AnonymousObjectCreationExpressionSyntax anonObjectCreation)
+        private void CheckAnonymousType(
+            SemanticModel model,
+            ILocalSymbol local,
+            AnonymousObjectCreationExpressionSyntax anonObjectCreation
+        )
         {
             var localType = local.Type;
             Assert.True(localType.IsAnonymousType);
 
-            // IsImplicitlyDeclared: Return false. The new { } clause 
+            // IsImplicitlyDeclared: Return false. The new { } clause
             //                       serves as the declaration.
             Assert.False(localType.IsImplicitlyDeclared);
 
-            // DeclaringSyntaxNodes: Return the AnonymousObjectCreationExpression from the particular 
+            // DeclaringSyntaxNodes: Return the AnonymousObjectCreationExpression from the particular
             //                       anonymous type definition that flowed to this usage.
-            AssertDeclaringSyntaxNodes(((CSharp.Symbols.PublicModel.Symbol)localType).UnderlyingSymbol, (CSharpCompilation)model.Compilation, anonObjectCreation);
+            AssertDeclaringSyntaxNodes(
+                ((CSharp.Symbols.PublicModel.Symbol)localType).UnderlyingSymbol,
+                (CSharpCompilation)model.Compilation,
+                anonObjectCreation
+            );
 
-            // SemanticModel.GetDeclaredSymbol: Return this symbol when applied to the 
+            // SemanticModel.GetDeclaredSymbol: Return this symbol when applied to the
             //                                  AnonymousObjectCreationExpression in the new { } declaration.
             var symbol = model.GetDeclaredSymbol(anonObjectCreation);
             Assert.NotNull(symbol);
             Assert.Equal<ISymbol>(localType, symbol);
-            Assert.Same(localType.DeclaringSyntaxReferences[0].GetSyntax(), symbol.DeclaringSyntaxReferences[0].GetSyntax());
+            Assert.Same(
+                localType.DeclaringSyntaxReferences[0].GetSyntax(),
+                symbol.DeclaringSyntaxReferences[0].GetSyntax()
+            );
 
-            // Locations: Return the Span of that particular 
+            // Locations: Return the Span of that particular
             //            AnonymousObjectCreationExpression's NewKeyword.
             Assert.Equal(1, localType.Locations.Length);
             Assert.Equal(localType.Locations[0], anonObjectCreation.NewKeyword.GetLocation());
@@ -355,32 +444,41 @@ class C1 {
             {
                 if (member.Kind == SymbolKind.Property)
                 {
-                    // Equals: Return true when comparing same-named members of 
+                    // Equals: Return true when comparing same-named members of
                     //         structurally-equivalent anonymous type symbols.
                     var members = symbol.GetMembers(member.Name);
                     Assert.Equal(1, members.Length);
                     Assert.Equal(member, members[0]);
 
-                    // IsImplicitlyDeclared: Return false. The goo = bar clause in 
+                    // IsImplicitlyDeclared: Return false. The goo = bar clause in
                     //                       the new { } clause serves as the declaration.
                     Assert.False(member.IsImplicitlyDeclared);
 
-                    // DeclaringSyntaxNodes: Return the AnonymousObjectMemberDeclarator from the 
+                    // DeclaringSyntaxNodes: Return the AnonymousObjectMemberDeclarator from the
                     //                       particular property definition that flowed to this usage.
                     var propertyInitializer = anonObjectCreation.Initializers[propIndex];
                     Assert.Equal(1, member.DeclaringSyntaxReferences.Length);
-                    Assert.Same(propertyInitializer, member.DeclaringSyntaxReferences[0].GetSyntax());
+                    Assert.Same(
+                        propertyInitializer,
+                        member.DeclaringSyntaxReferences[0].GetSyntax()
+                    );
 
-                    // SemanticModel.GetDeclaredSymbol: Return this symbol when applied to its new { } 
+                    // SemanticModel.GetDeclaredSymbol: Return this symbol when applied to its new { }
                     //                                  declaration's AnonymousObjectMemberDeclarator.
                     var propSymbol = model.GetDeclaredSymbol(propertyInitializer);
                     Assert.Equal<ISymbol>(member, propSymbol);
-                    Assert.Same(propertyInitializer, propSymbol.DeclaringSyntaxReferences[0].GetSyntax());
+                    Assert.Same(
+                        propertyInitializer,
+                        propSymbol.DeclaringSyntaxReferences[0].GetSyntax()
+                    );
 
-                    // Locations: Return the Span of that particular 
+                    // Locations: Return the Span of that particular
                     //            AnonymousObjectMemberDeclarator's IdentifierToken.
                     Assert.Equal(1, member.Locations.Length);
-                    Assert.Equal(member.Locations[0], propertyInitializer.NameEquals.Name.GetLocation());
+                    Assert.Equal(
+                        member.Locations[0],
+                        propertyInitializer.NameEquals.Name.GetLocation()
+                    );
 
                     propIndex++;
                 }
@@ -391,7 +489,7 @@ class C1 {
         public void NamespaceDeclaringSyntax()
         {
             var text =
-@"
+                @"
 namespace N1 {
     namespace N2 {
         namespace N3 {}
@@ -416,19 +514,31 @@ namespace System {}
             CheckDeclaringSyntaxNodes(comp, system, 1);
 
             // Can't use GetDeclaredSymbol for N1 or global.
-            CheckDeclaringSyntaxNodesWithoutGetDeclaredSymbol(comp, n1, 2, SyntaxKind.NamespaceDeclaration);
-            CheckDeclaringSyntaxNodesWithoutGetDeclaredSymbol(comp, global, 1, SyntaxKind.CompilationUnit);
+            CheckDeclaringSyntaxNodesWithoutGetDeclaredSymbol(
+                comp,
+                n1,
+                2,
+                SyntaxKind.NamespaceDeclaration
+            );
+            CheckDeclaringSyntaxNodesWithoutGetDeclaredSymbol(
+                comp,
+                global,
+                1,
+                SyntaxKind.CompilationUnit
+            );
         }
 
         [Theory, MemberData(nameof(FileScopedOrBracedNamespace))]
         public void TypeParameterDeclaringSyntax(string ob, string cb)
         {
             var text =
-@"
+                @"
 using System;
 using System.Collections.Generic;
 
-namespace N1 " + ob + @"
+namespace N1 "
+                + ob
+                + @"
     class C1<T, U> {
         class C2<W> {
             public C1<int, string>.C2<W> f1;
@@ -442,7 +552,9 @@ namespace N1 " + ob + @"
 
     class M {
     }
-" + cb + @"
+"
+                + cb
+                + @"
 ";
             var comp = (Compilation)CreateCompilation(text);
             var global = comp.GlobalNamespace;
@@ -485,7 +597,7 @@ namespace N1 " + ob + @"
         public void MemberDeclaringSyntax()
         {
             var text =
-@"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -520,8 +632,11 @@ namespace N1 {
 
             foreach (ISymbol memb in e1.GetMembers())
             {
-                if (memb.Kind == SymbolKind.Method && ((IMethodSymbol)memb).MethodKind == MethodKind.Constructor)
-                    CheckDeclaringSyntaxNodesIncludingParameters(comp, memb, 0);  // implicit constructor
+                if (
+                    memb.Kind == SymbolKind.Method
+                    && ((IMethodSymbol)memb).MethodKind == MethodKind.Constructor
+                )
+                    CheckDeclaringSyntaxNodesIncludingParameters(comp, memb, 0); // implicit constructor
                 else
                     CheckDeclaringSyntaxNodesIncludingParameters(comp, memb, 1);
             }
@@ -536,14 +651,20 @@ namespace N1 {
                 if (memb is IMethodSymbol)
                 {
                     var meth = (IMethodSymbol)memb;
-                    if (meth.AssociatedSymbol != null && meth.AssociatedSymbol.OriginalDefinition.Equals(ev1))
-                        expectedDeclaringNodes = 0;  // implicit accessor.
+                    if (
+                        meth.AssociatedSymbol != null
+                        && meth.AssociatedSymbol.OriginalDefinition.Equals(ev1)
+                    )
+                        expectedDeclaringNodes = 0; // implicit accessor.
                 }
                 if (memb is IFieldSymbol)
                 {
                     var fld = (IFieldSymbol)memb;
-                    if (fld.AssociatedSymbol != null && fld.AssociatedSymbol.OriginalDefinition.Equals(prop3))
-                        expectedDeclaringNodes = 0;  // auto-prop backing field.
+                    if (
+                        fld.AssociatedSymbol != null
+                        && fld.AssociatedSymbol.OriginalDefinition.Equals(prop3)
+                    )
+                        expectedDeclaringNodes = 0; // auto-prop backing field.
                 }
 
                 CheckDeclaringSyntaxNodesIncludingParameters(comp, memb, expectedDeclaringNodes);
@@ -559,14 +680,20 @@ namespace N1 {
                 if (memb is IMethodSymbol)
                 {
                     var meth = (IMethodSymbol)memb;
-                    if (meth.AssociatedSymbol != null && meth.AssociatedSymbol.OriginalDefinition.Equals(ev1))
-                        expectedDeclaringNodes = 0;  // implicit accessor.
+                    if (
+                        meth.AssociatedSymbol != null
+                        && meth.AssociatedSymbol.OriginalDefinition.Equals(ev1)
+                    )
+                        expectedDeclaringNodes = 0; // implicit accessor.
                 }
                 if (memb is IFieldSymbol)
                 {
                     var fld = (IFieldSymbol)memb;
-                    if (fld.AssociatedSymbol != null && fld.AssociatedSymbol.OriginalDefinition.Equals(prop3))
-                        expectedDeclaringNodes = 0;  // auto-prop backing field.
+                    if (
+                        fld.AssociatedSymbol != null
+                        && fld.AssociatedSymbol.OriginalDefinition.Equals(prop3)
+                    )
+                        expectedDeclaringNodes = 0; // auto-prop backing field.
                 }
 
                 CheckDeclaringSyntaxNodesIncludingParameters(comp, memb, expectedDeclaringNodes);
@@ -583,7 +710,7 @@ namespace N1 {
         public void LocalDeclaringSyntax()
         {
             var text =
-@"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -615,7 +742,7 @@ class C1
         public void LabelDeclaringSyntax()
         {
             var text =
-@"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -648,7 +775,7 @@ class C1
         public void AliasDeclaringSyntax()
         {
             var text =
-@"
+                @"
 using System;
 using System.Collections.Generic;
 using ConsoleAlias=System.Console;
@@ -661,8 +788,18 @@ namespace N1
 ";
             var tree = Parse(text);
             var comp = CreateCompilation(tree);
-            CheckDeclaringSyntax<UsingDirectiveSyntax>(comp, tree, "ConsoleAlias", SymbolKind.Alias);
-            CheckDeclaringSyntax<UsingDirectiveSyntax>(comp, tree, "ListOfIntAlias", SymbolKind.Alias);
+            CheckDeclaringSyntax<UsingDirectiveSyntax>(
+                comp,
+                tree,
+                "ConsoleAlias",
+                SymbolKind.Alias
+            );
+            CheckDeclaringSyntax<UsingDirectiveSyntax>(
+                comp,
+                tree,
+                "ListOfIntAlias",
+                SymbolKind.Alias
+            );
             CheckDeclaringSyntax<UsingDirectiveSyntax>(comp, tree, "GooAlias", SymbolKind.Alias);
         }
 
@@ -670,7 +807,7 @@ namespace N1
         public void RangeVariableDeclaringSyntax()
         {
             var text =
-@"
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -689,17 +826,27 @@ class C
             var comp = CreateCompilation(tree);
             CheckDeclaringSyntax<QueryClauseSyntax>(comp, tree, "range1", SymbolKind.RangeVariable);
             CheckDeclaringSyntax<QueryClauseSyntax>(comp, tree, "range2", SymbolKind.RangeVariable);
-            CheckDeclaringSyntax<QueryContinuationSyntax>(comp, tree, "range3", SymbolKind.RangeVariable);
+            CheckDeclaringSyntax<QueryContinuationSyntax>(
+                comp,
+                tree,
+                "range3",
+                SymbolKind.RangeVariable
+            );
             CheckDeclaringSyntax<QueryClauseSyntax>(comp, tree, "range4", SymbolKind.RangeVariable);
             CheckDeclaringSyntax<QueryClauseSyntax>(comp, tree, "range5", SymbolKind.RangeVariable);
-            CheckDeclaringSyntax<JoinIntoClauseSyntax>(comp, tree, "range6", SymbolKind.RangeVariable);
+            CheckDeclaringSyntax<JoinIntoClauseSyntax>(
+                comp,
+                tree,
+                "range6",
+                SymbolKind.RangeVariable
+            );
         }
 
         [Fact]
         public void LambdaDeclaringSyntax()
         {
             var text =
-@"
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -729,10 +876,16 @@ class C
         [Fact]
         public void PreserveLocationOrderOnReplaceSyntaxTree()
         {
-            var source0 = Parse("namespace N { partial class C { } } namespace N0 { } class C0 { }");
-            var source1 = Parse("namespace N { partial class C { } } namespace N1 { } class C1 { }");
+            var source0 = Parse(
+                "namespace N { partial class C { } } namespace N0 { } class C0 { }"
+            );
+            var source1 = Parse(
+                "namespace N { partial class C { } } namespace N1 { } class C1 { }"
+            );
             var source2 = Parse("namespace N { struct S { } }");
-            var source3 = Parse("namespace N { partial class C { } } namespace N3 { } class C3 { }");
+            var source3 = Parse(
+                "namespace N { partial class C { } } namespace N3 { } class C3 { }"
+            );
             var comp0 = CreateCompilation(new[] { source0, source1, source2, source3 });
             comp0.VerifyDiagnostics();
             Assert.Equal(new[] { source0, source1, source2, source3 }, comp0.SyntaxTrees);
@@ -742,10 +895,15 @@ class C
             Assert.Equal(new[] { source0, source1, source3 }, locations.Select(l => l.SourceTree));
 
             // AddSyntaxTrees will add to the end.
-            var source4 = Parse("namespace N { partial class C { } } namespace N4 { } class C4 { }");
+            var source4 = Parse(
+                "namespace N { partial class C { } } namespace N4 { } class C4 { }"
+            );
             var comp1 = comp0.AddSyntaxTrees(source4);
             locations = comp1.GetMember<NamedTypeSymbol>("N.C").Locations;
-            Assert.Equal(new[] { source0, source1, source3, source4 }, locations.Select(l => l.SourceTree));
+            Assert.Equal(
+                new[] { source0, source1, source3, source4 },
+                locations.Select(l => l.SourceTree)
+            );
 
             // ReplaceSyntaxTree should preserve location order.
             var comp2 = comp0.ReplaceSyntaxTree(source1, source4);
@@ -754,8 +912,14 @@ class C
 
             // NamespaceNames and TypeNames do not match SyntaxTrees order.
             // This is expected.
-            Assert.Equal(new[] { "", "N3", "N0", "N", "", "N4", "N" }, comp2.Declarations.NamespaceNames.ToArray());
-            Assert.Equal(new[] { "C3", "C0", "S", "C", "C4", "C" }, comp2.Declarations.TypeNames.ToArray());
+            Assert.Equal(
+                new[] { "", "N3", "N0", "N", "", "N4", "N" },
+                comp2.Declarations.NamespaceNames.ToArray()
+            );
+            Assert.Equal(
+                new[] { "C3", "C0", "S", "C", "C4", "C" },
+                comp2.Declarations.TypeNames.ToArray()
+            );
 
             // RemoveSyntaxTrees should preserve order of remaining trees.
             var comp3 = comp2.RemoveSyntaxTrees(source0);

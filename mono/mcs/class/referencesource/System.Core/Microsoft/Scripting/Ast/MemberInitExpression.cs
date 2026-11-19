@@ -1,11 +1,11 @@
 ﻿/* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Apache License, Version 2.0, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Apache License, Version 2.0, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Apache License, Version 2.0.
  *
  * You must not remove this notice, or any other, from this software.
@@ -21,9 +21,11 @@ using System.Dynamic.Utils;
 using System.Runtime.CompilerServices;
 
 #if CLR2
-namespace Microsoft.Scripting.Ast {
+namespace Microsoft.Scripting.Ast
+{
 #else
-namespace System.Linq.Expressions {
+namespace System.Linq.Expressions
+{
 #endif
     /// <summary>
     /// Represents calling a constructor and initializing one or more members of the new object.
@@ -31,11 +33,16 @@ namespace System.Linq.Expressions {
 #if !SILVERLIGHT
     [DebuggerTypeProxy(typeof(Expression.MemberInitExpressionProxy))]
 #endif
-    public sealed class MemberInitExpression : Expression {
+    public sealed class MemberInitExpression : Expression
+    {
         private readonly NewExpression _newExpression;
         private readonly ReadOnlyCollection<MemberBinding> _bindings;
 
-        internal MemberInitExpression(NewExpression newExpression, ReadOnlyCollection<MemberBinding> bindings) {
+        internal MemberInitExpression(
+            NewExpression newExpression,
+            ReadOnlyCollection<MemberBinding> bindings
+        )
+        {
             _newExpression = newExpression;
             _bindings = bindings;
         }
@@ -44,17 +51,17 @@ namespace System.Linq.Expressions {
         /// Gets the static type of the expression that this <see cref="Expression" /> represents.
         /// </summary>
         /// <returns>The <see cref="Type"/> that represents the static type of the expression.</returns>
-        public sealed override Type Type {
+        public sealed override Type Type
+        {
             get { return _newExpression.Type; }
         }
 
         /// <summary>
-        /// Gets a value that indicates whether the expression tree node can be reduced. 
+        /// Gets a value that indicates whether the expression tree node can be reduced.
         /// </summary>
-        public override bool CanReduce {
-            get {
-                return true;
-            }
+        public override bool CanReduce
+        {
+            get { return true; }
         }
 
         /// <summary>
@@ -62,58 +69,75 @@ namespace System.Linq.Expressions {
         /// ExpressionType.Extension when overriding this method.
         /// </summary>
         /// <returns>The <see cref="ExpressionType"/> of the expression.</returns>
-        public sealed override ExpressionType NodeType {
+        public sealed override ExpressionType NodeType
+        {
             get { return ExpressionType.MemberInit; }
         }
 
         ///<summary>Gets the expression that represents the constructor call.</summary>
         ///<returns>A <see cref="T:System.Linq.Expressions.NewExpression" /> that represents the constructor call.</returns>
-        public NewExpression NewExpression {
+        public NewExpression NewExpression
+        {
             get { return _newExpression; }
         }
 
         ///<summary>Gets the bindings that describe how to initialize the members of the newly created object.</summary>
         ///<returns>A <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" /> of <see cref="T:System.Linq.Expressions.MemberBinding" /> objects which describe how to initialize the members.</returns>
-        public ReadOnlyCollection<MemberBinding> Bindings {
+        public ReadOnlyCollection<MemberBinding> Bindings
+        {
             get { return _bindings; }
         }
 
         /// <summary>
         /// Dispatches to the specific visit method for this node type.
         /// </summary>
-        protected internal override Expression Accept(ExpressionVisitor visitor) {
+        protected internal override Expression Accept(ExpressionVisitor visitor)
+        {
             return visitor.VisitMemberInit(this);
         }
 
         /// <summary>
-        /// Reduces the <see cref="MemberInitExpression"/> to a simpler expression. 
+        /// Reduces the <see cref="MemberInitExpression"/> to a simpler expression.
         /// If CanReduce returns true, this should return a valid expression.
-        /// This method is allowed to return another node which itself 
+        /// This method is allowed to return another node which itself
         /// must be reduced.
         /// </summary>
         /// <returns>The reduced expression.</returns>
-        public override Expression Reduce() {
+        public override Expression Reduce()
+        {
             return ReduceMemberInit(_newExpression, _bindings, true);
         }
 
-        internal static Expression ReduceMemberInit(Expression objExpression, ReadOnlyCollection<MemberBinding> bindings, bool keepOnStack) {
+        internal static Expression ReduceMemberInit(
+            Expression objExpression,
+            ReadOnlyCollection<MemberBinding> bindings,
+            bool keepOnStack
+        )
+        {
             var objVar = Expression.Variable(objExpression.Type, null);
             int count = bindings.Count;
             var block = new Expression[count + 2];
             block[0] = Expression.Assign(objVar, objExpression);
-            for (int i = 0; i < count; i++) {
+            for (int i = 0; i < count; i++)
+            {
                 block[i + 1] = ReduceMemberBinding(objVar, bindings[i]);
             }
             block[count + 1] = keepOnStack ? (Expression)objVar : Expression.Empty();
             return Expression.Block(new TrueReadOnlyCollection<Expression>(block));
         }
 
-        internal static Expression ReduceListInit(Expression listExpression, ReadOnlyCollection<ElementInit> initializers, bool keepOnStack) {
+        internal static Expression ReduceListInit(
+            Expression listExpression,
+            ReadOnlyCollection<ElementInit> initializers,
+            bool keepOnStack
+        )
+        {
             var listVar = Expression.Variable(listExpression.Type, null);
             int count = initializers.Count;
             var block = new Expression[count + 2];
             block[0] = Expression.Assign(listVar, listExpression);
-            for (int i = 0; i < count; i++) {
+            for (int i = 0; i < count; i++)
+            {
                 ElementInit element = initializers[i];
                 block[i + 1] = Expression.Call(listVar, element.AddMethod, element.Arguments);
             }
@@ -121,16 +145,22 @@ namespace System.Linq.Expressions {
             return Expression.Block(new TrueReadOnlyCollection<Expression>(block));
         }
 
-        internal static Expression ReduceMemberBinding(ParameterExpression objVar, MemberBinding binding) {
+        internal static Expression ReduceMemberBinding(
+            ParameterExpression objVar,
+            MemberBinding binding
+        )
+        {
             MemberExpression member = Expression.MakeMemberAccess(objVar, binding.Member);
-            switch (binding.BindingType) {
+            switch (binding.BindingType)
+            {
                 case MemberBindingType.Assignment:
                     return Expression.Assign(member, ((MemberAssignment)binding).Expression);
                 case MemberBindingType.ListBinding:
                     return ReduceListInit(member, ((MemberListBinding)binding).Initializers, false);
                 case MemberBindingType.MemberBinding:
                     return ReduceMemberInit(member, ((MemberMemberBinding)binding).Bindings, false);
-                default: throw ContractUtils.Unreachable;
+                default:
+                    throw ContractUtils.Unreachable;
             }
         }
 
@@ -142,15 +172,21 @@ namespace System.Linq.Expressions {
         /// <param name="newExpression">The <see cref="NewExpression" /> property of the result.</param>
         /// <param name="bindings">The <see cref="Bindings" /> property of the result.</param>
         /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-        public MemberInitExpression Update(NewExpression newExpression, IEnumerable<MemberBinding> bindings) {
-            if (newExpression == NewExpression && bindings == Bindings) {
+        public MemberInitExpression Update(
+            NewExpression newExpression,
+            IEnumerable<MemberBinding> bindings
+        )
+        {
+            if (newExpression == NewExpression && bindings == Bindings)
+            {
                 return this;
             }
             return Expression.MemberInit(newExpression, bindings);
         }
     }
 
-    public partial class Expression {
+    public partial class Expression
+    {
         ///<summary>Creates a <see cref="T:System.Linq.Expressions.MemberInitExpression" />.</summary>
         ///<returns>A <see cref="T:System.Linq.Expressions.MemberInitExpression" /> that has the <see cref="P:System.Linq.Expressions.Expression.NodeType" /> property equal to <see cref="F:System.Linq.Expressions.ExpressionType.MemberInit" /> and the <see cref="P:System.Linq.Expressions.MemberInitExpression.NewExpression" /> and <see cref="P:System.Linq.Expressions.MemberInitExpression.Bindings" /> properties set to the specified values.</returns>
         ///<param name="newExpression">A <see cref="T:System.Linq.Expressions.NewExpression" /> to set the <see cref="P:System.Linq.Expressions.MemberInitExpression.NewExpression" /> property equal to.</param>
@@ -158,7 +194,11 @@ namespace System.Linq.Expressions {
         ///<exception cref="T:System.ArgumentNullException">
         ///<paramref name="newExpression" /> or <paramref name="bindings" /> is null.</exception>
         ///<exception cref="T:System.ArgumentException">The <see cref="P:System.Linq.Expressions.MemberBinding.Member" /> property of an element of <paramref name="bindings" /> does not represent a member of the type that <paramref name="newExpression" />.Type represents.</exception>
-        public static MemberInitExpression MemberInit(NewExpression newExpression, params MemberBinding[] bindings) {
+        public static MemberInitExpression MemberInit(
+            NewExpression newExpression,
+            params MemberBinding[] bindings
+        )
+        {
             return MemberInit(newExpression, (IEnumerable<MemberBinding>)bindings);
         }
 
@@ -169,7 +209,11 @@ namespace System.Linq.Expressions {
         ///<exception cref="T:System.ArgumentNullException">
         ///<paramref name="newExpression" /> or <paramref name="bindings" /> is null.</exception>
         ///<exception cref="T:System.ArgumentException">The <see cref="P:System.Linq.Expressions.MemberBinding.Member" /> property of an element of <paramref name="bindings" /> does not represent a member of the type that <paramref name="newExpression" />.Type represents.</exception>
-        public static MemberInitExpression MemberInit(NewExpression newExpression, IEnumerable<MemberBinding> bindings) {
+        public static MemberInitExpression MemberInit(
+            NewExpression newExpression,
+            IEnumerable<MemberBinding> bindings
+        )
+        {
             ContractUtils.RequiresNotNull(newExpression, "newExpression");
             ContractUtils.RequiresNotNull(bindings, "bindings");
             var roBindings = bindings.ToReadOnly();

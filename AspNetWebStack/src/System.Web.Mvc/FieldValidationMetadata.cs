@@ -8,7 +8,8 @@ namespace System.Web.Mvc
 {
     public class FieldValidationMetadata
     {
-        private readonly Collection<ModelClientValidationRule> _validationRules = new Collection<ModelClientValidationRule>();
+        private readonly Collection<ModelClientValidationRule> _validationRules =
+            new Collection<ModelClientValidationRule>();
         private string _fieldName;
 
         public string FieldName

@@ -9,9 +9,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Text;
 using System.Threading;
-using System.Diagnostics;
 
 namespace System.Data.Metadata.Edm
 {
@@ -29,20 +29,27 @@ namespace System.Data.Metadata.Edm
         /// <param name="foreignKey">is this a foreign key (FK) relationship?</param>
         /// <param name="dataSpace">dataSpace in which this AssociationType belongs to</param>
         /// <exception cref="System.ArgumentNullException">Thrown if either the name, namespace or version attributes are null</exception>
-        internal AssociationType(string name,
-                                 string namespaceName,
-                                 bool foreignKey,
-                                 DataSpace dataSpace)
+        internal AssociationType(
+            string name,
+            string namespaceName,
+            bool foreignKey,
+            DataSpace dataSpace
+        )
             : base(name, namespaceName, dataSpace)
         {
-            _referentialConstraints = new ReadOnlyMetadataCollection<ReferentialConstraint>(new MetadataCollection<ReferentialConstraint>());
+            _referentialConstraints = new ReadOnlyMetadataCollection<ReferentialConstraint>(
+                new MetadataCollection<ReferentialConstraint>()
+            );
             _isForeignKey = foreignKey;
         }
         #endregion
 
         #region Fields
         private readonly ReadOnlyMetadataCollection<ReferentialConstraint> _referentialConstraints;
-        private FilteredReadOnlyMetadataCollection<AssociationEndMember, EdmMember> _associationEndMembers;
+        private FilteredReadOnlyMetadataCollection<
+            AssociationEndMember,
+            EdmMember
+        > _associationEndMembers;
         private readonly bool _isForeignKey;
         #endregion
 
@@ -50,7 +57,10 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns the kind of the type
         /// </summary>
-        public override BuiltInTypeKind BuiltInTypeKind { get { return BuiltInTypeKind.AssociationType; } }
+        public override BuiltInTypeKind BuiltInTypeKind
+        {
+            get { return BuiltInTypeKind.AssociationType; }
+        }
 
         /// <summary>
         /// Returns the list of ends for this association type
@@ -59,12 +69,20 @@ namespace System.Data.Metadata.Edm
         {
             get
             {
-                Debug.Assert(IsReadOnly, "this is a wrapper around this.Members, don't call it during metadata loading, only call it after the metadata is set to read-only");
+                Debug.Assert(
+                    IsReadOnly,
+                    "this is a wrapper around this.Members, don't call it during metadata loading, only call it after the metadata is set to read-only"
+                );
                 if (null == _associationEndMembers)
                 {
-                    Interlocked.CompareExchange(ref _associationEndMembers,
+                    Interlocked.CompareExchange(
+                        ref _associationEndMembers,
                         new FilteredReadOnlyMetadataCollection<AssociationEndMember, EdmMember>(
-                            this.Members, Helper.IsAssociationEndMember), null);
+                            this.Members,
+                            Helper.IsAssociationEndMember
+                        ),
+                        null
+                    );
                 }
                 return _associationEndMembers;
             }
@@ -76,10 +94,7 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(BuiltInTypeKind.ReferentialConstraint, true)]
         public ReadOnlyMetadataCollection<ReferentialConstraint> ReferentialConstraints
         {
-            get
-            {
-                return _referentialConstraints;
-            }
+            get { return _referentialConstraints; }
         }
 
         /// <summary>
@@ -88,19 +103,16 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(PrimitiveTypeKind.Boolean, false)]
         public bool IsForeignKey
         {
-            get
-            {
-                return _isForeignKey;
-            }
+            get { return _isForeignKey; }
         }
         #endregion
 
         #region Methods
 
         /// <summary>
-        /// Validates a EdmMember object to determine if it can be added to this type's 
+        /// Validates a EdmMember object to determine if it can be added to this type's
         /// Members collection. If this method returns without throwing, it is assumed
-        /// the member is valid. 
+        /// the member is valid.
         /// </summary>
         /// <param name="member">The member to validate</param>
         /// <exception cref="System.ArgumentException">Thrown if the member is not an AssociationEndMember</exception>
@@ -108,7 +120,8 @@ namespace System.Data.Metadata.Edm
         {
             Debug.Assert(
                 (member is AssociationEndMember),
-                "Only members of type AssociationEndMember may be added to Association definitions.");
+                "Only members of type AssociationEndMember may be added to Association definitions."
+            );
         }
 
         /// <summary>

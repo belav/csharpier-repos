@@ -12,27 +12,46 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.FindUsages
     {
         private readonly Microsoft.CodeAnalysis.FindUsages.DefinitionItem _roslynDefinitionItem;
 
-        private FSharpDefinitionItem(Microsoft.CodeAnalysis.FindUsages.DefinitionItem roslynDefinitionItem)
+        private FSharpDefinitionItem(
+            Microsoft.CodeAnalysis.FindUsages.DefinitionItem roslynDefinitionItem
+        )
         {
             _roslynDefinitionItem = roslynDefinitionItem;
         }
 
         internal Microsoft.CodeAnalysis.FindUsages.DefinitionItem RoslynDefinitionItem
         {
-            get
-            {
-                return _roslynDefinitionItem;
-            }
+            get { return _roslynDefinitionItem; }
         }
 
-        public static FSharpDefinitionItem Create(ImmutableArray<string> tags, ImmutableArray<TaggedText> displayParts, FSharpDocumentSpan sourceSpan)
+        public static FSharpDefinitionItem Create(
+            ImmutableArray<string> tags,
+            ImmutableArray<TaggedText> displayParts,
+            FSharpDocumentSpan sourceSpan
+        )
         {
-            return new FSharpDefinitionItem(Microsoft.CodeAnalysis.FindUsages.DefinitionItem.Create(tags, displayParts, sourceSpan.ToRoslynDocumentSpan()));
+            return new FSharpDefinitionItem(
+                Microsoft.CodeAnalysis.FindUsages.DefinitionItem.Create(
+                    tags,
+                    displayParts,
+                    sourceSpan.ToRoslynDocumentSpan()
+                )
+            );
         }
 
-        public static FSharpDefinitionItem CreateNonNavigableItem(ImmutableArray<string> tags, ImmutableArray<TaggedText> displayParts, ImmutableArray<TaggedText> originationParts)
+        public static FSharpDefinitionItem CreateNonNavigableItem(
+            ImmutableArray<string> tags,
+            ImmutableArray<TaggedText> displayParts,
+            ImmutableArray<TaggedText> originationParts
+        )
         {
-            return new FSharpDefinitionItem(Microsoft.CodeAnalysis.FindUsages.DefinitionItem.CreateNonNavigableItem(tags, displayParts, originationParts));
+            return new FSharpDefinitionItem(
+                Microsoft.CodeAnalysis.FindUsages.DefinitionItem.CreateNonNavigableItem(
+                    tags,
+                    displayParts,
+                    originationParts
+                )
+            );
         }
     }
 }

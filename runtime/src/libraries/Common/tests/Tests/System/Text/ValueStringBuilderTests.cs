@@ -72,9 +72,9 @@ namespace System.Text.Tests
         }
 
         [Theory]
-        [InlineData(0, 4*1024*1024)]
-        [InlineData(1025, 4*1024*1024)]
-        [InlineData(3*1024*1024, 6*1024*1024)]
+        [InlineData(0, 4 * 1024 * 1024)]
+        [InlineData(1025, 4 * 1024 * 1024)]
+        [InlineData(3 * 1024 * 1024, 6 * 1024 * 1024)]
         public void Append_String_Large_MatchesStringBuilder(int initialLength, int stringLength)
         {
             var sb = new StringBuilder(initialLength);

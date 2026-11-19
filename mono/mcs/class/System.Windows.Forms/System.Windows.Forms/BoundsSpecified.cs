@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,16 +27,16 @@
 
 namespace System.Windows.Forms
 {
-	[Flags]
-	public enum BoundsSpecified
-	{
-		None		= 0x00000000,
-		X		= 0x00000001,
-		Y		= 0x00000002,
-		Location	= 0x00000003,
-		Width		= 0x00000004,
-		Height		= 0x00000008,
-		Size		= 0x0000000c,
-		All		= 0x0000000f
-	}
+    [Flags]
+    public enum BoundsSpecified
+    {
+        None = 0x00000000,
+        X = 0x00000001,
+        Y = 0x00000002,
+        Location = 0x00000003,
+        Width = 0x00000004,
+        Height = 0x00000008,
+        Size = 0x0000000c,
+        All = 0x0000000f,
+    }
 }

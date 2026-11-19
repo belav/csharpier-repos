@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>WESU</OWNER>
 using System;
@@ -19,7 +19,7 @@ namespace System.Runtime.InteropServices
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [CLSCompliant(false)]
     [TypeLibImportClassAttribute(typeof(System.Reflection.Emit.AssemblyBuilder))]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface _AssemblyBuilder
     {
 #if !FEATURE_CORECLR
@@ -27,9 +27,24 @@ namespace System.Runtime.InteropServices
 
         void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
 
-        void GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
 
-        void Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 #endif
     }
 
@@ -45,9 +60,24 @@ namespace System.Runtime.InteropServices
 
         void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
 
-        void GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
 
-        void Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 #endif
     }
 
@@ -55,7 +85,7 @@ namespace System.Runtime.InteropServices
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [CLSCompliant(false)]
     [TypeLibImportClassAttribute(typeof(System.Reflection.Emit.CustomAttributeBuilder))]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface _CustomAttributeBuilder
     {
 #if !FEATURE_CORECLR
@@ -63,9 +93,24 @@ namespace System.Runtime.InteropServices
 
         void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
 
-        void GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
 
-        void Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 #endif
     }
 
@@ -73,7 +118,7 @@ namespace System.Runtime.InteropServices
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [CLSCompliant(false)]
     [TypeLibImportClassAttribute(typeof(System.Reflection.Emit.EnumBuilder))]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface _EnumBuilder
     {
 #if !FEATURE_CORECLR
@@ -81,9 +126,24 @@ namespace System.Runtime.InteropServices
 
         void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
 
-        void GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
 
-        void Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 #endif
     }
 
@@ -91,7 +151,7 @@ namespace System.Runtime.InteropServices
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [CLSCompliant(false)]
     [TypeLibImportClassAttribute(typeof(System.Reflection.Emit.EventBuilder))]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface _EventBuilder
     {
 #if !FEATURE_CORECLR
@@ -99,9 +159,24 @@ namespace System.Runtime.InteropServices
 
         void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
 
-        void GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
 
-        void Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 #endif
     }
 
@@ -109,7 +184,7 @@ namespace System.Runtime.InteropServices
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [CLSCompliant(false)]
     [TypeLibImportClassAttribute(typeof(System.Reflection.Emit.FieldBuilder))]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface _FieldBuilder
     {
 #if !FEATURE_CORECLR
@@ -117,9 +192,24 @@ namespace System.Runtime.InteropServices
 
         void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
 
-        void GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
 
-        void Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 #endif
     }
 
@@ -127,7 +217,7 @@ namespace System.Runtime.InteropServices
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [CLSCompliant(false)]
     [TypeLibImportClassAttribute(typeof(System.Reflection.Emit.ILGenerator))]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface _ILGenerator
     {
 #if !FEATURE_CORECLR
@@ -135,9 +225,24 @@ namespace System.Runtime.InteropServices
 
         void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
 
-        void GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
 
-        void Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 #endif
     }
 
@@ -145,7 +250,7 @@ namespace System.Runtime.InteropServices
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [CLSCompliant(false)]
     [TypeLibImportClassAttribute(typeof(System.Reflection.Emit.LocalBuilder))]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface _LocalBuilder
     {
 #if !FEATURE_CORECLR
@@ -153,9 +258,24 @@ namespace System.Runtime.InteropServices
 
         void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
 
-        void GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
 
-        void Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 #endif
     }
 
@@ -163,7 +283,7 @@ namespace System.Runtime.InteropServices
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [CLSCompliant(false)]
     [TypeLibImportClassAttribute(typeof(System.Reflection.Emit.MethodBuilder))]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface _MethodBuilder
     {
 #if !FEATURE_CORECLR
@@ -171,9 +291,24 @@ namespace System.Runtime.InteropServices
 
         void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
 
-        void GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
 
-        void Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 #endif
     }
 
@@ -182,7 +317,7 @@ namespace System.Runtime.InteropServices
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [CLSCompliant(false)]
     [TypeLibImportClassAttribute(typeof(System.Reflection.Emit.MethodRental))]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface _MethodRental
     {
 #if !FEATURE_CORECLR
@@ -190,9 +325,24 @@ namespace System.Runtime.InteropServices
 
         void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
 
-        void GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
 
-        void Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 #endif
     }
 #endif
@@ -201,7 +351,7 @@ namespace System.Runtime.InteropServices
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [CLSCompliant(false)]
     [TypeLibImportClassAttribute(typeof(System.Reflection.Emit.ModuleBuilder))]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface _ModuleBuilder
     {
 #if !FEATURE_CORECLR
@@ -209,9 +359,24 @@ namespace System.Runtime.InteropServices
 
         void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
 
-        void GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
 
-        void Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 #endif
     }
 
@@ -219,7 +384,7 @@ namespace System.Runtime.InteropServices
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [CLSCompliant(false)]
     [TypeLibImportClassAttribute(typeof(System.Reflection.Emit.ParameterBuilder))]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface _ParameterBuilder
     {
 #if !FEATURE_CORECLR
@@ -227,9 +392,24 @@ namespace System.Runtime.InteropServices
 
         void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
 
-        void GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
 
-        void Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 #endif
     }
 
@@ -237,7 +417,7 @@ namespace System.Runtime.InteropServices
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [CLSCompliant(false)]
     [TypeLibImportClassAttribute(typeof(System.Reflection.Emit.PropertyBuilder))]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface _PropertyBuilder
     {
 #if !FEATURE_CORECLR
@@ -245,9 +425,24 @@ namespace System.Runtime.InteropServices
 
         void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
 
-        void GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
 
-        void Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 #endif
     }
 
@@ -255,7 +450,7 @@ namespace System.Runtime.InteropServices
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [CLSCompliant(false)]
     [TypeLibImportClassAttribute(typeof(System.Reflection.Emit.SignatureHelper))]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface _SignatureHelper
     {
 #if !FEATURE_CORECLR
@@ -263,9 +458,24 @@ namespace System.Runtime.InteropServices
 
         void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
 
-        void GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
 
-        void Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 #endif
     }
 
@@ -273,7 +483,7 @@ namespace System.Runtime.InteropServices
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [CLSCompliant(false)]
     [TypeLibImportClassAttribute(typeof(System.Reflection.Emit.TypeBuilder))]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface _TypeBuilder
     {
 #if !FEATURE_CORECLR
@@ -281,10 +491,24 @@ namespace System.Runtime.InteropServices
 
         void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
 
-        void GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
 
-        void Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 #endif
     }
-
 }

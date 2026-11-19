@@ -17,7 +17,10 @@ namespace AnalyzerRunner
                 { "LangVersion", "latest" },
             };
 
-            return MSBuildWorkspace.Create(properties, AnalyzerRunnerMefHostServices.DefaultServices);
+            return MSBuildWorkspace.Create(
+                properties,
+                AnalyzerRunnerMefHostServices.DefaultServices
+            );
         }
     }
 }

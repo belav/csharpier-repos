@@ -17,7 +17,7 @@ namespace System.Net.Mail
     {
         Network,
         SpecifiedPickupDirectory,
-        PickupDirectoryFromIis
+        PickupDirectoryFromIis,
     }
 
     // EAI Settings
@@ -119,7 +119,8 @@ namespace System.Net.Mail
         /// <summary>
         /// Certificates used by the client for establishing an SSL connection with the server.
         /// </summary>
-        public X509CertificateCollection ClientCertificates => throw new PlatformNotSupportedException();
+        public X509CertificateCollection ClientCertificates =>
+            throw new PlatformNotSupportedException();
 
         public string? TargetName
         {
@@ -129,26 +130,43 @@ namespace System.Net.Mail
 
         private static bool ServerSupportsEai => throw new PlatformNotSupportedException();
 
-        public void Send(string from, string recipients, string? subject, string? body) => throw new PlatformNotSupportedException();
+        public void Send(string from, string recipients, string? subject, string? body) =>
+            throw new PlatformNotSupportedException();
 
         public void Send(MailMessage message) => throw new PlatformNotSupportedException();
 
-        public void SendAsync(string from, string recipients, string? subject, string? body, object? userToken) => throw new PlatformNotSupportedException();
+        public void SendAsync(
+            string from,
+            string recipients,
+            string? subject,
+            string? body,
+            object? userToken
+        ) => throw new PlatformNotSupportedException();
 
-        public void SendAsync(MailMessage message, object? userToken) => throw new PlatformNotSupportedException();
+        public void SendAsync(MailMessage message, object? userToken) =>
+            throw new PlatformNotSupportedException();
 
-        public void SendAsyncCancel()  => throw new PlatformNotSupportedException();
+        public void SendAsyncCancel() => throw new PlatformNotSupportedException();
 
         //************* Task-based async public methods *************************
-        public Task SendMailAsync(string from, string recipients, string? subject, string? body) => throw new PlatformNotSupportedException();
+        public Task SendMailAsync(string from, string recipients, string? subject, string? body) =>
+            throw new PlatformNotSupportedException();
 
         public Task SendMailAsync(MailMessage message) => throw new PlatformNotSupportedException();
 
-        public Task SendMailAsync(string from, string recipients, string? subject, string? body, CancellationToken cancellationToken) => throw new PlatformNotSupportedException();
+        public Task SendMailAsync(
+            string from,
+            string recipients,
+            string? subject,
+            string? body,
+            CancellationToken cancellationToken
+        ) => throw new PlatformNotSupportedException();
 
-        public Task SendMailAsync(MailMessage message, CancellationToken cancellationToken) => throw new PlatformNotSupportedException();
+        public Task SendMailAsync(MailMessage message, CancellationToken cancellationToken) =>
+            throw new PlatformNotSupportedException();
 
-        protected void OnSendCompleted(AsyncCompletedEventArgs e) => throw new PlatformNotSupportedException();
+        protected void OnSendCompleted(AsyncCompletedEventArgs e) =>
+            throw new PlatformNotSupportedException();
 
         public void Dispose()
         {
@@ -156,7 +174,6 @@ namespace System.Net.Mail
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
-        { }
+        protected virtual void Dispose(bool disposing) { }
     }
 }

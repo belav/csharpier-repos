@@ -32,7 +32,10 @@ namespace Microsoft.Extensions.Http
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void Build_NoAdditionalHandlers_ReturnsPrimaryHandler()
         {
             // Arrange
@@ -49,7 +52,10 @@ namespace Microsoft.Extensions.Http
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void Build_SomeAdditionalHandlers_PutsTogetherDelegatingHandlers()
         {
             // Arrange
@@ -60,7 +66,7 @@ namespace Microsoft.Extensions.Http
                 {
                     Mock.Of<DelegatingHandler>(), // Outer
                     Mock.Of<DelegatingHandler>(), // Middle
-                }
+                },
             };
 
             // Act
@@ -81,10 +87,7 @@ namespace Microsoft.Extensions.Http
         public void Build_PrimaryHandlerIsNull_ThrowsException()
         {
             // Arrange
-            var builder = new DefaultHttpMessageHandlerBuilder(Services)
-            {
-                PrimaryHandler = null,
-            };
+            var builder = new DefaultHttpMessageHandlerBuilder(Services) { PrimaryHandler = null };
 
             // Act & Assert
             var exception = Assert.Throws<InvalidOperationException>(() => builder.Build());
@@ -98,19 +101,22 @@ namespace Microsoft.Extensions.Http
             // Arrange
             var builder = new DefaultHttpMessageHandlerBuilder(Services)
             {
-                AdditionalHandlers =
-                {
-                    null,
-                }
+                AdditionalHandlers = { null },
             };
 
             // Act & Assert
             var exception = Assert.Throws<InvalidOperationException>(() => builder.Build());
-            Assert.Equal("The 'additionalHandlers' must not contain a null entry.", exception.Message);
+            Assert.Equal(
+                "The 'additionalHandlers' must not contain a null entry.",
+                exception.Message
+            );
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/50873", TestPlatforms.Android)]
         public void Build_AdditionalHandlerHasNonNullInnerHandler_ThrowsException()
         {
@@ -120,16 +126,18 @@ namespace Microsoft.Extensions.Http
                 AdditionalHandlers =
                 {
                     Mock.Of<DelegatingHandler>(h => h.InnerHandler == Mock.Of<DelegatingHandler>()),
-                }
+                },
             };
 
             // Act & Assert
             var exception = Assert.Throws<InvalidOperationException>(() => builder.Build());
             Assert.Equal(
-                "The 'InnerHandler' property must be null. " +
-                "'DelegatingHandler' instances provided to 'HttpMessageHandlerBuilder' must not be reused or cached." + Environment.NewLine +
-                $"Handler: '{builder.AdditionalHandlers[0].ToString()}'",
-                exception.Message);
+                "The 'InnerHandler' property must be null. "
+                    + "'DelegatingHandler' instances provided to 'HttpMessageHandlerBuilder' must not be reused or cached."
+                    + Environment.NewLine
+                    + $"Handler: '{builder.AdditionalHandlers[0].ToString()}'",
+                exception.Message
+            );
         }
     }
 }

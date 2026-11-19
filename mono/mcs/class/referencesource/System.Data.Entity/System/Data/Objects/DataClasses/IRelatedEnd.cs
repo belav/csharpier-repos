@@ -6,20 +6,23 @@
 // @owner       mirszy
 // @backupOwner sparra
 //---------------------------------------------------------------------
+using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.Common.CommandTrees;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
 
 namespace System.Data.Objects.DataClasses
 {
     /// <summary>
     /// Represents one end of a relationship.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1710:IdentifiersShouldHaveCorrectSuffix"
+    )]
     public interface IRelatedEnd
     {
         // ----------
@@ -29,10 +32,10 @@ namespace System.Data.Objects.DataClasses
         /// <summary>
         /// IsLoaded returns true if and only if Load was called.
         /// </summary>
-        bool IsLoaded { get;}
+        bool IsLoaded { get; }
 
         /// <summary>
-        /// Name of the relationship in which this IRelatedEnd is participating        
+        /// Name of the relationship in which this IRelatedEnd is participating
         /// </summary>
         string RelationshipName { get; }
 
@@ -68,7 +71,7 @@ namespace System.Data.Objects.DataClasses
         /// <summary>
         ///   Adds an entity to the related end.  If the owner is
         ///   attached to a cache then the all the connected ends are
-        ///   added to the object cache and their corresponding relationships 
+        ///   added to the object cache and their corresponding relationships
         ///   are also added to the ObjectStateManager. The RelatedEnd of the
         ///   relationship is also fixed.
         /// </summary>
@@ -80,10 +83,10 @@ namespace System.Data.Objects.DataClasses
         /// <summary>
         ///   Adds an entity to the related end.  If the owner is
         ///   attached to a cache then the all the connected ends are
-        ///   added to the object cache and their corresponding relationships 
+        ///   added to the object cache and their corresponding relationships
         ///   are also added to the ObjectStateManager. The RelatedEnd of the
         ///   relationship is also fixed.
-        /// 
+        ///
         /// This overload is meant to be used by classes that do not implement IEntityWithRelationships.
         /// </summary>
         /// <param name="entity">
@@ -106,7 +109,7 @@ namespace System.Data.Objects.DataClasses
         ///   Removes an entity from the related end.  If owner is
         ///   attached to a cache, marks relationship for deletion and if
         ///   the relationship is composition also marks the entity for deletion.
-        /// 
+        ///
         /// This overload is meant to be used by classes that do not implement IEntityWithRelationships.
         /// </summary>
         /// <param name="entity">
@@ -119,8 +122,8 @@ namespace System.Data.Objects.DataClasses
         /// Attaches an entity to the related end. If the related end is already filled
         /// or partially filled, this merges the existing entities with the given entity. The given
         /// entity is not assumed to be the complete set of related entities.
-        /// 
-        /// Owner and all entities passed in must be in Unchanged or Modified state. 
+        ///
+        /// Owner and all entities passed in must be in Unchanged or Modified state.
         /// Deleted elements are allowed only when the state manager is already tracking the relationship
         /// instance.
         /// </summary>
@@ -133,11 +136,11 @@ namespace System.Data.Objects.DataClasses
         /// Attaches an entity to the related end. If the related end is already filled
         /// or partially filled, this merges the existing entities with the given entity. The given
         /// entity is not assumed to be the complete set of related entities.
-        /// 
-        /// Owner and all entities passed in must be in Unchanged or Modified state. 
+        ///
+        /// Owner and all entities passed in must be in Unchanged or Modified state.
         /// Deleted elements are allowed only when the state manager is already tracking the relationship
         /// instance.
-        /// 
+        ///
         /// This overload is meant to be used by classes that do not implement IEntityWithRelationships.
         /// </summary>
         /// <param name="entity">The entity to attach to the related end</param>
@@ -156,9 +159,7 @@ namespace System.Data.Objects.DataClasses
 
         /// <summary>
         /// Returns an enumerator of all of the values contained within this related end
-        /// </summary>        
+        /// </summary>
         IEnumerator GetEnumerator();
     }
 }
-
-

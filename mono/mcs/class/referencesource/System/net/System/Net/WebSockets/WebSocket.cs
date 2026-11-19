@@ -26,15 +26,19 @@ namespace System.Net.WebSockets
 
         public static TimeSpan DefaultKeepAliveInterval
         {
-            [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
-                Justification = "This is a harmless read-only operation")]
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
+                Justification = "This is a harmless read-only operation"
+            )]
             get
             {
                 if (defaultKeepAliveInterval == null)
                 {
                     if (WebSocketProtocolComponent.IsSupported)
                     {
-                        defaultKeepAliveInterval = WebSocketProtocolComponent.WebSocketGetDefaultKeepAliveInterval();
+                        defaultKeepAliveInterval =
+                            WebSocketProtocolComponent.WebSocketGetDefaultKeepAliveInterval();
                     }
                     else
                     {
@@ -45,28 +49,44 @@ namespace System.Net.WebSockets
             }
         }
 
-        public static ArraySegment<byte> CreateClientBuffer(int receiveBufferSize, int sendBufferSize)
+        public static ArraySegment<byte> CreateClientBuffer(
+            int receiveBufferSize,
+            int sendBufferSize
+        )
         {
             WebSocketHelpers.ValidateBufferSizes(receiveBufferSize, sendBufferSize);
 
-            return WebSocketBuffer.CreateInternalBufferArraySegment(receiveBufferSize, sendBufferSize, false);
+            return WebSocketBuffer.CreateInternalBufferArraySegment(
+                receiveBufferSize,
+                sendBufferSize,
+                false
+            );
         }
 
         public static ArraySegment<byte> CreateServerBuffer(int receiveBufferSize)
         {
-            WebSocketHelpers.ValidateBufferSizes(receiveBufferSize, WebSocketBuffer.MinSendBufferSize);
+            WebSocketHelpers.ValidateBufferSizes(
+                receiveBufferSize,
+                WebSocketBuffer.MinSendBufferSize
+            );
 
-            return WebSocketBuffer.CreateInternalBufferArraySegment(receiveBufferSize, WebSocketBuffer.MinSendBufferSize, true);
+            return WebSocketBuffer.CreateInternalBufferArraySegment(
+                receiveBufferSize,
+                WebSocketBuffer.MinSendBufferSize,
+                true
+            );
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static WebSocket CreateClientWebSocket(Stream innerStream, 
+        public static WebSocket CreateClientWebSocket(
+            Stream innerStream,
             string subProtocol,
             int receiveBufferSize,
             int sendBufferSize,
-            TimeSpan keepAliveInterval, 
-            bool useZeroMaskingKey, 
-            ArraySegment<byte> internalBuffer)
+            TimeSpan keepAliveInterval,
+            bool useZeroMaskingKey,
+            ArraySegment<byte> internalBuffer
+        )
         {
             if (!WebSocketProtocolComponent.IsSupported)
             {
@@ -74,24 +94,38 @@ namespace System.Net.WebSockets
             }
 
             WebSocketHelpers.ValidateInnerStream(innerStream);
-            WebSocketHelpers.ValidateOptions(subProtocol, receiveBufferSize, sendBufferSize, keepAliveInterval);
+            WebSocketHelpers.ValidateOptions(
+                subProtocol,
+                receiveBufferSize,
+                sendBufferSize,
+                keepAliveInterval
+            );
             WebSocketHelpers.ValidateArraySegment<byte>(internalBuffer, "internalBuffer");
-            WebSocketBuffer.Validate(internalBuffer.Count, receiveBufferSize, sendBufferSize, false);
+            WebSocketBuffer.Validate(
+                internalBuffer.Count,
+                receiveBufferSize,
+                sendBufferSize,
+                false
+            );
 
-            return new InternalClientWebSocket(innerStream, 
-                subProtocol, 
-                receiveBufferSize, 
-                sendBufferSize, 
-                keepAliveInterval, 
-                useZeroMaskingKey, 
-                internalBuffer);
+            return new InternalClientWebSocket(
+                innerStream,
+                subProtocol,
+                receiveBufferSize,
+                sendBufferSize,
+                keepAliveInterval,
+                useZeroMaskingKey,
+                internalBuffer
+            );
         }
 
-        internal static WebSocket CreateServerWebSocket(Stream innerStream,
+        internal static WebSocket CreateServerWebSocket(
+            Stream innerStream,
             string subProtocol,
             int receiveBufferSize,
             TimeSpan keepAliveInterval,
-            ArraySegment<byte> internalBuffer)
+            ArraySegment<byte> internalBuffer
+        )
         {
             if (!WebSocketProtocolComponent.IsSupported)
             {
@@ -99,47 +133,78 @@ namespace System.Net.WebSockets
             }
 
             WebSocketHelpers.ValidateInnerStream(innerStream);
-            WebSocketHelpers.ValidateOptions(subProtocol, receiveBufferSize, WebSocketBuffer.MinSendBufferSize, keepAliveInterval);
-            WebSocketHelpers.ValidateArraySegment<byte>(internalBuffer, "internalBuffer");
-            WebSocketBuffer.Validate(internalBuffer.Count, receiveBufferSize, WebSocketBuffer.MinSendBufferSize, true);
-
-            return new ServerWebSocket(innerStream, 
-                subProtocol, 
+            WebSocketHelpers.ValidateOptions(
+                subProtocol,
                 receiveBufferSize,
-                keepAliveInterval, 
-                internalBuffer);
+                WebSocketBuffer.MinSendBufferSize,
+                keepAliveInterval
+            );
+            WebSocketHelpers.ValidateArraySegment<byte>(internalBuffer, "internalBuffer");
+            WebSocketBuffer.Validate(
+                internalBuffer.Count,
+                receiveBufferSize,
+                WebSocketBuffer.MinSendBufferSize,
+                true
+            );
+
+            return new ServerWebSocket(
+                innerStream,
+                subProtocol,
+                receiveBufferSize,
+                keepAliveInterval,
+                internalBuffer
+            );
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static void RegisterPrefixes()
         {
-            WebRequest.RegisterPrefix(Uri.UriSchemeWs + ":", new WebSocketHttpRequestCreator(false));
-            WebRequest.RegisterPrefix(Uri.UriSchemeWss + ":", new WebSocketHttpRequestCreator(true));
+            WebRequest.RegisterPrefix(
+                Uri.UriSchemeWs + ":",
+                new WebSocketHttpRequestCreator(false)
+            );
+            WebRequest.RegisterPrefix(
+                Uri.UriSchemeWss + ":",
+                new WebSocketHttpRequestCreator(true)
+            );
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.")]
+        [Obsolete(
+            "This API supports the .NET Framework infrastructure and is not intended to be used directly from your code."
+        )]
         public static bool IsApplicationTargeting45()
         {
             return BinaryCompatibility.TargetsAtLeast_Desktop_V4_5;
         }
 
         public abstract void Abort();
-        public abstract Task CloseAsync(WebSocketCloseStatus closeStatus, 
-            string statusDescription, 
-            CancellationToken cancellationToken);
-        public abstract Task CloseOutputAsync(WebSocketCloseStatus closeStatus, 
-            string statusDescription, 
-            CancellationToken cancellationToken);
+        public abstract Task CloseAsync(
+            WebSocketCloseStatus closeStatus,
+            string statusDescription,
+            CancellationToken cancellationToken
+        );
+        public abstract Task CloseOutputAsync(
+            WebSocketCloseStatus closeStatus,
+            string statusDescription,
+            CancellationToken cancellationToken
+        );
         public abstract void Dispose();
-        public abstract Task<WebSocketReceiveResult> ReceiveAsync(ArraySegment<byte> buffer, 
-            CancellationToken cancellationToken);
-        public abstract Task SendAsync(ArraySegment<byte> buffer, 
-            WebSocketMessageType messageType, 
-            bool endOfMessage, 
-            CancellationToken cancellationToken);
+        public abstract Task<WebSocketReceiveResult> ReceiveAsync(
+            ArraySegment<byte> buffer,
+            CancellationToken cancellationToken
+        );
+        public abstract Task SendAsync(
+            ArraySegment<byte> buffer,
+            WebSocketMessageType messageType,
+            bool endOfMessage,
+            CancellationToken cancellationToken
+        );
 
-        protected static void ThrowOnInvalidState(WebSocketState state, params WebSocketState[] validStates)
+        protected static void ThrowOnInvalidState(
+            WebSocketState state,
+            params WebSocketState[] validStates
+        )
         {
             string validStatesText = string.Empty;
 
@@ -156,13 +221,14 @@ namespace System.Net.WebSockets
                 validStatesText = string.Join(", ", validStates);
             }
 
-            throw new WebSocketException(SR.GetString(SR.net_WebSockets_InvalidState, state, validStatesText));
+            throw new WebSocketException(
+                SR.GetString(SR.net_WebSockets_InvalidState, state, validStatesText)
+            );
         }
 
         protected static bool IsStateTerminal(WebSocketState state)
         {
-            return state == WebSocketState.Closed ||
-                   state == WebSocketState.Aborted;
+            return state == WebSocketState.Closed || state == WebSocketState.Aborted;
         }
     }
 }

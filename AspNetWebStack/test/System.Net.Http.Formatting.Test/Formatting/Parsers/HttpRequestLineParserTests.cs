@@ -21,24 +21,45 @@ namespace System.Net.Http.Formatting.Parsers
             HttpUnsortedRequest requestLine = new HttpUnsortedRequest();
             Assert.NotNull(requestLine);
 
-            Assert.ThrowsArgumentGreaterThanOrEqualTo(() => new HttpRequestLineParser(requestLine, ParserData.MinRequestLineSize - 1),
-                "maxRequestLineSize", ParserData.MinRequestLineSize.ToString(), ParserData.MinRequestLineSize - 1);
+            Assert.ThrowsArgumentGreaterThanOrEqualTo(
+                () => new HttpRequestLineParser(requestLine, ParserData.MinRequestLineSize - 1),
+                "maxRequestLineSize",
+                ParserData.MinRequestLineSize.ToString(),
+                ParserData.MinRequestLineSize - 1
+            );
 
-            HttpRequestLineParser parser = new HttpRequestLineParser(requestLine, ParserData.MinRequestLineSize);
+            HttpRequestLineParser parser = new HttpRequestLineParser(
+                requestLine,
+                ParserData.MinRequestLineSize
+            );
             Assert.NotNull(parser);
 
-            Assert.ThrowsArgumentNull(() => { new HttpRequestLineParser(null, ParserData.MinRequestLineSize); }, "httpRequest");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    new HttpRequestLineParser(null, ParserData.MinRequestLineSize);
+                },
+                "httpRequest"
+            );
         }
-
 
         [Fact]
         public void RequestLineParserNullBuffer()
         {
             HttpUnsortedRequest requestLine = new HttpUnsortedRequest();
-            HttpRequestLineParser parser = new HttpRequestLineParser(requestLine, ParserData.MinRequestLineSize);
+            HttpRequestLineParser parser = new HttpRequestLineParser(
+                requestLine,
+                ParserData.MinRequestLineSize
+            );
             Assert.NotNull(parser);
             int bytesConsumed = 0;
-            Assert.ThrowsArgumentNull(() => { parser.ParseBuffer(null, 0, ref bytesConsumed); }, "buffer");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    parser.ParseBuffer(null, 0, ref bytesConsumed);
+                },
+                "buffer"
+            );
         }
 
         [Fact]
@@ -46,7 +67,10 @@ namespace System.Net.Http.Formatting.Parsers
         {
             byte[] data = CreateBuffer("G", "/", "HTTP/1.1");
             HttpUnsortedRequest requestLine = new HttpUnsortedRequest();
-            HttpRequestLineParser parser = new HttpRequestLineParser(requestLine, ParserData.MinRequestLineSize);
+            HttpRequestLineParser parser = new HttpRequestLineParser(
+                requestLine,
+                ParserData.MinRequestLineSize
+            );
             Assert.NotNull(parser);
 
             int bytesConsumed = 0;
@@ -195,7 +219,12 @@ namespace System.Net.Http.Formatting.Parsers
             return CreateBuffer(method, address, version, false);
         }
 
-        private static byte[] CreateBuffer(string method, string address, string version, bool withLws)
+        private static byte[] CreateBuffer(
+            string method,
+            string address,
+            string version,
+            bool withLws
+        )
         {
             const string SP = " ";
             const string HTAB = "\t";
@@ -207,11 +236,24 @@ namespace System.Net.Http.Formatting.Parsers
                 lws = SP + SP + HTAB + SP;
             }
 
-            string requestLine = String.Format("{0}{1}{2}{3}{4}{5}", method, lws, address, lws, version, CRLF);
+            string requestLine = String.Format(
+                "{0}{1}{2}{3}{4}{5}",
+                method,
+                lws,
+                address,
+                lws,
+                version,
+                CRLF
+            );
             return Encoding.UTF8.GetBytes(requestLine);
         }
 
-        private static ParserState ParseBufferInSteps(HttpRequestLineParser parser, byte[] buffer, int readsize, out int totalBytesConsumed)
+        private static ParserState ParseBufferInSteps(
+            HttpRequestLineParser parser,
+            byte[] buffer,
+            int readsize,
+            out int totalBytesConsumed
+        )
         {
             ParserState state = ParserState.Invalid;
             totalBytesConsumed = 0;
@@ -234,7 +276,12 @@ namespace System.Net.Http.Formatting.Parsers
             return state;
         }
 
-        private static void ValidateResult(HttpUnsortedRequest requestLine, string method, string requestUri, Version version)
+        private static void ValidateResult(
+            HttpUnsortedRequest requestLine,
+            string method,
+            string requestUri,
+            Version version
+        )
         {
             Assert.Equal(new HttpMethod(method), requestLine.Method);
             Assert.Equal(requestUri, requestLine.RequestUri);

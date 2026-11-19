@@ -9,9 +9,9 @@ namespace Microsoft.EntityFrameworkCore.Storage.Json;
 /// <summary>
 ///     A <see cref="JsonValueReaderWriter{TValue}" /> that wraps an existing reader/writer and adds casts to the given type.
 /// </summary>
-public class JsonCastValueReaderWriter<TConverted> :
-    JsonValueReaderWriter<TConverted>,
-    ICompositeJsonValueReaderWriter
+public class JsonCastValueReaderWriter<TConverted>
+    : JsonValueReaderWriter<TConverted>,
+        ICompositeJsonValueReaderWriter
 {
     private readonly JsonValueReaderWriter _providerReaderWriter;
 
@@ -25,13 +25,15 @@ public class JsonCastValueReaderWriter<TConverted> :
     }
 
     /// <inheritdoc />
-    public override TConverted FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
-        => (TConverted)_providerReaderWriter.FromJson(ref manager, existingObject);
+    public override TConverted FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    ) => (TConverted)_providerReaderWriter.FromJson(ref manager, existingObject);
 
     /// <inheritdoc />
-    public override void ToJsonTyped(Utf8JsonWriter writer, TConverted value)
-        => _providerReaderWriter.ToJson(writer, value!);
+    public override void ToJsonTyped(Utf8JsonWriter writer, TConverted value) =>
+        _providerReaderWriter.ToJson(writer, value!);
 
-    JsonValueReaderWriter ICompositeJsonValueReaderWriter.InnerReaderWriter
-        => _providerReaderWriter;
+    JsonValueReaderWriter ICompositeJsonValueReaderWriter.InnerReaderWriter =>
+        _providerReaderWriter;
 }

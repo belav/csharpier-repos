@@ -20,5 +20,4 @@ namespace System.Reflection
 
         public override Type LocalType => type!;
     }
-
 }

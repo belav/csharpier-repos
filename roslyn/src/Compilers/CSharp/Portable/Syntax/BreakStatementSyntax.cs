@@ -8,8 +8,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
     public partial class BreakStatementSyntax
     {
-        public BreakStatementSyntax Update(SyntaxToken breakKeyword, SyntaxToken semicolonToken)
-            => Update(AttributeLists, breakKeyword, semicolonToken);
+        public BreakStatementSyntax Update(SyntaxToken breakKeyword, SyntaxToken semicolonToken) =>
+            Update(AttributeLists, breakKeyword, semicolonToken);
     }
 }
 
@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     public partial class SyntaxFactory
     {
-        public static BreakStatementSyntax BreakStatement(SyntaxToken breakKeyword, SyntaxToken semicolonToken)
-            => BreakStatement(attributeLists: default, breakKeyword, semicolonToken);
+        public static BreakStatementSyntax BreakStatement(
+            SyntaxToken breakKeyword,
+            SyntaxToken semicolonToken
+        ) => BreakStatement(attributeLists: default, breakKeyword, semicolonToken);
     }
 }

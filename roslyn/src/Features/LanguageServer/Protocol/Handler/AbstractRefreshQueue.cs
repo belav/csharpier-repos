@@ -14,10 +14,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
-    internal abstract class AbstractRefreshQueue :
-        IOnInitialized,
-        ILspService,
-        IDisposable
+    internal abstract class AbstractRefreshQueue : IOnInitialized, ILspService, IDisposable
     {
         private AsyncBatchingWorkQueue<Uri?>? _refreshQueue;
 
@@ -38,17 +35,24 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider,
             LspWorkspaceRegistrationService lspWorkspaceRegistrationService,
             LspWorkspaceManager lspWorkspaceManager,
-            IClientLanguageServerManager notificationManager)
+            IClientLanguageServerManager notificationManager
+        )
         {
             _isQueueCreated = false;
-            _asyncListener = asynchronousOperationListenerProvider.GetListener(GetFeatureAttribute());
+            _asyncListener = asynchronousOperationListenerProvider.GetListener(
+                GetFeatureAttribute()
+            );
             _lspWorkspaceRegistrationService = lspWorkspaceRegistrationService;
             _disposalTokenSource = new();
             _lspWorkspaceManager = lspWorkspaceManager;
             _notificationManager = notificationManager;
         }
 
-        public Task OnInitializedAsync(ClientCapabilities clientCapabilities, RequestContext context, CancellationToken cancellationToken)
+        public Task OnInitializedAsync(
+            ClientCapabilities clientCapabilities,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             if (_refreshQueue is null && GetRefreshSupport(clientCapabilities) is true)
             {
@@ -58,11 +62,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 // an enormous amount of time.
                 _refreshQueue = new AsyncBatchingWorkQueue<Uri?>(
                     delay: TimeSpan.FromMilliseconds(2000),
-                    processBatchAsync: (documentUris, cancellationToken)
-                        => FilterLspTrackedDocumentsAsync(_lspWorkspaceManager, _notificationManager, documentUris, cancellationToken),
+                    processBatchAsync: (documentUris, cancellationToken) =>
+                        FilterLspTrackedDocumentsAsync(
+                            _lspWorkspaceManager,
+                            _notificationManager,
+                            documentUris,
+                            cancellationToken
+                        ),
                     equalityComparer: EqualityComparer<Uri?>.Default,
                     asyncListener: _asyncListener,
-                    _disposalTokenSource.Token);
+                    _disposalTokenSource.Token
+                );
                 _isQueueCreated = true;
                 _lspWorkspaceRegistrationService.LspSolutionChanged += OnLspSolutionChanged;
             }
@@ -102,14 +112,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             LspWorkspaceManager lspWorkspaceManager,
             IClientLanguageServerManager notificationManager,
             ImmutableSegmentedList<Uri?> documentUris,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var trackedDocuments = lspWorkspaceManager.GetTrackedLspText();
             foreach (var documentUri in documentUris)
             {
                 if (documentUri is null || !trackedDocuments.ContainsKey(documentUri))
                 {
-                    return notificationManager.SendRequestAsync(GetWorkspaceRefreshName(), cancellationToken);
+                    return notificationManager.SendRequestAsync(
+                        GetWorkspaceRefreshName(),
+                        cancellationToken
+                    );
                 }
             }
 

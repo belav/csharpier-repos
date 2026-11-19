@@ -25,8 +25,9 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             string errorMessage,
             DkmEvaluationResultFlags flags,
             string type,
-            DkmDataItem dataItem) :
-            base(inspectionContext, stackFrame, name, fullName, flags, type, dataItem)
+            DkmDataItem dataItem
+        )
+            : base(inspectionContext, stackFrame, name, fullName, flags, type, dataItem)
         {
             this.ErrorMessage = errorMessage;
         }
@@ -39,7 +40,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             string ErrorMessage,
             DkmEvaluationResultFlags Flags,
             string Type,
-            DkmDataItem DataItem)
+            DkmDataItem DataItem
+        )
         {
             return new DkmFailedEvaluationResult(
                 InspectionContext,
@@ -49,7 +51,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
                 ErrorMessage,
                 Flags,
                 Type,
-                DataItem);
+                DataItem
+            );
         }
     }
 }

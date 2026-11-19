@@ -18,7 +18,18 @@ namespace System
         // Note: CreateInstance returns null for Nullable<T>, e.g. CreateInstance(typeof(int?)) returns null.
         //
 
-        public static object? CreateInstance([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors | DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, BindingFlags bindingAttr, Binder? binder, object?[]? args, CultureInfo? culture, object?[]? activationAttributes)
+        public static object? CreateInstance(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.NonPublicConstructors
+                    | DynamicallyAccessedMemberTypes.PublicConstructors
+            )]
+                Type type,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            object?[]? args,
+            CultureInfo? culture,
+            object?[]? activationAttributes
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -44,51 +55,76 @@ namespace System
         public static ObjectHandle? CreateInstance(string assemblyName, string typeName)
         {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return CreateInstanceInternal(assemblyName,
-                                          typeName,
-                                          false,
-                                          ConstructorDefault,
-                                          null,
-                                          null,
-                                          null,
-                                          null,
-                                          ref stackMark);
+            return CreateInstanceInternal(
+                assemblyName,
+                typeName,
+                false,
+                ConstructorDefault,
+                null,
+                null,
+                null,
+                null,
+                ref stackMark
+            );
         }
 
         [DynamicSecurityMethod]
         [RequiresUnreferencedCode("Type and its constructor could be removed")]
-        public static ObjectHandle? CreateInstance(string assemblyName, string typeName, bool ignoreCase, BindingFlags bindingAttr, Binder? binder, object?[]? args, CultureInfo? culture, object?[]? activationAttributes)
+        public static ObjectHandle? CreateInstance(
+            string assemblyName,
+            string typeName,
+            bool ignoreCase,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            object?[]? args,
+            CultureInfo? culture,
+            object?[]? activationAttributes
+        )
         {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return CreateInstanceInternal(assemblyName,
-                                          typeName,
-                                          ignoreCase,
-                                          bindingAttr,
-                                          binder,
-                                          args,
-                                          culture,
-                                          activationAttributes,
-                                          ref stackMark);
+            return CreateInstanceInternal(
+                assemblyName,
+                typeName,
+                ignoreCase,
+                bindingAttr,
+                binder,
+                args,
+                culture,
+                activationAttributes,
+                ref stackMark
+            );
         }
 
         [DynamicSecurityMethod]
         [RequiresUnreferencedCode("Type and its constructor could be removed")]
-        public static ObjectHandle? CreateInstance(string assemblyName, string typeName, object?[]? activationAttributes)
+        public static ObjectHandle? CreateInstance(
+            string assemblyName,
+            string typeName,
+            object?[]? activationAttributes
+        )
         {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return CreateInstanceInternal(assemblyName,
-                                          typeName,
-                                          false,
-                                          ConstructorDefault,
-                                          null,
-                                          null,
-                                          null,
-                                          activationAttributes,
-                                          ref stackMark);
+            return CreateInstanceInternal(
+                assemblyName,
+                typeName,
+                false,
+                ConstructorDefault,
+                null,
+                null,
+                null,
+                activationAttributes,
+                ref stackMark
+            );
         }
 
-        public static object? CreateInstance([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)] Type type, bool nonPublic) =>
-            CreateInstance(type, nonPublic, wrapExceptions: true);
+        public static object? CreateInstance(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                Type type,
+            bool nonPublic
+        ) => CreateInstance(type, nonPublic, wrapExceptions: true);
 
         internal static object? CreateInstance(Type type, bool nonPublic, bool wrapExceptions)
         {
@@ -97,22 +133,33 @@ namespace System
             if (type.UnderlyingSystemType is not RuntimeType rt)
                 throw new ArgumentException(SR.Arg_MustBeType, nameof(type));
 
-            return rt.CreateInstanceDefaultCtor(publicOnly: !nonPublic, wrapExceptions: wrapExceptions);
+            return rt.CreateInstanceDefaultCtor(
+                publicOnly: !nonPublic,
+                wrapExceptions: wrapExceptions
+            );
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Implementation detail of Activator that linker intrinsically recognizes")]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2072:UnrecognizedReflectionPattern",
-            Justification = "Implementation detail of Activator that linker intrinsically recognizes")]
-        private static ObjectHandle? CreateInstanceInternal(string assemblyString,
-                                                           string typeName,
-                                                           bool ignoreCase,
-                                                           BindingFlags bindingAttr,
-                                                           Binder? binder,
-                                                           object?[]? args,
-                                                           CultureInfo? culture,
-                                                           object?[]? activationAttributes,
-                                                           ref StackCrawlMark stackMark)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Implementation detail of Activator that linker intrinsically recognizes"
+        )]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2072:UnrecognizedReflectionPattern",
+            Justification = "Implementation detail of Activator that linker intrinsically recognizes"
+        )]
+        private static ObjectHandle? CreateInstanceInternal(
+            string assemblyString,
+            string typeName,
+            bool ignoreCase,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            object?[]? args,
+            CultureInfo? culture,
+            object?[]? activationAttributes,
+            ref StackCrawlMark stackMark
+        )
         {
             RuntimeAssembly assembly;
             if (assemblyString == null)
@@ -122,24 +169,41 @@ namespace System
             else
             {
                 AssemblyName assemblyName = new AssemblyName(assemblyString);
-                assembly = RuntimeAssembly.InternalLoad(assemblyName, ref stackMark, AssemblyLoadContext.CurrentContextualReflectionContext);
+                assembly = RuntimeAssembly.InternalLoad(
+                    assemblyName,
+                    ref stackMark,
+                    AssemblyLoadContext.CurrentContextualReflectionContext
+                );
             }
 
             // Issues IL2026 warning.
             Type? type = assembly.GetType(typeName, throwOnError: true, ignoreCase);
 
             // Issues IL2072 warning.
-            object? o = CreateInstance(type!, bindingAttr, binder, args, culture, activationAttributes);
+            object? o = CreateInstance(
+                type!,
+                bindingAttr,
+                binder,
+                args,
+                culture,
+                activationAttributes
+            );
 
             return o != null ? new ObjectHandle(o) : null;
         }
 
         [Intrinsic]
-        public static T CreateInstance<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]T>()
+        public static T CreateInstance<
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                T
+        >()
         {
             return (T)((RuntimeType)typeof(T)).CreateInstanceOfT()!;
         }
 
-        private static T CreateDefaultInstance<T>() where T : struct => default;
+        private static T CreateDefaultInstance<T>()
+            where T : struct => default;
     }
 }

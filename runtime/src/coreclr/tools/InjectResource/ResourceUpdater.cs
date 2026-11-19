@@ -10,10 +10,7 @@ class ResourceUpdater : IDisposable
     private class UpdateResourceHandle : SafeHandle
     {
         public UpdateResourceHandle()
-            :base(IntPtr.Zero, true)
-        {
-
-        }
+            : base(IntPtr.Zero, true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -23,19 +20,38 @@ class ResourceUpdater : IDisposable
         public override bool IsInvalid => handle == IntPtr.Zero;
     }
 
-    [DllImport("kernel32", EntryPoint = "BeginUpdateResourceA", CharSet = CharSet.Ansi, SetLastError = true)]
-    private static extern UpdateResourceHandle BeginUpdateResource(string pFileName, bool bDeleteExistingResources);
+    [DllImport(
+        "kernel32",
+        EntryPoint = "BeginUpdateResourceA",
+        CharSet = CharSet.Ansi,
+        SetLastError = true
+    )]
+    private static extern UpdateResourceHandle BeginUpdateResource(
+        string pFileName,
+        bool bDeleteExistingResources
+    );
 
-    [DllImport("kernel32", EntryPoint = "UpdateResourceA", CharSet = CharSet.Ansi, SetLastError = true)]
+    [DllImport(
+        "kernel32",
+        EntryPoint = "UpdateResourceA",
+        CharSet = CharSet.Ansi,
+        SetLastError = true
+    )]
     private static extern bool UpdateResource(
         UpdateResourceHandle hUpdate,
         nint lpType,
         string lpName,
         ushort wLanguage,
         byte[] lpData,
-        int cb);
+        int cb
+    );
 
-    [DllImport("kernel32", EntryPoint = "EndUpdateResourceA", CharSet = CharSet.Ansi, SetLastError = true)]
+    [DllImport(
+        "kernel32",
+        EntryPoint = "EndUpdateResourceA",
+        CharSet = CharSet.Ansi,
+        SetLastError = true
+    )]
     private static extern bool EndUpdateResource(IntPtr hUpdate, bool fDiscard);
 
     private UpdateResourceHandle handle;

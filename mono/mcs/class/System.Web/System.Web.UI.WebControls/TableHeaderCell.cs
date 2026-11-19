@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,84 +30,97 @@ using System.ComponentModel;
 using System.Security.Permissions;
 using System.Text;
 
-namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls
+{
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public class TableHeaderCell : TableCell
+    {
+        public TableHeaderCell()
+            : base(HtmlTextWriterTag.Th) { }
 
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class TableHeaderCell : TableCell {
+        [DefaultValue("")]
+        public virtual string AbbreviatedText
+        {
+            get
+            {
+                object o = ViewState["AbbreviatedText"];
+                return (o == null) ? String.Empty : (string)o;
+            }
+            set
+            {
+                if (value == null)
+                    ViewState.Remove("AbbreviatedText");
+                else
+                    ViewState["AbbreviatedText"] = value;
+            }
+        }
 
-		public TableHeaderCell ()
-			: base (HtmlTextWriterTag.Th)
-		{
-		}
+        [DefaultValue(null)]
+        [TypeConverter(typeof(StringArrayConverter))]
+        public virtual string[] CategoryText
+        {
+            get
+            {
+                object o = ViewState["CategoryText"];
+                return (o == null) ? new string[0] : (string[])o;
+            }
+            set { ViewState["CategoryText"] = value; }
+        }
 
-		[DefaultValue ("")]
-		public virtual string AbbreviatedText {
-			get {
-				object o = ViewState ["AbbreviatedText"];
-				return (o == null) ? String.Empty : (string) o;
-			}
-			set {
-				if (value == null)
-					ViewState.Remove ("AbbreviatedText");
-				else
-					ViewState ["AbbreviatedText"] = value;
-			}
-		}
+        [DefaultValue(TableHeaderScope.NotSet)]
+        public virtual TableHeaderScope Scope
+        {
+            get
+            {
+                object o = ViewState["Scope"];
+                return (o == null) ? TableHeaderScope.NotSet : (TableHeaderScope)o;
+            }
+            set { ViewState["Scope"] = (int)value; }
+        }
 
-		[DefaultValue (null)]
-		[TypeConverter (typeof (StringArrayConverter))]
-		public virtual string[] CategoryText {
-			get {
-				object o = ViewState ["CategoryText"];
-				return (o == null) ? new string [0] : (string[]) o;
-			}
-			set {
-				ViewState ["CategoryText"] = value;
-			}
-		}
+        protected override void AddAttributesToRender(HtmlTextWriter writer)
+        {
+            base.AddAttributesToRender(writer);
+            if (writer != null)
+            {
+                object o = ViewState["AbbreviatedText"];
+                if (o != null)
+                    writer.AddAttribute(HtmlTextWriterAttribute.Abbr, (string)o);
 
-		[DefaultValue (TableHeaderScope.NotSet)]
-		public virtual TableHeaderScope Scope {
-			get {
-				object o = ViewState ["Scope"];
-				return (o == null) ? TableHeaderScope.NotSet : (TableHeaderScope) o;
-			}
-			set {
-				ViewState ["Scope"] = (int) value;
-			}
-		}
+                switch (Scope)
+                {
+                    case TableHeaderScope.Column:
+                        writer.AddAttribute(HtmlTextWriterAttribute.Scope, "column", false);
+                        break;
+                    case TableHeaderScope.Row:
+                        writer.AddAttribute(HtmlTextWriterAttribute.Scope, "row", false);
+                        break;
+                }
 
-		protected override void AddAttributesToRender (HtmlTextWriter writer)
-		{
-			base.AddAttributesToRender (writer);
-			if (writer != null) {
-				object o = ViewState ["AbbreviatedText"];
-				if (o != null)
-					writer.AddAttribute (HtmlTextWriterAttribute.Abbr, (string) o);
-
-				switch (Scope) {
-				case TableHeaderScope.Column:
-					writer.AddAttribute (HtmlTextWriterAttribute.Scope, "column", false);
-					break;
-				case TableHeaderScope.Row:
-					writer.AddAttribute (HtmlTextWriterAttribute.Scope, "row", false);
-					break;
-				}
-
-				string[] cats = CategoryText;
-				if (cats.Length == 1) {
-					writer.AddAttribute (HtmlTextWriterAttribute.Axis, cats [0]);
-				} else if (cats.Length > 1) {
-					StringBuilder sb = new StringBuilder ();
-					for (int i=0; i < cats.Length - 1; i++) {
-						sb.Append (cats [i]);
-						sb.Append (",");
-					}
-					sb.Append (cats [cats.Length - 1]);
-					writer.AddAttribute (HtmlTextWriterAttribute.Axis, sb.ToString ());
-				}
-			}
-		}
-	}
+                string[] cats = CategoryText;
+                if (cats.Length == 1)
+                {
+                    writer.AddAttribute(HtmlTextWriterAttribute.Axis, cats[0]);
+                }
+                else if (cats.Length > 1)
+                {
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i < cats.Length - 1; i++)
+                    {
+                        sb.Append(cats[i]);
+                        sb.Append(",");
+                    }
+                    sb.Append(cats[cats.Length - 1]);
+                    writer.AddAttribute(HtmlTextWriterAttribute.Axis, sb.ToString());
+                }
+            }
+        }
+    }
 }

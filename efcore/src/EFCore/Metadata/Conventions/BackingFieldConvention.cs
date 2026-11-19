@@ -23,12 +23,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 ///     </para>
 /// </remarks>
-public class BackingFieldConvention :
-    IPropertyAddedConvention,
-    INavigationAddedConvention,
-    ISkipNavigationAddedConvention,
-    IComplexPropertyAddedConvention,
-    IModelFinalizingConvention
+public class BackingFieldConvention
+    : IPropertyAddedConvention,
+        INavigationAddedConvention,
+        ISkipNavigationAddedConvention,
+        IComplexPropertyAddedConvention,
+        IModelFinalizingConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="BackingFieldConvention" />.
@@ -47,31 +47,32 @@ public class BackingFieldConvention :
     /// <inheritdoc />
     public virtual void ProcessPropertyAdded(
         IConventionPropertyBuilder propertyBuilder,
-        IConventionContext<IConventionPropertyBuilder> context)
-        => DiscoverField(propertyBuilder);
+        IConventionContext<IConventionPropertyBuilder> context
+    ) => DiscoverField(propertyBuilder);
 
     /// <inheritdoc />
     public virtual void ProcessNavigationAdded(
         IConventionNavigationBuilder navigationBuilder,
-        IConventionContext<IConventionNavigationBuilder> context)
-        => DiscoverField(navigationBuilder);
+        IConventionContext<IConventionNavigationBuilder> context
+    ) => DiscoverField(navigationBuilder);
 
     /// <inheritdoc />
     public virtual void ProcessSkipNavigationAdded(
         IConventionSkipNavigationBuilder skipNavigationBuilder,
-        IConventionContext<IConventionSkipNavigationBuilder> context)
-        => DiscoverField(skipNavigationBuilder);
+        IConventionContext<IConventionSkipNavigationBuilder> context
+    ) => DiscoverField(skipNavigationBuilder);
 
     /// <inheritdoc />
     public virtual void ProcessComplexPropertyAdded(
         IConventionComplexPropertyBuilder propertyBuilder,
-        IConventionContext<IConventionComplexPropertyBuilder> context)
-        => DiscoverField(propertyBuilder);
+        IConventionContext<IConventionComplexPropertyBuilder> context
+    ) => DiscoverField(propertyBuilder);
 
     /// <inheritdoc />
     public virtual void ProcessModelFinalizing(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context)
+        IConventionContext<IConventionModelBuilder> context
+    )
     {
         foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
         {
@@ -91,10 +92,16 @@ public class BackingFieldConvention :
         }
     }
 
-    private static void DiscoverField<TBuilder>(IConventionPropertyBaseBuilder<TBuilder> conventionPropertyBaseBuilder)
+    private static void DiscoverField<TBuilder>(
+        IConventionPropertyBaseBuilder<TBuilder> conventionPropertyBaseBuilder
+    )
         where TBuilder : IConventionPropertyBaseBuilder<TBuilder>
     {
-        if (ConfigurationSource.Convention.Overrides(conventionPropertyBaseBuilder.Metadata.GetFieldInfoConfigurationSource()))
+        if (
+            ConfigurationSource.Convention.Overrides(
+                conventionPropertyBaseBuilder.Metadata.GetFieldInfoConfigurationSource()
+            )
+        )
         {
             var field = GetFieldToSet(conventionPropertyBaseBuilder.Metadata);
             if (field != null)
@@ -106,10 +113,14 @@ public class BackingFieldConvention :
 
     private static FieldInfo? GetFieldToSet(IConventionPropertyBase? propertyBase)
     {
-        if (propertyBase == null
-            || !ConfigurationSource.Convention.Overrides(propertyBase.GetFieldInfoConfigurationSource())
+        if (
+            propertyBase == null
+            || !ConfigurationSource.Convention.Overrides(
+                propertyBase.GetFieldInfoConfigurationSource()
+            )
             || propertyBase.IsIndexerProperty()
-            || propertyBase.IsShadowProperty())
+            || propertyBase.IsShadowProperty()
+        )
         {
             return null;
         }
@@ -120,8 +131,13 @@ public class BackingFieldConvention :
         while (type != null)
         {
             var fieldInfo = TryMatchFieldName(propertyBase, typeBase, type);
-            if (fieldInfo != null
-                && (propertyBase.PropertyInfo != null || propertyBase.Name == fieldInfo.GetSimpleMemberName()))
+            if (
+                fieldInfo != null
+                && (
+                    propertyBase.PropertyInfo != null
+                    || propertyBase.Name == fieldInfo.GetSimpleMemberName()
+                )
+            )
             {
                 return fieldInfo;
             }
@@ -136,7 +152,8 @@ public class BackingFieldConvention :
     private static FieldInfo? TryMatchFieldName(
         IConventionPropertyBase propertyBase,
         IConventionTypeBase? entityType,
-        Type entityClrType)
+        Type entityClrType
+    )
     {
         var propertyName = propertyBase.Name;
 
@@ -146,8 +163,7 @@ public class BackingFieldConvention :
             var newFields = new Dictionary<string, FieldInfo>(StringComparer.Ordinal);
             foreach (var field in entityClrType.GetRuntimeFields())
             {
-                if (!field.IsStatic
-                    && !newFields.ContainsKey(field.Name))
+                if (!field.IsStatic && !newFields.ContainsKey(field.Name))
                 {
                     newFields[field.Name] = field;
                 }
@@ -162,20 +178,92 @@ public class BackingFieldConvention :
 
         var sortedFields = fields.OrderBy(p => p.Key, StringComparer.Ordinal).ToArray();
 
-        var match = TryMatch(sortedFields, "<", propertyName, ">k__BackingField", null, null, entityClrType, propertyName);
+        var match = TryMatch(
+            sortedFields,
+            "<",
+            propertyName,
+            ">k__BackingField",
+            null,
+            null,
+            entityClrType,
+            propertyName
+        );
         if (match == null)
         {
-            match = TryMatch(sortedFields, propertyName, "", "", propertyBase, null, entityClrType, propertyName);
+            match = TryMatch(
+                sortedFields,
+                propertyName,
+                "",
+                "",
+                propertyBase,
+                null,
+                entityClrType,
+                propertyName
+            );
 
             var camelPrefix = char.ToLowerInvariant(propertyName[0]).ToString();
             var camelizedSuffix = propertyName[1..];
 
-            match = TryMatch(sortedFields, camelPrefix, camelizedSuffix, "", propertyBase, match, entityClrType, propertyName);
-            match = TryMatch(sortedFields, "_", camelPrefix, camelizedSuffix, propertyBase, match, entityClrType, propertyName);
-            match = TryMatch(sortedFields, "_", "", propertyName, propertyBase, match, entityClrType, propertyName);
-            match = TryMatch(sortedFields, "m_", camelPrefix, camelizedSuffix, propertyBase, match, entityClrType, propertyName);
-            match = TryMatch(sortedFields, "m_", "", propertyName, propertyBase, match, entityClrType, propertyName);
-            match = TryMatch(sortedFields, "", camelPrefix + camelizedSuffix, "_", propertyBase, match, entityClrType, propertyName);
+            match = TryMatch(
+                sortedFields,
+                camelPrefix,
+                camelizedSuffix,
+                "",
+                propertyBase,
+                match,
+                entityClrType,
+                propertyName
+            );
+            match = TryMatch(
+                sortedFields,
+                "_",
+                camelPrefix,
+                camelizedSuffix,
+                propertyBase,
+                match,
+                entityClrType,
+                propertyName
+            );
+            match = TryMatch(
+                sortedFields,
+                "_",
+                "",
+                propertyName,
+                propertyBase,
+                match,
+                entityClrType,
+                propertyName
+            );
+            match = TryMatch(
+                sortedFields,
+                "m_",
+                camelPrefix,
+                camelizedSuffix,
+                propertyBase,
+                match,
+                entityClrType,
+                propertyName
+            );
+            match = TryMatch(
+                sortedFields,
+                "m_",
+                "",
+                propertyName,
+                propertyBase,
+                match,
+                entityClrType,
+                propertyName
+            );
+            match = TryMatch(
+                sortedFields,
+                "",
+                camelPrefix + camelizedSuffix,
+                "_",
+                propertyBase,
+                match,
+                entityClrType,
+                propertyName
+            );
         }
 
         return match;
@@ -189,7 +277,8 @@ public class BackingFieldConvention :
         IConventionPropertyBase? propertyBase,
         FieldInfo? existingMatch,
         Type entityClrType,
-        string propertyName)
+        string propertyName
+    )
     {
         var index = PrefixBinarySearch(array, prefix, 0, array.Length - 1);
         if (index == -1)
@@ -202,25 +291,35 @@ public class BackingFieldConvention :
         var currentValue = array[index];
         while (true)
         {
-            if (currentValue.Key.Length == length
+            if (
+                currentValue.Key.Length == length
                 && currentValue.Key.EndsWith(suffix, StringComparison.Ordinal)
-                && currentValue.Key.IndexOf(middle, prefix.Length, StringComparison.Ordinal) == prefix.Length)
+                && currentValue.Key.IndexOf(middle, prefix.Length, StringComparison.Ordinal)
+                    == prefix.Length
+            )
             {
-                var newMatch = typeInfo == null
-                    ? currentValue.Value
-                    : (typeInfo.IsCompatibleWith(currentValue.Value.FieldType)
+                var newMatch =
+                    typeInfo == null
                         ? currentValue.Value
-                        : null);
+                        : (
+                            typeInfo.IsCompatibleWith(currentValue.Value.FieldType)
+                                ? currentValue.Value
+                                : null
+                        );
 
                 if (newMatch != null)
                 {
-                    if (existingMatch != null
-                        && newMatch != existingMatch)
+                    if (existingMatch != null && newMatch != existingMatch)
                     {
                         propertyBase!.SetOrRemoveAnnotation(
                             CoreAnnotationNames.AmbiguousField,
                             CoreStrings.ConflictingBackingFields(
-                                propertyName, entityClrType.ShortDisplayName(), existingMatch.Name, newMatch.Name));
+                                propertyName,
+                                entityClrType.ShortDisplayName(),
+                                existingMatch.Name,
+                                newMatch.Name
+                            )
+                        );
                         return null;
                     }
 
@@ -243,7 +342,12 @@ public class BackingFieldConvention :
         }
     }
 
-    private static int PrefixBinarySearch<T>(KeyValuePair<string, T>[] array, string prefix, int left, int right)
+    private static int PrefixBinarySearch<T>(
+        KeyValuePair<string, T>[] array,
+        string prefix,
+        int left,
+        int right
+    )
     {
         var found = -1;
         while (true)

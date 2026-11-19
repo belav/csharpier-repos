@@ -12,7 +12,9 @@ namespace System.Reflection.PortableExecutable.Tests
     internal static class SigningUtilities
     {
         public static bool SupportsSigning { get; } =
-            System.Security.Cryptography.Tests.SignatureSupport.CanProduceSha1Signature(RSA.Create());
+            System.Security.Cryptography.Tests.SignatureSupport.CanProduceSha1Signature(
+                RSA.Create()
+            );
 
         public static byte[] CalculateRsaSignature(IEnumerable<Blob> content, byte[] privateKey)
         {
@@ -21,7 +23,11 @@ namespace System.Reflection.PortableExecutable.Tests
             using (var rsa = RSA.Create())
             {
                 rsa.ImportParameters(RSAParametersFromBlob(privateKey));
-                var signature = rsa.SignHash(hash, HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
+                var signature = rsa.SignHash(
+                    hash,
+                    HashAlgorithmName.SHA1,
+                    RSASignaturePadding.Pkcs1
+                );
                 Array.Reverse(signature);
                 return signature;
             }
@@ -93,7 +99,10 @@ namespace System.Reflection.PortableExecutable.Tests
             {
                 int offset = _offset;
                 _offset = offset + 4;
-                return _blob[offset] | (_blob[offset + 1] << 8) | (_blob[offset + 2] << 16) | (_blob[offset + 3] << 24);
+                return _blob[offset]
+                    | (_blob[offset + 1] << 8)
+                    | (_blob[offset + 2] << 16)
+                    | (_blob[offset + 3] << 24);
             }
 
             public byte[] ReadBigInteger(int length)

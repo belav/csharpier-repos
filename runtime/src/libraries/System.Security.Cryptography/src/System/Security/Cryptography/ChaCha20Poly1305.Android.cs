@@ -11,21 +11,25 @@ namespace System.Security.Cryptography
     {
         private SafeEvpCipherCtxHandle _ctxHandle;
 
-        public static bool IsSupported { get; } = Interop.Crypto.CipherIsSupported(Interop.Crypto.EvpChaCha20Poly1305());
+        public static bool IsSupported { get; } =
+            Interop.Crypto.CipherIsSupported(Interop.Crypto.EvpChaCha20Poly1305());
 
         [MemberNotNull(nameof(_ctxHandle))]
         private void ImportKey(ReadOnlySpan<byte> key)
         {
             // Constructors should check key size before calling ImportKey.
             Debug.Assert(key.Length == KeySizeInBytes);
-            _ctxHandle = Interop.Crypto.EvpCipherCreatePartial(Interop.Crypto.EvpChaCha20Poly1305());
+            _ctxHandle = Interop.Crypto.EvpCipherCreatePartial(
+                Interop.Crypto.EvpChaCha20Poly1305()
+            );
 
             Interop.Crypto.CheckValidOpenSslHandle(_ctxHandle);
             Interop.Crypto.EvpCipherSetKeyAndIV(
                 _ctxHandle,
                 key,
                 Span<byte>.Empty,
-                Interop.Crypto.EvpCipherDirection.NoChange);
+                Interop.Crypto.EvpCipherDirection.NoChange
+            );
 
             Interop.Crypto.CipherSetNonceLength(_ctxHandle, NonceSizeInBytes);
         }
@@ -35,14 +39,15 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> plaintext,
             Span<byte> ciphertext,
             Span<byte> tag,
-            ReadOnlySpan<byte> associatedData = default)
+            ReadOnlySpan<byte> associatedData = default
+        )
         {
-
             Interop.Crypto.EvpCipherSetKeyAndIV(
                 _ctxHandle,
                 Span<byte>.Empty,
                 nonce,
-                Interop.Crypto.EvpCipherDirection.Encrypt);
+                Interop.Crypto.EvpCipherDirection.Encrypt
+            );
 
             if (!associatedData.IsEmpty)
             {
@@ -66,16 +71,26 @@ namespace System.Security.Cryptography
 
                 ciphertextAndTag = ciphertextAndTag.Slice(0, ciphertextAndTagLength);
 
-                if (!Interop.Crypto.EvpCipherUpdate(_ctxHandle, ciphertextAndTag, out int ciphertextBytesWritten, plaintext))
+                if (
+                    !Interop.Crypto.EvpCipherUpdate(
+                        _ctxHandle,
+                        ciphertextAndTag,
+                        out int ciphertextBytesWritten,
+                        plaintext
+                    )
+                )
                 {
                     throw new CryptographicException();
                 }
 
-                if (!Interop.Crypto.EvpAeadCipherFinalEx(
-                    _ctxHandle,
-                    ciphertextAndTag.Slice(ciphertextBytesWritten),
-                    out int bytesWritten,
-                    out bool authTagMismatch))
+                if (
+                    !Interop.Crypto.EvpAeadCipherFinalEx(
+                        _ctxHandle,
+                        ciphertextAndTag.Slice(ciphertextBytesWritten),
+                        out int bytesWritten,
+                        out bool authTagMismatch
+                    )
+                )
                 {
                     Debug.Assert(!authTagMismatch);
                     throw new CryptographicException();
@@ -87,7 +102,9 @@ namespace System.Security.Cryptography
 
                 if (ciphertextBytesWritten != ciphertextAndTagLength)
                 {
-                    Debug.Fail($"ChaCha20Poly1305 encrypt wrote {ciphertextBytesWritten} of {ciphertextAndTagLength} bytes.");
+                    Debug.Fail(
+                        $"ChaCha20Poly1305 encrypt wrote {ciphertextBytesWritten} of {ciphertextAndTagLength} bytes."
+                    );
                     throw new CryptographicException();
                 }
 
@@ -108,26 +125,42 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> ciphertext,
             ReadOnlySpan<byte> tag,
             Span<byte> plaintext,
-            ReadOnlySpan<byte> associatedData)
+            ReadOnlySpan<byte> associatedData
+        )
         {
             Interop.Crypto.EvpCipherSetKeyAndIV(
                 _ctxHandle,
                 ReadOnlySpan<byte>.Empty,
                 nonce,
-                Interop.Crypto.EvpCipherDirection.Decrypt);
+                Interop.Crypto.EvpCipherDirection.Decrypt
+            );
 
             if (!associatedData.IsEmpty)
             {
                 Interop.Crypto.CipherUpdateAAD(_ctxHandle, associatedData);
             }
 
-            if (!Interop.Crypto.EvpCipherUpdate(_ctxHandle, plaintext, out int plaintextBytesWritten, ciphertext))
+            if (
+                !Interop.Crypto.EvpCipherUpdate(
+                    _ctxHandle,
+                    plaintext,
+                    out int plaintextBytesWritten,
+                    ciphertext
+                )
+            )
             {
                 CryptographicOperations.ZeroMemory(plaintext);
                 throw new CryptographicException();
             }
 
-            if (!Interop.Crypto.EvpCipherUpdate(_ctxHandle, plaintext.Slice(plaintextBytesWritten), out int bytesWritten, tag))
+            if (
+                !Interop.Crypto.EvpCipherUpdate(
+                    _ctxHandle,
+                    plaintext.Slice(plaintextBytesWritten),
+                    out int bytesWritten,
+                    tag
+                )
+            )
             {
                 CryptographicOperations.ZeroMemory(plaintext);
                 throw new CryptographicException();
@@ -135,11 +168,14 @@ namespace System.Security.Cryptography
 
             plaintextBytesWritten += bytesWritten;
 
-            if (!Interop.Crypto.EvpAeadCipherFinalEx(
-                _ctxHandle,
-                plaintext.Slice(plaintextBytesWritten),
-                out bytesWritten,
-                out bool authTagMismatch))
+            if (
+                !Interop.Crypto.EvpAeadCipherFinalEx(
+                    _ctxHandle,
+                    plaintext.Slice(plaintextBytesWritten),
+                    out bytesWritten,
+                    out bool authTagMismatch
+                )
+            )
             {
                 CryptographicOperations.ZeroMemory(plaintext);
 
@@ -155,7 +191,9 @@ namespace System.Security.Cryptography
 
             if (plaintextBytesWritten != plaintext.Length)
             {
-                Debug.Fail($"ChaCha20Poly1305 decrypt wrote {plaintextBytesWritten} of {plaintext.Length} bytes.");
+                Debug.Fail(
+                    $"ChaCha20Poly1305 decrypt wrote {plaintextBytesWritten} of {plaintext.Length} bytes."
+                );
                 throw new CryptographicException();
             }
         }

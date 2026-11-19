@@ -23,7 +23,9 @@ public class RelationalDataReaderTest
                 new Dictionary<string, object>(),
                 readerColumns: null,
                 context: null,
-                logger: null));
+                logger: null
+            )
+        );
 
         Assert.NotNull(reader.DbDataReader);
 
@@ -41,33 +43,42 @@ public class RelationalDataReaderTest
 
     private const string ConnectionString = "Fake Connection String";
 
-    private static FakeRelationalConnection CreateConnection(IDbContextOptions options = null)
-        => new(options ?? CreateOptions());
+    private static FakeRelationalConnection CreateConnection(IDbContextOptions options = null) =>
+        new(options ?? CreateOptions());
 
     private static IDbContextOptions CreateOptions(
-        RelationalOptionsExtension optionsExtension = null)
+        RelationalOptionsExtension optionsExtension = null
+    )
     {
         var optionsBuilder = new DbContextOptionsBuilder();
 
-        ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
-            .AddOrUpdateExtension(
-                optionsExtension
-                ?? new FakeRelationalOptionsExtension().WithConnectionString(ConnectionString));
+        ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
+            optionsExtension
+                ?? new FakeRelationalOptionsExtension().WithConnectionString(ConnectionString)
+        );
 
         return optionsBuilder.Options;
     }
 
     private IRelationalCommand CreateRelationalCommand(
         string commandText = "Command Text",
-        IReadOnlyList<IRelationalParameter> parameters = null)
-        => new RelationalCommand(
+        IReadOnlyList<IRelationalParameter> parameters = null
+    ) =>
+        new RelationalCommand(
             new RelationalCommandBuilderDependencies(
                 new TestRelationalTypeMappingSource(
                     TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                    TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()),
-                new ExceptionDetector()),
+                    TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                ),
+                new ExceptionDetector()
+            ),
             commandText,
-            parameters ?? Array.Empty<IRelationalParameter>());
+            parameters ?? Array.Empty<IRelationalParameter>()
+        );
 
-    public static IEnumerable<object[]> IsAsyncData = new[] { new object[] { false }, new object[] { true } };
+    public static IEnumerable<object[]> IsAsyncData = new[]
+    {
+        new object[] { false },
+        new object[] { true },
+    };
 }

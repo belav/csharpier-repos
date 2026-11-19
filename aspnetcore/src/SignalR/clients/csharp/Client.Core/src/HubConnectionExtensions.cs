@@ -86,10 +86,8 @@ public static partial class HubConnectionExtensions
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
-        return hubConnection.On(
-            methodName,
-            new[] { typeof(T1), typeof(T2) },
-            args => handler((T1)args[0]!, (T2)args[1]!)
+        return hubConnection.On(methodName, new[] { typeof(T1), typeof(T2) }, args =>
+            handler((T1)args[0]!, (T2)args[1]!)
         );
     }
 
@@ -111,10 +109,8 @@ public static partial class HubConnectionExtensions
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
-        return hubConnection.On(
-            methodName,
-            new[] { typeof(T1), typeof(T2), typeof(T3) },
-            args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!)
+        return hubConnection.On(methodName, new[] { typeof(T1), typeof(T2), typeof(T3) }, args =>
+            handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!)
         );
     }
 
@@ -385,10 +381,8 @@ public static partial class HubConnectionExtensions
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
-        return hubConnection.On(
-            methodName,
-            new[] { typeof(T1), typeof(T2) },
-            args => handler((T1)args[0]!, (T2)args[1]!)
+        return hubConnection.On(methodName, new[] { typeof(T1), typeof(T2) }, args =>
+            handler((T1)args[0]!, (T2)args[1]!)
         );
     }
 
@@ -410,10 +404,8 @@ public static partial class HubConnectionExtensions
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
-        return hubConnection.On(
-            methodName,
-            new[] { typeof(T1), typeof(T2), typeof(T3) },
-            args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!)
+        return hubConnection.On(methodName, new[] { typeof(T1), typeof(T2), typeof(T3) }, args =>
+            handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!)
         );
     }
 

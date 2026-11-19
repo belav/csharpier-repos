@@ -29,9 +29,11 @@ public class RouteHandlerTest
                     {
                         app.UseRouting();
                         app.UseEndpoints(b =>
-                            b.MapPost(
-                                "/EchoTodo/{id}",
-                                (int id, Todo todo) => todo with { Id = id }
+                            b.MapPost("/EchoTodo/{id}", (int id, Todo todo) =>
+                                todo with
+                                {
+                                    Id = id,
+                                }
                             )
                         );
                     })

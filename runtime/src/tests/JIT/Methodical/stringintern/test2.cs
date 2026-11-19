@@ -14,13 +14,22 @@ Test2_xassem
 Test2
 #endif
 {
-    public static string[] teststr2 = new string[] { "\u3F2Aarray element 0", "array element 1\uCB53", "array \u47BBelement 2" };
+    public static string[] teststr2 = new string[]
+    {
+        "\u3F2Aarray element 0",
+        "array element 1\uCB53",
+        "array \u47BBelement 2",
+    };
 
     public static bool TestSameObjRef()
     {
         Console.WriteLine();
-        Console.WriteLine("When NGEN'ed, two strings in different modules have different object reference");
-        Console.WriteLine("When NGEN'ed, two strings in the same module have same object reference");
+        Console.WriteLine(
+            "When NGEN'ed, two strings in different modules have different object reference"
+        );
+        Console.WriteLine(
+            "When NGEN'ed, two strings in the same module have same object reference"
+        );
         Console.WriteLine("When JIT'ed, two strings always have same object reference");
         Console.WriteLine();
         Console.WriteLine("Testing SameObjRef");
@@ -75,7 +84,9 @@ Test2
             ;
         if (i != teststr2.Length)
         {
-            Console.WriteLine("for, (object)C.teststr2[i]==(object)teststr2[i] is not expected, FAILED");
+            Console.WriteLine(
+                "for, (object)C.teststr2[i]==(object)teststr2[i] is not expected, FAILED"
+            );
             passed = false;
         }
 
@@ -113,11 +124,17 @@ Test2
                 break;
         }
 
-        for (i = 1; (i < teststr2.Length) && (object)GenC<object>.teststr2[i] != (object)C.teststr2[i]; i++)
+        for (
+            i = 1;
+            (i < teststr2.Length) && (object)GenC<object>.teststr2[i] != (object)C.teststr2[i];
+            i++
+        )
             ;
         if (i != teststr2.Length)
         {
-            Console.WriteLine("for, (object)GenC<object>.teststr2[i]!=(object)C.teststr2[i] is not expected, FAILED");
+            Console.WriteLine(
+                "for, (object)GenC<object>.teststr2[i]!=(object)C.teststr2[i] is not expected, FAILED"
+            );
             passed = false;
         }
 
@@ -137,6 +154,5 @@ Test2
             Console.WriteLine("FAILED");
             return 1;
         }
-
     }
 }

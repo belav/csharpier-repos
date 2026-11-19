@@ -26,11 +26,17 @@ namespace System.CodeDom.Tests
 
             CodeNamespace namespace1 = new CodeNamespace("Name1");
             compileUnit.Namespaces.Add(namespace1);
-            Assert.Equal(new CodeNamespace[] { namespace1 }, compileUnit.Namespaces.Cast<CodeNamespace>());
+            Assert.Equal(
+                new CodeNamespace[] { namespace1 },
+                compileUnit.Namespaces.Cast<CodeNamespace>()
+            );
 
             CodeNamespace namespace2 = new CodeNamespace("Name2");
             compileUnit.Namespaces.Add(namespace2);
-            Assert.Equal(new CodeNamespace[] { namespace1, namespace2 }, compileUnit.Namespaces.Cast<CodeNamespace>());
+            Assert.Equal(
+                new CodeNamespace[] { namespace1, namespace2 },
+                compileUnit.Namespaces.Cast<CodeNamespace>()
+            );
         }
 
         [Fact]
@@ -40,11 +46,17 @@ namespace System.CodeDom.Tests
 
             string assembly1 = "Name1";
             compileUnit.ReferencedAssemblies.Add(assembly1);
-            Assert.Equal(new string[] { assembly1 }, compileUnit.ReferencedAssemblies.Cast<string>());
+            Assert.Equal(
+                new string[] { assembly1 },
+                compileUnit.ReferencedAssemblies.Cast<string>()
+            );
 
             string assembly2 = "Name2";
             compileUnit.ReferencedAssemblies.Add(assembly2);
-            Assert.Equal(new string[] { assembly1, assembly2 }, compileUnit.ReferencedAssemblies.Cast<string>());
+            Assert.Equal(
+                new string[] { assembly1, assembly2 },
+                compileUnit.ReferencedAssemblies.Cast<string>()
+            );
         }
 
         [Fact]
@@ -54,11 +66,17 @@ namespace System.CodeDom.Tests
 
             CodeAttributeDeclaration attribute1 = new CodeAttributeDeclaration("Name1");
             compileUnit.AssemblyCustomAttributes.Add(attribute1);
-            Assert.Equal(new CodeAttributeDeclaration[] { attribute1 }, compileUnit.AssemblyCustomAttributes.Cast<CodeAttributeDeclaration>());
+            Assert.Equal(
+                new CodeAttributeDeclaration[] { attribute1 },
+                compileUnit.AssemblyCustomAttributes.Cast<CodeAttributeDeclaration>()
+            );
 
             CodeAttributeDeclaration attribute2 = new CodeAttributeDeclaration("Name2");
             compileUnit.AssemblyCustomAttributes.Add(attribute2);
-            Assert.Equal(new CodeAttributeDeclaration[] { attribute1, attribute2 }, compileUnit.AssemblyCustomAttributes.Cast<CodeAttributeDeclaration>());
+            Assert.Equal(
+                new CodeAttributeDeclaration[] { attribute1, attribute2 },
+                compileUnit.AssemblyCustomAttributes.Cast<CodeAttributeDeclaration>()
+            );
         }
 
         [Fact]
@@ -66,13 +84,25 @@ namespace System.CodeDom.Tests
         {
             var compileUnit = new CodeCompileUnit();
 
-            CodeRegionDirective directive1 = new CodeRegionDirective(CodeRegionMode.None, "Region1");
+            CodeRegionDirective directive1 = new CodeRegionDirective(
+                CodeRegionMode.None,
+                "Region1"
+            );
             compileUnit.StartDirectives.Add(directive1);
-            Assert.Equal(new CodeRegionDirective[] { directive1 }, compileUnit.StartDirectives.Cast<CodeDirective>());
+            Assert.Equal(
+                new CodeRegionDirective[] { directive1 },
+                compileUnit.StartDirectives.Cast<CodeDirective>()
+            );
 
-            CodeRegionDirective directive2 = new CodeRegionDirective(CodeRegionMode.None, "Region2");
+            CodeRegionDirective directive2 = new CodeRegionDirective(
+                CodeRegionMode.None,
+                "Region2"
+            );
             compileUnit.StartDirectives.Add(directive2);
-            Assert.Equal(new CodeRegionDirective[] { directive1, directive2 }, compileUnit.StartDirectives.Cast<CodeDirective>());
+            Assert.Equal(
+                new CodeRegionDirective[] { directive1, directive2 },
+                compileUnit.StartDirectives.Cast<CodeDirective>()
+            );
         }
 
         [Fact]
@@ -80,13 +110,25 @@ namespace System.CodeDom.Tests
         {
             var compileUnit = new CodeCompileUnit();
 
-            CodeRegionDirective directive1 = new CodeRegionDirective(CodeRegionMode.None, "Region1");
+            CodeRegionDirective directive1 = new CodeRegionDirective(
+                CodeRegionMode.None,
+                "Region1"
+            );
             compileUnit.EndDirectives.Add(directive1);
-            Assert.Equal(new CodeRegionDirective[] { directive1 }, compileUnit.EndDirectives.Cast<CodeDirective>());
+            Assert.Equal(
+                new CodeRegionDirective[] { directive1 },
+                compileUnit.EndDirectives.Cast<CodeDirective>()
+            );
 
-            CodeRegionDirective directive2 = new CodeRegionDirective(CodeRegionMode.None, "Region2");
+            CodeRegionDirective directive2 = new CodeRegionDirective(
+                CodeRegionMode.None,
+                "Region2"
+            );
             compileUnit.EndDirectives.Add(directive2);
-            Assert.Equal(new CodeRegionDirective[] { directive1, directive2 }, compileUnit.EndDirectives.Cast<CodeDirective>());
+            Assert.Equal(
+                new CodeRegionDirective[] { directive1, directive2 },
+                compileUnit.EndDirectives.Cast<CodeDirective>()
+            );
         }
     }
 }

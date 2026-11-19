@@ -19,20 +19,27 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
     [TestService]
     internal partial class AddParameterDialogInProcess
     {
-        private async Task<AddParameterDialog?> TryGetDialogAsync(CancellationToken cancellationToken)
+        private async Task<AddParameterDialog?> TryGetDialogAsync(
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
             return Application.Current.Windows.OfType<AddParameterDialog>().SingleOrDefault();
         }
 
-        private async Task ClickAsync(Func<AddParameterDialog, ButtonBase> buttonAccessor, CancellationToken cancellationToken)
+        private async Task ClickAsync(
+            Func<AddParameterDialog, ButtonBase> buttonAccessor,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var dialog = await TryGetDialogAsync(cancellationToken);
             AssertEx.NotNull(dialog);
 
-            Contract.ThrowIfFalse(await buttonAccessor(dialog).SimulateClickAsync(JoinableTaskFactory));
+            Contract.ThrowIfFalse(
+                await buttonAccessor(dialog).SimulateClickAsync(JoinableTaskFactory)
+            );
         }
 
         public async Task VerifyOpenAsync(CancellationToken cancellationToken)
@@ -84,7 +91,10 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             await ClickAsync(dialog => dialog.GetTestAccessor().CancelButton, cancellationToken);
         }
 
-        public async Task FillCallSiteFieldAsync(string callsiteValue, CancellationToken cancellationToken)
+        public async Task FillCallSiteFieldAsync(
+            string callsiteValue,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -95,7 +105,10 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             dialog.CallsiteValueTextBox.Text = callsiteValue;
         }
 
-        public async Task FillNameFieldAsync(string parameterName, CancellationToken cancellationToken)
+        public async Task FillNameFieldAsync(
+            string parameterName,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 

@@ -15,24 +15,15 @@ namespace System.IdentityModel.Selectors
     public class UserCancellationException : System.Exception
     {
         public UserCancellationException()
-            : base()
-        {
-        }
+            : base() { }
 
-        public UserCancellationException( string message )
-            : base( message )
-        {
-        }
+        public UserCancellationException(string message)
+            : base(message) { }
 
-        public UserCancellationException( string message, Exception innerException )
-            : base( message, innerException )
-        {
-        }
+        public UserCancellationException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-        protected UserCancellationException( SerializationInfo info, StreamingContext context )
-            : base( info, context )
-        {
-        }
+        protected UserCancellationException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
-
 }

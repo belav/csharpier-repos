@@ -35,7 +35,9 @@ namespace System.Net.Tests
         [Theory]
         [InlineData(null)]
         [InlineData("")]
-        public void Ctor_ConnectionGroupIdNullOrEmpty_ExpectConnectionGroupIdNull(string connectionGroupId)
+        public void Ctor_ConnectionGroupIdNullOrEmpty_ExpectConnectionGroupIdNull(
+            string connectionGroupId
+        )
         {
             Authorization authorization = new Authorization(null, true, connectionGroupId);
             Assert.Null(authorization.ConnectionGroupId);
@@ -69,7 +71,11 @@ namespace System.Net.Tests
 
         [Theory]
         [MemberData(nameof(GetMutuallyAuthenticatedValues))]
-        public void MutuallyAuthenticated_Values_ExpectEqualValues(Authorization authorization, bool setValue, bool expectedValue)
+        public void MutuallyAuthenticated_Values_ExpectEqualValues(
+            Authorization authorization,
+            bool setValue,
+            bool expectedValue
+        )
         {
             authorization.MutuallyAuthenticated = setValue;
             Assert.Equal(expectedValue, authorization.MutuallyAuthenticated);

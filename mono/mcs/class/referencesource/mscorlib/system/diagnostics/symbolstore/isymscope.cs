@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -13,15 +13,16 @@
 ** parent scopes. Also provides access to all the locals defined
 ** within this scope.
 **
-** 
+**
 ===========================================================*/
-namespace System.Diagnostics.SymbolStore {
+namespace System.Diagnostics.SymbolStore
+{
     // Interface does not need to be marked with the serializable attribute
     using System;
-    using System.Text;
     using System.Runtime.InteropServices;
+    using System.Text;
 
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface ISymbolScope
     {
         // Get the method that contains this scope.

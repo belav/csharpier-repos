@@ -14,31 +14,30 @@ namespace System.Runtime.DurableInstancing
         const string InstanceOwnerIdName = "instancePersistenceInstanceOwnerId";
 
         public InstanceOwnerException()
-            : base(SRCore.InstanceOwnerDefault)
-        {
-        }
+            : base(SRCore.InstanceOwnerDefault) { }
 
         public InstanceOwnerException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public InstanceOwnerException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         public InstanceOwnerException(XName commandName, Guid instanceOwnerId)
-            : this(commandName, instanceOwnerId, null)
-        {
-        }
+            : this(commandName, instanceOwnerId, null) { }
 
-        public InstanceOwnerException(XName commandName, Guid instanceOwnerId, Exception innerException)
-            : this(commandName, instanceOwnerId, ToMessage(instanceOwnerId), innerException)
-        {
-        }
+        public InstanceOwnerException(
+            XName commandName,
+            Guid instanceOwnerId,
+            Exception innerException
+        )
+            : this(commandName, instanceOwnerId, ToMessage(instanceOwnerId), innerException) { }
 
-        public InstanceOwnerException(XName commandName, Guid instanceOwnerId, string message, Exception innerException)
+        public InstanceOwnerException(
+            XName commandName,
+            Guid instanceOwnerId,
+            string message,
+            Exception innerException
+        )
             : base(commandName, message, innerException)
         {
             InstanceOwnerId = instanceOwnerId;
@@ -55,8 +54,11 @@ namespace System.Runtime.DurableInstancing
 
         [Fx.Tag.SecurityNote(Critical = "Overrides critical inherited method")]
         [SecurityCritical]
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.SecureGetObjectDataOverrides,
-            Justification = "Method is SecurityCritical")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.SecureGetObjectDataOverrides,
+            Justification = "Method is SecurityCritical"
+        )]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);

@@ -12,7 +12,10 @@ namespace System.Data.ProviderBase
         protected readonly IDataReader _dataReader;
         protected int _fieldCount;
 
-        internal static DataReaderContainer Create(IDataReader dataReader, bool returnProviderSpecificTypes)
+        internal static DataReaderContainer Create(
+            IDataReader dataReader,
+            bool returnProviderSpecificTypes
+        )
         {
             if (returnProviderSpecificTypes)
             {
@@ -33,16 +36,16 @@ namespace System.Data.ProviderBase
 
         internal int FieldCount
         {
-            get
-            {
-                return _fieldCount;
-            }
+            get { return _fieldCount; }
         }
 
         internal abstract bool ReturnProviderSpecificTypes { get; }
         protected abstract int VisibleFieldCount { get; }
 
-        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)]
+        [return: DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.PublicFields
+        )]
         internal abstract Type GetFieldType(int ordinal);
         internal abstract object GetValue(int ordinal);
         internal abstract int GetValues(object[] values);
@@ -53,10 +56,12 @@ namespace System.Data.ProviderBase
             Debug.Assert(null != fieldName, "null GetName");
             return fieldName ?? "";
         }
+
         internal DataTable? GetSchemaTable()
         {
             return _dataReader.GetSchemaTable();
         }
+
         internal bool NextResult()
         {
             _fieldCount = 0;
@@ -67,6 +72,7 @@ namespace System.Data.ProviderBase
             }
             return false;
         }
+
         internal bool Read()
         {
             return _dataReader.Read();
@@ -76,7 +82,8 @@ namespace System.Data.ProviderBase
         {
             private readonly DbDataReader _providerSpecificDataReader;
 
-            internal ProviderSpecificDataReader(IDataReader dataReader, DbDataReader dbDataReader) : base(dataReader)
+            internal ProviderSpecificDataReader(IDataReader dataReader, DbDataReader dbDataReader)
+                : base(dataReader)
             {
                 Debug.Assert(null != dataReader, "null dbDataReader");
                 _providerSpecificDataReader = dbDataReader;
@@ -85,10 +92,7 @@ namespace System.Data.ProviderBase
 
             internal override bool ReturnProviderSpecificTypes
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
             protected override int VisibleFieldCount
             {
@@ -100,17 +104,22 @@ namespace System.Data.ProviderBase
                 }
             }
 
-            [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)]
+            [return: DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicFields
+            )]
             internal override Type GetFieldType(int ordinal)
             {
                 Type fieldType = _providerSpecificDataReader.GetProviderSpecificFieldType(ordinal);
                 Debug.Assert(null != fieldType, "null FieldType");
                 return fieldType;
             }
+
             internal override object GetValue(int ordinal)
             {
                 return _providerSpecificDataReader.GetProviderSpecificValue(ordinal);
             }
+
             internal override int GetValues(object[] values)
             {
                 return _providerSpecificDataReader.GetProviderSpecificValues(values);
@@ -119,17 +128,15 @@ namespace System.Data.ProviderBase
 
         private sealed class CommonLanguageSubsetDataReader : DataReaderContainer
         {
-            internal CommonLanguageSubsetDataReader(IDataReader dataReader) : base(dataReader)
+            internal CommonLanguageSubsetDataReader(IDataReader dataReader)
+                : base(dataReader)
             {
                 _fieldCount = VisibleFieldCount;
             }
 
             internal override bool ReturnProviderSpecificTypes
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
             protected override int VisibleFieldCount
             {
@@ -141,15 +148,20 @@ namespace System.Data.ProviderBase
                 }
             }
 
-            [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)]
+            [return: DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicFields
+            )]
             internal override Type GetFieldType(int ordinal)
             {
                 return _dataReader.GetFieldType(ordinal);
             }
+
             internal override object GetValue(int ordinal)
             {
                 return _dataReader.GetValue(ordinal);
             }
+
             internal override int GetValues(object[] values)
             {
                 return _dataReader.GetValues(values);

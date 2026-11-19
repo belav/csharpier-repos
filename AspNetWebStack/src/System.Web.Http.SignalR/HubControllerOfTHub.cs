@@ -13,7 +13,8 @@ namespace System.Web.Http
     /// </summary>
     /// <typeparam name="THub">The type of the hub. Must implement the <see cref="IHub"/> interface.</typeparam>
     [CLSCompliant(false)]
-    public abstract class HubController<THub> : HubControllerBase where THub : IHub
+    public abstract class HubController<THub> : HubControllerBase
+        where THub : IHub
     {
         /// <summary>
         /// Gets the <see cref="IHubContext"/> for the associated hub.

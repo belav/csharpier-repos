@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Rename
         bool isRenamingInStrings,
         bool isRenamingInComments,
         AnnotationTable<RenameAnnotation> renameAnnotations,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         internal readonly CancellationToken CancellationToken = cancellationToken;
         internal readonly ImmutableHashSet<TextSpan> ConflictLocationSpans = conflictLocationSpans;
@@ -39,13 +40,18 @@ namespace Microsoft.CodeAnalysis.Rename
         internal readonly SyntaxTree OriginalSyntaxTree = semanticModel.SyntaxTree;
         internal readonly string OriginalText = originalText;
         internal readonly ImmutableArray<string> PossibleNameConflicts = possibleNameConflicts;
-        internal readonly RenameAnnotation RenamedSymbolDeclarationAnnotation = renamedSymbolDeclarationAnnotation;
-        internal readonly ImmutableDictionary<TextSpan, RenameLocation> RenameLocations = renameLocations;
+        internal readonly RenameAnnotation RenamedSymbolDeclarationAnnotation =
+            renamedSymbolDeclarationAnnotation;
+        internal readonly ImmutableDictionary<TextSpan, RenameLocation> RenameLocations =
+            renameLocations;
         internal readonly RenamedSpansTracker RenameSpansTracker = renameSpansTracker;
         internal readonly ISymbol RenameSymbol = renameSymbol;
         internal readonly string ReplacementText = replacementText;
         internal readonly bool ReplacementTextValid = replacementTextValid;
-        internal readonly ImmutableDictionary<TextSpan, ImmutableSortedSet<TextSpan>?> StringAndCommentTextSpans = stringAndCommentTextSpans;
+        internal readonly ImmutableDictionary<
+            TextSpan,
+            ImmutableSortedSet<TextSpan>?
+        > StringAndCommentTextSpans = stringAndCommentTextSpans;
         internal readonly SyntaxNode SyntaxRoot = syntaxRoot;
         internal readonly Document Document = document;
         internal readonly SemanticModel SemanticModel = semanticModel;

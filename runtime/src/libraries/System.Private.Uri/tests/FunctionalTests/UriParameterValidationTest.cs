@@ -23,7 +23,7 @@ namespace System.PrivateUri.Tests
             Uri baseUri = new Uri("http://localhost/");
             Assert.False(Uri.TryCreate(baseUri, (Uri)null, out _));
             Assert.False(Uri.TryCreate((Uri)null, baseUri, out _));
-            Assert.False(Uri.TryCreate((Uri)null, (Uri)null, out _)) ;
+            Assert.False(Uri.TryCreate((Uri)null, (Uri)null, out _));
         }
 
         [Fact]

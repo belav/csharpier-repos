@@ -34,7 +34,10 @@ namespace System.Data.Common.EntitySql.AST
             //
             if (_name.StartsWith("_", StringComparison.OrdinalIgnoreCase) || Char.IsDigit(_name, 0))
             {
-                throw EntityUtil.EntitySqlError(ErrCtx, System.Data.Entity.Strings.InvalidParameterFormat(_name));
+                throw EntityUtil.EntitySqlError(
+                    ErrCtx,
+                    System.Data.Entity.Strings.InvalidParameterFormat(_name)
+                );
             }
         }
 

@@ -9,20 +9,26 @@
 using System.Net;
 #endif
 
-namespace System.Xml {
-    internal class XmlNullResolver : XmlResolver {
+namespace System.Xml
+{
+    internal class XmlNullResolver : XmlResolver
+    {
         public static readonly XmlNullResolver Singleton = new XmlNullResolver();
 
         // Private constructor ensures existing only one instance of XmlNullResolver
         private XmlNullResolver() { }
 
-        public override Object GetEntity(Uri absoluteUri, string role, Type ofObjectToReturn) {
+        public override Object GetEntity(Uri absoluteUri, string role, Type ofObjectToReturn)
+        {
             throw new XmlException(Res.Xml_NullResolver, string.Empty);
         }
 
 #if !SILVERLIGHT
-        public override ICredentials Credentials {
-            set { /* Do nothing */ }
+        public override ICredentials Credentials
+        {
+            set
+            { /* Do nothing */
+            }
         }
 #endif
     }

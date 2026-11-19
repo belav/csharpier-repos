@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
+
 public class BringUpTest_LocallocCnstB5
 {
     const int Pass = 100;
@@ -13,7 +13,8 @@ public class BringUpTest_LocallocCnstB5
 
     // Reduce all values to byte
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static unsafe bool CHECK(byte check, byte expected) {
+    public static unsafe bool CHECK(byte check, byte expected)
+    {
         return check == expected;
     }
 
@@ -23,12 +24,13 @@ public class BringUpTest_LocallocCnstB5
         byte* a = stackalloc byte[5];
         for (int i = 0; i < 5; i++)
         {
-            a[i] = (byte) i;
+            a[i] = (byte)i;
         }
 
         for (int i = 0; i < 5; i++)
         {
-            if (!CHECK(a[i], (byte) i)) return i;
+            if (!CHECK(a[i], (byte)i))
+                return i;
         }
 
         return -1;
@@ -40,7 +42,8 @@ public class BringUpTest_LocallocCnstB5
         int ret;
 
         ret = LocallocCnstB5();
-        if (ret != -1) {
+        if (ret != -1)
+        {
             Console.WriteLine("LocallocCnstB5: Failed on index: " + ret);
             return Fail;
         }

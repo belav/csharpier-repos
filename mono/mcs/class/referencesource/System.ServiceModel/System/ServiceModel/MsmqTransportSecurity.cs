@@ -5,10 +5,10 @@ namespace System.ServiceModel
 {
     using System;
     using System.ComponentModel;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Security;
     using System.Net;
     using System.Net.Security;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Security;
 
     public sealed class MsmqTransportSecurity
     {
@@ -39,7 +39,8 @@ namespace System.ServiceModel
         {
             get
             {
-                return this.msmqAuthenticationMode != MsmqAuthenticationMode.None && this.msmqProtectionLevel != ProtectionLevel.None;
+                return this.msmqAuthenticationMode != MsmqAuthenticationMode.None
+                    && this.msmqProtectionLevel != ProtectionLevel.None;
             }
         }
 
@@ -50,7 +51,9 @@ namespace System.ServiceModel
             set
             {
                 if (!MsmqAuthenticationModeHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 this.msmqAuthenticationMode = value;
             }
         }
@@ -62,7 +65,9 @@ namespace System.ServiceModel
             set
             {
                 if (!MsmqEncryptionAlgorithmHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 this.msmqEncryptionAlgorithm = value;
             }
         }
@@ -74,7 +79,9 @@ namespace System.ServiceModel
             set
             {
                 if (!MsmqSecureHashAlgorithmHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 this.msmqHashAlgorithm = value;
             }
         }
@@ -86,7 +93,9 @@ namespace System.ServiceModel
             set
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 this.msmqProtectionLevel = value;
             }
         }

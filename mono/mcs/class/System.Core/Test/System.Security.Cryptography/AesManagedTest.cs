@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,74 +28,79 @@
 
 using System;
 using System.Security.Cryptography;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Security.Cryptography {
-	
-	[TestFixture]
-	public class AesManagedTest {
-		
-		[Test]
+namespace MonoTests.System.Security.Cryptography
+{
+    [TestFixture]
+    public class AesManagedTest
+    {
+        [Test]
 #if !MONOTOUCH && !XAMMAC
-		[ExpectedException (typeof (CryptographicException))]
+        [ExpectedException(typeof(CryptographicException))]
 #endif
-		public void CFB_NotAllowed ()
-		{
-			// that's differnt from RjindaelManaged
-			// and also different from AesCryptoServiceProvider
-			// and both are different as well :-(
-			using (var aes = new AesManaged ()) {
-				aes.Mode = CipherMode.CFB;
-			}
-		}
-		
-		[Test]
-		[ExpectedException (typeof (CryptographicException))]
-		public void CTS_NotAllowed ()
-		{
-			// this check is normally (e.g. RijndaelManaged) done later
-			using (var aes = new AesManaged ()) {
-				aes.Mode = CipherMode.CTS;
-			}
-		}
-		
-		[Test]
+        public void CFB_NotAllowed()
+        {
+            // that's differnt from RjindaelManaged
+            // and also different from AesCryptoServiceProvider
+            // and both are different as well :-(
+            using (var aes = new AesManaged())
+            {
+                aes.Mode = CipherMode.CFB;
+            }
+        }
+
+        [Test]
+        [ExpectedException(typeof(CryptographicException))]
+        public void CTS_NotAllowed()
+        {
+            // this check is normally (e.g. RijndaelManaged) done later
+            using (var aes = new AesManaged())
+            {
+                aes.Mode = CipherMode.CTS;
+            }
+        }
+
+        [Test]
 #if !MONOTOUCH && !XAMMAC
-		[ExpectedException (typeof (CryptographicException))]
+        [ExpectedException(typeof(CryptographicException))]
 #endif
-		public void OFB_NotAllowed ()
-		{
-			// this check is normally (e.g. RijndaelManaged) done later
-			using (var aes = new AesManaged ()) {
-				aes.Mode = CipherMode.OFB;
-			}
-		}
-		
-		[Test]
-		public void CBC_Allowed ()
-		{
-			using (var aes = new AesManaged ()) {
-				aes.Mode = CipherMode.CBC;
-			}
-		}
-		
-		[Test]
-		public void ECB_Allowed ()
-		{
-			using (var aes = new AesManaged ()) {
-				aes.Mode = CipherMode.ECB;
-			}
-		}
-		
-		[Test]
-		public void FeedbackSize ()
-		{
-			using (var aes = new AesManaged ()) {
-				// no used (no CFB support) but matching Aes (and RjindaelManaged),
-				// but not AesCryptoServiceProvider, default value 
-				Assert.AreEqual (128, aes.FeedbackSize, "FeedbackSize");
-			}
-		}
-	}
+        public void OFB_NotAllowed()
+        {
+            // this check is normally (e.g. RijndaelManaged) done later
+            using (var aes = new AesManaged())
+            {
+                aes.Mode = CipherMode.OFB;
+            }
+        }
+
+        [Test]
+        public void CBC_Allowed()
+        {
+            using (var aes = new AesManaged())
+            {
+                aes.Mode = CipherMode.CBC;
+            }
+        }
+
+        [Test]
+        public void ECB_Allowed()
+        {
+            using (var aes = new AesManaged())
+            {
+                aes.Mode = CipherMode.ECB;
+            }
+        }
+
+        [Test]
+        public void FeedbackSize()
+        {
+            using (var aes = new AesManaged())
+            {
+                // no used (no CFB support) but matching Aes (and RjindaelManaged),
+                // but not AesCryptoServiceProvider, default value
+                Assert.AreEqual(128, aes.FeedbackSize, "FeedbackSize");
+            }
+        }
+    }
 }

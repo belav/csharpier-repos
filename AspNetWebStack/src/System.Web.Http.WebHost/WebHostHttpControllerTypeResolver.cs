@@ -26,7 +26,11 @@ namespace System.Web.Http.WebHost
             HttpControllerTypeCacheSerializer serializer = new HttpControllerTypeCacheSerializer();
 
             // First, try reading from the cache on disk
-            List<Type> matchingTypes = ReadTypesFromCache(TypeCacheName, IsControllerTypePredicate, serializer);
+            List<Type> matchingTypes = ReadTypesFromCache(
+                TypeCacheName,
+                IsControllerTypePredicate,
+                serializer
+            );
             if (matchingTypes != null)
             {
                 return matchingTypes;
@@ -41,8 +45,16 @@ namespace System.Web.Http.WebHost
             return matchingTypes;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Cache failures are not fatal, and the code should continue executing normally.")]
-        private static List<Type> ReadTypesFromCache(string cacheName, Predicate<Type> predicate, HttpControllerTypeCacheSerializer serializer)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Cache failures are not fatal, and the code should continue executing normally."
+        )]
+        private static List<Type> ReadTypesFromCache(
+            string cacheName,
+            Predicate<Type> predicate,
+            HttpControllerTypeCacheSerializer serializer
+        )
         {
             try
             {
@@ -52,7 +64,10 @@ namespace System.Web.Http.WebHost
                     using (StreamReader reader = new StreamReader(stream))
                     {
                         ICollection<Type> deserializedTypes = serializer.DeserializeTypes(reader);
-                        if (deserializedTypes != null && deserializedTypes.All(type => predicate(type)))
+                        if (
+                            deserializedTypes != null
+                            && deserializedTypes.All(type => predicate(type))
+                        )
                         {
                             // If all read types still match the predicate, success!
                             return deserializedTypes.ToList();
@@ -68,9 +83,21 @@ namespace System.Web.Http.WebHost
             return null;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Cache failures are not fatal, and the code should continue executing normally.")]
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Disposed later")]
-        private static void SaveTypesToCache(string cacheName, IEnumerable<Type> matchingTypes, HttpControllerTypeCacheSerializer serializer)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Cache failures are not fatal, and the code should continue executing normally."
+        )]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Disposed later"
+        )]
+        private static void SaveTypesToCache(
+            string cacheName,
+            IEnumerable<Type> matchingTypes,
+            HttpControllerTypeCacheSerializer serializer
+        )
         {
             try
             {

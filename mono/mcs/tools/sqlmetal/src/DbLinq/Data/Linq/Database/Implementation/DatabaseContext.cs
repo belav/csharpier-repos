@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -47,6 +47,7 @@ namespace DbLinq.Data.Linq.Database.Implementation
         public IDbTransaction CurrentTransaction { get; set; }
 
         private readonly DbProviderFactory _providerFactory;
+
         /// <summary>
         /// Gets the provider factory.
         /// </summary>
@@ -56,7 +57,9 @@ namespace DbLinq.Data.Linq.Database.Implementation
             get
             {
                 if (_providerFactory == null)
-                    throw new Exception("In order to use this method, a DbProviderFactory must be provided");
+                    throw new Exception(
+                        "In order to use this method, a DbProviderFactory must be provided"
+                    );
                 return _providerFactory;
             }
         }
@@ -106,7 +109,9 @@ namespace DbLinq.Data.Linq.Database.Implementation
         public IDbTransaction CreateTransaction()
         {
             if (CurrentTransaction != null)
-                throw new InvalidOperationException("Attempting to create a transaction while within a transaction.");
+                throw new InvalidOperationException(
+                    "Attempting to create a transaction while within a transaction."
+                );
             return CurrentTransaction = Connection.BeginTransaction();
         }
 
@@ -195,10 +200,14 @@ namespace DbLinq.Data.Linq.Database.Implementation
                     {
                         return (DbProviderFactory)instanceFieldInfo.GetValue(null);
                     }
-                    PropertyInfo instancePropertyInfo = testType.GetProperty("Instance", bindingFlags);
+                    PropertyInfo instancePropertyInfo = testType.GetProperty(
+                        "Instance",
+                        bindingFlags
+                    );
                     if (instancePropertyInfo != null)
                     {
-                        return (DbProviderFactory)instancePropertyInfo.GetGetMethod().Invoke(null, new object[0]);
+                        return (DbProviderFactory)
+                            instancePropertyInfo.GetGetMethod().Invoke(null, new object[0]);
                     }
                 }
             }
@@ -206,9 +215,7 @@ namespace DbLinq.Data.Linq.Database.Implementation
         }
 
         public DatabaseContext(DbProviderFactory providerFactory)
-            : this(providerFactory, null)
-        {
-        }
+            : this(providerFactory, null) { }
 
         public DatabaseContext(DbProviderFactory providerFactory, string connectionString)
         {

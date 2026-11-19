@@ -18,12 +18,9 @@ namespace System.Net.Configuration
             this.properties.Add(this.enabled);
         }
 
-        protected override ConfigurationPropertyCollection Properties 
+        protected override ConfigurationPropertyCollection Properties
         {
-            get 
-            {
-                return this.properties;
-            }
+            get { return this.properties; }
         }
 
         [ConfigurationProperty(ConfigurationStrings.Enabled, DefaultValue = false)]
@@ -35,10 +32,11 @@ namespace System.Net.Configuration
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        readonly ConfigurationProperty enabled =
-            new ConfigurationProperty(ConfigurationStrings.Enabled, typeof(bool), false,
-                    ConfigurationPropertyOptions.None);
-
+        readonly ConfigurationProperty enabled = new ConfigurationProperty(
+            ConfigurationStrings.Enabled,
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
     }
 }
-

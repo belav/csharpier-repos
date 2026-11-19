@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
     [Shared]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal sealed class WorkspaceThreadingService(IThreadingContext threadingContext) : IWorkspaceThreadingService
+    internal sealed class WorkspaceThreadingService(IThreadingContext threadingContext)
+        : IWorkspaceThreadingService
     {
         private readonly IThreadingContext _threadingContext = threadingContext;
 

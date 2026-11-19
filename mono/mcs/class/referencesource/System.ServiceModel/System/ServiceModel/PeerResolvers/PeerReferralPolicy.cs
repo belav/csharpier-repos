@@ -15,11 +15,10 @@ namespace System.ServiceModel.PeerResolvers
         internal static bool IsDefined(PeerReferralPolicy value)
         {
             return (
-                value == PeerReferralPolicy.Service ||
-                value == PeerReferralPolicy.Share ||
-                value == PeerReferralPolicy.DoNotShare);
+                value == PeerReferralPolicy.Service
+                || value == PeerReferralPolicy.Share
+                || value == PeerReferralPolicy.DoNotShare
+            );
         }
     }
 }
-
-

@@ -26,26 +26,48 @@ namespace System.Runtime.InteropServices.Tests
 
             yield return new object[] { new int[] { 10 } };
             yield return new object[] { new int[][] { new int[] { 10 } } };
-            yield return new object[] { new int[,] { { 10 } } };
+            yield return new object[]
+            {
+                new int[,]
+                {
+                    { 10 },
+                },
+            };
 
-            MethodInfo method = typeof(IsComObjectTests).GetMethod(nameof(NonGenericMethod), BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo method = typeof(IsComObjectTests).GetMethod(
+                nameof(NonGenericMethod),
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             Delegate d = method.CreateDelegate(typeof(NonGenericDelegate));
             yield return new object[] { d };
 
             yield return new object[] { new KeyValuePair<string, int>("key", 10) };
 
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.RunAndCollect);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.RunAndCollect
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
             Type collectibleType = typeBuilder.CreateType();
             object collectibleObject = Activator.CreateInstance(collectibleType);
             yield return new object[] { collectibleObject };
 
-            ConstructorInfo comImportConstructor = typeof(ComImportAttribute).GetConstructor(new Type[0]);
-            var comImportAttributeBuilder = new CustomAttributeBuilder(comImportConstructor, new object[0]);
+            ConstructorInfo comImportConstructor = typeof(ComImportAttribute).GetConstructor(
+                new Type[0]
+            );
+            var comImportAttributeBuilder = new CustomAttributeBuilder(
+                comImportConstructor,
+                new object[0]
+            );
 
-            AssemblyBuilder comImportAssemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.RunAndCollect);
-            ModuleBuilder comImportModuleBuilder = comImportAssemblyBuilder.DefineDynamicModule("Module");
+            AssemblyBuilder comImportAssemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.RunAndCollect
+            );
+            ModuleBuilder comImportModuleBuilder = comImportAssemblyBuilder.DefineDynamicModule(
+                "Module"
+            );
             TypeBuilder comImportTypeBuilder = comImportModuleBuilder.DefineType("Type");
             comImportTypeBuilder.SetCustomAttribute(comImportAttributeBuilder);
 
@@ -53,7 +75,10 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { collectibleComImportObject };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltInComEnabled)
+        )]
         [MemberData(nameof(IsComObject_TestData))]
         public void IsComObject_NonComObject_ReturnsFalse(object value)
         {
@@ -67,8 +92,13 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         private static void NonGenericMethod(int i) { }
+
         public delegate void NonGenericDelegate(int i);
 
-        public enum Int32Enum : int { Value1, Value2 }
+        public enum Int32Enum : int
+        {
+            Value1,
+            Value2,
+        }
     }
 }

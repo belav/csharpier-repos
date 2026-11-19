@@ -33,255 +33,278 @@ using System.Threading;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
-	public class Copy : TaskExtension {
-	
-		ITaskItem[]	copiedFiles;
-		ITaskItem[]	destinationFiles;
-		ITaskItem	destinationFolder;
-		bool		skipUnchangedFiles;
-		ITaskItem[]	sourceFiles;
-		bool		overwriteReadOnlyFiles;
-		int			retries;
-		int			retryDelayMilliseconds;
-		bool		useHardlinksIfPossible;
+namespace Microsoft.Build.Tasks
+{
+    public class Copy : TaskExtension
+    {
+        ITaskItem[] copiedFiles;
+        ITaskItem[] destinationFiles;
+        ITaskItem destinationFolder;
+        bool skipUnchangedFiles;
+        ITaskItem[] sourceFiles;
+        bool overwriteReadOnlyFiles;
+        int retries;
+        int retryDelayMilliseconds;
+        bool useHardlinksIfPossible;
 
-		public Copy ()
-		{
-		}
+        public Copy() { }
 
-		public override bool Execute ()
-		{
-			if (sourceFiles.Length == 0)
-				// nothing to copy!
-				return true;
+        public override bool Execute()
+        {
+            if (sourceFiles.Length == 0)
+                // nothing to copy!
+                return true;
 
-			try {
-				List <ITaskItem> temporaryCopiedFiles = new List <ITaskItem> ();
-			
-				if (sourceFiles != null && destinationFiles != null &&
-					sourceFiles.Length != destinationFiles.Length) {
-					Log.LogError ("Number of source files is different than number of destination files.");
-					return false;
-				}
+            try
+            {
+                List<ITaskItem> temporaryCopiedFiles = new List<ITaskItem>();
 
-				if (destinationFiles != null && destinationFolder != null) {
-					Log.LogError ("You must specify only one attribute from DestinationFiles and DestinationFolder");
-					return false;
-				}
+                if (
+                    sourceFiles != null
+                    && destinationFiles != null
+                    && sourceFiles.Length != destinationFiles.Length
+                )
+                {
+                    Log.LogError(
+                        "Number of source files is different than number of destination files."
+                    );
+                    return false;
+                }
 
-				if (destinationFiles != null && destinationFiles.Length > 0) {
-					for (int i = 0; i < sourceFiles.Length; i ++) {
-						ITaskItem sourceItem = sourceFiles [i];
-						ITaskItem destinationItem = destinationFiles [i];
-						string sourceFile = sourceItem.GetMetadata ("FullPath");
-						string destinationFile = destinationItem.GetMetadata ("FullPath");
+                if (destinationFiles != null && destinationFolder != null)
+                {
+                    Log.LogError(
+                        "You must specify only one attribute from DestinationFiles and DestinationFolder"
+                    );
+                    return false;
+                }
 
-						if (!File.Exists (sourceFile)) {
-							Log.LogError ("Cannot copy {0} to {1}, as the source file doesn't exist.", sourceFile, destinationFile);
-							continue;
-						}
+                if (destinationFiles != null && destinationFiles.Length > 0)
+                {
+                    for (int i = 0; i < sourceFiles.Length; i++)
+                    {
+                        ITaskItem sourceItem = sourceFiles[i];
+                        ITaskItem destinationItem = destinationFiles[i];
+                        string sourceFile = sourceItem.GetMetadata("FullPath");
+                        string destinationFile = destinationItem.GetMetadata("FullPath");
 
-						if (!skipUnchangedFiles || HasFileChanged (sourceFile, destinationFile))
-							CopyFileWithRetries (sourceFile, destinationFile, true);
+                        if (!File.Exists(sourceFile))
+                        {
+                            Log.LogError(
+                                "Cannot copy {0} to {1}, as the source file doesn't exist.",
+                                sourceFile,
+                                destinationFile
+                            );
+                            continue;
+                        }
 
-						sourceItem.CopyMetadataTo (destinationItem);
-						temporaryCopiedFiles.Add (destinationItem);
-					}
-					
-				} else if (destinationFolder != null) {
-					List<ITaskItem> temporaryDestinationFiles = new List<ITaskItem> ();
-					string destinationDirectory = destinationFolder.GetMetadata ("FullPath");
-					bool directoryCreated = CreateDirectoryIfRequired (destinationDirectory);
-					
-					foreach (ITaskItem sourceItem in sourceFiles) {
-						string sourceFile = sourceItem.GetMetadata ("FullPath");
-						string filename = sourceItem.GetMetadata ("Filename") + sourceItem.GetMetadata ("Extension");
-						string destinationFile = Path.Combine (destinationDirectory,filename);
+                        if (!skipUnchangedFiles || HasFileChanged(sourceFile, destinationFile))
+                            CopyFileWithRetries(sourceFile, destinationFile, true);
 
-						if (!File.Exists (sourceFile)) {
-							Log.LogError ("Cannot copy {0} to {1}, as the source file doesn't exist.", sourceFile, destinationFile);
-							continue;
-						}
+                        sourceItem.CopyMetadataTo(destinationItem);
+                        temporaryCopiedFiles.Add(destinationItem);
+                    }
+                }
+                else if (destinationFolder != null)
+                {
+                    List<ITaskItem> temporaryDestinationFiles = new List<ITaskItem>();
+                    string destinationDirectory = destinationFolder.GetMetadata("FullPath");
+                    bool directoryCreated = CreateDirectoryIfRequired(destinationDirectory);
 
-						if (!skipUnchangedFiles || directoryCreated ||
-							HasFileChanged (sourceFile, destinationFile))
-							CopyFileWithRetries (sourceFile, destinationFile, false);
+                    foreach (ITaskItem sourceItem in sourceFiles)
+                    {
+                        string sourceFile = sourceItem.GetMetadata("FullPath");
+                        string filename =
+                            sourceItem.GetMetadata("Filename")
+                            + sourceItem.GetMetadata("Extension");
+                        string destinationFile = Path.Combine(destinationDirectory, filename);
 
-						temporaryCopiedFiles.Add (new TaskItem (
-								Path.Combine (destinationFolder.GetMetadata ("Identity"), filename),
-								sourceItem.CloneCustomMetadata ()));
+                        if (!File.Exists(sourceFile))
+                        {
+                            Log.LogError(
+                                "Cannot copy {0} to {1}, as the source file doesn't exist.",
+                                sourceFile,
+                                destinationFile
+                            );
+                            continue;
+                        }
 
-						temporaryDestinationFiles.Add (new TaskItem (
-								Path.Combine (destinationFolder.GetMetadata ("Identity"), filename),
-								sourceItem.CloneCustomMetadata ()));
-					}
-					destinationFiles = temporaryDestinationFiles.ToArray ();
-				} else {
-					Log.LogError ("You must specify DestinationFolder or DestinationFiles attribute.");
-					return false;
-				}
-				
-				copiedFiles = temporaryCopiedFiles.ToArray ();
+                        if (
+                            !skipUnchangedFiles
+                            || directoryCreated
+                            || HasFileChanged(sourceFile, destinationFile)
+                        )
+                            CopyFileWithRetries(sourceFile, destinationFile, false);
 
-				return !Log.HasLoggedErrors;
-			}
-			catch (Exception ex) {
-				Log.LogErrorFromException (ex);
-				return false;
-			}
-		}
+                        temporaryCopiedFiles.Add(
+                            new TaskItem(
+                                Path.Combine(destinationFolder.GetMetadata("Identity"), filename),
+                                sourceItem.CloneCustomMetadata()
+                            )
+                        );
 
-		[Output]
-		public ITaskItem[] CopiedFiles {
-			get {
-				return copiedFiles;
-			}
-		}
+                        temporaryDestinationFiles.Add(
+                            new TaskItem(
+                                Path.Combine(destinationFolder.GetMetadata("Identity"), filename),
+                                sourceItem.CloneCustomMetadata()
+                            )
+                        );
+                    }
+                    destinationFiles = temporaryDestinationFiles.ToArray();
+                }
+                else
+                {
+                    Log.LogError(
+                        "You must specify DestinationFolder or DestinationFiles attribute."
+                    );
+                    return false;
+                }
 
-		[Output]
-		public ITaskItem[] DestinationFiles {
-			get {
-				return destinationFiles;
-			}
-			set {
-				destinationFiles = value;
-			}
-		}
+                copiedFiles = temporaryCopiedFiles.ToArray();
 
-		public ITaskItem DestinationFolder {
-			get {
-				return destinationFolder;
-			}
-			set {
-				destinationFolder = value;
-			}
-		}
+                return !Log.HasLoggedErrors;
+            }
+            catch (Exception ex)
+            {
+                Log.LogErrorFromException(ex);
+                return false;
+            }
+        }
 
-		public bool SkipUnchangedFiles {
-			get {
-				return skipUnchangedFiles;
-			}
-			set {
-				skipUnchangedFiles = value;
-			}
-		}
+        [Output]
+        public ITaskItem[] CopiedFiles
+        {
+            get { return copiedFiles; }
+        }
 
-		public bool OverwriteReadOnlyFiles {
-			get {
-				return overwriteReadOnlyFiles;
-			}
-			set {
-				overwriteReadOnlyFiles = value;
-			}
-		}
+        [Output]
+        public ITaskItem[] DestinationFiles
+        {
+            get { return destinationFiles; }
+            set { destinationFiles = value; }
+        }
 
-		public int Retries {
-			get {
-				return retries;
-			}
-			set {
-				retries = value;
-			}
-		}
+        public ITaskItem DestinationFolder
+        {
+            get { return destinationFolder; }
+            set { destinationFolder = value; }
+        }
 
-		public int RetryDelayMilliseconds {
-			get {
-				return retryDelayMilliseconds;
-			}
-			set {
-				retryDelayMilliseconds = value;
-			}
-		}
+        public bool SkipUnchangedFiles
+        {
+            get { return skipUnchangedFiles; }
+            set { skipUnchangedFiles = value; }
+        }
 
-		[MonoTODO ("Not implemented yet.")]
-		public bool UseHardlinksIfPossible {
-			get {
-				return useHardlinksIfPossible;
-			}
-			set {
-				useHardlinksIfPossible = value;
-			}
-		}
+        public bool OverwriteReadOnlyFiles
+        {
+            get { return overwriteReadOnlyFiles; }
+            set { overwriteReadOnlyFiles = value; }
+        }
 
-		[Required]
-		public ITaskItem[] SourceFiles {
-			get {
-				return sourceFiles;
-			}
-			set {
-				sourceFiles = value;
-			}
-		}
+        public int Retries
+        {
+            get { return retries; }
+            set { retries = value; }
+        }
 
-		// returns whether directory was created or not
-		bool CreateDirectoryIfRequired (string name)
-		{
-			if (Directory.Exists (name))
-				return false;
+        public int RetryDelayMilliseconds
+        {
+            get { return retryDelayMilliseconds; }
+            set { retryDelayMilliseconds = value; }
+        }
 
-			Log.LogMessage ("Creating directory '{0}'", name);
-			Directory.CreateDirectory (name);
-			return true;
-		}
+        [MonoTODO("Not implemented yet.")]
+        public bool UseHardlinksIfPossible
+        {
+            get { return useHardlinksIfPossible; }
+            set { useHardlinksIfPossible = value; }
+        }
 
-		void CopyFileWithRetries (string source, string dest, bool create_dir)
-		{
-			for (int i = retries; i >= 0; i--) {
-				try {
-					CopyFile (source, dest, create_dir);
-				}
-				catch (Exception ex) {
-					Log.LogMessage ("Copying failed. Retries left: {0}.", i);
+        [Required]
+        public ITaskItem[] SourceFiles
+        {
+            get { return sourceFiles; }
+            set { sourceFiles = value; }
+        }
 
-					if (i == 0)
-						throw;
+        // returns whether directory was created or not
+        bool CreateDirectoryIfRequired(string name)
+        {
+            if (Directory.Exists(name))
+                return false;
 
-					Thread.Sleep (retryDelayMilliseconds);
-				}
-			}
-		}
+            Log.LogMessage("Creating directory '{0}'", name);
+            Directory.CreateDirectory(name);
+            return true;
+        }
 
-		void CopyFile (string source, string dest, bool create_dir)
-		{
-			if (create_dir)
-				CreateDirectoryIfRequired (Path.GetDirectoryName (dest));
-			if (overwriteReadOnlyFiles)
-				ClearReadOnlyAttribute (dest);
-			Log.LogMessage ("Copying file from '{0}' to '{1}'", source, dest);
-			if (String.Compare (source, dest) != 0) {
-				// Ensure that we delete the destination file first so that if the file is already
-				// opened via mmap we do not screw up the data for the process which has the file open
-				// Fixes https://bugzilla.xamarin.com/show_bug.cgi?id=9146
-				if (!HasReadOnlyAttribute (dest))
-					File.Delete (dest);
-				File.Copy (source, dest, true);
-			}
-			ClearReadOnlyAttribute (dest);
-		}
+        void CopyFileWithRetries(string source, string dest, bool create_dir)
+        {
+            for (int i = retries; i >= 0; i--)
+            {
+                try
+                {
+                    CopyFile(source, dest, create_dir);
+                }
+                catch (Exception ex)
+                {
+                    Log.LogMessage("Copying failed. Retries left: {0}.", i);
 
-		void ClearReadOnlyAttribute (string name)
-		{
-			if (File.Exists (name) && ((File.GetAttributes (name) & FileAttributes.ReadOnly) == FileAttributes.ReadOnly))
-				File.SetAttributes (name, FileAttributes.Normal);
-		}
+                    if (i == 0)
+                        throw;
 
-		bool HasReadOnlyAttribute (string name)
-		{
-			return File.Exists (name) && (File.GetAttributes (name) & FileAttributes.ReadOnly) == FileAttributes.ReadOnly;
-		}
+                    Thread.Sleep(retryDelayMilliseconds);
+                }
+            }
+        }
 
-		bool HasFileChanged (string source, string dest)
-		{
-			if (!File.Exists (dest))
-				return true;
+        void CopyFile(string source, string dest, bool create_dir)
+        {
+            if (create_dir)
+                CreateDirectoryIfRequired(Path.GetDirectoryName(dest));
+            if (overwriteReadOnlyFiles)
+                ClearReadOnlyAttribute(dest);
+            Log.LogMessage("Copying file from '{0}' to '{1}'", source, dest);
+            if (String.Compare(source, dest) != 0)
+            {
+                // Ensure that we delete the destination file first so that if the file is already
+                // opened via mmap we do not screw up the data for the process which has the file open
+                // Fixes https://bugzilla.xamarin.com/show_bug.cgi?id=9146
+                if (!HasReadOnlyAttribute(dest))
+                    File.Delete(dest);
+                File.Copy(source, dest, true);
+            }
+            ClearReadOnlyAttribute(dest);
+        }
 
-			FileInfo sourceInfo = new FileInfo (source);
-			FileInfo destinationInfo = new FileInfo (dest);
+        void ClearReadOnlyAttribute(string name)
+        {
+            if (
+                File.Exists(name)
+                && ((File.GetAttributes(name) & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
+            )
+                File.SetAttributes(name, FileAttributes.Normal);
+        }
 
-			return !(sourceInfo.Length == destinationInfo.Length &&
-					File.GetLastWriteTime (source) <= File.GetLastWriteTime (dest));
-		}
+        bool HasReadOnlyAttribute(string name)
+        {
+            return File.Exists(name)
+                && (File.GetAttributes(name) & FileAttributes.ReadOnly) == FileAttributes.ReadOnly;
+        }
 
-	}
+        bool HasFileChanged(string source, string dest)
+        {
+            if (!File.Exists(dest))
+                return true;
+
+            FileInfo sourceInfo = new FileInfo(source);
+            FileInfo destinationInfo = new FileInfo(dest);
+
+            return !(
+                sourceInfo.Length == destinationInfo.Length
+                && File.GetLastWriteTime(source) <= File.GetLastWriteTime(dest)
+            );
+        }
+    }
 }

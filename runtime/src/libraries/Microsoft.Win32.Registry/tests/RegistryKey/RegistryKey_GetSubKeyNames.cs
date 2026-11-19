@@ -31,7 +31,10 @@ namespace Microsoft.Win32.RegistryTests
         public void GetSubKeyNamesTest()
         {
             // [] Creating new SubKeys and get the names
-            string[] expectedSubKeyNames = Enumerable.Range(1, 9).Select(x => "BLAH_" + x.ToString()).ToArray();
+            string[] expectedSubKeyNames = Enumerable
+                .Range(1, 9)
+                .Select(x => "BLAH_" + x.ToString())
+                .ToArray();
             foreach (var subKeyName in expectedSubKeyNames)
             {
                 TestRegistryKey.CreateSubKey(subKeyName).Dispose();

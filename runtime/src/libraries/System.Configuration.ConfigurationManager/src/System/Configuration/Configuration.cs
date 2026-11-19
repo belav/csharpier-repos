@@ -25,18 +25,25 @@ namespace System.Configuration
         private Stack _sectionsStack;
         private Func<string, string> _typeStringTransformer;
 
-        internal Configuration(string locationSubPath, Type typeConfigHost, params object[] hostInitConfigurationParams)
+        internal Configuration(
+            string locationSubPath,
+            Type typeConfigHost,
+            params object[] hostInitConfigurationParams
+        )
         {
             _typeConfigHost = typeConfigHost;
             _hostInitConfigurationParams = hostInitConfigurationParams;
 
-            IInternalConfigHost configHost = (IInternalConfigHost)TypeUtil.CreateInstance(typeConfigHost);
+            IInternalConfigHost configHost = (IInternalConfigHost)
+                TypeUtil.CreateInstance(typeConfigHost);
 
             // Wrap the host with the UpdateConfigHost to support SaveAs.
             UpdateConfigHost updateConfigHost = new UpdateConfigHost(configHost);
 
             // Now wrap in ImplicitMachineConfigHost so we can stub in a simple machine.config if needed.
-            ImplicitMachineConfigHost implicitMachineConfigHost = new ImplicitMachineConfigHost(updateConfigHost);
+            ImplicitMachineConfigHost implicitMachineConfigHost = new ImplicitMachineConfigHost(
+                updateConfigHost
+            );
 
             InternalConfigRoot configRoot = new InternalConfigRoot(this, updateConfigHost);
             ((IInternalConfigRoot)configRoot).Init(implicitMachineConfigHost, isDesignTime: true);
@@ -46,15 +53,20 @@ namespace System.Configuration
             // We do this in a separate step so that the WebConfigurationHost
             // can use this object's _configRoot to get the <sites> section,
             // which is used in it's MapPath implementation.
-            string configPath, locationConfigPath;
+            string configPath,
+                locationConfigPath;
             implicitMachineConfigHost.InitForConfiguration(
                 ref locationSubPath,
                 out configPath,
                 out locationConfigPath,
                 configRoot,
-                hostInitConfigurationParams);
+                hostInitConfigurationParams
+            );
 
-            if (!string.IsNullOrEmpty(locationSubPath) && !implicitMachineConfigHost.SupportsLocation)
+            if (
+                !string.IsNullOrEmpty(locationSubPath)
+                && !implicitMachineConfigHost.SupportsLocation
+            )
                 throw ExceptionUtil.UnexpectedError("Configuration::ctor");
 
             if (string.IsNullOrEmpty(locationSubPath) != string.IsNullOrEmpty(locationConfigPath))
@@ -68,7 +80,11 @@ namespace System.Configuration
             if (!string.IsNullOrEmpty(locationSubPath))
             {
                 _configRecord = MgmtConfigurationRecord.Create(
-                    configRoot, _configRecord, locationConfigPath, locationSubPath);
+                    configRoot,
+                    _configRecord,
+                    locationConfigPath,
+                    locationSubPath
+                );
             }
 
             // Throw if the config record we created contains global errors.
@@ -77,17 +93,18 @@ namespace System.Configuration
 
         public AppSettingsSection AppSettings => (AppSettingsSection)GetSection("appSettings");
 
-        public ConnectionStringsSection ConnectionStrings => (ConnectionStringsSection)GetSection("connectionStrings");
+        public ConnectionStringsSection ConnectionStrings =>
+            (ConnectionStringsSection)GetSection("connectionStrings");
 
         public string FilePath => _configRecord.ConfigurationFilePath;
 
         public bool HasFile => _configRecord.HasStream;
 
-        public ConfigurationLocationCollection Locations
-            => _locations ??= _configRecord.GetLocationCollection(this);
+        public ConfigurationLocationCollection Locations =>
+            _locations ??= _configRecord.GetLocationCollection(this);
 
-        public ContextInformation EvaluationContext
-            => _evalContext ??= new ContextInformation(_configRecord);
+        public ContextInformation EvaluationContext =>
+            _evalContext ??= new ContextInformation(_configRecord);
 
         public ConfigurationSectionGroup RootSectionGroup
         {
@@ -143,10 +160,7 @@ namespace System.Configuration
             }
         }
 
-        public FrameworkName TargetFramework
-        {
-            get; set;
-        }
+        public FrameworkName TargetFramework { get; set; }
 
         internal bool TypeStringTransformerIsSet { get; private set; }
 
@@ -158,20 +172,27 @@ namespace System.Configuration
         // with the initialization parameters that were used to create this configuration.
         internal Configuration OpenLocationConfiguration(string locationSubPath)
         {
-            return new Configuration(locationSubPath, _typeConfigHost, _hostInitConfigurationParams);
+            return new Configuration(
+                locationSubPath,
+                _typeConfigHost,
+                _hostInitConfigurationParams
+            );
         }
 
         // public methods
         public ConfigurationSection GetSection(string sectionName)
         {
-            ConfigurationSection section = (ConfigurationSection)_configRecord.GetSection(sectionName);
+            ConfigurationSection section = (ConfigurationSection)
+                _configRecord.GetSection(sectionName);
 
             return section;
         }
 
         public ConfigurationSectionGroup GetSectionGroup(string sectionGroupName)
         {
-            ConfigurationSectionGroup sectionGroup = _configRecord.GetSectionGroup(sectionGroupName);
+            ConfigurationSectionGroup sectionGroup = _configRecord.GetSectionGroup(
+                sectionGroupName
+            );
 
             return sectionGroup;
         }
@@ -203,7 +224,8 @@ namespace System.Configuration
 
         public void SaveAs(string filename, ConfigurationSaveMode saveMode, bool forceSaveAll)
         {
-            if (string.IsNullOrEmpty(filename)) throw ExceptionUtil.ParameterNullOrEmpty(nameof(filename));
+            if (string.IsNullOrEmpty(filename))
+                throw ExceptionUtil.ParameterNullOrEmpty(nameof(filename));
 
             SaveAsImpl(filename, saveMode, forceSaveAll);
         }
@@ -212,7 +234,8 @@ namespace System.Configuration
         {
             filename = string.IsNullOrEmpty(filename) ? null : Path.GetFullPath(filename);
 
-            if (forceSaveAll) ForceGroupsRecursive(RootSectionGroup);
+            if (forceSaveAll)
+                ForceGroupsRecursive(RootSectionGroup);
             _configRecord.SaveAs(filename, saveMode, forceSaveAll);
         }
 

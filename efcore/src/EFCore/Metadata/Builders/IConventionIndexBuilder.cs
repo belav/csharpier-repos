@@ -32,7 +32,11 @@ public interface IConventionIndexBuilder : IConventionAnnotatableBuilder
     /// <returns>
     ///     An <see cref="IConventionIndexBuilder" /> to continue configuration if the annotation was set, <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionIndexBuilder? HasAnnotation(string name, object? value, bool fromDataAnnotation = false);
+    new IConventionIndexBuilder? HasAnnotation(
+        string name,
+        object? value,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the annotation stored under the given name. Overwrites the existing annotation if an
@@ -49,7 +53,8 @@ public interface IConventionIndexBuilder : IConventionAnnotatableBuilder
     new IConventionIndexBuilder? HasNonNullAnnotation(
         string name,
         object? value,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes the annotation with the given name from this object.
@@ -83,7 +88,10 @@ public interface IConventionIndexBuilder : IConventionAnnotatableBuilder
     /// <param name="descending">A set of values indicating whether each corresponding index column has descending sort order.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The same builder instance if the uniqueness was configured, <see langword="null" /> otherwise.</returns>
-    IConventionIndexBuilder? IsDescending(IReadOnlyList<bool>? descending, bool fromDataAnnotation = false);
+    IConventionIndexBuilder? IsDescending(
+        IReadOnlyList<bool>? descending,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether this index sort order can be configured from the current configuration source.

@@ -7,20 +7,27 @@ using System.Collections.Generic;
 
 #pragma warning disable CA1716
 namespace Microsoft.Shared.Collections;
+
 #pragma warning restore CA1716
 
 #if !SHARED_PROJECT
 [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
 
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable", Justification = "Static field, lifetime matches the process")]
+[System.Diagnostics.CodeAnalysis.SuppressMessage(
+    "Design",
+    "CA1001:Types that own disposable fields should be disposable",
+    Justification = "Static field, lifetime matches the process"
+)]
 internal sealed class EmptyReadOnlyList<T> : IReadOnlyList<T>, ICollection<T>
 {
     public static readonly EmptyReadOnlyList<T> Instance = new();
     private readonly Enumerator _enumerator = new();
 
     public IEnumerator<T> GetEnumerator() => _enumerator;
+
     IEnumerator IEnumerable.GetEnumerator() => _enumerator;
+
     public int Count => 0;
     public T this[int index] => throw new ArgumentOutOfRangeException(nameof(index));
 
@@ -30,8 +37,11 @@ internal sealed class EmptyReadOnlyList<T> : IReadOnlyList<T>, ICollection<T>
     }
 
     bool ICollection<T>.Contains(T item) => false;
+
     bool ICollection<T>.IsReadOnly => true;
+
     void ICollection<T>.Add(T item) => throw new NotSupportedException();
+
     bool ICollection<T>.Remove(T item) => false;
 
     void ICollection<T>.Clear()
@@ -52,6 +62,7 @@ internal sealed class EmptyReadOnlyList<T> : IReadOnlyList<T>, ICollection<T>
         }
 
         public bool MoveNext() => false;
+
         public T Current => throw new InvalidOperationException();
         object IEnumerator.Current => throw new InvalidOperationException();
     }

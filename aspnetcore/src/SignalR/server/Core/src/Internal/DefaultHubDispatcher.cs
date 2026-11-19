@@ -1086,8 +1086,8 @@ internal sealed partial class DefaultHubDispatcher<THub> : HubDispatcher<THub>
                 );
             }
 
-            var methodName =
-                methodInfo.GetCustomAttribute<HubMethodNameAttribute>()?.Name ?? methodInfo.Name;
+            var methodName = methodInfo.GetCustomAttribute<HubMethodNameAttribute>()?.Name
+                ?? methodInfo.Name;
 
             if (_methods.ContainsKey(methodName))
             {

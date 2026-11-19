@@ -8,10 +8,7 @@ namespace System.CommandLine.Tests.Help
 {
     public static class HelpBuilderExtensions
     {
-        public static void Write(
-            this HelpBuilder builder,
-            CliCommand command,
-            TextWriter writer) =>
+        public static void Write(this HelpBuilder builder, CliCommand command, TextWriter writer) =>
             builder.Write(new HelpContext(builder, command, writer));
     }
 }

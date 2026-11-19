@@ -15,8 +15,14 @@ namespace System.Security.Cryptography.Pkcs.Tests
             ContentInfo content = new ContentInfo(new byte[] { 7 });
             SignedCms cms = new SignedCms(content);
 
-            using (X509Certificate2 cert1 = Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey())
-            using (X509Certificate2 cert2 = Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 cert1 =
+                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+            )
+            using (
+                X509Certificate2 cert2 =
+                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+            )
             {
                 CmsSigner signer = new CmsSigner(SubjectIdentifierType.SubjectKeyIdentifier, cert1);
                 cms.ComputeSignature(signer);
@@ -26,7 +32,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     SubjectIdentifierType.SubjectKeyIdentifier,
                     hasSignedAttrs: false,
                     hasUnsignedAttrs: false,
-                    hasCounterSigners: false);
+                    hasCounterSigners: false
+                );
 
                 AssertSignerTraits(cms.SignerInfos[0], yellow);
 
@@ -39,7 +46,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     SubjectIdentifierType.IssuerAndSerialNumber,
                     hasSignedAttrs: true,
                     hasUnsignedAttrs: false,
-                    hasCounterSigners: false);
+                    hasCounterSigners: false
+                );
 
                 // No reordering.  0 stayed 0, new entry becomes 1.
                 AssertSignerTraits(cms.SignerInfos[0], yellow);
@@ -53,14 +61,18 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     SubjectIdentifierType.IssuerAndSerialNumber,
                     hasSignedAttrs: false,
                     hasUnsignedAttrs: false,
-                    hasCounterSigners: false);
+                    hasCounterSigners: false
+                );
 
                 // No reordering.  0 stayed 0, 1 stays 1, new entry is 2.
                 AssertSignerTraits(cms.SignerInfos[0], yellow);
                 AssertSignerTraits(cms.SignerInfos[1], green);
                 AssertSignerTraits(cms.SignerInfos[2], grey);
 
-                CmsSigner counterSigner = new CmsSigner(SubjectIdentifierType.IssuerAndSerialNumber, cert1);
+                CmsSigner counterSigner = new CmsSigner(
+                    SubjectIdentifierType.IssuerAndSerialNumber,
+                    cert1
+                );
                 SignerInfo toCounterSign = cms.SignerInfos[0];
                 toCounterSign.ComputeCounterSignature(counterSigner);
 
@@ -83,7 +95,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     SubjectIdentifierType.IssuerAndSerialNumber,
                     hasSignedAttrs: true,
                     hasUnsignedAttrs: false,
-                    hasCounterSigners: false);
+                    hasCounterSigners: false
+                );
 
                 AssertSignerTraits(cms.SignerInfos[0], grey);
                 AssertSignerTraits(cms.SignerInfos[1], green);
@@ -98,7 +111,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     SubjectIdentifierType.IssuerAndSerialNumber,
                     hasSignedAttrs: true,
                     hasUnsignedAttrs: true,
-                    hasCounterSigners: false);
+                    hasCounterSigners: false
+                );
 
                 // Since "red" has one more attribute than "cyan", but they're otherwise the same
                 // it will sort later.
@@ -117,7 +131,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     SubjectIdentifierType.SubjectKeyIdentifier,
                     hasSignedAttrs: true,
                     hasUnsignedAttrs: true,
-                    hasCounterSigners: false);
+                    hasCounterSigners: false
+                );
 
                 // By changing from IssuerAndSerialNumber to SubjectKeyIdentifier, this copy will
                 // sort higher.  It saves so many bytes, in this specific case, that it goes first.
@@ -212,7 +227,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 SubjectIdentifierType type,
                 bool hasSignedAttrs,
                 bool hasUnsignedAttrs,
-                bool hasCounterSigners)
+                bool hasCounterSigners
+            )
             {
                 Cert = cert;
                 Type = type;

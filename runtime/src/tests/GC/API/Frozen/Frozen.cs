@@ -5,8 +5,8 @@ namespace HelloFrozenSegment
 {
     using System;
     using System.Reflection;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     struct FrozenSegment
     {
@@ -39,7 +39,10 @@ namespace HelloFrozenSegment
             {
                 if (s_registerFrozenSegmentMethod == null)
                 {
-                    s_registerFrozenSegmentMethod = typeof(GC).GetMethod("_RegisterFrozenSegment", BindingFlags.NonPublic|BindingFlags.Static);
+                    s_registerFrozenSegmentMethod = typeof(GC).GetMethod(
+                        "_RegisterFrozenSegment",
+                        BindingFlags.NonPublic | BindingFlags.Static
+                    );
                 }
 
                 return s_registerFrozenSegmentMethod;
@@ -52,7 +55,10 @@ namespace HelloFrozenSegment
             {
                 if (s_unregisterFrozenSegmentMethod == null)
                 {
-                    s_unregisterFrozenSegmentMethod = typeof(GC).GetMethod("_UnregisterFrozenSegment", BindingFlags.NonPublic|BindingFlags.Static);
+                    s_unregisterFrozenSegmentMethod = typeof(GC).GetMethod(
+                        "_UnregisterFrozenSegment",
+                        BindingFlags.NonPublic | BindingFlags.Static
+                    );
                 }
 
                 return s_unregisterFrozenSegmentMethod;
@@ -61,13 +67,12 @@ namespace HelloFrozenSegment
 
         public static IntPtr RegisterFrozenSegment(IntPtr buffer, nint size)
         {
-            return (IntPtr)RegisterFrozenSegmentMethod.Invoke(null, new object[]{buffer, size});
-
+            return (IntPtr)RegisterFrozenSegmentMethod.Invoke(null, new object[] { buffer, size });
         }
 
         public static void UnregisterFrozenSegment(IntPtr segment)
         {
-            UnregisterFrozenSegmentMethod.Invoke(null, new object[]{segment});
+            UnregisterFrozenSegmentMethod.Invoke(null, new object[] { segment });
         }
     }
 
@@ -139,7 +144,7 @@ namespace HelloFrozenSegment
         private static unsafe int Main()
         {
             // Regression testing for dotnet/runtime #83027
-            Node[] firstArray = new Node[30000000]; 
+            Node[] firstArray = new Node[30000000];
             for (int index = 0; index < firstArray.Length; index++)
             {
                 firstArray[index] = new Node();
@@ -157,10 +162,10 @@ namespace HelloFrozenSegment
             Node node2 = Unsafe.AsRef<Node>((void*)&node2Ptr);
             // It is okay for any object to reference a frozen object.
             root.next = node1;
-            
+
             // It is not okay for a frozen object to reference another frozen object
             // This is because the WriteBarrier code may (depending on the pointer
-            // value returned by AllocHGlobal) determine node2 to be an ephemeral object 
+            // value returned by AllocHGlobal) determine node2 to be an ephemeral object
             // when it isn't.
             // node1.next = node2;
 

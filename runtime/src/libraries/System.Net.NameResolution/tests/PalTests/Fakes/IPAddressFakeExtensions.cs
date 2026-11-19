@@ -5,7 +5,11 @@ namespace System.Net
 {
     internal static class IPAddressFakeExtensions
     {
-        public static bool TryWriteBytes(this IPAddress address, Span<byte> destination, out int bytesWritten)
+        public static bool TryWriteBytes(
+            this IPAddress address,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             byte[] bytes = address.GetAddressBytes();
             if (bytes.Length >= destination.Length)

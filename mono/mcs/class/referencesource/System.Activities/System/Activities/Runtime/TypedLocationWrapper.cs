@@ -29,22 +29,13 @@ namespace System.Activities
 
         internal override bool CanBeMapped
         {
-            get
-            {
-                return this.innerLocation.CanBeMapped;
-            }
+            get { return this.innerLocation.CanBeMapped; }
         }
 
         public override T Value
         {
-            get
-            {
-                return (T)this.innerLocation.Value;
-            }
-            set
-            {
-                this.innerLocation.Value = value;
-            }
+            get { return (T)this.innerLocation.Value; }
+            set { this.innerLocation.Value = value; }
         }
 
         [DataMember(Name = "innerLocation")]

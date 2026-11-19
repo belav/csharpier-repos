@@ -43,7 +43,11 @@ namespace System.ServiceModel
         public XmlBuffer(int maxBufferSize)
         {
             if (maxBufferSize < 0)
-                throw new ArgumentOutOfRangeException(nameof(maxBufferSize), maxBufferSize, SR.ValueMustBeNonNegative);
+                throw new ArgumentOutOfRangeException(
+                    nameof(maxBufferSize),
+                    maxBufferSize,
+                    SR.ValueMustBeNonNegative
+                );
 
             int initialBufferSize = Math.Min(512, maxBufferSize);
             _stream = new BufferedStream(new MemoryStream(), initialBufferSize);
@@ -92,14 +96,23 @@ namespace System.ServiceModel
             _stream = null;
         }
 
-        private static InvalidOperationException CreateInvalidStateException() => new InvalidOperationException(SR.XmlBufferInInvalidState);
+        private static InvalidOperationException CreateInvalidStateException() =>
+            new InvalidOperationException(SR.XmlBufferInInvalidState);
 
         public XmlDictionaryReader GetReader(int sectionIndex)
         {
             if (_bufferState != BufferState.Reading)
                 throw CreateInvalidStateException();
             Section section = _sections[sectionIndex];
-            XmlDictionaryReader reader = XmlDictionaryReader.CreateBinaryReader(_buffer, section.Offset, section.Size, null, section.Quotas, null, null);
+            XmlDictionaryReader reader = XmlDictionaryReader.CreateBinaryReader(
+                _buffer,
+                section.Offset,
+                section.Size,
+                null,
+                section.Quotas,
+                null,
+                null
+            );
 
             reader.MoveToContent();
             return reader;

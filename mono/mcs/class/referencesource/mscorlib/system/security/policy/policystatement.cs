@@ -1,30 +1,32 @@
 using System.Diagnostics.Contracts;
+
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //  PolicyStatement.cs
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //
 //  Represents the policy associated with some piece of evidence
 //
 
-namespace System.Security.Policy {
-    
+namespace System.Security.Policy
+{
     using System;
-    using System.Security;
-    using System.Security.Util;
-    using Math = System.Math;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Security.Permissions;
-    using System.Text;
     using System.Globalization;
-[Serializable]
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Security.Util;
+    using System.Text;
+    using Math = System.Math;
+
+    [Serializable]
     [Flags]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public enum PolicyStatementAttribute
     {
         Nothing = 0x0,
@@ -32,10 +34,10 @@ namespace System.Security.Policy {
         LevelFinal = 0x02,
         All = 0x03,
     }
-    
+
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class PolicyStatement : ISecurityPolicyEncodable, ISecurityEncodable
+    public sealed class PolicyStatement : ISecurityPolicyEncodable, ISecurityEncodable
     {
         // The PermissionSet associated with this policy
         internal PermissionSet m_permSet;
@@ -56,29 +58,31 @@ namespace System.Security.Policy {
             m_permSet = null;
             m_attributes = PolicyStatementAttribute.Nothing;
         }
-        
-        public PolicyStatement( PermissionSet permSet )
-            : this( permSet, PolicyStatementAttribute.Nothing )
-        {
-        }
-        
-        public PolicyStatement( PermissionSet permSet, PolicyStatementAttribute attributes )
+
+        public PolicyStatement(PermissionSet permSet)
+            : this(permSet, PolicyStatementAttribute.Nothing) { }
+
+        public PolicyStatement(PermissionSet permSet, PolicyStatementAttribute attributes)
         {
             if (permSet == null)
             {
-                m_permSet = new PermissionSet( false );
+                m_permSet = new PermissionSet(false);
             }
             else
             {
                 m_permSet = permSet.Copy();
             }
-            if (ValidProperties( attributes ))
+            if (ValidProperties(attributes))
             {
                 m_attributes = attributes;
             }
         }
-        
-        private PolicyStatement( PermissionSet permSet, PolicyStatementAttribute attributes, bool copy )
+
+        private PolicyStatement(
+            PermissionSet permSet,
+            PolicyStatementAttribute attributes,
+            bool copy
+        )
         {
             if (permSet != null)
             {
@@ -89,9 +93,9 @@ namespace System.Security.Policy {
             }
             else
             {
-                m_permSet = new PermissionSet( false );
+                m_permSet = new PermissionSet(false);
             }
-                
+
             m_attributes = attributes;
         }
 
@@ -104,14 +108,13 @@ namespace System.Security.Policy {
                     return m_permSet.Copy();
                 }
             }
-            
             set
             {
                 lock (this)
                 {
                     if (value == null)
                     {
-                        m_permSet = new PermissionSet( false );
+                        m_permSet = new PermissionSet(false);
                     }
                     else
                     {
@@ -120,12 +123,12 @@ namespace System.Security.Policy {
                 }
             }
         }
-        
-        internal void SetPermissionSetNoCopy( PermissionSet permSet )
+
+        internal void SetPermissionSetNoCopy(PermissionSet permSet)
         {
             m_permSet = permSet;
         }
-        
+
         internal PermissionSet GetPermissionSetNoCopy()
         {
             lock (this)
@@ -133,23 +136,19 @@ namespace System.Security.Policy {
                 return m_permSet;
             }
         }
-        
+
         public PolicyStatementAttribute Attributes
         {
-            get
-            {
-                return m_attributes;
-            }
-            
+            get { return m_attributes; }
             set
             {
-                if (ValidProperties( value ))
+                if (ValidProperties(value))
                 {
                     m_attributes = value;
                 }
             }
         }
-        
+
         public PolicyStatement Copy()
         {
             PolicyStatement copy = new PolicyStatement(m_permSet, Attributes, true); // The PolicyStatement .ctor will copy the permission set
@@ -162,32 +161,32 @@ namespace System.Security.Policy {
 
             return copy;
         }
-        
+
         public String AttributeString
         {
             get
             {
                 StringBuilder sb = new StringBuilder();
-            
+
                 bool first = true;
-            
-                if (GetFlag((int) PolicyStatementAttribute.Exclusive ))
+
+                if (GetFlag((int)PolicyStatementAttribute.Exclusive))
                 {
-                    sb.Append( "Exclusive" );
+                    sb.Append("Exclusive");
                     first = false;
                 }
-                if (GetFlag((int) PolicyStatementAttribute.LevelFinal ))
+                if (GetFlag((int)PolicyStatementAttribute.LevelFinal))
                 {
                     if (!first)
-                        sb.Append( " " );
-                    sb.Append( "LevelFinal" );
+                        sb.Append(" ");
+                    sb.Append("LevelFinal");
                 }
-            
+
                 return sb.ToString();
             }
         }
 
-        private static bool ValidProperties( PolicyStatementAttribute attributes )
+        private static bool ValidProperties(PolicyStatementAttribute attributes)
         {
             if ((attributes & ~(PolicyStatementAttribute.All)) == 0)
             {
@@ -195,11 +194,11 @@ namespace System.Security.Policy {
             }
             else
             {
-                throw new ArgumentException( Environment.GetResourceString( "Argument_InvalidFlag" ) );
+                throw new ArgumentException(Environment.GetResourceString("Argument_InvalidFlag"));
             }
         }
-        
-        private bool GetFlag( int flag )
+
+        private bool GetFlag(int flag)
         {
             return (flag & (int)m_attributes) != 0;
         }
@@ -249,9 +248,14 @@ namespace System.Security.Policy {
         {
             BCLDebug.Assert(childPolicy != null, "childPolicy != null");
 
-            if (((Attributes & childPolicy.Attributes) & PolicyStatementAttribute.Exclusive) == PolicyStatementAttribute.Exclusive)
+            if (
+                ((Attributes & childPolicy.Attributes) & PolicyStatementAttribute.Exclusive)
+                == PolicyStatementAttribute.Exclusive
+            )
             {
-                throw new PolicyException(Environment.GetResourceString( "Policy_MultipleExclusive" ));
+                throw new PolicyException(
+                    Environment.GetResourceString("Policy_MultipleExclusive")
+                );
             }
 
 #if FEATURE_CAS_POLICY
@@ -260,8 +264,9 @@ namespace System.Security.Policy {
             // track of any unverified evidence our child group has.
             if (childPolicy.HasDependentEvidence)
             {
-                bool childEvidenceNeedsVerification = m_permSet.IsSubsetOf(childPolicy.GetPermissionSetNoCopy()) &&
-                                                      !childPolicy.GetPermissionSetNoCopy().IsSubsetOf(m_permSet);
+                bool childEvidenceNeedsVerification =
+                    m_permSet.IsSubsetOf(childPolicy.GetPermissionSetNoCopy())
+                    && !childPolicy.GetPermissionSetNoCopy().IsSubsetOf(m_permSet);
 
                 if (HasDependentEvidence || childEvidenceNeedsVerification)
                 {
@@ -280,7 +285,10 @@ namespace System.Security.Policy {
             // exclusive, we need to union in its grant set and or in its attributes. However, if the child
             // is exclusive then it is the only code group which should have an effect on the resulting
             // grant set and therefore our grant should be ignored.
-            if ((childPolicy.Attributes & PolicyStatementAttribute.Exclusive) == PolicyStatementAttribute.Exclusive)
+            if (
+                (childPolicy.Attributes & PolicyStatementAttribute.Exclusive)
+                == PolicyStatementAttribute.Exclusive
+            )
             {
                 m_permSet = childPolicy.GetPermissionSetNoCopy();
                 Attributes = childPolicy.Attributes;
@@ -296,26 +304,29 @@ namespace System.Security.Policy {
 
         public SecurityElement ToXml()
         {
-            return ToXml( null );
+            return ToXml(null);
         }
 
-        public void FromXml( SecurityElement et )
+        public void FromXml(SecurityElement et)
         {
-            FromXml( et, null );
+            FromXml(et, null);
         }
 
-        public SecurityElement ToXml( PolicyLevel level )
+        public SecurityElement ToXml(PolicyLevel level)
         {
-            return ToXml( level, false );
+            return ToXml(level, false);
         }
 
-        internal SecurityElement ToXml( PolicyLevel level, bool useInternal )
+        internal SecurityElement ToXml(PolicyLevel level, bool useInternal)
         {
-            SecurityElement e = new SecurityElement( "PolicyStatement" );
-            e.AddAttribute( "version", "1" );
+            SecurityElement e = new SecurityElement("PolicyStatement");
+            e.AddAttribute("version", "1");
             if (m_attributes != PolicyStatementAttribute.Nothing)
-                e.AddAttribute( "Attributes", XMLUtil.BitFieldEnumToString( typeof( PolicyStatementAttribute ), m_attributes ) );            
-            
+                e.AddAttribute(
+                    "Attributes",
+                    XMLUtil.BitFieldEnumToString(typeof(PolicyStatementAttribute), m_attributes)
+                );
+
             lock (this)
             {
                 if (m_permSet != null)
@@ -325,55 +336,63 @@ namespace System.Security.Policy {
                         // If the named permission set exists in the parent level of this
                         // policy struct, then just save the name of the permission set.
                         // Otherwise, serialize it like normal.
-                
+
                         NamedPermissionSet namedPermSet = (NamedPermissionSet)m_permSet;
-                        if (level != null && level.GetNamedPermissionSet( namedPermSet.Name ) != null)
+                        if (level != null && level.GetNamedPermissionSet(namedPermSet.Name) != null)
                         {
-                            e.AddAttribute( "PermissionSetName", namedPermSet.Name );
+                            e.AddAttribute("PermissionSetName", namedPermSet.Name);
                         }
                         else
                         {
                             if (useInternal)
-                                e.AddChild( namedPermSet.InternalToXml() );
+                                e.AddChild(namedPermSet.InternalToXml());
                             else
-                                e.AddChild( namedPermSet.ToXml() );
+                                e.AddChild(namedPermSet.ToXml());
                         }
                     }
                     else
                     {
                         if (useInternal)
-                            e.AddChild( m_permSet.InternalToXml() );
+                            e.AddChild(m_permSet.InternalToXml());
                         else
-                            e.AddChild( m_permSet.ToXml() );
+                            e.AddChild(m_permSet.ToXml());
                     }
                 }
             }
-            
+
             return e;
         }
-        
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        public void FromXml( SecurityElement et, PolicyLevel level )
+
+        [System.Security.SecuritySafeCritical] // auto-generated
+        public void FromXml(SecurityElement et, PolicyLevel level)
         {
-            FromXml( et, level, false );
+            FromXml(et, level, false);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal void FromXml( SecurityElement et, PolicyLevel level, bool allowInternalOnly )
+        [System.Security.SecurityCritical] // auto-generated
+        internal void FromXml(SecurityElement et, PolicyLevel level, bool allowInternalOnly)
         {
             if (et == null)
-                throw new ArgumentNullException( "et" );
+                throw new ArgumentNullException("et");
 
-            if (!et.Tag.Equals( "PolicyStatement" ))
-                throw new ArgumentException( String.Format( CultureInfo.CurrentCulture, Environment.GetResourceString( "Argument_InvalidXMLElement" ),  "PolicyStatement", this.GetType().FullName ) );
+            if (!et.Tag.Equals("PolicyStatement"))
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        Environment.GetResourceString("Argument_InvalidXMLElement"),
+                        "PolicyStatement",
+                        this.GetType().FullName
+                    )
+                );
             Contract.EndContractBlock();
-        
-            m_attributes = (PolicyStatementAttribute) 0;
 
-            String strAttributes = et.Attribute( "Attributes" );
+            m_attributes = (PolicyStatementAttribute)0;
+
+            String strAttributes = et.Attribute("Attributes");
 
             if (strAttributes != null)
-                m_attributes = (PolicyStatementAttribute)Enum.Parse( typeof( PolicyStatementAttribute ), strAttributes );
+                m_attributes = (PolicyStatementAttribute)
+                    Enum.Parse(typeof(PolicyStatementAttribute), strAttributes);
 
             lock (this)
             {
@@ -381,39 +400,43 @@ namespace System.Security.Policy {
 
                 if (level != null)
                 {
-                    String permSetName = et.Attribute( "PermissionSetName" );
-    
+                    String permSetName = et.Attribute("PermissionSetName");
+
                     if (permSetName != null)
                     {
-                        m_permSet = level.GetNamedPermissionSetInternal( permSetName );
+                        m_permSet = level.GetNamedPermissionSetInternal(permSetName);
 
                         if (m_permSet == null)
-                            m_permSet = new PermissionSet( PermissionState.None );
+                            m_permSet = new PermissionSet(PermissionState.None);
                     }
                 }
-
 
                 if (m_permSet == null)
                 {
                     // There is no provided level, it is not a named permission set, or
                     // the named permission set doesn't exist in the provided level,
                     // so just create the class through reflection and decode normally.
-        
-                    SecurityElement e = et.SearchForChildByTag( "PermissionSet" );
+
+                    SecurityElement e = et.SearchForChildByTag("PermissionSet");
 
                     if (e != null)
                     {
-                        String className = e.Attribute( "class" );
+                        String className = e.Attribute("class");
 
-                        if (className != null && (className.Equals( "NamedPermissionSet" ) ||
-                                                  className.Equals( "System.Security.NamedPermissionSet" )))
-                            m_permSet = new NamedPermissionSet( "DefaultName", PermissionState.None );
+                        if (
+                            className != null
+                            && (
+                                className.Equals("NamedPermissionSet")
+                                || className.Equals("System.Security.NamedPermissionSet")
+                            )
+                        )
+                            m_permSet = new NamedPermissionSet("DefaultName", PermissionState.None);
                         else
-                            m_permSet = new PermissionSet( PermissionState.None );
-                
+                            m_permSet = new PermissionSet(PermissionState.None);
+
                         try
                         {
-                            m_permSet.FromXml( e, allowInternalOnly, true );
+                            m_permSet.FromXml(e, allowInternalOnly, true);
                         }
                         catch
                         {
@@ -425,32 +448,46 @@ namespace System.Security.Policy {
                     }
                     else
                     {
-                        throw new ArgumentException( Environment.GetResourceString( "Argument_InvalidXML" ) );
+                        throw new ArgumentException(
+                            Environment.GetResourceString("Argument_InvalidXML")
+                        );
                     }
                 }
 
-                if (m_permSet == null) 
-                    m_permSet = new PermissionSet( PermissionState.None );
-            }    
+                if (m_permSet == null)
+                    m_permSet = new PermissionSet(PermissionState.None);
+            }
         }
 
-
-        [System.Security.SecurityCritical]  // auto-generated
-        internal void FromXml( SecurityDocument doc, int position, PolicyLevel level, bool allowInternalOnly )
+        [System.Security.SecurityCritical] // auto-generated
+        internal void FromXml(
+            SecurityDocument doc,
+            int position,
+            PolicyLevel level,
+            bool allowInternalOnly
+        )
         {
             if (doc == null)
-                throw new ArgumentNullException( "doc" );
+                throw new ArgumentNullException("doc");
             Contract.EndContractBlock();
 
-            if (!doc.GetTagForElement( position ).Equals( "PolicyStatement" ))
-                throw new ArgumentException( String.Format( CultureInfo.CurrentCulture, Environment.GetResourceString( "Argument_InvalidXMLElement" ),  "PolicyStatement", this.GetType().FullName ) );
-        
-            m_attributes = (PolicyStatementAttribute) 0;
+            if (!doc.GetTagForElement(position).Equals("PolicyStatement"))
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        Environment.GetResourceString("Argument_InvalidXMLElement"),
+                        "PolicyStatement",
+                        this.GetType().FullName
+                    )
+                );
 
-            String strAttributes = doc.GetAttributeForElement( position, "Attributes" );
+            m_attributes = (PolicyStatementAttribute)0;
+
+            String strAttributes = doc.GetAttributeForElement(position, "Attributes");
 
             if (strAttributes != null)
-                m_attributes = (PolicyStatementAttribute)Enum.Parse( typeof( PolicyStatementAttribute ), strAttributes );
+                m_attributes = (PolicyStatementAttribute)
+                    Enum.Parse(typeof(PolicyStatementAttribute), strAttributes);
 
             lock (this)
             {
@@ -458,30 +495,29 @@ namespace System.Security.Policy {
 
                 if (level != null)
                 {
-                    String permSetName = doc.GetAttributeForElement( position, "PermissionSetName" );
-    
+                    String permSetName = doc.GetAttributeForElement(position, "PermissionSetName");
+
                     if (permSetName != null)
                     {
-                        m_permSet = level.GetNamedPermissionSetInternal( permSetName );
+                        m_permSet = level.GetNamedPermissionSetInternal(permSetName);
 
                         if (m_permSet == null)
-                            m_permSet = new PermissionSet( PermissionState.None );
+                            m_permSet = new PermissionSet(PermissionState.None);
                     }
                 }
-
 
                 if (m_permSet == null)
                 {
                     // There is no provided level, it is not a named permission set, or
                     // the named permission set doesn't exist in the provided level,
                     // so just create the class through reflection and decode normally.
-        
-                    ArrayList childPositions = doc.GetChildrenPositionForElement( position );
+
+                    ArrayList childPositions = doc.GetChildrenPositionForElement(position);
                     int positionPermissionSet = -1;
 
                     for (int i = 0; i < childPositions.Count; ++i)
                     {
-                        if (doc.GetTagForElement( (int)childPositions[i] ).Equals( "PermissionSet" ))
+                        if (doc.GetTagForElement((int)childPositions[i]).Equals("PermissionSet"))
                         {
                             positionPermissionSet = (int)childPositions[i];
                         }
@@ -489,31 +525,40 @@ namespace System.Security.Policy {
 
                     if (positionPermissionSet != -1)
                     {
-                        String className = doc.GetAttributeForElement( positionPermissionSet, "class" );
+                        String className = doc.GetAttributeForElement(
+                            positionPermissionSet,
+                            "class"
+                        );
 
-                        if (className != null && (className.Equals( "NamedPermissionSet" ) ||
-                                                  className.Equals( "System.Security.NamedPermissionSet" )))
-                            m_permSet = new NamedPermissionSet( "DefaultName", PermissionState.None );
+                        if (
+                            className != null
+                            && (
+                                className.Equals("NamedPermissionSet")
+                                || className.Equals("System.Security.NamedPermissionSet")
+                            )
+                        )
+                            m_permSet = new NamedPermissionSet("DefaultName", PermissionState.None);
                         else
-                            m_permSet = new PermissionSet( PermissionState.None );
-                
-                        m_permSet.FromXml( doc, positionPermissionSet, allowInternalOnly );
+                            m_permSet = new PermissionSet(PermissionState.None);
+
+                        m_permSet.FromXml(doc, positionPermissionSet, allowInternalOnly);
                     }
                     else
                     {
-                        throw new ArgumentException( Environment.GetResourceString( "Argument_InvalidXML" ) );
+                        throw new ArgumentException(
+                            Environment.GetResourceString("Argument_InvalidXML")
+                        );
                     }
                 }
 
-                if (m_permSet == null) 
-                    m_permSet = new PermissionSet( PermissionState.None );
-            }    
+                if (m_permSet == null)
+                    m_permSet = new PermissionSet(PermissionState.None);
+            }
         }
 #endif // FEATURE_CAS_POLICY
 
-
         [System.Runtime.InteropServices.ComVisible(false)]
-        public override bool Equals( Object obj )
+        public override bool Equals(Object obj)
         {
             PolicyStatement other = obj as PolicyStatement;
 
@@ -523,7 +568,7 @@ namespace System.Security.Policy {
             if (this.m_attributes != other.m_attributes)
                 return false;
 
-            if (!Object.Equals( this.m_permSet, other.m_permSet ))
+            if (!Object.Equals(this.m_permSet, other.m_permSet))
                 return false;
 
             return true;
@@ -539,7 +584,5 @@ namespace System.Security.Policy {
 
             return accumulator;
         }
-
     }
 }
-

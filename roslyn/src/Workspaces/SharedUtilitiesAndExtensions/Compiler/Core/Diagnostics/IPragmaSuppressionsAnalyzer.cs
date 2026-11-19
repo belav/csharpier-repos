@@ -25,6 +25,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             CompilationWithAnalyzers compilationWithAnalyzers,
             Func<DiagnosticAnalyzer, ImmutableArray<DiagnosticDescriptor>> getSupportedDiagnostics,
             Action<Diagnostic> reportDiagnostic,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

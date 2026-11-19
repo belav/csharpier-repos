@@ -16,12 +16,15 @@ namespace Microsoft.Extensions.Logging
     /// Doesn't use ConfigurationBinder in order to allow ConfigurationBinder, and all its dependencies,
     /// to be trimmed. This improves app size and startup.
     /// </remarks>
-    internal sealed class ConsoleFormatterConfigureOptions : IConfigureOptions<ConsoleFormatterOptions>
+    internal sealed class ConsoleFormatterConfigureOptions
+        : IConfigureOptions<ConsoleFormatterOptions>
     {
         private readonly IConfiguration _configuration;
 
         [UnsupportedOSPlatform("browser")]
-        public ConsoleFormatterConfigureOptions(ILoggerProviderConfiguration<ConsoleLoggerProvider> providerConfiguration)
+        public ConsoleFormatterConfigureOptions(
+            ILoggerProviderConfiguration<ConsoleLoggerProvider> providerConfiguration
+        )
         {
             _configuration = providerConfiguration.GetFormatterOptionsSection();
         }

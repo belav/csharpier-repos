@@ -24,7 +24,11 @@ namespace System.IO.Enumeration
         /// <exception cref="ArgumentOutOfRangeException">
         /// The match type is out of the range of the valid MatchType enum values.
         /// </exception>
-        internal static bool NormalizeInputs(ref string directory, ref string expression, MatchType matchType)
+        internal static bool NormalizeInputs(
+            ref string directory,
+            ref string expression,
+            MatchType matchType
+        )
         {
             if (Path.IsPathRooted(expression))
                 throw new ArgumentException(SR.Arg_Path2IsRooted, nameof(expression));
@@ -63,7 +67,11 @@ namespace System.IO.Enumeration
                         // Most common case
                         break;
                     }
-                    else if (string.IsNullOrEmpty(expression) || expression == "." || expression == "*.*")
+                    else if (
+                        string.IsNullOrEmpty(expression)
+                        || expression == "."
+                        || expression == "*.*"
+                    )
                     {
                         // Historically we always treated "." as "*"
                         expression = "*";
@@ -74,7 +82,10 @@ namespace System.IO.Enumeration
                         // is the directory separator and cannot be part of any path segment in Windows). The other three are the
                         // special case wildcards that we'll convert some * and ? into. They're also valid as filenames on Unix,
                         // which is not true in Windows and as such we'll escape any that occur on the input string.
-                        if (Path.DirectorySeparatorChar != '\\' && expression.AsSpan().ContainsAny(@"\""<>"))
+                        if (
+                            Path.DirectorySeparatorChar != '\\'
+                            && expression.AsSpan().ContainsAny(@"\""<>")
+                        )
                         {
                             // Backslash isn't the default separator, need to escape (e.g. Unix)
                             expression = expression.Replace("\\", "\\\\");
@@ -98,58 +109,83 @@ namespace System.IO.Enumeration
             return isDirectoryModified;
         }
 
-        private static bool MatchesPattern(string expression, ReadOnlySpan<char> name, EnumerationOptions options)
+        private static bool MatchesPattern(
+            string expression,
+            ReadOnlySpan<char> name,
+            EnumerationOptions options
+        )
         {
-            bool ignoreCase = (options.MatchCasing == MatchCasing.PlatformDefault && !PathInternal.IsCaseSensitive)
+            bool ignoreCase =
+                (
+                    options.MatchCasing == MatchCasing.PlatformDefault
+                    && !PathInternal.IsCaseSensitive
+                )
                 || options.MatchCasing == MatchCasing.CaseInsensitive;
 
             return options.MatchType switch
             {
-                MatchType.Simple => FileSystemName.MatchesSimpleExpression(expression.AsSpan(), name, ignoreCase),
-                MatchType.Win32 => FileSystemName.MatchesWin32Expression(expression.AsSpan(), name, ignoreCase),
+                MatchType.Simple => FileSystemName.MatchesSimpleExpression(
+                    expression.AsSpan(),
+                    name,
+                    ignoreCase
+                ),
+                MatchType.Win32 => FileSystemName.MatchesWin32Expression(
+                    expression.AsSpan(),
+                    name,
+                    ignoreCase
+                ),
                 _ => throw new ArgumentOutOfRangeException(nameof(options)),
             };
         }
 
-        internal static IEnumerable<string> UserFiles(string directory,
+        internal static IEnumerable<string> UserFiles(
+            string directory,
             string expression,
-            EnumerationOptions options)
+            EnumerationOptions options
+        )
         {
             return new FileSystemEnumerable<string>(
                 directory,
                 (ref FileSystemEntry entry) => entry.ToSpecifiedFullPath(),
-                options)
+                options
+            )
             {
                 ShouldIncludePredicate = (ref FileSystemEntry entry) =>
-                    !entry.IsDirectory && MatchesPattern(expression, entry.FileName, options)
+                    !entry.IsDirectory && MatchesPattern(expression, entry.FileName, options),
             };
         }
 
-        internal static IEnumerable<string> UserDirectories(string directory,
+        internal static IEnumerable<string> UserDirectories(
+            string directory,
             string expression,
-            EnumerationOptions options)
+            EnumerationOptions options
+        )
         {
             return new FileSystemEnumerable<string>(
                 directory,
                 (ref FileSystemEntry entry) => entry.ToSpecifiedFullPath(),
-                options)
+                options
+            )
             {
                 ShouldIncludePredicate = (ref FileSystemEntry entry) =>
-                    entry.IsDirectory && MatchesPattern(expression, entry.FileName, options)
+                    entry.IsDirectory && MatchesPattern(expression, entry.FileName, options),
             };
         }
 
-        internal static IEnumerable<string> UserEntries(string directory,
+        internal static IEnumerable<string> UserEntries(
+            string directory,
             string expression,
-            EnumerationOptions options)
+            EnumerationOptions options
+        )
         {
             return new FileSystemEnumerable<string>(
                 directory,
                 (ref FileSystemEntry entry) => entry.ToSpecifiedFullPath(),
-                options)
+                options
+            )
             {
                 ShouldIncludePredicate = (ref FileSystemEntry entry) =>
-                    MatchesPattern(expression, entry.FileName, options)
+                    MatchesPattern(expression, entry.FileName, options),
             };
         }
 
@@ -157,16 +193,18 @@ namespace System.IO.Enumeration
             string directory,
             string expression,
             EnumerationOptions options,
-            bool isNormalized)
+            bool isNormalized
+        )
         {
             return new FileSystemEnumerable<FileInfo>(
-               directory,
-               (ref FileSystemEntry entry) => (FileInfo)entry.ToFileSystemInfo(),
-               options,
-               isNormalized)
+                directory,
+                (ref FileSystemEntry entry) => (FileInfo)entry.ToFileSystemInfo(),
+                options,
+                isNormalized
+            )
             {
                 ShouldIncludePredicate = (ref FileSystemEntry entry) =>
-                    !entry.IsDirectory && MatchesPattern(expression, entry.FileName, options)
+                    !entry.IsDirectory && MatchesPattern(expression, entry.FileName, options),
             };
         }
 
@@ -174,16 +212,18 @@ namespace System.IO.Enumeration
             string directory,
             string expression,
             EnumerationOptions options,
-            bool isNormalized)
+            bool isNormalized
+        )
         {
             return new FileSystemEnumerable<DirectoryInfo>(
-               directory,
-               (ref FileSystemEntry entry) => (DirectoryInfo)entry.ToFileSystemInfo(),
-               options,
-               isNormalized)
+                directory,
+                (ref FileSystemEntry entry) => (DirectoryInfo)entry.ToFileSystemInfo(),
+                options,
+                isNormalized
+            )
             {
                 ShouldIncludePredicate = (ref FileSystemEntry entry) =>
-                    entry.IsDirectory && MatchesPattern(expression, entry.FileName, options)
+                    entry.IsDirectory && MatchesPattern(expression, entry.FileName, options),
             };
         }
 
@@ -191,16 +231,18 @@ namespace System.IO.Enumeration
             string directory,
             string expression,
             EnumerationOptions options,
-            bool isNormalized)
+            bool isNormalized
+        )
         {
             return new FileSystemEnumerable<FileSystemInfo>(
-               directory,
-               (ref FileSystemEntry entry) => entry.ToFileSystemInfo(),
-               options,
-               isNormalized)
+                directory,
+                (ref FileSystemEntry entry) => entry.ToFileSystemInfo(),
+                options,
+                isNormalized
+            )
             {
                 ShouldIncludePredicate = (ref FileSystemEntry entry) =>
-                    MatchesPattern(expression, entry.FileName, options)
+                    MatchesPattern(expression, entry.FileName, options),
             };
         }
     }

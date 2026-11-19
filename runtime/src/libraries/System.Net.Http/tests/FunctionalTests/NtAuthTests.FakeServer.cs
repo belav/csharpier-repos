@@ -6,7 +6,6 @@ using System.Net.Security;
 using System.Net.Test.Common;
 using System.Security.Principal;
 using System.Threading.Tasks;
-
 using Xunit;
 using Xunit.Abstractions;
 
@@ -17,9 +16,15 @@ namespace System.Net.Http.Functional.Tests
         public static bool IsNtlmAvailable =>
             Capability.IsNtlmInstalled() || OperatingSystem.IsAndroid() || OperatingSystem.IsTvOS();
 
-        private static NetworkCredential s_testCredentialRight = new NetworkCredential("rightusername", "rightpassword");
+        private static NetworkCredential s_testCredentialRight = new NetworkCredential(
+            "rightusername",
+            "rightpassword"
+        );
 
-        internal static async Task HandleAuthenticationRequestWithFakeServer(LoopbackServer.Connection connection, bool useNtlm)
+        internal static async Task HandleAuthenticationRequestWithFakeServer(
+            LoopbackServer.Connection connection,
+            bool useNtlm
+        )
         {
             HttpRequestData request = await connection.ReadRequestDataAsync();
             FakeNtlmServer? fakeNtlmServer = null;
@@ -47,7 +52,9 @@ namespace System.Net.Http.Functional.Tests
                     authHeader = "WWW-Authenticate: Negotiate\r\n";
                 }
 
-                await connection.SendResponseAsync(HttpStatusCode.Unauthorized, authHeader).ConfigureAwait(false);
+                await connection
+                    .SendResponseAsync(HttpStatusCode.Unauthorized, authHeader)
+                    .ConfigureAwait(false);
                 connection.CompleteRequestProcessing();
 
                 // Read next requests and fall-back to loop bellow to process it.
@@ -73,7 +80,10 @@ namespace System.Net.Http.Functional.Tests
 
                 if (fakeNtlmServer == null)
                 {
-                    fakeNtlmServer = new FakeNtlmServer(s_testCredentialRight) { ForceNegotiateVersion = true };
+                    fakeNtlmServer = new FakeNtlmServer(s_testCredentialRight)
+                    {
+                        ForceNegotiateVersion = true,
+                    };
                     if (!useNtlm)
                     {
                         fakeNegotiateServer = new FakeNegotiateServer(fakeNtlmServer);
@@ -84,7 +94,9 @@ namespace System.Net.Http.Functional.Tests
 
                 if (fakeNegotiateServer != null)
                 {
-                    outBlob = fakeNegotiateServer.GetOutgoingBlob(Convert.FromBase64String(tokens[1]));
+                    outBlob = fakeNegotiateServer.GetOutgoingBlob(
+                        Convert.FromBase64String(tokens[1])
+                    );
                     isAuthenticated = fakeNegotiateServer.IsAuthenticated;
                 }
                 else
@@ -95,8 +107,12 @@ namespace System.Net.Http.Functional.Tests
 
                 if (outBlob != null)
                 {
-                    authHeader = $"WWW-Authenticate: {tokens[0]} {Convert.ToBase64String(outBlob)}\r\n";
-                    await connection.SendResponseAsync(isAuthenticated ? HttpStatusCode.OK : HttpStatusCode.Unauthorized, authHeader);
+                    authHeader =
+                        $"WWW-Authenticate: {tokens[0]} {Convert.ToBase64String(outBlob)}\r\n";
+                    await connection.SendResponseAsync(
+                        isAuthenticated ? HttpStatusCode.OK : HttpStatusCode.Unauthorized,
+                        authHeader
+                    );
                     connection.CompleteRequestProcessing();
 
                     if (!isAuthenticated)
@@ -104,8 +120,7 @@ namespace System.Net.Http.Functional.Tests
                         request = await connection.ReadRequestDataAsync();
                     }
                 }
-            }
-            while (!isAuthenticated);
+            } while (!isAuthenticated);
 
             fakeNtlmServer?.Dispose();
 
@@ -115,7 +130,10 @@ namespace System.Net.Http.Functional.Tests
         [ConditionalTheory(nameof(IsNtlmAvailable))]
         [InlineData(true)]
         [InlineData(false)]
-        [SkipOnPlatform(TestPlatforms.Browser, "Credentials and HttpListener is not supported on Browser")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser,
+            "Credentials and HttpListener is not supported on Browser"
+        )]
         public async Task DefaultHandler_FakeServer_Success(bool useNtlm)
         {
             await LoopbackServer.CreateClientAndServerAsync(
@@ -124,7 +142,10 @@ namespace System.Net.Http.Functional.Tests
                     HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
                     requestMessage.Version = new Version(1, 1);
 
-                    HttpMessageHandler handler = new HttpClientHandler() { Credentials = s_testCredentialRight };
+                    HttpMessageHandler handler = new HttpClientHandler()
+                    {
+                        Credentials = s_testCredentialRight,
+                    };
                     using (var client = new HttpClient(handler))
                     {
                         HttpResponseMessage response = await client.SendAsync(requestMessage);
@@ -133,15 +154,21 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(async connection =>
-                    {
-                        await HandleAuthenticationRequestWithFakeServer(connection, useNtlm);
-                    }).ConfigureAwait(false);
-                });
+                    await server
+                        .AcceptConnectionAsync(async connection =>
+                        {
+                            await HandleAuthenticationRequestWithFakeServer(connection, useNtlm);
+                        })
+                        .ConfigureAwait(false);
+                }
+            );
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.Windows, "DefaultCredentials are unsupported for NTLM on Unix / Managed implementation")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser | TestPlatforms.Windows,
+            "DefaultCredentials are unsupported for NTLM on Unix / Managed implementation"
+        )]
         public async Task DefaultHandler_FakeServer_DefaultCredentials()
         {
             await LoopbackServer.CreateClientAndServerAsync(
@@ -150,7 +177,10 @@ namespace System.Net.Http.Functional.Tests
                     HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
                     requestMessage.Version = new Version(1, 1);
 
-                    HttpMessageHandler handler = new HttpClientHandler() { Credentials = CredentialCache.DefaultCredentials };
+                    HttpMessageHandler handler = new HttpClientHandler()
+                    {
+                        Credentials = CredentialCache.DefaultCredentials,
+                    };
                     using (var client = new HttpClient(handler))
                     {
                         HttpResponseMessage response = await client.SendAsync(requestMessage);
@@ -159,13 +189,18 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(async connection =>
-                    {
-                        var authHeader = "WWW-Authenticate: NTLM\r\n";
-                        await connection.SendResponseAsync(HttpStatusCode.Unauthorized, authHeader).ConfigureAwait(false);
-                        connection.CompleteRequestProcessing();
-                    }).ConfigureAwait(false);
-                });
+                    await server
+                        .AcceptConnectionAsync(async connection =>
+                        {
+                            var authHeader = "WWW-Authenticate: NTLM\r\n";
+                            await connection
+                                .SendResponseAsync(HttpStatusCode.Unauthorized, authHeader)
+                                .ConfigureAwait(false);
+                            connection.CompleteRequestProcessing();
+                        })
+                        .ConfigureAwait(false);
+                }
+            );
         }
     }
 }

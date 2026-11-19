@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,60 +31,69 @@
 using System;
 using System.Configuration;
 
+namespace System.Web.Configuration
+{
+    public sealed class WebPartsSection : ConfigurationSection
+    {
+        static ConfigurationProperty enableExportProp;
+        static ConfigurationProperty personalizationProp;
+        static ConfigurationProperty transformersProp;
+        static ConfigurationPropertyCollection properties;
 
-namespace System.Web.Configuration {
+        static WebPartsSection()
+        {
+            enableExportProp = new ConfigurationProperty("enableExport", typeof(bool), false);
+            personalizationProp = new ConfigurationProperty(
+                "personalization",
+                typeof(WebPartsPersonalization),
+                null,
+                null,
+                PropertyHelper.DefaultValidator,
+                ConfigurationPropertyOptions.None
+            );
+            transformersProp = new ConfigurationProperty(
+                "transformers",
+                typeof(TransformerInfoCollection),
+                null,
+                null,
+                PropertyHelper.DefaultValidator,
+                ConfigurationPropertyOptions.None
+            );
+            properties = new ConfigurationPropertyCollection();
 
-	public sealed class WebPartsSection : ConfigurationSection
-	{
-		static ConfigurationProperty enableExportProp;
-		static ConfigurationProperty personalizationProp;
-		static ConfigurationProperty transformersProp;
-		static ConfigurationPropertyCollection properties;
+            properties.Add(enableExportProp);
+            properties.Add(personalizationProp);
+            properties.Add(transformersProp);
+        }
 
-		static WebPartsSection ()
-		{
-			enableExportProp = new ConfigurationProperty ("enableExport", typeof (bool), false);
-			personalizationProp = new ConfigurationProperty ("personalization", typeof (WebPartsPersonalization), null,
-									 null, PropertyHelper.DefaultValidator,
-									 ConfigurationPropertyOptions.None);
-			transformersProp = new ConfigurationProperty ("transformers", typeof (TransformerInfoCollection), null,
-								      null, PropertyHelper.DefaultValidator,
-								      ConfigurationPropertyOptions.None);
-			properties = new ConfigurationPropertyCollection ();
+        [MonoTODO("why override this?")]
+        protected internal override object GetRuntimeObject()
+        {
+            return this;
+        }
 
-			properties.Add (enableExportProp);
-			properties.Add (personalizationProp);
-			properties.Add (transformersProp);
-		}
+        [ConfigurationProperty("enableExport", DefaultValue = "False")]
+        public bool EnableExport
+        {
+            get { return (bool)base[enableExportProp]; }
+            set { base[enableExportProp] = value; }
+        }
 
-		[MonoTODO ("why override this?")]
-		protected internal override object GetRuntimeObject ()
-		{
-			return this;
-		}
+        [ConfigurationProperty("personalization")]
+        public WebPartsPersonalization Personalization
+        {
+            get { return (WebPartsPersonalization)base[personalizationProp]; }
+        }
 
-		[ConfigurationProperty ("enableExport", DefaultValue = "False")]
-		public bool EnableExport {
-			get { return (bool) base [enableExportProp];}
-			set { base[enableExportProp] = value; }
-		}
+        [ConfigurationProperty("transformers")]
+        public TransformerInfoCollection Transformers
+        {
+            get { return (TransformerInfoCollection)base[transformersProp]; }
+        }
 
-		[ConfigurationProperty ("personalization")]
-		public WebPartsPersonalization Personalization {
-			get { return (WebPartsPersonalization) base [personalizationProp];}
-		}
-
-		[ConfigurationProperty ("transformers")]
-		public TransformerInfoCollection Transformers {
-			get { return (TransformerInfoCollection) base [transformersProp];}
-		}
-
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-	}
-
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-
-

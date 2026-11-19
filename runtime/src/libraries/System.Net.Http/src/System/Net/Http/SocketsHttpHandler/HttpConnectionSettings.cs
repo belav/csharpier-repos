@@ -16,7 +16,8 @@ namespace System.Net.Http
     /// <summary>Provides a state bag of settings for configuring HTTP connections.</summary>
     internal sealed class HttpConnectionSettings
     {
-        internal DecompressionMethods _automaticDecompression = HttpHandlerDefaults.DefaultAutomaticDecompression;
+        internal DecompressionMethods _automaticDecompression =
+            HttpHandlerDefaults.DefaultAutomaticDecompression;
 
         internal bool _useCookies = HttpHandlerDefaults.DefaultUseCookies;
         internal CookieContainer? _cookieContainer;
@@ -31,27 +32,34 @@ namespace System.Net.Http
         internal ICredentials? _credentials;
 
         internal bool _allowAutoRedirect = HttpHandlerDefaults.DefaultAutomaticRedirection;
-        internal int _maxAutomaticRedirections = HttpHandlerDefaults.DefaultMaxAutomaticRedirections;
+        internal int _maxAutomaticRedirections =
+            HttpHandlerDefaults.DefaultMaxAutomaticRedirections;
 
         internal int _maxConnectionsPerServer = HttpHandlerDefaults.DefaultMaxConnectionsPerServer;
         internal int _maxResponseDrainSize = HttpHandlerDefaults.DefaultMaxResponseDrainSize;
         internal TimeSpan _maxResponseDrainTime = HttpHandlerDefaults.DefaultResponseDrainTimeout;
-        internal int _maxResponseHeadersLength = HttpHandlerDefaults.DefaultMaxResponseHeadersLength;
+        internal int _maxResponseHeadersLength =
+            HttpHandlerDefaults.DefaultMaxResponseHeadersLength;
         internal IMeterFactory? _meterFactory;
         internal SocketsHttpHandlerMetrics? _metrics;
 
-        internal TimeSpan _pooledConnectionLifetime = HttpHandlerDefaults.DefaultPooledConnectionLifetime;
-        internal TimeSpan _pooledConnectionIdleTimeout = HttpHandlerDefaults.DefaultPooledConnectionIdleTimeout;
-        internal TimeSpan _expect100ContinueTimeout = HttpHandlerDefaults.DefaultExpect100ContinueTimeout;
+        internal TimeSpan _pooledConnectionLifetime =
+            HttpHandlerDefaults.DefaultPooledConnectionLifetime;
+        internal TimeSpan _pooledConnectionIdleTimeout =
+            HttpHandlerDefaults.DefaultPooledConnectionIdleTimeout;
+        internal TimeSpan _expect100ContinueTimeout =
+            HttpHandlerDefaults.DefaultExpect100ContinueTimeout;
         internal TimeSpan _keepAlivePingTimeout = HttpHandlerDefaults.DefaultKeepAlivePingTimeout;
         internal TimeSpan _keepAlivePingDelay = HttpHandlerDefaults.DefaultKeepAlivePingDelay;
-        internal HttpKeepAlivePingPolicy _keepAlivePingPolicy = HttpHandlerDefaults.DefaultKeepAlivePingPolicy;
+        internal HttpKeepAlivePingPolicy _keepAlivePingPolicy =
+            HttpHandlerDefaults.DefaultKeepAlivePingPolicy;
         internal TimeSpan _connectTimeout = HttpHandlerDefaults.DefaultConnectTimeout;
 
         internal HeaderEncodingSelector<HttpRequestMessage>? _requestHeaderEncodingSelector;
         internal HeaderEncodingSelector<HttpRequestMessage>? _responseHeaderEncodingSelector;
 
-        internal DistributedContextPropagator? _activityHeadersPropagator = DistributedContextPropagator.Current;
+        internal DistributedContextPropagator? _activityHeadersPropagator =
+            DistributedContextPropagator.Current;
 
         internal Version _maxHttpVersion;
 
@@ -59,13 +67,22 @@ namespace System.Net.Http
 
         internal bool _enableMultipleHttp2Connections;
 
-        internal Func<SocketsHttpConnectionContext, CancellationToken, ValueTask<Stream>>? _connectCallback;
-        internal Func<SocketsHttpPlaintextStreamFilterContext, CancellationToken, ValueTask<Stream>>? _plaintextStreamFilter;
+        internal Func<
+            SocketsHttpConnectionContext,
+            CancellationToken,
+            ValueTask<Stream>
+        >? _connectCallback;
+        internal Func<
+            SocketsHttpPlaintextStreamFilterContext,
+            CancellationToken,
+            ValueTask<Stream>
+        >? _plaintextStreamFilter;
 
         internal IDictionary<string, object?>? _properties;
 
         // Http2 flow control settings:
-        internal int _initialHttp2StreamWindowSize = HttpHandlerDefaults.DefaultInitialHttp2StreamWindowSize;
+        internal int _initialHttp2StreamWindowSize =
+            HttpHandlerDefaults.DefaultInitialHttp2StreamWindowSize;
 
         internal ClientCertificateOption _clientCertificateOptions;
 
@@ -74,9 +91,9 @@ namespace System.Net.Http
             bool allowHttp2 = GlobalHttpSettings.SocketsHttpHandler.AllowHttp2;
             bool allowHttp3 = GlobalHttpSettings.SocketsHttpHandler.AllowHttp3;
             _maxHttpVersion =
-                allowHttp3 && allowHttp2 ? HttpVersion.Version30 :
-                allowHttp2 ? HttpVersion.Version20 :
-                HttpVersion.Version11;
+                allowHttp3 && allowHttp2 ? HttpVersion.Version30
+                : allowHttp2 ? HttpVersion.Version20
+                : HttpVersion.Version11;
 
             _clientCertificateOptions = ClientCertificateOption.Automatic;
         }
@@ -125,15 +142,22 @@ namespace System.Net.Http
                 _plaintextStreamFilter = _plaintextStreamFilter,
                 _initialHttp2StreamWindowSize = _initialHttp2StreamWindowSize,
                 _activityHeadersPropagator = _activityHeadersPropagator,
-                _defaultCredentialsUsedForProxy = _proxy != null && (_proxy.Credentials == CredentialCache.DefaultCredentials || _defaultProxyCredentials == CredentialCache.DefaultCredentials),
-                _defaultCredentialsUsedForServer = _credentials == CredentialCache.DefaultCredentials,
+                _defaultCredentialsUsedForProxy =
+                    _proxy != null
+                    && (
+                        _proxy.Credentials == CredentialCache.DefaultCredentials
+                        || _defaultProxyCredentials == CredentialCache.DefaultCredentials
+                    ),
+                _defaultCredentialsUsedForServer =
+                    _credentials == CredentialCache.DefaultCredentials,
                 _clientCertificateOptions = _clientCertificateOptions,
             };
 
             return settings;
         }
 
-        public int MaxResponseHeadersByteLength => (int)Math.Min(int.MaxValue, _maxResponseHeadersLength * 1024L);
+        public int MaxResponseHeadersByteLength =>
+            (int)Math.Min(int.MaxValue, _maxResponseHeadersLength * 1024L);
 
         public bool EnableMultipleHttp2Connections => _enableMultipleHttp2Connections;
 
@@ -142,6 +166,7 @@ namespace System.Net.Http
         [SupportedOSPlatform("windows")]
         [SupportedOSPlatform("linux")]
         [SupportedOSPlatform("macos")]
-        internal byte[] Http3SettingsFrame => _http3SettingsFrame ??= Http3Connection.BuildSettingsFrame(this);
+        internal byte[] Http3SettingsFrame =>
+            _http3SettingsFrame ??= Http3Connection.BuildSettingsFrame(this);
     }
 }

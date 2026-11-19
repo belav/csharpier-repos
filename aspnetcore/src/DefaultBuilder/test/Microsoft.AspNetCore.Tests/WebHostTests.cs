@@ -110,11 +110,9 @@ public class WebHostTests
         logger.LogInformation("Request starting");
 
         var events = listener.EventData.ToArray();
-        Assert.Contains(
-            events,
-            args =>
-                args.EventSource.Name == "Microsoft-Extensions-Logging"
-                && args.Payload.OfType<string>().Any(p => p.Contains("Request starting"))
+        Assert.Contains(events, args =>
+            args.EventSource.Name == "Microsoft-Extensions-Logging"
+            && args.Payload.OfType<string>().Any(p => p.Contains("Request starting"))
         );
     }
 

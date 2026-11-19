@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,67 +26,74 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 
-namespace System.Security.Policy {
+namespace System.Security.Policy
+{
+    [ComVisible(true)]
+    public sealed class ApplicationSecurityInfo
+    {
+        //		private ActivationContext _context;
+        private Evidence _evidence;
+        private ApplicationId _appid;
+        private PermissionSet _defaultSet;
+        private ApplicationId _deployid;
 
-	[ComVisible (true)]
-	public sealed class ApplicationSecurityInfo {
+        public ApplicationSecurityInfo(ActivationContext activationContext)
+        {
+            if (activationContext == null)
+                throw new ArgumentNullException("activationContext");
+            //			_context = activationContext;
+        }
 
-//		private ActivationContext _context;
-		private Evidence _evidence;
-		private ApplicationId _appid;
-		private PermissionSet _defaultSet;
-		private ApplicationId _deployid;
+        public Evidence ApplicationEvidence
+        {
+            get { return _evidence; }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("ApplicationEvidence");
+                _evidence = value;
+            }
+        }
 
-		public ApplicationSecurityInfo (ActivationContext activationContext)
-		{
-			if (activationContext == null)
-				throw new ArgumentNullException ("activationContext");
-//			_context = activationContext;
-		}
+        public ApplicationId ApplicationId
+        {
+            get { return _appid; }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("ApplicationId");
+                _appid = value;
+            }
+        }
 
-		public Evidence ApplicationEvidence {
-			get { return _evidence; }
-			set {
-				if (value == null)
-					throw new ArgumentNullException ("ApplicationEvidence");
-				_evidence = value;
-			}
-		}
+        public PermissionSet DefaultRequestSet
+        {
+            get
+            {
+                if (_defaultSet == null)
+                    return new PermissionSet(PermissionState.None);
+                return _defaultSet; // FIXME: copy or reference ?
+            }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("DefaultRequestSet");
+                _defaultSet = value;
+            }
+        }
 
-		public ApplicationId ApplicationId {
-			get { return _appid; }
-			set {
-				if (value == null)
-					throw new ArgumentNullException ("ApplicationId");
-				_appid = value;
-			}
-		}
-
-		public PermissionSet DefaultRequestSet {
-			get {
-				if (_defaultSet == null)
-					return new PermissionSet (PermissionState.None);
-				return _defaultSet; // FIXME: copy or reference ?
-			}
-			set {
-				if (value == null)
-					throw new ArgumentNullException ("DefaultRequestSet");
-				_defaultSet = value;
-			}
-		}
-
-		public ApplicationId DeploymentId {
-			get { return _deployid; }
-			set {
-				if (value == null)
-					throw new ArgumentNullException ("DeploymentId");
-				_deployid = value;
-			}
-		}
-	}
+        public ApplicationId DeploymentId
+        {
+            get { return _deployid; }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("DeploymentId");
+                _deployid = value;
+            }
+        }
+    }
 }
-

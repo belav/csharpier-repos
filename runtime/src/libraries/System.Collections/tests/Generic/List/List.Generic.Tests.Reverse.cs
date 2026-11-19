@@ -108,26 +108,28 @@ namespace System.Collections.Tests
             List<T> list = GenericListFactory(listLength);
             Tuple<int, int>[] InvalidParameters = new Tuple<int, int>[]
             {
-                Tuple.Create(listLength     ,1             ),
-                Tuple.Create(listLength+1   ,0             ),
-                Tuple.Create(listLength+1   ,1             ),
-                Tuple.Create(listLength     ,2             ),
-                Tuple.Create(listLength/2   ,listLength/2+1),
-                Tuple.Create(listLength-1   ,2             ),
-                Tuple.Create(listLength-2   ,3             ),
-                Tuple.Create(1              ,listLength    ),
-                Tuple.Create(0              ,listLength+1  ),
-                Tuple.Create(1              ,listLength+1  ),
-                Tuple.Create(2              ,listLength    ),
-                Tuple.Create(listLength/2+1 ,listLength/2  ),
-                Tuple.Create(2              ,listLength-1  ),
-                Tuple.Create(3              ,listLength-2  ),
+                Tuple.Create(listLength, 1),
+                Tuple.Create(listLength + 1, 0),
+                Tuple.Create(listLength + 1, 1),
+                Tuple.Create(listLength, 2),
+                Tuple.Create(listLength / 2, listLength / 2 + 1),
+                Tuple.Create(listLength - 1, 2),
+                Tuple.Create(listLength - 2, 3),
+                Tuple.Create(1, listLength),
+                Tuple.Create(0, listLength + 1),
+                Tuple.Create(1, listLength + 1),
+                Tuple.Create(2, listLength),
+                Tuple.Create(listLength / 2 + 1, listLength / 2),
+                Tuple.Create(2, listLength - 1),
+                Tuple.Create(3, listLength - 2),
             };
 
             Assert.All(InvalidParameters, invalidSet =>
             {
                 if (invalidSet.Item1 >= 0 && invalidSet.Item2 >= 0)
-                    AssertExtensions.Throws<ArgumentException>(null, () => list.Reverse(invalidSet.Item1, invalidSet.Item2));
+                    AssertExtensions.Throws<ArgumentException>(null, () =>
+                        list.Reverse(invalidSet.Item1, invalidSet.Item2)
+                    );
             });
         }
 
@@ -140,18 +142,20 @@ namespace System.Collections.Tests
             List<T> list = GenericListFactory(listLength);
             Tuple<int, int>[] InvalidParameters = new Tuple<int, int>[]
             {
-                Tuple.Create(-1,-1),
+                Tuple.Create(-1, -1),
                 Tuple.Create(-1, 0),
                 Tuple.Create(-1, 1),
                 Tuple.Create(-1, 2),
-                Tuple.Create(0 ,-1),
-                Tuple.Create(1 ,-1),
-                Tuple.Create(2 ,-1),
+                Tuple.Create(0, -1),
+                Tuple.Create(1, -1),
+                Tuple.Create(2, -1),
             };
 
             Assert.All(InvalidParameters, invalidSet =>
             {
-                Assert.Throws<ArgumentOutOfRangeException>(() => list.Reverse(invalidSet.Item1, invalidSet.Item2));
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    list.Reverse(invalidSet.Item1, invalidSet.Item2)
+                );
             });
         }
     }

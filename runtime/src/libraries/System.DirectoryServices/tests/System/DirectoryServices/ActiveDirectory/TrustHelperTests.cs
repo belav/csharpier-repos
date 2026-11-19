@@ -14,10 +14,12 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         {
             Type trustHelperType = typeof(Domain).Assembly.GetType(
                 "System.DirectoryServices.ActiveDirectory.TrustHelper",
-                throwOnError: true);
+                throwOnError: true
+            );
             MethodInfo createTrustPasswordMethod = trustHelperType.GetMethod(
                 "CreateTrustPassword",
-                BindingFlags.NonPublic | BindingFlags.Static);
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
 
             Assert.NotNull(createTrustPasswordMethod);
 

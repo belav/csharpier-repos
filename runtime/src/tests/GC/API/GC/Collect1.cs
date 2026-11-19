@@ -29,7 +29,7 @@ public class Test_Collect1
         Console.WriteLine("Object is in generation: {0}", ogen2);
 
         if (agen2 > ogen2)
-        {  // gen 0,1 collected
+        { // gen 0,1 collected
             Console.WriteLine("Test for GC.Collect(1) passed!");
             return 100;
         }

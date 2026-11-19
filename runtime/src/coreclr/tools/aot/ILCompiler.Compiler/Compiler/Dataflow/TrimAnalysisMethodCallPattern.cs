@@ -31,7 +31,8 @@ namespace ILCompiler.Dataflow
             MethodDesc calledMethod,
             MultiValue instance,
             ImmutableArray<MultiValue> arguments,
-            MessageOrigin origin)
+            MessageOrigin origin
+        )
         {
             Debug.Assert(origin.MemberDefinition is MethodDesc);
             MethodBody = methodBody;
@@ -53,7 +54,10 @@ namespace ILCompiler.Dataflow
             Origin = origin;
         }
 
-        public TrimAnalysisMethodCallPattern Merge(ValueSetLattice<SingleValue> lattice, TrimAnalysisMethodCallPattern other)
+        public TrimAnalysisMethodCallPattern Merge(
+            ValueSetLattice<SingleValue> lattice,
+            TrimAnalysisMethodCallPattern other
+        )
         {
             Debug.Assert(MethodBody.OwningMethod == other.MethodBody.OwningMethod);
             Debug.Assert(Operation == other.Operation);
@@ -73,21 +77,38 @@ namespace ILCompiler.Dataflow
                 CalledMethod,
                 lattice.Meet(Instance, other.Instance),
                 argumentsBuilder.ToImmutable(),
-                Origin);
+                Origin
+            );
         }
 
         public void MarkAndProduceDiagnostics(ReflectionMarker reflectionMarker, Logger logger)
         {
             var diagnosticContext = new DiagnosticContext(
                 Origin,
-                logger.ShouldSuppressAnalysisWarningsForRequires(Origin.MemberDefinition, DiagnosticUtilities.RequiresUnreferencedCodeAttribute),
-                logger.ShouldSuppressAnalysisWarningsForRequires(Origin.MemberDefinition, DiagnosticUtilities.RequiresDynamicCodeAttribute),
-                logger.ShouldSuppressAnalysisWarningsForRequires(Origin.MemberDefinition, DiagnosticUtilities.RequiresAssemblyFilesAttribute),
-                logger);
-            ReflectionMethodBodyScanner.HandleCall(MethodBody, CalledMethod, Operation, Instance, Arguments,
+                logger.ShouldSuppressAnalysisWarningsForRequires(
+                    Origin.MemberDefinition,
+                    DiagnosticUtilities.RequiresUnreferencedCodeAttribute
+                ),
+                logger.ShouldSuppressAnalysisWarningsForRequires(
+                    Origin.MemberDefinition,
+                    DiagnosticUtilities.RequiresDynamicCodeAttribute
+                ),
+                logger.ShouldSuppressAnalysisWarningsForRequires(
+                    Origin.MemberDefinition,
+                    DiagnosticUtilities.RequiresAssemblyFilesAttribute
+                ),
+                logger
+            );
+            ReflectionMethodBodyScanner.HandleCall(
+                MethodBody,
+                CalledMethod,
+                Operation,
+                Instance,
+                Arguments,
                 diagnosticContext,
                 reflectionMarker,
-                out MultiValue _);
+                out MultiValue _
+            );
         }
     }
 }

@@ -8,6 +8,6 @@ namespace Microsoft.TestCommon.Types
         FirstLong,
         SecondLong,
         ThirdLong,
-        FourthLong
+        FourthLong,
     }
 }

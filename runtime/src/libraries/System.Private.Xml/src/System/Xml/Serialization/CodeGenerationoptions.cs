@@ -37,7 +37,6 @@ namespace System.Xml.Serialization
         [XmlEnum("oldAsync")]
         GenerateOldAsync = 0x4,
 
-
         /// <summary>
         /// Generate OM using explicit ordering feature.
         /// </summary>

@@ -14,10 +14,20 @@ namespace System.Net.Sockets.Tests
         private int _receiveBufferSize;
         private volatile bool _disposed = false;
 
-        protected sealed override int Port { get { return ((IPEndPoint)_socket.LocalEndPoint).Port; } }
-        public sealed override EndPoint EndPoint { get { return _socket.LocalEndPoint; } }
+        protected sealed override int Port
+        {
+            get { return ((IPEndPoint)_socket.LocalEndPoint).Port; }
+        }
+        public sealed override EndPoint EndPoint
+        {
+            get { return _socket.LocalEndPoint; }
+        }
 
-        public SocketTestServerAPM(int numConnections, int receiveBufferSize, EndPoint localEndPoint)
+        public SocketTestServerAPM(
+            int numConnections,
+            int receiveBufferSize,
+            EndPoint localEndPoint
+        )
         {
             _log = VerboseTestLogging.GetInstance();
             _receiveBufferSize = receiveBufferSize;
@@ -53,9 +63,11 @@ namespace System.Net.Sockets.Tests
             }
             catch (SocketException e)
             {
-                if (_disposed ||
-                    e.SocketErrorCode == SocketError.OperationAborted ||
-                    e.SocketErrorCode == SocketError.Interrupted)
+                if (
+                    _disposed
+                    || e.SocketErrorCode == SocketError.OperationAborted
+                    || e.SocketErrorCode == SocketError.Interrupted
+                )
                 {
                     return;
                 }
@@ -71,11 +83,16 @@ namespace System.Net.Sockets.Tests
             ServerSocketState state = new ServerSocketState(client, _receiveBufferSize);
             try
             {
-                state.Socket.BeginReceive(state.TransferBuffer, 0, state.TransferBuffer.Length, SocketFlags.None, OnReceive, state);
+                state.Socket.BeginReceive(
+                    state.TransferBuffer,
+                    0,
+                    state.TransferBuffer.Length,
+                    SocketFlags.None,
+                    OnReceive,
+                    state
+                );
             }
-            catch (SocketException)
-            {
-            }
+            catch (SocketException) { }
 
             try
             {
@@ -83,18 +100,18 @@ namespace System.Net.Sockets.Tests
             }
             catch (SocketException e)
             {
-                if (_disposed ||
-                    e.SocketErrorCode == SocketError.OperationAborted ||
-                    e.SocketErrorCode == SocketError.Interrupted)
+                if (
+                    _disposed
+                    || e.SocketErrorCode == SocketError.OperationAborted
+                    || e.SocketErrorCode == SocketError.Interrupted
+                )
                 {
                     return;
                 }
 
                 throw;
             }
-            catch (ObjectDisposedException)
-            {
-            }
+            catch (ObjectDisposedException) { }
         }
 
         private void OnReceive(IAsyncResult result)
@@ -112,14 +129,22 @@ namespace System.Net.Sockets.Tests
 
                 ServerSocketState sendState = new ServerSocketState(recvState, bytesReceived);
 
-                sendState.Socket.BeginSend(sendState.TransferBuffer, 0, bytesReceived, SocketFlags.None, OnSend, sendState);
+                sendState.Socket.BeginSend(
+                    sendState.TransferBuffer,
+                    0,
+                    bytesReceived,
+                    SocketFlags.None,
+                    OnSend,
+                    sendState
+                );
                 recvState.Socket.BeginReceive(
                     recvState.TransferBuffer,
                     0,
                     recvState.TransferBuffer.Length,
                     SocketFlags.None,
                     OnReceive,
-                    recvState);
+                    recvState
+                );
             }
             catch (SocketException)
             {
@@ -141,7 +166,12 @@ namespace System.Net.Sockets.Tests
                 int bytesSent = sendState.Socket.EndSend(result);
                 if (bytesSent != sendState.TransferBuffer.Length)
                 {
-                    _log.WriteLine("{2} APM: OnSend {0}bytes - expecting {1}bytes.", bytesSent, sendState.TransferBuffer.Length, sendState.Socket.GetHashCode());
+                    _log.WriteLine(
+                        "{2} APM: OnSend {0}bytes - expecting {1}bytes.",
+                        bytesSent,
+                        sendState.TransferBuffer.Length,
+                        sendState.Socket.GetHashCode()
+                    );
                 }
             }
             catch (SocketException)

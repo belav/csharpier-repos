@@ -33,86 +33,103 @@ using System.Drawing.Drawing2D;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Samples {
-	public partial class flatten: Form {
+namespace Samples
+{
+    public partial class flatten : Form
+    {
+        // default values
+        private float translateX = 0f;
+        private float translateY = 10f;
+        private float flat = 0.1f;
 
-		// default values
-		private float translateX = 0f;
-		private float translateY = 10f;
-		private float flat = 0.1f;
+        private Pen default_pen;
+        private Pen flat_pen;
 
-		private Pen default_pen;
-		private Pen flat_pen;
+        public flatten()
+        {
+            InitializeComponent();
 
-		public flatten ()
-		{
-			InitializeComponent ();
+            object[] shapes = Samples.Common.Shapes.GetList();
+            shapeComboBox.Items.AddRange(shapes);
 
-			object[] shapes = Samples.Common.Shapes.GetList ();
-			shapeComboBox.Items.AddRange (shapes);
+            default_pen = new System.Drawing.Pen(System.Drawing.Color.Black, 2);
+            flat_pen = new System.Drawing.Pen(System.Drawing.Color.Red, 1);
 
-			default_pen = new System.Drawing.Pen (System.Drawing.Color.Black, 2);
-			flat_pen = new System.Drawing.Pen (System.Drawing.Color.Red, 1);
+            translateXtextBox.Text = translateX.ToString();
+            translateYtextBox.Text = translateY.ToString();
+            flattenTextBox.Text = flat.ToString();
+        }
 
-			translateXtextBox.Text = translateX.ToString ();
-			translateYtextBox.Text = translateY.ToString ();
-			flattenTextBox.Text = flat.ToString ();
-		}
+        private void Flattener_Paint(object sender, PaintEventArgs e)
+        {
+            GraphicsPath path = Samples.Common.Shapes.GetShape(shapeComboBox.SelectedIndex);
+            if (path == null)
+                return;
 
-		private void Flattener_Paint (object sender, PaintEventArgs e)
-		{
-			GraphicsPath path = Samples.Common.Shapes.GetShape (shapeComboBox.SelectedIndex);
-			if (path == null)
-				return;
+            e.Graphics.DrawPath(default_pen, path);
+            int pcount = path.PointCount;
 
-			e.Graphics.DrawPath (default_pen, path);
-			int pcount = path.PointCount;
+            if ((translateX != 0f) || (translateY != 0f))
+            {
+                Matrix translateMatrix = new Matrix();
+                translateMatrix.Translate(translateX, translateY);
+                path.Flatten(translateMatrix, flat);
+            }
+            else
+            {
+                path.Flatten(null, flat);
+            }
+            e.Graphics.DrawPath(flat_pen, path);
 
-			if ((translateX != 0f) || (translateY != 0f)) {
-				Matrix translateMatrix = new Matrix ();
-				translateMatrix.Translate (translateX, translateY);
-				path.Flatten (translateMatrix, flat);
-			} else {
-				path.Flatten (null, flat);
-			}
-			e.Graphics.DrawPath (flat_pen, path);
+            int fcount = path.PointCount;
+            path.Dispose();
 
-			int fcount = path.PointCount;
-			path.Dispose ();
+            infoLabel.Text = System.String.Format(
+                "Path Points: {0}, Flat Points: {1}",
+                pcount,
+                fcount
+            );
+        }
 
-			infoLabel.Text = System.String.Format ("Path Points: {0}, Flat Points: {1}", pcount, fcount);
-		}
+        private void redrawButton_Click(object sender, EventArgs e)
+        {
+            if (Single.TryParse(translateXtextBox.Text, out translateX))
+            {
+                translateXtextBox.BackColor = SystemColors.Window;
+            }
+            else
+            {
+                translateXtextBox.BackColor = Color.Red;
+            }
 
-		private void redrawButton_Click (object sender, EventArgs e)
-		{
-			if (Single.TryParse (translateXtextBox.Text, out translateX)) {
-				translateXtextBox.BackColor = SystemColors.Window;
-			} else {
-				translateXtextBox.BackColor = Color.Red;
-			}
+            if (Single.TryParse(translateYtextBox.Text, out translateY))
+            {
+                translateYtextBox.BackColor = SystemColors.Window;
+            }
+            else
+            {
+                translateYtextBox.BackColor = Color.Red;
+            }
 
-			if (Single.TryParse (translateYtextBox.Text, out translateY)) {
-				translateYtextBox.BackColor = SystemColors.Window;
-			} else {
-				translateYtextBox.BackColor = Color.Red;
-			}
+            if (Single.TryParse(flattenTextBox.Text, out flat))
+            {
+                flattenTextBox.BackColor = SystemColors.Window;
+            }
+            else
+            {
+                flattenTextBox.BackColor = Color.Red;
+            }
 
-			if (Single.TryParse (flattenTextBox.Text, out flat)) {
-				flattenTextBox.BackColor = SystemColors.Window;
-			} else {
-				flattenTextBox.BackColor = Color.Red;
-			}
+            Invalidate();
+            Update();
+        }
 
-			Invalidate ();
-			Update ();
-		}
-
-		[STAThread]
-		static void Main ()
-		{
-			Application.EnableVisualStyles ();
-			Application.SetCompatibleTextRenderingDefault (false);
-			Application.Run (new flatten ());
-		}
-	}
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new flatten());
+        }
+    }
 }

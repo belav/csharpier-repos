@@ -17,9 +17,9 @@ namespace System.Activities.DurableInstancing
         Dictionary<Guid, IDictionary<XName, InstanceValue>> keysToAssociate;
 
         public LoadWorkflowByInstanceKeyCommand()
-            : base(InstancePersistence.ActivitiesCommandNamespace.GetName("LoadWorkflowByInstanceKey"))
-        {
-        }
+            : base(
+                InstancePersistence.ActivitiesCommandNamespace.GetName("LoadWorkflowByInstanceKey")
+            ) { }
 
         public bool AcceptUninitializedInstance { get; set; }
 
@@ -32,7 +32,8 @@ namespace System.Activities.DurableInstancing
             {
                 if (this.keysToAssociate == null)
                 {
-                    this.keysToAssociate = new Dictionary<Guid, IDictionary<XName, InstanceValue>>();
+                    this.keysToAssociate =
+                        new Dictionary<Guid, IDictionary<XName, InstanceValue>>();
                 }
                 return this.keysToAssociate;
             }
@@ -42,52 +43,69 @@ namespace System.Activities.DurableInstancing
         {
             get
             {
-                return (this.keysToAssociate == null || this.keysToAssociate.Count == 0) && AssociateInstanceKeyToInstanceId == Guid.Empty;
+                return (this.keysToAssociate == null || this.keysToAssociate.Count == 0)
+                    && AssociateInstanceKeyToInstanceId == Guid.Empty;
             }
         }
 
         protected internal override bool AutomaticallyAcquiringLock
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected internal override void Validate(InstanceView view)
         {
             if (!view.IsBoundToInstanceOwner)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SRCore.OwnerRequired));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SRCore.OwnerRequired)
+                );
             }
             if (view.IsBoundToInstance)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SRCore.AlreadyBoundToInstance));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SRCore.AlreadyBoundToInstance)
+                );
             }
 
             if (LookupInstanceKey == Guid.Empty)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SRCore.LoadOpKeyMustBeValid));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SRCore.LoadOpKeyMustBeValid)
+                );
             }
 
             if (AssociateInstanceKeyToInstanceId == Guid.Empty)
             {
                 if (InstanceKeysToAssociate.ContainsKey(LookupInstanceKey))
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SRCore.LoadOpAssociateKeysCannotContainLookupKey));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SRCore.LoadOpAssociateKeysCannotContainLookupKey
+                        )
+                    );
                 }
             }
             else
             {
                 if (!AcceptUninitializedInstance)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SRCore.LoadOpFreeKeyRequiresAcceptUninitialized));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SRCore.LoadOpFreeKeyRequiresAcceptUninitialized
+                        )
+                    );
                 }
             }
 
             if (this.keysToAssociate != null)
             {
-                foreach (KeyValuePair<Guid, IDictionary<XName, InstanceValue>> key in this.keysToAssociate)
+                foreach (
+                    KeyValuePair<
+                        Guid,
+                        IDictionary<XName, InstanceValue>
+                    > key in this.keysToAssociate
+                )
                 {
                     InstancePersistence.ValidatePropertyBag(key.Value);
                 }

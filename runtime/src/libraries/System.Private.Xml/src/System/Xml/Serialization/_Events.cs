@@ -19,8 +19,13 @@ namespace System.Xml.Serialization
         private readonly int _lineNumber;
         private readonly int _linePosition;
 
-
-        internal XmlAttributeEventArgs(XmlAttribute attr, int lineNumber, int linePosition, object? o, string? qnames)
+        internal XmlAttributeEventArgs(
+            XmlAttribute attr,
+            int lineNumber,
+            int linePosition,
+            object? o,
+            string? qnames
+        )
         {
             _attr = attr;
             _o = o;
@@ -74,7 +79,13 @@ namespace System.Xml.Serialization
         private readonly int _lineNumber;
         private readonly int _linePosition;
 
-        internal XmlElementEventArgs(XmlElement elem, int lineNumber, int linePosition, object? o, string? qnames)
+        internal XmlElementEventArgs(
+            XmlElement elem,
+            int lineNumber,
+            int linePosition,
+            object? o,
+            string? qnames
+        )
         {
             _elem = elem;
             _o = o;
@@ -114,14 +125,12 @@ namespace System.Xml.Serialization
 
     public delegate void XmlNodeEventHandler(object? sender, XmlNodeEventArgs e);
 
-
     public class XmlNodeEventArgs : EventArgs
     {
         private readonly object? _o;
         private readonly XmlNode _xmlNode;
         private readonly int _lineNumber;
         private readonly int _linePosition;
-
 
         internal XmlNodeEventArgs(XmlNode xmlNode, int lineNumber, int linePosition, object? o)
         {
@@ -178,7 +187,10 @@ namespace System.Xml.Serialization
         }
     }
 
-    public delegate void UnreferencedObjectEventHandler(object? sender, UnreferencedObjectEventArgs e);
+    public delegate void UnreferencedObjectEventHandler(
+        object? sender,
+        UnreferencedObjectEventArgs e
+    );
 
     public class UnreferencedObjectEventArgs : EventArgs
     {

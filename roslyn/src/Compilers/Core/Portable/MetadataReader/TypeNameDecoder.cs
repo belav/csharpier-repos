@@ -19,7 +19,10 @@ namespace Microsoft.CodeAnalysis
         private readonly SymbolFactory<ModuleSymbol, TypeSymbol> _factory;
         protected readonly ModuleSymbol moduleSymbol;
 
-        internal TypeNameDecoder(SymbolFactory<ModuleSymbol, TypeSymbol> factory, ModuleSymbol moduleSymbol)
+        internal TypeNameDecoder(
+            SymbolFactory<ModuleSymbol, TypeSymbol> factory,
+            ModuleSymbol moduleSymbol
+        )
         {
             _factory = factory;
             this.moduleSymbol = moduleSymbol;
@@ -30,13 +33,22 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Lookup a type defined in this module.
         /// </summary>
-        protected abstract TypeSymbol LookupTopLevelTypeDefSymbol(ref MetadataTypeName emittedName, out bool isNoPiaLocalType);
+        protected abstract TypeSymbol LookupTopLevelTypeDefSymbol(
+            ref MetadataTypeName emittedName,
+            out bool isNoPiaLocalType
+        );
 
         /// <summary>
         /// Lookup a type defined in referenced assembly.
         /// </summary>
-        protected abstract TypeSymbol LookupTopLevelTypeDefSymbol(int referencedAssemblyIndex, ref MetadataTypeName emittedName);
-        protected abstract TypeSymbol LookupNestedTypeDefSymbol(TypeSymbol container, ref MetadataTypeName emittedName);
+        protected abstract TypeSymbol LookupTopLevelTypeDefSymbol(
+            int referencedAssemblyIndex,
+            ref MetadataTypeName emittedName
+        );
+        protected abstract TypeSymbol LookupNestedTypeDefSymbol(
+            TypeSymbol container,
+            ref MetadataTypeName emittedName
+        );
 
         /// <summary>
         /// Given the identity of an assembly referenced by this module, finds
@@ -57,29 +69,57 @@ namespace Microsoft.CodeAnalysis
             return GetTypeSymbol(fullName, out refersToNoPiaLocalType);
         }
 
-        protected TypeSymbol GetUnsupportedMetadataTypeSymbol(BadImageFormatException exception = null)
+        protected TypeSymbol GetUnsupportedMetadataTypeSymbol(
+            BadImageFormatException exception = null
+        )
         {
             return _factory.GetUnsupportedMetadataTypeSymbol(this.moduleSymbol, exception);
         }
 
-        protected TypeSymbol GetSZArrayTypeSymbol(TypeSymbol elementType, ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers)
+        protected TypeSymbol GetSZArrayTypeSymbol(
+            TypeSymbol elementType,
+            ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers
+        )
         {
             return _factory.GetSZArrayTypeSymbol(this.moduleSymbol, elementType, customModifiers);
         }
 
-        protected TypeSymbol GetMDArrayTypeSymbol(int rank, TypeSymbol elementType, ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers, ImmutableArray<int> sizes, ImmutableArray<int> lowerBounds)
+        protected TypeSymbol GetMDArrayTypeSymbol(
+            int rank,
+            TypeSymbol elementType,
+            ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers,
+            ImmutableArray<int> sizes,
+            ImmutableArray<int> lowerBounds
+        )
         {
-            return _factory.GetMDArrayTypeSymbol(this.moduleSymbol, rank, elementType, customModifiers, sizes, lowerBounds);
+            return _factory.GetMDArrayTypeSymbol(
+                this.moduleSymbol,
+                rank,
+                elementType,
+                customModifiers,
+                sizes,
+                lowerBounds
+            );
         }
 
-        protected TypeSymbol MakePointerTypeSymbol(TypeSymbol type, ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers)
+        protected TypeSymbol MakePointerTypeSymbol(
+            TypeSymbol type,
+            ImmutableArray<ModifierInfo<TypeSymbol>> customModifiers
+        )
         {
             return _factory.MakePointerTypeSymbol(this.moduleSymbol, type, customModifiers);
         }
 
-        protected TypeSymbol MakeFunctionPointerTypeSymbol(Cci.CallingConvention callingConvention, ImmutableArray<ParamInfo<TypeSymbol>> retAndParamInfos)
+        protected TypeSymbol MakeFunctionPointerTypeSymbol(
+            Cci.CallingConvention callingConvention,
+            ImmutableArray<ParamInfo<TypeSymbol>> retAndParamInfos
+        )
         {
-            return _factory.MakeFunctionPointerTypeSymbol(this.moduleSymbol, callingConvention, retAndParamInfos);
+            return _factory.MakeFunctionPointerTypeSymbol(
+                this.moduleSymbol,
+                callingConvention,
+                retAndParamInfos
+            );
         }
 
         protected TypeSymbol GetSpecialType(SpecialType specialType)
@@ -107,21 +147,35 @@ namespace Microsoft.CodeAnalysis
             return _factory.MakeUnboundIfGeneric(this.moduleSymbol, type);
         }
 
-        protected TypeSymbol SubstituteTypeParameters(TypeSymbol genericType, ImmutableArray<KeyValuePair<TypeSymbol, ImmutableArray<ModifierInfo<TypeSymbol>>>> arguments, ImmutableArray<bool> refersToNoPiaLocalType)
+        protected TypeSymbol SubstituteTypeParameters(
+            TypeSymbol genericType,
+            ImmutableArray<
+                KeyValuePair<TypeSymbol, ImmutableArray<ModifierInfo<TypeSymbol>>>
+            > arguments,
+            ImmutableArray<bool> refersToNoPiaLocalType
+        )
         {
-            return _factory.SubstituteTypeParameters(this.moduleSymbol, genericType, arguments, refersToNoPiaLocalType);
+            return _factory.SubstituteTypeParameters(
+                this.moduleSymbol,
+                genericType,
+                arguments,
+                refersToNoPiaLocalType
+            );
         }
 
-        internal TypeSymbol GetTypeSymbol(MetadataHelpers.AssemblyQualifiedTypeName fullName, out bool refersToNoPiaLocalType)
+        internal TypeSymbol GetTypeSymbol(
+            MetadataHelpers.AssemblyQualifiedTypeName fullName,
+            out bool refersToNoPiaLocalType
+        )
         {
             //
             // Section 23.3 (Custom Attributes) of CLI Spec Partition II:
             //
-            // If the parameter kind is System.Type, (also, the middle line in above diagram) its value is 
-            // stored as a SerString (as defined in the previous paragraph), representing its canonical name. 
-            // The canonical name is its full type name, followed optionally by the assembly where it is defined, 
-            // its version, culture and public-key-token. If the assembly name is omitted, the CLI looks first 
-            // in the current assembly, and then in the system library (mscorlib); in these two special cases, 
+            // If the parameter kind is System.Type, (also, the middle line in above diagram) its value is
+            // stored as a SerString (as defined in the previous paragraph), representing its canonical name.
+            // The canonical name is its full type name, followed optionally by the assembly where it is defined,
+            // its version, culture and public-key-token. If the assembly name is omitted, the CLI looks first
+            // in the current assembly, and then in the system library (mscorlib); in these two special cases,
             // it is permitted to omit the assembly-name, version, culture and public-key-token.
 
             int referencedAssemblyIndex;
@@ -138,7 +192,7 @@ namespace Microsoft.CodeAnalysis
                 referencedAssemblyIndex = GetIndexOfReferencedAssembly(identity);
                 if (referencedAssemblyIndex == -1)
                 {
-                    // In rare cases (e.g. assemblies emitted by Reflection.Emit) the identity 
+                    // In rare cases (e.g. assemblies emitted by Reflection.Emit) the identity
                     // might be the identity of the containing assembly. The metadata spec doesn't disallow this.
                     if (!this.IsContainingAssembly(identity))
                     {
@@ -156,7 +210,11 @@ namespace Microsoft.CodeAnalysis
             // Find the top level type
             Debug.Assert(MetadataHelpers.IsValidMetadataIdentifier(fullName.TopLevelType));
             var mdName = MetadataTypeName.FromFullName(fullName.TopLevelType);
-            TypeSymbol container = LookupTopLevelTypeDefSymbol(ref mdName, referencedAssemblyIndex, out refersToNoPiaLocalType);
+            TypeSymbol container = LookupTopLevelTypeDefSymbol(
+                ref mdName,
+                referencedAssemblyIndex,
+                out refersToNoPiaLocalType
+            );
 
             // Process any nested types
             if (fullName.NestedTypes != null)
@@ -170,7 +228,9 @@ namespace Microsoft.CodeAnalysis
 
                 for (int i = 0; i < fullName.NestedTypes.Length; i++)
                 {
-                    Debug.Assert(MetadataHelpers.IsValidMetadataIdentifier(fullName.NestedTypes[i]));
+                    Debug.Assert(
+                        MetadataHelpers.IsValidMetadataIdentifier(fullName.NestedTypes[i])
+                    );
                     mdName = MetadataTypeName.FromTypeName(fullName.NestedTypes[i]);
                     // Find nested type in the container
                     container = LookupNestedTypeDefSymbol(container, ref mdName);
@@ -181,8 +241,15 @@ namespace Microsoft.CodeAnalysis
             if (fullName.TypeArguments != null)
             {
                 ImmutableArray<bool> argumentRefersToNoPiaLocalType;
-                var typeArguments = ResolveTypeArguments(fullName.TypeArguments, out argumentRefersToNoPiaLocalType);
-                container = SubstituteTypeParameters(container, typeArguments, argumentRefersToNoPiaLocalType);
+                var typeArguments = ResolveTypeArguments(
+                    fullName.TypeArguments,
+                    out argumentRefersToNoPiaLocalType
+                );
+                container = SubstituteTypeParameters(
+                    container,
+                    typeArguments,
+                    argumentRefersToNoPiaLocalType
+                );
 
                 foreach (bool flag in argumentRefersToNoPiaLocalType)
                 {
@@ -200,7 +267,10 @@ namespace Microsoft.CodeAnalysis
 
             for (int i = 0; i < fullName.PointerCount; i++)
             {
-                container = MakePointerTypeSymbol(container, ImmutableArray<ModifierInfo<TypeSymbol>>.Empty);
+                container = MakePointerTypeSymbol(
+                    container,
+                    ImmutableArray<ModifierInfo<TypeSymbol>>.Empty
+                );
             }
 
             // Process any array type ranks
@@ -209,25 +279,47 @@ namespace Microsoft.CodeAnalysis
                 foreach (int rank in fullName.ArrayRanks)
                 {
                     Debug.Assert(rank >= 0);
-                    container = rank == 0 ?
-                                GetSZArrayTypeSymbol(container, default(ImmutableArray<ModifierInfo<TypeSymbol>>)) :
-                                GetMDArrayTypeSymbol(rank, container, default(ImmutableArray<ModifierInfo<TypeSymbol>>), ImmutableArray<int>.Empty, default(ImmutableArray<int>));
+                    container =
+                        rank == 0
+                            ? GetSZArrayTypeSymbol(
+                                container,
+                                default(ImmutableArray<ModifierInfo<TypeSymbol>>)
+                            )
+                            : GetMDArrayTypeSymbol(
+                                rank,
+                                container,
+                                default(ImmutableArray<ModifierInfo<TypeSymbol>>),
+                                ImmutableArray<int>.Empty,
+                                default(ImmutableArray<int>)
+                            );
                 }
             }
 
             return container;
         }
 
-        private ImmutableArray<KeyValuePair<TypeSymbol, ImmutableArray<ModifierInfo<TypeSymbol>>>> ResolveTypeArguments(MetadataHelpers.AssemblyQualifiedTypeName[] arguments, out ImmutableArray<bool> refersToNoPiaLocalType)
+        private ImmutableArray<
+            KeyValuePair<TypeSymbol, ImmutableArray<ModifierInfo<TypeSymbol>>>
+        > ResolveTypeArguments(
+            MetadataHelpers.AssemblyQualifiedTypeName[] arguments,
+            out ImmutableArray<bool> refersToNoPiaLocalType
+        )
         {
             int count = arguments.Length;
-            var typeArgumentsBuilder = ArrayBuilder<KeyValuePair<TypeSymbol, ImmutableArray<ModifierInfo<TypeSymbol>>>>.GetInstance(count);
+            var typeArgumentsBuilder = ArrayBuilder<
+                KeyValuePair<TypeSymbol, ImmutableArray<ModifierInfo<TypeSymbol>>>
+            >.GetInstance(count);
             var refersToNoPiaBuilder = ArrayBuilder<bool>.GetInstance(count);
 
             foreach (var argument in arguments)
             {
                 bool refersToNoPia;
-                typeArgumentsBuilder.Add(new KeyValuePair<TypeSymbol, ImmutableArray<ModifierInfo<TypeSymbol>>>(GetTypeSymbol(argument, out refersToNoPia), ImmutableArray<ModifierInfo<TypeSymbol>>.Empty));
+                typeArgumentsBuilder.Add(
+                    new KeyValuePair<TypeSymbol, ImmutableArray<ModifierInfo<TypeSymbol>>>(
+                        GetTypeSymbol(argument, out refersToNoPia),
+                        ImmutableArray<ModifierInfo<TypeSymbol>>.Empty
+                    )
+                );
                 refersToNoPiaBuilder.Add(refersToNoPia);
             }
 
@@ -235,7 +327,11 @@ namespace Microsoft.CodeAnalysis
             return typeArgumentsBuilder.ToImmutableAndFree();
         }
 
-        private TypeSymbol LookupTopLevelTypeDefSymbol(ref MetadataTypeName emittedName, int referencedAssemblyIndex, out bool isNoPiaLocalType)
+        private TypeSymbol LookupTopLevelTypeDefSymbol(
+            ref MetadataTypeName emittedName,
+            int referencedAssemblyIndex,
+            out bool isNoPiaLocalType
+        )
         {
             TypeSymbol container;
 

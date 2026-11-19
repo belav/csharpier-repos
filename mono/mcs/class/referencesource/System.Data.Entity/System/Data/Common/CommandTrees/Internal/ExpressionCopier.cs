@@ -34,9 +34,15 @@ namespace System.Data.Common.CommandTrees.Internal
             _perspective = new ModelPerspective(targetWorkspace);
         }
 
-        // 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal static DbExpression BindToWorkspace(DbExpression expression, MetadataWorkspace targetWorkspace)
+        //
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Performance",
+            "CA1811:AvoidUncalledPrivateCode"
+        )]
+        internal static DbExpression BindToWorkspace(
+            DbExpression expression,
+            MetadataWorkspace targetWorkspace
+        )
         {
             Debug.Assert(expression != null, "expression is null");
 
@@ -47,20 +53,37 @@ namespace System.Data.Common.CommandTrees.Internal
         protected override EntitySetBase VisitEntitySet(EntitySetBase entitySet)
         {
             EntityContainer container;
-            if (_metadata.TryGetEntityContainer(entitySet.EntityContainer.Name, entitySet.EntityContainer.DataSpace, out container))
+            if (
+                _metadata.TryGetEntityContainer(
+                    entitySet.EntityContainer.Name,
+                    entitySet.EntityContainer.DataSpace,
+                    out container
+                )
+            )
             {
                 EntitySetBase extent = null;
-                if (container.BaseEntitySets.TryGetValue(entitySet.Name, false, out extent) &&
-                    extent != null &&
-                    entitySet.BuiltInTypeKind == extent.BuiltInTypeKind) // EntitySet -> EntitySet, AssociationSet -> AssociationSet, etc
+                if (
+                    container.BaseEntitySets.TryGetValue(entitySet.Name, false, out extent)
+                    && extent != null
+                    && entitySet.BuiltInTypeKind == extent.BuiltInTypeKind
+                ) // EntitySet -> EntitySet, AssociationSet -> AssociationSet, etc
                 {
                     return extent;
                 }
 
-                throw EntityUtil.Argument(System.Data.Entity.Strings.Cqt_Copier_EntitySetNotFound(entitySet.EntityContainer.Name, entitySet.Name));
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.Cqt_Copier_EntitySetNotFound(
+                        entitySet.EntityContainer.Name,
+                        entitySet.Name
+                    )
+                );
             }
 
-            throw EntityUtil.Argument(System.Data.Entity.Strings.Cqt_Copier_EntityContainerNotFound(entitySet.EntityContainer.Name));
+            throw EntityUtil.Argument(
+                System.Data.Entity.Strings.Cqt_Copier_EntityContainerNotFound(
+                    entitySet.EntityContainer.Name
+                )
+            );
         }
 
         protected override EdmFunction VisitFunction(EdmFunction function)
@@ -75,13 +98,18 @@ namespace System.Data.Common.CommandTrees.Internal
             if (DataSpace.SSpace == function.DataSpace)
             {
                 EdmFunction foundFunc = null;
-                if (_metadata.TryGetFunction(function.Name,
-                                             function.NamespaceName,
-                                             paramTypes.ToArray(),
-                                             false /* ignoreCase */,
-                                             function.DataSpace,
-                                             out foundFunc) &&
-                    foundFunc != null)
+                if (
+                    _metadata.TryGetFunction(
+                        function.Name,
+                        function.NamespaceName,
+                        paramTypes.ToArray(),
+                        false /* ignoreCase */
+                        ,
+                        function.DataSpace,
+                        out foundFunc
+                    )
+                    && foundFunc != null
+                )
                 {
                     return foundFunc;
                 }
@@ -90,21 +118,39 @@ namespace System.Data.Common.CommandTrees.Internal
             {
                 // Find the function or function import.
                 IList<EdmFunction> candidateFunctions;
-                if (_perspective.TryGetFunctionByName(function.NamespaceName, function.Name, /*ignoreCase:*/ false, out candidateFunctions))
+                if (
+                    _perspective.TryGetFunctionByName(
+                        function.NamespaceName,
+                        function.Name, /*ignoreCase:*/
+                        false,
+                        out candidateFunctions
+                    )
+                )
                 {
-                    Debug.Assert(null != candidateFunctions && candidateFunctions.Count > 0, "Perspective.TryGetFunctionByName returned true with null/empty function result list");
+                    Debug.Assert(
+                        null != candidateFunctions && candidateFunctions.Count > 0,
+                        "Perspective.TryGetFunctionByName returned true with null/empty function result list"
+                    );
 
                     bool isAmbiguous;
-                    EdmFunction retFunc = FunctionOverloadResolver.ResolveFunctionOverloads(candidateFunctions, paramTypes, /*isGroupAggregateFunction:*/ false, out isAmbiguous);
-                    if (!isAmbiguous &&
-                        retFunc != null)
+                    EdmFunction retFunc = FunctionOverloadResolver.ResolveFunctionOverloads(
+                        candidateFunctions,
+                        paramTypes, /*isGroupAggregateFunction:*/
+                        false,
+                        out isAmbiguous
+                    );
+                    if (!isAmbiguous && retFunc != null)
                     {
                         return retFunc;
                     }
                 }
             }
 
-            throw EntityUtil.Argument(System.Data.Entity.Strings.Cqt_Copier_FunctionNotFound(TypeHelpers.GetFullName(function)));
+            throw EntityUtil.Argument(
+                System.Data.Entity.Strings.Cqt_Copier_FunctionNotFound(
+                    TypeHelpers.GetFullName(function)
+                )
+            );
         }
 
         protected override EdmType VisitType(EdmType type)
@@ -142,31 +188,49 @@ namespace System.Data.Common.CommandTrees.Internal
                         if (mappedPropInfo == null)
                         {
                             mappedPropInfo = new List<KeyValuePair<string, TypeUsage>>(
-                                                rowType.Properties.Select(
-                                                    prop => new KeyValuePair<string, TypeUsage>(prop.Name, prop.TypeUsage)
-                                                ));
+                                rowType.Properties.Select(prop => new KeyValuePair<
+                                    string,
+                                    TypeUsage
+                                >(prop.Name, prop.TypeUsage))
+                            );
                         }
-                        mappedPropInfo[idx] = new KeyValuePair<string,TypeUsage>(originalProp.Name, mappedPropType);
+                        mappedPropInfo[idx] = new KeyValuePair<string, TypeUsage>(
+                            originalProp.Name,
+                            mappedPropType
+                        );
                     }
                 }
                 if (mappedPropInfo != null)
                 {
-                    IEnumerable<EdmProperty> mappedProps = mappedPropInfo.Select(propInfo => new EdmProperty(propInfo.Key, propInfo.Value));
+                    IEnumerable<EdmProperty> mappedProps = mappedPropInfo.Select(
+                        propInfo => new EdmProperty(propInfo.Key, propInfo.Value)
+                    );
                     retType = new RowType(mappedProps, rowType.InitializerMetadata);
                 }
             }
             else
             {
-                if (!_metadata.TryGetType(type.Name, type.NamespaceName, type.DataSpace, out retType) ||
-                    null == retType)
+                if (
+                    !_metadata.TryGetType(
+                        type.Name,
+                        type.NamespaceName,
+                        type.DataSpace,
+                        out retType
+                    )
+                    || null == retType
+                )
                 {
-                    throw EntityUtil.Argument(System.Data.Entity.Strings.Cqt_Copier_TypeNotFound(TypeHelpers.GetFullName(type)));
+                    throw EntityUtil.Argument(
+                        System.Data.Entity.Strings.Cqt_Copier_TypeNotFound(
+                            TypeHelpers.GetFullName(type)
+                        )
+                    );
                 }
             }
 
             return retType;
         }
-                        
+
         protected override TypeUsage VisitTypeUsage(TypeUsage type)
         {
             //
@@ -196,7 +260,12 @@ namespace System.Data.Common.CommandTrees.Internal
             return TypeUsage.Create(retEdmType, facets);
         }
 
-        private bool TryGetMember<TMember>(DbExpression instance, string memberName, out TMember member) where TMember : EdmMember
+        private bool TryGetMember<TMember>(
+            DbExpression instance,
+            string memberName,
+            out TMember member
+        )
+            where TMember : EdmMember
         {
             member = null;
             StructuralType declType = instance.ResultType.EdmType as StructuralType;
@@ -223,9 +292,14 @@ namespace System.Data.Common.CommandTrees.Internal
                 if (Helper.IsRelationshipEndMember(expression.Property))
                 {
                     RelationshipEndMember endMember;
-                    if(!TryGetMember(newInstance, expression.Property.Name, out endMember))
+                    if (!TryGetMember(newInstance, expression.Property.Name, out endMember))
                     {
-                        throw EntityUtil.Argument(System.Data.Entity.Strings.Cqt_Copier_EndNotFound(expression.Property.Name, TypeHelpers.GetFullName(newInstance.ResultType.EdmType)));
+                        throw EntityUtil.Argument(
+                            System.Data.Entity.Strings.Cqt_Copier_EndNotFound(
+                                expression.Property.Name,
+                                TypeHelpers.GetFullName(newInstance.ResultType.EdmType)
+                            )
+                        );
                     }
                     result = DbExpressionBuilder.Property(newInstance, endMember);
                 }
@@ -234,7 +308,12 @@ namespace System.Data.Common.CommandTrees.Internal
                     NavigationProperty navProp;
                     if (!TryGetMember(newInstance, expression.Property.Name, out navProp))
                     {
-                        throw EntityUtil.Argument(System.Data.Entity.Strings.Cqt_Copier_NavPropertyNotFound(expression.Property.Name, TypeHelpers.GetFullName(newInstance.ResultType.EdmType)));
+                        throw EntityUtil.Argument(
+                            System.Data.Entity.Strings.Cqt_Copier_NavPropertyNotFound(
+                                expression.Property.Name,
+                                TypeHelpers.GetFullName(newInstance.ResultType.EdmType)
+                            )
+                        );
                     }
                     result = DbExpressionBuilder.Property(newInstance, navProp);
                 }
@@ -243,7 +322,12 @@ namespace System.Data.Common.CommandTrees.Internal
                     EdmProperty prop;
                     if (!TryGetMember(newInstance, expression.Property.Name, out prop))
                     {
-                        throw EntityUtil.Argument(System.Data.Entity.Strings.Cqt_Copier_PropertyNotFound(expression.Property.Name, TypeHelpers.GetFullName(newInstance.ResultType.EdmType)));
+                        throw EntityUtil.Argument(
+                            System.Data.Entity.Strings.Cqt_Copier_PropertyNotFound(
+                                expression.Property.Name,
+                                TypeHelpers.GetFullName(newInstance.ResultType.EdmType)
+                            )
+                        );
                     }
                     result = DbExpressionBuilder.Property(newInstance, prop);
                 }

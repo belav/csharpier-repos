@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="ObjectDataSourceSelectingEventHandler.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
 
     /// <devdoc>
@@ -13,6 +13,8 @@ namespace System.Web.UI.WebControls {
     /// One of these events is for the SelectCount operation, the other is for
     /// the Select operation.
     /// </devdoc>
-    public delegate void ObjectDataSourceSelectingEventHandler(object sender, ObjectDataSourceSelectingEventArgs e);
+    public delegate void ObjectDataSourceSelectingEventHandler(
+        object sender,
+        ObjectDataSourceSelectingEventArgs e
+    );
 }
-

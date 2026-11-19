@@ -18,16 +18,24 @@ namespace Microsoft.Win32.SystemEventsTests
         {
             SendMessage(MessageId, IntPtr.Zero, IntPtr.Zero);
         }
+
         private void SendReflectedMessage()
         {
             SendMessage(User32.WM_REFLECT + MessageId, IntPtr.Zero, IntPtr.Zero);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoNorServerCore))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoNorServerCore)
+        )]
         public void SignalsEventsAsynchronouslyOnMessage()
         {
             var signal = new AutoResetEvent(false);
-            EventHandler signaledHandler = (o, e) => { Assert.NotNull(o); signal.Set(); };
+            EventHandler signaledHandler = (o, e) =>
+            {
+                Assert.NotNull(o);
+                signal.Set();
+            };
 
             Event += signaledHandler;
 
@@ -43,11 +51,18 @@ namespace Microsoft.Win32.SystemEventsTests
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoNorServerCore))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoNorServerCore)
+        )]
         public void SignalsEventsSynchronouslyOnReflectedMessage()
         {
             bool signal = false;
-            EventHandler signaledHandler = (o, e) => { Assert.NotNull(o); signal = true; };
+            EventHandler signaledHandler = (o, e) =>
+            {
+                Assert.NotNull(o);
+                signal = true;
+            };
 
             Event += signaledHandler;
 

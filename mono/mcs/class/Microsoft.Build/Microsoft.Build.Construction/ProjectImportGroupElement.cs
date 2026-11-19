@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,32 +28,46 @@
 
 using System;
 using System.Collections.Generic;
-using Microsoft.Build.Internal;
 using System.Xml;
+using Microsoft.Build.Internal;
 
 namespace Microsoft.Build.Construction
 {
-        [System.Diagnostics.DebuggerDisplayAttribute ("#Imports={Count} Condition={Condition} Label={Label}")]
-        public class ProjectImportGroupElement : ProjectElementContainer
+    [System.Diagnostics.DebuggerDisplayAttribute(
+        "#Imports={Count} Condition={Condition} Label={Label}"
+    )]
+    public class ProjectImportGroupElement : ProjectElementContainer
+    {
+        internal ProjectImportGroupElement(ProjectRootElement containingProject)
         {
-                internal ProjectImportGroupElement (ProjectRootElement containingProject)
-                {
-                        ContainingProject = containingProject;
-                }
-                public ICollection<ProjectImportElement> Imports {
-                        get { return new CollectionFromEnumerable<ProjectImportElement> (
-                                new FilteredEnumerable<ProjectImportElement> (Children)); }
-                }
-                public ProjectImportElement AddImport (string project)
-                {
-                        var import = ContainingProject.CreateImportElement (project);
-                        AppendChild (import);
-                        return import;
-                }
-                internal override string XmlName { get { return "ImportGroup"; } }
-                internal override ProjectElement LoadChildElement (XmlReader reader)
-                {
-                        return AddImport (null);
-                }
+            ContainingProject = containingProject;
         }
+
+        public ICollection<ProjectImportElement> Imports
+        {
+            get
+            {
+                return new CollectionFromEnumerable<ProjectImportElement>(
+                    new FilteredEnumerable<ProjectImportElement>(Children)
+                );
+            }
+        }
+
+        public ProjectImportElement AddImport(string project)
+        {
+            var import = ContainingProject.CreateImportElement(project);
+            AppendChild(import);
+            return import;
+        }
+
+        internal override string XmlName
+        {
+            get { return "ImportGroup"; }
+        }
+
+        internal override ProjectElement LoadChildElement(XmlReader reader)
+        {
+            return AddImport(null);
+        }
+    }
 }

@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
     [Export(typeof(IWpfTextViewCreationListener))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [TextViewRole(PredefinedTextViewRoles.Document)]
-    internal class InlineDiagnosticsAdornmentManagerProvider : AbstractAdornmentManagerProvider<InlineDiagnosticsTag>
+    internal class InlineDiagnosticsAdornmentManagerProvider
+        : AbstractAdornmentManagerProvider<InlineDiagnosticsTag>
     {
         private const string LayerName = "RoslynInlineDiagnostics";
         private readonly IClassificationFormatMapService _classificationFormatMapService;
@@ -28,7 +29,10 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
         [Export]
         [Name(LayerName)]
         [ContentType(ContentTypeNames.RoslynContentType)]
-        [Order(After = PredefinedAdornmentLayers.Selection, Before = PredefinedAdornmentLayers.Squiggle)]
+        [Order(
+            After = PredefinedAdornmentLayers.Selection,
+            Before = PredefinedAdornmentLayers.Squiggle
+        )]
         internal readonly AdornmentLayerDefinition InlineDiagnosticsLayer;
 
         [ImportingConstructor]
@@ -41,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
             IClassificationFormatMapService classificationFormatMapService,
             IClassificationTypeRegistryService classificationTypeRegistryService,
             IGlobalOptionService globalOptions,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
             : base(threadingContext, tagAggregatorFactoryService, globalOptions, listenerProvider)
         {
             _classificationFormatMapService = classificationFormatMapService;
@@ -56,8 +61,15 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
         {
             // the manager keeps itself alive by listening to text view events.
             _ = new InlineDiagnosticsAdornmentManager(
-                ThreadingContext, textView, TagAggregatorFactoryService, AsyncListener,
-                AdornmentLayerName, _classificationFormatMapService, _classificationTypeRegistryService, GlobalOptions);
+                ThreadingContext,
+                textView,
+                TagAggregatorFactoryService,
+                AsyncListener,
+                AdornmentLayerName,
+                _classificationFormatMapService,
+                _classificationTypeRegistryService,
+                GlobalOptions
+            );
         }
     }
 }

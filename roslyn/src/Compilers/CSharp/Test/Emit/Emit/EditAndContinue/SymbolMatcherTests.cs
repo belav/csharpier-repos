@@ -29,33 +29,47 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         {
             var compilation = CreateCompilation(source, options: TestOptions.DebugDll);
             var reference = compilation.EmitToImageReference();
-            return (PEAssemblySymbol)CreateCompilation("", new[] { reference }).GetReferencedAssemblySymbol(reference);
+            return (PEAssemblySymbol)
+                CreateCompilation("", new[] { reference }).GetReferencedAssemblySymbol(reference);
         }
 
-        private static CSharpSymbolMatcher CreateMatcher(CSharpCompilation fromCompilation, CSharpCompilation toCompilation)
-            => new CSharpSymbolMatcher(
+        private static CSharpSymbolMatcher CreateMatcher(
+            CSharpCompilation fromCompilation,
+            CSharpCompilation toCompilation
+        ) =>
+            new CSharpSymbolMatcher(
                 fromCompilation.SourceAssembly,
                 toCompilation.SourceAssembly,
                 SynthesizedTypeMaps.Empty,
                 otherSynthesizedMembers: null,
-                otherDeletedMembers: null);
+                otherDeletedMembers: null
+            );
 
-        private static CSharpSymbolMatcher CreateMatcher(CSharpCompilation fromCompilation, PEAssemblySymbol peAssemblySymbol)
-            => new CSharpSymbolMatcher(
+        private static CSharpSymbolMatcher CreateMatcher(
+            CSharpCompilation fromCompilation,
+            PEAssemblySymbol peAssemblySymbol
+        ) =>
+            new CSharpSymbolMatcher(
                 SynthesizedTypeMaps.Empty,
                 fromCompilation.SourceAssembly,
-                peAssemblySymbol);
+                peAssemblySymbol
+            );
 
-        private static IEnumerable<string> Inspect(ImmutableSegmentedDictionary<AnonymousDelegateWithIndexedNamePartialKey, ImmutableArray<AnonymousTypeValue>> anonymousDelegatesWithIndexedNames)
-            => from entry in anonymousDelegatesWithIndexedNames
-               from value in entry.Value
-               select $"({entry.Key.GenericArity},{entry.Key.ParameterCount}): {value.Type}";
+        private static IEnumerable<string> Inspect(
+            ImmutableSegmentedDictionary<
+                AnonymousDelegateWithIndexedNamePartialKey,
+                ImmutableArray<AnonymousTypeValue>
+            > anonymousDelegatesWithIndexedNames
+        ) =>
+            from entry in anonymousDelegatesWithIndexedNames
+            from value in entry.Value
+            select $"({entry.Key.GenericArity},{entry.Key.ParameterCount}): {value.Type}";
 
         [Fact]
         public void ConcurrentAccess()
         {
             var source =
-@"class A
+                @"class A
 {
     B F;
     D P { get; set; }
@@ -105,7 +119,11 @@ class B
             }
         }
 
-        private static void MatchAll(CSharpSymbolMatcher matcher, ImmutableArray<Symbol> members, int startAt)
+        private static void MatchAll(
+            CSharpSymbolMatcher matcher,
+            ImmutableArray<Symbol> members,
+            int startAt
+        )
         {
             int n = members.Length;
             for (int i = 0; i < n; i++)
@@ -120,7 +138,7 @@ class B
         public void TypeArguments()
         {
             const string source =
-@"class A<T>
+                @"class A<T>
 {
     class B<U>
     {
@@ -154,7 +172,7 @@ class B
         public void Constraints()
         {
             const string source =
-@"interface I<T> where T : I<T>
+                @"interface I<T> where T : I<T>
 {
 }
 class C
@@ -176,30 +194,59 @@ class C
         public void CustomModifiers()
         {
             var ilSource =
-@".class public abstract A
+                @".class public abstract A
 {
   .method public hidebysig specialname rtspecialname instance void .ctor() { ret }
   .method public abstract virtual instance object modopt(A) [] F(int32 modopt(object) *p) { }
 }";
             var metadataRef = CompileIL(ilSource);
             var source =
-@"unsafe class B : A
+                @"unsafe class B : A
 {
     public override object[] F(int* p) { return null; }
 }";
-            var compilation0 = CreateCompilation(source, options: TestOptions.DebugDll, references: new[] { metadataRef });
+            var compilation0 = CreateCompilation(
+                source,
+                options: TestOptions.DebugDll,
+                references: new[] { metadataRef }
+            );
             var compilation1 = compilation0.WithSource(source);
 
             var member1 = compilation1.GetMember<MethodSymbol>("B.F");
-            Assert.Equal(1, ((PointerTypeSymbol)member1.Parameters[0].Type).PointedAtTypeWithAnnotations.CustomModifiers.Length);
-            Assert.Equal(1, ((ArrayTypeSymbol)member1.ReturnType).ElementTypeWithAnnotations.CustomModifiers.Length);
+            Assert.Equal(
+                1,
+                ((PointerTypeSymbol)member1.Parameters[0].Type)
+                    .PointedAtTypeWithAnnotations
+                    .CustomModifiers
+                    .Length
+            );
+            Assert.Equal(
+                1,
+                ((ArrayTypeSymbol)member1.ReturnType)
+                    .ElementTypeWithAnnotations
+                    .CustomModifiers
+                    .Length
+            );
 
             var matcher = CreateMatcher(compilation1, compilation0);
 
-            var other = (MethodSymbol)matcher.MapDefinition(member1.GetCciAdapter()).GetInternalSymbol();
+            var other = (MethodSymbol)
+                matcher.MapDefinition(member1.GetCciAdapter()).GetInternalSymbol();
             Assert.NotNull(other);
-            Assert.Equal(1, ((PointerTypeSymbol)other.Parameters[0].Type).PointedAtTypeWithAnnotations.CustomModifiers.Length);
-            Assert.Equal(1, ((ArrayTypeSymbol)other.ReturnType).ElementTypeWithAnnotations.CustomModifiers.Length);
+            Assert.Equal(
+                1,
+                ((PointerTypeSymbol)other.Parameters[0].Type)
+                    .PointedAtTypeWithAnnotations
+                    .CustomModifiers
+                    .Length
+            );
+            Assert.Equal(
+                1,
+                ((ArrayTypeSymbol)other.ReturnType)
+                    .ElementTypeWithAnnotations
+                    .CustomModifiers
+                    .Length
+            );
         }
 
         [Fact]
@@ -208,7 +255,8 @@ class C
             // The parameter is emitted as
             // int32& modreq([mscorlib]System.Runtime.InteropServices.InAttribute)
 
-            var source0 = @"
+            var source0 =
+                @"
 abstract class C
 {  
     // matching
@@ -218,7 +266,8 @@ abstract class C
     // non-matching
     public void H(in int x) => throw null;
 }";
-            var source1 = @"
+            var source1 =
+                @"
 abstract class C
 {
     // matching
@@ -239,8 +288,14 @@ abstract class C
             var g1 = compilation1.GetMember<MethodSymbol>("C.G");
             var h1 = compilation1.GetMember<MethodSymbol>("C.H");
 
-            Assert.Same(f0, (MethodSymbol)matcher.MapDefinition(f1.GetCciAdapter()).GetInternalSymbol());
-            Assert.Same(g0, (MethodSymbol)matcher.MapDefinition(g1.GetCciAdapter()).GetInternalSymbol());
+            Assert.Same(
+                f0,
+                (MethodSymbol)matcher.MapDefinition(f1.GetCciAdapter()).GetInternalSymbol()
+            );
+            Assert.Same(
+                g0,
+                (MethodSymbol)matcher.MapDefinition(g1.GetCciAdapter()).GetInternalSymbol()
+            );
             Assert.Null(matcher.MapDefinition(h1.GetCciAdapter()));
         }
 
@@ -250,7 +305,8 @@ abstract class C
             // The parameter is emitted as
             // int32& modreq([mscorlib]System.Runtime.InteropServices.InAttribute)
 
-            var source0 = @"
+            var source0 =
+                @"
 abstract class C
 {  
     // matching
@@ -260,7 +316,8 @@ abstract class C
     // non-matching
     public void H(in int x) => throw null;
 }";
-            var source1 = @"
+            var source1 =
+                @"
 abstract class C
 {
     // matching
@@ -273,39 +330,66 @@ abstract class C
 
             var peAssemblySymbol = CreatePEAssemblySymbol(source0);
 
-            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll).WithSource(source1);
+            var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll)
+                .WithSource(source1);
 
             var matcher = CreateMatcher(compilation1, peAssemblySymbol);
 
-            var f0 = peAssemblySymbol.GlobalNamespace.GetMember<NamedTypeSymbol>("C").GetMember("F");
-            var g0 = peAssemblySymbol.GlobalNamespace.GetMember<NamedTypeSymbol>("C").GetMember("G");
+            var f0 = peAssemblySymbol
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                .GetMember("F");
+            var g0 = peAssemblySymbol
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                .GetMember("G");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
             var g1 = compilation1.GetMember<MethodSymbol>("C.G");
             var h1 = compilation1.GetMember<MethodSymbol>("C.H");
 
-            Assert.Equal(f0, (MethodSymbol)matcher.MapDefinition(f1.GetCciAdapter()).GetInternalSymbol());
-            Assert.Equal(g0, (MethodSymbol)matcher.MapDefinition(g1.GetCciAdapter()).GetInternalSymbol());
+            Assert.Equal(
+                f0,
+                (MethodSymbol)matcher.MapDefinition(f1.GetCciAdapter()).GetInternalSymbol()
+            );
+            Assert.Equal(
+                g0,
+                (MethodSymbol)matcher.MapDefinition(g1.GetCciAdapter()).GetInternalSymbol()
+            );
             Assert.Null(matcher.MapDefinition(h1.GetCciAdapter()));
         }
 
         [ConditionalFact(typeof(DesktopOnly))]
         public void VaryingCompilationReferences()
         {
-            string libSource = @"
+            string libSource =
+                @"
 public class D { }
 ";
 
-            string source = @"
+            string source =
+                @"
 public class C
 {
     public void F(D a) {}
 }
 ";
-            var lib0 = CreateCompilation(libSource, options: TestOptions.DebugDll, assemblyName: "Lib");
-            var lib1 = CreateCompilation(libSource, options: TestOptions.DebugDll, assemblyName: "Lib");
+            var lib0 = CreateCompilation(
+                libSource,
+                options: TestOptions.DebugDll,
+                assemblyName: "Lib"
+            );
+            var lib1 = CreateCompilation(
+                libSource,
+                options: TestOptions.DebugDll,
+                assemblyName: "Lib"
+            );
 
-            var compilation0 = CreateCompilation(source, new[] { lib0.ToMetadataReference() }, options: TestOptions.DebugDll);
-            var compilation1 = compilation0.WithSource(source).WithReferences(MscorlibRef, lib1.ToMetadataReference());
+            var compilation0 = CreateCompilation(
+                source,
+                new[] { lib0.ToMetadataReference() },
+                options: TestOptions.DebugDll
+            );
+            var compilation1 = compilation0
+                .WithSource(source)
+                .WithReferences(MscorlibRef, lib1.ToMetadataReference());
 
             var matcher = CreateMatcher(compilation1, compilation0);
 
@@ -320,7 +404,8 @@ public class C
         [Fact]
         public void PreviousType_ArrayType()
         {
-            var source0 = @"
+            var source0 =
+                @"
 class C
 {  
     static void M()
@@ -329,7 +414,8 @@ class C
     }
     class D {}
 }";
-            var source1 = @"
+            var source1 =
+                @"
 class C
 {
     static void M()
@@ -352,7 +438,8 @@ class C
         [Fact]
         public void NoPreviousType_ArrayType()
         {
-            var source0 = @"
+            var source0 =
+                @"
 class C
 {  
     static void M()
@@ -360,7 +447,8 @@ class C
         int x = 0;
     }
 }";
-            var source1 = @"
+            var source1 =
+                @"
 class C
 {
     static void M()
@@ -384,7 +472,8 @@ class C
         [Fact]
         public void NoPreviousType_PointerType()
         {
-            var source0 = @"
+            var source0 =
+                @"
 class C
 {  
     static void M()
@@ -392,7 +481,8 @@ class C
         int x = 0;
     }
 }";
-            var source1 = @"
+            var source1 =
+                @"
 class C
 {
     static unsafe void M()
@@ -416,7 +506,8 @@ class C
         [Fact]
         public void NoPreviousType_GenericType()
         {
-            var source0 = @"
+            var source0 =
+                @"
 using System.Collections.Generic;
 class C
 {  
@@ -425,7 +516,8 @@ class C
         int x = 0;
     }
 }";
-            var source1 = @"
+            var source1 =
+                @"
 using System.Collections.Generic;
 class C
 {
@@ -449,7 +541,8 @@ class C
         [Fact]
         public void HoistedAnonymousTypes()
         {
-            var source0 = @"
+            var source0 =
+                @"
 using System;
 
 class C
@@ -462,7 +555,8 @@ class C
     }
 }
 ";
-            var source1 = @"
+            var source1 =
+                @"
 using System;
 
 class C
@@ -481,10 +575,31 @@ class C
             var reader0 = peModule0.Module.MetadataReader;
             var decoder0 = new MetadataDecoder(peModule0);
 
-            var synthesizedTypes0 = PEDeltaAssemblyBuilder.GetSynthesizedTypesFromMetadata(reader0, decoder0);
+            var synthesizedTypes0 = PEDeltaAssemblyBuilder.GetSynthesizedTypesFromMetadata(
+                reader0,
+                decoder0
+            );
             var anonymousTypeMap0 = synthesizedTypes0.AnonymousTypes;
-            Assert.Equal("<>f__AnonymousType0", anonymousTypeMap0[new AnonymousTypeKey(ImmutableArray.Create(new AnonymousTypeKeyField("A", isKey: false, ignoreCase: false)))].Name);
-            Assert.Equal("<>f__AnonymousType1", anonymousTypeMap0[new AnonymousTypeKey(ImmutableArray.Create(new AnonymousTypeKeyField("B", isKey: false, ignoreCase: false)))].Name);
+            Assert.Equal(
+                "<>f__AnonymousType0",
+                anonymousTypeMap0[
+                    new AnonymousTypeKey(
+                        ImmutableArray.Create(
+                            new AnonymousTypeKeyField("A", isKey: false, ignoreCase: false)
+                        )
+                    )
+                ].Name
+            );
+            Assert.Equal(
+                "<>f__AnonymousType1",
+                anonymousTypeMap0[
+                    new AnonymousTypeKey(
+                        ImmutableArray.Create(
+                            new AnonymousTypeKeyField("B", isKey: false, ignoreCase: false)
+                        )
+                    )
+                ].Name
+            );
             Assert.Equal(2, anonymousTypeMap0.Count);
 
             var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll);
@@ -497,7 +612,13 @@ class C
             var displayClass = peAssemblyBuilder.GetSynthesizedTypes(c).Single();
             Assert.Equal("<>c__DisplayClass0_0", displayClass.Name);
 
-            var emitContext = new EmitContext(peAssemblyBuilder, null, new DiagnosticBag(), metadataOnly: false, includePrivateMembers: true);
+            var emitContext = new EmitContext(
+                peAssemblyBuilder,
+                null,
+                new DiagnosticBag(),
+                metadataOnly: false,
+                includePrivateMembers: true
+            );
 
             var fields = displayClass.GetFields(emitContext).ToArray();
             var x1 = fields[0];
@@ -505,7 +626,11 @@ class C
             Assert.Equal("x1", x1.Name);
             Assert.Equal("x2", x2.Name);
 
-            var matcher = new CSharpSymbolMatcher(synthesizedTypes0, compilation1.SourceAssembly, peAssemblySymbol0);
+            var matcher = new CSharpSymbolMatcher(
+                synthesizedTypes0,
+                compilation1.SourceAssembly,
+                peAssemblySymbol0
+            );
 
             var mappedX1 = (Cci.IFieldDefinition)matcher.MapDefinition(x1);
             var mappedX2 = (Cci.IFieldDefinition)matcher.MapDefinition(x2);
@@ -517,7 +642,8 @@ class C
         [Fact]
         public void HoistedAnonymousTypes_Complex()
         {
-            var source0 = @"
+            var source0 =
+                @"
 using System;
 
 class C
@@ -530,7 +656,8 @@ class C
     }
 }
 ";
-            var source1 = @"
+            var source1 =
+                @"
 using System;
 
 class C
@@ -545,17 +672,48 @@ class C
             var compilation0 = CreateCompilation(source0, options: TestOptions.DebugDll);
 
             var peRef0 = compilation0.EmitToImageReference();
-            var peAssemblySymbol0 = (PEAssemblySymbol)CreateCompilation("", new[] { peRef0 }).GetReferencedAssemblySymbol(peRef0);
+            var peAssemblySymbol0 = (PEAssemblySymbol)
+                CreateCompilation("", new[] { peRef0 }).GetReferencedAssemblySymbol(peRef0);
             var peModule0 = (PEModuleSymbol)peAssemblySymbol0.Modules[0];
 
             var reader0 = peModule0.Module.MetadataReader;
             var decoder0 = new MetadataDecoder(peModule0);
 
-            var synthesizedTypes0 = PEDeltaAssemblyBuilder.GetSynthesizedTypesFromMetadata(reader0, decoder0);
+            var synthesizedTypes0 = PEDeltaAssemblyBuilder.GetSynthesizedTypesFromMetadata(
+                reader0,
+                decoder0
+            );
             var anonymousTypeMap0 = synthesizedTypes0.AnonymousTypes;
-            Assert.Equal("<>f__AnonymousType0", anonymousTypeMap0[new AnonymousTypeKey(ImmutableArray.Create(new AnonymousTypeKeyField("A", isKey: false, ignoreCase: false)))].Name);
-            Assert.Equal("<>f__AnonymousType1", anonymousTypeMap0[new AnonymousTypeKey(ImmutableArray.Create(new AnonymousTypeKeyField("X", isKey: false, ignoreCase: false)))].Name);
-            Assert.Equal("<>f__AnonymousType2", anonymousTypeMap0[new AnonymousTypeKey(ImmutableArray.Create(new AnonymousTypeKeyField("Y", isKey: false, ignoreCase: false)))].Name);
+            Assert.Equal(
+                "<>f__AnonymousType0",
+                anonymousTypeMap0[
+                    new AnonymousTypeKey(
+                        ImmutableArray.Create(
+                            new AnonymousTypeKeyField("A", isKey: false, ignoreCase: false)
+                        )
+                    )
+                ].Name
+            );
+            Assert.Equal(
+                "<>f__AnonymousType1",
+                anonymousTypeMap0[
+                    new AnonymousTypeKey(
+                        ImmutableArray.Create(
+                            new AnonymousTypeKeyField("X", isKey: false, ignoreCase: false)
+                        )
+                    )
+                ].Name
+            );
+            Assert.Equal(
+                "<>f__AnonymousType2",
+                anonymousTypeMap0[
+                    new AnonymousTypeKey(
+                        ImmutableArray.Create(
+                            new AnonymousTypeKeyField("Y", isKey: false, ignoreCase: false)
+                        )
+                    )
+                ].Name
+            );
             Assert.Equal(3, anonymousTypeMap0.Count);
 
             var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll);
@@ -568,14 +726,24 @@ class C
             var displayClass = peAssemblyBuilder.GetSynthesizedTypes(c).Single();
             Assert.Equal("<>c__DisplayClass0_0", displayClass.Name);
 
-            var emitContext = new EmitContext(peAssemblyBuilder, null, new DiagnosticBag(), metadataOnly: false, includePrivateMembers: true);
+            var emitContext = new EmitContext(
+                peAssemblyBuilder,
+                null,
+                new DiagnosticBag(),
+                metadataOnly: false,
+                includePrivateMembers: true
+            );
 
             var fields = displayClass.GetFields(emitContext).ToArray();
             AssertEx.SetEqual(fields.Select(f => f.Name), new[] { "x1", "x2" });
             var x1 = fields.Where(f => f.Name == "x1").Single();
             var x2 = fields.Where(f => f.Name == "x2").Single();
 
-            var matcher = new CSharpSymbolMatcher(synthesizedTypes0, compilation1.SourceAssembly, peAssemblySymbol0);
+            var matcher = new CSharpSymbolMatcher(
+                synthesizedTypes0,
+                compilation1.SourceAssembly,
+                peAssemblySymbol0
+            );
 
             var mappedX1 = (Cci.IFieldDefinition)matcher.MapDefinition(x1);
             var mappedX2 = (Cci.IFieldDefinition)matcher.MapDefinition(x2);
@@ -587,12 +755,14 @@ class C
         [Fact]
         public void TupleField_TypeChange()
         {
-            var source0 = @"
+            var source0 =
+                @"
 class C
 {  
     public (int a, int b) x;
 }";
-            var source1 = @"
+            var source1 =
+                @"
 class C
 {
     public (int a, bool b) x;
@@ -611,12 +781,14 @@ class C
         [Fact]
         public void TupleField_NameChange()
         {
-            var source0 = @"
+            var source0 =
+                @"
 class C
 {  
     public (int a, int b) x;
 }";
-            var source1 = @"
+            var source1 =
+                @"
 class C
 {
     public (int a, int c) x;
@@ -635,12 +807,14 @@ class C
         [Fact]
         public void TupleMethod_TypeChange()
         {
-            var source0 = @"
+            var source0 =
+                @"
 class C
 {  
     public (int a, int b) X() { return null };
 }";
-            var source1 = @"
+            var source1 =
+                @"
 class C
 {
     public (int a, bool b) X() { return null };
@@ -659,12 +833,14 @@ class C
         [Fact]
         public void TupleMethod_NameChange()
         {
-            var source0 = @"
+            var source0 =
+                @"
 class C
 {  
     public (int a, int b) X() { return null };
 }";
-            var source1 = @"
+            var source1 =
+                @"
 class C
 {
     public (int a, int c) X() { return null };
@@ -683,12 +859,14 @@ class C
         [Fact]
         public void TupleProperty_TypeChange()
         {
-            var source0 = @"
+            var source0 =
+                @"
 class C
 {  
     public (int a, int b) X { get { return null; } };
 }";
-            var source1 = @"
+            var source1 =
+                @"
 class C
 {
     public (int a, bool b) X { get { return null; } };
@@ -707,12 +885,14 @@ class C
         [Fact]
         public void TupleProperty_NameChange()
         {
-            var source0 = @"
+            var source0 =
+                @"
 class C
 {  
     public (int a, int b) X { get { return null; } };
 }";
-            var source1 = @"
+            var source1 =
+                @"
 class C
 {
     public (int a, int c) X { get { return null; } };
@@ -731,12 +911,14 @@ class C
         [Fact]
         public void TupleStructField_TypeChange()
         {
-            var source0 = @"
+            var source0 =
+                @"
 public struct Vector
 {
     public (int x, int y) Coordinates;
 }";
-            var source1 = @"
+            var source1 =
+                @"
 public struct Vector
 {
     public (int x, int y, int z) Coordinates;
@@ -755,12 +937,14 @@ public struct Vector
         [Fact]
         public void TupleStructField_NameChange()
         {
-            var source0 = @"
+            var source0 =
+                @"
 public struct Vector
 {
     public (int x, int y) Coordinates;
 }";
-            var source1 = @"
+            var source1 =
+                @"
 public struct Vector
 {
     public (int x, int z) Coordinates;
@@ -779,12 +963,14 @@ public struct Vector
         [Fact]
         public void TupleDelegate_TypeChange()
         {
-            var source0 = @"
+            var source0 =
+                @"
 public class C
 {
     public delegate (int, int) F();
 }";
-            var source1 = @"
+            var source1 =
+                @"
 public class C
 {
     public delegate (int, bool) F();
@@ -803,12 +989,14 @@ public class C
         [Fact]
         public void TupleDelegate_NameChange()
         {
-            var source0 = @"
+            var source0 =
+                @"
 public class C
 {
     public delegate (int, int) F();
 }";
-            var source1 = @"
+            var source1 =
+                @"
 public class C
 {
     public delegate (int x, int y) F();
@@ -827,7 +1015,8 @@ public class C
         [Fact]
         public void RefReturn_Method()
         {
-            var source0 = @"
+            var source0 =
+                @"
 struct C
 {
     // non-matching
@@ -839,7 +1028,8 @@ struct C
     public ref readonly int S() => throw null;
     public ref int T() => throw null;
 }";
-            var source1 = @"
+            var source1 =
+                @"
 struct C
 {
     // non-matching
@@ -875,7 +1065,8 @@ struct C
         [Fact]
         public void RefReturn_Property()
         {
-            var source0 = @"
+            var source0 =
+                @"
 struct C
 {
     // non-matching
@@ -887,7 +1078,8 @@ struct C
     public ref readonly int S => throw null;
     public ref int T => throw null;
 }";
-            var source1 = @"
+            var source1 =
+                @"
 struct C
 {
     // non-matching
@@ -923,7 +1115,8 @@ struct C
         [Fact]
         public void Property_CompilationVsPE()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface I<T, S>
@@ -943,7 +1136,8 @@ class C : I<int, bool>
             var compilation0 = CreateCompilation(source, options: TestOptions.DebugDll);
 
             var peRef0 = compilation0.EmitToImageReference();
-            var peAssemblySymbol0 = (PEAssemblySymbol)CreateCompilation("", new[] { peRef0 }).GetReferencedAssemblySymbol(peRef0);
+            var peAssemblySymbol0 = (PEAssemblySymbol)
+                CreateCompilation("", new[] { peRef0 }).GetReferencedAssemblySymbol(peRef0);
 
             var compilation1 = CreateCompilation(source, options: TestOptions.DebugDll);
 
@@ -958,22 +1152,28 @@ class C : I<int, bool>
 
             var matcher = CreateMatcher(compilation1, peAssemblySymbol0);
 
-            var mappedProperty = (Cci.IPropertyDefinition)matcher.MapDefinition(property.GetCciAdapter());
+            var mappedProperty = (Cci.IPropertyDefinition)
+                matcher.MapDefinition(property.GetCciAdapter());
 
-            Assert.Equal("I<System.Int32,System.Boolean>.Item", ((PropertySymbol)mappedProperty.GetInternalSymbol()).MetadataName);
+            Assert.Equal(
+                "I<System.Int32,System.Boolean>.Item",
+                ((PropertySymbol)mappedProperty.GetInternalSymbol()).MetadataName
+            );
         }
 
         [Fact]
         public void Method_ParameterNullableChange()
         {
-            var source0 = @"
+            var source0 =
+                @"
 using System.Collections.Generic;
 class C
 {
     string c;
     ref string M(string? s, (string a, dynamic? b) tuple, List<string?> list) => ref c;
 }";
-            var source1 = @"
+            var source1 =
+                @"
 using System.Collections.Generic;
 class C
 {
@@ -993,13 +1193,15 @@ class C
         [Fact]
         public void Method_ParameterRename()
         {
-            var source0 = @"
+            var source0 =
+                @"
 using System.Collections.Generic;
 class C
 {
     string M(string s) => s.ToString();
 }";
-            var source1 = @"
+            var source1 =
+                @"
 using System.Collections.Generic;
 class C
 {
@@ -1018,13 +1220,15 @@ class C
         [Fact]
         public void Method_ParameterRenameToDiscard()
         {
-            var source0 = @"
+            var source0 =
+                @"
 using System.Collections.Generic;
 class C
 {
     string M(string s) => s.ToString();
 }";
-            var source1 = @"
+            var source1 =
+                @"
 using System.Collections.Generic;
 class C
 {
@@ -1043,12 +1247,14 @@ class C
         [Fact]
         public void Field_NullableChange()
         {
-            var source0 = @"
+            var source0 =
+                @"
 class C
 {
     string S;
 }";
-            var source1 = @"
+            var source1 =
+                @"
 class C
 {
     string? S;
@@ -1066,7 +1272,8 @@ class C
         [Fact]
         public void AnonymousTypesWithNullables()
         {
-            var source0 = @"
+            var source0 =
+                @"
 using System;
 
 class C
@@ -1081,7 +1288,8 @@ class C
         var z = new Func<string>(() => y1.A + y2.B);
     }
 }";
-            var source1 = @"
+            var source1 =
+                @"
 using System;
 
 class C
@@ -1100,16 +1308,38 @@ class C
             var compilation0 = CreateCompilation(source0, options: TestOptions.DebugDll);
 
             var peRef0 = compilation0.EmitToImageReference();
-            var peAssemblySymbol0 = (PEAssemblySymbol)CreateCompilation("", new[] { peRef0 }).GetReferencedAssemblySymbol(peRef0);
+            var peAssemblySymbol0 = (PEAssemblySymbol)
+                CreateCompilation("", new[] { peRef0 }).GetReferencedAssemblySymbol(peRef0);
             var peModule0 = (PEModuleSymbol)peAssemblySymbol0.Modules[0];
 
             var reader0 = peModule0.Module.MetadataReader;
             var decoder0 = new MetadataDecoder(peModule0);
 
-            var synthesizedTypes0 = PEDeltaAssemblyBuilder.GetSynthesizedTypesFromMetadata(reader0, decoder0);
+            var synthesizedTypes0 = PEDeltaAssemblyBuilder.GetSynthesizedTypesFromMetadata(
+                reader0,
+                decoder0
+            );
             var anonymousTypeMap0 = synthesizedTypes0.AnonymousTypes;
-            Assert.Equal("<>f__AnonymousType0", anonymousTypeMap0[new AnonymousTypeKey(ImmutableArray.Create(new AnonymousTypeKeyField("A", isKey: false, ignoreCase: false)))].Name);
-            Assert.Equal("<>f__AnonymousType1", anonymousTypeMap0[new AnonymousTypeKey(ImmutableArray.Create(new AnonymousTypeKeyField("B", isKey: false, ignoreCase: false)))].Name);
+            Assert.Equal(
+                "<>f__AnonymousType0",
+                anonymousTypeMap0[
+                    new AnonymousTypeKey(
+                        ImmutableArray.Create(
+                            new AnonymousTypeKeyField("A", isKey: false, ignoreCase: false)
+                        )
+                    )
+                ].Name
+            );
+            Assert.Equal(
+                "<>f__AnonymousType1",
+                anonymousTypeMap0[
+                    new AnonymousTypeKey(
+                        ImmutableArray.Create(
+                            new AnonymousTypeKeyField("B", isKey: false, ignoreCase: false)
+                        )
+                    )
+                ].Name
+            );
             Assert.Equal(2, anonymousTypeMap0.Count);
 
             var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll);
@@ -1122,14 +1352,24 @@ class C
             var displayClass = peAssemblyBuilder.GetSynthesizedTypes(c).Single();
             Assert.Equal("<>c__DisplayClass2_0", displayClass.Name);
 
-            var emitContext = new EmitContext(peAssemblyBuilder, null, new DiagnosticBag(), metadataOnly: false, includePrivateMembers: true);
+            var emitContext = new EmitContext(
+                peAssemblyBuilder,
+                null,
+                new DiagnosticBag(),
+                metadataOnly: false,
+                includePrivateMembers: true
+            );
 
             var fields = displayClass.GetFields(emitContext).ToArray();
             AssertEx.SetEqual(fields.Select(f => f.Name), new[] { "x", "y1", "y2" });
             var y1 = fields.Where(f => f.Name == "y1").Single();
             var y2 = fields.Where(f => f.Name == "y2").Single();
 
-            var matcher = new CSharpSymbolMatcher(synthesizedTypes0, compilation1.SourceAssembly, peAssemblySymbol0);
+            var matcher = new CSharpSymbolMatcher(
+                synthesizedTypes0,
+                compilation1.SourceAssembly,
+                peAssemblySymbol0
+            );
 
             var mappedY1 = (Cci.IFieldDefinition)matcher.MapDefinition(y1);
             var mappedY2 = (Cci.IFieldDefinition)matcher.MapDefinition(y2);
@@ -1141,7 +1381,8 @@ class C
         [Fact]
         public void InterfaceMembers()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface I
@@ -1195,7 +1436,8 @@ interface I
         [Fact]
         public void FunctionPointerMembersTranslated()
         {
-            var source = @"
+            var source =
+                @"
 unsafe class C
 {
     delegate*<void> f1;
@@ -1208,7 +1450,11 @@ unsafe class C
 }
 ";
 
-            var compilation0 = CreateCompilation(source, options: TestOptions.UnsafeDebugDll, parseOptions: TestOptions.Regular9);
+            var compilation0 = CreateCompilation(
+                source,
+                options: TestOptions.UnsafeDebugDll,
+                parseOptions: TestOptions.Regular9
+            );
             var compilation1 = compilation0.WithSource(source);
 
             var matcher = CreateMatcher(compilation1, compilation0);
@@ -1230,19 +1476,25 @@ unsafe class C
         [InlineData("ref C", "ref readonly C")]
         public void FunctionPointerMembers_ReturnMismatch(string return1, string return2)
         {
-            var source1 = $@"
+            var source1 =
+                $@"
 unsafe class C
 {{
     delegate*<C, {return1}> f1;
 }}";
 
-            var source2 = $@"
+            var source2 =
+                $@"
 unsafe class C
 {{
     delegate*<C, {return2}> f1;
 }}";
 
-            var compilation0 = CreateCompilation(source1, options: TestOptions.UnsafeDebugDll, parseOptions: TestOptions.Regular9);
+            var compilation0 = CreateCompilation(
+                source1,
+                options: TestOptions.UnsafeDebugDll,
+                parseOptions: TestOptions.Regular9
+            );
             var compilation1 = compilation0.WithSource(source2);
 
             var matcher = CreateMatcher(compilation1, compilation0);
@@ -1263,13 +1515,15 @@ unsafe class C
         [InlineData("C, C", "C")]
         public void FunctionPointerMembers_ParamMismatch(string param1, string param2)
         {
-            var source1 = $@"
+            var source1 =
+                $@"
 unsafe class C
 {{
     delegate*<{param1}, C, void>* f1;
 }}";
 
-            var source2 = $@"
+            var source2 =
+                $@"
 unsafe class C
 {{
     delegate*<{param2}, C, void>* f1;
@@ -1277,13 +1531,15 @@ unsafe class C
 
             verify(source1, source2);
 
-            source1 = $@"
+            source1 =
+                $@"
 unsafe class C
 {{
     delegate*<C, {param1}, void> f1;
 }}";
 
-            source2 = $@"
+            source2 =
+                $@"
 unsafe class C
 {{
     delegate*<C, {param2}, void> f1;
@@ -1293,7 +1549,11 @@ unsafe class C
 
             static void verify(string source1, string source2)
             {
-                var compilation0 = CreateCompilation(source1, options: TestOptions.UnsafeDebugDll, parseOptions: TestOptions.Regular9);
+                var compilation0 = CreateCompilation(
+                    source1,
+                    options: TestOptions.UnsafeDebugDll,
+                    parseOptions: TestOptions.Regular9
+                );
                 var compilation1 = compilation0.WithSource(source2);
 
                 var matcher = CreateMatcher(compilation1, compilation0);
@@ -1307,11 +1567,13 @@ unsafe class C
         [Fact]
         public void Record_ImplementSynthesizedMember_ToString()
         {
-            var source0 = @"
+            var source0 =
+                @"
 public record R
 {
 }";
-            var source1 = @"
+            var source1 =
+                @"
 public record R
 {
     public override string ToString() => ""R"";
@@ -1329,11 +1591,13 @@ public record R
         [Fact]
         public void Record_ImplementSynthesizedMember_PrintMembers()
         {
-            var source0 = @"
+            var source0 =
+                @"
 public record R
 {
 }";
-            var source1 = @"
+            var source1 =
+                @"
 public record R
 {
     protected virtual bool PrintMembers(System.Text.StringBuilder builder) => true;
@@ -1346,18 +1610,23 @@ public record R
             var member0 = compilation0.GetMember<SynthesizedRecordPrintMembers>("R.PrintMembers");
             var member1 = compilation1.GetMember<SourceOrdinaryMethodSymbol>("R.PrintMembers");
 
-            Assert.Equal(member0, (MethodSymbol)matcher.MapDefinition(member1.GetCciAdapter()).GetInternalSymbol());
+            Assert.Equal(
+                member0,
+                (MethodSymbol)matcher.MapDefinition(member1.GetCciAdapter()).GetInternalSymbol()
+            );
         }
 
         [Fact]
         public void Record_RemoveSynthesizedMember_PrintMembers()
         {
-            var source0 = @"
+            var source0 =
+                @"
 public record R
 {
     protected virtual bool PrintMembers(System.Text.StringBuilder builder) => true;
 }";
-            var source1 = @"
+            var source1 =
+                @"
 public record R
 {
 }";
@@ -1369,15 +1638,20 @@ public record R
             var member0 = compilation0.GetMember<SourceOrdinaryMethodSymbol>("R.PrintMembers");
             var member1 = compilation1.GetMember<SynthesizedRecordPrintMembers>("R.PrintMembers");
 
-            Assert.Equal(member0, (MethodSymbol)matcher.MapDefinition(member1.GetCciAdapter()).GetInternalSymbol());
+            Assert.Equal(
+                member0,
+                (MethodSymbol)matcher.MapDefinition(member1.GetCciAdapter()).GetInternalSymbol()
+            );
         }
 
         [Fact]
         public void Record_ImplementSynthesizedMember_Property()
         {
-            var source0 = @"
+            var source0 =
+                @"
 public record R(int X);";
-            var source1 = @"
+            var source1 =
+                @"
 public record R(int X)
 {
     public int X { get; init; } = this.X;
@@ -1390,15 +1664,20 @@ public record R(int X)
             var member0 = compilation0.GetMember<SynthesizedRecordPropertySymbol>("R.X");
             var member1 = compilation1.GetMember<SourcePropertySymbol>("R.X");
 
-            Assert.Equal(member0, (PropertySymbol)matcher.MapDefinition(member1.GetCciAdapter()).GetInternalSymbol());
+            Assert.Equal(
+                member0,
+                (PropertySymbol)matcher.MapDefinition(member1.GetCciAdapter()).GetInternalSymbol()
+            );
         }
 
         [Fact]
         public void Record_ImplementSynthesizedMember_Constructor()
         {
-            var source0 = @"
+            var source0 =
+                @"
 public record R(int X);";
-            var source1 = @"
+            var source1 =
+                @"
 public record R
 {
     public R(int X)
@@ -1425,7 +1704,8 @@ public record R
         [Fact]
         public void SynthesizedDelegates_01()
         {
-            var source0 = @"
+            var source0 =
+                @"
 using System;
 
 class C
@@ -1439,7 +1719,8 @@ class C
     }
 }
 ";
-            var source1 = @"
+            var source1 =
+                @"
 using System;
 
 class C
@@ -1459,11 +1740,23 @@ class C
             var reader0 = peModule0.Module.MetadataReader;
             var decoder0 = new MetadataDecoder(peModule0);
 
-            var synthesizedTypes0 = PEDeltaAssemblyBuilder.GetSynthesizedTypesFromMetadata(reader0, decoder0);
+            var synthesizedTypes0 = PEDeltaAssemblyBuilder.GetSynthesizedTypesFromMetadata(
+                reader0,
+                decoder0
+            );
             var synthesizedDelegates0 = synthesizedTypes0.AnonymousDelegates;
-            Assert.Contains(new SynthesizedDelegateKey("<>F{00000008}`3"), synthesizedDelegates0.Keys);
-            Assert.Contains(new SynthesizedDelegateKey("<>A{00000003}`2"), synthesizedDelegates0.Keys);
-            Assert.Contains(new SynthesizedDelegateKey("<>A{00000000,100000000}`33"), synthesizedDelegates0.Keys);
+            Assert.Contains(
+                new SynthesizedDelegateKey("<>F{00000008}`3"),
+                synthesizedDelegates0.Keys
+            );
+            Assert.Contains(
+                new SynthesizedDelegateKey("<>A{00000003}`2"),
+                synthesizedDelegates0.Keys
+            );
+            Assert.Contains(
+                new SynthesizedDelegateKey("<>A{00000000,100000000}`33"),
+                synthesizedDelegates0.Keys
+            );
             Assert.Equal(3, synthesizedDelegates0.Count);
 
             var compilation1 = CreateCompilation(source1, options: TestOptions.DebugDll);
@@ -1476,7 +1769,13 @@ class C
             var displayClass = peAssemblyBuilder.GetSynthesizedTypes(c).Single();
             Assert.Equal("<>c", displayClass.Name);
 
-            var emitContext = new EmitContext(peAssemblyBuilder, null, new DiagnosticBag(), metadataOnly: false, includePrivateMembers: true);
+            var emitContext = new EmitContext(
+                peAssemblyBuilder,
+                null,
+                new DiagnosticBag(),
+                metadataOnly: false,
+                includePrivateMembers: true
+            );
 
             var fields = displayClass.GetFields(emitContext).ToArray();
             var field1 = fields[1];
@@ -1486,7 +1785,11 @@ class C
             Assert.Equal("<>9__0_1", field2.Name);
             Assert.Equal("<>9__0_2", field3.Name);
 
-            var matcher = new CSharpSymbolMatcher(synthesizedTypes0, compilation1.SourceAssembly, peAssemblySymbol0);
+            var matcher = new CSharpSymbolMatcher(
+                synthesizedTypes0,
+                compilation1.SourceAssembly,
+                peAssemblySymbol0
+            );
 
             var mappedField1 = (Cci.IFieldDefinition)matcher.MapDefinition(field1);
             var mappedField2 = (Cci.IFieldDefinition)matcher.MapDefinition(field2);
@@ -1501,7 +1804,7 @@ class C
         public void SynthesizedDelegates_02()
         {
             var source0 =
-@"unsafe class Program
+                @"unsafe class Program
 {
     static void Main()
     {
@@ -1509,7 +1812,7 @@ class C
     }
 }";
             var source1 =
-@"unsafe class Program
+                @"unsafe class Program
 {
     static void Main()
     {
@@ -1521,15 +1824,22 @@ class C
             var compilation1 = CreateCompilation(source1, options: TestOptions.UnsafeDebugDll);
 
             var peRef0 = compilation0.EmitToImageReference();
-            var peAssemblySymbol0 = (PEAssemblySymbol)CreateCompilation("", new[] { peRef0 }).GetReferencedAssemblySymbol(peRef0);
+            var peAssemblySymbol0 = (PEAssemblySymbol)
+                CreateCompilation("", new[] { peRef0 }).GetReferencedAssemblySymbol(peRef0);
             var peModule0 = (PEModuleSymbol)peAssemblySymbol0.Modules[0];
 
             var reader0 = peModule0.Module.MetadataReader;
             var decoder0 = new MetadataDecoder(peModule0);
 
-            var synthesizedTypes0 = PEDeltaAssemblyBuilder.GetSynthesizedTypesFromMetadata(reader0, decoder0);
+            var synthesizedTypes0 = PEDeltaAssemblyBuilder.GetSynthesizedTypesFromMetadata(
+                reader0,
+                decoder0
+            );
             var anonymousDelegates0 = synthesizedTypes0.AnonymousDelegatesWithIndexedNames;
-            Assert.Equal("<>f__AnonymousDelegate0", anonymousDelegates0.Single().Value.Single().Name);
+            Assert.Equal(
+                "<>f__AnonymousDelegate0",
+                anonymousDelegates0.Single().Value.Single().Name
+            );
             Assert.Equal(1, anonymousDelegates0.Count);
 
             var testData = new CompilationTestData();
@@ -1540,11 +1850,21 @@ class C
             var displayClass = peAssemblyBuilder.GetSynthesizedTypes(type).Single();
             Assert.Equal("<>c", displayClass.Name);
 
-            var emitContext = new EmitContext(peAssemblyBuilder, null, new DiagnosticBag(), metadataOnly: false, includePrivateMembers: true);
+            var emitContext = new EmitContext(
+                peAssemblyBuilder,
+                null,
+                new DiagnosticBag(),
+                metadataOnly: false,
+                includePrivateMembers: true
+            );
             var field0 = displayClass.GetFields(emitContext).Single(f => f.Name == "<>9__0_0");
             Assert.Equal("<>f__AnonymousDelegate0", field0.GetType(emitContext).ToString());
 
-            var matcher = new CSharpSymbolMatcher(synthesizedTypes0, compilation1.SourceAssembly, peAssemblySymbol0);
+            var matcher = new CSharpSymbolMatcher(
+                synthesizedTypes0,
+                compilation1.SourceAssembly,
+                peAssemblySymbol0
+            );
             var field1 = (Cci.IFieldDefinition)matcher.MapDefinition(field0);
             Assert.Equal("<>9__0_0", field1.Name);
         }
@@ -1581,20 +1901,27 @@ class C
             var compilation1 = CreateCompilation(source1, options: TestOptions.UnsafeDebugDll);
 
             var peRef0 = compilation0.EmitToImageReference();
-            var peAssemblySymbol0 = (PEAssemblySymbol)CreateCompilation("", new[] { peRef0 }).GetReferencedAssemblySymbol(peRef0);
+            var peAssemblySymbol0 = (PEAssemblySymbol)
+                CreateCompilation("", new[] { peRef0 }).GetReferencedAssemblySymbol(peRef0);
             var peModule0 = (PEModuleSymbol)peAssemblySymbol0.Modules[0];
 
             var reader0 = peModule0.Module.MetadataReader;
             var decoder0 = new MetadataDecoder(peModule0);
 
-            var synthesizedTypes0 = PEDeltaAssemblyBuilder.GetSynthesizedTypesFromMetadata(reader0, decoder0);
+            var synthesizedTypes0 = PEDeltaAssemblyBuilder.GetSynthesizedTypesFromMetadata(
+                reader0,
+                decoder0
+            );
 
-            AssertEx.SetEqual(new[]
-            {
-                "(3,2): <>f__AnonymousDelegate0<T1, T2, TResult>",
-                "(0,2): <>f__AnonymousDelegate1",
-                "(0,2): <>f__AnonymousDelegate2"
-            }, Inspect(synthesizedTypes0.AnonymousDelegatesWithIndexedNames));
+            AssertEx.SetEqual(
+                new[]
+                {
+                    "(3,2): <>f__AnonymousDelegate0<T1, T2, TResult>",
+                    "(0,2): <>f__AnonymousDelegate1",
+                    "(0,2): <>f__AnonymousDelegate2",
+                },
+                Inspect(synthesizedTypes0.AnonymousDelegatesWithIndexedNames)
+            );
 
             var testData = new CompilationTestData();
             compilation1.EmitToArray(testData: testData);
@@ -1604,7 +1931,13 @@ class C
             var displayClass = peAssemblyBuilder.GetSynthesizedTypes(c).Single();
             Assert.Equal("<>c", displayClass.Name);
 
-            var emitContext = new EmitContext(peAssemblyBuilder, null, new DiagnosticBag(), metadataOnly: false, includePrivateMembers: true);
+            var emitContext = new EmitContext(
+                peAssemblyBuilder,
+                null,
+                new DiagnosticBag(),
+                metadataOnly: false,
+                includePrivateMembers: true
+            );
 
             var fields = displayClass.GetFields(emitContext).ToArray();
             var field1 = fields[1];
@@ -1614,7 +1947,11 @@ class C
             Assert.Equal("<>9__0_1", field2.Name);
             Assert.Equal("<>9__0_2", field3.Name);
 
-            var matcher = new CSharpSymbolMatcher(synthesizedTypes0, compilation1.SourceAssembly, peAssemblySymbol0);
+            var matcher = new CSharpSymbolMatcher(
+                synthesizedTypes0,
+                compilation1.SourceAssembly,
+                peAssemblySymbol0
+            );
 
             Assert.Null(matcher.MapDefinition(field1));
             Assert.Null(matcher.MapDefinition(field2));
@@ -1651,20 +1988,27 @@ class C
             var compilation1 = CreateCompilation(source1, options: TestOptions.UnsafeDebugDll);
 
             var peRef0 = compilation0.EmitToImageReference();
-            var peAssemblySymbol0 = (PEAssemblySymbol)CreateCompilation("", new[] { peRef0 }).GetReferencedAssemblySymbol(peRef0);
+            var peAssemblySymbol0 = (PEAssemblySymbol)
+                CreateCompilation("", new[] { peRef0 }).GetReferencedAssemblySymbol(peRef0);
             var peModule0 = (PEModuleSymbol)peAssemblySymbol0.Modules[0];
 
             var reader0 = peModule0.Module.MetadataReader;
             var decoder0 = new MetadataDecoder(peModule0);
 
-            var synthesizedTypes0 = PEDeltaAssemblyBuilder.GetSynthesizedTypesFromMetadata(reader0, decoder0);
+            var synthesizedTypes0 = PEDeltaAssemblyBuilder.GetSynthesizedTypesFromMetadata(
+                reader0,
+                decoder0
+            );
 
-            AssertEx.SetEqual(new[]
-            {
-                "(3,2): <>f__AnonymousDelegate0<T1, T2, TResult>",
-                "(0,2): <>f__AnonymousDelegate1",
-                "(0,2): <>f__AnonymousDelegate2"
-            }, Inspect(synthesizedTypes0.AnonymousDelegatesWithIndexedNames));
+            AssertEx.SetEqual(
+                new[]
+                {
+                    "(3,2): <>f__AnonymousDelegate0<T1, T2, TResult>",
+                    "(0,2): <>f__AnonymousDelegate1",
+                    "(0,2): <>f__AnonymousDelegate2",
+                },
+                Inspect(synthesizedTypes0.AnonymousDelegatesWithIndexedNames)
+            );
 
             var testData = new CompilationTestData();
             compilation1.EmitToArray(testData: testData);
@@ -1674,7 +2018,13 @@ class C
             var displayClass = peAssemblyBuilder.GetSynthesizedTypes(c).Single();
             Assert.Equal("<>c", displayClass.Name);
 
-            var emitContext = new EmitContext(peAssemblyBuilder, null, new DiagnosticBag(), metadataOnly: false, includePrivateMembers: true);
+            var emitContext = new EmitContext(
+                peAssemblyBuilder,
+                null,
+                new DiagnosticBag(),
+                metadataOnly: false,
+                includePrivateMembers: true
+            );
 
             var fields = displayClass.GetFields(emitContext).ToArray();
             var field1 = fields[1];
@@ -1684,7 +2034,11 @@ class C
             Assert.Equal("<>9__0_1", field2.Name);
             Assert.Equal("<>9__0_2", field3.Name);
 
-            var matcher = new CSharpSymbolMatcher(synthesizedTypes0, compilation1.SourceAssembly, peAssemblySymbol0);
+            var matcher = new CSharpSymbolMatcher(
+                synthesizedTypes0,
+                compilation1.SourceAssembly,
+                peAssemblySymbol0
+            );
 
             var mappedField1 = (Cci.IFieldDefinition)matcher.MapDefinition(field1);
             var mappedField2 = (Cci.IFieldDefinition)matcher.MapDefinition(field2);
@@ -1699,7 +2053,7 @@ class C
         public void CheckedUserDefinedOperators_01()
         {
             const string source =
-@"
+                @"
 class A 
 {
     public static A operator -(A c) => c;
@@ -1716,14 +2070,31 @@ class A
             var compilation1 = compilation0.WithSource(source);
 
             var matcher = CreateMatcher(compilation1, compilation0);
-            var members1 = compilation1.GetMember<NamedTypeSymbol>("A").GetMembers().OfType<MethodSymbol>().Where(m => m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)).ToArray();
-            var members0 = compilation0.GetMember<NamedTypeSymbol>("A").GetMembers().OfType<MethodSymbol>().Where(m => m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)).ToArray();
+            var members1 = compilation1
+                .GetMember<NamedTypeSymbol>("A")
+                .GetMembers()
+                .OfType<MethodSymbol>()
+                .Where(m =>
+                    m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
+                )
+                .ToArray();
+            var members0 = compilation0
+                .GetMember<NamedTypeSymbol>("A")
+                .GetMembers()
+                .OfType<MethodSymbol>()
+                .Where(m =>
+                    m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
+                )
+                .ToArray();
             Assert.Equal(6, members1.Length);
             Assert.Equal(members1.Length, members0.Length);
 
             for (int i = 0; i < members0.Length; i++)
             {
-                Assert.Same(members0[i], matcher.MapDefinition(members1[i].GetCciAdapter()).GetInternalSymbol());
+                Assert.Same(
+                    members0[i],
+                    matcher.MapDefinition(members1[i].GetCciAdapter()).GetInternalSymbol()
+                );
             }
         }
 
@@ -1731,7 +2102,7 @@ class A
         public void CheckedUserDefinedOperators_02()
         {
             const string source0 =
-@"
+                @"
 class A 
 {
     public static A operator -(A c) => c;
@@ -1741,7 +2112,7 @@ class A
 ";
 
             const string source1 =
-@"
+                @"
 class A 
 {
     public static A operator -(A c) => c;
@@ -1758,14 +2129,31 @@ class A
             var compilation1 = compilation0.WithSource(source1);
 
             var matcher = CreateMatcher(compilation1, compilation0);
-            var members1 = compilation1.GetMember<NamedTypeSymbol>("A").GetMembers().OfType<MethodSymbol>().Where(m => m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)).ToArray();
-            var members0 = compilation0.GetMember<NamedTypeSymbol>("A").GetMembers().OfType<MethodSymbol>().Where(m => m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)).ToArray();
+            var members1 = compilation1
+                .GetMember<NamedTypeSymbol>("A")
+                .GetMembers()
+                .OfType<MethodSymbol>()
+                .Where(m =>
+                    m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
+                )
+                .ToArray();
+            var members0 = compilation0
+                .GetMember<NamedTypeSymbol>("A")
+                .GetMembers()
+                .OfType<MethodSymbol>()
+                .Where(m =>
+                    m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
+                )
+                .ToArray();
             Assert.Equal(6, members1.Length);
             Assert.Equal(3, members0.Length);
 
             for (int i = 0; i < members0.Length; i++)
             {
-                Assert.Same(members0[i], matcher.MapDefinition(members1[i * 2].GetCciAdapter()).GetInternalSymbol());
+                Assert.Same(
+                    members0[i],
+                    matcher.MapDefinition(members1[i * 2].GetCciAdapter()).GetInternalSymbol()
+                );
             }
 
             for (int i = 0; i < members1.Length; i++)
@@ -1783,7 +2171,7 @@ class A
         public void CheckedUserDefinedOperators_03()
         {
             const string source0 =
-@"
+                @"
 class A 
 {
     public static A operator -(A c) => c;
@@ -1798,7 +2186,7 @@ class A
 ";
 
             const string source1 =
-@"
+                @"
 class A 
 {
     public static A operator -(A c) => c;
@@ -1810,14 +2198,31 @@ class A
             var compilation1 = compilation0.WithSource(source1);
 
             var matcher = CreateMatcher(compilation1, compilation0);
-            var members1 = compilation1.GetMember<NamedTypeSymbol>("A").GetMembers().OfType<MethodSymbol>().Where(m => m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)).ToArray();
-            var members0 = compilation0.GetMember<NamedTypeSymbol>("A").GetMembers().OfType<MethodSymbol>().Where(m => m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)).ToArray();
+            var members1 = compilation1
+                .GetMember<NamedTypeSymbol>("A")
+                .GetMembers()
+                .OfType<MethodSymbol>()
+                .Where(m =>
+                    m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
+                )
+                .ToArray();
+            var members0 = compilation0
+                .GetMember<NamedTypeSymbol>("A")
+                .GetMembers()
+                .OfType<MethodSymbol>()
+                .Where(m =>
+                    m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
+                )
+                .ToArray();
             Assert.Equal(3, members1.Length);
             Assert.Equal(6, members0.Length);
 
             for (int i = 0; i < members1.Length; i++)
             {
-                Assert.Same(members0[i * 2], matcher.MapDefinition(members1[i].GetCciAdapter()).GetInternalSymbol());
+                Assert.Same(
+                    members0[i * 2],
+                    matcher.MapDefinition(members1[i].GetCciAdapter()).GetInternalSymbol()
+                );
             }
         }
 
@@ -1825,7 +2230,7 @@ class A
         public void CheckedUserDefinedOperators_04()
         {
             const string source0 =
-@"
+                @"
 class A 
 {
     public static A operator -(A c) => default;
@@ -1840,7 +2245,7 @@ class A
 ";
 
             const string source1 =
-@"
+                @"
 class A 
 {
     public static int operator -(A c) => default;
@@ -1857,7 +2262,14 @@ class A
             var compilation1 = compilation0.WithSource(source1);
 
             var matcher = CreateMatcher(compilation1, compilation0);
-            var members1 = compilation1.GetMember<NamedTypeSymbol>("A").GetMembers().OfType<MethodSymbol>().Where(m => m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)).ToArray();
+            var members1 = compilation1
+                .GetMember<NamedTypeSymbol>("A")
+                .GetMembers()
+                .OfType<MethodSymbol>()
+                .Where(m =>
+                    m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
+                )
+                .ToArray();
             Assert.Equal(6, members1.Length);
 
             foreach (var member in members1)
@@ -1870,7 +2282,7 @@ class A
         public void CheckedUserDefinedOperators_05()
         {
             const string source0 =
-@"
+                @"
 class A 
 {
     public static A operator -(A c) => default;
@@ -1885,7 +2297,7 @@ class A
 ";
 
             const string source1 =
-@"
+                @"
 class A 
 {
     public static A operator -(int c) => default;
@@ -1902,7 +2314,14 @@ class A
             var compilation1 = compilation0.WithSource(source1);
 
             var matcher = CreateMatcher(compilation1, compilation0);
-            var members1 = compilation1.GetMember<NamedTypeSymbol>("A").GetMembers().OfType<MethodSymbol>().Where(m => m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)).ToArray();
+            var members1 = compilation1
+                .GetMember<NamedTypeSymbol>("A")
+                .GetMembers()
+                .OfType<MethodSymbol>()
+                .Where(m =>
+                    m.MethodKind is (MethodKind.Conversion or MethodKind.UserDefinedOperator)
+                )
+                .ToArray();
             Assert.Equal(6, members1.Length);
 
             foreach (var member in members1)

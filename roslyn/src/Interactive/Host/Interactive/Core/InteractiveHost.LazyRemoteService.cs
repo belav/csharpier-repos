@@ -15,8 +15,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.ErrorReporting;
 using Roslyn.Utilities;
-using StreamJsonRpc;
 using Scripting::Microsoft.CodeAnalysis.Scripting.Hosting;
+using StreamJsonRpc;
 
 namespace Microsoft.CodeAnalysis.Interactive
 {
@@ -32,7 +32,12 @@ namespace Microsoft.CodeAnalysis.Interactive
             public readonly bool SkipInitialization;
             public readonly int InstanceId;
 
-            public LazyRemoteService(InteractiveHost host, InteractiveHostOptions options, int instanceId, bool skipInitialization)
+            public LazyRemoteService(
+                InteractiveHost host,
+                InteractiveHostOptions options,
+                int instanceId,
+                bool skipInitialization
+            )
             {
                 _lazyInitializedService = AsyncLazy.Create(TryStartAndInitializeProcessAsync);
                 _cancellationSource = new CancellationTokenSource();
@@ -55,17 +60,25 @@ namespace Microsoft.CodeAnalysis.Interactive
                 }
             }
 
-            internal Task<InitializedRemoteService> GetInitializedServiceAsync()
-                => _lazyInitializedService.GetValueAsync(_cancellationSource.Token);
+            internal Task<InitializedRemoteService> GetInitializedServiceAsync() =>
+                _lazyInitializedService.GetValueAsync(_cancellationSource.Token);
 
-            internal InitializedRemoteService? TryGetInitializedService()
-                => _lazyInitializedService.TryGetValue(out var service) ? service : default;
+            internal InitializedRemoteService? TryGetInitializedService() =>
+                _lazyInitializedService.TryGetValue(out var service) ? service : default;
 
-            private async Task<InitializedRemoteService> TryStartAndInitializeProcessAsync(CancellationToken cancellationToken)
+            private async Task<InitializedRemoteService> TryStartAndInitializeProcessAsync(
+                CancellationToken cancellationToken
+            )
             {
                 try
                 {
-                    var remoteService = await TryStartProcessAsync(Options.HostPath, Options.Culture, Options.UICulture, cancellationToken).ConfigureAwait(false);
+                    var remoteService = await TryStartProcessAsync(
+                            Options.HostPath,
+                            Options.Culture,
+                            Options.UICulture,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     if (remoteService == null)
                     {
                         return default;
@@ -82,10 +95,19 @@ namespace Microsoft.CodeAnalysis.Interactive
                             workingDirectory: Host._initialWorkingDirectory,
                             initializationResult: new RemoteInitializationResult(
                                 initializationScript: null,
-                                metadataReferencePaths: ImmutableArray.Create(typeof(object).Assembly.Location, typeof(InteractiveScriptGlobals).Assembly.Location),
-                                imports: ImmutableArray<string>.Empty));
+                                metadataReferencePaths: ImmutableArray.Create(
+                                    typeof(object).Assembly.Location,
+                                    typeof(InteractiveScriptGlobals).Assembly.Location
+                                ),
+                                imports: ImmutableArray<string>.Empty
+                            )
+                        );
 
-                        Host.ProcessInitialized?.Invoke(remoteService.PlatformInfo, Options, result);
+                        Host.ProcessInitialized?.Invoke(
+                            remoteService.PlatformInfo,
+                            Options,
+                            result
+                        );
                         return new InitializedRemoteService(remoteService, result);
                     }
 
@@ -101,7 +123,13 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                     // try to execute initialization script:
                     var isRestarting = InstanceId > 1;
-                    result = await ExecuteRemoteAsync(remoteService, nameof(Service.InitializeContextAsync), Options.InitializationFilePath, isRestarting).ConfigureAwait(false);
+                    result = await ExecuteRemoteAsync(
+                            remoteService,
+                            nameof(Service.InitializeContextAsync),
+                            Options.InitializationFilePath,
+                            isRestarting
+                        )
+                        .ConfigureAwait(false);
 
                     initializing = false;
                     if (!result.Success)
@@ -134,7 +162,12 @@ namespace Microsoft.CodeAnalysis.Interactive
                 }
             }
 
-            private async Task<RemoteService?> TryStartProcessAsync(string hostPath, CultureInfo culture, CultureInfo uiCulture, CancellationToken cancellationToken)
+            private async Task<RemoteService?> TryStartProcessAsync(
+                string hostPath,
+                CultureInfo culture,
+                CultureInfo uiCulture,
+                CancellationToken cancellationToken
+            )
             {
                 int currentProcessId = Process.GetCurrentProcess().Id;
                 var pipeName = typeof(InteractiveHost).FullName + Guid.NewGuid();
@@ -143,18 +176,19 @@ namespace Microsoft.CodeAnalysis.Interactive
                 {
                     StartInfo = new ProcessStartInfo(hostPath)
                     {
-                        Arguments = $"{pipeName} {currentProcessId} \"{culture.Name}\" \"{uiCulture.Name}\"",
+                        Arguments =
+                            $"{pipeName} {currentProcessId} \"{culture.Name}\" \"{uiCulture.Name}\"",
                         WorkingDirectory = Host._initialWorkingDirectory,
                         CreateNoWindow = true,
                         UseShellExecute = false,
                         RedirectStandardOutput = true,
                         RedirectStandardError = true,
                         StandardErrorEncoding = OutputEncoding,
-                        StandardOutputEncoding = OutputEncoding
+                        StandardOutputEncoding = OutputEncoding,
                     },
 
                     // enables Process.Exited event to be raised:
-                    EnableRaisingEvents = true
+                    EnableRaisingEvents = true,
                 };
 
                 try
@@ -165,10 +199,17 @@ namespace Microsoft.CodeAnalysis.Interactive
                 {
                     Host.WriteOutputInBackground(
                         isError: true,
-                        string.Format(InteractiveHostResources.Failed_to_create_a_remote_process_for_interactive_code_execution, hostPath),
-                        e.Message);
+                        string.Format(
+                            InteractiveHostResources.Failed_to_create_a_remote_process_for_interactive_code_execution,
+                            hostPath
+                        ),
+                        e.Message
+                    );
 
-                    Host.InteractiveHostProcessCreationFailed?.Invoke(e, TryGetExitCode(newProcess));
+                    Host.InteractiveHostProcessCreationFailed?.Invoke(
+                        e,
+                        TryGetExitCode(newProcess)
+                    );
                     return null;
                 }
 
@@ -184,12 +225,20 @@ namespace Microsoft.CodeAnalysis.Interactive
                     newProcessId = 0;
                 }
 
-                var clientStream = new NamedPipeClientStream(".", pipeName, PipeDirection.InOut, PipeOptions.Asynchronous);
+                var clientStream = new NamedPipeClientStream(
+                    ".",
+                    pipeName,
+                    PipeDirection.InOut,
+                    PipeOptions.Asynchronous
+                );
                 JsonRpc? jsonRpc = null;
 
                 void ProcessExitedBeforeEstablishingConnection(object sender, EventArgs e)
                 {
-                    Host.InteractiveHostProcessCreationFailed?.Invoke(null, TryGetExitCode(newProcess));
+                    Host.InteractiveHostProcessCreationFailed?.Invoke(
+                        null,
+                        TryGetExitCode(newProcess)
+                    );
                     _cancellationSource.Cancel();
                 }
 
@@ -202,17 +251,28 @@ namespace Microsoft.CodeAnalysis.Interactive
                 {
                     if (!CheckAlive(newProcess, hostPath))
                     {
-                        Host.InteractiveHostProcessCreationFailed?.Invoke(null, TryGetExitCode(newProcess));
+                        Host.InteractiveHostProcessCreationFailed?.Invoke(
+                            null,
+                            TryGetExitCode(newProcess)
+                        );
                         return null;
                     }
 
                     await clientStream.ConnectAsync(cancellationToken).ConfigureAwait(false);
                     jsonRpc = CreateRpc(clientStream, incomingCallTarget: null);
 
-                    platformInfo = (await jsonRpc.InvokeWithCancellationAsync<InteractiveHostPlatformInfo.Data>(
-                        nameof(Service.InitializeAsync),
-                        new object[] { Host._replServiceProviderType.AssemblyQualifiedName },
-                        cancellationToken).ConfigureAwait(false)).Deserialize();
+                    platformInfo = (
+                        await jsonRpc
+                            .InvokeWithCancellationAsync<InteractiveHostPlatformInfo.Data>(
+                                nameof(Service.InitializeAsync),
+                                new object[]
+                                {
+                                    Host._replServiceProviderType.AssemblyQualifiedName,
+                                },
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false)
+                    ).Deserialize();
                 }
                 catch (Exception e)
                 {
@@ -223,7 +283,10 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                     jsonRpc?.Dispose();
 
-                    Host.InteractiveHostProcessCreationFailed?.Invoke(e, TryGetExitCode(newProcess));
+                    Host.InteractiveHostProcessCreationFailed?.Invoke(
+                        e,
+                        TryGetExitCode(newProcess)
+                    );
                     return null;
                 }
                 finally
@@ -231,7 +294,14 @@ namespace Microsoft.CodeAnalysis.Interactive
                     newProcess.Exited -= ProcessExitedBeforeEstablishingConnection;
                 }
 
-                return new RemoteService(Host, newProcess, newProcessId, jsonRpc, platformInfo, Options);
+                return new RemoteService(
+                    Host,
+                    newProcess,
+                    newProcessId,
+                    jsonRpc,
+                    platformInfo,
+                    Options
+                );
             }
 
             private bool CheckAlive(Process process, string hostPath)
@@ -243,8 +313,13 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                     Host.WriteOutputInBackground(
                         isError: true,
-                        string.Format(InteractiveHostResources.Failed_to_launch_0_process_exit_code_colon_1_with_output_colon, hostPath, process.ExitCode),
-                        errorString);
+                        string.Format(
+                            InteractiveHostResources.Failed_to_launch_0_process_exit_code_colon_1_with_output_colon,
+                            hostPath,
+                            process.ExitCode
+                        ),
+                        errorString
+                    );
                 }
 
                 return alive;

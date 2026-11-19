@@ -17,8 +17,7 @@ public class SqliteNetTopologySuiteMemberTranslatorPlugin : IMemberTranslatorPlu
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SqliteNetTopologySuiteMemberTranslatorPlugin(
-        ISqlExpressionFactory sqlExpressionFactory)
+    public SqliteNetTopologySuiteMemberTranslatorPlugin(ISqlExpressionFactory sqlExpressionFactory)
     {
         Translators = new IMemberTranslator[]
         {
@@ -27,7 +26,7 @@ public class SqliteNetTopologySuiteMemberTranslatorPlugin : IMemberTranslatorPlu
             new SqliteLineStringMemberTranslator(sqlExpressionFactory),
             new SqliteMultiLineStringMemberTranslator(sqlExpressionFactory),
             new SqlitePointMemberTranslator(sqlExpressionFactory),
-            new SqlitePolygonMemberTranslator(sqlExpressionFactory)
+            new SqlitePolygonMemberTranslator(sqlExpressionFactory),
         };
     }
 

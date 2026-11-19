@@ -47,7 +47,7 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             }
 
             // wParam contains a value indicated if the window was activated.
-            // See https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-activateapp 
+            // See https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-activateapp
             // 1 = activate
             // 0 = deactivated
             if (wParam == IntPtr.Zero)
@@ -58,14 +58,19 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             var window = GetOrInitializeWindow();
             _threadingContext.JoinableTaskFactory.RunAsync(async () =>
             {
-                var shouldActivate = await window.ShouldShowOnActivatedAsync(default).ConfigureAwait(false);
+                var shouldActivate = await window
+                    .ShouldShowOnActivatedAsync(default)
+                    .ConfigureAwait(false);
 
                 if (shouldActivate)
                 {
                     await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
                     var windowFrame = (IVsWindowFrame)window.Frame;
                     ErrorHandler.ThrowOnFailure(windowFrame.Show());
-                    Logger.Log(FunctionId.StackTraceToolWindow_ShowOnActivated, logLevel: LogLevel.Information);
+                    Logger.Log(
+                        FunctionId.StackTraceToolWindow_ShowOnActivated,
+                        logLevel: LogLevel.Information
+                    );
                 }
             });
 
@@ -141,7 +146,9 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             // Get the instance number 0 of this tool window. This window is single instance so this instance
             // is actually the only one.
             // The last flag is set to true so that if the tool window does not exists it will be created.
-            var window = _package.FindToolWindow(typeof(StackTraceExplorerToolWindow), 0, true) as StackTraceExplorerToolWindow;
+            var window =
+                _package.FindToolWindow(typeof(StackTraceExplorerToolWindow), 0, true)
+                as StackTraceExplorerToolWindow;
             if (window is not { Frame: not null })
             {
                 throw new NotSupportedException("Cannot create tool window");
@@ -168,7 +175,10 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             window.Root?.OnClear();
         }
 
-        internal static void Initialize(OleMenuCommandService menuCommandService, RoslynPackage package)
+        internal static void Initialize(
+            OleMenuCommandService menuCommandService,
+            RoslynPackage package
+        )
         {
             if (_instance is not null)
             {

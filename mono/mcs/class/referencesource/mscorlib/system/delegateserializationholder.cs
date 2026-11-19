@@ -1,16 +1,16 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
-    
+
 using System;
+using System.Diagnostics.Contracts;
+using System.Globalization;
 using System.Reflection;
 using System.Runtime.Remoting;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
-using System.Globalization;
-using System.Diagnostics.Contracts;
 
 namespace System
 {
@@ -18,34 +18,53 @@ namespace System
     internal sealed class DelegateSerializationHolder : IObjectReference, ISerializable
     {
         #region Static Members
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static DelegateEntry GetDelegateSerializationInfo(
-            SerializationInfo info, Type delegateType, Object target, MethodInfo method, int targetIndex)
+            SerializationInfo info,
+            Type delegateType,
+            Object target,
+            MethodInfo method,
+            int targetIndex
+        )
         {
             // Used for MulticastDelegate
 
-            if (method == null) 
+            if (method == null)
                 throw new ArgumentNullException("method");
             Contract.EndContractBlock();
-    
-            if (!method.IsPublic || (method.DeclaringType != null && !method.DeclaringType.IsVisible))
+
+            if (
+                !method.IsPublic
+                || (method.DeclaringType != null && !method.DeclaringType.IsVisible)
+            )
                 new ReflectionPermission(ReflectionPermissionFlag.MemberAccess).Demand();
-    
+
             Type c = delegateType.BaseType;
 
             if (c == null || (c != typeof(Delegate) && c != typeof(MulticastDelegate)))
-                throw new ArgumentException(Environment.GetResourceString("Arg_MustBeDelegate"),"type");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_MustBeDelegate"),
+                    "type"
+                );
 
             if (method.DeclaringType == null)
-                throw new NotSupportedException(Environment.GetResourceString("NotSupported_GlobalMethodSerialization"));
+                throw new NotSupportedException(
+                    Environment.GetResourceString("NotSupported_GlobalMethodSerialization")
+                );
 
-            DelegateEntry de = new DelegateEntry(delegateType.FullName, delegateType.Module.Assembly.FullName, target,
-                method.ReflectedType.Module.Assembly.FullName, method.ReflectedType.FullName, method.Name);
+            DelegateEntry de = new DelegateEntry(
+                delegateType.FullName,
+                delegateType.Module.Assembly.FullName,
+                target,
+                method.ReflectedType.Module.Assembly.FullName,
+                method.ReflectedType.FullName,
+                method.Name
+            );
 
             if (info.MemberCount == 0)
             {
                 info.SetType(typeof(DelegateSerializationHolder));
-                info.AddValue("Delegate",de,typeof(DelegateEntry));
+                info.AddValue("Delegate", de, typeof(DelegateEntry));
             }
 
             // target can be an object so it needs to be added to the info, or else a fixup is needed
@@ -89,7 +108,13 @@ namespace System
 
             #region Constructor
             internal DelegateEntry(
-                String type, String assembly, Object target, String targetTypeAssembly, String targetTypeName, String methodName)
+                String type,
+                String assembly,
+                Object target,
+                String targetTypeAssembly,
+                String targetTypeName,
+                String methodName
+            )
             {
                 this.type = type;
                 this.assembly = assembly;
@@ -114,16 +139,16 @@ namespace System
         #region Private Data Members
         private DelegateEntry m_delegateEntry;
         private MethodInfo[] m_methods;
-        #endregion    
-    
+        #endregion
+
         #region Constructor
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private DelegateSerializationHolder(SerializationInfo info, StreamingContext context)
         {
             if (info == null)
                 throw new ArgumentNullException("info");
             Contract.EndContractBlock();
-    
+
             bool bNewWire = true;
 
             try
@@ -161,7 +186,8 @@ namespace System
                 for (i = 0; i < count; i++)
                 {
                     String methodInfoName = "method" + i;
-                    methods[i] = (MethodInfo)info.GetValueNoThrow(methodInfoName, typeof(MethodInfo));
+                    methods[i] = (MethodInfo)
+                        info.GetValueNoThrow(methodInfoName, typeof(MethodInfo));
                     if (methods[i] == null)
                         break;
                 }
@@ -177,10 +203,17 @@ namespace System
         private void ThrowInsufficientState(string field)
         {
             throw new SerializationException(
-                Environment.GetResourceString("Serialization_InsufficientDeserializationState", field));
+                Environment.GetResourceString(
+                    "Serialization_InsufficientDeserializationState",
+                    field
+                )
+            );
         }
 
-        private DelegateEntry OldDelegateWireFormat(SerializationInfo info, StreamingContext context)
+        private DelegateEntry OldDelegateWireFormat(
+            SerializationInfo info,
+            StreamingContext context
+        )
         {
             if (info == null)
                 throw new ArgumentNullException("info");
@@ -193,7 +226,14 @@ namespace System
             String targetTypeName = info.GetString("TargetTypeName");
             String methodName = info.GetString("MethodName");
 
-            return new DelegateEntry(delegateType, delegateAssembly, target, targetTypeAssembly, targetTypeName, methodName);
+            return new DelegateEntry(
+                delegateType,
+                delegateAssembly,
+                target,
+                targetTypeAssembly,
+                targetTypeName,
+                methodName
+            );
         }
 
         [System.Security.SecurityCritical]
@@ -214,37 +254,48 @@ namespace System
 
                 // We cannot use Type.GetType directly, because of AppCompat - assembly names starting with '[' would fail to load.
                 RuntimeType type = (RuntimeType)Assembly.GetType_Compat(de.assembly, de.type);
-                RuntimeType targetType = (RuntimeType)Assembly.GetType_Compat(de.targetTypeAssembly, de.targetTypeName);
+                RuntimeType targetType = (RuntimeType)
+                    Assembly.GetType_Compat(de.targetTypeAssembly, de.targetTypeName);
 
                 // If we received the new style delegate encoding we already have the target MethodInfo in hand.
                 if (m_methods != null)
                 {
-#if FEATURE_REMOTING                
-                    Object target = de.target != null ? RemotingServices.CheckCast(de.target, targetType) : null;
+#if FEATURE_REMOTING
+                    Object target =
+                        de.target != null
+                            ? RemotingServices.CheckCast(de.target, targetType)
+                            : null;
 #else
-                    if(!targetType.IsInstanceOfType(de.target))
+                    if (!targetType.IsInstanceOfType(de.target))
                         throw new InvalidCastException();
-                    Object target=de.target;
+                    Object target = de.target;
 #endif
                     d = Delegate.CreateDelegateNoSecurityCheck(type, target, m_methods[index]);
                 }
                 else
                 {
                     if (de.target != null)
-#if FEATURE_REMOTING                
-                        d = Delegate.CreateDelegate(type, RemotingServices.CheckCast(de.target, targetType), de.methodName);
+#if FEATURE_REMOTING
+                        d = Delegate.CreateDelegate(
+                            type,
+                            RemotingServices.CheckCast(de.target, targetType),
+                            de.methodName
+                        );
 #else
-                {
-                    if(!targetType.IsInstanceOfType(de.target))
-                        throw new InvalidCastException();
-                     d = Delegate.CreateDelegate(type, de.target, de.methodName);
-                }
+                    {
+                        if (!targetType.IsInstanceOfType(de.target))
+                            throw new InvalidCastException();
+                        d = Delegate.CreateDelegate(type, de.target, de.methodName);
+                    }
 #endif
                     else
                         d = Delegate.CreateDelegate(type, targetType, de.methodName);
                 }
 
-                if ((d.Method != null && !d.Method.IsPublic) || (d.Method.DeclaringType != null && !d.Method.DeclaringType.IsVisible))
+                if (
+                    (d.Method != null && !d.Method.IsPublic)
+                    || (d.Method.DeclaringType != null && !d.Method.DeclaringType.IsVisible)
+                )
                     new ReflectionPermission(ReflectionPermissionFlag.MemberAccess).Demand();
             }
             catch (Exception e)
@@ -260,7 +311,7 @@ namespace System
         #endregion
 
         #region IObjectReference
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public Object GetRealObject(StreamingContext context)
         {
             int count = 0;
@@ -276,7 +327,7 @@ namespace System
             else
             {
                 object[] invocationList = new object[count];
-                
+
                 for (DelegateEntry de = m_delegateEntry; de != null; de = de.Entry)
                 {
                     // Be careful to match the index we pass to GetDelegate (used to look up extra information for each delegate) to
@@ -284,16 +335,21 @@ namespace System
                     --count;
                     invocationList[count] = GetDelegate(de, maxindex - count);
                 }
-                return ((MulticastDelegate)invocationList[0]).NewMulticastDelegate(invocationList, invocationList.Length);
+                return ((MulticastDelegate)invocationList[0]).NewMulticastDelegate(
+                    invocationList,
+                    invocationList.Length
+                );
             }
         }
         #endregion
 
         #region ISerializable
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            throw new NotSupportedException(Environment.GetResourceString("NotSupported_DelegateSerHolderSerial"));
+            throw new NotSupportedException(
+                Environment.GetResourceString("NotSupported_DelegateSerHolderSerial")
+            );
         }
         #endregion
     }

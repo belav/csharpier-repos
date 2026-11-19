@@ -16,7 +16,8 @@ public class Program
             "runtimes",
             RuntimeInformation.RuntimeIdentifier,
             "native",
-            "llvm-dwarfdump");
+            "llvm-dwarfdump"
+        );
 
         if (!File.Exists(llvmDwarfDumpPath))
         {
@@ -40,14 +41,16 @@ public class Program
             return 3;
         }
 
-        proc = Process.Start(new ProcessStartInfo
-        {
-            FileName = llvmDwarfDumpPath,
-            Arguments = $"--verify {Environment.ProcessPath}",
-            RedirectStandardOutput = true,
-            RedirectStandardError = true,
-            UseShellExecute = false
-        });
+        proc = Process.Start(
+            new ProcessStartInfo
+            {
+                FileName = llvmDwarfDumpPath,
+                Arguments = $"--verify {Environment.ProcessPath}",
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+            }
+        );
 
         // Just count the number of warnings and errors. There are so many right now that it's not worth enumerating the list
 #if DEBUG
@@ -67,7 +70,6 @@ public class Program
             }
         }
 
-
         if (count == 0)
         {
             // something is off, lets check the StandardError stream
@@ -77,14 +79,17 @@ public class Program
             {
                 if (line.Contains("error:"))
                 {
-                    if (errorCount < 5) firstFiveErrors[errorCount] = line;
+                    if (errorCount < 5)
+                        firstFiveErrors[errorCount] = line;
                     errorCount++;
                 }
             }
 
             if (errorCount > 0)
             {
-                Console.Error.WriteLine($"llvm-dwarfdump failed. First five errors:{Environment.NewLine}{string.Join(Environment.NewLine, firstFiveErrors)}");
+                Console.Error.WriteLine(
+                    $"llvm-dwarfdump failed. First five errors:{Environment.NewLine}{string.Join(Environment.NewLine, firstFiveErrors)}"
+                );
                 return 10;
             }
         }
@@ -93,8 +98,12 @@ public class Program
         Console.WriteLine($"Found {count} warnings and errors");
         if (count is not (>= MinWarnings and <= MaxWarnings))
         {
-            Console.WriteLine($"Found {count} warnings and errors, expected between {MinWarnings} and {MaxWarnings}");
-            Console.WriteLine("This is likely a result of debug info changes. To see the new output, run the following command:");
+            Console.WriteLine(
+                $"Found {count} warnings and errors, expected between {MinWarnings} and {MaxWarnings}"
+            );
+            Console.WriteLine(
+                "This is likely a result of debug info changes. To see the new output, run the following command:"
+            );
             Console.WriteLine("\tllvm-dwarfdump --verify " + Environment.ProcessPath);
             return 10;
         }

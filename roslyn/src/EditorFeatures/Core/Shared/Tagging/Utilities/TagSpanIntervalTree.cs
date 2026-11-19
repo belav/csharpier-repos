@@ -21,22 +21,28 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
     /// tracked. That way you can query for intersecting/overlapping spans in a different snapshot
     /// than the one for the tag spans that were added.
     /// </summary>
-    internal partial class TagSpanIntervalTree<TTag> where TTag : ITag
+    internal partial class TagSpanIntervalTree<TTag>
+        where TTag : ITag
     {
         private readonly IntervalTree<TagNode> _tree;
         private readonly ITextBuffer _textBuffer;
         private readonly SpanTrackingMode _spanTrackingMode;
 
-        public TagSpanIntervalTree(ITextBuffer textBuffer,
+        public TagSpanIntervalTree(
+            ITextBuffer textBuffer,
             SpanTrackingMode trackingMode,
-            IEnumerable<ITagSpan<TTag>>? values = null)
+            IEnumerable<ITagSpan<TTag>>? values = null
+        )
         {
             _textBuffer = textBuffer;
             _spanTrackingMode = trackingMode;
 
             var nodeValues = values?.Select(ts => new TagNode(ts, trackingMode));
 
-            _tree = IntervalTree.Create(new IntervalIntrospector(textBuffer.CurrentSnapshot), nodeValues);
+            _tree = IntervalTree.Create(
+                new IntervalIntrospector(textBuffer.CurrentSnapshot),
+                nodeValues
+            );
         }
 
         public ITextBuffer Buffer => _textBuffer;
@@ -48,42 +54,59 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
             var snapshot = point.Snapshot;
             Debug.Assert(snapshot.TextBuffer == _textBuffer);
 
-            return _tree.HasIntervalThatContains(point.Position, length: 0, new IntervalIntrospector(snapshot));
+            return _tree.HasIntervalThatContains(
+                point.Position,
+                length: 0,
+                new IntervalIntrospector(snapshot)
+            );
         }
 
-        public IList<ITagSpan<TTag>> GetIntersectingSpans(SnapshotSpan snapshotSpan)
-            => SegmentedListPool.ComputeList(
+        public IList<ITagSpan<TTag>> GetIntersectingSpans(SnapshotSpan snapshotSpan) =>
+            SegmentedListPool.ComputeList(
                 static (args, tags) => args.@this.AddIntersectingSpans(args.snapshotSpan, tags),
                 (@this: this, snapshotSpan),
-                _: (ITagSpan<TTag>?)null);
+                _: (ITagSpan<TTag>?)null
+            );
 
-        private void AddIntersectingSpans(SnapshotSpan snapshotSpan, SegmentedList<ITagSpan<TTag>> result)
+        private void AddIntersectingSpans(
+            SnapshotSpan snapshotSpan,
+            SegmentedList<ITagSpan<TTag>> result
+        )
         {
             var snapshot = snapshotSpan.Snapshot;
             Debug.Assert(snapshot.TextBuffer == _textBuffer);
 
             using var intersectingIntervals = TemporaryArray<TagNode>.Empty;
             _tree.FillWithIntervalsThatIntersectWith(
-                snapshotSpan.Start, snapshotSpan.Length, ref intersectingIntervals.AsRef(), new IntervalIntrospector(snapshot));
+                snapshotSpan.Start,
+                snapshotSpan.Length,
+                ref intersectingIntervals.AsRef(),
+                new IntervalIntrospector(snapshot)
+            );
 
             foreach (var tagNode in intersectingIntervals)
                 result.Add(new TagSpan<TTag>(tagNode.Span.GetSpan(snapshot), tagNode.Tag));
         }
 
-        public IEnumerable<ITagSpan<TTag>> GetSpans(ITextSnapshot snapshot)
-            => _tree.Select(tn => new TagSpan<TTag>(tn.Span.GetSpan(snapshot), tn.Tag));
+        public IEnumerable<ITagSpan<TTag>> GetSpans(ITextSnapshot snapshot) =>
+            _tree.Select(tn => new TagSpan<TTag>(tn.Span.GetSpan(snapshot), tn.Tag));
 
-        public bool IsEmpty()
-            => _tree.IsEmpty();
+        public bool IsEmpty() => _tree.IsEmpty();
 
-        public void AddIntersectingTagSpans(NormalizedSnapshotSpanCollection requestedSpans, SegmentedList<ITagSpan<TTag>> tags)
+        public void AddIntersectingTagSpans(
+            NormalizedSnapshotSpanCollection requestedSpans,
+            SegmentedList<ITagSpan<TTag>> tags
+        )
         {
             AddIntersectingTagSpansWorker(requestedSpans, tags);
             DebugVerifyTags(requestedSpans, tags);
         }
 
         [Conditional("DEBUG")]
-        private static void DebugVerifyTags(NormalizedSnapshotSpanCollection requestedSpans, SegmentedList<ITagSpan<TTag>> tags)
+        private static void DebugVerifyTags(
+            NormalizedSnapshotSpanCollection requestedSpans,
+            SegmentedList<ITagSpan<TTag>> tags
+        )
         {
             if (tags == null)
             {
@@ -103,7 +126,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
 
         private void AddIntersectingTagSpansWorker(
             NormalizedSnapshotSpanCollection requestedSpans,
-            SegmentedList<ITagSpan<TTag>> tags)
+            SegmentedList<ITagSpan<TTag>> tags
+        )
         {
             const int MaxNumberOfRequestedSpans = 100;
 
@@ -119,16 +143,20 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
 
         private void AddTagsForSmallNumberOfSpans(
             NormalizedSnapshotSpanCollection requestedSpans,
-            SegmentedList<ITagSpan<TTag>> tags)
+            SegmentedList<ITagSpan<TTag>> tags
+        )
         {
             foreach (var span in requestedSpans)
                 AddIntersectingSpans(span, tags);
         }
 
-        private void AddTagsForLargeNumberOfSpans(NormalizedSnapshotSpanCollection requestedSpans, SegmentedList<ITagSpan<TTag>> tags)
+        private void AddTagsForLargeNumberOfSpans(
+            NormalizedSnapshotSpanCollection requestedSpans,
+            SegmentedList<ITagSpan<TTag>> tags
+        )
         {
             // we are asked with bunch of spans. rather than asking same question again and again, ask once with big span
-            // which will return superset of what we want. and then filter them out in O(m+n) cost. 
+            // which will return superset of what we want. and then filter them out in O(m+n) cost.
             // m == number of requested spans, n = number of returned spans
             var mergedSpan = new SnapshotSpan(requestedSpans[0].Start, requestedSpans[^1].End);
 
@@ -168,8 +196,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
                 else
                 {
                     // Only if this is the first time we are seeing this tag do we add it to the result.
-                    if (currentTagSpan.Length > 0 &&
-                        hashSet.Add(currentTag))
+                    if (currentTagSpan.Length > 0 && hashSet.Add(currentTag))
                     {
                         tags.Add(currentTag);
                     }

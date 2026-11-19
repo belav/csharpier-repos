@@ -9,7 +9,11 @@ namespace JitTest_lcs_gcref_port
     internal class LCSO
     {
         private LCSO _m_child;
-        public LCSO(LCSO child) { _m_child = child; }
+
+        public LCSO(LCSO child)
+        {
+            _m_child = child;
+        }
     }
 
     public struct LCSV
@@ -21,7 +25,8 @@ namespace JitTest_lcs_gcref_port
         private static String buildLCS(LCSV[,,,] b, char[] X, LCSV[] ind)
         {
             for (int i = 0; i < RANK; i++)
-                if (ind[i]._v == 0) return "";
+                if (ind[i]._v == 0)
+                    return "";
 
             LCSV L = b[ind[0]._v, ind[1]._v, ind[2]._v, ind[3]._v];
             LCSV Z;
@@ -68,12 +73,15 @@ namespace JitTest_lcs_gcref_port
                             if (eqFlag)
                             {
                                 c[ind[0]._v, ind[1]._v, ind[2]._v, ind[3]._v]._v =
-                                    c[ind[0]._v - 1, ind[1]._v - 1, ind[2]._v - 1, ind[3]._v - 1]._v + 1;
+                                    c[ind[0]._v - 1, ind[1]._v - 1, ind[2]._v - 1, ind[3]._v - 1]._v
+                                    + 1;
                                 b[ind[0]._v, ind[1]._v, ind[2]._v, ind[3]._v]._v = RANK;
                                 continue;
                             }
 
-                            LCSV R, M, Z;
+                            LCSV R,
+                                M,
+                                Z;
                             Z._v = 0;
                             R._v = M._v = -1;
                             Z._gcref = R._gcref = M._gcref = null;
@@ -103,11 +111,12 @@ namespace JitTest_lcs_gcref_port
         public static int TestEntryPoint()
         {
             Console.WriteLine("Test searches for longest common subsequence of 4 strings\n\n");
-            String[] str = new String[RANK] {
+            String[] str = new String[RANK]
+            {
                 "The Sun has left his blackness",
                 "and has found a fresher morning",
                 "and the fair Moon rejoices",
-                "in the clear and cloudless night"
+                "in the clear and cloudless night",
             };
 
             LCSV[] len = new LCSV[RANK];

@@ -45,7 +45,9 @@ public sealed record RelationalQueryTranslationPreprocessorDependencies
     ///     the constructor at any point in this process.
     /// </remarks>
     [EntityFrameworkInternal]
-    public RelationalQueryTranslationPreprocessorDependencies(IRelationalTypeMappingSource relationalTypeMappingSource)
+    public RelationalQueryTranslationPreprocessorDependencies(
+        IRelationalTypeMappingSource relationalTypeMappingSource
+    )
     {
         RelationalTypeMappingSource = relationalTypeMappingSource;
     }

@@ -20,8 +20,10 @@ namespace System
     [JsonConverter(typeof(BinaryDataJsonConverter))]
     public class BinaryData
     {
-        private const string JsonSerializerRequiresDynamicCode = "JSON serialization and deserialization might require types that cannot be statically analyzed and might need runtime code generation.";
-        private const string JsonSerializerRequiresUnreferencedCode = "JSON serialization and deserialization might require types that cannot be statically analyzed.";
+        private const string JsonSerializerRequiresDynamicCode =
+            "JSON serialization and deserialization might require types that cannot be statically analyzed and might need runtime code generation.";
+        private const string JsonSerializerRequiresUnreferencedCode =
+            "JSON serialization and deserialization might require types that cannot be statically analyzed.";
         private const string MediaTypeApplicationJson = "application/json";
 
         /// <summary>
@@ -69,7 +71,8 @@ namespace System
         /// <param name="data">The array to wrap.</param>
         /// <param name="mediaType">MIME type of this data, e.g. <see cref="MediaTypeNames.Application.Octet"/>.</param>
         /// <seealso cref="MediaTypeNames"/>
-        public BinaryData(byte[] data, string? mediaType) : this(data)
+        public BinaryData(byte[] data, string? mediaType)
+            : this(data)
         {
             MediaType = mediaType;
         }
@@ -87,11 +90,19 @@ namespace System
         /// <seealso cref="MediaTypeNames"/>
         [RequiresDynamicCode(JsonSerializerRequiresDynamicCode)]
         [RequiresUnreferencedCode(JsonSerializerRequiresUnreferencedCode)]
-        public BinaryData(object? jsonSerializable, JsonSerializerOptions? options = default, Type? type = default) : this(
-            JsonSerializer.SerializeToUtf8Bytes(jsonSerializable, type ?? jsonSerializable?.GetType() ?? typeof(object), options),
-            MediaTypeApplicationJson)
-        {
-        }
+        public BinaryData(
+            object? jsonSerializable,
+            JsonSerializerOptions? options = default,
+            Type? type = default
+        )
+            : this(
+                JsonSerializer.SerializeToUtf8Bytes(
+                    jsonSerializable,
+                    type ?? jsonSerializable?.GetType() ?? typeof(object),
+                    options
+                ),
+                MediaTypeApplicationJson
+            ) { }
 
         /// <summary>
         /// Creates a <see cref="BinaryData"/> instance by serializing the provided object to JSON
@@ -104,11 +115,19 @@ namespace System
         /// <param name="type">The type to use when serializing the data. If not specified, <see cref="object.GetType"/> will
         /// be used to determine the type.</param>
         /// <seealso cref="MediaTypeNames"/>
-        public BinaryData(object? jsonSerializable, JsonSerializerContext context, Type? type = default) : this(
-            JsonSerializer.SerializeToUtf8Bytes(jsonSerializable, type ?? jsonSerializable?.GetType() ?? typeof(object), context),
-            MediaTypeApplicationJson)
-        {
-        }
+        public BinaryData(
+            object? jsonSerializable,
+            JsonSerializerContext context,
+            Type? type = default
+        )
+            : this(
+                JsonSerializer.SerializeToUtf8Bytes(
+                    jsonSerializable,
+                    type ?? jsonSerializable?.GetType() ?? typeof(object),
+                    context
+                ),
+                MediaTypeApplicationJson
+            ) { }
 
         /// <summary>
         /// Creates a <see cref="BinaryData"/> instance by wrapping the
@@ -127,7 +146,8 @@ namespace System
         /// <param name="data">Byte data to wrap.</param>
         /// <param name="mediaType">MIME type of this data, e.g. <see cref="MediaTypeNames.Application.Octet"/>.</param>
         /// <seealso cref="MediaTypeNames"/>
-        public BinaryData(ReadOnlyMemory<byte> data, string? mediaType) : this(data)
+        public BinaryData(ReadOnlyMemory<byte> data, string? mediaType)
+            : this(data)
         {
             MediaType = mediaType;
         }
@@ -155,7 +175,8 @@ namespace System
         /// <param name="data">The string data.</param>
         /// <param name="mediaType">MIME type of this data, e.g. <see cref="MediaTypeNames.Application.Octet"/>.</param>
         /// <seealso cref="MediaTypeNames"/>
-        public BinaryData(string data, string? mediaType) : this(data)
+        public BinaryData(string data, string? mediaType)
+            : this(data)
         {
             MediaType = mediaType;
         }
@@ -177,8 +198,8 @@ namespace System
         /// <param name="mediaType">MIME type of this data, e.g. <see cref="MediaTypeNames.Application.Octet"/>.</param>
         /// <returns>A wrapper over <paramref name="data"/>.</returns>
         /// <seealso cref="MediaTypeNames"/>
-        public static BinaryData FromBytes(ReadOnlyMemory<byte> data, string? mediaType)
-            => new BinaryData(data, mediaType);
+        public static BinaryData FromBytes(ReadOnlyMemory<byte> data, string? mediaType) =>
+            new BinaryData(data, mediaType);
 
         /// <summary>
         /// Creates a <see cref="BinaryData"/> instance by wrapping the provided
@@ -196,8 +217,8 @@ namespace System
         /// <param name="mediaType">MIME type of this data, e.g. <see cref="MediaTypeNames.Application.Octet"/>.</param>
         /// <returns>A wrapper over <paramref name="data"/>.</returns>
         /// <seealso cref="MediaTypeNames"/>
-        public static BinaryData FromBytes(byte[] data, string? mediaType)
-            => new BinaryData(data, mediaType);
+        public static BinaryData FromBytes(byte[] data, string? mediaType) =>
+            new BinaryData(data, mediaType);
 
         /// <summary>
         /// Creates a <see cref="BinaryData"/> instance from a string by converting
@@ -216,8 +237,8 @@ namespace System
         /// <param name="mediaType">MIME type of this data, e.g. <see cref="MediaTypeNames.Text.Plain"/>.</param>
         /// <returns>A value representing the UTF-8 encoding of <paramref name="data"/>.</returns>
         /// <seealso cref="MediaTypeNames"/>
-        public static BinaryData FromString(string data, string? mediaType)
-            => new BinaryData(data, mediaType);
+        public static BinaryData FromString(string data, string? mediaType) =>
+            new BinaryData(data, mediaType);
 
         /// <summary>
         /// Creates a <see cref="BinaryData"/> instance from the specified stream.
@@ -261,7 +282,10 @@ namespace System
         /// <param name="stream">Stream containing the data.</param>
         /// <param name="cancellationToken">A token that may be used to cancel the operation.</param>
         /// <returns>A value representing all of the data remaining in <paramref name="stream"/>.</returns>
-        public static Task<BinaryData> FromStreamAsync(Stream stream, CancellationToken cancellationToken = default)
+        public static Task<BinaryData> FromStreamAsync(
+            Stream stream,
+            CancellationToken cancellationToken = default
+        )
         {
             if (stream is null)
             {
@@ -281,8 +305,11 @@ namespace System
         /// <param name="cancellationToken">A token that may be used to cancel the operation.</param>
         /// <returns>A value representing all of the data remaining in <paramref name="stream"/>.</returns>
         /// <seealso cref="MediaTypeNames"/>
-        public static Task<BinaryData> FromStreamAsync(Stream stream, string? mediaType,
-            CancellationToken cancellationToken = default)
+        public static Task<BinaryData> FromStreamAsync(
+            Stream stream,
+            string? mediaType,
+            CancellationToken cancellationToken = default
+        )
         {
             if (stream is null)
             {
@@ -292,10 +319,14 @@ namespace System
             return FromStreamAsync(stream, async: true, mediaType, cancellationToken);
         }
 
-        private static async Task<BinaryData> FromStreamAsync(Stream stream, bool async,
-            string? mediaType = default, CancellationToken cancellationToken = default)
+        private static async Task<BinaryData> FromStreamAsync(
+            Stream stream,
+            bool async,
+            string? mediaType = default,
+            CancellationToken cancellationToken = default
+        )
         {
-            const int CopyToBufferSize = 81920;  // the default used by Stream.CopyToAsync
+            const int CopyToBufferSize = 81920; // the default used by Stream.CopyToAsync
             int bufferSize = CopyToBufferSize;
             MemoryStream memoryStream;
 
@@ -304,7 +335,10 @@ namespace System
                 long longLength = stream.Length - stream.Position;
                 if (longLength > int.MaxValue || longLength < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(stream), SR.ArgumentOutOfRange_StreamLengthMustBeNonNegativeInt32);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(stream),
+                        SR.ArgumentOutOfRange_StreamLengthMustBeNonNegativeInt32
+                    );
                 }
 
                 // choose a minimum valid (non-zero) buffer size.
@@ -320,13 +354,18 @@ namespace System
             {
                 if (async)
                 {
-                    await stream.CopyToAsync(memoryStream, bufferSize, cancellationToken).ConfigureAwait(false);
+                    await stream
+                        .CopyToAsync(memoryStream, bufferSize, cancellationToken)
+                        .ConfigureAwait(false);
                 }
                 else
                 {
                     stream.CopyTo(memoryStream, bufferSize);
                 }
-                return new BinaryData(memoryStream.GetBuffer().AsMemory(0, (int)memoryStream.Position), mediaType);
+                return new BinaryData(
+                    memoryStream.GetBuffer().AsMemory(0, (int)memoryStream.Position),
+                    mediaType
+                );
             }
         }
 
@@ -342,8 +381,14 @@ namespace System
         /// <seealso cref="MediaTypeNames"/>
         [RequiresDynamicCode(JsonSerializerRequiresDynamicCode)]
         [RequiresUnreferencedCode(JsonSerializerRequiresUnreferencedCode)]
-        public static BinaryData FromObjectAsJson<T>(T jsonSerializable, JsonSerializerOptions? options = default)
-            => new BinaryData(JsonSerializer.SerializeToUtf8Bytes(jsonSerializable, options), MediaTypeApplicationJson);
+        public static BinaryData FromObjectAsJson<T>(
+            T jsonSerializable,
+            JsonSerializerOptions? options = default
+        ) =>
+            new BinaryData(
+                JsonSerializer.SerializeToUtf8Bytes(jsonSerializable, options),
+                MediaTypeApplicationJson
+            );
 
         /// <summary>
         /// Creates a <see cref="BinaryData"/> instance by serializing the provided object using
@@ -355,8 +400,14 @@ namespace System
         /// <param name="jsonTypeInfo">The <see cref="JsonTypeInfo"/> to use when serializing to JSON.</param>
         /// <returns>A value representing the UTF-8 encoding of the JSON representation of <paramref name="jsonSerializable" />.</returns>
         /// <seealso cref="MediaTypeNames"/>
-        public static BinaryData FromObjectAsJson<T>(T jsonSerializable, JsonTypeInfo<T> jsonTypeInfo)
-            => new BinaryData(JsonSerializer.SerializeToUtf8Bytes(jsonSerializable, jsonTypeInfo), MediaTypeApplicationJson);
+        public static BinaryData FromObjectAsJson<T>(
+            T jsonSerializable,
+            JsonTypeInfo<T> jsonTypeInfo
+        ) =>
+            new BinaryData(
+                JsonSerializer.SerializeToUtf8Bytes(jsonSerializable, jsonTypeInfo),
+                MediaTypeApplicationJson
+            );
 
         /// <summary>
         /// Creates a <see cref="BinaryData"/> instance by wrapping the same data
@@ -364,8 +415,7 @@ namespace System
         /// </summary>
         /// <returns>A wrapper over the same data with specified <see cref="MediaType"/>.</returns>
         /// <seealso cref="MediaTypeNames"/>
-        public BinaryData WithMediaType(string? mediaType)
-            => new BinaryData(_bytes, mediaType);
+        public BinaryData WithMediaType(string? mediaType) => new BinaryData(_bytes, mediaType);
 
         /// <summary>
         /// Converts the value of this instance to a string using UTF-8.
@@ -423,8 +473,8 @@ namespace System
         /// <returns>The data converted to the specified type.</returns>
         [RequiresDynamicCode(JsonSerializerRequiresDynamicCode)]
         [RequiresUnreferencedCode(JsonSerializerRequiresUnreferencedCode)]
-        public T? ToObjectFromJson<T>(JsonSerializerOptions? options = default)
-            => JsonSerializer.Deserialize<T>(GetBytesWithTrimmedBom(), options);
+        public T? ToObjectFromJson<T>(JsonSerializerOptions? options = default) =>
+            JsonSerializer.Deserialize<T>(GetBytesWithTrimmedBom(), options);
 
         /// <summary>
         /// Converts the <see cref="BinaryData"/> to the specified type using
@@ -434,8 +484,8 @@ namespace System
         /// converted to.</typeparam>
         /// <param name="jsonTypeInfo">The <see cref="JsonTypeInfo"/> to use when serializing to JSON.</param>
         /// <returns>The data converted to the specified type.</returns>
-        public T? ToObjectFromJson<T>(JsonTypeInfo<T> jsonTypeInfo)
-            => JsonSerializer.Deserialize(GetBytesWithTrimmedBom(), jsonTypeInfo);
+        public T? ToObjectFromJson<T>(JsonTypeInfo<T> jsonTypeInfo) =>
+            JsonSerializer.Deserialize(GetBytesWithTrimmedBom(), jsonTypeInfo);
 
         private ReadOnlySpan<byte> GetBytesWithTrimmedBom()
         {
@@ -452,7 +502,8 @@ namespace System
         /// Defines an implicit conversion from a <see cref="BinaryData" /> to a <see cref="ReadOnlyMemory{Byte}"/>.
         /// </summary>
         /// <param name="data">The value to be converted.</param>
-        public static implicit operator ReadOnlyMemory<byte>(BinaryData? data) => data?._bytes ?? default;
+        public static implicit operator ReadOnlyMemory<byte>(BinaryData? data) =>
+            data?._bytes ?? default;
 
         /// <summary>
         /// Defines an implicit conversion from a <see cref="BinaryData" /> to a <see cref="ReadOnlySpan{Byte}"/>.

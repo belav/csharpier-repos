@@ -6,6 +6,6 @@
     public enum SampleDirection
     {
         Request = 0,
-        Response
+        Response,
     }
 }

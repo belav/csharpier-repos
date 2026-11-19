@@ -66,8 +66,8 @@ public class InferParameterBindingInfoConventionTest
         var action = GetActionModel(typeof(MultipleFromBodyController), actionName);
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => convention.InferParameterBindingSources(action)
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            convention.InferParameterBindingSources(action)
         );
         Assert.Equal(expected, ex.Message);
     }
@@ -89,8 +89,8 @@ public class InferParameterBindingInfoConventionTest
         var action = GetActionModel(typeof(MultipleFromBodyController), actionName);
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => convention.InferParameterBindingSources(action)
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            convention.InferParameterBindingSources(action)
         );
         Assert.Equal(expected, ex.Message);
     }
@@ -112,8 +112,8 @@ public class InferParameterBindingInfoConventionTest
         var action = GetActionModel(typeof(MultipleFromBodyController), actionName);
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => convention.InferParameterBindingSources(action)
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            convention.InferParameterBindingSources(action)
         );
         Assert.Equal(expected, ex.Message);
     }
@@ -174,18 +174,15 @@ public class InferParameterBindingInfoConventionTest
         convention.InferParameterBindingSources(action);
 
         // Assert
-        Assert.Collection(
-            action.Parameters,
-            parameter =>
-            {
-                Assert.Equal("model", parameter.Name);
+        Assert.Collection(action.Parameters, parameter =>
+        {
+            Assert.Equal("model", parameter.Name);
 
-                var bindingInfo = parameter.BindingInfo;
-                Assert.NotNull(bindingInfo);
-                Assert.Equal(EmptyBodyBehavior.Default, bindingInfo.EmptyBodyBehavior);
-                Assert.Same(BindingSource.Body, bindingInfo.BindingSource);
-            }
-        );
+            var bindingInfo = parameter.BindingInfo;
+            Assert.NotNull(bindingInfo);
+            Assert.Equal(EmptyBodyBehavior.Default, bindingInfo.EmptyBodyBehavior);
+            Assert.Same(BindingSource.Body, bindingInfo.BindingSource);
+        });
     }
 
     [Fact]
@@ -205,18 +202,15 @@ public class InferParameterBindingInfoConventionTest
         convention.InferParameterBindingSources(action);
 
         // Assert
-        Assert.Collection(
-            action.Parameters,
-            parameter =>
-            {
-                Assert.Equal("model", parameter.Name);
+        Assert.Collection(action.Parameters, parameter =>
+        {
+            Assert.Equal("model", parameter.Name);
 
-                var bindingInfo = parameter.BindingInfo;
-                Assert.NotNull(bindingInfo);
-                Assert.Equal(EmptyBodyBehavior.Allow, bindingInfo.EmptyBodyBehavior);
-                Assert.Same(BindingSource.Body, bindingInfo.BindingSource);
-            }
-        );
+            var bindingInfo = parameter.BindingInfo;
+            Assert.NotNull(bindingInfo);
+            Assert.Equal(EmptyBodyBehavior.Allow, bindingInfo.EmptyBodyBehavior);
+            Assert.Same(BindingSource.Body, bindingInfo.BindingSource);
+        });
     }
 
     [Fact]
@@ -236,18 +230,15 @@ public class InferParameterBindingInfoConventionTest
         convention.InferParameterBindingSources(action);
 
         // Assert
-        Assert.Collection(
-            action.Parameters,
-            parameter =>
-            {
-                Assert.Equal("model", parameter.Name);
+        Assert.Collection(action.Parameters, parameter =>
+        {
+            Assert.Equal("model", parameter.Name);
 
-                var bindingInfo = parameter.BindingInfo;
-                Assert.NotNull(bindingInfo);
-                Assert.Equal(EmptyBodyBehavior.Allow, bindingInfo.EmptyBodyBehavior);
-                Assert.Same(BindingSource.Body, bindingInfo.BindingSource);
-            }
-        );
+            var bindingInfo = parameter.BindingInfo;
+            Assert.NotNull(bindingInfo);
+            Assert.Equal(EmptyBodyBehavior.Allow, bindingInfo.EmptyBodyBehavior);
+            Assert.Same(BindingSource.Body, bindingInfo.BindingSource);
+        });
     }
 
     [Fact]
@@ -1004,8 +995,7 @@ public class InferParameterBindingInfoConventionTest
     )
     {
         modelMetadataProvider = modelMetadataProvider ?? new EmptyModelMetadataProvider();
-        serviceProviderIsService =
-            serviceProviderIsService
+        serviceProviderIsService = serviceProviderIsService
             ?? Mock.Of<IServiceProviderIsService>(s => s.IsService(It.IsAny<Type>()) == false);
         return new InferParameterBindingInfoConvention(
             modelMetadataProvider,

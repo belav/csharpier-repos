@@ -11,31 +11,28 @@ internal sealed class ListCommand
 {
     public static void Register(ProjectCommandLineApplication app)
     {
-        app.Command(
-            "list",
-            cmd =>
+        app.Command("list", cmd =>
+        {
+            cmd.Description = Resources.ListCommand_Description;
+
+            var showTokensOption = cmd.Option(
+                "--show-tokens",
+                Resources.ListCommand_ShowTokenOption_Description,
+                CommandOptionType.NoValue
+            );
+
+            cmd.HelpOption("-h|--help");
+
+            cmd.OnExecute(() =>
             {
-                cmd.Description = Resources.ListCommand_Description;
-
-                var showTokensOption = cmd.Option(
-                    "--show-tokens",
-                    Resources.ListCommand_ShowTokenOption_Description,
-                    CommandOptionType.NoValue
+                return Execute(
+                    cmd.Reporter,
+                    cmd.ProjectOption.Value(),
+                    showTokensOption.HasValue(),
+                    cmd.OutputOption.Value()
                 );
-
-                cmd.HelpOption("-h|--help");
-
-                cmd.OnExecute(() =>
-                {
-                    return Execute(
-                        cmd.Reporter,
-                        cmd.ProjectOption.Value(),
-                        showTokensOption.HasValue(),
-                        cmd.OutputOption.Value()
-                    );
-                });
-            }
-        );
+            });
+        });
     }
 
     private static int Execute(

@@ -7,9 +7,7 @@ namespace SamplesCS
 {
     public class CustomUpdatePanel : System.Web.UI.UpdatePanel
     {
-        public CustomUpdatePanel()
-        {
-        }
+        public CustomUpdatePanel() { }
 
         private String _groupingText;
         public String GroupingText
@@ -20,17 +18,21 @@ namespace SamplesCS
 
         protected override Control CreateContentTemplateContainer()
         {
-            MyContentTemplateContainer myContentTemplateContainer =
-                new MyContentTemplateContainer(_groupingText);
+            MyContentTemplateContainer myContentTemplateContainer = new MyContentTemplateContainer(
+                _groupingText
+            );
             return myContentTemplateContainer;
         }
+
         private sealed class MyContentTemplateContainer : Control
         {
             private String _displayText;
+
             public MyContentTemplateContainer(string groupingText)
             {
                 _displayText = groupingText;
             }
+
             protected override void Render(HtmlTextWriter writer)
             {
                 writer.RenderBeginTag(HtmlTextWriterTag.Fieldset);
@@ -41,6 +43,5 @@ namespace SamplesCS
                 writer.RenderEndTag();
             }
         }
-
     }
 }

@@ -23,26 +23,32 @@ namespace System.ServiceModel.Activities.Presentation
         static readonly string key = "key";
         DataGridHelper messageQueriesDGHelper;
         string querySetPropertyName = string.Empty;
-        ObservableCollection<MessageQueryEntry> dataSource = new ObservableCollection<MessageQueryEntry>();
+        ObservableCollection<MessageQueryEntry> dataSource =
+            new ObservableCollection<MessageQueryEntry>();
         public event PropertyChangedEventHandler PropertyChanged;
 
         public static readonly DependencyProperty ActivityProperty = DependencyProperty.Register(
             "Activity",
             typeof(ModelItem),
             typeof(MessageQuerySetDesigner),
-            new UIPropertyMetadata(OnActivityChanged));
+            new UIPropertyMetadata(OnActivityChanged)
+        );
 
-        public static readonly DependencyProperty MessageQuerySetContainerProperty = DependencyProperty.Register(
-            "MessageQuerySetContainer",
-            typeof(ModelItem),
-            typeof(MessageQuerySetDesigner),
-            new UIPropertyMetadata(null, OnMessageQuerySetContainerChanged));
+        public static readonly DependencyProperty MessageQuerySetContainerProperty =
+            DependencyProperty.Register(
+                "MessageQuerySetContainer",
+                typeof(ModelItem),
+                typeof(MessageQuerySetDesigner),
+                new UIPropertyMetadata(null, OnMessageQuerySetContainerChanged)
+            );
 
-        static readonly DependencyPropertyKey IsTypeExpanderEnabledPropertyKey = DependencyProperty.RegisterReadOnly(
-            "IsTypeExpanderEnabled",
-            typeof(bool),
-            typeof(MessageQuerySetDesigner),
-            new UIPropertyMetadata(false));
+        static readonly DependencyPropertyKey IsTypeExpanderEnabledPropertyKey =
+            DependencyProperty.RegisterReadOnly(
+                "IsTypeExpanderEnabled",
+                typeof(bool),
+                typeof(MessageQuerySetDesigner),
+                new UIPropertyMetadata(false)
+            );
 
         public static readonly DependencyProperty IsTypeExpanderEnabledProperty =
             IsTypeExpanderEnabledPropertyKey.DependencyProperty;
@@ -74,10 +80,7 @@ namespace System.ServiceModel.Activities.Presentation
 
         public IList<KeyValuePair<string, Type>> ActivityParameters
         {
-            get
-            {
-                return null != this.Activity ? this.GetActivityParameters() : null;
-            }
+            get { return null != this.Activity ? this.GetActivityParameters() : null; }
         }
 
         protected override void OnInitialized(EventArgs e)
@@ -100,14 +103,18 @@ namespace System.ServiceModel.Activities.Presentation
             if (null != query)
             {
                 //get reference to message query set dictionary
-                var messageQuerySet = this.MessageQuerySetContainer.Properties[this.querySetPropertyName].Dictionary;
+                var messageQuerySet = this.MessageQuerySetContainer
+                    .Properties[this.querySetPropertyName]
+                    .Dictionary;
                 //create unique key name
                 var name = messageQuerySet.GetUniqueName(key, p => (string)p.GetCurrentValue());
                 //add new entry with created key and query
                 messageQuerySet.Add(name, query);
                 //look for created key value pair
-                var entry = messageQuerySet.First(p => string.Equals(p.Key.GetCurrentValue(), name));
-                //wrap it 
+                var entry = messageQuerySet.First(p =>
+                    string.Equals(p.Key.GetCurrentValue(), name)
+                );
+                //wrap it
                 var wrapper = new MessageQueryEntry(entry);
                 //and add it to the ui
                 this.messageQueriesDGHelper.Source<IList>().Add(wrapper);
@@ -132,16 +139,23 @@ namespace System.ServiceModel.Activities.Presentation
             this.dataSource.Clear();
 
             //if we have activity and valid message query set container
-            if (null != this.Activity && null != this.MessageQuerySetContainer && !string.IsNullOrEmpty(this.querySetPropertyName))
+            if (
+                null != this.Activity
+                && null != this.MessageQuerySetContainer
+                && !string.IsNullOrEmpty(this.querySetPropertyName)
+            )
             {
                 //check if message query set is initialized
                 if (!this.MessageQuerySetContainer.Properties[this.querySetPropertyName].IsSet)
                 {
                     //initialize if required
-                    this.MessageQuerySetContainer.Properties[this.querySetPropertyName].SetValue(new MessageQuerySet());
+                    this.MessageQuerySetContainer.Properties[this.querySetPropertyName]
+                        .SetValue(new MessageQuerySet());
                 }
                 //get reference to message query set
-                var input = this.MessageQuerySetContainer.Properties[this.querySetPropertyName].Dictionary;
+                var input = this.MessageQuerySetContainer
+                    .Properties[this.querySetPropertyName]
+                    .Dictionary;
 
                 if (null != input)
                 {
@@ -162,7 +176,9 @@ namespace System.ServiceModel.Activities.Presentation
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Remove:
-                    var messageQuerySet = this.MessageQuerySetContainer.Properties[this.querySetPropertyName].Dictionary;
+                    var messageQuerySet = this.MessageQuerySetContainer
+                        .Properties[this.querySetPropertyName]
+                        .Dictionary;
                     foreach (MessageQueryEntry entry in e.OldItems)
                     {
                         messageQuerySet.Remove(entry.GetKey());
@@ -176,7 +192,7 @@ namespace System.ServiceModel.Activities.Presentation
             }
         }
 
-        //helper method - used to pull activity's parameters 
+        //helper method - used to pull activity's parameters
         IList<KeyValuePair<string, Type>> GetActivityParameters()
         {
             var result = new List<KeyValuePair<string, Type>>();
@@ -185,28 +201,51 @@ namespace System.ServiceModel.Activities.Presentation
             if (null != content)
             {
                 //simple scenario - content is just one argument - get its type
-                if ((content.IsAssignableFrom<ReceiveMessageContent>() || content.IsAssignableFrom<SendMessageContent>()) &&
-                    content.Properties["Message"].IsSet)
+                if (
+                    (
+                        content.IsAssignableFrom<ReceiveMessageContent>()
+                        || content.IsAssignableFrom<SendMessageContent>()
+                    ) && content.Properties["Message"].IsSet
+                )
                 {
                     ModelItem type = null;
                     content.TryGetPropertyValue(out type, "Message", "ArgumentType");
-                    result.Add(new KeyValuePair<string, Type>((string)this.FindResource("defaultParameterName"), (Type)type.GetCurrentValue()));
+                    result.Add(
+                        new KeyValuePair<string, Type>(
+                            (string)this.FindResource("defaultParameterName"),
+                            (Type)type.GetCurrentValue()
+                        )
+                    );
                 }
                 //complex scenario - content is a collection of parameters, for each one get its name and type
-                else if (content.IsAssignableFrom<ReceiveParametersContent>() && content.Properties["Parameters"].IsSet)
+                else if (
+                    content.IsAssignableFrom<ReceiveParametersContent>()
+                    && content.Properties["Parameters"].IsSet
+                )
                 {
-                    var source = (IDictionary<string, OutArgument>)content.Properties["Parameters"].ComputedValue;
+                    var source =
+                        (IDictionary<string, OutArgument>)
+                            content.Properties["Parameters"].ComputedValue;
                     foreach (var entry in source)
                     {
-                        result.Add(new KeyValuePair<string, Type>(entry.Key, entry.Value.ArgumentType));
+                        result.Add(
+                            new KeyValuePair<string, Type>(entry.Key, entry.Value.ArgumentType)
+                        );
                     }
                 }
-                else if (content.IsAssignableFrom<SendParametersContent>() && content.Properties["Parameters"].IsSet)
+                else if (
+                    content.IsAssignableFrom<SendParametersContent>()
+                    && content.Properties["Parameters"].IsSet
+                )
                 {
-                    var source = (IDictionary<string, InArgument>)content.Properties["Parameters"].ComputedValue;
+                    var source =
+                        (IDictionary<string, InArgument>)
+                            content.Properties["Parameters"].ComputedValue;
                     foreach (var entry in source)
                     {
-                        result.Add(new KeyValuePair<string, Type>(entry.Key, entry.Value.ArgumentType));
+                        result.Add(
+                            new KeyValuePair<string, Type>(entry.Key, entry.Value.ArgumentType)
+                        );
                     }
                 }
             }
@@ -219,22 +258,31 @@ namespace System.ServiceModel.Activities.Presentation
             //throw if activity is not valid messaging activity type
             if (null != activity && !activity.IsMessagingActivity())
             {
-                throw FxTrace.Exception.AsError(new NotSupportedException(activity.ItemType.FullName));
+                throw FxTrace.Exception.AsError(
+                    new NotSupportedException(activity.ItemType.FullName)
+                );
             }
             ((MessageQuerySetDesigner)sender).OnActivityChanged();
         }
 
-        static void OnMessageQuerySetContainerChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        static void OnMessageQuerySetContainerChanged(
+            DependencyObject sender,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             var control = (MessageQuerySetDesigner)sender;
             var container = e.NewValue as ModelItem;
             //throw if query set container is not derived from correlation initializer or doesn't have required property
             if (null != container)
             {
-                var property = container.Properties.FirstOrDefault(p => typeof(MessageQuerySet).IsAssignableFrom(p.PropertyType));
+                var property = container.Properties.FirstOrDefault(p =>
+                    typeof(MessageQuerySet).IsAssignableFrom(p.PropertyType)
+                );
                 if (!container.IsAssignableFrom<CorrelationInitializer>() && null == property)
                 {
-                    throw FxTrace.Exception.AsError(new NotSupportedException(container.ItemType.FullName));
+                    throw FxTrace.Exception.AsError(
+                        new NotSupportedException(container.ItemType.FullName)
+                    );
                 }
                 control.querySetPropertyName = null != property ? property.Name : string.Empty;
             }
@@ -276,19 +324,34 @@ namespace System.ServiceModel.Activities.Presentation
                 {
                     new PropertyDescriptorData()
                     {
-                         PropertyType = typeof(string),
-                         PropertyName = KeyProperty,
-                         PropertyGetter = (instance) => ( ((MessageQueryEntry)instance).GetKey() ),
-                         PropertyValidator = (instance, value, errors) => (((MessageQueryEntry)instance).ValidateKey(value, errors)),
-                         PropertySetter = (instance, value) => { ((MessageQueryEntry)instance).SetKey(value); },
+                        PropertyType = typeof(string),
+                        PropertyName = KeyProperty,
+                        PropertyGetter = (instance) => (((MessageQueryEntry)instance).GetKey()),
+                        PropertyValidator = (instance, value, errors) =>
+                            (((MessageQueryEntry)instance).ValidateKey(value, errors)),
+                        PropertySetter = (instance, value) =>
+                        {
+                            ((MessageQueryEntry)instance).SetKey(value);
+                        },
                     },
                     new PropertyDescriptorData()
                     {
                         PropertyType = typeof(string),
                         PropertyName = ValueProperty,
-                        PropertyGetter = (instance) => (((MessageQueryEntry)instance).ReflectedObject.Properties[ValueProperty].ComputedValue),
-                        PropertySetter = (instance, value) => { ((MessageQueryEntry)instance).ReflectedObject.Properties[ValueProperty].SetValue( value ); },
-                    }
+                        PropertyGetter = (instance) =>
+                            (
+                                ((MessageQueryEntry)instance)
+                                    .ReflectedObject
+                                    .Properties[ValueProperty]
+                                    .ComputedValue
+                            ),
+                        PropertySetter = (instance, value) =>
+                        {
+                            ((MessageQueryEntry)instance)
+                                .ReflectedObject.Properties[ValueProperty]
+                                .SetValue(value);
+                        },
+                    },
                 };
             }
             #endregion
@@ -300,7 +363,9 @@ namespace System.ServiceModel.Activities.Presentation
 
             void SetKey(object value)
             {
-                string name = (string)(value is ModelItem ? ((ModelItem)value).GetCurrentValue() : value);
+                string name = (string)(
+                    value is ModelItem ? ((ModelItem)value).GetCurrentValue() : value
+                );
                 name = name.Trim();
 
                 var source = (ModelItemDictionary)this.ReflectedObject.Parent;
@@ -311,7 +376,9 @@ namespace System.ServiceModel.Activities.Presentation
 
             bool ValidateKey(object newValue, List<string> errors)
             {
-                string name = (string)(newValue is ModelItem ? ((ModelItem)newValue).GetCurrentValue() : newValue);
+                string name = (string)(
+                    newValue is ModelItem ? ((ModelItem)newValue).GetCurrentValue() : newValue
+                );
                 if (null != name)
                 {
                     name = name.Trim();
@@ -326,7 +393,13 @@ namespace System.ServiceModel.Activities.Presentation
                     var source = (ModelItemDictionary)this.ReflectedObject.Parent;
                     if (source.Keys.Any(p => string.Equals(p.GetCurrentValue(), name)))
                     {
-                        errors.Add(string.Format(CultureInfo.CurrentUICulture, System.Activities.Core.Presentation.SR.DuplicateKeyName, name));
+                        errors.Add(
+                            string.Format(
+                                CultureInfo.CurrentUICulture,
+                                System.Activities.Core.Presentation.SR.DuplicateKeyName,
+                                name
+                            )
+                        );
                     }
                 }
                 return errors.Count == 0;

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,18 +28,24 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Security {
-
-	[Flags]
-	[ComVisible (true)]
-	[Serializable]
-	public enum HostSecurityManagerOptions {
-		None = 0,
-		HostAppDomainEvidence = 1,
-		HostPolicyLevel = 2,
-		HostAssemblyEvidence = 4,
-		HostDetermineApplicationTrust = 8,
-		HostResolvePolicy = 16,
-		AllFlags = HostAppDomainEvidence | HostPolicyLevel | HostAssemblyEvidence | HostDetermineApplicationTrust | HostResolvePolicy
-	}
+namespace System.Security
+{
+    [Flags]
+    [ComVisible(true)]
+    [Serializable]
+    public enum HostSecurityManagerOptions
+    {
+        None = 0,
+        HostAppDomainEvidence = 1,
+        HostPolicyLevel = 2,
+        HostAssemblyEvidence = 4,
+        HostDetermineApplicationTrust = 8,
+        HostResolvePolicy = 16,
+        AllFlags =
+            HostAppDomainEvidence
+            | HostPolicyLevel
+            | HostAssemblyEvidence
+            | HostDetermineApplicationTrust
+            | HostResolvePolicy,
+    }
 }

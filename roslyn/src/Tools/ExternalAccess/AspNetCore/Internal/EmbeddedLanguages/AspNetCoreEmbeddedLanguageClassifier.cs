@@ -10,19 +10,21 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.Internal.EmbeddedLanguages
 {
-    [ExportEmbeddedLanguageClassifier(
-        nameof(AspNetCoreEmbeddedLanguageClassifier),
-        new[] { LanguageNames.CSharp },
-        supportsUnannotatedAPIs: false,
-        // Add more syntax names here in the future if there are additional cases ASP.Net would like to light up on.
-        identifiers: new[] { "Route" }), Shared]
+    [
+        ExportEmbeddedLanguageClassifier(
+            nameof(AspNetCoreEmbeddedLanguageClassifier),
+            new[] { LanguageNames.CSharp },
+            supportsUnannotatedAPIs: false,
+            // Add more syntax names here in the future if there are additional cases ASP.Net would like to light up on.
+            identifiers: new[] { "Route" }
+        ),
+        Shared
+    ]
     internal class AspNetCoreEmbeddedLanguageClassifier : IEmbeddedLanguageClassifier
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AspNetCoreEmbeddedLanguageClassifier()
-        {
-        }
+        public AspNetCoreEmbeddedLanguageClassifier() { }
 
         public void RegisterClassifications(EmbeddedLanguageClassificationContext context)
         {

@@ -24,7 +24,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public RenameTrackingTagDefinition()
         {
-            this.Border = new Pen(Brushes.Black, thickness: 1.0) { DashStyle = new DashStyle(new[] { 0.5, 4.0 }, 1) };
+            this.Border = new Pen(Brushes.Black, thickness: 1.0)
+            {
+                DashStyle = new DashStyle(new[] { 0.5, 4.0 }, 1),
+            };
             this.DisplayName = EditorFeaturesResources.Rename_Tracking;
             this.ZOrder = 1;
         }

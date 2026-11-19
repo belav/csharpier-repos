@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------
 // <copyright file="HybridDictionary.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Collections.Specialized {
-
+namespace System.Collections.Specialized
+{
     using System.Collections;
     using System.Globalization;
 
     /// <devdoc>
-    ///  <para> 
+    ///  <para>
     ///    This data structure implements IDictionary first using a linked list
     ///    (ListDictionary) and then switching over to use Hashtable when large. This is recommended
     ///    for cases where the number of elements in a dictionary is unknown and might be small.
@@ -20,13 +20,13 @@ namespace System.Collections.Specialized {
     ///  </para>
     /// </devdoc>
     [Serializable]
-    public class HybridDictionary: IDictionary {
-
+    public class HybridDictionary : IDictionary
+    {
         // These numbers have been carefully tested to be optimal. Please don't change them
         // without doing thorough performance testing.
         private const int CutoverPoint = 9;
         private const int InitialHashtableSize = 13;
-        private const int FixedSizeCutoverPoint = 6;       
+        private const int FixedSizeCutoverPoint = 6;
 
         // Instance variables. This keeps the HybridDictionary very light-weight when empty
         private ListDictionary list;
@@ -36,31 +36,36 @@ namespace System.Collections.Specialized {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public HybridDictionary() {
-        }
+        public HybridDictionary() { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public HybridDictionary(int initialSize) : this(initialSize, false) {
-        }
+        public HybridDictionary(int initialSize)
+            : this(initialSize, false) { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public HybridDictionary(bool caseInsensitive) {
+        public HybridDictionary(bool caseInsensitive)
+        {
             this.caseInsensitive = caseInsensitive;
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public HybridDictionary(int initialSize, bool caseInsensitive) {
+        public HybridDictionary(int initialSize, bool caseInsensitive)
+        {
             this.caseInsensitive = caseInsensitive;
-            if (initialSize >= FixedSizeCutoverPoint) {
-                if (caseInsensitive) {
+            if (initialSize >= FixedSizeCutoverPoint)
+            {
+                if (caseInsensitive)
+                {
                     hashtable = new Hashtable(initialSize, StringComparer.OrdinalIgnoreCase);
-                } else {
+                }
+                else
+                {
                     hashtable = new Hashtable(initialSize);
                 }
             }
@@ -69,79 +74,91 @@ namespace System.Collections.Specialized {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public object this[object key] {
-            get {
+        public object this[object key]
+        {
+            get
+            {
                 // <
 
-
-
-
-
-
-                
                 ListDictionary cachedList = list;
-                if (hashtable != null) {
+                if (hashtable != null)
+                {
                     return hashtable[key];
-                } else if (cachedList != null) {
+                }
+                else if (cachedList != null)
+                {
                     return cachedList[key];
-                } else {
+                }
+                else
+                {
                     // <
 
-
-
-
-
-
-
-                    if (key == null) {
+                    if (key == null)
+                    {
                         throw new ArgumentNullException("key", SR.GetString(SR.ArgumentNull_Key));
                     }
                     return null;
                 }
             }
-            set {
-                if (hashtable != null) {
+            set
+            {
+                if (hashtable != null)
+                {
                     hashtable[key] = value;
-                } 
-                else if (list != null) {
-                    if (list.Count >= CutoverPoint - 1) {
+                }
+                else if (list != null)
+                {
+                    if (list.Count >= CutoverPoint - 1)
+                    {
                         ChangeOver();
                         hashtable[key] = value;
-                    } else {
+                    }
+                    else
+                    {
                         list[key] = value;
                     }
                 }
-                else {
-                    list = new ListDictionary(caseInsensitive ? StringComparer.OrdinalIgnoreCase : null);
+                else
+                {
+                    list = new ListDictionary(
+                        caseInsensitive ? StringComparer.OrdinalIgnoreCase : null
+                    );
                     list[key] = value;
                 }
             }
         }
 
-        private ListDictionary List {
-            get {
-                if (list == null) {
-                    list = new ListDictionary(caseInsensitive ? StringComparer.OrdinalIgnoreCase : null);
+        private ListDictionary List
+        {
+            get
+            {
+                if (list == null)
+                {
+                    list = new ListDictionary(
+                        caseInsensitive ? StringComparer.OrdinalIgnoreCase : null
+                    );
                 }
                 return list;
             }
         }
 
-        private void ChangeOver() {
+        private void ChangeOver()
+        {
             IDictionaryEnumerator en = list.GetEnumerator();
-            Hashtable newTable;            
-            if (caseInsensitive) {
+            Hashtable newTable;
+            if (caseInsensitive)
+            {
                 newTable = new Hashtable(InitialHashtableSize, StringComparer.OrdinalIgnoreCase);
-            } else {
+            }
+            else
+            {
                 newTable = new Hashtable(InitialHashtableSize);
             }
-            while (en.MoveNext()) {
+            while (en.MoveNext())
+            {
                 newTable.Add(en.Key, en.Value);
             }
             // <
-
-
-
 
             hashtable = newTable;
             list = null;
@@ -150,98 +167,122 @@ namespace System.Collections.Specialized {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int Count {
-            get {
-                ListDictionary cachedList = list;                
-                if (hashtable != null) {
+        public int Count
+        {
+            get
+            {
+                ListDictionary cachedList = list;
+                if (hashtable != null)
+                {
                     return hashtable.Count;
-                } else if (cachedList != null) {
+                }
+                else if (cachedList != null)
+                {
                     return cachedList.Count;
-                } else {
+                }
+                else
+                {
                     return 0;
                 }
             }
-        }   
+        }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ICollection Keys {
-            get {
-                if (hashtable != null) {
+        public ICollection Keys
+        {
+            get
+            {
+                if (hashtable != null)
+                {
                     return hashtable.Keys;
-                } else {
-                    return List.Keys;
-                } 
-            }
-        }
-
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
-        public bool IsReadOnly {
-            get {
-                return false;
-            }
-        }
-
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
-        public bool IsFixedSize {
-            get {
-                return false;
-            }
-        }
-
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
-        public bool IsSynchronized {
-            get {
-                return false;
-            }
-        }
-
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
-        public object SyncRoot {
-            get {
-                return this;
-            }
-        }
-
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
-        public ICollection Values {
-            get {
-                if (hashtable != null) {
-                    return hashtable.Values;
-                } else {
-                    return List.Values;
-                } 
-            }
-        }
-
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
-        public void Add(object key, object value) {
-            if (hashtable != null) {
-                hashtable.Add(key, value);
-            } else {
-                if (list == null) {
-                    list = new ListDictionary(caseInsensitive ? StringComparer.OrdinalIgnoreCase : null);
-                    list.Add(key, value); 
                 }
-                else {
-                    if (list.Count + 1 >= CutoverPoint) {
+                else
+                {
+                    return List.Keys;
+                }
+            }
+        }
+
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
+
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        public bool IsFixedSize
+        {
+            get { return false; }
+        }
+
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        public bool IsSynchronized
+        {
+            get { return false; }
+        }
+
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        public object SyncRoot
+        {
+            get { return this; }
+        }
+
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        public ICollection Values
+        {
+            get
+            {
+                if (hashtable != null)
+                {
+                    return hashtable.Values;
+                }
+                else
+                {
+                    return List.Values;
+                }
+            }
+        }
+
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        public void Add(object key, object value)
+        {
+            if (hashtable != null)
+            {
+                hashtable.Add(key, value);
+            }
+            else
+            {
+                if (list == null)
+                {
+                    list = new ListDictionary(
+                        caseInsensitive ? StringComparer.OrdinalIgnoreCase : null
+                    );
+                    list.Add(key, value);
+                }
+                else
+                {
+                    if (list.Count + 1 >= CutoverPoint)
+                    {
                         ChangeOver();
                         hashtable.Add(key, value);
-                    } else {
-                        list.Add(key, value); 
+                    }
+                    else
+                    {
+                        list.Add(key, value);
                     }
                 }
             }
@@ -250,16 +291,19 @@ namespace System.Collections.Specialized {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Clear() {
-            if(hashtable != null) {
+        public void Clear()
+        {
+            if (hashtable != null)
+            {
                 Hashtable cachedHashtable = hashtable;
-                hashtable = null;                
+                hashtable = null;
                 cachedHashtable.Clear();
             }
 
-            if( list != null) {
-                ListDictionary cachedList = list;                                
-                list = null;                
+            if (list != null)
+            {
+                ListDictionary cachedList = list;
+                list = null;
                 cachedList.Clear();
             }
         }
@@ -267,14 +311,21 @@ namespace System.Collections.Specialized {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool Contains(object key) {
+        public bool Contains(object key)
+        {
             ListDictionary cachedList = list;
-            if (hashtable != null) {
+            if (hashtable != null)
+            {
                 return hashtable.Contains(key);
-            } else if (cachedList != null) {
+            }
+            else if (cachedList != null)
+            {
                 return cachedList.Contains(key);
-            } else {
-                if (key == null) {
+            }
+            else
+            {
+                if (key == null)
+                {
                     throw new ArgumentNullException("key", SR.GetString(SR.ArgumentNull_Key));
                 }
                 return false;
@@ -284,23 +335,32 @@ namespace System.Collections.Specialized {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void CopyTo(Array array, int index)  {
-            if (hashtable != null) {
+        public void CopyTo(Array array, int index)
+        {
+            if (hashtable != null)
+            {
                 hashtable.CopyTo(array, index);
-            } else {
+            }
+            else
+            {
                 List.CopyTo(array, index);
-            } 
+            }
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public IDictionaryEnumerator GetEnumerator() {
-            if (hashtable != null) {
+        public IDictionaryEnumerator GetEnumerator()
+        {
+            if (hashtable != null)
+            {
                 return hashtable.GetEnumerator();
-            } 
-            if (list == null) {
-                list = new ListDictionary(caseInsensitive ? StringComparer.OrdinalIgnoreCase : null);
+            }
+            if (list == null)
+            {
+                list = new ListDictionary(
+                    caseInsensitive ? StringComparer.OrdinalIgnoreCase : null
+                );
             }
             return list.GetEnumerator();
         }
@@ -308,12 +368,17 @@ namespace System.Collections.Specialized {
         /// <devdoc>
         /// <para>[To be supplied.]</para>
         /// </devdoc>
-        IEnumerator IEnumerable.GetEnumerator() {
-            if (hashtable != null) {
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            if (hashtable != null)
+            {
                 return hashtable.GetEnumerator();
-            } 
-            if (list == null) {
-                list = new ListDictionary(caseInsensitive ? StringComparer.OrdinalIgnoreCase : null);
+            }
+            if (list == null)
+            {
+                list = new ListDictionary(
+                    caseInsensitive ? StringComparer.OrdinalIgnoreCase : null
+                );
             }
             return list.GetEnumerator();
         }
@@ -321,17 +386,22 @@ namespace System.Collections.Specialized {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Remove(object key) {
-            if (hashtable != null) {
+        public void Remove(object key)
+        {
+            if (hashtable != null)
+            {
                 hashtable.Remove(key);
-            } 
-            else if (list != null){
+            }
+            else if (list != null)
+            {
                 list.Remove(key);
-            } 
-            else {
-                if (key == null) {
+            }
+            else
+            {
+                if (key == null)
+                {
                     throw new ArgumentNullException("key", SR.GetString(SR.ArgumentNull_Key));
-                }                
+                }
             }
         }
     }

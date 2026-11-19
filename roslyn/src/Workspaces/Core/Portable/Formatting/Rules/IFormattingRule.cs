@@ -7,7 +7,5 @@ using System;
 namespace Microsoft.CodeAnalysis.Formatting.Rules
 {
     [Obsolete("This interface is no longer used")]
-    internal interface IFormattingRule
-    {
-    }
+    internal interface IFormattingRule { }
 }

@@ -15,9 +15,9 @@ namespace System.Data.Common
     {
         private SqlBinary[] _values = default!; // Late-initialized
 
-        public SqlBinaryStorage(DataColumn column) : base(column, typeof(SqlBinary), SqlBinary.Null, SqlBinary.Null, StorageType.SqlBinary)
-        {
-        }
+        public SqlBinaryStorage(DataColumn column)
+            : base(column, typeof(SqlBinary), SqlBinary.Null, SqlBinary.Null, StorageType.SqlBinary)
+        { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -130,7 +130,12 @@ namespace System.Data.Common
             return new SqlBinary[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             SqlBinary[] typedStore = (SqlBinary[])store;
             typedStore[storeIndex] = _values[record];

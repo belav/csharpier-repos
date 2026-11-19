@@ -3,15 +3,15 @@
 //-----------------------------------------------------------------------------
 namespace System.ServiceModel.Security.Tokens
 {
-    using System.IdentityModel.Claims;
-    using System.ServiceModel;
-    using System.IdentityModel.Policy;
-    using System.IdentityModel.Tokens;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Security.Principal;
+    using System.IdentityModel.Claims;
+    using System.IdentityModel.Policy;
+    using System.IdentityModel.Tokens;
     using System.Net;
-   
+    using System.Security.Principal;
+    using System.ServiceModel;
+
     public class SspiSecurityToken : SecurityToken
     {
         string id;
@@ -19,11 +19,16 @@ namespace System.ServiceModel.Security.Tokens
         bool allowNtlm;
         NetworkCredential networkCredential;
         bool extractGroupsForWindowsAccounts;
-        bool allowUnauthenticatedCallers = SspiSecurityTokenProvider.DefaultAllowUnauthenticatedCallers;
+        bool allowUnauthenticatedCallers =
+            SspiSecurityTokenProvider.DefaultAllowUnauthenticatedCallers;
         DateTime effectiveTime;
         DateTime expirationTime;
 
-        public SspiSecurityToken(TokenImpersonationLevel impersonationLevel, bool allowNtlm, NetworkCredential networkCredential)
+        public SspiSecurityToken(
+            TokenImpersonationLevel impersonationLevel,
+            bool allowNtlm,
+            NetworkCredential networkCredential
+        )
         {
             this.impersonationLevel = impersonationLevel;
             this.allowNtlm = allowNtlm;
@@ -32,7 +37,11 @@ namespace System.ServiceModel.Security.Tokens
             this.expirationTime = this.effectiveTime.AddHours(10);
         }
 
-        public SspiSecurityToken(NetworkCredential networkCredential, bool extractGroupsForWindowsAccounts, bool allowUnauthenticatedCallers)
+        public SspiSecurityToken(
+            NetworkCredential networkCredential,
+            bool extractGroupsForWindowsAccounts,
+            bool allowUnauthenticatedCallers
+        )
         {
             this.networkCredential = SecurityUtils.GetNetworkCredentialsCopy(networkCredential);
             this.extractGroupsForWindowsAccounts = extractGroupsForWindowsAccounts;
@@ -47,7 +56,7 @@ namespace System.ServiceModel.Security.Tokens
             {
                 if (this.id == null)
                     this.id = SecurityUniqueId.Create().Value;
-                return this.id; 
+                return this.id;
             }
         }
 
@@ -63,50 +72,32 @@ namespace System.ServiceModel.Security.Tokens
 
         public bool AllowUnauthenticatedCallers
         {
-            get
-            {
-                return this.allowUnauthenticatedCallers;
-            }
+            get { return this.allowUnauthenticatedCallers; }
         }
 
         public TokenImpersonationLevel ImpersonationLevel
         {
-            get
-            {
-                return this.impersonationLevel;
-            }
+            get { return this.impersonationLevel; }
         }
 
         public bool AllowNtlm
         {
-            get
-            {
-                return this.allowNtlm;
-            }
+            get { return this.allowNtlm; }
         }
 
         public NetworkCredential NetworkCredential
         {
-            get
-            {
-                return this.networkCredential;
-            }
+            get { return this.networkCredential; }
         }
 
         public bool ExtractGroupsForWindowsAccounts
         {
-            get
-            {
-                return this.extractGroupsForWindowsAccounts;
-            }
+            get { return this.extractGroupsForWindowsAccounts; }
         }
 
         public override ReadOnlyCollection<SecurityKey> SecurityKeys
         {
-            get 
-            {
-                return EmptyReadOnlyCollection<SecurityKey>.Instance; 
-            }
+            get { return EmptyReadOnlyCollection<SecurityKey>.Instance; }
         }
     }
 }

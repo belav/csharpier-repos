@@ -8,7 +8,6 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime;
 using System.Text;
-
 using Xunit;
 
 public class TestConfigTester
@@ -19,14 +18,21 @@ public class TestConfigTester
         // clear some environment variables that we will set during the test run
         Environment.SetEnvironmentVariable("DOTNET_gcServer", null);
 
-        string testConfigApp = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "TestConfig.dll");
+        string testConfigApp = Path.Combine(
+            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+            "TestConfig.dll"
+        );
 
-        MethodInfo[] infos = typeof(TestConfig).GetMethods(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+        MethodInfo[] infos = typeof(TestConfig).GetMethods(
+            BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public
+        );
 
         string corerunPath = GetCorerunPath();
         foreach (var mi in infos)
         {
-            var configProperties = mi.GetCustomAttributes(typeof(TestConfig.ConfigPropertyAttribute));
+            var configProperties = mi.GetCustomAttributes(
+                typeof(TestConfig.ConfigPropertyAttribute)
+            );
             var envVariables = mi.GetCustomAttributes(typeof(TestConfig.EnvVarAttribute));
 
             if (configProperties.Count() == 0 && envVariables.Count() == 0)
@@ -40,7 +46,8 @@ public class TestConfigTester
 
             foreach (Attribute cp in configProperties)
             {
-                TestConfig.ConfigPropertyAttribute configProp = (TestConfig.ConfigPropertyAttribute)cp;
+                TestConfig.ConfigPropertyAttribute configProp =
+                    (TestConfig.ConfigPropertyAttribute)cp;
                 arguments.Append($"-p {configProp.Name}={configProp.Value} ");
             }
 
@@ -51,7 +58,9 @@ public class TestConfigTester
 
             foreach (string key in Environment.GetEnvironmentVariables().Keys)
             {
-                process.StartInfo.EnvironmentVariables[key] = Environment.GetEnvironmentVariable(key);
+                process.StartInfo.EnvironmentVariables[key] = Environment.GetEnvironmentVariable(
+                    key
+                );
             }
 
             Console.WriteLine($"Running: {process.StartInfo.Arguments}");

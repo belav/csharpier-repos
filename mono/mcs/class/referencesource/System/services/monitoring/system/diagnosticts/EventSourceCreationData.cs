@@ -1,32 +1,43 @@
 using System.Security;
 using System.Security.Permissions;
 
-namespace System.Diagnostics {
-    public class EventSourceCreationData {
+namespace System.Diagnostics
+{
+    public class EventSourceCreationData
+    {
         private string _logName = "Application";
         private string _machineName = ".";
         private string _source;
         private string _messageResourceFile;
         private string _parameterResourceFile;
         private string _categoryResourceFile;
-        private int    _categoryCount;
+        private int _categoryCount;
 
-        private EventSourceCreationData() {}
+        private EventSourceCreationData() { }
 
-        public EventSourceCreationData(string source, string logName) {
+        public EventSourceCreationData(string source, string logName)
+        {
             _source = source;
             _logName = logName;
         }
 
-        internal EventSourceCreationData(string source, string logName, string machineName) {
+        internal EventSourceCreationData(string source, string logName, string machineName)
+        {
             _source = source;
             _logName = logName;
             _machineName = machineName;
         }
 
-        private EventSourceCreationData(string source, string logName, string machineName,
-                                          string messageResourceFile, string parameterResourceFile,
-                                          string categoryResourceFile, short categoryCount) {
+        private EventSourceCreationData(
+            string source,
+            string logName,
+            string machineName,
+            string messageResourceFile,
+            string parameterResourceFile,
+            string categoryResourceFile,
+            short categoryCount
+        )
+        {
             _source = source;
             _logName = logName;
             _machineName = machineName;
@@ -36,40 +47,47 @@ namespace System.Diagnostics {
             CategoryCount = categoryCount;
         }
 
-
-        public string LogName {
+        public string LogName
+        {
             get { return _logName; }
             set { _logName = value; }
         }
 
-        public string MachineName {
+        public string MachineName
+        {
             get { return _machineName; }
             set { _machineName = value; }
         }
 
-        public string Source {
+        public string Source
+        {
             get { return _source; }
             set { _source = value; }
         }
 
-        public string MessageResourceFile {
+        public string MessageResourceFile
+        {
             get { return _messageResourceFile; }
             set { _messageResourceFile = value; }
         }
 
-        public string ParameterResourceFile {
+        public string ParameterResourceFile
+        {
             get { return _parameterResourceFile; }
             set { _parameterResourceFile = value; }
         }
 
-        public string CategoryResourceFile {
+        public string CategoryResourceFile
+        {
             get { return _categoryResourceFile; }
             set { _categoryResourceFile = value; }
         }
 
-        public int CategoryCount {
+        public int CategoryCount
+        {
             get { return _categoryCount; }
-            set {
+            set
+            {
                 if (value > UInt16.MaxValue || value < 0)
                     throw new ArgumentOutOfRangeException("value");
 
@@ -78,5 +96,3 @@ namespace System.Diagnostics {
         }
     }
 }
-
-

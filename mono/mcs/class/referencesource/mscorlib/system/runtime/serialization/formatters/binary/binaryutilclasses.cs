@@ -13,7 +13,6 @@
  **
  ===========================================================*/
 
-
 // All classes and methods in here are only for the internal use by the XML and Binary Formatters.
 // They are public so that the XMLFormatter can address them. Eventually they will
 // be signed so that they can't be used by external applications.
@@ -22,24 +21,24 @@ namespace System.Runtime.Serialization.Formatters.Binary
 {
     using System;
     using System.Collections;
-    using System.Reflection;
-    using System.Text;
+    using System.Diagnostics;
     using System.Globalization;
-    using System.Runtime.Serialization.Formatters;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
     using System.Runtime.Remoting.Messaging;
-    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
-    using System.Diagnostics;
+    using System.Runtime.Serialization.Formatters;
+    using System.Text;
 
     // The ParseRecord class holds the parsed XML information. There is a
     // ParsedRecord for each XML Element
-    internal sealed class ParseRecord 
+    internal sealed class ParseRecord
 #if _DEBUG
-                                        : ITrace
-#endif                                        
+        : ITrace
+#endif
     {
-// disable csharp compiler warning #0414: field assigned unused value
+        // disable csharp compiler warning #0414: field assigned unused value
 #pragma warning disable 0414
         internal static int parseRecordIdCount = 1;
 
@@ -65,7 +64,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal String PRkeyDt;
         internal Type PRdtType;
         internal InternalPrimitiveTypeE PRdtTypeCode;
-// disable csharp compiler warning #0414: field assigned unused value
+        // disable csharp compiler warning #0414: field assigned unused value
 #pragma warning disable 0414
         internal bool PRisVariant = false; // Used by Binary
         internal bool PRisEnum = false;
@@ -88,7 +87,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
         // Parsed array information
         internal int PRrank;
         internal int[] PRlengthA;
-// disable csharp compiler warning #0414: field assigned unused value
+        // disable csharp compiler warning #0414: field assigned unused value
 #pragma warning disable 0414
         internal int[] PRpositionA;
         internal int[] PRlowerBoundA;
@@ -100,15 +99,14 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal int PRmemberIndex;
         internal int PRlinearlength;
         internal int[] PRrectangularMap;
-        internal bool   PRisLowerBound;
+        internal bool PRisLowerBound;
 
         // SerializedStreamHeader information
-// disable csharp compiler warning #0414: field assigned unused value
+        // disable csharp compiler warning #0414: field assigned unused value
 #pragma warning disable 0414
         internal long PRtopId;
         internal long PRheaderId;
 #pragma warning restore 0414
-
 
         // MemberInfo accumulated during parsing of members
 
@@ -123,22 +121,25 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal PrimitiveArray PRprimitiveArray; // for Primitive Soap arrays, optimization
         internal bool PRisRegistered; // Used when registering nested classes
         internal Object[] PRmemberData; // member data is collected here before populating
-        internal SerializationInfo  PRsi;
+        internal SerializationInfo PRsi;
 
         internal int PRnullCount; // Count of consecutive nulls within an array
 
-
-        internal ParseRecord()
-        {
-        }
-
+        internal ParseRecord() { }
 
 #if _DEBUG
         // Get a String describing the ParseRecord
         // ITrace
         public String Trace()
         {
-            return "ParseRecord"+PRparseRecordId+" ParseType "+ ((Enum)PRparseTypeEnum).ToString() +" name "+PRname+" keyDt "+Util.PString(PRkeyDt);
+            return "ParseRecord"
+                + PRparseRecordId
+                + " ParseType "
+                + ((Enum)PRparseTypeEnum).ToString()
+                + " name "
+                + PRname
+                + " keyDt "
+                + Util.PString(PRkeyDt);
         }
 #endif
 
@@ -179,7 +180,6 @@ namespace System.Runtime.Serialization.Formatters.Binary
             PRisArrayVariant = false;
             PRarrayElementTypeCode = InternalPrimitiveTypeE.Invalid;
 
-
             // Parsed array information
             PRrank = 0;
             PRlengthA = null;
@@ -216,33 +216,33 @@ namespace System.Runtime.Serialization.Formatters.Binary
         [Conditional("SER_LOGGING")]
         internal void Dump()
         {
-            SerTrace.Log("ParseRecord Dump ",PRparseRecordId);
+            SerTrace.Log("ParseRecord Dump ", PRparseRecordId);
             SerTrace.Log("Enums");
-            Util.NVTrace("ParseType",((Enum)PRparseTypeEnum).ToString());
-            Util.NVTrace("ObjectType",((Enum)PRobjectTypeEnum).ToString());
-            Util.NVTrace("ArrayType",((Enum)PRarrayTypeEnum).ToString());
-            Util.NVTrace("MemberType",((Enum)PRmemberTypeEnum).ToString());
-            Util.NVTrace("MemberValue",((Enum)PRmemberValueEnum).ToString());
-            Util.NVTrace("ObjectPosition",((Enum)PRobjectPositionEnum).ToString());
+            Util.NVTrace("ParseType", ((Enum)PRparseTypeEnum).ToString());
+            Util.NVTrace("ObjectType", ((Enum)PRobjectTypeEnum).ToString());
+            Util.NVTrace("ArrayType", ((Enum)PRarrayTypeEnum).ToString());
+            Util.NVTrace("MemberType", ((Enum)PRmemberTypeEnum).ToString());
+            Util.NVTrace("MemberValue", ((Enum)PRmemberValueEnum).ToString());
+            Util.NVTrace("ObjectPosition", ((Enum)PRobjectPositionEnum).ToString());
             SerTrace.Log("Basics");
-            Util.NVTrace("Name",PRname);
-            Util.NVTrace("Value ",PRvalue);
-            Util.NVTrace("varValue ",PRvarValue);
+            Util.NVTrace("Name", PRname);
+            Util.NVTrace("Value ", PRvalue);
+            Util.NVTrace("varValue ", PRvarValue);
             if (PRvarValue != null)
-                Util.NVTrace("varValue type",PRvarValue.GetType());
+                Util.NVTrace("varValue type", PRvarValue.GetType());
 
-            Util.NVTrace("keyDt",PRkeyDt);
-            Util.NVTrace("dtType",PRdtType);
-            Util.NVTrace("code",((Enum)PRdtTypeCode).ToString());
-            Util.NVTrace("objectID",PRobjectId);
-            Util.NVTrace("idRef",PRidRef);
-            Util.NVTrace("isEnum",PRisEnum);
+            Util.NVTrace("keyDt", PRkeyDt);
+            Util.NVTrace("dtType", PRdtType);
+            Util.NVTrace("code", ((Enum)PRdtTypeCode).ToString());
+            Util.NVTrace("objectID", PRobjectId);
+            Util.NVTrace("idRef", PRidRef);
+            Util.NVTrace("isEnum", PRisEnum);
             SerTrace.Log("Array ");
-            Util.NVTrace("arrayElementTypeString",PRarrayElementTypeString);
-            Util.NVTrace("arrayElementType",PRarrayElementType);
-            Util.NVTrace("arrayElementTypeCode",((Enum)PRarrayElementTypeCode).ToString());
-            Util.NVTrace("isArrayVariant",PRisArrayVariant);
-            Util.NVTrace("rank",PRrank);
+            Util.NVTrace("arrayElementTypeString", PRarrayElementTypeString);
+            Util.NVTrace("arrayElementType", PRarrayElementType);
+            Util.NVTrace("arrayElementTypeCode", ((Enum)PRarrayElementTypeCode).ToString());
+            Util.NVTrace("isArrayVariant", PRisArrayVariant);
+            Util.NVTrace("rank", PRrank);
             Util.NVTrace("dimensions", Util.PArray(PRlengthA));
             Util.NVTrace("position", Util.PArray(PRpositionA));
             Util.NVTrace("lowerBoundA", Util.PArray(PRlowerBoundA));
@@ -270,7 +270,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal Object[] objects = new Object[5];
         internal String stackId;
         internal int top = -1;
-// disable csharp compiler warning #0414: field assigned unused value
+        // disable csharp compiler warning #0414: field assigned unused value
 #pragma warning disable 0414
         internal int next = 0;
 #pragma warning restore 0414
@@ -280,16 +280,24 @@ namespace System.Runtime.Serialization.Formatters.Binary
             stackId = "System";
         }
 
-        internal SerStack(String stackId) {
+        internal SerStack(String stackId)
+        {
             this.stackId = stackId;
         }
 
         // Push the object onto the stack
-        internal void Push(Object obj) {
-#if _DEBUG        
-            SerTrace.Log(this, "Push ",stackId," ",((obj is ITrace)?((ITrace)obj).Trace():""));
+        internal void Push(Object obj)
+        {
+#if _DEBUG
+            SerTrace.Log(
+                this,
+                "Push ",
+                stackId,
+                " ",
+                ((obj is ITrace) ? ((ITrace)obj).Trace() : "")
+            );
 #endif
-            if (top == (objects.Length -1))
+            if (top == (objects.Length - 1))
             {
                 IncreaseCapacity();
             }
@@ -297,19 +305,27 @@ namespace System.Runtime.Serialization.Formatters.Binary
         }
 
         // Pop the object from the stack
-        internal Object Pop() {
+        internal Object Pop()
+        {
             if (top < 0)
                 return null;
 
             Object obj = objects[top];
             objects[top--] = null;
-#if _DEBUG        
-            SerTrace.Log(this, "Pop ",stackId," ",((obj is ITrace)?((ITrace)obj).Trace():""));
+#if _DEBUG
+            SerTrace.Log(
+                this,
+                "Pop ",
+                stackId,
+                " ",
+                ((obj is ITrace) ? ((ITrace)obj).Trace() : "")
+            );
 #endif
             return obj;
         }
 
-        internal void IncreaseCapacity() {
+        internal void IncreaseCapacity()
+        {
             int size = objects.Length * 2;
             Object[] newItems = new Object[size];
             Array.Copy(objects, 0, newItems, 0, objects.Length);
@@ -317,32 +333,48 @@ namespace System.Runtime.Serialization.Formatters.Binary
         }
 
         // Gets the object on the top of the stack
-        internal Object Peek() {
+        internal Object Peek()
+        {
             if (top < 0)
                 return null;
-#if _DEBUG        
-            SerTrace.Log(this, "Peek ",stackId," ",((objects[top] is ITrace)?((ITrace)objects[top]).Trace():""));
+#if _DEBUG
+            SerTrace.Log(
+                this,
+                "Peek ",
+                stackId,
+                " ",
+                ((objects[top] is ITrace) ? ((ITrace)objects[top]).Trace() : "")
+            );
 #endif
             return objects[top];
         }
 
         // Gets the second entry in the stack.
-        internal Object PeekPeek() {
+        internal Object PeekPeek()
+        {
             if (top < 1)
                 return null;
-#if _DEBUG            
-            SerTrace.Log(this, "PeekPeek ",stackId," ",((objects[top - 1] is ITrace)?((ITrace)objects[top - 1]).Trace():""));
+#if _DEBUG
+            SerTrace.Log(
+                this,
+                "PeekPeek ",
+                stackId,
+                " ",
+                ((objects[top - 1] is ITrace) ? ((ITrace)objects[top - 1]).Trace() : "")
+            );
 #endif
             return objects[top - 1];
         }
 
         // The number of entries in the stack
-        internal int Count() {
+        internal int Count()
+        {
             return top + 1;
         }
 
         // The number of entries in the stack
-        internal bool IsEmpty() {
+        internal bool IsEmpty()
+        {
             if (top > 0)
                 return false;
             else
@@ -352,16 +384,20 @@ namespace System.Runtime.Serialization.Formatters.Binary
         [Conditional("SER_LOGGING")]
         internal void Dump()
         {
-            for (int i=0; i<Count(); i++)
+            for (int i = 0; i < Count(); i++)
             {
 #if _DEBUG
                 Object obj = objects[i];
-                SerTrace.Log(this, "Stack Dump ",stackId," "+((obj is ITrace)?((ITrace)obj).Trace():""));
+                SerTrace.Log(
+                    this,
+                    "Stack Dump ",
+                    stackId,
+                    " " + ((obj is ITrace) ? ((ITrace)obj).Trace() : "")
+                );
 #endif
             }
         }
     }
-
 
     // Implements a Growable array
 
@@ -417,16 +453,15 @@ namespace System.Runtime.Serialization.Formatters.Binary
             {
                 if (index < 0)
                 {
-                    if (-index > negObjects.Length-1 )
+                    if (-index > negObjects.Length - 1)
                     {
                         IncreaseCapacity(index);
                     }
                     negObjects[-index] = value;
-
                 }
                 else
                 {
-                    if (index > objects.Length-1 )
+                    if (index > objects.Length - 1)
                     {
                         IncreaseCapacity(index);
                     }
@@ -445,14 +480,14 @@ namespace System.Runtime.Serialization.Formatters.Binary
             {
                 if (index < 0)
                 {
-                    int size = Math.Max(negObjects.Length * 2, (-index)+1);
+                    int size = Math.Max(negObjects.Length * 2, (-index) + 1);
                     Object[] newItems = new Object[size];
                     Array.Copy(negObjects, 0, newItems, 0, negObjects.Length);
                     negObjects = newItems;
                 }
                 else
                 {
-                    int size = Math.Max(objects.Length * 2, index+1);
+                    int size = Math.Max(objects.Length * 2, index + 1);
                     Object[] newItems = new Object[size];
                     Array.Copy(objects, 0, newItems, 0, objects.Length);
                     objects = newItems;
@@ -460,10 +495,11 @@ namespace System.Runtime.Serialization.Formatters.Binary
             }
             catch (Exception)
             {
-                throw new SerializationException(Environment.GetResourceString("Serialization_CorruptedStream"));
+                throw new SerializationException(
+                    Environment.GetResourceString("Serialization_CorruptedStream")
+                );
             }
         }
-
     }
 
     [Serializable]
@@ -472,9 +508,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal int[] objects = new int[16];
         internal int[] negObjects = new int[4];
 
-        public IntSizedArray()
-        {
-        }
+        public IntSizedArray() { }
 
         private IntSizedArray(IntSizedArray sizedArray)
         {
@@ -489,20 +523,19 @@ namespace System.Runtime.Serialization.Formatters.Binary
             return new IntSizedArray(this);
         }
 
-
         internal int this[int index]
         {
             get
             {
                 if (index < 0)
                 {
-                    if (-index > negObjects.Length-1 )
+                    if (-index > negObjects.Length - 1)
                         return 0;
                     return negObjects[-index];
                 }
                 else
                 {
-                    if (index > objects.Length-1 )
+                    if (index > objects.Length - 1)
                         return 0;
                     return objects[index];
                 }
@@ -511,16 +544,15 @@ namespace System.Runtime.Serialization.Formatters.Binary
             {
                 if (index < 0)
                 {
-                    if (-index > negObjects.Length-1 )
+                    if (-index > negObjects.Length - 1)
                     {
                         IncreaseCapacity(index);
                     }
                     negObjects[-index] = value;
-
                 }
                 else
                 {
-                    if (index > objects.Length-1 )
+                    if (index > objects.Length - 1)
                     {
                         IncreaseCapacity(index);
                     }
@@ -535,14 +567,14 @@ namespace System.Runtime.Serialization.Formatters.Binary
             {
                 if (index < 0)
                 {
-                    int size = Math.Max(negObjects.Length * 2, (-index)+1);
+                    int size = Math.Max(negObjects.Length * 2, (-index) + 1);
                     int[] newItems = new int[size];
                     Array.Copy(negObjects, 0, newItems, 0, negObjects.Length);
                     negObjects = newItems;
                 }
                 else
                 {
-                    int size = Math.Max(objects.Length * 2, index+1);
+                    int size = Math.Max(objects.Length * 2, index + 1);
                     int[] newItems = new int[size];
                     Array.Copy(objects, 0, newItems, 0, objects.Length);
                     objects = newItems;
@@ -550,14 +582,17 @@ namespace System.Runtime.Serialization.Formatters.Binary
             }
             catch (Exception)
             {
-                throw new SerializationException(Environment.GetResourceString("Serialization_CorruptedStream"));
+                throw new SerializationException(
+                    Environment.GetResourceString("Serialization_CorruptedStream")
+                );
             }
         }
     }
 
     internal sealed class NameCache
     {
-        static System.Collections.Concurrent.ConcurrentDictionary<string, object> ht = new System.Collections.Concurrent.ConcurrentDictionary<string, object>();
+        static System.Collections.Concurrent.ConcurrentDictionary<string, object> ht =
+            new System.Collections.Concurrent.ConcurrentDictionary<string, object>();
         String name = null;
 
         internal Object GetCachedValue(String name)
@@ -604,10 +639,10 @@ namespace System.Runtime.Serialization.Formatters.Binary
             {
                 StringBuilder sb = new StringBuilder(10);
                 sb.Append("[");
-                for (int i=0; i<array.Length; i++)
+                for (int i = 0; i < array.Length; i++)
                 {
                     sb.Append(array[i]);
-                    if (i != array.Length -1)
+                    if (i != array.Length - 1)
                         sb.Append(",");
                 }
                 sb.Append("]");
@@ -622,14 +657,14 @@ namespace System.Runtime.Serialization.Formatters.Binary
         [Conditional("SER_LOGGING")]
         internal static void NVTrace(String name, String value)
         {
-            SerTrace.Log("  "+name+((value == null)?" = null":" = "+value));
+            SerTrace.Log("  " + name + ((value == null) ? " = null" : " = " + value));
         }
 
         // Traces an name value pair
         [Conditional("SER_LOGGING")]
         internal static void NVTrace(String name, Object value)
         {
-            SerTrace.Log("  "+name+((value == null)?" = null":" = "+value.ToString()));
+            SerTrace.Log("  " + name + ((value == null) ? " = null" : " = " + value.ToString()));
         }
 
         // Traces an name value pair
@@ -637,18 +672,20 @@ namespace System.Runtime.Serialization.Formatters.Binary
         [Conditional("_LOGGING")]
         internal static void NVTraceI(String name, String value)
         {
-            BCLDebug.Trace("Binary", "  "+name+((value == null)?" = null":" = "+value));
+            BCLDebug.Trace("Binary", "  " + name + ((value == null) ? " = null" : " = " + value));
         }
 
         // Traces an name value pair
         [Conditional("_LOGGING")]
         internal static void NVTraceI(String name, Object value)
         {
-            BCLDebug.Trace("Binary", "  "+name+((value == null)?" = null":" = "+value.ToString()));
+            BCLDebug.Trace(
+                "Binary",
+                "  " + name + ((value == null) ? " = null" : " = " + value.ToString())
+            );
         }
     }
 #endif
-
 
     // Used to fixup value types. Only currently used for valuetypes which are array items.
     internal sealed class ValueFixup
@@ -665,7 +702,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal ValueFixup(Array arrayObj, int[] indexMap)
         {
 #if _DEBUG
-            SerTrace.Log(this, "Array Constructor ",arrayObj);
+            SerTrace.Log(this, "Array Constructor ", arrayObj);
 #endif
             valueFixupEnum = ValueFixupEnum.Array;
             this.arrayObj = arrayObj;
@@ -675,7 +712,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal ValueFixup(Object memberObject, String memberName, ReadObjectInfo objectInfo)
         {
 #if _DEBUG
-            SerTrace.Log(this, "Member Constructor ",memberObject);
+            SerTrace.Log(this, "Member Constructor ", memberObject);
 #endif
             valueFixupEnum = ValueFixupEnum.Member;
             this.memberObject = memberObject;
@@ -683,58 +720,91 @@ namespace System.Runtime.Serialization.Formatters.Binary
             this.objectInfo = objectInfo;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal void Fixup(ParseRecord record, ParseRecord parent) {
+        [System.Security.SecurityCritical] // auto-generated
+        internal void Fixup(ParseRecord record, ParseRecord parent)
+        {
             Object obj = record.PRnewObj;
 #if _DEBUG
-            SerTrace.Log(this, "Fixup ",obj," ",((Enum)valueFixupEnum).ToString());
+            SerTrace.Log(this, "Fixup ", obj, " ", ((Enum)valueFixupEnum).ToString());
 #endif
             switch (valueFixupEnum)
             {
-            case ValueFixupEnum.Array:
-                arrayObj.SetValue(obj, indexMap);
-                break;
-            case ValueFixupEnum.Header:
-                Type type = typeof(Header);
-                if (valueInfo == null)
-                {
-                    MemberInfo[] valueInfos = type.GetMember("Value");
-                    if (valueInfos.Length != 1)
-                        throw new SerializationException(Environment.GetResourceString("Serialization_HeaderReflection",valueInfos.Length));
-                    valueInfo = valueInfos[0];
-                }
-                FormatterServices.SerializationSetValue(valueInfo, header, obj);
-                break;
-            case ValueFixupEnum.Member:
-                SerTrace.Log(this, "Fixup Member new object value ",obj," memberObject ",memberObject);
+                case ValueFixupEnum.Array:
+                    arrayObj.SetValue(obj, indexMap);
+                    break;
+                case ValueFixupEnum.Header:
+                    Type type = typeof(Header);
+                    if (valueInfo == null)
+                    {
+                        MemberInfo[] valueInfos = type.GetMember("Value");
+                        if (valueInfos.Length != 1)
+                            throw new SerializationException(
+                                Environment.GetResourceString(
+                                    "Serialization_HeaderReflection",
+                                    valueInfos.Length
+                                )
+                            );
+                        valueInfo = valueInfos[0];
+                    }
+                    FormatterServices.SerializationSetValue(valueInfo, header, obj);
+                    break;
+                case ValueFixupEnum.Member:
+                    SerTrace.Log(
+                        this,
+                        "Fixup Member new object value ",
+                        obj,
+                        " memberObject ",
+                        memberObject
+                    );
 
-                if (objectInfo.isSi)
-                {
-                    SerTrace.Log(this, "Recording a fixup on member: ", memberName,
-                                 " in object id", parent.PRobjectId, " Required Object ", record.PRobjectId);
-                    objectInfo.objectManager.RecordDelayedFixup(parent.PRobjectId, memberName, record.PRobjectId);
-//                          Console.WriteLine("SerializationInfo: Main Object ({0}): {1}. SubObject ({2}): {3}", parent.PRobjectId,
-//                                            objectInfo.obj, record.PRobjectId, obj);
-                }
-                else
-                {
-                    MemberInfo memberInfo = objectInfo.GetMemberInfo(memberName);
-                    SerTrace.Log(this, "Recording a fixup on member:", memberInfo, " in object id ",
-                                 parent.PRobjectId," Required Object", record.PRobjectId);
-                    if (memberInfo != null)
-                        objectInfo.objectManager.RecordFixup(parent.PRobjectId, memberInfo, record.PRobjectId);
-//                          Console.WriteLine("MemberFixup: Main Object({0}): {1}. SubObject({2}): {3}", parent.PRobjectId,
-//                                            objectInfo.obj.GetType(), record.PRobjectId, obj.GetType());
-
-                }
-                break;
+                    if (objectInfo.isSi)
+                    {
+                        SerTrace.Log(
+                            this,
+                            "Recording a fixup on member: ",
+                            memberName,
+                            " in object id",
+                            parent.PRobjectId,
+                            " Required Object ",
+                            record.PRobjectId
+                        );
+                        objectInfo.objectManager.RecordDelayedFixup(
+                            parent.PRobjectId,
+                            memberName,
+                            record.PRobjectId
+                        );
+                        //                          Console.WriteLine("SerializationInfo: Main Object ({0}): {1}. SubObject ({2}): {3}", parent.PRobjectId,
+                        //                                            objectInfo.obj, record.PRobjectId, obj);
+                    }
+                    else
+                    {
+                        MemberInfo memberInfo = objectInfo.GetMemberInfo(memberName);
+                        SerTrace.Log(
+                            this,
+                            "Recording a fixup on member:",
+                            memberInfo,
+                            " in object id ",
+                            parent.PRobjectId,
+                            " Required Object",
+                            record.PRobjectId
+                        );
+                        if (memberInfo != null)
+                            objectInfo.objectManager.RecordFixup(
+                                parent.PRobjectId,
+                                memberInfo,
+                                record.PRobjectId
+                            );
+                        //                          Console.WriteLine("MemberFixup: Main Object({0}): {1}. SubObject({2}): {3}", parent.PRobjectId,
+                        //                                            objectInfo.obj.GetType(), record.PRobjectId, obj.GetType());
+                    }
+                    break;
             }
         }
 
 #if _DEBUG
         public String Trace()
         {
-            return "ValueFixup"+((Enum)valueFixupEnum).ToString();
+            return "ValueFixup" + ((Enum)valueFixupEnum).ToString();
         }
 #endif
     }
@@ -744,10 +814,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
     {
         internal FormatterTypeStyle FEtypeFormat;
         internal FormatterAssemblyStyle FEassemblyFormat;
-        internal TypeFilterLevel FEsecurityLevel;        
+        internal TypeFilterLevel FEsecurityLevel;
         internal InternalSerializerTypeE FEserializerTypeEnum;
     }
-
 
     internal sealed class NameInfo
     {
@@ -764,10 +833,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal bool NIisParentTypeOnObject;
         internal InternalArrayTypeE NIarrayEnum;
 
-        internal NameInfo()
-        {
-        }
-
+        internal NameInfo() { }
 
         internal void Init()
         {
@@ -804,10 +870,12 @@ namespace System.Runtime.Serialization.Formatters.Binary
             Util.NVTrace("arrayEnum", ((Enum)NIarrayEnum).ToString());
         }
 #endif
+
         private bool NIsealedStatusChecked = false;
         public bool IsSealed
         {
-            get {
+            get
+            {
                 if (!NIsealedStatusChecked)
                 {
                     NIisSealed = NItype.IsSealed;
@@ -819,15 +887,14 @@ namespace System.Runtime.Serialization.Formatters.Binary
 
         public String NIname
         {
-            get {
+            get
+            {
                 if (this.NIFullName == null)
                     this.NIFullName = NItype.FullName;
 
                 return this.NIFullName;
             }
-            set {
-                this.NIFullName = value;
-            }
+            set { this.NIFullName = value; }
         }
     }
 
@@ -846,7 +913,6 @@ namespace System.Runtime.Serialization.Formatters.Binary
         UInt32[] uint32A = null;
         UInt64[] uint64A = null;
 
-
         internal PrimitiveArray(InternalPrimitiveTypeE code, Array array)
         {
             Init(code, array);
@@ -857,84 +923,83 @@ namespace System.Runtime.Serialization.Formatters.Binary
             this.code = code;
             switch (code)
             {
-            case InternalPrimitiveTypeE.Boolean:
-                booleanA = (Boolean[])array;
-                break;
-            case InternalPrimitiveTypeE.Char:
-                charA = (Char[])array;
-                break;
-            case InternalPrimitiveTypeE.Double:
-                doubleA = (Double[])array;
-                break;
-            case InternalPrimitiveTypeE.Int16:
-                int16A = (Int16[])array;
-                break;
-            case InternalPrimitiveTypeE.Int32:
-                int32A = (Int32[])array;
-                break;
-            case InternalPrimitiveTypeE.Int64:
-                int64A = (Int64[])array;
-                break;
-            case InternalPrimitiveTypeE.SByte:
-                sbyteA = (SByte[])array;
-                break;
-            case InternalPrimitiveTypeE.Single:
-                singleA = (Single[])array;
-                break;
-            case InternalPrimitiveTypeE.UInt16:
-                uint16A = (UInt16[])array;
-                break;
-            case InternalPrimitiveTypeE.UInt32:
-                uint32A = (UInt32[])array;
-                break;
-            case InternalPrimitiveTypeE.UInt64:
-                uint64A = (UInt64[])array;
-                break;
+                case InternalPrimitiveTypeE.Boolean:
+                    booleanA = (Boolean[])array;
+                    break;
+                case InternalPrimitiveTypeE.Char:
+                    charA = (Char[])array;
+                    break;
+                case InternalPrimitiveTypeE.Double:
+                    doubleA = (Double[])array;
+                    break;
+                case InternalPrimitiveTypeE.Int16:
+                    int16A = (Int16[])array;
+                    break;
+                case InternalPrimitiveTypeE.Int32:
+                    int32A = (Int32[])array;
+                    break;
+                case InternalPrimitiveTypeE.Int64:
+                    int64A = (Int64[])array;
+                    break;
+                case InternalPrimitiveTypeE.SByte:
+                    sbyteA = (SByte[])array;
+                    break;
+                case InternalPrimitiveTypeE.Single:
+                    singleA = (Single[])array;
+                    break;
+                case InternalPrimitiveTypeE.UInt16:
+                    uint16A = (UInt16[])array;
+                    break;
+                case InternalPrimitiveTypeE.UInt32:
+                    uint32A = (UInt32[])array;
+                    break;
+                case InternalPrimitiveTypeE.UInt64:
+                    uint64A = (UInt64[])array;
+                    break;
             }
         }
-        
+
         internal void SetValue(String value, int index)
         {
             switch (code)
             {
-            case InternalPrimitiveTypeE.Boolean:
-                booleanA[index] = Boolean.Parse(value);
-                break;
-            case InternalPrimitiveTypeE.Char:
-                if ((value[0] == '_') && (value.Equals("_0x00_")))
-                    charA[index] = Char.MinValue;
-                else
-                    charA[index] = Char.Parse(value);
-                break;
-            case InternalPrimitiveTypeE.Double:
-                doubleA[index] = Double.Parse(value, CultureInfo.InvariantCulture);
-                break;
-            case InternalPrimitiveTypeE.Int16:
-                int16A[index] = Int16.Parse(value, CultureInfo.InvariantCulture);
-                break;
-            case InternalPrimitiveTypeE.Int32:
-                int32A[index] = Int32.Parse(value, CultureInfo.InvariantCulture);
-                break;
-            case InternalPrimitiveTypeE.Int64:
-                int64A[index] = Int64.Parse(value, CultureInfo.InvariantCulture);
-                break;
-            case InternalPrimitiveTypeE.SByte:
-                sbyteA[index] = SByte.Parse(value, CultureInfo.InvariantCulture);
-                break;
-            case InternalPrimitiveTypeE.Single:
-                singleA[index] = Single.Parse(value, CultureInfo.InvariantCulture);
-                break;
-            case InternalPrimitiveTypeE.UInt16:
-                uint16A[index] = UInt16.Parse(value, CultureInfo.InvariantCulture);
-                break;
-            case InternalPrimitiveTypeE.UInt32:
-                uint32A[index] = UInt32.Parse(value, CultureInfo.InvariantCulture);
-                break;
-            case InternalPrimitiveTypeE.UInt64:
-                uint64A[index] = UInt64.Parse(value, CultureInfo.InvariantCulture);
-                break;
+                case InternalPrimitiveTypeE.Boolean:
+                    booleanA[index] = Boolean.Parse(value);
+                    break;
+                case InternalPrimitiveTypeE.Char:
+                    if ((value[0] == '_') && (value.Equals("_0x00_")))
+                        charA[index] = Char.MinValue;
+                    else
+                        charA[index] = Char.Parse(value);
+                    break;
+                case InternalPrimitiveTypeE.Double:
+                    doubleA[index] = Double.Parse(value, CultureInfo.InvariantCulture);
+                    break;
+                case InternalPrimitiveTypeE.Int16:
+                    int16A[index] = Int16.Parse(value, CultureInfo.InvariantCulture);
+                    break;
+                case InternalPrimitiveTypeE.Int32:
+                    int32A[index] = Int32.Parse(value, CultureInfo.InvariantCulture);
+                    break;
+                case InternalPrimitiveTypeE.Int64:
+                    int64A[index] = Int64.Parse(value, CultureInfo.InvariantCulture);
+                    break;
+                case InternalPrimitiveTypeE.SByte:
+                    sbyteA[index] = SByte.Parse(value, CultureInfo.InvariantCulture);
+                    break;
+                case InternalPrimitiveTypeE.Single:
+                    singleA[index] = Single.Parse(value, CultureInfo.InvariantCulture);
+                    break;
+                case InternalPrimitiveTypeE.UInt16:
+                    uint16A[index] = UInt16.Parse(value, CultureInfo.InvariantCulture);
+                    break;
+                case InternalPrimitiveTypeE.UInt32:
+                    uint32A[index] = UInt32.Parse(value, CultureInfo.InvariantCulture);
+                    break;
+                case InternalPrimitiveTypeE.UInt64:
+                    uint64A[index] = UInt64.Parse(value, CultureInfo.InvariantCulture);
+                    break;
             }
         }
     }
 }
-

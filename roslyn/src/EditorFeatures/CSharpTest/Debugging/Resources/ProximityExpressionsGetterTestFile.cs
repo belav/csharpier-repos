@@ -13,7 +13,11 @@ namespace Roslyn.Services.CSharp.Debugging
             return expression.GetFullText();
         }
 
-        private static void CollectExpressionTerms(int position, ExpressionSyntax expression, List<string> terms)
+        private static void CollectExpressionTerms(
+            int position,
+            ExpressionSyntax expression,
+            List<string> terms
+        )
         {
             // Check here rather than at all the call sites...
             if (expression == null)
@@ -34,7 +38,12 @@ namespace Roslyn.Services.CSharp.Debugging
             }
         }
 
-        private static void CollectExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+        private static void CollectExpressionTerms(
+            int position,
+            ExpressionSyntax expression,
+            IList<string> terms,
+            ref ExpressionType expressionType
+        )
         {
             // Check here rather than at all the call sites...
             if (expression == null)
@@ -73,24 +82,49 @@ namespace Roslyn.Services.CSharp.Debugging
                     // For a cast, just add the nested expression.  Note: this is technically
                     // unsafe as the cast *may* have side effects.  However, in practice this is
                     // extremely rare, so we allow for this since it's ok in the common case.
-                    CollectExpressionTerms(position, ((CastExpressionSyntax)expression).Expression, terms, ref expressionType);
+                    CollectExpressionTerms(
+                        position,
+                        ((CastExpressionSyntax)expression).Expression,
+                        terms,
+                        ref expressionType
+                    );
                     return;
 
                 case SyntaxKind.MemberAccessExpression:
                 case SyntaxKind.PointerMemberAccessExpression:
-                    CollectMemberAccessExpressionTerms(position, expression, terms, ref expressionType);
+                    CollectMemberAccessExpressionTerms(
+                        position,
+                        expression,
+                        terms,
+                        ref expressionType
+                    );
                     return;
 
                 case SyntaxKind.ObjectCreationExpression:
-                    CollectObjectCreationExpressionTerms(position, expression, terms, ref expressionType);
+                    CollectObjectCreationExpressionTerms(
+                        position,
+                        expression,
+                        terms,
+                        ref expressionType
+                    );
                     return;
 
                 case SyntaxKind.ArrayCreationExpression:
-                    CollectArrayCreationExpressionTerms(position, expression, terms, ref expressionType);
+                    CollectArrayCreationExpressionTerms(
+                        position,
+                        expression,
+                        terms,
+                        ref expressionType
+                    );
                     return;
 
                 case SyntaxKind.InvocationExpression:
-                    CollectInvocationExpressionTerms(position, expression, terms, ref expressionType);
+                    CollectInvocationExpressionTerms(
+                        position,
+                        expression,
+                        terms,
+                        ref expressionType
+                    );
                     return;
             }
 
@@ -118,7 +152,12 @@ namespace Roslyn.Services.CSharp.Debugging
             expressionType = ExpressionType.Invalid;
         }
 
-        private static void CollectMemberAccessExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+        private static void CollectMemberAccessExpressionTerms(
+            int position,
+            ExpressionSyntax expression,
+            IList<string> terms,
+            ref ExpressionType expressionType
+        )
         {
             var flags = ExpressionType.Invalid;
 
@@ -131,17 +170,21 @@ namespace Roslyn.Services.CSharp.Debugging
             // If the LHS says it's a valid term, then we add it ONLY if our PARENT
             // is NOT another dot/arrow.  This allows the expression 'a.b.c.d' to
             // add both 'a.b.c.d' and 'a.b.c', but not 'a.b' and 'a'.
-            if ((flags & ExpressionType.ValidTerm) == ExpressionType.ValidTerm &&
-                !expression.IsParentKind(SyntaxKind.MemberAccessExpression) &&
-                !expression.IsParentKind(SyntaxKind.PointerMemberAccessExpression))
+            if (
+                (flags & ExpressionType.ValidTerm) == ExpressionType.ValidTerm
+                && !expression.IsParentKind(SyntaxKind.MemberAccessExpression)
+                && !expression.IsParentKind(SyntaxKind.PointerMemberAccessExpression)
+            )
             {
                 terms.Add(ConvertToString(memberAccess.Expression));
             }
 
             // And this expression itself is a valid term if the LHS is a valid
             // expression, and its PARENT is not an invocation.
-            if ((flags & ExpressionType.ValidExpression) == ExpressionType.ValidExpression &&
-                !expression.IsParentKind(SyntaxKind.InvocationExpression))
+            if (
+                (flags & ExpressionType.ValidExpression) == ExpressionType.ValidExpression
+                && !expression.IsParentKind(SyntaxKind.InvocationExpression)
+            )
             {
                 expressionType = ExpressionType.ValidTerm;
             }
@@ -151,7 +194,12 @@ namespace Roslyn.Services.CSharp.Debugging
             }
         }
 
-        private static void CollectObjectCreationExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+        private static void CollectObjectCreationExpressionTerms(
+            int position,
+            ExpressionSyntax expression,
+            IList<string> terms,
+            ref ExpressionType expressionType
+        )
         {
             // Object creation can *definitely* cause side effects.  So we initially
             // mark this as something invalid.  We allow it as a valid expr if all
@@ -173,7 +221,12 @@ namespace Roslyn.Services.CSharp.Debugging
             }
         }
 
-        private static void CollectArrayCreationExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+        private static void CollectArrayCreationExpressionTerms(
+            int position,
+            ExpressionSyntax expression,
+            IList<string> terms,
+            ref ExpressionType expressionType
+        )
         {
             var validTerm = true;
             var arrayCreation = (ArrayCreationExpressionSyntax)expression;
@@ -181,7 +234,9 @@ namespace Roslyn.Services.CSharp.Debugging
             if (arrayCreation.InitializerOpt != null)
             {
                 var flags = ExpressionType.Invalid;
-                arrayCreation.InitializerOpt.Expressions.Do(e => CollectExpressionTerms(position, e, terms, ref flags));
+                arrayCreation.InitializerOpt.Expressions.Do(e =>
+                    CollectExpressionTerms(position, e, terms, ref flags)
+                );
 
                 validTerm &= (flags & ExpressionType.ValidTerm) == ExpressionType.ValidTerm;
             }
@@ -196,12 +251,18 @@ namespace Roslyn.Services.CSharp.Debugging
             }
         }
 
-        private static void CollectInvocationExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+        private static void CollectInvocationExpressionTerms(
+            int position,
+            ExpressionSyntax expression,
+            IList<string> terms,
+            ref ExpressionType expressionType
+        )
         {
             // Invocations definitely have side effects.  So we assume this
             // is invalid initially
             expressionType = ExpressionType.Invalid;
-            ExpressionType leftFlags = ExpressionType.Invalid, rightFlags = ExpressionType.Invalid;
+            ExpressionType leftFlags = ExpressionType.Invalid,
+                rightFlags = ExpressionType.Invalid;
 
             var invocation = (InvocationExpressionSyntax)expression;
             CollectExpressionTerms(position, invocation.Expression, terms, ref leftFlags);
@@ -216,7 +277,12 @@ namespace Roslyn.Services.CSharp.Debugging
             expressionType = (leftFlags & rightFlags) & ExpressionType.ValidExpression;
         }
 
-        private static void CollectPrefixUnaryExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+        private static void CollectPrefixUnaryExpressionTerms(
+            int position,
+            ExpressionSyntax expression,
+            IList<string> terms,
+            ref ExpressionType expressionType
+        )
         {
             expressionType = ExpressionType.Invalid;
             var flags = ExpressionType.Invalid;
@@ -231,14 +297,26 @@ namespace Roslyn.Services.CSharp.Debugging
                 terms.Add(ConvertToString(prefixUnaryExpression.Operand));
             }
 
-            if (expression.MatchesKind(SyntaxKind.LogicalNotExpression, SyntaxKind.BitwiseNotExpression, SyntaxKind.NegateExpression, SyntaxKind.PlusExpression))
+            if (
+                expression.MatchesKind(
+                    SyntaxKind.LogicalNotExpression,
+                    SyntaxKind.BitwiseNotExpression,
+                    SyntaxKind.NegateExpression,
+                    SyntaxKind.PlusExpression
+                )
+            )
             {
                 // We're a valid expression if our subexpression is...
                 expressionType = flags & ExpressionType.ValidExpression;
             }
         }
 
-        private static void CollectPostfixUnaryExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+        private static void CollectPostfixUnaryExpressionTerms(
+            int position,
+            ExpressionSyntax expression,
+            IList<string> terms,
+            ref ExpressionType expressionType
+        )
         {
             // ++ and -- are the only postfix operators.  Since they always have side
             // effects, we never consider this an expression.
@@ -257,9 +335,15 @@ namespace Roslyn.Services.CSharp.Debugging
             }
         }
 
-        private static void CollectBinaryExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+        private static void CollectBinaryExpressionTerms(
+            int position,
+            ExpressionSyntax expression,
+            IList<string> terms,
+            ref ExpressionType expressionType
+        )
         {
-            ExpressionType leftFlags = ExpressionType.Invalid, rightFlags = ExpressionType.Invalid;
+            ExpressionType leftFlags = ExpressionType.Invalid,
+                rightFlags = ExpressionType.Invalid;
 
             var binaryExpression = (BinaryExpressionSyntax)expression;
             CollectExpressionTerms(position, binaryExpression.Left, terms, ref leftFlags);
@@ -311,7 +395,12 @@ namespace Roslyn.Services.CSharp.Debugging
             }
         }
 
-        private static void CollectArgumentTerms(int position, ArgumentListSyntax argumentList, IList<string> terms, ref ExpressionType expressionType)
+        private static void CollectArgumentTerms(
+            int position,
+            ArgumentListSyntax argumentList,
+            IList<string> terms,
+            ref ExpressionType expressionType
+        )
         {
             var validExpr = true;
 
@@ -327,7 +416,8 @@ namespace Roslyn.Services.CSharp.Debugging
                     terms.Add(ConvertToString(arg.Expression));
                 }
 
-                validExpr &= (flags & ExpressionType.ValidExpression) == ExpressionType.ValidExpression;
+                validExpr &=
+                    (flags & ExpressionType.ValidExpression) == ExpressionType.ValidExpression;
             }
 
             // We're never a valid term, but we're a valid expression if all
@@ -335,7 +425,11 @@ namespace Roslyn.Services.CSharp.Debugging
             expressionType = validExpr ? ExpressionType.ValidExpression : 0;
         }
 
-        private static void CollectVariableTerms(int position, SeparatedSyntaxList<VariableDeclaratorSyntax> declarators, List<string> terms)
+        private static void CollectVariableTerms(
+            int position,
+            SeparatedSyntaxList<VariableDeclaratorSyntax> declarators,
+            List<string> terms
+        )
         {
             foreach (var declarator in declarators)
             {

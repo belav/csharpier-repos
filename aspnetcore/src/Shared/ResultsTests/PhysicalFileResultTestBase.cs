@@ -433,8 +433,8 @@ public abstract class PhysicalFileResultTestBase
         var httpContext = GetHttpContext();
 
         // Act
-        var ex = await Assert.ThrowsAsync<NotSupportedException>(
-            () => ExecuteAsync(httpContext, path, "text/plain")
+        var ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
+            ExecuteAsync(httpContext, path, "text/plain")
         );
 
         // Assert
@@ -458,8 +458,8 @@ public abstract class PhysicalFileResultTestBase
         var httpContext = GetHttpContext();
 
         // Act & Assert
-        Assert.ThrowsAsync<DirectoryNotFoundException>(
-            () => ExecuteAsync(httpContext, path, "text/plain")
+        Assert.ThrowsAsync<DirectoryNotFoundException>(() =>
+            ExecuteAsync(httpContext, path, "text/plain")
         );
     }
 
@@ -472,8 +472,8 @@ public abstract class PhysicalFileResultTestBase
         var httpContext = GetHttpContext();
 
         // Act & Assert
-        Assert.ThrowsAsync<FileNotFoundException>(
-            () => ExecuteAsync(httpContext, path, "text/plain")
+        Assert.ThrowsAsync<FileNotFoundException>(() =>
+            ExecuteAsync(httpContext, path, "text/plain")
         );
     }
 

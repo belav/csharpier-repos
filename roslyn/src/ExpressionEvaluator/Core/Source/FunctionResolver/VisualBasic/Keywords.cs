@@ -172,7 +172,8 @@ namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
                     "Gosub",
                     "Variant",
                     "Wend",
-                });
+                }
+            );
         }
     }
 }

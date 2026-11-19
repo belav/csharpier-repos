@@ -29,6 +29,6 @@ namespace System.DirectoryServices
         /// <devdoc>
         /// Chase referrals of either the subordinate or external type.
         /// </devdoc>
-        All = Subordinate | External
+        All = Subordinate | External,
     }
 }

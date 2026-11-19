@@ -35,7 +35,8 @@ public class RelationalIndexExtensionsTest
         Assert.Collection(
             index0.Properties,
             prop0 => Assert.Equal("A", prop0.Name),
-            prop1 => Assert.Equal("B", prop1.Name));
+            prop1 => Assert.Equal("B", prop1.Name)
+        );
 
         var index1 = (Index)entityBuilder.Metadata.GetIndexes().Skip(1).First();
         Assert.Equal(ConfigurationSource.DataAnnotation, index1.GetConfigurationSource());
@@ -47,11 +48,12 @@ public class RelationalIndexExtensionsTest
         Assert.Collection(
             index1.Properties,
             prop0 => Assert.Equal("B", prop0.Name),
-            prop1 => Assert.Equal("C", prop1.Name));
+            prop1 => Assert.Equal("C", prop1.Name)
+        );
     }
 
-    protected virtual ModelBuilder CreateConventionModelBuilder()
-        => FakeRelationalTestHelpers.Instance.CreateConventionBuilder();
+    protected virtual ModelBuilder CreateConventionModelBuilder() =>
+        FakeRelationalTestHelpers.Instance.CreateConventionBuilder();
 
     [Index(nameof(A), nameof(B), Name = "IndexOnAAndB", IsUnique = true)]
     [Index(nameof(B), nameof(C), Name = "IndexOnBAndC")]

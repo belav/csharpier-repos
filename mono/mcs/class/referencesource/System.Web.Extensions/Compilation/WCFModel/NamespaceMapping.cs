@@ -36,14 +36,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute()]
         public string TargetNamespace
         {
-            get
-            {
-                return m_TargetNamespace;
-            }
-            set
-            {
-                m_TargetNamespace = value;
-            }
+            get { return m_TargetNamespace; }
+            set { m_TargetNamespace = value; }
         }
 
         /// <summary>
@@ -54,16 +48,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute()]
         public string ClrNamespace
         {
-            get
-            {
-                return m_ClrNamespace;
-            }
-            set
-            {
-                m_ClrNamespace = value;
-            }
+            get { return m_ClrNamespace; }
+            set { m_ClrNamespace = value; }
         }
-
     }
 }
-

@@ -4,29 +4,31 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
+namespace System.Configuration
+{
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Xml;
     using System.Globalization;
+    using System.Xml;
 
     /// <devdoc>
     /// Simple dictionary config factory
     /// config is a dictionary mapping key-&gt;value
-    /// 
-    ///     &lt;add key="name" value="text"&gt;  sets key=text 
+    ///
+    ///     &lt;add key="name" value="text"&gt;  sets key=text
     ///     &lt;remove key="name"&gt;            removes the definition of key
     ///     &lt;clear&gt;                        removes all definitions
-    /// 
+    ///
     /// </devdoc>
-    public class DictionarySectionHandler : IConfigurationSectionHandler {
-
+    public class DictionarySectionHandler : IConfigurationSectionHandler
+    {
         /// <devdoc>
         /// Given a partially composed config object (possibly null)
         /// and some input from the config system, return a
         /// further partially composed config object
         /// </devdoc>
-        public virtual object Create(Object parent, Object context, XmlNode section) {
+        public virtual object Create(Object parent, Object context, XmlNode section)
+        {
             Hashtable res;
 
             // start res off as a shallow clone of the parent
@@ -40,14 +42,15 @@ namespace System.Configuration {
 
             HandlerBase.CheckForUnrecognizedAttributes(section);
 
-            foreach (XmlNode child in section.ChildNodes) {
-
+            foreach (XmlNode child in section.ChildNodes)
+            {
                 // skip whitespace and comments, throws if non-element
                 if (HandlerBase.IsIgnorableAlsoCheckForNonElement(child))
                     continue;
 
                 // handle <add>, <remove>, <clear> tags
-                if (child.Name == "add") {
+                if (child.Name == "add")
+                {
                     HandlerBase.CheckForChildNodes(child);
                     String key = HandlerBase.RemoveRequiredAttribute(child, KeyAttributeName);
                     String value;
@@ -62,19 +65,22 @@ namespace System.Configuration {
 
                     res[key] = value;
                 }
-                else if (child.Name == "remove") {
+                else if (child.Name == "remove")
+                {
                     HandlerBase.CheckForChildNodes(child);
                     String key = HandlerBase.RemoveRequiredAttribute(child, KeyAttributeName);
                     HandlerBase.CheckForUnrecognizedAttributes(child);
 
                     res.Remove(key);
                 }
-                else if (child.Name.Equals("clear")) {
+                else if (child.Name.Equals("clear"))
+                {
                     HandlerBase.CheckForChildNodes(child);
                     HandlerBase.CheckForUnrecognizedAttributes(child);
                     res.Clear();
                 }
-                else {
+                else
+                {
                     HandlerBase.ThrowUnrecognizedElement(child);
                 }
             }
@@ -85,19 +91,22 @@ namespace System.Configuration {
         /// <devdoc>
         ///    Make the name of the key attribute configurable by derived classes.
         /// </devdoc>
-        protected virtual string KeyAttributeName {
-            get { return "key";}
+        protected virtual string KeyAttributeName
+        {
+            get { return "key"; }
         }
 
         /// <devdoc>
         ///    Make the name of the value attribute configurable by derived classes.
         /// </devdoc>
-        protected virtual string ValueAttributeName {
-            get { return "value";}
+        protected virtual string ValueAttributeName
+        {
+            get { return "value"; }
         }
 
-        // 
-        internal virtual bool ValueRequired {
+        //
+        internal virtual bool ValueRequired
+        {
             get { return false; }
         }
     }

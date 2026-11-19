@@ -3,20 +3,17 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class KeysWithConvertersSqlServerTest : KeysWithConvertersTestBase<
-    KeysWithConvertersSqlServerTest.KeysWithConvertersSqlServerFixture>
+public class KeysWithConvertersSqlServerTest
+    : KeysWithConvertersTestBase<KeysWithConvertersSqlServerTest.KeysWithConvertersSqlServerFixture>
 {
     public KeysWithConvertersSqlServerTest(KeysWithConvertersSqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class KeysWithConvertersSqlServerFixture : KeysWithConvertersFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => builder.UseSqlServer(b => b.MinBatchSize(1));
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            builder.UseSqlServer(b => b.MinBatchSize(1));
     }
 }

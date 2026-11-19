@@ -18,17 +18,20 @@ namespace System.Web.Http.ValueProviders.Providers
                 throw Error.ArgumentNull("actionContext");
             }
 
-            // Only parse the query string once-per request. 
-                        
+            // Only parse the query string once-per request.
+
             QueryStringValueProvider provider;
-            IDictionary<string, object> storage  = actionContext.Request.Properties;
+            IDictionary<string, object> storage = actionContext.Request.Properties;
 
             if (!storage.TryGetValue(RequestLocalStorageKey, out provider))
             {
-                provider = new QueryStringValueProvider(actionContext, CultureInfo.InvariantCulture);
+                provider = new QueryStringValueProvider(
+                    actionContext,
+                    CultureInfo.InvariantCulture
+                );
                 storage[RequestLocalStorageKey] = provider;
-            }            
-            
+            }
+
             return provider;
         }
     }

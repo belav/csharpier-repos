@@ -3,9 +3,18 @@
 
 using System.Collections.Generic;
 using System.Text.Json.Serialization.Metadata;
-
-using FoundProperties = System.ValueTuple<System.Text.Json.Serialization.Metadata.JsonPropertyInfo, System.Text.Json.JsonReaderState, long, byte[]?, string?>;
-using FoundPropertiesAsync = System.ValueTuple<System.Text.Json.Serialization.Metadata.JsonPropertyInfo, object?, string?>;
+using FoundProperties = System.ValueTuple<
+    System.Text.Json.Serialization.Metadata.JsonPropertyInfo,
+    System.Text.Json.JsonReaderState,
+    long,
+    byte[]?,
+    string?
+>;
+using FoundPropertiesAsync = System.ValueTuple<
+    System.Text.Json.Serialization.Metadata.JsonPropertyInfo,
+    object?,
+    string?
+>;
 
 namespace System.Text.Json
 {

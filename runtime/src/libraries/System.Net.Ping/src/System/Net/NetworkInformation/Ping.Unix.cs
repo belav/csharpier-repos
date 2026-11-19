@@ -19,19 +19,29 @@ namespace System.Net.NetworkInformation
         private static bool NeedsConnect => OperatingSystem.IsLinux();
         private static bool SupportsDualMode => true;
 
-        private PingReply SendPingCore(IPAddress address, byte[] buffer, int timeout, PingOptions? options)
+        private PingReply SendPingCore(
+            IPAddress address,
+            byte[] buffer,
+            int timeout,
+            PingOptions? options
+        )
         {
-            PingReply reply = RawSocketPermissions.CanUseRawSockets(address.AddressFamily) ?
-                    SendIcmpEchoRequestOverRawSocket(address, buffer, timeout, options) :
-                    SendWithPingUtility(address, buffer, timeout, options);
+            PingReply reply = RawSocketPermissions.CanUseRawSockets(address.AddressFamily)
+                ? SendIcmpEchoRequestOverRawSocket(address, buffer, timeout, options)
+                : SendWithPingUtility(address, buffer, timeout, options);
             return reply;
         }
 
-        private Task<PingReply> SendPingAsyncCore(IPAddress address, byte[] buffer, int timeout, PingOptions? options)
+        private Task<PingReply> SendPingAsyncCore(
+            IPAddress address,
+            byte[] buffer,
+            int timeout,
+            PingOptions? options
+        )
         {
-            return RawSocketPermissions.CanUseRawSockets(address.AddressFamily) ?
-                    SendIcmpEchoRequestOverRawSocketAsync(address, buffer, timeout, options) :
-                    SendWithPingUtilityAsync(address, buffer, timeout, options);
+            return RawSocketPermissions.CanUseRawSockets(address.AddressFamily)
+                ? SendIcmpEchoRequestOverRawSocketAsync(address, buffer, timeout, options)
+                : SendWithPingUtilityAsync(address, buffer, timeout, options);
         }
     }
 }

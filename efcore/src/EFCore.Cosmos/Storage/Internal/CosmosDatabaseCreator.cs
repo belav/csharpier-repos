@@ -28,7 +28,8 @@ public class CosmosDatabaseCreator : IDatabaseCreator
         ICosmosClientWrapper cosmosClient,
         IDesignTimeModel designTimeModel,
         IUpdateAdapterFactory updateAdapterFactory,
-        IDatabase database)
+        IDatabase database
+    )
     {
         _cosmosClient = cosmosClient;
         _designTimeModel = designTimeModel;
@@ -66,15 +67,19 @@ public class CosmosDatabaseCreator : IDatabaseCreator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual async Task<bool> EnsureCreatedAsync(CancellationToken cancellationToken = default)
+    public virtual async Task<bool> EnsureCreatedAsync(
+        CancellationToken cancellationToken = default
+    )
     {
         var model = _designTimeModel.Model;
-        var created = await _cosmosClient.CreateDatabaseIfNotExistsAsync(model.GetThroughput(), cancellationToken)
+        var created = await _cosmosClient
+            .CreateDatabaseIfNotExistsAsync(model.GetThroughput(), cancellationToken)
             .ConfigureAwait(false);
 
         foreach (var container in GetContainersToCreate(model))
         {
-            created |= await _cosmosClient.CreateContainerIfNotExistsAsync(container, cancellationToken)
+            created |= await _cosmosClient
+                .CreateContainerIfNotExistsAsync(container, cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -126,7 +131,8 @@ public class CosmosDatabaseCreator : IDatabaseCreator
                 partitionKey!,
                 analyticalTtl,
                 defaultTtl,
-                throughput);
+                throughput
+            );
         }
     }
 
@@ -178,8 +184,7 @@ public class CosmosDatabaseCreator : IDatabaseCreator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool EnsureDeleted()
-        => _cosmosClient.DeleteDatabase();
+    public virtual bool EnsureDeleted() => _cosmosClient.DeleteDatabase();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -187,8 +192,8 @@ public class CosmosDatabaseCreator : IDatabaseCreator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Task<bool> EnsureDeletedAsync(CancellationToken cancellationToken = default)
-        => _cosmosClient.DeleteDatabaseAsync(cancellationToken);
+    public virtual Task<bool> EnsureDeletedAsync(CancellationToken cancellationToken = default) =>
+        _cosmosClient.DeleteDatabaseAsync(cancellationToken);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -196,8 +201,8 @@ public class CosmosDatabaseCreator : IDatabaseCreator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool CanConnect()
-        => throw new NotSupportedException(CosmosStrings.CanConnectNotSupported);
+    public virtual bool CanConnect() =>
+        throw new NotSupportedException(CosmosStrings.CanConnectNotSupported);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -205,8 +210,8 @@ public class CosmosDatabaseCreator : IDatabaseCreator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Task<bool> CanConnectAsync(CancellationToken cancellationToken = default)
-        => throw new NotSupportedException(CosmosStrings.CanConnectNotSupported);
+    public virtual Task<bool> CanConnectAsync(CancellationToken cancellationToken = default) =>
+        throw new NotSupportedException(CosmosStrings.CanConnectNotSupported);
 
     /// <summary>
     ///     Returns the store name of the property that is used to store the partition key.

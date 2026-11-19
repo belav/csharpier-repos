@@ -13,7 +13,8 @@ using System.Collections.Generic;
 namespace Microsoft.CodeAnalysis.Collections.Internal
 {
     /// <summary>Equality comparer for hashsets of hashsets</summary>
-    internal sealed class SegmentedHashSetEqualityComparer<T> : IEqualityComparer<SegmentedHashSet<T>?>
+    internal sealed class SegmentedHashSetEqualityComparer<T>
+        : IEqualityComparer<SegmentedHashSet<T>?>
     {
         public bool Equals(SegmentedHashSet<T>? x, SegmentedHashSet<T>? y)
         {

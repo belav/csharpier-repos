@@ -15,7 +15,11 @@ namespace Microsoft.AspNet.Facebook
         /// <summary>
         /// Gets or sets the connection data.
         /// </summary>
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "Needed for JSON deserialization")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "Needed for JSON deserialization"
+        )]
         public IList<T> Data { get; set; }
     }
 }

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void MethodReference_NoControlFlow()
         {
             // Verify method references with different kinds of instance references.
-            string source = @"
+            string source =
+                @"
 class C
 {
     public virtual int M1() => 0;
@@ -35,7 +36,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -85,14 +87,19 @@ Block[B2] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void MethodReference_ControlFlowInReceiver()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public int M1() => 0;
@@ -102,7 +109,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -182,14 +190,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void MethodReference_ControlFlowInReceiver_StaticMethod()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public static int M1() => 0;
@@ -200,7 +213,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -294,16 +308,25 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(7,14): error CS0176: Member 'C.M1()' cannot be accessed with an instance reference; qualify it with a type name instead
                 //         m1 = c1.M1;
-                Diagnostic(ErrorCode.ERR_ObjectProhibited, "c1.M1").WithArguments("C.M1()").WithLocation(7, 14),
+                Diagnostic(ErrorCode.ERR_ObjectProhibited, "c1.M1")
+                    .WithArguments("C.M1()")
+                    .WithLocation(7, 14),
                 // file.cs(8,14): error CS0176: Member 'C.M1()' cannot be accessed with an instance reference; qualify it with a type name instead
                 //         m2 = (c1 ?? c2).M1;
-                Diagnostic(ErrorCode.ERR_ObjectProhibited, "(c1 ?? c2).M1").WithArguments("C.M1()").WithLocation(8, 14)
+                Diagnostic(ErrorCode.ERR_ObjectProhibited, "(c1 ?? c2).M1")
+                    .WithArguments("C.M1()")
+                    .WithLocation(8, 14),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
     }
 }

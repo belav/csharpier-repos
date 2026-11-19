@@ -5,8 +5,8 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace IntelHardwareIntrinsicTest.Avx1
@@ -26,7 +26,8 @@ namespace IntelHardwareIntrinsicTest.Avx1
             return (void*)(buffer + misalignment);
         }
 
-        public unsafe struct TestTable<T> : IDisposable where T : struct
+        public unsafe struct TestTable<T> : IDisposable
+            where T : struct
         {
             public T[] inArray;
             public T[] outArray;
@@ -36,6 +37,7 @@ namespace IntelHardwareIntrinsicTest.Avx1
 
             GCHandle inHandle;
             GCHandle outHandle;
+
             public TestTable(T[] a, T[] b)
             {
                 this.inArray = a;
@@ -44,10 +46,12 @@ namespace IntelHardwareIntrinsicTest.Avx1
                 inHandle = GCHandle.Alloc(inArray, GCHandleType.Pinned);
                 outHandle = GCHandle.Alloc(outArray, GCHandleType.Pinned);
             }
+
             public bool CheckResult(Func<T[], T[], bool> check)
             {
                 return check(inArray, outArray);
             }
+
             public bool CheckResult(Func<T, T, bool> check)
             {
                 for (int i = 0; i < inArray.Length; i++)
@@ -59,6 +63,7 @@ namespace IntelHardwareIntrinsicTest.Avx1
                 }
                 return true;
             }
+
             public void Dispose()
             {
                 inHandle.Free();
@@ -66,8 +71,8 @@ namespace IntelHardwareIntrinsicTest.Avx1
             }
         }
 
-
-        public unsafe struct AlignedTestTable<T> : IDisposable where T : struct
+        public unsafe struct AlignedTestTable<T> : IDisposable
+            where T : struct
         {
             private byte[] inArray;
             public T[] outArray;
@@ -87,10 +92,15 @@ namespace IntelHardwareIntrinsicTest.Avx1
 
                 this.simdSize = 16;
 
-                Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArrayPtr), ref Unsafe.As<T, byte>(ref a[0]), this.simdSize);
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.AsRef<byte>(inArrayPtr),
+                    ref Unsafe.As<T, byte>(ref a[0]),
+                    this.simdSize
+                );
             }
 
-            public void* inArrayPtr => Align((byte*)(inHandle.AddrOfPinnedObject().ToPointer()), simdSize);
+            public void* inArrayPtr =>
+                Align((byte*)(inHandle.AddrOfPinnedObject().ToPointer()), simdSize);
             public void* outArrayPtr => outHandle.AddrOfPinnedObject().ToPointer();
 
             public bool CheckResult(Func<T, T, bool> check)
@@ -122,7 +132,8 @@ namespace IntelHardwareIntrinsicTest.Avx1
             }
         }
 
-        public unsafe struct TestTable_2Input<T> : IDisposable where T : struct
+        public unsafe struct TestTable_2Input<T> : IDisposable
+            where T : struct
         {
             public T[] inArray1;
             public T[] inArray2;
@@ -135,6 +146,7 @@ namespace IntelHardwareIntrinsicTest.Avx1
             GCHandle inHandle1;
             GCHandle inHandle2;
             GCHandle outHandle;
+
             public TestTable_2Input(T[] a, T[] b, T[] c)
             {
                 this.inArray1 = a;
@@ -145,10 +157,12 @@ namespace IntelHardwareIntrinsicTest.Avx1
                 inHandle2 = GCHandle.Alloc(inArray2, GCHandleType.Pinned);
                 outHandle = GCHandle.Alloc(outArray, GCHandleType.Pinned);
             }
+
             public bool CheckResult(Func<T[], T[], T[], bool> check)
             {
                 return check(inArray1, inArray2, outArray);
             }
+
             public bool CheckResult(Func<T, T, T, bool> check)
             {
                 for (int i = 0; i < inArray1.Length; i++)
@@ -168,7 +182,5 @@ namespace IntelHardwareIntrinsicTest.Avx1
                 outHandle.Free();
             }
         }
-
-
     }
 }

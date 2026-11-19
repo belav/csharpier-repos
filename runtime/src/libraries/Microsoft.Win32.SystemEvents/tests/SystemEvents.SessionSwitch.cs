@@ -16,11 +16,15 @@ namespace Microsoft.Win32.SystemEventsTests
             SendMessage(User32.WM_WTSSESSION_CHANGE, (IntPtr)reason, IntPtr.Zero);
         }
 
-        public static IEnumerable<object[]> SessionSwitchReasons() => Enum.GetValues(typeof(SessionSwitchReason))
-            .Cast<SessionSwitchReason>()
-            .Select(x => new object[] { x });
+        public static IEnumerable<object[]> SessionSwitchReasons() =>
+            Enum.GetValues(typeof(SessionSwitchReason))
+                .Cast<SessionSwitchReason>()
+                .Select(x => new object[] { x });
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoNorServerCore))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoNorServerCore)
+        )]
         [MemberData(nameof(SessionSwitchReasons))]
         public void SignalsSessionSwitch(SessionSwitchReason reason)
         {

@@ -28,30 +28,21 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Microsoft.Build.BuildEngine {
-	[Serializable]
-	internal class ExpressionParseException : Exception {
-	
-		public ExpressionParseException ()
-			: base ("Exception occured when parsing an expression.")
-		{
-		}
+namespace Microsoft.Build.BuildEngine
+{
+    [Serializable]
+    internal class ExpressionParseException : Exception
+    {
+        public ExpressionParseException()
+            : base("Exception occured when parsing an expression.") { }
 
-		public ExpressionParseException (string message)
-			: base (message)
-		{
-		}
+        public ExpressionParseException(string message)
+            : base(message) { }
 
-		public ExpressionParseException (string message,
-					Exception innerException)
-			: base (message, innerException)
-		{
-		}
+        public ExpressionParseException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-		protected ExpressionParseException (SerializationInfo info,
-					   StreamingContext context)
-			: base (info, context)
-		{
-		}
-	}
+        protected ExpressionParseException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
+    }
 }

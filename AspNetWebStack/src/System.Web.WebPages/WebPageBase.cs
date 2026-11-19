@@ -11,13 +11,21 @@ using Microsoft.Internal.Web.Utils;
 
 namespace System.Web.WebPages
 {
-    [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "This is temporary (elipton)")]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable",
+        Justification = "This is temporary (elipton)"
+    )]
     public abstract class WebPageBase : WebPageRenderingBase
     {
         // Keep track of which sections RenderSection has already been called on
-        private readonly HashSet<string> _renderedSections = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        private readonly HashSet<string> _renderedSections = new HashSet<string>(
+            StringComparer.OrdinalIgnoreCase
+        );
+
         // Keep track of whether RenderBody has been called
         private bool _renderedBody = false;
+
         // Action for rendering the body within a layout page
         private Action<TextWriter> _body;
 
@@ -49,7 +57,9 @@ namespace System.Web.WebPages
             {
                 if (_dynamicPageData == null)
                 {
-                    _dynamicPageData = new DynamicPageDataDictionary<dynamic>((PageDataDictionary<dynamic>)PageData);
+                    _dynamicPageData = new DynamicPageDataDictionary<dynamic>(
+                        (PageDataDictionary<dynamic>)PageData
+                    );
                 }
                 return _dynamicPageData;
             }
@@ -81,16 +91,17 @@ namespace System.Web.WebPages
             get { return PageContext.SectionWritersStack; }
         }
 
-        protected virtual void ConfigurePage(WebPageBase parentPage)
-        {
-        }
+        protected virtual void ConfigurePage(WebPageBase parentPage) { }
 
         public static WebPageBase CreateInstanceFromVirtualPath(string virtualPath)
         {
             return CreateInstanceFromVirtualPath(virtualPath, VirtualPathFactoryManager.Instance);
         }
 
-        internal static WebPageBase CreateInstanceFromVirtualPath(string virtualPath, IVirtualPathFactory virtualPathFactory)
+        internal static WebPageBase CreateInstanceFromVirtualPath(
+            string virtualPath,
+            IVirtualPathFactory virtualPathFactory
+        )
         {
             // Get the compiled object
             try
@@ -115,15 +126,28 @@ namespace System.Web.WebPages
         /// <summary>
         /// Attempts to create a WebPageBase instance from a virtualPath and wraps complex compiler exceptions with simpler messages
         /// </summary>
-        protected virtual WebPageBase CreatePageFromVirtualPath(string virtualPath, HttpContextBase httpContext, Func<string, bool> virtualPathExists, DisplayModeProvider displayModeProvider, IDisplayMode displayMode)
+        protected virtual WebPageBase CreatePageFromVirtualPath(
+            string virtualPath,
+            HttpContextBase httpContext,
+            Func<string, bool> virtualPathExists,
+            DisplayModeProvider displayModeProvider,
+            IDisplayMode displayMode
+        )
         {
             try
             {
-                DisplayInfo resolvedDisplayInfo = displayModeProvider.GetDisplayInfoForVirtualPath(virtualPath, httpContext, virtualPathExists, displayMode);
+                DisplayInfo resolvedDisplayInfo = displayModeProvider.GetDisplayInfoForVirtualPath(
+                    virtualPath,
+                    httpContext,
+                    virtualPathExists,
+                    displayMode
+                );
 
                 if (resolvedDisplayInfo != null)
                 {
-                    var webPage = VirtualPathFactory.CreateInstance<WebPageBase>(resolvedDisplayInfo.FilePath);
+                    var webPage = VirtualPathFactory.CreateInstance<WebPageBase>(
+                        resolvedDisplayInfo.FilePath
+                    );
 
                     if (webPage != null)
                     {
@@ -152,10 +176,19 @@ namespace System.Web.WebPages
                 throw;
             }
             // The page is missing, could not be compiled or is of an invalid type.
-            throw new HttpException(String.Format(CultureInfo.CurrentCulture, WebPageResources.WebPage_InvalidPageType, virtualPath));
+            throw new HttpException(
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    WebPageResources.WebPage_InvalidPageType,
+                    virtualPath
+                )
+            );
         }
 
-        private WebPageContext CreatePageContextFromParameters(bool isLayoutPage, params object[] data)
+        private WebPageContext CreatePageContextFromParameters(
+            bool isLayoutPage,
+            params object[] data
+        )
         {
             object first = null;
             if (data != null && data.Length > 0)
@@ -165,14 +198,25 @@ namespace System.Web.WebPages
 
             var pageData = PageDataDictionary<dynamic>.CreatePageDataFromParameters(PageData, data);
 
-            return WebPageContext.CreateNestedPageContext(PageContext, pageData, first, isLayoutPage);
+            return WebPageContext.CreateNestedPageContext(
+                PageContext,
+                pageData,
+                first,
+                isLayoutPage
+            );
         }
 
         public void DefineSection(string name, SectionWriter action)
         {
             if (SectionWriters.ContainsKey(name))
             {
-                throw new HttpException(String.Format(CultureInfo.InvariantCulture, WebPageResources.WebPage_SectionAleadyDefined, name));
+                throw new HttpException(
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        WebPageResources.WebPage_SectionAleadyDefined,
+                        name
+                    )
+                );
             }
             SectionWriters[name] = action;
         }
@@ -181,7 +225,14 @@ namespace System.Web.WebPages
         {
             if (PreviousSectionWriters == null)
             {
-                throw new HttpException(String.Format(CultureInfo.CurrentCulture, WebPageResources.WebPage_CannotRequestDirectly, VirtualPath, methodName));
+                throw new HttpException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        WebPageResources.WebPage_CannotRequestDirectly,
+                        VirtualPath,
+                        methodName
+                    )
+                );
             }
         }
 
@@ -191,7 +242,11 @@ namespace System.Web.WebPages
         }
 
         // This method is only used by WebPageBase to allow passing in the view context and writer.
-        public void ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+        public void ExecutePageHierarchy(
+            WebPageContext pageContext,
+            TextWriter writer,
+            WebPageRenderingBase startPage
+        )
         {
             PushContext(pageContext, writer);
 
@@ -199,7 +254,12 @@ namespace System.Web.WebPages
             {
                 if (startPage != this)
                 {
-                    var startPageContext = WebPageContext.CreateNestedPageContext<object>(parentContext: pageContext, pageData: null, model: null, isLayoutPage: false);
+                    var startPageContext = WebPageContext.CreateNestedPageContext<object>(
+                        parentContext: pageContext,
+                        pageData: null,
+                        model: null,
+                        isLayoutPage: false
+                    );
                     startPageContext.Page = startPage;
                     startPage.PageContext = startPageContext;
                 }
@@ -212,7 +272,11 @@ namespace System.Web.WebPages
             PopContext();
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We really don't care if SourceHeader fails, and we don't want it to fail any real requests ever")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We really don't care if SourceHeader fails, and we don't want it to fail any real requests ever"
+        )]
         public override void ExecutePageHierarchy()
         {
             // Unlike InitPages, for a WebPage there is no hierarchy - it is always
@@ -220,7 +284,7 @@ namespace System.Web.WebPages
             // and partial pages, but they are never part of the hierarchy.
 
             // (add server header for falcon debugging)
-            // call to MapPath() is expensive. If we are not emiting source files to header, 
+            // call to MapPath() is expensive. If we are not emiting source files to header,
             // don't bother to populate the SourceFiles collection. This saves perf significantly.
             if (WebPageHttpHandler.ShouldGenerateSourceHeader(Context))
             {
@@ -254,9 +318,7 @@ namespace System.Web.WebPages
             }
         }
 
-        protected virtual void InitializePage()
-        {
-        }
+        protected virtual void InitializePage() { }
 
         public bool IsSectionDefined(string name)
         {
@@ -276,9 +338,7 @@ namespace System.Web.WebPages
 
                 // If a layout file was specified, render it passing our page content.
                 OutputStack.Push(_currentWriter);
-                RenderSurrounding(
-                    layoutPagePath,
-                    _tempWriter.CopyTo);
+                RenderSurrounding(layoutPagePath, _tempWriter.CopyTo);
                 OutputStack.Pop();
             }
             else
@@ -304,7 +364,9 @@ namespace System.Web.WebPages
 
             // Render the page into it
             OutputStack.Push(_tempWriter);
-            SectionWritersStack.Push(new Dictionary<string, SectionWriter>(StringComparer.OrdinalIgnoreCase));
+            SectionWritersStack.Push(
+                new Dictionary<string, SectionWriter>(StringComparer.OrdinalIgnoreCase)
+            );
 
             // If the body is defined in the ViewData, remove it and store it on the instance
             // so that it won't affect rendering of partial pages when they call VerifyRenderedBodyOrSections
@@ -333,7 +395,14 @@ namespace System.Web.WebPages
             }
             else
             {
-                throw new HttpException(String.Format(CultureInfo.CurrentCulture, WebPageResources.WebPage_CannotRequestDirectly, VirtualPath, "RenderBody"));
+                throw new HttpException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        WebPageResources.WebPage_CannotRequestDirectly,
+                        VirtualPath,
+                        "RenderBody"
+                    )
+                );
             }
         }
 
@@ -346,13 +415,22 @@ namespace System.Web.WebPages
         {
             if (String.IsNullOrEmpty(path))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "path");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "path"
+                );
             }
 
             return new HelperResult(writer =>
             {
                 path = NormalizePath(path);
-                WebPageBase subPage = CreatePageFromVirtualPath(path, Context, VirtualPathFactory.Exists, DisplayModeProvider, DisplayMode);
+                WebPageBase subPage = CreatePageFromVirtualPath(
+                    path,
+                    Context,
+                    VirtualPathFactory.Exists,
+                    DisplayModeProvider,
+                    DisplayMode
+                );
                 var pageContext = CreatePageContextFromParameters(isLayoutPage, data);
 
                 subPage.ConfigurePage(this);
@@ -375,7 +453,13 @@ namespace System.Web.WebPages
                 {
                     if (_renderedSections.Contains(name))
                     {
-                        throw new HttpException(String.Format(CultureInfo.InvariantCulture, WebPageResources.WebPage_SectionAleadyRendered, name));
+                        throw new HttpException(
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                WebPageResources.WebPage_SectionAleadyRendered,
+                                name
+                            )
+                        );
                     }
                     var body = PreviousSectionWriters[name];
                     // Since the body can also call RenderSection, we need to temporarily remove
@@ -408,7 +492,13 @@ namespace System.Web.WebPages
             else if (required)
             {
                 // If the section is not found, and it is not optional, throw an error.
-                throw new HttpException(String.Format(CultureInfo.InvariantCulture, WebPageResources.WebPage_SectionNotDefined, name));
+                throw new HttpException(
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        WebPageResources.WebPage_SectionNotDefined,
+                        name
+                    )
+                );
             }
             else
             {
@@ -435,14 +525,18 @@ namespace System.Web.WebPages
         // Verifies that RenderBody is called, or that RenderSection is called for all sections
         private void VerifyRenderedBodyOrSections()
         {
-            // The _body will be set within a layout page because PageContext.BodyAction was set by RenderSurrounding, 
+            // The _body will be set within a layout page because PageContext.BodyAction was set by RenderSurrounding,
             // which is only called in the case of rendering layout pages.
             // Using RenderPage will not result in a _body being set in a partial page, thus the following checks for
             // sections should not apply when RenderPage is called.
-            // Dev10 bug 928341 
+            // Dev10 bug 928341
             if (_body != null)
             {
-                if (SectionWritersStack.Count > 1 && PreviousSectionWriters != null && PreviousSectionWriters.Count > 0)
+                if (
+                    SectionWritersStack.Count > 1
+                    && PreviousSectionWriters != null
+                    && PreviousSectionWriters.Count > 0
+                )
                 {
                     // There are sections defined. Check that all sections have been rendered.
                     StringBuilder sectionsNotRendered = new StringBuilder();
@@ -459,14 +553,27 @@ namespace System.Web.WebPages
                     }
                     if (sectionsNotRendered.Length > 0)
                     {
-                        throw new HttpException(String.Format(CultureInfo.CurrentCulture, WebPageResources.WebPage_SectionsNotRendered, VirtualPath, sectionsNotRendered.ToString()));
+                        throw new HttpException(
+                            String.Format(
+                                CultureInfo.CurrentCulture,
+                                WebPageResources.WebPage_SectionsNotRendered,
+                                VirtualPath,
+                                sectionsNotRendered.ToString()
+                            )
+                        );
                     }
                 }
                 else if (!_renderedBody)
                 {
                     // There are no sections defined, but RenderBody was NOT called.
                     // If a body was defined, then RenderBody should have been called.
-                    throw new HttpException(String.Format(CultureInfo.CurrentCulture, WebPageResources.WebPage_RenderBodyNotCalled, VirtualPath));
+                    throw new HttpException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            WebPageResources.WebPage_RenderBodyNotCalled,
+                            VirtualPath
+                        )
+                    );
                 }
             }
         }

@@ -11,8 +11,9 @@ using Xunit.Sdk;
 namespace Roslyn.Test.Utilities
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
-    [XunitTestCaseDiscoverer("Roslyn.Test.Utilities.WpfTheoryDiscoverer", "Microsoft.CodeAnalysis.EditorFeatures.Test.Utilities")]
-    public class WpfTheoryAttribute : TheoryAttribute
-    {
-    }
+    [XunitTestCaseDiscoverer(
+        "Roslyn.Test.Utilities.WpfTheoryDiscoverer",
+        "Microsoft.CodeAnalysis.EditorFeatures.Test.Utilities"
+    )]
+    public class WpfTheoryAttribute : TheoryAttribute { }
 }

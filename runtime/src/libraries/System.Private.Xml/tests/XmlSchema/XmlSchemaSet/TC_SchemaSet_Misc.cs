@@ -64,7 +64,9 @@ namespace System.Xml.XmlSchemaTests
         {
             XmlSchemaSet xss = new XmlSchemaSet();
             xss.XmlResolver = new XmlUrlResolver();
-            using (XmlTextReader xtr = new XmlTextReader(Path.Combine(TestData._Root, "bug110823.xsd")))
+            using (
+                XmlTextReader xtr = new XmlTextReader(Path.Combine(TestData._Root, "bug110823.xsd"))
+            )
             {
                 xss.Add(XmlSchema.Read(xtr, null));
             }
@@ -84,13 +86,18 @@ namespace System.Xml.XmlSchemaTests
             //create reader
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.ValidationType = ValidationType.Schema;
-            settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings |
-                                       XmlSchemaValidationFlags.ProcessSchemaLocation |
-                                       XmlSchemaValidationFlags.ProcessInlineSchema;
+            settings.ValidationFlags |=
+                XmlSchemaValidationFlags.ReportValidationWarnings
+                | XmlSchemaValidationFlags.ProcessSchemaLocation
+                | XmlSchemaValidationFlags.ProcessInlineSchema;
             settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
             settings.Schemas.Add(ss);
-            XmlReader vr = XmlReader.Create(Path.Combine(TestData._Root, "bug115049.xml"), settings);
-            while (vr.Read()) ;
+            XmlReader vr = XmlReader.Create(
+                Path.Combine(TestData._Root, "bug115049.xml"),
+                settings
+            );
+            while (vr.Read())
+                ;
             CError.Compare(errorCount, 1, "Error Count mismatch!");
             return;
         }
@@ -99,17 +106,20 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void v4()
         {
-            string xml = @"<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xsi:type='xsd:anyType'>1242<b/></a>";
+            string xml =
+                @"<a xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xsi:type='xsd:anyType'>1242<b/></a>";
             Initialize();
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.XmlResolver = new XmlUrlResolver();
             settings.ValidationType = ValidationType.Schema;
-            settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings |
-                                       XmlSchemaValidationFlags.ProcessSchemaLocation |
-                                       XmlSchemaValidationFlags.ProcessInlineSchema;
+            settings.ValidationFlags |=
+                XmlSchemaValidationFlags.ReportValidationWarnings
+                | XmlSchemaValidationFlags.ProcessSchemaLocation
+                | XmlSchemaValidationFlags.ProcessInlineSchema;
             settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
             XmlReader vr = XmlReader.Create(new StringReader(xml), settings, (string)null);
-            while (vr.Read()) ;
+            while (vr.Read())
+                ;
             CError.Compare(errorCount, 0, "Error Count mismatch!");
             CError.Compare(warningCount, 1, "Warning Count mismatch!");
             return;
@@ -262,7 +272,11 @@ namespace System.Xml.XmlSchemaTests
             {
                 if (a.QualifiedName.Name == attName)
                 {
-                    CError.Compare(a.AttributeSchemaType.QualifiedName.Name, newtype, "Incorrect type for xml:lang");
+                    CError.Compare(
+                        a.AttributeSchemaType.QualifiedName.Name,
+                        newtype,
+                        "Incorrect type for xml:lang"
+                    );
                     return;
                 }
             }
@@ -312,11 +326,19 @@ namespace System.Xml.XmlSchemaTests
             {
                 if (a.QualifiedName.Name == "lang")
                 {
-                    CError.Compare(a.AttributeSchemaType.QualifiedName.Name, "decimal", "Incorrect type for xml:lang");
+                    CError.Compare(
+                        a.AttributeSchemaType.QualifiedName.Name,
+                        "decimal",
+                        "Incorrect type for xml:lang"
+                    );
                 }
                 if (a.QualifiedName.Name == "base")
                 {
-                    CError.Compare(a.AttributeSchemaType.QualifiedName.Name, "short", "Incorrect type for xml:base");
+                    CError.Compare(
+                        a.AttributeSchemaType.QualifiedName.Name,
+                        "short",
+                        "Incorrect type for xml:base"
+                    );
                 }
             }
 
@@ -341,7 +363,11 @@ namespace System.Xml.XmlSchemaTests
             {
                 if (a.QualifiedName.Name == "blah")
                 {
-                    CError.Compare(a.AttributeSchemaType.QualifiedName.Name, "int", "Incorrect type for xml:lang");
+                    CError.Compare(
+                        a.AttributeSchemaType.QualifiedName.Name,
+                        "int",
+                        "Incorrect type for xml:lang"
+                    );
                 }
             }
             CError.Compare(ss.Count, 6, "Count of SchemaSet not matched!");
@@ -377,7 +403,11 @@ namespace System.Xml.XmlSchemaTests
             {
                 if (a.QualifiedName.Name == "blah")
                 {
-                    CError.Compare(a.AttributeSchemaType.QualifiedName.Name, "int", "Incorrect type for xml:lang");
+                    CError.Compare(
+                        a.AttributeSchemaType.QualifiedName.Name,
+                        "int",
+                        "Incorrect type for xml:lang"
+                    );
                 }
             }
             CError.Compare(ss.Count, 5, "Count of SchemaSet not matched!");
@@ -392,7 +422,11 @@ namespace System.Xml.XmlSchemaTests
                 _output.WriteLine("WARNING Received");
                 bWarningCallback = true;
                 warningCount++;
-                CError.Compare(args.Exception.InnerException == null, false, "Inner Exception not set");
+                CError.Compare(
+                    args.Exception.InnerException == null,
+                    false,
+                    "Inner Exception not set"
+                );
             }
         }
 
@@ -400,7 +434,8 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void v100()
         {
-            string xsd = @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:include schemaLocation='bogus'/></xs:schema>";
+            string xsd =
+                @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:include schemaLocation='bogus'/></xs:schema>";
             Initialize();
             XmlSchemaSet ss = new XmlSchemaSet();
             ss.XmlResolver = new XmlUrlResolver();
@@ -415,8 +450,10 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void v101()
         {
-            string xsd1 = @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:notation name='a' public='a'/></xs:schema>";
-            string xsd2 = @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='root'/></xs:schema>";
+            string xsd1 =
+                @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:notation name='a' public='a'/></xs:schema>";
+            string xsd2 =
+                @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element name='root'/></xs:schema>";
 
             Initialize();
             XmlSchemaSet ss = new XmlSchemaSet();
@@ -477,17 +514,41 @@ namespace System.Xml.XmlSchemaTests
             {
                 ss1.Add(ss2);
 
-                CError.Compare(ss1.GlobalElements.Count, 7, "Schema Set 1 GlobalElements Count mismatch!");
-                CError.Compare(ss1.GlobalAttributes.Count, 2, "Schema Set 1 GlobalAttributes Count mismatch!");
-                CError.Compare(ss1.GlobalTypes.Count, 6, "Schema Set 1 GlobalTypes Count mismatch!");
+                CError.Compare(
+                    ss1.GlobalElements.Count,
+                    7,
+                    "Schema Set 1 GlobalElements Count mismatch!"
+                );
+                CError.Compare(
+                    ss1.GlobalAttributes.Count,
+                    2,
+                    "Schema Set 1 GlobalAttributes Count mismatch!"
+                );
+                CError.Compare(
+                    ss1.GlobalTypes.Count,
+                    6,
+                    "Schema Set 1 GlobalTypes Count mismatch!"
+                );
             }
             else
             {
                 ss1.Add(s);
 
-                CError.Compare(ss1.GlobalElements.Count, 2, "Schema Set 1 GlobalElements Count mismatch!");
-                CError.Compare(ss1.GlobalAttributes.Count, 0, "Schema Set 1 GlobalAttributes Count mismatch!");
-                CError.Compare(ss1.GlobalTypes.Count, 2, "Schema Set 1 GlobalTypes Count mismatch!");
+                CError.Compare(
+                    ss1.GlobalElements.Count,
+                    2,
+                    "Schema Set 1 GlobalElements Count mismatch!"
+                );
+                CError.Compare(
+                    ss1.GlobalAttributes.Count,
+                    0,
+                    "Schema Set 1 GlobalAttributes Count mismatch!"
+                );
+                CError.Compare(
+                    ss1.GlobalTypes.Count,
+                    2,
+                    "Schema Set 1 GlobalTypes Count mismatch!"
+                );
             }
 
             /***********************************************/
@@ -499,7 +560,11 @@ namespace System.Xml.XmlSchemaTests
             ss3.Compile();
             ss1.Add(ss3);
 
-            CError.Compare(ss1.GlobalElements.Count, 8, "Schema Set 1 GlobalElements Count mismatch!");
+            CError.Compare(
+                ss1.GlobalElements.Count,
+                8,
+                "Schema Set 1 GlobalElements Count mismatch!"
+            );
 
             return;
         }
@@ -555,7 +620,8 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void v107()
         {
-            string strXml = @"<root xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='a bug356711_a.xsd' xmlns:a='a'></root>";
+            string strXml =
+                @"<root xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='a bug356711_a.xsd' xmlns:a='a'></root>";
             Initialize();
             XmlSchemaSet schemaSet = new XmlSchemaSet();
             schemaSet.XmlResolver = new XmlUrlResolver();
@@ -564,13 +630,16 @@ namespace System.Xml.XmlSchemaTests
 
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.XmlResolver = new XmlUrlResolver();
-            settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings | XmlSchemaValidationFlags.ProcessSchemaLocation;
+            settings.ValidationFlags |=
+                XmlSchemaValidationFlags.ReportValidationWarnings
+                | XmlSchemaValidationFlags.ProcessSchemaLocation;
             settings.Schemas.Add(schemaSet);
             settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
             settings.ValidationType = ValidationType.Schema;
             XmlReader vr = XmlReader.Create(new StringReader(strXml), settings);
 
-            while (vr.Read()) ;
+            while (vr.Read())
+                ;
 
             CError.Compare(warningCount, 1, "Warning Count mismatch!");
             CError.Compare(WarningInnerExceptionSet, true, "Inner Exception not set!");
@@ -581,7 +650,8 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void v108()
         {
-            string strSchema1 = @"
+            string strSchema1 =
+                @"
 <xs:schema targetNamespace='http://bar'
            xmlns='http://bar' xmlns:x='http://foo'
            elementFormDefault='qualified'
@@ -597,7 +667,8 @@ namespace System.Xml.XmlSchemaTests
   </xs:element>
 </xs:schema>
 ";
-            string strSchema2 = @"<xs:schema targetNamespace='http://foo'
+            string strSchema2 =
+                @"<xs:schema targetNamespace='http://foo'
            xmlns='http://foo' xmlns:x='http://bar'
            elementFormDefault='qualified'
            attributeFormDefault='unqualified'
@@ -689,8 +760,14 @@ namespace System.Xml.XmlSchemaTests
             XmlSchemaSet ss = new XmlSchemaSet();
             ss.XmlResolver = new XmlUrlResolver();
             ss.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
-            XmlSchema s1 = ss.Add("http://EmployeeTest.org", Path.Combine(TestData._Root, "EmployeeTypes.xsd"));
-            XmlSchema s2 = ss.Add("http://EmployeeTest.org", Path.Combine(TestData._Root, "EmployeeTypes.xsd"));
+            XmlSchema s1 = ss.Add(
+                "http://EmployeeTest.org",
+                Path.Combine(TestData._Root, "EmployeeTypes.xsd")
+            );
+            XmlSchema s2 = ss.Add(
+                "http://EmployeeTest.org",
+                Path.Combine(TestData._Root, "EmployeeTypes.xsd")
+            );
 
             CError.Compare(warningCount, 0, "Warning Count mismatch!");
             CError.Compare(errorCount, 0, "Error Count mismatch!");
@@ -707,7 +784,10 @@ namespace System.Xml.XmlSchemaTests
             XmlSchemaSet newSet = new XmlSchemaSet();
             newSet.XmlResolver = new XmlUrlResolver();
             newSet.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
-            XmlSchema chameleon = newSet.Add(null, Path.Combine(TestData._Root, "EmployeeTypes.xsd"));
+            XmlSchema chameleon = newSet.Add(
+                null,
+                Path.Combine(TestData._Root, "EmployeeTypes.xsd")
+            );
             newSet.Compile();
 
             CError.Compare(newSet.GlobalTypes.Count, 10, "GlobalTypes count mismatch!");
@@ -733,7 +813,10 @@ namespace System.Xml.XmlSchemaTests
 
             XmlSchemaSet set2 = new XmlSchemaSet();
             set2.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
-            XmlSchema includedSchema = set2.Add(null, Path.Combine(TestData._Root, "bug382035a1.xsd"));
+            XmlSchema includedSchema = set2.Add(
+                null,
+                Path.Combine(TestData._Root, "bug382035a1.xsd")
+            );
             set2.Compile();
 
             XmlSchemaSet set = new XmlSchemaSet();
@@ -743,7 +826,10 @@ namespace System.Xml.XmlSchemaTests
             set.Compile();
 
             XmlReader r = XmlReader.Create(Path.Combine(TestData._Root, "bug382035a1.xsd"));
-            XmlSchema reParsedInclude = XmlSchema.Read(r, new ValidationEventHandler(ValidationCallback));
+            XmlSchema reParsedInclude = XmlSchema.Read(
+                r,
+                new ValidationEventHandler(ValidationCallback)
+            );
 
             ((XmlSchemaExternal)mainSchema.Includes[0]).Schema = reParsedInclude;
             set.Reprocess(mainSchema);
@@ -759,16 +845,20 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void v113()
         {
-            string strXml = @"<root xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xs='http://www.w3.org/2001/XMLSchema' xsi:type='xs:int'>a</root>";
+            string strXml =
+                @"<root xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xs='http://www.w3.org/2001/XMLSchema' xsi:type='xs:int'>a</root>";
             Initialize();
 
             XmlReaderSettings settings = new XmlReaderSettings();
-            settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings | XmlSchemaValidationFlags.ProcessSchemaLocation;
+            settings.ValidationFlags |=
+                XmlSchemaValidationFlags.ReportValidationWarnings
+                | XmlSchemaValidationFlags.ProcessSchemaLocation;
             settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
             settings.ValidationType = ValidationType.Schema;
             XmlReader vr = XmlReader.Create(new StringReader(strXml), settings);
 
-            while (vr.Read()) ;
+            while (vr.Read())
+                ;
 
             CError.Compare(warningCount, 0, "Warning Count mismatch!");
             CError.Compare(errorCount, 1, "Error Count mismatch!");
@@ -780,7 +870,8 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void v114()
         {
-            string strXsd = @"<xs:schema elementFormDefault='qualified' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
+            string strXsd =
+                @"<xs:schema elementFormDefault='qualified' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
  <xs:element name='date' type='date'/>
  <xs:simpleType name='date'>
   <xs:restriction base='xs:int'>
@@ -793,7 +884,12 @@ namespace System.Xml.XmlSchemaTests
             XmlSchemaSet ss = new XmlSchemaSet();
             ss.XmlResolver = new XmlUrlResolver();
             ss.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
-            ss.Add(XmlSchema.Read(new StringReader(strXsd), new ValidationEventHandler(ValidationCallback)));
+            ss.Add(
+                XmlSchema.Read(
+                    new StringReader(strXsd),
+                    new ValidationEventHandler(ValidationCallback)
+                )
+            );
 
             ss.Compile();
 
@@ -822,7 +918,7 @@ namespace System.Xml.XmlSchemaTests
         public void v117()
         {
             string strXsdv117 =
-            @"<?xml version='1.0' encoding='utf-8' ?>
+                @"<?xml version='1.0' encoding='utf-8' ?>
                   <xs:schema  xmlns:xs='http://www.w3.org/2001/XMLSchema'>
                     <xs:element name='doc'>
                       <xs:complexType>
@@ -878,7 +974,11 @@ namespace System.Xml.XmlSchemaTests
         [Fact]
         public void v120()
         {
-            using (XmlReader schemaReader = XmlReader.Create(Path.Combine(TestData._Root, "Bug397633.xsd")))
+            using (
+                XmlReader schemaReader = XmlReader.Create(
+                    Path.Combine(TestData._Root, "Bug397633.xsd")
+                )
+            )
             {
                 XmlSchemaSet sc = new XmlSchemaSet();
                 sc.XmlResolver = new XmlUrlResolver();
@@ -889,7 +989,12 @@ namespace System.Xml.XmlSchemaTests
                 readerSettings.ValidationType = ValidationType.Schema;
                 readerSettings.Schemas = sc;
 
-                using (XmlReader docValidatingReader = XmlReader.Create(Path.Combine(TestData._Root, "Bug397633.xml"), readerSettings))
+                using (
+                    XmlReader docValidatingReader = XmlReader.Create(
+                        Path.Combine(TestData._Root, "Bug397633.xml"),
+                        readerSettings
+                    )
+                )
                 {
                     XmlDocument doc = new XmlDocument();
                     try
@@ -899,7 +1004,11 @@ namespace System.Xml.XmlSchemaTests
                     }
                     catch (XmlSchemaValidationException ex)
                     {
-                        if (ex.LineNumber == 1 && ex.LinePosition == 2 && !string.IsNullOrEmpty(ex.SourceUri))
+                        if (
+                            ex.LineNumber == 1
+                            && ex.LinePosition == 2
+                            && !string.IsNullOrEmpty(ex.SourceUri)
+                        )
                         {
                             return;
                         }
@@ -915,7 +1024,12 @@ namespace System.Xml.XmlSchemaTests
         {
             XmlReaderSettings readerSettings = new XmlReaderSettings();
             readerSettings.ValidationType = ValidationType.Schema;
-            using (XmlReader reader = XmlReader.Create(Path.Combine(TestData._Root, "Bug397633.xml"), readerSettings))
+            using (
+                XmlReader reader = XmlReader.Create(
+                    Path.Combine(TestData._Root, "Bug397633.xml"),
+                    readerSettings
+                )
+            )
             {
                 XmlDocument doc = new XmlDocument();
                 try
@@ -938,26 +1052,25 @@ namespace System.Xml.XmlSchemaTests
         {
             Initialize();
             string XamlPresentationNamespace =
-        "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
-            string XamlToParse =
-        "<pfx0:DrawingBrush TileMode=\"Tile\" Viewbox=\"foobar\" />";
+                "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
+            string XamlToParse = "<pfx0:DrawingBrush TileMode=\"Tile\" Viewbox=\"foobar\" />";
 
             string xml =
-        "	<xs:schema " +
-        "		xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"" +
-        "		xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"" +
-        "		targetNamespace=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\" " +
-        "		elementFormDefault=\"qualified\" " +
-        "		attributeFormDefault=\"unqualified\"" +
-        "	>" +
-        "" +
-        "		<xs:element name=\"DrawingBrush\" type=\"DrawingBrushType\" />" +
-        "" +
-        "		<xs:complexType name=\"DrawingBrushType\">" +
-        "			<xs:attribute name=\"Viewbox\" type=\"xs:string\" />" +
-        "			<xs:attribute name=\"TileMode\" type=\"xs:string\" />" +
-        "		</xs:complexType>" +
-        "	</xs:schema>";
+                "	<xs:schema "
+                + "		xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\""
+                + "		xmlns:xs=\"http://www.w3.org/2001/XMLSchema\""
+                + "		targetNamespace=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\" "
+                + "		elementFormDefault=\"qualified\" "
+                + "		attributeFormDefault=\"unqualified\""
+                + "	>"
+                + ""
+                + "		<xs:element name=\"DrawingBrush\" type=\"DrawingBrushType\" />"
+                + ""
+                + "		<xs:complexType name=\"DrawingBrushType\">"
+                + "			<xs:attribute name=\"Viewbox\" type=\"xs:string\" />"
+                + "			<xs:attribute name=\"TileMode\" type=\"xs:string\" />"
+                + "		</xs:complexType>"
+                + "	</xs:schema>";
 
             XmlSchema schema = XmlSchema.Read(new StringReader(xml), null);
             schema.TargetNamespace = XamlPresentationNamespace;
@@ -975,9 +1088,25 @@ namespace System.Xml.XmlSchemaTests
             XmlNamespaceManager namespaces = new XmlNamespaceManager(nameTable);
             namespaces.AddNamespace("pfx0", XamlPresentationNamespace);
             namespaces.AddNamespace(string.Empty, XamlPresentationNamespace);
-            XmlParserContext parserContext = new XmlParserContext(nameTable, namespaces, null, null, null, null, null, null, XmlSpace.None);
+            XmlParserContext parserContext = new XmlParserContext(
+                nameTable,
+                namespaces,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                XmlSpace.None
+            );
 
-            using (XmlReader xmlReader = XmlReader.Create(new StringReader(XamlToParse), readerSettings, parserContext))
+            using (
+                XmlReader xmlReader = XmlReader.Create(
+                    new StringReader(XamlToParse),
+                    readerSettings,
+                    parserContext
+                )
+            )
             {
                 xmlReader.Read();
                 xmlReader.MoveToAttribute(0);
@@ -997,7 +1126,8 @@ namespace System.Xml.XmlSchemaTests
         public void Dev10_40561()
         {
             Initialize();
-            string xml = @"<?xml version='1.0' encoding='utf-8'?><e1 xmlns='ns-a'>  <c23 xmlns='ns-b'/></e1>";
+            string xml =
+                @"<?xml version='1.0' encoding='utf-8'?><e1 xmlns='ns-a'>  <c23 xmlns='ns-b'/></e1>";
             XmlSchemaSet set = new XmlSchemaSet();
             set.XmlResolver = new XmlUrlResolver();
             string path = Path.Combine(TestData.StandardPath, "xsd10", "SCHEMA", "schN11_a.xsd");
@@ -1012,11 +1142,15 @@ namespace System.Xml.XmlSchemaTests
             {
                 try
                 {
-                    while (reader.Read()) ;
+                    while (reader.Read())
+                        ;
                     _output.WriteLine("XmlSchemaValidationException was not thrown");
                     Assert.Fail();
                 }
-                catch (XmlSchemaValidationException e) { _output.WriteLine(e.Message); }
+                catch (XmlSchemaValidationException e)
+                {
+                    _output.WriteLine(e.Message);
+                }
             }
             CError.Compare(warningCount, 0, "Warning Count mismatch!");
             CError.Compare(errorCount, 0, "Error Count mismatch!");
@@ -1025,19 +1159,28 @@ namespace System.Xml.XmlSchemaTests
 
 #if !ReflectionOnly && !XMLSERIALIZERGENERATORTESTS
         // Conditioned the same as XmlSerializer tests. This uses XmlSerializer to serialize the schema.
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBuiltWithAggressiveTrimming))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotBuiltWithAggressiveTrimming)
+        )]
 #else
         [Fact]
 #endif
         public void GetBuiltinSimpleTypeWorksAsEcpected()
         {
             Initialize();
-            string xml = "<?xml version=\"1.0\" encoding=\"utf-16\"?>" + Environment.NewLine +
- "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">" + Environment.NewLine +
- "  <xs:simpleType>" + Environment.NewLine +
- "    <xs:restriction base=\"xs:anySimpleType\" />" + Environment.NewLine +
- "  </xs:simpleType>" + Environment.NewLine +
- "</xs:schema>";
+            string xml =
+                "<?xml version=\"1.0\" encoding=\"utf-16\"?>"
+                + Environment.NewLine
+                + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">"
+                + Environment.NewLine
+                + "  <xs:simpleType>"
+                + Environment.NewLine
+                + "    <xs:restriction base=\"xs:anySimpleType\" />"
+                + Environment.NewLine
+                + "  </xs:simpleType>"
+                + Environment.NewLine
+                + "</xs:schema>";
             XmlSchema schema = new XmlSchema();
             XmlSchemaSimpleType stringType = XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.String);
             schema.Items.Add(stringType);
@@ -1078,7 +1221,8 @@ namespace System.Xml.XmlSchemaTests
         public void Dev10_40511()
         {
             Initialize();
-            string xsd = @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>
+            string xsd =
+                @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>
 <xs:simpleType name='textType'>
     <xs:restriction base='xs:string'>
       <xs:minLength value='1' />
@@ -1104,7 +1248,8 @@ namespace System.Xml.XmlSchemaTests
         public void Dev10_40495()
         {
             Initialize();
-            const string schema1Str = @"<xs:schema xmlns:tns=""http://BizTalk_Server_Project2.Schema1"" xmlns:b=""http://schemas.microsoft.com/BizTalk/2003"" attributeFormDefault=""unqualified"" elementFormDefault=""qualified"" targetNamespace=""http://BizTalk_Server_Project2.Schema1"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">
+            const string schema1Str =
+                @"<xs:schema xmlns:tns=""http://BizTalk_Server_Project2.Schema1"" xmlns:b=""http://schemas.microsoft.com/BizTalk/2003"" attributeFormDefault=""unqualified"" elementFormDefault=""qualified"" targetNamespace=""http://BizTalk_Server_Project2.Schema1"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">
   <xs:include schemaLocation=""S3"" />
   <xs:include schemaLocation=""S2"" />
   <xs:element name=""Root"">
@@ -1124,13 +1269,15 @@ namespace System.Xml.XmlSchemaTests
   </xs:element>
 </xs:schema>";
 
-            const string schema2Str = @"<xs:schema xmlns:b=""http://schemas.microsoft.com/BizTalk/2003"" attributeFormDefault=""unqualified"" elementFormDefault=""qualified"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">
+            const string schema2Str =
+                @"<xs:schema xmlns:b=""http://schemas.microsoft.com/BizTalk/2003"" attributeFormDefault=""unqualified"" elementFormDefault=""qualified"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">
   <xs:complexType name=""FxType"">
     <xs:attribute name=""Fx2"" type=""xs:string"" />
   </xs:complexType>
 </xs:schema>";
 
-            const string schema3Str = @"<xs:schema xmlns:b=""http://schemas.microsoft.com/BizTalk/2003"" attributeFormDefault=""unqualified"" elementFormDefault=""qualified"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">
+            const string schema3Str =
+                @"<xs:schema xmlns:b=""http://schemas.microsoft.com/BizTalk/2003"" attributeFormDefault=""unqualified"" elementFormDefault=""qualified"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">
   <xs:complexType name=""TestType"">
     <xs:attribute name=""Fx2"" type=""xs:string"" />
   </xs:complexType>
@@ -1167,10 +1314,10 @@ namespace System.Xml.XmlSchemaTests
         {
             Initialize();
             string xsd =
-                "<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema'>" +
-                    "<xsd:element name='some'>" +
-                    "</xsd:element>" +
-                "</xsd:schema>";
+                "<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema'>"
+                + "<xsd:element name='some'>"
+                + "</xsd:element>"
+                + "</xsd:schema>";
             string xml = "<root/>";
 
             XmlDocument doc = new XmlDocument();
@@ -1189,7 +1336,11 @@ namespace System.Xml.XmlSchemaTests
 
         private void ValidateXPathNavigator(XPathNavigator nav, XmlSchemaSet schemaSet)
         {
-            _output.WriteLine(nav.CheckValidity(schemaSet, OnValidationEvent) ? "Validation succeeded." : "Validation failed.");
+            _output.WriteLine(
+                nav.CheckValidity(schemaSet, OnValidationEvent)
+                    ? "Validation succeeded."
+                    : "Validation failed."
+            );
         }
 
         private XmlSchemaSet CompileSchemaSet(string xsd)
@@ -1212,7 +1363,11 @@ namespace System.Xml.XmlSchemaTests
                 CError.Compare(exception.SourceObject != null, "SourceObject == null");
                 return;
             }
-            CError.Compare(exception.SourceObject.GetType().ToString(), "MS.Internal.Xml.Cache.XPathDocumentNavigator", "SourceObject.GetType");
+            CError.Compare(
+                exception.SourceObject.GetType().ToString(),
+                "MS.Internal.Xml.Cache.XPathDocumentNavigator",
+                "SourceObject.GetType"
+            );
             _output.WriteLine("Exc: " + exception);
         }
 
@@ -1222,10 +1377,10 @@ namespace System.Xml.XmlSchemaTests
         {
             Initialize();
             string xsd =
-                "<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema'>" +
-                    "<xsd:element name='some'>" +
-                    "</xsd:element>" +
-                "</xsd:schema>";
+                "<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema'>"
+                + "<xsd:element name='some'>"
+                + "</xsd:element>"
+                + "</xsd:schema>";
             XmlSchemaSet ss = new XmlSchemaSet();
             ss.XmlResolver = new XmlUrlResolver();
             ss.Add("http://www.w3.org/2001/XMLSchema", XmlReader.Create(new StringReader(xsd)));
@@ -1237,8 +1392,10 @@ namespace System.Xml.XmlSchemaTests
             {
                 using (XmlReader r2 = XmlReader.Create(new StringReader(input), rs))
                 {
-                    while (r1.Read()) ;
-                    while (r2.Read()) ;
+                    while (r1.Read())
+                        ;
+                    while (r2.Read())
+                        ;
                 }
             }
             CError.Compare(warningCount, 0, "Warning Count mismatch!");
@@ -1251,13 +1408,15 @@ namespace System.Xml.XmlSchemaTests
         public void TFS_470020()
         {
             Initialize();
-            string xml = @"<?xml version='1.0' encoding='utf-8' ?>
+            string xml =
+                @"<?xml version='1.0' encoding='utf-8' ?>
             <e3>
             <e2>1</e2>
             <e2>1</e2>
             </e3>";
 
-            string xsd = @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' elementFormDefault='qualified'>
+            string xsd =
+                @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' elementFormDefault='qualified'>
               <xs:element name='e1' type='xs:int'/>
               <xs:element name='e2' type='xs:int' substitutionGroup='e1'/>
               <xs:complexType name='t3'>

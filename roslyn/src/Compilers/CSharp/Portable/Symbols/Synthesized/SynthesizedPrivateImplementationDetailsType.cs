@@ -21,7 +21,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly NamespaceSymbol _globalNamespace;
         private readonly NamedTypeSymbol _objectType;
 
-        public SynthesizedPrivateImplementationDetailsType(PrivateImplementationDetails privateImplementationDetails, NamespaceSymbol globalNamespace, NamedTypeSymbol objectType)
+        public SynthesizedPrivateImplementationDetailsType(
+            PrivateImplementationDetails privateImplementationDetails,
+            NamespaceSymbol globalNamespace,
+            NamedTypeSymbol objectType
+        )
         {
             Debug.Assert(globalNamespace.IsGlobalNamespace);
             Debug.Assert(objectType.IsObjectType());
@@ -31,13 +35,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             _objectType = objectType;
         }
 
-        public PrivateImplementationDetails PrivateImplementationDetails => _privateImplementationDetails;
+        public PrivateImplementationDetails PrivateImplementationDetails =>
+            _privateImplementationDetails;
 
         public override bool IsImplicitlyDeclared => true;
 
         public override int Arity => 0;
 
-        public override ImmutableArray<TypeParameterSymbol> TypeParameters => ImmutableArray<TypeParameterSymbol>.Empty;
+        public override ImmutableArray<TypeParameterSymbol> TypeParameters =>
+            ImmutableArray<TypeParameterSymbol>.Empty;
 
         public override NamedTypeSymbol ConstructedFrom => this;
 
@@ -45,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override string Name => _privateImplementationDetails.Name;
 
-        public override IEnumerable<string> MemberNames => SpecializedCollections.EmptyEnumerable<string>();
+        public override IEnumerable<string> MemberNames =>
+            SpecializedCollections.EmptyEnumerable<string>();
 
         public override Accessibility DeclaredAccessibility => Accessibility.Internal;
 
@@ -63,15 +70,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override ImmutableArray<Location> Locations => ImmutableArray<Location>.Empty;
 
-        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences => ImmutableArray<SyntaxReference>.Empty;
+        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences =>
+            ImmutableArray<SyntaxReference>.Empty;
 
-        public override bool IsStatic => _privateImplementationDetails.IsSealed && _privateImplementationDetails.IsAbstract;
+        public override bool IsStatic =>
+            _privateImplementationDetails.IsSealed && _privateImplementationDetails.IsAbstract;
 
-        public override bool IsAbstract => _privateImplementationDetails.IsAbstract && !_privateImplementationDetails.IsSealed;
+        public override bool IsAbstract =>
+            _privateImplementationDetails.IsAbstract && !_privateImplementationDetails.IsSealed;
 
-        public override bool IsSealed => _privateImplementationDetails.IsSealed && !_privateImplementationDetails.IsAbstract;
+        public override bool IsSealed =>
+            _privateImplementationDetails.IsSealed && !_privateImplementationDetails.IsAbstract;
 
-        internal override ImmutableArray<TypeWithAnnotations> TypeArgumentsWithAnnotationsNoUseSiteDiagnostics => ImmutableArray<TypeWithAnnotations>.Empty;
+        internal override ImmutableArray<TypeWithAnnotations> TypeArgumentsWithAnnotationsNoUseSiteDiagnostics =>
+            ImmutableArray<TypeWithAnnotations>.Empty;
 
         internal override bool IsFileLocal => false;
 
@@ -93,7 +105,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool ShouldAddWinRTMembers => false;
 
-        internal override TypeLayout Layout => new TypeLayout(_privateImplementationDetails.Layout, (int)_privateImplementationDetails.SizeOf, (byte)_privateImplementationDetails.Alignment);
+        internal override TypeLayout Layout =>
+            new TypeLayout(
+                _privateImplementationDetails.Layout,
+                (int)_privateImplementationDetails.SizeOf,
+                (byte)_privateImplementationDetails.Alignment
+            );
 
         internal override CharSet MarshallingCharSet => _privateImplementationDetails.StringFormat;
 
@@ -113,13 +130,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override ImmutableArray<Symbol> GetMembers() => ImmutableArray<Symbol>.Empty;
 
-        public override ImmutableArray<Symbol> GetMembers(string name) => ImmutableArray<Symbol>.Empty;
+        public override ImmutableArray<Symbol> GetMembers(string name) =>
+            ImmutableArray<Symbol>.Empty;
 
-        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers() => ImmutableArray<NamedTypeSymbol>.Empty;
+        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers() =>
+            ImmutableArray<NamedTypeSymbol>.Empty;
 
-        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name, int arity) => ImmutableArray<NamedTypeSymbol>.Empty;
+        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(
+            ReadOnlyMemory<char> name,
+            int arity
+        ) => ImmutableArray<NamedTypeSymbol>.Empty;
 
-        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name) => ImmutableArray<NamedTypeSymbol>.Empty;
+        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name) =>
+            ImmutableArray<NamedTypeSymbol>.Empty;
 
         protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData)
         {
@@ -131,22 +154,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal override ImmutableArray<string> GetAppliedConditionalSymbols() => ImmutableArray<string>.Empty;
+        internal override ImmutableArray<string> GetAppliedConditionalSymbols() =>
+            ImmutableArray<string>.Empty;
 
         internal override AttributeUsageInfo GetAttributeUsageInfo()
         {
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal override NamedTypeSymbol GetDeclaredBaseType(ConsList<TypeSymbol> basesBeingResolved) => _objectType;
+        internal override NamedTypeSymbol GetDeclaredBaseType(
+            ConsList<TypeSymbol> basesBeingResolved
+        ) => _objectType;
 
-        internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(ConsList<TypeSymbol> basesBeingResolved) => ImmutableArray<NamedTypeSymbol>.Empty;
+        internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
+            ConsList<TypeSymbol> basesBeingResolved
+        ) => ImmutableArray<NamedTypeSymbol>.Empty;
 
-        internal override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers() => ImmutableArray<Symbol>.Empty;
+        internal override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers() =>
+            ImmutableArray<Symbol>.Empty;
 
-        internal override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers(string name) => ImmutableArray<Symbol>.Empty;
+        internal override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers(string name) =>
+            ImmutableArray<Symbol>.Empty;
 
-        internal override IEnumerable<FieldSymbol> GetFieldsToEmit() => throw ExceptionUtilities.Unreachable();
+        internal override IEnumerable<FieldSymbol> GetFieldsToEmit() =>
+            throw ExceptionUtilities.Unreachable();
 
         internal override bool GetGuidString(out string? guidString)
         {
@@ -154,9 +185,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return false;
         }
 
-        internal override ImmutableArray<NamedTypeSymbol> GetInterfacesToEmit() => ImmutableArray<NamedTypeSymbol>.Empty;
+        internal override ImmutableArray<NamedTypeSymbol> GetInterfacesToEmit() =>
+            ImmutableArray<NamedTypeSymbol>.Empty;
 
-        internal override IEnumerable<SecurityAttribute> GetSecurityInformation() => SpecializedCollections.EmptyEnumerable<SecurityAttribute>();
+        internal override IEnumerable<SecurityAttribute> GetSecurityInformation() =>
+            SpecializedCollections.EmptyEnumerable<SecurityAttribute>();
 
         internal override bool HasAsyncMethodBuilderAttribute(out TypeSymbol? builderArgument)
         {
@@ -164,7 +197,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return false;
         }
 
-        internal override bool HasCollectionBuilderAttribute(out TypeSymbol? builderType, out string? methodName)
+        internal override bool HasCollectionBuilderAttribute(
+            out TypeSymbol? builderType,
+            out string? methodName
+        )
         {
             builderType = null;
             methodName = null;
@@ -179,11 +215,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool HasPossibleWellKnownCloneMethod() => false;
 
-        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(ConsList<TypeSymbol>? basesBeingResolved = null) => ImmutableArray<NamedTypeSymbol>.Empty;
+        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
+            ConsList<TypeSymbol>? basesBeingResolved = null
+        ) => ImmutableArray<NamedTypeSymbol>.Empty;
 
-        internal override IEnumerable<(MethodSymbol Body, MethodSymbol Implemented)> SynthesizedInterfaceMethodImpls()
+        internal override IEnumerable<(
+            MethodSymbol Body,
+            MethodSymbol Implemented
+        )> SynthesizedInterfaceMethodImpls()
         {
-            return SpecializedCollections.EmptyEnumerable<(MethodSymbol Body, MethodSymbol Implemented)>();
+            return SpecializedCollections.EmptyEnumerable<(
+                MethodSymbol Body,
+                MethodSymbol Implemented
+            )>();
         }
     }
 }

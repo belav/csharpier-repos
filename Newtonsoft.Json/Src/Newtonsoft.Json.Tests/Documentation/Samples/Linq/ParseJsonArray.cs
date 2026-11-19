@@ -45,7 +45,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
         public void Example()
         {
             #region Usage
-            string json = @"[
+            string json =
+                @"[
               'Small',
               'Medium',
               'Large'
@@ -61,11 +62,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             // ]
             #endregion
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""Small"",
   ""Medium"",
   ""Large""
-]", a.ToString());
+]",
+                a.ToString()
+            );
         }
     }
 }

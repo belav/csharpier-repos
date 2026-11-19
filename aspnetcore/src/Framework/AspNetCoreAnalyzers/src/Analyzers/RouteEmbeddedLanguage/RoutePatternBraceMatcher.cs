@@ -85,36 +85,27 @@ internal class RoutePatternBraceMatcher : IAspNetCoreEmbeddedLanguageBraceMatche
         RoutePatternNode node,
         VirtualChar ch
     ) =>
-        FindNode<RoutePatternParameterNode>(
-            node,
-            ch,
-            (parameter, c) =>
-                parameter.OpenBraceToken.VirtualChars.Contains(c)
-                || parameter.CloseBraceToken.VirtualChars.Contains(c)
+        FindNode<RoutePatternParameterNode>(node, ch, (parameter, c) =>
+            parameter.OpenBraceToken.VirtualChars.Contains(c)
+            || parameter.CloseBraceToken.VirtualChars.Contains(c)
         );
 
     private static RoutePatternPolicyFragmentEscapedNode? FindPolicyFragmentEscapedNode(
         RoutePatternNode node,
         VirtualChar ch
     ) =>
-        FindNode<RoutePatternPolicyFragmentEscapedNode>(
-            node,
-            ch,
-            (fragment, c) =>
-                fragment.OpenParenToken.VirtualChars.Contains(c)
-                || fragment.CloseParenToken.VirtualChars.Contains(c)
+        FindNode<RoutePatternPolicyFragmentEscapedNode>(node, ch, (fragment, c) =>
+            fragment.OpenParenToken.VirtualChars.Contains(c)
+            || fragment.CloseParenToken.VirtualChars.Contains(c)
         );
 
     private static RoutePatternReplacementNode? FindReplacementNode(
         RoutePatternNode node,
         VirtualChar ch
     ) =>
-        FindNode<RoutePatternReplacementNode>(
-            node,
-            ch,
-            (fragment, c) =>
-                fragment.OpenBracketToken.VirtualChars.Contains(c)
-                || fragment.CloseBracketToken.VirtualChars.Contains(c)
+        FindNode<RoutePatternReplacementNode>(node, ch, (fragment, c) =>
+            fragment.OpenBracketToken.VirtualChars.Contains(c)
+            || fragment.CloseBracketToken.VirtualChars.Contains(c)
         );
 
     private static TNode? FindNode<TNode>(

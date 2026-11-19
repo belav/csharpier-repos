@@ -18,27 +18,37 @@ namespace System.Xml.Serialization.TrimmingTests
         public static int Main()
         {
             Response obj = new Response();
-            obj.DataUpdates.DataUpdateInfo.Add(new DataUpdatesDataUpdateInfo()
-            {
-                DataDate = new DateTime(2009, 4, 13),
-                DataType = "Data",
-                LastUpdatedDate = new DateTime(2010, 12, 12)
-            });
-            obj.DataUpdates.DataUpdateInfo.Add(new DataUpdatesDataUpdateInfo()
-            {
-                DataDate = new DateTime(2009, 4, 14),
-                DataType = "Data",
-                LastUpdatedDate = new DateTime(2010, 12, 12)
-            });
+            obj.DataUpdates.DataUpdateInfo.Add(
+                new DataUpdatesDataUpdateInfo()
+                {
+                    DataDate = new DateTime(2009, 4, 13),
+                    DataType = "Data",
+                    LastUpdatedDate = new DateTime(2010, 12, 12),
+                }
+            );
+            obj.DataUpdates.DataUpdateInfo.Add(
+                new DataUpdatesDataUpdateInfo()
+                {
+                    DataDate = new DateTime(2009, 4, 14),
+                    DataType = "Data",
+                    LastUpdatedDate = new DateTime(2010, 12, 12),
+                }
+            );
 
             using StringWriter writer = new StringWriter();
             new XmlSerializer(typeof(Response)).Serialize(writer, obj);
             string serialized = writer.ToString();
 
-            if (serialized.Contains("<Response") &&
-                serialized.Contains("<DataUpdates>") &&
-                serialized.Contains(@"<DataUpdateInfo DataDate=""2009-04-13T00:00:00"" DataType=""Data"" LastUpdatedDate=""2010-12-12T00:00:00"" />") &&
-                serialized.Contains(@"<DataUpdateInfo DataDate=""2009-04-14T00:00:00"" DataType=""Data"" LastUpdatedDate=""2010-12-12T00:00:00"" />"))
+            if (
+                serialized.Contains("<Response")
+                && serialized.Contains("<DataUpdates>")
+                && serialized.Contains(
+                    @"<DataUpdateInfo DataDate=""2009-04-13T00:00:00"" DataType=""Data"" LastUpdatedDate=""2010-12-12T00:00:00"" />"
+                )
+                && serialized.Contains(
+                    @"<DataUpdateInfo DataDate=""2009-04-14T00:00:00"" DataType=""Data"" LastUpdatedDate=""2010-12-12T00:00:00"" />"
+                )
+            )
             {
                 return 100;
             }
@@ -79,9 +89,7 @@ namespace System.Xml.Serialization.TrimmingTests
     [XmlType(AnonymousType = true)]
     public class DataUpdatesDataUpdateInfo
     {
-        public DataUpdatesDataUpdateInfo()
-        {
-        }
+        public DataUpdatesDataUpdateInfo() { }
 
         [XmlAttribute]
         public DateTime DataDate { get; set; }

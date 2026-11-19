@@ -4,13 +4,13 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net {
-
+namespace System.Net
+{
     using System.Diagnostics;
     using System.Globalization;
 
-    internal class NetRes {
-
+    internal class NetRes
+    {
         /*++
             Constructor
 
@@ -18,8 +18,7 @@ namespace System.Net {
             be instantiated.
 
         --*/
-        private NetRes() {
-        }
+        private NetRes() { }
 
         /*++
 
@@ -40,7 +39,8 @@ namespace System.Net {
                 string for localized message.
 
         --*/
-        public static string GetWebStatusString(string Res, WebExceptionStatus Status) {
+        public static string GetWebStatusString(string Res, WebExceptionStatus Status)
+        {
             string Msg;
             string StatusMsg;
 
@@ -55,11 +55,11 @@ namespace System.Net {
 
             return String.Format(CultureInfo.CurrentCulture, Msg, StatusMsg);
         }
-        
-        public static string GetWebStatusString(WebExceptionStatus Status) {
+
+        public static string GetWebStatusString(WebExceptionStatus Status)
+        {
             return SR.GetString(WebExceptionMapping.GetWebStatusString(Status));
         }
-
 
         /*++
 
@@ -78,29 +78,37 @@ namespace System.Net {
                 string for localized message.
 
         --*/
-        public static string GetWebStatusCodeString(HttpStatusCode statusCode, string statusDescription) {
-            string webStatusCode = "(" + ((int)statusCode).ToString(NumberFormatInfo.InvariantInfo) + ")";
+        public static string GetWebStatusCodeString(
+            HttpStatusCode statusCode,
+            string statusDescription
+        )
+        {
+            string webStatusCode =
+                "(" + ((int)statusCode).ToString(NumberFormatInfo.InvariantInfo) + ")";
             string statusMessage = null;
             //
             // Now combine the label with the base enum key and look up the status msg.
             //
-            try {
+            try
+            {
                 //
                 // convert the HttpStatusCode to its label and look it up.
                 //
                 statusMessage = SR.GetString("net_httpstatuscode_" + statusCode.ToString(), null);
             }
-            catch {
-            }
+            catch { }
 
-            if (statusMessage!=null && statusMessage.Length>0) {
+            if (statusMessage != null && statusMessage.Length > 0)
+            {
                 webStatusCode += " " + statusMessage;
             }
-            else {
+            else
+            {
                 //
                 // Otherwise try to map the base status.
                 //
-                if (statusDescription!=null && statusDescription.Length>0) {
+                if (statusDescription != null && statusDescription.Length > 0)
+                {
                     webStatusCode += " " + statusDescription;
                 }
             }
@@ -108,29 +116,37 @@ namespace System.Net {
             return webStatusCode;
         }
 
-        public static string GetWebStatusCodeString(FtpStatusCode statusCode, string statusDescription) {
-            string webStatusCode = "(" + ((int)statusCode).ToString(NumberFormatInfo.InvariantInfo) + ")";
+        public static string GetWebStatusCodeString(
+            FtpStatusCode statusCode,
+            string statusDescription
+        )
+        {
+            string webStatusCode =
+                "(" + ((int)statusCode).ToString(NumberFormatInfo.InvariantInfo) + ")";
             string statusMessage = null;
             //
             // Now combine the label with the base enum key and look up the status msg.
             //
-            try {
+            try
+            {
                 //
                 // convert the HttpStatusCode to its label and look it up.
                 //
                 statusMessage = SR.GetString("net_ftpstatuscode_" + statusCode.ToString(), null);
             }
-            catch {
-            }
+            catch { }
 
-            if (statusMessage!=null && statusMessage.Length>0) {
+            if (statusMessage != null && statusMessage.Length > 0)
+            {
                 webStatusCode += " " + statusMessage;
             }
-            else {
+            else
+            {
                 //
                 // Otherwise try to map the base status.
                 //
-                if (statusDescription!=null && statusDescription.Length>0) {
+                if (statusDescription != null && statusDescription.Length > 0)
+                {
                     webStatusCode += " " + statusDescription;
                 }
             }
@@ -139,4 +155,3 @@ namespace System.Net {
         }
     }
 }
-

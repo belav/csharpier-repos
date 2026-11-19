@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -13,14 +13,14 @@
 **
 ============================================================*/
 
-namespace System.Runtime.Serialization {
-
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Globalization;
-using System.Diagnostics.Contracts;
+namespace System.Runtime.Serialization
+{
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Reflection;
 
     internal class SerializationEvents
     {
@@ -40,32 +40,46 @@ using System.Diagnostics.Contracts;
                 RuntimeType rt = (RuntimeType)baseType;
 #endif
                 // Get all methods which are declared on this type, instance and public or nonpublic
-                MethodInfo[] mis = baseType.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-#if _DEBUG                
+                MethodInfo[] mis = baseType.GetMethods(
+                    BindingFlags.DeclaredOnly
+                        | BindingFlags.Instance
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Public
+                );
+#if _DEBUG
                 bool found = false;
 #endif
-                foreach(MethodInfo m in mis)
+                foreach (MethodInfo m in mis)
                 {
                     // For each method find if attribute is present, the return type is void and the method is not virtual
                     if (m.IsDefined(attribute, false))
                     {
 #if _DEBUG
-                        Contract.Assert(m.ReturnType == typeof(void) && !m.IsVirtual, "serialization events methods cannot be virtual and need to have void return");
-                            
+                        Contract.Assert(
+                            m.ReturnType == typeof(void) && !m.IsVirtual,
+                            "serialization events methods cannot be virtual and need to have void return"
+                        );
+
                         ParameterInfo[] paramInfo = m.GetParameters();
                         // Only add it if this method has one parameter of type StreamingContext
-                        if (paramInfo.Length == 1 && paramInfo[0].ParameterType == typeof(StreamingContext))
+                        if (
+                            paramInfo.Length == 1
+                            && paramInfo[0].ParameterType == typeof(StreamingContext)
+                        )
                         {
                             if (found)
-                                Contract.Assert(false, "Mutliple methods with same serialization attribute");
-#endif                            
+                                Contract.Assert(
+                                    false,
+                                    "Mutliple methods with same serialization attribute"
+                                );
+#endif
                             mi.Add(m);
 #if _DEBUG
                             found = true;
                         }
                         else
                             Contract.Assert(false, "Incorrect serialization event signature");
-#endif                        
+#endif
                     }
                 }
 #if _DEBUG
@@ -73,7 +87,7 @@ using System.Diagnostics.Contracts;
 #endif
                 baseType = baseType.BaseType;
             }
-            mi.Reverse();  // We should invoke the methods starting from base
+            mi.Reverse(); // We should invoke the methods starting from base
 
             return (mi.Count == 0) ? null : mi;
         }
@@ -100,13 +114,17 @@ using System.Diagnostics.Contracts;
             if (m_OnSerializingMethods != null)
             {
 #if !MONO
-                Object[] p = new Object[] {context};
+                Object[] p = new Object[] { context };
 #endif
                 SerializationEventHandler handler = null;
-                foreach(MethodInfo m in m_OnSerializingMethods)
+                foreach (MethodInfo m in m_OnSerializingMethods)
                 {
-                    SerializationEventHandler onSerializing =
-                        (SerializationEventHandler)Delegate.CreateDelegateNoSecurityCheck((RuntimeType)typeof(SerializationEventHandler), obj, m);
+                    SerializationEventHandler onSerializing = (SerializationEventHandler)
+                        Delegate.CreateDelegateNoSecurityCheck(
+                            (RuntimeType)typeof(SerializationEventHandler),
+                            obj,
+                            m
+                        );
                     handler = (SerializationEventHandler)Delegate.Combine(handler, onSerializing);
                 }
                 handler(context);
@@ -121,13 +139,17 @@ using System.Diagnostics.Contracts;
             if (m_OnDeserializingMethods != null)
             {
 #if !MONO
-                Object[] p = new Object[] {context};
+                Object[] p = new Object[] { context };
 #endif
                 SerializationEventHandler handler = null;
-                foreach(MethodInfo m in m_OnDeserializingMethods)
+                foreach (MethodInfo m in m_OnDeserializingMethods)
                 {
-                    SerializationEventHandler onDeserializing =
-                        (SerializationEventHandler)Delegate.CreateDelegateNoSecurityCheck((RuntimeType)typeof(SerializationEventHandler), obj, m);
+                    SerializationEventHandler onDeserializing = (SerializationEventHandler)
+                        Delegate.CreateDelegateNoSecurityCheck(
+                            (RuntimeType)typeof(SerializationEventHandler),
+                            obj,
+                            m
+                        );
                     handler = (SerializationEventHandler)Delegate.Combine(handler, onDeserializing);
                 }
                 handler(context);
@@ -142,13 +164,17 @@ using System.Diagnostics.Contracts;
             if (m_OnDeserializedMethods != null)
             {
 #if !MONO
-                Object[] p = new Object[] {context};
+                Object[] p = new Object[] { context };
 #endif
                 SerializationEventHandler handler = null;
-                foreach(MethodInfo m in m_OnDeserializedMethods)
+                foreach (MethodInfo m in m_OnDeserializedMethods)
                 {
-                    SerializationEventHandler onDeserialized =
-                        (SerializationEventHandler)Delegate.CreateDelegateNoSecurityCheck((RuntimeType)typeof(SerializationEventHandler), obj, m);
+                    SerializationEventHandler onDeserialized = (SerializationEventHandler)
+                        Delegate.CreateDelegateNoSecurityCheck(
+                            (RuntimeType)typeof(SerializationEventHandler),
+                            obj,
+                            m
+                        );
                     handler = (SerializationEventHandler)Delegate.Combine(handler, onDeserialized);
                 }
                 handler(context);
@@ -156,15 +182,22 @@ using System.Diagnostics.Contracts;
         }
 
         [System.Security.SecurityCritical]
-        internal SerializationEventHandler AddOnSerialized(Object obj, SerializationEventHandler handler)
+        internal SerializationEventHandler AddOnSerialized(
+            Object obj,
+            SerializationEventHandler handler
+        )
         {
             // Add all OnSerialized methods to a delegate
             if (m_OnSerializedMethods != null)
             {
-                foreach(MethodInfo m in m_OnSerializedMethods)
+                foreach (MethodInfo m in m_OnSerializedMethods)
                 {
-                    SerializationEventHandler onSerialized =
-                        (SerializationEventHandler)Delegate.CreateDelegateNoSecurityCheck((RuntimeType)typeof(SerializationEventHandler), obj, m);
+                    SerializationEventHandler onSerialized = (SerializationEventHandler)
+                        Delegate.CreateDelegateNoSecurityCheck(
+                            (RuntimeType)typeof(SerializationEventHandler),
+                            obj,
+                            m
+                        );
                     handler = (SerializationEventHandler)Delegate.Combine(handler, onSerialized);
                 }
             }
@@ -172,15 +205,22 @@ using System.Diagnostics.Contracts;
         }
 
         [System.Security.SecurityCritical]
-        internal SerializationEventHandler AddOnDeserialized(Object obj, SerializationEventHandler handler)
+        internal SerializationEventHandler AddOnDeserialized(
+            Object obj,
+            SerializationEventHandler handler
+        )
         {
             // Add all OnDeserialized methods to a delegate
             if (m_OnDeserializedMethods != null)
             {
-                foreach(MethodInfo m in m_OnDeserializedMethods)
+                foreach (MethodInfo m in m_OnDeserializedMethods)
                 {
-                    SerializationEventHandler onDeserialized =
-                        (SerializationEventHandler)Delegate.CreateDelegateNoSecurityCheck((RuntimeType)typeof(SerializationEventHandler), obj, m);
+                    SerializationEventHandler onDeserialized = (SerializationEventHandler)
+                        Delegate.CreateDelegateNoSecurityCheck(
+                            (RuntimeType)typeof(SerializationEventHandler),
+                            obj,
+                            m
+                        );
                     handler = (SerializationEventHandler)Delegate.Combine(handler, onDeserialized);
                 }
             }
@@ -197,7 +237,7 @@ using System.Diagnostics.Contracts;
             SerializationEvents events;
             if ((events = (SerializationEvents)cache[t]) == null)
             {
-                lock(cache.SyncRoot)
+                lock (cache.SyncRoot)
                 {
                     if ((events = (SerializationEvents)cache[t]) == null)
                     {
@@ -207,8 +247,6 @@ using System.Diagnostics.Contracts;
                 }
             }
             return events;
-
         }
     }
 }
-

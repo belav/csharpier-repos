@@ -28,12 +28,16 @@ public class Helper
         }
         else if (actualArray == null && expArr != null)
         {
-            Console.WriteLine("\tTwo array are not equal.The sourcArr is null,but the expArr is not null");
+            Console.WriteLine(
+                "\tTwo array are not equal.The sourcArr is null,but the expArr is not null"
+            );
             return false;
         }
         else if (actualArray != null && expArr == null)
         {
-            Console.WriteLine("\tTwo array are not equal.The sourcArr is not null but the expArr is null");
+            Console.WriteLine(
+                "\tTwo array are not equal.The sourcArr is not null but the expArr is null"
+            );
             return false;
         }
         else if (!actualSize.Equals(arrSize2))
@@ -45,8 +49,15 @@ public class Helper
         {
             if (!actualArray[i].Equals(expArr[i]))
             {
-                Console.WriteLine("\tTwo array are not equal.The values of index {0} are not equal!", i);
-                Console.WriteLine("\t\tThe actualArray is {0},the expArr is {1}", actualArray[i].ToString(), expArr[i].ToString());
+                Console.WriteLine(
+                    "\tTwo array are not equal.The values of index {0} are not equal!",
+                    i
+                );
+                Console.WriteLine(
+                    "\t\tThe actualArray is {0},the expArr is {1}",
+                    actualArray[i].ToString(),
+                    expArr[i].ToString()
+                );
                 failures++;
             }
         }
@@ -65,7 +76,12 @@ public class Helper
         return array;
     }
 
-    public static bool CheckAndChangeArray<T>(ref T[] arrArg, ref T arrSize, int actualArrSize, int expectedArrSize)
+    public static bool CheckAndChangeArray<T>(
+        ref T[] arrArg,
+        ref T arrSize,
+        int actualArrSize,
+        int expectedArrSize
+    )
     {
         T[] actualArr = InitArray<T>(actualArrSize);
         if (!EqualArray<T>(arrArg, actualArrSize, actualArr, actualArrSize))

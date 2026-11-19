@@ -13,9 +13,16 @@ namespace System.Threading
             int maximumCount,
             string? name,
             out bool createdNew,
-            SemaphoreSecurity? semaphoreSecurity)
+            SemaphoreSecurity? semaphoreSecurity
+        )
         {
-            return new Semaphore(initialCount, maximumCount, name, out createdNew, semaphoreSecurity);
+            return new Semaphore(
+                initialCount,
+                maximumCount,
+                name,
+                out createdNew,
+                semaphoreSecurity
+            );
         }
 
         public static Semaphore OpenExisting(string name, SemaphoreRights rights)
@@ -23,7 +30,11 @@ namespace System.Threading
             return Semaphore.OpenExisting(name, rights);
         }
 
-        public static bool TryOpenExisting(string name, SemaphoreRights rights, [NotNullWhen(true)] out Semaphore result)
+        public static bool TryOpenExisting(
+            string name,
+            SemaphoreRights rights,
+            [NotNullWhen(true)] out Semaphore result
+        )
         {
             return Semaphore.TryOpenExisting(name, rights, out result);
         }

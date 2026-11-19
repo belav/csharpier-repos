@@ -27,7 +27,7 @@ public class SqlServerRetryingExecutionStrategyTests
             TimeSpan.FromMilliseconds(3),
             TimeSpan.FromMilliseconds(7),
             TimeSpan.FromMilliseconds(15),
-            TimeSpan.FromMilliseconds(31)
+            TimeSpan.FromMilliseconds(31),
         };
 
         Assert.Equal(expectedDelays.Count, delays.Count);
@@ -35,11 +35,11 @@ public class SqlServerRetryingExecutionStrategyTests
         {
             Assert.True(
                 Math.Abs((delays[i] - expectedDelays[i]).TotalMilliseconds)
-                <= expectedDelays[i].TotalMilliseconds * 0.1 + 1,
-                $"Expected: {expectedDelays[i]}; Actual: {delays[i]}");
+                    <= expectedDelays[i].TotalMilliseconds * 0.1 + 1,
+                $"Expected: {expectedDelays[i]}; Actual: {delays[i]}"
+            );
         }
     }
 
-    protected DbContext CreateContext()
-        => SqlServerTestHelpers.Instance.CreateContext();
+    protected DbContext CreateContext() => SqlServerTestHelpers.Instance.CreateContext();
 }

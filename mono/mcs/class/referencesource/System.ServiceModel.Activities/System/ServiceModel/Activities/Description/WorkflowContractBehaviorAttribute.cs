@@ -13,21 +13,30 @@ namespace System.ServiceModel.Activities.Description
     [AttributeUsage(AttributeTargets.Interface, AllowMultiple = false)]
     public sealed class WorkflowContractBehaviorAttribute : Attribute, IContractBehavior
     {
+        public void AddBindingParameters(
+            ContractDescription contractDescription,
+            ServiceEndpoint endpoint,
+            BindingParameterCollection bindingParameters
+        ) { }
 
-        public void AddBindingParameters(ContractDescription contractDescription, ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
-        {
+        public void ApplyClientBehavior(
+            ContractDescription contractDescription,
+            ServiceEndpoint endpoint,
+            ClientRuntime clientRuntime
+        ) { }
 
-        }
-
-        public void ApplyClientBehavior(ContractDescription contractDescription, ServiceEndpoint endpoint, ClientRuntime clientRuntime)
-        {
-
-        }
-
-        public void ApplyDispatchBehavior(ContractDescription contractDescription, ServiceEndpoint endpoint, DispatchRuntime dispatchRuntime)
+        public void ApplyDispatchBehavior(
+            ContractDescription contractDescription,
+            ServiceEndpoint endpoint,
+            DispatchRuntime dispatchRuntime
+        )
         {
             //Only when DurableServiceBehavior is present ensure this endpoint operates in wrapped mode.
-            if (dispatchRuntime.ChannelDispatcher.Host.Description.Behaviors.Contains(typeof(WorkflowServiceBehavior)))
+            if (
+                dispatchRuntime.ChannelDispatcher.Host.Description.Behaviors.Contains(
+                    typeof(WorkflowServiceBehavior)
+                )
+            )
             {
                 foreach (OperationDescription operation in contractDescription.Operations)
                 {
@@ -39,9 +48,6 @@ namespace System.ServiceModel.Activities.Description
             }
         }
 
-        public void Validate(ContractDescription contractDescription, ServiceEndpoint endpoint)
-        {
-
-        }     
+        public void Validate(ContractDescription contractDescription, ServiceEndpoint endpoint) { }
     }
 }

@@ -11,7 +11,6 @@ namespace Microsoft.CodeAnalysis.Serialization
     // TODO: move to ObjectReader (see https://github.com/dotnet/roslyn/issues/45837)
     internal static class ObjectReaderExtensions
     {
-        public static T[] ReadArray<T>(this ObjectReader reader)
-            => (T[])reader.ReadValue();
+        public static T[] ReadArray<T>(this ObjectReader reader) => (T[])reader.ReadValue();
     }
 }

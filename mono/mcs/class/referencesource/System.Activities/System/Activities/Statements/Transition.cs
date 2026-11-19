@@ -21,33 +21,21 @@ namespace System.Activities.Statements
         /// </summary>
         [DependsOn("To")]
         [DefaultValue(null)]
-        public Activity Action
-        {
-            get;
-            set;
-        }
+        public Activity Action { get; set; }
 
         /// <summary>
         /// Gets or sets the Condition to decide whether the Transition should be taken after the Trigger activity is completed.
-        /// It's optional. 
+        /// It's optional.
         /// If the Condition is null, the Transition would always be taken when the Trigger activity is completed.
         /// </summary>
         [DependsOn("Action")]
         [DefaultValue(null)]
-        public Activity<bool> Condition
-        {
-            get;
-            set;
-        }
+        public Activity<bool> Condition { get; set; }
 
         /// <summary>
         /// Gets or sets DisplayName of the Transition
         /// </summary>
-        public string DisplayName
-        {
-            get;
-            set;
-        }
+        public string DisplayName { get; set; }
 
         /// <summary>
         /// Gets or sets the target State of the Transition.
@@ -55,11 +43,7 @@ namespace System.Activities.Statements
         /// </summary>
         [DependsOn("Trigger")]
         [DefaultValue(null)]
-        public State To
-        {
-            get;
-            set;
-        }
+        public State To { get; set; }
 
         /// <summary>
         /// Gets or sets the Trigger activity of the Transition.
@@ -67,11 +51,7 @@ namespace System.Activities.Statements
         /// It's required.
         /// </summary>
         [DefaultValue(null)]
-        public Activity Trigger
-        {
-            get;
-            set;
-        }
+        public Activity Trigger { get; set; }
 
         /// <summary>
         /// Gets the actual Trigger activity object that should be used when scheduling Transition trigger
@@ -80,28 +60,17 @@ namespace System.Activities.Statements
         /// </summary>
         internal Activity ActiveTrigger
         {
-            get
-            {
-                return this.Trigger != null ? this.Trigger : this.Source.NullTrigger;
-            }
+            get { return this.Trigger != null ? this.Trigger : this.Source.NullTrigger; }
         }
 
         /// <summary>
         /// Gets or sets Transition Id, which is unique within a State inside a StateMachine.
         /// </summary>
-        internal string Id
-        {
-            get;
-            set;
-        }
+        internal string Id { get; set; }
 
         /// <summary>
         /// Gets or sets Source, which represents source state of transition
         /// </summary>
-        internal State Source
-        {
-            get;
-            set;
-        }
+        internal State Source { get; set; }
     }
 }

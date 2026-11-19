@@ -7,18 +7,23 @@ using Xunit;
 
 namespace System.Xml.XslCompiledTransformApiTests
 {
-    [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+    [ConditionalClass(
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsReflectionEmitSupported)
+    )]
     public class XslCompilerTests
     {
         [Fact]
         public void ValueOfInDebugMode()
         {
-            string xml = @"<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?>
+            string xml =
+                @"<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?>
 <Class>
     <Info>This is my class info</Info>
 </Class>";
 
-            string xsl = @"<xsl:stylesheet version=""1.0"" xmlns:xsl=""http://www.w3.org/1999/XSL/Transform"">
+            string xsl =
+                @"<xsl:stylesheet version=""1.0"" xmlns:xsl=""http://www.w3.org/1999/XSL/Transform"">
 
     <xsl:output method=""text"" indent=""yes"" />
 

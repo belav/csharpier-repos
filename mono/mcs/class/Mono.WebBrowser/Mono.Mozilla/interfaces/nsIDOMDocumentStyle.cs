@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,31 +26,34 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Mono.Mozilla {
+namespace Mono.Mozilla
+{
+    [Guid("3d9f4973-dd2e-48f5-b5f7-2634e09eadd9")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIDOMDocumentStyle
+    {
+        #region nsIDOMDocumentStyle
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getStyleSheets([MarshalAs(UnmanagedType.Interface)] out nsIDOMStyleSheetList ret);
 
-	[Guid ("3d9f4973-dd2e-48f5-b5f7-2634e09eadd9")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIDOMDocumentStyle {
+        #endregion
+    }
 
-#region nsIDOMDocumentStyle
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getStyleSheets ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMStyleSheetList ret);
-
-#endregion
-	}
-
-
-	internal class nsDOMDocumentStyle {
-		public static nsIDOMDocumentStyle GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMDocumentStyle obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIDOMDocumentStyle).GUID, obj);
-			return o as nsIDOMDocumentStyle;
-		}
-	}
+    internal class nsDOMDocumentStyle
+    {
+        public static nsIDOMDocumentStyle GetProxy(
+            Mono.WebBrowser.IWebBrowser control,
+            nsIDOMDocumentStyle obj
+        )
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsIDOMDocumentStyle).GUID, obj);
+            return o as nsIDOMDocumentStyle;
+        }
+    }
 }

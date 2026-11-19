@@ -1,4 +1,3 @@
-
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -7,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,374 +27,351 @@ using System.Text;
 
 namespace IBM.Data.DB2
 {
+    public class DB2Connection : System.ComponentModel.Component, IDbConnection, ICloneable
+    {
+        #region private data members
 
-	
-	public class DB2Connection : System.ComponentModel.Component, IDbConnection, ICloneable
-	{
-		#region private data members
+        private ArrayList refCommands;
+        private WeakReference refTransaction;
+        private DB2ConnectionSettings connectionSettings = null;
+        private int connectionTimeout;
+        internal DB2OpenConnection openConnection;
+        private bool disposed = false;
 
-		private ArrayList refCommands;
-		private WeakReference refTransaction;
-		private DB2ConnectionSettings connectionSettings = null;
-		private int connectionTimeout;
-		internal DB2OpenConnection openConnection;
-		private bool disposed = false;
+        #endregion
 
-		#endregion
+        #region Constructors
 
-		#region Constructors
+        public DB2Connection()
+        {
+            connectionTimeout = 15;
+        }
 
-		public DB2Connection()
-		{
-			connectionTimeout = 15;
-			
-		}
-		
-		public DB2Connection(string conString)
-		{
-			
-			SetConnectionString(conString);
-		}
+        public DB2Connection(string conString)
+        {
+            SetConnectionString(conString);
+        }
 
+        #endregion
 
-		#endregion
-		
-		#region ConnectionString property
+        #region ConnectionString property
 
-		public string ConnectionString 
-		{
-			get
-			{
-				return connectionSettings.ConnectionString;
-			}
-			set
-			{
-				SetConnectionString(value);
-			}
-		}
-		#endregion
+        public string ConnectionString
+        {
+            get { return connectionSettings.ConnectionString; }
+            set { SetConnectionString(value); }
+        }
+        #endregion
 
 
-		#region ConnectionTimeout property
-		public int ConnectionTimeout
-		{
-			get
-			{
-				return connectionTimeout;
-			}
-			set
-			{
-				connectionTimeout = value;
-			}
-		}
-		#endregion
+        #region ConnectionTimeout property
+        public int ConnectionTimeout
+        {
+            get { return connectionTimeout; }
+            set { connectionTimeout = value; }
+        }
+        #endregion
 
-		#region Database property
-		public string Database
-		{
-			get
-			{
-				return connectionSettings.DatabaseAlias;
-			}
-		}
-		#endregion
-	
-		#region State property
+        #region Database property
+        public string Database
+        {
+            get { return connectionSettings.DatabaseAlias; }
+        }
+        #endregion
+
+        #region State property
 
 
-		unsafe public ConnectionState State
-		{
-			get
-			{   
-				//if ((long)dbHandle.ToPointer() == DB2Constants.SQL_NULL_HANDLE)
-				if (openConnection == null)
-					return ConnectionState.Closed;
-				return ConnectionState.Open;
-			}
-		}
-		#endregion
+        unsafe public ConnectionState State
+        {
+            get
+            {
+                //if ((long)dbHandle.ToPointer() == DB2Constants.SQL_NULL_HANDLE)
+                if (openConnection == null)
+                    return ConnectionState.Closed;
+                return ConnectionState.Open;
+            }
+        }
+        #endregion
 
-		#region events
+        #region events
 
-		public event DB2InfoMessageEventHandler InfoMessage;
-		public event StateChangeEventHandler StateChange;
+        public event DB2InfoMessageEventHandler InfoMessage;
+        public event StateChangeEventHandler StateChange;
 
-		internal void OnInfoMessage(short handleType, IntPtr handle)
-		{
-			if(InfoMessage != null)
-			{
-				// Don't get error information until we know for sure someone is listening
-				try
-				{
-					InfoMessage(this,
-						new DB2InfoMessageEventArgs(new DB2ErrorCollection(handleType, handle)));
-				}
-				catch(Exception)
-				{}
-			}
-		}
+        internal void OnInfoMessage(short handleType, IntPtr handle)
+        {
+            if (InfoMessage != null)
+            {
+                // Don't get error information until we know for sure someone is listening
+                try
+                {
+                    InfoMessage(
+                        this,
+                        new DB2InfoMessageEventArgs(new DB2ErrorCollection(handleType, handle))
+                    );
+                }
+                catch (Exception) { }
+            }
+        }
 
-		private void OnStateChange(StateChangeEventArgs args)
-		{
-			if(StateChange != null)
-				StateChange(this, args);
-		}
+        private void OnStateChange(StateChangeEventArgs args)
+        {
+            if (StateChange != null)
+                StateChange(this, args);
+        }
 
-		#endregion
-		
-		#region DBHandle
+        #endregion
 
-		internal IntPtr DBHandle
-		{
-			get
-			{
-				return (openConnection == null) ? IntPtr.Zero : openConnection.DBHandle;
-			}
-		}
-		#endregion
+        #region DBHandle
 
-		#region BeginTransaction Method
+        internal IntPtr DBHandle
+        {
+            get { return (openConnection == null) ? IntPtr.Zero : openConnection.DBHandle; }
+        }
+        #endregion
 
-		IDbTransaction IDbConnection.BeginTransaction()
-		{
-			return BeginTransaction();
-		}
+        #region BeginTransaction Method
 
-		IDbTransaction IDbConnection.BeginTransaction(IsolationLevel isolationL)
-		{
-			return BeginTransaction(isolationL);
-		}
+        IDbTransaction IDbConnection.BeginTransaction()
+        {
+            return BeginTransaction();
+        }
 
-		public DB2Transaction BeginTransaction()
-		{
-			return BeginTransaction(IsolationLevel.ReadCommitted);
-		}
+        IDbTransaction IDbConnection.BeginTransaction(IsolationLevel isolationL)
+        {
+            return BeginTransaction(isolationL);
+        }
 
-		public DB2Transaction BeginTransaction(IsolationLevel isolationL)
-		{
-			if ((refTransaction != null) && (refTransaction.IsAlive))
-				throw new InvalidOperationException("Cannot open another transaction");
-			if(State != ConnectionState.Open)
-				throw new InvalidOperationException("BeginTransaction needs an open connection");
+        public DB2Transaction BeginTransaction()
+        {
+            return BeginTransaction(IsolationLevel.ReadCommitted);
+        }
 
-			if(refTransaction != null)
-			{
-				if(refTransaction.IsAlive)
-					throw new InvalidOperationException("Parallel transactions not supported");
+        public DB2Transaction BeginTransaction(IsolationLevel isolationL)
+        {
+            if ((refTransaction != null) && (refTransaction.IsAlive))
+                throw new InvalidOperationException("Cannot open another transaction");
+            if (State != ConnectionState.Open)
+                throw new InvalidOperationException("BeginTransaction needs an open connection");
 
-				openConnection.RollbackDeadTransaction();
-				refTransaction = null;
-			}
-			openConnection.transactionOpen = true;
-			DB2Transaction tran = new DB2Transaction(this, isolationL);
-			refTransaction = new WeakReference(tran);
-			return tran;
-		}
+            if (refTransaction != null)
+            {
+                if (refTransaction.IsAlive)
+                    throw new InvalidOperationException("Parallel transactions not supported");
 
-		#endregion
-		
-		#region ChangeDatabase
-		unsafe public void ChangeDatabase(string newDBName)
-		{
-			if(connectionSettings == null)
-			{
-				throw new InvalidOperationException("No connection string");
-			}
-			this.Close();
+                openConnection.RollbackDeadTransaction();
+                refTransaction = null;
+            }
+            openConnection.transactionOpen = true;
+            DB2Transaction tran = new DB2Transaction(this, isolationL);
+            refTransaction = new WeakReference(tran);
+            return tran;
+        }
 
-			SetConnectionString(connectionSettings.ConnectionString.Replace(connectionSettings.DatabaseAlias, newDBName));
+        #endregion
 
-			this.Open();
-		}
-		#endregion
+        #region ChangeDatabase
+        unsafe public void ChangeDatabase(string newDBName)
+        {
+            if (connectionSettings == null)
+            {
+                throw new InvalidOperationException("No connection string");
+            }
+            this.Close();
 
-		#region ReleaseObjectPool
-		public static void ReleaseObjectPool()
-		{
-			DB2Environment.Instance.Dispose();
-		}
-		#endregion
-		
-		#region Close
-		public void Close()
-		{
-			DB2Transaction transaction = null;
-			if(refTransaction != null)
-				transaction = (DB2Transaction)refTransaction.Target;
-			if((transaction != null) && refTransaction.IsAlive)
-			{
-				transaction.Dispose();
-			}
-			if(refCommands != null)
-			{
-				for(int i = 0; i < refCommands.Count; i++)
-				{
-					DB2Command command = null;
-					if(refCommands[i] != null)
-					{
-						command = (DB2Command)((WeakReference)refCommands[i]).Target;
-					}
-					if((command != null) && ((WeakReference)refCommands[i]).IsAlive)
-					{
-						try
-						{
-							command.ConnectionClosed();
-						}
-						catch{}
-					}
-					//?? refCommands[i] = null;
-				}
-			}
+            SetConnectionString(
+                connectionSettings.ConnectionString.Replace(
+                    connectionSettings.DatabaseAlias,
+                    newDBName
+                )
+            );
 
-			if(openConnection != null)
-			{
-				openConnection.Close();
-				openConnection = null;
-			}
-		}
+            this.Open();
+        }
+        #endregion
 
-		#endregion
-		
-		#region CreateCommand
-		IDbCommand IDbConnection.CreateCommand()
-		{
-			return CreateCommand();
-		}
+        #region ReleaseObjectPool
+        public static void ReleaseObjectPool()
+        {
+            DB2Environment.Instance.Dispose();
+        }
+        #endregion
 
-		public DB2Command CreateCommand()
-		{
-			//CheckState();
-			return new DB2Command(null, this);
-		}
-		#endregion
-		
-		#region Open
+        #region Close
+        public void Close()
+        {
+            DB2Transaction transaction = null;
+            if (refTransaction != null)
+                transaction = (DB2Transaction)refTransaction.Target;
+            if ((transaction != null) && refTransaction.IsAlive)
+            {
+                transaction.Dispose();
+            }
+            if (refCommands != null)
+            {
+                for (int i = 0; i < refCommands.Count; i++)
+                {
+                    DB2Command command = null;
+                    if (refCommands[i] != null)
+                    {
+                        command = (DB2Command)((WeakReference)refCommands[i]).Target;
+                    }
+                    if ((command != null) && ((WeakReference)refCommands[i]).IsAlive)
+                    {
+                        try
+                        {
+                            command.ConnectionClosed();
+                        }
+                        catch { }
+                    }
+                    //?? refCommands[i] = null;
+                }
+            }
 
-		unsafe public void Open()
-		{
-			if(disposed)
-			{
-				throw new ObjectDisposedException("DB2Connection");
-			}
+            if (openConnection != null)
+            {
+                openConnection.Close();
+                openConnection = null;
+            }
+        }
 
-			if (this.State == ConnectionState.Open || this.State == ConnectionState.Connecting || this.State == ConnectionState.Executing || this.State == ConnectionState.Fetching)
-			{
-				throw new InvalidOperationException("Connection already open");
-			}
+        #endregion
 
-			try
-			{
-				openConnection = connectionSettings.GetRealOpenConnection(this);
-			}
-			catch (DB2Exception)
-			{
-				Close();
-				throw;
-			}
-		}
-		#endregion
-		
-		#region Dispose
-		public new void Dispose()
-		{
-			Dispose(true);
-			GC.SuppressFinalize(this);
-		}
+        #region CreateCommand
+        IDbCommand IDbConnection.CreateCommand()
+        {
+            return CreateCommand();
+        }
 
-		protected override void Dispose(bool disposing)
-		{
-			if(!disposed) 
-			{
-				if(disposing)
-				{
-					// dispose managed resources
-					Close();
-				}
-			}
-			base.Dispose(disposing);
-			disposed = true;
-		}
+        public DB2Command CreateCommand()
+        {
+            //CheckState();
+            return new DB2Command(null, this);
+        }
+        #endregion
 
+        #region Open
 
-		~DB2Connection()
-		{
-			Dispose(false);
-		}
-		#endregion
+        unsafe public void Open()
+        {
+            if (disposed)
+            {
+                throw new ObjectDisposedException("DB2Connection");
+            }
 
-		private void CheckState()
-		{
-			if (ConnectionState.Closed == State)
-				throw new InvalidOperationException("Connection is currently closed.");
-		}
+            if (
+                this.State == ConnectionState.Open
+                || this.State == ConnectionState.Connecting
+                || this.State == ConnectionState.Executing
+                || this.State == ConnectionState.Fetching
+            )
+            {
+                throw new InvalidOperationException("Connection already open");
+            }
 
-		void SetConnectionString (string connectionString) 
-		{
-			if (State != ConnectionState.Closed)
-				throw new InvalidOperationException("Connection is not closed.");
+            try
+            {
+                openConnection = connectionSettings.GetRealOpenConnection(this);
+            }
+            catch (DB2Exception)
+            {
+                Close();
+                throw;
+            }
+        }
+        #endregion
 
-			this.connectionSettings = DB2ConnectionSettings.GetConnectionSettings(connectionString);
-		}
+        #region Dispose
+        public new void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-		internal WeakReference WeakRefTransaction
-		{
-			get
-			{
-				return refTransaction;
-			}
-			set
-			{
-				refTransaction = value;
-			}
+        protected override void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    // dispose managed resources
+                    Close();
+                }
+            }
+            base.Dispose(disposing);
+            disposed = true;
+        }
 
-		}
+        ~DB2Connection()
+        {
+            Dispose(false);
+        }
+        #endregion
 
-		internal void AddCommand(DB2Command command)
-		{
-			if(refCommands == null)
-			{
-				refCommands = new ArrayList();
-			}
-			for(int i = 0; i < refCommands.Count; i++)
-			{
-				WeakReference reference = (WeakReference)refCommands[i];
-				if((reference == null) || !reference.IsAlive)
-				{
-					refCommands[i] = new WeakReference(command);
-					return;
-				}
-			}
-			refCommands.Add(new WeakReference(command));
+        private void CheckState()
+        {
+            if (ConnectionState.Closed == State)
+                throw new InvalidOperationException("Connection is currently closed.");
+        }
 
-		}
+        void SetConnectionString(string connectionString)
+        {
+            if (State != ConnectionState.Closed)
+                throw new InvalidOperationException("Connection is not closed.");
 
-		internal void RemoveCommand(DB2Command command)
-		{
-			for(int i = 0; i < refCommands.Count; i++)
-			{
-				WeakReference reference = (WeakReference)refCommands[i];
-				if(object.ReferenceEquals(reference, command))
-				{
-					refCommands[i] = null;
-					return;
-				}
-			}
-		}
+            this.connectionSettings = DB2ConnectionSettings.GetConnectionSettings(connectionString);
+        }
 
-		#region ICloneable Members
+        internal WeakReference WeakRefTransaction
+        {
+            get { return refTransaction; }
+            set { refTransaction = value; }
+        }
 
-		object ICloneable.Clone()
-		{
-			DB2Connection clone = new DB2Connection();
+        internal void AddCommand(DB2Command command)
+        {
+            if (refCommands == null)
+            {
+                refCommands = new ArrayList();
+            }
+            for (int i = 0; i < refCommands.Count; i++)
+            {
+                WeakReference reference = (WeakReference)refCommands[i];
+                if ((reference == null) || !reference.IsAlive)
+                {
+                    refCommands[i] = new WeakReference(command);
+                    return;
+                }
+            }
+            refCommands.Add(new WeakReference(command));
+        }
 
-			clone.connectionSettings = connectionSettings;
-			clone.connectionTimeout = connectionTimeout;
-			
-			return clone;
-		}
+        internal void RemoveCommand(DB2Command command)
+        {
+            for (int i = 0; i < refCommands.Count; i++)
+            {
+                WeakReference reference = (WeakReference)refCommands[i];
+                if (object.ReferenceEquals(reference, command))
+                {
+                    refCommands[i] = null;
+                    return;
+                }
+            }
+        }
 
-		#endregion
+        #region ICloneable Members
 
-	}
+        object ICloneable.Clone()
+        {
+            DB2Connection clone = new DB2Connection();
+
+            clone.connectionSettings = connectionSettings;
+            clone.connectionTimeout = connectionTimeout;
+
+            return clone;
+        }
+
+        #endregion
+    }
 }
-

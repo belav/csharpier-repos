@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 //
 // GenericIdentity.cs
@@ -16,9 +16,8 @@ namespace System.Security.Principal
 {
     using System;
     using System.Diagnostics.Contracts;
-
-// Claims feature is not available in Silverlight
-#if !FEATURE_CORECLR                         
+    // Claims feature is not available in Silverlight
+#if !FEATURE_CORECLR
     using System.Security.Claims;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
@@ -26,11 +25,12 @@ namespace System.Security.Principal
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
-
 #if!FEATURE_CORECLR
-    public class GenericIdentity  : ClaimsIdentity {
+    public class GenericIdentity : ClaimsIdentity
+    {
 #else
-    public class GenericIdentity : IIdentity {
+    public class GenericIdentity : IIdentity
+    {
 #endif
 
         private string m_name;
@@ -39,7 +39,8 @@ namespace System.Security.Principal
 #if !FEATURE_CORECLR
         [SecuritySafeCritical]
 #endif
-        public GenericIdentity (string name) {
+        public GenericIdentity(string name)
+        {
             if (name == null)
                 throw new ArgumentNullException("name");
             Contract.EndContractBlock();
@@ -55,7 +56,8 @@ namespace System.Security.Principal
 #if !FEATURE_CORECLR
         [SecuritySafeCritical]
 #endif
-        public GenericIdentity (string name, string type) {
+        public GenericIdentity(string name, string type)
+        {
             if (name == null)
                 throw new ArgumentNullException("name");
             if (type == null)
@@ -72,8 +74,7 @@ namespace System.Security.Principal
 
 #if !FEATURE_CORECLR
         GenericIdentity()
-            : base()
-        { }
+            : base() { }
 #endif
 
 #if !FEATURE_CORECLR
@@ -95,49 +96,46 @@ namespace System.Security.Principal
 
         public override IEnumerable<Claim> Claims
         {
-            get
-            {
-                return base.Claims;
-            }
+            get { return base.Claims; }
         }
 
 #endif
 
 #if !FEATURE_CORECLR
-        public override string Name {
+        public override string Name
+        {
 #else
-        public virtual string Name {
+        public virtual string Name
+        {
 #endif
-            get {
-                return m_name;
-            }
+            get { return m_name; }
         }
 
 #if !FEATURE_CORECLR
-        public override string AuthenticationType {
+        public override string AuthenticationType
+        {
 #else
-        public virtual string AuthenticationType {
+        public virtual string AuthenticationType
+        {
 #endif
-            get {
-                return m_type;
-            }
+            get { return m_type; }
         }
 
 #if !FEATURE_CORECLR
-        public override bool IsAuthenticated {
+        public override bool IsAuthenticated
+        {
 #else
-        public virtual bool IsAuthenticated {
+        public virtual bool IsAuthenticated
+        {
 #endif
-            get {
-                return !m_name.Equals("");
-            } 
+            get { return !m_name.Equals(""); }
         }
 
 #if !FEATURE_CORECLR
         [OnDeserialized()]
         private void OnDeserializedMethod(StreamingContext context)
         {
-            // GenericIdentities that have been deserialized from a .net 4.0 runtime, will not have any claims. 
+            // GenericIdentities that have been deserialized from a .net 4.0 runtime, will not have any claims.
             // In this case add a name claim, otherwise assume it was deserialized.
             bool claimFound = false;
             foreach (Claim c in base.Claims)
@@ -157,7 +155,16 @@ namespace System.Security.Principal
         {
             if (m_name != null)
             {
-                base.AddClaim(new Claim(base.NameClaimType, m_name, ClaimValueTypes.String, ClaimsIdentity.DefaultIssuer, ClaimsIdentity.DefaultIssuer, this));
+                base.AddClaim(
+                    new Claim(
+                        base.NameClaimType,
+                        m_name,
+                        ClaimValueTypes.String,
+                        ClaimsIdentity.DefaultIssuer,
+                        ClaimsIdentity.DefaultIssuer,
+                        this
+                    )
+                );
             }
         }
 #endif // #if !FEATURE_CORECLR

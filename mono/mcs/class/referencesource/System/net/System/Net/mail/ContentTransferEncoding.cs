@@ -12,11 +12,11 @@ namespace System.Net.Mime
     /// Summary description for ContentTransferEncoding.
     /// </summary>
 #if MAKE_MAILCLIENT_PUBLIC
-    internal 
+    internal
 #else
     internal
 #endif
-        enum ContentTransferEncoding
+    enum ContentTransferEncoding
     {
         SevenBit,
         EightBit,
@@ -25,6 +25,6 @@ namespace System.Net.Mime
         QuotedPrintable,
         QEncoded,
         Other,
-        Unspecified
+        Unspecified,
     }
 }

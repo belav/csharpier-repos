@@ -14,7 +14,11 @@ namespace System.Net.Http
         private readonly Version _negotiatedHttpVersion;
         private readonly HttpRequestMessage _initialRequestMessage;
 
-        internal SocketsHttpPlaintextStreamFilterContext(Stream plaintextStream, Version negotiatedHttpVersion, HttpRequestMessage initialRequestMessage)
+        internal SocketsHttpPlaintextStreamFilterContext(
+            Stream plaintextStream,
+            Version negotiatedHttpVersion,
+            HttpRequestMessage initialRequestMessage
+        )
         {
             _plaintextStream = plaintextStream;
             _negotiatedHttpVersion = negotiatedHttpVersion;

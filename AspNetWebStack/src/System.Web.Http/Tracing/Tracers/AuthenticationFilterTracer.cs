@@ -13,14 +13,20 @@ using System.Web.Http.Services;
 namespace System.Web.Http.Tracing.Tracers
 {
     /// <summary>Represents a tracer for an <see cref="IAuthenticationFilter"/>.</summary>
-    internal class AuthenticationFilterTracer : FilterTracer, IAuthenticationFilter, IDecorator<IAuthenticationFilter>
+    internal class AuthenticationFilterTracer
+        : FilterTracer,
+            IAuthenticationFilter,
+            IDecorator<IAuthenticationFilter>
     {
         private const string AuthenticateAsyncMethodName = "AuthenticateAsync";
         private const string ChallengeAsyncMethodName = "ChallengeAsync";
 
         private readonly IAuthenticationFilter _innerFilter;
 
-        public AuthenticationFilterTracer(IAuthenticationFilter innerFilter, ITraceWriter traceWriter)
+        public AuthenticationFilterTracer(
+            IAuthenticationFilter innerFilter,
+            ITraceWriter traceWriter
+        )
             : base(innerFilter, traceWriter)
         {
             _innerFilter = innerFilter;
@@ -31,7 +37,10 @@ namespace System.Web.Http.Tracing.Tracers
             get { return _innerFilter; }
         }
 
-        public Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
+        public Task AuthenticateAsync(
+            HttpAuthenticationContext context,
+            CancellationToken cancellationToken
+        )
         {
             IPrincipal originalPrincipal = null;
             return TraceWriter.TraceBeginEndAsync(
@@ -54,22 +63,27 @@ namespace System.Web.Http.Tracing.Tracers
                     {
                         if (context.ErrorResult != null)
                         {
-                            tr.Message = String.Format(CultureInfo.CurrentCulture,
+                            tr.Message = String.Format(
+                                CultureInfo.CurrentCulture,
                                 SRResources.AuthenticationFilterErrorResult,
-                                context.ErrorResult);
+                                context.ErrorResult
+                            );
                         }
                         else if (context.Principal != originalPrincipal)
                         {
                             if (context.Principal == null || context.Principal.Identity == null)
                             {
-                                tr.Message = SRResources.AuthenticationFilterSetPrincipalToUnknownIdentity;
+                                tr.Message =
+                                    SRResources.AuthenticationFilterSetPrincipalToUnknownIdentity;
                             }
                             else
                             {
-                                tr.Message = String.Format(CultureInfo.CurrentCulture,
+                                tr.Message = String.Format(
+                                    CultureInfo.CurrentCulture,
                                     SRResources.AuthenticationFilterSetPrincipalToKnownIdentity,
                                     context.Principal.Identity.Name,
-                                    context.Principal.Identity.AuthenticationType);
+                                    context.Principal.Identity.AuthenticationType
+                                );
                             }
                         }
                         else
@@ -78,10 +92,14 @@ namespace System.Web.Http.Tracing.Tracers
                         }
                     }
                 },
-                errorTrace: null);
+                errorTrace: null
+            );
         }
 
-        public Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)
+        public Task ChallengeAsync(
+            HttpAuthenticationChallengeContext context,
+            CancellationToken cancellationToken
+        )
         {
             return TraceWriter.TraceBeginEndAsync(
                 request: context != null ? context.Request : null,
@@ -92,7 +110,8 @@ namespace System.Web.Http.Tracing.Tracers
                 beginTrace: null,
                 execute: () => _innerFilter.ChallengeAsync(context, cancellationToken),
                 endTrace: null,
-                errorTrace: null);
+                errorTrace: null
+            );
         }
     }
 }

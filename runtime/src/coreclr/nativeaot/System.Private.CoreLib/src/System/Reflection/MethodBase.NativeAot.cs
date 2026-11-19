@@ -2,19 +2,26 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics.CodeAnalysis;
-
 using Internal.Reflection.Augments;
 
 namespace System.Reflection
 {
     public abstract partial class MethodBase : MemberInfo
     {
-        public static MethodBase GetMethodFromHandle(RuntimeMethodHandle handle) => ReflectionAugments.ReflectionCoreCallbacks.GetMethodFromHandle(handle);
-        public static MethodBase GetMethodFromHandle(RuntimeMethodHandle handle, RuntimeTypeHandle declaringType) => ReflectionAugments.ReflectionCoreCallbacks.GetMethodFromHandle(handle, declaringType);
+        public static MethodBase GetMethodFromHandle(RuntimeMethodHandle handle) =>
+            ReflectionAugments.ReflectionCoreCallbacks.GetMethodFromHandle(handle);
+
+        public static MethodBase GetMethodFromHandle(
+            RuntimeMethodHandle handle,
+            RuntimeTypeHandle declaringType
+        ) => ReflectionAugments.ReflectionCoreCallbacks.GetMethodFromHandle(handle, declaringType);
 
         [RequiresUnreferencedCode("Metadata for the method might be incomplete or removed")]
         [System.Runtime.CompilerServices.Intrinsic]
-        public static MethodBase GetCurrentMethod() { throw NotImplemented.ByDesign; } //Implemented by toolchain.
+        public static MethodBase GetCurrentMethod()
+        {
+            throw NotImplemented.ByDesign;
+        } //Implemented by toolchain.
 
         // This is not an api but needs to be declared public so that System.Private.Reflection.Core can access (and override it)
         public virtual ReadOnlySpan<ParameterInfo> GetParametersAsSpan() => GetParameters();
@@ -35,6 +42,9 @@ namespace System.Reflection
         //  (for example, the methods returned on Array types.)
         //
         // This is not an api but needs to be declared public so that System.Private.Reflection.Core can access (and override it)
-        public virtual MethodBase MetadataDefinitionMethod { get { throw NotImplemented.ByDesign; } }
+        public virtual MethodBase MetadataDefinitionMethod
+        {
+            get { throw NotImplemented.ByDesign; }
+        }
     }
 }

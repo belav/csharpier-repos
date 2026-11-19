@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpUseCoalesceExpressionForIfNullStatementCheckDiagnosticAnalyzer,
-        UseCoalesceExpressionForIfNullStatementCheckCodeFixProvider>;
+        UseCoalesceExpressionForIfNullStatementCheckCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseCoalesceExpression)]
     public class UseCoalesceExpressionForIfNullStatementCheckTests
@@ -24,29 +25,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
             await new VerifyCS.Test
             {
                 TestCode = """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var item = FindItem() as C;
-                        [|if|] (item == null)
-                            throw new System.InvalidOperationException();
-                    }
+                        void M()
+                        {
+                            var item = FindItem() as C;
+                            [|if|] (item == null)
+                                throw new System.InvalidOperationException();
+                        }
 
-                    object FindItem() => null;
-                }
-                """,
-                FixedCode = """
-                class C
-                {
-                    void M()
-                    {
-                        var item = FindItem() as C ?? throw new System.InvalidOperationException();
+                        object FindItem() => null;
                     }
-                
-                    object FindItem() => null;
-                }
-                """
+                    """,
+                FixedCode = """
+                    class C
+                    {
+                        void M()
+                        {
+                            var item = FindItem() as C ?? throw new System.InvalidOperationException();
+                        }
+
+                        object FindItem() => null;
+                    }
+                    """,
             }.RunAsync();
         }
 
@@ -56,31 +57,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
             await new VerifyCS.Test
             {
                 TestCode = """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var item = FindItem() as C;
-                        [|if|] (item == null)
+                        void M()
                         {
-                            throw new System.InvalidOperationException();
+                            var item = FindItem() as C;
+                            [|if|] (item == null)
+                            {
+                                throw new System.InvalidOperationException();
+                            }
                         }
-                    }
 
-                    object FindItem() => null;
-                }
-                """,
-                FixedCode = """
-                class C
-                {
-                    void M()
-                    {
-                        var item = FindItem() as C ?? throw new System.InvalidOperationException();
+                        object FindItem() => null;
                     }
-                
-                    object FindItem() => null;
-                }
-                """
+                    """,
+                FixedCode = """
+                    class C
+                    {
+                        void M()
+                        {
+                            var item = FindItem() as C ?? throw new System.InvalidOperationException();
+                        }
+
+                        object FindItem() => null;
+                    }
+                    """,
             }.RunAsync();
         }
 
@@ -90,29 +91,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
             await new VerifyCS.Test
             {
                 TestCode = """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var item = FindItem() as C;
-                        [|if|] (item is null)
-                            throw new System.InvalidOperationException();
-                    }
+                        void M()
+                        {
+                            var item = FindItem() as C;
+                            [|if|] (item is null)
+                                throw new System.InvalidOperationException();
+                        }
 
-                    object FindItem() => null;
-                }
-                """,
-                FixedCode = """
-                class C
-                {
-                    void M()
-                    {
-                        var item = FindItem() as C ?? throw new System.InvalidOperationException();
+                        object FindItem() => null;
                     }
-                
-                    object FindItem() => null;
-                }
-                """
+                    """,
+                FixedCode = """
+                    class C
+                    {
+                        void M()
+                        {
+                            var item = FindItem() as C ?? throw new System.InvalidOperationException();
+                        }
+
+                        object FindItem() => null;
+                    }
+                    """,
             }.RunAsync();
         }
 
@@ -122,29 +123,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
             await new VerifyCS.Test
             {
                 TestCode = """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var item = FindItem() as C;
-                        [|if|] (item == null)
-                            item = new C();
-                    }
+                        void M()
+                        {
+                            var item = FindItem() as C;
+                            [|if|] (item == null)
+                                item = new C();
+                        }
 
-                    object FindItem() => null;
-                }
-                """,
-                FixedCode = """
-                class C
-                {
-                    void M()
-                    {
-                        var item = FindItem() as C ?? new C();
+                        object FindItem() => null;
                     }
-                
-                    object FindItem() => null;
-                }
-                """
+                    """,
+                FixedCode = """
+                    class C
+                    {
+                        void M()
+                        {
+                            var item = FindItem() as C ?? new C();
+                        }
+
+                        object FindItem() => null;
+                    }
+                    """,
             }.RunAsync();
         }
 
@@ -154,29 +155,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
             await new VerifyCS.Test
             {
                 TestCode = """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        var item = FindItem() as C;
-                        [|if|] (item == null)
-                            item = new();
-                    }
+                        void M()
+                        {
+                            var item = FindItem() as C;
+                            [|if|] (item == null)
+                                item = new();
+                        }
 
-                    object FindItem() => null;
-                }
-                """,
-                FixedCode = """
-                class C
-                {
-                    void M()
-                    {
-                        var item = FindItem() as C ?? new();
+                        object FindItem() => null;
                     }
-                
-                    object FindItem() => null;
-                }
-                """,
+                    """,
+                FixedCode = """
+                    class C
+                    {
+                        void M()
+                        {
+                            var item = FindItem() as C ?? new();
+                        }
+
+                        object FindItem() => null;
+                    }
+                    """,
                 LanguageVersion = LanguageVersion.CSharp9,
             }.RunAsync();
         }
@@ -198,11 +199,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = text,
-                FixedCode = text,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = text, FixedCode = text }.RunAsync();
         }
 
         [Fact]
@@ -222,11 +219,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = text,
-                FixedCode = text,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = text, FixedCode = text }.RunAsync();
         }
 
         [Fact]
@@ -271,11 +264,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = text,
-                FixedCode = text,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = text, FixedCode = text }.RunAsync();
         }
 
         [Fact]
@@ -297,11 +286,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = text,
-                FixedCode = text,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = text, FixedCode = text }.RunAsync();
         }
 
         [Fact]
@@ -324,11 +309,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = text,
-                FixedCode = text,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = text, FixedCode = text }.RunAsync();
         }
 
         [Fact]
@@ -349,11 +330,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = text,
-                FixedCode = text,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = text, FixedCode = text }.RunAsync();
         }
 
         [Fact]
@@ -379,11 +356,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = text,
-                FixedCode = text,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = text, FixedCode = text }.RunAsync();
         }
 
         [Fact]
@@ -403,11 +376,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = text,
-                FixedCode = text,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = text, FixedCode = text }.RunAsync();
         }
 
         [Fact]
@@ -427,11 +396,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = text,
-                FixedCode = text,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = text, FixedCode = text }.RunAsync();
         }
 
         [Fact]

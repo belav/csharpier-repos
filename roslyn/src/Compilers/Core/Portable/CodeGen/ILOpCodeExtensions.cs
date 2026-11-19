@@ -108,15 +108,15 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 case ILOpCode.Blt_un:
                 case ILOpCode.Blt_un_s:
                     return true;
-                    // these are not conditional
+                // these are not conditional
 
-                    //case ILOpCode.Br:
-                    //case ILOpCode.Br_s:
-                    //case ILOpCode.Leave:
-                    //case ILOpCode.Leave_s:
+                //case ILOpCode.Br:
+                //case ILOpCode.Br_s:
+                //case ILOpCode.Leave:
+                //case ILOpCode.Leave_s:
 
-                    // this is treated specially. It will not use regular single label
-                    //case ILOpCode.Switch
+                // this is treated specially. It will not use regular single label
+                //case ILOpCode.Switch
             }
 
             return false;
@@ -166,7 +166,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 case ILOpCode.Ret:
                 case ILOpCode.Jmp:
                 case ILOpCode.Throw:
-                //NOTE: from the codegen view endfilter is a logical  "brfalse <continueHandlerSearch>" 
+                //NOTE: from the codegen view endfilter is a logical  "brfalse <continueHandlerSearch>"
                 //      endfilter must be used once at the end of the filter and must be lexically followed by the handler
                 //      to which the control returns if filter result was 1.
                 //case ILOpCode.Endfilter:

@@ -49,5 +49,5 @@ internal enum WatchKind
 {
     Create = 1,
     Change = 2,
-    Delete = 4
+    Delete = 4,
 }

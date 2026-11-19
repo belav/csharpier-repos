@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,95 +31,103 @@
 using System.Collections;
 using System.Security.Permissions;
 
-namespace System.ServiceProcess {
+namespace System.ServiceProcess
+{
+    [Serializable]
+    public class ServiceControllerPermissionEntryCollection : CollectionBase
+    {
+        private ServiceControllerPermission owner;
 
-	[Serializable]
-	public class ServiceControllerPermissionEntryCollection : CollectionBase {
+        internal ServiceControllerPermissionEntryCollection(ServiceControllerPermission owner)
+        {
+            this.owner = owner;
+            ResourcePermissionBaseEntry[] entries = owner.GetEntries();
+            if (entries.Length > 0)
+            {
+                foreach (ResourcePermissionBaseEntry entry in entries)
+                {
+                    ServiceControllerPermissionAccess scpa = (ServiceControllerPermissionAccess)
+                        entry.PermissionAccess;
+                    string machine = entry.PermissionAccessPath[0];
+                    string service = entry.PermissionAccessPath[1];
+                    ServiceControllerPermissionEntry scpe = new ServiceControllerPermissionEntry(
+                        scpa,
+                        machine,
+                        service
+                    );
+                    // we don't want to add them (again) to the base class
+                    InnerList.Add(scpe);
+                }
+            }
+        }
 
-		private ServiceControllerPermission owner;
+        public ServiceControllerPermissionEntry this[int index]
+        {
+            get { return base.List[index] as ServiceControllerPermissionEntry; }
+            set { base.List[index] = value; }
+        }
 
-		internal ServiceControllerPermissionEntryCollection (ServiceControllerPermission owner)
-		{
-			this.owner = owner;
-			ResourcePermissionBaseEntry[] entries = owner.GetEntries ();
-			if (entries.Length > 0) {
-				foreach (ResourcePermissionBaseEntry entry in entries) {
-					ServiceControllerPermissionAccess scpa = (ServiceControllerPermissionAccess) entry.PermissionAccess;
-					string machine = entry.PermissionAccessPath [0];
-					string service = entry.PermissionAccessPath [1];
-					ServiceControllerPermissionEntry scpe = new ServiceControllerPermissionEntry (scpa, machine, service);
-					// we don't want to add them (again) to the base class
-					InnerList.Add (scpe);
-				}
-			}
-		}
+        public int Add(ServiceControllerPermissionEntry value)
+        {
+            return base.List.Add(value);
+        }
 
-		public ServiceControllerPermissionEntry this [int index] {
-			get { return base.List [index] as ServiceControllerPermissionEntry; }
-			set { base.List [index] = value; }
-		}
+        public void AddRange(ServiceControllerPermissionEntry[] value)
+        {
+            foreach (ServiceControllerPermissionEntry entry in value)
+                base.List.Add(entry);
+        }
 
-		public int Add (ServiceControllerPermissionEntry value)
-		{
-			return base.List.Add (value);
-		}
+        public void AddRange(ServiceControllerPermissionEntryCollection value)
+        {
+            foreach (ServiceControllerPermissionEntry entry in value)
+                base.List.Add(entry);
+        }
 
-		public void AddRange (ServiceControllerPermissionEntry [] value)
-		{
-			foreach (ServiceControllerPermissionEntry entry in value)
-				base.List.Add (entry);
-		}
+        public bool Contains(ServiceControllerPermissionEntry value)
+        {
+            return base.List.Contains(value);
+        }
 
-		public void AddRange (ServiceControllerPermissionEntryCollection value)
-		{
-			foreach (ServiceControllerPermissionEntry entry in value)
-				base.List.Add (entry);
-		}
+        public void CopyTo(ServiceControllerPermissionEntry[] array, int index)
+        {
+            base.List.CopyTo(array, index);
+        }
 
-		public bool Contains (ServiceControllerPermissionEntry value)
-		{
-			return base.List.Contains (value);
-		}
+        public int IndexOf(ServiceControllerPermissionEntry value)
+        {
+            return base.List.IndexOf(value);
+        }
 
-		public void CopyTo (ServiceControllerPermissionEntry [] array, int index)
-		{
-			base.List.CopyTo (array, index);
-		}
+        public void Insert(int index, ServiceControllerPermissionEntry value)
+        {
+            base.List.Insert(index, value);
+        }
 
-		public int IndexOf (ServiceControllerPermissionEntry value)
-		{
-			return base.List.IndexOf (value);
-		}
+        public void Remove(ServiceControllerPermissionEntry value)
+        {
+            base.List.Remove(value);
+        }
 
-		public void Insert (int index, ServiceControllerPermissionEntry value)
-		{
-			base.List.Insert (index, value);
-		}
+        protected override void OnClear()
+        {
+            owner.ClearEntries();
+        }
 
-		public void Remove (ServiceControllerPermissionEntry value)
-		{
-			base.List.Remove (value);
-		}
+        protected override void OnInsert(int index, object value)
+        {
+            owner.Add(value);
+        }
 
-		protected override void OnClear ()
-		{
-			owner.ClearEntries ();
-		}
+        protected override void OnRemove(int index, object value)
+        {
+            owner.Remove(value);
+        }
 
-		protected override void OnInsert (int index, object value)
-		{
-			owner.Add (value);
-		}
-
-		protected override void OnRemove (int index, object value)
-		{
-			owner.Remove (value);
-		}
-
-		protected override void OnSet (int index, object oldValue, object newValue)
-		{
-			owner.Remove (oldValue);
-			owner.Add (newValue);
-		}
-	}
+        protected override void OnSet(int index, object oldValue, object newValue)
+        {
+            owner.Remove(oldValue);
+            owner.Add(newValue);
+        }
+    }
 }

@@ -25,7 +25,8 @@ namespace XPathTests.FunctionalTests
         {
             var xml = "books.xml";
             var testExpression = @"/bookstore/magazine[6]/@frequency/following::title";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -33,7 +34,7 @@ namespace XPathTests.FunctionalTests
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Tracking Trenton"
+                    Value = "Tracking Trenton",
                 },
                 new XPathResultToken
                 {
@@ -42,7 +43,7 @@ namespace XPathTests.FunctionalTests
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Tracking Trenton Stocks"
+                    Value = "Tracking Trenton Stocks",
                 },
                 new XPathResultToken
                 {
@@ -51,8 +52,9 @@ namespace XPathTests.FunctionalTests
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Trenton Today, Trenton Tomorrow"
-                });
+                    Value = "Trenton Today, Trenton Tomorrow",
+                }
+            );
 
             Utils.XPathNodesetTest(kind, xml, testExpression, expected);
         }
@@ -71,8 +73,12 @@ namespace XPathTests.FunctionalTests
             var startingNodePath = "/bookstore/book[1]";
             var testExpression = @"child::*[$$abc=1]";
 
-            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -88,7 +94,11 @@ namespace XPathTests.FunctionalTests
             var xml = "books.xml";
             var testExpression = @"true() and true()";
 
-            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression);
+            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression
+            );
         }
 
         /// <summary>
@@ -104,7 +114,11 @@ namespace XPathTests.FunctionalTests
             var xml = "books.xml";
             var testExpression = @"false() or true()";
 
-            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression);
+            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression
+            );
         }
 
         /// <summary>
@@ -119,7 +133,11 @@ namespace XPathTests.FunctionalTests
             var xml = "books.xml";
             var testExpression = @"1 and 1";
 
-            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression);
+            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression
+            );
         }
 
         /// <summary>
@@ -134,7 +152,11 @@ namespace XPathTests.FunctionalTests
             var xml = "books.xml";
             var testExpression = @"1[true()]";
 
-            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression);
+            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression
+            );
         }
 
         /// <summary>
@@ -149,7 +171,11 @@ namespace XPathTests.FunctionalTests
             var xml = "books.xml";
             var testExpression = @"1";
 
-            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression);
+            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression
+            );
         }
 
         /// <summary>
@@ -165,7 +191,11 @@ namespace XPathTests.FunctionalTests
             var xml = "books.xml";
             var testExpression = @"//node()[abc:xyz()]";
 
-            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression);
+            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression
+            );
         }
 
         /// <summary>
@@ -184,8 +214,12 @@ namespace XPathTests.FunctionalTests
 
             namespaceManager.AddNamespace("abc", "http://abc.htm");
 
-            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                namespaceManager: namespaceManager);
+            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                namespaceManager: namespaceManager
+            );
         }
 
         /// <summary>
@@ -199,13 +233,19 @@ namespace XPathTests.FunctionalTests
         {
             var xml = "books.xml";
             var startingNodePath = "/bookstore";
-            var testExpression = @"descendant::node()/self::node() [self::text() = false() and self::attribute=fasle()]";
+            var testExpression =
+                @"descendant::node()/self::node() [self::text() = false() and self::attribute=fasle()]";
             var namespaceManager = new XmlNamespaceManager(new NameTable());
 
             namespaceManager.AddNamespace("abc", "http://abc.htm");
 
-            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                namespaceManager: namespaceManager, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -222,8 +262,12 @@ namespace XPathTests.FunctionalTests
             var startingNodePath = "/bookstore";
             var testExpression = @"//*[abc()]";
 
-            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -243,8 +287,13 @@ namespace XPathTests.FunctionalTests
 
             namespaceManager.AddNamespace("abc", "http://abc.htm");
 
-            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                namespaceManager: namespaceManager, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -260,7 +309,13 @@ namespace XPathTests.FunctionalTests
             var startingNodePath = "/bookstore/magazine[3]/articles/story1/details";
             var testExpression = @"ancestor::*[position()>2][position()=5]";
             var expected = new XPathResult(0);
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -275,7 +330,8 @@ namespace XPathTests.FunctionalTests
             var xml = "books.xml";
             var startingNodePath = "/bookstore/magazine[3]/articles/story1/details";
             var testExpression = @"ancestor::*[position()>2][position()=1]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -285,10 +341,17 @@ namespace XPathTests.FunctionalTests
                     Name = "magazine",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t"
-                });
+                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t",
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -304,7 +367,13 @@ namespace XPathTests.FunctionalTests
             var startingNodePath = "/bookstore/magazine[3]/articles/story1/details";
             var testExpression = @"ancestor::*[position()>2][position()=3]";
             var expected = new XPathResult(0);
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -320,7 +389,13 @@ namespace XPathTests.FunctionalTests
             var startingNodePath = "/bookstore/magazine[3]/articles/story1/details";
             var testExpression = @"ancestor::*[position()>2][position()=4]";
             var expected = new XPathResult(0);
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -335,7 +410,8 @@ namespace XPathTests.FunctionalTests
             var xml = "books.xml";
             var startingNodePath = "/bookstore/magazine[3]/articles/story1/details";
             var testExpression = @"ancestor::*[position()>2][last()]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -345,10 +421,17 @@ namespace XPathTests.FunctionalTests
                     Name = "bookstore",
                     HasNameTable = true,
                     Value =
-                        "\n\t\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t\n\t\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t\n\t\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t\n\t\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t\n\t\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t\n\t\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t\n\t\n\t\tPC Magazine Best Product of 1997\n\t\n\t\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t\n\t\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t\n\t\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t\n\t\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t\n\t\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t\n\t\n\t\tWho's Who in Trenton\n\t\tRobert Bob\n\t\n\t\n\t\tWhere is Trenton?\n\t\n\t\n\t\tWhere in the world is Trenton?\n\t\n"
-                });
+                        "\n\t\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t\n\t\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t\n\t\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t\n\t\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t\n\t\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t\n\t\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t\n\t\n\t\tPC Magazine Best Product of 1997\n\t\n\t\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t\n\t\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t\n\t\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t\n\t\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t\n\t\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t\n\t\n\t\tWho's Who in Trenton\n\t\tRobert Bob\n\t\n\t\n\t\tWhere is Trenton?\n\t\n\t\n\t\tWhere in the world is Trenton?\n\t\n",
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -363,7 +446,8 @@ namespace XPathTests.FunctionalTests
             var xml = "books.xml";
             var startingNodePath = "/bookstore/magazine[3]/articles/story1/details";
             var testExpression = @"ancestor::*[position()>2][position()=2]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -373,10 +457,17 @@ namespace XPathTests.FunctionalTests
                     Name = "bookstore",
                     HasNameTable = true,
                     Value =
-                        "\n\t\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t\n\t\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t\n\t\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t\n\t\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t\n\t\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t\n\t\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t\n\t\n\t\tPC Magazine Best Product of 1997\n\t\n\t\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t\n\t\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t\n\t\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t\n\t\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t\n\t\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t\n\t\n\t\tWho's Who in Trenton\n\t\tRobert Bob\n\t\n\t\n\t\tWhere is Trenton?\n\t\n\t\n\t\tWhere in the world is Trenton?\n\t\n"
-                });
+                        "\n\t\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t\n\t\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t\n\t\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t\n\t\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t\n\t\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t\n\t\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t\n\t\n\t\tPC Magazine Best Product of 1997\n\t\n\t\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t\n\t\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t\n\t\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t\n\t\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t\n\t\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t\n\t\n\t\tWho's Who in Trenton\n\t\tRobert Bob\n\t\n\t\n\t\tWhere is Trenton?\n\t\n\t\n\t\tWhere in the world is Trenton?\n\t\n",
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -391,7 +482,8 @@ namespace XPathTests.FunctionalTests
             var xml = "books.xml";
             var startingNodePath = "/bookstore/magazine[3]/articles/story1/details";
             var testExpression = @"ancestor::*[position()>2]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -401,7 +493,7 @@ namespace XPathTests.FunctionalTests
                     Name = "bookstore",
                     HasNameTable = true,
                     Value =
-                        "\n\t\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t\n\t\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t\n\t\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t\n\t\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t\n\t\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t\n\t\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t\n\t\n\t\tPC Magazine Best Product of 1997\n\t\n\t\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t\n\t\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t\n\t\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t\n\t\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t\n\t\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t\n\t\n\t\tWho's Who in Trenton\n\t\tRobert Bob\n\t\n\t\n\t\tWhere is Trenton?\n\t\n\t\n\t\tWhere in the world is Trenton?\n\t\n"
+                        "\n\t\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t\n\t\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t\n\t\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t\n\t\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t\n\t\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t\n\t\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t\n\t\n\t\tPC Magazine Best Product of 1997\n\t\n\t\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t\n\t\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t\n\t\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t\n\t\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t\n\t\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t\n\t\n\t\tWho's Who in Trenton\n\t\tRobert Bob\n\t\n\t\n\t\tWhere is Trenton?\n\t\n\t\n\t\tWhere in the world is Trenton?\n\t\n",
                 },
                 new XPathResultToken
                 {
@@ -412,10 +504,17 @@ namespace XPathTests.FunctionalTests
                     Name = "magazine",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t"
-                });
+                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t",
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         [Theory]
@@ -423,7 +522,9 @@ namespace XPathTests.FunctionalTests
         [InlineData(Utils.NavigatorKind.XPathDocument)]
         [InlineData(Utils.NavigatorKind.XDocument)]
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]
-        public static void WhenUsingCustomXPathNavigatorDescendantIteratorShouldBeDoneAfterIterationIsComplete(Utils.NavigatorKind kind)
+        public static void WhenUsingCustomXPathNavigatorDescendantIteratorShouldBeDoneAfterIterationIsComplete(
+            Utils.NavigatorKind kind
+        )
         {
             // When XPathDescendantIterator.MoveNext returns false it should keep returning false
             // This is a regression test.
@@ -471,17 +572,32 @@ namespace XPathTests.FunctionalTests
             public override string BaseURI => _inner.BaseURI;
             public override bool IsEmptyElement => _inner.IsEmptyElement;
             public override string Value => _inner.Value;
+
             public override XPathNavigator Clone() => new CustomNavigator(_inner.Clone());
-            public override bool IsSamePosition(XPathNavigator other) => _inner.IsSamePosition(Unwrap(other));
+
+            public override bool IsSamePosition(XPathNavigator other) =>
+                _inner.IsSamePosition(Unwrap(other));
+
             public override bool MoveTo(XPathNavigator other) => _inner.MoveTo(Unwrap(other));
+
             public override bool MoveToFirstAttribute() => _inner.MoveToFirstAttribute();
+
             public override bool MoveToFirstChild() => _inner.MoveToFirstChild();
-            public override bool MoveToFirstNamespace(XPathNamespaceScope namespaceScope) => _inner.MoveToFirstNamespace(namespaceScope);
+
+            public override bool MoveToFirstNamespace(XPathNamespaceScope namespaceScope) =>
+                _inner.MoveToFirstNamespace(namespaceScope);
+
             public override bool MoveToId(string id) => _inner.MoveToId(id);
+
             public override bool MoveToNext() => _inner.MoveToNext();
+
             public override bool MoveToNextAttribute() => _inner.MoveToNextAttribute();
-            public override bool MoveToNextNamespace(XPathNamespaceScope namespaceScope) => _inner.MoveToNextNamespace(namespaceScope);
+
+            public override bool MoveToNextNamespace(XPathNamespaceScope namespaceScope) =>
+                _inner.MoveToNextNamespace(namespaceScope);
+
             public override bool MoveToParent() => _inner.MoveToParent();
+
             public override bool MoveToPrevious() => _inner.MoveToPrevious();
         }
     }

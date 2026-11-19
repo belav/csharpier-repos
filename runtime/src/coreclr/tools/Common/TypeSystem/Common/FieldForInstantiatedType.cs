@@ -19,33 +19,27 @@ namespace Internal.TypeSystem
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _fieldDef.Context;
-            }
+            get { return _fieldDef.Context; }
         }
 
         public override DefType OwningType
         {
-            get
-            {
-                return _instantiatedType;
-            }
+            get { return _instantiatedType; }
         }
 
         public override string Name
         {
-            get
-            {
-                return _fieldDef.Name;
-            }
+            get { return _fieldDef.Name; }
         }
 
         public override TypeDesc FieldType
         {
             get
             {
-                return _fieldDef.FieldType.InstantiateSignature(_instantiatedType.Instantiation, default(Instantiation));
+                return _fieldDef.FieldType.InstantiateSignature(
+                    _instantiatedType.Instantiation,
+                    default(Instantiation)
+                );
             }
         }
 
@@ -56,50 +50,32 @@ namespace Internal.TypeSystem
 
         public override bool HasEmbeddedSignatureData
         {
-            get
-            {
-                return _fieldDef.HasEmbeddedSignatureData;
-            }
+            get { return _fieldDef.HasEmbeddedSignatureData; }
         }
 
         public override bool IsStatic
         {
-            get
-            {
-                return _fieldDef.IsStatic;
-            }
+            get { return _fieldDef.IsStatic; }
         }
 
         public override bool IsInitOnly
         {
-            get
-            {
-                return _fieldDef.IsInitOnly;
-            }
+            get { return _fieldDef.IsInitOnly; }
         }
 
         public override bool IsThreadStatic
         {
-            get
-            {
-                return _fieldDef.IsThreadStatic;
-            }
+            get { return _fieldDef.IsThreadStatic; }
         }
 
         public override bool HasRva
         {
-            get
-            {
-                return _fieldDef.HasRva;
-            }
+            get { return _fieldDef.HasRva; }
         }
 
         public override bool IsLiteral
         {
-            get
-            {
-                return _fieldDef.IsLiteral;
-            }
+            get { return _fieldDef.IsLiteral; }
         }
 
         public override bool HasCustomAttribute(string attributeNamespace, string attributeName)

@@ -139,8 +139,8 @@ public class RoutePatternParserTests
     [Fact]
     public void InvalidTemplate_WithRepeatedParameter()
     {
-        var ex = Assert.Throws<RoutePatternException>(
-            () => RoutePatternParser.Parse("{p1}/literal/{p1}")
+        var ex = Assert.Throws<RoutePatternException>(() =>
+            RoutePatternParser.Parse("{p1}/literal/{p1}")
         );
 
         var expectedMessage =
@@ -249,8 +249,8 @@ public class RoutePatternParserTests
     [Fact(Skip = "It's ok to have literals after optional parameters. They just aren't optional.")]
     public void InvalidTemplate_LiteralAfterOptionalParam()
     {
-        var ex = Assert.Throws<RoutePatternException>(
-            () => RoutePatternParser.Parse("/test/{a?}/test")
+        var ex = Assert.Throws<RoutePatternException>(() =>
+            RoutePatternParser.Parse("/test/{a?}/test")
         );
 
         var expectedMessage =
@@ -262,8 +262,8 @@ public class RoutePatternParserTests
     [Fact(Skip = "It's ok to have literals after optional parameters. They just aren't optional.")]
     public void InvalidTemplate_NonOptionalParamAfterOptionalParam()
     {
-        var ex = Assert.Throws<RoutePatternException>(
-            () => RoutePatternParser.Parse("/test/{a?}/{b}")
+        var ex = Assert.Throws<RoutePatternException>(() =>
+            RoutePatternParser.Parse("/test/{a?}/{b}")
         );
 
         var expectedMessage =
@@ -292,8 +292,8 @@ public class RoutePatternParserTests
     [Fact]
     public void InvalidTemplate_CatchAllParamNotLast()
     {
-        var ex = Assert.Throws<RoutePatternException>(
-            () => RoutePatternParser.Parse("/test/{*a}/{b}")
+        var ex = Assert.Throws<RoutePatternException>(() =>
+            RoutePatternParser.Parse("/test/{*a}/{b}")
         );
 
         var expectedMessage =
@@ -305,8 +305,8 @@ public class RoutePatternParserTests
     [Fact]
     public void InvalidTemplate_BadOptionalCharacterPosition()
     {
-        var ex = Assert.Throws<RoutePatternException>(
-            () => RoutePatternParser.Parse("/test/{a?bc}/{b}")
+        var ex = Assert.Throws<RoutePatternException>(() =>
+            RoutePatternParser.Parse("/test/{a?bc}/{b}")
         );
 
         var expectedMessage =

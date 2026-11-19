@@ -17,22 +17,24 @@ namespace System.Runtime.InteropServices.ObjectiveC
         /// <remarks>
         /// If <c>null</c> is supplied any pending exception is discarded.
         /// </remarks>
-        public static void SetMessageSendPendingException(Exception? exception)
-            => throw new NotImplementedException();
+        public static void SetMessageSendPendingException(Exception? exception) =>
+            throw new NotImplementedException();
 
         private static bool TrySetGlobalMessageSendCallback(
             MessageSendFunction msgSendFunction,
-            IntPtr func) => throw new NotImplementedException();
+            IntPtr func
+        ) => throw new NotImplementedException();
 
         private static unsafe bool TryInitializeReferenceTracker(
             delegate* unmanaged<void> beginEndCallback,
             delegate* unmanaged<IntPtr, int> isReferencedCallback,
-            delegate* unmanaged<IntPtr, void> trackedObjectEnteredFinalization)
-             => throw new NotImplementedException();
+            delegate* unmanaged<IntPtr, void> trackedObjectEnteredFinalization
+        ) => throw new NotImplementedException();
 
         private static IntPtr CreateReferenceTrackingHandleInternal(
             ObjectHandleOnStack obj,
             out int memInSizeT,
-            out IntPtr mem) => throw new NotImplementedException();
+            out IntPtr mem
+        ) => throw new NotImplementedException();
     }
 }

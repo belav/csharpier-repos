@@ -13,7 +13,9 @@ namespace System.Xml.XmlSchemaValidatorApiTests
     public class TCConstructor : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
-        public TCConstructor(ITestOutputHelper output): base(output)
+
+        public TCConstructor(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -25,7 +27,12 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
             try
             {
-                val = new XmlSchemaValidator(null, new XmlSchemaSet(), new XmlNamespaceManager(new NameTable()), AllFlags);
+                val = new XmlSchemaValidator(
+                    null,
+                    new XmlSchemaSet(),
+                    new XmlNamespaceManager(new NameTable()),
+                    AllFlags
+                );
             }
             catch (ArgumentNullException)
             {
@@ -54,7 +61,12 @@ namespace System.Xml.XmlSchemaValidatorApiTests
                 nt.IsGetCalled = false;
             }
 
-            val = new XmlSchemaValidator(nt, sch, new XmlNamespaceManager(new NameTable()), AllFlags);
+            val = new XmlSchemaValidator(
+                nt,
+                sch,
+                new XmlNamespaceManager(new NameTable()),
+                AllFlags
+            );
             Assert.NotNull(val);
 
             val.Initialize();
@@ -73,7 +85,12 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
             try
             {
-                val = new XmlSchemaValidator(new NameTable(), null, new XmlNamespaceManager(new NameTable()), AllFlags);
+                val = new XmlSchemaValidator(
+                    new NameTable(),
+                    null,
+                    new XmlNamespaceManager(new NameTable()),
+                    AllFlags
+                );
             }
             catch (ArgumentNullException)
             {
@@ -100,7 +117,12 @@ namespace System.Xml.XmlSchemaValidatorApiTests
                     sch.Compile();
             }
 
-            val = new XmlSchemaValidator(new NameTable(), sch, new XmlNamespaceManager(new NameTable()), AllFlags);
+            val = new XmlSchemaValidator(
+                new NameTable(),
+                sch,
+                new XmlNamespaceManager(new NameTable()),
+                AllFlags
+            );
             Assert.NotNull(val);
 
             val.Initialize();
@@ -119,18 +141,37 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
             XmlSchemaSet sch = new XmlSchemaSet();
 
-            sch.Add("", XmlReader.Create(new StringReader("<?xml version=\"1.0\" ?>\n" +
-                                                          "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n" +
-                                                          "    <xs:element name=\"root\" type=\"xs:int\" />\n" +
-                                                          "</xs:schema>")));
-            sch.Add("", XmlReader.Create(new StringReader("<?xml version=\"1.0\" ?>\n" +
-                                                          "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n" +
-                                                          "    <xs:element name=\"root\" type=\"xs:string\" />\n" +
-                                                          "</xs:schema>")));
+            sch.Add(
+                "",
+                XmlReader.Create(
+                    new StringReader(
+                        "<?xml version=\"1.0\" ?>\n"
+                            + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n"
+                            + "    <xs:element name=\"root\" type=\"xs:int\" />\n"
+                            + "</xs:schema>"
+                    )
+                )
+            );
+            sch.Add(
+                "",
+                XmlReader.Create(
+                    new StringReader(
+                        "<?xml version=\"1.0\" ?>\n"
+                            + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n"
+                            + "    <xs:element name=\"root\" type=\"xs:string\" />\n"
+                            + "</xs:schema>"
+                    )
+                )
+            );
 
             try
             {
-                val = new XmlSchemaValidator(new NameTable(), sch, new XmlNamespaceManager(new NameTable()), AllFlags);
+                val = new XmlSchemaValidator(
+                    new NameTable(),
+                    sch,
+                    new XmlNamespaceManager(new NameTable()),
+                    AllFlags
+                );
             }
             catch (XmlSchemaValidationException)
             {
@@ -153,16 +194,25 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
             val = new XmlSchemaValidator(new NameTable(), sch, nsManager, AllFlags);
 
-            val.AddSchema(XmlSchema.Read(XmlReader.Create(new StringReader("<?xml version=\"1.0\" ?>\n" +
-                                                                     "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" +
-                                                                     "			 xmlns:n1=\"uri:tempuri\"\n" +
-                                                                     "			 targetNamespace=\"uri:tempuri1\">\n" +
-                                                                     "    <xs:complexType name=\"foo\">\n" +
-                                                                     "        <xs:sequence>\n" +
-                                                                     "            <xs:element name=\"bar\" />\n" +
-                                                                     "        </xs:sequence>\n" +
-                                                                     "    </xs:complexType>\n" +
-                                                                     "</xs:schema>")), null));
+            val.AddSchema(
+                XmlSchema.Read(
+                    XmlReader.Create(
+                        new StringReader(
+                            "<?xml version=\"1.0\" ?>\n"
+                                + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n"
+                                + "			 xmlns:n1=\"uri:tempuri\"\n"
+                                + "			 targetNamespace=\"uri:tempuri1\">\n"
+                                + "    <xs:complexType name=\"foo\">\n"
+                                + "        <xs:sequence>\n"
+                                + "            <xs:element name=\"bar\" />\n"
+                                + "        </xs:sequence>\n"
+                                + "    </xs:complexType>\n"
+                                + "</xs:schema>"
+                        )
+                    ),
+                    null
+                )
+            );
 
             val.Initialize();
             val.ValidateElement("root", "", info, "n1:foo", null, null, null);
@@ -178,7 +228,9 @@ namespace System.Xml.XmlSchemaValidatorApiTests
     public class TCAddSchema : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
-        public TCAddSchema(ITestOutputHelper output): base(output)
+
+        public TCAddSchema(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -237,10 +289,17 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             XmlSchemaInfo info = new XmlSchemaInfo();
             XmlSchema s;
 
-            s = XmlSchema.Read(XmlReader.Create(new StringReader("<?xml version=\"1.0\" ?>\n" +
-                                                                 "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n" +
-                                                                 "    <xs:element name=\"root\" />\n" +
-                                                                 "</xs:schema>")), null);
+            s = XmlSchema.Read(
+                XmlReader.Create(
+                    new StringReader(
+                        "<?xml version=\"1.0\" ?>\n"
+                            + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n"
+                            + "    <xs:element name=\"root\" />\n"
+                            + "</xs:schema>"
+                    )
+                ),
+                null
+            );
             val.AddSchema(s);
             val.AddSchema(s);
 
@@ -257,12 +316,19 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             XmlSchemaInfo info = new XmlSchemaInfo();
             XmlSchema s;
 
-            s = XmlSchema.Read(XmlReader.Create(new StringReader("<?xml version=\"1.0\" ?>\n" +
-                                                                 "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" +
-                                                                 "           xmlns:n1=\"uri:tempuri\"\n" +
-                                                                 "           targetNamespace=\"uri:tempuri\">\n" +
-                                                                 "    <xs:element name=\"root\" />\n" +
-                                                                 "</xs:schema>")), null);
+            s = XmlSchema.Read(
+                XmlReader.Create(
+                    new StringReader(
+                        "<?xml version=\"1.0\" ?>\n"
+                            + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n"
+                            + "           xmlns:n1=\"uri:tempuri\"\n"
+                            + "           targetNamespace=\"uri:tempuri\">\n"
+                            + "    <xs:element name=\"root\" />\n"
+                            + "</xs:schema>"
+                    )
+                ),
+                null
+            );
             val.AddSchema(s);
             val.AddSchema(s);
 
@@ -277,17 +343,35 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         {
             XmlSchemaValidator val = CreateValidator(new XmlSchemaSet());
 
-            val.AddSchema(XmlSchema.Read(XmlReader.Create(new StringReader("<?xml version=\"1.0\" ?>\n" +
-                                                                           "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n" +
-                                                                           "    <xs:element name=\"root\" type=\"xs:string\" />\n" +
-                                                                           "</xs:schema>")), null));
+            val.AddSchema(
+                XmlSchema.Read(
+                    XmlReader.Create(
+                        new StringReader(
+                            "<?xml version=\"1.0\" ?>\n"
+                                + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n"
+                                + "    <xs:element name=\"root\" type=\"xs:string\" />\n"
+                                + "</xs:schema>"
+                        )
+                    ),
+                    null
+                )
+            );
 
             try
             {
-                val.AddSchema(XmlSchema.Read(XmlReader.Create(new StringReader("<?xml version=\"1.0\" ?>\n" +
-                                                                               "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n" +
-                                                                               "    <xs:element name=\"root\" type=\"xs:boolean\" />\n" +
-                                                                               "</xs:schema>")), null));
+                val.AddSchema(
+                    XmlSchema.Read(
+                        XmlReader.Create(
+                            new StringReader(
+                                "<?xml version=\"1.0\" ?>\n"
+                                    + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n"
+                                    + "    <xs:element name=\"root\" type=\"xs:boolean\" />\n"
+                                    + "</xs:schema>"
+                            )
+                        ),
+                        null
+                    )
+                );
             }
             catch (XmlSchemaValidationException)
             {
@@ -305,21 +389,39 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
             val = CreateValidator(new XmlSchemaSet());
 
-            val.AddSchema(XmlSchema.Read(XmlReader.Create(new StringReader("<?xml version=\"1.0\" ?>\n" +
-                                                                           "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" +
-                                                                           "           targetNamespace=\"uri:tempuri1\">\n" +
-                                                                           "    <xs:element name=\"foo\" type=\"xs:string\" />\n" +
-                                                                           "</xs:schema>")), null));
+            val.AddSchema(
+                XmlSchema.Read(
+                    XmlReader.Create(
+                        new StringReader(
+                            "<?xml version=\"1.0\" ?>\n"
+                                + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n"
+                                + "           targetNamespace=\"uri:tempuri1\">\n"
+                                + "    <xs:element name=\"foo\" type=\"xs:string\" />\n"
+                                + "</xs:schema>"
+                        )
+                    ),
+                    null
+                )
+            );
 
             val.Initialize();
             val.ValidateElement("foo", "uri:tempuri1", info);
             val.SkipToEndElement(info);
 
-            val.AddSchema(XmlSchema.Read(XmlReader.Create(new StringReader("<?xml version=\"1.0\" ?>\n" +
-                                                                            "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" +
-                                                                            "           targetNamespace=\"uri:tempuri2\">\n" +
-                                                                            "    <xs:element name=\"bar\" type=\"xs:string\" />\n" +
-                                                                            "</xs:schema>")), null));
+            val.AddSchema(
+                XmlSchema.Read(
+                    XmlReader.Create(
+                        new StringReader(
+                            "<?xml version=\"1.0\" ?>\n"
+                                + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n"
+                                + "           targetNamespace=\"uri:tempuri2\">\n"
+                                + "    <xs:element name=\"bar\" type=\"xs:string\" />\n"
+                                + "</xs:schema>"
+                        )
+                    ),
+                    null
+                )
+            );
 
             val.ValidateElement("bar", "uri:tempuri2", info);
             val.SkipToEndElement(info);
@@ -335,26 +437,37 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         {
             XmlSchemaValidator val;
             XmlSchemaInfo info = new XmlSchemaInfo();
-            Uri u = new Uri(Uri.UriSchemeFile + Uri.SchemeDelimiter + Path.Combine(Path.GetFullPath(TestData), XSDFILE_TARGET_NAMESPACE));
+            Uri u = new Uri(
+                Uri.UriSchemeFile
+                    + Uri.SchemeDelimiter
+                    + Path.Combine(Path.GetFullPath(TestData), XSDFILE_TARGET_NAMESPACE)
+            );
             XmlSchema s1;
             XmlSchemaSet schemas = new XmlSchemaSet();
             schemas.XmlResolver = new XmlUrlResolver();
 
             val = CreateValidator(new XmlSchemaSet());
 
-            s1 = XmlSchema.Read(new StringReader("<?xml version=\"1.0\"?>\n" +
-                                                 "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" +
-                                                 "           xmlns:temp=\"uri:tempuri\">\n" +
-                                                 "    <xs:import namespace=\"uri:tempuri\"\n" +
-                                                 "               schemaLocation=\"" + u.AbsoluteUri + "\" />\n" +
-                                                 "    <xs:element name=\"root\">\n" +
-                                                 "        <xs:complexType>\n" +
-                                                 "            <xs:sequence>\n" +
-                                                 "                <xs:element ref=\"temp:elem1\" />\n" +
-                                                 "            </xs:sequence>\n" +
-                                                 "        </xs:complexType>\n" +
-                                                 "    </xs:element>\n" +
-                                                 "</xs:schema>"), null);
+            s1 = XmlSchema.Read(
+                new StringReader(
+                    "<?xml version=\"1.0\"?>\n"
+                        + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n"
+                        + "           xmlns:temp=\"uri:tempuri\">\n"
+                        + "    <xs:import namespace=\"uri:tempuri\"\n"
+                        + "               schemaLocation=\""
+                        + u.AbsoluteUri
+                        + "\" />\n"
+                        + "    <xs:element name=\"root\">\n"
+                        + "        <xs:complexType>\n"
+                        + "            <xs:sequence>\n"
+                        + "                <xs:element ref=\"temp:elem1\" />\n"
+                        + "            </xs:sequence>\n"
+                        + "        </xs:complexType>\n"
+                        + "    </xs:element>\n"
+                        + "</xs:schema>"
+                ),
+                null
+            );
 
             schemas.Add(s1);
 
@@ -384,12 +497,25 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             XmlSchemaValidator val;
             XmlSchemaInfo info = new XmlSchemaInfo();
 
-            val = CreateValidator(CreateSchemaSetFromXml("<root />"), XmlSchemaValidationFlags.ReportValidationWarnings | XmlSchemaValidationFlags.ProcessSchemaLocation);
+            val = CreateValidator(
+                CreateSchemaSetFromXml("<root />"),
+                XmlSchemaValidationFlags.ReportValidationWarnings
+                    | XmlSchemaValidationFlags.ProcessSchemaLocation
+            );
 
-            val.AddSchema(XmlSchema.Read(XmlReader.Create(new StringReader("<?xml version=\"1.0\" ?>\n" +
-                                                                           "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n" +
-                                                                           "    <xs:element name=\"foo\" type=\"xs:string\" />\n" +
-                                                                           "</xs:schema>")), null));
+            val.AddSchema(
+                XmlSchema.Read(
+                    XmlReader.Create(
+                        new StringReader(
+                            "<?xml version=\"1.0\" ?>\n"
+                                + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n"
+                                + "    <xs:element name=\"foo\" type=\"xs:string\" />\n"
+                                + "</xs:schema>"
+                        )
+                    ),
+                    null
+                )
+            );
 
             val.Initialize();
 

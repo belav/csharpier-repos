@@ -6,7 +6,7 @@ namespace System.ServiceModel.Activities
 {
     using System.Activities;
     using System.Collections.Generic;
-        
+
     internal class WorkflowIdentityKey : IEquatable<WorkflowIdentityKey>
     {
         public WorkflowIdentityKey(WorkflowIdentity definitionIdentity)
@@ -14,11 +14,7 @@ namespace System.ServiceModel.Activities
             this.Identity = definitionIdentity;
         }
 
-        public WorkflowIdentity Identity
-        {
-            get;
-            private set;
-        }
+        public WorkflowIdentity Identity { get; private set; }
 
         public override int GetHashCode()
         {

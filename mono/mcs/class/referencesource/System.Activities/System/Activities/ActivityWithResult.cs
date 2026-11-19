@@ -9,56 +9,33 @@ namespace System.Activities
     public abstract class ActivityWithResult : Activity
     {
         internal ActivityWithResult()
-            : base()
-        {
-        }
+            : base() { }
 
         public Type ResultType
         {
-            get
-            {
-                return this.InternalResultType;
-            }
+            get { return this.InternalResultType; }
         }
 
         [IgnoreDataMember] // this member is repeated by all subclasses, which we control
         public OutArgument Result
         {
-            get
-            {
-                return this.ResultCore;
-            }
-            set
-            {
-                this.ResultCore = value;
-            }
+            get { return this.ResultCore; }
+            set { this.ResultCore = value; }
         }
 
-        internal abstract Type InternalResultType
-        {
-            get;
-        }
+        internal abstract Type InternalResultType { get; }
 
-        internal abstract OutArgument ResultCore
-        {
-            get;
-            set;
-        }
+        internal abstract OutArgument ResultCore { get; set; }
 
-        internal RuntimeArgument ResultRuntimeArgument
-        {
-            get;
-            set;
-        }
+        internal RuntimeArgument ResultRuntimeArgument { get; set; }
 
-        internal abstract object InternalExecuteInResolutionContextUntyped(CodeActivityContext resolutionContext);
+        internal abstract object InternalExecuteInResolutionContextUntyped(
+            CodeActivityContext resolutionContext
+        );
 
         internal override bool IsActivityWithResult
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
 }

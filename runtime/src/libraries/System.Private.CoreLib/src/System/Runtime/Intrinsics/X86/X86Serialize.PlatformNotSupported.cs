@@ -14,20 +14,30 @@ namespace System.Runtime.Intrinsics.X86
     {
         internal X86Serialize() { }
 
-        public static new bool IsSupported { [Intrinsic] get => false; }
+        public static new bool IsSupported
+        {
+            [Intrinsic]
+            get => false;
+        }
 
         [Intrinsic]
         public new abstract class X64 : X86Base.X64
         {
-            internal X64() {  }
+            internal X64() { }
 
-            public static new bool IsSupported { [Intrinsic] get => false; }
+            public static new bool IsSupported
+            {
+                [Intrinsic]
+                get => false;
+            }
         }
 
         /// <summary>
         /// void _serialize (void);
         /// </summary>
-        public static void Serialize() { throw new PlatformNotSupportedException(); }
-
+        public static void Serialize()
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
 }

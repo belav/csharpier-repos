@@ -94,7 +94,11 @@ namespace System.Tests
             VerifyFromObject(Convert.ToUInt64, Convert.ToUInt64, testValues, expectedValues);
 
             object[] invalidValues = { new object(), DateTime.Now };
-            VerifyFromObjectThrows<InvalidCastException>(Convert.ToUInt64, Convert.ToUInt64, invalidValues);
+            VerifyFromObjectThrows<InvalidCastException>(
+                Convert.ToUInt64,
+                Convert.ToUInt64,
+                invalidValues
+            );
         }
 
         [Fact]
@@ -122,36 +126,130 @@ namespace System.Tests
         [Fact]
         public void FromString()
         {
-            string[] testValues = { "1000", "0", UInt16.MaxValue.ToString(), UInt32.MaxValue.ToString(), UInt64.MaxValue.ToString(), "9223372036854775807", "9223372036854775808", "9223372036854775809", null };
-            ulong[] expectedValues = { 1000, 0, ushort.MaxValue, uint.MaxValue, ulong.MaxValue, long.MaxValue, (ulong)long.MaxValue + 1, (ulong)long.MaxValue + 2, 0 };
+            string[] testValues =
+            {
+                "1000",
+                "0",
+                UInt16.MaxValue.ToString(),
+                UInt32.MaxValue.ToString(),
+                UInt64.MaxValue.ToString(),
+                "9223372036854775807",
+                "9223372036854775808",
+                "9223372036854775809",
+                null,
+            };
+            ulong[] expectedValues =
+            {
+                1000,
+                0,
+                ushort.MaxValue,
+                uint.MaxValue,
+                ulong.MaxValue,
+                long.MaxValue,
+                (ulong)long.MaxValue + 1,
+                (ulong)long.MaxValue + 2,
+                0,
+            };
             VerifyFromString(Convert.ToUInt64, Convert.ToUInt64, testValues, expectedValues);
 
             string[] overflowValues = { "-1", Decimal.MaxValue.ToString() };
-            VerifyFromStringThrows<OverflowException>(Convert.ToUInt64, Convert.ToUInt64, overflowValues);
+            VerifyFromStringThrows<OverflowException>(
+                Convert.ToUInt64,
+                Convert.ToUInt64,
+                overflowValues
+            );
 
             string[] formatExceptionValues = { "abba" };
-            VerifyFromStringThrows<FormatException>(Convert.ToUInt64, Convert.ToUInt64, formatExceptionValues);
+            VerifyFromStringThrows<FormatException>(
+                Convert.ToUInt64,
+                Convert.ToUInt64,
+                formatExceptionValues
+            );
         }
 
         [Fact]
         public void FromStringWithBase()
         {
-            string[] testValues = { null, null, null, null, "ffffffffffffffff", "18446744073709551615", "1777777777777777777777", "1111111111111111111111111111111111111111111111111111111111111111", "0", "0", "0", "0", "9223372036854775807", "9223372036854775808" /*VSWhidbey #526568*/, "9223372036854775809", "9223372036854775810", "9223372036854775811" };
+            string[] testValues =
+            {
+                null,
+                null,
+                null,
+                null,
+                "ffffffffffffffff",
+                "18446744073709551615",
+                "1777777777777777777777",
+                "1111111111111111111111111111111111111111111111111111111111111111",
+                "0",
+                "0",
+                "0",
+                "0",
+                "9223372036854775807",
+                "9223372036854775808" /*VSWhidbey #526568*/
+                ,
+                "9223372036854775809",
+                "9223372036854775810",
+                "9223372036854775811",
+            };
             int[] testBases = { 10, 2, 8, 16, 16, 10, 8, 2, 16, 10, 8, 2, 10, 10, 10, 10, 10 };
-            ulong[] expectedValues = { 0, 0, 0, 0, ulong.MaxValue, ulong.MaxValue, ulong.MaxValue, ulong.MaxValue, ulong.MinValue, ulong.MinValue, ulong.MinValue, ulong.MinValue, (ulong)long.MaxValue, (ulong)long.MaxValue + 1 /*VSWhidbey #526568*/, (ulong)long.MaxValue + 2, (ulong)long.MaxValue + 3, (ulong)long.MaxValue + 4 };
+            ulong[] expectedValues =
+            {
+                0,
+                0,
+                0,
+                0,
+                ulong.MaxValue,
+                ulong.MaxValue,
+                ulong.MaxValue,
+                ulong.MaxValue,
+                ulong.MinValue,
+                ulong.MinValue,
+                ulong.MinValue,
+                ulong.MinValue,
+                (ulong)long.MaxValue,
+                (ulong)long.MaxValue
+                    + 1 /*VSWhidbey #526568*/
+                ,
+                (ulong)long.MaxValue + 2,
+                (ulong)long.MaxValue + 3,
+                (ulong)long.MaxValue + 4,
+            };
             VerifyFromStringWithBase(Convert.ToUInt64, testValues, testBases, expectedValues);
 
-            string[] overflowValues = { "18446744073709551616", "18446744073709551617", "18446744073709551618", "18446744073709551619", "18446744073709551620", "-4294967297", "11111111111111111111111111111111111111111111111111111111111111111", "1FFFFffffFFFFffff", "7777777777777777777777777" };
+            string[] overflowValues =
+            {
+                "18446744073709551616",
+                "18446744073709551617",
+                "18446744073709551618",
+                "18446744073709551619",
+                "18446744073709551620",
+                "-4294967297",
+                "11111111111111111111111111111111111111111111111111111111111111111",
+                "1FFFFffffFFFFffff",
+                "7777777777777777777777777",
+            };
             int[] overflowBases = { 10, 10, 10, 10, 10, 10, 2, 16, 8 };
-            VerifyFromStringWithBaseThrows<OverflowException>(Convert.ToUInt64, overflowValues, overflowBases);
+            VerifyFromStringWithBaseThrows<OverflowException>(
+                Convert.ToUInt64,
+                overflowValues,
+                overflowBases
+            );
 
             string[] formatExceptionValues = { "12", "ffffffffffffffffffff" };
             int[] formatExceptionBases = { 2, 8 };
-            VerifyFromStringWithBaseThrows<FormatException>(Convert.ToUInt64, formatExceptionValues, formatExceptionBases);
+            VerifyFromStringWithBaseThrows<FormatException>(
+                Convert.ToUInt64,
+                formatExceptionValues,
+                formatExceptionBases
+            );
 
             string[] argumentExceptionValues = { "10", "11", "abba", "-ab" };
             int[] argumentExceptionBases = { -1, 3, 0, 16 };
-            VerifyFromStringWithBaseThrows<ArgumentException>(Convert.ToUInt64, argumentExceptionValues, argumentExceptionBases);
+            VerifyFromStringWithBaseThrows<ArgumentException>(
+                Convert.ToUInt64,
+                argumentExceptionValues,
+                argumentExceptionBases
+            );
         }
 
         [Fact]

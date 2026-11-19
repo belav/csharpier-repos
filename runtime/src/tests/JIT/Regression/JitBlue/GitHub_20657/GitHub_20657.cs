@@ -5,7 +5,7 @@ using System;
 using System.Numerics;
 using Xunit;
 
-// GitHub 20657: 
+// GitHub 20657:
 
 namespace GitHub_20657
 {

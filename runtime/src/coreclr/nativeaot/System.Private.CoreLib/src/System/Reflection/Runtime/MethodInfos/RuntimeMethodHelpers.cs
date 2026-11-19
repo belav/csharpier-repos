@@ -9,7 +9,6 @@ using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.ParameterInfos;
 using System.Reflection.Runtime.TypeInfos;
 using System.Text;
-
 using Internal.Reflection.Core;
 using Internal.Reflection.Core.Execution;
 
@@ -27,8 +26,14 @@ namespace System.Reflection.Runtime.MethodInfos
         //
         // Does not array-copy.
         //
-        internal static RuntimeParameterInfo[] GetRuntimeParameters<TRuntimeMethodCommon>(ref TRuntimeMethodCommon runtimeMethodCommon, MethodBase contextMethod, RuntimeTypeInfo[] methodTypeArguments, out RuntimeParameterInfo returnParameter)
-            where TRuntimeMethodCommon : IRuntimeMethodCommon<TRuntimeMethodCommon>, IEquatable<TRuntimeMethodCommon>
+        internal static RuntimeParameterInfo[] GetRuntimeParameters<TRuntimeMethodCommon>(
+            ref TRuntimeMethodCommon runtimeMethodCommon,
+            MethodBase contextMethod,
+            RuntimeTypeInfo[] methodTypeArguments,
+            out RuntimeParameterInfo returnParameter
+        )
+            where TRuntimeMethodCommon : IRuntimeMethodCommon<TRuntimeMethodCommon>,
+                IEquatable<TRuntimeMethodCommon>
         {
             TypeContext typeContext = contextMethod.DeclaringType.ToRuntimeTypeInfo().TypeContext;
             typeContext = new TypeContext(typeContext.GenericTypeArguments, methodTypeArguments);
@@ -36,18 +41,23 @@ namespace System.Reflection.Runtime.MethodInfos
             int count = typeSignatures.Length;
 
             VirtualRuntimeParameterInfoArray result = new VirtualRuntimeParameterInfoArray(count);
-            runtimeMethodCommon.FillInMetadataDescribedParameters(ref result, typeSignatures, contextMethod, typeContext);
+            runtimeMethodCommon.FillInMetadataDescribedParameters(
+                ref result,
+                typeSignatures,
+                contextMethod,
+                typeContext
+            );
 
             for (int i = 0; i < count; i++)
             {
                 if (result[i] == null)
                 {
-                    result[i] =
-                        RuntimeThinMethodParameterInfo.GetRuntimeThinMethodParameterInfo(
-                            contextMethod,
-                            i - 1,
-                            typeSignatures[i],
-                            typeContext);
+                    result[i] = RuntimeThinMethodParameterInfo.GetRuntimeThinMethodParameterInfo(
+                        contextMethod,
+                        i - 1,
+                        typeSignatures[i],
+                        typeContext
+                    );
                 }
             }
 
@@ -56,11 +66,21 @@ namespace System.Reflection.Runtime.MethodInfos
         }
 
         // Compute the ToString() value in a pay-to-play-safe way.
-        internal static string ComputeToString<TRuntimeMethodCommon>(ref TRuntimeMethodCommon runtimeMethodCommon, MethodBase contextMethod, RuntimeTypeInfo[] methodTypeArguments)
-            where TRuntimeMethodCommon : IRuntimeMethodCommon<TRuntimeMethodCommon>, IEquatable<TRuntimeMethodCommon>
+        internal static string ComputeToString<TRuntimeMethodCommon>(
+            ref TRuntimeMethodCommon runtimeMethodCommon,
+            MethodBase contextMethod,
+            RuntimeTypeInfo[] methodTypeArguments
+        )
+            where TRuntimeMethodCommon : IRuntimeMethodCommon<TRuntimeMethodCommon>,
+                IEquatable<TRuntimeMethodCommon>
         {
             RuntimeParameterInfo returnParameter;
-            RuntimeParameterInfo[] parameters = GetRuntimeParameters(ref runtimeMethodCommon, contextMethod, methodTypeArguments, out returnParameter);
+            RuntimeParameterInfo[] parameters = GetRuntimeParameters(
+                ref runtimeMethodCommon,
+                contextMethod,
+                methodTypeArguments,
+                out returnParameter
+            );
             return ComputeToString(contextMethod, methodTypeArguments, parameters, returnParameter);
         }
 
@@ -73,7 +93,8 @@ namespace System.Reflection.Runtime.MethodInfos
             {
                 if (i != 0)
                     sb.Append(", ");
-                string parameterTypeString = parameters[i].ParameterType.FormatTypeNameForReflection();
+                string parameterTypeString = parameters[i]
+                    .ParameterType.FormatTypeNameForReflection();
 
                 // Legacy: Why use "ByRef" for by ref parameters? What language is this?
                 // VB uses "ByRef" but it should precede (not follow) the parameter name.
@@ -91,10 +112,19 @@ namespace System.Reflection.Runtime.MethodInfos
             return sb.ToString();
         }
 
-        internal static string ComputeToString(MethodBase contextMethod, RuntimeTypeInfo[] methodTypeArguments, RuntimeParameterInfo[] parameters, RuntimeParameterInfo returnParameter)
+        internal static string ComputeToString(
+            MethodBase contextMethod,
+            RuntimeTypeInfo[] methodTypeArguments,
+            RuntimeParameterInfo[] parameters,
+            RuntimeParameterInfo returnParameter
+        )
         {
             StringBuilder sb = new StringBuilder(30);
-            sb.Append(returnParameter == null ? "Void" : returnParameter.ParameterType.FormatTypeNameForReflection());  // ConstructorInfos allowed to pass in null rather than craft a ReturnParameterInfo that's always of type void.
+            sb.Append(
+                returnParameter == null
+                    ? "Void"
+                    : returnParameter.ParameterType.FormatTypeNameForReflection()
+            ); // ConstructorInfos allowed to pass in null rather than craft a ReturnParameterInfo that's always of type void.
             sb.Append(' ');
             sb.Append(contextMethod.Name);
             if (methodTypeArguments.Length != 0)

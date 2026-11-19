@@ -10,11 +10,8 @@ public class Engine
     public int Computed { get; set; }
     public PoweredVehicle Vehicle { get; set; }
 
-    public override bool Equals(object obj)
-        => obj is Engine other
-            && VehicleName == other.VehicleName
-            && Description == other.Description;
+    public override bool Equals(object obj) =>
+        obj is Engine other && VehicleName == other.VehicleName && Description == other.Description;
 
-    public override int GetHashCode()
-        => HashCode.Combine(VehicleName, Description);
+    public override int GetHashCode() => HashCode.Combine(VehicleName, Description);
 }

@@ -10,7 +10,9 @@ namespace System.Text.Encodings.Web
 {
     internal sealed class DefaultHtmlEncoder : HtmlEncoder
     {
-        internal static readonly DefaultHtmlEncoder BasicLatinSingleton = new DefaultHtmlEncoder(new TextEncoderSettings(UnicodeRanges.BasicLatin));
+        internal static readonly DefaultHtmlEncoder BasicLatinSingleton = new DefaultHtmlEncoder(
+            new TextEncoderSettings(UnicodeRanges.BasicLatin)
+        );
 
         private readonly OptimizedInboxTextEncoder _innerEncoder;
 
@@ -21,7 +23,10 @@ namespace System.Text.Encodings.Web
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.settings);
             }
 
-            _innerEncoder = new OptimizedInboxTextEncoder(EscaperImplementation.Singleton, settings.GetAllowedCodePointsBitmap());
+            _innerEncoder = new OptimizedInboxTextEncoder(
+                EscaperImplementation.Singleton,
+                settings.GetAllowedCodePointsBitmap()
+            );
         }
 
         public override int MaxOutputCharactersPerInputCharacter => 8; // "&#xFFFF;" is worst case for single char ("&#x10FFFF;" [10 chars] worst case for arbitrary scalar value)
@@ -32,26 +37,60 @@ namespace System.Text.Encodings.Web
          */
 
 #pragma warning disable CS0618 // some of the adapters are intentionally marked [Obsolete]
-        private protected override OperationStatus EncodeCore(ReadOnlySpan<char> source, Span<char> destination, out int charsConsumed, out int charsWritten, bool isFinalBlock)
-            => _innerEncoder.Encode(source, destination, out charsConsumed, out charsWritten, isFinalBlock);
+        private protected override OperationStatus EncodeCore(
+            ReadOnlySpan<char> source,
+            Span<char> destination,
+            out int charsConsumed,
+            out int charsWritten,
+            bool isFinalBlock
+        ) =>
+            _innerEncoder.Encode(
+                source,
+                destination,
+                out charsConsumed,
+                out charsWritten,
+                isFinalBlock
+            );
 
-        private protected override OperationStatus EncodeUtf8Core(ReadOnlySpan<byte> utf8Source, Span<byte> utf8Destination, out int bytesConsumed, out int bytesWritten, bool isFinalBlock)
-            => _innerEncoder.EncodeUtf8(utf8Source, utf8Destination, out bytesConsumed, out bytesWritten, isFinalBlock);
+        private protected override OperationStatus EncodeUtf8Core(
+            ReadOnlySpan<byte> utf8Source,
+            Span<byte> utf8Destination,
+            out int bytesConsumed,
+            out int bytesWritten,
+            bool isFinalBlock
+        ) =>
+            _innerEncoder.EncodeUtf8(
+                utf8Source,
+                utf8Destination,
+                out bytesConsumed,
+                out bytesWritten,
+                isFinalBlock
+            );
 
-        private protected override int FindFirstCharacterToEncode(ReadOnlySpan<char> text)
-            => _innerEncoder.GetIndexOfFirstCharToEncode(text);
+        private protected override int FindFirstCharacterToEncode(ReadOnlySpan<char> text) =>
+            _innerEncoder.GetIndexOfFirstCharToEncode(text);
 
-        public override unsafe int FindFirstCharacterToEncode(char* text, int textLength)
-            => _innerEncoder.FindFirstCharacterToEncode(text, textLength);
+        public override unsafe int FindFirstCharacterToEncode(char* text, int textLength) =>
+            _innerEncoder.FindFirstCharacterToEncode(text, textLength);
 
-        public override int FindFirstCharacterToEncodeUtf8(ReadOnlySpan<byte> utf8Text)
-            => _innerEncoder.GetIndexOfFirstByteToEncode(utf8Text);
+        public override int FindFirstCharacterToEncodeUtf8(ReadOnlySpan<byte> utf8Text) =>
+            _innerEncoder.GetIndexOfFirstByteToEncode(utf8Text);
 
-        public override unsafe bool TryEncodeUnicodeScalar(int unicodeScalar, char* buffer, int bufferLength, out int numberOfCharactersWritten)
-            => _innerEncoder.TryEncodeUnicodeScalar(unicodeScalar, buffer, bufferLength, out numberOfCharactersWritten);
+        public override unsafe bool TryEncodeUnicodeScalar(
+            int unicodeScalar,
+            char* buffer,
+            int bufferLength,
+            out int numberOfCharactersWritten
+        ) =>
+            _innerEncoder.TryEncodeUnicodeScalar(
+                unicodeScalar,
+                buffer,
+                bufferLength,
+                out numberOfCharactersWritten
+            );
 
-        public override bool WillEncode(int unicodeScalar)
-            => !_innerEncoder.IsScalarValueAllowed(new Rune(unicodeScalar));
+        public override bool WillEncode(int unicodeScalar) =>
+            !_innerEncoder.IsScalarValueAllowed(new Rune(unicodeScalar));
 #pragma warning restore CS0618
 
         /*
@@ -68,22 +107,69 @@ namespace System.Text.Encodings.Web
             {
                 if (value.Value == '<')
                 {
-                    if (!SpanUtility.TryWriteBytes(destination, (byte)'&', (byte)'l', (byte)'t', (byte)';')) { goto OutOfSpace; }
+                    if (
+                        !SpanUtility.TryWriteBytes(
+                            destination,
+                            (byte)'&',
+                            (byte)'l',
+                            (byte)'t',
+                            (byte)';'
+                        )
+                    )
+                    {
+                        goto OutOfSpace;
+                    }
                     return 4;
                 }
                 else if (value.Value == '>')
                 {
-                    if (!SpanUtility.TryWriteBytes(destination, (byte)'&', (byte)'g', (byte)'t', (byte)';')) { goto OutOfSpace; }
+                    if (
+                        !SpanUtility.TryWriteBytes(
+                            destination,
+                            (byte)'&',
+                            (byte)'g',
+                            (byte)'t',
+                            (byte)';'
+                        )
+                    )
+                    {
+                        goto OutOfSpace;
+                    }
                     return 4;
                 }
                 else if (value.Value == '&')
                 {
-                    if (!SpanUtility.TryWriteBytes(destination, (byte)'&', (byte)'a', (byte)'m', (byte)'p', (byte)';')) { goto OutOfSpace; }
+                    if (
+                        !SpanUtility.TryWriteBytes(
+                            destination,
+                            (byte)'&',
+                            (byte)'a',
+                            (byte)'m',
+                            (byte)'p',
+                            (byte)';'
+                        )
+                    )
+                    {
+                        goto OutOfSpace;
+                    }
                     return 5;
                 }
                 else if (value.Value == '\"')
                 {
-                    if (!SpanUtility.TryWriteBytes(destination, (byte)'&', (byte)'q', (byte)'u', (byte)'o', (byte)'t', (byte)';')) { goto OutOfSpace; }
+                    if (
+                        !SpanUtility.TryWriteBytes(
+                            destination,
+                            (byte)'&',
+                            (byte)'q',
+                            (byte)'u',
+                            (byte)'o',
+                            (byte)'t',
+                            (byte)';'
+                        )
+                    )
+                    {
+                        goto OutOfSpace;
+                    }
                     return 6;
                 }
                 else
@@ -91,12 +177,16 @@ namespace System.Text.Encodings.Web
                     return TryEncodeScalarAsHex(this, (uint)value.Value, destination);
                 }
 
-            OutOfSpace:
+                OutOfSpace:
 
                 return -1;
 
 #pragma warning disable IDE0060 // 'this' taken explicitly to avoid argument shuffling by caller
-                static int TryEncodeScalarAsHex(object @this, uint scalarValue, Span<byte> destination)
+                static int TryEncodeScalarAsHex(
+                    object @this,
+                    uint scalarValue,
+                    Span<byte> destination
+                )
 #pragma warning restore IDE0060
                 {
                     UnicodeDebug.AssertIsValidScalar(scalarValue);
@@ -104,18 +194,36 @@ namespace System.Text.Encodings.Web
                     // See comments in the UTF-16 equivalent method later in this file.
 
                     int idxOfSemicolon = (int)((uint)BitOperations.Log2(scalarValue) / 4) + 4;
-                    Debug.Assert(4 <= idxOfSemicolon && idxOfSemicolon <= 9, "Expected '&#x0;'..'&#x10FFFF;'.");
+                    Debug.Assert(
+                        4 <= idxOfSemicolon && idxOfSemicolon <= 9,
+                        "Expected '&#x0;'..'&#x10FFFF;'."
+                    );
 
-                    if (!SpanUtility.IsValidIndex(destination, idxOfSemicolon)) { goto OutOfSpaceInner; }
+                    if (!SpanUtility.IsValidIndex(destination, idxOfSemicolon))
+                    {
+                        goto OutOfSpaceInner;
+                    }
                     destination[idxOfSemicolon] = (byte)';';
 
-                    if (!SpanUtility.TryWriteBytes(destination, (byte)'&', (byte)'#', (byte)'x', (byte)'0'))
+                    if (
+                        !SpanUtility.TryWriteBytes(
+                            destination,
+                            (byte)'&',
+                            (byte)'#',
+                            (byte)'x',
+                            (byte)'0'
+                        )
+                    )
                     {
                         Debug.Fail("We should've had enough room to write 4 bytes.");
                     }
 
                     destination = destination.Slice(3, idxOfSemicolon - 3);
-                    for (int i = destination.Length - 1; SpanUtility.IsValidIndex(destination, i); i--)
+                    for (
+                        int i = destination.Length - 1;
+                        SpanUtility.IsValidIndex(destination, i);
+                        i--
+                    )
                     {
                         char asUpperHex = HexConverter.ToCharUpper((int)scalarValue);
                         destination[i] = (byte)asUpperHex;
@@ -124,7 +232,7 @@ namespace System.Text.Encodings.Web
 
                     return destination.Length + 4;
 
-                OutOfSpaceInner:
+                    OutOfSpaceInner:
 
                     return -1;
                 }
@@ -134,22 +242,34 @@ namespace System.Text.Encodings.Web
             {
                 if (value.Value == '<')
                 {
-                    if (!SpanUtility.TryWriteChars(destination, '&', 'l', 't', ';')) { goto OutOfSpace; }
+                    if (!SpanUtility.TryWriteChars(destination, '&', 'l', 't', ';'))
+                    {
+                        goto OutOfSpace;
+                    }
                     return 4;
                 }
                 else if (value.Value == '>')
                 {
-                    if (!SpanUtility.TryWriteChars(destination, '&', 'g', 't', ';')) { goto OutOfSpace; }
+                    if (!SpanUtility.TryWriteChars(destination, '&', 'g', 't', ';'))
+                    {
+                        goto OutOfSpace;
+                    }
                     return 4;
                 }
                 else if (value.Value == '&')
                 {
-                    if (!SpanUtility.TryWriteChars(destination, '&', 'a', 'm', 'p', ';')) { goto OutOfSpace; }
+                    if (!SpanUtility.TryWriteChars(destination, '&', 'a', 'm', 'p', ';'))
+                    {
+                        goto OutOfSpace;
+                    }
                     return 5;
                 }
                 else if (value.Value == '\"')
                 {
-                    if (!SpanUtility.TryWriteChars(destination, '&', 'q', 'u', 'o', 't', ';')) { goto OutOfSpace; }
+                    if (!SpanUtility.TryWriteChars(destination, '&', 'q', 'u', 'o', 't', ';'))
+                    {
+                        goto OutOfSpace;
+                    }
                     return 6;
                 }
                 else
@@ -157,12 +277,16 @@ namespace System.Text.Encodings.Web
                     return TryEncodeScalarAsHex(this, (uint)value.Value, destination);
                 }
 
-            OutOfSpace:
+                OutOfSpace:
 
                 return -1;
 
 #pragma warning disable IDE0060 // 'this' taken explicitly to avoid argument shuffling by caller
-                static int TryEncodeScalarAsHex(object @this, uint scalarValue, Span<char> destination)
+                static int TryEncodeScalarAsHex(
+                    object @this,
+                    uint scalarValue,
+                    Span<char> destination
+                )
 #pragma warning restore IDE0060
                 {
                     UnicodeDebug.AssertIsValidScalar(scalarValue);
@@ -179,9 +303,15 @@ namespace System.Text.Encodings.Web
                     // >> +1 +4 -1 = +4
 
                     int idxOfSemicolon = (int)((uint)BitOperations.Log2(scalarValue) / 4) + 4;
-                    Debug.Assert(4 <= idxOfSemicolon && idxOfSemicolon <= 9, "Expected '&#x0;'..'&#x10FFFF;'.");
+                    Debug.Assert(
+                        4 <= idxOfSemicolon && idxOfSemicolon <= 9,
+                        "Expected '&#x0;'..'&#x10FFFF;'."
+                    );
 
-                    if (!SpanUtility.IsValidIndex(destination, idxOfSemicolon)) { goto OutOfSpaceInner; }
+                    if (!SpanUtility.IsValidIndex(destination, idxOfSemicolon))
+                    {
+                        goto OutOfSpaceInner;
+                    }
                     destination[idxOfSemicolon] = ';';
 
                     // It's more efficient to write 4 chars at a time instead of 1 char.
@@ -192,7 +322,11 @@ namespace System.Text.Encodings.Web
                     }
 
                     destination = destination.Slice(3, idxOfSemicolon - 3);
-                    for (int i = destination.Length - 1; SpanUtility.IsValidIndex(destination, i); i--)
+                    for (
+                        int i = destination.Length - 1;
+                        SpanUtility.IsValidIndex(destination, i);
+                        i--
+                    )
                     {
                         char asUpperHex = HexConverter.ToCharUpper((int)scalarValue);
                         destination[i] = asUpperHex;
@@ -201,7 +335,7 @@ namespace System.Text.Encodings.Web
 
                     return destination.Length + 4;
 
-                OutOfSpaceInner:
+                    OutOfSpaceInner:
 
                     return -1;
                 }

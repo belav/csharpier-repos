@@ -83,7 +83,7 @@ namespace N
         {
             Outer o;
             o.i = getInner();
-            o.j = o.i;  // Copy gets lost
+            o.j = o.i; // Copy gets lost
             o.z = 20;
             return (int)sum(o);
         }
@@ -96,7 +96,7 @@ namespace N
         {
             if (Repro1.RunTest() != 100)
             {
-              return -1;
+                return -1;
             }
             return Repro2.RunTest();
         }

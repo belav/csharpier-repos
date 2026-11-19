@@ -12,23 +12,30 @@ namespace Common.Tests
     {
         [Theory]
         // Double quotes:
-        [InlineData("NAME=\"Fedora\"\nVERSION=\"37\"\nPRETTY_NAME=\"Fedora Linux 37\"", "Fedora Linux 37")]
+        [InlineData(
+            "NAME=\"Fedora\"\nVERSION=\"37\"\nPRETTY_NAME=\"Fedora Linux 37\"",
+            "Fedora Linux 37"
+        )]
         [InlineData("NAME=\"Fedora\"\nVERSION=\"37\"", "Fedora 37")]
         [InlineData("NAME=\"Fedora\"", "Fedora")]
         // Single quotes:
-        [InlineData("NAME='Ubuntu'\nVERSION='22.04'\nPRETTY_NAME='Ubuntu Linux 22.04'", "Ubuntu Linux 22.04")]
+        [InlineData(
+            "NAME='Ubuntu'\nVERSION='22.04'\nPRETTY_NAME='Ubuntu Linux 22.04'",
+            "Ubuntu Linux 22.04"
+        )]
         [InlineData("NAME='Ubuntu'\nVERSION='22.04'", "Ubuntu 22.04")]
         [InlineData("NAME='Ubuntu'", "Ubuntu")]
         // No quotes:
-        [InlineData("NAME=Alpine\nVERSION=3.14\nPRETTY_NAME=Alpine_Linux_3.14", "Alpine_Linux_3.14")]
+        [InlineData(
+            "NAME=Alpine\nVERSION=3.14\nPRETTY_NAME=Alpine_Linux_3.14",
+            "Alpine_Linux_3.14"
+        )]
         [InlineData("NAME=Alpine\nVERSION=3.14", "Alpine 3.14")]
         [InlineData("NAME=Alpine", "Alpine")]
         // No pretty name fields:
         [InlineData("ID=fedora\nVERSION_ID=37", null)]
         [InlineData("", null)]
-        public void GetPrettyName_Success(
-            string content,
-            string? expectedName)
+        public void GetPrettyName_Success(string content, string? expectedName)
         {
             string path = GetTestFilePath();
             File.WriteAllText(path, content);
@@ -47,19 +54,31 @@ namespace Common.Tests
             Assert.Null(name);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotPrivilegedProcess)), PlatformSpecific(TestPlatforms.Linux)]
+        [
+            ConditionalFact(
+                typeof(PlatformDetection),
+                nameof(PlatformDetection.IsNotPrivilegedProcess)
+            ),
+            PlatformSpecific(TestPlatforms.Linux)
+        ]
         public void GetPrettyName_CannotRead_ReturnsNull()
         {
             string path = CreateTestFile();
             File.SetUnixFileMode(path, UnixFileMode.None);
 
-            Assert.ThrowsAny<Exception>(() => File.ReadAllText(path)); 
+            Assert.ThrowsAny<Exception>(() => File.ReadAllText(path));
 
             string? name = Interop.OSReleaseFile.GetPrettyName(path);
             Assert.Null(name);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPrivilegedProcess)), PlatformSpecific(TestPlatforms.Linux)]
+        [
+            ConditionalFact(
+                typeof(PlatformDetection),
+                nameof(PlatformDetection.IsPrivilegedProcess)
+            ),
+            PlatformSpecific(TestPlatforms.Linux)
+        ]
         public void GetPrettyName_NonePrivileges_CanRead_ReturnsNull()
         {
             string path = CreateTestFile();

@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="CancellationTokenHelper.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Util {
+namespace System.Web.Util
+{
     using System;
     using System.Threading;
 
@@ -12,8 +13,8 @@ namespace System.Web.Util {
     // are fully thread-safe and will never block or throw, while a normal CancellationTokenSource
     // doesn't make these guarantees.
 
-    internal sealed class CancellationTokenHelper : IDisposable {
-
+    internal sealed class CancellationTokenHelper : IDisposable
+    {
         private const int STATE_CREATED = 0;
         private const int STATE_CANCELING = 1;
         private const int STATE_CANCELED = 2;
@@ -27,51 +28,76 @@ namespace System.Web.Util {
         private readonly CancellationTokenSource _cts = new CancellationTokenSource();
         private int _state;
 
-        public CancellationTokenHelper(bool canceled) {
-            if (canceled) {
+        public CancellationTokenHelper(bool canceled)
+        {
+            if (canceled)
+            {
                 _cts.Cancel();
             }
             _state = (canceled) ? STATE_CANCELED : STATE_CREATED;
         }
 
-        internal bool IsCancellationRequested {
+        internal bool IsCancellationRequested
+        {
             get { return _cts.IsCancellationRequested; }
         }
 
-        internal CancellationToken Token {
+        internal CancellationToken Token
+        {
             get { return _cts.Token; }
         }
 
         // Cancels the token.
-        public void Cancel() {
-            if (Interlocked.CompareExchange(ref _state, STATE_CANCELING, STATE_CREATED) == STATE_CREATED) {
+        public void Cancel()
+        {
+            if (
+                Interlocked.CompareExchange(ref _state, STATE_CANCELING, STATE_CREATED)
+                == STATE_CREATED
+            )
+            {
                 // Only allow cancellation if the token hasn't yet been canceled or disposed.
                 // Cancel on a ThreadPool thread so that we can release the original thread back to IIS.
                 // We can use UnsafeQUWI to avoid an extra ExecutionContext capture since CancellationToken already captures it.
-                ThreadPool.UnsafeQueueUserWorkItem(_ => {
-                    try {
-                        _cts.Cancel();
-                    }
-                    catch {
-                        // ---- all exceptions to avoid killing the worker process.
-                    }
-                    finally {
-                        if (Interlocked.CompareExchange(ref _state, STATE_CANCELED, STATE_CANCELING) == STATE_DISPOSING) {
-                            // A call to Dispose() came in on another thread while we were in the middle of a cancel
-                            // operation. That thread will no-op, so we'll dispose of it here.
-                            _cts.Dispose();
-                            Interlocked.Exchange(ref _state, STATE_DISPOSED);
+                ThreadPool.UnsafeQueueUserWorkItem(
+                    _ =>
+                    {
+                        try
+                        {
+                            _cts.Cancel();
                         }
-                    }
-                }, null);
+                        catch
+                        {
+                            // ---- all exceptions to avoid killing the worker process.
+                        }
+                        finally
+                        {
+                            if (
+                                Interlocked.CompareExchange(
+                                    ref _state,
+                                    STATE_CANCELED,
+                                    STATE_CANCELING
+                                ) == STATE_DISPOSING
+                            )
+                            {
+                                // A call to Dispose() came in on another thread while we were in the middle of a cancel
+                                // operation. That thread will no-op, so we'll dispose of it here.
+                                _cts.Dispose();
+                                Interlocked.Exchange(ref _state, STATE_DISPOSED);
+                            }
+                        }
+                    },
+                    null
+                );
             }
         }
 
         // Disposes of the token.
-        public void Dispose() {
+        public void Dispose()
+        {
             // Only allow a single call to Dispose.
             int originalState = Interlocked.Exchange(ref _state, STATE_DISPOSING);
-            switch (originalState) {
+            switch (originalState)
+            {
                 case STATE_CREATED:
                 case STATE_CANCELED:
                     // If Cancel() hasn't yet been called or has already run to completion,
@@ -92,11 +118,11 @@ namespace System.Web.Util {
             }
         }
 
-        private static CancellationTokenHelper GetStaticDisposedHelper() {
+        private static CancellationTokenHelper GetStaticDisposedHelper()
+        {
             CancellationTokenHelper helper = new CancellationTokenHelper(false);
             helper.Dispose();
             return helper;
         }
-
     }
 }

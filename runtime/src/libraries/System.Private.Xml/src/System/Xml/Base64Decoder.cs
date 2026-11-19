@@ -23,18 +23,12 @@ namespace System.Xml
         //
         internal override int DecodedCount
         {
-            get
-            {
-                return _curIndex - _startIndex;
-            }
+            get { return _curIndex - _startIndex; }
         }
 
         internal override bool IsFull
         {
-            get
-            {
-                return _curIndex == _endIndex;
-            }
+            get { return _curIndex == _endIndex; }
         }
 
         internal override int Decode(char[] chars, int startPos, int len)
@@ -50,7 +44,12 @@ namespace System.Xml
                 return 0;
             }
 
-            Decode(chars.AsSpan(startPos, len), _buffer.AsSpan(_curIndex, _endIndex - _curIndex), out int charsDecoded, out int bytesDecoded);
+            Decode(
+                chars.AsSpan(startPos, len),
+                _buffer.AsSpan(_curIndex, _endIndex - _curIndex),
+                out int charsDecoded,
+                out int bytesDecoded
+            );
 
             _curIndex += bytesDecoded;
             return charsDecoded;
@@ -69,7 +68,12 @@ namespace System.Xml
                 return 0;
             }
 
-            Decode(str.AsSpan(startPos, len), _buffer.AsSpan(_curIndex, _endIndex - _curIndex), out int charsDecoded, out int bytesDecoded);
+            Decode(
+                str.AsSpan(startPos, len),
+                _buffer.AsSpan(_curIndex, _endIndex - _curIndex),
+                out int charsDecoded,
+                out int bytesDecoded
+            );
 
             _curIndex += bytesDecoded;
             return charsDecoded;
@@ -99,7 +103,12 @@ namespace System.Xml
         // Private methods
         //
 
-        private void Decode(ReadOnlySpan<char> chars, Span<byte> bytes, out int charsDecoded, out int bytesDecoded)
+        private void Decode(
+            ReadOnlySpan<char> chars,
+            Span<byte> bytes,
+            out int charsDecoded,
+            out int bytesDecoded
+        )
         {
             // walk hex digits pairing them up and shoving the value of each pair into a byte
             int iByte = 0;
@@ -110,14 +119,129 @@ namespace System.Xml
             const byte Invalid = 255;
             ReadOnlySpan<byte> mapBase64 = // 123
             [
-                255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
-                255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
-                255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 62,  255, 255, 255, 63,
-                52,  53,  54,  55,  56,  57,  58,  59,  60,  61,  255, 255, 255, 255, 255, 255,
-                255, 0,   1,   2,   3,   4,   5,   6,   7,   8,   9,   10,  11,  12,  13,  14,
-                15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  255, 255, 255, 255, 255,
-                255, 26,  27,  28,  29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,
-                41,  42,  43,  44,  45,  46,  47,  48,  49,  50,  51,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                62,
+                255,
+                255,
+                255,
+                63,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
             ];
 
             while ((uint)iChar < (uint)chars.Length)
@@ -182,7 +306,7 @@ namespace System.Xml
                 }
             }
 
-        Return:
+            Return:
             _bits = b;
             _bitsFilled = bFilled;
 

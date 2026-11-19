@@ -29,11 +29,27 @@ namespace System.Web.WebPages.Deployment.Test
             var fileSystem = new TestFileSystem();
             var buildManager = new TestBuildManager();
             var nameValueCollection = GetAppSettings(enabled: false, webPagesVersion: null);
-            Action<Version> loadWebPages = (version) => { loadedVersion = version; };
-            Action registerForChange = () => { registeredForChangeNotification = true; };
+            Action<Version> loadWebPages = (version) =>
+            {
+                loadedVersion = version;
+            };
+            Action registerForChange = () =>
+            {
+                registeredForChangeNotification = true;
+            };
 
             // Act
-            bool loaded = PreApplicationStartCode.StartCore(fileSystem, "", "bin", nameValueCollection, loadedAssemblies, buildManager, loadWebPages, registerForChange, null);
+            bool loaded = PreApplicationStartCode.StartCore(
+                fileSystem,
+                "",
+                "bin",
+                nameValueCollection,
+                loadedAssemblies,
+                buildManager,
+                loadWebPages,
+                registerForChange,
+                null
+            );
 
             // Assert
             Assert.False(loaded);
@@ -48,18 +64,40 @@ namespace System.Web.WebPages.Deployment.Test
             // Arrange
             Version loadedVersion = null;
             bool registeredForChangeNotification = false;
-            IEnumerable<AssemblyName> loadedAssemblies = GetAssemblies("1.12.123.1234", LatestVersion);
+            IEnumerable<AssemblyName> loadedAssemblies = GetAssemblies(
+                "1.12.123.1234",
+                LatestVersion
+            );
             Version webPagesVersion = new Version("1.12.123.1234");
 
             var fileSystem = new TestFileSystem();
             fileSystem.AddFile("Default.cshtml");
             var buildManager = new TestBuildManager();
-            var nameValueCollection = GetAppSettings(enabled: null, webPagesVersion: webPagesVersion);
-            Action<Version> loadWebPages = (version) => { loadedVersion = version; };
-            Action registerForChange = () => { registeredForChangeNotification = true; };
+            var nameValueCollection = GetAppSettings(
+                enabled: null,
+                webPagesVersion: webPagesVersion
+            );
+            Action<Version> loadWebPages = (version) =>
+            {
+                loadedVersion = version;
+            };
+            Action registerForChange = () =>
+            {
+                registeredForChangeNotification = true;
+            };
 
             // Act
-            bool loaded = PreApplicationStartCode.StartCore(fileSystem, "", "bin", nameValueCollection, loadedAssemblies, buildManager, loadWebPages, registerForChange, getAssemblyNameThunk: null);
+            bool loaded = PreApplicationStartCode.StartCore(
+                fileSystem,
+                "",
+                "bin",
+                nameValueCollection,
+                loadedAssemblies,
+                buildManager,
+                loadWebPages,
+                registerForChange,
+                getAssemblyNameThunk: null
+            );
 
             // Assert
             Assert.True(loaded);
@@ -79,12 +117,31 @@ namespace System.Web.WebPages.Deployment.Test
 
             var fileSystem = new TestFileSystem();
             var buildManager = new TestBuildManager();
-            var nameValueCollection = GetAppSettings(enabled: null, webPagesVersion: webPagesVersion);
-            Action<Version> loadWebPages = (version) => { loadedVersion = version; };
-            Action registerForChange = () => { registeredForChangeNotification = true; };
+            var nameValueCollection = GetAppSettings(
+                enabled: null,
+                webPagesVersion: webPagesVersion
+            );
+            Action<Version> loadWebPages = (version) =>
+            {
+                loadedVersion = version;
+            };
+            Action registerForChange = () =>
+            {
+                registeredForChangeNotification = true;
+            };
 
             // Arrange
-            bool loaded = PreApplicationStartCode.StartCore(fileSystem, "", "bin", nameValueCollection, loadedAssemblies, buildManager, loadWebPages, registerForChange, null);
+            bool loaded = PreApplicationStartCode.StartCore(
+                fileSystem,
+                "",
+                "bin",
+                nameValueCollection,
+                loadedAssemblies,
+                buildManager,
+                loadWebPages,
+                registerForChange,
+                null
+            );
 
             // Assert
             Assert.False(loaded);
@@ -104,11 +161,27 @@ namespace System.Web.WebPages.Deployment.Test
             var fileSystem = new TestFileSystem();
             var buildManager = new TestBuildManager();
             var nameValueCollection = GetAppSettings(enabled: null, webPagesVersion: null);
-            Action<Version> loadWebPages = (version) => { loadedVersion = version; };
-            Action registerForChange = () => { registeredForChangeNotification = true; };
+            Action<Version> loadWebPages = (version) =>
+            {
+                loadedVersion = version;
+            };
+            Action registerForChange = () =>
+            {
+                registeredForChangeNotification = true;
+            };
 
             // Act
-            bool loaded = PreApplicationStartCode.StartCore(fileSystem, "", "bin", nameValueCollection, loadedAssemblies, buildManager, loadWebPages, registerForChange, null);
+            bool loaded = PreApplicationStartCode.StartCore(
+                fileSystem,
+                "",
+                "bin",
+                nameValueCollection,
+                loadedAssemblies,
+                buildManager,
+                loadWebPages,
+                registerForChange,
+                null
+            );
 
             // Assert
             Assert.False(loaded);
@@ -132,12 +205,30 @@ namespace System.Web.WebPages.Deployment.Test
             fileSystem.AddFile(Path.Combine(binDirectory, "System.Web.WebPages.Deployment.dll"));
             var buildManager = new TestBuildManager();
             var nameValueCollection = GetAppSettings(enabled: true, webPagesVersion: null);
-            Action<Version> loadWebPages = (version) => { loadedVersion = version; };
-            Action registerForChange = () => { registeredForChangeNotification = true; };
-            Func<string, AssemblyName> getAssembyName = _ => new AssemblyName("System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35");
+            Action<Version> loadWebPages = (version) =>
+            {
+                loadedVersion = version;
+            };
+            Action registerForChange = () =>
+            {
+                registeredForChangeNotification = true;
+            };
+            Func<string, AssemblyName> getAssembyName = _ => new AssemblyName(
+                "System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+            );
 
             // Act
-            bool loaded = PreApplicationStartCode.StartCore(fileSystem, "", binDirectory, nameValueCollection, loadedAssemblies, buildManager, loadWebPages, registerForChange, getAssembyName);
+            bool loaded = PreApplicationStartCode.StartCore(
+                fileSystem,
+                "",
+                binDirectory,
+                nameValueCollection,
+                loadedAssemblies,
+                buildManager,
+                loadWebPages,
+                registerForChange,
+                getAssembyName
+            );
 
             // Assert
             Assert.False(loaded);
@@ -162,12 +253,30 @@ namespace System.Web.WebPages.Deployment.Test
             fileSystem.AddFile("Default.cshtml");
             fileSystem.AddFile(Path.Combine(binDirectory, "System.Web.WebPages.Deployment.dll"));
             var nameValueCollection = GetAppSettings(enabled: null, webPagesVersion: null);
-            Action<Version> loadWebPages = (version) => { loadedVersion = version; };
-            Action registerForChange = () => { registeredForChangeNotification = true; };
-            Func<string, AssemblyName> getAssembyName = _ => new AssemblyName("System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35");
+            Action<Version> loadWebPages = (version) =>
+            {
+                loadedVersion = version;
+            };
+            Action registerForChange = () =>
+            {
+                registeredForChangeNotification = true;
+            };
+            Func<string, AssemblyName> getAssembyName = _ => new AssemblyName(
+                "System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+            );
 
             // Act
-            bool loaded = PreApplicationStartCode.StartCore(fileSystem, "", binDirectory, nameValueCollection, loadedAssemblies, buildManager, loadWebPages, registerForChange, getAssembyName);
+            bool loaded = PreApplicationStartCode.StartCore(
+                fileSystem,
+                "",
+                binDirectory,
+                nameValueCollection,
+                loadedAssemblies,
+                buildManager,
+                loadWebPages,
+                registerForChange,
+                getAssembyName
+            );
 
             // Assert
             Assert.False(loaded);
@@ -183,7 +292,9 @@ namespace System.Web.WebPages.Deployment.Test
             Version loadedVersion = null;
             bool registeredForChangeNotification = false;
             var webPagesVersion = AssemblyUtils.ThisAssemblyName.Version;
-            IEnumerable<AssemblyName> loadedAssemblies = GetAssemblies(AssemblyUtils.ThisAssemblyName.Version.ToString());
+            IEnumerable<AssemblyName> loadedAssemblies = GetAssemblies(
+                AssemblyUtils.ThisAssemblyName.Version.ToString()
+            );
 
             var fileSystem = new TestFileSystem();
             var binDirectory = DeploymentUtil.GetBinDirectory();
@@ -192,12 +303,32 @@ namespace System.Web.WebPages.Deployment.Test
             fileSystem.AddFile("Default.vbhtml");
             fileSystem.AddFile(Path.Combine(binDirectory, "System.Web.WebPages.Deployment.dll"));
             var nameValueCollection = GetAppSettings(enabled: null, webPagesVersion: null);
-            Action<Version> loadWebPages = (version) => { loadedVersion = version; };
-            Action registerForChange = () => { registeredForChangeNotification = true; };
-            Func<string, AssemblyName> getAssembyName = _ => new AssemblyName("System.Web.WebPages.Deployment, Version=" + AssemblyUtils.ThisAssemblyName.Version.ToString() + ", Culture=neutral, PublicKeyToken=31bf3856ad364e35");
+            Action<Version> loadWebPages = (version) =>
+            {
+                loadedVersion = version;
+            };
+            Action registerForChange = () =>
+            {
+                registeredForChangeNotification = true;
+            };
+            Func<string, AssemblyName> getAssembyName = _ => new AssemblyName(
+                "System.Web.WebPages.Deployment, Version="
+                    + AssemblyUtils.ThisAssemblyName.Version.ToString()
+                    + ", Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+            );
 
             // Act
-            bool loaded = PreApplicationStartCode.StartCore(fileSystem, "", binDirectory, nameValueCollection, loadedAssemblies, buildManager, loadWebPages, registerForChange, getAssembyName);
+            bool loaded = PreApplicationStartCode.StartCore(
+                fileSystem,
+                "",
+                binDirectory,
+                nameValueCollection,
+                loadedAssemblies,
+                buildManager,
+                loadWebPages,
+                registerForChange,
+                getAssembyName
+            );
 
             // Assert
             Assert.False(loaded);
@@ -221,11 +352,27 @@ namespace System.Web.WebPages.Deployment.Test
             var buildManager = new TestBuildManager();
             fileSystem.AddFile("Index.cshtml");
             var nameValueCollection = GetAppSettings(enabled: null, webPagesVersion: null);
-            Action<Version> loadWebPages = (version) => { loadedVersion = version; };
-            Action registerForChange = () => { registeredForChangeNotification = true; };
+            Action<Version> loadWebPages = (version) =>
+            {
+                loadedVersion = version;
+            };
+            Action registerForChange = () =>
+            {
+                registeredForChangeNotification = true;
+            };
 
             // Act
-            bool loaded = PreApplicationStartCode.StartCore(fileSystem, "", "bin", nameValueCollection, loadedAssemblies, buildManager, loadWebPages, registerForChange, null);
+            bool loaded = PreApplicationStartCode.StartCore(
+                fileSystem,
+                "",
+                "bin",
+                nameValueCollection,
+                loadedAssemblies,
+                buildManager,
+                loadWebPages,
+                registerForChange,
+                null
+            );
 
             // Assert
             Assert.True(loaded);
@@ -248,15 +395,33 @@ namespace System.Web.WebPages.Deployment.Test
             var buildManager = new TestBuildManager();
             fileSystem.AddFile("Index.cshtml");
             var nameValueCollection = GetAppSettings(enabled: null, webPagesVersion: null);
-            Action<Version> loadWebPages = (version) => { loadedVersion = version; };
-            Action registerForChange = () => { registeredForChangeNotification = true; };
+            Action<Version> loadWebPages = (version) =>
+            {
+                loadedVersion = version;
+            };
+            Action registerForChange = () =>
+            {
+                registeredForChangeNotification = true;
+            };
 
             // Act and Assert
-            Assert.Throws<InvalidOperationException>(() =>
-                PreApplicationStartCode.StartCore(fileSystem, "", "bin", nameValueCollection, loadedAssemblies, buildManager, loadWebPages, registerForChange, null),
-@"Could not determine which version of ASP.NET Web Pages to use.
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    PreApplicationStartCode.StartCore(
+                        fileSystem,
+                        "",
+                        "bin",
+                        nameValueCollection,
+                        loadedAssemblies,
+                        buildManager,
+                        loadWebPages,
+                        registerForChange,
+                        null
+                    ),
+                @"Could not determine which version of ASP.NET Web Pages to use.
 
-In order to use this site, specify a version in the site’s web.config file. For more information, see the following article on the Microsoft support site: http://go.microsoft.com/fwlink/?LinkId=254126");
+In order to use this site, specify a version in the site’s web.config file. For more information, see the following article on the Microsoft support site: http://go.microsoft.com/fwlink/?LinkId=254126"
+            );
             Assert.False(registeredForChangeNotification);
             Assert.Equal(0, buildManager.Stream.Length);
         }
@@ -276,12 +441,30 @@ In order to use this site, specify a version in the site’s web.config file. Fo
             fileSystem.AddFile(Path.Combine(binDirectory, "System.Web.WebPages.Deployment.dll"));
             var buildManager = new TestBuildManager();
             var nameValueCollection = GetAppSettings(enabled: null, webPagesVersion: null);
-            Action<Version> loadWebPages = (version) => { loadedVersion = version; };
-            Action registerForChange = () => { registeredForChangeNotification = true; };
-            Func<string, AssemblyName> getAssembyName = _ => new AssemblyName("System.Web.WebPages.Deployment, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35");
+            Action<Version> loadWebPages = (version) =>
+            {
+                loadedVersion = version;
+            };
+            Action registerForChange = () =>
+            {
+                registeredForChangeNotification = true;
+            };
+            Func<string, AssemblyName> getAssembyName = _ => new AssemblyName(
+                "System.Web.WebPages.Deployment, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+            );
 
             // Act
-            bool loaded = PreApplicationStartCode.StartCore(fileSystem, "", binDirectory, nameValueCollection, loadedAssemblies, buildManager, loadWebPages, registerForChange, getAssembyName);
+            bool loaded = PreApplicationStartCode.StartCore(
+                fileSystem,
+                "",
+                binDirectory,
+                nameValueCollection,
+                loadedAssemblies,
+                buildManager,
+                loadWebPages,
+                registerForChange,
+                getAssembyName
+            );
 
             // Assert
             Assert.False(loaded);
@@ -298,17 +481,37 @@ In order to use this site, specify a version in the site’s web.config file. Fo
             bool registeredForChangeNotification = false;
             // Hopefully we'd have figured out a better way to load Plan9 by v8.
             var webPagesVersion = new Version("8.0.0.0");
-            IEnumerable<AssemblyName> loadedAssemblies = GetAssemblies("1.0.0.0", LatestVersion, "8.0.0.0");
+            IEnumerable<AssemblyName> loadedAssemblies = GetAssemblies(
+                "1.0.0.0",
+                LatestVersion,
+                "8.0.0.0"
+            );
 
             var fileSystem = new TestFileSystem();
             fileSystem.AddFile("Index.cshtml");
             var buildManager = new TestBuildManager();
             var nameValueCollection = GetAppSettings(enabled: null, webPagesVersion: null);
-            Action<Version> loadWebPages = (version) => { loadedVersion = version; };
-            Action registerForChange = () => { registeredForChangeNotification = true; };
+            Action<Version> loadWebPages = (version) =>
+            {
+                loadedVersion = version;
+            };
+            Action registerForChange = () =>
+            {
+                registeredForChangeNotification = true;
+            };
 
             // Act
-            bool loaded = PreApplicationStartCode.StartCore(fileSystem, "", "bin", nameValueCollection, loadedAssemblies, buildManager, loadWebPages, registerForChange, null);
+            bool loaded = PreApplicationStartCode.StartCore(
+                fileSystem,
+                "",
+                "bin",
+                nameValueCollection,
+                loadedAssemblies,
+                buildManager,
+                loadWebPages,
+                registerForChange,
+                null
+            );
 
             // Assert
             Assert.False(loaded);
@@ -331,17 +534,39 @@ In order to use this site, specify a version in the site’s web.config file. Fo
             var content = "1.0.0.0" + Environment.NewLine;
             buildManager.Stream = new MemoryStream(Encoding.Default.GetBytes(content));
 
-            var nameValueCollection = GetAppSettings(enabled: null, webPagesVersion: new Version(LatestVersion));
-            Action<Version> loadWebPages = (version) => { loadedVersion = version; };
-            Action registerForChange = () => { registeredForChangeNotification = true; };
+            var nameValueCollection = GetAppSettings(
+                enabled: null,
+                webPagesVersion: new Version(LatestVersion)
+            );
+            Action<Version> loadWebPages = (version) =>
+            {
+                loadedVersion = version;
+            };
+            Action registerForChange = () =>
+            {
+                registeredForChangeNotification = true;
+            };
 
             // Act
             var ex = Assert.Throws<HttpCompileException>(() =>
-                PreApplicationStartCode.StartCore(fileSystem, "", @"site\bin", nameValueCollection, loadedAssemblies, buildManager, loadWebPages, registerForChange, null)
+                PreApplicationStartCode.StartCore(
+                    fileSystem,
+                    "",
+                    @"site\bin",
+                    nameValueCollection,
+                    loadedAssemblies,
+                    buildManager,
+                    loadWebPages,
+                    registerForChange,
+                    null
+                )
             );
 
             // Assert
-            Assert.Equal("Changes were detected in the Web Pages runtime version that require your application to be recompiled. Refresh your browser window to continue.", ex.Message);
+            Assert.Equal(
+                "Changes were detected in the Web Pages runtime version that require your application to be recompiled. Refresh your browser window to continue.",
+                ex.Message
+            );
             Assert.Equal((object)true, ex.Data["WebPages.VersionChange"]);
             Assert.False(registeredForChangeNotification);
             VerifyVersionFile(buildManager, new Version(LatestVersion));
@@ -362,12 +587,31 @@ In order to use this site, specify a version in the site’s web.config file. Fo
             var content = AssemblyUtils.ThisAssemblyName.Version + Environment.NewLine;
             buildManager.Stream = new MemoryStream(Encoding.Default.GetBytes(content));
 
-            var nameValueCollection = GetAppSettings(enabled: null, webPagesVersion: new Version("1.0.0"));
-            Action<Version> loadWebPages = (version) => { loadedVersion = version; };
-            Action registerForChange = () => { registeredForChangeNotification = true; };
+            var nameValueCollection = GetAppSettings(
+                enabled: null,
+                webPagesVersion: new Version("1.0.0")
+            );
+            Action<Version> loadWebPages = (version) =>
+            {
+                loadedVersion = version;
+            };
+            Action registerForChange = () =>
+            {
+                registeredForChangeNotification = true;
+            };
 
             // Act
-            bool loaded = PreApplicationStartCode.StartCore(fileSystem, "", @"site\bin", nameValueCollection, loadedAssemblies, buildManager, loadWebPages, registerForChange, null);
+            bool loaded = PreApplicationStartCode.StartCore(
+                fileSystem,
+                "",
+                @"site\bin",
+                nameValueCollection,
+                loadedAssemblies,
+                buildManager,
+                loadWebPages,
+                registerForChange,
+                null
+            );
 
             // Assert
             Assert.False(loaded);
@@ -393,15 +637,39 @@ In order to use this site, specify a version in the site’s web.config file. Fo
             var content = AssemblyUtils.ThisAssemblyName.Version + Environment.NewLine;
             buildManager.Stream = new MemoryStream(Encoding.Default.GetBytes(content));
 
-            var nameValueCollection = GetAppSettings(enabled: null, webPagesVersion: new Version(LatestVersion));
-            Action<Version> loadWebPages = (version) => { loadedVersion = version; };
-            Action registerForChange = () => { registeredForChangeNotification = true; };
-            Func<string, AssemblyName> getAssembyName = _ => new AssemblyName("System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35");
+            var nameValueCollection = GetAppSettings(
+                enabled: null,
+                webPagesVersion: new Version(LatestVersion)
+            );
+            Action<Version> loadWebPages = (version) =>
+            {
+                loadedVersion = version;
+            };
+            Action registerForChange = () =>
+            {
+                registeredForChangeNotification = true;
+            };
+            Func<string, AssemblyName> getAssembyName = _ => new AssemblyName(
+                "System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+            );
 
             // Act and Assert
-            Assert.Throws<InvalidOperationException>(() =>
-                PreApplicationStartCode.StartCore(fileSystem, "", binDirectory, nameValueCollection, loadedAssemblies, buildManager, loadWebPages, registerForChange, getAssembyName),
-                @"Conflicting versions of ASP.NET Web Pages detected: specified version is """ + LatestVersion + @""", but the version in bin is ""1.0.0.0"". To continue, remove files from the application's bin directory or remove the version specification in web.config."
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    PreApplicationStartCode.StartCore(
+                        fileSystem,
+                        "",
+                        binDirectory,
+                        nameValueCollection,
+                        loadedAssemblies,
+                        buildManager,
+                        loadWebPages,
+                        registerForChange,
+                        getAssembyName
+                    ),
+                @"Conflicting versions of ASP.NET Web Pages detected: specified version is """
+                    + LatestVersion
+                    + @""", but the version in bin is ""1.0.0.0"". To continue, remove files from the application's bin directory or remove the version specification in web.config."
             );
 
             Assert.False(registeredForChangeNotification);
@@ -415,7 +683,10 @@ In order to use this site, specify a version in the site’s web.config file. Fo
             Version loadedVersion = null;
 
             var binDirectory = DeploymentUtil.GetBinDirectory();
-            IEnumerable<AssemblyName> loadedAssemblies = GetAssemblies("1.0.0.0", AssemblyUtils.ThisAssemblyName.Version.ToString());
+            IEnumerable<AssemblyName> loadedAssemblies = GetAssemblies(
+                "1.0.0.0",
+                AssemblyUtils.ThisAssemblyName.Version.ToString()
+            );
 
             var fileSystem = new TestFileSystem();
             fileSystem.AddFile("Index.cshtml");
@@ -424,16 +695,40 @@ In order to use this site, specify a version in the site’s web.config file. Fo
             var content = AssemblyUtils.ThisAssemblyName.Version + Environment.NewLine;
             buildManager.Stream = new MemoryStream(Encoding.Default.GetBytes(content));
 
-            var nameValueCollection = GetAppSettings(enabled: null, webPagesVersion: new Version("1.0.0"));
-            Action<Version> loadWebPages = (version) => { loadedVersion = version; };
+            var nameValueCollection = GetAppSettings(
+                enabled: null,
+                webPagesVersion: new Version("1.0.0")
+            );
+            Action<Version> loadWebPages = (version) =>
+            {
+                loadedVersion = version;
+            };
             Action registerForChange = () => { };
-            Func<string, AssemblyName> getAssembyName = _ => new AssemblyName("System.Web.WebPages.Deployment, Version=" + AssemblyUtils.ThisAssemblyName.Version + ", Culture=neutral, PublicKeyToken=31bf3856ad364e35");
+            Func<string, AssemblyName> getAssembyName = _ => new AssemblyName(
+                "System.Web.WebPages.Deployment, Version="
+                    + AssemblyUtils.ThisAssemblyName.Version
+                    + ", Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+            );
 
             // Act and Assert
-            Assert.Throws<InvalidOperationException>(() =>
-                                                              PreApplicationStartCode.StartCore(fileSystem, "", binDirectory, nameValueCollection, loadedAssemblies, buildManager: buildManager, loadWebPages: loadWebPages, registerForChangeNotification: registerForChange, getAssemblyNameThunk: getAssembyName),
-                                                              String.Format(@"Conflicting versions of ASP.NET Web Pages detected: specified version is ""1.0.0.0"", but the version in bin is ""{0}"". To continue, remove files from the application's bin directory or remove the version specification in web.config.",
-                                                                            AssemblyUtils.ThisAssemblyName.Version));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    PreApplicationStartCode.StartCore(
+                        fileSystem,
+                        "",
+                        binDirectory,
+                        nameValueCollection,
+                        loadedAssemblies,
+                        buildManager: buildManager,
+                        loadWebPages: loadWebPages,
+                        registerForChangeNotification: registerForChange,
+                        getAssemblyNameThunk: getAssembyName
+                    ),
+                String.Format(
+                    @"Conflicting versions of ASP.NET Web Pages detected: specified version is ""1.0.0.0"", but the version in bin is ""{0}"". To continue, remove files from the application's bin directory or remove the version specification in web.config.",
+                    AssemblyUtils.ThisAssemblyName.Version
+                )
+            );
         }
 
         [Fact]
@@ -443,7 +738,10 @@ In order to use this site, specify a version in the site’s web.config file. Fo
             Version loadedVersion = null;
 
             var binDirectory = DeploymentUtil.GetBinDirectory();
-            IEnumerable<AssemblyName> loadedAssemblies = GetAssemblies("1.0.0.0", AssemblyUtils.ThisAssemblyName.Version.ToString());
+            IEnumerable<AssemblyName> loadedAssemblies = GetAssemblies(
+                "1.0.0.0",
+                AssemblyUtils.ThisAssemblyName.Version.ToString()
+            );
 
             var fileSystem = new TestFileSystem();
             fileSystem.AddFile("Index.cshtml");
@@ -451,15 +749,35 @@ In order to use this site, specify a version in the site’s web.config file. Fo
             var content = AssemblyUtils.ThisAssemblyName.Version + Environment.NewLine;
             buildManager.Stream = new MemoryStream(Encoding.Default.GetBytes(content));
 
-            var nameValueCollection = GetAppSettings(enabled: null, webPagesVersion: new Version("1.5"));
-            Action<Version> loadWebPages = (version) => { loadedVersion = version; };
+            var nameValueCollection = GetAppSettings(
+                enabled: null,
+                webPagesVersion: new Version("1.5")
+            );
+            Action<Version> loadWebPages = (version) =>
+            {
+                loadedVersion = version;
+            };
             Action registerForChange = () => { };
 
             // Act and Assert
-            Assert.Throws<InvalidOperationException>(() =>
-                                                              PreApplicationStartCode.StartCore(fileSystem, "", binDirectory, nameValueCollection, loadedAssemblies, buildManager: buildManager, loadWebPages: loadWebPages, registerForChangeNotification: registerForChange, getAssemblyNameThunk: null),
-                                                              String.Format("Specified Web Pages version \"1.5.0.0\" could not be found. Update your web.config to specify a different version. Current version: \"{0}\".",
-                                                                            AssemblyUtils.ThisAssemblyName.Version));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    PreApplicationStartCode.StartCore(
+                        fileSystem,
+                        "",
+                        binDirectory,
+                        nameValueCollection,
+                        loadedAssemblies,
+                        buildManager: buildManager,
+                        loadWebPages: loadWebPages,
+                        registerForChangeNotification: registerForChange,
+                        getAssemblyNameThunk: null
+                    ),
+                String.Format(
+                    "Specified Web Pages version \"1.5.0.0\" could not be found. Update your web.config to specify a different version. Current version: \"{0}\".",
+                    AssemblyUtils.ThisAssemblyName.Version
+                )
+            );
         }
 
         [Fact]
@@ -483,7 +801,10 @@ In order to use this site, specify a version in the site’s web.config file. Fo
             return nameValueCollection;
         }
 
-        private static void VerifyVersionFile(TestBuildManager buildManager, Version webPagesVersion)
+        private static void VerifyVersionFile(
+            TestBuildManager buildManager,
+            Version webPagesVersion
+        )
         {
             var content = Encoding.UTF8.GetString(buildManager.Stream.ToArray());
             Version version = Version.Parse(content);
@@ -534,7 +855,11 @@ In order to use this site, specify a version in the site’s web.config file. Fo
         private static IEnumerable<AssemblyName> GetAssemblies(params string[] versions)
         {
             return from version in versions
-                   select new AssemblyName("System.Web.WebPages.Deployment, Version=" + version + ", Culture=neutral, PublicKeyToken=31bf3856ad364e35");
+                select new AssemblyName(
+                    "System.Web.WebPages.Deployment, Version="
+                        + version
+                        + ", Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+                );
         }
     }
 }

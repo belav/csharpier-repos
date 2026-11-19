@@ -42,7 +42,10 @@ namespace System.ServiceModel.Discovery.VersionApril2005
                 throw FxTrace.Exception.ArgumentNull("schemaSet");
             }
 
-            return SchemaUtility.EnsureProbeSchema(DiscoveryVersion.WSDiscoveryApril2005, schemaSet);            
+            return SchemaUtility.EnsureProbeSchema(
+                DiscoveryVersion.WSDiscoveryApril2005,
+                schemaSet
+            );
         }
 
         public FindCriteria ToFindCriteria()
@@ -64,6 +67,6 @@ namespace System.ServiceModel.Discovery.VersionApril2005
         public void WriteXml(XmlWriter writer)
         {
             this.findCriteria.WriteTo(DiscoveryVersion.WSDiscoveryApril2005, writer);
-        }        
+        }
     }
 }

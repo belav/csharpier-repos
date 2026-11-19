@@ -15,8 +15,12 @@ namespace System.Security.Cryptography.X509Certificates
 
         private sealed partial class AppleX509Pal : ManagedX509ExtensionProcessor, IX509Pal
         {
-            public AsymmetricAlgorithm DecodePublicKey(Oid oid, byte[] encodedKeyValue, byte[] encodedParameters,
-                ICertificatePal? certificatePal)
+            public AsymmetricAlgorithm DecodePublicKey(
+                Oid oid,
+                byte[] encodedKeyValue,
+                byte[] encodedParameters,
+                ICertificatePal? certificatePal
+            )
             {
                 if (oid.Value != Oids.Rsa)
                 {
@@ -25,7 +29,9 @@ namespace System.Security.Cryptography.X509Certificates
 
                 if (certificatePal is AppleCertificatePal applePal)
                 {
-                    SafeSecKeyRefHandle key = Interop.AppleCrypto.X509GetPublicKey(applePal.CertificateHandle);
+                    SafeSecKeyRefHandle key = Interop.AppleCrypto.X509GetPublicKey(
+                        applePal.CertificateHandle
+                    );
                     Debug.Assert(!key.IsInvalid);
                     return new RSAImplementation.RSASecurityTransforms(key);
                 }
@@ -57,13 +63,11 @@ namespace System.Security.Cryptography.X509Certificates
 
                 X509ContentType result = X509ContentType.Unknown;
 
-                AppleCertificatePal.TryDecodePem(
-                    rawData,
-                    (derData, contentType) =>
-                    {
-                        result = contentType;
-                        return false;
-                    });
+                AppleCertificatePal.TryDecodePem(rawData, (derData, contentType) =>
+                {
+                    result = contentType;
+                    return false;
+                });
 
                 if (result == X509ContentType.Unknown)
                 {

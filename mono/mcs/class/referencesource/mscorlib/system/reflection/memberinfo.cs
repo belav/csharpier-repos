@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright(c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 namespace System.Reflection
 {
@@ -32,7 +32,10 @@ namespace System.Reflection
         #endregion
 
         #region Internal Methods
-        internal virtual bool CacheEquals(object o) { throw new NotImplementedException(); } 
+        internal virtual bool CacheEquals(object o)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region Public Abstract\Virtual Members
@@ -46,10 +49,7 @@ namespace System.Reflection
 
         public virtual IEnumerable<CustomAttributeData> CustomAttributes
         {
-            get
-            {
-                return GetCustomAttributesData();
-            }
+            get { return GetCustomAttributesData(); }
         }
         public abstract Object[] GetCustomAttributes(bool inherit);
 
@@ -63,27 +63,31 @@ namespace System.Reflection
         }
 
 #if MONO
-        public virtual extern int MetadataToken {
-            [System.Runtime.CompilerServices.MethodImplAttribute (System.Runtime.CompilerServices.MethodImplOptions.InternalCall)]
+        public virtual extern int MetadataToken
+        {
+            [System.Runtime.CompilerServices.MethodImplAttribute(
+                System.Runtime.CompilerServices.MethodImplOptions.InternalCall
+            )]
             get;
         }
 #else
-        public virtual int MetadataToken { get { throw new InvalidOperationException(); } }
+        public virtual int MetadataToken
+        {
+            get { throw new InvalidOperationException(); }
+        }
 #endif
 
         public virtual Module Module
-        { 
+        {
             get
             {
                 if (this is Type)
                     return ((Type)this).Module;
 
-                throw new NotImplementedException(); 
-            } 
+                throw new NotImplementedException();
+            }
         }
-        
-        
-        
+
         #endregion
 
 #if !FEATURE_CORECLR
@@ -95,21 +99,32 @@ namespace System.Reflection
             if ((object)left == null || (object)right == null)
                 return false;
 
-            Type type1, type2;
-            MethodBase method1, method2;
-            FieldInfo field1, field2;
-            EventInfo event1, event2;
-            PropertyInfo property1, property2;
+            Type type1,
+                type2;
+            MethodBase method1,
+                method2;
+            FieldInfo field1,
+                field2;
+            EventInfo event1,
+                event2;
+            PropertyInfo property1,
+                property2;
 
             if ((type1 = left as Type) != null && (type2 = right as Type) != null)
                 return type1 == type2;
-            else if ((method1 = left as MethodBase) != null && (method2 = right as MethodBase) != null)
+            else if (
+                (method1 = left as MethodBase) != null
+                && (method2 = right as MethodBase) != null
+            )
                 return method1 == method2;
             else if ((field1 = left as FieldInfo) != null && (field2 = right as FieldInfo) != null)
                 return field1 == field2;
             else if ((event1 = left as EventInfo) != null && (event2 = right as EventInfo) != null)
                 return event1 == event2;
-            else if ((property1 = left as PropertyInfo) != null && (property2 = right as PropertyInfo) != null)
+            else if (
+                (property1 = left as PropertyInfo) != null
+                && (property2 = right as PropertyInfo) != null
+            )
                 return property1 == property2;
 
             return false;
@@ -134,7 +149,7 @@ namespace System.Reflection
 #if !FEATURE_CORECLR
         // this method is required so Object.GetType is not made final virtual by the compiler
         Type _MemberInfo.GetType()
-        { 
+        {
             return base.GetType();
         }
 
@@ -148,12 +163,27 @@ namespace System.Reflection
             throw new NotImplementedException();
         }
 
-        void _MemberInfo.GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId)
+        void _MemberInfo.GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        )
         {
             throw new NotImplementedException();
         }
 
-        void _MemberInfo.Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr)
+        void _MemberInfo.Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        )
         {
             throw new NotImplementedException();
         }
@@ -164,13 +194,14 @@ namespace System.Reflection
     [ContractClassFor(typeof(MemberInfo))]
     internal abstract class MemberInfoContracts : MemberInfo
     {
-        public override String Name {
-            get {
+        public override String Name
+        {
+            get
+            {
                 Contract.Ensures(Contract.Result<String>() != null);
                 return default(String);
             }
         }
     }
 #endif // CONTRACTS_FULL
-
 }

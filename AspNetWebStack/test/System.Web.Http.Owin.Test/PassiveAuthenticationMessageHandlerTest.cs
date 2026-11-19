@@ -26,19 +26,27 @@ namespace System.Web.Http.Owin
 
             using (HttpResponseMessage expectedResponse = new HttpResponseMessage())
             {
-                HttpMessageHandler innerHandler = new LambdaHttpMessageHandler((r, c) =>
-                {
-                    request = r;
-                    cancellationToken = c;
-                    return Task.FromResult(expectedResponse);
-                });
+                HttpMessageHandler innerHandler = new LambdaHttpMessageHandler(
+                    (r, c) =>
+                    {
+                        request = r;
+                        cancellationToken = c;
+                        return Task.FromResult(expectedResponse);
+                    }
+                );
                 HttpMessageHandler handler = CreateProductUnderTest(innerHandler);
                 CancellationToken expectedCancellationToken = new CancellationToken(true);
 
-                using (HttpRequestMessage expectedRequest = CreateRequestWithOwinContextAndRequestContext(context))
+                using (
+                    HttpRequestMessage expectedRequest =
+                        CreateRequestWithOwinContextAndRequestContext(context)
+                )
                 {
                     // Act
-                    HttpResponseMessage response = await handler.SendAsync(expectedRequest, expectedCancellationToken);
+                    HttpResponseMessage response = await handler.SendAsync(
+                        expectedRequest,
+                        expectedCancellationToken
+                    );
 
                     // Assert
                     Assert.Same(expectedRequest, request);
@@ -61,7 +69,8 @@ namespace System.Web.Http.Owin
                 await Assert.ThrowsArgumentAsync(
                     () => handler.SendAsync(request, CancellationToken.None),
                     "request",
-                    "The request must have a request context.");
+                    "The request must have a request context."
+                );
             }
         }
 
@@ -77,9 +86,14 @@ namespace System.Web.Http.Owin
                 request.SetRequestContext(new HttpRequestContext());
 
                 // Act & Assert
-                InvalidOperationException exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => handler.SendAsync(request, CancellationToken.None));
-                Assert.Equal("No OWIN authentication manager is associated with the request.", exception.Message);
+                InvalidOperationException exception =
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        handler.SendAsync(request, CancellationToken.None)
+                    );
+                Assert.Equal(
+                    "No OWIN authentication manager is associated with the request.",
+                    exception.Message
+                );
             }
         }
 
@@ -91,12 +105,19 @@ namespace System.Web.Http.Owin
             HttpMessageHandler handler = CreateProductUnderTest(innerHandler);
             IOwinContext context = CreateOwinContext(null);
 
-            using (HttpRequestMessage request = CreateRequestWithOwinContextAndRequestContext(context))
+            using (
+                HttpRequestMessage request = CreateRequestWithOwinContextAndRequestContext(context)
+            )
             {
                 // Act & Assert
-                InvalidOperationException exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => handler.SendAsync(request, CancellationToken.None));
-                Assert.Equal("No OWIN authentication manager is associated with the request.", exception.Message);
+                InvalidOperationException exception =
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        handler.SendAsync(request, CancellationToken.None)
+                    );
+                Assert.Equal(
+                    "No OWIN authentication manager is associated with the request.",
+                    exception.Message
+                );
             }
         }
 
@@ -106,7 +127,10 @@ namespace System.Web.Http.Owin
             // Arrange
             var requestContextMock = new Mock<HttpRequestContext>(MockBehavior.Strict);
             var sequence = new MockSequence();
-            var initialPrincipal = new GenericPrincipal(new GenericIdentity("generic user"), new[] { "generic role" });
+            var initialPrincipal = new GenericPrincipal(
+                new GenericIdentity("generic user"),
+                new[] { "generic role" }
+            );
             IPrincipal requestContextPrincipal = null;
             requestContextMock
                 .InSequence(sequence)
@@ -122,16 +146,16 @@ namespace System.Web.Http.Owin
                 .InSequence(sequence)
                 .SetupGet(c => c.Principal)
                 .Returns(requestContextPrincipal);
-            requestContextMock
-                .InSequence(sequence)
-                .SetupSet(c => c.Principal = initialPrincipal);
+            requestContextMock.InSequence(sequence).SetupSet(c => c.Principal = initialPrincipal);
 
             IPrincipal principalBeforeInnerHandler = null;
-            HttpMessageHandler inner = new LambdaHttpMessageHandler((ignore1, ignore2) =>
-            {
-                principalBeforeInnerHandler = requestContextPrincipal;
-                return Task.FromResult<HttpResponseMessage>(null);
-            });
+            HttpMessageHandler inner = new LambdaHttpMessageHandler(
+                (ignore1, ignore2) =>
+                {
+                    principalBeforeInnerHandler = requestContextPrincipal;
+                    return Task.FromResult<HttpResponseMessage>(null);
+                }
+            );
             HttpMessageHandler handler = CreateProductUnderTest(inner);
             var context = CreateOwinContext();
 
@@ -162,15 +186,21 @@ namespace System.Web.Http.Owin
             HttpMessageHandler handler = CreateProductUnderTest(inner);
             IOwinContext context = CreateOwinContext();
 
-            using (HttpRequestMessage request = CreateRequestWithOwinContextAndRequestContext(context))
+            using (
+                HttpRequestMessage request = CreateRequestWithOwinContextAndRequestContext(context)
+            )
             {
                 // Act
-                HttpResponseMessage ignore = await handler.SendAsync(request, CancellationToken.None);
+                HttpResponseMessage ignore = await handler.SendAsync(
+                    request,
+                    CancellationToken.None
+                );
             }
 
             // Assert
             IAuthenticationManager authenticationManager = context.Authentication;
-            AuthenticationResponseChallenge challenge = authenticationManager.AuthenticationResponseChallenge;
+            AuthenticationResponseChallenge challenge =
+                authenticationManager.AuthenticationResponseChallenge;
             Assert.NotNull(challenge);
             string[] authenticationTypes = challenge.AuthenticationTypes;
             Assert.NotNull(authenticationTypes);
@@ -188,17 +218,23 @@ namespace System.Web.Http.Owin
             IAuthenticationManager authenticationManager = context.Authentication;
             IDictionary<string, string> expectedExtra = new Dictionary<string, string>();
             AuthenticationProperties extraWrapper = new AuthenticationProperties(expectedExtra);
-            context.Authentication.AuthenticationResponseChallenge = new AuthenticationResponseChallenge(null,
-                extraWrapper);
+            context.Authentication.AuthenticationResponseChallenge =
+                new AuthenticationResponseChallenge(null, extraWrapper);
 
-            using (HttpRequestMessage request = CreateRequestWithOwinContextAndRequestContext(context))
+            using (
+                HttpRequestMessage request = CreateRequestWithOwinContextAndRequestContext(context)
+            )
             {
                 // Act
-                HttpResponseMessage ignore = await handler.SendAsync(request, CancellationToken.None);
+                HttpResponseMessage ignore = await handler.SendAsync(
+                    request,
+                    CancellationToken.None
+                );
             }
 
             // Assert
-            AuthenticationResponseChallenge challenge = authenticationManager.AuthenticationResponseChallenge;
+            AuthenticationResponseChallenge challenge =
+                authenticationManager.AuthenticationResponseChallenge;
             Assert.NotNull(challenge);
             string[] authenticationTypes = challenge.AuthenticationTypes;
             Assert.NotNull(authenticationTypes);
@@ -219,17 +255,23 @@ namespace System.Web.Http.Owin
             IAuthenticationManager authenticationManager = context.Authentication;
             AuthenticationProperties extraWrapper = new AuthenticationProperties();
             IDictionary<string, string> expectedExtra = extraWrapper.Dictionary;
-            authenticationManager.AuthenticationResponseChallenge = new AuthenticationResponseChallenge(new string[0],
-                extraWrapper);
+            authenticationManager.AuthenticationResponseChallenge =
+                new AuthenticationResponseChallenge(new string[0], extraWrapper);
 
-            using (HttpRequestMessage request = CreateRequestWithOwinContextAndRequestContext(context))
+            using (
+                HttpRequestMessage request = CreateRequestWithOwinContextAndRequestContext(context)
+            )
             {
                 // Act
-                HttpResponseMessage ignore = await handler.SendAsync(request, CancellationToken.None);
+                HttpResponseMessage ignore = await handler.SendAsync(
+                    request,
+                    CancellationToken.None
+                );
             }
 
             // Assert
-            AuthenticationResponseChallenge challenge = authenticationManager.AuthenticationResponseChallenge;
+            AuthenticationResponseChallenge challenge =
+                authenticationManager.AuthenticationResponseChallenge;
             Assert.NotNull(challenge);
             string[] authenticationTypes = challenge.AuthenticationTypes;
             Assert.NotNull(authenticationTypes);
@@ -251,17 +293,23 @@ namespace System.Web.Http.Owin
             AuthenticationProperties extraWrapper = new AuthenticationProperties();
             string[] expectedAuthenticationTypes = new string[] { "Existing" };
             IDictionary<string, string> expectedExtra = extraWrapper.Dictionary;
-            authenticationManager.AuthenticationResponseChallenge = new AuthenticationResponseChallenge(
-                expectedAuthenticationTypes, extraWrapper);
+            authenticationManager.AuthenticationResponseChallenge =
+                new AuthenticationResponseChallenge(expectedAuthenticationTypes, extraWrapper);
 
-            using (HttpRequestMessage request = CreateRequestWithOwinContextAndRequestContext(context))
+            using (
+                HttpRequestMessage request = CreateRequestWithOwinContextAndRequestContext(context)
+            )
             {
                 // Act
-                HttpResponseMessage ignore = await handler.SendAsync(request, CancellationToken.None);
+                HttpResponseMessage ignore = await handler.SendAsync(
+                    request,
+                    CancellationToken.None
+                );
             }
 
             // Assert
-            AuthenticationResponseChallenge challenge = authenticationManager.AuthenticationResponseChallenge;
+            AuthenticationResponseChallenge challenge =
+                authenticationManager.AuthenticationResponseChallenge;
             Assert.NotNull(challenge);
             Assert.Same(expectedAuthenticationTypes, challenge.AuthenticationTypes);
             AuthenticationProperties actualExtraWrapper = challenge.Properties;
@@ -286,14 +334,18 @@ namespace System.Web.Http.Owin
             return mock.Object;
         }
 
-        private static PassiveAuthenticationMessageHandler CreateProductUnderTest(HttpMessageHandler innerHandler)
+        private static PassiveAuthenticationMessageHandler CreateProductUnderTest(
+            HttpMessageHandler innerHandler
+        )
         {
             PassiveAuthenticationMessageHandler handler = new PassiveAuthenticationMessageHandler();
             handler.InnerHandler = innerHandler;
             return handler;
         }
 
-        private static HttpRequestMessage CreateRequestWithOwinContextAndRequestContext(IOwinContext context)
+        private static HttpRequestMessage CreateRequestWithOwinContextAndRequestContext(
+            IOwinContext context
+        )
         {
             HttpRequestMessage request = new HttpRequestMessage();
             request.SetOwinContext(context);
@@ -303,16 +355,20 @@ namespace System.Web.Http.Owin
 
         private static HttpMessageHandler CreateStubHandler()
         {
-            return new LambdaHttpMessageHandler((ignore1, ignore2) =>
-            {
-                return Task.FromResult<HttpResponseMessage>(null);
-            });
+            return new LambdaHttpMessageHandler(
+                (ignore1, ignore2) =>
+                {
+                    return Task.FromResult<HttpResponseMessage>(null);
+                }
+            );
         }
 
         private class DummyHttpMessageHandler : HttpMessageHandler
         {
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-                CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 throw new NotImplementedException();
             }
@@ -320,10 +376,15 @@ namespace System.Web.Http.Owin
 
         private class LambdaHttpMessageHandler : HttpMessageHandler
         {
-            private readonly Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> _sendAsync;
+            private readonly Func<
+                HttpRequestMessage,
+                CancellationToken,
+                Task<HttpResponseMessage>
+            > _sendAsync;
 
-            public LambdaHttpMessageHandler(Func<HttpRequestMessage, CancellationToken,
-                Task<HttpResponseMessage>> sendAsync)
+            public LambdaHttpMessageHandler(
+                Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> sendAsync
+            )
             {
                 if (sendAsync == null)
                 {
@@ -333,8 +394,10 @@ namespace System.Web.Http.Owin
                 _sendAsync = sendAsync;
             }
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-                CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 return _sendAsync.Invoke(request, cancellationToken);
             }

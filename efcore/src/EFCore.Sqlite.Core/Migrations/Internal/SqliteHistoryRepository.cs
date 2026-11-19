@@ -20,9 +20,7 @@ public class SqliteHistoryRepository : HistoryRepository
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public SqliteHistoryRepository(HistoryRepositoryDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -48,8 +46,7 @@ public class SqliteHistoryRepository : HistoryRepository
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override bool InterpretExistsResult(object? value)
-        => (long)value! != 0L;
+    protected override bool InterpretExistsResult(object? value) => (long)value! != 0L;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -61,7 +58,10 @@ public class SqliteHistoryRepository : HistoryRepository
     {
         var script = GetCreateScript();
 
-        return script.Insert(script.IndexOf("CREATE TABLE", StringComparison.Ordinal) + 12, " IF NOT EXISTS");
+        return script.Insert(
+            script.IndexOf("CREATE TABLE", StringComparison.Ordinal) + 12,
+            " IF NOT EXISTS"
+        );
     }
 
     /// <summary>
@@ -70,8 +70,8 @@ public class SqliteHistoryRepository : HistoryRepository
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string GetBeginIfNotExistsScript(string migrationId)
-        => throw new NotSupportedException(SqliteStrings.MigrationScriptGenerationNotSupported);
+    public override string GetBeginIfNotExistsScript(string migrationId) =>
+        throw new NotSupportedException(SqliteStrings.MigrationScriptGenerationNotSupported);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -79,8 +79,8 @@ public class SqliteHistoryRepository : HistoryRepository
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string GetBeginIfExistsScript(string migrationId)
-        => throw new NotSupportedException(SqliteStrings.MigrationScriptGenerationNotSupported);
+    public override string GetBeginIfExistsScript(string migrationId) =>
+        throw new NotSupportedException(SqliteStrings.MigrationScriptGenerationNotSupported);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -88,6 +88,6 @@ public class SqliteHistoryRepository : HistoryRepository
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string GetEndIfScript()
-        => throw new NotSupportedException(SqliteStrings.MigrationScriptGenerationNotSupported);
+    public override string GetEndIfScript() =>
+        throw new NotSupportedException(SqliteStrings.MigrationScriptGenerationNotSupported);
 }

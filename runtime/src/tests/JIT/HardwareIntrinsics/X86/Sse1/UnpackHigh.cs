@@ -5,8 +5,8 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace IntelHardwareIntrinsicTest._Sse1
@@ -20,16 +20,25 @@ namespace IntelHardwareIntrinsicTest._Sse1
 
             if (Sse.IsSupported)
             {
-                using (TestTable_2Input<float> floatTable = new TestTable_2Input<float>(new float[4] { 1, -5, 100, 0 }, new float[4] { 22, -1, -50, 0 }, new float[4]))
+                using (
+                    TestTable_2Input<float> floatTable = new TestTable_2Input<float>(
+                        new float[4] { 1, -5, 100, 0 },
+                        new float[4] { 22, -1, -50, 0 },
+                        new float[4]
+                    )
+                )
                 {
-
                     var vf1 = Unsafe.Read<Vector128<float>>(floatTable.inArray1Ptr);
                     var vf2 = Unsafe.Read<Vector128<float>>(floatTable.inArray2Ptr);
                     var vf3 = Sse.UnpackHigh(vf1, vf2);
                     Unsafe.Write(floatTable.outArrayPtr, vf3);
 
-                    if (!floatTable.CheckResult((x, y, z) => (z[0] == x[2]) && (z[1] == y[2]) &&
-                                                             (z[2] == x[3]) && (z[3] == y[3])))
+                    if (
+                        !floatTable.CheckResult(
+                            (x, y, z) =>
+                                (z[0] == x[2]) && (z[1] == y[2]) && (z[2] == x[3]) && (z[3] == y[3])
+                        )
+                    )
                     {
                         Console.WriteLine("SSE UnpackHigh failed on float:");
                         foreach (var item in floatTable.outArray)
@@ -41,7 +50,6 @@ namespace IntelHardwareIntrinsicTest._Sse1
                     }
                 }
             }
-
 
             Assert.Equal(Pass, testResult);
         }

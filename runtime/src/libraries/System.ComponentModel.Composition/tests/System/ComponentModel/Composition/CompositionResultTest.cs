@@ -464,10 +464,12 @@ namespace System.ComponentModel.Composition
 
         private CompositionResult CreateCompositionResult(params CompositionErrorId[] errorIds)
         {
-            return new CompositionResult(errorIds.Select(id =>
-            {
-                return ErrorFactory.Create(id);
-            }));
+            return new CompositionResult(
+                errorIds.Select(id =>
+                {
+                    return ErrorFactory.Create(id);
+                })
+            );
         }
 
         private CompositionResult CreateCompositionResult(int count)

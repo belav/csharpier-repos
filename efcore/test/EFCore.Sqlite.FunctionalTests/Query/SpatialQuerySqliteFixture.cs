@@ -10,11 +10,10 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class SpatialQuerySqliteFixture : SpatialQueryRelationalFixture
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqliteTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
-    protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-        => base.AddServices(serviceCollection)
+    protected override IServiceCollection AddServices(IServiceCollection serviceCollection) =>
+        base.AddServices(serviceCollection)
             .AddEntityFrameworkSqliteNetTopologySuite()
             .AddSingleton<IRelationalTypeMappingSource, ReplacementTypeMappingSource>();
 
@@ -32,30 +31,35 @@ public class SpatialQuerySqliteFixture : SpatialQueryRelationalFixture
 
         modelBuilder.HasDbFunction(
             typeof(GeoExtensions).GetMethod(nameof(GeoExtensions.Distance)),
-            b => b.HasTranslation(
-                e => new SqlFunctionExpression(
+            b =>
+                b.HasTranslation(e => new SqlFunctionExpression(
                     "Distance",
                     arguments: e,
                     nullable: true,
                     argumentsPropagateNullability: e.Select(a => true).ToList(),
                     typeof(double),
-                    null)));
+                    null
+                ))
+        );
     }
 
     private class ReplacementTypeMappingSource : SqliteTypeMappingSource
     {
         public ReplacementTypeMappingSource(
             TypeMappingSourceDependencies dependencies,
-            RelationalTypeMappingSourceDependencies relationalDependencies)
-            : base(dependencies, relationalDependencies)
-        {
-        }
+            RelationalTypeMappingSourceDependencies relationalDependencies
+        )
+            : base(dependencies, relationalDependencies) { }
 
-        protected override RelationalTypeMapping FindMapping(in RelationalTypeMappingInfo mappingInfo)
-            => mappingInfo.ClrType == typeof(GeoPoint)
-                ? ((RelationalTypeMapping)base.FindMapping(typeof(Point))
-                    .WithComposedConverter(new GeoPointConverter()))
-                .WithStoreTypeAndSize("geometry", null)
+        protected override RelationalTypeMapping FindMapping(
+            in RelationalTypeMappingInfo mappingInfo
+        ) =>
+            mappingInfo.ClrType == typeof(GeoPoint)
+                ? (
+                    (RelationalTypeMapping)
+                        base.FindMapping(typeof(Point))
+                            .WithComposedConverter(new GeoPointConverter())
+                ).WithStoreTypeAndSize("geometry", null)
                 : base.FindMapping(mappingInfo);
     }
 }

@@ -86,14 +86,8 @@ namespace System.Security.Cryptography.Xml
         [System.Runtime.CompilerServices.IndexerName("ItemOf")]
         public EncryptedReference this[int index]
         {
-            get
-            {
-                return Item(index)!;
-            }
-            set
-            {
-                ((IList)this)[index] = value;
-            }
+            get { return Item(index)!; }
+            set { ((IList)this)[index] = value; }
         }
 
         /// <internalonly/>
@@ -106,7 +100,10 @@ namespace System.Security.Cryptography.Xml
                     throw new ArgumentNullException(nameof(value));
 
                 if (!(value is DataReference) && !(value is KeyReference))
-                    throw new ArgumentException(SR.Cryptography_Xml_IncorrectObjectType, nameof(value));
+                    throw new ArgumentException(
+                        SR.Cryptography_Xml_IncorrectObjectType,
+                        nameof(value)
+                    );
 
                 _references[index] = value;
             }

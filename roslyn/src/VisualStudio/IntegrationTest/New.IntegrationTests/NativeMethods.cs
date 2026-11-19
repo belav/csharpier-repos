@@ -45,7 +45,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Interop
 
         [DllImport(User32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool EnumWindows([MarshalAs(UnmanagedType.FunctionPtr)] WNDENUMPROC lpEnumFunc, IntPtr lParam);
+        public static extern bool EnumWindows(
+            [MarshalAs(UnmanagedType.FunctionPtr)] WNDENUMPROC lpEnumFunc,
+            IntPtr lParam
+        );
 
         [DllImport(User32)]
         public static extern IntPtr GetAncestor(IntPtr hWnd, uint gaFlags);
@@ -74,10 +77,20 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Interop
         public static extern IntPtr GetWindow(IntPtr hWnd, uint uCmd);
 
         [DllImport(User32, CharSet = CharSet.Unicode, SetLastError = true)]
-        public static extern IntPtr SendMessage(IntPtr hWnd, uint uMsg, IntPtr wParam, IntPtr lParam);
+        public static extern IntPtr SendMessage(
+            IntPtr hWnd,
+            uint uMsg,
+            IntPtr wParam,
+            IntPtr lParam
+        );
 
         [DllImport(User32, CharSet = CharSet.Unicode, SetLastError = true)]
-        public static extern IntPtr SendMessage(IntPtr hWnd, uint uMsg, IntPtr wParam, [Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder lParam);
+        public static extern IntPtr SendMessage(
+            IntPtr hWnd,
+            uint uMsg,
+            IntPtr wParam,
+            [Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder lParam
+        );
 
         #endregion
     }

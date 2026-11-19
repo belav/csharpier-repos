@@ -10,7 +10,15 @@ namespace System.Security.Cryptography
     {
         private readonly OpenSslCipherLite _cipherLite;
 
-        public OpenSslCipher(IntPtr algorithm, CipherMode cipherMode, int blockSizeInBytes, int paddingSizeInBytes, byte[] key, byte[]? iv, bool encrypting)
+        public OpenSslCipher(
+            IntPtr algorithm,
+            CipherMode cipherMode,
+            int blockSizeInBytes,
+            int paddingSizeInBytes,
+            byte[] key,
+            byte[]? iv,
+            bool encrypting
+        )
             : base(cipherMode.GetCipherIv(iv), blockSizeInBytes, paddingSizeInBytes)
         {
             _cipherLite = new OpenSslCipherLite(
@@ -19,7 +27,8 @@ namespace System.Security.Cryptography
                 paddingSizeInBytes,
                 key,
                 iv,
-                encrypting);
+                encrypting
+            );
         }
 
         protected override void Dispose(bool disposing)

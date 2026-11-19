@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
-
 using Internal.TypeSystem;
 
 namespace ILCompiler
@@ -22,15 +21,13 @@ namespace ILCompiler
 
         public override bool IsSingleFileCompilation
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool ContainsMethodBody(MethodDesc method, bool unboxingStub)
         {
-            return method == _method || method == _method.GetCanonMethodTarget(CanonicalFormKind.Specific);
+            return method == _method
+                || method == _method.GetCanonMethodTarget(CanonicalFormKind.Specific);
         }
 
         public sealed override bool ContainsMethodDictionary(MethodDesc method)

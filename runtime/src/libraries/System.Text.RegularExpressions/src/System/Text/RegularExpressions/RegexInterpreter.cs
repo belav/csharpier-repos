@@ -260,7 +260,12 @@ namespace System.Text.RegularExpressions
             return true;
         }
 
-        private bool MatchRef(int index, int length, ReadOnlySpan<char> inputSpan, bool caseInsensitive)
+        private bool MatchRef(
+            int index,
+            int length,
+            ReadOnlySpan<char> inputSpan,
+            bool caseInsensitive
+        )
         {
             int pos;
             if (!_rightToLeft)
@@ -308,9 +313,19 @@ namespace System.Text.RegularExpressions
                     {
                         // If they are not the same character, then we need to check if the backreference character participates in case conversion
                         // and if so, we need to fetch the case equivalences from our casing tables.
-                        Debug.Assert(_culture != null, "If the pattern has backreferences and is IgnoreCase, then _culture must not be null.");
-                        if (!RegexCaseEquivalences.TryFindCaseEquivalencesForCharWithIBehavior(backreferenceChar, _culture, ref _caseBehavior, out ReadOnlySpan<char> equivalences) ||
-                            equivalences.IndexOf(inputSpan[pos]) < 0)
+                        Debug.Assert(
+                            _culture != null,
+                            "If the pattern has backreferences and is IgnoreCase, then _culture must not be null."
+                        );
+                        if (
+                            !RegexCaseEquivalences.TryFindCaseEquivalencesForCharWithIBehavior(
+                                backreferenceChar,
+                                _culture,
+                                ref _caseBehavior,
+                                out ReadOnlySpan<char> equivalences
+                            )
+                            || equivalences.IndexOf(inputSpan[pos]) < 0
+                        )
                         {
                             // The backreference character doesn't participate in case conversions, or it does but the input character
                             // doesn't match any of its equivalents.  Either way, we fail to match.
@@ -341,7 +356,13 @@ namespace System.Text.RegularExpressions
 
             if (runregex.RightToLeft)
             {
-                while (_code.FindOptimizations.TryFindNextStartingPositionRightToLeft(text, ref runtextpos, runtextstart))
+                while (
+                    _code.FindOptimizations.TryFindNextStartingPositionRightToLeft(
+                        text,
+                        ref runtextpos,
+                        runtextstart
+                    )
+                )
                 {
                     CheckTimeout();
 
@@ -359,7 +380,13 @@ namespace System.Text.RegularExpressions
             }
             else
             {
-                while (_code.FindOptimizations.TryFindNextStartingPositionLeftToRight(text, ref runtextpos, runtextstart))
+                while (
+                    _code.FindOptimizations.TryFindNextStartingPositionLeftToRight(
+                        text,
+                        ref runtextpos,
+                        runtextstart
+                    )
+                )
                 {
                     CheckTimeout();
 
@@ -487,14 +514,14 @@ namespace System.Text.RegularExpressions
                         {
                             // Nonempty match -> loop now
                             TrackPush(StackPeek(), runtextpos); // Save old mark, textpos
-                            StackPush(runtextpos);              // Make new mark
-                            Goto(Operand(0));                   // Loop
+                            StackPush(runtextpos); // Make new mark
+                            Goto(Operand(0)); // Loop
                         }
                         else
                         {
                             // Empty match -> straight now
-                            TrackPush2(StackPeek());            // Save old mark
-                            advance = 1;                        // Straight
+                            TrackPush2(StackPeek()); // Save old mark
+                            advance = 1; // Straight
                         }
                         continue;
 
@@ -502,20 +529,21 @@ namespace System.Text.RegularExpressions
                         TrackPop(2);
                         StackPop();
                         runtextpos = TrackPeek(1); // Recall position
-                        TrackPush2(TrackPeek());   // Save old mark
-                        advance = 1;               // Straight
+                        TrackPush2(TrackPeek()); // Save old mark
+                        advance = 1; // Straight
                         continue;
 
                     case RegexOpcode.Branchmark | RegexOpcode.BacktrackingSecond:
                         TrackPop();
                         StackPush(TrackPeek()); // Recall old mark
-                        break;                  // Backtrack
+                        break; // Backtrack
 
                     case RegexOpcode.Lazybranchmark:
                         // We hit this the first time through a lazy loop and after each
                         // successful match of the inner expression.  It simply continues
                         // on and doesn't loop.
                         StackPop();
+
                         {
                             int oldMarkPos = StackPeek();
                             if (runtextpos != oldMarkPos)
@@ -553,9 +581,9 @@ namespace System.Text.RegularExpressions
                             TrackPop(2);
                             int pos = TrackPeek(1);
                             TrackPush2(TrackPeek()); // Save old mark
-                            StackPush(pos);          // Make new mark
-                            runtextpos = pos;        // Recall position
-                            Goto(Operand(0));        // Loop
+                            StackPush(pos); // Make new mark
+                            runtextpos = pos; // Recall position
+                            Goto(Operand(0)); // Loop
                         }
                         continue;
 
@@ -590,6 +618,7 @@ namespace System.Text.RegularExpressions
                         //  0: Mark
                         //  1: Count
                         StackPop(2);
+
                         {
                             int mark = StackPeek();
                             int count = StackPeek(1);
@@ -598,14 +627,14 @@ namespace System.Text.RegularExpressions
                             {
                                 // Max loops or empty match -> straight now
                                 TrackPush2(mark, count); // Save old mark, count
-                                advance = 2;             // Straight
+                                advance = 2; // Straight
                             }
                             else
                             {
                                 // Nonempty match -> count+loop now
-                                TrackPush(mark);                  // remember mark
+                                TrackPush(mark); // remember mark
                                 StackPush(runtextpos, count + 1); // Make new mark, incr count
-                                Goto(Operand(0));                 // Loop
+                                Goto(Operand(0)); // Loop
                             }
                         }
                         continue;
@@ -621,12 +650,12 @@ namespace System.Text.RegularExpressions
                         if (StackPeek(1) > 0)
                         {
                             // Positive -> can go straight
-                            runtextpos = StackPeek();                  // Zap to mark
+                            runtextpos = StackPeek(); // Zap to mark
                             TrackPush2(TrackPeek(), StackPeek(1) - 1); // Save old mark, old count
-                            advance = 2;                               // Straight
+                            advance = 2; // Straight
                             continue;
                         }
-                        StackPush(TrackPeek(), StackPeek(1) - 1);      // Recall old mark, old count
+                        StackPush(TrackPeek(), StackPeek(1) - 1); // Recall old mark, old count
                         break;
 
                     case RegexOpcode.Branchcount | RegexOpcode.BacktrackingSecond:
@@ -635,28 +664,29 @@ namespace System.Text.RegularExpressions
                         //  1: Previous count
                         TrackPop(2);
                         StackPush(TrackPeek(), TrackPeek(1)); // Recall old mark, old count
-                        break;                                // Backtrack
+                        break; // Backtrack
 
                     case RegexOpcode.Lazybranchcount:
                         // StackPush:
                         //  0: Mark
                         //  1: Count
                         StackPop(2);
+
                         {
                             int mark = StackPeek();
                             int count = StackPeek(1);
                             if (count < 0)
                             {
                                 // Negative count -> loop now
-                                TrackPush2(mark);                 // Save old mark
+                                TrackPush2(mark); // Save old mark
                                 StackPush(runtextpos, count + 1); // Make new mark, incr count
-                                Goto(Operand(0));                 // Loop
+                                Goto(Operand(0)); // Loop
                             }
                             else
                             {
                                 // Nonneg count -> straight now
                                 TrackPush(mark, count, runtextpos); // Save mark, count, position
-                                advance = 2;                        // Straight
+                                advance = 2; // Straight
                             }
                         }
                         continue;
@@ -667,23 +697,24 @@ namespace System.Text.RegularExpressions
                         //  1: Count
                         //  2: Textpos
                         TrackPop(3);
+
                         {
                             int mark = TrackPeek();
                             int textpos = TrackPeek(2);
                             if (TrackPeek(1) < Operand(1) && textpos != mark)
                             {
                                 // Under limit and not empty match -> loop
-                                runtextpos = textpos;                 // Recall position
+                                runtextpos = textpos; // Recall position
                                 StackPush(textpos, TrackPeek(1) + 1); // Make new mark, incr count
-                                TrackPush2(mark);                     // Save old mark
-                                Goto(Operand(0));                     // Loop
+                                TrackPush2(mark); // Save old mark
+                                Goto(Operand(0)); // Loop
                                 continue;
                             }
                             else
                             {
                                 // Max loops or empty match -> backtrack
                                 StackPush(TrackPeek(), TrackPeek(1)); // Recall old mark, count
-                                break;                                // backtrack
+                                break; // backtrack
                             }
                         }
 
@@ -696,7 +727,7 @@ namespace System.Text.RegularExpressions
                         TrackPop();
                         StackPop(2);
                         StackPush(TrackPeek(), StackPeek(1) - 1); // Recall old mark, count
-                        break;                                    // Backtrack
+                        break; // Backtrack
 
                     case RegexOpcode.Setjump:
                         CheckTimeout(); // to ensure that positive/negative lookarounds have a timeout check
@@ -738,26 +769,29 @@ namespace System.Text.RegularExpressions
                         break;
 
                     case RegexOpcode.Bol:
+                    {
+                        int m1 = runtextpos - 1;
+                        if ((uint)m1 < (uint)inputSpan.Length && inputSpan[m1] != '\n')
                         {
-                            int m1 = runtextpos - 1;
-                            if ((uint)m1 < (uint)inputSpan.Length && inputSpan[m1] != '\n')
-                            {
-                                break;
-                            }
-                            advance = 0;
-                            continue;
+                            break;
                         }
+                        advance = 0;
+                        continue;
+                    }
 
                     case RegexOpcode.Eol:
+                    {
+                        int runtextpos = this.runtextpos;
+                        if (
+                            (uint)runtextpos < (uint)inputSpan.Length
+                            && inputSpan[runtextpos] != '\n'
+                        )
                         {
-                            int runtextpos = this.runtextpos;
-                            if ((uint)runtextpos < (uint)inputSpan.Length && inputSpan[runtextpos] != '\n')
-                            {
-                                break;
-                            }
-                            advance = 0;
-                            continue;
+                            break;
                         }
+                        advance = 0;
+                        continue;
+                    }
 
                     case RegexOpcode.Boundary:
                         if (!IsBoundary(inputSpan, runtextpos))
@@ -808,15 +842,21 @@ namespace System.Text.RegularExpressions
                         continue;
 
                     case RegexOpcode.EndZ:
+                    {
+                        int runtextpos = this.runtextpos;
+                        if (
+                            runtextpos < inputSpan.Length - 1
+                            || (
+                                (uint)runtextpos < (uint)inputSpan.Length
+                                && inputSpan[runtextpos] != '\n'
+                            )
+                        )
                         {
-                            int runtextpos = this.runtextpos;
-                            if (runtextpos < inputSpan.Length - 1 || ((uint)runtextpos < (uint)inputSpan.Length && inputSpan[runtextpos] != '\n'))
-                            {
-                                break;
-                            }
-                            advance = 0;
-                            continue;
+                            break;
                         }
+                        advance = 0;
+                        continue;
+                    }
 
                     case RegexOpcode.End:
                         if (runtextpos < inputSpan.Length)
@@ -850,7 +890,13 @@ namespace System.Text.RegularExpressions
                         else
                         {
                             int operand = Operand(0);
-                            if (!RegexCharClass.CharInClass(Forwardcharnext(inputSpan), _code.Strings[operand], ref _code.StringsAsciiLookup[operand]))
+                            if (
+                                !RegexCharClass.CharInClass(
+                                    Forwardcharnext(inputSpan),
+                                    _code.Strings[operand],
+                                    ref _code.StringsAsciiLookup[operand]
+                                )
+                            )
                             {
                                 break;
                             }
@@ -872,7 +918,14 @@ namespace System.Text.RegularExpressions
                             int capnum = Operand(0);
                             if (IsMatched(capnum))
                             {
-                                if (!MatchRef(MatchIndex(capnum), MatchLength(capnum), inputSpan, (_operator & RegexOpcode.CaseInsensitive) != 0))
+                                if (
+                                    !MatchRef(
+                                        MatchIndex(capnum),
+                                        MatchLength(capnum),
+                                        inputSpan,
+                                        (_operator & RegexOpcode.CaseInsensitive) != 0
+                                    )
+                                )
                                 {
                                     break;
                                 }
@@ -942,7 +995,13 @@ namespace System.Text.RegularExpressions
 
                             while (c-- > 0)
                             {
-                                if (!RegexCharClass.CharInClass(Forwardcharnext(inputSpan), set, ref setLookup))
+                                if (
+                                    !RegexCharClass.CharInClass(
+                                        Forwardcharnext(inputSpan),
+                                        set,
+                                        ref setLookup
+                                    )
+                                )
                                 {
                                     goto BreakBackward;
                                 }
@@ -1029,7 +1088,13 @@ namespace System.Text.RegularExpressions
 
                             for (i = len; i > 0; i--)
                             {
-                                if (!RegexCharClass.CharInClass(Forwardcharnext(inputSpan), set, ref setLookup))
+                                if (
+                                    !RegexCharClass.CharInClass(
+                                        Forwardcharnext(inputSpan),
+                                        set,
+                                        ref setLookup
+                                    )
+                                )
                                 {
                                     Backwardnext();
                                     break;
@@ -1048,6 +1113,7 @@ namespace System.Text.RegularExpressions
                     case RegexOpcode.Notoneloop | RegexOpcode.Backtracking:
                     case RegexOpcode.Setloop | RegexOpcode.Backtracking:
                         TrackPop(2);
+
                         {
                             int i = TrackPeek();
                             int pos = TrackPeek(1);
@@ -1075,6 +1141,7 @@ namespace System.Text.RegularExpressions
 
                     case RegexOpcode.Onelazy | RegexOpcode.Backtracking:
                         TrackPop(2);
+
                         {
                             int pos = TrackPeek(1);
                             runtextpos = pos;
@@ -1095,6 +1162,7 @@ namespace System.Text.RegularExpressions
 
                     case RegexOpcode.Notonelazy | RegexOpcode.Backtracking:
                         TrackPop(2);
+
                         {
                             int pos = TrackPeek(1);
                             runtextpos = pos;
@@ -1115,12 +1183,19 @@ namespace System.Text.RegularExpressions
 
                     case RegexOpcode.Setlazy | RegexOpcode.Backtracking:
                         TrackPop(2);
+
                         {
                             int pos = TrackPeek(1);
                             runtextpos = pos;
 
                             int operand0 = Operand(0);
-                            if (!RegexCharClass.CharInClass(Forwardcharnext(inputSpan), _code.Strings[operand0], ref _code.StringsAsciiLookup[operand0]))
+                            if (
+                                !RegexCharClass.CharInClass(
+                                    Forwardcharnext(inputSpan),
+                                    _code.Strings[operand0],
+                                    ref _code.StringsAsciiLookup[operand0]
+                                )
+                            )
                             {
                                 break;
                             }
@@ -1135,26 +1210,26 @@ namespace System.Text.RegularExpressions
                         continue;
 
                     case RegexOpcode.UpdateBumpalong:
-                        // UpdateBumpalong should only exist in the code stream at such a point where the root
-                        // of the backtracking stack contains the runtextpos from the start of this Go call. Replace
-                        // that tracking value with the current runtextpos value if it's greater.
+                    // UpdateBumpalong should only exist in the code stream at such a point where the root
+                    // of the backtracking stack contains the runtextpos from the start of this Go call. Replace
+                    // that tracking value with the current runtextpos value if it's greater.
+                    {
+                        Debug.Assert(!_rightToLeft, "UpdateBumpalongs aren't added for RTL");
+                        ref int trackingpos = ref runtrack![runtrack.Length - 1];
+                        if (trackingpos < runtextpos)
                         {
-                            Debug.Assert(!_rightToLeft, "UpdateBumpalongs aren't added for RTL");
-                            ref int trackingpos = ref runtrack![runtrack.Length - 1];
-                            if (trackingpos < runtextpos)
-                            {
-                                trackingpos = runtextpos;
-                            }
-                            advance = 0;
-                            continue;
+                            trackingpos = runtextpos;
                         }
+                        advance = 0;
+                        continue;
+                    }
 
                     default:
                         Debug.Fail($"Unimplemented state: {_operator:X8}");
                         break;
                 }
 
-            BreakBackward:
+                BreakBackward:
                 Backtrack();
             }
         }

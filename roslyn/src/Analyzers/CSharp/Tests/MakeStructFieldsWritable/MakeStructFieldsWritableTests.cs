@@ -11,14 +11,17 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritable
 {
-    using VerifyCS = CSharpCodeFixVerifier<CSharpMakeStructFieldsWritableDiagnosticAnalyzer, CSharpMakeStructFieldsWritableCodeFixProvider>;
+    using VerifyCS = CSharpCodeFixVerifier<
+        CSharpMakeStructFieldsWritableDiagnosticAnalyzer,
+        CSharpMakeStructFieldsWritableCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsMakeStructFieldsWritable)]
     public class MakeStructFieldsWritable
     {
         [Theory, CombinatorialData]
-        public void TestStandardProperty(AnalyzerProperty property)
-            => VerifyCS.VerifyStandardProperty(property);
+        public void TestStandardProperty(AnalyzerProperty property) =>
+            VerifyCS.VerifyStandardProperty(property);
 
         [Fact]
         public async Task SingleReadonlyField_ThisAssignmentInMethod()
@@ -55,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
                         this = new MyStruct(5);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -103,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
                         this = new MyStruct(10);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -172,7 +177,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
                         this = new MyStruct(5, 3, 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -251,7 +257,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
                         this = new MyStruct(5);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -405,7 +412,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
                         this = new MyStruct2(5);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -473,7 +481,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
                         this = new MyStruct2(5);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -541,7 +550,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -609,7 +619,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -661,7 +672,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
                         TestValue = 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -699,7 +711,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
                         Value = value;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57920")]

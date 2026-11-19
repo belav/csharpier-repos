@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,224 +33,273 @@ using System.Reflection;
 using System.Text;
 using System.Web;
 using System.Web.Hosting;
-
 using Mono.Options;
-
 using StandAloneRunnerSupport;
 
 namespace StandAloneRunner
 {
-	sealed class StandAloneRunner
-	{
-		static string testsAssembly;
-		
-		static void Usage (int exitCode, OptionSet options)
-		{
-			Console.WriteLine (@"Usage: standalone-runner [OPTIONS] <TESTS_ASSEMBLY>");
-			if (options != null) {
-				Console.WriteLine ();
-				Console.WriteLine ("Available options:");
-				options.WriteOptionDescriptions (Console.Out);
-			}
-			Console.WriteLine ();
-			
-			Environment.Exit (exitCode);
-		}
-		
-		public static void Die (string format, params object[] args)
-		{
-			Console.WriteLine ("Standalone test failure in assembly '{0}'.", testsAssembly);
-			Console.WriteLine ();
-			
-			if (args == null || args.Length == 0)
-				Console.WriteLine ("Error: " + format);
-			else
-				Console.WriteLine ("Error: " + format, args);
+    sealed class StandAloneRunner
+    {
+        static string testsAssembly;
 
-			Environment.Exit (1);
-		}
-		
-		static void Main (string[] args)
-		{
-			try {
-				var success = Run (args);
+        static void Usage(int exitCode, OptionSet options)
+        {
+            Console.WriteLine(@"Usage: standalone-runner [OPTIONS] <TESTS_ASSEMBLY>");
+            if (options != null)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Available options:");
+                options.WriteOptionDescriptions(Console.Out);
+            }
+            Console.WriteLine();
 
-				if (!success)
-					Environment.Exit (1);
-			} catch (Exception ex) {
-				Die ("Exception caught:{0}{1}", Environment.NewLine, ex.ToString ());
-			}
-		}
+            Environment.Exit(exitCode);
+        }
 
-		static bool Run (string[] args)
-		{
-			bool showHelp = false;
-			string testName = null;
-			string outputName = null;
-			bool verbose = false;
+        public static void Die(string format, params object[] args)
+        {
+            Console.WriteLine("Standalone test failure in assembly '{0}'.", testsAssembly);
+            Console.WriteLine();
 
-			var options = new OptionSet () {
-				{"?|h|help", "Show short usage screen.", v => showHelp = true},
-				{"t=|test=", "Run this test only (full type name)", (string s) => testName = s},
-				{"o=|output=", "Output test results to the console and to the indicated file", (string s) => outputName = s},
-				{"v|verbose", "Print the running test name", v => verbose = true}
-			}; 
-			
-			List <string> extra = options.Parse (args);
-			int extraCount = extra.Count;
+            if (args == null || args.Length == 0)
+                Console.WriteLine("Error: " + format);
+            else
+                Console.WriteLine("Error: " + format, args);
 
-			if (showHelp || extraCount < 1)
-				Usage (showHelp ? 0 : 1, options);
+            Environment.Exit(1);
+        }
 
-			testsAssembly = extra [0];
-			
-			if (!File.Exists (testsAssembly))
-				Die ("Tests assembly '{0}' does not exist.", testsAssembly);
-			
-			Assembly asm = Assembly.LoadFrom (testsAssembly);
-			var tests = new List <StandaloneTest> ();
+        static void Main(string[] args)
+        {
+            try
+            {
+                var success = Run(args);
 
-			LoadTestsFromAssembly (asm, tests);
-			if (tests.Count == 0)
-				Die ("No tests present in the '{0}' assembly. Tests must be public types decorated with the TestCase attribute and implementing the ITestCase interface.", testsAssembly);
+                if (!success)
+                    Environment.Exit(1);
+            }
+            catch (Exception ex)
+            {
+                Die("Exception caught:{0}{1}", Environment.NewLine, ex.ToString());
+            }
+        }
 
-			ApplicationManager appMan = ApplicationManager.GetApplicationManager ();
-			int runCounter = 0;
-			int failedCounter = 0;
-			var reports = new List <string> ();
-			
-			Console.WriteLine ("Running tests:");
-			DateTime start = DateTime.Now;
-			
-			foreach (StandaloneTest test in tests) {
-				if (test.Info.Disabled)
-					continue;
+        static bool Run(string[] args)
+        {
+            bool showHelp = false;
+            string testName = null;
+            string outputName = null;
+            bool verbose = false;
 
-				if (!String.IsNullOrEmpty (testName)) {
-					if (String.Compare (test.TestType.FullName, testName) != 0)
-						continue;
-				}
-				
-				test.Run (appMan, verbose);
-				runCounter++;
-				if (!test.Success) {
-					failedCounter++;
-					reports.Add (FormatReport (test));
-				}
-			}
-			
-			DateTime end = DateTime.Now;
-			Console.WriteLine ();
-			StreamWriter writer;
+            var options = new OptionSet()
+            {
+                { "?|h|help", "Show short usage screen.", v => showHelp = true },
+                { "t=|test=", "Run this test only (full type name)", (string s) => testName = s },
+                {
+                    "o=|output=",
+                    "Output test results to the console and to the indicated file",
+                    (string s) => outputName = s
+                },
+                { "v|verbose", "Print the running test name", v => verbose = true },
+            };
 
-			if (!String.IsNullOrEmpty (outputName))
-				writer = new StreamWriter (outputName);
-			else
-				writer = null;
+            List<string> extra = options.Parse(args);
+            int extraCount = extra.Count;
 
-			try {
-				string report;
-				if (reports.Count > 0) {
-					int repCounter = 0;
-					int numWidth = reports.Count.ToString ().Length;
-					string indent = String.Empty.PadLeft (numWidth + 2);
-					string numFormat = "{0," + numWidth + "}) ";
-					
-					foreach (string r in reports) {
-						repCounter++;
-						Console.Write (numFormat, repCounter);
-						report = FormatLines (indent, r, Environment.NewLine, true);
-						Console.WriteLine (report);
-						if (writer != null) {
-							writer.Write (numFormat, repCounter);
-							writer.WriteLine (report);
-						}
-					}
-				} else
-					Console.WriteLine ();
+            if (showHelp || extraCount < 1)
+                Usage(showHelp ? 0 : 1, options);
 
-				report = String.Format ("Tests run: {0}; Total tests: {1}; Failed: {2}; Not run: {3}; Time taken: {4}",
-							runCounter, tests.Count, failedCounter, tests.Count - runCounter, end - start);
-				Console.WriteLine (report);
-				if (writer != null)
-					writer.WriteLine (report);
-			} finally {
-				if (writer != null) {
-					writer.Close ();
-					writer.Dispose ();
-				}
-			}
+            testsAssembly = extra[0];
 
-			return failedCounter == 0;
-		}
+            if (!File.Exists(testsAssembly))
+                Die("Tests assembly '{0}' does not exist.", testsAssembly);
 
-		static string FormatReport (StandaloneTest test)
-		{
-			var sb = new StringBuilder ();
-			string newline = Environment.NewLine;
-			
-			sb.AppendFormat ("{0}{1}", test.Info.Name, newline);			
-			sb.AppendFormat ("{0,16}: {1}{2}", "Test", test.TestType, newline);
+            Assembly asm = Assembly.LoadFrom(testsAssembly);
+            var tests = new List<StandaloneTest>();
 
-			if (!String.IsNullOrEmpty (test.Info.Description))
-				sb.AppendFormat ("{0,16}: {1}{2}", "Description", test.Info.Description, newline);
+            LoadTestsFromAssembly(asm, tests);
+            if (tests.Count == 0)
+                Die(
+                    "No tests present in the '{0}' assembly. Tests must be public types decorated with the TestCase attribute and implementing the ITestCase interface.",
+                    testsAssembly
+                );
 
-			if (!String.IsNullOrEmpty (test.FailedUrl))
-				sb.AppendFormat ("{0,16}: {1}{2}", "Failed URL", test.FailedUrl, newline);
+            ApplicationManager appMan = ApplicationManager.GetApplicationManager();
+            int runCounter = 0;
+            int failedCounter = 0;
+            var reports = new List<string>();
 
-			if (!String.IsNullOrEmpty (test.FailedUrlCallbackName))
-				sb.AppendFormat ("{0,16}: {1}{2}", "Callback method", test.FailedUrlCallbackName, newline);
-			
-			if (!String.IsNullOrEmpty (test.FailedUrlDescription))
-				sb.AppendFormat ("{0,16}: {1}{2}", "URL description", test.FailedUrlDescription, newline);
+            Console.WriteLine("Running tests:");
+            DateTime start = DateTime.Now;
 
-			if (!String.IsNullOrEmpty (test.FailureDetails))
-				sb.AppendFormat ("{0,16}:{2}{1}{2}", "Failure details", FormatLines ("   ", test.FailureDetails, newline, false), newline);
+            foreach (StandaloneTest test in tests)
+            {
+                if (test.Info.Disabled)
+                    continue;
 
-			if (test.Exception != null)
-				sb.AppendFormat ("{0,16}:{2}{1}{2}", "Exception", FormatLines ("   ", test.Exception.ToString (), newline, false), newline);
+                if (!String.IsNullOrEmpty(testName))
+                {
+                    if (String.Compare(test.TestType.FullName, testName) != 0)
+                        continue;
+                }
 
-			return sb.ToString ();
-		}
+                test.Run(appMan, verbose);
+                runCounter++;
+                if (!test.Success)
+                {
+                    failedCounter++;
+                    reports.Add(FormatReport(test));
+                }
+            }
 
-		static string FormatLines (string indent, string text, string newline, bool skipFirst)
-		{
-			var sb = new StringBuilder ();
-			bool first = true;
-			
-			foreach (string s in text.Split (new string[] { newline }, StringSplitOptions.None)) {
-				if (skipFirst && first)
-					first = false;
-				else
-					sb.Append (indent);
-				sb.Append (s);
-				sb.Append (newline);
-			}
+            DateTime end = DateTime.Now;
+            Console.WriteLine();
+            StreamWriter writer;
 
-			sb.Length -= newline.Length;
-			return sb.ToString ();
-		}
-		
-		static void LoadTestsFromAssembly (Assembly asm, List <StandaloneTest> tests)
-		{
-			Type[] types = asm.GetExportedTypes ();
-			if (types.Length == 0)
-				return;
+            if (!String.IsNullOrEmpty(outputName))
+                writer = new StreamWriter(outputName);
+            else
+                writer = null;
 
-			object[] attributes;
-			foreach (var t in types) {
-				if (!t.IsClass || t.IsAbstract || t.IsGenericTypeDefinition)
-					continue;
-				
-				attributes = t.GetCustomAttributes (typeof (TestCaseAttribute), false);
-				if (attributes.Length == 0)
-					continue;
+            try
+            {
+                string report;
+                if (reports.Count > 0)
+                {
+                    int repCounter = 0;
+                    int numWidth = reports.Count.ToString().Length;
+                    string indent = String.Empty.PadLeft(numWidth + 2);
+                    string numFormat = "{0," + numWidth + "}) ";
 
-				if (!typeof (ITestCase).IsAssignableFrom (t))
-					continue;
+                    foreach (string r in reports)
+                    {
+                        repCounter++;
+                        Console.Write(numFormat, repCounter);
+                        report = FormatLines(indent, r, Environment.NewLine, true);
+                        Console.WriteLine(report);
+                        if (writer != null)
+                        {
+                            writer.Write(numFormat, repCounter);
+                            writer.WriteLine(report);
+                        }
+                    }
+                }
+                else
+                    Console.WriteLine();
 
-				tests.Add (new StandaloneTest (t, attributes [0] as TestCaseAttribute));
-			}
-		}
-	}
+                report = String.Format(
+                    "Tests run: {0}; Total tests: {1}; Failed: {2}; Not run: {3}; Time taken: {4}",
+                    runCounter,
+                    tests.Count,
+                    failedCounter,
+                    tests.Count - runCounter,
+                    end - start
+                );
+                Console.WriteLine(report);
+                if (writer != null)
+                    writer.WriteLine(report);
+            }
+            finally
+            {
+                if (writer != null)
+                {
+                    writer.Close();
+                    writer.Dispose();
+                }
+            }
+
+            return failedCounter == 0;
+        }
+
+        static string FormatReport(StandaloneTest test)
+        {
+            var sb = new StringBuilder();
+            string newline = Environment.NewLine;
+
+            sb.AppendFormat("{0}{1}", test.Info.Name, newline);
+            sb.AppendFormat("{0,16}: {1}{2}", "Test", test.TestType, newline);
+
+            if (!String.IsNullOrEmpty(test.Info.Description))
+                sb.AppendFormat("{0,16}: {1}{2}", "Description", test.Info.Description, newline);
+
+            if (!String.IsNullOrEmpty(test.FailedUrl))
+                sb.AppendFormat("{0,16}: {1}{2}", "Failed URL", test.FailedUrl, newline);
+
+            if (!String.IsNullOrEmpty(test.FailedUrlCallbackName))
+                sb.AppendFormat(
+                    "{0,16}: {1}{2}",
+                    "Callback method",
+                    test.FailedUrlCallbackName,
+                    newline
+                );
+
+            if (!String.IsNullOrEmpty(test.FailedUrlDescription))
+                sb.AppendFormat(
+                    "{0,16}: {1}{2}",
+                    "URL description",
+                    test.FailedUrlDescription,
+                    newline
+                );
+
+            if (!String.IsNullOrEmpty(test.FailureDetails))
+                sb.AppendFormat(
+                    "{0,16}:{2}{1}{2}",
+                    "Failure details",
+                    FormatLines("   ", test.FailureDetails, newline, false),
+                    newline
+                );
+
+            if (test.Exception != null)
+                sb.AppendFormat(
+                    "{0,16}:{2}{1}{2}",
+                    "Exception",
+                    FormatLines("   ", test.Exception.ToString(), newline, false),
+                    newline
+                );
+
+            return sb.ToString();
+        }
+
+        static string FormatLines(string indent, string text, string newline, bool skipFirst)
+        {
+            var sb = new StringBuilder();
+            bool first = true;
+
+            foreach (string s in text.Split(new string[] { newline }, StringSplitOptions.None))
+            {
+                if (skipFirst && first)
+                    first = false;
+                else
+                    sb.Append(indent);
+                sb.Append(s);
+                sb.Append(newline);
+            }
+
+            sb.Length -= newline.Length;
+            return sb.ToString();
+        }
+
+        static void LoadTestsFromAssembly(Assembly asm, List<StandaloneTest> tests)
+        {
+            Type[] types = asm.GetExportedTypes();
+            if (types.Length == 0)
+                return;
+
+            object[] attributes;
+            foreach (var t in types)
+            {
+                if (!t.IsClass || t.IsAbstract || t.IsGenericTypeDefinition)
+                    continue;
+
+                attributes = t.GetCustomAttributes(typeof(TestCaseAttribute), false);
+                if (attributes.Length == 0)
+                    continue;
+
+                if (!typeof(ITestCase).IsAssignableFrom(t))
+                    continue;
+
+                tests.Add(new StandaloneTest(t, attributes[0] as TestCaseAttribute));
+            }
+        }
+    }
 }

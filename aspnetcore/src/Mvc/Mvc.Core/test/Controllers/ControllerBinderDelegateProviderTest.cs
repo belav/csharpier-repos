@@ -1391,8 +1391,8 @@ public class ControllerBinderDelegateProviderTest
             modelValidatorProvider = Mock.Of<IModelValidatorProvider>();
         }
 
-        var metadataProvider =
-            modelMetadataProvider ?? TestModelMetadataProvider.CreateDefaultProvider();
+        var metadataProvider = modelMetadataProvider
+            ?? TestModelMetadataProvider.CreateDefaultProvider();
         var objectModelValidator = GetObjectValidator(
             modelMetadataProvider,
             modelValidatorProvider

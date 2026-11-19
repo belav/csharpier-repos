@@ -21,7 +21,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.U
         [Fact]
         public void OpenStream_Errors()
         {
-            Assert.Throws<ArgumentException>(() => new CompilationOutputFilesWithImplicitPdbPath(@"a.dll"));
+            Assert.Throws<ArgumentException>(() =>
+                new CompilationOutputFilesWithImplicitPdbPath(@"a.dll")
+            );
         }
 
         [Theory]
@@ -32,14 +34,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.U
         {
             var dir = Temp.CreateDirectory();
             var dllFile = dir.CreateFile("lib.dll");
-            var pdbFile = (pdbFormat == DebugInformationFormat.Embedded) ? null : dir.CreateFile("lib.pdb");
+            var pdbFile =
+                (pdbFormat == DebugInformationFormat.Embedded) ? null : dir.CreateFile("lib.pdb");
 
             var source = @"class C { public static void Main() { int x = 1; } }";
 
-            var compilation = CSharpTestBase.CreateCompilationWithMscorlib40AndSystemCore(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), options: TestOptions.DebugDll, assemblyName: "lib");
+            var compilation = CSharpTestBase.CreateCompilationWithMscorlib40AndSystemCore(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                options: TestOptions.DebugDll,
+                assemblyName: "lib"
+            );
             var pdbStream = (pdbFile != null) ? new MemoryStream() : null;
             var debugDirPdbPath = exactPdbPath ? pdbFile.Path : "a/y/z/lib.pdb";
-            var peImage = compilation.EmitToArray(new EmitOptions(debugInformationFormat: pdbFormat, pdbFilePath: debugDirPdbPath), pdbStream: pdbStream);
+            var peImage = compilation.EmitToArray(
+                new EmitOptions(debugInformationFormat: pdbFormat, pdbFilePath: debugDirPdbPath),
+                pdbStream: pdbStream
+            );
             dllFile.WriteAllBytes(peImage);
 
             if (pdbFile != null)
@@ -54,7 +65,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.U
             {
                 var encReader = pdb.CreateEditAndContinueMethodDebugInfoReader();
                 Assert.True(encReader.IsPortable);
-                var localSig = encReader.GetLocalSignature(MetadataTokens.MethodDefinitionHandle(1));
+                var localSig = encReader.GetLocalSignature(
+                    MetadataTokens.MethodDefinitionHandle(1)
+                );
                 Assert.Equal(MetadataTokens.StandaloneSignatureHandle(1), localSig);
             }
 
@@ -72,7 +85,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.U
         public void AssemblyFileNotFound()
         {
             var dir = Temp.CreateDirectory();
-            var outputs = new CompilationOutputFilesWithImplicitPdbPath(Path.Combine(dir.Path, "nonexistent.dll"));
+            var outputs = new CompilationOutputFilesWithImplicitPdbPath(
+                Path.Combine(dir.Path, "nonexistent.dll")
+            );
             Assert.Null(outputs.OpenPdb());
             Assert.Null(outputs.OpenAssemblyMetadata(prefetch: false));
         }
@@ -85,10 +100,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.U
 
             var source = @"class C { public static void Main() { int x = 1; } }";
 
-            var compilation = CSharpTestBase.CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.DebugDll, assemblyName: "lib");
+            var compilation = CSharpTestBase.CreateCompilationWithMscorlib40AndSystemCore(
+                source,
+                options: TestOptions.DebugDll,
+                assemblyName: "lib"
+            );
             var pdbStream = new MemoryStream();
             var debugDirPdbPath = Path.Combine(dir.Path, "nonexistent.pdb");
-            var peImage = compilation.EmitToArray(new EmitOptions(debugInformationFormat: DebugInformationFormat.PortablePdb, pdbFilePath: debugDirPdbPath), pdbStream: pdbStream);
+            var peImage = compilation.EmitToArray(
+                new EmitOptions(
+                    debugInformationFormat: DebugInformationFormat.PortablePdb,
+                    pdbFilePath: debugDirPdbPath
+                ),
+                pdbStream: pdbStream
+            );
             pdbStream.Position = 0;
 
             dllFile.WriteAllBytes(peImage);

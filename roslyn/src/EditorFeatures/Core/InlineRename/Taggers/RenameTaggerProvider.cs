@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
     {
         private readonly InlineRenameService _renameService = renameService;
 
-        public ITagger<T> CreateTagger<T>(ITextBuffer buffer) where T : ITag
-            => new RenameTagger(buffer, _renameService) as ITagger<T>;
+        public ITagger<T> CreateTagger<T>(ITextBuffer buffer)
+            where T : ITag => new RenameTagger(buffer, _renameService) as ITagger<T>;
     }
 }

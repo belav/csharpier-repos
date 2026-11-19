@@ -14,6 +14,7 @@ using Microsoft.ServiceHub.Framework;
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.StarredSuggestions;
+
 internal static class StarredCompletionAssemblyHelper
 {
     private const string CompletionsDllName = "Microsoft.VisualStudio.IntelliCode.CSharp.dll";
@@ -41,7 +42,11 @@ internal static class StarredCompletionAssemblyHelper
     /// <param name="completionsAssemblyLocation">Location of dll for starred completion</param>
     /// <param name="loggerFactory">Factory for creating new logger</param>
     /// <param name="serviceBrokerFactory">Service broker with access to necessary remote services</param>
-    internal static void InitializeInstance(string? completionsAssemblyLocation, ILoggerFactory loggerFactory, ServiceBrokerFactory serviceBrokerFactory)
+    internal static void InitializeInstance(
+        string? completionsAssemblyLocation,
+        ILoggerFactory loggerFactory,
+        ServiceBrokerFactory serviceBrokerFactory
+    )
     {
         // No location provided means it wasn't passed through from C# Dev Kit, so we don't need to initialize anything further
         if (string.IsNullOrEmpty(completionsAssemblyLocation))
@@ -56,7 +61,9 @@ internal static class StarredCompletionAssemblyHelper
         s_serviceBrokerFactory = serviceBrokerFactory;
     }
 
-    internal static async Task<CompletionProvider?> GetCompletionProviderAsync(CancellationToken cancellationToken)
+    internal static async Task<CompletionProvider?> GetCompletionProviderAsync(
+        CancellationToken cancellationToken
+    )
     {
         // Short cut: if we already have a provider, return it
         if (s_completionProvider is CompletionProvider completionProvider)
@@ -67,7 +74,11 @@ internal static class StarredCompletionAssemblyHelper
             return null;
 
         // If we were never initialized with any information from Dev Kit, we can't create one
-        if (s_completionsAssemblyLocation is null || s_logger is null || s_serviceBrokerFactory is null)
+        if (
+            s_completionsAssemblyLocation is null
+            || s_logger is null
+            || s_serviceBrokerFactory is null
+        )
             return null;
 
         // If we don't have a connection to a service broker yet, we also can't create one
@@ -88,16 +99,29 @@ internal static class StarredCompletionAssemblyHelper
 
             try
             {
-                var alc = AssemblyLoadContextWrapper.TryCreate(ALCName, s_completionsAssemblyLocation, s_logger);
+                var alc = AssemblyLoadContextWrapper.TryCreate(
+                    ALCName,
+                    s_completionsAssemblyLocation,
+                    s_logger
+                );
                 if (alc is null)
                 {
                     s_previousCreationFailed = true;
                     return null;
                 }
 
-                var createCompletionProviderMethodInfo = alc.GetMethodInfo(CompletionsDllName, CompletionHelperClassFullName, CreateCompletionProviderMethodName);
+                var createCompletionProviderMethodInfo = alc.GetMethodInfo(
+                    CompletionsDllName,
+                    CompletionHelperClassFullName,
+                    CreateCompletionProviderMethodName
+                );
 
-                s_completionProvider = await CreateCompletionProviderAsync(createCompletionProviderMethodInfo, serviceBroker, s_completionsAssemblyLocation, s_logger);
+                s_completionProvider = await CreateCompletionProviderAsync(
+                    createCompletionProviderMethodInfo,
+                    serviceBroker,
+                    s_completionsAssemblyLocation,
+                    s_logger
+                );
                 return s_completionProvider;
             }
             catch (Exception ex)
@@ -109,12 +133,28 @@ internal static class StarredCompletionAssemblyHelper
         }
     }
 
-    private static async Task<CompletionProvider> CreateCompletionProviderAsync(MethodInfo createCompletionProviderMethodInfo, IServiceBroker serviceBroker, string modelBasePath, ILogger logger)
+    private static async Task<CompletionProvider> CreateCompletionProviderAsync(
+        MethodInfo createCompletionProviderMethodInfo,
+        IServiceBroker serviceBroker,
+        string modelBasePath,
+        ILogger logger
+    )
     {
-        var completionProviderObj = createCompletionProviderMethodInfo.Invoke(null, new object[4] { serviceBroker, BrokeredServices.Services.Descriptors.RemoteModelService, modelBasePath, logger });
+        var completionProviderObj = createCompletionProviderMethodInfo.Invoke(
+            null,
+            new object[4]
+            {
+                serviceBroker,
+                BrokeredServices.Services.Descriptors.RemoteModelService,
+                modelBasePath,
+                logger,
+            }
+        );
         if (completionProviderObj == null)
         {
-            throw new NotSupportedException($"{createCompletionProviderMethodInfo.Name} method could not be invoked");
+            throw new NotSupportedException(
+                $"{createCompletionProviderMethodInfo.Name} method could not be invoked"
+            );
         }
         var completionProvider = (Task<CompletionProvider>)completionProviderObj;
         return await completionProvider;

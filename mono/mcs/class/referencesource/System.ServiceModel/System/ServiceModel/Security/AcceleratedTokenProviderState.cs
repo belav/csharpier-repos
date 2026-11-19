@@ -13,7 +13,7 @@ namespace System.ServiceModel.Security
         }
 
         public byte[] GetRequestorEntropy()
-        {       
+        {
             return this.entropy;
         }
     }

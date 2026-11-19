@@ -14,7 +14,9 @@ internal partial class MigrationsListCommand
     protected override int Execute(string[] args)
     {
         using var executor = CreateExecutor(args);
-        var migrations = executor.GetMigrations(Context!.Value(), _connection!.Value(), _noConnect!.HasValue()).ToList();
+        var migrations = executor
+            .GetMigrations(Context!.Value(), _connection!.Value(), _noConnect!.HasValue())
+            .ToList();
 
         if (_json!.HasValue())
         {
@@ -36,15 +38,18 @@ internal partial class MigrationsListCommand
 
         for (var i = 0; i < migrations.Count; i++)
         {
-            var safeName = nameGroups.Count(g => g.Key == migrations[i]["Name"]) == 1
-                ? migrations[i]["Name"]
-                : migrations[i]["Id"];
+            var safeName =
+                nameGroups.Count(g => g.Key == migrations[i]["Name"]) == 1
+                    ? migrations[i]["Name"]
+                    : migrations[i]["Id"];
 
             Reporter.WriteData("  {");
             Reporter.WriteData("    \"id\": \"" + migrations[i]["Id"] + "\",");
             Reporter.WriteData("    \"name\": \"" + migrations[i]["Name"] + "\",");
             Reporter.WriteData("    \"safeName\": \"" + safeName + "\",");
-            Reporter.WriteData("    \"applied\": " + Json.Literal(migrations[i]["Applied"] as bool?));
+            Reporter.WriteData(
+                "    \"applied\": " + Json.Literal(migrations[i]["Applied"] as bool?)
+            );
 
             var line = "  }";
             if (i != migrations.Count - 1)

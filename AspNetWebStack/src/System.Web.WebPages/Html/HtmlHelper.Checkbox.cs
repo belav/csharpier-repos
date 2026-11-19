@@ -23,7 +23,10 @@ namespace System.Web.WebPages.Html
         {
             if (String.IsNullOrEmpty(name))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "name");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "name"
+                );
             }
 
             return BuildCheckBox(name, null, htmlAttributes);
@@ -39,16 +42,27 @@ namespace System.Web.WebPages.Html
             return CheckBox(name, isChecked, AnonymousObjectToHtmlAttributes(htmlAttributes));
         }
 
-        public IHtmlString CheckBox(string name, bool isChecked, IDictionary<string, object> htmlAttributes)
+        public IHtmlString CheckBox(
+            string name,
+            bool isChecked,
+            IDictionary<string, object> htmlAttributes
+        )
         {
             if (String.IsNullOrEmpty(name))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "name");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "name"
+                );
             }
             return BuildCheckBox(name, isChecked, htmlAttributes);
         }
 
-        private IHtmlString BuildCheckBox(string name, bool? isChecked, IDictionary<string, object> attributes)
+        private IHtmlString BuildCheckBox(
+            string name,
+            bool? isChecked,
+            IDictionary<string, object> attributes
+        )
         {
             TagBuilder builder = new TagBuilder("input");
             builder.MergeAttribute("type", "checkbox", replaceExisting: true);
@@ -58,7 +72,9 @@ namespace System.Web.WebPages.Html
 
             if (UnobtrusiveJavaScriptEnabled)
             {
-                var validationAttributes = _validationHelper.GetUnobtrusiveValidationAttributes(name);
+                var validationAttributes = _validationHelper.GetUnobtrusiveValidationAttributes(
+                    name
+                );
                 builder.MergeAttributes(validationAttributes, replaceExisting: false);
             }
 

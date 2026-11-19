@@ -39,5 +39,6 @@ public interface IModelRuntimeInitializer
     IModel Initialize(
         IModel model,
         bool designTime = true,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation>? validationLogger = null);
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation>? validationLogger = null
+    );
 }

@@ -12,19 +12,20 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 {
     internal class CodeGenerationNamespaceInfo
     {
-        private static readonly ConditionalWeakTable<INamespaceSymbol, CodeGenerationNamespaceInfo> s_namespaceToInfoMap =
-            new();
+        private static readonly ConditionalWeakTable<
+            INamespaceSymbol,
+            CodeGenerationNamespaceInfo
+        > s_namespaceToInfoMap = new();
 
         private readonly IList<ISymbol> _imports;
 
-        private CodeGenerationNamespaceInfo(IList<ISymbol> imports)
-            => _imports = imports;
+        private CodeGenerationNamespaceInfo(IList<ISymbol> imports) => _imports = imports;
 
-        public static void Attach(
-            INamespaceSymbol @namespace,
-            IList<ISymbol> imports)
+        public static void Attach(INamespaceSymbol @namespace, IList<ISymbol> imports)
         {
-            var info = new CodeGenerationNamespaceInfo(imports ?? SpecializedCollections.EmptyList<ISymbol>());
+            var info = new CodeGenerationNamespaceInfo(
+                imports ?? SpecializedCollections.EmptyList<ISymbol>()
+            );
             s_namespaceToInfoMap.Add(@namespace, info);
         }
 
@@ -34,14 +35,12 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             return info;
         }
 
-        public static IList<ISymbol> GetImports(INamespaceSymbol @namespace)
-            => GetImports(GetInfo(@namespace));
+        public static IList<ISymbol> GetImports(INamespaceSymbol @namespace) =>
+            GetImports(GetInfo(@namespace));
 
         private static IList<ISymbol> GetImports(CodeGenerationNamespaceInfo info)
         {
-            return info == null
-                ? SpecializedCollections.EmptyList<ISymbol>()
-                : info._imports;
+            return info == null ? SpecializedCollections.EmptyList<ISymbol>() : info._imports;
         }
     }
 }

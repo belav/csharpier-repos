@@ -11,7 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class CompositeRowForeignKeyValueFactory : CompositeRowValueFactory, IRowForeignKeyValueFactory<object?[]>
+public class CompositeRowForeignKeyValueFactory
+    : CompositeRowValueFactory,
+        IRowForeignKeyValueFactory<object?[]>
 {
     private readonly IForeignKeyConstraint _foreignKey;
     private readonly IRowKeyValueFactory<object?[]> _principalKeyValueFactory;
@@ -25,12 +27,14 @@ public class CompositeRowForeignKeyValueFactory : CompositeRowValueFactory, IRow
     /// </summary>
     public CompositeRowForeignKeyValueFactory(
         IForeignKeyConstraint foreignKey,
-        IValueConverterSelector valueConverterSelector)
+        IValueConverterSelector valueConverterSelector
+    )
         : base(foreignKey.Columns)
     {
         _foreignKey = foreignKey;
         _principalKeyValueFactory =
-            (IRowKeyValueFactory<object?[]>)((UniqueConstraint)foreignKey.PrincipalUniqueConstraint).GetRowKeyValueFactory();
+            (IRowKeyValueFactory<object?[]>)
+                ((UniqueConstraint)foreignKey.PrincipalUniqueConstraint).GetRowKeyValueFactory();
 
         var columns = foreignKey.Columns;
         _valueConverters = new List<ValueConverter?>(columns.Count);
@@ -48,7 +52,12 @@ public class CompositeRowForeignKeyValueFactory : CompositeRowValueFactory, IRow
                 {
                     throw new InvalidOperationException(
                         RelationalStrings.StoredKeyTypesNotConvertable(
-                            fkColumn.Name, fkColumn.StoreType, pkColumn.StoreType, pkColumn.Name));
+                            fkColumn.Name,
+                            fkColumn.StoreType,
+                            pkColumn.StoreType,
+                            pkColumn.Name
+                        )
+                    );
                 }
 
                 _valueConverters.Add(converterInfos.First().Create());
@@ -69,11 +78,15 @@ public class CompositeRowForeignKeyValueFactory : CompositeRowValueFactory, IRow
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object CreatePrincipalEquatableKeyValue(IReadOnlyModificationCommand command, bool fromOriginalValues = false)
-        => new EquatableKeyValue<object?[]>(
+    public virtual object CreatePrincipalEquatableKeyValue(
+        IReadOnlyModificationCommand command,
+        bool fromOriginalValues = false
+    ) =>
+        new EquatableKeyValue<object?[]>(
             _foreignKey,
             _principalKeyValueFactory.CreateKeyValue(command, fromOriginalValues),
-            EqualityComparer);
+            EqualityComparer
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -81,8 +94,11 @@ public class CompositeRowForeignKeyValueFactory : CompositeRowValueFactory, IRow
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object? CreateDependentEquatableKeyValue(IReadOnlyModificationCommand command, bool fromOriginalValues = false)
-        => TryCreateDependentKeyValue(command, fromOriginalValues, out var keyValue)
+    public virtual object? CreateDependentEquatableKeyValue(
+        IReadOnlyModificationCommand command,
+        bool fromOriginalValues = false
+    ) =>
+        TryCreateDependentKeyValue(command, fromOriginalValues, out var keyValue)
             ? new EquatableKeyValue<object?[]>(_foreignKey, keyValue, EqualityComparer)
             : null;
 
@@ -92,8 +108,10 @@ public class CompositeRowForeignKeyValueFactory : CompositeRowValueFactory, IRow
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object[] CreatePrincipalKeyValue(IReadOnlyModificationCommand command, bool fromOriginalValues = false)
-        => _principalKeyValueFactory.CreateKeyValue(command, fromOriginalValues)!;
+    public virtual object[] CreatePrincipalKeyValue(
+        IReadOnlyModificationCommand command,
+        bool fromOriginalValues = false
+    ) => _principalKeyValueFactory.CreateKeyValue(command, fromOriginalValues)!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -101,8 +119,11 @@ public class CompositeRowForeignKeyValueFactory : CompositeRowValueFactory, IRow
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object[]? CreateDependentKeyValue(IReadOnlyModificationCommand command, bool fromOriginalValues = false)
-        => TryCreateDependentKeyValue(command, fromOriginalValues, out var keyValue)
+    public virtual object[]? CreateDependentKeyValue(
+        IReadOnlyModificationCommand command,
+        bool fromOriginalValues = false
+    ) =>
+        TryCreateDependentKeyValue(command, fromOriginalValues, out var keyValue)
             ? (object[])keyValue
             : null;
 }

@@ -22,7 +22,12 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
                 _child1 = child1;
             }
 
-            internal WithTwoChildren(DiagnosticInfo[]? diagnostics, SyntaxAnnotation[]? annotations, GreenNode child0, GreenNode child1)
+            internal WithTwoChildren(
+                DiagnosticInfo[]? diagnostics,
+                SyntaxAnnotation[]? annotations,
+                GreenNode child0,
+                GreenNode child1
+            )
                 : base(diagnostics, annotations)
             {
                 this.SlotCount = 2;

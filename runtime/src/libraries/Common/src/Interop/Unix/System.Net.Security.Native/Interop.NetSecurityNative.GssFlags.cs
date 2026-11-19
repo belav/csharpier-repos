@@ -22,7 +22,7 @@ internal static partial class Interop
             GSS_C_DCE_STYLE = 0x1000,
             GSS_C_IDENTIFY_FLAG = 0x2000,
             GSS_C_EXTENDED_ERROR_FLAG = 0x4000,
-            GSS_C_DELEG_POLICY_FLAG = 0x8000
+            GSS_C_DELEG_POLICY_FLAG = 0x8000,
         }
     }
 }

@@ -22,28 +22,44 @@ namespace System.Security.Cryptography
 
         [SupportedOSPlatform("windows")]
         public RSACryptoServiceProvider(int dwKeySize, CspParameters parameters) =>
-            throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_CAPI_Required, nameof(CspParameters)));
+            throw new PlatformNotSupportedException(
+                SR.Format(SR.Cryptography_CAPI_Required, nameof(CspParameters))
+            );
 
         [SupportedOSPlatform("windows")]
         public RSACryptoServiceProvider(CspParameters parameters) =>
-            throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_CAPI_Required, nameof(CspParameters)));
+            throw new PlatformNotSupportedException(
+                SR.Format(SR.Cryptography_CAPI_Required, nameof(CspParameters))
+            );
 
         [SupportedOSPlatform("windows")]
         public CspKeyContainerInfo CspKeyContainerInfo => default!;
 
         public byte[] Decrypt(byte[] rgb, bool fOAEP) => default!;
+
         public byte[] Encrypt(byte[] rgb, bool fOAEP) => default!;
+
         public byte[] ExportCspBlob(bool includePrivateParameters) => default!;
+
         public override RSAParameters ExportParameters(bool includePrivateParameters) => default;
+
         public void ImportCspBlob(byte[] keyBlob) { }
+
         public override void ImportParameters(RSAParameters parameters) { }
+
         public bool PersistKeyInCsp { get; set; }
         public bool PublicOnly => default;
+
         public byte[] SignData(byte[] buffer, object halg) => default!;
+
         public byte[] SignData(byte[] buffer, int offset, int count, object halg) => default!;
+
         public byte[] SignData(Stream inputStream, object halg) => default!;
+
         public byte[] SignHash(byte[] rgbHash, string str) => default!;
+
         public bool VerifyData(byte[] buffer, object halg, byte[] signature) => default;
+
         public bool VerifyHash(byte[] rgbHash, string str, byte[] rgbSignature) => default;
 
         // UseMachineKeyStore has no effect in non-Windows

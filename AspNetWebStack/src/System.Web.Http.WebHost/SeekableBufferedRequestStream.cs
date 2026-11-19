@@ -30,10 +30,7 @@ namespace System.Web.Http.WebHost
 
         public override bool CanSeek
         {
-            get
-            {
-                return !IsDisposed;
-            }
+            get { return !IsDisposed; }
         }
 
         public override long Position
@@ -76,7 +73,12 @@ namespace System.Web.Http.WebHost
             return bytesRead;
         }
 
-        public async override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override async Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfDisposed();
 
@@ -117,7 +119,7 @@ namespace System.Web.Http.WebHost
                     newPosition = currentPosition + offset;
                     break;
                 case SeekOrigin.End:
-                    // We have to check Length here because we might not know the length in some scenarios. 
+                    // We have to check Length here because we might not know the length in some scenarios.
                     // If we don't know, then we just do the safe thing and force a read to end.
                     if (Length >= 0)
                     {
@@ -125,7 +127,11 @@ namespace System.Web.Http.WebHost
                     }
                     break;
                 default:
-                    throw new InvalidEnumArgumentException("origin", (int)origin, typeof(SeekOrigin));
+                    throw new InvalidEnumArgumentException(
+                        "origin",
+                        (int)origin,
+                        typeof(SeekOrigin)
+                    );
             }
 
             if (newPosition == currentPosition)
@@ -146,9 +152,7 @@ namespace System.Web.Http.WebHost
                 // This is done synchronously, because we need to block the calling thread so that the result of
                 // Seek can be returned.
                 byte[] buffer = new byte[ReadBufferSize];
-                while (InnerStream.Read(buffer, 0, buffer.Length) > 0)
-                {
-                }
+                while (InnerStream.Read(buffer, 0, buffer.Length) > 0) { }
 
                 SwapToSeekableStream();
             }

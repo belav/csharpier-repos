@@ -16,32 +16,41 @@ namespace Microsoft.CodeAnalysis.CSharp.TopLevelStatements
     using static ConvertProgramAnalysis;
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class ConvertToTopLevelStatementsDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal sealed class ConvertToTopLevelStatementsDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public ConvertToTopLevelStatementsDiagnosticAnalyzer()
             : base(
-                  IDEDiagnosticIds.UseTopLevelStatementsId,
-                  EnforceOnBuildValues.UseTopLevelStatements,
-                  CSharpCodeStyleOptions.PreferTopLevelStatements,
-                  new LocalizableResourceString(nameof(CSharpAnalyzersResources.Convert_to_top_level_statements), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+                IDEDiagnosticIds.UseTopLevelStatementsId,
+                EnforceOnBuildValues.UseTopLevelStatements,
+                CSharpCodeStyleOptions.PreferTopLevelStatements,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Convert_to_top_level_statements),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticDocumentAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticDocumentAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context)
         {
             context.RegisterCompilationStartAction(context =>
             {
                 // can only suggest moving to top level statement on c# 9 or above.
-                if (context.Compilation.LanguageVersion() < LanguageVersion.CSharp9 ||
-                    !IsApplication(context.Compilation))
+                if (
+                    context.Compilation.LanguageVersion() < LanguageVersion.CSharp9
+                    || !IsApplication(context.Compilation)
+                )
                 {
                     return;
                 }
 
-                context.RegisterSyntaxNodeAction(ProcessCompilationUnit, SyntaxKind.CompilationUnit);
+                context.RegisterSyntaxNodeAction(
+                    ProcessCompilationUnit,
+                    SyntaxKind.CompilationUnit
+                );
             });
         }
 
@@ -49,8 +58,10 @@ namespace Microsoft.CodeAnalysis.CSharp.TopLevelStatements
         {
             // Don't want to suggest moving if the user doesn't have a preference for top-level-statements.
             var option = context.GetCSharpAnalyzerOptions().PreferTopLevelStatements;
-            if (ShouldSkipAnalysis(context, option.Notification)
-                || !CanOfferUseTopLevelStatements(option, forAnalyzer: true))
+            if (
+                ShouldSkipAnalysis(context, option.Notification)
+                || !CanOfferUseTopLevelStatements(option, forAnalyzer: true)
+            )
             {
                 return;
             }
@@ -63,22 +74,42 @@ namespace Microsoft.CodeAnalysis.CSharp.TopLevelStatements
             // Ok, the user does like top level statements.  Check if we can find a suitable hit in this type that
             // indicates we're on the entrypoint of the program.
             var root = (CompilationUnitSyntax)context.Node;
-            var methodDeclarations = root.DescendantNodes(n => n is CompilationUnitSyntax or BaseNamespaceDeclarationSyntax or ClassDeclarationSyntax).OfType<MethodDeclarationSyntax>();
+            var methodDeclarations = root.DescendantNodes(n =>
+                    n
+                        is CompilationUnitSyntax
+                            or BaseNamespaceDeclarationSyntax
+                            or ClassDeclarationSyntax
+                )
+                .OfType<MethodDeclarationSyntax>();
             foreach (var methodDeclaration in methodDeclarations)
             {
-                if (IsProgramMainMethod(
-                        semanticModel, methodDeclaration, mainTypeName, cancellationToken, out var canConvertToTopLevelStatement))
+                if (
+                    IsProgramMainMethod(
+                        semanticModel,
+                        methodDeclaration,
+                        mainTypeName,
+                        cancellationToken,
+                        out var canConvertToTopLevelStatement
+                    )
+                )
                 {
                     if (canConvertToTopLevelStatement)
                     {
                         // Looks good.  Let the user know this type/method can be converted to a top level program.
-                        context.ReportDiagnostic(DiagnosticHelper.Create(
-                            this.Descriptor,
-                            GetUseTopLevelStatementsDiagnosticLocation(
-                                methodDeclaration, isHidden: option.Notification.Severity.WithDefaultSeverity(DiagnosticSeverity.Hidden) == ReportDiagnostic.Hidden),
-                            option.Notification,
-                            ImmutableArray.Create(methodDeclaration.GetLocation()),
-                            ImmutableDictionary<string, string?>.Empty));
+                        context.ReportDiagnostic(
+                            DiagnosticHelper.Create(
+                                this.Descriptor,
+                                GetUseTopLevelStatementsDiagnosticLocation(
+                                    methodDeclaration,
+                                    isHidden: option.Notification.Severity.WithDefaultSeverity(
+                                        DiagnosticSeverity.Hidden
+                                    ) == ReportDiagnostic.Hidden
+                                ),
+                                option.Notification,
+                                ImmutableArray.Create(methodDeclaration.GetLocation()),
+                                ImmutableDictionary<string, string?>.Empty
+                            )
+                        );
                     }
 
                     // We found the main method, but it's not convertible, bail out as we have nothing else to do.

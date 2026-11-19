@@ -8,7 +8,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Internal.Cryptography;
 using Microsoft.Win32.SafeHandles;
-
 using BCRYPT_RSAKEY_BLOB = Interop.BCrypt.BCRYPT_RSAKEY_BLOB;
 using ErrorCode = Interop.NCrypt.ErrorCode;
 using KeyBlobMagicNumber = Interop.BCrypt.KeyBlobMagicNumber;
@@ -17,9 +16,13 @@ namespace System.Security.Cryptography
 {
     internal static class CngHelpers
     {
-        private static readonly CngKeyBlobFormat s_cipherKeyBlobFormat = new CngKeyBlobFormat(Interop.NCrypt.NCRYPT_CIPHER_KEY_BLOB);
+        private static readonly CngKeyBlobFormat s_cipherKeyBlobFormat = new CngKeyBlobFormat(
+            Interop.NCrypt.NCRYPT_CIPHER_KEY_BLOB
+        );
 
-        internal static CryptographicException ToCryptographicException(this Interop.NCrypt.ErrorCode errorCode)
+        internal static CryptographicException ToCryptographicException(
+            this Interop.NCrypt.ErrorCode errorCode
+        )
         {
             return ((int)errorCode).ToCryptographicException();
         }
@@ -28,7 +31,11 @@ namespace System.Security.Cryptography
         {
             string providerName = provider.Provider;
             SafeNCryptProviderHandle providerHandle;
-            ErrorCode errorCode = Interop.NCrypt.NCryptOpenStorageProvider(out providerHandle, providerName, 0);
+            ErrorCode errorCode = Interop.NCrypt.NCryptOpenStorageProvider(
+                out providerHandle,
+                providerName,
+                0
+            );
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -39,7 +46,10 @@ namespace System.Security.Cryptography
             return providerHandle;
         }
 
-        public static void SetExportPolicy(this SafeNCryptKeyHandle keyHandle, CngExportPolicies exportPolicy)
+        public static void SetExportPolicy(
+            this SafeNCryptKeyHandle keyHandle,
+            CngExportPolicies exportPolicy
+        )
         {
             unsafe
             {
@@ -48,7 +58,8 @@ namespace System.Security.Cryptography
                     KeyPropertyName.ExportPolicy,
                     &exportPolicy,
                     sizeof(CngExportPolicies),
-                    CngPropertyOptions.Persist);
+                    CngPropertyOptions.Persist
+                );
 
                 if (errorCode != ErrorCode.ERROR_SUCCESS)
                 {
@@ -64,7 +75,11 @@ namespace System.Security.Cryptography
         /// null - if property not defined on key.
         /// throws - for any other type of error.
         /// </returns>
-        internal static byte[]? GetProperty(this SafeNCryptHandle ncryptHandle, string propertyName, CngPropertyOptions options)
+        internal static byte[]? GetProperty(
+            this SafeNCryptHandle ncryptHandle,
+            string propertyName,
+            CngPropertyOptions options
+        )
         {
             Debug.Assert(!ncryptHandle.IsInvalid);
             unsafe
@@ -75,7 +90,8 @@ namespace System.Security.Cryptography
                     null,
                     0,
                     out int numBytesNeeded,
-                    options);
+                    options
+                );
 
                 if (errorCode == ErrorCode.NTE_NOT_FOUND)
                 {
@@ -97,7 +113,8 @@ namespace System.Security.Cryptography
                         pPropertyValue,
                         propertyValue.Length,
                         out numBytesNeeded,
-                        options);
+                        options
+                    );
                 }
 
                 if (errorCode == ErrorCode.NTE_NOT_FOUND)
@@ -120,7 +137,11 @@ namespace System.Security.Cryptography
         /// values rather than throw exceptions for missing or ill-formatted property values. Only use it for well-known
         /// properties that are unlikely to be ill-formatted.)
         /// </summary>
-        internal static string? GetPropertyAsString(this SafeNCryptHandle ncryptHandle, string propertyName, CngPropertyOptions options)
+        internal static string? GetPropertyAsString(
+            this SafeNCryptHandle ncryptHandle,
+            string propertyName,
+            CngPropertyOptions options
+        )
         {
             Debug.Assert(!ncryptHandle.IsInvalid);
             byte[]? value = GetProperty(ncryptHandle, propertyName, options);
@@ -152,18 +173,28 @@ namespace System.Security.Cryptography
         /// rather than throw exceptions for missing or ill-formatted property values. Only use it for well-known properties that
         /// are unlikely to be ill-formatted.)
         /// </summary>
-        public static int GetPropertyAsDword(this SafeNCryptHandle ncryptHandle, string propertyName, CngPropertyOptions options) =>
-            GetPropertyAsPrimitive<int>(ncryptHandle, propertyName, options);
+        public static int GetPropertyAsDword(
+            this SafeNCryptHandle ncryptHandle,
+            string propertyName,
+            CngPropertyOptions options
+        ) => GetPropertyAsPrimitive<int>(ncryptHandle, propertyName, options);
 
         /// <summary>
         /// Retrieve a well-known CNG pointer property. (Note: .NET Framework compat: this helper likes to return special values
         /// rather than throw exceptions for missing or ill-formatted property values. Only use it for well-known properties that
         /// are unlikely to be ill-formatted.)
         /// </summary>
-        internal static IntPtr GetPropertyAsIntPtr(this SafeNCryptHandle ncryptHandle, string propertyName, CngPropertyOptions options) =>
-            GetPropertyAsPrimitive<IntPtr>(ncryptHandle, propertyName, options);
+        internal static IntPtr GetPropertyAsIntPtr(
+            this SafeNCryptHandle ncryptHandle,
+            string propertyName,
+            CngPropertyOptions options
+        ) => GetPropertyAsPrimitive<IntPtr>(ncryptHandle, propertyName, options);
 
-        private static unsafe T GetPropertyAsPrimitive<T>(SafeNCryptHandle ncryptHandle, string propertyName, CngPropertyOptions options)
+        private static unsafe T GetPropertyAsPrimitive<T>(
+            SafeNCryptHandle ncryptHandle,
+            string propertyName,
+            CngPropertyOptions options
+        )
             where T : unmanaged
         {
             T value;
@@ -174,7 +205,8 @@ namespace System.Security.Cryptography
                 &value,
                 sizeof(T),
                 out _,
-                options);
+                options
+            );
 
             if (errorCode == ErrorCode.NTE_NOT_FOUND)
             {
@@ -203,36 +235,48 @@ namespace System.Security.Cryptography
                 using (BinaryReader br = new BinaryReader(ms, Encoding.Unicode))
                 {
                     // Read NCRYPT_KEY_BLOB_HEADER
-                    int cbSize = br.ReadInt32();                      // NCRYPT_KEY_BLOB_HEADER.cbSize
+                    int cbSize = br.ReadInt32(); // NCRYPT_KEY_BLOB_HEADER.cbSize
                     if (cbSize != SizeOf_NCRYPT_KEY_BLOB_HEADER)
                         throw new CryptographicException(SR.Cryptography_KeyBlobParsingError);
 
-                    int ncryptMagic = br.ReadInt32();                 // NCRYPT_KEY_BLOB_HEADER.dwMagic
+                    int ncryptMagic = br.ReadInt32(); // NCRYPT_KEY_BLOB_HEADER.dwMagic
                     if (ncryptMagic != Interop.NCrypt.NCRYPT_CIPHER_KEY_BLOB_MAGIC)
                         throw new CryptographicException(SR.Cryptography_KeyBlobParsingError);
 
-                    int cbAlgName = br.ReadInt32();                   // NCRYPT_KEY_BLOB_HEADER.cbAlgName
+                    int cbAlgName = br.ReadInt32(); // NCRYPT_KEY_BLOB_HEADER.cbAlgName
 
-                    br.ReadInt32();                                   // NCRYPT_KEY_BLOB_HEADER.cbKey
+                    br.ReadInt32(); // NCRYPT_KEY_BLOB_HEADER.cbKey
 
                     string algorithmName = new string(br.ReadChars((cbAlgName / 2) - 1));
                     if (algorithmName != algorithm)
-                        throw new CryptographicException(SR.Format(SR.Cryptography_CngKeyWrongAlgorithm, algorithmName, algorithm));
+                        throw new CryptographicException(
+                            SR.Format(
+                                SR.Cryptography_CngKeyWrongAlgorithm,
+                                algorithmName,
+                                algorithm
+                            )
+                        );
 
                     char nullTerminator = br.ReadChar();
                     if (nullTerminator != 0)
                         throw new CryptographicException(SR.Cryptography_KeyBlobParsingError);
 
                     // Read BCRYPT_KEY_DATA_BLOB_HEADER
-                    int bcryptMagic = br.ReadInt32();                 // BCRYPT_KEY_DATA_BLOB_HEADER.dwMagic
-                    if (bcryptMagic != Interop.BCrypt.BCRYPT_KEY_DATA_BLOB_HEADER.BCRYPT_KEY_DATA_BLOB_MAGIC)
+                    int bcryptMagic = br.ReadInt32(); // BCRYPT_KEY_DATA_BLOB_HEADER.dwMagic
+                    if (
+                        bcryptMagic
+                        != Interop.BCrypt.BCRYPT_KEY_DATA_BLOB_HEADER.BCRYPT_KEY_DATA_BLOB_MAGIC
+                    )
                         throw new CryptographicException(SR.Cryptography_KeyBlobParsingError);
 
-                    int dwVersion = br.ReadInt32();                   // BCRYPT_KEY_DATA_BLOB_HEADER.dwVersion
-                    if (dwVersion != Interop.BCrypt.BCRYPT_KEY_DATA_BLOB_HEADER.BCRYPT_KEY_DATA_BLOB_VERSION1)
+                    int dwVersion = br.ReadInt32(); // BCRYPT_KEY_DATA_BLOB_HEADER.dwVersion
+                    if (
+                        dwVersion
+                        != Interop.BCrypt.BCRYPT_KEY_DATA_BLOB_HEADER.BCRYPT_KEY_DATA_BLOB_VERSION1
+                    )
                         throw new CryptographicException(SR.Cryptography_KeyBlobParsingError);
 
-                    int keyLength = br.ReadInt32();                   // BCRYPT_KEY_DATA_BLOB_HEADER.cbKeyData
+                    int keyLength = br.ReadInt32(); // BCRYPT_KEY_DATA_BLOB_HEADER.cbKeyData
                     byte[] key = br.ReadBytes(keyLength);
                     return key;
                 }
@@ -249,11 +293,13 @@ namespace System.Security.Cryptography
             {
                 includePrivate = false;
 
-                if (parameters.P != null ||
-                    parameters.DP != null ||
-                    parameters.Q != null ||
-                    parameters.DQ != null ||
-                    parameters.InverseQ != null)
+                if (
+                    parameters.P != null
+                    || parameters.DP != null
+                    || parameters.Q != null
+                    || parameters.DQ != null
+                    || parameters.InverseQ != null
+                )
                 {
                     throw new CryptographicException(SR.Cryptography_InvalidRsaParameters);
                 }
@@ -262,11 +308,13 @@ namespace System.Security.Cryptography
             {
                 includePrivate = true;
 
-                if (parameters.P == null ||
-                    parameters.DP == null ||
-                    parameters.Q == null ||
-                    parameters.DQ == null ||
-                    parameters.InverseQ == null)
+                if (
+                    parameters.P == null
+                    || parameters.DP == null
+                    || parameters.Q == null
+                    || parameters.DQ == null
+                    || parameters.InverseQ == null
+                )
                 {
                     throw new CryptographicException(SR.Cryptography_InvalidRsaParameters);
                 }
@@ -280,12 +328,14 @@ namespace System.Security.Cryptography
                 //
                 // Doing the check here prevents the state in RS1 where the Import succeeds, but corrupts the key,
                 // and makes for a friendlier exception message.
-                if (parameters.D.Length != parameters.Modulus.Length ||
-                    parameters.P.Length != halfModulusLength ||
-                    parameters.Q.Length != halfModulusLength ||
-                    parameters.DP.Length != halfModulusLength ||
-                    parameters.DQ.Length != halfModulusLength ||
-                    parameters.InverseQ.Length != halfModulusLength)
+                if (
+                    parameters.D.Length != parameters.Modulus.Length
+                    || parameters.P.Length != halfModulusLength
+                    || parameters.Q.Length != halfModulusLength
+                    || parameters.DP.Length != halfModulusLength
+                    || parameters.DQ.Length != halfModulusLength
+                    || parameters.InverseQ.Length != halfModulusLength
+                )
                 {
                     throw new CryptographicException(SR.Cryptography_InvalidRsaParameters);
                 }
@@ -303,13 +353,11 @@ namespace System.Security.Cryptography
             //     ------------------
             //
 
-            int blobSize = sizeof(BCRYPT_RSAKEY_BLOB) +
-                            parameters.Exponent.Length +
-                            parameters.Modulus.Length;
+            int blobSize =
+                sizeof(BCRYPT_RSAKEY_BLOB) + parameters.Exponent.Length + parameters.Modulus.Length;
             if (includePrivate)
             {
-                blobSize += parameters.P!.Length +
-                            parameters.Q!.Length;
+                blobSize += parameters.P!.Length + parameters.Q!.Length;
             }
 
             byte[] rsaBlob = CryptoPool.Rent(blobSize);
@@ -318,7 +366,9 @@ namespace System.Security.Cryptography
             {
                 // Build the header
                 BCRYPT_RSAKEY_BLOB* pBcryptBlob = (BCRYPT_RSAKEY_BLOB*)pRsaBlob;
-                pBcryptBlob->Magic = includePrivate ? KeyBlobMagicNumber.BCRYPT_RSAPRIVATE_MAGIC : KeyBlobMagicNumber.BCRYPT_RSAPUBLIC_MAGIC;
+                pBcryptBlob->Magic = includePrivate
+                    ? KeyBlobMagicNumber.BCRYPT_RSAPRIVATE_MAGIC
+                    : KeyBlobMagicNumber.BCRYPT_RSAPUBLIC_MAGIC;
                 pBcryptBlob->BitLength = parameters.Modulus.Length * 8;
                 pBcryptBlob->cbPublicExp = parameters.Exponent.Length;
                 pBcryptBlob->cbModulus = parameters.Modulus.Length;
@@ -354,7 +404,8 @@ namespace System.Security.Cryptography
         internal static void FromBCryptBlob(
             this ref RSAParameters rsaParams,
             ReadOnlySpan<byte> rsaBlob,
-            bool includePrivateParameters)
+            bool includePrivateParameters
+        )
         {
             //
             // We now have a buffer laid out as follows:
@@ -378,7 +429,8 @@ namespace System.Security.Cryptography
 
                 fixed (byte* pRsaBlob = &rsaBlob[0])
                 {
-                    KeyBlobMagicNumber magic = (KeyBlobMagicNumber)Unsafe.ReadUnaligned<int>(pRsaBlob);
+                    KeyBlobMagicNumber magic = (KeyBlobMagicNumber)
+                        Unsafe.ReadUnaligned<int>(pRsaBlob);
 
                     // Check the magic value in the key blob header. If the blob does not have the required magic,
                     // then throw a CryptographicException.
@@ -389,26 +441,64 @@ namespace System.Security.Cryptography
                     int offset = sizeof(BCRYPT_RSAKEY_BLOB);
 
                     // Read out the exponent
-                    rsaParams.Exponent = Interop.BCrypt.Consume(rsaBlob, ref offset, pBcryptBlob->cbPublicExp);
-                    rsaParams.Modulus = Interop.BCrypt.Consume(rsaBlob, ref offset, pBcryptBlob->cbModulus);
+                    rsaParams.Exponent = Interop.BCrypt.Consume(
+                        rsaBlob,
+                        ref offset,
+                        pBcryptBlob->cbPublicExp
+                    );
+                    rsaParams.Modulus = Interop.BCrypt.Consume(
+                        rsaBlob,
+                        ref offset,
+                        pBcryptBlob->cbModulus
+                    );
 
                     if (includePrivateParameters)
                     {
-                        rsaParams.P = Interop.BCrypt.Consume(rsaBlob, ref offset, pBcryptBlob->cbPrime1);
-                        rsaParams.Q = Interop.BCrypt.Consume(rsaBlob, ref offset, pBcryptBlob->cbPrime2);
-                        rsaParams.DP = Interop.BCrypt.Consume(rsaBlob, ref offset, pBcryptBlob->cbPrime1);
-                        rsaParams.DQ = Interop.BCrypt.Consume(rsaBlob, ref offset, pBcryptBlob->cbPrime2);
-                        rsaParams.InverseQ = Interop.BCrypt.Consume(rsaBlob, ref offset, pBcryptBlob->cbPrime1);
-                        rsaParams.D = Interop.BCrypt.Consume(rsaBlob, ref offset, pBcryptBlob->cbModulus);
+                        rsaParams.P = Interop.BCrypt.Consume(
+                            rsaBlob,
+                            ref offset,
+                            pBcryptBlob->cbPrime1
+                        );
+                        rsaParams.Q = Interop.BCrypt.Consume(
+                            rsaBlob,
+                            ref offset,
+                            pBcryptBlob->cbPrime2
+                        );
+                        rsaParams.DP = Interop.BCrypt.Consume(
+                            rsaBlob,
+                            ref offset,
+                            pBcryptBlob->cbPrime1
+                        );
+                        rsaParams.DQ = Interop.BCrypt.Consume(
+                            rsaBlob,
+                            ref offset,
+                            pBcryptBlob->cbPrime2
+                        );
+                        rsaParams.InverseQ = Interop.BCrypt.Consume(
+                            rsaBlob,
+                            ref offset,
+                            pBcryptBlob->cbPrime1
+                        );
+                        rsaParams.D = Interop.BCrypt.Consume(
+                            rsaBlob,
+                            ref offset,
+                            pBcryptBlob->cbModulus
+                        );
                     }
                 }
             }
 
-            static void CheckMagicValueOfKey(KeyBlobMagicNumber magic, bool includePrivateParameters)
+            static void CheckMagicValueOfKey(
+                KeyBlobMagicNumber magic,
+                bool includePrivateParameters
+            )
             {
                 if (includePrivateParameters)
                 {
-                    if (magic != KeyBlobMagicNumber.BCRYPT_RSAPRIVATE_MAGIC && magic != KeyBlobMagicNumber.BCRYPT_RSAFULLPRIVATE_MAGIC)
+                    if (
+                        magic != KeyBlobMagicNumber.BCRYPT_RSAPRIVATE_MAGIC
+                        && magic != KeyBlobMagicNumber.BCRYPT_RSAFULLPRIVATE_MAGIC
+                    )
                     {
                         throw new CryptographicException(SR.Cryptography_NotValidPrivateKey);
                     }
@@ -418,9 +508,14 @@ namespace System.Security.Cryptography
                     if (magic != KeyBlobMagicNumber.BCRYPT_RSAPUBLIC_MAGIC)
                     {
                         // Private key magic is permissible too since the public key can be derived from the private key blob.
-                        if (magic != KeyBlobMagicNumber.BCRYPT_RSAPRIVATE_MAGIC && magic != KeyBlobMagicNumber.BCRYPT_RSAFULLPRIVATE_MAGIC)
+                        if (
+                            magic != KeyBlobMagicNumber.BCRYPT_RSAPRIVATE_MAGIC
+                            && magic != KeyBlobMagicNumber.BCRYPT_RSAFULLPRIVATE_MAGIC
+                        )
                         {
-                            throw new CryptographicException(SR.Cryptography_NotValidPublicOrPrivateKey);
+                            throw new CryptographicException(
+                                SR.Cryptography_NotValidPublicOrPrivateKey
+                            );
                         }
                     }
                 }

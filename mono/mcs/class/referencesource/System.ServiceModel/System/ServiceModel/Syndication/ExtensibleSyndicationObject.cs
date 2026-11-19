@@ -4,11 +4,11 @@
 
 namespace System.ServiceModel.Syndication
 {
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
-    using System.Xml.Serialization;
     using System.Xml;
+    using System.Xml.Serialization;
 
     // NOTE: This class implements Clone so if you add any members, please update the copy ctor
     struct ExtensibleSyndicationObject : IExtensibleSyndicationObject
@@ -32,7 +32,9 @@ namespace System.ServiceModel.Syndication
             }
             if (source.elementExtensions != null)
             {
-                this.elementExtensions = new SyndicationElementExtensionCollection(source.elementExtensions);
+                this.elementExtensions = new SyndicationElementExtensionCollection(
+                    source.elementExtensions
+                );
             }
             else
             {
@@ -40,7 +42,7 @@ namespace System.ServiceModel.Syndication
             }
         }
 
-        public Dictionary<XmlQualifiedName, string> AttributeExtensions 
+        public Dictionary<XmlQualifiedName, string> AttributeExtensions
         {
             get
             {
@@ -64,7 +66,10 @@ namespace System.ServiceModel.Syndication
             }
         }
 
-        static XmlBuffer CreateXmlBuffer(XmlDictionaryReader unparsedExtensionsReader, int maxExtensionSize)
+        static XmlBuffer CreateXmlBuffer(
+            XmlDictionaryReader unparsedExtensionsReader,
+            int maxExtensionSize
+        )
         {
             XmlBuffer buffer = new XmlBuffer(maxExtensionSize);
             using (XmlDictionaryWriter writer = buffer.OpenSection(unparsedExtensionsReader.Quotas))
@@ -81,20 +86,30 @@ namespace System.ServiceModel.Syndication
             return buffer;
         }
 
-        internal void LoadElementExtensions(XmlReader readerOverUnparsedExtensions, int maxExtensionSize)
+        internal void LoadElementExtensions(
+            XmlReader readerOverUnparsedExtensions,
+            int maxExtensionSize
+        )
         {
             if (readerOverUnparsedExtensions == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("readerOverUnparsedExtensions");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "readerOverUnparsedExtensions"
+                );
             }
             if (maxExtensionSize < 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("maxExtensionSize"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("maxExtensionSize")
+                );
             }
-            XmlDictionaryReader r = XmlDictionaryReader.CreateDictionaryReader(readerOverUnparsedExtensions);
-            this.elementExtensions = new SyndicationElementExtensionCollection(CreateXmlBuffer(r, maxExtensionSize));
+            XmlDictionaryReader r = XmlDictionaryReader.CreateDictionaryReader(
+                readerOverUnparsedExtensions
+            );
+            this.elementExtensions = new SyndicationElementExtensionCollection(
+                CreateXmlBuffer(r, maxExtensionSize)
+            );
         }
-
 
         internal void LoadElementExtensions(XmlBuffer buffer)
         {

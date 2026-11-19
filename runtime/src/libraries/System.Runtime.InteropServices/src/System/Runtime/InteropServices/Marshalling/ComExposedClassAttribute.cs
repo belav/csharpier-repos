@@ -13,6 +13,7 @@ namespace System.Runtime.InteropServices.Marshalling
         where T : IComExposedClass
     {
         /// <inheritdoc cref="IComExposedDetails.GetComInterfaceEntries(out int)" />
-        public unsafe ComWrappers.ComInterfaceEntry* GetComInterfaceEntries(out int count) => T.GetComInterfaceEntries(out count);
+        public unsafe ComWrappers.ComInterfaceEntry* GetComInterfaceEntries(out int count) =>
+            T.GetComInterfaceEntries(out count);
     }
 }

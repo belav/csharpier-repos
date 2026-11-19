@@ -17,7 +17,9 @@ namespace Microsoft.Web.Mvc.Resources
             return FormatManager.Current.FormatHelper.GetRequestFormat(requestContext);
         }
 
-        public static IEnumerable<ContentType> GetResponseFormats(this RequestContext requestContext)
+        public static IEnumerable<ContentType> GetResponseFormats(
+            this RequestContext requestContext
+        )
         {
             return FormatManager.Current.FormatHelper.GetResponseFormats(requestContext);
         }

@@ -14,7 +14,11 @@ namespace System.Formats.Cbor.Tests
         private const string? ReplaySeed = "(42,42)"; // set a seed for deterministic runs, null for randomized runs
         private const int MaxTests = 100; // FsCheck default is 100
 
-        [Property(Replay = ReplaySeed, MaxTest = MaxTests, Arbitrary = new[] { typeof(CborRandomGenerators) })]
+        [Property(
+            Replay = ReplaySeed,
+            MaxTest = MaxTests,
+            Arbitrary = new[] { typeof(CborRandomGenerators) }
+        )]
         public static void Roundtrip_Int64(CborConformanceMode mode, long input)
         {
             var writer = new CborWriter(mode);
@@ -26,7 +30,11 @@ namespace System.Formats.Cbor.Tests
             Assert.Equal(input, result);
         }
 
-        [Property(Replay = ReplaySeed, MaxTest = MaxTests, Arbitrary = new[] { typeof(CborRandomGenerators) })]
+        [Property(
+            Replay = ReplaySeed,
+            MaxTest = MaxTests,
+            Arbitrary = new[] { typeof(CborRandomGenerators) }
+        )]
         public static void Roundtrip_UInt64(CborConformanceMode mode, ulong input)
         {
             var writer = new CborWriter(mode);
@@ -38,7 +46,11 @@ namespace System.Formats.Cbor.Tests
             Assert.Equal(input, result);
         }
 
-        [Property(Replay = ReplaySeed, MaxTest = MaxTests, Arbitrary = new[] { typeof(CborRandomGenerators) })]
+        [Property(
+            Replay = ReplaySeed,
+            MaxTest = MaxTests,
+            Arbitrary = new[] { typeof(CborRandomGenerators) }
+        )]
         public static void Roundtrip_NegativeInteger(CborConformanceMode mode, ulong input)
         {
             var writer = new CborWriter(mode);
@@ -50,7 +62,11 @@ namespace System.Formats.Cbor.Tests
             Assert.Equal(input, result);
         }
 
-        [Property(Replay = ReplaySeed, MaxTest = MaxTests, Arbitrary = new[] { typeof(CborRandomGenerators) })]
+        [Property(
+            Replay = ReplaySeed,
+            MaxTest = MaxTests,
+            Arbitrary = new[] { typeof(CborRandomGenerators) }
+        )]
         public static void Roundtrip_ByteString(CborConformanceMode mode, byte[] input)
         {
             var writer = new CborWriter(mode);
@@ -62,7 +78,11 @@ namespace System.Formats.Cbor.Tests
             AssertHelper.HexEqual(input, result);
         }
 
-        [Property(Replay = ReplaySeed, MaxTest = MaxTests, Arbitrary = new[] { typeof(CborRandomGenerators) })]
+        [Property(
+            Replay = ReplaySeed,
+            MaxTest = MaxTests,
+            Arbitrary = new[] { typeof(CborRandomGenerators) }
+        )]
         public static void Roundtrip_TextString(CborConformanceMode mode, string input)
         {
             var writer = new CborWriter(mode);
@@ -74,11 +94,18 @@ namespace System.Formats.Cbor.Tests
             Assert.Equal(input, result);
         }
 
-        [Property(Replay = ReplaySeed, MaxTest = MaxTests, Arbitrary = new[] { typeof(CborRandomGenerators) })]
+        [Property(
+            Replay = ReplaySeed,
+            MaxTest = MaxTests,
+            Arbitrary = new[] { typeof(CborRandomGenerators) }
+        )]
         public static void Roundtrip_IndefiniteByteString(CborConformanceMode mode, byte[][] chunks)
         {
-            bool convertIndefiniteLengthEncodings = mode is CborConformanceMode.Canonical or CborConformanceMode.Ctap2Canonical;
-            var writer = new CborWriter(convertIndefiniteLengthEncodings: convertIndefiniteLengthEncodings);
+            bool convertIndefiniteLengthEncodings =
+                mode is CborConformanceMode.Canonical or CborConformanceMode.Ctap2Canonical;
+            var writer = new CborWriter(
+                convertIndefiniteLengthEncodings: convertIndefiniteLengthEncodings
+            );
 
             writer.WriteStartIndefiniteLengthByteString();
             foreach (byte[] chunk in chunks)
@@ -95,11 +122,18 @@ namespace System.Formats.Cbor.Tests
             AssertHelper.HexEqual(expected, result);
         }
 
-        [Property(Replay = ReplaySeed, MaxTest = MaxTests, Arbitrary = new[] { typeof(CborRandomGenerators) })]
+        [Property(
+            Replay = ReplaySeed,
+            MaxTest = MaxTests,
+            Arbitrary = new[] { typeof(CborRandomGenerators) }
+        )]
         public static void Roundtrip_IndefiniteTextString(CborConformanceMode mode, string[] chunks)
         {
-            bool convertIndefiniteLengthEncodings = mode is CborConformanceMode.Canonical or CborConformanceMode.Ctap2Canonical;
-            var writer = new CborWriter(convertIndefiniteLengthEncodings: convertIndefiniteLengthEncodings);
+            bool convertIndefiniteLengthEncodings =
+                mode is CborConformanceMode.Canonical or CborConformanceMode.Ctap2Canonical;
+            var writer = new CborWriter(
+                convertIndefiniteLengthEncodings: convertIndefiniteLengthEncodings
+            );
 
             writer.WriteStartIndefiniteLengthTextString();
             foreach (string chunk in chunks)
@@ -116,7 +150,11 @@ namespace System.Formats.Cbor.Tests
             Assert.Equal(expected, result);
         }
 
-        [Property(Replay = ReplaySeed, MaxTest = MaxTests, Arbitrary = new[] { typeof(CborRandomGenerators) })]
+        [Property(
+            Replay = ReplaySeed,
+            MaxTest = MaxTests,
+            Arbitrary = new[] { typeof(CborRandomGenerators) }
+        )]
         public static void Roundtrip_Half(CborConformanceMode mode, Half input)
         {
             var writer = new CborWriter(mode);
@@ -128,7 +166,11 @@ namespace System.Formats.Cbor.Tests
             Assert.Equal(input, result);
         }
 
-        [Property(Replay = ReplaySeed, MaxTest = MaxTests, Arbitrary = new[] { typeof(CborRandomGenerators) })]
+        [Property(
+            Replay = ReplaySeed,
+            MaxTest = MaxTests,
+            Arbitrary = new[] { typeof(CborRandomGenerators) }
+        )]
         public static void Roundtrip_Double(CborConformanceMode mode, double input)
         {
             var writer = new CborWriter();
@@ -140,7 +182,11 @@ namespace System.Formats.Cbor.Tests
             Assert.Equal(input, result);
         }
 
-        [Property(Replay = ReplaySeed, MaxTest = MaxTests, Arbitrary = new[] { typeof(CborRandomGenerators) })]
+        [Property(
+            Replay = ReplaySeed,
+            MaxTest = MaxTests,
+            Arbitrary = new[] { typeof(CborRandomGenerators) }
+        )]
         public static void Roundtrip_Decimal(CborConformanceMode mode, decimal input)
         {
             var writer = new CborWriter();
@@ -152,8 +198,15 @@ namespace System.Formats.Cbor.Tests
             Assert.Equal(input, result);
         }
 
-        [Property(Replay = ReplaySeed, MaxTest = MaxTests, Arbitrary = new[] { typeof(CborRandomGenerators) })]
-        public static void ByteString_Encoding_ShouldContainInputBytes(CborConformanceMode mode, byte[] input)
+        [Property(
+            Replay = ReplaySeed,
+            MaxTest = MaxTests,
+            Arbitrary = new[] { typeof(CborRandomGenerators) }
+        )]
+        public static void ByteString_Encoding_ShouldContainInputBytes(
+            CborConformanceMode mode,
+            byte[] input
+        )
         {
             var writer = new CborWriter(mode);
             writer.WriteByteString(input);
@@ -163,7 +216,10 @@ namespace System.Formats.Cbor.Tests
             int lengthEncodingLength = GetLengthEncodingLength(length);
 
             Assert.Equal(lengthEncodingLength + length, encoding.Length);
-            AssertHelper.HexEqual(input ?? Array.Empty<byte>(), encoding.Skip(lengthEncodingLength).ToArray());
+            AssertHelper.HexEqual(
+                input ?? Array.Empty<byte>(),
+                encoding.Skip(lengthEncodingLength).ToArray()
+            );
 
             static int GetLengthEncodingLength(int length)
             {
@@ -172,27 +228,42 @@ namespace System.Formats.Cbor.Tests
                     _ when (length < 24) => 1,
                     _ when (length < byte.MaxValue) => 1 + sizeof(byte),
                     _ when (length < ushort.MaxValue) => 1 + sizeof(ushort),
-                    _ => 1 + sizeof(uint)
+                    _ => 1 + sizeof(uint),
                 };
             }
         }
 
-        [Property(Replay = ReplaySeed, MaxTest = MaxTests, Arbitrary = new[] { typeof(CborRandomGenerators) })]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/73150", TestPlatforms.iOS | TestPlatforms.tvOS)]
+        [Property(
+            Replay = ReplaySeed,
+            MaxTest = MaxTests,
+            Arbitrary = new[] { typeof(CborRandomGenerators) }
+        )]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/73150",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
         public static void CborDocument_Roundtrip(CborPropertyTestContext input)
         {
             byte[] encoding = CborDocumentSerializer.encode(input);
 
-            CborDocument[] expectedResults = CborPropertyTestContextHelper.getExpectedRoundtripValues(input);
+            CborDocument[] expectedResults =
+                CborPropertyTestContextHelper.getExpectedRoundtripValues(input);
             CborDocument[] roundtrippedDocuments = CborDocumentSerializer.decode(input, encoding);
             Assert.Equal(expectedResults, roundtrippedDocuments);
         }
 
-        [Property(Replay = ReplaySeed, MaxTest = MaxTests, Arbitrary = new[] { typeof(CborRandomGenerators) })]
+        [Property(
+            Replay = ReplaySeed,
+            MaxTest = MaxTests,
+            Arbitrary = new[] { typeof(CborRandomGenerators) }
+        )]
         public static void CborDocument_SkipValue(CborPropertyTestContext input)
         {
             int length = input.RootDocuments.Length;
-            input.RootDocuments = new[] { CborDocument.NewArray(_isDefiniteLength: true, input.RootDocuments) };
+            input.RootDocuments = new[]
+            {
+                CborDocument.NewArray(_isDefiniteLength: true, input.RootDocuments),
+            };
             byte[] encoding = CborDocumentSerializer.encode(input);
 
             CborReader reader = CborDocumentSerializer.createReader(input, encoding);
@@ -205,10 +276,17 @@ namespace System.Formats.Cbor.Tests
             Assert.Equal(CborReaderState.Finished, reader.PeekState());
         }
 
-        [Property(Replay = ReplaySeed, MaxTest = MaxTests, Arbitrary = new[] { typeof(CborRandomGenerators) })]
+        [Property(
+            Replay = ReplaySeed,
+            MaxTest = MaxTests,
+            Arbitrary = new[] { typeof(CborRandomGenerators) }
+        )]
         public static void CborDocument_SkipToParent(CborPropertyTestContext input)
         {
-            input.RootDocuments = new[] { CborDocument.NewArray(_isDefiniteLength: true, input.RootDocuments) };
+            input.RootDocuments = new[]
+            {
+                CborDocument.NewArray(_isDefiniteLength: true, input.RootDocuments),
+            };
             byte[] encoding = CborDocumentSerializer.encode(input);
 
             CborReader reader = CborDocumentSerializer.createReader(input, encoding);

@@ -46,7 +46,8 @@ namespace CoreXml.Test.XLinq
                 {
                     XDocument doc = new XDocument();
                     XmlReader r = doc.CreateReader();
-                    while (r.Read()) { };
+                    while (r.Read()) { }
+                    ;
                     if (r.ReadState != ReadState.EndOfFile)
                         throw new TestFailedException("");
                 }
@@ -70,7 +71,8 @@ namespace CoreXml.Test.XLinq
                 {
                     XDocument doc = XDocument.Parse("<a/>");
                     XmlReader r = doc.CreateReader();
-                    while (r.Read()) { };
+                    while (r.Read()) { }
+                    ;
                     try
                     {
                         r.ReadContentAsInt();
@@ -86,8 +88,10 @@ namespace CoreXml.Test.XLinq
             {
                 void VerifyNextNode(XmlReader DataReader, XmlNodeType nt, string name, string value)
                 {
-                    while (DataReader.NodeType == XmlNodeType.Whitespace ||
-                            DataReader.NodeType == XmlNodeType.SignificantWhitespace)
+                    while (
+                        DataReader.NodeType == XmlNodeType.Whitespace
+                        || DataReader.NodeType == XmlNodeType.SignificantWhitespace
+                    )
                     {
                         // skip all whitespace nodes
                         // if EOF is reached NodeType=None
@@ -105,7 +109,11 @@ namespace CoreXml.Test.XLinq
 
                     XmlReader DataReader = GetReader();
                     PositionOnElement(DataReader, "EMPTY1");
-                    bPassed = TestLog.Equals(DataReader.ReadInnerXml(), strExpected, Variation.Desc);
+                    bPassed = TestLog.Equals(
+                        DataReader.ReadInnerXml(),
+                        strExpected,
+                        Variation.Desc
+                    );
                     BoolToLTMResult(bPassed);
                 }
 
@@ -117,7 +125,11 @@ namespace CoreXml.Test.XLinq
 
                     XmlReader DataReader = GetReader();
                     PositionOnElement(DataReader, "EMPTY2");
-                    bPassed = TestLog.Equals(DataReader.ReadInnerXml(), strExpected, Variation.Desc);
+                    bPassed = TestLog.Equals(
+                        DataReader.ReadInnerXml(),
+                        strExpected,
+                        Variation.Desc
+                    );
                     BoolToLTMResult(bPassed);
                 }
 
@@ -129,7 +141,11 @@ namespace CoreXml.Test.XLinq
 
                     XmlReader DataReader = GetReader();
                     PositionOnElement(DataReader, "NONEMPTY1");
-                    bPassed = TestLog.Equals(DataReader.ReadInnerXml(), strExpected, Variation.Desc);
+                    bPassed = TestLog.Equals(
+                        DataReader.ReadInnerXml(),
+                        strExpected,
+                        Variation.Desc
+                    );
                     BoolToLTMResult(bPassed);
                 }
 
@@ -142,7 +158,11 @@ namespace CoreXml.Test.XLinq
 
                     XmlReader DataReader = GetReader();
                     PositionOnElement(DataReader, "SKIP3");
-                    bPassed = TestLog.Equals(DataReader.ReadInnerXml(), strExpected, Variation.Desc);
+                    bPassed = TestLog.Equals(
+                        DataReader.ReadInnerXml(),
+                        strExpected,
+                        Variation.Desc
+                    );
                     VerifyNextNode(DataReader, XmlNodeType.Element, "AFTERSKIP3", string.Empty);
                     BoolToLTMResult(bPassed);
                 }
@@ -151,12 +171,17 @@ namespace CoreXml.Test.XLinq
                 public void TestReadInnerXml7()
                 {
                     bool bPassed = false;
-                    string strExpected = "<e1 a1='a1value' a2='a2value'><e2 a1='a1value' a2='a2value'><e3 a1='a1value' a2='a2value'>leave</e3></e2></e1>";
+                    string strExpected =
+                        "<e1 a1='a1value' a2='a2value'><e2 a1='a1value' a2='a2value'><e3 a1='a1value' a2='a2value'>leave</e3></e2></e1>";
                     strExpected = strExpected.Replace('\'', '"');
                     XmlReader DataReader = GetReader();
                     PositionOnElement(DataReader, "CONTENT");
 
-                    bPassed = TestLog.Equals(DataReader.ReadInnerXml(), strExpected, Variation.Desc);
+                    bPassed = TestLog.Equals(
+                        DataReader.ReadInnerXml(),
+                        strExpected,
+                        Variation.Desc
+                    );
                     BoolToLTMResult(bPassed);
                 }
 
@@ -168,7 +193,11 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader();
                     PositionOnElement(DataReader, ST_ENTTEST_NAME);
 
-                    bPassed = TestLog.Equals(DataReader.ReadInnerXml(), strExpected, Variation.Desc);
+                    bPassed = TestLog.Equals(
+                        DataReader.ReadInnerXml(),
+                        strExpected,
+                        Variation.Desc
+                    );
                     VerifyNextNode(DataReader, XmlNodeType.Element, "ENTITY2", string.Empty);
                     BoolToLTMResult(bPassed);
                 }
@@ -182,7 +211,11 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader();
                     PositionOnElement(DataReader, "ATTRIBUTE2");
                     bPassed = DataReader.MoveToFirstAttribute();
-                    bPassed = TestLog.Equals(DataReader.ReadInnerXml(), strExpected, Variation.Desc);
+                    bPassed = TestLog.Equals(
+                        DataReader.ReadInnerXml(),
+                        strExpected,
+                        Variation.Desc
+                    );
                     VerifyNextNode(DataReader, XmlNodeType.Attribute, "a1", strExpected);
                     BoolToLTMResult(bPassed);
                 }
@@ -196,7 +229,11 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader();
                     PositionOnElement(DataReader, ST_ENTTEST_NAME);
                     bPassed = DataReader.MoveToFirstAttribute();
-                    bPassed = TestLog.Equals(DataReader.ReadInnerXml(), strExpected, Variation.Desc);
+                    bPassed = TestLog.Equals(
+                        DataReader.ReadInnerXml(),
+                        strExpected,
+                        Variation.Desc
+                    );
                     VerifyNextNode(DataReader, XmlNodeType.Attribute, "att1", strExpectedAttValue);
                     BoolToLTMResult(bPassed);
                 }
@@ -280,7 +317,11 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader();
                     PositionOnElement(DataReader, "SKIP2");
                     DataReader.ReadInnerXml();
-                    TestLog.Compare(VerifyNode(DataReader, XmlNodeType.Element, "AFTERSKIP2", string.Empty), true, "VN");
+                    TestLog.Compare(
+                        VerifyNode(DataReader, XmlNodeType.Element, "AFTERSKIP2", string.Empty),
+                        true,
+                        "VN"
+                    );
                 }
 
                 //[Variation("Current node after ReadInnerXml on element")]
@@ -289,7 +330,11 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader();
                     PositionOnElement(DataReader, "MARKUP");
                     TestLog.Compare(DataReader.ReadInnerXml(), string.Empty, "RIX");
-                    TestLog.Compare(VerifyNode(DataReader, XmlNodeType.Text, string.Empty, "yyy"), true, "VN");
+                    TestLog.Compare(
+                        VerifyNode(DataReader, XmlNodeType.Text, string.Empty, "yyy"),
+                        true,
+                        "VN"
+                    );
                 }
 
                 //[Variation("ReadInnerXml with entity references, EntityHandling = ExpandCharEntities")]
@@ -299,7 +344,11 @@ namespace CoreXml.Test.XLinq
                     string strExpected = ST_EXPAND_ENTITIES2;
                     XmlReader DataReader = GetReader();
                     PositionOnElement(DataReader, ST_ENTTEST_NAME);
-                    bPassed = TestLog.Equals(DataReader.ReadInnerXml(), strExpected, Variation.Desc);
+                    bPassed = TestLog.Equals(
+                        DataReader.ReadInnerXml(),
+                        strExpected,
+                        Variation.Desc
+                    );
                     BoolToLTMResult(bPassed);
                 }
 
@@ -350,7 +399,11 @@ namespace CoreXml.Test.XLinq
                 public void TestMoveToContent1()
                 {
                     XmlReader DataReader = GetReader();
-                    TestLog.Compare(DataReader.MoveToContent(), XmlNodeType.Element, Variation.Desc);
+                    TestLog.Compare(
+                        DataReader.MoveToContent(),
+                        XmlNodeType.Element,
+                        Variation.Desc
+                    );
                     TestLog.Compare(DataReader.Name, "PLAY", Variation.Desc);
                 }
 
@@ -360,15 +413,27 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader();
 
                     PositionOnElement(DataReader, ST_TEST_NAME1);
-                    TestLog.Compare(DataReader.MoveToContent(), XmlNodeType.Element, Variation.Desc);
+                    TestLog.Compare(
+                        DataReader.MoveToContent(),
+                        XmlNodeType.Element,
+                        Variation.Desc
+                    );
                     TestLog.Compare(DataReader.Name, ST_TEST_NAME1, "Element name");
 
                     DataReader.Read();
                     TestLog.Compare(DataReader.MoveToContent(), XmlNodeType.Text, "Move to Text");
 
-                    TestLog.Compare(DataReader.ReadContentAsString(), ST_TEST_TEXT + ST_TEST_CDATA, "Read String");
+                    TestLog.Compare(
+                        DataReader.ReadContentAsString(),
+                        ST_TEST_TEXT + ST_TEST_CDATA,
+                        "Read String"
+                    );
 
-                    TestLog.Compare(DataReader.MoveToContent(), XmlNodeType.EndElement, "Move to EndElement");
+                    TestLog.Compare(
+                        DataReader.MoveToContent(),
+                        XmlNodeType.EndElement,
+                        "Move to EndElement"
+                    );
                     TestLog.Compare(DataReader.Name, ST_TEST_NAME1, "EndElement value");
                 }
 
@@ -378,7 +443,11 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader();
 
                     PositionOnElement(DataReader, ST_TEST_NAME2);
-                    TestLog.Compare(DataReader.MoveToContent(), XmlNodeType.Element, Variation.Desc);
+                    TestLog.Compare(
+                        DataReader.MoveToContent(),
+                        XmlNodeType.Element,
+                        Variation.Desc
+                    );
                     TestLog.Compare(DataReader.Name, ST_TEST_NAME2, "Element name");
 
                     DataReader.Read();
@@ -392,7 +461,11 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader();
 
                     PositionOnElement(DataReader, ST_TEST_NAME3);
-                    TestLog.Compare(DataReader.MoveToContent(), XmlNodeType.Element, Variation.Desc);
+                    TestLog.Compare(
+                        DataReader.MoveToContent(),
+                        XmlNodeType.Element,
+                        Variation.Desc
+                    );
                     TestLog.Compare(DataReader.Name, ST_TEST_NAME3, "Element name");
 
                     DataReader.Read();
@@ -407,7 +480,11 @@ namespace CoreXml.Test.XLinq
                     TestLog.Compare(DataReader.Name, "", "CDATA value");
 
                     DataReader.Read();
-                    TestLog.Compare(DataReader.MoveToContent(), XmlNodeType.EndElement, "Move to EndElement");
+                    TestLog.Compare(
+                        DataReader.MoveToContent(),
+                        XmlNodeType.EndElement,
+                        "Move to EndElement"
+                    );
                     TestLog.Compare(DataReader.Name, ST_TEST_NAME3, "EndElement value");
                 }
 
@@ -417,7 +494,11 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader();
                     PositionOnElement(DataReader, ST_TEST_NAME1);
                     PositionOnNodeType(DataReader, XmlNodeType.Attribute);
-                    TestLog.Compare(DataReader.MoveToContent(), XmlNodeType.Element, "Move to EndElement");
+                    TestLog.Compare(
+                        DataReader.MoveToContent(),
+                        XmlNodeType.Element,
+                        "Move to EndElement"
+                    );
                     TestLog.Compare(DataReader.Name, ST_TEST_NAME2, "EndElement value");
                 }
             }
@@ -437,8 +518,16 @@ namespace CoreXml.Test.XLinq
                     PositionOnElement(DataReader, ST_TEST_ELEM);
 
                     TestLog.Compare(DataReader.IsStartElement(), true, "IsStartElement()");
-                    TestLog.Compare(DataReader.IsStartElement(ST_TEST_ELEM), true, "IsStartElement(n)");
-                    TestLog.Compare(DataReader.IsStartElement(ST_TEST_ELEM, string.Empty), true, "IsStartElement(n,ns)");
+                    TestLog.Compare(
+                        DataReader.IsStartElement(ST_TEST_ELEM),
+                        true,
+                        "IsStartElement(n)"
+                    );
+                    TestLog.Compare(
+                        DataReader.IsStartElement(ST_TEST_ELEM, string.Empty),
+                        true,
+                        "IsStartElement(n,ns)"
+                    );
                 }
 
                 //[Variation("IsStartElement on Empty Element, no namespace", Priority = 0)]
@@ -448,8 +537,16 @@ namespace CoreXml.Test.XLinq
                     PositionOnElement(DataReader, ST_TEST_EMPTY_ELEM);
 
                     TestLog.Compare(DataReader.IsStartElement(), true, "IsStartElement()");
-                    TestLog.Compare(DataReader.IsStartElement(ST_TEST_EMPTY_ELEM), true, "IsStartElement(n)");
-                    TestLog.Compare(DataReader.IsStartElement(ST_TEST_EMPTY_ELEM, string.Empty), true, "IsStartElement(n,ns)");
+                    TestLog.Compare(
+                        DataReader.IsStartElement(ST_TEST_EMPTY_ELEM),
+                        true,
+                        "IsStartElement(n)"
+                    );
+                    TestLog.Compare(
+                        DataReader.IsStartElement(ST_TEST_EMPTY_ELEM, string.Empty),
+                        true,
+                        "IsStartElement(n,ns)"
+                    );
                 }
 
                 //[Variation("IsStartElement on regular Element, with namespace", Priority = 0)]
@@ -460,11 +557,31 @@ namespace CoreXml.Test.XLinq
                     PositionOnElement(DataReader, "bar:check");
 
                     TestLog.Compare(DataReader.IsStartElement(), true, "IsStartElement()");
-                    TestLog.Compare(DataReader.IsStartElement("check", "1"), true, "IsStartElement(n,ns)");
-                    TestLog.Compare(DataReader.IsStartElement("check", string.Empty), false, "IsStartElement(n)");
-                    TestLog.Compare(DataReader.IsStartElement("check"), false, "IsStartElement2(n)");
-                    TestLog.Compare(DataReader.IsStartElement("bar:check"), true, "IsStartElement(qname)");
-                    TestLog.Compare(DataReader.IsStartElement("bar1:check"), false, "IsStartElement(invalid_qname)");
+                    TestLog.Compare(
+                        DataReader.IsStartElement("check", "1"),
+                        true,
+                        "IsStartElement(n,ns)"
+                    );
+                    TestLog.Compare(
+                        DataReader.IsStartElement("check", string.Empty),
+                        false,
+                        "IsStartElement(n)"
+                    );
+                    TestLog.Compare(
+                        DataReader.IsStartElement("check"),
+                        false,
+                        "IsStartElement2(n)"
+                    );
+                    TestLog.Compare(
+                        DataReader.IsStartElement("bar:check"),
+                        true,
+                        "IsStartElement(qname)"
+                    );
+                    TestLog.Compare(
+                        DataReader.IsStartElement("bar1:check"),
+                        false,
+                        "IsStartElement(invalid_qname)"
+                    );
                 }
 
                 //[Variation("IsStartElement on Empty Tag, with default namespace", Priority = 0)]
@@ -474,9 +591,21 @@ namespace CoreXml.Test.XLinq
                     PositionOnElement(DataReader, ST_TEST_EMPTY_ELEM_NS);
 
                     TestLog.Compare(DataReader.IsStartElement(), true, "IsStartElement()");
-                    TestLog.Compare(DataReader.IsStartElement(ST_TEST_EMPTY_ELEM_NS, "14"), true, "IsStartElement(n,ns)");
-                    TestLog.Compare(DataReader.IsStartElement(ST_TEST_EMPTY_ELEM_NS, string.Empty), false, "IsStartElement(n)");
-                    TestLog.Compare(DataReader.IsStartElement(ST_TEST_EMPTY_ELEM_NS), true, "IsStartElement2(n)");
+                    TestLog.Compare(
+                        DataReader.IsStartElement(ST_TEST_EMPTY_ELEM_NS, "14"),
+                        true,
+                        "IsStartElement(n,ns)"
+                    );
+                    TestLog.Compare(
+                        DataReader.IsStartElement(ST_TEST_EMPTY_ELEM_NS, string.Empty),
+                        false,
+                        "IsStartElement(n)"
+                    );
+                    TestLog.Compare(
+                        DataReader.IsStartElement(ST_TEST_EMPTY_ELEM_NS),
+                        true,
+                        "IsStartElement2(n)"
+                    );
                 }
 
                 //[Variation("IsStartElement with Name=String.Empty")]
@@ -492,7 +621,11 @@ namespace CoreXml.Test.XLinq
                 {
                     XmlReader DataReader = GetReader();
                     PositionOnElement(DataReader, ST_TEST_EMPTY_ELEM);
-                    TestLog.Compare(DataReader.IsStartElement(string.Empty, string.Empty), false, Variation.Desc);
+                    TestLog.Compare(
+                        DataReader.IsStartElement(string.Empty, string.Empty),
+                        false,
+                        Variation.Desc
+                    );
                 }
 
                 //[Variation("IsStartElement on CDATA")]
@@ -510,8 +643,16 @@ namespace CoreXml.Test.XLinq
                     PositionOnElement(DataReader, "NONAMESPACE");
                     PositionOnNodeType(DataReader, XmlNodeType.EndElement);
                     TestLog.Compare(DataReader.IsStartElement(), false, "IsStartElement()");
-                    TestLog.Compare(DataReader.IsStartElement("NONAMESPACE"), false, "IsStartElement(n)");
-                    TestLog.Compare(DataReader.IsStartElement("NONAMESPACE", string.Empty), false, "IsStartElement(n,ns)");
+                    TestLog.Compare(
+                        DataReader.IsStartElement("NONAMESPACE"),
+                        false,
+                        "IsStartElement(n)"
+                    );
+                    TestLog.Compare(
+                        DataReader.IsStartElement("NONAMESPACE", string.Empty),
+                        false,
+                        "IsStartElement(n,ns)"
+                    );
                 }
 
                 //[Variation("IsStartElement on EndElement, with namespace")]
@@ -523,8 +664,16 @@ namespace CoreXml.Test.XLinq
                     PositionOnNodeType(DataReader, XmlNodeType.EndElement);
 
                     TestLog.Compare(DataReader.IsStartElement(), false, "IsStartElement()");
-                    TestLog.Compare(DataReader.IsStartElement("check", "1"), false, "IsStartElement(n,ns)");
-                    TestLog.Compare(DataReader.IsStartElement("bar:check"), false, "IsStartElement(qname)");
+                    TestLog.Compare(
+                        DataReader.IsStartElement("check", "1"),
+                        false,
+                        "IsStartElement(n,ns)"
+                    );
+                    TestLog.Compare(
+                        DataReader.IsStartElement("bar:check"),
+                        false,
+                        "IsStartElement(qname)"
+                    );
                 }
 
                 //[Variation("IsStartElement on Attribute")]
@@ -849,7 +998,14 @@ namespace CoreXml.Test.XLinq
                     {
                         PositionOnElement(DataReader, "NONAMESPACE");
                         PositionOnNodeType(DataReader, XmlNodeType.EndElement);
-                        Assert.True(VerifyNode(DataReader, XmlNodeType.EndElement, "NONAMESPACE", string.Empty));
+                        Assert.True(
+                            VerifyNode(
+                                DataReader,
+                                XmlNodeType.EndElement,
+                                "NONAMESPACE",
+                                string.Empty
+                            )
+                        );
                     }
                 }
 
@@ -861,7 +1017,14 @@ namespace CoreXml.Test.XLinq
                         PositionOnElement(DataReader, ST_TEST_ELEM_NS);
                         PositionOnElement(DataReader, "bar:check");
                         PositionOnNodeType(DataReader, XmlNodeType.EndElement);
-                        Assert.True(VerifyNode(DataReader, XmlNodeType.EndElement, "bar:check", string.Empty));
+                        Assert.True(
+                            VerifyNode(
+                                DataReader,
+                                XmlNodeType.EndElement,
+                                "bar:check",
+                                string.Empty
+                            )
+                        );
                     }
                 }
 
@@ -1050,7 +1213,10 @@ namespace CoreXml.Test.XLinq
                     PositionOnElement(DataReader, "elem2");
                     DataReader.MoveToAttribute(1);
                     TestLog.Compare(DataReader.MoveToElement(), "MTE on elem2 failed");
-                    TestLog.Compare(VerifyNode(DataReader, XmlNodeType.Element, "elem2", string.Empty), "MTE moved on wrong node");
+                    TestLog.Compare(
+                        VerifyNode(DataReader, XmlNodeType.Element, "elem2", string.Empty),
+                        "MTE moved on wrong node"
+                    );
                 }
 
                 //[Variation("Element node")]
@@ -1060,7 +1226,10 @@ namespace CoreXml.Test.XLinq
 
                     PositionOnElement(DataReader, "elem2");
                     TestLog.Compare(!DataReader.MoveToElement(), "MTE on elem2 failed");
-                    TestLog.Compare(VerifyNode(DataReader, XmlNodeType.Element, "elem2", string.Empty), "MTE moved on wrong node");
+                    TestLog.Compare(
+                        VerifyNode(DataReader, XmlNodeType.Element, "elem2", string.Empty),
+                        "MTE moved on wrong node"
+                    );
                 }
 
                 //[Variation("Comment node")]

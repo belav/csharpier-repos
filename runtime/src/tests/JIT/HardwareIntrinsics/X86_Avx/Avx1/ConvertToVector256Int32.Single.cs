@@ -88,8 +88,10 @@ namespace JIT.HardwareIntrinsics.X86._Avx512F.handwritten
     {
         private static readonly int LargestVectorSize = 64;
 
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector256<Single>>() / sizeof(Single);
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector512<Double>>() / sizeof(Double);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector256<Single>>() / sizeof(Single);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector512<Double>>() / sizeof(Double);
 
         private static Single[] _data = new Single[Op1ElementCount];
 
@@ -103,8 +105,15 @@ namespace JIT.HardwareIntrinsics.X86._Avx512F.handwritten
         {
             var random = new Random();
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = (float)(random.NextDouble()); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Single>, byte>(ref _clsVar), ref Unsafe.As<Single, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector256<Single>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = (float)(random.NextDouble());
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector256<Single>, byte>(ref _clsVar),
+                ref Unsafe.As<Single, byte>(ref _data[0]),
+                (uint)Unsafe.SizeOf<Vector256<Single>>()
+            );
         }
 
         public SimpleUnaryOpTest__ConvertToVector512DoubleSingle()
@@ -113,11 +122,25 @@ namespace JIT.HardwareIntrinsics.X86._Avx512F.handwritten
 
             var random = new Random();
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = (float)(random.NextDouble()); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector256<Single>, byte>(ref _fld), ref Unsafe.As<Single, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector256<Single>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = (float)(random.NextDouble());
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector256<Single>, byte>(ref _fld),
+                ref Unsafe.As<Single, byte>(ref _data[0]),
+                (uint)Unsafe.SizeOf<Vector256<Single>>()
+            );
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = (float)(random.NextDouble()); }
-            _dataTable = new SimpleUnaryOpTest__DataTable<Double, Single>(_data, new Double[RetElementCount], LargestVectorSize);
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = (float)(random.NextDouble());
+            }
+            _dataTable = new SimpleUnaryOpTest__DataTable<Double, Single>(
+                _data,
+                new Double[RetElementCount],
+                LargestVectorSize
+            );
         }
 
         public bool IsSupported => Avx512F.IsSupported;
@@ -156,10 +179,15 @@ namespace JIT.HardwareIntrinsics.X86._Avx512F.handwritten
 
         public void RunReflectionScenario_UnsafeRead()
         {
-            var result = typeof(Avx512F).GetMethod(nameof(Avx512F.ConvertToVector512Double), new Type[] { typeof(Vector256<Single>) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.Read<Vector256<Single>>(_dataTable.inArrayPtr)
-                                     });
+            var result = typeof(Avx512F)
+                .GetMethod(
+                    nameof(Avx512F.ConvertToVector512Double),
+                    new Type[] { typeof(Vector256<Single>) }
+                )
+                .Invoke(
+                    null,
+                    new object[] { Unsafe.Read<Vector256<Single>>(_dataTable.inArrayPtr) }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector512<Double>)(result));
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -167,10 +195,12 @@ namespace JIT.HardwareIntrinsics.X86._Avx512F.handwritten
 
         public void RunReflectionScenario_Load()
         {
-            var result = typeof(Avx512F).GetMethod(nameof(Avx512F.ConvertToVector512Double), new Type[] { typeof(Vector256<Single>) })
-                                     .Invoke(null, new object[] {
-                                        Avx.LoadVector256((Single*)(_dataTable.inArrayPtr))
-                                     });
+            var result = typeof(Avx512F)
+                .GetMethod(
+                    nameof(Avx512F.ConvertToVector512Double),
+                    new Type[] { typeof(Vector256<Single>) }
+                )
+                .Invoke(null, new object[] { Avx.LoadVector256((Single*)(_dataTable.inArrayPtr)) });
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector512<Double>)(result));
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -178,10 +208,15 @@ namespace JIT.HardwareIntrinsics.X86._Avx512F.handwritten
 
         public void RunReflectionScenario_LoadAligned()
         {
-            var result = typeof(Avx512F).GetMethod(nameof(Avx512F.ConvertToVector512Double), new Type[] { typeof(Vector256<Single>) })
-                                     .Invoke(null, new object[] {
-                                        Avx.LoadAlignedVector256((Single*)(_dataTable.inArrayPtr))
-                                     });
+            var result = typeof(Avx512F)
+                .GetMethod(
+                    nameof(Avx512F.ConvertToVector512Double),
+                    new Type[] { typeof(Vector256<Single>) }
+                )
+                .Invoke(
+                    null,
+                    new object[] { Avx.LoadAlignedVector256((Single*)(_dataTable.inArrayPtr)) }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector512<Double>)(result));
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -189,9 +224,7 @@ namespace JIT.HardwareIntrinsics.X86._Avx512F.handwritten
 
         public void RunClsVarScenario()
         {
-            var result = Avx512F.ConvertToVector512Double(
-                _clsVar
-            );
+            var result = Avx512F.ConvertToVector512Double(_clsVar);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_clsVar, _dataTable.outArrayPtr);
@@ -255,29 +288,53 @@ namespace JIT.HardwareIntrinsics.X86._Avx512F.handwritten
             }
         }
 
-        private void ValidateResult(Vector256<Single> firstOp, void* result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector256<Single> firstOp,
+            void* result,
+            [CallerMemberName] string method = ""
+        )
         {
             Single[] inArray = new Single[Op1ElementCount];
             Double[] outArray = new Double[RetElementCount];
 
             Unsafe.WriteUnaligned(ref Unsafe.As<Single, byte>(ref inArray[0]), firstOp);
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Double, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector512<Double>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Double, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector512<Double>>()
+            );
 
             ValidateResult(inArray, outArray, method);
         }
 
-        private void ValidateResult(void* firstOp, void* result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            void* firstOp,
+            void* result,
+            [CallerMemberName] string method = ""
+        )
         {
             Single[] inArray = new Single[Op1ElementCount];
             Double[] outArray = new Double[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Single, byte>(ref inArray[0]), ref Unsafe.AsRef<byte>(firstOp), (uint)Unsafe.SizeOf<Vector256<Single>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Double, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector512<Double>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Single, byte>(ref inArray[0]),
+                ref Unsafe.AsRef<byte>(firstOp),
+                (uint)Unsafe.SizeOf<Vector256<Single>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Double, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector512<Double>>()
+            );
 
             ValidateResult(inArray, outArray, method);
         }
 
-        private void ValidateResult(Single[] firstOp, Double[] result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Single[] firstOp,
+            Double[] result,
+            [CallerMemberName] string method = ""
+        )
         {
             if (result[0] != (Double)(firstOp[0]))
             {
@@ -297,7 +354,9 @@ namespace JIT.HardwareIntrinsics.X86._Avx512F.handwritten
 
             if (!Succeeded)
             {
-                Console.WriteLine($"{nameof(Avx512F)}.{nameof(Avx512F.ConvertToVector512Double)}(Vector256<Single>): {method} failed:");
+                Console.WriteLine(
+                    $"{nameof(Avx512F)}.{nameof(Avx512F.ConvertToVector512Double)}(Vector256<Single>): {method} failed:"
+                );
                 Console.WriteLine($"  firstOp: ({string.Join(", ", firstOp)})");
                 Console.WriteLine($"   result: ({string.Join(", ", result)})");
                 Console.WriteLine();

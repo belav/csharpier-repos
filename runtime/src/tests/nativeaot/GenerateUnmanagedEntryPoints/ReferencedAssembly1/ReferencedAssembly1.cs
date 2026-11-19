@@ -10,6 +10,7 @@ namespace ReferencedAssembly1
     public class ClassLibrary
     {
         [UnmanagedCallersOnly(EntryPoint = "ReferencedAssembly1Method")]
-        public static void ReferencedAssembly1Method() => Console.WriteLine($"Hello from {nameof(ReferencedAssembly1Method)}");
+        public static void ReferencedAssembly1Method() =>
+            Console.WriteLine($"Hello from {nameof(ReferencedAssembly1Method)}");
     }
 }

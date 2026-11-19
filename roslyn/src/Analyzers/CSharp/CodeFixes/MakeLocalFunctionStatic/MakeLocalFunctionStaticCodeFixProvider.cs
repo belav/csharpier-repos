@@ -16,30 +16,52 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.MakeLocalFunctionStatic), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.MakeLocalFunctionStatic
+        ),
+        Shared
+    ]
     internal class MakeLocalFunctionStaticCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public MakeLocalFunctionStaticCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public MakeLocalFunctionStaticCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(IDEDiagnosticIds.MakeLocalFunctionStaticDiagnosticId);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            RegisterCodeFix(context, CSharpAnalyzersResources.Make_local_function_static, nameof(CSharpAnalyzersResources.Make_local_function_static));
+            RegisterCodeFix(
+                context,
+                CSharpAnalyzersResources.Make_local_function_static,
+                nameof(CSharpAnalyzersResources.Make_local_function_static)
+            );
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var localFunctions = diagnostics.SelectAsArray(d => d.AdditionalLocations[0].FindNode(getInnermostNodeForTie: true, cancellationToken));
+            var localFunctions = diagnostics.SelectAsArray(d =>
+                d.AdditionalLocations[0].FindNode(getInnermostNodeForTie: true, cancellationToken)
+            );
             foreach (var localFunction in localFunctions)
-                editor.ReplaceNode(localFunction, MakeLocalFunctionStaticCodeFixHelper.AddStaticModifier);
+                editor.ReplaceNode(
+                    localFunction,
+                    MakeLocalFunctionStaticCodeFixHelper.AddStaticModifier
+                );
 
             return Task.CompletedTask;
         }

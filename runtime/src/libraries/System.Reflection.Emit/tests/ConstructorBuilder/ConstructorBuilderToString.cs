@@ -13,7 +13,13 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             Type[] parameterTypes = new Type[] { typeof(int), typeof(double) };
 
-            ConstructorBuilder constructor = type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, parameterTypes, null, null);
+            ConstructorBuilder constructor = type.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.Standard,
+                parameterTypes,
+                null,
+                null
+            );
             Assert.StartsWith("Name: .ctor", constructor.ToString());
         }
 
@@ -24,7 +30,11 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             Type[] parameterTypes = new Type[] { typeof(int), typeof(double) };
 
-            ConstructorBuilder constructor = type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, parameterTypes);
+            ConstructorBuilder constructor = type.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.Standard,
+                parameterTypes
+            );
             Assert.StartsWith("Name: .ctor", constructor.ToString());
         }
     }

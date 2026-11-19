@@ -1,15 +1,16 @@
 //------------------------------------------------------------------------------
 // <copyright file="IDesigner.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel.Design {
-    using System.Diagnostics;
+namespace System.ComponentModel.Design
+{
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
     using Microsoft.Win32;
 
     /// <devdoc>
@@ -18,17 +19,17 @@ namespace System.ComponentModel.Design {
     ///       services for the designer.</para>
     /// </devdoc>
     [System.Runtime.InteropServices.ComVisible(true)]
-    public interface IDesigner : IDisposable {
-
+    public interface IDesigner : IDisposable
+    {
         /// <devdoc>
         ///    <para>Gets or sets the base component this designer is designing.</para>
         /// </devdoc>
-        IComponent Component {get;}
-        
+        IComponent Component { get; }
+
         /// <devdoc>
         ///    <para> Gets or sets the design-time verbs supported by the designer.</para>
         /// </devdoc>
-        DesignerVerbCollection Verbs {get;}
+        DesignerVerbCollection Verbs { get; }
 
         /// <devdoc>
         ///    <para>
@@ -36,7 +37,7 @@ namespace System.ComponentModel.Design {
         ///    </para>
         /// </devdoc>
         void DoDefaultAction();
-        
+
         /// <devdoc>
         ///    <para>
         ///       Initializes the designer with the given component.
@@ -45,4 +46,3 @@ namespace System.ComponentModel.Design {
         void Initialize(IComponent component);
     }
 }
-

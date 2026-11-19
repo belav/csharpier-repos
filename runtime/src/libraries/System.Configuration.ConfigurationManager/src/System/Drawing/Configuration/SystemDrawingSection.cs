@@ -20,9 +20,14 @@ namespace System.Drawing.Configuration
 
         protected internal override ConfigurationPropertyCollection Properties => s_properties;
 
-        private static readonly ConfigurationPropertyCollection s_properties = new ConfigurationPropertyCollection();
+        private static readonly ConfigurationPropertyCollection s_properties =
+            new ConfigurationPropertyCollection();
 
-        private static readonly ConfigurationProperty s_bitmapSuffix =
-            new ConfigurationProperty(BitmapSuffixSectionName, typeof(string), null, ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty s_bitmapSuffix = new ConfigurationProperty(
+            BitmapSuffixSectionName,
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.None
+        );
     }
 }

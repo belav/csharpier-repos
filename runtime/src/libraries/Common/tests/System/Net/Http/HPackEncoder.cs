@@ -48,7 +48,12 @@ namespace System.Net.Test.Common
         /// <param name="value">A literal value to encode for this header.</param>
         /// <param name="headerBlock">A span to write the encoded header to.</param>
         /// <returns>The number of bytes written to <paramref name="headerBlock"/>.</returns>
-        public static int EncodeHeader(int nameIdx, string value, HPackFlags flags, Span<byte> headerBlock)
+        public static int EncodeHeader(
+            int nameIdx,
+            string value,
+            HPackFlags flags,
+            Span<byte> headerBlock
+        )
         {
             Debug.Assert(nameIdx > 0);
             return EncodeHeaderImpl(nameIdx, null, value, valueEncoding: null, flags, headerBlock);
@@ -61,24 +66,50 @@ namespace System.Net.Test.Common
         /// <param name="value">A literal value to encode for this header.</param>
         /// <param name="headerBlock">A span to write the encoded header to.</param>
         /// <returns>The number of bytes written to <paramref name="headerBlock"/>.</returns>
-        public static int EncodeHeader(string name, string value, HPackFlags flags, Span<byte> headerBlock)
+        public static int EncodeHeader(
+            string name,
+            string value,
+            HPackFlags flags,
+            Span<byte> headerBlock
+        )
         {
             return EncodeHeader(name, value, valueEncoding: null, flags, headerBlock);
         }
 
-        public static int EncodeHeader(string name, string value, Encoding valueEncoding, HPackFlags flags, Span<byte> headerBlock)
+        public static int EncodeHeader(
+            string name,
+            string value,
+            Encoding valueEncoding,
+            HPackFlags flags,
+            Span<byte> headerBlock
+        )
         {
             return EncodeHeaderImpl(0, name, value, valueEncoding, flags, headerBlock);
         }
 
-        private static int EncodeHeaderImpl(int nameIdx, string name, string value, Encoding valueEncoding, HPackFlags flags, Span<byte> headerBlock)
+        private static int EncodeHeaderImpl(
+            int nameIdx,
+            string name,
+            string value,
+            Encoding valueEncoding,
+            HPackFlags flags,
+            Span<byte> headerBlock
+        )
         {
-            const HPackFlags IndexingMask = HPackFlags.NeverIndexed | HPackFlags.NewIndexed | HPackFlags.WithoutIndexing;
+            const HPackFlags IndexingMask =
+                HPackFlags.NeverIndexed | HPackFlags.NewIndexed | HPackFlags.WithoutIndexing;
 
-            Debug.Assert((nameIdx != 0) != (name != null), $"Only one of {nameof(nameIdx)} or {nameof(name)} can be used.");
-            Debug.Assert(name != null || (flags & HPackFlags.HuffmanEncodeName) == 0, "An indexed name can not be huffman encoded.");
+            Debug.Assert(
+                (nameIdx != 0) != (name != null),
+                $"Only one of {nameof(nameIdx)} or {nameof(name)} can be used."
+            );
+            Debug.Assert(
+                name != null || (flags & HPackFlags.HuffmanEncodeName) == 0,
+                "An indexed name can not be huffman encoded."
+            );
 
-            byte prefix, prefixMask;
+            byte prefix,
+                prefixMask;
 
             switch (flags & IndexingMask)
             {
@@ -102,14 +133,29 @@ namespace System.Net.Test.Common
 
             if (name != null)
             {
-                bytesGenerated += EncodeString(name, Encoding.ASCII, headerBlock.Slice(bytesGenerated), (flags & HPackFlags.HuffmanEncodeName) != 0);
+                bytesGenerated += EncodeString(
+                    name,
+                    Encoding.ASCII,
+                    headerBlock.Slice(bytesGenerated),
+                    (flags & HPackFlags.HuffmanEncodeName) != 0
+                );
             }
 
-            bytesGenerated += EncodeString(value, valueEncoding, headerBlock.Slice(bytesGenerated), (flags & HPackFlags.HuffmanEncodeValue) != 0);
+            bytesGenerated += EncodeString(
+                value,
+                valueEncoding,
+                headerBlock.Slice(bytesGenerated),
+                (flags & HPackFlags.HuffmanEncodeValue) != 0
+            );
             return bytesGenerated;
         }
 
-        public static int EncodeString(string value, Encoding valueEncoding, Span<byte> headerBlock, bool huffmanEncode)
+        public static int EncodeString(
+            string value,
+            Encoding valueEncoding,
+            Span<byte> headerBlock,
+            bool huffmanEncode
+        )
         {
             byte[] data = (valueEncoding ?? Encoding.ASCII).GetBytes(value);
             byte prefix;
@@ -139,7 +185,12 @@ namespace System.Net.Test.Common
             return bytesGenerated;
         }
 
-        public static int EncodeInteger(int value, byte prefix, byte prefixMask, Span<byte> headerBlock)
+        public static int EncodeInteger(
+            int value,
+            byte prefix,
+            byte prefixMask,
+            Span<byte> headerBlock
+        )
         {
             byte prefixLimit = (byte)(~prefixMask);
 
@@ -203,6 +254,6 @@ namespace System.Net.Test.Common
         /// <summary>
         /// Encode a literal value without adding a new dynamic index. Intermediaries (such as a proxy) must not index the value when forwarding the header.
         /// </summary>
-        NeverIndexed = 8
+        NeverIndexed = 8,
     }
 }

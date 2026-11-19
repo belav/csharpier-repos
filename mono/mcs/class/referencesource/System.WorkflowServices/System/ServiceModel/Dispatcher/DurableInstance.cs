@@ -12,11 +12,16 @@ namespace System.ServiceModel.Dispatcher
         DurableInstanceContextProvider instanceContextProvider;
         Guid instanceId;
 
-        protected DurableInstance(DurableInstanceContextProvider instanceContextProvider, Guid instanceId)
+        protected DurableInstance(
+            DurableInstanceContextProvider instanceContextProvider,
+            Guid instanceId
+        )
         {
             if (instanceContextProvider == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("instanceContextProvider");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "instanceContextProvider"
+                );
             }
 
             this.instanceId = instanceId;
@@ -25,10 +30,7 @@ namespace System.ServiceModel.Dispatcher
 
         public Guid InstanceId
         {
-            get
-            {
-                return this.instanceId;
-            }
+            get { return this.instanceId; }
         }
 
         protected override TimeSpan DefaultCloseTimeout
@@ -46,31 +48,31 @@ namespace System.ServiceModel.Dispatcher
             instanceContextProvider.DecrementActivityCount(this.instanceId);
         }
 
-        void IExtension<InstanceContext>.Attach(InstanceContext owner)
-        {
-        }
+        void IExtension<InstanceContext>.Attach(InstanceContext owner) { }
 
-        void IExtension<InstanceContext>.Detach(InstanceContext owner)
-        {
-        }
+        void IExtension<InstanceContext>.Detach(InstanceContext owner) { }
 
-        protected override void OnAbort()
-        {
-        }
+        protected override void OnAbort() { }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
 
-        protected override void OnClose(TimeSpan timeout)
-        {
-        }
+        protected override void OnClose(TimeSpan timeout) { }
 
         protected override void OnEndClose(IAsyncResult result)
         {
@@ -82,8 +84,6 @@ namespace System.ServiceModel.Dispatcher
             CompletedAsyncResult.End(result);
         }
 
-        protected override void OnOpen(TimeSpan timeout)
-        {
-        }
+        protected override void OnOpen(TimeSpan timeout) { }
     }
 }

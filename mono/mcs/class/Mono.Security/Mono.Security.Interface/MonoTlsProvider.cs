@@ -33,111 +33,104 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Mono.Security.Interface
 {
-	/*
-	 * Unfortunately, we can't use the public definitions from System.dll here, so we need to
-	 * copy these.
-	 *
-	 * The @MonoRemoteCertificateValidationCallback also has an additional 'targetHost' argument.
-	 *
-	 */
+    /*
+     * Unfortunately, we can't use the public definitions from System.dll here, so we need to
+     * copy these.
+     *
+     * The @MonoRemoteCertificateValidationCallback also has an additional 'targetHost' argument.
+     *
+     */
 
-	[Flags]
-	public enum MonoSslPolicyErrors
-	{
-		None = 0,
-		RemoteCertificateNotAvailable = 1,
-		RemoteCertificateNameMismatch = 2,
-		RemoteCertificateChainErrors = 4,
-	}
+    [Flags]
+    public enum MonoSslPolicyErrors
+    {
+        None = 0,
+        RemoteCertificateNotAvailable = 1,
+        RemoteCertificateNameMismatch = 2,
+        RemoteCertificateChainErrors = 4,
+    }
 
-	public enum MonoEncryptionPolicy
-	{
-		// Prohibit null ciphers (current system defaults)
-		RequireEncryption = 0,
+    public enum MonoEncryptionPolicy
+    {
+        // Prohibit null ciphers (current system defaults)
+        RequireEncryption = 0,
 
-		// Add null ciphers to current system defaults
-		AllowNoEncryption,
+        // Add null ciphers to current system defaults
+        AllowNoEncryption,
 
-		// Request null ciphers only
-		NoEncryption
-	}
+        // Request null ciphers only
+        NoEncryption,
+    }
 
-	public delegate bool MonoRemoteCertificateValidationCallback (
-		string targetHost, X509Certificate certificate, X509Chain chain, MonoSslPolicyErrors sslPolicyErrors);
+    public delegate bool MonoRemoteCertificateValidationCallback(
+        string targetHost,
+        X509Certificate certificate,
+        X509Chain chain,
+        MonoSslPolicyErrors sslPolicyErrors
+    );
 
-	public delegate X509Certificate MonoLocalCertificateSelectionCallback (
-		string targetHost, X509CertificateCollection localCertificates, X509Certificate remoteCertificate,
-		string[] acceptableIssuers);
+    public delegate X509Certificate MonoLocalCertificateSelectionCallback(
+        string targetHost,
+        X509CertificateCollection localCertificates,
+        X509Certificate remoteCertificate,
+        string[] acceptableIssuers
+    );
 
-	public abstract class MonoTlsProvider
-	{
-		internal MonoTlsProvider ()
-		{
-		}
+    public abstract class MonoTlsProvider
+    {
+        internal MonoTlsProvider() { }
 
-		public abstract Guid ID {
-			get;
-		}
+        public abstract Guid ID { get; }
 
-		public abstract string Name {
-			get;
-		}
+        public abstract string Name { get; }
 
-#region SslStream
+        #region SslStream
 
-		/*
-		 * This section abstracts the @SslStream class.
-		 *
-		 */
+        /*
+         * This section abstracts the @SslStream class.
+         *
+         */
 
-		public abstract bool SupportsSslStream {
-			get;
-		}
+        public abstract bool SupportsSslStream { get; }
 
-		/*
-		 * Does this provider support IMonoSslStream.GetConnectionInfo() ?
-		 */
-		public abstract bool SupportsConnectionInfo {
-			get;
-		}
+        /*
+         * Does this provider support IMonoSslStream.GetConnectionInfo() ?
+         */
+        public abstract bool SupportsConnectionInfo { get; }
 
-		/*
-		 * Whether or not this TLS Provider supports Mono-specific extensions
-		 * (via @MonoTlsSettings).
-		 */
-		public abstract bool SupportsMonoExtensions {
-			get;
-		}
+        /*
+         * Whether or not this TLS Provider supports Mono-specific extensions
+         * (via @MonoTlsSettings).
+         */
+        public abstract bool SupportsMonoExtensions { get; }
 
-		public abstract SslProtocols SupportedProtocols {
-			get;
-		}
+        public abstract SslProtocols SupportedProtocols { get; }
 
-		/*
-		 * Obtain a @IMonoSslStream instance.
-		 *
-		 */
-		public abstract IMonoSslStream CreateSslStream (
-			Stream innerStream, bool leaveInnerStreamOpen,
-			MonoTlsSettings settings = null);
+        /*
+         * Obtain a @IMonoSslStream instance.
+         *
+         */
+        public abstract IMonoSslStream CreateSslStream(
+            Stream innerStream,
+            bool leaveInnerStreamOpen,
+            MonoTlsSettings settings = null
+        );
 
-#endregion
+        #endregion
 
-#region Native Certificate Implementation
+        #region Native Certificate Implementation
 
-		internal virtual bool HasNativeCertificates {
-			get { return false; }
-		}
+        internal virtual bool HasNativeCertificates
+        {
+            get { return false; }
+        }
 
-#endregion
+        #endregion
 
-#region Misc
+        #region Misc
 
-		internal abstract bool SupportsCleanShutdown {
-			get;
-		}
+        internal abstract bool SupportsCleanShutdown { get; }
 
-#endregion
-
-	}
+        #endregion
+    }
 }

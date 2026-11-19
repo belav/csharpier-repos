@@ -12,7 +12,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class InMemoryTransactionManager : IDbContextTransactionManager, ITransactionEnlistmentManager
+public class InMemoryTransactionManager
+    : IDbContextTransactionManager,
+        ITransactionEnlistmentManager
 {
     private static readonly InMemoryTransaction StubTransaction = new();
 
@@ -25,7 +27,8 @@ public class InMemoryTransactionManager : IDbContextTransactionManager, ITransac
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public InMemoryTransactionManager(
-        IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> logger
+    )
     {
         _logger = logger;
     }
@@ -50,7 +53,8 @@ public class InMemoryTransactionManager : IDbContextTransactionManager, ITransac
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual Task<IDbContextTransaction> BeginTransactionAsync(
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         _logger.TransactionIgnoredWarning();
 
@@ -63,8 +67,7 @@ public class InMemoryTransactionManager : IDbContextTransactionManager, ITransac
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void CommitTransaction()
-        => _logger.TransactionIgnoredWarning();
+    public virtual void CommitTransaction() => _logger.TransactionIgnoredWarning();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -84,8 +87,7 @@ public class InMemoryTransactionManager : IDbContextTransactionManager, ITransac
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void RollbackTransaction()
-        => _logger.TransactionIgnoredWarning();
+    public virtual void RollbackTransaction() => _logger.TransactionIgnoredWarning();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -105,8 +107,7 @@ public class InMemoryTransactionManager : IDbContextTransactionManager, ITransac
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IDbContextTransaction? CurrentTransaction
-        => null;
+    public virtual IDbContextTransaction? CurrentTransaction => null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -114,8 +115,7 @@ public class InMemoryTransactionManager : IDbContextTransactionManager, ITransac
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Transaction? EnlistedTransaction
-        => null;
+    public virtual Transaction? EnlistedTransaction => null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -123,8 +123,8 @@ public class InMemoryTransactionManager : IDbContextTransactionManager, ITransac
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void EnlistTransaction(Transaction? transaction)
-        => _logger.TransactionIgnoredWarning();
+    public virtual void EnlistTransaction(Transaction? transaction) =>
+        _logger.TransactionIgnoredWarning();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -132,9 +132,7 @@ public class InMemoryTransactionManager : IDbContextTransactionManager, ITransac
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void ResetState()
-    {
-    }
+    public virtual void ResetState() { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -4,22 +4,20 @@
 
 namespace System.ServiceModel.Activities.Tracking
 {
-    using System.Runtime.Remoting.Messaging;
-    using System.Runtime;
     using System.Activities.Tracking;
-    using System.Collections.Specialized;
     using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
     using System.Configuration;
-    using System.ServiceModel.Configuration;
+    using System.Runtime;
+    using System.Runtime.Remoting.Messaging;
     using System.ServiceModel.Activities.Tracking.Configuration;
+    using System.ServiceModel.Configuration;
 
     class DefaultProfileManager : TrackingProfileManager
     {
         ConfigFileProfileStore profileStore;
 
-        public DefaultProfileManager()
-        {
-        }
+        public DefaultProfileManager() { }
 
         ConfigFileProfileStore ProfileStore
         {
@@ -33,8 +31,11 @@ namespace System.ServiceModel.Activities.Tracking
             }
         }
 
-
-        public override TrackingProfile Load(string profileName, string activityDefinitionId, TimeSpan timeout)
+        public override TrackingProfile Load(
+            string profileName,
+            string activityDefinitionId,
+            TimeSpan timeout
+        )
         {
             if (profileName == null)
             {
@@ -55,19 +56,37 @@ namespace System.ServiceModel.Activities.Tracking
                 foreach (TrackingProfile profile in profiles)
                 {
                     // Check the profile matches the requested name, and scope type
-                    if (string.Compare(profileName, profile.Name, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (
+                        string.Compare(
+                            profileName,
+                            profile.Name,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
                     {
                         // If we find a global scope profile, use it as the default profile
-                        if (string.Compare("*", profile.ActivityDefinitionId, StringComparison.OrdinalIgnoreCase) == 0)
+                        if (
+                            string.Compare(
+                                "*",
+                                profile.ActivityDefinitionId,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
                         {
                             if (bestMatch == null)
                             {
                                 bestMatch = profile;
                             }
                         }
-                        else if (string.Compare(activityDefinitionId, profile.ActivityDefinitionId, StringComparison.OrdinalIgnoreCase) == 0)
+                        else if (
+                            string.Compare(
+                                activityDefinitionId,
+                                profile.ActivityDefinitionId,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
                         {
-                            //specific profile for scopetarget found. 
+                            //specific profile for scopetarget found.
                             bestMatch = profile;
                             break;
                         }
@@ -84,15 +103,11 @@ namespace System.ServiceModel.Activities.Tracking
 
                 //If the profile is not found in config, return an empty profile to suppress
                 //events. If .config does not have profiles, return null.
-                bestMatch = new TrackingProfile()
-                {
-                    ActivityDefinitionId = activityDefinitionId
-                };
+                bestMatch = new TrackingProfile() { ActivityDefinitionId = activityDefinitionId };
             }
-            
+
             return bestMatch;
         }
-
 
         class ConfigFileProfileStore
         {
@@ -109,8 +124,12 @@ namespace System.ServiceModel.Activities.Tracking
 
                 try
                 {
-                    trackingSection =
-                        (TrackingSection)ConfigurationHelpers.GetSection(ConfigurationHelpers.GetSectionPath(TrackingConfigurationStrings.Tracking));
+                    trackingSection = (TrackingSection)
+                        ConfigurationHelpers.GetSection(
+                            ConfigurationHelpers.GetSectionPath(
+                                TrackingConfigurationStrings.Tracking
+                            )
+                        );
                 }
                 catch (ConfigurationErrorsException e)
                 {
@@ -141,7 +160,7 @@ namespace System.ServiceModel.Activities.Tracking
                             {
                                 Name = profileElement.Name,
                                 ImplementationVisibility = profileElement.ImplementationVisibility,
-                                ActivityDefinitionId = workflowElement.ActivityDefinitionId
+                                ActivityDefinitionId = workflowElement.ActivityDefinitionId,
                             };
 
                             workflowElement.AddQueries(profile.Queries);
@@ -153,7 +172,6 @@ namespace System.ServiceModel.Activities.Tracking
 
                 return this.trackingProfiles;
             }
-
         }
     }
 }

@@ -7,30 +7,31 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Mapping;
 using System.Diagnostics;
 using System.Globalization;
-using System.Reflection;
-using System.Text;
-using System.Xml;
-using System.Data.Mapping;
 using System.IO;
+using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-using System.Collections.ObjectModel;
-
+using System.Text;
+using System.Xml;
 
 namespace System.Data.Metadata.Edm
 {
     /// <summary>
-    /// This class represents a super-collection (a collection of collections) 
+    /// This class represents a super-collection (a collection of collections)
     /// of artifact resources. Typically, this "meta-collection" would contain
     /// artifacts represented as individual files, directories (which are in
     /// turn collections of files), and embedded resources.
     /// </summary>
     /// <remarks>This is the root class for access to all loader objects.</remarks>
-    internal class MetadataArtifactLoaderComposite : MetadataArtifactLoader, IEnumerable<MetadataArtifactLoader>
+    internal class MetadataArtifactLoaderComposite
+        : MetadataArtifactLoader,
+            IEnumerable<MetadataArtifactLoader>
     {
         /// <summary>
         /// The list of loaders aggregated by the composite.
@@ -62,10 +63,7 @@ namespace System.Data.Metadata.Edm
 
         public override bool IsComposite
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <summary>
@@ -85,7 +83,7 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// Get paths to artifacts for a specific DataSpace, in the original, unexpanded 
+        /// Get paths to artifacts for a specific DataSpace, in the original, unexpanded
         /// form
         /// </summary>
         /// <param name="spaceToGet">The DataSpace for the artifacts of interest</param>
@@ -139,7 +137,9 @@ namespace System.Data.Metadata.Edm
         /// Aggregates all resource streams from the _children collection
         /// </summary>
         /// <returns>A List of XmlReader objects; cannot be null</returns>
-        public override List<XmlReader> GetReaders(Dictionary<MetadataArtifactLoader, XmlReader> sourceDictionary)
+        public override List<XmlReader> GetReaders(
+            Dictionary<MetadataArtifactLoader, XmlReader> sourceDictionary
+        )
         {
             List<XmlReader> list = new List<XmlReader>();
 

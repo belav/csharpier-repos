@@ -8,16 +8,21 @@ namespace System.Net
         private string[]? _protectionRealm;
         private bool _mutualAuth;
 
-        public Authorization(string? token) :
-            this(token, true) { }
+        public Authorization(string? token)
+            : this(token, true) { }
 
-        public Authorization(string? token, bool finished) :
-            this(token, finished, null) { }
+        public Authorization(string? token, bool finished)
+            : this(token, finished, null) { }
 
-        public Authorization(string? token, bool finished, string? connectionGroupId) :
-            this(token, finished, connectionGroupId, false) { }
+        public Authorization(string? token, bool finished, string? connectionGroupId)
+            : this(token, finished, connectionGroupId, false) { }
 
-        internal Authorization(string? token, bool finished, string? connectionGroupId, bool mutualAuth)
+        internal Authorization(
+            string? token,
+            bool finished,
+            string? connectionGroupId,
+            bool mutualAuth
+        )
         {
             Message = string.IsNullOrEmpty(token) ? null : token;
             ConnectionGroupId = string.IsNullOrEmpty(connectionGroupId) ? null : connectionGroupId;

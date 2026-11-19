@@ -23,9 +23,7 @@ public class GroupByShaperExpression : Expression, IPrintableExpression
     /// </summary>
     /// <param name="keySelector">An expression representing key selector for the grouping result.</param>
     /// <param name="groupingEnumerable">An expression representing subquery for enumerable over the grouping result.</param>
-    public GroupByShaperExpression(
-        Expression keySelector,
-        ShapedQueryExpression groupingEnumerable)
+    public GroupByShaperExpression(Expression keySelector, ShapedQueryExpression groupingEnumerable)
     {
         KeySelector = keySelector;
         GroupingEnumerable = groupingEnumerable;
@@ -42,12 +40,14 @@ public class GroupByShaperExpression : Expression, IPrintableExpression
     public virtual ShapedQueryExpression GroupingEnumerable { get; }
 
     /// <inheritdoc />
-    public override Type Type
-        => typeof(IGrouping<,>).MakeGenericType(KeySelector.Type, GroupingEnumerable.ShaperExpression.Type);
+    public override Type Type =>
+        typeof(IGrouping<,>).MakeGenericType(
+            KeySelector.Type,
+            GroupingEnumerable.ShaperExpression.Type
+        );
 
     /// <inheritdoc />
-    public sealed override ExpressionType NodeType
-        => ExpressionType.Extension;
+    public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <inheritdoc />
     protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -65,8 +65,11 @@ public class GroupByShaperExpression : Expression, IPrintableExpression
     /// <param name="keySelector">The <see cref="KeySelector" /> property of the result.</param>
     /// <param name="groupingEnumerable">The <see cref="GroupingEnumerable" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public virtual GroupByShaperExpression Update(Expression keySelector, ShapedQueryExpression groupingEnumerable)
-        => keySelector != KeySelector || groupingEnumerable != GroupingEnumerable
+    public virtual GroupByShaperExpression Update(
+        Expression keySelector,
+        ShapedQueryExpression groupingEnumerable
+    ) =>
+        keySelector != KeySelector || groupingEnumerable != GroupingEnumerable
             ? new GroupByShaperExpression(keySelector, groupingEnumerable)
             : this;
 

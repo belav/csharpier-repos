@@ -35,8 +35,7 @@ internal sealed class DefaultApiProblemDetailsWriter : IProblemDetailsWriter
 
     public bool CanWrite(ProblemDetailsContext context)
     {
-        var controllerAttribute =
-            context.AdditionalMetadata?.GetMetadata<ControllerAttribute>()
+        var controllerAttribute = context.AdditionalMetadata?.GetMetadata<ControllerAttribute>()
             ?? context.HttpContext.GetEndpoint()?.Metadata.GetMetadata<ControllerAttribute>();
 
         return controllerAttribute != null;
@@ -44,8 +43,7 @@ internal sealed class DefaultApiProblemDetailsWriter : IProblemDetailsWriter
 
     public ValueTask WriteAsync(ProblemDetailsContext context)
     {
-        var apiControllerAttribute =
-            context.AdditionalMetadata?.GetMetadata<IApiBehaviorMetadata>()
+        var apiControllerAttribute = context.AdditionalMetadata?.GetMetadata<IApiBehaviorMetadata>()
             ?? context.HttpContext.GetEndpoint()?.Metadata.GetMetadata<IApiBehaviorMetadata>();
 
         if (apiControllerAttribute is null || _apiBehaviorOptions.SuppressMapClientErrors)

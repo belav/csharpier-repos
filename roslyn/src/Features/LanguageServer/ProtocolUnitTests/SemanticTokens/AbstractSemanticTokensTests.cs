@@ -24,52 +24,87 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SemanticTokens
 {
     public abstract class AbstractSemanticTokensTests : AbstractLanguageServerProtocolTests
     {
-        protected AbstractSemanticTokensTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-        {
-        }
+        protected AbstractSemanticTokensTests(ITestOutputHelper testOutputHelper)
+            : base(testOutputHelper) { }
 
-        private protected static IReadOnlyDictionary<string, int> GetTokenTypeToIndex(TestLspServer server)
-            => SemanticTokensSchema.GetSchema(server.ClientCapabilities.HasVisualStudioLspCapability()).TokenTypeToIndex;
+        private protected static IReadOnlyDictionary<string, int> GetTokenTypeToIndex(
+            TestLspServer server
+        ) =>
+            SemanticTokensSchema
+                .GetSchema(server.ClientCapabilities.HasVisualStudioLspCapability())
+                .TokenTypeToIndex;
 
-        private protected static async Task<LSP.SemanticTokens> RunGetSemanticTokensRangeAsync(TestLspServer testLspServer, LSP.Location caret, LSP.Range range)
+        private protected static async Task<LSP.SemanticTokens> RunGetSemanticTokensRangeAsync(
+            TestLspServer testLspServer,
+            LSP.Location caret,
+            LSP.Range range
+        )
         {
-            var result = await testLspServer.ExecuteRequestAsync<LSP.SemanticTokensRangeParams, LSP.SemanticTokens>(LSP.Methods.TextDocumentSemanticTokensRangeName,
-                CreateSemanticTokensRangeParams(caret, range), CancellationToken.None);
+            var result = await testLspServer.ExecuteRequestAsync<
+                LSP.SemanticTokensRangeParams,
+                LSP.SemanticTokens
+            >(
+                LSP.Methods.TextDocumentSemanticTokensRangeName,
+                CreateSemanticTokensRangeParams(caret, range),
+                CancellationToken.None
+            );
             Contract.ThrowIfNull(result);
             return result;
         }
 
-        private protected static async Task<LSP.SemanticTokens> RunGetSemanticTokensRangesAsync(TestLspServer testLspServer, LSP.Location caret, Range[] ranges)
+        private protected static async Task<LSP.SemanticTokens> RunGetSemanticTokensRangesAsync(
+            TestLspServer testLspServer,
+            LSP.Location caret,
+            Range[] ranges
+        )
         {
-            var result = await testLspServer.ExecuteRequestAsync<SemanticTokensRangesParams, LSP.SemanticTokens>(SemanticTokensRangesHandler.SemanticRangesMethodName,
-                CreateSemanticTokensRangesParams(caret, ranges!), CancellationToken.None);
+            var result = await testLspServer.ExecuteRequestAsync<
+                SemanticTokensRangesParams,
+                LSP.SemanticTokens
+            >(
+                SemanticTokensRangesHandler.SemanticRangesMethodName,
+                CreateSemanticTokensRangesParams(caret, ranges!),
+                CancellationToken.None
+            );
             Contract.ThrowIfNull(result);
             return result;
         }
 
-        private static LSP.SemanticTokensRangeParams CreateSemanticTokensRangeParams(LSP.Location caret, LSP.Range range)
-            => new LSP.SemanticTokensRangeParams
+        private static LSP.SemanticTokensRangeParams CreateSemanticTokensRangeParams(
+            LSP.Location caret,
+            LSP.Range range
+        ) =>
+            new LSP.SemanticTokensRangeParams
             {
                 TextDocument = new LSP.TextDocumentIdentifier { Uri = caret.Uri },
-                Range = range
+                Range = range,
             };
 
-        private static SemanticTokensRangesParams CreateSemanticTokensRangesParams(LSP.Location caret, Range[] ranges)
-            => new SemanticTokensRangesParams
+        private static SemanticTokensRangesParams CreateSemanticTokensRangesParams(
+            LSP.Location caret,
+            Range[] ranges
+        ) =>
+            new SemanticTokensRangesParams
             {
                 TextDocument = new LSP.TextDocumentIdentifier { Uri = caret.Uri },
-                Ranges = ranges
+                Ranges = ranges,
             };
 
         protected static async Task UpdateDocumentTextAsync(string updatedText, Workspace workspace)
         {
             var docId = ((TestWorkspace)workspace).Documents.First().Id;
-            await ((TestWorkspace)workspace).ChangeDocumentAsync(docId, SourceText.From(updatedText));
+            await ((TestWorkspace)workspace).ChangeDocumentAsync(
+                docId,
+                SourceText.From(updatedText)
+            );
         }
 
         // VS doesn't currently support multi-line tokens, so we want to verify that we aren't
         // returning any in the tokens array.
-        private protected static async Task VerifyBasicInvariantsAndNoMultiLineTokens(TestLspServer testLspServer, int[] tokens)
+        private protected static async Task VerifyBasicInvariantsAndNoMultiLineTokens(
+            TestLspServer testLspServer,
+            int[] tokens
+        )
         {
             var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
             var text = await document.GetTextAsync().ConfigureAwait(false);
@@ -99,7 +134,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SemanticTokens
                 else
                 {
                     currentChar += tokens[i + 1];
-                    Assert.True(currentChar >= 0, "The first token on the line can't be a negative position, but applying an offset took us there.");
+                    Assert.True(
+                        currentChar >= 0,
+                        "The first token on the line can't be a negative position, but applying an offset took us there."
+                    );
                 }
 
                 // Gets the length of the token
@@ -112,9 +150,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SemanticTokens
                 var tokenTypeToIndex = GetTokenTypeToIndex(testLspServer);
                 var kind = tokenTypeToIndex.Where(kvp => kvp.Value == tokens[i + 3]).Single().Key;
 
-                Assert.True(currentChar + tokenLength <= lineLength,
-                    $"Multi-line token of type {kind} found on line {currentLine} at character index {currentChar}. " +
-                    $"The token ends at index {currentChar + tokenLength}, which exceeds the line length of {lineLength}.");
+                Assert.True(
+                    currentChar + tokenLength <= lineLength,
+                    $"Multi-line token of type {kind} found on line {currentLine} at character index {currentChar}. "
+                        + $"The token ends at index {currentChar + tokenLength}, which exceeds the line length of {lineLength}."
+                );
             }
         }
 
@@ -124,16 +164,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SemanticTokens
         /// back with the string again.
         /// </summary>
         protected static ImmutableArray<string> ConvertToReadableFormat(
-            ClientCapabilities capabilities, int[] data)
+            ClientCapabilities capabilities,
+            int[] data
+        )
         {
             var convertedStringsBuilder = ImmutableArray.CreateBuilder<string>(data.Length / 5);
-            var tokenTypeToIndex = SemanticTokensSchema.GetSchema(capabilities.HasVisualStudioLspCapability()).TokenTypeToIndex;
+            var tokenTypeToIndex = SemanticTokensSchema
+                .GetSchema(capabilities.HasVisualStudioLspCapability())
+                .TokenTypeToIndex;
 
             for (var i = 0; i < data.Length; i += 5)
             {
                 var kind = tokenTypeToIndex.Single(kvp => kvp.Value == data[i + 3]).Key;
 
-                convertedStringsBuilder.Add($"{data[i]}, {data[i + 1]}, {data[i + 2]}, {kind}, {data[i + 4]}");
+                convertedStringsBuilder.Add(
+                    $"{data[i]}, {data[i + 1]}, {data[i + 2]}, {kind}, {data[i + 4]}"
+                );
             }
 
             return convertedStringsBuilder.MoveToImmutable();

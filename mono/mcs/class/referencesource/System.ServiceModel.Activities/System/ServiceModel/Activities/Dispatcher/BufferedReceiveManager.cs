@@ -29,17 +29,36 @@ namespace System.ServiceModel.Activities.Dispatcher
             this.thisLock = new object();
         }
 
-        public bool BufferReceive(OperationContext operationContext, ReceiveContext receiveContext, string bookmarkName, BufferedReceiveState state, bool retry)
+        public bool BufferReceive(
+            OperationContext operationContext,
+            ReceiveContext receiveContext,
+            string bookmarkName,
+            BufferedReceiveState state,
+            bool retry
+        )
         {
-            Fx.Assert(receiveContext != null, "ReceiveContext must be present in order to perform buffering");
+            Fx.Assert(
+                receiveContext != null,
+                "ReceiveContext must be present in order to perform buffering"
+            );
 
             bool success = false;
 
             BufferedReceiveMessageProperty property = null;
-            if (BufferedReceiveMessageProperty.TryGet(operationContext.IncomingMessageProperties, out property))
+            if (
+                BufferedReceiveMessageProperty.TryGet(
+                    operationContext.IncomingMessageProperties,
+                    out property
+                )
+            )
             {
                 CorrelationMessageProperty correlation = null;
-                if (CorrelationMessageProperty.TryGet(operationContext.IncomingMessageProperties, out correlation))
+                if (
+                    CorrelationMessageProperty.TryGet(
+                        operationContext.IncomingMessageProperties,
+                        out correlation
+                    )
+                )
                 {
                     InstanceKey instanceKey = correlation.CorrelationKey;
                     int channelKey = operationContext.Channel.GetHashCode();
@@ -48,7 +67,15 @@ namespace System.ServiceModel.Activities.Dispatcher
                         try
                         {
                             // Tag the property with identifying data to be used during later processing
-                            if (UpdateProperty(property, receiveContext, channelKey, bookmarkName, state))
+                            if (
+                                UpdateProperty(
+                                    property,
+                                    receiveContext,
+                                    channelKey,
+                                    bookmarkName,
+                                    state
+                                )
+                            )
                             {
                                 // Cleanup if we are notified the ReceiveContext faulted underneath us
                                 receiveContext.Faulted += delegate(object sender, EventArgs e)
@@ -57,7 +84,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                                     {
                                         if (this.bufferedProperties.ContainsKey(instanceKey))
                                         {
-                                            if (this.bufferedProperties[instanceKey].Remove(property))
+                                            if (
+                                                this.bufferedProperties[instanceKey]
+                                                    .Remove(property)
+                                            )
                                             {
                                                 try
                                                 {
@@ -91,7 +121,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                                     {
                                         bool found = false;
                                         // if the exception indicates retry-able (such as RetryException),
-                                        // we will simply retry.  This happens when racing with abort and 
+                                        // we will simply retry.  This happens when racing with abort and
                                         // WF informing the client to retry (BufferedReceiveManager is a
                                         // client in this case).
                                         if (retry)
@@ -99,12 +129,17 @@ namespace System.ServiceModel.Activities.Dispatcher
                                             property.RequestContext.DelayClose(true);
                                             property.RegisterForReplay(operationContext);
                                             property.ReplayRequest();
-                                            property.Notification.NotifyInvokeReceived(property.RequestContext.InnerRequestContext);
+                                            property.Notification.NotifyInvokeReceived(
+                                                property.RequestContext.InnerRequestContext
+                                            );
                                             found = true;
                                         }
                                         else
                                         {
-                                            ReadOnlyCollection<BookmarkInfo> bookmarks = this.host.DurableInstanceManager.PersistenceProviderDirectory.GetBookmarksForInstance(instanceKey);
+                                            ReadOnlyCollection<BookmarkInfo> bookmarks =
+                                                this.host.DurableInstanceManager.PersistenceProviderDirectory.GetBookmarksForInstance(
+                                                    instanceKey
+                                                );
                                             // Retry in case match the existing bookmark
                                             if (bookmarks != null)
                                             {
@@ -115,9 +150,15 @@ namespace System.ServiceModel.Activities.Dispatcher
                                                     {
                                                         // Found it so retry...
                                                         property.RequestContext.DelayClose(true);
-                                                        property.RegisterForReplay(operationContext);
+                                                        property.RegisterForReplay(
+                                                            operationContext
+                                                        );
                                                         property.ReplayRequest();
-                                                        property.Notification.NotifyInvokeReceived(property.RequestContext.InnerRequestContext);
+                                                        property.Notification.NotifyInvokeReceived(
+                                                            property
+                                                                .RequestContext
+                                                                .InnerRequestContext
+                                                        );
                                                         found = true;
                                                         break;
                                                     }
@@ -128,10 +169,19 @@ namespace System.ServiceModel.Activities.Dispatcher
                                         if (!found)
                                         {
                                             List<BufferedReceiveMessageProperty> properties;
-                                            if (!this.bufferedProperties.TryGetValue(instanceKey, out properties))
+                                            if (
+                                                !this.bufferedProperties.TryGetValue(
+                                                    instanceKey,
+                                                    out properties
+                                                )
+                                            )
                                             {
-                                                properties = new List<BufferedReceiveMessageProperty>();
-                                                this.bufferedProperties.Add(instanceKey, properties);
+                                                properties =
+                                                    new List<BufferedReceiveMessageProperty>();
+                                                this.bufferedProperties.Add(
+                                                    instanceKey,
+                                                    properties
+                                                );
                                             }
                                             property.RequestContext.DelayClose(true);
                                             property.RegisterForReplay(operationContext);
@@ -160,7 +210,10 @@ namespace System.ServiceModel.Activities.Dispatcher
             return success;
         }
 
-        public void Retry(HashSet<InstanceKey> associatedInstances, ReadOnlyCollection<BookmarkInfo> availableBookmarks)
+        public void Retry(
+            HashSet<InstanceKey> associatedInstances,
+            ReadOnlyCollection<BookmarkInfo> availableBookmarks
+        )
         {
             List<BookmarkInfo> bookmarks = new List<BookmarkInfo>(availableBookmarks);
             foreach (InstanceKey instanceKey in associatedInstances)
@@ -169,7 +222,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     if (this.bufferedProperties.ContainsKey(instanceKey))
                     {
-                        List<BufferedReceiveMessageProperty> properties = this.bufferedProperties[instanceKey];
+                        List<BufferedReceiveMessageProperty> properties = this.bufferedProperties[
+                            instanceKey
+                        ];
                         int index = 0;
 
                         while (index < properties.Count && bookmarks.Count > 0)
@@ -189,7 +244,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                                     bookmarks.RemoveAt(i);
                                     channelKey = data.ChannelKey;
                                     property.ReplayRequest();
-                                    property.Notification.NotifyInvokeReceived(property.RequestContext.InnerRequestContext);
+                                    property.Notification.NotifyInvokeReceived(
+                                        property.RequestContext.InnerRequestContext
+                                    );
                                     found = true;
                                     break;
                                 }
@@ -223,7 +280,11 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     if (this.bufferedProperties.ContainsKey(instanceKey))
                     {
-                        foreach (BufferedReceiveMessageProperty property in this.bufferedProperties[instanceKey])
+                        foreach (
+                            BufferedReceiveMessageProperty property in this.bufferedProperties[
+                                instanceKey
+                            ]
+                        )
                         {
                             PropertyData data = (PropertyData)property.UserState;
                             AbandonReceiveContext(data.ReceiveContext);
@@ -241,7 +302,9 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             lock (this.thisLock)
             {
-                foreach (List<BufferedReceiveMessageProperty> value in this.bufferedProperties.Values)
+                foreach (
+                    List<BufferedReceiveMessageProperty> value in this.bufferedProperties.Values
+                )
                 {
                     foreach (BufferedReceiveMessageProperty property in value)
                     {
@@ -267,7 +330,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                 try
                 {
                     IAsyncResult result = receiveContext.BeginAbandon(
-                        TimeSpan.MaxValue, onEndAbandon, receiveContext);
+                        TimeSpan.MaxValue,
+                        onEndAbandon,
+                        receiveContext
+                    );
                     if (result.CompletedSynchronously)
                     {
                         HandleEndAbandon(result);
@@ -326,7 +392,8 @@ namespace System.ServiceModel.Activities.Dispatcher
             if (Interlocked.CompareExchange(ref this.initialized, 1, 0) != 0)
             {
                 throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.BufferedReceiveBehaviorMultipleUse));
+                    new InvalidOperationException(SR.BufferedReceiveBehaviorMultipleUse)
+                );
             }
 
             owner.ThrowIfClosedOrOpened();
@@ -336,11 +403,15 @@ namespace System.ServiceModel.Activities.Dispatcher
             Initialize();
         }
 
-        void IExtension<ServiceHostBase>.Detach(ServiceHostBase owner)
-        {
-        }
+        void IExtension<ServiceHostBase>.Detach(ServiceHostBase owner) { }
 
-        bool UpdateProperty(BufferedReceiveMessageProperty property, ReceiveContext receiveContext, int channelKey, string bookmarkName, BufferedReceiveState state)
+        bool UpdateProperty(
+            BufferedReceiveMessageProperty property,
+            ReceiveContext receiveContext,
+            int channelKey,
+            string bookmarkName,
+            BufferedReceiveState state
+        )
         {
             // If there's data already there make sure the state is allowed
             if (property.UserState == null)
@@ -350,7 +421,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                     ReceiveContext = receiveContext,
                     ChannelKey = channelKey,
                     BookmarkName = bookmarkName,
-                    State = state
+                    State = state,
                 };
             }
             else
@@ -371,7 +442,8 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         void Initialize()
         {
-            this.bufferedProperties = new Dictionary<InstanceKey, List<BufferedReceiveMessageProperty>>();
+            this.bufferedProperties =
+                new Dictionary<InstanceKey, List<BufferedReceiveMessageProperty>>();
         }
 
         class PendingMessageThrottle
@@ -385,7 +457,8 @@ namespace System.ServiceModel.Activities.Dispatcher
             public PendingMessageThrottle(int maxPendingMessagesPerChannel)
             {
                 this.maxPendingMessagesPerChannel = maxPendingMessagesPerChannel;
-                this.warningRestoreLimit = (int)Math.Floor(0.7 * (double)maxPendingMessagesPerChannel);
+                this.warningRestoreLimit = (int)
+                    Math.Floor(0.7 * (double)maxPendingMessagesPerChannel);
                 this.pendingMessages = new Dictionary<int, ThrottleEntry>();
             }
 
@@ -404,7 +477,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                         entry.Count++;
                         if (TD.PendingMessagesPerChannelRatioIsEnabled())
                         {
-                            TD.PendingMessagesPerChannelRatio(entry.Count, this.maxPendingMessagesPerChannel);
+                            TD.PendingMessagesPerChannelRatio(
+                                entry.Count,
+                                this.maxPendingMessagesPerChannel
+                            );
                         }
                         return true;
                     }
@@ -414,7 +490,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                         {
                             if (!entry.WarningIssued)
                             {
-                                TD.MaxPendingMessagesPerChannelExceeded(this.maxPendingMessagesPerChannel);
+                                TD.MaxPendingMessagesPerChannelExceeded(
+                                    this.maxPendingMessagesPerChannel
+                                );
                                 entry.WarningIssued = true;
                             }
                         }
@@ -429,12 +507,18 @@ namespace System.ServiceModel.Activities.Dispatcher
                 lock (this.pendingMessages)
                 {
                     ThrottleEntry entry = this.pendingMessages[channelKey];
-                    Fx.Assert(entry.Count > 0, "The pending message throttle was released too many times");
+                    Fx.Assert(
+                        entry.Count > 0,
+                        "The pending message throttle was released too many times"
+                    );
 
                     entry.Count--;
                     if (TD.PendingMessagesPerChannelRatioIsEnabled())
                     {
-                        TD.PendingMessagesPerChannelRatio(entry.Count, this.maxPendingMessagesPerChannel);
+                        TD.PendingMessagesPerChannelRatio(
+                            entry.Count,
+                            this.maxPendingMessagesPerChannel
+                        );
                     }
                     if (entry.Count == 0)
                     {
@@ -449,53 +533,25 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             class ThrottleEntry
             {
-                public ThrottleEntry()
-                {
-                }
+                public ThrottleEntry() { }
 
-                public bool WarningIssued
-                {
-                    get;
-                    set;
-                }
+                public bool WarningIssued { get; set; }
 
-                public int Count
-                {
-                    get;
-                    set;
-                }
+                public int Count { get; set; }
             }
         }
 
         class PropertyData
         {
-            public PropertyData()
-            {
-            }
+            public PropertyData() { }
 
-            public ReceiveContext ReceiveContext
-            {
-                get;
-                set;
-            }
+            public ReceiveContext ReceiveContext { get; set; }
 
-            public int ChannelKey
-            {
-                get;
-                set;
-            }
+            public int ChannelKey { get; set; }
 
-            public string BookmarkName
-            {
-                get;
-                set;
-            }
+            public string BookmarkName { get; set; }
 
-            public BufferedReceiveState State
-            {
-                get;
-                set;
-            }
+            public BufferedReceiveState State { get; set; }
         }
     }
 }

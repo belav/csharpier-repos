@@ -1,5 +1,5 @@
 //
-// OracleInfoMessageEventArgs.cs 
+// OracleInfoMessageEventArgs.cs
 //
 // Part of the Mono class libraries at
 // mcs/class/System.Data.OracleClient/System.Data.OracleClient
@@ -15,55 +15,58 @@
 //
 
 using System;
-using System.IO;
-using System.Data.SqlTypes;
 using System.Data.OracleClient.Oci;
+using System.Data.SqlTypes;
+using System.IO;
 
-namespace System.Data.OracleClient 
+namespace System.Data.OracleClient
 {
-	public sealed class OracleInfoMessageEventArgs : EventArgs
-	{
-		#region Fields
+    public sealed class OracleInfoMessageEventArgs : EventArgs
+    {
+        #region Fields
 
-		int code;
-		string message;
+        int code;
+        string message;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		internal OracleInfoMessageEventArgs (OciErrorInfo info)
-		{
-			code = info.ErrorCode;
-			message = info.ErrorMessage;
-		}
+        internal OracleInfoMessageEventArgs(OciErrorInfo info)
+        {
+            code = info.ErrorCode;
+            message = info.ErrorMessage;
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public int Code {
-			get { return code; }
-		}
+        public int Code
+        {
+            get { return code; }
+        }
 
-		public string Message {
-			get { return message; }
-		}
+        public string Message
+        {
+            get { return message; }
+        }
 
-		public string Source {
-			[MonoTODO]
-			get { throw new NotImplementedException (); }
-		}
+        public string Source
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		public override string ToString ()
-		{
-			return Message;
-		}
+        public override string ToString()
+        {
+            return Message;
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

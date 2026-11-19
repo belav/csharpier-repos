@@ -25,7 +25,8 @@ public class DiscriminatorLengthConvention : IModelFinalizingConvention
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public DiscriminatorLengthConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
     {
         Dependencies = dependencies;
         RelationalDependencies = relationalDependencies;
@@ -42,19 +43,29 @@ public class DiscriminatorLengthConvention : IModelFinalizingConvention
     protected virtual RelationalConventionSetBuilderDependencies RelationalDependencies { get; }
 
     /// <inheritdoc />
-    public virtual void ProcessModelFinalizing(IConventionModelBuilder modelBuilder, IConventionContext<IConventionModelBuilder> context)
+    public virtual void ProcessModelFinalizing(
+        IConventionModelBuilder modelBuilder,
+        IConventionContext<IConventionModelBuilder> context
+    )
     {
-        foreach (var entityType in modelBuilder.Metadata.GetEntityTypes()
-                     .Where(entityType => entityType.BaseType == null))
+        foreach (
+            var entityType in modelBuilder
+                .Metadata.GetEntityTypes()
+                .Where(entityType => entityType.BaseType == null)
+        )
         {
             var discriminatorProperty = entityType.FindDiscriminatorProperty();
-            if (discriminatorProperty != null
+            if (
+                discriminatorProperty != null
                 && discriminatorProperty.ClrType == typeof(string)
                 && !discriminatorProperty.IsKey()
-                && !discriminatorProperty.IsForeignKey())
+                && !discriminatorProperty.IsForeignKey()
+            )
             {
-                var maxDiscriminatorValueLength =
-                    entityType.GetDerivedTypesInclusive().Select(e => ((string)e.GetDiscriminatorValue()!).Length).Max();
+                var maxDiscriminatorValueLength = entityType
+                    .GetDerivedTypesInclusive()
+                    .Select(e => ((string)e.GetDiscriminatorValue()!).Length)
+                    .Max();
 
                 var previous = 1;
                 var current = 1;

@@ -16,14 +16,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 [Method(Methods.InitializeName)]
 internal class InitializeHandler : ILspServiceRequestHandler<InitializeParams, InitializeResult>
 {
-    public InitializeHandler()
-    {
-    }
+    public InitializeHandler() { }
 
     public bool MutatesSolutionState => true;
     public bool RequiresLSPSolution => false;
 
-    public Task<InitializeResult> HandleRequestAsync(InitializeParams request, RequestContext context, CancellationToken cancellationToken)
+    public Task<InitializeResult> HandleRequestAsync(
+        InitializeParams request,
+        RequestContext context,
+        CancellationToken cancellationToken
+    )
     {
         var logger = context.GetRequiredLspService<ILspServiceLogger>();
         try
@@ -34,7 +36,9 @@ internal class InitializeHandler : ILspServiceRequestHandler<InitializeParams, I
             var clientCapabilities = clientCapabilitiesManager.TryGetClientCapabilities();
             if (clientCapabilities != null)
             {
-                throw new InvalidOperationException($"{nameof(Methods.InitializeName)} called multiple times");
+                throw new InvalidOperationException(
+                    $"{nameof(Methods.InitializeName)} called multiple times"
+                );
             }
 
             clientCapabilities = request.Capabilities;
@@ -45,16 +49,16 @@ internal class InitializeHandler : ILspServiceRequestHandler<InitializeParams, I
 
             // Record a telemetry event indicating what capabilities are being provided by the server.
             // Useful for figuring out if a particular session is opted into an LSP feature.
-            Logger.Log(FunctionId.LSP_Initialize, KeyValueLogMessage.Create(m =>
-            {
-                m["serverKind"] = context.ServerKind.ToTelemetryString();
-                m["capabilities"] = JsonConvert.SerializeObject(serverCapabilities);
-            }));
+            Logger.Log(
+                FunctionId.LSP_Initialize,
+                KeyValueLogMessage.Create(m =>
+                {
+                    m["serverKind"] = context.ServerKind.ToTelemetryString();
+                    m["capabilities"] = JsonConvert.SerializeObject(serverCapabilities);
+                })
+            );
 
-            return Task.FromResult(new InitializeResult
-            {
-                Capabilities = serverCapabilities,
-            });
+            return Task.FromResult(new InitializeResult { Capabilities = serverCapabilities });
         }
         finally
         {

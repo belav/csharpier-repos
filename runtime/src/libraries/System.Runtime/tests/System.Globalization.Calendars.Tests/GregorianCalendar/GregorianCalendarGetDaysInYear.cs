@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using Xunit;
-
 using static System.Globalization.Tests.GregorianCalendarTestUtilities;
 
 namespace System.Globalization.Tests
@@ -20,7 +19,7 @@ namespace System.Globalization.Tests
             yield return new object[] { 400 };
 
             // Boundary years
-            yield return new object[] { 9999  };
+            yield return new object[] { 9999 };
             yield return new object[] { 1 };
         }
 

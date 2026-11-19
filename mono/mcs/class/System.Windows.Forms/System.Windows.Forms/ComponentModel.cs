@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,26 +29,35 @@
 using System;
 using System.ComponentModel.Design;
 
-namespace System.Windows.Forms.ComponentModel.Com2Interop {
-	public class Com2Variant {
-		public Com2Variant() {
-			throw new NotImplementedException();
-		}
-	}
+namespace System.Windows.Forms.ComponentModel.Com2Interop
+{
+    public class Com2Variant
+    {
+        public Com2Variant()
+        {
+            throw new NotImplementedException();
+        }
+    }
 
-	public interface ICom2PropertyPageDisplayService {
-		void ShowPropertyPage(string title, object component, int dispid, Guid pageGuid, IntPtr parentHandle);
-	}
+    public interface ICom2PropertyPageDisplayService
+    {
+        void ShowPropertyPage(
+            string title,
+            object component,
+            int dispid,
+            Guid pageGuid,
+            IntPtr parentHandle
+        );
+    }
 
-	public interface IComPropertyBrowser {
-		bool InPropertySet {
-			get ;
-		}
-		void DropDownDone();
-		bool EnsurePendingChangesCommitted();
-		void HandleF4();
-		void LoadState(Microsoft.Win32.RegistryKey key);
-		void SaveState(Microsoft.Win32.RegistryKey key);
-		event ComponentRenameEventHandler ComComponentNameChanged;
-	}
+    public interface IComPropertyBrowser
+    {
+        bool InPropertySet { get; }
+        void DropDownDone();
+        bool EnsurePendingChangesCommitted();
+        void HandleF4();
+        void LoadState(Microsoft.Win32.RegistryKey key);
+        void SaveState(Microsoft.Win32.RegistryKey key);
+        event ComponentRenameEventHandler ComComponentNameChanged;
+    }
 }

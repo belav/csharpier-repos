@@ -3,7 +3,7 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
-    // Bindings can implement this interface in order to advertise capabilities 
+    // Bindings can implement this interface in order to advertise capabilities
     // that DeliveryRequirementsAttribute consumes
     public interface IBindingDeliveryCapabilities
     {

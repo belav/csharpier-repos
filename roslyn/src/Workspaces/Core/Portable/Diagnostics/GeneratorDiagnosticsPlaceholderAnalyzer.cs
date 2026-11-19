@@ -13,12 +13,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         internal static readonly GeneratorDiagnosticsPlaceholderAnalyzer Instance = new();
 
-        private GeneratorDiagnosticsPlaceholderAnalyzer()
-        {
-        }
+        private GeneratorDiagnosticsPlaceholderAnalyzer() { }
 
         // We don't have any diagnostics to directly state here, since it could be any underlying type.
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray<DiagnosticDescriptor>.Empty;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            ImmutableArray<DiagnosticDescriptor>.Empty;
 
 #pragma warning disable RS1026 // Enable concurrent execution
 #pragma warning disable RS1025 // Configure generated code analysis

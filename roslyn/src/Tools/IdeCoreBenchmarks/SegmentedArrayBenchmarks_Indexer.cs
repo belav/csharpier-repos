@@ -79,7 +79,13 @@ namespace IdeCoreBenchmarks
         [Benchmark(Description = "SegmentedArray<int> (Copy)")]
         public void ShiftAllViaSegmentedArrayCopy()
         {
-            SegmentedArray.Copy(_segmentedValues, 1, _segmentedValues, 0, _segmentedValues.Length - 1);
+            SegmentedArray.Copy(
+                _segmentedValues,
+                1,
+                _segmentedValues,
+                0,
+                _segmentedValues.Length - 1
+            );
             _segmentedValues[^1] = 0;
         }
 
@@ -97,7 +103,13 @@ namespace IdeCoreBenchmarks
         [Benchmark(Description = "SegmentedArray<object> (Copy)")]
         public void ShiftAllObjectViaSegmentedArrayCopy()
         {
-            SegmentedArray.Copy(_segmentedValuesObject, 1, _segmentedValuesObject, 0, _segmentedValuesObject.Length - 1);
+            SegmentedArray.Copy(
+                _segmentedValuesObject,
+                1,
+                _segmentedValuesObject,
+                0,
+                _segmentedValuesObject.Length - 1
+            );
             _segmentedValuesObject[^1] = null;
         }
     }

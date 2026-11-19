@@ -34,7 +34,11 @@ namespace System.Diagnostics.Tests
         [ConditionalFact(typeof(Helpers), nameof(Helpers.SupportsEventLogs))]
         public void EventInstanceCreationWithType()
         {
-            EventInstance eventInstance = new EventInstance(instanceId, categoryId, EventLogEntryType.Warning);
+            EventInstance eventInstance = new EventInstance(
+                instanceId,
+                categoryId,
+                EventLogEntryType.Warning
+            );
 
             Assert.Equal(categoryId, eventInstance.CategoryId);
             Assert.Equal(instanceId, eventInstance.InstanceId);

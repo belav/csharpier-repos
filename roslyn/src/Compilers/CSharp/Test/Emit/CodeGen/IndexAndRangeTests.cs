@@ -17,15 +17,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
 {
     public class IndexAndRangeTests : CSharpTestBase
     {
-        private CompilationVerifier CompileAndVerifyWithIndexAndRange(string s, string expectedOutput = null)
+        private CompilationVerifier CompileAndVerifyWithIndexAndRange(
+            string s,
+            string expectedOutput = null
+        )
         {
             var comp = CreateCompilationWithIndexAndRange(
-                new[] { s, TestSources.GetSubArray, },
-                expectedOutput is null ? TestOptions.ReleaseDll : TestOptions.ReleaseExe);
+                new[] { s, TestSources.GetSubArray },
+                expectedOutput is null ? TestOptions.ReleaseDll : TestOptions.ReleaseExe
+            );
             return CompileAndVerify(comp, expectedOutput: expectedOutput);
         }
 
-        private static (SemanticModel model, List<ElementAccessExpressionSyntax> accesses) GetModelAndAccesses(CSharpCompilation comp)
+        private static (
+            SemanticModel model,
+            List<ElementAccessExpressionSyntax> accesses
+        ) GetModelAndAccesses(CSharpCompilation comp)
         {
             var syntaxTree = comp.SyntaxTrees[0];
             var root = syntaxTree.GetRoot();
@@ -34,7 +41,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             return (model, root.DescendantNodes().OfType<ElementAccessExpressionSyntax>().ToList());
         }
 
-        private static void VerifyIndexCall(IMethodSymbol symbol, string methodName, string containingTypeName)
+        private static void VerifyIndexCall(
+            IMethodSymbol symbol,
+            string methodName,
+            string containingTypeName
+        )
         {
             Assert.NotNull(symbol);
             Assert.Equal(methodName, symbol.Name);
@@ -45,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         [Fact]
         public void ExpressionTreePatternIndexAndRange()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -67,28 +79,44 @@ class Program
         Expression<Func<S, S>> e4 = (S s) => s[new Range(0, 1)]; // 4
     }
 }";
-            var comp = CreateCompilationWithIndexAndRange(
-                new[] { src, TestSources.GetSubArray, });
+            var comp = CreateCompilationWithIndexAndRange(new[] { src, TestSources.GetSubArray });
             comp.VerifyEmitDiagnostics(
                 // (16,55): error CS8790: An expression tree may not contain a pattern System.Index or System.Range indexer access
                 //         Expression<Func<int[], int>> e = (int[] a) => a[new Index(0, true)]; // 1
-                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsPatternImplicitIndexer, "a[new Index(0, true)]").WithLocation(16, 55),
+                Diagnostic(
+                        ErrorCode.ERR_ExpressionTreeContainsPatternImplicitIndexer,
+                        "a[new Index(0, true)]"
+                    )
+                    .WithLocation(16, 55),
                 // (17,64): error CS8790: An expression tree may not contain a pattern System.Index or System.Range indexer access
                 //         Expression<Func<List<int>, int>> e2 = (List<int> a) => a[new Index(0, true)]; // 2
-                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsPatternImplicitIndexer, "a[new Index(0, true)]").WithLocation(17, 64),
+                Diagnostic(
+                        ErrorCode.ERR_ExpressionTreeContainsPatternImplicitIndexer,
+                        "a[new Index(0, true)]"
+                    )
+                    .WithLocation(17, 64),
                 // (19,58): error CS8790: An expression tree may not contain a pattern System.Index or System.Range indexer access
                 //         Expression<Func<int[], int[]>> e3 = (int[] a) => a[new Range(0, 1)]; // 3
-                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsPatternImplicitIndexer, "a[new Range(0, 1)]").WithLocation(19, 58),
+                Diagnostic(
+                        ErrorCode.ERR_ExpressionTreeContainsPatternImplicitIndexer,
+                        "a[new Range(0, 1)]"
+                    )
+                    .WithLocation(19, 58),
                 // (20,46): error CS8790: An expression tree may not contain a pattern System.Index or System.Range indexer access
                 //         Expression<Func<S, S>> e4 = (S s) => s[new Range(0, 1)]; // 4
-                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsPatternImplicitIndexer, "s[new Range(0, 1)]").WithLocation(20, 46)
+                Diagnostic(
+                        ErrorCode.ERR_ExpressionTreeContainsPatternImplicitIndexer,
+                        "s[new Range(0, 1)]"
+                    )
+                    .WithLocation(20, 46)
             );
         }
 
         [Fact]
         public void ExpressionTreeFromEndIndexAndRange()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -105,17 +133,20 @@ class Program
             comp.VerifyEmitDiagnostics(
                 // (10,43): error CS8791: An expression tree may not contain a from-end index ('^') expression.
                 //         Expression<Func<Index>> e = () => ^1;
-                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsFromEndIndexExpression, "^1").WithLocation(10, 43),
+                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsFromEndIndexExpression, "^1")
+                    .WithLocation(10, 43),
                 // (11,44): error CS8792: An expression tree may not contain a range ('..') expression.
                 //         Expression<Func<Range>> e2 = () => 1..2;
-                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsRangeExpression, "1..2").WithLocation(11, 44)
+                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsRangeExpression, "1..2")
+                    .WithLocation(11, 44)
             );
         }
 
         [Fact]
         public void PatternIndexArray()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     static int M1(int[] arr) => arr[^1];
@@ -128,7 +159,9 @@ class C
             // the same, except that string will use Length/indexer
             // and array will use ldlen/ldelem, and string may have
             // more temporaries
-            verifier.VerifyIL("C.M1", @"
+            verifier.VerifyIL(
+                "C.M1",
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  3
@@ -140,8 +173,11 @@ class C
   IL_0005:  sub
   IL_0006:  ldelem.i4
   IL_0007:  ret
-}");
-            verifier.VerifyIL("C.M2", @"
+}"
+            );
+            verifier.VerifyIL(
+                "C.M2",
+                @"
 {
   // Code size       15 (0xf)
   .maxstack  3
@@ -153,8 +189,11 @@ class C
   IL_0009:  callvirt   ""char string.this[int].get""
   IL_000e:  ret
 }
-");
-            verifier.VerifyIL("C.M3", @"
+"
+            );
+            verifier.VerifyIL(
+                "C.M3",
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  3
@@ -167,14 +206,16 @@ class C
   IL_0006:  ldelem.i4
   IL_0007:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(37789, "https://github.com/dotnet/roslyn/issues/37789")]
         public void PatternIndexAndRangeCompoundOperatorRefIndexer()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -188,9 +229,14 @@ class C
 }
 ";
             var comp = CreateCompilationWithIndexAndRangeAndSpan(src, TestOptions.ReleaseExe);
-            var verifier = CompileAndVerify(comp, expectedOutput: @"0
-1");
-            verifier.VerifyIL("C.Main", @"
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: @"0
+1"
+            );
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       63 (0x3f)
   .maxstack  3
@@ -223,14 +269,16 @@ class C
   IL_0039:  call       ""void System.Console.WriteLine(int)""
   IL_003e:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(37789, "https://github.com/dotnet/roslyn/issues/37789")]
         public void PatternIndexCompoundOperator()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 struct S
 {
@@ -278,12 +326,17 @@ class C
 }
 ";
             var comp = CreateCompilationWithIndexAndRangeAndSpan(src, TestOptions.ReleaseExe);
-            var verifier = CompileAndVerify(comp, expectedOutput: @"0
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: @"0
 Length 0
 Get 1
 Set 2
-5");
-            verifier.VerifyIL("C.Main", @"
+5"
+            );
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       60 (0x3c)
   .maxstack  4
@@ -322,13 +375,15 @@ Set 2
   IL_0036:  call       ""void System.Console.WriteLine(int)""
   IL_003b:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void PatternIndexCompoundOperator_InReadonlyMethod()
         {
-            var src = @"
+            var src =
+                @"
 public struct S
 {
     public readonly int[] _array;
@@ -359,18 +414,23 @@ public struct S
             comp.VerifyDiagnostics(
                 // (24,9): warning CS8656: Call to non-readonly member 'S.Length.get' from a 'readonly' member results in an implicit copy of 'this'.
                 //         this[^1] += 5;
-                Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "this").WithArguments("S.Length.get", "this").WithLocation(24, 9),
+                Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "this")
+                    .WithArguments("S.Length.get", "this")
+                    .WithLocation(24, 9),
                 // (24,9): error CS1604: Cannot assign to 'this[^1]' because it is read-only
                 //         this[^1] += 5;
-                Diagnostic(ErrorCode.ERR_AssgReadonlyLocal, "this[^1]").WithArguments("this[^1]").WithLocation(24, 9)
-                );
+                Diagnostic(ErrorCode.ERR_AssgReadonlyLocal, "this[^1]")
+                    .WithArguments("this[^1]")
+                    .WithLocation(24, 9)
+            );
         }
 
         [Fact]
         [WorkItem(37789, "https://github.com/dotnet/roslyn/issues/37789")]
         public void PatternRangeCompoundOperator()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 struct S
 {
@@ -410,11 +470,16 @@ class C
 }
 ";
             var comp = CreateCompilationWithIndexAndRangeAndSpan(src, TestOptions.ReleaseExe);
-            var verifier = CompileAndVerify(comp, expectedOutput: @"0
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: @"0
 Length 0
 Slice 1
-5");
-            verifier.VerifyIL("C.Main", @"
+5"
+            );
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       55 (0x37)
       .maxstack  4
@@ -450,14 +515,16 @@ Slice 1
       IL_0030:  ldelem.i4
       IL_0031:  call       ""void System.Console.WriteLine(int)""
       IL_0036:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         [WorkItem(37789, "https://github.com/dotnet/roslyn/issues/37789")]
         public void PatternindexNullableCoalescingAssignmentClass()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 struct S
 {
@@ -507,7 +574,9 @@ class C
     }
 }";
             var comp = CreateCompilationWithIndex(src, options: TestOptions.ReleaseExe);
-            var verifier = CompileAndVerify(comp, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: @"
 True
 Length 0
 Get 1
@@ -519,8 +588,11 @@ Get 6
 Length 7
 Get 8
 abc
-abc");
-            verifier.VerifyIL("C.Main", @"
+abc"
+            );
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size      180 (0xb4)
   .maxstack  5
@@ -616,14 +688,16 @@ abc");
   IL_00ae:  call       ""void System.Console.WriteLine(string)""
   IL_00b3:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(37789, "https://github.com/dotnet/roslyn/issues/37789")]
         public void PatternindexNullableCoalescingAssignmentStruct()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 struct S
 {
@@ -674,7 +748,9 @@ class C
     }
 }";
             var comp = CreateCompilationWithIndex(src, options: TestOptions.ReleaseExe);
-            var verifier = CompileAndVerify(comp, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: @"
 True
 Length 0
 Get 1
@@ -686,8 +762,11 @@ Get 6
 Length 7
 Get 8
 1
-1");
-            verifier.VerifyIL("C.Main", @"
+1"
+            );
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size      256 (0x100)
   .maxstack  5
@@ -805,13 +884,15 @@ Get 8
   IL_00fa:  call       ""void System.Console.WriteLine(object)""
   IL_00ff:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void StringAndSpanPatternRangeOpenEnd()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -827,10 +908,15 @@ class C
     }
 }";
             var comp = CreateCompilationWithIndexAndRangeAndSpan(src, TestOptions.ReleaseExe);
-            var verifier = CompileAndVerify(comp, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: @"
 abcd
-abcd");
-            verifier.VerifyIL("C.Main", @"
+abcd"
+            );
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       84 (0x54)
       .maxstack  4
@@ -875,7 +961,8 @@ abcd");
       IL_004c:  call       ""int System.ReadOnlySpan<char>.Length.get""
       IL_0051:  blt.s      IL_0037
       IL_0053:  ret
-}");
+}"
+            );
 
             var (model, elementAccesses) = GetModelAndAccesses(comp);
 
@@ -891,7 +978,8 @@ abcd");
         [Fact]
         public void SpanTaskReturn()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 using System.Threading.Tasks;
 class C
@@ -918,13 +1006,18 @@ class C
             CompileAndVerify(comp, expectedOutput: "throws");
 
             var (model, accesses) = GetModelAndAccesses(comp);
-            VerifyIndexCall((IMethodSymbol)model.GetSymbolInfo(accesses[0]).Symbol, "Slice", "Span");
+            VerifyIndexCall(
+                (IMethodSymbol)model.GetSymbolInfo(accesses[0]).Symbol,
+                "Slice",
+                "Span"
+            );
         }
 
         [Fact]
         public void PatternIndexSetter()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 struct S
 {
@@ -949,10 +1042,15 @@ class C
     }
 }";
             var comp = CreateCompilationWithIndexAndRange(src, TestOptions.ReleaseExe);
-            var verifier = CompileAndVerify(comp, expectedOutput: @"0
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: @"0
 2
-2");
-            verifier.VerifyIL("C.Main", @"
+2"
+            );
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       84 (0x54)
   .maxstack  3
@@ -988,7 +1086,8 @@ class C
   IL_004e:  call       ""void System.Console.WriteLine(int)""
   IL_0053:  ret
 }
-");
+"
+            );
 
             var (model, accesses) = GetModelAndAccesses(comp);
 
@@ -1007,7 +1106,8 @@ class C
         [Fact]
         public void PatternIndexerRefReturn()
         {
-            var comp = CreateCompilationWithIndexAndRangeAndSpan(@"
+            var comp = CreateCompilationWithIndexAndRangeAndSpan(
+                @"
 using System;
 class C
 {
@@ -1021,12 +1121,19 @@ class C
         Console.WriteLine(s[^2]);
         Console.WriteLine(x);
     }
-}", TestOptions.ReleaseExe);
-            var verifier = CompileAndVerify(comp, expectedOutput: @"5
+}",
+                TestOptions.ReleaseExe
+            );
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: @"5
 5
 9
-9");
-            verifier.VerifyIL("C.Main", @"
+9"
+            );
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size      112 (0x70)
   .maxstack  4
@@ -1075,13 +1182,15 @@ class C
   IL_006a:  call       ""void System.Console.WriteLine(int)""
   IL_006f:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void PatternIndexAndRangeSpanChar()
         {
-            var comp = CreateCompilationWithIndexAndRangeAndSpan(@"
+            var comp = CreateCompilationWithIndexAndRangeAndSpan(
+                @"
 using System;
 class C
 {
@@ -1095,12 +1204,20 @@ class C
         Console.WriteLine(s[0]);
         Console.WriteLine(s[1]);
     }
-}", TestOptions.ReleaseExe); ;
-            var verifier = CompileAndVerify(comp, expectedOutput: @"f
+}",
+                TestOptions.ReleaseExe
+            );
+            ;
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: @"f
 g
 f
-g");
-            verifier.VerifyIL(@"C.Main", @"
+g"
+            );
+            verifier.VerifyIL(
+                @"C.Main",
+                @"
 {
   // Code size      124 (0x7c)
   .maxstack  4
@@ -1160,13 +1277,15 @@ g");
   IL_0076:  call       ""void System.Console.WriteLine(char)""
   IL_007b:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void PatternIndexAndRangeSpanInt()
         {
-            var comp = CreateCompilationWithIndexAndRangeAndSpan(@"
+            var comp = CreateCompilationWithIndexAndRangeAndSpan(
+                @"
 using System;
 class C
 {
@@ -1180,12 +1299,19 @@ class C
         Console.WriteLine(s[0]);
         Console.WriteLine(s[1]);
     }
-}", TestOptions.ReleaseExe);
-            var verifier = CompileAndVerify(comp, expectedOutput: @"5
+}",
+                TestOptions.ReleaseExe
+            );
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: @"5
 6
 5
-6");
-            verifier.VerifyIL("C.Main", @"
+6"
+            );
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size      136 (0x88)
       .maxstack  4
@@ -1249,13 +1375,15 @@ class C
       IL_0082:  call       ""void System.Console.WriteLine(int)""
       IL_0087:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void RealIndexersPreferredToPattern()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
@@ -1273,16 +1401,20 @@ class C
         _ = c[0..];
     }
 }";
-            var verifier = CompileAndVerifyWithIndexAndRange(src, expectedOutput: @"
+            var verifier = CompileAndVerifyWithIndexAndRange(
+                src,
+                expectedOutput: @"
 int
 Index
-Range");
+Range"
+            );
         }
 
         [Fact]
         public void PatternIndexList()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 using System.Collections.Generic;
 class C
@@ -1295,9 +1427,14 @@ class C
         Console.WriteLine(list[index]);
     }
 }";
-            var verifier = CompileAndVerifyWithIndexAndRange(src, expectedOutput: @"5
-6");
-            verifier.VerifyIL("C.Main", @"
+            var verifier = CompileAndVerifyWithIndexAndRange(
+                src,
+                expectedOutput: @"5
+6"
+            );
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       63 (0x3f)
   .maxstack  3
@@ -1325,7 +1462,8 @@ class C
   IL_0039:  call       ""void System.Console.WriteLine(int)""
   IL_003e:  ret
 }
-");
+"
+            );
         }
 
         [Theory]
@@ -1333,12 +1471,15 @@ class C
         [InlineData("Count")]
         public void PatternRangeIndexers(string propertyName)
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
     private int[] _f = { 2, 4, 5, 6 };
-    public int " + propertyName + @" => _f.Length;
+    public int "
+                + propertyName
+                + @" => _f.Length;
     public int[] Slice(int start, int length) => _f[start..length];
     static void Main()
     {
@@ -1353,12 +1494,17 @@ class C
         }
     }
 }";
-            var verifier = CompileAndVerifyWithIndexAndRange(src, @"
+            var verifier = CompileAndVerifyWithIndexAndRange(
+                src,
+                @"
 4
 5
 2
-4");
-            verifier.VerifyIL("C.Main", @"
+4"
+            );
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
     // Code size       87 (0x57)
     .maxstack  4
@@ -1373,7 +1519,9 @@ class C
     IL_0008:  ldloc.3
     IL_0009:  ldc.i4.1
     IL_000a:  ldloc.3
-    IL_000b:  callvirt   ""int C." + propertyName + @".get""
+    IL_000b:  callvirt   ""int C."
+                    + propertyName
+                    + @".get""
     IL_0010:  ldc.i4.1
     IL_0011:  sub
     IL_0012:  callvirt   ""int[] C.Slice(int, int)""
@@ -1399,7 +1547,9 @@ class C
     IL_0030:  ldloc.3
     IL_0031:  ldc.i4.0
     IL_0032:  ldloc.3
-    IL_0033:  callvirt   ""int C." + propertyName + @".get""
+    IL_0033:  callvirt   ""int C."
+                    + propertyName
+                    + @".get""
     IL_0038:  ldc.i4.2
     IL_0039:  sub
     IL_003a:  callvirt   ""int[] C.Slice(int, int)""
@@ -1422,7 +1572,8 @@ class C
     IL_0054:  blt.s      IL_0044
     IL_0056:  ret
 }
-");
+"
+            );
         }
 
         [Theory]
@@ -1430,12 +1581,15 @@ class C
         [InlineData("Count")]
         public void PatternIndexIndexers(string propertyName)
         {
-            var src = @"
+            var src =
+                @"
 using System;
 class C
 {
     private int[] _f = { 2, 4, 5, 6 };
-    public int " + propertyName + @" => _f.Length;
+    public int "
+                + propertyName
+                + @" => _f.Length;
     public int this[int x] => _f[x];
     static void Main()
     {
@@ -1444,10 +1598,15 @@ class C
         Console.WriteLine(c[^1]);
     }
 }";
-            var verifier = CompileAndVerifyWithIndexAndRange(src, @"
+            var verifier = CompileAndVerifyWithIndexAndRange(
+                src,
+                @"
 2
-6");
-            verifier.VerifyIL("C.Main", @"
+6"
+            );
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       36 (0x24)
   .maxstack  3
@@ -1457,20 +1616,24 @@ class C
   IL_0007:  callvirt   ""int C.this[int].get""
   IL_000c:  call       ""void System.Console.WriteLine(int)""
   IL_0011:  dup
-  IL_0012:  callvirt   ""int C." + propertyName + @".get""
+  IL_0012:  callvirt   ""int C."
+                    + propertyName
+                    + @".get""
   IL_0017:  ldc.i4.1
   IL_0018:  sub
   IL_0019:  callvirt   ""int C.this[int].get""
   IL_001e:  call       ""void System.Console.WriteLine(int)""
   IL_0023:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void RefToArrayIndexIndexer()
         {
-            var verifier = CompileAndVerifyWithIndexAndRange(@"
+            var verifier = CompileAndVerifyWithIndexAndRange(
+                @"
 using System;
 class C
 {
@@ -1493,13 +1656,17 @@ class C
         Console.WriteLine(r1);
         Console.WriteLine(r2);
     }
-}", expectedOutput: @"2
+}",
+                expectedOutput: @"2
 2
 7
 7
 5
-5");
-            verifier.VerifyIL("C.M", @"
+5"
+            );
+            verifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       67 (0x43)
   .maxstack  4
@@ -1539,13 +1706,15 @@ class C
   IL_003c:  ldind.i4
   IL_003d:  call       ""void System.Console.WriteLine(int)""
   IL_0042:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void RangeIndexerStringIsFromEndStart()
         {
-            CompileAndVerifyWithIndexAndRange(@"
+            CompileAndVerifyWithIndexAndRange(
+                @"
 using System;
 class C
 {
@@ -1554,13 +1723,16 @@ class C
         string s = ""abcdef"";
         Console.WriteLine(s[^2..]);
     }
-}", expectedOutput: "ef");
+}",
+                expectedOutput: "ef"
+            );
         }
 
         [Fact]
         public void FakeRangeIndexerStringBothIsFromEnd()
         {
-            CompileAndVerifyWithIndexAndRange(@"
+            CompileAndVerifyWithIndexAndRange(
+                @"
 using System;
 class C
 {
@@ -1569,13 +1741,16 @@ class C
         string s = ""abcdef"";
         Console.WriteLine(s[^4..^1]);
     }
-}", expectedOutput: "cde");
+}",
+                expectedOutput: "cde"
+            );
         }
 
         [Fact]
         public void IndexIndexerStringTwoArgs()
         {
-            var comp = CreateCompilationWithIndexAndRange(@"
+            var comp = CreateCompilationWithIndexAndRange(
+                @"
 using System;
 class C
 {
@@ -1589,17 +1764,22 @@ class C
         Console.WriteLine(s[new Index(1, false)]);
         Console.WriteLine(s[new Index(1, false), ^1]);
     }
-}");
+}"
+            );
             comp.VerifyDiagnostics(
                 // (13,27): error CS1501: No overload for method 'this' takes 2 arguments
                 //         Console.WriteLine(s[new Index(1, false), ^1]);
-                Diagnostic(ErrorCode.ERR_BadArgCount, "s[new Index(1, false), ^1]").WithArguments("this", "2").WithLocation(13, 27));
+                Diagnostic(ErrorCode.ERR_BadArgCount, "s[new Index(1, false), ^1]")
+                    .WithArguments("this", "2")
+                    .WithLocation(13, 27)
+            );
         }
 
         [Fact]
         public void IndexIndexerArrayTwoArgs()
         {
-            var comp = CreateCompilationWithIndex(@"
+            var comp = CreateCompilationWithIndex(
+                @"
 using System;
 class C
 {
@@ -1612,20 +1792,27 @@ class C
     {
         Console.WriteLine(s[new Index(1, false), ^1]);
     }
-}");
+}"
+            );
             comp.VerifyDiagnostics(
                 // (12,27): error CS0029: Cannot implicitly convert type 'System.Index' to 'int'
                 //         Console.WriteLine(s[new Index(1, false), ^1]);
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new Index(1, false)").WithArguments("System.Index", "int").WithLocation(12, 29),
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new Index(1, false)")
+                    .WithArguments("System.Index", "int")
+                    .WithLocation(12, 29),
                 // (12,27): error CS0029: Cannot implicitly convert type 'System.Index' to 'int'
                 //         Console.WriteLine(s[new Index(1, false), ^1]);
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "^1").WithArguments("System.Index", "int").WithLocation(12, 50));
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "^1")
+                    .WithArguments("System.Index", "int")
+                    .WithLocation(12, 50)
+            );
         }
 
         [Fact]
         public void FakeIndexIndexerString()
         {
-            var verifier = CompileAndVerifyWithIndexAndRange(@"
+            var verifier = CompileAndVerifyWithIndexAndRange(
+                @"
 using System;
 class C
 {
@@ -1644,7 +1831,8 @@ class C
         Console.WriteLine(s[new Index(fromEnd: true, value: 3)]);
         Console.WriteLine(s[new Index(3, false) {}]);
     }
-}", expectedOutput: @"b
+}",
+                expectedOutput: @"b
 c
 f
 d
@@ -1652,8 +1840,11 @@ e
 a
 c
 d
-d");
-            verifier.VerifyIL("C.Main", @"
+d"
+            );
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size      219 (0xdb)
   .maxstack  4
@@ -1744,13 +1935,15 @@ d");
   IL_00d5:  call       ""void System.Console.WriteLine(char)""
   IL_00da:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void FakeRangeIndexerString()
         {
-            var verifier = CompileAndVerifyWithIndexAndRange(@"
+            var verifier = CompileAndVerifyWithIndexAndRange(
+                @"
 using System;
 class C
 {
@@ -1759,8 +1952,12 @@ class C
         var s = ""abcdef"";
         Console.WriteLine(s[1..3]);
     }
-}", expectedOutput: "bc");
-            verifier.VerifyIL("C.Main", @"
+}",
+                expectedOutput: "bc"
+            );
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
     // Code size       18 (0x12)
     .maxstack  3
@@ -1770,13 +1967,15 @@ class C
     IL_0007:  callvirt   ""string string.Substring(int, int)""
     IL_000c:  call       ""void System.Console.WriteLine(string)""
     IL_0011:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(40776, "https://github.com/dotnet/roslyn/issues/40776")]
         public void FakeIndexIndexerOnDefaultStruct()
         {
-            var verifier = CompileAndVerifyWithIndexAndRange(@"
+            var verifier = CompileAndVerifyWithIndexAndRange(
+                @"
 using System;
 
 struct NotASpan
@@ -1791,9 +1990,12 @@ class C
     static int Repro() => default(NotASpan)[^0];
 
     static void Main() => Repro();
-}");
+}"
+            );
 
-            verifier.VerifyIL("C.Repro", @"
+            verifier.VerifyIL(
+                "C.Repro",
+                @"
 {
   // Code size       21 (0x15)
   .maxstack  2
@@ -1806,23 +2008,28 @@ class C
   IL_000f:  call       ""int NotASpan.this[int].get""
   IL_0014:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(40776, "https://github.com/dotnet/roslyn/issues/40776")]
         public void FakeIndexIndexerOnStructConstructor()
         {
-            var comp = CreateCompilationWithIndexAndRangeAndSpan(@"
+            var comp = CreateCompilationWithIndexAndRangeAndSpan(
+                @"
 using System;
 
 class C
 {
     static byte Repro() => new Span<byte>(new byte[] { })[^1];
-}");
+}"
+            );
 
             var verifier = CompileAndVerify(comp);
 
-            verifier.VerifyIL("C.Repro", @"
+            verifier.VerifyIL(
+                "C.Repro",
+                @"
 {
   // Code size       29 (0x1d)
   .maxstack  3
@@ -1840,13 +2047,15 @@ class C
   IL_001b:  ldind.u1
   IL_001c:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void FakeRangeIndexerStringOpenEnd()
         {
-            CompileAndVerifyWithIndexAndRange(@"
+            CompileAndVerifyWithIndexAndRange(
+                @"
 using System;
 class C
 {
@@ -1857,13 +2066,16 @@ class C
         Console.WriteLine(result);
     }
     public static string M(string s) => s[1..];
-}", expectedOutput: "bcdef");
+}",
+                expectedOutput: "bcdef"
+            );
         }
 
         [Fact]
         public void FakeRangeIndexerStringOpenStart()
         {
-            CompileAndVerifyWithIndexAndRange(@"
+            CompileAndVerifyWithIndexAndRange(
+                @"
 using System;
 class C
 {
@@ -1874,13 +2086,16 @@ class C
         Console.WriteLine(result);
     }
     public static string M(string s) => s[..^2];
-}", expectedOutput: "abcd");
+}",
+                expectedOutput: "abcd"
+            );
         }
 
         [Fact]
         public void FakeIndexIndexerArray()
         {
-            var comp = CreateCompilationWithIndex(@"
+            var comp = CreateCompilationWithIndex(
+                @"
 using System;
 class C
 {
@@ -1896,10 +2111,17 @@ class C
         Console.WriteLine(array[new Index(1, fromEnd)]);
         Console.WriteLine(array[^1]);
     }
-}", TestOptions.ReleaseExe);
-            var verifier = CompileAndVerify(comp, expectedOutput: @"2
-11");
-            verifier.VerifyIL("C.M", @"
+}",
+                TestOptions.ReleaseExe
+            );
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: @"2
+11"
+            );
+            verifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       42 (0x2a)
   .maxstack  3
@@ -1931,13 +2153,15 @@ class C
   IL_0023:  ldelem.i4
   IL_0024:  call       ""void System.Console.WriteLine(int)""
   IL_0029:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void SuppressNullableWarning_FakeIndexIndexerArray()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -1962,7 +2186,8 @@ class C
         [Fact]
         public void FakeRangeIndexerArray()
         {
-            var verifier = CompileAndVerifyWithIndexAndRange(@"
+            var verifier = CompileAndVerifyWithIndexAndRange(
+                @"
 using System;
 class C
 {
@@ -1977,10 +2202,14 @@ class C
         }
     }
     public static int[] M(int[] array) => array[1..3];
-}", expectedOutput: @"2
+}",
+                expectedOutput: @"2
 2
-3");
-            verifier.VerifyIL("C.M", @"
+3"
+            );
+            verifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       24 (0x18)
   .maxstack  3
@@ -1993,13 +2222,15 @@ class C
   IL_0012:  call       ""int[] System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray<int>(int[], System.Range)""
   IL_0017:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void FakeRangeStartIsFromEndIndexerArray()
         {
-            CompileAndVerifyWithIndexAndRange(@"
+            CompileAndVerifyWithIndexAndRange(
+                @"
 using System;
 class C
 {
@@ -2014,15 +2245,18 @@ class C
         }
     }
     public static int[] M(int[] array) => array[^2..];
-}", expectedOutput: @"2
+}",
+                expectedOutput: @"2
 3
-11");
+11"
+            );
         }
 
         [Fact]
         public void FakeRangeBothIsFromEndIndexerArray()
         {
-            CompileAndVerifyWithIndexAndRange(@"
+            CompileAndVerifyWithIndexAndRange(
+                @"
 using System;
 class C
 {
@@ -2037,15 +2271,18 @@ class C
         }
     }
     public static int[] M(int[] array) => array[^3..^1];
-}", expectedOutput: @"2
+}",
+                expectedOutput: @"2
 2
-3");
+3"
+            );
         }
 
         [Fact]
         public void FakeRangeToEndIndexerArray()
         {
-            var verifier = CompileAndVerifyWithIndexAndRange(@"
+            var verifier = CompileAndVerifyWithIndexAndRange(
+                @"
 using System;
 class C
 {
@@ -2060,11 +2297,15 @@ class C
         }
     }
     public static int[] M(int[] array) => array[1..];
-}", expectedOutput: @"3
+}",
+                expectedOutput: @"3
 2
 3
-11");
-            verifier.VerifyIL("C.M", @"
+11"
+            );
+            verifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       18 (0x12)
   .maxstack  2
@@ -2075,13 +2316,15 @@ class C
   IL_000c:  call       ""int[] System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray<int>(int[], System.Range)""
   IL_0011:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void FakeRangeFromStartIndexerArray()
         {
-            var comp = CreateCompilationWithIndexAndRange(@"
+            var comp = CreateCompilationWithIndexAndRange(
+                @"
 using System;
 class C
 {
@@ -2096,12 +2339,20 @@ class C
         }
     }
     public static int[] M(int[] array) => array[..3];
-}" + TestSources.GetSubArray, TestOptions.ReleaseExe);
-            var verifier = CompileAndVerify(comp, verify: Verification.Passes, expectedOutput: @"3
+}" + TestSources.GetSubArray,
+                TestOptions.ReleaseExe
+            );
+            var verifier = CompileAndVerify(
+                comp,
+                verify: Verification.Passes,
+                expectedOutput: @"3
 1
 2
-3");
-            verifier.VerifyIL("C.M", @"
+3"
+            );
+            verifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       18 (0x12)
   .maxstack  2
@@ -2111,20 +2362,26 @@ class C
   IL_0007:  call       ""System.Range System.Range.EndAt(System.Index)""
   IL_000c:  call       ""int[] System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray<int>(int[], System.Range)""
   IL_0011:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void LowerIndex_Int()
         {
-            var compilation = CreateCompilationWithIndex(@"
+            var compilation = CreateCompilationWithIndex(
+                @"
 using System;
 public static class Util
 {
     public static Index Convert(int a) => ^a;
-}");
+}"
+            );
 
-            CompileAndVerify(compilation).VerifyIL("Util.Convert", @"
+            CompileAndVerify(compilation)
+                .VerifyIL(
+                    "Util.Convert",
+                    @"
 {
   // Code size        8 (0x8)
   .maxstack  2
@@ -2132,20 +2389,26 @@ public static class Util
   IL_0001:  ldc.i4.1
   IL_0002:  newobj     ""System.Index..ctor(int, bool)""
   IL_0007:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void LowerIndex_NullableInt()
         {
-            var compilation = CreateCompilationWithIndex(@"
+            var compilation = CreateCompilationWithIndex(
+                @"
 using System;
 public static class Util
 {
     public static Index? Convert(int? a) => ^a;
-}");
+}"
+            );
 
-            CompileAndVerify(compilation).VerifyIL("Util.Convert", @"
+            CompileAndVerify(compilation)
+                .VerifyIL(
+                    "Util.Convert",
+                    @"
 {
   // Code size       40 (0x28)
   .maxstack  2
@@ -2166,13 +2429,15 @@ public static class Util
   IL_001d:  newobj     ""System.Index..ctor(int, bool)""
   IL_0022:  newobj     ""System.Index?..ctor(System.Index)""
   IL_0027:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void PrintIndexExpressions()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                @"
 using System;
 partial class Program
 {
@@ -2204,28 +2469,38 @@ partial class Program
         Index? f = ^nullableDefault;
         Console.WriteLine(""f: "" + Print(f));
     }
-}" + PrintIndexesAndRangesCode, options: TestOptions.ReleaseExe);
+}" + PrintIndexesAndRangesCode,
+                options: TestOptions.ReleaseExe
+            );
 
-            CompileAndVerify(compilation, expectedOutput: @"
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"
 a: value: '1', fromEnd: 'False'
 b: value: '1', fromEnd: 'True'
 c: value: '2', fromEnd: 'False'
 d: value: '2', fromEnd: 'True'
 e: default
-f: default");
+f: default"
+            );
         }
 
         [Fact]
         public void LowerRange_Create_Index_Index()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                @"
 using System;
 public static class Util
 {
     public static Range Create(Index start, Index end) => start..end;
-}");
+}"
+            );
 
-            CompileAndVerify(compilation).VerifyIL("Util.Create", @"
+            CompileAndVerify(compilation)
+                .VerifyIL(
+                    "Util.Create",
+                    @"
 {
   // Code size        8 (0x8)
   .maxstack  2
@@ -2233,20 +2508,26 @@ public static class Util
   IL_0001:  ldarg.1
   IL_0002:  newobj     ""System.Range..ctor(System.Index, System.Index)""
   IL_0007:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void LowerRange_Create_Index_NullableIndex()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                @"
 using System;
 public static class Util
 {
     public static Range? Create(Index start, Index? end) => start..end;
-}");
+}"
+            );
 
-            CompileAndVerify(compilation).VerifyIL("Util.Create", @"
+            CompileAndVerify(compilation)
+                .VerifyIL(
+                    "Util.Create",
+                    @"
 {
   // Code size       42 (0x2a)
   .maxstack  2
@@ -2270,20 +2551,26 @@ public static class Util
   IL_001f:  newobj     ""System.Range..ctor(System.Index, System.Index)""
   IL_0024:  newobj     ""System.Range?..ctor(System.Range)""
   IL_0029:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void LowerRange_Create_NullableIndex_Index()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                @"
 using System;
 public static class Util
 {
     public static Range? Create(Index? start, Index end) => start..end;
-}");
+}"
+            );
 
-            CompileAndVerify(compilation).VerifyIL("Util.Create", @"
+            CompileAndVerify(compilation)
+                .VerifyIL(
+                    "Util.Create",
+                    @"
 {
   // Code size       42 (0x2a)
   .maxstack  2
@@ -2307,20 +2594,26 @@ public static class Util
   IL_001f:  newobj     ""System.Range..ctor(System.Index, System.Index)""
   IL_0024:  newobj     ""System.Range?..ctor(System.Range)""
   IL_0029:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void LowerRange_Create_NullableIndex_NullableIndex()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                @"
 using System;
 public static class Util
 {
     public static Range? Create(Index? start, Index? end) => start..end;
-}");
+}"
+            );
 
-            CompileAndVerify(compilation).VerifyIL("Util.Create", @"
+            CompileAndVerify(compilation)
+                .VerifyIL(
+                    "Util.Create",
+                    @"
 {
   // Code size       56 (0x38)
   .maxstack  2
@@ -2348,40 +2641,52 @@ public static class Util
   IL_002d:  newobj     ""System.Range..ctor(System.Index, System.Index)""
   IL_0032:  newobj     ""System.Range?..ctor(System.Range)""
   IL_0037:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void LowerRange_ToEnd_Index()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                @"
 using System;
 public static class Util
 {
     public static Range ToEnd(Index end) => ..end;
-}");
+}"
+            );
 
-            CompileAndVerify(compilation).VerifyIL("Util.ToEnd", @"
+            CompileAndVerify(compilation)
+                .VerifyIL(
+                    "Util.ToEnd",
+                    @"
 {
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  call       ""System.Range System.Range.EndAt(System.Index)""
   IL_0006:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void LowerRange_ToEnd_NullableIndex()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                @"
 using System;
 public static class Util
 {
     public static Range? ToEnd(Index? end) => ..end;
-}");
+}"
+            );
 
-            CompileAndVerify(compilation).VerifyIL("Util.ToEnd", @"
+            CompileAndVerify(compilation)
+                .VerifyIL(
+                    "Util.ToEnd",
+                    @"
 {
   // Code size       39 (0x27)
   .maxstack  1
@@ -2401,40 +2706,52 @@ public static class Util
   IL_001c:  call       ""System.Range System.Range.EndAt(System.Index)""
   IL_0021:  newobj     ""System.Range?..ctor(System.Range)""
   IL_0026:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void LowerRange_FromStart_Index()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                @"
 using System;
 public static class Util
 {
     public static Range FromStart(Index start) => start..;
-}");
+}"
+            );
 
-            CompileAndVerify(compilation).VerifyIL("Util.FromStart", @"
+            CompileAndVerify(compilation)
+                .VerifyIL(
+                    "Util.FromStart",
+                    @"
 {
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  call       ""System.Range System.Range.StartAt(System.Index)""
   IL_0006:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void LowerRange_FromStart_NullableIndex()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                @"
 using System;
 public static class Util
 {
     public static Range? FromStart(Index? start) => start..;
-}");
+}"
+            );
 
-            CompileAndVerify(compilation).VerifyIL("Util.FromStart", @"
+            CompileAndVerify(compilation)
+                .VerifyIL(
+                    "Util.FromStart",
+                    @"
 {
   // Code size       39 (0x27)
   .maxstack  1
@@ -2454,32 +2771,40 @@ public static class Util
   IL_001c:  call       ""System.Range System.Range.StartAt(System.Index)""
   IL_0021:  newobj     ""System.Range?..ctor(System.Range)""
   IL_0026:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void LowerRange_All()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                @"
 using System;
 public static class Util
 {
     public static Range All() => ..;
-}");
+}"
+            );
 
-            CompileAndVerify(compilation).VerifyIL("Util.All", @"
+            CompileAndVerify(compilation)
+                .VerifyIL(
+                    "Util.All",
+                    @"
 {
   // Code size        6 (0x6)
   .maxstack  1
   IL_0000:  call       ""System.Range System.Range.All.get""
   IL_0005:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void PrintRangeExpressions()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                @"
 using System;
 partial class Program
 {
@@ -2548,9 +2873,13 @@ partial class Program
         Console.WriteLine(""p: "" + Print(p));
 
     }
-}" + PrintIndexesAndRangesCode, options: TestOptions.ReleaseExe);
+}" + PrintIndexesAndRangesCode,
+                options: TestOptions.ReleaseExe
+            );
 
-            CompileAndVerify(compilation, expectedOutput: @"
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"
 a: value: 'value: '1', fromEnd: 'False'', fromEnd: 'value: '1', fromEnd: 'False''
 b: value: 'value: '1', fromEnd: 'False'', fromEnd: 'value: '2', fromEnd: 'False''
 c: default
@@ -2566,13 +2895,15 @@ l: default
 m: value: 'value: '1', fromEnd: 'False'', fromEnd: 'value: '0', fromEnd: 'True''
 n: value: 'value: '2', fromEnd: 'False'', fromEnd: 'value: '0', fromEnd: 'True''
 o: default
-p: value: 'value: '0', fromEnd: 'False'', fromEnd: 'value: '0', fromEnd: 'True''");
+p: value: 'value: '0', fromEnd: 'False'', fromEnd: 'value: '0', fromEnd: 'True''"
+            );
         }
 
         [Fact]
         public void PassingAsArguments()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                    @"
 using System;
 partial class Program
 {
@@ -2584,20 +2915,27 @@ partial class Program
         Console.WriteLine(Print(..3));
         Console.WriteLine(Print(4..5));
     }
-}" + PrintIndexesAndRangesCode, options: TestOptions.ReleaseExe).VerifyDiagnostics();
+}" + PrintIndexesAndRangesCode,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics();
 
-            CompileAndVerify(compilation, expectedOutput: @"
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"
 value: '1', fromEnd: 'True'
 value: 'value: '0', fromEnd: 'False'', fromEnd: 'value: '0', fromEnd: 'True''
 value: 'value: '2', fromEnd: 'False'', fromEnd: 'value: '0', fromEnd: 'True''
 value: 'value: '0', fromEnd: 'False'', fromEnd: 'value: '3', fromEnd: 'False''
-value: 'value: '4', fromEnd: 'False'', fromEnd: 'value: '5', fromEnd: 'False''");
+value: 'value: '4', fromEnd: 'False'', fromEnd: 'value: '5', fromEnd: 'False''"
+            );
         }
 
         [Fact]
         public void LowerRange_OrderOfEvaluation_Index_NullableIndex()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                @"
 using System;
 public static class Util
 {
@@ -2622,11 +2960,19 @@ public static class Util
         System.Console.WriteLine(""2"");
         return new Index(1, true);
     }
-}", options: TestOptions.DebugExe);
+}",
+                options: TestOptions.DebugExe
+            );
 
-            CompileAndVerify(compilation, expectedOutput: @"
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"
 1
-2").VerifyIL("Util.Create", @"
+2"
+                )
+                .VerifyIL(
+                    "Util.Create",
+                    @"
 {
   // Code size       56 (0x38)
   .maxstack  2
@@ -2655,13 +3001,15 @@ public static class Util
   IL_0034:  br.s       IL_0036
   IL_0036:  ldloc.3
   IL_0037:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void LowerRange_OrderOfEvaluation_Index_Null()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                @"
 using System;
 public static class Util
 {
@@ -2686,11 +3034,19 @@ public static class Util
         System.Console.WriteLine(""2"");
         return null;
     }
-}", options: TestOptions.DebugExe);
+}",
+                options: TestOptions.DebugExe
+            );
 
-            CompileAndVerify(compilation, expectedOutput: @"
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"
 1
-2").VerifyIL("Util.Create", @"
+2"
+                )
+                .VerifyIL(
+                    "Util.Create",
+                    @"
 {
   // Code size       56 (0x38)
   .maxstack  2
@@ -2719,13 +3075,16 @@ public static class Util
   IL_0034:  br.s       IL_0036
   IL_0036:  ldloc.3
   IL_0037:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void Index_OperandConvertibleToInt()
         {
-            CompileAndVerify(CreateCompilationWithIndexAndRange(@"
+            CompileAndVerify(
+                CreateCompilationWithIndexAndRange(
+                    @"
 using System;
 partial class Program
 {
@@ -2735,13 +3094,19 @@ partial class Program
         Index b = ^a;
         Console.WriteLine(Print(b));
     }
-}" + PrintIndexesAndRangesCode, options: TestOptions.ReleaseExe), expectedOutput: "value: '3', fromEnd: 'True'");
+}" + PrintIndexesAndRangesCode,
+                    options: TestOptions.ReleaseExe
+                ),
+                expectedOutput: "value: '3', fromEnd: 'True'"
+            );
         }
 
         [Fact]
         public void Index_NullableAlwaysHasValue()
         {
-            CompileAndVerify(CreateCompilationWithIndexAndRange(@"
+            CompileAndVerify(
+                    CreateCompilationWithIndexAndRange(
+                        @"
 using System;
 partial class Program
 {
@@ -2754,9 +3119,14 @@ partial class Program
         // should be lowered into: new Nullable<Index>(new Index(5, fromEnd: true))
         return ^new Nullable<int>(5);
     }
-}" + PrintIndexesAndRangesCode, options: TestOptions.ReleaseExe),
-                expectedOutput: "value: '5', fromEnd: 'True'")
-                .VerifyIL("Program.Create", @"
+}" + PrintIndexesAndRangesCode,
+                        options: TestOptions.ReleaseExe
+                    ),
+                    expectedOutput: "value: '5', fromEnd: 'True'"
+                )
+                .VerifyIL(
+                    "Program.Create",
+                    @"
 {
   // Code size       13 (0xd)
   .maxstack  2
@@ -2765,13 +3135,16 @@ partial class Program
   IL_0002:  newobj     ""System.Index..ctor(int, bool)""
   IL_0007:  newobj     ""System.Index?..ctor(System.Index)""
   IL_000c:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void Range_NullableAlwaysHasValue_Left()
         {
-            CompileAndVerify(CreateCompilationWithIndexAndRange(@"
+            CompileAndVerify(
+                    CreateCompilationWithIndexAndRange(
+                        @"
 using System;
 partial class Program
 {
@@ -2784,9 +3157,14 @@ partial class Program
         // should be lowered into: new Nullable<Range>(Range.FromStart(arg))
         return new Nullable<Index>(arg)..;
     }
-}" + PrintIndexesAndRangesCode, options: TestOptions.ReleaseExe),
-                expectedOutput: "value: 'value: '1', fromEnd: 'True'', fromEnd: 'value: '0', fromEnd: 'True''")
-                .VerifyIL("Program.Create", @"
+}" + PrintIndexesAndRangesCode,
+                        options: TestOptions.ReleaseExe
+                    ),
+                    expectedOutput: "value: 'value: '1', fromEnd: 'True'', fromEnd: 'value: '0', fromEnd: 'True''"
+                )
+                .VerifyIL(
+                    "Program.Create",
+                    @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -2794,13 +3172,16 @@ partial class Program
   IL_0001:  call       ""System.Range System.Range.StartAt(System.Index)""
   IL_0006:  newobj     ""System.Range?..ctor(System.Range)""
   IL_000b:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void Range_NullableAlwaysHasValue_Right()
         {
-            CompileAndVerify(CreateCompilationWithIndexAndRange(@"
+            CompileAndVerify(
+                    CreateCompilationWithIndexAndRange(
+                        @"
 using System;
 partial class Program
 {
@@ -2813,9 +3194,14 @@ partial class Program
         // should be lowered into: new Nullable<Range>(Range.ToEnd(arg))
         return ..new Nullable<Index>(arg);
     }
-}" + PrintIndexesAndRangesCode, options: TestOptions.ReleaseExe),
-                expectedOutput: "value: 'value: '0', fromEnd: 'False'', fromEnd: 'value: '1', fromEnd: 'True''")
-                .VerifyIL("Program.Create", @"
+}" + PrintIndexesAndRangesCode,
+                        options: TestOptions.ReleaseExe
+                    ),
+                    expectedOutput: "value: 'value: '0', fromEnd: 'False'', fromEnd: 'value: '1', fromEnd: 'True''"
+                )
+                .VerifyIL(
+                    "Program.Create",
+                    @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -2823,13 +3209,16 @@ partial class Program
   IL_0001:  call       ""System.Range System.Range.EndAt(System.Index)""
   IL_0006:  newobj     ""System.Range?..ctor(System.Range)""
   IL_000b:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void Range_NullableAlwaysHasValue_Both()
         {
-            CompileAndVerify(CreateCompilationWithIndexAndRange(@"
+            CompileAndVerify(
+                    CreateCompilationWithIndexAndRange(
+                        @"
 using System;
 partial class Program
 {
@@ -2842,9 +3231,14 @@ partial class Program
         // should be lowered into: new Nullable<Range>(Range.Create(arg1, arg2))
         return new Nullable<Index>(arg1)..new Nullable<Index>(arg2);
     }
-}" + PrintIndexesAndRangesCode, options: TestOptions.ReleaseExe),
-                expectedOutput: "value: 'value: '2', fromEnd: 'True'', fromEnd: 'value: '1', fromEnd: 'True''")
-                .VerifyIL("Program.Create", @"
+}" + PrintIndexesAndRangesCode,
+                        options: TestOptions.ReleaseExe
+                    ),
+                    expectedOutput: "value: 'value: '2', fromEnd: 'True'', fromEnd: 'value: '1', fromEnd: 'True''"
+                )
+                .VerifyIL(
+                    "Program.Create",
+                    @"
 {
   // Code size       13 (0xd)
   .maxstack  2
@@ -2853,13 +3247,16 @@ partial class Program
   IL_0002:  newobj     ""System.Range..ctor(System.Index, System.Index)""
   IL_0007:  newobj     ""System.Range?..ctor(System.Range)""
   IL_000c:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void Index_NullableNeverHasValue()
         {
-            CompileAndVerify(CreateCompilationWithIndexAndRange(@"
+            CompileAndVerify(
+                    CreateCompilationWithIndexAndRange(
+                        @"
 using System;
 partial class Program
 {
@@ -2872,8 +3269,14 @@ partial class Program
         // should be lowered into: new Nullable<Index>(new Index(default, fromEnd: true))
         return ^new Nullable<int>();
     }
-}" + PrintIndexesAndRangesCode, options: TestOptions.ReleaseExe), expectedOutput: "value: '0', fromEnd: 'True'")
-                .VerifyIL("Program.Create", @"
+}" + PrintIndexesAndRangesCode,
+                        options: TestOptions.ReleaseExe
+                    ),
+                    expectedOutput: "value: '0', fromEnd: 'True'"
+                )
+                .VerifyIL(
+                    "Program.Create",
+                    @"
 {
   // Code size       13 (0xd)
   .maxstack  2
@@ -2882,13 +3285,16 @@ partial class Program
   IL_0002:  newobj     ""System.Index..ctor(int, bool)""
   IL_0007:  newobj     ""System.Index?..ctor(System.Index)""
   IL_000c:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void Range_NullableNeverhasValue_Left()
         {
-            CompileAndVerify(CreateCompilationWithIndexAndRange(@"
+            CompileAndVerify(
+                    CreateCompilationWithIndexAndRange(
+                        @"
 using System;
 partial class Program
 {
@@ -2901,9 +3307,14 @@ partial class Program
         // should be lowered into: new Nullable<Range>(Range.FromStart(default))
         return new Nullable<Index>()..;
     }
-}" + PrintIndexesAndRangesCode, options: TestOptions.ReleaseExe),
-                expectedOutput: "value: 'value: '0', fromEnd: 'False'', fromEnd: 'value: '0', fromEnd: 'True''")
-                .VerifyIL("Program.Create", @"
+}" + PrintIndexesAndRangesCode,
+                        options: TestOptions.ReleaseExe
+                    ),
+                    expectedOutput: "value: 'value: '0', fromEnd: 'False'', fromEnd: 'value: '0', fromEnd: 'True''"
+                )
+                .VerifyIL(
+                    "Program.Create",
+                    @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -2914,13 +3325,16 @@ partial class Program
   IL_0009:  call       ""System.Range System.Range.StartAt(System.Index)""
   IL_000e:  newobj     ""System.Range?..ctor(System.Range)""
   IL_0013:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void Range_NullableNeverHasValue_Right()
         {
-            CompileAndVerify(CreateCompilationWithIndexAndRange(@"
+            CompileAndVerify(
+                    CreateCompilationWithIndexAndRange(
+                        @"
 using System;
 partial class Program
 {
@@ -2933,9 +3347,14 @@ partial class Program
         // should be lowered into: new Nullable<Range>(Range.ToEnd(default))
         return ..new Nullable<Index>();
     }
-}" + PrintIndexesAndRangesCode, options: TestOptions.ReleaseExe),
-                expectedOutput: "value: 'value: '0', fromEnd: 'False'', fromEnd: 'value: '0', fromEnd: 'False''")
-                .VerifyIL("Program.Create", @"
+}" + PrintIndexesAndRangesCode,
+                        options: TestOptions.ReleaseExe
+                    ),
+                    expectedOutput: "value: 'value: '0', fromEnd: 'False'', fromEnd: 'value: '0', fromEnd: 'False''"
+                )
+                .VerifyIL(
+                    "Program.Create",
+                    @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -2946,13 +3365,16 @@ partial class Program
   IL_0009:  call       ""System.Range System.Range.EndAt(System.Index)""
   IL_000e:  newobj     ""System.Range?..ctor(System.Range)""
   IL_0013:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void Range_NullableNeverHasValue_Both()
         {
-            CompileAndVerify(CreateCompilationWithIndexAndRange(@"
+            CompileAndVerify(
+                    CreateCompilationWithIndexAndRange(
+                        @"
 using System;
 partial class Program
 {
@@ -2965,9 +3387,14 @@ partial class Program
         // should be lowered into: new Nullable<Range>(Range.Create(default, default))
         return new Nullable<Index>()..new Nullable<Index>();
     }
-}" + PrintIndexesAndRangesCode, options: TestOptions.ReleaseExe),
-                expectedOutput: "value: 'value: '0', fromEnd: 'False'', fromEnd: 'value: '0', fromEnd: 'False''")
-                .VerifyIL("Program.Create", @"
+}" + PrintIndexesAndRangesCode,
+                        options: TestOptions.ReleaseExe
+                    ),
+                    expectedOutput: "value: 'value: '0', fromEnd: 'False'', fromEnd: 'value: '0', fromEnd: 'False''"
+                )
+                .VerifyIL(
+                    "Program.Create",
+                    @"
 {
   // Code size       29 (0x1d)
   .maxstack  2
@@ -2981,13 +3408,16 @@ partial class Program
   IL_0012:  newobj     ""System.Range..ctor(System.Index, System.Index)""
   IL_0017:  newobj     ""System.Range?..ctor(System.Range)""
   IL_001c:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void Index_OnFunctionCall()
         {
-            CompileAndVerify(CreateCompilationWithIndexAndRange(@"
+            CompileAndVerify(
+                CreateCompilationWithIndexAndRange(
+                    @"
 using System;
 partial class Program
 {
@@ -2997,14 +3427,18 @@ partial class Program
     }
     static int Create(int x) => x;
 }" + PrintIndexesAndRangesCode,
-                options: TestOptions.ReleaseExe),
-                expectedOutput: "value: '5', fromEnd: 'True'");
+                    options: TestOptions.ReleaseExe
+                ),
+                expectedOutput: "value: '5', fromEnd: 'True'"
+            );
         }
 
         [Fact]
         public void Range_OnFunctionCall()
         {
-            CompileAndVerify(CreateCompilationWithIndexAndRange(@"
+            CompileAndVerify(
+                CreateCompilationWithIndexAndRange(
+                    @"
 using System;
 partial class Program
 {
@@ -3014,14 +3448,18 @@ partial class Program
     }
     static Index Create(int x) => ^x;
 }" + PrintIndexesAndRangesCode,
-                options: TestOptions.ReleaseExe),
-                expectedOutput: "value: 'value: '1', fromEnd: 'True'', fromEnd: 'value: '2', fromEnd: 'True''");
+                    options: TestOptions.ReleaseExe
+                ),
+                expectedOutput: "value: 'value: '1', fromEnd: 'True'', fromEnd: 'value: '2', fromEnd: 'True''"
+            );
         }
 
         [Fact]
         public void Index_OnAssignment()
         {
-            CompileAndVerify(CreateCompilationWithIndexAndRange(@"
+            CompileAndVerify(
+                CreateCompilationWithIndexAndRange(
+                    @"
 using System;
 partial class Program
 {
@@ -3033,16 +3471,20 @@ partial class Program
     }
     static int Create(int x) => x;
 }" + PrintIndexesAndRangesCode,
-                options: TestOptions.ReleaseExe),
+                    options: TestOptions.ReleaseExe
+                ),
                 expectedOutput: @"
 value: '5', fromEnd: 'True'
-5");
+5"
+            );
         }
 
         [Fact]
         public void Range_OnAssignment()
         {
-            CompileAndVerify(CreateCompilationWithIndexAndRange(@"
+            CompileAndVerify(
+                CreateCompilationWithIndexAndRange(
+                    @"
 using System;
 partial class Program
 {
@@ -3055,17 +3497,21 @@ partial class Program
     }
     static Index Create(int x) => ^x;
 }" + PrintIndexesAndRangesCode,
-                options: TestOptions.ReleaseExe),
+                    options: TestOptions.ReleaseExe
+                ),
                 expectedOutput: @"
 value: 'value: '1', fromEnd: 'True'', fromEnd: 'value: '2', fromEnd: 'True''
 value: '1', fromEnd: 'True'
-value: '2', fromEnd: 'True'");
+value: '2', fromEnd: 'True'"
+            );
         }
 
         [Fact]
         public void Range_OnVarOut()
         {
-            CompileAndVerify(CreateCompilationWithIndexAndRange(@"
+            CompileAndVerify(
+                CreateCompilationWithIndexAndRange(
+                    @"
 using System;
 partial class Program
 {
@@ -3078,14 +3524,19 @@ partial class Program
         y = ^2;
         return ^x;
     }
-}" + PrintIndexesAndRangesCode, options: TestOptions.ReleaseExe),
-                expectedOutput: "value: 'value: '1', fromEnd: 'True'', fromEnd: 'value: '2', fromEnd: 'True''");
+}" + PrintIndexesAndRangesCode,
+                    options: TestOptions.ReleaseExe
+                ),
+                expectedOutput: "value: 'value: '1', fromEnd: 'True'', fromEnd: 'value: '2', fromEnd: 'True''"
+            );
         }
 
         [Fact]
         public void Range_EvaluationInCondition()
         {
-            CompileAndVerify(CreateCompilationWithIndexAndRange(@"
+            CompileAndVerify(
+                CreateCompilationWithIndexAndRange(
+                    @"
 using System;
 partial class Program
 {
@@ -3105,10 +3556,15 @@ partial class Program
         y = x;
         return ^x;
     }
-}", options: TestOptions.ReleaseExe), expectedOutput: "YES");
+}",
+                    options: TestOptions.ReleaseExe
+                ),
+                expectedOutput: "YES"
+            );
         }
 
-        private const string PrintIndexesAndRangesCode = @"
+        private const string PrintIndexesAndRangesCode =
+            @"
 partial class Program
 {
     static string Print(Index arg)
@@ -3147,7 +3603,8 @@ partial class Program
         [WorkItem(54085, "https://github.com/dotnet/roslyn/issues/54085")]
         public void OrderOfEvaluation_01()
         {
-            var comp = CreateCompilationWithIndexAndRangeAndSpan(@"
+            var comp = CreateCompilationWithIndexAndRangeAndSpan(
+                @"
 using System;
 
 class CollectionX
@@ -3192,21 +3649,26 @@ static class SideEffect
         Console.WriteLine(i2);
     }
 }
-", TestOptions.ReleaseExe);
-            CompileAndVerify(comp, expectedOutput:
-@"Get
+",
+                TestOptions.ReleaseExe
+            );
+            CompileAndVerify(
+                comp,
+                expectedOutput: @"Get
 GetIdx
 Length
 Indexer get
 3
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(54085, "https://github.com/dotnet/roslyn/issues/54085")]
         public void OrderOfEvaluation_02()
         {
-            var comp = CreateCompilationWithIndexAndRangeAndSpan(@"
+            var comp = CreateCompilationWithIndexAndRangeAndSpan(
+                @"
 using System;
 
 class CollectionX
@@ -3257,9 +3719,12 @@ static class SideEffect
         Console.WriteLine(i2);
     }
 }
-", TestOptions.ReleaseExe);
-            CompileAndVerify(comp, expectedOutput:
-@"Get
+",
+                TestOptions.ReleaseExe
+            );
+            CompileAndVerify(
+                comp,
+                expectedOutput: @"Get
 GetIdx
 Length
 Indexer get
@@ -3274,14 +3739,16 @@ Get
 GetIdx
 Indexer get
 2
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(57349, "https://github.com/dotnet/roslyn/issues/57349")]
         public void OrderOfEvaluation_03()
         {
-            var comp = CreateCompilationWithIndexAndRangeAndSpan(@"
+            var comp = CreateCompilationWithIndexAndRangeAndSpan(
+                @"
 using System;
 
 class CollectionX
@@ -3358,9 +3825,12 @@ static class SideEffect
         _ = Get()[GetIdx3(1)..^GetIdx2(1)];
     }
 }
-", TestOptions.ReleaseExe);
-            var verifier = CompileAndVerify(comp, expectedOutput:
-@"
+",
+                TestOptions.ReleaseExe
+            );
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: @"
 Get GetIdx Length Slice 1, 2
 Get GetIdx1 GetIdx2 Slice 1, 2
 Get GetIdx1 GetIdx2 Length Slice 1, 2
@@ -3378,8 +3848,11 @@ Get GetIdx1 GetIdx4 Length Slice 1, 2
 Get GetIdx1 GetIdx4 Length Slice 1, 2
 Get GetIdx3 GetIdx2 Length Slice 1, 2
 Get GetIdx3 GetIdx2 Length Slice 1, 2
-");
-            verifier.VerifyMethodBody("SideEffect.Main", @"
+"
+            );
+            verifier.VerifyMethodBody(
+                "SideEffect.Main",
+                @"
 {
   // Code size      731 (0x2db)
   .maxstack  4
@@ -3705,13 +4178,15 @@ Get GetIdx3 GetIdx2 Length Slice 1, 2
   // sequence point: }
   IL_02da:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(57745, "https://github.com/dotnet/roslyn/issues/57745")]
         public void ObsoleteRangeType()
         {
-            var source = @"
+            var source =
+                @"
 _ = new C()[..];
 
 class C
@@ -3749,7 +4224,8 @@ namespace System
         [Fact]
         public void ImplicitIndexerAccessAsLValue()
         {
-            var source = @"
+            var source =
+                @"
 #nullable enable
 
 object? o1 = new object();
@@ -3785,20 +4261,22 @@ class C<T>
                 Diagnostic(ErrorCode.WRN_NullAsNonNullable, "null").WithLocation(6, 13),
                 // (11,13): warning CS8600: Converting null literal or possible null value to non-nullable type.
                 // object o2 = null; // 3
-                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "null").WithLocation(11, 13),
+                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "null")
+                    .WithLocation(11, 13),
                 // (15,5): warning CS8602: Dereference of a possibly null reference.
                 // _ = M(o2)[^1].ToString(); // 4
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "M(o2)[^1]").WithLocation(15, 5),
                 // (16,5): warning CS8602: Dereference of a possibly null reference.
                 // _ = M(o2)[..].ToString(); // 5
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "M(o2)[..]").WithLocation(16, 5)
-                );
+            );
         }
 
         [Fact]
         public void NullableIndexerArgument()
         {
-            var source = @"
+            var source =
+                @"
 #nullable enable
 var c = new C();
 
@@ -3822,23 +4300,26 @@ class C
             comp.VerifyDiagnostics(
                 // (5,13): warning CS8600: Converting null literal or possible null value to non-nullable type.
                 // object o1 = null;
-                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "null").WithLocation(5, 13),
+                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "null")
+                    .WithLocation(5, 13),
                 // (6,10): warning CS8602: Dereference of a possibly null reference.
                 // _ = c[M1(o1.ToString())];
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "o1").WithLocation(6, 10),
                 // (8,13): warning CS8600: Converting null literal or possible null value to non-nullable type.
                 // object o2 = null;
-                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "null").WithLocation(8, 13),
+                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "null")
+                    .WithLocation(8, 13),
                 // (9,10): warning CS8602: Dereference of a possibly null reference.
                 // _ = c[M2(o2.ToString())];
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "o2").WithLocation(9, 10)
-                );
+            );
         }
 
         [Fact]
         public void SemanticModelOnReceiver()
         {
-            var source = @"
+            var source =
+                @"
 var c = new C();
 
 _ = c[^1];
@@ -3855,7 +4336,11 @@ class C
             comp.VerifyDiagnostics();
 
             var tree = comp.SyntaxTrees.First();
-            var receivers = tree.GetRoot().DescendantNodes().OfType<ElementAccessExpressionSyntax>().Select(e => e.Expression).ToArray();
+            var receivers = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<ElementAccessExpressionSyntax>()
+                .Select(e => e.Expression)
+                .ToArray();
             Assert.Equal(2, receivers.Length);
             var model = comp.GetSemanticModel(tree, ignoreAccessibility: false);
 
@@ -3869,7 +4354,8 @@ class C
         [Fact]
         public void Nullable_OrderOfEvaluation()
         {
-            var source = @"
+            var source =
+                @"
 #nullable enable
 C? c = null;
 _ = (c = new C())[M1(c.ToString())];
@@ -3902,18 +4388,21 @@ class C
     public int Slice(int i, int j) => throw null!;
 }
 ";
-            var comp = CreateCompilation(new[] { source, TestSources.Index, TestSources.Range, TestSources.GetSubArray });
+            var comp = CreateCompilation(
+                new[] { source, TestSources.Index, TestSources.Range, TestSources.GetSubArray }
+            );
             comp.VerifyDiagnostics(
                 // (10,5): warning CS8602: Dereference of a possibly null reference.
                 // _ = c[M1((c = new C()).ToString())]; // 1
                 Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "c").WithLocation(10, 5)
-                );
+            );
         }
 
         [Fact]
         public void PatternIndexArrayAndAwait_01()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     static async System.Threading.Tasks.Task M1(int[] arr)
@@ -3930,17 +4419,21 @@ class C
     }
 }
 ";
-            CompileAndVerifyWithIndexAndRange(src, expectedOutput:
-@"
+            CompileAndVerifyWithIndexAndRange(
+                    src,
+                    expectedOutput: @"
 123
 0
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         public void PatternIndexArrayAndAwait_02()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     static async System.Threading.Tasks.Task M1(int[] arr)
@@ -3957,17 +4450,21 @@ class C
     }
 }
 ";
-            CompileAndVerifyWithIndexAndRange(src, expectedOutput:
-@"
+            CompileAndVerifyWithIndexAndRange(
+                    src,
+                    expectedOutput: @"
 124
 123
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         public void PatternIndexArrayAndAwait_03()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     static async System.Threading.Tasks.Task M1((int x, int y)[] arr)
@@ -3983,17 +4480,21 @@ class C
     }
 }
 ";
-            CompileAndVerifyWithIndexAndRange(src, expectedOutput:
-@"
+            CompileAndVerifyWithIndexAndRange(
+                    src,
+                    expectedOutput: @"
 124
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         [WorkItem(58569, "https://github.com/dotnet/roslyn/issues/58569")]
         public void PatternIndexArrayAndAwait_04()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     static async System.Threading.Tasks.Task M1((int x, int y)[] arr)
@@ -4010,18 +4511,22 @@ class C
     }
 }
 ";
-            CompileAndVerifyWithIndexAndRange(src, expectedOutput:
-@"
+            CompileAndVerifyWithIndexAndRange(
+                    src,
+                    expectedOutput: @"
 124
 123
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         [WorkItem(58569, "https://github.com/dotnet/roslyn/issues/58569")]
         public void PatternIndexArrayAndAwait_05()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     static async System.Threading.Tasks.Task M1((int x, int y)[] arr)
@@ -4037,16 +4542,20 @@ class C
     }
 }
 ";
-            CompileAndVerifyWithIndexAndRange(src, expectedOutput:
-@"
+            CompileAndVerifyWithIndexAndRange(
+                    src,
+                    expectedOutput: @"
 125
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         public void PatternIndexArrayAndAwait_06()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     static async System.Threading.Tasks.Task M1(int[] arr)
@@ -4062,16 +4571,20 @@ class C
     }
 }
 ";
-            CompileAndVerifyWithIndexAndRange(src, expectedOutput:
-@"
+            CompileAndVerifyWithIndexAndRange(
+                    src,
+                    expectedOutput: @"
 125
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         public void PatternIndexArrayAndAwait_07()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     static async System.Threading.Tasks.Task M1(int[][] arr)
@@ -4087,16 +4600,20 @@ class C
     }
 }
 ";
-            CompileAndVerifyWithIndexAndRange(src, expectedOutput:
-@"
+            CompileAndVerifyWithIndexAndRange(
+                    src,
+                    expectedOutput: @"
 125
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         public void PatternIndexArrayAndAwait_08()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     static async System.Threading.Tasks.Task M1((int x, int y)[] arr)
@@ -4119,7 +4636,8 @@ class C
         [WorkItem(65586, "https://github.com/dotnet/roslyn/issues/65586")]
         public void SideeffectsOfSlicing_01()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 
 class Program
@@ -4150,10 +4668,12 @@ struct S
     
     public int Length => 10;
 }";
-            var verifier = CompileAndVerifyWithIndexAndRange(src, expectedOutput: "1").VerifyDiagnostics();
+            var verifier = CompileAndVerifyWithIndexAndRange(src, expectedOutput: "1")
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Test",
-@"
+            verifier.VerifyIL(
+                "Program.Test",
+                @"
 {
   // Code size       14 (0xe)
   .maxstack  3
@@ -4164,14 +4684,16 @@ struct S
   IL_000c:  pop
   IL_000d:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(65586, "https://github.com/dotnet/roslyn/issues/65586")]
         public void SideeffectsOfSlicing_02()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 
 class Program
@@ -4202,10 +4724,12 @@ class S
     
     public int Length => 10;
 }";
-            var verifier = CompileAndVerifyWithIndexAndRange(src, expectedOutput: "1").VerifyDiagnostics();
+            var verifier = CompileAndVerifyWithIndexAndRange(src, expectedOutput: "1")
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Test",
-@"
+            verifier.VerifyIL(
+                "Program.Test",
+                @"
 {
   // Code size       14 (0xe)
   .maxstack  3
@@ -4216,7 +4740,8 @@ class S
   IL_000c:  pop
   IL_000d:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]

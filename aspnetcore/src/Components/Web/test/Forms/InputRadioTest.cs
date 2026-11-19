@@ -20,8 +20,8 @@ public class InputRadioTest
             InnerContent = RadioButtonsWithoutGroup(null),
         };
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => RenderAndGetTestInputComponentAsync(rootComponent)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            RenderAndGetTestInputComponentAsync(rootComponent)
         );
         Assert.Contains($"must have an ancestor", ex.Message);
     }
@@ -38,9 +38,8 @@ public class InputRadioTest
 
         var inputRadioComponents = await RenderAndGetTestInputComponentAsync(rootComponent);
 
-        Assert.All(
-            inputRadioComponents,
-            inputRadio => Assert.True(Guid.TryParseExact(inputRadio.GroupName, "N", out _))
+        Assert.All(inputRadioComponents, inputRadio =>
+            Assert.True(Guid.TryParseExact(inputRadio.GroupName, "N", out _))
         );
     }
 
@@ -57,9 +56,8 @@ public class InputRadioTest
 
         var inputRadioComponents = await RenderAndGetTestInputComponentAsync(rootComponent);
 
-        Assert.All(
-            inputRadioComponents,
-            inputRadio => Assert.Equal(groupName, inputRadio.GroupName)
+        Assert.All(inputRadioComponents, inputRadio =>
+            Assert.Equal(groupName, inputRadio.GroupName)
         );
     }
 

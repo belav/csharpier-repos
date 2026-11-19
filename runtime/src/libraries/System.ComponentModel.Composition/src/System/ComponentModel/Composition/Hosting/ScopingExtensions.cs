@@ -64,14 +64,21 @@ namespace System.ComponentModel.Composition.Hosting
         /// <returns>
         ///     <c>true</c> if the specified part imports the specified contract with the given cardinality; otherwise, <c>false</c>.
         /// </returns>
-        public static bool Imports(this ComposablePartDefinition part, string contractName, ImportCardinality importCardinality)
+        public static bool Imports(
+            this ComposablePartDefinition part,
+            string contractName,
+            ImportCardinality importCardinality
+        )
         {
             Requires.NotNull(part, nameof(part));
             Requires.NotNull(contractName, nameof(contractName));
 
             foreach (ImportDefinition import in part.ImportDefinitions)
             {
-                if (StringComparers.ContractName.Equals(contractName, import.ContractName) && (import.Cardinality == importCardinality))
+                if (
+                    StringComparers.ContractName.Equals(contractName, import.ContractName)
+                    && (import.Cardinality == importCardinality)
+                )
                 {
                     return true;
                 }
@@ -88,7 +95,10 @@ namespace System.ComponentModel.Composition.Hosting
         /// <returns>
         ///     <c>true</c> if the part contains a metadata entry with the specified key; otherwise, <c>false</c>.
         /// </returns>
-        public static bool ContainsPartMetadataWithKey(this ComposablePartDefinition part, string key)
+        public static bool ContainsPartMetadataWithKey(
+            this ComposablePartDefinition part,
+            string key
+        )
         {
             Requires.NotNull(part, nameof(part));
             Requires.NotNull(key, nameof(key));
@@ -106,7 +116,11 @@ namespace System.ComponentModel.Composition.Hosting
         /// <returns>
         ///     <c>true</c> the specified part contains a metadata entry with the specified key and value; otherwise, <c>false</c>.
         /// </returns>
-        public static bool ContainsPartMetadata<T>(this ComposablePartDefinition part, string key, T value)
+        public static bool ContainsPartMetadata<T>(
+            this ComposablePartDefinition part,
+            string key,
+            T value
+        )
         {
             Requires.NotNull(part, nameof(part));
             Requires.NotNull(key, nameof(key));
@@ -132,7 +146,10 @@ namespace System.ComponentModel.Composition.Hosting
         /// <param name="catalog">The catalog.</param>
         /// <param name="filter">The filter.</param>
         /// <returns></returns>
-        public static FilteredCatalog Filter(this ComposablePartCatalog catalog, Func<ComposablePartDefinition, bool> filter)
+        public static FilteredCatalog Filter(
+            this ComposablePartCatalog catalog,
+            Func<ComposablePartDefinition, bool> filter
+        )
         {
             Requires.NotNull(catalog, nameof(catalog));
             Requires.NotNull(filter, nameof(filter));

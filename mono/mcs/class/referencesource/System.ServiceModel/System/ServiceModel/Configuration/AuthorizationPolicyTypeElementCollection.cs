@@ -7,11 +7,11 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
 
     [ConfigurationCollection(typeof(AuthorizationPolicyTypeElement))]
-    public sealed class AuthorizationPolicyTypeElementCollection : ServiceModelConfigurationElementCollection<AuthorizationPolicyTypeElement>
+    public sealed class AuthorizationPolicyTypeElementCollection
+        : ServiceModelConfigurationElementCollection<AuthorizationPolicyTypeElement>
     {
         public AuthorizationPolicyTypeElementCollection()
-            : base()
-        { }
+            : base() { }
 
         protected override object GetElementKey(ConfigurationElement element)
         {
@@ -19,7 +19,8 @@ namespace System.ServiceModel.Configuration
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("element");
             }
-            AuthorizationPolicyTypeElement authorizationPolicyTypeElement = (AuthorizationPolicyTypeElement)element;
+            AuthorizationPolicyTypeElement authorizationPolicyTypeElement =
+                (AuthorizationPolicyTypeElement)element;
             return authorizationPolicyTypeElement.PolicyType;
         }
     }

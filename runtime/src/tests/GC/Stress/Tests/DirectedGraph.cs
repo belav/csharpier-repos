@@ -1,9 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 using System;
-
 
 /************************************************************************************************************
 This test does the following:
@@ -28,8 +26,10 @@ namespace DefaultNamespace
 
         public static int Nodes;
 
-
-        public Graph(int n) { Nodes = n; }
+        public Graph(int n)
+        {
+            Nodes = n;
+        }
 
         public void SetWeightSum()
         {
@@ -49,7 +49,8 @@ namespace DefaultNamespace
 
         public void BuildEdge(int v1, int v2)
         {
-            Vertex n1 = null, n2 = null;
+            Vertex n1 = null,
+                n2 = null;
             Vertex temp = _vfirst;
 
             while (temp != null)
@@ -61,14 +62,16 @@ namespace DefaultNamespace
                     n1 = temp;
                     break;
                 }
-                else temp = temp.Next;
+                else
+                    temp = temp.Next;
             }
 
             //check if edge already exists
             for (int i = 0; i < n1.Num_Edges; i++)
             {
                 int j = Decimal.Compare(v2, n1.Adjacent[i].Name);
-                if (j == 0) return;
+                if (j == 0)
+                    return;
             }
 
             temp = _vfirst;
@@ -81,7 +84,8 @@ namespace DefaultNamespace
                     n2 = temp;
                     break;
                 }
-                else temp = temp.Next;
+                else
+                    temp = temp.Next;
             }
 
             n1.Adjacent[n1.Num_Edges++] = n2;
@@ -101,7 +105,7 @@ namespace DefaultNamespace
 
         public void BuildGraph()
         {
-            // Build Nodes	
+            // Build Nodes
             TestLibrary.Logging.WriteLine("Building Vertices...");
             for (int i = 0; i < Nodes; i++)
             {
@@ -132,15 +136,13 @@ namespace DefaultNamespace
                 for (int k = 0; k < j; k++)
                 {
                     int v2;
-                    while ((v2 = rand.Next(0, Nodes)) == i) ;     //select a random node, also avoid self-loops
-                    BuildEdge(i, v2);                //build edge betn node i and v2
-                                                     //TestLibrary.Logging.WriteLine("Edge built between {0} and {1}...",i,v2);
-
-
+                    while ((v2 = rand.Next(0, Nodes)) == i)
+                        ; //select a random node, also avoid self-loops
+                    BuildEdge(i, v2); //build edge betn node i and v2
+                    //TestLibrary.Logging.WriteLine("Edge built between {0} and {1}...",i,v2);
                 }
             }
         }
-
 
         public void CheckIfReachable()
         {
@@ -161,12 +163,13 @@ namespace DefaultNamespace
             for (int v2 = 0; v2 < Nodes; v2++)
             {
                 if (temp[v2] == 0)
-                {  //this vertex is not connected
+                { //this vertex is not connected
                     DateTime time = DateTime.Now;
                     Int32 seed = (Int32)time.Ticks;
                     Random rand = new Random(seed);
                     int v1;
-                    while ((v1 = rand.Next(0, Nodes)) == v2) ;     //select a random node, also avoid self-loops
+                    while ((v1 = rand.Next(0, Nodes)) == v2)
+                        ; //select a random node, also avoid self-loops
                     BuildEdge(v1, v2);
                     temp[v2] = 1;
                 }
@@ -184,7 +187,7 @@ namespace DefaultNamespace
                     while(next != null) {
                         TestLibrary.Logging.WriteLine(next.Name);
                         if(next.Name == j) {break;}
-                        next = next.Adjacent[0]; 
+                        next = next.Adjacent[0];
                     }
                     i++;
                     if((next = root.Adjacent[i]) == null) {
@@ -195,7 +198,7 @@ namespace DefaultNamespace
                         next = root.Adjacent[i];
 
                             }
-                }	
+                }
 
         }*/
 
@@ -295,7 +298,12 @@ namespace DefaultNamespace
             while (temp2 != null)
             {
                 TestLibrary.Logging.WriteLine("Edge " + edge++);
-                TestLibrary.Logging.WriteLine("Weight: {0}, v1: {1}, v2: {2}", temp2.Weight, temp2.v1.Name, temp2.v2.Name);
+                TestLibrary.Logging.WriteLine(
+                    "Weight: {0}, v1: {1}, v2: {2}",
+                    temp2.Weight,
+                    temp2.v1.Name,
+                    temp2.v2.Name
+                );
                 temp2 = temp2.Next;
             }
             SetWeightSum();
@@ -306,6 +314,7 @@ namespace DefaultNamespace
     public class Vertex
     {
         public int Name;
+
         //public bool Visited = false;
 
         public Vertex Next;
@@ -341,11 +350,11 @@ namespace DefaultNamespace
         }
     }
 
-
     public class Edge
     {
         public int Weight;
-        public Vertex v1, v2;
+        public Vertex v1,
+            v2;
         public Edge Next;
 
         public Edge(Vertex n1, Vertex n2)
@@ -364,13 +373,12 @@ namespace DefaultNamespace
         }
     }
 
-
     public class Test
     {
         public static int Main()
         {
             TestLibrary.Logging.WriteLine("Building Graph with 800 vertices...");
-            Graph MyGraph = new Graph(800);  // graph with 800 nodes
+            Graph MyGraph = new Graph(800); // graph with 800 nodes
             MyGraph.BuildGraph();
 
             TestLibrary.Logging.WriteLine("Checking if all vertices are reachable...");

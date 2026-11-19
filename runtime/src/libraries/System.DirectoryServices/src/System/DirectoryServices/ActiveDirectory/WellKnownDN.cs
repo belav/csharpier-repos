@@ -15,6 +15,6 @@ namespace System.DirectoryServices.ActiveDirectory
         RidManager = 7,
         Infrastructure = 8,
         RootDomainNamingContext = 9,
-        Schema = 10
+        Schema = 10,
     }
 }

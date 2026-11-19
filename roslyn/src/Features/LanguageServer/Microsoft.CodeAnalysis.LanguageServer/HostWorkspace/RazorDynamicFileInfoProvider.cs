@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.LanguageServer.HostWorkspace;
 
 [Export(typeof(IDynamicFileInfoProvider)), Shared]
-[ExportMetadata("Extensions", new string[] { "cshtml", "razor", })]
+[ExportMetadata("Extensions", new string[] { "cshtml", "razor" })]
 internal class RazorDynamicFileInfoProvider : IDynamicFileInfoProvider
 {
     private const string ProvideRazorDynamicFileInfoMethodName = "razor/provideDynamicFileInfo";
@@ -49,22 +49,38 @@ internal class RazorDynamicFileInfoProvider : IDynamicFileInfoProvider
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public RazorDynamicFileInfoProvider(Lazy<RazorWorkspaceListenerInitializer> razorWorkspaceListenerInitializer)
+    public RazorDynamicFileInfoProvider(
+        Lazy<RazorWorkspaceListenerInitializer> razorWorkspaceListenerInitializer
+    )
     {
         _razorWorkspaceListenerInitializer = razorWorkspaceListenerInitializer;
     }
 
-    public async Task<DynamicFileInfo?> GetDynamicFileInfoAsync(ProjectId projectId, string? projectFilePath, string filePath, CancellationToken cancellationToken)
+    public async Task<DynamicFileInfo?> GetDynamicFileInfoAsync(
+        ProjectId projectId,
+        string? projectFilePath,
+        string filePath,
+        CancellationToken cancellationToken
+    )
     {
         _razorWorkspaceListenerInitializer.Value.NotifyDynamicFile(projectId);
 
-        var requestParams = new ProvideDynamicFileParams { RazorFiles = [ProtocolConversions.CreateAbsoluteUri(filePath)] };
+        var requestParams = new ProvideDynamicFileParams
+        {
+            RazorFiles = [ProtocolConversions.CreateAbsoluteUri(filePath)],
+        };
 
-        Contract.ThrowIfNull(LanguageServerHost.Instance, "We don't have an LSP channel yet to send this request through.");
-        var clientLanguageServerManager = LanguageServerHost.Instance.GetRequiredLspService<IClientLanguageServerManager>();
+        Contract.ThrowIfNull(
+            LanguageServerHost.Instance,
+            "We don't have an LSP channel yet to send this request through."
+        );
+        var clientLanguageServerManager =
+            LanguageServerHost.Instance.GetRequiredLspService<IClientLanguageServerManager>();
 
-        var response = await clientLanguageServerManager.SendRequestAsync<ProvideDynamicFileParams, ProvideDynamicFileResponse>(
-            ProvideRazorDynamicFileInfoMethodName, requestParams, cancellationToken);
+        var response = await clientLanguageServerManager.SendRequestAsync<
+            ProvideDynamicFileParams,
+            ProvideDynamicFileResponse
+        >(ProvideRazorDynamicFileInfoMethodName, requestParams, cancellationToken);
 
         // Since we only sent one file over, we should get either zero or one URI back
         var responseUri = response.GeneratedFiles.SingleOrDefault();
@@ -75,20 +91,45 @@ internal class RazorDynamicFileInfoProvider : IDynamicFileInfoProvider
         }
         else
         {
-            var dynamicFileInfoFilePath = ProtocolConversions.GetDocumentFilePathFromUri(responseUri);
-            return new DynamicFileInfo(dynamicFileInfoFilePath, SourceCodeKind.Regular, EmptyStringTextLoader.Instance, designTimeOnly: true, documentServiceProvider: null);
+            var dynamicFileInfoFilePath = ProtocolConversions.GetDocumentFilePathFromUri(
+                responseUri
+            );
+            return new DynamicFileInfo(
+                dynamicFileInfoFilePath,
+                SourceCodeKind.Regular,
+                EmptyStringTextLoader.Instance,
+                designTimeOnly: true,
+                documentServiceProvider: null
+            );
         }
     }
 
-    public Task RemoveDynamicFileInfoAsync(ProjectId projectId, string? projectFilePath, string filePath, CancellationToken cancellationToken)
+    public Task RemoveDynamicFileInfoAsync(
+        ProjectId projectId,
+        string? projectFilePath,
+        string filePath,
+        CancellationToken cancellationToken
+    )
     {
-        var notificationParams = new RemoveDynamicFileParams { RazorFiles = [ProtocolConversions.CreateAbsoluteUri(filePath)] };
+        var notificationParams = new RemoveDynamicFileParams
+        {
+            RazorFiles = [ProtocolConversions.CreateAbsoluteUri(filePath)],
+        };
 
-        Contract.ThrowIfNull(LanguageServerHost.Instance, "We don't have an LSP channel yet to send this request through.");
-        var clientLanguageServerManager = LanguageServerHost.Instance.GetRequiredLspService<IClientLanguageServerManager>();
+        Contract.ThrowIfNull(
+            LanguageServerHost.Instance,
+            "We don't have an LSP channel yet to send this request through."
+        );
+        var clientLanguageServerManager =
+            LanguageServerHost.Instance.GetRequiredLspService<IClientLanguageServerManager>();
 
-        return clientLanguageServerManager.SendNotificationAsync(
-            RemoveRazorDynamicFileInfoMethodName, notificationParams, cancellationToken).AsTask();
+        return clientLanguageServerManager
+            .SendNotificationAsync(
+                RemoveRazorDynamicFileInfoMethodName,
+                notificationParams,
+                cancellationToken
+            )
+            .AsTask();
     }
 
     private sealed class EmptyStringTextLoader : TextLoader
@@ -97,9 +138,14 @@ internal class RazorDynamicFileInfoProvider : IDynamicFileInfoProvider
 
         private EmptyStringTextLoader() { }
 
-        public override Task<TextAndVersion> LoadTextAndVersionAsync(LoadTextOptions options, CancellationToken cancellationToken)
+        public override Task<TextAndVersion> LoadTextAndVersionAsync(
+            LoadTextOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            return Task.FromResult(TextAndVersion.Create(SourceText.From(""), VersionStamp.Default));
+            return Task.FromResult(
+                TextAndVersion.Create(SourceText.From(""), VersionStamp.Default)
+            );
         }
     }
 }

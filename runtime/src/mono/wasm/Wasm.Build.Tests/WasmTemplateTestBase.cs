@@ -14,21 +14,33 @@ namespace Wasm.Build.Tests;
 public abstract class WasmTemplateTestBase : BuildTestBase
 {
     private readonly WasmSdkBasedProjectProvider _provider;
-    protected WasmTemplateTestBase(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext, WasmSdkBasedProjectProvider? projectProvider = null)
-                : base(projectProvider ?? new WasmSdkBasedProjectProvider(output), output, buildContext)
+
+    protected WasmTemplateTestBase(
+        ITestOutputHelper output,
+        SharedBuildPerTestClassFixture buildContext,
+        WasmSdkBasedProjectProvider? projectProvider = null
+    )
+        : base(projectProvider ?? new WasmSdkBasedProjectProvider(output), output, buildContext)
     {
         _provider = GetProvider<WasmSdkBasedProjectProvider>();
         // Wasm templates are not using wasm sdk yet
         _provider.BundleDirName = "AppBundle";
     }
 
-    public string CreateWasmTemplateProject(string id, string template = "wasmbrowser", string extraArgs = "", bool runAnalyzers = true, bool addFrameworkArg = false)
+    public string CreateWasmTemplateProject(
+        string id,
+        string template = "wasmbrowser",
+        string extraArgs = "",
+        bool runAnalyzers = true,
+        bool addFrameworkArg = false
+    )
     {
         InitPaths(id);
         InitProjectDir(_projectDir, addNuGetSourceForLocalPackages: true);
 
         File.WriteAllText(Path.Combine(_projectDir, "Directory.Build.props"), "<Project />");
-        File.WriteAllText(Path.Combine(_projectDir, "Directory.Build.targets"),
+        File.WriteAllText(
+            Path.Combine(_projectDir, "Directory.Build.targets"),
             """
             <Project>
               <Target Name="PrintRuntimePackPath" BeforeTargets="Build">
@@ -37,16 +49,24 @@ public abstract class WasmTemplateTestBase : BuildTestBase
 
               <Import Project="WasmOverridePacks.targets" Condition="'$(WBTOverrideRuntimePack)' == 'true'" />
             </Project>
-            """);
+            """
+        );
         if (UseWBTOverridePackTargets)
-            File.Copy(BuildEnvironment.WasmOverridePacksTargetsPath, Path.Combine(_projectDir, Path.GetFileName(BuildEnvironment.WasmOverridePacksTargetsPath)), overwrite: true);
+            File.Copy(
+                BuildEnvironment.WasmOverridePacksTargetsPath,
+                Path.Combine(
+                    _projectDir,
+                    Path.GetFileName(BuildEnvironment.WasmOverridePacksTargetsPath)
+                ),
+                overwrite: true
+            );
 
         if (addFrameworkArg)
             extraArgs += $" -f {DefaultTargetFramework}";
         new DotNetCommand(s_buildEnv, _testOutput, useDefaultArgs: false)
-                .WithWorkingDirectory(_projectDir!)
-                .ExecuteWithCapturedOutput($"new {template} {extraArgs}")
-                .EnsureSuccessful();
+            .WithWorkingDirectory(_projectDir!)
+            .ExecuteWithCapturedOutput($"new {template} {extraArgs}")
+            .EnsureSuccessful();
 
         string projectfile = Path.Combine(_projectDir!, $"{id}.csproj");
         string extraProperties = string.Empty;
@@ -72,11 +92,17 @@ public abstract class WasmTemplateTestBase : BuildTestBase
         string runtimeconfigTemplateContent = File.ReadAllText(runtimeconfigTemplatePath);
         var runtimeconfigTemplate = JsonObject.Parse(runtimeconfigTemplateContent);
         if (runtimeconfigTemplate == null)
-            throw new Exception($"Unable to parse runtimeconfigtemplate at '{runtimeconfigTemplatePath}'");
+            throw new Exception(
+                $"Unable to parse runtimeconfigtemplate at '{runtimeconfigTemplatePath}'"
+            );
 
-        var perHostConfigs = runtimeconfigTemplate?["wasmHostProperties"]?["perHostConfig"]?.AsArray();
+        var perHostConfigs = runtimeconfigTemplate?["wasmHostProperties"]?[
+            "perHostConfig"
+        ]?.AsArray();
         if (perHostConfigs == null || perHostConfigs.Count == 0 || perHostConfigs[0] == null)
-            throw new Exception($"Unable to find perHostConfig in runtimeconfigtemplate at '{runtimeconfigTemplatePath}'");
+            throw new Exception(
+                $"Unable to find perHostConfig in runtimeconfigtemplate at '{runtimeconfigTemplatePath}'"
+            );
 
         perHostConfigs[0]!["host-args"] = new JsonArray(
             "--experimental-wasm-simd",
@@ -86,17 +112,29 @@ public abstract class WasmTemplateTestBase : BuildTestBase
         File.WriteAllText(runtimeconfigTemplatePath, runtimeconfigTemplate!.ToString());
     }
 
-    public (string projectDir, string buildOutput) BuildTemplateProject(BuildArgs buildArgs,
+    public (string projectDir, string buildOutput) BuildTemplateProject(
+        BuildArgs buildArgs,
         string id,
-        BuildProjectOptions buildProjectOptions)
+        BuildProjectOptions buildProjectOptions
+    )
     {
         if (buildProjectOptions.ExtraBuildEnvironmentVariables is null)
-            buildProjectOptions = buildProjectOptions with { ExtraBuildEnvironmentVariables = new Dictionary<string, string>() };
+            buildProjectOptions = buildProjectOptions with
+            {
+                ExtraBuildEnvironmentVariables = new Dictionary<string, string>(),
+            };
         buildProjectOptions.ExtraBuildEnvironmentVariables["ForceNet8Current"] = "false";
 
-        (CommandResult res, string logFilePath) = BuildProjectWithoutAssert(id, buildArgs.Config, buildProjectOptions);
+        (CommandResult res, string logFilePath) = BuildProjectWithoutAssert(
+            id,
+            buildArgs.Config,
+            buildProjectOptions
+        );
         if (buildProjectOptions.UseCache)
-            _buildContext.CacheBuild(buildArgs, new BuildProduct(_projectDir!, logFilePath, true, res.Output));
+            _buildContext.CacheBuild(
+                buildArgs,
+                new BuildProduct(_projectDir!, logFilePath, true, res.Output)
+            );
 
         if (buildProjectOptions.AssertAppBundle)
         {
@@ -108,13 +146,18 @@ public abstract class WasmTemplateTestBase : BuildTestBase
         return (_projectDir!, res.Output);
     }
 
-    public void AssertTestMainJsBundle(BuildArgs buildArgs,
-                              BuildProjectOptions buildProjectOptions,
-                              string? buildOutput = null,
-                              AssertTestMainJsAppBundleOptions? assertAppBundleOptions = null)
+    public void AssertTestMainJsBundle(
+        BuildArgs buildArgs,
+        BuildProjectOptions buildProjectOptions,
+        string? buildOutput = null,
+        AssertTestMainJsAppBundleOptions? assertAppBundleOptions = null
+    )
     {
         if (buildOutput is not null)
-            ProjectProviderBase.AssertRuntimePackPath(buildOutput, buildProjectOptions.TargetFramework ?? DefaultTargetFramework);
+            ProjectProviderBase.AssertRuntimePackPath(
+                buildOutput,
+                buildProjectOptions.TargetFramework ?? DefaultTargetFramework
+            );
 
         var testMainJsProvider = new TestMainJsProjectProvider(_testOutput, _projectDir!);
         if (assertAppBundleOptions is not null)
@@ -123,13 +166,18 @@ public abstract class WasmTemplateTestBase : BuildTestBase
             testMainJsProvider.AssertBundle(buildArgs, buildProjectOptions);
     }
 
-    public void AssertWasmSdkBundle(BuildArgs buildArgs,
-                              BuildProjectOptions buildProjectOptions,
-                              string? buildOutput = null,
-                              AssertWasmSdkBundleOptions? assertAppBundleOptions = null)
+    public void AssertWasmSdkBundle(
+        BuildArgs buildArgs,
+        BuildProjectOptions buildProjectOptions,
+        string? buildOutput = null,
+        AssertWasmSdkBundleOptions? assertAppBundleOptions = null
+    )
     {
         if (buildOutput is not null)
-            ProjectProviderBase.AssertRuntimePackPath(buildOutput, buildProjectOptions.TargetFramework ?? DefaultTargetFramework);
+            ProjectProviderBase.AssertRuntimePackPath(
+                buildOutput,
+                buildProjectOptions.TargetFramework ?? DefaultTargetFramework
+            );
 
         var projectProvider = new WasmSdkBasedProjectProvider(_testOutput, _projectDir!);
         if (assertAppBundleOptions is not null)
@@ -140,7 +188,11 @@ public abstract class WasmTemplateTestBase : BuildTestBase
 
     protected const string DefaultRuntimeAssetsRelativePath = "./_framework/";
 
-    protected void UpdateBrowserMainJs(Func<string, string> transform, string targetFramework, string runtimeAssetsRelativePath = DefaultRuntimeAssetsRelativePath)
+    protected void UpdateBrowserMainJs(
+        Func<string, string> transform,
+        string targetFramework,
+        string runtimeAssetsRelativePath = DefaultRuntimeAssetsRelativePath
+    )
     {
         string mainJsPath = Path.Combine(_projectDir!, "wwwroot", "main.js");
         string mainJsContent = File.ReadAllText(mainJsPath);

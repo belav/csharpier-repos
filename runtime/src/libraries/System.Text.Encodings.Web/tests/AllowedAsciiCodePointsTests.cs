@@ -30,12 +30,16 @@ namespace System.Text.Encodings.Web
             var bitmap = new AllowedBmpCodePointsBitmap();
             for (int i = 0; i < 1024; i++) // include C0 controls & characters beyond ASCII range
             {
-                if (IsValueAllowed(i)) { bitmap.AllowChar((char)i); }
+                if (IsValueAllowed(i))
+                {
+                    bitmap.AllowChar((char)i);
+                }
             }
 
             // Act
 
-            using BoundedMemory<AllowedAsciiCodePoints> boundedMemory = BoundedMemory.Allocate<AllowedAsciiCodePoints>(1); // use BoundedMemory to detect out-of-bound accesses
+            using BoundedMemory<AllowedAsciiCodePoints> boundedMemory =
+                BoundedMemory.Allocate<AllowedAsciiCodePoints>(1); // use BoundedMemory to detect out-of-bound accesses
             ref var allowedAsciiCodePoints = ref boundedMemory.Span[0];
 
             allowedAsciiCodePoints.PopulateAllowedCodePoints(bitmap);
@@ -46,7 +50,10 @@ namespace System.Text.Encodings.Web
 
             for (int i = -1024; i < 1024; i++)
             {
-                bool expected = UnicodeUtility.IsAsciiCodePoint((uint)i) && !char.IsControl((char)i) && IsValueAllowed(i);
+                bool expected =
+                    UnicodeUtility.IsAsciiCodePoint((uint)i)
+                    && !char.IsControl((char)i)
+                    && IsValueAllowed(i);
                 bool actual = allowedAsciiCodePoints.IsAllowedAsciiCodePoint((uint)i);
                 Assert.Equal(expected, actual);
             }

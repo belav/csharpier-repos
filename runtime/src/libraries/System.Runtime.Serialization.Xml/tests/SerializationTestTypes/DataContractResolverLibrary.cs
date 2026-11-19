@@ -12,9 +12,16 @@ namespace SerializationTestTypes
     public class PrimitiveTypeResolver : DataContractResolver
     {
         private static readonly string s_defaultNS = "http://www.default.com";
-        private static readonly ConcurrentDictionary<string, Type> s_types = new ConcurrentDictionary<string, Type>();
+        private static readonly ConcurrentDictionary<string, Type> s_types =
+            new ConcurrentDictionary<string, Type>();
 
-        public override bool TryResolveType(Type dcType, Type declaredType, DataContractResolver KTResolver, out XmlDictionaryString typeName, out XmlDictionaryString typeNamespace)
+        public override bool TryResolveType(
+            Type dcType,
+            Type declaredType,
+            DataContractResolver KTResolver,
+            out XmlDictionaryString typeName,
+            out XmlDictionaryString typeNamespace
+        )
         {
             string resolvedTypeName = string.Empty;
             string resolvedNamespace = string.Empty;
@@ -27,7 +34,12 @@ namespace SerializationTestTypes
             return true;
         }
 
-        public override Type ResolveName(string typeName, string typeNamespace, Type declaredType, DataContractResolver KTResolver)
+        public override Type ResolveName(
+            string typeName,
+            string typeNamespace,
+            Type declaredType,
+            DataContractResolver KTResolver
+        )
         {
             return s_types[typeName];
         }
@@ -35,7 +47,13 @@ namespace SerializationTestTypes
 
     public class EmptyNamespaceResolver : DataContractResolver
     {
-        public override bool TryResolveType(Type dataContractType, Type declaredType, DataContractResolver knownTypeResolver, out XmlDictionaryString typeName, out XmlDictionaryString typeNamespace)
+        public override bool TryResolveType(
+            Type dataContractType,
+            Type declaredType,
+            DataContractResolver knownTypeResolver,
+            out XmlDictionaryString typeName,
+            out XmlDictionaryString typeNamespace
+        )
         {
             XmlDictionary dic = new XmlDictionary();
             if (dataContractType == typeof(EmptyNsContainer))
@@ -52,11 +70,22 @@ namespace SerializationTestTypes
             }
             else
             {
-                return knownTypeResolver.TryResolveType(dataContractType, declaredType, null, out typeName, out typeNamespace);
+                return knownTypeResolver.TryResolveType(
+                    dataContractType,
+                    declaredType,
+                    null,
+                    out typeName,
+                    out typeNamespace
+                );
             }
         }
 
-        public override Type ResolveName(string typeName, string typeNamespace, Type declaredType, DataContractResolver knownTypeResolver)
+        public override Type ResolveName(
+            string typeName,
+            string typeNamespace,
+            Type declaredType,
+            DataContractResolver knownTypeResolver
+        )
         {
             if (typeNamespace == "MyNamespace")
             {
@@ -78,22 +107,47 @@ namespace SerializationTestTypes
     [Serializable]
     public class ProxyDataContractResolver : DataContractResolver
     {
-        public override Type ResolveName(string typeName, string typeNamespace, Type declaredType, DataContractResolver knownTypeResolver)
+        public override Type ResolveName(
+            string typeName,
+            string typeNamespace,
+            Type declaredType,
+            DataContractResolver knownTypeResolver
+        )
         {
             return knownTypeResolver.ResolveName(typeName, typeNamespace, declaredType, null);
         }
 
-        public override bool TryResolveType(Type dataContractType, Type declaredType, DataContractResolver knownTypeResolver, out XmlDictionaryString typeName, out XmlDictionaryString typeNamespace)
+        public override bool TryResolveType(
+            Type dataContractType,
+            Type declaredType,
+            DataContractResolver knownTypeResolver,
+            out XmlDictionaryString typeName,
+            out XmlDictionaryString typeNamespace
+        )
         {
-            Type actualDataContractType = dataContractType.Name.EndsWith("Proxy") ? dataContractType.BaseType : dataContractType;
-            return knownTypeResolver.TryResolveType(actualDataContractType, declaredType, null, out typeName, out typeNamespace);
+            Type actualDataContractType = dataContractType.Name.EndsWith("Proxy")
+                ? dataContractType.BaseType
+                : dataContractType;
+            return knownTypeResolver.TryResolveType(
+                actualDataContractType,
+                declaredType,
+                null,
+                out typeName,
+                out typeNamespace
+            );
         }
     }
 
     [Serializable]
     public class POCOTypeResolver : DataContractResolver
     {
-        public override bool TryResolveType(Type dcType, Type declaredType, DataContractResolver KTResolver, out XmlDictionaryString typeName, out XmlDictionaryString typeNamespace)
+        public override bool TryResolveType(
+            Type dcType,
+            Type declaredType,
+            DataContractResolver KTResolver,
+            out XmlDictionaryString typeName,
+            out XmlDictionaryString typeNamespace
+        )
         {
             string resolvedTypeName = string.Empty;
             string resolvedNamespace = string.Empty;
@@ -106,13 +160,21 @@ namespace SerializationTestTypes
                     }
                     break;
                 case "Person":
-                    {
-                        throw new InvalidOperationException("Member with attribute 'IgnoreDataMember' should be ignored during ser");
-                    }
+                {
+                    throw new InvalidOperationException(
+                        "Member with attribute 'IgnoreDataMember' should be ignored during ser"
+                    );
+                }
                 default:
-                    {
-                        return KTResolver.TryResolveType(dcType, declaredType, null, out typeName, out typeNamespace);
-                    }
+                {
+                    return KTResolver.TryResolveType(
+                        dcType,
+                        declaredType,
+                        null,
+                        out typeName,
+                        out typeNamespace
+                    );
+                }
             }
             //for types resolved by the DCR
             XmlDictionary dic = new XmlDictionary();
@@ -121,7 +183,12 @@ namespace SerializationTestTypes
             return true;
         }
 
-        public override Type ResolveName(string typeName, string typeNamespace, Type declaredType, DataContractResolver KTResolver)
+        public override Type ResolveName(
+            string typeName,
+            string typeNamespace,
+            Type declaredType,
+            DataContractResolver KTResolver
+        )
         {
             if (typeNamespace.Equals("http://www.default.com"))
             {
@@ -132,7 +199,9 @@ namespace SerializationTestTypes
             }
             if (typeName.Equals("Person"))
             {
-                throw new InvalidOperationException("Member with attribute 'IgnoreDataMember' should be ignored during deser");
+                throw new InvalidOperationException(
+                    "Member with attribute 'IgnoreDataMember' should be ignored during deser"
+                );
             }
             Type result = KTResolver.ResolveName(typeName, typeNamespace, declaredType, null);
             return result;
@@ -143,9 +212,23 @@ namespace SerializationTestTypes
     {
         private Type _type;
 
-        public override bool TryResolveType(Type dcType, Type declaredType, DataContractResolver KTResolver, out XmlDictionaryString typeName, out XmlDictionaryString typeNamespace)
+        public override bool TryResolveType(
+            Type dcType,
+            Type declaredType,
+            DataContractResolver KTResolver,
+            out XmlDictionaryString typeName,
+            out XmlDictionaryString typeNamespace
+        )
         {
-            if (!KTResolver.TryResolveType(dcType, declaredType, null, out typeName, out typeNamespace))
+            if (
+                !KTResolver.TryResolveType(
+                    dcType,
+                    declaredType,
+                    null,
+                    out typeName,
+                    out typeNamespace
+                )
+            )
             {
                 _type = dcType;
                 typeName = new XmlDictionary().Add(dcType.FullName + "***");
@@ -153,7 +236,13 @@ namespace SerializationTestTypes
             }
             return true;
         }
-        public override Type ResolveName(string typeName, string typeNamespace, Type declaredType, DataContractResolver KTResolver)
+
+        public override Type ResolveName(
+            string typeName,
+            string typeNamespace,
+            Type declaredType,
+            DataContractResolver KTResolver
+        )
         {
             Type t = null;
             if (typeName.Contains("***"))
@@ -174,7 +263,13 @@ namespace SerializationTestTypes
 
     public class UserTypeToPrimitiveTypeResolver : DataContractResolver
     {
-        public override bool TryResolveType(Type dcType, Type declaredType, DataContractResolver KTResolver, out XmlDictionaryString typeName, out XmlDictionaryString typeNamespace)
+        public override bool TryResolveType(
+            Type dcType,
+            Type declaredType,
+            DataContractResolver KTResolver,
+            out XmlDictionaryString typeName,
+            out XmlDictionaryString typeNamespace
+        )
         {
             string resolvedTypeName = string.Empty;
             string resolvedNamespace = "http://www.default.com";
@@ -188,7 +283,13 @@ namespace SerializationTestTypes
                     resolvedTypeName = "UserType";
                     break;
                 default:
-                    return KTResolver.TryResolveType(dcType, declaredType, null, out typeName, out typeNamespace);
+                    return KTResolver.TryResolveType(
+                        dcType,
+                        declaredType,
+                        null,
+                        out typeName,
+                        out typeNamespace
+                    );
             }
 
             XmlDictionary dic = new XmlDictionary();
@@ -197,7 +298,12 @@ namespace SerializationTestTypes
             return true;
         }
 
-        public override Type ResolveName(string typeName, string typeNamespace, Type declaredType, DataContractResolver KTResolver)
+        public override Type ResolveName(
+            string typeName,
+            string typeNamespace,
+            Type declaredType,
+            DataContractResolver KTResolver
+        )
         {
             if (typeNamespace.Equals("http://www.default.com"))
             {
@@ -219,7 +325,14 @@ namespace SerializationTestTypes
     public class SimpleResolver_Ser : DataContractResolver
     {
         private static readonly string s_defaultNs = "http://schemas.datacontract.org/2004/07/";
-        public override bool TryResolveType(Type dcType, Type declaredType, DataContractResolver KTResolver, out XmlDictionaryString typeName, out XmlDictionaryString typeNamespace)
+
+        public override bool TryResolveType(
+            Type dcType,
+            Type declaredType,
+            DataContractResolver KTResolver,
+            out XmlDictionaryString typeName,
+            out XmlDictionaryString typeNamespace
+        )
         {
             string resolvedNamespace = string.Empty;
             resolvedNamespace = s_defaultNs;
@@ -229,9 +342,16 @@ namespace SerializationTestTypes
             return true;
         }
 
-        public override Type ResolveName(string typeName, string typeNamespace, Type declaredType, DataContractResolver KTResolver)
+        public override Type ResolveName(
+            string typeName,
+            string typeNamespace,
+            Type declaredType,
+            DataContractResolver KTResolver
+        )
         {
-            throw new NotImplementedException("Deserialization is supposed to be handled by the SimpleResolver_DeSer resolver.");
+            throw new NotImplementedException(
+                "Deserialization is supposed to be handled by the SimpleResolver_DeSer resolver."
+            );
         }
     }
 
@@ -239,12 +359,26 @@ namespace SerializationTestTypes
     public class SimpleResolver_DeSer : DataContractResolver
     {
         private static readonly string s_defaultNs = "http://schemas.datacontract.org/2004/07/";
-        public override bool TryResolveType(Type dcType, Type declaredType, DataContractResolver KTResolver, out XmlDictionaryString typeName, out XmlDictionaryString typeNamespace)
+
+        public override bool TryResolveType(
+            Type dcType,
+            Type declaredType,
+            DataContractResolver KTResolver,
+            out XmlDictionaryString typeName,
+            out XmlDictionaryString typeNamespace
+        )
         {
-            throw new NotImplementedException("Serialization is supposed to be handled by the SimpleResolver_Ser resolver.");
+            throw new NotImplementedException(
+                "Serialization is supposed to be handled by the SimpleResolver_Ser resolver."
+            );
         }
 
-        public override Type ResolveName(string typeName, string typeNamespace, Type declaredType, DataContractResolver KTResolver)
+        public override Type ResolveName(
+            string typeName,
+            string typeNamespace,
+            Type declaredType,
+            DataContractResolver KTResolver
+        )
         {
             if (typeNamespace.Equals(s_defaultNs))
             {
@@ -268,9 +402,23 @@ namespace SerializationTestTypes
 
     public class VerySimpleResolver : DataContractResolver
     {
-        public override bool TryResolveType(Type dcType, Type declaredType, DataContractResolver KTResolver, out XmlDictionaryString typeName, out XmlDictionaryString typeNamespace)
+        public override bool TryResolveType(
+            Type dcType,
+            Type declaredType,
+            DataContractResolver KTResolver,
+            out XmlDictionaryString typeName,
+            out XmlDictionaryString typeNamespace
+        )
         {
-            if (!KTResolver.TryResolveType(dcType, declaredType, null, out typeName, out typeNamespace))
+            if (
+                !KTResolver.TryResolveType(
+                    dcType,
+                    declaredType,
+                    null,
+                    out typeName,
+                    out typeNamespace
+                )
+            )
             {
                 typeName = new XmlDictionary().Add(dcType.FullName);
                 typeNamespace = new XmlDictionary().Add(dcType.Assembly.FullName);
@@ -279,7 +427,12 @@ namespace SerializationTestTypes
             return true;
         }
 
-        public override Type ResolveName(string typeName, string typeNamespace, Type declaredType, DataContractResolver KTResolver)
+        public override Type ResolveName(
+            string typeName,
+            string typeNamespace,
+            Type declaredType,
+            DataContractResolver KTResolver
+        )
         {
             Type t = KTResolver.ResolveName(typeName, typeNamespace, declaredType, null);
             if (t == null)
@@ -301,7 +454,14 @@ namespace SerializationTestTypes
     public class ResolverDefaultCollections : DataContractResolver
     {
         private static readonly string s_defaultNs = "http://www.default.com";
-        public override bool TryResolveType(Type dcType, Type declaredType, DataContractResolver KTResolver, out XmlDictionaryString typeName, out XmlDictionaryString typeNamespace)
+
+        public override bool TryResolveType(
+            Type dcType,
+            Type declaredType,
+            DataContractResolver KTResolver,
+            out XmlDictionaryString typeName,
+            out XmlDictionaryString typeNamespace
+        )
         {
             string resolvedNamespace = string.Empty;
             resolvedNamespace = s_defaultNs;
@@ -311,7 +471,12 @@ namespace SerializationTestTypes
             return true;
         }
 
-        public override Type ResolveName(string typeName, string typeNamespace, Type declaredType, DataContractResolver KTResolver)
+        public override Type ResolveName(
+            string typeName,
+            string typeNamespace,
+            Type declaredType,
+            DataContractResolver KTResolver
+        )
         {
             if (typeNamespace.Equals(s_defaultNs))
             {
@@ -348,7 +513,13 @@ namespace SerializationTestTypes
 
         private TypeLibraryManager _mgr = new TypeLibraryManager();
 
-        public override bool TryResolveType(Type dcType, Type declaredType, DataContractResolver KTResolver, out XmlDictionaryString typeName, out XmlDictionaryString typeNamespace)
+        public override bool TryResolveType(
+            Type dcType,
+            Type declaredType,
+            DataContractResolver KTResolver,
+            out XmlDictionaryString typeName,
+            out XmlDictionaryString typeNamespace
+        )
         {
             string resolvedTypeName = string.Empty;
             string resolvedNamespace = string.Empty;
@@ -363,7 +534,13 @@ namespace SerializationTestTypes
             }
             else
             {
-                KTResolver.TryResolveType(dcType, declaredType, null, out typeName, out typeNamespace);
+                KTResolver.TryResolveType(
+                    dcType,
+                    declaredType,
+                    null,
+                    out typeName,
+                    out typeNamespace
+                );
             }
             if (typeName == null || typeNamespace == null)
             {
@@ -374,7 +551,12 @@ namespace SerializationTestTypes
             return true;
         }
 
-        public override Type ResolveName(string typeName, string typeNamespace, Type declaredType, DataContractResolver KTResolver)
+        public override Type ResolveName(
+            string typeName,
+            string typeNamespace,
+            Type declaredType,
+            DataContractResolver KTResolver
+        )
         {
             TypeLibraryManager mgr = new TypeLibraryManager();
             string inputTypeName = typeName.Trim('*');

@@ -12,14 +12,8 @@ namespace Microsoft.Win32.SystemEventsTests
 
         protected override event EventHandler Event
         {
-            add
-            {
-                SystemEvents.TimeChanged += value;
-            }
-            remove
-            {
-                SystemEvents.TimeChanged -= value;
-            }
+            add { SystemEvents.TimeChanged += value; }
+            remove { SystemEvents.TimeChanged -= value; }
         }
     }
 }

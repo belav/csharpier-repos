@@ -15,10 +15,7 @@ namespace HtmlAgilityPack
         #region Constructors
 
         internal HtmlCommentNode(HtmlDocument ownerdocument, int index)
-            :
-                base(HtmlNodeType.Comment, ownerdocument, index)
-        {
-        }
+            : base(HtmlNodeType.Comment, ownerdocument, index) { }
 
         #endregion
 

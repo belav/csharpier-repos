@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,33 +14,32 @@
 
 namespace Castle.DynamicProxy.Tests
 {
-	using System.IO;
-	using System.Xml.Serialization;
+    using System.IO;
+    using System.Xml.Serialization;
+    using Castle.DynamicProxy.Tests.Classes;
+    using NUnit.Framework;
 
-	using Castle.DynamicProxy.Tests.Classes;
-	using NUnit.Framework;
+    [TestFixture]
+    public class XmlSerializationTestCase : BasePEVerifyTestCase
+    {
+        [Test, Ignore("Could not come up with a solution for this")]
+        public void ProxyIsXmlSerializable()
+        {
+            ClassToSerialize proxy = (ClassToSerialize)
+                generator.CreateClassProxy(typeof(ClassToSerialize), new StandardInterceptor());
 
-	[TestFixture]
-	public class XmlSerializationTestCase : BasePEVerifyTestCase
-	{
-		[Test, Ignore("Could not come up with a solution for this")]
-		public void ProxyIsXmlSerializable()
-		{
-			ClassToSerialize proxy = (ClassToSerialize)
-			                         generator.CreateClassProxy(typeof (ClassToSerialize), new StandardInterceptor());
+            XmlSerializer serializer = new XmlSerializer(proxy.GetType());
 
-			XmlSerializer serializer = new XmlSerializer(proxy.GetType());
+            StringWriter writer = new StringWriter();
 
-			StringWriter writer = new StringWriter();
+            serializer.Serialize(writer, proxy);
 
-			serializer.Serialize(writer, proxy);
+            StringReader reader = new StringReader(writer.GetStringBuilder().ToString());
 
-			StringReader reader = new StringReader(writer.GetStringBuilder().ToString());
+            object newObj = serializer.Deserialize(reader);
 
-			object newObj = serializer.Deserialize(reader);
-
-			Assert.IsNotNull(newObj);
-			Assert.IsInstanceOf(typeof (ClassToSerialize), newObj);
-		}
-	}
+            Assert.IsNotNull(newObj);
+            Assert.IsInstanceOf(typeof(ClassToSerialize), newObj);
+        }
+    }
 }

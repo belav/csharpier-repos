@@ -3,6 +3,7 @@
 
 using System;
 using Xunit;
+
 internal class Buffer
 {
     private byte[] _buffer;
@@ -39,7 +40,6 @@ internal class Buffer
     }
 }
 
-
 public class Test_bug595776
 {
     [Fact]
@@ -72,5 +72,3 @@ public class Test_bug595776
         }
     }
 }
-
-

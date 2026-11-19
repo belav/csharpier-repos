@@ -560,8 +560,7 @@ internal partial class QuicStreamContext : TransportConnection, IPooledStream, I
         {
             lock (_shutdownLock)
             {
-                _shutdownReason =
-                    _shutdownWriteReason
+                _shutdownReason = _shutdownWriteReason
                     ?? _shutdownReason
                     ?? shutdownReason
                     ?? SendGracefullyCompletedException;

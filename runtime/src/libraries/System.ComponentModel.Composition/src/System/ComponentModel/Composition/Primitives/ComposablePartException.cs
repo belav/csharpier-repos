@@ -22,9 +22,7 @@ namespace System.ComponentModel.Composition.Primitives
         ///     Initializes a new instance of the <see cref="ComposablePartException"/> class.
         /// </summary>
         public ComposablePartException()
-            : this((string?)null, (ICompositionElement?)null, (Exception?)null)
-        {
-        }
+            : this((string?)null, (ICompositionElement?)null, (Exception?)null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ComposablePartException"/> class
@@ -48,10 +46,15 @@ namespace System.ComponentModel.Composition.Primitives
         ///     <paramref name="info"/> contains a value that cannot be cast to the correct type.
         /// </exception>
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
-        protected ComposablePartException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected ComposablePartException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             _element = (ICompositionElement?)info.GetValue("Element", typeof(ICompositionElement));
         }
@@ -66,9 +69,7 @@ namespace System.ComponentModel.Composition.Primitives
         ///     the <see cref="Exception.Message"/> property to its default value.
         /// </param>
         public ComposablePartException(string? message)
-            : this(message, (ICompositionElement?)null, (Exception?)null)
-        {
-        }
+            : this(message, (ICompositionElement?)null, (Exception?)null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ComposablePartException"/> class
@@ -87,9 +88,7 @@ namespace System.ComponentModel.Composition.Primitives
         ///     <see langword="null"/>.
         /// </param>
         public ComposablePartException(string? message, ICompositionElement? element)
-            : this(message, element, (Exception?)null)
-        {
-        }
+            : this(message, element, (Exception?)null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ComposablePartException"/> class
@@ -107,9 +106,7 @@ namespace System.ComponentModel.Composition.Primitives
         ///     the <see cref="Exception.InnerException"/> property to <see langword="null"/>.
         /// </param>
         public ComposablePartException(string? message, Exception? innerException)
-            : this(message, (ICompositionElement?)null, innerException)
-        {
-        }
+            : this(message, (ICompositionElement?)null, innerException) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ComposablePartException"/> class
@@ -132,7 +129,11 @@ namespace System.ComponentModel.Composition.Primitives
         ///     <see cref="ComposablePartException"/>; or <see langword="null"/> to set
         ///     the <see cref="Exception.InnerException"/> property to <see langword="null"/>.
         /// </param>
-        public ComposablePartException(string? message, ICompositionElement? element, Exception? innerException)
+        public ComposablePartException(
+            string? message,
+            ICompositionElement? element,
+            Exception? innerException
+        )
             : base(message, innerException)
         {
             _element = element;
@@ -165,7 +166,11 @@ namespace System.ComponentModel.Composition.Primitives
         ///     <paramref name="info"/> is <see langword="null"/>.
         /// </exception>
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
         public override void GetObjectData(SerializationInfo info, StreamingContext context)

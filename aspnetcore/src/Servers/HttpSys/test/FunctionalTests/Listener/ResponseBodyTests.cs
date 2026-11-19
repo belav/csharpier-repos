@@ -29,8 +29,8 @@ public class ResponseBodyTests
             Assert.False(context.AllowSynchronousIO);
 
             Assert.Throws<InvalidOperationException>(() => context.Response.Body.Flush());
-            Assert.Throws<InvalidOperationException>(
-                () => context.Response.Body.Write(new byte[10], 0, 10)
+            Assert.Throws<InvalidOperationException>(() =>
+                context.Response.Body.Write(new byte[10], 0, 10)
             );
             Assert.Throws<InvalidOperationException>(() => context.Response.Body.Flush());
 
@@ -212,8 +212,8 @@ public class ResponseBodyTests
             Assert.True(writeTask.IsCanceled);
             context.Dispose();
 
-            await Assert.ThrowsAsync<HttpRequestException>(
-                () => response.Content.LoadIntoBufferAsync()
+            await Assert.ThrowsAsync<HttpRequestException>(() =>
+                response.Content.LoadIntoBufferAsync()
             );
         }
     }
@@ -236,8 +236,8 @@ public class ResponseBodyTests
             Assert.True(writeTask.IsCanceled);
             context.Dispose();
 
-            await Assert.ThrowsAsync<HttpRequestException>(
-                () => response.Content.LoadIntoBufferAsync()
+            await Assert.ThrowsAsync<HttpRequestException>(() =>
+                response.Content.LoadIntoBufferAsync()
             );
         }
     }
@@ -279,13 +279,8 @@ public class ResponseBodyTests
                 }
             });
 
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                    context.Response.Body.Write(
-                        Utilities.WriteBuffer,
-                        0,
-                        Utilities.WriteBuffer.Length
-                    )
+            Assert.Throws<ObjectDisposedException>(() =>
+                context.Response.Body.Write(Utilities.WriteBuffer, 0, Utilities.WriteBuffer.Length)
             );
 
             context.Dispose();
@@ -328,13 +323,12 @@ public class ResponseBodyTests
                 }
             });
 
-            await Assert.ThrowsAsync<ObjectDisposedException>(
-                () =>
-                    context.Response.Body.WriteAsync(
-                        Utilities.WriteBuffer,
-                        0,
-                        Utilities.WriteBuffer.Length
-                    )
+            await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                context.Response.Body.WriteAsync(
+                    Utilities.WriteBuffer,
+                    0,
+                    Utilities.WriteBuffer.Length
+                )
             );
 
             context.Dispose();

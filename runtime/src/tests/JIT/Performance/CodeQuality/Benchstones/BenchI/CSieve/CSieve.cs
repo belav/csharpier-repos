@@ -9,62 +9,65 @@ using Xunit;
 
 namespace Benchstone.BenchI
 {
-public static class CSieve
-{
-
+    public static class CSieve
+    {
 #if DEBUG
-    public const int Iterations = 1;
+        public const int Iterations = 1;
 #else
-    public const int Iterations = 200;
+        public const int Iterations = 200;
 #endif
 
-    const int Size = 8190;
+        const int Size = 8190;
 
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    static bool Bench() {
-        bool[] flags = new bool[Size + 1];
-        int count = 0;
-        for (int iter = 1; iter <= Iterations; iter++)
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        static bool Bench()
         {
-            count = 0;
-
-            // Initially, assume all are prime
-            for (int i = 0; i <= Size; i++)
+            bool[] flags = new bool[Size + 1];
+            int count = 0;
+            for (int iter = 1; iter <= Iterations; iter++)
             {
-                flags[i] = true;
-            }
+                count = 0;
 
-            // Refine
-            for (int i = 2; i <= Size; i++)
-            {
-                if (flags[i])
+                // Initially, assume all are prime
+                for (int i = 0; i <= Size; i++)
                 {
-                    // Found a prime
-                    for (int k = i + i; k <= Size; k += i)
+                    flags[i] = true;
+                }
+
+                // Refine
+                for (int i = 2; i <= Size; i++)
+                {
+                    if (flags[i])
                     {
-                        // Cancel its multiples
-                        flags[k] = false;
+                        // Found a prime
+                        for (int k = i + i; k <= Size; k += i)
+                        {
+                            // Cancel its multiples
+                            flags[k] = false;
+                        }
+                        count++;
                     }
-                    count++;
                 }
             }
+
+            return (count == 1027);
         }
 
-        return (count == 1027);
-    }
-
-    static bool TestBase() {
-        bool result = true;
-        for (int i = 0; i < Iterations; i++) {
-            result &= Bench();
+        static bool TestBase()
+        {
+            bool result = true;
+            for (int i = 0; i < Iterations; i++)
+            {
+                result &= Bench();
+            }
+            return result;
         }
-        return result;
-    }
 
-    [Fact]
-    public static int TestEntryPoint() {
-        bool result = TestBase();
-        return (result ? 100 : -1);
+        [Fact]
+        public static int TestEntryPoint()
+        {
+            bool result = TestBase();
+            return (result ? 100 : -1);
+        }
     }
-}
 }

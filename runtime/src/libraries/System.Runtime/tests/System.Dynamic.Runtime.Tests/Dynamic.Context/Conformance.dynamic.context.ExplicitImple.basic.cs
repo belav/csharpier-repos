@@ -118,33 +118,45 @@ namespace Dynamic.Tests
     public class OneExplicitlyImplementedNonGenericInterface1 : NonGenericInterface1
     {
         int NonGenericInterface1.Foo() => 0;
+
         public int Bar() => 1;
     }
 
     public struct OneExplicitlyImplementedNonGenericInterface2 : NonGenericInterface1
     {
         int NonGenericInterface1.Foo() => 0;
+
         public int Foo() => 2;
+
         public int Bar() => 1;
     }
 
     public class OneExplicitlyImplementedNonGenericInterface3 : NonGenericInterface1
     {
         int NonGenericInterface1.Foo() => 0;
+
         public int Foo() => 2;
+
         public int Bar() => 1;
     }
 
-    public class TwoExplicitlyImplementedNonGenericInterface1 : NonGenericInterface1, NonGenericInterface2
+    public class TwoExplicitlyImplementedNonGenericInterface1
+        : NonGenericInterface1,
+            NonGenericInterface2
     {
         int NonGenericInterface1.Foo() => 0;
+
         public int Bar() => 1;
     }
 
-    public class TwoExplicitlyImplementedNonGenericInterface2 : NonGenericInterface1, NonGenericInterface3
+    public class TwoExplicitlyImplementedNonGenericInterface2
+        : NonGenericInterface1,
+            NonGenericInterface3
     {
         int NonGenericInterface1.Foo() => 0;
+
         int NonGenericInterface3.Foo() => 2;
+
         public int Bar() => 1;
     }
 
@@ -172,7 +184,11 @@ namespace Dynamic.Tests
         public static bool s_getterCalled;
         int InterfaceWithGetter.Property
         {
-            get { s_getterCalled = true;  return 2; }
+            get
+            {
+                s_getterCalled = true;
+                return 2;
+            }
         }
     }
 
@@ -187,7 +203,11 @@ namespace Dynamic.Tests
         public static bool s_setterCalled;
         int InterfaceWithGetterAndSetter.Property
         {
-            get { s_getterCalled = true; return 1; }
+            get
+            {
+                s_getterCalled = true;
+                return 1;
+            }
             set { s_setterCalled = true; }
         }
     }
@@ -219,7 +239,11 @@ namespace Dynamic.Tests
         public static bool s_setCalled;
         long InterfaceWithIndexer.this[byte index]
         {
-            get { s_getCalled = true; return 1; }
+            get
+            {
+                s_getCalled = true;
+                return 1;
+            }
             set { s_setCalled = true; }
         }
     }

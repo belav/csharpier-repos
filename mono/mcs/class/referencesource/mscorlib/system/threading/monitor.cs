@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>Microsoft</OWNER>
@@ -10,29 +10,28 @@
 ** Class: Monitor
 **
 **
-** Purpose: Synchronizes access to a shared resource or region of code in a multi-threaded 
+** Purpose: Synchronizes access to a shared resource or region of code in a multi-threaded
 **             program.
 **
 **
 =============================================================================*/
 
-
-namespace System.Threading {
-
+namespace System.Threading
+{
     using System;
+    using System.Diagnostics.Contracts;
+    using System.Runtime;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.Remoting;
+    using System.Runtime.Versioning;
+    using System.Threading;
 #if !MONO
     using System.Security.Permissions;
 #endif
-    using System.Runtime;
-    using System.Runtime.Remoting;
-    using System.Threading;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
 
 #if !MONO
-    [HostProtection(Synchronization=true, ExternalThreading=true)]
+    [HostProtection(Synchronization = true, ExternalThreading = true)]
     [System.Runtime.InteropServices.ComVisible(true)]
 #endif
     public static partial class Monitor
@@ -52,9 +51,8 @@ namespace System.Threading {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void Enter(Object obj);
 
-
         // Use a ref bool instead of out to ensure that unverifiable code must
-        // initialize this value to something.  If we used out, the value 
+        // initialize this value to something.  If we used out, the value
         // could be uninitialized if we threw an exception in our prolog.
         // The JIT should inline this method to allow check of lockTaken argument to be optimized out
         // in the typical case. Note that the method has to be transparent for inlining to be allowed by the VM.
@@ -69,7 +67,10 @@ namespace System.Threading {
 
         private static void ThrowLockTakenException()
         {
-            throw new ArgumentException(Environment.GetResourceString("Argument_MustBeFalse"), "lockTaken");
+            throw new ArgumentException(
+                Environment.GetResourceString("Argument_MustBeFalse"),
+                "lockTaken"
+            );
         }
 
 #if !MONO
@@ -78,7 +79,6 @@ namespace System.Threading {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern void ReliableEnter(Object obj, ref bool lockTaken);
 #endif
-
 
         /*=========================================================================
         ** Release the monitor lock. If one or more threads are waiting to acquire the
@@ -96,7 +96,7 @@ namespace System.Threading {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static extern void Exit(Object obj);
-    
+
         /*=========================================================================
         ** Similar to Enter, but will never block. That is, if the current thread can
         ** acquire the monitor lock without blocking, it will do so and TRUE will
@@ -120,7 +120,7 @@ namespace System.Threading {
 
             ReliableEnterTimeout(obj, 0, ref lockTaken);
         }
-    
+
         /*=========================================================================
         ** Version of TryEnter that will block, but only up to a timeout period
         ** expressed in milliseconds. If timeout == Timeout.Infinite the method
@@ -142,7 +142,10 @@ namespace System.Threading {
         {
             long tm = (long)timeout.TotalMilliseconds;
             if (tm < -1 || tm > (long)Int32.MaxValue)
-                throw new ArgumentOutOfRangeException("timeout", Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegOrNegative1"));
+                throw new ArgumentOutOfRangeException(
+                    "timeout",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegOrNegative1")
+                );
             return (int)tm;
         }
 
@@ -173,7 +176,11 @@ namespace System.Threading {
         [System.Security.SecuritySafeCritical]
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void ReliableEnterTimeout(Object obj, int timeout, ref bool lockTaken);
+        private static extern void ReliableEnterTimeout(
+            Object obj,
+            int timeout,
+            ref bool lockTaken
+        );
 #endif
 
         [System.Security.SecuritySafeCritical]
@@ -193,24 +200,24 @@ namespace System.Threading {
 #endif
 
         /*========================================================================
-    ** Waits for notification from the object (via a Pulse/PulseAll). 
+    ** Waits for notification from the object (via a Pulse/PulseAll).
     ** timeout indicates how long to wait before the method returns.
-    ** This method acquires the monitor waithandle for the object 
-    ** If this thread holds the monitor lock for the object, it releases it. 
-    ** On exit from the method, it obtains the monitor lock back. 
-    ** If exitContext is true then the synchronization domain for the context 
-    ** (if in a synchronized context) is exited before the wait and reacquired 
+    ** This method acquires the monitor waithandle for the object
+    ** If this thread holds the monitor lock for the object, it releases it.
+    ** On exit from the method, it obtains the monitor lock back.
+    ** If exitContext is true then the synchronization domain for the context
+    ** (if in a synchronized context) is exited before the wait and reacquired
     **
         ** Exceptions: ArgumentNullException if object is null.
     ========================================================================*/
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern bool ObjWait(bool exitContext, int millisecondsTimeout, Object obj);
 #endif
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public static bool Wait(Object obj, int millisecondsTimeout, bool exitContext)
         {
             if (obj == null)
@@ -239,18 +246,18 @@ namespace System.Threading {
         }
 
         /*========================================================================
-        ** Sends a notification to a single waiting object. 
+        ** Sends a notification to a single waiting object.
         * Exceptions: SynchronizationLockException if this method is not called inside
         * a synchronized block of code.
         ========================================================================*/
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern void ObjPulse(Object obj);
 #endif
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public static void Pulse(Object obj)
         {
             if (obj == null)
@@ -262,16 +269,16 @@ namespace System.Threading {
             ObjPulse(obj);
         }
         /*========================================================================
-        ** Sends a notification to all waiting objects. 
+        ** Sends a notification to all waiting objects.
         ========================================================================*/
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern void ObjPulseAll(Object obj);
 #endif
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public static void PulseAll(Object obj)
         {
             if (obj == null)

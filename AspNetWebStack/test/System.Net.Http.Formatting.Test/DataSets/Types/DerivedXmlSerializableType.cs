@@ -13,9 +13,7 @@ namespace System.Net.Http.Formatting.DataSets.Types
     {
         private WcfPocoType reference;
 
-        public DerivedXmlSerializableType()
-        {
-        }
+        public DerivedXmlSerializableType() { }
 
         public DerivedXmlSerializableType(int id, string name, WcfPocoType reference)
             : base(id, name)
@@ -26,11 +24,7 @@ namespace System.Net.Http.Formatting.DataSets.Types
         [XmlElement]
         public WcfPocoType Reference
         {
-            get
-            {
-                return this.reference;
-            }
-
+            get { return this.reference; }
             set
             {
                 this.ReferenceSet = true;
@@ -43,17 +37,25 @@ namespace System.Net.Http.Formatting.DataSets.Types
 
         public static new IEnumerable<DerivedXmlSerializableType> GetTestData()
         {
-            return new DerivedXmlSerializableType[] { 
-                new DerivedXmlSerializableType(), 
-                new DerivedXmlSerializableType(1, "SomeName", new WcfPocoType(2, "SomeOtherName")) };
+            return new DerivedXmlSerializableType[]
+            {
+                new DerivedXmlSerializableType(),
+                new DerivedXmlSerializableType(1, "SomeName", new WcfPocoType(2, "SomeOtherName")),
+            };
         }
 
         public static IEnumerable<DerivedXmlSerializableType> GetKnownTypeTestData()
         {
-            return new DerivedXmlSerializableType[] { 
-                new DerivedXmlSerializableType(), 
-                new DerivedXmlSerializableType(1, "SomeName", null), 
-                new DerivedXmlSerializableType(1, "SomeName", new DerivedWcfPocoType(2, "SomeOtherName", null))};
+            return new DerivedXmlSerializableType[]
+            {
+                new DerivedXmlSerializableType(),
+                new DerivedXmlSerializableType(1, "SomeName", null),
+                new DerivedXmlSerializableType(
+                    1,
+                    "SomeName",
+                    new DerivedWcfPocoType(2, "SomeOtherName", null)
+                ),
+            };
         }
     }
 }

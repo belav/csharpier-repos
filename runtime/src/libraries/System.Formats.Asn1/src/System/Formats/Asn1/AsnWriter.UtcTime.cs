@@ -98,12 +98,14 @@ namespace System.Formats.Asn1
             Span<byte> baseSpan = _buffer.AsSpan(_offset);
             StandardFormat format = new StandardFormat('D', 2);
 
-            if (!Utf8Formatter.TryFormat(year % 100, baseSpan.Slice(0, 2), out _, format) ||
-                !Utf8Formatter.TryFormat(month, baseSpan.Slice(2, 2), out _, format) ||
-                !Utf8Formatter.TryFormat(day, baseSpan.Slice(4, 2), out _, format) ||
-                !Utf8Formatter.TryFormat(hour, baseSpan.Slice(6, 2), out _, format) ||
-                !Utf8Formatter.TryFormat(minute, baseSpan.Slice(8, 2), out _, format) ||
-                !Utf8Formatter.TryFormat(second, baseSpan.Slice(10, 2), out _, format))
+            if (
+                !Utf8Formatter.TryFormat(year % 100, baseSpan.Slice(0, 2), out _, format)
+                || !Utf8Formatter.TryFormat(month, baseSpan.Slice(2, 2), out _, format)
+                || !Utf8Formatter.TryFormat(day, baseSpan.Slice(4, 2), out _, format)
+                || !Utf8Formatter.TryFormat(hour, baseSpan.Slice(6, 2), out _, format)
+                || !Utf8Formatter.TryFormat(minute, baseSpan.Slice(8, 2), out _, format)
+                || !Utf8Formatter.TryFormat(second, baseSpan.Slice(10, 2), out _, format)
+            )
             {
                 Debug.Fail($"Utf8Formatter.TryFormat failed to build components of {normalized:O}");
                 throw new InvalidOperationException();

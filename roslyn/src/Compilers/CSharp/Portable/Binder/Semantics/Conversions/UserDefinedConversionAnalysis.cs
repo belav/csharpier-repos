@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal enum UserDefinedConversionAnalysisKind : byte
     {
         ApplicableInNormalForm,
-        ApplicableInLiftedForm
+        ApplicableInLiftedForm,
     }
 
     internal sealed class UserDefinedConversionAnalysis
@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Conversion sourceConversion,
             Conversion targetConversion,
             TypeSymbol fromType,
-            TypeSymbol toType)
+            TypeSymbol toType
+        )
         {
             return new UserDefinedConversionAnalysis(
                 UserDefinedConversionAnalysisKind.ApplicableInNormalForm,
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 sourceConversion,
                 targetConversion,
                 fromType,
-                toType);
+                toType
+            );
         }
 
         public static UserDefinedConversionAnalysis Lifted(
@@ -51,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Conversion sourceConversion,
             Conversion targetConversion,
             TypeSymbol fromType,
-            TypeSymbol toType)
+            TypeSymbol toType
+        )
         {
             return new UserDefinedConversionAnalysis(
                 UserDefinedConversionAnalysisKind.ApplicableInLiftedForm,
@@ -60,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 sourceConversion,
                 targetConversion,
                 fromType,
-                toType);
+                toType
+            );
         }
 
         private UserDefinedConversionAnalysis(
@@ -70,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Conversion sourceConversion,
             Conversion targetConversion,
             TypeSymbol fromType,
-            TypeSymbol toType)
+            TypeSymbol toType
+        )
         {
             this.Kind = kind;
             this.ConstrainedToTypeOpt = constrainedToTypeOpt;

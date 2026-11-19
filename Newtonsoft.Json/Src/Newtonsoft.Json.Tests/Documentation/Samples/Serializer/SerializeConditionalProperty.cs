@@ -85,7 +85,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // ]
             #endregion
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""Name"": ""Joe Employee"",
     ""Manager"": {
@@ -95,7 +96,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
   {
     ""Name"": ""Mike Manager""
   }
-]", json);
+]",
+                json
+            );
         }
     }
 }

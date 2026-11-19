@@ -29,12 +29,20 @@ namespace System.Web.Http.Results
         /// <param name="contentNegotiator">The content negotiator to handle content negotiation.</param>
         /// <param name="request">The request message which led to this result.</param>
         /// <param name="formatters">The formatters to use to negotiate and format the content.</param>
-        public OkNegotiatedContentResult(T content, IContentNegotiator contentNegotiator, HttpRequestMessage request,
-            IEnumerable<MediaTypeFormatter> formatters)
-            : this(content, new NegotiatedContentResult<T>.DirectDependencyProvider(contentNegotiator, request,
-            formatters))
-        {
-        }
+        public OkNegotiatedContentResult(
+            T content,
+            IContentNegotiator contentNegotiator,
+            HttpRequestMessage request,
+            IEnumerable<MediaTypeFormatter> formatters
+        )
+            : this(
+                content,
+                new NegotiatedContentResult<T>.DirectDependencyProvider(
+                    contentNegotiator,
+                    request,
+                    formatters
+                )
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OkNegotiatedContentResult{T}"/> class with the values
@@ -43,11 +51,15 @@ namespace System.Web.Http.Results
         /// <param name="content">The content value to negotiate and format in the entity body.</param>
         /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
         public OkNegotiatedContentResult(T content, ApiController controller)
-            : this(content, new NegotiatedContentResult<T>.ApiControllerDependencyProvider(controller))
-        {
-        }
+            : this(
+                content,
+                new NegotiatedContentResult<T>.ApiControllerDependencyProvider(controller)
+            ) { }
 
-        private OkNegotiatedContentResult(T content, NegotiatedContentResult<T>.IDependencyProvider dependencies)
+        private OkNegotiatedContentResult(
+            T content,
+            NegotiatedContentResult<T>.IDependencyProvider dependencies
+        )
         {
             Contract.Assert(dependencies != null);
 
@@ -82,8 +94,15 @@ namespace System.Web.Http.Results
         /// <inheritdoc />
         public virtual Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
         {
-            return Task.FromResult(NegotiatedContentResult<T>.Execute(HttpStatusCode.OK, _content,
-                _dependencies.ContentNegotiator, _dependencies.Request, _dependencies.Formatters));
+            return Task.FromResult(
+                NegotiatedContentResult<T>.Execute(
+                    HttpStatusCode.OK,
+                    _content,
+                    _dependencies.ContentNegotiator,
+                    _dependencies.Request,
+                    _dependencies.Formatters
+                )
+            );
         }
     }
 }

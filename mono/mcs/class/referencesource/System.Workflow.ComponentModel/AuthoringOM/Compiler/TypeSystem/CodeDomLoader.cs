@@ -4,8 +4,8 @@ namespace System.Workflow.ComponentModel.Compiler
     using System.CodeDom;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Reflection;
     using System.Diagnostics;
+    using System.Reflection;
 
     internal class CodeDomLoader : IDisposable
     {
@@ -42,10 +42,17 @@ namespace System.Workflow.ComponentModel.Compiler
                         if (codeNamespace.Name.Length > 0)
                             typename = (Helper.EnsureTypeName(codeNamespace.Name) + "." + typename);
 
-                        DesignTimeType partialType = this.typeProvider.GetType(typename, false) as DesignTimeType;
+                        DesignTimeType partialType =
+                            this.typeProvider.GetType(typename, false) as DesignTimeType;
                         if (partialType == null)
                         {
-                            partialType = new DesignTimeType(null, codeTypeDeclaration.Name, codeNamespace.Imports, codeNamespace.Name, this.typeProvider);
+                            partialType = new DesignTimeType(
+                                null,
+                                codeTypeDeclaration.Name,
+                                codeNamespace.Imports,
+                                codeNamespace.Name,
+                                this.typeProvider
+                            );
                             this.types.Add(partialType);
                             this.typeProvider.AddType(partialType);
                         }
@@ -59,7 +66,14 @@ namespace System.Workflow.ComponentModel.Compiler
                     Type type = nestedQueue.Dequeue() as Type;
                     if (type.DeclaringType != null)
                         this.types.Add(type);
-                    foreach (Type nestedType2 in type.GetNestedTypes(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic))
+                    foreach (
+                        Type nestedType2 in type.GetNestedTypes(
+                            BindingFlags.Instance
+                                | BindingFlags.Static
+                                | BindingFlags.Public
+                                | BindingFlags.NonPublic
+                        )
+                    )
                         nestedQueue.Enqueue(nestedType2);
                 }
             }

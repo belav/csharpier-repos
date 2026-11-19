@@ -2,9 +2,8 @@
 // <copyright file="CodeGenerationOptions.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">ElenaK</owner>                                                                
+// <owner current="true" primary="true">ElenaK</owner>
 //------------------------------------------------------------------------------
-
 
 namespace System.Xml.Serialization
 {
@@ -25,6 +24,7 @@ namespace System.Xml.Serialization
         /// </devdoc>
         [XmlIgnore]
         None = 0,
+
         /// <include file='doc\CodeGenerationOptions.uex' path='docs/doc[@for="CodeGenerationOptions.GenerateProperties"]/*' />
         /// <devdoc>
         ///    <para>
@@ -52,7 +52,6 @@ namespace System.Xml.Serialization
         [XmlEnum("oldAsync")]
         GenerateOldAsync = 0x4,
 
-
         /// <include file='doc\CodeGenerationOptions.uex' path='docs/doc[@for="CodeGenerationOptions.GenerateOrder"]/*' />
         /// <devdoc>
         ///    <para>
@@ -61,7 +60,7 @@ namespace System.Xml.Serialization
         /// </devdoc>
         [XmlEnum("order")]
         GenerateOrder = 0x08,
-        
+
         /// <include file='doc\CodeGenerationOptions.uex' path='docs/doc[@for="CodeGenerationOptions.EnableDataBinding"]/*' />
         /// <devdoc>
         ///    <para>

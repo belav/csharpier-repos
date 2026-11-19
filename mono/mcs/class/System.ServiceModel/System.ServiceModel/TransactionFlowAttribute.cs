@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,33 +33,34 @@ using System.Transactions;
 
 namespace System.ServiceModel
 {
-	[AttributeUsage (AttributeTargets.Method)]
-	public sealed class TransactionFlowAttribute : Attribute, IOperationBehavior
-	{
-		public TransactionFlowAttribute (TransactionFlowOption transactions)
-		{
-			Transactions = transactions;
-		}
+    [AttributeUsage(AttributeTargets.Method)]
+    public sealed class TransactionFlowAttribute : Attribute, IOperationBehavior
+    {
+        public TransactionFlowAttribute(TransactionFlowOption transactions)
+        {
+            Transactions = transactions;
+        }
 
-		public TransactionFlowOption Transactions { get; private set; }
+        public TransactionFlowOption Transactions { get; private set; }
 
-		void IOperationBehavior.AddBindingParameters (OperationDescription description, BindingParameterCollection parameters)
-		{
-		}
+        void IOperationBehavior.AddBindingParameters(
+            OperationDescription description,
+            BindingParameterCollection parameters
+        ) { }
 
-		[MonoTODO]
-		void IOperationBehavior.ApplyClientBehavior (OperationDescription description, ClientOperation proxy)
-		{
-		}
+        [MonoTODO]
+        void IOperationBehavior.ApplyClientBehavior(
+            OperationDescription description,
+            ClientOperation proxy
+        ) { }
 
-		[MonoTODO]
-		void IOperationBehavior.ApplyDispatchBehavior (OperationDescription description, DispatchOperation dispatch)
-		{
-		}
+        [MonoTODO]
+        void IOperationBehavior.ApplyDispatchBehavior(
+            OperationDescription description,
+            DispatchOperation dispatch
+        ) { }
 
-		[MonoTODO]
-		void IOperationBehavior.Validate (OperationDescription description)
-		{
-		}
-	}
+        [MonoTODO]
+        void IOperationBehavior.Validate(OperationDescription description) { }
+    }
 }

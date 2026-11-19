@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,103 +33,119 @@ using System.IO;
 using System.Runtime.Serialization;
 using ICSharpCode.SharpZipLib.GZip;
 
-namespace System.Net 
+namespace System.Net
 {
-	[Serializable]
-	public class GZipWebResponse : WebResponse, ISerializable, IDisposable
-	{
-		WebResponse response;
-		bool compressed;
-		[NonSerialized] Stream stream;
-		[NonSerialized] long gzipLength;
+    [Serializable]
+    public class GZipWebResponse : WebResponse, ISerializable, IDisposable
+    {
+        WebResponse response;
+        bool compressed;
 
-		internal GZipWebResponse (WebResponse response, bool compressed)
-		{
-			this.response = response;
-			this.compressed = compressed;
-		}
+        [NonSerialized]
+        Stream stream;
 
-		protected GZipWebResponse (SerializationInfo info, StreamingContext context)
-		{
-			response = (WebResponse) info.GetValue ("response", typeof (WebResponse));
-			compressed = info.GetBoolean ("compressed");
-		}
-		
-		public override long ContentLength {		
-			get {
-				SetStream ();
-				if (compressed)
-					return gzipLength;
+        [NonSerialized]
+        long gzipLength;
 
-				return response.ContentLength;
-			}
-		}
-		
-		public override string ContentType {
-			get { return response.ContentType; }
-		}
-		
-		public override WebHeaderCollection Headers {
-			get { return response.Headers; }
-		}
-		
-		public override Uri ResponseUri {		
-			get { return response.ResponseUri; }
-		}		
-		
-		public WebResponse RealResponse {
-			get { return response; }
-		}
+        internal GZipWebResponse(WebResponse response, bool compressed)
+        {
+            this.response = response;
+            this.compressed = compressed;
+        }
 
-		public bool IsCompressed {
-			get { return compressed; }
-		}
+        protected GZipWebResponse(SerializationInfo info, StreamingContext context)
+        {
+            response = (WebResponse)info.GetValue("response", typeof(WebResponse));
+            compressed = info.GetBoolean("compressed");
+        }
 
-		public override Stream GetResponseStream ()
-		{
-			SetStream ();
-			return stream;
-		}
-		
-		void SetStream ()
-		{
-			lock (this) {
-				if (stream != null)
-					return;
+        public override long ContentLength
+        {
+            get
+            {
+                SetStream();
+                if (compressed)
+                    return gzipLength;
 
-				Stream st = response.GetResponseStream ();
-				if (!compressed) {
-					stream = st;
-				} else {
-					stream = new GZipInputStream (st);
-					gzipLength = stream.Length;
-				}
-			}
-		}
+                return response.ContentLength;
+            }
+        }
 
-		void ISerializable.GetObjectData (SerializationInfo info, StreamingContext context)
-		{
-			info.AddValue ("response", response);
-			info.AddValue ("compressed", compressed);
-		}		
+        public override string ContentType
+        {
+            get { return response.ContentType; }
+        }
 
-		public override void Close ()
-		{
-			((IDisposable) this).Dispose ();
-		}
-		
-		void IDisposable.Dispose ()
-		{
-			if (stream != null) {
-				stream.Close ();
-				stream = null;
-			}
+        public override WebHeaderCollection Headers
+        {
+            get { return response.Headers; }
+        }
 
-			if (response != null) {
-				response.Close ();
-				response = null;
-			}
-		}
-	}	
+        public override Uri ResponseUri
+        {
+            get { return response.ResponseUri; }
+        }
+
+        public WebResponse RealResponse
+        {
+            get { return response; }
+        }
+
+        public bool IsCompressed
+        {
+            get { return compressed; }
+        }
+
+        public override Stream GetResponseStream()
+        {
+            SetStream();
+            return stream;
+        }
+
+        void SetStream()
+        {
+            lock (this)
+            {
+                if (stream != null)
+                    return;
+
+                Stream st = response.GetResponseStream();
+                if (!compressed)
+                {
+                    stream = st;
+                }
+                else
+                {
+                    stream = new GZipInputStream(st);
+                    gzipLength = stream.Length;
+                }
+            }
+        }
+
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("response", response);
+            info.AddValue("compressed", compressed);
+        }
+
+        public override void Close()
+        {
+            ((IDisposable)this).Dispose();
+        }
+
+        void IDisposable.Dispose()
+        {
+            if (stream != null)
+            {
+                stream.Close();
+                stream = null;
+            }
+
+            if (response != null)
+            {
+                response.Close();
+                response = null;
+            }
+        }
+    }
 }
-

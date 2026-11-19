@@ -9,20 +9,29 @@ namespace System.Data
 {
     public class EnumerableRowCollectionExtensionsTests
     {
-        public class TestTypedTable<T> : TypedTableBase<T> where T : DataRow
+        public class TestTypedTable<T> : TypedTableBase<T>
+            where T : DataRow
         {
-            public TestTypedTable() : base() { }
+            public TestTypedTable()
+                : base() { }
         }
 
-        private class TestDataRowComparer<T> : Comparer<T> where T : DataRow
+        private class TestDataRowComparer<T> : Comparer<T>
+            where T : DataRow
         {
             public override int Compare(T x, T y)
             {
-                return int.Parse((string)x.ItemArray[0]).CompareTo(int.Parse((string)y.ItemArray[0]));
+                return int.Parse((string)x.ItemArray[0])
+                    .CompareTo(int.Parse((string)y.ItemArray[0]));
             }
         }
 
-        private (TypedTableBase<DataRow> table, DataRow one, DataRow two, DataRow three) InstantiateTable()
+        private (
+            TypedTableBase<DataRow> table,
+            DataRow one,
+            DataRow two,
+            DataRow three
+        ) InstantiateTable()
         {
             TypedTableBase<DataRow> table = new TestTypedTable<DataRow>();
             table.Columns.Add();
@@ -71,11 +80,16 @@ namespace System.Data
             var (table, one, two, three) = InstantiateTable();
 
             EnumerableRowCollection<DataRow> source = table.Cast<DataRow>();
-            var orderedBackwards = source.OrderByDescending(row => int.Parse((string)row.ItemArray[0]));
+            var orderedBackwards = source.OrderByDescending(row =>
+                int.Parse((string)row.ItemArray[0])
+            );
             Assert.Equal(new DataRow[] { three, two, one }, orderedBackwards);
 
             DataRow four = table.Rows.Add(4);
-            var comparedBackwards = source.OrderByDescending((row => row), new TestDataRowComparer<DataRow>());
+            var comparedBackwards = source.OrderByDescending(
+                (row => row),
+                new TestDataRowComparer<DataRow>()
+            );
             Assert.Equal(new DataRow[] { four, three, two, one }, comparedBackwards);
         }
 
@@ -85,16 +99,20 @@ namespace System.Data
             var (table, one, two, three) = InstantiateTable();
 
             // Order the EnumerableRowCollection
-            OrderedEnumerableRowCollection<DataRow> orderedSource = table.Cast<DataRow>().OrderBy(row => int.Parse((string)row.ItemArray[0]));
+            OrderedEnumerableRowCollection<DataRow> orderedSource = table
+                .Cast<DataRow>()
+                .OrderBy(row => int.Parse((string)row.ItemArray[0]));
 
             DataRow zero = table.Rows.Add(0);
             var orderedAgain = orderedSource.ThenBy(row => int.Parse((string)row.ItemArray[0]));
             Assert.Equal(new DataRow[] { zero, one, two, three }, orderedAgain);
 
             DataRow negative = table.Rows.Add(-1);
-            var comparedAgain = orderedSource.ThenBy((row => row), new TestDataRowComparer<DataRow>());
+            var comparedAgain = orderedSource.ThenBy(
+                (row => row),
+                new TestDataRowComparer<DataRow>()
+            );
             Assert.Equal(new DataRow[] { negative, zero, one, two, three }, comparedAgain);
-
         }
 
         [Fact]
@@ -103,17 +121,22 @@ namespace System.Data
             var (table, one, two, three) = InstantiateTable();
 
             // Order the EnumerableRowCollection
-            OrderedEnumerableRowCollection<DataRow> orderedSource = table.Cast<DataRow>().OrderByDescending(row => int.Parse((string)row.ItemArray[0]));
+            OrderedEnumerableRowCollection<DataRow> orderedSource = table
+                .Cast<DataRow>()
+                .OrderByDescending(row => int.Parse((string)row.ItemArray[0]));
 
             DataRow zero = table.Rows.Add(0);
-            var orderedBackwardsAgain = orderedSource.ThenByDescending(row => int.Parse((string)row.ItemArray[0]));
+            var orderedBackwardsAgain = orderedSource.ThenByDescending(row =>
+                int.Parse((string)row.ItemArray[0])
+            );
             Assert.Equal(new DataRow[] { three, two, one, zero }, orderedBackwardsAgain);
 
             DataRow negative = table.Rows.Add(-1);
-            var comparedBackwardsAgain = orderedSource.ThenByDescending((row => row), new TestDataRowComparer<DataRow>());
+            var comparedBackwardsAgain = orderedSource.ThenByDescending(
+                (row => row),
+                new TestDataRowComparer<DataRow>()
+            );
             Assert.Equal(new DataRow[] { three, two, one, zero, negative }, comparedBackwardsAgain);
-
         }
-
     }
 }

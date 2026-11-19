@@ -50,7 +50,8 @@ namespace R2RTest
         public BuildFolderSet(
             IEnumerable<BuildFolder> buildFolders,
             IEnumerable<CompilerRunner> compilerRunners,
-            BuildOptions options)
+            BuildOptions options
+        )
         {
             _buildFolders = buildFolders;
             _compilerRunners = compilerRunners;
@@ -71,29 +72,47 @@ namespace R2RTest
 
         private void WriteJittedMethodSummary(StreamWriter logWriter)
         {
-            var allMethodsPerModulePerCompiler = new Dictionary<string, HashSet<string>>[(int)CompilerIndex.Count];
+            var allMethodsPerModulePerCompiler = new Dictionary<string, HashSet<string>>[
+                (int)CompilerIndex.Count
+            ];
 
             foreach (CompilerRunner runner in _compilerRunners)
             {
-                allMethodsPerModulePerCompiler[(int)runner.Index] = new Dictionary<string, HashSet<string>>();
+                allMethodsPerModulePerCompiler[(int)runner.Index] =
+                    new Dictionary<string, HashSet<string>>();
             }
 
             foreach (BuildFolder folder in FoldersToBuild)
             {
                 for (int exeIndex = 0; exeIndex < folder.Executions.Count; exeIndex++)
                 {
-                    var appMethodsPerModulePerCompiler = new Dictionary<string, HashSet<string>>[(int)CompilerIndex.Count];
+                    var appMethodsPerModulePerCompiler = new Dictionary<string, HashSet<string>>[
+                        (int)CompilerIndex.Count
+                    ];
                     foreach (CompilerRunner runner in _compilerRunners)
                     {
-                        appMethodsPerModulePerCompiler[(int)runner.Index] = new Dictionary<string, HashSet<string>>();
-                        folder.AddModuleToJittedMethodsMapping(allMethodsPerModulePerCompiler[(int)runner.Index], exeIndex, runner.Index);
-                        folder.AddModuleToJittedMethodsMapping(appMethodsPerModulePerCompiler[(int)runner.Index], exeIndex, runner.Index);
+                        appMethodsPerModulePerCompiler[(int)runner.Index] =
+                            new Dictionary<string, HashSet<string>>();
+                        folder.AddModuleToJittedMethodsMapping(
+                            allMethodsPerModulePerCompiler[(int)runner.Index],
+                            exeIndex,
+                            runner.Index
+                        );
+                        folder.AddModuleToJittedMethodsMapping(
+                            appMethodsPerModulePerCompiler[(int)runner.Index],
+                            exeIndex,
+                            runner.Index
+                        );
                     }
                     folder.WriteJitStatistics(appMethodsPerModulePerCompiler, _compilerRunners);
                 }
             }
 
-            BuildFolder.WriteJitStatistics(logWriter, allMethodsPerModulePerCompiler, _compilerRunners);
+            BuildFolder.WriteJitStatistics(
+                logWriter,
+                allMethodsPerModulePerCompiler,
+                _compilerRunners
+            );
         }
 
         public bool Compile()
@@ -124,7 +143,11 @@ namespace R2RTest
                 }
             }
 
-            ParallelRunner.Run(compilationsToRun, _options.DegreeOfParallelism, _options.MeasurePerf);
+            ParallelRunner.Run(
+                compilationsToRun,
+                _options.DegreeOfParallelism,
+                _options.MeasurePerf
+            );
 
             bool success = true;
             var failedCompilationsPerBuilder = new List<KeyValuePair<string, string>>();
@@ -150,8 +173,24 @@ namespace R2RTest
                             AnalyzeCompilationLog(runnerProcess, runner.Index);
                             if (_options.R2RDumpPath != null)
                             {
-                                r2rDumpExecutionsToRun.Add(new ProcessInfo(new R2RDumpProcessConstructor(runner, runnerProcess.Parameters.OutputFileName, naked: false)));
-                                r2rDumpExecutionsToRun.Add(new ProcessInfo(new R2RDumpProcessConstructor(runner, runnerProcess.Parameters.OutputFileName, naked: true)));
+                                r2rDumpExecutionsToRun.Add(
+                                    new ProcessInfo(
+                                        new R2RDumpProcessConstructor(
+                                            runner,
+                                            runnerProcess.Parameters.OutputFileName,
+                                            naked: false
+                                        )
+                                    )
+                                );
+                                r2rDumpExecutionsToRun.Add(
+                                    new ProcessInfo(
+                                        new R2RDumpProcessConstructor(
+                                            runner,
+                                            runnerProcess.Parameters.OutputFileName,
+                                            naked: true
+                                        )
+                                    )
+                                );
                             }
                         }
                         else // runner process failed
@@ -172,7 +211,9 @@ namespace R2RTest
                     {
                         foreach (string file in failedFiles)
                         {
-                            failedCompilationsPerBuilder.Add(new KeyValuePair<string, string>(file, failedBuilders));
+                            failedCompilationsPerBuilder.Add(
+                                new KeyValuePair<string, string>(file, failedBuilders)
+                            );
                         }
                         success = false;
                     }
@@ -203,7 +244,11 @@ namespace R2RTest
                         causeOfFailure = "Unknown cause of failure";
                     }
 
-                    Console.Error.WriteLine("Error running R2R dump on {0}: {1}", string.Join(", ", r2rDumpExecution.Parameters.InputFileNames), causeOfFailure);
+                    Console.Error.WriteLine(
+                        "Error running R2R dump on {0}: {1}",
+                        string.Join(", ", r2rDumpExecution.Parameters.InputFileNames),
+                        causeOfFailure
+                    );
                     success = false;
                 }
             }
@@ -228,7 +273,10 @@ namespace R2RTest
 
             string[] frameworkFolderFiles = Directory.GetFiles(coreRoot);
 
-            IEnumerable<CompilerRunner> frameworkRunners = _options.CompilerRunners(isFramework: true, overrideOutputPath: _options.OutputDirectory.FullName);
+            IEnumerable<CompilerRunner> frameworkRunners = _options.CompilerRunners(
+                isFramework: true,
+                overrideOutputPath: _options.OutputDirectory.FullName
+            );
 
             // Pre-populate the output folders with the input files so that we have backdrops
             // for failing compilations.
@@ -249,7 +297,11 @@ namespace R2RTest
                 foreach (CompilerRunner runner in frameworkRunners)
                 {
                     List<string> inputFrameworkDlls = new List<string>();
-                    foreach (string frameworkDll in ComputeManagedAssemblies.GetManagedAssembliesInFolder(_options.CoreRootDirectory.FullName))
+                    foreach (
+                        string frameworkDll in ComputeManagedAssemblies.GetManagedAssembliesInFolder(
+                            _options.CoreRootDirectory.FullName
+                        )
+                    )
                     {
                         string simpleName = Path.GetFileNameWithoutExtension(frameworkDll);
                         if (FrameworkExclusion.Exclude(simpleName, runner.Index, out string reason))
@@ -259,32 +311,65 @@ namespace R2RTest
                         else
                         {
                             inputFrameworkDlls.Add(frameworkDll);
-                            compilationsPerRunner.Add(new KeyValuePair<string, ProcessInfo[]>(frameworkDll, processes));
+                            compilationsPerRunner.Add(
+                                new KeyValuePair<string, ProcessInfo[]>(frameworkDll, processes)
+                            );
                         }
                     }
 
                     if (inputFrameworkDlls.Count > 0)
                     {
-                        string outputFileName = runner.GetOutputFileName(_options.CoreRootDirectory.FullName, FrameworkOutputFileName);
-                        ProcessInfo compilationProcess = new ProcessInfo(new CompilationProcessConstructor(runner, outputFileName, inputFrameworkDlls));
+                        string outputFileName = runner.GetOutputFileName(
+                            _options.CoreRootDirectory.FullName,
+                            FrameworkOutputFileName
+                        );
+                        ProcessInfo compilationProcess = new ProcessInfo(
+                            new CompilationProcessConstructor(
+                                runner,
+                                outputFileName,
+                                inputFrameworkDlls
+                            )
+                        );
                         compilationsToRun.Add(compilationProcess);
                         processes[(int)runner.Index] = compilationProcess;
                         if (_options.R2RDumpPath != null)
                         {
-                            r2rDumpExecutionsToRun.Add(new ProcessInfo(new R2RDumpProcessConstructor(runner, outputFileName, naked: false)));
-                            r2rDumpExecutionsToRun.Add(new ProcessInfo(new R2RDumpProcessConstructor(runner, outputFileName, naked: true)));
+                            r2rDumpExecutionsToRun.Add(
+                                new ProcessInfo(
+                                    new R2RDumpProcessConstructor(
+                                        runner,
+                                        outputFileName,
+                                        naked: false
+                                    )
+                                )
+                            );
+                            r2rDumpExecutionsToRun.Add(
+                                new ProcessInfo(
+                                    new R2RDumpProcessConstructor(
+                                        runner,
+                                        outputFileName,
+                                        naked: true
+                                    )
+                                )
+                            );
                         }
                     }
                 }
             }
             else
             {
-                foreach (string frameworkDll in ComputeManagedAssemblies.GetManagedAssembliesInFolder(_options.CoreRootDirectory.FullName))
+                foreach (
+                    string frameworkDll in ComputeManagedAssemblies.GetManagedAssembliesInFolder(
+                        _options.CoreRootDirectory.FullName
+                    )
+                )
                 {
                     string simpleName = Path.GetFileNameWithoutExtension(frameworkDll);
 
                     ProcessInfo[] processes = new ProcessInfo[(int)CompilerIndex.Count];
-                    compilationsPerRunner.Add(new KeyValuePair<string, ProcessInfo[]>(frameworkDll, processes));
+                    compilationsPerRunner.Add(
+                        new KeyValuePair<string, ProcessInfo[]>(frameworkDll, processes)
+                    );
                     foreach (CompilerRunner runner in frameworkRunners)
                     {
                         if (FrameworkExclusion.Exclude(simpleName, runner.Index, out string reason))
@@ -292,15 +377,40 @@ namespace R2RTest
                             _frameworkExclusions[simpleName] = reason;
                             continue;
                         }
-                        string outputFileName = Path.Combine(runner.GetOutputPath(_options.CoreRootDirectory.FullName), Path.GetFileName(frameworkDll));
-                        var compilationProcess = new ProcessInfo(new CompilationProcessConstructor(runner, outputFileName, new string[] { frameworkDll }));
+                        string outputFileName = Path.Combine(
+                            runner.GetOutputPath(_options.CoreRootDirectory.FullName),
+                            Path.GetFileName(frameworkDll)
+                        );
+                        var compilationProcess = new ProcessInfo(
+                            new CompilationProcessConstructor(
+                                runner,
+                                outputFileName,
+                                new string[] { frameworkDll }
+                            )
+                        );
                         compilationsToRun.Add(compilationProcess);
                         processes[(int)runner.Index] = compilationProcess;
 
                         if (_options.R2RDumpPath != null)
                         {
-                            r2rDumpExecutionsToRun.Add(new ProcessInfo(new R2RDumpProcessConstructor(runner, outputFileName, naked: false)));
-                            r2rDumpExecutionsToRun.Add(new ProcessInfo(new R2RDumpProcessConstructor(runner, outputFileName, naked: true)));
+                            r2rDumpExecutionsToRun.Add(
+                                new ProcessInfo(
+                                    new R2RDumpProcessConstructor(
+                                        runner,
+                                        outputFileName,
+                                        naked: false
+                                    )
+                                )
+                            );
+                            r2rDumpExecutionsToRun.Add(
+                                new ProcessInfo(
+                                    new R2RDumpProcessConstructor(
+                                        runner,
+                                        outputFileName,
+                                        naked: true
+                                    )
+                                )
+                            );
                         }
                     }
                 }
@@ -311,7 +421,9 @@ namespace R2RTest
             var skipCopying = new HashSet<string>[(int)CompilerIndex.Count];
             foreach (CompilerRunner runner in frameworkRunners)
             {
-                skipCopying[(int)runner.Index] = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                skipCopying[(int)runner.Index] = new HashSet<string>(
+                    StringComparer.OrdinalIgnoreCase
+                );
             }
             var failedCompilationsPerBuilder = new int[(int)CompilerIndex.Count];
             int successfulCompileCount = 0;
@@ -328,7 +440,8 @@ namespace R2RTest
                     }
                     else if (compilationProcess.Succeeded)
                     {
-                        skipCopying[(int)runner.Index].UnionWith(compilationProcess.Parameters.InputFileNames);
+                        skipCopying[(int)runner.Index]
+                            .UnionWith(compilationProcess.Parameters.InputFileNames);
                         AnalyzeCompilationLog(compilationProcess, runner.Index);
                     }
                     else
@@ -385,7 +498,11 @@ namespace R2RTest
                         causeOfFailure = "Unknown cause of failure";
                     }
 
-                    Console.Error.WriteLine("Error running R2R dump on {0}: {1}", string.Join(", ", r2rDumpExecution.Parameters.InputFileNames), causeOfFailure);
+                    Console.Error.WriteLine(
+                        "Error running R2R dump on {0}: {1}",
+                        string.Join(", ", r2rDumpExecution.Parameters.InputFileNames),
+                        causeOfFailure
+                    );
                     success = false;
                 }
             }
@@ -393,7 +510,10 @@ namespace R2RTest
             return success;
         }
 
-        private void AnalyzeCompilationLog(ProcessInfo compilationProcess, CompilerIndex runnerIndex)
+        private void AnalyzeCompilationLog(
+            ProcessInfo compilationProcess,
+            CompilerIndex runnerIndex
+        )
         {
             Dictionary<string, byte> managedSequentialTarget;
             Dictionary<string, byte> requiresMarshalingTarget;
@@ -427,7 +547,11 @@ namespace R2RTest
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine("Error reading log file {0}: {1}", compilationProcess.Parameters.LogPath, ex.Message);
+                Console.Error.WriteLine(
+                    "Error reading log file {0}: {1}",
+                    compilationProcess.Parameters.LogPath,
+                    ex.Message
+                );
             }
         }
 
@@ -442,8 +566,10 @@ namespace R2RTest
             {
                 startIndex += marker.Length;
                 int falseEndIndex = line.IndexOf(FalseEndMarker, startIndex);
-                int trueEndIndex = falseEndIndex >= 0 ? falseEndIndex : line.IndexOf(TrueEndMarker, startIndex);
-                int multiEndIndex = trueEndIndex >= 0 ? trueEndIndex : line.IndexOf(MultiEndMarker, startIndex);
+                int trueEndIndex =
+                    falseEndIndex >= 0 ? falseEndIndex : line.IndexOf(TrueEndMarker, startIndex);
+                int multiEndIndex =
+                    trueEndIndex >= 0 ? trueEndIndex : line.IndexOf(MultiEndMarker, startIndex);
                 byte result;
                 if (falseEndIndex >= 0)
                 {
@@ -485,7 +611,8 @@ namespace R2RTest
             ParallelRunner.Run(
                 executionsToRun,
                 degreeOfParallelism: _options.Sequential || _options.Iterations > 1 ? 1 : 0,
-                measurePerf: false);
+                measurePerf: false
+            );
 
             int successfulExecuteCount = 0;
 
@@ -562,7 +689,11 @@ namespace R2RTest
             }
         }
 
-        private void AddBuildFolderExecutions(List<ProcessInfo> executionsToRun, BuildFolder folder, int iterations)
+        private void AddBuildFolderExecutions(
+            List<ProcessInfo> executionsToRun,
+            BuildFolder folder,
+            int iterations
+        )
         {
             foreach (ProcessInfo[][] execution in folder.Executions)
             {
@@ -598,11 +729,18 @@ namespace R2RTest
             }
         }
 
-        private void WriteTopRankingProcesses(StreamWriter logWriter, string metric, IEnumerable<ProcessInfo> processes)
+        private void WriteTopRankingProcesses(
+            StreamWriter logWriter,
+            string metric,
+            IEnumerable<ProcessInfo> processes
+        )
         {
             const int TopAppCount = 10;
 
-            IEnumerable<ProcessInfo> selection = processes.Where(process => !process.IsEmpty).OrderByDescending(process => process.DurationMilliseconds).Take(TopAppCount);
+            IEnumerable<ProcessInfo> selection = processes
+                .Where(process => !process.IsEmpty)
+                .OrderByDescending(process => process.DurationMilliseconds)
+                .Take(TopAppCount);
             int count = selection.Count();
             if (count == 0)
             {
@@ -618,7 +756,9 @@ namespace R2RTest
 
             foreach (ProcessInfo processInfo in selection)
             {
-                logWriter.WriteLine($"{processInfo.DurationMilliseconds,10} | {processInfo.Parameters.OutputFileName}");
+                logWriter.WriteLine(
+                    $"{processInfo.DurationMilliseconds, 10} | {processInfo.Parameters.OutputFileName}"
+                );
             }
         }
 
@@ -627,7 +767,7 @@ namespace R2RTest
             PASS = 0,
             FAIL = 1,
 
-            Count
+            Count,
         }
 
         private enum ExecutionOutcome
@@ -638,7 +778,7 @@ namespace R2RTest
             TIMED_OUT = 3,
             BUILD_FAILED = 4,
 
-            Count
+            Count,
         }
 
         private CompilationOutcome GetCompilationOutcome(ProcessInfo compilation)
@@ -662,8 +802,14 @@ namespace R2RTest
         private void WriteBuildStatistics(StreamWriter logWriter)
         {
             // The Count'th element corresponds to totals over all compiler runners used in the run
-            var compilationOutcomes = new int[(int)CompilationOutcome.Count, (int)CompilerIndex.Count + 1];
-            var executionOutcomes = new int[(int)ExecutionOutcome.Count, (int)CompilerIndex.Count + 1];
+            var compilationOutcomes = new int[
+                (int)CompilationOutcome.Count,
+                (int)CompilerIndex.Count + 1
+            ];
+            var executionOutcomes = new int[
+                (int)ExecutionOutcome.Count,
+                (int)CompilerIndex.Count + 1
+            ];
             int totalCompilations = 0;
             int totalExecutions = 0;
 
@@ -680,7 +826,9 @@ namespace R2RTest
                         {
                             if (!compilation[(int)runner.Index].IsEmpty)
                             {
-                                CompilationOutcome outcome = GetCompilationOutcome(compilation[(int)runner.Index]);
+                                CompilationOutcome outcome = GetCompilationOutcome(
+                                    compilation[(int)runner.Index]
+                                );
                                 compilationOutcomes[(int)outcome, (int)runner.Index]++;
                                 if (outcome != CompilationOutcome.PASS)
                                 {
@@ -691,11 +839,17 @@ namespace R2RTest
                         }
                         if (anyCompilationFailed)
                         {
-                            compilationOutcomes[(int)CompilationOutcome.FAIL, (int)CompilerIndex.Count]++;
+                            compilationOutcomes[
+                                (int)CompilationOutcome.FAIL,
+                                (int)CompilerIndex.Count
+                            ]++;
                         }
                         else
                         {
-                            compilationOutcomes[(int)CompilationOutcome.PASS, (int)CompilerIndex.Count]++;
+                            compilationOutcomes[
+                                (int)CompilationOutcome.PASS,
+                                (int)CompilerIndex.Count
+                            ]++;
                         }
                     }
                 }
@@ -714,7 +868,9 @@ namespace R2RTest
                             anyCompilationFailed |= compilationFailed;
                             foreach (ProcessInfo execProcess in execProcesses)
                             {
-                                bool executionFailed = !compilationFailed && (execProcess != null && !execProcess.Succeeded);
+                                bool executionFailed =
+                                    !compilationFailed
+                                    && (execProcess != null && !execProcess.Succeeded);
                                 if (executionFailed)
                                 {
                                     ExecutionOutcome outcome = GetExecutionOutcome(execProcess);
@@ -723,32 +879,54 @@ namespace R2RTest
                                 }
                                 else if (compilationFailed)
                                 {
-                                    executionOutcomes[(int)ExecutionOutcome.BUILD_FAILED, (int)runner.Index]++;
+                                    executionOutcomes[
+                                        (int)ExecutionOutcome.BUILD_FAILED,
+                                        (int)runner.Index
+                                    ]++;
                                 }
                                 else
                                 {
-                                    executionOutcomes[(int)ExecutionOutcome.PASS, (int)runner.Index]++;
+                                    executionOutcomes[
+                                        (int)ExecutionOutcome.PASS,
+                                        (int)runner.Index
+                                    ]++;
                                 }
                                 if (!anyCompilationFailed)
                                 {
                                     if (executionFailureOutcomeMask != 0)
                                     {
-                                        for (int outcomeIndex = 0; outcomeIndex < (int)ExecutionOutcome.Count; outcomeIndex++)
+                                        for (
+                                            int outcomeIndex = 0;
+                                            outcomeIndex < (int)ExecutionOutcome.Count;
+                                            outcomeIndex++
+                                        )
                                         {
-                                            if ((executionFailureOutcomeMask & (1 << outcomeIndex)) != 0)
+                                            if (
+                                                (executionFailureOutcomeMask & (1 << outcomeIndex))
+                                                != 0
+                                            )
                                             {
-                                                executionOutcomes[outcomeIndex, (int)CompilerIndex.Count]++;
+                                                executionOutcomes[
+                                                    outcomeIndex,
+                                                    (int)CompilerIndex.Count
+                                                ]++;
                                             }
                                         }
                                     }
                                     else
                                     {
-                                        executionOutcomes[(int)ExecutionOutcome.PASS, (int)CompilerIndex.Count]++;
+                                        executionOutcomes[
+                                            (int)ExecutionOutcome.PASS,
+                                            (int)CompilerIndex.Count
+                                        ]++;
                                     }
                                 }
                                 else
                                 {
-                                    executionOutcomes[(int)ExecutionOutcome.BUILD_FAILED, (int)CompilerIndex.Count]++;
+                                    executionOutcomes[
+                                        (int)ExecutionOutcome.BUILD_FAILED,
+                                        (int)CompilerIndex.Count
+                                    ]++;
                                 }
                             }
                         }
@@ -758,13 +936,21 @@ namespace R2RTest
 
             logWriter.WriteLine();
             logWriter.WriteLine($"Configuration:    {(_options.Release ? "Release" : "Debug")}");
-            logWriter.WriteLine($"Framework:        {(_options.Framework ? "build native" : _options.UseFramework ? "prebuilt native" : "MSIL")}");
-            logWriter.WriteLine($"Version bubble:   {(_options.LargeBubble ? "input + all reference assemblies" : "single assembly")}");
+            logWriter.WriteLine(
+                $"Framework:        {(_options.Framework ? "build native" : _options.UseFramework ? "prebuilt native" : "MSIL")}"
+            );
+            logWriter.WriteLine(
+                $"Version bubble:   {(_options.LargeBubble ? "input + all reference assemblies" : "single assembly")}"
+            );
             logWriter.WriteLine($"Input folder:     {_options.InputDirectory?.FullName}");
             logWriter.WriteLine($"CORE_ROOT:        {_options.CoreRootDirectory?.FullName}");
-            logWriter.WriteLine($"GC stress mode:   {(!string.IsNullOrEmpty(_options.GCStress) ? _options.GCStress : "None")}");
+            logWriter.WriteLine(
+                $"GC stress mode:   {(!string.IsNullOrEmpty(_options.GCStress) ? _options.GCStress : "None")}"
+            );
             logWriter.WriteLine($"Total folders:    {_buildFolders.Count()}");
-            logWriter.WriteLine($"Blocked w/issues: {_buildFolders.Count(folder => folder.IsBlockedWithIssue)}");
+            logWriter.WriteLine(
+                $"Blocked w/issues: {_buildFolders.Count(folder => folder.IsBlockedWithIssue)}"
+            );
             int foldersToBuild = FoldersToBuild.Count();
             logWriter.WriteLine($"Folders to build: {foldersToBuild}");
             if (!_options.Exe)
@@ -788,42 +974,58 @@ namespace R2RTest
                 if (!_options.Exe)
                 {
                     logWriter.WriteLine();
-                    logWriter.Write($"{totalCompilations,8} ILC |");
+                    logWriter.Write($"{totalCompilations, 8} ILC |");
                     foreach (CompilerRunner runner in _compilerRunners)
                     {
-                        logWriter.Write($"{runner.CompilerName,8} |");
+                        logWriter.Write($"{runner.CompilerName, 8} |");
                     }
                     logWriter.WriteLine(" Overall");
                     logWriter.WriteLine(separator);
-                    for (int outcomeIndex = 0; outcomeIndex < (int)CompilationOutcome.Count; outcomeIndex++)
+                    for (
+                        int outcomeIndex = 0;
+                        outcomeIndex < (int)CompilationOutcome.Count;
+                        outcomeIndex++
+                    )
                     {
-                        logWriter.Write($"{((CompilationOutcome)outcomeIndex).ToString(),12} |");
+                        logWriter.Write($"{((CompilationOutcome)outcomeIndex).ToString(), 12} |");
                         foreach (CompilerRunner runner in _compilerRunners)
                         {
-                            logWriter.Write($"{compilationOutcomes[outcomeIndex, (int)runner.Index],8} |");
+                            logWriter.Write(
+                                $"{compilationOutcomes[outcomeIndex, (int)runner.Index], 8} |"
+                            );
                         }
-                        logWriter.WriteLine($"{compilationOutcomes[outcomeIndex, (int)CompilerIndex.Count],8}");
+                        logWriter.WriteLine(
+                            $"{compilationOutcomes[outcomeIndex, (int)CompilerIndex.Count], 8}"
+                        );
                     }
                 }
 
                 if (!_options.NoExe)
                 {
                     logWriter.WriteLine();
-                    logWriter.Write($"{totalExecutions,8} EXE |");
+                    logWriter.Write($"{totalExecutions, 8} EXE |");
                     foreach (CompilerRunner runner in _compilerRunners)
                     {
-                        logWriter.Write($"{runner.CompilerName,8} |");
+                        logWriter.Write($"{runner.CompilerName, 8} |");
                     }
                     logWriter.WriteLine(" Overall");
                     logWriter.WriteLine(separator);
-                    for (int outcomeIndex = 0; outcomeIndex < (int)ExecutionOutcome.Count; outcomeIndex++)
+                    for (
+                        int outcomeIndex = 0;
+                        outcomeIndex < (int)ExecutionOutcome.Count;
+                        outcomeIndex++
+                    )
                     {
-                        logWriter.Write($"{((ExecutionOutcome)outcomeIndex).ToString(),12} |");
+                        logWriter.Write($"{((ExecutionOutcome)outcomeIndex).ToString(), 12} |");
                         foreach (CompilerRunner runner in _compilerRunners)
                         {
-                            logWriter.Write($"{executionOutcomes[outcomeIndex, (int)runner.Index],8} |");
+                            logWriter.Write(
+                                $"{executionOutcomes[outcomeIndex, (int)runner.Index], 8} |"
+                            );
                         }
-                        logWriter.WriteLine($"{executionOutcomes[outcomeIndex, (int)CompilerIndex.Count],8}");
+                        logWriter.WriteLine(
+                            $"{executionOutcomes[outcomeIndex, (int)CompilerIndex.Count], 8}"
+                        );
                     }
                 }
 
@@ -835,11 +1037,19 @@ namespace R2RTest
 
                 if (!_options.Exe)
                 {
-                    WriteTopRankingProcesses(logWriter, "compilations by duration", EnumerateCompilations());
+                    WriteTopRankingProcesses(
+                        logWriter,
+                        "compilations by duration",
+                        EnumerateCompilations()
+                    );
                 }
                 if (!_options.NoExe)
                 {
-                    WriteTopRankingProcesses(logWriter, "executions by duration", EnumerateExecutions());
+                    WriteTopRankingProcesses(
+                        logWriter,
+                        "executions by duration",
+                        EnumerateExecutions()
+                    );
                 }
             }
 
@@ -888,7 +1098,12 @@ namespace R2RTest
             title.Append(" | REASON");
             logWriter.WriteLine(title.ToString());
             logWriter.WriteLine(new string('-', title.Length));
-            foreach (KeyValuePair<string, string> exclusion in _frameworkExclusions.OrderBy(kvp => kvp.Key, StringComparer.OrdinalIgnoreCase))
+            foreach (
+                KeyValuePair<string, string> exclusion in _frameworkExclusions.OrderBy(
+                    kvp => kvp.Key,
+                    StringComparer.OrdinalIgnoreCase
+                )
+            )
             {
                 var line = new StringBuilder();
                 line.Append(exclusion.Key);
@@ -902,7 +1117,14 @@ namespace R2RTest
         private void WritePerFolderStatistics(StreamWriter logWriter)
         {
             string baseFolder = _options.InputDirectory.FullName;
-            int baseOffset = baseFolder.Length + (baseFolder.Length > 0 && baseFolder[baseFolder.Length - 1] == Path.DirectorySeparatorChar ? 0 : 1);
+            int baseOffset =
+                baseFolder.Length
+                + (
+                    baseFolder.Length > 0
+                    && baseFolder[baseFolder.Length - 1] == Path.DirectorySeparatorChar
+                        ? 0
+                        : 1
+                );
             var folders = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             foreach (BuildFolder folder in FoldersToBuild)
             {
@@ -951,9 +1173,11 @@ namespace R2RTest
                 foreach (BuildFolder buildFolder in FoldersToBuild)
                 {
                     string buildFolderPath = buildFolder.InputFolder;
-                    if (buildFolderPath.Equals(folder, StringComparison.OrdinalIgnoreCase) ||
-                        buildFolderPath.StartsWith(folder, StringComparison.OrdinalIgnoreCase) &&
-                            buildFolderPath[folder.Length] == Path.DirectorySeparatorChar)
+                    if (
+                        buildFolderPath.Equals(folder, StringComparison.OrdinalIgnoreCase)
+                        || buildFolderPath.StartsWith(folder, StringComparison.OrdinalIgnoreCase)
+                            && buildFolderPath[folder.Length] == Path.DirectorySeparatorChar
+                    )
                     {
                         if (!_options.Exe)
                         {
@@ -962,7 +1186,10 @@ namespace R2RTest
                                 bool anyIlcFail = false;
                                 foreach (CompilerRunner runner in _compilerRunners)
                                 {
-                                    if (compilation[(int)runner.Index] != null && !compilation[(int)runner.Index].Succeeded)
+                                    if (
+                                        compilation[(int)runner.Index] != null
+                                        && !compilation[(int)runner.Index].Succeeded
+                                    )
                                     {
                                         anyIlcFail = true;
                                         break;
@@ -1002,13 +1229,11 @@ namespace R2RTest
                 }
                 if (!_options.Exe)
                 {
-                    logWriter.Write($"{ilcCount,4} | {(ilcCount - ilcFail),4} | {ilcFail,4} | ");
-
+                    logWriter.Write($"{ilcCount, 4} | {(ilcCount - ilcFail), 4} | {ilcFail, 4} | ");
                 }
                 if (!_options.NoExe)
                 {
-                    logWriter.Write($"{exeCount,4} | {(exeCount - exeFail),4} | {exeFail,4} | ");
-
+                    logWriter.Write($"{exeCount, 4} | {(exeCount - exeFail), 4} | {exeFail, 4} | ");
                 }
                 logWriter.WriteLine($"{relativeFolder}");
             }
@@ -1021,7 +1246,12 @@ namespace R2RTest
             public readonly string CrossgenPath;
             public readonly long CrossgenSize;
 
-            public ExeSizeInfo(string cpaotPath, long cpaotSize, string crossgenPath, long crossgenSize)
+            public ExeSizeInfo(
+                string cpaotPath,
+                long cpaotSize,
+                string crossgenPath,
+                long crossgenSize
+            )
             {
                 CpaotPath = cpaotPath;
                 CpaotSize = cpaotSize;
@@ -1041,35 +1271,49 @@ namespace R2RTest
                 {
                     ProcessInfo crossgenCompilation = compilation[(int)CompilerIndex.Crossgen];
                     ProcessInfo cpaotCompilation = compilation[(int)CompilerIndex.CPAOT];
-                    if ((crossgenCompilation?.Succeeded ?? false) &&
-                        (cpaotCompilation?.Succeeded ?? false))
+                    if (
+                        (crossgenCompilation?.Succeeded ?? false)
+                        && (cpaotCompilation?.Succeeded ?? false)
+                    )
                     {
                         long cpaotSize;
                         try
                         {
-                            cpaotSize = new FileInfo(cpaotCompilation.Parameters.OutputFileName).Length;
+                            cpaotSize = new FileInfo(
+                                cpaotCompilation.Parameters.OutputFileName
+                            ).Length;
                         }
                         catch (Exception)
                         {
-                            Console.Error.WriteLine("Cannot find CPAOT output file '{0}', ignoring in size stats", cpaotCompilation.Parameters.OutputFileName);
+                            Console.Error.WriteLine(
+                                "Cannot find CPAOT output file '{0}', ignoring in size stats",
+                                cpaotCompilation.Parameters.OutputFileName
+                            );
                             continue;
                         }
 
                         long crossgenSize;
                         try
                         {
-                            crossgenSize = new FileInfo(crossgenCompilation.Parameters.OutputFileName).Length;
+                            crossgenSize = new FileInfo(
+                                crossgenCompilation.Parameters.OutputFileName
+                            ).Length;
                         }
                         catch (Exception)
                         {
-                            Console.Error.WriteLine("Cannot find Crossgen output file '{0}', ignoring in size stats", crossgenCompilation.Parameters.OutputFileName);
+                            Console.Error.WriteLine(
+                                "Cannot find Crossgen output file '{0}', ignoring in size stats",
+                                crossgenCompilation.Parameters.OutputFileName
+                            );
                             continue;
                         }
 
-                        string ext = Path.GetExtension(cpaotCompilation.Parameters.OutputFileName).ToLower();
+                        string ext = Path.GetExtension(cpaotCompilation.Parameters.OutputFileName)
+                            .ToLower();
                         if (ext == ".dll" || ext == ".so")
                         {
-                            string hash = $"{Path.GetFileName(cpaotCompilation.Parameters.OutputFileName)}#{cpaotSize}#{crossgenSize}";
+                            string hash =
+                                $"{Path.GetFileName(cpaotCompilation.Parameters.OutputFileName)}#{cpaotSize}#{crossgenSize}";
                             if (!libraryHashes.Add(hash))
                             {
                                 // We ignore libraries with the same "simple name" if it has the same compiled size as many tests
@@ -1079,12 +1323,14 @@ namespace R2RTest
                             }
                         }
 
-                        sizeStats.Add(new ExeSizeInfo(
-                            cpaotPath: cpaotCompilation.Parameters.OutputFileName,
-                            cpaotSize: cpaotSize,
-                            crossgenPath: crossgenCompilation.Parameters.OutputFileName,
-                            crossgenSize: crossgenSize));
-
+                        sizeStats.Add(
+                            new ExeSizeInfo(
+                                cpaotPath: cpaotCompilation.Parameters.OutputFileName,
+                                cpaotSize: cpaotSize,
+                                crossgenPath: crossgenCompilation.Parameters.OutputFileName,
+                                crossgenSize: crossgenSize
+                            )
+                        );
                     }
                 }
             }
@@ -1102,16 +1348,30 @@ namespace R2RTest
 
             logWriter.WriteLine();
             logWriter.WriteLine("Executable size statistics:");
-            logWriter.WriteLine("Total CPAOT size:    {0:F3} MB ({1:F3} KB per app on average)", totalCpaotSize / MegaByte, totalCpaotSize / KiloCount);
-            logWriter.WriteLine("Total Crossgen size: {0:F3} MB ({1:F3} KB per app on average)", totalCrossgenSize / MegaByte, totalCrossgenSize / KiloCount);
+            logWriter.WriteLine(
+                "Total CPAOT size:    {0:F3} MB ({1:F3} KB per app on average)",
+                totalCpaotSize / MegaByte,
+                totalCpaotSize / KiloCount
+            );
+            logWriter.WriteLine(
+                "Total Crossgen size: {0:F3} MB ({1:F3} KB per app on average)",
+                totalCrossgenSize / MegaByte,
+                totalCrossgenSize / KiloCount
+            );
 
             long deltaSize = totalCpaotSize - totalCrossgenSize;
-            logWriter.WriteLine("CPAOT - Crossgen:    {0:F3} MB ({1:F3} KB per app on average)", deltaSize / MegaByte, deltaSize / KiloCount);
+            logWriter.WriteLine(
+                "CPAOT - Crossgen:    {0:F3} MB ({1:F3} KB per app on average)",
+                deltaSize / MegaByte,
+                deltaSize / KiloCount
+            );
 
             double percentageSizeRatio = totalCpaotSize * 100.0 / Math.Max(totalCrossgenSize, 1);
             logWriter.WriteLine("CPAOT / Crossgen:    {0:F3}%", percentageSizeRatio);
 
-            sizeStats.Sort((a, b) => (b.CpaotSize - b.CrossgenSize).CompareTo(a.CpaotSize - a.CrossgenSize));
+            sizeStats.Sort(
+                (a, b) => (b.CpaotSize - b.CrossgenSize).CompareTo(a.CpaotSize - a.CrossgenSize)
+            );
 
             const int TopExeCount = 10;
 
@@ -1139,14 +1399,19 @@ namespace R2RTest
                     exeSize.CpaotSize,
                     exeSize.CrossgenSize,
                     exeSize.CpaotSize - exeSize.CrossgenSize,
-                    exeSize.CpaotPath);
+                    exeSize.CpaotPath
+                );
             }
 
             if (bottomCount > 0)
             {
                 logWriter.WriteLine();
-                logWriter.WriteLine("CPAOT size |   Crossgen | CPAOT - CG | Lowest exe size deltas");
-                logWriter.WriteLine("-------------------------------------------------------------");
+                logWriter.WriteLine(
+                    "CPAOT size |   Crossgen | CPAOT - CG | Lowest exe size deltas"
+                );
+                logWriter.WriteLine(
+                    "-------------------------------------------------------------"
+                );
                 foreach (ExeSizeInfo exeSize in sizeStats.TakeLast(bottomCount))
                 {
                     logWriter.WriteLine(
@@ -1154,11 +1419,14 @@ namespace R2RTest
                         exeSize.CpaotSize,
                         exeSize.CrossgenSize,
                         exeSize.CpaotSize - exeSize.CrossgenSize,
-                        exeSize.CpaotPath);
+                        exeSize.CpaotPath
+                    );
                 }
             }
 
-            sizeStats.Sort((a, b) => (b.CpaotSize * a.CrossgenSize).CompareTo(a.CpaotSize * b.CrossgenSize));
+            sizeStats.Sort(
+                (a, b) => (b.CpaotSize * a.CrossgenSize).CompareTo(a.CpaotSize * b.CrossgenSize)
+            );
 
             logWriter.WriteLine();
             logWriter.WriteLine("CPAOT size |   Crossgen | CPAOT/CG % | Highest exe size ratios");
@@ -1170,14 +1438,19 @@ namespace R2RTest
                     exeSize.CpaotSize,
                     exeSize.CrossgenSize,
                     exeSize.CpaotSize * 100.0 / exeSize.CrossgenSize,
-                    exeSize.CpaotPath);
+                    exeSize.CpaotPath
+                );
             }
 
             if (bottomCount > 0)
             {
                 logWriter.WriteLine();
-                logWriter.WriteLine("CPAOT size |   Crossgen | CPAOT/CG % | Lowest exe size ratios");
-                logWriter.WriteLine("-------------------------------------------------------------");
+                logWriter.WriteLine(
+                    "CPAOT size |   Crossgen | CPAOT/CG % | Lowest exe size ratios"
+                );
+                logWriter.WriteLine(
+                    "-------------------------------------------------------------"
+                );
                 foreach (ExeSizeInfo exeSize in sizeStats.TakeLast(bottomCount))
                 {
                     logWriter.WriteLine(
@@ -1185,7 +1458,8 @@ namespace R2RTest
                         exeSize.CpaotSize,
                         exeSize.CrossgenSize,
                         exeSize.CpaotSize * 100.0 / exeSize.CrossgenSize,
-                        exeSize.CpaotPath);
+                        exeSize.CpaotPath
+                    );
                 }
             }
         }
@@ -1244,7 +1518,10 @@ namespace R2RTest
                 var perRunnerLog = new StreamWriter[(int)CompilerIndex.Count];
                 foreach (CompilerRunner runner in _compilerRunners)
                 {
-                    string runnerLogPath = Path.ChangeExtension(outputFile, "-" + runner.CompilerName + ".log");
+                    string runnerLogPath = Path.ChangeExtension(
+                        outputFile,
+                        "-" + runner.CompilerName + ".log"
+                    );
                     perRunnerLog[(int)runner.Index] = new StreamWriter(runnerLogPath);
                 }
 
@@ -1260,13 +1537,20 @@ namespace R2RTest
                                 ProcessInfo compilationProcess = compilation[(int)runner.Index];
                                 if (compilationProcess != null && !compilationProcess.IsEmpty)
                                 {
-                                    string log = $"\nCOMPILE {runner.CompilerName}:{compilationProcess.Parameters.OutputFileName}";
+                                    string log =
+                                        $"\nCOMPILE {runner.CompilerName}:{compilationProcess.Parameters.OutputFileName}";
                                     StreamWriter runnerLog = perRunnerLog[(int)runner.Index];
                                     runnerLog.WriteLine(log);
                                     combinedLog.WriteLine(log);
                                     try
                                     {
-                                        using (Stream input = new FileStream(compilationProcess.Parameters.LogPath, FileMode.Open, FileAccess.Read))
+                                        using (
+                                            Stream input = new FileStream(
+                                                compilationProcess.Parameters.LogPath,
+                                                FileMode.Open,
+                                                FileAccess.Read
+                                            )
+                                        )
                                         {
                                             input.CopyTo(combinedLog.BaseStream);
                                             input.Seek(0, SeekOrigin.Begin);
@@ -1294,16 +1578,25 @@ namespace R2RTest
                             if (!compilationErrorPerRunner[(int)runner.Index])
                             {
                                 StreamWriter runnerLog = perRunnerLog[(int)runner.Index];
-                                foreach (ProcessInfo executionProcess in executions[(int)runner.Index])
+                                foreach (
+                                    ProcessInfo executionProcess in executions[(int)runner.Index]
+                                )
                                 {
                                     if (executionProcess != null)
                                     {
-                                        string header = $"\nEXECUTE {runner.CompilerName}:{executionProcess.Parameters.OutputFileName}";
+                                        string header =
+                                            $"\nEXECUTE {runner.CompilerName}:{executionProcess.Parameters.OutputFileName}";
                                         combinedLog.WriteLine(header);
                                         runnerLog.WriteLine(header);
                                         try
                                         {
-                                            using (Stream input = new FileStream(executionProcess.Parameters.LogPath, FileMode.Open, FileAccess.Read))
+                                            using (
+                                                Stream input = new FileStream(
+                                                    executionProcess.Parameters.LogPath,
+                                                    FileMode.Open,
+                                                    FileAccess.Read
+                                                )
+                                            )
                                             {
                                                 input.CopyTo(combinedLog.BaseStream);
                                                 input.Seek(0, SeekOrigin.Begin);
@@ -1331,7 +1624,9 @@ namespace R2RTest
 
         private void WriteFoldersBlockedWithIssues(StreamWriter logWriter)
         {
-            IEnumerable<BuildFolder> blockedFolders = _buildFolders.Where(folder => folder.IsBlockedWithIssue);
+            IEnumerable<BuildFolder> blockedFolders = _buildFolders.Where(folder =>
+                folder.IsBlockedWithIssue
+            );
 
             int blockedCount = blockedFolders.Count();
 
@@ -1341,7 +1636,7 @@ namespace R2RTest
             logWriter.WriteLine("------------");
             foreach (BuildFolder folder in blockedFolders)
             {
-                logWriter.WriteLine($"{folder.IssueID,5} | {folder.InputFolder}");
+                logWriter.WriteLine($"{folder.IssueID, 5} | {folder.InputFolder}");
             }
         }
 
@@ -1351,15 +1646,24 @@ namespace R2RTest
 
             string suffix = (_options.Release ? "ret-" : "chk-") + timestamp + ".log";
 
-            string buildLogPath = Path.Combine(_options.OutputDirectory.FullName, "build-" + suffix);
+            string buildLogPath = Path.Combine(
+                _options.OutputDirectory.FullName,
+                "build-" + suffix
+            );
             WriteBuildLog(buildLogPath);
 
-            string combinedSetLogPath = Path.Combine(_options.OutputDirectory.FullName, "combined-" + suffix);
+            string combinedSetLogPath = Path.Combine(
+                _options.OutputDirectory.FullName,
+                "combined-" + suffix
+            );
             WriteCombinedLog(combinedSetLogPath);
 
             if (_options.Framework)
             {
-                string frameworkExclusionsFile = Path.Combine(_options.OutputDirectory.FullName, "framework-exclusions-" + suffix);
+                string frameworkExclusionsFile = Path.Combine(
+                    _options.OutputDirectory.FullName,
+                    "framework-exclusions-" + suffix
+                );
                 using (var writer = new StreamWriter(frameworkExclusionsFile))
                 {
                     WriteFrameworkExclusions(writer);
@@ -1368,50 +1672,86 @@ namespace R2RTest
 
             if (!_options.Exe && _options.Framework)
             {
-                string frameworkBucketsFile = Path.Combine(_options.OutputDirectory.FullName, "framework-buckets-" + suffix);
-                FrameworkCompilationFailureBuckets.WriteToFile(frameworkBucketsFile, detailed: true);
+                string frameworkBucketsFile = Path.Combine(
+                    _options.OutputDirectory.FullName,
+                    "framework-buckets-" + suffix
+                );
+                FrameworkCompilationFailureBuckets.WriteToFile(
+                    frameworkBucketsFile,
+                    detailed: true
+                );
             }
 
             if (!_options.Exe)
             {
-                string compilationBucketsFile = Path.Combine(_options.OutputDirectory.FullName, "compilation-buckets-" + suffix);
+                string compilationBucketsFile = Path.Combine(
+                    _options.OutputDirectory.FullName,
+                    "compilation-buckets-" + suffix
+                );
                 CompilationFailureBuckets.WriteToFile(compilationBucketsFile, detailed: true);
             }
 
             if (!_options.NoExe)
             {
-                string executionBucketsFile = Path.Combine(_options.OutputDirectory.FullName, "execution-buckets-" + suffix);
+                string executionBucketsFile = Path.Combine(
+                    _options.OutputDirectory.FullName,
+                    "execution-buckets-" + suffix
+                );
                 ExecutionFailureBuckets.WriteToFile(executionBucketsFile, detailed: true);
             }
 
             if (!_options.Exe)
             {
-                string compilationPassedFile = Path.Combine(_options.OutputDirectory.FullName, "compilation-passed-" + suffix);
+                string compilationPassedFile = Path.Combine(
+                    _options.OutputDirectory.FullName,
+                    "compilation-passed-" + suffix
+                );
                 WriteFileListPerCompilationOutcome(compilationPassedFile, CompilationOutcome.PASS);
 
-                string compilationFailedFile = Path.Combine(_options.OutputDirectory.FullName, "compilation-failed-" + suffix);
+                string compilationFailedFile = Path.Combine(
+                    _options.OutputDirectory.FullName,
+                    "compilation-failed-" + suffix
+                );
                 WriteFileListPerCompilationOutcome(compilationFailedFile, CompilationOutcome.FAIL);
             }
 
             if (!_options.NoExe)
             {
-                string executionPassedFile = Path.Combine(_options.OutputDirectory.FullName, "execution-passed-" + suffix);
+                string executionPassedFile = Path.Combine(
+                    _options.OutputDirectory.FullName,
+                    "execution-passed-" + suffix
+                );
                 WriteFileListPerExecutionOutcome(executionPassedFile, ExecutionOutcome.PASS);
 
-                string executionTimedOutFile = Path.Combine(_options.OutputDirectory.FullName, "execution-timed-out-" + suffix);
+                string executionTimedOutFile = Path.Combine(
+                    _options.OutputDirectory.FullName,
+                    "execution-timed-out-" + suffix
+                );
                 WriteFileListPerExecutionOutcome(executionTimedOutFile, ExecutionOutcome.TIMED_OUT);
 
-                string executionCrashedFile = Path.Combine(_options.OutputDirectory.FullName, "execution-crashed-" + suffix);
+                string executionCrashedFile = Path.Combine(
+                    _options.OutputDirectory.FullName,
+                    "execution-crashed-" + suffix
+                );
                 WriteFileListPerExecutionOutcome(executionCrashedFile, ExecutionOutcome.CRASHED);
 
-                string executionExitCodeFile = Path.Combine(_options.OutputDirectory.FullName, "execution-exit-code-" + suffix);
+                string executionExitCodeFile = Path.Combine(
+                    _options.OutputDirectory.FullName,
+                    "execution-exit-code-" + suffix
+                );
                 WriteFileListPerExecutionOutcome(executionExitCodeFile, ExecutionOutcome.EXIT_CODE);
             }
 
-            string cpaotManagedSequentialFile = Path.Combine(_options.OutputDirectory.FullName, "managed-sequential-cpaot-" + suffix);
+            string cpaotManagedSequentialFile = Path.Combine(
+                _options.OutputDirectory.FullName,
+                "managed-sequential-cpaot-" + suffix
+            );
             WriterMarkerLog(cpaotManagedSequentialFile, _cpaotManagedSequentialResults);
 
-            string cpaotRequiresMarshalingFile = Path.Combine(_options.OutputDirectory.FullName, "requires-marshaling-cpaot-" + suffix);
+            string cpaotRequiresMarshalingFile = Path.Combine(
+                _options.OutputDirectory.FullName,
+                "requires-marshaling-cpaot-" + suffix
+            );
             WriterMarkerLog(cpaotRequiresMarshalingFile, _cpaotRequiresMarshalingResults);
         }
 
@@ -1432,7 +1772,11 @@ namespace R2RTest
             }
         }
 
-        private static void WriterMarkerDiff(string fileName, Dictionary<string, byte> cpaot, Dictionary<string, byte> crossgen)
+        private static void WriterMarkerDiff(
+            string fileName,
+            Dictionary<string, byte> cpaot,
+            Dictionary<string, byte> crossgen
+        )
         {
             if (cpaot.Count == 0 && crossgen.Count == 0)
             {
@@ -1444,51 +1788,89 @@ namespace R2RTest
             {
                 int cpaotCount = cpaot.Count();
                 logWriter.WriteLine("Objects queried by CPAOT:        {0}", cpaotCount);
-                logWriter.WriteLine("CPAOT conflicting results:       {0}", cpaot.Count(kvp => kvp.Value == 2));
+                logWriter.WriteLine(
+                    "CPAOT conflicting results:       {0}",
+                    cpaot.Count(kvp => kvp.Value == 2)
+                );
                 int crossgenCount = crossgen.Count();
                 logWriter.WriteLine("Objects queried by Crossgen:     {0}", crossgenCount);
-                logWriter.WriteLine("Crossgen conflicting results:    {0}", crossgen.Count(kvp => kvp.Value == 2));
-                int matchCount = cpaot.Count(kvp => crossgen.ContainsKey(kvp.Key) && crossgen[kvp.Key] == kvp.Value);
+                logWriter.WriteLine(
+                    "Crossgen conflicting results:    {0}",
+                    crossgen.Count(kvp => kvp.Value == 2)
+                );
+                int matchCount = cpaot.Count(kvp =>
+                    crossgen.ContainsKey(kvp.Key) && crossgen[kvp.Key] == kvp.Value
+                );
                 int bothCount = cpaot.Count(kvp => crossgen.ContainsKey(kvp.Key));
                 logWriter.WriteLine("Objects queried by both:         {0}", bothCount);
-                logWriter.WriteLine("Matching results:                {0} ({1:F3}%)", matchCount, matchCount * 100.0 / Math.Max(bothCount, 1));
-                logWriter.WriteLine("Mismatched results:              {0}",
-                    cpaot.Count(kvp => crossgen.ContainsKey(kvp.Key) && crossgen[kvp.Key] != kvp.Value));
-                logWriter.WriteLine("Objects not queried by Crossgen: {0}", cpaot.Count(kvp => !crossgen.ContainsKey(kvp.Key)));
-                logWriter.WriteLine("Objects not queried by CPAOT:    {0}", crossgen.Count(kvp => !cpaot.ContainsKey(kvp.Key)));
+                logWriter.WriteLine(
+                    "Matching results:                {0} ({1:F3}%)",
+                    matchCount,
+                    matchCount * 100.0 / Math.Max(bothCount, 1)
+                );
+                logWriter.WriteLine(
+                    "Mismatched results:              {0}",
+                    cpaot.Count(kvp =>
+                        crossgen.ContainsKey(kvp.Key) && crossgen[kvp.Key] != kvp.Value
+                    )
+                );
+                logWriter.WriteLine(
+                    "Objects not queried by Crossgen: {0}",
+                    cpaot.Count(kvp => !crossgen.ContainsKey(kvp.Key))
+                );
+                logWriter.WriteLine(
+                    "Objects not queried by CPAOT:    {0}",
+                    crossgen.Count(kvp => !cpaot.ContainsKey(kvp.Key))
+                );
                 logWriter.WriteLine();
 
                 WriterMarkerDiffSection(
                     logWriter,
                     "CPAOT = TRUE / CROSSGEN = FALSE",
                     cpaot
-                        .Where(kvp => kvp.Value == 1 && crossgen.ContainsKey(kvp.Key) && crossgen[kvp.Key] == 0)
-                        .Select(kvp => kvp.Key));
+                        .Where(kvp =>
+                            kvp.Value == 1
+                            && crossgen.ContainsKey(kvp.Key)
+                            && crossgen[kvp.Key] == 0
+                        )
+                        .Select(kvp => kvp.Key)
+                );
 
                 WriterMarkerDiffSection(
                     logWriter,
                     "CPAOT = FALSE / CROSSGEN = TRUE",
                     cpaot
-                        .Where(kvp => kvp.Value == 0 && crossgen.ContainsKey(kvp.Key) && crossgen[kvp.Key] == 1)
-                        .Select(kvp => kvp.Key));
+                        .Where(kvp =>
+                            kvp.Value == 0
+                            && crossgen.ContainsKey(kvp.Key)
+                            && crossgen[kvp.Key] == 1
+                        )
+                        .Select(kvp => kvp.Key)
+                );
 
                 WriterMarkerDiffSection(
                     logWriter,
                     "CROSSGEN - NO RESULT",
                     cpaot
                         .Where(kvp => !crossgen.ContainsKey(kvp.Key))
-                        .Select(kvp => (kvp.Value.ToString() + ":" + kvp.Key)));
+                        .Select(kvp => (kvp.Value.ToString() + ":" + kvp.Key))
+                );
 
                 WriterMarkerDiffSection(
                     logWriter,
                     "CPAOT - NO RESULT",
                     crossgen
                         .Where(kvp => !cpaot.ContainsKey(kvp.Key))
-                        .Select(kvp => (kvp.Value.ToString() + ":" + kvp.Key)));
+                        .Select(kvp => (kvp.Value.ToString() + ":" + kvp.Key))
+                );
             }
         }
 
-        private static void WriterMarkerDiffSection(StreamWriter logWriter, string title, IEnumerable<string> items)
+        private static void WriterMarkerDiffSection(
+            StreamWriter logWriter,
+            string title,
+            IEnumerable<string> items
+        )
         {
             bool first = true;
             foreach (string item in items)
@@ -1504,7 +1886,10 @@ namespace R2RTest
             }
         }
 
-        private void WriteFileListPerCompilationOutcome(string outputFileName, CompilationOutcome outcome)
+        private void WriteFileListPerCompilationOutcome(
+            string outputFileName,
+            CompilationOutcome outcome
+        )
         {
             var filteredTestList = new List<string>();
             foreach (BuildFolder folder in _buildFolders)
@@ -1514,9 +1899,11 @@ namespace R2RTest
                     foreach (CompilerRunner runner in _compilerRunners)
                     {
                         ProcessInfo compilationPerRunner = compilation[(int)runner.Index];
-                        if (compilationPerRunner != null &&
-                            GetCompilationOutcome(compilationPerRunner) == outcome &&
-                            compilationPerRunner.Parameters != null)
+                        if (
+                            compilationPerRunner != null
+                            && GetCompilationOutcome(compilationPerRunner) == outcome
+                            && compilationPerRunner.Parameters != null
+                        )
                         {
                             filteredTestList.Add(compilationPerRunner.Parameters.OutputFileName);
                         }
@@ -1528,7 +1915,10 @@ namespace R2RTest
             File.WriteAllLines(outputFileName, filteredTestList);
         }
 
-        private void WriteFileListPerExecutionOutcome(string outputFileName, ExecutionOutcome outcome)
+        private void WriteFileListPerExecutionOutcome(
+            string outputFileName,
+            ExecutionOutcome outcome
+        )
         {
             var filteredTestList = new List<string>();
             foreach (BuildFolder folder in _buildFolders)
@@ -1539,9 +1929,11 @@ namespace R2RTest
                     {
                         foreach (ProcessInfo executionPerRunner in executions[(int)runner.Index])
                         {
-                            if (executionPerRunner != null &&
-                                GetExecutionOutcome(executionPerRunner) == outcome &&
-                                executionPerRunner.Parameters != null)
+                            if (
+                                executionPerRunner != null
+                                && GetExecutionOutcome(executionPerRunner) == outcome
+                                && executionPerRunner.Parameters != null
+                            )
                             {
                                 filteredTestList.Add(executionPerRunner.Parameters.OutputFileName);
                             }
@@ -1554,7 +1946,8 @@ namespace R2RTest
             File.WriteAllLines(outputFileName, filteredTestList);
         }
 
-        public IEnumerable<BuildFolder> FoldersToBuild => _buildFolders.Where(folder => !folder.IsBlockedWithIssue);
+        public IEnumerable<BuildFolder> FoldersToBuild =>
+            _buildFolders.Where(folder => !folder.IsBlockedWithIssue);
 
         public Buckets FrameworkCompilationFailureBuckets => _frameworkCompilationFailureBuckets;
 

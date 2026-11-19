@@ -6,9 +6,7 @@ namespace System.Activities.Tracking
 {
     class TrackingRecordPreFilter
     {
-        public TrackingRecordPreFilter()
-        {
-        }
+        public TrackingRecordPreFilter() { }
 
         public TrackingRecordPreFilter(bool trackingProviderInitialized)
         {
@@ -26,69 +24,35 @@ namespace System.Activities.Tracking
             }
         }
 
-        internal bool TrackingProviderInitialized
-        {
-            get;
-            private set;
-        }
+        internal bool TrackingProviderInitialized { get; private set; }
 
-        internal bool TrackWorkflowInstanceRecords
-        {
-            get;
-            set;
-        }
+        internal bool TrackWorkflowInstanceRecords { get; set; }
 
-        internal bool TrackBookmarkResumptionRecords
-        {
-            get;
-            set;
-        }
+        internal bool TrackBookmarkResumptionRecords { get; set; }
 
-        internal bool TrackActivityScheduledRecords
-        {
-            get;
-            set;
-        }
+        internal bool TrackActivityScheduledRecords { get; set; }
 
-        internal bool TrackActivityStateRecordsClosedState
-        {
-            get;
-            set;
-        }
+        internal bool TrackActivityStateRecordsClosedState { get; set; }
 
-        internal bool TrackActivityStateRecordsExecutingState
-        {
-            get;
-            set;
-        }
+        internal bool TrackActivityStateRecordsExecutingState { get; set; }
 
-        internal bool TrackActivityStateRecords
-        {
-            get;
-            set;
-        }
-        
-        internal bool TrackCancelRequestedRecords
-        {
-            get;
-            set;
-        }
+        internal bool TrackActivityStateRecords { get; set; }
 
-        internal bool TrackFaultPropagationRecords
-        {
-            get;
-            set;
-        }
+        internal bool TrackCancelRequestedRecords { get; set; }
+
+        internal bool TrackFaultPropagationRecords { get; set; }
 
         internal void Merge(TrackingRecordPreFilter filter)
         {
             if (this.TrackingProviderInitialized)
             {
                 this.TrackingProviderInitialized = false;
-                this.TrackActivityStateRecordsExecutingState = filter.TrackActivityStateRecordsExecutingState;
+                this.TrackActivityStateRecordsExecutingState =
+                    filter.TrackActivityStateRecordsExecutingState;
                 this.TrackActivityScheduledRecords = filter.TrackActivityScheduledRecords;
                 this.TrackActivityStateRecords = filter.TrackActivityStateRecords;
-                this.TrackActivityStateRecordsClosedState = filter.TrackActivityStateRecordsClosedState;
+                this.TrackActivityStateRecordsClosedState =
+                    filter.TrackActivityStateRecordsClosedState;
                 this.TrackBookmarkResumptionRecords = filter.TrackBookmarkResumptionRecords;
                 this.TrackCancelRequestedRecords = filter.TrackCancelRequestedRecords;
                 this.TrackFaultPropagationRecords = filter.TrackFaultPropagationRecords;
@@ -96,10 +60,12 @@ namespace System.Activities.Tracking
             }
             else
             {
-                this.TrackActivityStateRecordsExecutingState |= filter.TrackActivityStateRecordsExecutingState;
+                this.TrackActivityStateRecordsExecutingState |=
+                    filter.TrackActivityStateRecordsExecutingState;
                 this.TrackActivityScheduledRecords |= filter.TrackActivityScheduledRecords;
                 this.TrackActivityStateRecords |= filter.TrackActivityStateRecords;
-                this.TrackActivityStateRecordsClosedState |= filter.TrackActivityStateRecordsClosedState;
+                this.TrackActivityStateRecordsClosedState |=
+                    filter.TrackActivityStateRecordsClosedState;
                 this.TrackBookmarkResumptionRecords |= filter.TrackBookmarkResumptionRecords;
                 this.TrackCancelRequestedRecords |= filter.TrackCancelRequestedRecords;
                 this.TrackFaultPropagationRecords |= filter.TrackFaultPropagationRecords;

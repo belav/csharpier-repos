@@ -10,7 +10,7 @@ namespace System.ServiceModel
     //     binding.ReliableSession.Ordered
     //     binding.ReliableSession.InactivityTimeout
     //     binding.ReliableSession.Enabled
-    // where these properties are "bucketized" all under .ReliableSession, which makes them easier to 
+    // where these properties are "bucketized" all under .ReliableSession, which makes them easier to
     // discover/Intellisense
     public class ReliableSession
     {
@@ -24,7 +24,9 @@ namespace System.ServiceModel
         public ReliableSession(ReliableSessionBindingElement reliableSessionBindingElement)
         {
             if (reliableSessionBindingElement == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reliableSessionBindingElement");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "reliableSessionBindingElement"
+                );
             this.element = reliableSessionBindingElement;
         }
 
@@ -41,8 +43,13 @@ namespace System.ServiceModel
             set
             {
                 if (value <= TimeSpan.Zero)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                                                    SR.GetString(SR.ValueMustBePositive)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBePositive)
+                        )
+                    );
 
                 this.element.InactivityTimeout = value;
             }
@@ -59,18 +66,17 @@ namespace System.ServiceModel
     {
         bool enabled;
 
-        public OptionalReliableSession() : base() { }
+        public OptionalReliableSession()
+            : base() { }
 
-        public OptionalReliableSession(ReliableSessionBindingElement reliableSessionBindingElement) : base(reliableSessionBindingElement) { }
+        public OptionalReliableSession(ReliableSessionBindingElement reliableSessionBindingElement)
+            : base(reliableSessionBindingElement) { }
 
         // We don't include DefaultValue here because this defaults to false, so omitting it would make the XAML somewhat misleading
         public bool Enabled
         {
             get { return this.enabled; }
-            set
-            {
-                this.enabled = value;
-            }
+            set { this.enabled = value; }
         }
 
         internal void CopySettings(OptionalReliableSession copyFrom)

@@ -20,14 +20,12 @@ public class SqlQueryColumnMapping : ColumnMappingBase, ISqlQueryColumnMapping
     public SqlQueryColumnMapping(
         IProperty property,
         SqlQueryColumn column,
-        SqlQueryMapping sqlQueryMapping)
-        : base(property, column, sqlQueryMapping)
-    {
-    }
+        SqlQueryMapping sqlQueryMapping
+    )
+        : base(property, column, sqlQueryMapping) { }
 
     /// <inheritdoc />
-    public virtual ISqlQueryMapping SqlQueryMapping
-        => (ISqlQueryMapping)TableMapping;
+    public virtual ISqlQueryMapping SqlQueryMapping => (ISqlQueryMapping)TableMapping;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -35,9 +33,10 @@ public class SqlQueryColumnMapping : ColumnMappingBase, ISqlQueryColumnMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override RelationalTypeMapping GetTypeMapping()
-        => Property.FindRelationalTypeMapping(
-            StoreObjectIdentifier.SqlQuery(SqlQueryMapping.SqlQuery.Name))!;
+    protected override RelationalTypeMapping GetTypeMapping() =>
+        Property.FindRelationalTypeMapping(
+            StoreObjectIdentifier.SqlQuery(SqlQueryMapping.SqlQuery.Name)
+        )!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -45,8 +44,8 @@ public class SqlQueryColumnMapping : ColumnMappingBase, ISqlQueryColumnMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((ISqlQueryColumnMapping)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((ISqlQueryColumnMapping)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <inheritdoc />
     ISqlQueryColumn ISqlQueryColumnMapping.Column

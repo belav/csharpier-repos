@@ -62,8 +62,8 @@ public partial class SignOutResult : ActionResult, IResult
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-out operation.</param>
     public SignOutResult(IList<string> authenticationSchemes, AuthenticationProperties? properties)
     {
-        AuthenticationSchemes =
-            authenticationSchemes ?? throw new ArgumentNullException(nameof(authenticationSchemes));
+        AuthenticationSchemes = authenticationSchemes
+            ?? throw new ArgumentNullException(nameof(authenticationSchemes));
         Properties = properties;
     }
 

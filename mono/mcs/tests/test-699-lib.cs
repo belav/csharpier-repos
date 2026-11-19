@@ -2,5 +2,5 @@
 
 public class C
 {
-	internal string message;
+    internal string message;
 }

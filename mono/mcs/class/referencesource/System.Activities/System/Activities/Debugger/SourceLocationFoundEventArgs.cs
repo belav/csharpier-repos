@@ -12,13 +12,23 @@ namespace System.Activities.Debugger
 
         public SourceLocationFoundEventArgs(object target, SourceLocation sourceLocation)
         {
-            UnitTestUtility.Assert(target != null, "Target cannot be null and is ensured by caller");
-            UnitTestUtility.Assert(sourceLocation != null, "Target cannot be null and is ensured by caller");
+            UnitTestUtility.Assert(
+                target != null,
+                "Target cannot be null and is ensured by caller"
+            );
+            UnitTestUtility.Assert(
+                sourceLocation != null,
+                "Target cannot be null and is ensured by caller"
+            );
             this.target = target;
             this.sourceLocation = sourceLocation;
         }
 
-        internal SourceLocationFoundEventArgs(object target, SourceLocation sourceLocation, bool isValueNode)
+        internal SourceLocationFoundEventArgs(
+            object target,
+            SourceLocation sourceLocation,
+            bool isValueNode
+        )
             : this(target, sourceLocation)
         {
             this.isValueNode = isValueNode;

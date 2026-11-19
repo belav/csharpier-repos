@@ -21,44 +21,73 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.RemoveUnusedValues), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.RemoveUnusedValues
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.AddImport)]
-    internal class CSharpRemoveUnusedValuesCodeFixProvider :
-        AbstractRemoveUnusedValuesCodeFixProvider<ExpressionSyntax, StatementSyntax, BlockSyntax,
-            ExpressionStatementSyntax, LocalDeclarationStatementSyntax, VariableDeclaratorSyntax,
-            ForEachStatementSyntax, SwitchSectionSyntax, SwitchLabelSyntax, CatchClauseSyntax, CatchClauseSyntax>
+    internal class CSharpRemoveUnusedValuesCodeFixProvider
+        : AbstractRemoveUnusedValuesCodeFixProvider<
+            ExpressionSyntax,
+            StatementSyntax,
+            BlockSyntax,
+            ExpressionStatementSyntax,
+            LocalDeclarationStatementSyntax,
+            VariableDeclaratorSyntax,
+            ForEachStatementSyntax,
+            SwitchSectionSyntax,
+            SwitchLabelSyntax,
+            CatchClauseSyntax,
+            CatchClauseSyntax
+        >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpRemoveUnusedValuesCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpRemoveUnusedValuesCodeFixProvider() { }
 
-        protected override ISyntaxFormatting GetSyntaxFormatting()
-            => CSharpSyntaxFormatting.Instance;
+        protected override ISyntaxFormatting GetSyntaxFormatting() =>
+            CSharpSyntaxFormatting.Instance;
 
-        protected override BlockSyntax WrapWithBlockIfNecessary(IEnumerable<StatementSyntax> statements)
-            => SyntaxFactory.Block(statements);
+        protected override BlockSyntax WrapWithBlockIfNecessary(
+            IEnumerable<StatementSyntax> statements
+        ) => SyntaxFactory.Block(statements);
 
-        protected override SyntaxToken GetForEachStatementIdentifier(ForEachStatementSyntax node)
-            => node.Identifier;
+        protected override SyntaxToken GetForEachStatementIdentifier(ForEachStatementSyntax node) =>
+            node.Identifier;
 
-        protected override LocalDeclarationStatementSyntax GetCandidateLocalDeclarationForRemoval(VariableDeclaratorSyntax declarator)
-            => declarator.Parent?.Parent as LocalDeclarationStatementSyntax;
+        protected override LocalDeclarationStatementSyntax GetCandidateLocalDeclarationForRemoval(
+            VariableDeclaratorSyntax declarator
+        ) => declarator.Parent?.Parent as LocalDeclarationStatementSyntax;
 
-        protected override SyntaxNode TryUpdateNameForFlaggedNode(SyntaxNode node, SyntaxToken newName)
+        protected override SyntaxNode TryUpdateNameForFlaggedNode(
+            SyntaxNode node,
+            SyntaxToken newName
+        )
         {
             switch (node.Kind())
             {
                 case SyntaxKind.IdentifierName:
                     var identifierName = (IdentifierNameSyntax)node;
-                    return identifierName.WithIdentifier(newName.WithTriviaFrom(identifierName.Identifier));
+                    return identifierName.WithIdentifier(
+                        newName.WithTriviaFrom(identifierName.Identifier)
+                    );
 
                 case SyntaxKind.VariableDeclarator:
                     var variableDeclarator = (VariableDeclaratorSyntax)node;
-                    if (newName.ValueText == AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.DiscardVariableName &&
-                        variableDeclarator.Initializer?.Value is ImplicitObjectCreationExpressionSyntax implicitObjectCreation &&
-                        variableDeclarator.Parent is VariableDeclarationSyntax parent)
+                    if (
+                        newName.ValueText
+                            == AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.DiscardVariableName
+                        && variableDeclarator.Initializer?.Value
+                            is ImplicitObjectCreationExpressionSyntax implicitObjectCreation
+                        && variableDeclarator.Parent is VariableDeclarationSyntax parent
+                    )
                     {
                         // If we are generating a discard on the left of an initialization with an implicit object creation on the right,
                         // then we need to replace the implicit object creation with an explicit one.
@@ -67,20 +96,29 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
                             newKeyword: implicitObjectCreation.NewKeyword,
                             type: parent.Type,
                             argumentList: implicitObjectCreation.ArgumentList,
-                            initializer: implicitObjectCreation.Initializer);
-                        variableDeclarator = variableDeclarator.WithInitializer(variableDeclarator.Initializer.WithValue(objectCreationNode));
+                            initializer: implicitObjectCreation.Initializer
+                        );
+                        variableDeclarator = variableDeclarator.WithInitializer(
+                            variableDeclarator.Initializer.WithValue(objectCreationNode)
+                        );
                     }
 
-                    return variableDeclarator.WithIdentifier(newName.WithTriviaFrom(variableDeclarator.Identifier));
+                    return variableDeclarator.WithIdentifier(
+                        newName.WithTriviaFrom(variableDeclarator.Identifier)
+                    );
 
                 case SyntaxKind.SingleVariableDesignation:
-                    return newName.ValueText == AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.DiscardVariableName
+                    return
+                        newName.ValueText
+                        == AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.DiscardVariableName
                         ? SyntaxFactory.DiscardDesignation().WithTriviaFrom(node)
                         : SyntaxFactory.SingleVariableDesignation(newName).WithTriviaFrom(node);
 
                 case SyntaxKind.CatchDeclaration:
                     var catchDeclaration = (CatchDeclarationSyntax)node;
-                    return catchDeclaration.WithIdentifier(newName.WithTriviaFrom(catchDeclaration.Identifier));
+                    return catchDeclaration.WithIdentifier(
+                        newName.WithTriviaFrom(catchDeclaration.Identifier)
+                    );
 
                 case SyntaxKind.VarPattern:
                     return node.IsParentKind(SyntaxKind.Subpattern)
@@ -88,24 +126,40 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
                         : SyntaxFactory.DiscardDesignation();
 
                 default:
-                    Debug.Fail($"Unexpected node kind for local/parameter declaration or reference: '{node.Kind()}'");
+                    Debug.Fail(
+                        $"Unexpected node kind for local/parameter declaration or reference: '{node.Kind()}'"
+                    );
                     return null;
             }
         }
 
-        protected override SyntaxNode TryUpdateParentOfUpdatedNode(SyntaxNode parent, SyntaxNode newNameNode, SyntaxEditor editor, ISyntaxFacts syntaxFacts, SemanticModel semanticModel)
+        protected override SyntaxNode TryUpdateParentOfUpdatedNode(
+            SyntaxNode parent,
+            SyntaxNode newNameNode,
+            SyntaxEditor editor,
+            ISyntaxFacts syntaxFacts,
+            SemanticModel semanticModel
+        )
         {
             if (newNameNode.IsKind(SyntaxKind.DiscardDesignation))
             {
-                var triviaToAppend = newNameNode.GetLeadingTrivia().AddRange(newNameNode.GetTrailingTrivia());
+                var triviaToAppend = newNameNode
+                    .GetLeadingTrivia()
+                    .AddRange(newNameNode.GetTrailingTrivia());
 
                 // 1) `... is MyType variable` -> `... is MyType`
                 // 2) `... is MyType /*1*/ variable /*2*/` -> `... is MyType /*1*/  /*2*/`
-                if (parent is DeclarationPatternSyntax declarationPattern &&
-                    parent.SyntaxTree.Options.LanguageVersion() >= LanguageVersion.CSharp9)
+                if (
+                    parent is DeclarationPatternSyntax declarationPattern
+                    && parent.SyntaxTree.Options.LanguageVersion() >= LanguageVersion.CSharp9
+                )
                 {
-                    var trailingTrivia = declarationPattern.Type.GetTrailingTrivia().AddRange(triviaToAppend);
-                    return SyntaxFactory.TypePattern(declarationPattern.Type).WithTrailingTrivia(trailingTrivia);
+                    var trailingTrivia = declarationPattern
+                        .Type.GetTrailingTrivia()
+                        .AddRange(triviaToAppend);
+                    return SyntaxFactory
+                        .TypePattern(declarationPattern.Type)
+                        .WithTrailingTrivia(trailingTrivia);
                 }
 
                 // 1) `... is { } variable` -> `... is { }`
@@ -124,10 +178,16 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
                     return withoutDesignation.WithAppendedTrailingTrivia(triviaToAppend);
                 }
             }
-            else if (parent is AssignmentExpressionSyntax assignment &&
-                assignment.Right is ImplicitObjectCreationExpressionSyntax implicitObjectCreation &&
-                newNameNode is IdentifierNameSyntax { Identifier.ValueText: AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.DiscardVariableName } &&
-                semanticModel.GetTypeInfo(implicitObjectCreation).Type is { } type)
+            else if (
+                parent is AssignmentExpressionSyntax assignment
+                && assignment.Right is ImplicitObjectCreationExpressionSyntax implicitObjectCreation
+                && newNameNode
+                    is IdentifierNameSyntax
+                    {
+                        Identifier.ValueText: AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.DiscardVariableName
+                    }
+                && semanticModel.GetTypeInfo(implicitObjectCreation).Type is { } type
+            )
             {
                 // If we are generating a discard on the left of an assignment with an implicit object creation on the right,
                 // then we need to replace the implicit object creation with an explicit one.
@@ -136,41 +196,65 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
                     newKeyword: implicitObjectCreation.NewKeyword,
                     type: type.GenerateTypeSyntax(allowVar: false),
                     argumentList: implicitObjectCreation.ArgumentList,
-                    initializer: implicitObjectCreation.Initializer);
-                return assignment.Update((ExpressionSyntax)newNameNode, assignment.OperatorToken, objectCreationNode);
+                    initializer: implicitObjectCreation.Initializer
+                );
+                return assignment.Update(
+                    (ExpressionSyntax)newNameNode,
+                    assignment.OperatorToken,
+                    objectCreationNode
+                );
             }
 
             return null;
         }
 
-        protected override SyntaxNode ComputeReplacementNode(SyntaxNode originalOldNode, SyntaxNode changedOldNode, SyntaxNode proposedReplacementNode)
+        protected override SyntaxNode ComputeReplacementNode(
+            SyntaxNode originalOldNode,
+            SyntaxNode changedOldNode,
+            SyntaxNode proposedReplacementNode
+        )
         {
             // Check for the following change: `{ ... } variable` -> `{ ... }`
             // Since the internals of this patterns might be changed during previous iterations
             // we apply the same change (remove `variable` declaration) to the `changedOldNode`
-            if (originalOldNode is RecursivePatternSyntax originalOldRecursivePattern &&
-                proposedReplacementNode is RecursivePatternSyntax proposedReplacementRecursivePattern &&
-                proposedReplacementRecursivePattern.IsEquivalentTo(originalOldRecursivePattern.WithDesignation(null)))
+            if (
+                originalOldNode is RecursivePatternSyntax originalOldRecursivePattern
+                && proposedReplacementNode
+                    is RecursivePatternSyntax proposedReplacementRecursivePattern
+                && proposedReplacementRecursivePattern.IsEquivalentTo(
+                    originalOldRecursivePattern.WithDesignation(null)
+                )
+            )
             {
-                proposedReplacementNode = ((RecursivePatternSyntax)changedOldNode).WithDesignation(null)
-                                                                                  .WithTrailingTrivia(proposedReplacementNode.GetTrailingTrivia());
+                proposedReplacementNode = ((RecursivePatternSyntax)changedOldNode)
+                    .WithDesignation(null)
+                    .WithTrailingTrivia(proposedReplacementNode.GetTrailingTrivia());
             }
 
             // Check for the following change: `[...] variable` -> `[...]`
             // Since the internals of this patterns might be changed during previous iterations
             // we apply the same change (remove `variable` declaration) to the `changedOldNode`
-            if (originalOldNode is ListPatternSyntax originalOldListPattern &&
-                proposedReplacementNode is ListPatternSyntax proposedReplacementListPattern &&
-                proposedReplacementListPattern.IsEquivalentTo(originalOldListPattern.WithDesignation(null)))
+            if (
+                originalOldNode is ListPatternSyntax originalOldListPattern
+                && proposedReplacementNode is ListPatternSyntax proposedReplacementListPattern
+                && proposedReplacementListPattern.IsEquivalentTo(
+                    originalOldListPattern.WithDesignation(null)
+                )
+            )
             {
-                proposedReplacementNode = ((ListPatternSyntax)changedOldNode).WithDesignation(null)
-                                                                             .WithTrailingTrivia(proposedReplacementNode.GetTrailingTrivia());
+                proposedReplacementNode = ((ListPatternSyntax)changedOldNode)
+                    .WithDesignation(null)
+                    .WithTrailingTrivia(proposedReplacementNode.GetTrailingTrivia());
             }
 
             return proposedReplacementNode.WithAdditionalAnnotations(Formatter.Annotation);
         }
 
-        protected override void InsertAtStartOfSwitchCaseBlockForDeclarationInCaseLabelOrClause(SwitchSectionSyntax switchCaseBlock, SyntaxEditor editor, LocalDeclarationStatementSyntax declarationStatement)
+        protected override void InsertAtStartOfSwitchCaseBlockForDeclarationInCaseLabelOrClause(
+            SwitchSectionSyntax switchCaseBlock,
+            SyntaxEditor editor,
+            LocalDeclarationStatementSyntax declarationStatement
+        )
         {
             var firstStatement = switchCaseBlock.Statements.FirstOrDefault();
             if (firstStatement != null)
@@ -189,7 +273,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
             SyntaxNode originalCompoundAssignment,
             SyntaxNode newAssignmentTarget,
             SyntaxEditor editor,
-            ISyntaxFactsService syntaxFacts)
+            ISyntaxFactsService syntaxFacts
+        )
         {
             // 1. Compound assignment is changed to simple assignment.
             // For example, "x += MethodCall();", where assignment to 'x' is redundant
@@ -207,7 +292,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
 
             if (originalCompoundAssignment is not AssignmentExpressionSyntax assignmentExpression)
             {
-                Debug.Fail($"Unexpected kind for originalCompoundAssignment: {originalCompoundAssignment.Kind()}");
+                Debug.Fail(
+                    $"Unexpected kind for originalCompoundAssignment: {originalCompoundAssignment.Kind()}"
+                );
                 return originalCompoundAssignment;
             }
 
@@ -219,31 +306,49 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
                 if (!originalCompoundAssignment.IsKind(SyntaxKind.CoalesceAssignmentExpression))
                 {
                     // Case 1. Simple compound assignment parented by an expression statement.
-                    return editor.Generator.AssignmentStatement(newAssignmentTarget, rightOfAssignment);
+                    return editor.Generator.AssignmentStatement(
+                        newAssignmentTarget,
+                        rightOfAssignment
+                    );
                 }
                 else
                 {
                     // Case 2. Null coalescing compound assignment parented by an expression statement.
                     // Remove leading trivia from 'leftOfAssignment' as it should have been moved to 'newAssignmentTarget'.
                     leftOfAssignment = leftOfAssignment.WithoutLeadingTrivia();
-                    return editor.Generator.AssignmentStatement(newAssignmentTarget,
-                        SyntaxFactory.BinaryExpression(SyntaxKind.CoalesceExpression, leftOfAssignment, rightOfAssignment));
+                    return editor.Generator.AssignmentStatement(
+                        newAssignmentTarget,
+                        SyntaxFactory.BinaryExpression(
+                            SyntaxKind.CoalesceExpression,
+                            leftOfAssignment,
+                            rightOfAssignment
+                        )
+                    );
                 }
             }
             else
             {
                 // Case 3. Compound assignment not parented by an expression statement.
-                var mappedBinaryExpressionKind = originalCompoundAssignment.Kind().MapCompoundAssignmentKindToBinaryExpressionKind();
+                var mappedBinaryExpressionKind = originalCompoundAssignment
+                    .Kind()
+                    .MapCompoundAssignmentKindToBinaryExpressionKind();
                 if (mappedBinaryExpressionKind == SyntaxKind.None)
                 {
                     return originalCompoundAssignment;
                 }
 
-                return SyntaxFactory.BinaryExpression(mappedBinaryExpressionKind, leftOfAssignment, rightOfAssignment);
+                return SyntaxFactory.BinaryExpression(
+                    mappedBinaryExpressionKind,
+                    leftOfAssignment,
+                    rightOfAssignment
+                );
             }
         }
 
-        protected override SyntaxNode GetReplacementNodeForVarPattern(SyntaxNode originalVarPattern, SyntaxNode newNameNode)
+        protected override SyntaxNode GetReplacementNodeForVarPattern(
+            SyntaxNode originalVarPattern,
+            SyntaxNode newNameNode
+        )
         {
             if (originalVarPattern is not VarPatternSyntax pattern)
                 throw ExceptionUtilities.Unreachable();
@@ -252,7 +357,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
             // then we need to just change the incoming var's pattern designation
             if (newNameNode is DiscardDesignationSyntax discardDesignation)
             {
-                return pattern.WithDesignation(discardDesignation.WithTriviaFrom(pattern.Designation));
+                return pattern.WithDesignation(
+                    discardDesignation.WithTriviaFrom(pattern.Designation)
+                );
             }
 
             // Otherwise just return new node as a replacement.

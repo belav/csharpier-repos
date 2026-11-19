@@ -44,7 +44,6 @@ namespace HtmlAgilityPack
         /// </summary>
         public string TokenResponseWrite = "Response.Write ";
 
-
         private string TokenTextBlock = "TextBlock({0})";
 
         #endregion
@@ -84,7 +83,7 @@ namespace HtmlAgilityPack
                             break;
 
                         case MixedCodeDocumentFragmentType.Code:
-                            s += ((MixedCodeDocumentCodeFragment) frag).Code + "\n";
+                            s += ((MixedCodeDocumentCodeFragment)frag).Code + "\n";
                             break;
                     }
                 }
@@ -134,7 +133,9 @@ namespace HtmlAgilityPack
         /// <returns>The newly created code fragment instance.</returns>
         public MixedCodeDocumentCodeFragment CreateCodeFragment()
         {
-            return (MixedCodeDocumentCodeFragment) CreateFragment(MixedCodeDocumentFragmentType.Code);
+            return (MixedCodeDocumentCodeFragment)CreateFragment(
+                MixedCodeDocumentFragmentType.Code
+            );
         }
 
         /// <summary>
@@ -143,7 +144,9 @@ namespace HtmlAgilityPack
         /// <returns>The newly created text fragment instance.</returns>
         public MixedCodeDocumentTextFragment CreateTextFragment()
         {
-            return (MixedCodeDocumentTextFragment) CreateFragment(MixedCodeDocumentFragmentType.Text);
+            return (MixedCodeDocumentTextFragment)CreateFragment(
+                MixedCodeDocumentFragmentType.Text
+            );
         }
 
         /// <summary>
@@ -193,7 +196,12 @@ namespace HtmlAgilityPack
         /// <param name="encoding">The character encoding to use.</param>
         /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the file.</param>
         /// <param name="buffersize">The minimum buffer size.</param>
-        public void Load(Stream stream, Encoding encoding, bool detectEncodingFromByteOrderMarks, int buffersize)
+        public void Load(
+            Stream stream,
+            Encoding encoding,
+            bool detectEncodingFromByteOrderMarks,
+            int buffersize
+        )
         {
             Load(new StreamReader(stream, encoding, detectEncodingFromByteOrderMarks, buffersize));
         }
@@ -245,7 +253,12 @@ namespace HtmlAgilityPack
         /// <param name="encoding">The character encoding to use.</param>
         /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the file.</param>
         /// <param name="buffersize">The minimum buffer size.</param>
-        public void Load(string path, Encoding encoding, bool detectEncodingFromByteOrderMarks, int buffersize)
+        public void Load(
+            string path,
+            Encoding encoding,
+            bool detectEncodingFromByteOrderMarks,
+            int buffersize
+        )
         {
             Load(new StreamReader(path, encoding, detectEncodingFromByteOrderMarks, buffersize));
         }
@@ -328,7 +341,7 @@ namespace HtmlAgilityPack
         /// <param name="writer">The StreamWriter to which you want to save.</param>
         public void Save(StreamWriter writer)
         {
-            Save((TextWriter) writer);
+            Save((TextWriter)writer);
         }
 
         /// <summary>
@@ -398,11 +411,15 @@ namespace HtmlAgilityPack
                     case ParseState.Text:
                         if (_index + TokenCodeStart.Length < _text.Length)
                         {
-                            if (_text.Substring(_index - 1, TokenCodeStart.Length) == TokenCodeStart)
+                            if (
+                                _text.Substring(_index - 1, TokenCodeStart.Length) == TokenCodeStart
+                            )
                             {
                                 _state = ParseState.Code;
                                 _currentfragment.Length = _index - 1 - _currentfragment.Index;
-                                _currentfragment = CreateFragment(MixedCodeDocumentFragmentType.Code);
+                                _currentfragment = CreateFragment(
+                                    MixedCodeDocumentFragmentType.Code
+                                );
                                 SetPosition();
                                 continue;
                             }
@@ -415,10 +432,13 @@ namespace HtmlAgilityPack
                             if (_text.Substring(_index - 1, TokenCodeEnd.Length) == TokenCodeEnd)
                             {
                                 _state = ParseState.Text;
-                                _currentfragment.Length = _index + TokenCodeEnd.Length - _currentfragment.Index;
+                                _currentfragment.Length =
+                                    _index + TokenCodeEnd.Length - _currentfragment.Index;
                                 _index += TokenCodeEnd.Length;
                                 _lineposition += TokenCodeEnd.Length;
-                                _currentfragment = CreateFragment(MixedCodeDocumentFragmentType.Text);
+                                _currentfragment = CreateFragment(
+                                    MixedCodeDocumentFragmentType.Text
+                                );
                                 SetPosition();
                                 continue;
                             }
@@ -445,7 +465,7 @@ namespace HtmlAgilityPack
         private enum ParseState
         {
             Text,
-            Code
+            Code,
         }
 
         #endregion

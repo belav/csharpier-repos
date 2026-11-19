@@ -19,7 +19,13 @@ namespace System.Security.Cryptography.Tests
         private static readonly HashAlgorithmName s_nullHash = new HashAlgorithmName(null);
         private static readonly HashAlgorithmName s_emptyHash = new HashAlgorithmName("");
 
-        private static void VerifyKbkdfBytes(byte[] expected, byte[] key, HashAlgorithmName hashAlgorithm, byte[] labelBytes, byte[] contextBytes)
+        private static void VerifyKbkdfBytes(
+            byte[] expected,
+            byte[] key,
+            HashAlgorithmName hashAlgorithm,
+            byte[] labelBytes,
+            byte[] contextBytes
+        )
         {
             byte[] result;
 
@@ -31,14 +37,22 @@ namespace System.Security.Cryptography.Tests
 
             using (SP800108HmacCounterKdf kdf = new SP800108HmacCounterKdf(key, hashAlgorithm))
             {
-                result = kdf.DeriveKey(new ReadOnlySpan<byte>(labelBytes), new ReadOnlySpan<byte>(contextBytes), expected.Length);
+                result = kdf.DeriveKey(
+                    new ReadOnlySpan<byte>(labelBytes),
+                    new ReadOnlySpan<byte>(contextBytes),
+                    expected.Length
+                );
                 Assert.Equal(expected, result);
             }
 
             using (SP800108HmacCounterKdf kdf = new SP800108HmacCounterKdf(key, hashAlgorithm))
             {
                 result = new byte[expected.Length];
-                kdf.DeriveKey(new ReadOnlySpan<byte>(labelBytes), new ReadOnlySpan<byte>(contextBytes), result);
+                kdf.DeriveKey(
+                    new ReadOnlySpan<byte>(labelBytes),
+                    new ReadOnlySpan<byte>(contextBytes),
+                    result
+                );
                 Assert.Equal(expected, result);
             }
 
@@ -47,7 +61,8 @@ namespace System.Security.Cryptography.Tests
                 hashAlgorithm,
                 labelBytes,
                 contextBytes,
-                expected.Length);
+                expected.Length
+            );
             Assert.Equal(expected, result);
 
             result = SP800108HmacCounterKdf.DeriveBytes(
@@ -55,7 +70,8 @@ namespace System.Security.Cryptography.Tests
                 hashAlgorithm,
                 new ReadOnlySpan<byte>(labelBytes),
                 new ReadOnlySpan<byte>(contextBytes),
-                expected.Length);
+                expected.Length
+            );
             Assert.Equal(expected, result);
 
             result = new byte[expected.Length];
@@ -64,11 +80,18 @@ namespace System.Security.Cryptography.Tests
                 hashAlgorithm,
                 new ReadOnlySpan<byte>(labelBytes),
                 new ReadOnlySpan<byte>(contextBytes),
-                result);
+                result
+            );
             Assert.Equal(expected, result);
         }
 
-        private static void VerifyKbkdf(byte[] expected, byte[] key, HashAlgorithmName hashAlgorithm, char[] label, char[] context)
+        private static void VerifyKbkdf(
+            byte[] expected,
+            byte[] key,
+            HashAlgorithmName hashAlgorithm,
+            char[] label,
+            char[] context
+        )
         {
             // The actual implementation uses a stricter UTF8 encoding/decoding but we know our test data does not contain
             // invalid UTF8.
@@ -80,14 +103,22 @@ namespace System.Security.Cryptography.Tests
 
             using (SP800108HmacCounterKdf kdf = new SP800108HmacCounterKdf(key, hashAlgorithm))
             {
-                result = kdf.DeriveKey(new ReadOnlySpan<char>(label), new ReadOnlySpan<char>(context), expected.Length);
+                result = kdf.DeriveKey(
+                    new ReadOnlySpan<char>(label),
+                    new ReadOnlySpan<char>(context),
+                    expected.Length
+                );
                 Assert.Equal(expected, result);
             }
 
             using (SP800108HmacCounterKdf kdf = new SP800108HmacCounterKdf(key, hashAlgorithm))
             {
                 result = new byte[expected.Length];
-                kdf.DeriveKey(new ReadOnlySpan<char>(label), new ReadOnlySpan<char>(context), result);
+                kdf.DeriveKey(
+                    new ReadOnlySpan<char>(label),
+                    new ReadOnlySpan<char>(context),
+                    result
+                );
                 Assert.Equal(expected, result);
             }
 
@@ -102,7 +133,8 @@ namespace System.Security.Cryptography.Tests
                 hashAlgorithm,
                 new string(label),
                 new string(context),
-                expected.Length);
+                expected.Length
+            );
             Assert.Equal(expected, result);
 
             result = SP800108HmacCounterKdf.DeriveBytes(
@@ -110,7 +142,8 @@ namespace System.Security.Cryptography.Tests
                 hashAlgorithm,
                 new ReadOnlySpan<char>(label),
                 new ReadOnlySpan<char>(context),
-                expected.Length);
+                expected.Length
+            );
             Assert.Equal(expected, result);
 
             result = new byte[expected.Length];
@@ -119,11 +152,18 @@ namespace System.Security.Cryptography.Tests
                 hashAlgorithm,
                 new ReadOnlySpan<char>(label),
                 new ReadOnlySpan<char>(context),
-                result);
+                result
+            );
             Assert.Equal(expected, result);
         }
 
-        private static void RaceCalls(byte[] expected1, byte[] expected2, bool isDisposing, Func<int, byte[]> call1, Func<int, byte[]> call2)
+        private static void RaceCalls(
+            byte[] expected1,
+            byte[] expected2,
+            bool isDisposing,
+            Func<int, byte[]> call1,
+            Func<int, byte[]> call2
+        )
         {
             const int Iterations = 1_000;
 

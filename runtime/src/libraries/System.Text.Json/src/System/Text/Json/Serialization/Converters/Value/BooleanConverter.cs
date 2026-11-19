@@ -8,7 +8,11 @@ namespace System.Text.Json.Serialization.Converters
 {
     internal sealed class BooleanConverter : JsonPrimitiveConverter<bool>
     {
-        public override bool Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override bool Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             return reader.GetBoolean();
         }
@@ -18,12 +22,20 @@ namespace System.Text.Json.Serialization.Converters
             writer.WriteBooleanValue(value);
         }
 
-        internal override bool ReadAsPropertyNameCore(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        internal override bool ReadAsPropertyNameCore(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             Debug.Assert(reader.TokenType == JsonTokenType.PropertyName);
             ReadOnlySpan<byte> propertyName = reader.GetSpan();
-            if (!(Utf8Parser.TryParse(propertyName, out bool value, out int bytesConsumed)
-                  && propertyName.Length == bytesConsumed))
+            if (
+                !(
+                    Utf8Parser.TryParse(propertyName, out bool value, out int bytesConsumed)
+                    && propertyName.Length == bytesConsumed
+                )
+            )
             {
                 ThrowHelper.ThrowFormatException(DataType.Boolean);
             }
@@ -31,7 +43,12 @@ namespace System.Text.Json.Serialization.Converters
             return value;
         }
 
-        internal override void WriteAsPropertyNameCore(Utf8JsonWriter writer, bool value, JsonSerializerOptions options, bool isWritingExtensionDataProperty)
+        internal override void WriteAsPropertyNameCore(
+            Utf8JsonWriter writer,
+            bool value,
+            JsonSerializerOptions options,
+            bool isWritingExtensionDataProperty
+        )
         {
             writer.WritePropertyName(value);
         }

@@ -27,7 +27,10 @@ namespace Microsoft.CodeAnalysis.MSBuild
         /// A map of project path to <see cref="ProjectInfo"/>s. Note that there can be multiple <see cref="ProjectId"/>s per project path
         /// if the project is multi-targeted -- one for each target framework.
         /// </summary>
-        private readonly Dictionary<string, ImmutableArray<ProjectInfo>> _projectPathToProjectInfosMap;
+        private readonly Dictionary<
+            string,
+            ImmutableArray<ProjectInfo>
+        > _projectPathToProjectInfosMap;
 
         /// <summary>
         /// A map of <see cref="ProjectId"/> to the output file of the project (if any).
@@ -41,8 +44,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
         private ProjectMap()
         {
-            _projectPathToProjectIdsMap = new Dictionary<string, HashSet<ProjectId>>(PathUtilities.Comparer);
-            _projectPathToProjectInfosMap = new Dictionary<string, ImmutableArray<ProjectInfo>>(PathUtilities.Comparer);
+            _projectPathToProjectIdsMap = new Dictionary<string, HashSet<ProjectId>>(
+                PathUtilities.Comparer
+            );
+            _projectPathToProjectInfosMap = new Dictionary<string, ImmutableArray<ProjectInfo>>(
+                PathUtilities.Comparer
+            );
             _projectIdToOutputFilePathMap = new Dictionary<ProjectId, string>();
             _projectIdToOutputRefFilePathMap = new Dictionary<ProjectId, string>();
         }
@@ -79,7 +86,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
             AddProjectInfo(project.State.ProjectInfo);
         }
 
-        private void Add(ProjectId projectId, string? projectPath, string? outputFilePath, string? outputRefFilePath)
+        private void Add(
+            ProjectId projectId,
+            string? projectPath,
+            string? outputFilePath,
+            string? outputRefFilePath
+        )
         {
             if (!RoslynString.IsNullOrEmpty(projectPath))
             {
@@ -120,7 +132,11 @@ namespace Microsoft.CodeAnalysis.MSBuild
             _projectPathToProjectInfosMap[projectFilePath] = projectInfos;
         }
 
-        private ProjectId CreateProjectId(string? projectPath, string? outputFilePath, string? outputRefFilePath)
+        private ProjectId CreateProjectId(
+            string? projectPath,
+            string? outputFilePath,
+            string? outputRefFilePath
+        )
         {
             var newProjectId = ProjectId.CreateNewId(debugName: projectPath);
             Add(newProjectId, projectPath, outputFilePath, outputRefFilePath);
@@ -148,8 +164,18 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
             if (projectPath is not null && TryGetIdsByProjectPath(projectPath, out var projectIds))
             {
-                if (TryFindOutputFileRefPathInProjectIdSet(outputRefFilePath, projectIds, out var projectId) ||
-                    TryFindOutputFilePathInProjectIdSet(outputFilePath, projectIds, out projectId))
+                if (
+                    TryFindOutputFileRefPathInProjectIdSet(
+                        outputRefFilePath,
+                        projectIds,
+                        out var projectId
+                    )
+                    || TryFindOutputFilePathInProjectIdSet(
+                        outputFilePath,
+                        projectIds,
+                        out projectId
+                    )
+                )
                 {
                     return projectId;
                 }
@@ -158,13 +184,25 @@ namespace Microsoft.CodeAnalysis.MSBuild
             return CreateProjectId(projectPath, outputFilePath, outputRefFilePath);
         }
 
-        private bool TryFindOutputFileRefPathInProjectIdSet(string? outputRefFilePath, HashSet<ProjectId> set, [NotNullWhen(true)] out ProjectId? result)
-            => TryFindPathInProjectIdSet(outputRefFilePath, GetOutputRefFilePathById, set, out result);
+        private bool TryFindOutputFileRefPathInProjectIdSet(
+            string? outputRefFilePath,
+            HashSet<ProjectId> set,
+            [NotNullWhen(true)] out ProjectId? result
+        ) =>
+            TryFindPathInProjectIdSet(outputRefFilePath, GetOutputRefFilePathById, set, out result);
 
-        private bool TryFindOutputFilePathInProjectIdSet(string? outputFilePath, HashSet<ProjectId> set, [NotNullWhen(true)] out ProjectId? result)
-            => TryFindPathInProjectIdSet(outputFilePath, GetOutputFilePathById, set, out result);
+        private bool TryFindOutputFilePathInProjectIdSet(
+            string? outputFilePath,
+            HashSet<ProjectId> set,
+            [NotNullWhen(true)] out ProjectId? result
+        ) => TryFindPathInProjectIdSet(outputFilePath, GetOutputFilePathById, set, out result);
 
-        private static bool TryFindPathInProjectIdSet(string? path, Func<ProjectId, string?> getPathById, HashSet<ProjectId> set, [NotNullWhen(true)] out ProjectId? result)
+        private static bool TryFindPathInProjectIdSet(
+            string? path,
+            Func<ProjectId, string?> getPathById,
+            HashSet<ProjectId> set,
+            [NotNullWhen(true)] out ProjectId? result
+        )
         {
             if (!RoslynString.IsNullOrEmpty(path))
             {
@@ -184,26 +222,30 @@ namespace Microsoft.CodeAnalysis.MSBuild
             return false;
         }
 
-        internal string? GetOutputRefFilePathById(ProjectId projectId)
-            => TryGetOutputRefFilePathById(projectId, out var path)
-                ? path
-                : null;
+        internal string? GetOutputRefFilePathById(ProjectId projectId) =>
+            TryGetOutputRefFilePathById(projectId, out var path) ? path : null;
 
-        internal string? GetOutputFilePathById(ProjectId projectId)
-            => TryGetOutputFilePathById(projectId, out var path)
-                ? path
-                : null;
+        internal string? GetOutputFilePathById(ProjectId projectId) =>
+            TryGetOutputFilePathById(projectId, out var path) ? path : null;
 
-        internal bool TryGetIdsByProjectPath(string projectPath, [NotNullWhen(true)] out HashSet<ProjectId>? ids)
-            => _projectPathToProjectIdsMap.TryGetValue(projectPath, out ids);
+        internal bool TryGetIdsByProjectPath(
+            string projectPath,
+            [NotNullWhen(true)] out HashSet<ProjectId>? ids
+        ) => _projectPathToProjectIdsMap.TryGetValue(projectPath, out ids);
 
-        internal bool TryGetOutputFilePathById(ProjectId id, [NotNullWhen(true)] out string? outputFilePath)
-            => _projectIdToOutputFilePathMap.TryGetValue(id, out outputFilePath);
+        internal bool TryGetOutputFilePathById(
+            ProjectId id,
+            [NotNullWhen(true)] out string? outputFilePath
+        ) => _projectIdToOutputFilePathMap.TryGetValue(id, out outputFilePath);
 
-        internal bool TryGetOutputRefFilePathById(ProjectId id, [NotNullWhen(true)] out string? outputRefFilePath)
-            => _projectIdToOutputRefFilePathMap.TryGetValue(id, out outputRefFilePath);
+        internal bool TryGetOutputRefFilePathById(
+            ProjectId id,
+            [NotNullWhen(true)] out string? outputRefFilePath
+        ) => _projectIdToOutputRefFilePathMap.TryGetValue(id, out outputRefFilePath);
 
-        internal bool TryGetProjectInfosByProjectPath(string projectPath, out ImmutableArray<ProjectInfo> projectInfos)
-            => _projectPathToProjectInfosMap.TryGetValue(projectPath, out projectInfos);
+        internal bool TryGetProjectInfosByProjectPath(
+            string projectPath,
+            out ImmutableArray<ProjectInfo> projectInfos
+        ) => _projectPathToProjectInfosMap.TryGetValue(projectPath, out projectInfos);
     }
 }

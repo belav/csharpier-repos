@@ -18,10 +18,10 @@ namespace System.Xml.Schema
         {
             None,
             XmlSpace,
-            XmlLang
+            XmlLang,
         };
 
-        private string? _defExpanded;  // default value in its expanded form
+        private string? _defExpanded; // default value in its expanded form
 
         private int _lineNum;
         private int _linePos;
@@ -38,13 +38,10 @@ namespace System.Xml.Schema
         // Constructors
         //
         public SchemaAttDef(XmlQualifiedName name, string? prefix)
-            : base(name, prefix)
-        {
-        }
+            : base(name, prefix) { }
 
-        public SchemaAttDef(XmlQualifiedName name) : base(name, null)
-        {
-        }
+        public SchemaAttDef(XmlQualifiedName name)
+            : base(name, null) { }
 
         private SchemaAttDef() { }
 
@@ -150,14 +147,8 @@ namespace System.Xml.Schema
 
         internal XmlTokenizedType TokenizedType
         {
-            get
-            {
-                return Datatype.TokenizedType;
-            }
-            set
-            {
-                this.Datatype = XmlSchemaDatatype.FromXmlTokenizedType(value)!;
-            }
+            get { return Datatype.TokenizedType; }
+            set { this.Datatype = XmlSchemaDatatype.FromXmlTokenizedType(value)!; }
         }
 
         internal Reserve Reserved
@@ -174,9 +165,11 @@ namespace System.Xml.Schema
 
         internal void CheckXmlSpace(IValidationEventHandling validationEventHandling)
         {
-            if (datatype.TokenizedType == XmlTokenizedType.ENUMERATION &&
-                (values != null) &&
-                (values.Count <= 2))
+            if (
+                datatype.TokenizedType == XmlTokenizedType.ENUMERATION
+                && (values != null)
+                && (values.Count <= 2)
+            )
             {
                 string s1 = values[0].ToString();
 
@@ -184,8 +177,10 @@ namespace System.Xml.Schema
                 {
                     string s2 = values[1].ToString();
 
-                    if ((s1 == "default" || s2 == "default") &&
-                        (s1 == "preserve" || s2 == "preserve"))
+                    if (
+                        (s1 == "default" || s2 == "default")
+                        && (s1 == "preserve" || s2 == "preserve")
+                    )
                     {
                         return;
                     }
@@ -198,7 +193,10 @@ namespace System.Xml.Schema
                     }
                 }
             }
-            validationEventHandling.SendEvent(new XmlSchemaException(SR.Sch_XmlSpace, string.Empty), XmlSeverityType.Error);
+            validationEventHandling.SendEvent(
+                new XmlSchemaException(SR.Sch_XmlSpace, string.Empty),
+                XmlSeverityType.Error
+            );
         }
 
         internal SchemaAttDef Clone()

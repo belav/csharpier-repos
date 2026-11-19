@@ -28,14 +28,16 @@ public class SelectExpressionPruningExpressionVisitor : ExpressionVisitor
             case ShapedQueryExpression shapedQueryExpression:
                 return shapedQueryExpression.Update(
                     ((SelectExpression)shapedQueryExpression.QueryExpression).Prune(),
-                    Visit(shapedQueryExpression.ShaperExpression));
+                    Visit(shapedQueryExpression.ShaperExpression)
+                );
 
             case RelationalSplitCollectionShaperExpression relationalSplitCollectionShaperExpression:
                 return relationalSplitCollectionShaperExpression.Update(
                     relationalSplitCollectionShaperExpression.ParentIdentifier,
                     relationalSplitCollectionShaperExpression.ChildIdentifier,
                     relationalSplitCollectionShaperExpression.SelectExpression.Prune(),
-                    Visit(relationalSplitCollectionShaperExpression.InnerShaper));
+                    Visit(relationalSplitCollectionShaperExpression.InnerShaper)
+                );
 
             case DeleteExpression deleteExpression:
                 return deleteExpression.Update(deleteExpression.SelectExpression.Prune());
@@ -43,8 +45,13 @@ public class SelectExpressionPruningExpressionVisitor : ExpressionVisitor
             case UpdateExpression updateExpression:
                 return updateExpression.Update(
                     updateExpression.SelectExpression.Prune(),
-                    updateExpression.ColumnValueSetters.Select(e => new ColumnValueSetter(e.Column, (SqlExpression)Visit(e.Value)))
-                        .ToList());
+                    updateExpression
+                        .ColumnValueSetters.Select(e => new ColumnValueSetter(
+                            e.Column,
+                            (SqlExpression)Visit(e.Value)
+                        ))
+                        .ToList()
+                );
 
             default:
                 return base.Visit(expression);

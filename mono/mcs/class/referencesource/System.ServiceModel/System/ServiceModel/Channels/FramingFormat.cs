@@ -138,10 +138,12 @@ namespace System.ServiceModel.Channels
         const string FaultBaseUri = NamespaceUri + "/faults/";
         public const string ContentTypeInvalidFault = FaultBaseUri + "ContentTypeInvalid";
         public const string ContentTypeTooLongFault = FaultBaseUri + "ContentTypeTooLong";
-        public const string ConnectionDispatchFailedFault = FaultBaseUri + "ConnectionDispatchFailed";
+        public const string ConnectionDispatchFailedFault =
+            FaultBaseUri + "ConnectionDispatchFailed";
         public const string EndpointNotFoundFault = FaultBaseUri + "EndpointNotFound";
         public const string EndpointUnavailableFault = FaultBaseUri + "EndpointUnavailable";
-        public const string MaxMessageSizeExceededFault = FaultBaseUri + "MaxMessageSizeExceededFault";
+        public const string MaxMessageSizeExceededFault =
+            FaultBaseUri + "MaxMessageSizeExceededFault";
         public const string ServerTooBusyFault = FaultBaseUri + "ServerTooBusy";
         public const string ServiceActivationFailedFault = FaultBaseUri + "ServiceActivationFailed";
         public const string UnsupportedModeFault = FaultBaseUri + "UnsupportedMode";
@@ -150,6 +152,7 @@ namespace System.ServiceModel.Channels
         public const string ViaTooLongFault = FaultBaseUri + "ViaTooLong";
 
         const string ExceptionKey = "FramingEncodingString";
+
         public static bool TryGetFaultString(Exception exception, out string framingFault)
         {
             framingFault = null;

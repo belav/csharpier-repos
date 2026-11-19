@@ -30,11 +30,13 @@ public static partial class XmlSerializerTests
     {
         XmlTypeMapping mapping = null;
         XmlSerializer serializer = null;
-        Assert.Throws<ArgumentNullException>(() => { new XmlSerializer(mapping); });
+        Assert.Throws<ArgumentNullException>(() =>
+        {
+            new XmlSerializer(mapping);
+        });
 
         mapping = new XmlReflectionImporter(null, null).ImportTypeMapping(typeof(List<string>));
         serializer = new XmlSerializer(mapping);
         Xml_ListGenericRoot_Helper(serializer);
     }
-
 }

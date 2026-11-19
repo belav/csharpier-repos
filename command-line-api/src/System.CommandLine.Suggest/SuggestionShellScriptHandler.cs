@@ -13,22 +13,38 @@ namespace System.CommandLine.Suggest
             switch (shellType)
             {
                 case ShellType.Bash:
-                    PrintToConsoleFrom(output, "dotnet-suggest-shim.bash", useUnixLineEndings: true);
+                    PrintToConsoleFrom(
+                        output,
+                        "dotnet-suggest-shim.bash",
+                        useUnixLineEndings: true
+                    );
                     break;
                 case ShellType.PowerShell:
-                    PrintToConsoleFrom(output, "dotnet-suggest-shim.ps1", useUnixLineEndings: false);
+                    PrintToConsoleFrom(
+                        output,
+                        "dotnet-suggest-shim.ps1",
+                        useUnixLineEndings: false
+                    );
                     break;
                 case ShellType.Zsh:
                     PrintToConsoleFrom(output, "dotnet-suggest-shim.zsh", useUnixLineEndings: true);
                     break;
                 default:
-                    throw new SuggestionShellScriptException($"Shell '{shellType}' is not supported.");
+                    throw new SuggestionShellScriptException(
+                        $"Shell '{shellType}' is not supported."
+                    );
             }
         }
 
-        private static void PrintToConsoleFrom(TextWriter output, string scriptName, bool useUnixLineEndings)
+        private static void PrintToConsoleFrom(
+            TextWriter output,
+            string scriptName,
+            bool useUnixLineEndings
+        )
         {
-            var assemblyLocation = Assembly.GetAssembly(typeof(SuggestionShellScriptHandler)).Location;
+            var assemblyLocation = Assembly
+                .GetAssembly(typeof(SuggestionShellScriptHandler))
+                .Location;
             var directory = Path.GetDirectoryName(assemblyLocation);
             string scriptContent = File.ReadAllText(Path.Combine(directory, scriptName));
             bool hasUnixLineEndings = !scriptContent.Contains("\r\n");

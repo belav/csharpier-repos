@@ -31,6 +31,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         /// <summary>
         /// No characters are capitalized
         /// </summary>
-        AllLower
+        AllLower,
     }
 }

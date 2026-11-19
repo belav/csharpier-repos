@@ -6,23 +6,27 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace System.Data.Linq.SqlClient {
-
-    internal static class SqlTypeSystem {
-
-        internal static TypeSystemProvider Create2000Provider() {
+namespace System.Data.Linq.SqlClient
+{
+    internal static class SqlTypeSystem
+    {
+        internal static TypeSystemProvider Create2000Provider()
+        {
             return new Sql2000Provider();
         }
 
-        internal static TypeSystemProvider Create2005Provider() {
+        internal static TypeSystemProvider Create2005Provider()
+        {
             return new Sql2005Provider();
         }
 
-        internal static TypeSystemProvider Create2008Provider() {
+        internal static TypeSystemProvider Create2008Provider()
+        {
             return new Sql2008Provider();
         }
 
-        internal static TypeSystemProvider CreateCEProvider() {
+        internal static TypeSystemProvider CreateCEProvider()
+        {
             return new SqlCEProvider();
         }
 
@@ -31,58 +35,105 @@ namespace System.Data.Linq.SqlClient {
         internal const short LargeTypeSizeIndicator = -1;
 
         // class constructor will cause static initialization to be deferred
-        [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification="Static constructors provide deferred execution, which is desired.")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1810:InitializeReferenceTypeStaticFieldsInline",
+            Justification = "Static constructors provide deferred execution, which is desired."
+        )]
         static SqlTypeSystem() { }
 
         #region Factories
-        private static ProviderType Create(SqlDbType type, int size) {
+        private static ProviderType Create(SqlDbType type, int size)
+        {
             return new SqlType(type, size);
         }
 
-        private static ProviderType Create(SqlDbType type, int precision, int scale) {
-            if (type != SqlDbType.Decimal && precision == 0 && scale == 0) {
+        private static ProviderType Create(SqlDbType type, int precision, int scale)
+        {
+            if (type != SqlDbType.Decimal && precision == 0 && scale == 0)
+            {
                 return Create(type);
             }
-            else if (type == SqlDbType.Decimal && precision == defaultDecimalPrecision && scale == defaultDecimalScale) {
+            else if (
+                type == SqlDbType.Decimal
+                && precision == defaultDecimalPrecision
+                && scale == defaultDecimalScale
+            )
+            {
                 return Create(type);
             }
             return new SqlType(type, precision, scale);
         }
 
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification="These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand.")]
-        private static ProviderType Create(SqlDbType type) {
-            switch (type) {
-                case SqlDbType.BigInt: return theBigInt;
-                case SqlDbType.Bit: return theBit;
-                case SqlDbType.Char: return theChar;
-                case SqlDbType.DateTime: return theDateTime;
-                case SqlDbType.Date: return theDate;
-                case SqlDbType.Time: return theTime;
-                case SqlDbType.DateTime2: return theDateTime2;
-                case SqlDbType.DateTimeOffset: return theDateTimeOffset;
-                case SqlDbType.Decimal: return theDefaultDecimal;
-                case SqlDbType.Float: return theFloat;
-                case SqlDbType.Int: return theInt;
-                case SqlDbType.Money: return theMoney;
-                case SqlDbType.Real: return theReal;
-                case SqlDbType.UniqueIdentifier: return theUniqueIdentifier;
-                case SqlDbType.SmallDateTime: return theSmallDateTime;
-                case SqlDbType.SmallInt: return theSmallInt;
-                case SqlDbType.SmallMoney: return theSmallMoney;
-                case SqlDbType.Timestamp: return theTimestamp;
-                case SqlDbType.TinyInt: return theTinyInt;
-                case SqlDbType.Xml: return theXml;
-                case SqlDbType.Text: return theText;
-                case SqlDbType.NText: return theNText;
-                case SqlDbType.Image: return theImage;
+        [SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1502:AvoidExcessiveComplexity",
+            Justification = "These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand."
+        )]
+        private static ProviderType Create(SqlDbType type)
+        {
+            switch (type)
+            {
+                case SqlDbType.BigInt:
+                    return theBigInt;
+                case SqlDbType.Bit:
+                    return theBit;
+                case SqlDbType.Char:
+                    return theChar;
+                case SqlDbType.DateTime:
+                    return theDateTime;
+                case SqlDbType.Date:
+                    return theDate;
+                case SqlDbType.Time:
+                    return theTime;
+                case SqlDbType.DateTime2:
+                    return theDateTime2;
+                case SqlDbType.DateTimeOffset:
+                    return theDateTimeOffset;
+                case SqlDbType.Decimal:
+                    return theDefaultDecimal;
+                case SqlDbType.Float:
+                    return theFloat;
+                case SqlDbType.Int:
+                    return theInt;
+                case SqlDbType.Money:
+                    return theMoney;
+                case SqlDbType.Real:
+                    return theReal;
+                case SqlDbType.UniqueIdentifier:
+                    return theUniqueIdentifier;
+                case SqlDbType.SmallDateTime:
+                    return theSmallDateTime;
+                case SqlDbType.SmallInt:
+                    return theSmallInt;
+                case SqlDbType.SmallMoney:
+                    return theSmallMoney;
+                case SqlDbType.Timestamp:
+                    return theTimestamp;
+                case SqlDbType.TinyInt:
+                    return theTinyInt;
+                case SqlDbType.Xml:
+                    return theXml;
+                case SqlDbType.Text:
+                    return theText;
+                case SqlDbType.NText:
+                    return theNText;
+                case SqlDbType.Image:
+                    return theImage;
                 default:
                     return new SqlType(type);
             }
         }
 
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification="These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand.")]
-        private static Type GetClosestRuntimeType(SqlDbType sqlDbType) {
-            switch (sqlDbType) {
+        [SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1502:AvoidExcessiveComplexity",
+            Justification = "These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand."
+        )]
+        private static Type GetClosestRuntimeType(SqlDbType sqlDbType)
+        {
+            switch (sqlDbType)
+            {
                 case SqlDbType.Int:
                     return typeof(int);
                 case SqlDbType.BigInt:
@@ -142,38 +193,56 @@ namespace System.Data.Linq.SqlClient {
          * one type to another.
          */
         static private readonly SqlType theBigInt = new SqlType(SqlDbType.BigInt);
-        static private readonly SqlType theBit = new SqlType(SqlDbType.Bit);
-        static private readonly SqlType theChar = new SqlType(SqlDbType.Char);
-        static private readonly SqlType theDateTime = new SqlType(SqlDbType.DateTime);
-        static private readonly SqlType theDate = new SqlType(SqlDbType.Date);
-        static private readonly SqlType theTime = new SqlType(SqlDbType.Time);
-        static private readonly SqlType theDateTime2 = new SqlType(SqlDbType.DateTime2);
-        static private readonly SqlType theDateTimeOffset = new SqlType(SqlDbType.DateTimeOffset);
+        private static readonly SqlType theBit = new SqlType(SqlDbType.Bit);
+        private static readonly SqlType theChar = new SqlType(SqlDbType.Char);
+        private static readonly SqlType theDateTime = new SqlType(SqlDbType.DateTime);
+        private static readonly SqlType theDate = new SqlType(SqlDbType.Date);
+        private static readonly SqlType theTime = new SqlType(SqlDbType.Time);
+        private static readonly SqlType theDateTime2 = new SqlType(SqlDbType.DateTime2);
+        private static readonly SqlType theDateTimeOffset = new SqlType(SqlDbType.DateTimeOffset);
         const int defaultDecimalPrecision = 29;
         const int defaultDecimalScale = 4;
-        static private readonly SqlType theDefaultDecimal = new SqlType(SqlDbType.Decimal, defaultDecimalPrecision, defaultDecimalScale);
-        static private readonly SqlType theFloat = new SqlType(SqlDbType.Float);
-        static private readonly SqlType theInt = new SqlType(SqlDbType.Int);
-        static private readonly SqlType theMoney = new SqlType(SqlDbType.Money, 19, 4);
-        static private readonly SqlType theReal = new SqlType(SqlDbType.Real);
-        static private readonly SqlType theUniqueIdentifier = new SqlType(SqlDbType.UniqueIdentifier);
-        static private readonly SqlType theSmallDateTime = new SqlType(SqlDbType.SmallDateTime);
-        static private readonly SqlType theSmallInt = new SqlType(SqlDbType.SmallInt);
-        static private readonly SqlType theSmallMoney = new SqlType(SqlDbType.SmallMoney, 10, 4);
-        static private readonly SqlType theTimestamp = new SqlType(SqlDbType.Timestamp);
-        static private readonly SqlType theTinyInt = new SqlType(SqlDbType.TinyInt);
-        static private readonly SqlType theXml = new SqlType(SqlDbType.Xml, LargeTypeSizeIndicator);
-        static private readonly SqlType theText = new SqlType(SqlDbType.Text, LargeTypeSizeIndicator);
-        static private readonly SqlType theNText = new SqlType(SqlDbType.NText, LargeTypeSizeIndicator);
-        static private readonly SqlType theImage = new SqlType(SqlDbType.Image, LargeTypeSizeIndicator);
+        private static readonly SqlType theDefaultDecimal = new SqlType(
+            SqlDbType.Decimal,
+            defaultDecimalPrecision,
+            defaultDecimalScale
+        );
+        private static readonly SqlType theFloat = new SqlType(SqlDbType.Float);
+        private static readonly SqlType theInt = new SqlType(SqlDbType.Int);
+        private static readonly SqlType theMoney = new SqlType(SqlDbType.Money, 19, 4);
+        private static readonly SqlType theReal = new SqlType(SqlDbType.Real);
+        private static readonly SqlType theUniqueIdentifier = new SqlType(
+            SqlDbType.UniqueIdentifier
+        );
+        private static readonly SqlType theSmallDateTime = new SqlType(SqlDbType.SmallDateTime);
+        private static readonly SqlType theSmallInt = new SqlType(SqlDbType.SmallInt);
+        private static readonly SqlType theSmallMoney = new SqlType(SqlDbType.SmallMoney, 10, 4);
+        private static readonly SqlType theTimestamp = new SqlType(SqlDbType.Timestamp);
+        private static readonly SqlType theTinyInt = new SqlType(SqlDbType.TinyInt);
+        private static readonly SqlType theXml = new SqlType(SqlDbType.Xml, LargeTypeSizeIndicator);
+        private static readonly SqlType theText = new SqlType(
+            SqlDbType.Text,
+            LargeTypeSizeIndicator
+        );
+        private static readonly SqlType theNText = new SqlType(
+            SqlDbType.NText,
+            LargeTypeSizeIndicator
+        );
+        private static readonly SqlType theImage = new SqlType(
+            SqlDbType.Image,
+            LargeTypeSizeIndicator
+        );
         #endregion
 
-        public class SqlType : ProviderType {
+        public class SqlType : ProviderType
+        {
             /// <summary>
             /// Helper method for building ToString functions.
             /// </summary>
-            protected static string KeyValue<T>(string key, T value) {
-                if (value != null) {
+            protected static string KeyValue<T>(string key, T value)
+            {
+                if (value != null)
+                {
                     return key + "=" + value.ToString() + " ";
                 }
                 return String.Empty;
@@ -181,29 +250,34 @@ namespace System.Data.Linq.SqlClient {
 
             /// <summary>
             /// Helper method for building ToString functions.
-           /// </summary>
-            protected static string SingleValue<T>(T value) {
-                if (value != null) {
+            /// </summary>
+            protected static string SingleValue<T>(T value)
+            {
+                if (value != null)
+                {
                     return value.ToString() + " ";
                 }
                 return string.Empty;
-            }        
-            public override string ToString() {
-                return SingleValue(GetClosestRuntimeType()) 
-                        + SingleValue(ToQueryString())
-                        + KeyValue("IsApplicationType", IsApplicationType)
-                        + KeyValue("IsUnicodeType", IsUnicodeType)
-                        + KeyValue("IsRuntimeOnlyType", IsRuntimeOnlyType)
-                        + KeyValue("SupportsComparison", SupportsComparison)
-                        + KeyValue("SupportsLength", SupportsLength)
-                        + KeyValue("IsLargeType", IsLargeType)
-                        + KeyValue("IsFixedSize", IsFixedSize)
-                        + KeyValue("IsOrderable", IsOrderable)
-                        + KeyValue("IsGroupable", IsGroupable)
-                        + KeyValue("IsNumeric", IsNumeric)
-                        + KeyValue("IsChar", IsChar)
-                        + KeyValue("IsString", IsString);
-            }        
+            }
+
+            public override string ToString()
+            {
+                return SingleValue(GetClosestRuntimeType())
+                    + SingleValue(ToQueryString())
+                    + KeyValue("IsApplicationType", IsApplicationType)
+                    + KeyValue("IsUnicodeType", IsUnicodeType)
+                    + KeyValue("IsRuntimeOnlyType", IsRuntimeOnlyType)
+                    + KeyValue("SupportsComparison", SupportsComparison)
+                    + KeyValue("SupportsLength", SupportsLength)
+                    + KeyValue("IsLargeType", IsLargeType)
+                    + KeyValue("IsFixedSize", IsFixedSize)
+                    + KeyValue("IsOrderable", IsOrderable)
+                    + KeyValue("IsGroupable", IsGroupable)
+                    + KeyValue("IsNumeric", IsNumeric)
+                    + KeyValue("IsChar", IsChar)
+                    + KeyValue("IsString", IsString);
+            }
+
             protected SqlDbType sqlDbType;
             protected int? size;
             protected int precision;
@@ -212,35 +286,43 @@ namespace System.Data.Linq.SqlClient {
             private int? applicationTypeIndex = null;
 
             #region Constructors
-            internal SqlType(SqlDbType type) {
+            internal SqlType(SqlDbType type)
+            {
                 this.sqlDbType = type;
             }
 
-            internal SqlType(SqlDbType type, int? size) {
+            internal SqlType(SqlDbType type, int? size)
+            {
                 this.sqlDbType = type;
                 this.size = size;
             }
 
-            internal SqlType(SqlDbType type, int precision, int scale) {
+            internal SqlType(SqlDbType type, int precision, int scale)
+            {
                 System.Diagnostics.Debug.Assert(scale <= precision);
                 this.sqlDbType = type;
                 this.precision = precision;
                 this.scale = scale;
             }
 
-            internal SqlType(Type type) {
+            internal SqlType(Type type)
+            {
                 this.runtimeOnlyType = type;
             }
 
-            internal SqlType(int applicationTypeIndex) {
+            internal SqlType(int applicationTypeIndex)
+            {
                 this.applicationTypeIndex = applicationTypeIndex;
             }
             #endregion
 
             #region ProviderType Implementation
-            internal override bool IsUnicodeType {
-                get {
-                    switch (this.SqlDbType) {
+            internal override bool IsUnicodeType
+            {
+                get
+                {
+                    switch (this.SqlDbType)
+                    {
                         case SqlDbType.NChar:
                         case SqlDbType.NText:
                         case SqlDbType.NVarChar:
@@ -250,9 +332,13 @@ namespace System.Data.Linq.SqlClient {
                     }
                 }
             }
-            internal override ProviderType GetNonUnicodeEquivalent() {
-                if (IsUnicodeType) {
-                    switch (this.SqlDbType) {
+
+            internal override ProviderType GetNonUnicodeEquivalent()
+            {
+                if (IsUnicodeType)
+                {
+                    switch (this.SqlDbType)
+                    {
                         case SqlDbType.NChar:
                             return new SqlType(SqlDbType.Char, this.Size);
                         case SqlDbType.NText:
@@ -266,16 +352,21 @@ namespace System.Data.Linq.SqlClient {
                 }
                 return this;
             }
-            internal override bool IsRuntimeOnlyType {
+
+            internal override bool IsRuntimeOnlyType
+            {
                 get { return runtimeOnlyType != null; }
             }
 
-            internal override bool IsApplicationType {
+            internal override bool IsApplicationType
+            {
                 get { return applicationTypeIndex != null; }
             }
 
-            internal override bool IsApplicationTypeOf(int index) {
-                if (IsApplicationType) {
+            internal override bool IsApplicationTypeOf(int index)
+            {
+                if (IsApplicationType)
+                {
                     return applicationTypeIndex == index;
                 }
                 return false;
@@ -287,19 +378,29 @@ namespace System.Data.Linq.SqlClient {
             /// all these types have length less than the default sized used by SqlServer,
             /// so the length specification can be omitted without fear of truncation.
             /// </summary>
-            internal override bool CanSuppressSizeForConversionToString{
-                get {
+            internal override bool CanSuppressSizeForConversionToString
+            {
+                get
+                {
                     int defaultSize = 30;
 
-                    if (this.IsLargeType) {
+                    if (this.IsLargeType)
+                    {
                         return false;
                     }
-                    else if (!this.IsChar && !this.IsString && this.IsFixedSize && this.Size > 0 /*&& this.Size != LargeTypeSizeIndicator*/) { // commented out because LargeTypeSizeIndicator == -1
+                    else if (
+                        !this.IsChar
+                        && !this.IsString
+                        && this.IsFixedSize
+                        && this.Size > 0 /*&& this.Size != LargeTypeSizeIndicator*/
+                    )
+                    { // commented out because LargeTypeSizeIndicator == -1
                         return (this.Size < defaultSize);
                     }
-                    else {
-
-                        switch (this.SqlDbType) {
+                    else
+                    {
+                        switch (this.SqlDbType)
+                        {
                             case SqlDbType.BigInt: // -2^63 (-9,223,372,036,854,775,808) to 2^63-1 (9,223,372,036,854,775,807)
                             case SqlDbType.Bit: // 0 or 1
                             case SqlDbType.Int: // -2^31 (-2,147,483,648) to 2^31-1 (2,147,483,647)
@@ -312,42 +413,54 @@ namespace System.Data.Linq.SqlClient {
                                 return true;
                             default:
                                 return false;
-                        };
+                        }
+                        ;
                     }
-
                 }
             }
 
-            internal override int ComparePrecedenceTo(ProviderType type) {
+            internal override int ComparePrecedenceTo(ProviderType type)
+            {
                 SqlType sqlProviderType = (SqlType)type;
                 // Highest precedence is given to server-known types. Converting to a client-only type is
                 // impossible when the conversion is present in a SQL query.
-                int p0 = IsTypeKnownByProvider ? GetTypeCoercionPrecedence(this.SqlDbType) : Int32.MinValue;
-                int p1 = sqlProviderType.IsTypeKnownByProvider ? GetTypeCoercionPrecedence(sqlProviderType.SqlDbType) : Int32.MinValue;
+                int p0 = IsTypeKnownByProvider
+                    ? GetTypeCoercionPrecedence(this.SqlDbType)
+                    : Int32.MinValue;
+                int p1 = sqlProviderType.IsTypeKnownByProvider
+                    ? GetTypeCoercionPrecedence(sqlProviderType.SqlDbType)
+                    : Int32.MinValue;
                 return p0.CompareTo(p1);
             }
 
             /// <summary>
             /// Whether this is a legitimate server side type like NVARCHAR.
             /// </summary>
-            private bool IsTypeKnownByProvider {
+            private bool IsTypeKnownByProvider
+            {
                 get { return !IsApplicationType && !IsRuntimeOnlyType; }
             }
 
-            internal override bool IsSameTypeFamily(ProviderType type) {
+            internal override bool IsSameTypeFamily(ProviderType type)
+            {
                 SqlType sqlType = (SqlType)type;
-                if (IsApplicationType) {
+                if (IsApplicationType)
+                {
                     return false;
                 }
-                if (sqlType.IsApplicationType) {
+                if (sqlType.IsApplicationType)
+                {
                     return false;
                 }
                 return this.Category == sqlType.Category;
             }
 
-            internal override bool SupportsComparison {
-                get {
-                    switch (this.sqlDbType) {
+            internal override bool SupportsComparison
+            {
+                get
+                {
+                    switch (this.sqlDbType)
+                    {
                         case SqlDbType.NText:
                         case SqlDbType.Image:
                         case SqlDbType.Xml:
@@ -359,9 +472,12 @@ namespace System.Data.Linq.SqlClient {
                 }
             }
 
-            internal override bool SupportsLength {
-                get {
-                    switch (this.sqlDbType) {
+            internal override bool SupportsLength
+            {
+                get
+                {
+                    switch (this.sqlDbType)
+                    {
                         case SqlDbType.NText:
                         case SqlDbType.Image:
                         case SqlDbType.Xml:
@@ -376,21 +492,27 @@ namespace System.Data.Linq.SqlClient {
             /// <summary>
             /// Returns true if the given values will be equal to eachother on the server for this type.
             /// </summary>
-            internal override bool AreValuesEqual(object o1, object o2) {
-                if (o1 == null || o2 == null) {
+            internal override bool AreValuesEqual(object o1, object o2)
+            {
+                if (o1 == null || o2 == null)
+                {
                     return false;
                 }
-                switch (this.sqlDbType) {
+                switch (this.sqlDbType)
+                {
                     case SqlDbType.Char:
                     case SqlDbType.NChar:
                     case SqlDbType.NVarChar:
                     case SqlDbType.VarChar:
                     case SqlDbType.Text:
                         string s1 = o1 as string;
-                        if (s1 != null) {
+                        if (s1 != null)
+                        {
                             string s2 = o2 as string;
-                            if (s2 != null) {
-                                return s1.TrimEnd(' ').Equals(s2.TrimEnd(' '), StringComparison.Ordinal);
+                            if (s2 != null)
+                            {
+                                return s1.TrimEnd(' ')
+                                    .Equals(s2.TrimEnd(' '), StringComparison.Ordinal);
                             }
                         }
                         break;
@@ -398,9 +520,12 @@ namespace System.Data.Linq.SqlClient {
                 return o1.Equals(o2);
             }
 
-            internal override bool IsLargeType {
-                get {
-                    switch (this.sqlDbType) {
+            internal override bool IsLargeType
+            {
+                get
+                {
+                    switch (this.sqlDbType)
+                    {
                         case SqlDbType.NText:
                         case SqlDbType.Image:
                         case SqlDbType.Xml:
@@ -416,13 +541,16 @@ namespace System.Data.Linq.SqlClient {
                 }
             }
 
-            internal override bool HasPrecisionAndScale {
-                get {
-                    switch (SqlDbType) {
+            internal override bool HasPrecisionAndScale
+            {
+                get
+                {
+                    switch (SqlDbType)
+                    {
                         case SqlDbType.Decimal:
                         case SqlDbType.Float:
                         case SqlDbType.Real:
-                        case SqlDbType.Money:      // precision and scale are fixed at 19,4
+                        case SqlDbType.Money: // precision and scale are fixed at 19,4
                         case SqlDbType.SmallMoney: // precision and scale are fixed at 10,4
                         case SqlDbType.DateTime2:
                         case SqlDbType.DateTimeOffset:
@@ -434,27 +562,38 @@ namespace System.Data.Linq.SqlClient {
                 }
             }
 
-            internal override Type GetClosestRuntimeType() {
-                if (runtimeOnlyType != null) {
+            internal override Type GetClosestRuntimeType()
+            {
+                if (runtimeOnlyType != null)
+                {
                     return runtimeOnlyType;
                 }
-                else {
+                else
+                {
                     return SqlTypeSystem.GetClosestRuntimeType(this.sqlDbType);
                 }
             }
 
-            internal override string ToQueryString() {
+            internal override string ToQueryString()
+            {
                 return ToQueryString(QueryFormatOptions.None);
             }
 
-            [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification="These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand.")]
-            internal override string ToQueryString(QueryFormatOptions formatFlags) {
-                if (runtimeOnlyType != null) {
+            [SuppressMessage(
+                "Microsoft.Maintainability",
+                "CA1502:AvoidExcessiveComplexity",
+                Justification = "These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand."
+            )]
+            internal override string ToQueryString(QueryFormatOptions formatFlags)
+            {
+                if (runtimeOnlyType != null)
+                {
                     return runtimeOnlyType.ToString();
                 }
                 StringBuilder sb = new StringBuilder();
 
-                switch (sqlDbType) {
+                switch (sqlDbType)
+                {
                     case SqlDbType.BigInt:
                     case SqlDbType.Bit:
                     case SqlDbType.Date:
@@ -484,7 +623,8 @@ namespace System.Data.Linq.SqlClient {
                     case SqlDbType.Char:
                     case SqlDbType.NChar:
                         sb.Append(sqlDbType);
-                        if ((formatFlags & QueryFormatOptions.SuppressSize) == 0) {
+                        if ((formatFlags & QueryFormatOptions.SuppressSize) == 0)
+                        {
                             sb.Append("(");
                             sb.Append(size);
                             sb.Append(")");
@@ -494,12 +634,18 @@ namespace System.Data.Linq.SqlClient {
                     case SqlDbType.VarBinary:
                     case SqlDbType.VarChar:
                         sb.Append(sqlDbType);
-                        if ((size.HasValue && size != 0) && (formatFlags & QueryFormatOptions.SuppressSize) == 0) {
+                        if (
+                            (size.HasValue && size != 0)
+                            && (formatFlags & QueryFormatOptions.SuppressSize) == 0
+                        )
+                        {
                             sb.Append("(");
-                            if (size == LargeTypeSizeIndicator) {
+                            if (size == LargeTypeSizeIndicator)
+                            {
                                 sb.Append("MAX");
                             }
-                            else {
+                            else
+                            {
                                 sb.Append(size);
                             }
                             sb.Append(")");
@@ -509,10 +655,12 @@ namespace System.Data.Linq.SqlClient {
                     case SqlDbType.Float:
                     case SqlDbType.Real:
                         sb.Append(sqlDbType);
-                        if (precision != 0) {
+                        if (precision != 0)
+                        {
                             sb.Append("(");
                             sb.Append(precision);
-                            if (scale != 0) {
+                            if (scale != 0)
+                            {
                                 sb.Append(",");
                                 sb.Append(scale);
                             }
@@ -523,29 +671,32 @@ namespace System.Data.Linq.SqlClient {
                 return sb.ToString();
             }
 
-            internal override bool HasSizeOrIsLarge {
-                get {
-                    return this.size.HasValue || this.IsLargeType;
-                }
+            internal override bool HasSizeOrIsLarge
+            {
+                get { return this.size.HasValue || this.IsLargeType; }
             }
 
-            internal override int? Size {
-                get {
-                    return this.size;
-                }
+            internal override int? Size
+            {
+                get { return this.size; }
             }
 
-            internal int Precision {
+            internal int Precision
+            {
                 get { return this.precision; }
             }
 
-            internal int Scale {
+            internal int Scale
+            {
                 get { return this.scale; }
             }
 
-            internal override bool IsFixedSize {
-                get {
-                    switch (this.sqlDbType) {
+            internal override bool IsFixedSize
+            {
+                get
+                {
+                    switch (this.sqlDbType)
+                    {
                         case SqlDbType.NText:
                         case SqlDbType.Text:
                         case SqlDbType.NVarChar:
@@ -560,15 +711,20 @@ namespace System.Data.Linq.SqlClient {
                 }
             }
 
-            internal SqlDbType SqlDbType {
+            internal SqlDbType SqlDbType
+            {
                 get { return sqlDbType; }
             }
 
-            internal override bool IsOrderable {
-                get {
-                    if (this.IsRuntimeOnlyType) return false; // must be a SQL type
+            internal override bool IsOrderable
+            {
+                get
+                {
+                    if (this.IsRuntimeOnlyType)
+                        return false; // must be a SQL type
 
-                    switch (this.sqlDbType) {
+                    switch (this.sqlDbType)
+                    {
                         case SqlDbType.Image:
                         case SqlDbType.Text:
                         case SqlDbType.NText:
@@ -580,11 +736,15 @@ namespace System.Data.Linq.SqlClient {
                 }
             }
 
-            internal override bool IsGroupable {
-                get {
-                    if (this.IsRuntimeOnlyType) return false; // must be a SQL type
+            internal override bool IsGroupable
+            {
+                get
+                {
+                    if (this.IsRuntimeOnlyType)
+                        return false; // must be a SQL type
 
-                    switch (this.sqlDbType) {
+                    switch (this.sqlDbType)
+                    {
                         case SqlDbType.Image:
                         case SqlDbType.Text:
                         case SqlDbType.NText:
@@ -596,20 +756,26 @@ namespace System.Data.Linq.SqlClient {
                 }
             }
 
-            internal override bool CanBeColumn {
+            internal override bool CanBeColumn
+            {
                 get { return !this.IsApplicationType && !this.IsRuntimeOnlyType; }
             }
 
-            internal override bool CanBeParameter {
+            internal override bool CanBeParameter
+            {
                 get { return !this.IsApplicationType && !this.IsRuntimeOnlyType; }
             }
 
-            internal override bool IsNumeric {
-                get {
-                    if (IsApplicationType || IsRuntimeOnlyType) {
+            internal override bool IsNumeric
+            {
+                get
+                {
+                    if (IsApplicationType || IsRuntimeOnlyType)
+                    {
                         return false;
                     }
-                    switch (SqlDbType) {
+                    switch (SqlDbType)
+                    {
                         case SqlDbType.Bit:
                         case SqlDbType.TinyInt:
                         case SqlDbType.SmallInt:
@@ -623,15 +789,19 @@ namespace System.Data.Linq.SqlClient {
                             return true;
                         default:
                             return false;
-                    };
+                    }
+                    ;
                 }
             }
 
-            internal override bool IsChar {
-                get {
+            internal override bool IsChar
+            {
+                get
+                {
                     if (IsApplicationType || IsRuntimeOnlyType)
                         return false;
-                    switch (SqlDbType) {
+                    switch (SqlDbType)
+                    {
                         case SqlDbType.Char:
                         case SqlDbType.NChar:
                         case SqlDbType.NVarChar:
@@ -643,11 +813,14 @@ namespace System.Data.Linq.SqlClient {
                 }
             }
 
-            internal override bool IsString {
-                get {
+            internal override bool IsString
+            {
+                get
+                {
                     if (IsApplicationType || IsRuntimeOnlyType)
                         return false;
-                    switch (SqlDbType) {
+                    switch (SqlDbType)
+                    {
                         case SqlDbType.Char:
                         case SqlDbType.NChar:
                         case SqlDbType.NVarChar:
@@ -666,7 +839,8 @@ namespace System.Data.Linq.SqlClient {
 
             #region Equals + GetHashCode
 
-            public override bool Equals(object obj) {
+            public override bool Equals(object obj)
+            {
                 if ((object)this == obj)
                     return true;
 
@@ -674,70 +848,113 @@ namespace System.Data.Linq.SqlClient {
                 if (that == null)
                     return false;
 
-                return 
-                    this.runtimeOnlyType == that.runtimeOnlyType &&
-                    this.applicationTypeIndex == that.applicationTypeIndex &&
-                    this.sqlDbType == that.sqlDbType &&
-                    this.Size == that.Size &&
-                    this.precision == that.precision &&
-                    this.scale == that.scale;
+                return this.runtimeOnlyType == that.runtimeOnlyType
+                    && this.applicationTypeIndex == that.applicationTypeIndex
+                    && this.sqlDbType == that.sqlDbType
+                    && this.Size == that.Size
+                    && this.precision == that.precision
+                    && this.scale == that.scale;
             }
 
-            public override int GetHashCode() {
+            public override int GetHashCode()
+            {
                 // Make up a hash function that will atleast not treat precision and scale
                 // as interchangeable. This may need a smarter replacement if certain hash
                 // buckets get too full.
                 int hash = 0;
-                if (this.runtimeOnlyType != null) {
+                if (this.runtimeOnlyType != null)
+                {
                     hash = this.runtimeOnlyType.GetHashCode();
                 }
-                else if (this.applicationTypeIndex != null) {
+                else if (this.applicationTypeIndex != null)
+                {
                     hash = this.applicationTypeIndex.Value;
                 }
-                return hash ^ this.sqlDbType.GetHashCode() ^ (this.size ?? 0) ^ (this.precision) ^ (this.scale << 8);
+                return hash
+                    ^ this.sqlDbType.GetHashCode()
+                    ^ (this.size ?? 0)
+                    ^ (this.precision)
+                    ^ (this.scale << 8);
             }
             #endregion
 
             #region Type Classification
-            [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification="These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand.")]
-            private static int GetTypeCoercionPrecedence(SqlDbType type) {
-                switch (type) {
-                    case SqlDbType.Binary: return 0;
-                    case SqlDbType.VarBinary: return 1;
-                    case SqlDbType.VarChar: return 2;
-                    case SqlDbType.Char: return 3;
-                    case SqlDbType.NChar: return 4;
-                    case SqlDbType.NVarChar: return 5;
-                    case SqlDbType.UniqueIdentifier: return 6;
-                    case SqlDbType.Timestamp: return 7;
-                    case SqlDbType.Image: return 8;
-                    case SqlDbType.Text: return 9;
-                    case SqlDbType.NText: return 10;
-                    case SqlDbType.Bit: return 11;
-                    case SqlDbType.TinyInt: return 12;
-                    case SqlDbType.SmallInt: return 13;
-                    case SqlDbType.Int: return 14;
-                    case SqlDbType.BigInt: return 15;
-                    case SqlDbType.SmallMoney: return 16;
-                    case SqlDbType.Money: return 17;
-                    case SqlDbType.Decimal: return 18;
-                    case SqlDbType.Real: return 19;
-                    case SqlDbType.Float: return 20;
-                    case SqlDbType.Date: return 21;
-                    case SqlDbType.Time: return 22;
-                    case SqlDbType.SmallDateTime: return 23;
-                    case SqlDbType.DateTime: return 24;
-                    case SqlDbType.DateTime2: return 25;
-                    case SqlDbType.DateTimeOffset: return 26;
-                    case SqlDbType.Xml: return 27;
-                    case SqlDbType.Variant: return 28;
-                    case SqlDbType.Udt: return 29;
+            [SuppressMessage(
+                "Microsoft.Maintainability",
+                "CA1502:AvoidExcessiveComplexity",
+                Justification = "These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand."
+            )]
+            private static int GetTypeCoercionPrecedence(SqlDbType type)
+            {
+                switch (type)
+                {
+                    case SqlDbType.Binary:
+                        return 0;
+                    case SqlDbType.VarBinary:
+                        return 1;
+                    case SqlDbType.VarChar:
+                        return 2;
+                    case SqlDbType.Char:
+                        return 3;
+                    case SqlDbType.NChar:
+                        return 4;
+                    case SqlDbType.NVarChar:
+                        return 5;
+                    case SqlDbType.UniqueIdentifier:
+                        return 6;
+                    case SqlDbType.Timestamp:
+                        return 7;
+                    case SqlDbType.Image:
+                        return 8;
+                    case SqlDbType.Text:
+                        return 9;
+                    case SqlDbType.NText:
+                        return 10;
+                    case SqlDbType.Bit:
+                        return 11;
+                    case SqlDbType.TinyInt:
+                        return 12;
+                    case SqlDbType.SmallInt:
+                        return 13;
+                    case SqlDbType.Int:
+                        return 14;
+                    case SqlDbType.BigInt:
+                        return 15;
+                    case SqlDbType.SmallMoney:
+                        return 16;
+                    case SqlDbType.Money:
+                        return 17;
+                    case SqlDbType.Decimal:
+                        return 18;
+                    case SqlDbType.Real:
+                        return 19;
+                    case SqlDbType.Float:
+                        return 20;
+                    case SqlDbType.Date:
+                        return 21;
+                    case SqlDbType.Time:
+                        return 22;
+                    case SqlDbType.SmallDateTime:
+                        return 23;
+                    case SqlDbType.DateTime:
+                        return 24;
+                    case SqlDbType.DateTime2:
+                        return 25;
+                    case SqlDbType.DateTimeOffset:
+                        return 26;
+                    case SqlDbType.Xml:
+                        return 27;
+                    case SqlDbType.Variant:
+                        return 28;
+                    case SqlDbType.Udt:
+                        return 29;
                     default:
                         throw Error.UnexpectedTypeCode(type);
                 }
             }
 
-            internal enum TypeCategory {
+            internal enum TypeCategory
+            {
                 Numeric,
                 Char,
                 Text,
@@ -747,13 +964,20 @@ namespace System.Data.Linq.SqlClient {
                 DateTime,
                 UniqueIdentifier,
                 Variant,
-                Udt
+                Udt,
             }
 
-            [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification="These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand.")]
-            internal TypeCategory Category {
-                get {
-                    switch (this.SqlDbType) {
+            [SuppressMessage(
+                "Microsoft.Maintainability",
+                "CA1502:AvoidExcessiveComplexity",
+                Justification = "These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand."
+            )]
+            internal TypeCategory Category
+            {
+                get
+                {
+                    switch (this.SqlDbType)
+                    {
                         case SqlDbType.Bit:
                         case SqlDbType.TinyInt:
                         case SqlDbType.SmallInt:
@@ -802,51 +1026,65 @@ namespace System.Data.Linq.SqlClient {
             #endregion
         }
 
-        abstract class ProviderBase : TypeSystemProvider {
+        abstract class ProviderBase : TypeSystemProvider
+        {
             protected Dictionary<int, SqlType> applicationTypes = new Dictionary<int, SqlType>();
 
             #region Factories
-            internal override ProviderType GetApplicationType(int index) {
+            internal override ProviderType GetApplicationType(int index)
+            {
                 if (index < 0)
                     throw Error.ArgumentOutOfRange("index");
                 SqlType result = null;
-                if (!applicationTypes.TryGetValue(index, out result)) {
+                if (!applicationTypes.TryGetValue(index, out result))
+                {
                     result = new SqlType(index);
                     applicationTypes.Add(index, result);
                 }
                 return result;
             }
 
-            [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification="These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand.")]
-            internal override ProviderType Parse(string stype) {
+            [SuppressMessage(
+                "Microsoft.Maintainability",
+                "CA1502:AvoidExcessiveComplexity",
+                Justification = "These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand."
+            )]
+            internal override ProviderType Parse(string stype)
+            {
                 // parse type...
                 string typeName = null;
                 string param1 = null;
                 string param2 = null;
                 int paren = stype.IndexOf('(');
                 int space = stype.IndexOf(' ');
-                int end = (paren != -1 && space != -1) ? Math.Min(space, paren)
-                        : (paren != -1) ? paren
-                        : (space != -1) ? space
-                        : -1;
-                if (end == -1) {
+                int end =
+                    (paren != -1 && space != -1) ? Math.Min(space, paren)
+                    : (paren != -1) ? paren
+                    : (space != -1) ? space
+                    : -1;
+                if (end == -1)
+                {
                     typeName = stype;
                     end = stype.Length;
                 }
-                else {
+                else
+                {
                     typeName = stype.Substring(0, end);
                 }
                 int start = end;
-                if (start < stype.Length && stype[start] == '(') {
+                if (start < stype.Length && stype[start] == '(')
+                {
                     start++;
                     end = stype.IndexOf(',', start);
-                    if (end > 0) {
+                    if (end > 0)
+                    {
                         param1 = stype.Substring(start, end - start);
                         start = end + 1;
                         end = stype.IndexOf(')', start);
                         param2 = stype.Substring(start, end - start);
                     }
-                    else {
+                    else
+                    {
                         end = stype.IndexOf(')', start);
                         param1 = stype.Substring(start, end - start);
                     }
@@ -854,19 +1092,25 @@ namespace System.Data.Linq.SqlClient {
                 }
 
                 #region Special case type mappings
-                if (String.Compare(typeName, "rowversion", StringComparison.OrdinalIgnoreCase) == 0) {
+                if (String.Compare(typeName, "rowversion", StringComparison.OrdinalIgnoreCase) == 0)
+                {
                     typeName = "Timestamp";
                 }
 
-                if (String.Compare(typeName, "numeric", StringComparison.OrdinalIgnoreCase) == 0) {
+                if (String.Compare(typeName, "numeric", StringComparison.OrdinalIgnoreCase) == 0)
+                {
                     typeName = "Decimal";
                 }
 
-                if (String.Compare(typeName, "sql_variant", StringComparison.OrdinalIgnoreCase) == 0) {
+                if (
+                    String.Compare(typeName, "sql_variant", StringComparison.OrdinalIgnoreCase) == 0
+                )
+                {
                     typeName = "Variant";
                 }
 
-                if (String.Compare(typeName, "filestream", StringComparison.OrdinalIgnoreCase) == 0) {
+                if (String.Compare(typeName, "filestream", StringComparison.OrdinalIgnoreCase) == 0)
+                {
                     typeName = "Binary";
                 }
                 #endregion
@@ -874,7 +1118,11 @@ namespace System.Data.Linq.SqlClient {
                 // since we're going to parse the enum value below, we verify
                 // here that it is defined.  For example, types like table, cursor
                 // are not valid.
-                if (!Enum.GetNames(typeof(SqlDbType)).Select(n => n.ToUpperInvariant()).Contains(typeName.ToUpperInvariant()))
+                if (
+                    !Enum.GetNames(typeof(SqlDbType))
+                        .Select(n => n.ToUpperInvariant())
+                        .Contains(typeName.ToUpperInvariant())
+                )
                 {
                     throw Error.InvalidProviderType(typeName);
                 }
@@ -882,30 +1130,42 @@ namespace System.Data.Linq.SqlClient {
                 int p1 = 0;
                 int p2 = 0;
                 SqlDbType dbType = (SqlDbType)Enum.Parse(typeof(SqlDbType), typeName, true);
-                if (param1 != null) {
-                    if (String.Compare(param1.Trim(), "max", StringComparison.OrdinalIgnoreCase) == 0) {
+                if (param1 != null)
+                {
+                    if (
+                        String.Compare(param1.Trim(), "max", StringComparison.OrdinalIgnoreCase)
+                        == 0
+                    )
+                    {
                         p1 = LargeTypeSizeIndicator;
                     }
-                    else {
+                    else
+                    {
                         p1 = Int32.Parse(param1, Globalization.CultureInfo.InvariantCulture);
                         if (p1 == int.MaxValue)
                             p1 = LargeTypeSizeIndicator;
                     }
                 }
 
-                if (param2 != null) {
-                    if (String.Compare(param2.Trim(), "max", StringComparison.OrdinalIgnoreCase) == 0) {
+                if (param2 != null)
+                {
+                    if (
+                        String.Compare(param2.Trim(), "max", StringComparison.OrdinalIgnoreCase)
+                        == 0
+                    )
+                    {
                         p2 = LargeTypeSizeIndicator;
                     }
-                    else {
+                    else
+                    {
                         p2 = Int32.Parse(param2, Globalization.CultureInfo.InvariantCulture);
                         if (p2 == int.MaxValue)
                             p2 = LargeTypeSizeIndicator;
-
                     }
                 }
 
-                switch (dbType) {
+                switch (dbType)
+                {
                     case SqlDbType.Binary:
                     case SqlDbType.Char:
                     case SqlDbType.NChar:
@@ -949,7 +1209,8 @@ namespace System.Data.Linq.SqlClient {
                     case SqlDbType.VarBinary:
                         maxSize = 8000;
                         break;
-                };
+                }
+                ;
 
                 if (size.HasValue)
                 {
@@ -965,51 +1226,94 @@ namespace System.Data.Linq.SqlClient {
 
                 // if the type provider supports MAX types, return one, otherwise use
                 // the maximum size determined above
-                return Create(targetType, SupportsMaxSize ? SqlTypeSystem.LargeTypeSizeIndicator : maxSize);
+                return Create(
+                    targetType,
+                    SupportsMaxSize ? SqlTypeSystem.LargeTypeSizeIndicator : maxSize
+                );
             }
 
-            internal override void InitializeParameter(ProviderType type, DbParameter parameter, object value) {
+            internal override void InitializeParameter(
+                ProviderType type,
+                DbParameter parameter,
+                object value
+            )
+            {
                 SqlType sqlType = (SqlType)type;
-                if (sqlType.IsRuntimeOnlyType) {
+                if (sqlType.IsRuntimeOnlyType)
+                {
                     throw Error.BadParameterType(sqlType.GetClosestRuntimeType());
                 }
-                System.Data.SqlClient.SqlParameter sParameter = parameter as System.Data.SqlClient.SqlParameter;
-                if (sParameter != null) {
+                System.Data.SqlClient.SqlParameter sParameter =
+                    parameter as System.Data.SqlClient.SqlParameter;
+                if (sParameter != null)
+                {
                     sParameter.SqlDbType = sqlType.SqlDbType;
-                    if (sqlType.HasPrecisionAndScale) {
+                    if (sqlType.HasPrecisionAndScale)
+                    {
                         sParameter.Precision = (byte)sqlType.Precision;
                         sParameter.Scale = (byte)sqlType.Scale;
                     }
                 }
-                else {
+                else
+                {
                     PropertyInfo piSqlDbType = parameter.GetType().GetProperty("SqlDbType");
-                    if (piSqlDbType != null) {
+                    if (piSqlDbType != null)
+                    {
                         piSqlDbType.SetValue(parameter, sqlType.SqlDbType, null);
                     }
-                    if (sqlType.HasPrecisionAndScale) {
+                    if (sqlType.HasPrecisionAndScale)
+                    {
                         PropertyInfo piPrecision = parameter.GetType().GetProperty("Precision");
-                        if (piPrecision != null) {
-                            piPrecision.SetValue(parameter, Convert.ChangeType(sqlType.Precision, piPrecision.PropertyType, CultureInfo.InvariantCulture), null);
+                        if (piPrecision != null)
+                        {
+                            piPrecision.SetValue(
+                                parameter,
+                                Convert.ChangeType(
+                                    sqlType.Precision,
+                                    piPrecision.PropertyType,
+                                    CultureInfo.InvariantCulture
+                                ),
+                                null
+                            );
                         }
                         PropertyInfo piScale = parameter.GetType().GetProperty("Scale");
-                        if (piScale != null) {
-                            piScale.SetValue(parameter, Convert.ChangeType(sqlType.Scale, piScale.PropertyType, CultureInfo.InvariantCulture), null);
+                        if (piScale != null)
+                        {
+                            piScale.SetValue(
+                                parameter,
+                                Convert.ChangeType(
+                                    sqlType.Scale,
+                                    piScale.PropertyType,
+                                    CultureInfo.InvariantCulture
+                                ),
+                                null
+                            );
                         }
                     }
                 }
                 parameter.Value = GetParameterValue(sqlType, value);
 
                 int? determinedSize = DetermineParameterSize(sqlType, parameter);
-                if (determinedSize.HasValue) {
+                if (determinedSize.HasValue)
+                {
                     parameter.Size = determinedSize.Value;
                 }
             }
 
-            internal virtual int? DetermineParameterSize(SqlType declaredType, DbParameter parameter) {
+            internal virtual int? DetermineParameterSize(
+                SqlType declaredType,
+                DbParameter parameter
+            )
+            {
                 // Output parameters and input-parameters of a fixed-size should be specifically set if value fits.
                 bool isInputParameter = parameter.Direction == ParameterDirection.Input;
-                if (!isInputParameter || declaredType.IsFixedSize) {
-                    if (declaredType.Size.HasValue && parameter.Size <= declaredType.Size || declaredType.IsLargeType) {
+                if (!isInputParameter || declaredType.IsFixedSize)
+                {
+                    if (
+                        declaredType.Size.HasValue && parameter.Size <= declaredType.Size
+                        || declaredType.IsLargeType
+                    )
+                    {
                         return declaredType.Size.Value;
                     }
                 }
@@ -1018,8 +1322,10 @@ namespace System.Data.Linq.SqlClient {
                 return null;
             }
 
-            protected int? GetLargestDeclarableSize(SqlType declaredType) {
-                 switch (declaredType.SqlDbType) {
+            protected int? GetLargestDeclarableSize(SqlType declaredType)
+            {
+                switch (declaredType.SqlDbType)
+                {
                     case SqlDbType.Image:
                     case SqlDbType.Binary:
                     case SqlDbType.VarChar:
@@ -1030,27 +1336,45 @@ namespace System.Data.Linq.SqlClient {
                         return null;
                 }
             }
-           
-            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification="Unknown reason.")]
-            protected object GetParameterValue(SqlType type, object value) {
-                if (value == null) {
+
+            [SuppressMessage(
+                "Microsoft.Performance",
+                "CA1822:MarkMembersAsStatic",
+                Justification = "Unknown reason."
+            )]
+            protected object GetParameterValue(SqlType type, object value)
+            {
+                if (value == null)
+                {
                     return DBNull.Value;
                 }
-                else {
+                else
+                {
                     Type vType = value.GetType();
                     Type pType = type.GetClosestRuntimeType();
-                    if (pType == vType) {
+                    if (pType == vType)
+                    {
                         return value;
                     }
-                    else {
+                    else
+                    {
                         return DBConvert.ChangeType(value, pType);
                     }
                 }
             }
 
-            [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification="These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand.")]
-            internal override ProviderType PredictTypeForUnary(SqlNodeType unaryOp, ProviderType operandType) {
-                switch (unaryOp) {
+            [SuppressMessage(
+                "Microsoft.Maintainability",
+                "CA1502:AvoidExcessiveComplexity",
+                Justification = "These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand."
+            )]
+            internal override ProviderType PredictTypeForUnary(
+                SqlNodeType unaryOp,
+                ProviderType operandType
+            )
+            {
+                switch (unaryOp)
+                {
                     case SqlNodeType.Not:
                     case SqlNodeType.Not2V:
                     case SqlNodeType.IsNull:
@@ -1074,10 +1398,12 @@ namespace System.Data.Linq.SqlClient {
                     case SqlNodeType.Stddev:
                         return this.MostPreciseTypeInFamily(operandType);
                     case SqlNodeType.ClrLength:
-                        if (operandType.IsLargeType) {
+                        if (operandType.IsLargeType)
+                        {
                             return this.From(typeof(long)); // SqlDbType.BigInt
                         }
-                        else {
+                        else
+                        {
                             return this.From(typeof(int)); // SqlDbType.Int
                         }
                     default:
@@ -1085,18 +1411,34 @@ namespace System.Data.Linq.SqlClient {
                 }
             }
 
-            [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification="These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand.")]
-            internal override ProviderType PredictTypeForBinary(SqlNodeType binaryOp, ProviderType leftType, ProviderType rightType) {
+            [SuppressMessage(
+                "Microsoft.Maintainability",
+                "CA1502:AvoidExcessiveComplexity",
+                Justification = "These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand."
+            )]
+            internal override ProviderType PredictTypeForBinary(
+                SqlNodeType binaryOp,
+                ProviderType leftType,
+                ProviderType rightType
+            )
+            {
                 SqlType highest;
 
-                if (leftType.IsSameTypeFamily(this.From(typeof(string))) && rightType.IsSameTypeFamily(this.From(typeof(string)))) {
+                if (
+                    leftType.IsSameTypeFamily(this.From(typeof(string)))
+                    && rightType.IsSameTypeFamily(this.From(typeof(string)))
+                )
+                {
                     highest = (SqlType)this.GetBestType(leftType, rightType);
-                } else {
+                }
+                else
+                {
                     int coercionPrecedence = leftType.ComparePrecedenceTo(rightType);
                     highest = (SqlType)(coercionPrecedence > 0 ? leftType : rightType);
                 }
 
-                switch (binaryOp) {
+                switch (binaryOp)
+                {
                     case SqlNodeType.Add:
                     case SqlNodeType.Sub:
                     case SqlNodeType.Mul:
@@ -1116,8 +1458,10 @@ namespace System.Data.Linq.SqlClient {
                             // the maximum allowable size
                             ProviderType concatType = this.GetBestType(highest.SqlDbType, null);
 
-                            if ((!leftType.IsLargeType && leftType.Size.HasValue) &&
-                                (!rightType.IsLargeType && rightType.Size.HasValue))
+                            if (
+                                (!leftType.IsLargeType && leftType.Size.HasValue)
+                                && (!rightType.IsLargeType && rightType.Size.HasValue)
+                            )
                             {
                                 // If both types are not large types and have size, and the
                                 // size is less than the default size, return the shortened type.
@@ -1147,9 +1491,11 @@ namespace System.Data.Linq.SqlClient {
                 }
             }
 
-            internal override ProviderType MostPreciseTypeInFamily(ProviderType type) {
+            internal override ProviderType MostPreciseTypeInFamily(ProviderType type)
+            {
                 SqlType sqlType = (SqlType)type;
-                switch (sqlType.SqlDbType) {
+                switch (sqlType.SqlDbType)
+                {
                     case SqlDbType.TinyInt:
                     case SqlDbType.SmallInt:
                     case SqlDbType.Int:
@@ -1173,10 +1519,16 @@ namespace System.Data.Linq.SqlClient {
                 }
             }
 
-            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification="Unknown reason.")]
-            private ProviderType[] GetArgumentTypes(SqlFunctionCall fc) {
+            [SuppressMessage(
+                "Microsoft.Performance",
+                "CA1822:MarkMembersAsStatic",
+                Justification = "Unknown reason."
+            )]
+            private ProviderType[] GetArgumentTypes(SqlFunctionCall fc)
+            {
                 ProviderType[] array = new ProviderType[fc.Arguments.Count];
-                for (int i = 0, n = array.Length; i < n; i++) {
+                for (int i = 0, n = array.Length; i < n; i++)
+                {
                     array[i] = fc.Arguments[i].SqlType;
                 }
                 return array;
@@ -1189,24 +1541,33 @@ namespace System.Data.Linq.SqlClient {
             /// </summary>
             /// <param name="functionCall">The SqlFunctionCall node.</param>
             /// <returns>null: Don't change type, otherwise: Set return type to this ProviderType</returns>
-            [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification="These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand.")]
-            internal override ProviderType ReturnTypeOfFunction(SqlFunctionCall functionCall) {
+            [SuppressMessage(
+                "Microsoft.Maintainability",
+                "CA1502:AvoidExcessiveComplexity",
+                Justification = "These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand."
+            )]
+            internal override ProviderType ReturnTypeOfFunction(SqlFunctionCall functionCall)
+            {
                 var argumentTypes = this.GetArgumentTypes(functionCall);
 
                 SqlType arg0 = (SqlType)argumentTypes[0];
                 SqlType arg1 = argumentTypes.Length > 1 ? (SqlType)argumentTypes[1] : (SqlType)null;
 
-                switch (functionCall.Name) {
+                switch (functionCall.Name)
+                {
                     case "LEN":
                     case "DATALENGTH":
-                        switch (arg0.SqlDbType) {
+                        switch (arg0.SqlDbType)
+                        {
                             case SqlDbType.NVarChar:
                             case SqlDbType.VarChar:
                             case SqlDbType.VarBinary:
-                                if (arg0.IsLargeType) {
+                                if (arg0.IsLargeType)
+                                {
                                     return Create(SqlDbType.BigInt);
                                 }
-                                else {
+                                else
+                                {
                                     return Create(SqlDbType.Int);
                                 }
                             default:
@@ -1218,7 +1579,8 @@ namespace System.Data.Linq.SqlClient {
                     case "CEILING":
                     case "FLOOR":
                     case "POWER":
-                        switch (arg0.SqlDbType) {
+                        switch (arg0.SqlDbType)
+                        {
                             case SqlDbType.TinyInt:
                             case SqlDbType.Int:
                             case SqlDbType.SmallInt:
@@ -1235,11 +1597,14 @@ namespace System.Data.Linq.SqlClient {
                             return Create(SqlDbType.BigInt);
                         return Create(SqlDbType.Int);
                     case "SUBSTRING":
-                        if (functionCall.Arguments[2].NodeType == SqlNodeType.Value) {
+                        if (functionCall.Arguments[2].NodeType == SqlNodeType.Value)
+                        {
                             SqlValue val = (SqlValue)functionCall.Arguments[2];
 
-                            if (val.Value is int) {
-                                switch (arg0.SqlDbType) {
+                            if (val.Value is int)
+                            {
+                                switch (arg0.SqlDbType)
+                                {
                                     case SqlDbType.NVarChar:
                                     case SqlDbType.NChar:
                                     case SqlDbType.VarChar:
@@ -1250,7 +1615,8 @@ namespace System.Data.Linq.SqlClient {
                                 }
                             }
                         }
-                        switch (arg0.SqlDbType) {
+                        switch (arg0.SqlDbType)
+                        {
                             case SqlDbType.NVarChar:
                             case SqlDbType.NChar:
                                 return Create(SqlDbType.NVarChar);
@@ -1262,15 +1628,18 @@ namespace System.Data.Linq.SqlClient {
                         }
                     case "STUFF":
                         // if the stuff call is an insertion  and is strictly additive
-                        // (no deletion of characters) the return type is the same as 
+                        // (no deletion of characters) the return type is the same as
                         // a concatenation
                         if (functionCall.Arguments.Count == 4)
                         {
                             SqlValue delLength = functionCall.Arguments[2] as SqlValue;
                             if (delLength != null && (int)delLength.Value == 0)
                             {
-                                return PredictTypeForBinary(SqlNodeType.Concat,
-                                    functionCall.Arguments[0].SqlType, functionCall.Arguments[3].SqlType);
+                                return PredictTypeForBinary(
+                                    SqlNodeType.Concat,
+                                    functionCall.Arguments[0].SqlType,
+                                    functionCall.Arguments[3].SqlType
+                                );
                             }
                         }
                         return null;
@@ -1289,7 +1658,11 @@ namespace System.Data.Linq.SqlClient {
                 }
             }
 
-            internal override ProviderType ChangeTypeFamilyTo(ProviderType type, ProviderType toType) {
+            internal override ProviderType ChangeTypeFamilyTo(
+                ProviderType type,
+                ProviderType toType
+            )
+            {
                 // if this is already the same family, do nothing
                 if (type.IsSameTypeFamily(toType))
                     return type;
@@ -1301,8 +1674,13 @@ namespace System.Data.Linq.SqlClient {
                 SqlType sqlToType = (SqlType)toType;
                 SqlType sqlThisType = (SqlType)type;
 
-                if (sqlToType.Category == SqlType.TypeCategory.Numeric && sqlThisType.Category == SqlType.TypeCategory.Char) {
-                    switch (sqlThisType.SqlDbType) {
+                if (
+                    sqlToType.Category == SqlType.TypeCategory.Numeric
+                    && sqlThisType.Category == SqlType.TypeCategory.Char
+                )
+                {
+                    switch (sqlThisType.SqlDbType)
+                    {
                         case SqlDbType.NChar:
                             return Create(SqlDbType.Int);
                         case SqlDbType.Char:
@@ -1311,56 +1689,83 @@ namespace System.Data.Linq.SqlClient {
                             return toType;
                     }
                 }
-                else {
+                else
+                {
                     return toType;
                 }
             }
 
-            [SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily", Justification = "Microsoft: Cast is dependent on node type and casts do not happen unecessarily in a single code path.")]
-            internal override ProviderType GetBestType(ProviderType typeA, ProviderType typeB) {
+            [SuppressMessage(
+                "Microsoft.Performance",
+                "CA1800:DoNotCastUnnecessarily",
+                Justification = "Microsoft: Cast is dependent on node type and casts do not happen unecessarily in a single code path."
+            )]
+            internal override ProviderType GetBestType(ProviderType typeA, ProviderType typeB)
+            {
                 // first determine the type precedence
                 SqlType bestType = (SqlType)(typeA.ComparePrecedenceTo(typeB) > 0 ? typeA : typeB);
 
                 // if one of the types is a not a server type, return
                 // that type
-                if (typeA.IsApplicationType || typeA.IsRuntimeOnlyType) {
+                if (typeA.IsApplicationType || typeA.IsRuntimeOnlyType)
+                {
                     return typeA;
                 }
-                if (typeB.IsApplicationType || typeB.IsRuntimeOnlyType) {
+                if (typeB.IsApplicationType || typeB.IsRuntimeOnlyType)
+                {
                     return typeB;
                 }
 
                 SqlType sqlTypeA = (SqlType)typeA;
                 SqlType sqlTypeB = (SqlType)typeB;
-                if (sqlTypeA.HasPrecisionAndScale && sqlTypeB.HasPrecisionAndScale && bestType.SqlDbType == SqlDbType.Decimal) {
+                if (
+                    sqlTypeA.HasPrecisionAndScale
+                    && sqlTypeB.HasPrecisionAndScale
+                    && bestType.SqlDbType == SqlDbType.Decimal
+                )
+                {
                     int p0 = sqlTypeA.Precision;
                     int s0 = sqlTypeA.Scale;
                     int p1 = sqlTypeB.Precision;
                     int s1 = sqlTypeB.Scale;
                     // precision and scale may be zero if this is an unsized type.
-                    if (p0 == 0 && s0 == 0 && p1 == 0 && s1 == 0) {
+                    if (p0 == 0 && s0 == 0 && p1 == 0 && s1 == 0)
+                    {
                         return Create(bestType.SqlDbType);
-                    } else if (p0 == 0 && s0 == 0) {
+                    }
+                    else if (p0 == 0 && s0 == 0)
+                    {
                         return Create(bestType.SqlDbType, p1, s1);
-                    } else if (p1 == 0 && s1 == 0) {
+                    }
+                    else if (p1 == 0 && s1 == 0)
+                    {
                         return Create(bestType.SqlDbType, p0, s0);
                     }
                     // determine best scale/precision
                     int bestLeft = Math.Max(p0 - s0, p1 - s1);
                     int bestRight = Math.Max(s0, s1);
                     int precision = Math.Min(bestLeft + bestRight, 38);
-                    return Create(bestType.SqlDbType, precision, /*scale*/bestRight);
+                    return Create(
+                        bestType.SqlDbType,
+                        precision, /*scale*/
+                        bestRight
+                    );
                 }
-                else {
+                else
+                {
                     // determine the best size
                     int? bestSize = null;
 
-                    if (sqlTypeA.Size.HasValue && sqlTypeB.Size.HasValue) {
+                    if (sqlTypeA.Size.HasValue && sqlTypeB.Size.HasValue)
+                    {
                         bestSize = (sqlTypeB.Size > sqlTypeA.Size) ? sqlTypeB.Size : sqlTypeA.Size;
                     }
 
-                    if (sqlTypeB.Size.HasValue && sqlTypeB.Size.Value == LargeTypeSizeIndicator
-                        || sqlTypeA.Size.HasValue && sqlTypeA.Size.Value == LargeTypeSizeIndicator) {
+                    if (
+                        sqlTypeB.Size.HasValue && sqlTypeB.Size.Value == LargeTypeSizeIndicator
+                        || sqlTypeA.Size.HasValue && sqlTypeA.Size.Value == LargeTypeSizeIndicator
+                    )
+                    {
                         // the large type size trumps all
                         bestSize = LargeTypeSizeIndicator;
                     }
@@ -1371,27 +1776,33 @@ namespace System.Data.Linq.SqlClient {
                 return bestType;
             }
 
-            internal override ProviderType From(object o) {
+            internal override ProviderType From(object o)
+            {
                 Type clrType = (o != null) ? o.GetType() : typeof(object);
-                if (clrType == typeof(string)) {
+                if (clrType == typeof(string))
+                {
                     string str = (string)o;
                     return From(clrType, str.Length);
                 }
-                else if (clrType == typeof(bool)) {
+                else if (clrType == typeof(bool))
+                {
                     return From(typeof(int));
                 }
-                else if (clrType.IsArray) {
+                else if (clrType.IsArray)
+                {
                     Array arr = (Array)o;
                     return From(clrType, arr.Length);
                 }
-                else if (clrType == typeof(decimal)) {
+                else if (clrType == typeof(decimal))
+                {
                     decimal d = (decimal)o;
                     // The CLR stores the scale of a decimal value in bits
-                    // 16 to 23 (i.e., mask 0x00FF0000) of the fourth int. 
+                    // 16 to 23 (i.e., mask 0x00FF0000) of the fourth int.
                     int scale = (Decimal.GetBits(d)[3] & 0x00FF0000) >> 16;
                     return From(clrType, scale);
                 }
-                else {
+                else
+                {
                     return From(clrType);
                 }
             }
@@ -1401,20 +1812,28 @@ namespace System.Data.Linq.SqlClient {
                 return From(type, null);
             }
 
-            internal override ProviderType From(Type type, int? size) {
+            internal override ProviderType From(Type type, int? size)
+            {
                 return From(type, size);
             }
 
             #endregion
         }
 
-        class Sql2005Provider : ProviderBase {
-            [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification="These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand.")]
-            internal override ProviderType From(Type type, int? size) {
+        class Sql2005Provider : ProviderBase
+        {
+            [SuppressMessage(
+                "Microsoft.Maintainability",
+                "CA1502:AvoidExcessiveComplexity",
+                Justification = "These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand."
+            )]
+            internal override ProviderType From(Type type, int? size)
+            {
                 if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
                     type = type.GetGenericArguments()[0];
                 TypeCode tc = System.Type.GetTypeCode(type);
-                switch (tc) {
+                switch (tc)
+                {
                     case TypeCode.Boolean:
                         return Create(SqlDbType.Bit);
                     case TypeCode.Byte:
@@ -1442,29 +1861,34 @@ namespace System.Data.Linq.SqlClient {
                         return GetBestType(SqlDbType.NVarChar, size);
                     case TypeCode.DateTime:
                         return Create(SqlDbType.DateTime);
-                    case TypeCode.Object: {
-                            if (type == typeof(Guid))
-                                return Create(SqlDbType.UniqueIdentifier);
-                            if (type == typeof(byte[]) || type == typeof(Binary))
-                                return GetBestType(SqlDbType.VarBinary, size);
-                            if (type == typeof(char[]))
-                                return GetBestType(SqlDbType.NVarChar, size);
-                            if (type == typeof(TimeSpan))
-                                return Create(SqlDbType.BigInt);
-                            if (type == typeof(System.Xml.Linq.XDocument) ||
-                                type == typeof(System.Xml.Linq.XElement))
-                                return theXml;
-                            // else UDT?
-                            return new SqlType(type);
-                        }
+                    case TypeCode.Object:
+                    {
+                        if (type == typeof(Guid))
+                            return Create(SqlDbType.UniqueIdentifier);
+                        if (type == typeof(byte[]) || type == typeof(Binary))
+                            return GetBestType(SqlDbType.VarBinary, size);
+                        if (type == typeof(char[]))
+                            return GetBestType(SqlDbType.NVarChar, size);
+                        if (type == typeof(TimeSpan))
+                            return Create(SqlDbType.BigInt);
+                        if (
+                            type == typeof(System.Xml.Linq.XDocument)
+                            || type == typeof(System.Xml.Linq.XElement)
+                        )
+                            return theXml;
+                        // else UDT?
+                        return new SqlType(type);
+                    }
                     default:
                         throw Error.UnexpectedTypeCode(tc);
                 }
             }
 
-            internal override ProviderType GetBestLargeType(ProviderType type) {
+            internal override ProviderType GetBestLargeType(ProviderType type)
+            {
                 SqlType sqlType = (SqlType)type;
-                switch (sqlType.SqlDbType) {
+                switch (sqlType.SqlDbType)
+                {
                     case SqlDbType.NText:
                     case SqlDbType.NChar:
                     case SqlDbType.NVarChar:
@@ -1481,10 +1905,14 @@ namespace System.Data.Linq.SqlClient {
                 return type;
             }
 
-            internal override int? DetermineParameterSize(SqlType declaredType, DbParameter parameter)
+            internal override int? DetermineParameterSize(
+                SqlType declaredType,
+                DbParameter parameter
+            )
             {
                 int? parameterSize = base.DetermineParameterSize(declaredType, parameter);
-                if (parameterSize.HasValue) {
+                if (parameterSize.HasValue)
+                {
                     return parameterSize;
                 }
 
@@ -1500,17 +1928,19 @@ namespace System.Data.Linq.SqlClient {
                 return SqlTypeSystem.LargeTypeSizeIndicator;
             }
 
-
             protected override bool SupportsMaxSize
             {
                 get { return true; }
             }
-
         }
 
         class Sql2008Provider : Sql2005Provider
         {
-            [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand.")]
+            [SuppressMessage(
+                "Microsoft.Maintainability",
+                "CA1502:AvoidExcessiveComplexity",
+                Justification = "These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand."
+            )]
             internal override ProviderType From(Type type, int? size)
             {
                 if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
@@ -1518,8 +1948,10 @@ namespace System.Data.Linq.SqlClient {
 
                 // Retain mappings for DateTime and TimeSpan; add one for the new DateTimeOffset type.
                 //
-                if (System.Type.GetTypeCode(type) == TypeCode.Object &&
-                    type == typeof(DateTimeOffset))
+                if (
+                    System.Type.GetTypeCode(type) == TypeCode.Object
+                    && type == typeof(DateTimeOffset)
+                )
                 {
                     return Create(SqlDbType.DateTimeOffset);
                 }
@@ -1528,13 +1960,20 @@ namespace System.Data.Linq.SqlClient {
             }
         }
 
-        class Sql2000Provider : ProviderBase {
-            [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification="These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand.")]
-            internal override ProviderType From(Type type, int? size) {
+        class Sql2000Provider : ProviderBase
+        {
+            [SuppressMessage(
+                "Microsoft.Maintainability",
+                "CA1502:AvoidExcessiveComplexity",
+                Justification = "These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand."
+            )]
+            internal override ProviderType From(Type type, int? size)
+            {
                 if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
                     type = type.GetGenericArguments()[0];
                 TypeCode tc = System.Type.GetTypeCode(type);
-                switch (tc) {
+                switch (tc)
+                {
                     case TypeCode.Boolean:
                         return Create(SqlDbType.Bit);
                     case TypeCode.Byte:
@@ -1559,32 +1998,37 @@ namespace System.Data.Linq.SqlClient {
                     case TypeCode.Char:
                         return Create(SqlDbType.NChar, 1);
                     case TypeCode.String:
-                        return GetBestType(SqlDbType.NVarChar, size);               
+                        return GetBestType(SqlDbType.NVarChar, size);
                     case TypeCode.DateTime:
                         return Create(SqlDbType.DateTime);
-                    case TypeCode.Object: {
-                            if (type == typeof(Guid))
-                                return Create(SqlDbType.UniqueIdentifier);
-                            if (type == typeof(byte[]) || type == typeof(Binary))
-                                return GetBestType(SqlDbType.VarBinary, size); 
-                            if (type == typeof(char[]))
-                                return GetBestType(SqlDbType.NVarChar, size);
-                            if (type == typeof(TimeSpan))
-                                return Create(SqlDbType.BigInt);
-                            if (type == typeof(System.Xml.Linq.XDocument) ||
-                                type == typeof(System.Xml.Linq.XElement))
-                                return theNText;
-                            // else UDT?
-                            return new SqlType(type);
-                        }
+                    case TypeCode.Object:
+                    {
+                        if (type == typeof(Guid))
+                            return Create(SqlDbType.UniqueIdentifier);
+                        if (type == typeof(byte[]) || type == typeof(Binary))
+                            return GetBestType(SqlDbType.VarBinary, size);
+                        if (type == typeof(char[]))
+                            return GetBestType(SqlDbType.NVarChar, size);
+                        if (type == typeof(TimeSpan))
+                            return Create(SqlDbType.BigInt);
+                        if (
+                            type == typeof(System.Xml.Linq.XDocument)
+                            || type == typeof(System.Xml.Linq.XElement)
+                        )
+                            return theNText;
+                        // else UDT?
+                        return new SqlType(type);
+                    }
                     default:
                         throw Error.UnexpectedTypeCode(tc);
                 }
             }
 
-            internal override ProviderType GetBestLargeType(ProviderType type) {
+            internal override ProviderType GetBestLargeType(ProviderType type)
+            {
                 SqlType sqlType = (SqlType)type;
-                switch (sqlType.SqlDbType) {
+                switch (sqlType.SqlDbType)
+                {
                     case SqlDbType.NChar:
                     case SqlDbType.NVarChar:
                         return Create(SqlDbType.NText);
@@ -1602,10 +2046,8 @@ namespace System.Data.Linq.SqlClient {
             {
                 get { return false; }
             }
-
         }
 
-        class SqlCEProvider : Sql2000Provider {
-        }
+        class SqlCEProvider : Sql2000Provider { }
     }
 }

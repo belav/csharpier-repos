@@ -4,15 +4,16 @@
 
 namespace System.ServiceModel.Security
 {
+    using System.Collections.ObjectModel;
     using System.IdentityModel.Policy;
-    using System.ServiceModel;
     using System.IdentityModel.Tokens;
     using System.Runtime.Serialization;
-    using System.Collections.ObjectModel;
+    using System.ServiceModel;
 
     public sealed class SecureConversationServiceCredential
     {
-        static readonly SecurityStateEncoder defaultSecurityStateEncoder = new DataProtectionSecurityStateEncoder();
+        static readonly SecurityStateEncoder defaultSecurityStateEncoder =
+            new DataProtectionSecurityStateEncoder();
         SecurityStateEncoder securityStateEncoder;
         Collection<Type> securityContextClaimTypes;
         bool isReadOnly;
@@ -37,14 +38,11 @@ namespace System.ServiceModel.Security
 
         public SecurityStateEncoder SecurityStateEncoder
         {
-            get 
-            { 
-                return this.securityStateEncoder; 
-            }
-            set 
+            get { return this.securityStateEncoder; }
+            set
             {
                 ThrowIfImmutable();
-                this.securityStateEncoder = value; 
+                this.securityStateEncoder = value;
             }
         }
 
@@ -62,8 +60,10 @@ namespace System.ServiceModel.Security
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             }
         }
-     }
+    }
 }

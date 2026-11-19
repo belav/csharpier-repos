@@ -16,5 +16,5 @@ namespace System.ServiceModel.Channels
         /// Gets or sets the CookieContainer object to be used. "Get" returns null if no CookieContainer object is to be used.
         /// </summary>
         CookieContainer CookieContainer { get; set; }
-    } 
+    }
 }

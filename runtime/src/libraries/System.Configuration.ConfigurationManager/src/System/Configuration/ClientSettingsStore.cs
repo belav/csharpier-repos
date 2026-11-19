@@ -26,13 +26,18 @@ namespace System.Configuration
 
         private static Configuration GetUserConfig(bool isRoaming)
         {
-            ConfigurationUserLevel userLevel = isRoaming ? ConfigurationUserLevel.PerUserRoaming :
-                                                           ConfigurationUserLevel.PerUserRoamingAndLocal;
+            ConfigurationUserLevel userLevel = isRoaming
+                ? ConfigurationUserLevel.PerUserRoaming
+                : ConfigurationUserLevel.PerUserRoamingAndLocal;
 
             return ClientSettingsConfigurationHost.OpenExeConfiguration(userLevel);
         }
 
-        private static ClientSettingsSection GetConfigSection(Configuration config, string sectionName, bool declare)
+        private static ClientSettingsSection GetConfigSection(
+            Configuration config,
+            string sectionName,
+            bool declare
+        )
         {
             string fullSectionName = UserSettingsGroupPrefix + sectionName;
             ClientSettingsSection section = null;
@@ -75,7 +80,8 @@ namespace System.Configuration
                 if (section == null)
                 {
                     section = new ClientSettingsSection();
-                    section.SectionInformation.AllowExeDefinition = ConfigurationAllowExeDefinition.MachineToLocalUser;
+                    section.SectionInformation.AllowExeDefinition =
+                        ConfigurationAllowExeDefinition.MachineToLocalUser;
                     section.SectionInformation.RequirePermission = false;
                     settingsGroup.Sections.Add(sectionName, section);
                 }
@@ -93,20 +99,28 @@ namespace System.Configuration
 
             string prefix = isUserScoped ? UserSettingsGroupPrefix : ApplicationSettingsGroupPrefix;
             ConfigurationManager.RefreshSection(prefix + sectionName);
-            ClientSettingsSection section = ConfigurationManager.GetSection(prefix + sectionName) as ClientSettingsSection;
+            ClientSettingsSection section =
+                ConfigurationManager.GetSection(prefix + sectionName) as ClientSettingsSection;
 
             if (section != null)
             {
                 foreach (SettingElement setting in section.Settings)
                 {
-                    settings[setting.Name] = new StoredSetting(setting.SerializeAs, setting.Value.ValueXml);
+                    settings[setting.Name] = new StoredSetting(
+                        setting.SerializeAs,
+                        setting.Value.ValueXml
+                    );
                 }
             }
 
             return settings;
         }
 
-        internal static IDictionary ReadSettingsFromFile(string configFileName, string sectionName, bool isUserScoped)
+        internal static IDictionary ReadSettingsFromFile(
+            string configFileName,
+            string sectionName,
+            bool isUserScoped
+        )
         {
             IDictionary settings = new Hashtable();
 
@@ -120,11 +134,15 @@ namespace System.Configuration
 
             // NOTE: When isUserScoped is true, we don't care if configFileName represents a roaming file or
             //       a local one. All we want is three levels of configuration. So, we use the PerUserRoaming level.
-            ConfigurationUserLevel userLevel = isUserScoped ? ConfigurationUserLevel.PerUserRoaming : ConfigurationUserLevel.None;
+            ConfigurationUserLevel userLevel = isUserScoped
+                ? ConfigurationUserLevel.PerUserRoaming
+                : ConfigurationUserLevel.None;
 
             if (isUserScoped)
             {
-                fileMap.ExeConfigFilename = ConfigurationManagerInternalFactory.Instance.ApplicationConfigUri;
+                fileMap.ExeConfigFilename = ConfigurationManagerInternalFactory
+                    .Instance
+                    .ApplicationConfigUri;
                 fileMap.RoamingUserConfigFilename = configFileName;
             }
             else
@@ -132,14 +150,21 @@ namespace System.Configuration
                 fileMap.ExeConfigFilename = configFileName;
             }
 
-            Configuration config = ConfigurationManager.OpenMappedExeConfiguration(fileMap, userLevel);
-            ClientSettingsSection section = config.GetSection(prefix + sectionName) as ClientSettingsSection;
+            Configuration config = ConfigurationManager.OpenMappedExeConfiguration(
+                fileMap,
+                userLevel
+            );
+            ClientSettingsSection section =
+                config.GetSection(prefix + sectionName) as ClientSettingsSection;
 
             if (section != null)
             {
                 foreach (SettingElement setting in section.Settings)
                 {
-                    settings[setting.Name] = new StoredSetting(setting.SerializeAs, setting.Value.ValueXml);
+                    settings[setting.Name] = new StoredSetting(
+                        setting.SerializeAs,
+                        setting.Value.ValueXml
+                    );
                 }
             }
 
@@ -169,7 +194,11 @@ namespace System.Configuration
             }
         }
 
-        internal static void WriteSettings(string sectionName, bool isRoaming, IDictionary newSettings)
+        internal static void WriteSettings(
+            string sectionName,
+            bool isRoaming,
+            IDictionary newSettings
+        )
         {
             if (!ConfigurationManagerInternalFactory.Instance.SupportsUserConfig)
             {
@@ -205,7 +234,10 @@ namespace System.Configuration
                 catch (ConfigurationErrorsException ex)
                 {
                     // We wrap this in an exception with our error message and throw again.
-                    throw new ConfigurationErrorsException(SR.Format(SR.SettingsSaveFailed, ex.Message), ex);
+                    throw new ConfigurationErrorsException(
+                        SR.Format(SR.SettingsSaveFailed, ex.Message),
+                        ex
+                    );
                 }
             }
             else
@@ -220,8 +252,12 @@ namespace System.Configuration
         /// </summary>
         private sealed class ClientSettingsConfigurationHost : DelegatingConfigHost
         {
-            private const string ClientConfigurationHostTypeName = "System.Configuration.ClientConfigurationHost, " + TypeUtil.ConfigurationManagerAssemblyName;
-            private const string InternalConfigConfigurationFactoryTypeName = "System.Configuration.Internal.InternalConfigConfigurationFactory, " + TypeUtil.ConfigurationManagerAssemblyName;
+            private const string ClientConfigurationHostTypeName =
+                "System.Configuration.ClientConfigurationHost, "
+                + TypeUtil.ConfigurationManagerAssemblyName;
+            private const string InternalConfigConfigurationFactoryTypeName =
+                "System.Configuration.Internal.InternalConfigConfigurationFactory, "
+                + TypeUtil.ConfigurationManagerAssemblyName;
             private static volatile IInternalConfigConfigurationFactory s_configFactory;
 
             /// <summary>
@@ -230,18 +266,20 @@ namespace System.Configuration
             /// </summary>
             private IInternalConfigClientHost ClientHost
             {
-                get
-                {
-                    return (IInternalConfigClientHost)Host;
-                }
+                get { return (IInternalConfigClientHost)Host; }
             }
 
             internal static IInternalConfigConfigurationFactory ConfigFactory =>
-                s_configFactory ??= TypeUtil.CreateInstance<IInternalConfigConfigurationFactory>(InternalConfigConfigurationFactoryTypeName);
+                s_configFactory ??= TypeUtil.CreateInstance<IInternalConfigConfigurationFactory>(
+                    InternalConfigConfigurationFactoryTypeName
+                );
 
             private ClientSettingsConfigurationHost() { }
 
-            public override void Init(IInternalConfigRoot configRoot, params object[] hostInitParams)
+            public override void Init(
+                IInternalConfigRoot configRoot,
+                params object[] hostInitParams
+            )
             {
                 Debug.Fail("Did not expect to get called here");
             }
@@ -250,32 +288,62 @@ namespace System.Configuration
             /// We delegate this to the ClientConfigurationHost. The only thing we need to do here is to
             /// build a configPath from the ConfigurationUserLevel we get passed in.
             /// </summary>
-            public override void InitForConfiguration(ref string locationSubPath, out string configPath, out string locationConfigPath,
-                    IInternalConfigRoot configRoot, params object[] hostInitConfigurationParams)
+            public override void InitForConfiguration(
+                ref string locationSubPath,
+                out string configPath,
+                out string locationConfigPath,
+                IInternalConfigRoot configRoot,
+                params object[] hostInitConfigurationParams
+            )
             {
-
-                ConfigurationUserLevel userLevel = (ConfigurationUserLevel)hostInitConfigurationParams[0];
-                Host = TypeUtil.CreateInstance<IInternalConfigHost>(ClientConfigurationHostTypeName);
+                ConfigurationUserLevel userLevel = (ConfigurationUserLevel)
+                    hostInitConfigurationParams[0];
+                Host = TypeUtil.CreateInstance<IInternalConfigHost>(
+                    ClientConfigurationHostTypeName
+                );
 
                 string desiredConfigPath = userLevel switch
                 {
                     ConfigurationUserLevel.None => ClientHost.GetExeConfigPath(),
                     ConfigurationUserLevel.PerUserRoaming => ClientHost.GetRoamingUserConfigPath(),
-                    ConfigurationUserLevel.PerUserRoamingAndLocal => ClientHost.GetLocalUserConfigPath(),
+                    ConfigurationUserLevel.PerUserRoamingAndLocal =>
+                        ClientHost.GetLocalUserConfigPath(),
                     _ => throw new ArgumentException(SR.UnknownUserLevel),
                 };
 
-                Host.InitForConfiguration(ref locationSubPath, out configPath, out locationConfigPath, configRoot, null, null, desiredConfigPath);
+                Host.InitForConfiguration(
+                    ref locationSubPath,
+                    out configPath,
+                    out locationConfigPath,
+                    configRoot,
+                    null,
+                    null,
+                    desiredConfigPath
+                );
             }
 
             private static bool IsKnownConfigFile(string filename)
             {
-                return
-                  string.Equals(filename, ConfigurationManagerInternalFactory.Instance.MachineConfigPath, StringComparison.OrdinalIgnoreCase) ||
-                  string.Equals(filename, ConfigurationManagerInternalFactory.Instance.ApplicationConfigUri, StringComparison.OrdinalIgnoreCase) ||
-                  string.Equals(filename, ConfigurationManagerInternalFactory.Instance.ExeLocalConfigPath, StringComparison.OrdinalIgnoreCase) ||
-                  string.Equals(filename, ConfigurationManagerInternalFactory.Instance.ExeRoamingConfigPath, StringComparison.OrdinalIgnoreCase);
-
+                return string.Equals(
+                        filename,
+                        ConfigurationManagerInternalFactory.Instance.MachineConfigPath,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    || string.Equals(
+                        filename,
+                        ConfigurationManagerInternalFactory.Instance.ApplicationConfigUri,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    || string.Equals(
+                        filename,
+                        ConfigurationManagerInternalFactory.Instance.ExeLocalConfigPath,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    || string.Equals(
+                        filename,
+                        ConfigurationManagerInternalFactory.Instance.ExeRoamingConfigPath,
+                        StringComparison.OrdinalIgnoreCase
+                    );
             }
 
             internal static Configuration OpenExeConfiguration(ConfigurationUserLevel userLevel)
@@ -299,7 +367,11 @@ namespace System.Configuration
                 }
             }
 
-            public override Stream OpenStreamForWrite(string streamName, string templateStreamName, ref object writeContext)
+            public override Stream OpenStreamForWrite(
+                string streamName,
+                string templateStreamName,
+                ref object writeContext
+            )
             {
                 // On .NET Framework we do a bunch of work here around ensuring permissions and quotas
                 return Host.OpenStreamForWrite(streamName, templateStreamName, ref writeContext);
@@ -309,12 +381,25 @@ namespace System.Configuration
             /// If this is a stream that represents a user.config file that we know about, we ask
             /// the host to assert appropriate permissions.
             /// </summary>
-            public override void WriteCompleted(string streamName, bool success, object writeContext)
+            public override void WriteCompleted(
+                string streamName,
+                bool success,
+                object writeContext
+            )
             {
-                if (string.Equals(streamName, ConfigurationManagerInternalFactory.Instance.ExeLocalConfigPath, StringComparison.OrdinalIgnoreCase) ||
-                    string.Equals(streamName, ConfigurationManagerInternalFactory.Instance.ExeRoamingConfigPath, StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        streamName,
+                        ConfigurationManagerInternalFactory.Instance.ExeLocalConfigPath,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    || string.Equals(
+                        streamName,
+                        ConfigurationManagerInternalFactory.Instance.ExeRoamingConfigPath,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
-
                     Host.WriteCompleted(streamName, success, writeContext, true);
                 }
                 else
@@ -336,6 +421,7 @@ namespace System.Configuration
             SerializeAs = serializeAs;
             Value = value;
         }
+
         internal readonly SettingsSerializeAs SerializeAs;
         internal readonly XmlNode Value;
     }

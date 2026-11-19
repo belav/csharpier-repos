@@ -11,60 +11,60 @@
 /* objects
 /**************************************************************/
 
-namespace DefaultNamespace {
+namespace DefaultNamespace
+{
     using System;
 
     internal class VarAryStress
     {
-        public static int Main( String [] args )
+        public static int Main(String[] args)
         {
             int iRep = 20;
 
             Console.WriteLine("Test should return with ExitCode 100 ...");
 
-            if( args.Length > 0 )
+            if (args.Length > 0)
             {
                 try
                 {
-                    iRep = Int32.Parse( args[0] );
+                    iRep = Int32.Parse(args[0]);
                 }
-                catch(FormatException )
+                catch (FormatException)
                 {
                     Console.WriteLine("FormatException is caught");
                 }
             }
 
-            Object [] VarAry = new Object[1];
+            Object[] VarAry = new Object[1];
             VarAryStress mv_obj = new VarAryStress();
-            for(int i=0; i< iRep; i++ )
+            for (int i = 0; i < iRep; i++)
             {
-                if( i>1 )
+                if (i > 1)
                 {
-                    VarAry[0] = mv_obj.SetVarAry( i-1 );
+                    VarAry[0] = mv_obj.SetVarAry(i - 1);
                 }
                 else
                 {
                     VarAry[0] = i;
                 }
-                if( i%5 == 0)
+                if (i % 5 == 0)
                 {
                     GC.Collect();
                     // Console.WriteLine( "HeapSize after GC: {0}", GC.GetTotalMemory(false) );
                 }
-
             }
 
-            Console.WriteLine( "Test Passed" );
+            Console.WriteLine("Test Passed");
             return 100;
         }
 
-        public Object SetVarAry( int iSize )
+        public Object SetVarAry(int iSize)
         {
-            Object [] vary= new Object[2];
-            for( int i=0; i< iSize; i++ )
+            Object[] vary = new Object[2];
+            for (int i = 0; i < iSize; i++)
             {
-                if( i > 1 )
-                    vary[0] = SetVarAry( i-1 );
+                if (i > 1)
+                    vary[0] = SetVarAry(i - 1);
                 else
                     vary[1] = i;
             }

@@ -11,12 +11,17 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Host
 {
-    internal sealed class WorkspaceMetadataFileReferenceResolver : MetadataReferenceResolver, IEquatable<WorkspaceMetadataFileReferenceResolver>
+    internal sealed class WorkspaceMetadataFileReferenceResolver
+        : MetadataReferenceResolver,
+            IEquatable<WorkspaceMetadataFileReferenceResolver>
     {
         private readonly IMetadataService _metadataService;
         internal readonly RelativePathResolver PathResolver;
 
-        public WorkspaceMetadataFileReferenceResolver(IMetadataService metadataService, RelativePathResolver pathResolver)
+        public WorkspaceMetadataFileReferenceResolver(
+            IMetadataService metadataService,
+            RelativePathResolver pathResolver
+        )
         {
             Debug.Assert(metadataService != null);
             Debug.Assert(pathResolver != null);
@@ -25,7 +30,11 @@ namespace Microsoft.CodeAnalysis.Host
             PathResolver = pathResolver;
         }
 
-        public override ImmutableArray<PortableExecutableReference> ResolveReference(string reference, string baseFilePath, MetadataReferenceProperties properties)
+        public override ImmutableArray<PortableExecutableReference> ResolveReference(
+            string reference,
+            string baseFilePath,
+            MetadataReferenceProperties properties
+        )
         {
             var path = PathResolver.ResolvePath(reference, baseFilePath);
             if (path == null)
@@ -43,9 +52,10 @@ namespace Microsoft.CodeAnalysis.Host
                 && PathResolver.Equals(other.PathResolver);
         }
 
-        public override int GetHashCode()
-            => Hash.Combine(_metadataService, Hash.Combine(PathResolver, 0));
+        public override int GetHashCode() =>
+            Hash.Combine(_metadataService, Hash.Combine(PathResolver, 0));
 
-        public override bool Equals(object other) => Equals(other as WorkspaceMetadataFileReferenceResolver);
+        public override bool Equals(object other) =>
+            Equals(other as WorkspaceMetadataFileReferenceResolver);
     }
 }

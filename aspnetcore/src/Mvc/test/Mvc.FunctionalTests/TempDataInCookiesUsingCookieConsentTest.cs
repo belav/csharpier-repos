@@ -17,8 +17,7 @@ public class TempDataInCookiesUsingCookieConsentTest
         MvcTestFixture<BasicWebSite.StartupWithCookieTempDataProviderAndCookieConsent> fixture
     )
     {
-        var factory =
-            fixture.Factories.FirstOrDefault()
+        var factory = fixture.Factories.FirstOrDefault()
             ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         _client = factory.CreateDefaultClient();
     }

@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,71 +35,85 @@ using System.Xml;
 
 namespace System.ServiceModel.Description
 {
-	public abstract class WebServiceEndpoint : ServiceEndpoint
-	{
-		internal WebServiceEndpoint (ContractDescription contract, EndpointAddress address)
-			: base (contract, new WebHttpBinding (), address)
-		{
-			Behaviors.Add (new WebHttpBehavior ());
-		}
+    public abstract class WebServiceEndpoint : ServiceEndpoint
+    {
+        internal WebServiceEndpoint(ContractDescription contract, EndpointAddress address)
+            : base(contract, new WebHttpBinding(), address)
+        {
+            Behaviors.Add(new WebHttpBehavior());
+        }
 
-		protected abstract Type WebEndpointType { get; }
+        protected abstract Type WebEndpointType { get; }
 
-		WebHttpBinding wbind {
-			get {
-				if (Binding is WebHttpBinding)
-					return (WebHttpBinding) Binding;
-				throw new InvalidOperationException ("Binding on this standard endpoint is not supposed to be overwritten.");
-			}
-		}
+        WebHttpBinding wbind
+        {
+            get
+            {
+                if (Binding is WebHttpBinding)
+                    return (WebHttpBinding)Binding;
+                throw new InvalidOperationException(
+                    "Binding on this standard endpoint is not supposed to be overwritten."
+                );
+            }
+        }
 
-		public WebContentTypeMapper ContentTypeMapper {
-			get { return wbind.ContentTypeMapper; }
-			set { wbind.ContentTypeMapper = value; }
-		}
+        public WebContentTypeMapper ContentTypeMapper
+        {
+            get { return wbind.ContentTypeMapper; }
+            set { wbind.ContentTypeMapper = value; }
+        }
 
-		public bool CrossDomainScriptAccessEnabled {
-			get { return wbind.CrossDomainScriptAccessEnabled; }
-			set { wbind.CrossDomainScriptAccessEnabled = value; }
-		}
+        public bool CrossDomainScriptAccessEnabled
+        {
+            get { return wbind.CrossDomainScriptAccessEnabled; }
+            set { wbind.CrossDomainScriptAccessEnabled = value; }
+        }
 
-		public HostNameComparisonMode HostNameComparisonMode {
-			get { return wbind.HostNameComparisonMode; }
-			set { wbind.HostNameComparisonMode = value; }
-		}
+        public HostNameComparisonMode HostNameComparisonMode
+        {
+            get { return wbind.HostNameComparisonMode; }
+            set { wbind.HostNameComparisonMode = value; }
+        }
 
-		public long MaxBufferPoolSize {
-			get { return wbind.MaxBufferPoolSize; }
-			set { wbind.MaxBufferPoolSize = value; }
-		}
+        public long MaxBufferPoolSize
+        {
+            get { return wbind.MaxBufferPoolSize; }
+            set { wbind.MaxBufferPoolSize = value; }
+        }
 
-		public int MaxBufferSize {
-			get { return wbind.MaxBufferSize; }
-			set { wbind.MaxBufferSize = value; }
-		}
+        public int MaxBufferSize
+        {
+            get { return wbind.MaxBufferSize; }
+            set { wbind.MaxBufferSize = value; }
+        }
 
-		public long MaxReceivedMessageSize {
-			get { return wbind.MaxReceivedMessageSize; }
-			set { wbind.MaxReceivedMessageSize = value; }
-		}
+        public long MaxReceivedMessageSize
+        {
+            get { return wbind.MaxReceivedMessageSize; }
+            set { wbind.MaxReceivedMessageSize = value; }
+        }
 
-		public XmlDictionaryReaderQuotas ReaderQuotas {
-			get { return wbind.ReaderQuotas; }
-			set { wbind.ReaderQuotas = value; }
-		}
+        public XmlDictionaryReaderQuotas ReaderQuotas
+        {
+            get { return wbind.ReaderQuotas; }
+            set { wbind.ReaderQuotas = value; }
+        }
 
-		public WebHttpSecurity Security {
-			get { return wbind.Security; }
-		}
+        public WebHttpSecurity Security
+        {
+            get { return wbind.Security; }
+        }
 
-		public TransferMode TransferMode {
-			get { return wbind.TransferMode; }
-			set { wbind.TransferMode = value; }
-		}
+        public TransferMode TransferMode
+        {
+            get { return wbind.TransferMode; }
+            set { wbind.TransferMode = value; }
+        }
 
-		public Encoding WriteEncoding {
-			get { return wbind.WriteEncoding; }
-			set { wbind.WriteEncoding = value; }
-		}
-	}
+        public Encoding WriteEncoding
+        {
+            get { return wbind.WriteEncoding; }
+            set { wbind.WriteEncoding = value; }
+        }
+    }
 }

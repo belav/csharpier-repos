@@ -26,8 +26,11 @@ namespace System.Data.Metadata.Edm
         /// <param name="entityType">The entity type that this ref type references</param>
         /// <exception cref="System.ArgumentNullException">Thrown if entityType argument is null</exception>
         internal RefType(EntityType entityType)
-            : base(GetIdentity(EntityUtil.GenericCheckArgumentNull(entityType, "entityType")), 
-            EdmConstants.TransientNamespace, entityType.DataSpace)
+            : base(
+                GetIdentity(EntityUtil.GenericCheckArgumentNull(entityType, "entityType")),
+                EdmConstants.TransientNamespace,
+                entityType.DataSpace
+            )
         {
             _elementType = entityType;
             SetReadOnly();
@@ -42,7 +45,10 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns the kind of the type
         /// </summary>
-        public override BuiltInTypeKind BuiltInTypeKind { get { return BuiltInTypeKind.RefType; } }
+        public override BuiltInTypeKind BuiltInTypeKind
+        {
+            get { return BuiltInTypeKind.RefType; }
+        }
 
         /// <summary>
         /// The entity type that this ref type references
@@ -50,10 +56,7 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(BuiltInTypeKind.EntityTypeBase, false)]
         public EntityTypeBase ElementType
         {
-            get
-            {
-                return _elementType;
-            }
+            get { return _elementType; }
         }
         #endregion
 

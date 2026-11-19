@@ -12,7 +12,12 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Microsoft.Interop
 {
-    public readonly struct ContainingSyntax(SyntaxTokenList modifiers, SyntaxKind typeKind, SyntaxToken identifier, TypeParameterListSyntax? typeParameters) : IEquatable<ContainingSyntax>
+    public readonly struct ContainingSyntax(
+        SyntaxTokenList modifiers,
+        SyntaxKind typeKind,
+        SyntaxToken identifier,
+        TypeParameterListSyntax? typeParameters
+    ) : IEquatable<ContainingSyntax>
     {
         public SyntaxTokenList Modifiers { get; init; } = modifiers.StripTriviaFromTokens();
 
@@ -35,29 +40,40 @@ namespace Microsoft.Interop
         public override int GetHashCode() => throw new UnreachableException();
     }
 
-    public sealed record ContainingSyntaxContext(ImmutableArray<ContainingSyntax> ContainingSyntax, string? ContainingNamespace)
+    public sealed record ContainingSyntaxContext(
+        ImmutableArray<ContainingSyntax> ContainingSyntax,
+        string? ContainingNamespace
+    )
     {
         public ContainingSyntaxContext(MemberDeclarationSyntax memberDeclaration)
             : this(GetContainingTypes(memberDeclaration), GetContainingNamespace(memberDeclaration))
-        {
-        }
+        { }
 
         public ContainingSyntaxContext AddContainingSyntax(ContainingSyntax nestedType)
         {
             return this with { ContainingSyntax = ContainingSyntax.Insert(0, nestedType) };
         }
 
-        private static ImmutableArray<ContainingSyntax> GetContainingTypes(MemberDeclarationSyntax memberDeclaration)
+        private static ImmutableArray<ContainingSyntax> GetContainingTypes(
+            MemberDeclarationSyntax memberDeclaration
+        )
         {
-            ImmutableArray<ContainingSyntax>.Builder containingTypeInfoBuilder = ImmutableArray.CreateBuilder<ContainingSyntax>();
-            for (SyntaxNode? parent = memberDeclaration.Parent; parent is TypeDeclarationSyntax typeDeclaration; parent = parent.Parent)
+            ImmutableArray<ContainingSyntax>.Builder containingTypeInfoBuilder =
+                ImmutableArray.CreateBuilder<ContainingSyntax>();
+            for (
+                SyntaxNode? parent = memberDeclaration.Parent;
+                parent is TypeDeclarationSyntax typeDeclaration;
+                parent = parent.Parent
+            )
             {
                 containingTypeInfoBuilder.Add(
                     new ContainingSyntax(
                         typeDeclaration.Modifiers,
                         typeDeclaration.Kind(),
                         typeDeclaration.Identifier,
-                        typeDeclaration.TypeParameterList));
+                        typeDeclaration.TypeParameterList
+                    )
+                );
             }
 
             return containingTypeInfoBuilder.ToImmutable();
@@ -66,7 +82,12 @@ namespace Microsoft.Interop
         private static string GetContainingNamespace(MemberDeclarationSyntax memberDeclaration)
         {
             StringBuilder? containingNamespace = null;
-            for (SyntaxNode? parent = memberDeclaration.FirstAncestorOrSelf<BaseNamespaceDeclarationSyntax>(); parent is BaseNamespaceDeclarationSyntax ns; parent = parent.Parent)
+            for (
+                SyntaxNode? parent =
+                    memberDeclaration.FirstAncestorOrSelf<BaseNamespaceDeclarationSyntax>();
+                parent is BaseNamespaceDeclarationSyntax ns;
+                parent = parent.Parent
+            )
             {
                 if (containingNamespace is null)
                 {
@@ -98,54 +119,74 @@ namespace Microsoft.Interop
             return code;
         }
 
-        public MemberDeclarationSyntax WrapMemberInContainingSyntaxWithUnsafeModifier(MemberDeclarationSyntax member)
+        public MemberDeclarationSyntax WrapMemberInContainingSyntaxWithUnsafeModifier(
+            MemberDeclarationSyntax member
+        )
         {
             bool addedUnsafe = false;
             MemberDeclarationSyntax wrappedMember = member;
             foreach (var containingType in ContainingSyntax)
             {
-                TypeDeclarationSyntax type = TypeDeclaration(containingType.TypeKind, containingType.Identifier)
+                TypeDeclarationSyntax type = TypeDeclaration(
+                        containingType.TypeKind,
+                        containingType.Identifier
+                    )
                     .WithModifiers(containingType.Modifiers)
                     .AddMembers(wrappedMember);
                 if (!addedUnsafe)
                 {
-                    type = type.WithModifiers(type.Modifiers.AddToModifiers(SyntaxKind.UnsafeKeyword));
+                    type = type.WithModifiers(
+                        type.Modifiers.AddToModifiers(SyntaxKind.UnsafeKeyword)
+                    );
                 }
                 if (containingType.TypeParameters is not null)
                 {
-                    type = type.AddTypeParameterListParameters(containingType.TypeParameters.Parameters.ToArray());
+                    type = type.AddTypeParameterListParameters(
+                        containingType.TypeParameters.Parameters.ToArray()
+                    );
                 }
                 wrappedMember = type;
             }
             if (ContainingNamespace is not null)
             {
-                wrappedMember = NamespaceDeclaration(ParseName(ContainingNamespace)).AddMembers(wrappedMember);
+                wrappedMember = NamespaceDeclaration(ParseName(ContainingNamespace))
+                    .AddMembers(wrappedMember);
             }
             return wrappedMember;
         }
 
-        public MemberDeclarationSyntax WrapMembersInContainingSyntaxWithUnsafeModifier(params MemberDeclarationSyntax[] members)
+        public MemberDeclarationSyntax WrapMembersInContainingSyntaxWithUnsafeModifier(
+            params MemberDeclarationSyntax[] members
+        )
         {
             bool addedUnsafe = false;
             MemberDeclarationSyntax? wrappedMember = null;
             foreach (var containingType in ContainingSyntax)
             {
-                TypeDeclarationSyntax type = TypeDeclaration(containingType.TypeKind, containingType.Identifier)
+                TypeDeclarationSyntax type = TypeDeclaration(
+                        containingType.TypeKind,
+                        containingType.Identifier
+                    )
                     .WithModifiers(containingType.Modifiers)
                     .AddMembers(wrappedMember is not null ? new[] { wrappedMember } : members);
                 if (!addedUnsafe)
                 {
-                    type = type.WithModifiers(type.Modifiers.AddToModifiers(SyntaxKind.UnsafeKeyword));
+                    type = type.WithModifiers(
+                        type.Modifiers.AddToModifiers(SyntaxKind.UnsafeKeyword)
+                    );
                 }
                 if (containingType.TypeParameters is not null)
                 {
-                    type = type.AddTypeParameterListParameters(containingType.TypeParameters.Parameters.ToArray());
+                    type = type.AddTypeParameterListParameters(
+                        containingType.TypeParameters.Parameters.ToArray()
+                    );
                 }
                 wrappedMember = type;
             }
             if (ContainingNamespace is not null)
             {
-                wrappedMember = NamespaceDeclaration(ParseName(ContainingNamespace)).AddMembers(wrappedMember);
+                wrappedMember = NamespaceDeclaration(ParseName(ContainingNamespace))
+                    .AddMembers(wrappedMember);
             }
             return wrappedMember;
         }

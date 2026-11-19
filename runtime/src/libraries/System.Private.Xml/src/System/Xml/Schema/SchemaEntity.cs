@@ -8,16 +8,16 @@ namespace System.Xml.Schema
 {
     internal sealed class SchemaEntity : IDtdEntityInfo
     {
-        private readonly XmlQualifiedName _qname;      // Name of entity
-        private string? _url;                  // Url for external entity (system id)
-        private string? _pubid;                // Pubid for external entity
-        private string? _text;                 // Text for internal entity
+        private readonly XmlQualifiedName _qname; // Name of entity
+        private string? _url; // Url for external entity (system id)
+        private string? _pubid; // Pubid for external entity
+        private string? _text; // Text for internal entity
         private XmlQualifiedName _ndata = XmlQualifiedName.Empty; // NDATA identifier
-        private int _lineNumber;           // line number
-        private int _linePosition;         // character position
-        private readonly bool _isParameter;          // parameter entity flag
-        private bool _isExternal;           // external entity flag
-        private bool _parsingInProgress;      // whether entity is being parsed (DtdParser infinite recursion check)
+        private int _lineNumber; // line number
+        private int _linePosition; // character position
+        private readonly bool _isParameter; // parameter entity flag
+        private bool _isExternal; // external entity flag
+        private bool _parsingInProgress; // whether entity is being parsed (DtdParser infinite recursion check)
         private bool _isDeclaredInExternal; // declared in external markup or not
         private string? _baseURI;
         private string? _declaredURI;
@@ -103,11 +103,7 @@ namespace System.Xml.Schema
         //
         internal static bool IsPredefinedEntity(string n)
         {
-            return (n == "lt" ||
-                   n == "gt" ||
-                   n == "amp" ||
-                   n == "apos" ||
-                   n == "quot");
+            return (n == "lt" || n == "gt" || n == "amp" || n == "apos" || n == "quot");
         }
 
         internal XmlQualifiedName Name
@@ -118,7 +114,11 @@ namespace System.Xml.Schema
         internal string? Url
         {
             get { return _url; }
-            set { _url = value; _isExternal = true; }
+            set
+            {
+                _url = value;
+                _isExternal = true;
+            }
         }
 
         internal string? Pubid
@@ -148,7 +148,11 @@ namespace System.Xml.Schema
         internal string? Text
         {
             get { return _text; }
-            set { _text = value; _isExternal = false; }
+            set
+            {
+                _text = value;
+                _isExternal = false;
+            }
         }
 
         internal int Line

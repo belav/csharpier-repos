@@ -142,7 +142,10 @@ namespace System.Runtime.Caching
             _flags[INITIALIZED] = true;
 
             // If the dependency has already changed, or someone tried to dispose us, then call Dispose now.
-            Debug.Assert(_flags[INITIALIZED], "It is critical that INITIALIZED is set before CHANGED is checked below");
+            Debug.Assert(
+                _flags[INITIALIZED],
+                "It is critical that INITIALIZED is set before CHANGED is checked below"
+            );
             if (_flags[CHANGED])
             {
                 Dispose();
@@ -159,7 +162,10 @@ namespace System.Runtime.Caching
             OnChangedHelper(state);
 
             // OnChanged will also invoke Dispose, but only after initialization is complete
-            Debug.Assert(_flags[CHANGED], "It is critical that CHANGED is set before INITIALIZED is checked below.");
+            Debug.Assert(
+                _flags[CHANGED],
+                "It is critical that CHANGED is set before INITIALIZED is checked below."
+            );
             if (_flags[INITIALIZED])
             {
                 DisposeHelper();
@@ -171,11 +177,17 @@ namespace System.Runtime.Caching
         //
 
         // set to true when the dependency changes, specifically, when OnChanged is called.
-        public bool HasChanged { get { return _flags[CHANGED]; } }
+        public bool HasChanged
+        {
+            get { return _flags[CHANGED]; }
+        }
 
         // set to true when this instance is disposed, specifically, after
         // Dispose(bool disposing) is called by Dispose().
-        public bool IsDisposed { get { return _flags[DISPOSED]; } }
+        public bool IsDisposed
+        {
+            get { return _flags[DISPOSED]; }
+        }
 
         // a unique ID representing this ChangeMonitor, typically consisting of
         // the dependency names and last-modified times.
@@ -205,7 +217,10 @@ namespace System.Runtime.Caching
             OnChangedHelper(null);
 
             // If not initialized, throw, so the derived class understands that it must call InitializeComplete before Dispose.
-            Debug.Assert(_flags[CHANGED], "It is critical that CHANGED is set before INITIALIZED is checked below.");
+            Debug.Assert(
+                _flags[CHANGED],
+                "It is critical that CHANGED is set before INITIALIZED is checked below."
+            );
             if (!_flags[INITIALIZED])
             {
                 throw new InvalidOperationException(SR.Init_not_complete);
@@ -226,7 +241,9 @@ namespace System.Runtime.Caching
                 throw new ArgumentNullException(nameof(onChangedCallback));
             }
 
-            if (Interlocked.CompareExchange(ref _onChangedCallback, onChangedCallback, null) != null)
+            if (
+                Interlocked.CompareExchange(ref _onChangedCallback, onChangedCallback, null) != null
+            )
             {
                 throw new InvalidOperationException(SR.Method_already_invoked);
             }

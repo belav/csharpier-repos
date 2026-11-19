@@ -7,7 +7,13 @@ namespace System.Globalization
 {
     public partial class TextInfo
     {
-        internal unsafe void JsChangeCase(char* src, int srcLen, char* dstBuffer, int dstBufferCapacity, bool toUpper)
+        internal unsafe void JsChangeCase(
+            char* src,
+            int srcLen,
+            char* dstBuffer,
+            int dstBufferCapacity,
+            bool toUpper
+        )
         {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(!GlobalizationMode.UseNls);
@@ -17,11 +23,28 @@ namespace System.Globalization
             object ex_result;
             if (HasEmptyCultureName)
             {
-                Interop.JsGlobalization.ChangeCaseInvariant(src, srcLen, dstBuffer, dstBufferCapacity, toUpper, out exception, out ex_result);
+                Interop.JsGlobalization.ChangeCaseInvariant(
+                    src,
+                    srcLen,
+                    dstBuffer,
+                    dstBufferCapacity,
+                    toUpper,
+                    out exception,
+                    out ex_result
+                );
             }
             else
             {
-                Interop.JsGlobalization.ChangeCase(_cultureName, src, srcLen, dstBuffer, dstBufferCapacity, toUpper, out exception, out ex_result);
+                Interop.JsGlobalization.ChangeCase(
+                    _cultureName,
+                    src,
+                    srcLen,
+                    dstBuffer,
+                    dstBufferCapacity,
+                    toUpper,
+                    out exception,
+                    out ex_result
+                );
             }
             if (exception != 0)
                 throw new Exception((string)ex_result);

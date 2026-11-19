@@ -35,28 +35,50 @@ namespace System.Data.EntityModel.SchemaObjectModel
         //
         // we could create the StartCharacterExp and OtherCharacterExp dynamically to force inclusion of the missing Nl and Cf characters...
         private const string StartCharacterExp = @"[\p{Ll}\p{Lu}\p{Lt}\p{Lo}\p{Lm}\p{Nl}]";
-        private const string OtherCharacterExp = @"[\p{Ll}\p{Lu}\p{Lt}\p{Lo}\p{Lm}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}\p{Cf}]";
-        private const string NameExp = StartCharacterExp+OtherCharacterExp+"{0,}";
+        private const string OtherCharacterExp =
+            @"[\p{Ll}\p{Lu}\p{Lt}\p{Lo}\p{Lm}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}\p{Cf}]";
+        private const string NameExp = StartCharacterExp + OtherCharacterExp + "{0,}";
+
         //private static Regex ValidDottedName=new Regex(@"^"+NameExp+@"(\."+NameExp+@"){0,}$",RegexOptions.Singleline);
-        private static Regex UndottedNameValidator = new Regex(@"^"+NameExp+@"$",RegexOptions.Singleline | RegexOptions.Compiled );
+        private static Regex UndottedNameValidator = new Regex(
+            @"^" + NameExp + @"$",
+            RegexOptions.Singleline | RegexOptions.Compiled
+        );
         #endregion
 
         #region Static Methods
 
-        internal static void ExtractNamespaceAndName(SchemaDataModelOption dataModel, string qualifiedTypeName, out string namespaceName, out string name)
+        internal static void ExtractNamespaceAndName(
+            SchemaDataModelOption dataModel,
+            string qualifiedTypeName,
+            out string namespaceName,
+            out string name
+        )
         {
-            Debug.Assert(!string.IsNullOrEmpty(qualifiedTypeName), "qualifiedTypeName parameter is null");
-            GetBeforeAndAfterLastPeriod(qualifiedTypeName, out namespaceName, out name); 
+            Debug.Assert(
+                !string.IsNullOrEmpty(qualifiedTypeName),
+                "qualifiedTypeName parameter is null"
+            );
+            GetBeforeAndAfterLastPeriod(qualifiedTypeName, out namespaceName, out name);
         }
 
-
-        internal static string ExtractTypeName(SchemaDataModelOption dataModel, string qualifiedTypeName)
+        internal static string ExtractTypeName(
+            SchemaDataModelOption dataModel,
+            string qualifiedTypeName
+        )
         {
-            Debug.Assert(!string.IsNullOrEmpty(qualifiedTypeName), "qualifiedTypeName parameter is null or empty");
+            Debug.Assert(
+                !string.IsNullOrEmpty(qualifiedTypeName),
+                "qualifiedTypeName parameter is null or empty"
+            );
             return GetEverythingAfterLastPeriod(qualifiedTypeName);
         }
 
-        private static void GetBeforeAndAfterLastPeriod(string qualifiedTypeName, out string before, out string after)
+        private static void GetBeforeAndAfterLastPeriod(
+            string qualifiedTypeName,
+            out string before,
+            out string after
+        )
         {
             int lastDot = qualifiedTypeName.LastIndexOf('.');
             if (lastDot < 0)
@@ -70,6 +92,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 after = qualifiedTypeName.Substring(lastDot + 1);
             }
         }
+
         internal static string GetEverythingBeforeLastPeriod(string qualifiedTypeName)
         {
             int lastDot = qualifiedTypeName.LastIndexOf('.');
@@ -86,10 +109,9 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
             return qualifiedTypeName.Substring(lastDot + 1);
         }
-        
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="schema"></param>
         /// <param name="reader"></param>
@@ -109,29 +131,33 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
             value = reader.Value;
 
-            if ( string.IsNullOrEmpty(value) )
+            if (string.IsNullOrEmpty(value))
             {
-                schema.AddError( ErrorCode.InvalidName, EdmSchemaErrorSeverity.Error, reader,
-                    System.Data.Entity.Strings.InvalidName(value, reader.Name));
+                schema.AddError(
+                    ErrorCode.InvalidName,
+                    EdmSchemaErrorSeverity.Error,
+                    reader,
+                    System.Data.Entity.Strings.InvalidName(value, reader.Name)
+                );
                 return false;
             }
             return true;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="schema"></param>
         /// <param name="reader"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static bool GetDottedName(Schema schema, XmlReader reader,out string name)
+        public static bool GetDottedName(Schema schema, XmlReader reader, out string name)
         {
             if (!GetString(schema, reader, out name))
             {
                 return false;
             }
-            
+
             return ValidateDottedName(schema, reader, name);
         }
 
@@ -140,7 +166,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
             Debug.Assert(schema != null, "schema parameter is null");
             Debug.Assert(reader != null, "reader parameter is null");
             Debug.Assert(!string.IsNullOrEmpty(name), "name parameter is null or empty");
-            Debug.Assert(reader.SchemaInfo.Validity != System.Xml.Schema.XmlSchemaValidity.Invalid, "This method should not be called when the schema is invalid");
+            Debug.Assert(
+                reader.SchemaInfo.Validity != System.Xml.Schema.XmlSchemaValidity.Invalid,
+                "This method should not be called when the schema is invalid"
+            );
 
             if (schema.DataModel == SchemaDataModelOption.EntityDataModel)
             {
@@ -149,8 +178,12 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 {
                     if (!ValidUndottedName(namePart))
                     {
-                        schema.AddError(ErrorCode.InvalidName, EdmSchemaErrorSeverity.Error, reader,
-                            System.Data.Entity.Strings.InvalidName(name, reader.Name));
+                        schema.AddError(
+                            ErrorCode.InvalidName,
+                            EdmSchemaErrorSeverity.Error,
+                            reader,
+                            System.Data.Entity.Strings.InvalidName(name, reader.Name)
+                        );
                         return false;
                     }
                 }
@@ -159,13 +192,13 @@ namespace System.Data.EntityModel.SchemaObjectModel
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="schema"></param>
         /// <param name="reader"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static bool GetUndottedName(Schema schema,XmlReader reader,out string name)
+        public static bool GetUndottedName(Schema schema, XmlReader reader, out string name)
         {
             Debug.Assert(schema != null, "schema parameter is null");
             Debug.Assert(reader != null, "reader parameter is null");
@@ -180,27 +213,47 @@ namespace System.Data.EntityModel.SchemaObjectModel
             name = reader.Value;
             if (string.IsNullOrEmpty(name))
             {
-                schema.AddError( ErrorCode.InvalidName, EdmSchemaErrorSeverity.Error, reader,
-                    System.Data.Entity.Strings.EmptyName(reader.Name));
+                schema.AddError(
+                    ErrorCode.InvalidName,
+                    EdmSchemaErrorSeverity.Error,
+                    reader,
+                    System.Data.Entity.Strings.EmptyName(reader.Name)
+                );
                 return false;
             }
 
-            if (schema.DataModel == SchemaDataModelOption.EntityDataModel &&
-                !ValidUndottedName(name) )
+            if (
+                schema.DataModel == SchemaDataModelOption.EntityDataModel
+                && !ValidUndottedName(name)
+            )
             {
-                schema.AddError( ErrorCode.InvalidName, EdmSchemaErrorSeverity.Error, reader,
-                    System.Data.Entity.Strings.InvalidName(name,reader.Name));
+                schema.AddError(
+                    ErrorCode.InvalidName,
+                    EdmSchemaErrorSeverity.Error,
+                    reader,
+                    System.Data.Entity.Strings.InvalidName(name, reader.Name)
+                );
                 return false;
             }
 
-            Debug.Assert(!(schema.DataModel == SchemaDataModelOption.EntityDataModel && name.IndexOf('.') >= 0),
-                string.Format(CultureInfo.CurrentCulture, "{1} ({0}) is not valid. {1} cannot be qualified.", name, reader.Name));
+            Debug.Assert(
+                !(
+                    schema.DataModel == SchemaDataModelOption.EntityDataModel
+                    && name.IndexOf('.') >= 0
+                ),
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "{1} ({0}) is not valid. {1} cannot be qualified.",
+                    name,
+                    reader.Name
+                )
+            );
 
             return true;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
@@ -208,11 +261,15 @@ namespace System.Data.EntityModel.SchemaObjectModel
         {
             // CodeGenerator.IsValidLanguageIndependentIdentifier does demand a FullTrust Link
             // but this is safe since the function only walks over the string no risk is introduced
-            return !string.IsNullOrEmpty(name) && UndottedNameValidator.IsMatch(name) 
+            return !string.IsNullOrEmpty(name)
+                && UndottedNameValidator.IsMatch(name)
                 && IsValidLanguageIndependentIdentifier(name);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands"
+        )]
         [System.Security.SecuritySafeCritical]
         private static bool IsValidLanguageIndependentIdentifier(string name)
         {
@@ -220,7 +277,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="schema"></param>
         /// <param name="reader"></param>
@@ -231,7 +288,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
             Debug.Assert(schema != null, "schema parameter is null");
             Debug.Assert(reader != null, "reader parameter is null");
 
-            if ( reader.SchemaInfo.Validity == System.Xml.Schema.XmlSchemaValidity.Invalid )
+            if (reader.SchemaInfo.Validity == System.Xml.Schema.XmlSchemaValidity.Invalid)
             {
                 value = true; // we have to set the value to something before returning.
                 return false;
@@ -246,16 +303,23 @@ namespace System.Data.EntityModel.SchemaObjectModel
             catch (System.Xml.XmlException)
             {
                 // we already handled the valid and invalid cases, so it must be NotKnown now.
-                Debug.Assert(reader.SchemaInfo.Validity == Xml.Schema.XmlSchemaValidity.NotKnown, "The schema validity must be NotKnown at this point");
-                schema.AddError(ErrorCode.BoolValueExpected, EdmSchemaErrorSeverity.Error, reader,
-                    System.Data.Entity.Strings.ValueNotUnderstood(reader.Value, reader.Name));
+                Debug.Assert(
+                    reader.SchemaInfo.Validity == Xml.Schema.XmlSchemaValidity.NotKnown,
+                    "The schema validity must be NotKnown at this point"
+                );
+                schema.AddError(
+                    ErrorCode.BoolValueExpected,
+                    EdmSchemaErrorSeverity.Error,
+                    reader,
+                    System.Data.Entity.Strings.ValueNotUnderstood(reader.Value, reader.Name)
+                );
             }
-            
+
             value = true; // we have to set the value to something before returning.
             return false;
         }
 
-        public static bool GetInt(Schema schema,XmlReader reader,out int value)
+        public static bool GetInt(Schema schema, XmlReader reader, out int value)
         {
             Debug.Assert(schema != null, "schema parameter is null");
             Debug.Assert(reader != null, "reader parameter is null");
@@ -263,22 +327,34 @@ namespace System.Data.EntityModel.SchemaObjectModel
             if (reader.SchemaInfo.Validity == System.Xml.Schema.XmlSchemaValidity.Invalid)
             {
                 // an error has already been issued by the xsd validation
-                value = 0; ;
+                value = 0;
+                ;
                 return false;
             }
 
             string text = reader.Value;
             value = int.MinValue;
 
-            if ( int.TryParse(text,NumberStyles.Integer,System.Globalization.CultureInfo.InvariantCulture,out value) )
+            if (
+                int.TryParse(
+                    text,
+                    NumberStyles.Integer,
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    out value
+                )
+            )
                 return true;
 
-            schema.AddError( ErrorCode.IntegerExpected, EdmSchemaErrorSeverity.Error, reader,
-                    System.Data.Entity.Strings.ValueNotUnderstood(reader.Value,reader.Name));
+            schema.AddError(
+                ErrorCode.IntegerExpected,
+                EdmSchemaErrorSeverity.Error,
+                reader,
+                System.Data.Entity.Strings.ValueNotUnderstood(reader.Value, reader.Name)
+            );
             return false;
         }
 
-        public static bool GetByte(Schema schema,XmlReader reader,out byte value)
+        public static bool GetByte(Schema schema, XmlReader reader, out byte value)
         {
             Debug.Assert(schema != null, "schema parameter is null");
             Debug.Assert(reader != null, "reader parameter is null");
@@ -286,35 +362,46 @@ namespace System.Data.EntityModel.SchemaObjectModel
             if (reader.SchemaInfo.Validity == System.Xml.Schema.XmlSchemaValidity.Invalid)
             {
                 // an error has already been issued by the xsd validation
-                value = 0; ;
+                value = 0;
+                ;
                 return false;
             }
 
             string text = reader.Value;
             value = byte.MinValue;
 
-            if (byte.TryParse(text, NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture, out value))
+            if (
+                byte.TryParse(
+                    text,
+                    NumberStyles.Integer,
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    out value
+                )
+            )
             {
                 return true;
             }
 
-            schema.AddError( ErrorCode.ByteValueExpected, EdmSchemaErrorSeverity.Error, reader,
-                    System.Data.Entity.Strings.ValueNotUnderstood(reader.Value, reader.Name));
+            schema.AddError(
+                ErrorCode.ByteValueExpected,
+                EdmSchemaErrorSeverity.Error,
+                reader,
+                System.Data.Entity.Strings.ValueNotUnderstood(reader.Value, reader.Name)
+            );
 
             return false;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="lhsName"></param>
         /// <param name="rhsName"></param>
         /// <returns></returns>
         public static int CompareNames(string lhsName, string rhsName)
         {
-            return string.Compare(lhsName,rhsName,StringComparison.Ordinal);
+            return string.Compare(lhsName, rhsName, StringComparison.Ordinal);
         }
-
 
         #endregion
     }

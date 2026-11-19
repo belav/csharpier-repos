@@ -2,12 +2,10 @@
 
 class X
 {
-	public static void Main ()
-	{
-		Test (arg: 1, "");
-	}
+    public static void Main()
+    {
+        Test(arg: 1, "");
+    }
 
-	static void Test (int arg, string str)
-	{
-	}
+    static void Test(int arg, string str) { }
 }

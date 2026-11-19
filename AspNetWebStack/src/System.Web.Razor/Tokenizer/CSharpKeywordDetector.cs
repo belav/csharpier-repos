@@ -8,7 +8,10 @@ namespace System.Web.Razor.Tokenizer
 {
     internal static class CSharpKeywordDetector
     {
-        private static readonly Dictionary<string, CSharpKeyword> _keywords = new Dictionary<string, CSharpKeyword>(StringComparer.Ordinal)
+        private static readonly Dictionary<string, CSharpKeyword> _keywords = new Dictionary<
+            string,
+            CSharpKeyword
+        >(StringComparer.Ordinal)
         {
             { "abstract", CSharpKeyword.Abstract },
             { "byte", CSharpKeyword.Byte },
@@ -86,7 +89,7 @@ namespace System.Web.Razor.Tokenizer
             { "interface", CSharpKeyword.Interface },
             { "break", CSharpKeyword.Break },
             { "checked", CSharpKeyword.Checked },
-            { "namespace", CSharpKeyword.Namespace }
+            { "namespace", CSharpKeyword.Namespace },
         };
 
         public static CSharpKeyword? SymbolTypeForIdentifier(string id)

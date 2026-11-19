@@ -16,11 +16,9 @@ public abstract class NavigationsQueryTests
     private AdventureWorksContextBase _context;
     private IQueryable<Store> _query;
 
-    protected virtual int QueriesPerIteration
-        => 10;
+    protected virtual int QueriesPerIteration => 10;
 
-    protected virtual int UnfilteredCount
-        => 466;
+    protected virtual int UnfilteredCount => 466;
 
     [Params(true, false)]
     public bool Async { get; set; }

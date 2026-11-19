@@ -38,115 +38,91 @@ public class Program
                     .ConfigureKestrel(
                         (context, options) =>
                         {
-                            options.ListenAnyIP(
-                                5000,
-                                listenOptions =>
-                                {
-                                    listenOptions.UseConnectionLogging();
-                                    listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
-                                }
-                            );
+                            options.ListenAnyIP(5000, listenOptions =>
+                            {
+                                listenOptions.UseConnectionLogging();
+                                listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
+                            });
 
-                            options.Listen(
-                                IPAddress.Any,
-                                5001,
-                                listenOptions =>
-                                {
-                                    listenOptions.UseHttps();
-                                    listenOptions.UseConnectionLogging();
-                                    listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
-                                }
-                            );
+                            options.Listen(IPAddress.Any, 5001, listenOptions =>
+                            {
+                                listenOptions.UseHttps();
+                                listenOptions.UseConnectionLogging();
+                                listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
+                            });
 
-                            options.ListenAnyIP(
-                                5002,
-                                listenOptions =>
-                                {
-                                    listenOptions.UseConnectionLogging();
-                                    listenOptions.UseHttps(StoreName.My, "localhost");
-                                    listenOptions.Protocols = HttpProtocols.Http3;
-                                }
-                            );
+                            options.ListenAnyIP(5002, listenOptions =>
+                            {
+                                listenOptions.UseConnectionLogging();
+                                listenOptions.UseHttps(StoreName.My, "localhost");
+                                listenOptions.Protocols = HttpProtocols.Http3;
+                            });
 
-                            options.ListenAnyIP(
-                                5003,
-                                listenOptions =>
+                            options.ListenAnyIP(5003, listenOptions =>
+                            {
+                                listenOptions.UseHttps(httpsOptions =>
                                 {
-                                    listenOptions.UseHttps(httpsOptions =>
-                                    {
-                                        // ConnectionContext is null
-                                        httpsOptions.ServerCertificateSelector = (context, host) =>
-                                            cert;
-                                    });
-                                    listenOptions.UseConnectionLogging();
-                                    listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
-                                }
-                            );
+                                    // ConnectionContext is null
+                                    httpsOptions.ServerCertificateSelector = (context, host) =>
+                                        cert;
+                                });
+                                listenOptions.UseConnectionLogging();
+                                listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
+                            });
 
                             // No SslServerAuthenticationOptions callback is currently supported by QuicListener
-                            options.ListenAnyIP(
-                                5004,
-                                listenOptions =>
+                            options.ListenAnyIP(5004, listenOptions =>
+                            {
+                                listenOptions.UseHttps(httpsOptions =>
                                 {
-                                    listenOptions.UseHttps(httpsOptions =>
-                                    {
-                                        httpsOptions.OnAuthenticate = (_, sslOptions) =>
-                                            sslOptions.ServerCertificate = cert;
-                                    });
-                                    listenOptions.UseConnectionLogging();
-                                    listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
-                                }
-                            );
+                                    httpsOptions.OnAuthenticate = (_, sslOptions) =>
+                                        sslOptions.ServerCertificate = cert;
+                                });
+                                listenOptions.UseConnectionLogging();
+                                listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
+                            });
 
                             // ServerOptionsSelectionCallback isn't currently supported by QuicListener
-                            options.ListenAnyIP(
-                                5005,
-                                listenOptions =>
+                            options.ListenAnyIP(5005, listenOptions =>
+                            {
+                                ServerOptionsSelectionCallback callback = (
+                                    SslStream stream,
+                                    SslClientHelloInfo clientHelloInfo,
+                                    object state,
+                                    CancellationToken cancellationToken
+                                ) =>
                                 {
-                                    ServerOptionsSelectionCallback callback = (
-                                        SslStream stream,
-                                        SslClientHelloInfo clientHelloInfo,
-                                        object state,
-                                        CancellationToken cancellationToken
-                                    ) =>
+                                    var options = new SslServerAuthenticationOptions()
                                     {
-                                        var options = new SslServerAuthenticationOptions()
-                                        {
-                                            ServerCertificate = cert,
-                                        };
-                                        return new ValueTask<SslServerAuthenticationOptions>(
-                                            options
-                                        );
+                                        ServerCertificate = cert,
                                     };
-                                    listenOptions.UseHttps(callback, state: null);
-                                    listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
-                                }
-                            );
+                                    return new ValueTask<SslServerAuthenticationOptions>(options);
+                                };
+                                listenOptions.UseHttps(callback, state: null);
+                                listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
+                            });
 
                             // TlsHandshakeCallbackOptions (ServerOptionsSelectionCallback) isn't currently supported by QuicListener
-                            options.ListenAnyIP(
-                                5006,
-                                listenOptions =>
-                                {
-                                    listenOptions.UseHttps(
-                                        new TlsHandshakeCallbackOptions()
+                            options.ListenAnyIP(5006, listenOptions =>
+                            {
+                                listenOptions.UseHttps(
+                                    new TlsHandshakeCallbackOptions()
+                                    {
+                                        OnConnection = context =>
                                         {
-                                            OnConnection = context =>
+                                            var options = new SslServerAuthenticationOptions()
                                             {
-                                                var options = new SslServerAuthenticationOptions()
-                                                {
-                                                    ServerCertificate = cert,
-                                                };
-                                                return new ValueTask<SslServerAuthenticationOptions>(
-                                                    options
-                                                );
-                                            },
-                                        }
-                                    );
-                                    listenOptions.UseConnectionLogging();
-                                    listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
-                                }
-                            );
+                                                ServerCertificate = cert,
+                                            };
+                                            return new ValueTask<SslServerAuthenticationOptions>(
+                                                options
+                                            );
+                                        },
+                                    }
+                                );
+                                listenOptions.UseConnectionLogging();
+                                listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
+                            });
                         }
                     )
                     .UseStartup<Startup>();

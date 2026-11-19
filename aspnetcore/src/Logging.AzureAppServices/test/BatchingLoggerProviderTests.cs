@@ -35,13 +35,8 @@ public class BatchingLoggerProviderTests
 
         await provider.IntervalControl.Pause;
 
-        logger.Log(
-            _timestampOne,
-            LogLevel.Information,
-            0,
-            "Info message",
-            null,
-            (state, ex) => state
+        logger.Log(_timestampOne, LogLevel.Information, 0, "Info message", null, (state, ex) =>
+            state
         );
         logger.Log(
             _timestampOne.AddHours(1),
@@ -100,13 +95,8 @@ public class BatchingLoggerProviderTests
 
         await provider.IntervalControl.Pause;
 
-        logger.Log(
-            _timestampOne,
-            LogLevel.Information,
-            0,
-            "Info message",
-            null,
-            (state, ex) => state
+        logger.Log(_timestampOne, LogLevel.Information, 0, "Info message", null, (state, ex) =>
+            state
         );
         logger.Log(
             _timestampOne.AddHours(1),
@@ -142,13 +132,8 @@ public class BatchingLoggerProviderTests
 
         await provider.IntervalControl.Pause;
 
-        logger.Log(
-            _timestampOne,
-            LogLevel.Information,
-            0,
-            "Info message",
-            null,
-            (state, ex) => state
+        logger.Log(_timestampOne, LogLevel.Information, 0, "Info message", null, (state, ex) =>
+            state
         );
         logger.Log(
             _timestampOne.AddHours(1),

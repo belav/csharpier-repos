@@ -110,7 +110,7 @@ namespace System.Reflection.PortableExecutable
 
         private void CheckBounds(uint count)
         {
-            Debug.Assert(count <= sizeof(long));  // Error message assumes we're trying to read constant small number of bytes.
+            Debug.Assert(count <= sizeof(long)); // Error message assumes we're trying to read constant small number of bytes.
             Debug.Assert(_reader.BaseStream.Position >= 0 && _maxOffset >= 0);
 
             // Add cannot overflow because the worst case is (ulong)long.MaxValue + uint.MaxValue < ulong.MaxValue.

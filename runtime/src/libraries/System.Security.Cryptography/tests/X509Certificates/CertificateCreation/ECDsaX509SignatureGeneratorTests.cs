@@ -14,9 +14,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
         [Fact]
         public static void ECDsaX509SignatureGeneratorCtor_Exceptions()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => X509SignatureGenerator.CreateForECDsa(null));
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                X509SignatureGenerator.CreateForECDsa(null)
+            );
         }
 
         [Theory]
@@ -27,20 +27,24 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
             using (ECDsa ecdsa = ECDsa.Create(keyParameters))
             {
-                X509SignatureGenerator signatureGenerator =
-                    X509SignatureGenerator.CreateForECDsa(ecdsa);
+                X509SignatureGenerator signatureGenerator = X509SignatureGenerator.CreateForECDsa(
+                    ecdsa
+                );
 
                 PublicKey publicKey = signatureGenerator.PublicKey;
 
                 Assert.Equal(
                     testData.CurveEncodedOidHex,
-                    publicKey.EncodedParameters.RawData.ByteArrayToHex());
+                    publicKey.EncodedParameters.RawData.ByteArrayToHex()
+                );
 
                 string expectedKeyHex =
                     // Uncompressed Point
-                    "04" +
+                    "04"
+                    +
                     // Qx
-                    keyParameters.Q.X.ByteArrayToHex() +
+                    keyParameters.Q.X.ByteArrayToHex()
+                    +
                     // Qy
                     keyParameters.Q.Y.ByteArrayToHex();
 
@@ -83,9 +87,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 HashAlgorithmName hashAlgorithm = new HashAlgorithmName(hashAlgorithmName);
                 var generator = X509SignatureGenerator.CreateForECDsa(ecdsa);
 
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    "hashAlgorithm",
-                    () => generator.GetSignatureAlgorithmIdentifier(hashAlgorithm));
+                Assert.Throws<ArgumentOutOfRangeException>("hashAlgorithm", () =>
+                    generator.GetSignatureAlgorithmIdentifier(hashAlgorithm)
+                );
             }
         }
 

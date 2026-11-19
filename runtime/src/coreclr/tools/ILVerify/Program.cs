@@ -11,7 +11,6 @@ using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Text.RegularExpressions;
 using Internal.TypeSystem.Ecma;
-
 using static System.Console;
 
 namespace ILVerify
@@ -108,12 +107,17 @@ namespace ILVerify
 
         public int Run()
         {
-            _verifier = new Verifier(this, new VerifierOptions
-            {
-                IncludeMetadataTokensInErrorMessages = Get(_command.Tokens),
-                SanityChecks = Get(_command.SanityChecks)
-            });
-            _verifier.SetSystemModuleName(new AssemblyName(Get(_command.SystemModule) ?? "mscorlib"));
+            _verifier = new Verifier(
+                this,
+                new VerifierOptions
+                {
+                    IncludeMetadataTokensInErrorMessages = Get(_command.Tokens),
+                    SanityChecks = Get(_command.SanityChecks),
+                }
+            );
+            _verifier.SetSystemModuleName(
+                new AssemblyName(Get(_command.SystemModule) ?? "mscorlib")
+            );
 
             int numErrors = 0;
 
@@ -132,7 +136,11 @@ namespace ILVerify
             }
         }
 
-        private void PrintVerifyMethodsResult(VerificationResult result, EcmaModule module, string pathOrModuleName)
+        private void PrintVerifyMethodsResult(
+            VerificationResult result,
+            EcmaModule module,
+            string pathOrModuleName
+        )
         {
             Write("[IL]: Error [");
             if (result.Code != VerifierError.None)
@@ -151,7 +159,9 @@ namespace ILVerify
 
             MetadataReader metadataReader = module.MetadataReader;
 
-            TypeDefinitionHandle typeDef = metadataReader.GetMethodDefinition(result.Method).GetDeclaringType();
+            TypeDefinitionHandle typeDef = metadataReader
+                .GetMethodDefinition(result.Method)
+                .GetDeclaringType();
             string fullClassName = GetFullClassName(metadataReader, typeDef);
             Write(fullClassName);
 
@@ -240,8 +250,22 @@ namespace ILVerify
             int verifiedTypeCounter = 0;
             int typeCounter = 0;
 
-            VerifyMethods(peReader, module, path, ref numErrors, ref verifiedMethodCounter, ref methodCounter);
-            VerifyTypes(peReader, module, path, ref numErrors, ref verifiedTypeCounter, ref typeCounter);
+            VerifyMethods(
+                peReader,
+                module,
+                path,
+                ref numErrors,
+                ref verifiedMethodCounter,
+                ref methodCounter
+            );
+            VerifyTypes(
+                peReader,
+                module,
+                path,
+                ref numErrors,
+                ref verifiedTypeCounter,
+                ref typeCounter
+            );
 
             if (numErrors > 0)
                 WriteLine(numErrors + " Error(s) Verifying " + path);
@@ -260,7 +284,14 @@ namespace ILVerify
             return numErrors;
         }
 
-        private void VerifyMethods(PEReader peReader, EcmaModule module, string path, ref int numErrors, ref int verifiedMethodCounter, ref int methodCounter)
+        private void VerifyMethods(
+            PEReader peReader,
+            EcmaModule module,
+            string path,
+            ref int numErrors,
+            ref int verifiedMethodCounter,
+            ref int methodCounter
+        )
         {
             numErrors = 0;
             verifiedMethodCounter = 0;
@@ -306,7 +337,14 @@ namespace ILVerify
             }
         }
 
-        private void VerifyTypes(PEReader peReader, EcmaModule module, string path, ref int numErrors, ref int verifiedTypeCounter, ref int typeCounter)
+        private void VerifyTypes(
+            PEReader peReader,
+            EcmaModule module,
+            string path,
+            ref int numErrors,
+            ref int verifiedTypeCounter,
+            ref int typeCounter
+        )
         {
             MetadataReader metadataReader = peReader.GetMetadataReader();
 
@@ -350,7 +388,10 @@ namespace ILVerify
         /// <summary>
         /// Returns full class name, includes parent class for nested class.
         /// </summary>
-        private string GetFullClassName(MetadataReader metadataReader, TypeDefinitionHandle typeDefinitionHandle)
+        private string GetFullClassName(
+            MetadataReader metadataReader,
+            TypeDefinitionHandle typeDefinitionHandle
+        )
         {
             var typeDef = metadataReader.GetTypeDefinition(typeDefinitionHandle);
 
@@ -362,7 +403,7 @@ namespace ILVerify
                 fullName.Append(GetFullClassName(metadataReader, declaringType));
                 fullName.Append('+');
             }
-            
+
             var namespaceName = metadataReader.GetString(typeDef.Namespace);
             if (!string.IsNullOrEmpty(namespaceName))
             {
@@ -372,20 +413,27 @@ namespace ILVerify
 
             var typeName = metadataReader.GetString(typeDef.Name);
             fullName.Append(typeName);
-            
+
             return fullName.ToString();
         }
 
         /// <summary>
         /// This method returns the fully qualified class name.
         /// </summary>
-        private string GetQualifiedClassName(MetadataReader metadataReader, TypeDefinitionHandle typeHandle)
+        private string GetQualifiedClassName(
+            MetadataReader metadataReader,
+            TypeDefinitionHandle typeHandle
+        )
         {
             var typeDef = metadataReader.GetTypeDefinition(typeHandle);
             var typeName = metadataReader.GetString(typeDef.Name);
 
             var namespaceName = metadataReader.GetString(typeDef.Namespace);
-            var assemblyName = metadataReader.GetString(metadataReader.IsAssembly ? metadataReader.GetAssemblyDefinition().Name : metadataReader.GetModuleDefinition().Name);
+            var assemblyName = metadataReader.GetString(
+                metadataReader.IsAssembly
+                    ? metadataReader.GetAssemblyDefinition().Name
+                    : metadataReader.GetModuleDefinition().Name
+            );
 
             StringBuilder builder = new StringBuilder();
             builder.Append($"[{assemblyName}]");
@@ -401,15 +449,24 @@ namespace ILVerify
         /// This method exists to avoid additional assembly resolving, which might be triggered by calling
         /// MethodDesc.ToString().
         /// </summary>
-        private string GetQualifiedMethodName(MetadataReader metadataReader, MethodDefinitionHandle methodHandle)
+        private string GetQualifiedMethodName(
+            MetadataReader metadataReader,
+            MethodDefinitionHandle methodHandle
+        )
         {
             var methodDef = metadataReader.GetMethodDefinition(methodHandle);
             var typeDef = metadataReader.GetTypeDefinition(methodDef.GetDeclaringType());
 
-            var methodName = metadataReader.GetString(metadataReader.GetMethodDefinition(methodHandle).Name);
+            var methodName = metadataReader.GetString(
+                metadataReader.GetMethodDefinition(methodHandle).Name
+            );
             var typeName = metadataReader.GetString(typeDef.Name);
             var namespaceName = metadataReader.GetString(typeDef.Namespace);
-            var assemblyName = metadataReader.GetString(metadataReader.IsAssembly ? metadataReader.GetAssemblyDefinition().Name : metadataReader.GetModuleDefinition().Name);
+            var assemblyName = metadataReader.GetString(
+                metadataReader.IsAssembly
+                    ? metadataReader.GetAssemblyDefinition().Name
+                    : metadataReader.GetModuleDefinition().Name
+            );
 
             StringBuilder builder = new StringBuilder();
             builder.Append($"[{assemblyName}]");
@@ -422,7 +479,10 @@ namespace ILVerify
 
         private bool ShouldVerifyMemberName(string memberName)
         {
-            if (_includePatterns.Length > 0 && !Array.Exists(_includePatterns, p => p.IsMatch(memberName)))
+            if (
+                _includePatterns.Length > 0
+                && !Array.Exists(_includePatterns, p => p.IsMatch(memberName))
+            )
             {
                 return false;
             }
@@ -451,11 +511,10 @@ namespace ILVerify
             return false;
         }
 
-        PEReader IResolver.ResolveAssembly(AssemblyName assemblyName)
-            => Resolve(assemblyName.Name);
+        PEReader IResolver.ResolveAssembly(AssemblyName assemblyName) => Resolve(assemblyName.Name);
 
-        PEReader IResolver.ResolveModule(AssemblyName referencingModule, string fileName)
-            => Resolve(Path.GetFileNameWithoutExtension(fileName));
+        PEReader IResolver.ResolveModule(AssemblyName referencingModule, string fileName) =>
+            Resolve(Path.GetFileNameWithoutExtension(fileName));
 
         public PEReader Resolve(string simpleName)
         {
@@ -465,7 +524,10 @@ namespace ILVerify
             }
 
             string path = null;
-            if (_inputFilePaths.TryGetValue(simpleName, out path) || _referenceFilePaths.TryGetValue(simpleName, out path))
+            if (
+                _inputFilePaths.TryGetValue(simpleName, out path)
+                || _referenceFilePaths.TryGetValue(simpleName, out path)
+            )
             {
                 PEReader result = new PEReader(File.OpenRead(path));
                 _resolverCache.Add(simpleName, result);
@@ -476,12 +538,13 @@ namespace ILVerify
         }
 
         private T Get<T>(CliOption<T> option) => _command.Result.GetValue(option);
+
         private T Get<T>(CliArgument<T> argument) => _command.Result.GetValue(argument);
 
         private static int Main(string[] args) =>
             new CliConfiguration(new ILVerifyRootCommand().UseVersion())
             {
-                ResponseFileTokenReplacer = Helpers.TryReadResponseFile
+                ResponseFileTokenReplacer = Helpers.TryReadResponseFile,
             }.Invoke(args);
     }
 }

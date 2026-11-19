@@ -41,7 +41,13 @@ namespace Microsoft.CodeAnalysis.Options
         /// </summary>
         public object? DefaultValue { get; }
 
-        public OptionDefinition(OptionGroup? group, string configName, object? defaultValue, OptionStorageMapping? storageMapping, bool isEditorConfigOption)
+        public OptionDefinition(
+            OptionGroup? group,
+            string configName,
+            object? defaultValue,
+            OptionStorageMapping? storageMapping,
+            bool isEditorConfigOption
+        )
         {
             ConfigName = configName;
             Group = group ?? OptionGroup.Default;
@@ -61,40 +67,36 @@ namespace Microsoft.CodeAnalysis.Options
 
         protected abstract IEditorConfigValueSerializer SerializerImpl { get; }
 
-        public override bool Equals(object? other)
-            => Equals(other as OptionDefinition);
+        public override bool Equals(object? other) => Equals(other as OptionDefinition);
 
-        public bool Equals(OptionDefinition? other)
-            => ConfigName == other?.ConfigName;
+        public bool Equals(OptionDefinition? other) => ConfigName == other?.ConfigName;
 
-        public override int GetHashCode()
-            => ConfigName.GetHashCode();
+        public override int GetHashCode() => ConfigName.GetHashCode();
 
-        public override string ToString()
-            => ConfigName;
+        public override string ToString() => ConfigName;
 
-        public static bool operator ==(OptionDefinition? left, OptionDefinition? right)
-            => ReferenceEquals(left, right) || left?.Equals(right) == true;
+        public static bool operator ==(OptionDefinition? left, OptionDefinition? right) =>
+            ReferenceEquals(left, right) || left?.Equals(right) == true;
 
-        public static bool operator !=(OptionDefinition? left, OptionDefinition? right)
-            => !(left == right);
+        public static bool operator !=(OptionDefinition? left, OptionDefinition? right) =>
+            !(left == right);
 
-        public static bool IsSupportedOptionType(Type type)
-            => type == typeof(bool) ||
-               type == typeof(string) ||
-               type == typeof(int) ||
-               type == typeof(long) ||
-               type == typeof(bool?) ||
-               type == typeof(int?) ||
-               type == typeof(long?) ||
-               type.IsEnum ||
-               Nullable.GetUnderlyingType(type)?.IsEnum == true ||
-               typeof(ICodeStyleOption).IsAssignableFrom(type) ||
-               type == typeof(NamingStylePreferences) ||
-               type == typeof(ImmutableArray<bool>) ||
-               type == typeof(ImmutableArray<string>) ||
-               type == typeof(ImmutableArray<int>) ||
-               type == typeof(ImmutableArray<long>);
+        public static bool IsSupportedOptionType(Type type) =>
+            type == typeof(bool)
+            || type == typeof(string)
+            || type == typeof(int)
+            || type == typeof(long)
+            || type == typeof(bool?)
+            || type == typeof(int?)
+            || type == typeof(long?)
+            || type.IsEnum
+            || Nullable.GetUnderlyingType(type)?.IsEnum == true
+            || typeof(ICodeStyleOption).IsAssignableFrom(type)
+            || type == typeof(NamingStylePreferences)
+            || type == typeof(ImmutableArray<bool>)
+            || type == typeof(ImmutableArray<string>)
+            || type == typeof(ImmutableArray<int>)
+            || type == typeof(ImmutableArray<long>);
     }
 
     internal sealed class OptionDefinition<T>(
@@ -103,15 +105,15 @@ namespace Microsoft.CodeAnalysis.Options
         OptionGroup? group,
         string configName,
         OptionStorageMapping? storageMapping,
-        bool isEditorConfigOption) : OptionDefinition(group, configName, defaultValue, storageMapping, isEditorConfigOption)
+        bool isEditorConfigOption
+    ) : OptionDefinition(group, configName, defaultValue, storageMapping, isEditorConfigOption)
     {
         public new T DefaultValue { get; } = defaultValue;
-        public new EditorConfigValueSerializer<T> Serializer { get; } = serializer ?? EditorConfigValueSerializer.Default<T>();
+        public new EditorConfigValueSerializer<T> Serializer { get; } =
+            serializer ?? EditorConfigValueSerializer.Default<T>();
 
-        public override Type Type
-            => typeof(T);
+        public override Type Type => typeof(T);
 
-        protected override IEditorConfigValueSerializer SerializerImpl
-            => Serializer;
+        protected override IEditorConfigValueSerializer SerializerImpl => Serializer;
     }
 }

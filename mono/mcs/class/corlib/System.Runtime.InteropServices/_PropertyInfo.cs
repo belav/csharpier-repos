@@ -11,76 +11,103 @@ using System.Reflection;
 
 namespace System.Runtime.InteropServices
 {
-	[CLSCompliant (false)]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[Guid ("F59ED4E4-E68F-3218-BD77-061AA82824BF")]
+    [CLSCompliant(false)]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [Guid("F59ED4E4-E68F-3218-BD77-061AA82824BF")]
 #if !FULL_AOT_RUNTIME
-	[TypeLibImportClass (typeof (PropertyInfo))]
+    [TypeLibImportClass(typeof(PropertyInfo))]
 #endif
-	[ComVisible (true)]
-	public interface _PropertyInfo
-	{
-		bool Equals (object other);
+    [ComVisible(true)]
+    public interface _PropertyInfo
+    {
+        bool Equals(object other);
 
-		MethodInfo[] GetAccessors ();
+        MethodInfo[] GetAccessors();
 
-		MethodInfo[] GetAccessors (bool nonPublic);
+        MethodInfo[] GetAccessors(bool nonPublic);
 
-		object[] GetCustomAttributes (bool inherit);
+        object[] GetCustomAttributes(bool inherit);
 
-		object[] GetCustomAttributes (Type attributeType, bool inherit);
+        object[] GetCustomAttributes(Type attributeType, bool inherit);
 
-		MethodInfo GetGetMethod ();
+        MethodInfo GetGetMethod();
 
-		MethodInfo GetGetMethod (bool nonPublic);
+        MethodInfo GetGetMethod(bool nonPublic);
 
-		int GetHashCode ();
+        int GetHashCode();
 
-		ParameterInfo[] GetIndexParameters ();
+        ParameterInfo[] GetIndexParameters();
 
-		MethodInfo GetSetMethod ();
+        MethodInfo GetSetMethod();
 
-		MethodInfo GetSetMethod (bool nonPublic);
+        MethodInfo GetSetMethod(bool nonPublic);
 
-		void GetIDsOfNames ([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
 
-		void GetTypeInfo (uint iTInfo, uint lcid, IntPtr ppTInfo);
+        void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
 
-		void GetTypeInfoCount (out uint pcTInfo);
+        void GetTypeInfoCount(out uint pcTInfo);
 
-		void Invoke (uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams,
-			IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 
-		Type GetType ();
+        Type GetType();
 
-		object GetValue (object obj, object[] index);
+        object GetValue(object obj, object[] index);
 
-		object GetValue (object obj, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture);
+        object GetValue(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] index,
+            CultureInfo culture
+        );
 
-		bool IsDefined (Type attributeType, bool inherit);
+        bool IsDefined(Type attributeType, bool inherit);
 
-		void SetValue (object obj, object value, object[] index);
+        void SetValue(object obj, object value, object[] index);
 
-		void SetValue (object obj, object value, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture);
-		
-		string ToString ();
+        void SetValue(
+            object obj,
+            object value,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] index,
+            CultureInfo culture
+        );
 
-		PropertyAttributes Attributes {get;}
+        string ToString();
 
-		bool CanRead {get;}
+        PropertyAttributes Attributes { get; }
 
-		bool CanWrite {get;}
+        bool CanRead { get; }
 
-		Type DeclaringType {get;}
+        bool CanWrite { get; }
 
-		bool IsSpecialName {get;}
+        Type DeclaringType { get; }
 
-		MemberTypes MemberType {get;}
+        bool IsSpecialName { get; }
 
-		string Name {get;}
+        MemberTypes MemberType { get; }
 
-		Type PropertyType {get;}
+        string Name { get; }
 
-		Type ReflectedType {get;}
-	}
+        Type PropertyType { get; }
+
+        Type ReflectedType { get; }
+    }
 }

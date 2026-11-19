@@ -26,61 +26,39 @@ namespace System.ComponentModel.Composition
 
     public interface ITrans_MetadataTests_MetadataView
     {
-        string Value
-        {
-            get;
-        }
+        string Value { get; }
     }
 
     public interface ITrans_MetadataTests_MetadataView2 : ITrans_MetadataTests_MetadataView
     {
-        new int Value
-        {
-            get;
-        }
+        new int Value { get; }
     }
 
     public interface ITrans_MetadataTests_MetadataView3 : ITrans_MetadataTests_MetadataView
     {
-        string Value2
-        {
-            get;
-        }
+        string Value2 { get; }
     }
 
     public interface ITrans_MetadataTests_MetadataViewWithPropertySetter
     {
-        string Value
-        {
-            get;
-            set;
-        }
+        string Value { get; set; }
     }
 
     public interface ITrans_MetadataTests_MetadataViewWithMethod
     {
-        string Value
-        {
-            get;
-        }
+        string Value { get; }
         void Method();
     }
 
     public interface ITrans_MetadataTests_MetadataViewWithEvent
     {
-        string Value
-        {
-            get;
-        }
+        string Value { get; }
         event EventHandler TestEvent;
     }
 
     public interface ITrans_MetadataTests_MetadataViewWithIndexer
     {
-        string Value
-        {
-            get;
-        }
+        string Value { get; }
         string this[object o] { get; }
     }
 }

@@ -12,12 +12,17 @@ namespace System.Text.Tests
             throw new Exception("The method or operation is not implemented.");
         }
 
-        public override int GetChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
+        public override int GetChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex
+        )
         {
             throw new Exception("The method or operation is not implemented.");
         }
     }
-
 
     public class DecoderCtor
     {

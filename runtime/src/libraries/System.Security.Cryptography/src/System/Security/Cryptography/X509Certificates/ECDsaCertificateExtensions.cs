@@ -27,7 +27,10 @@ namespace System.Security.Cryptography.X509Certificates
             return certificate.GetPrivateKey<ECDsa>(HasECDsaKeyUsage);
         }
 
-        public static X509Certificate2 CopyWithPrivateKey(this X509Certificate2 certificate, ECDsa privateKey)
+        public static X509Certificate2 CopyWithPrivateKey(
+            this X509Certificate2 certificate,
+            ECDsa privateKey
+        )
         {
             ArgumentNullException.ThrowIfNull(certificate);
             ArgumentNullException.ThrowIfNull(privateKey);
@@ -40,9 +43,17 @@ namespace System.Security.Cryptography.X509Certificates
                 if (publicKey == null)
                     throw new ArgumentException(SR.Cryptography_PrivateKey_WrongAlgorithm);
 
-                if (!Helpers.AreSamePublicECParameters(publicKey.ExportParameters(false), privateKey.ExportParameters(false)))
+                if (
+                    !Helpers.AreSamePublicECParameters(
+                        publicKey.ExportParameters(false),
+                        privateKey.ExportParameters(false)
+                    )
+                )
                 {
-                    throw new ArgumentException(SR.Cryptography_PrivateKey_DoesNotMatch, nameof(privateKey));
+                    throw new ArgumentException(
+                        SR.Cryptography_PrivateKey_DoesNotMatch,
+                        nameof(privateKey)
+                    );
                 }
             }
 
@@ -70,10 +81,10 @@ namespace System.Security.Cryptography.X509Certificates
                     // Even if KeyAgreement was specified, if any of the signature uses was
                     // specified then ECDSA is a valid usage.
                     const X509KeyUsageFlags ecdsaFlags =
-                        X509KeyUsageFlags.DigitalSignature |
-                        X509KeyUsageFlags.NonRepudiation |
-                        X509KeyUsageFlags.KeyCertSign |
-                        X509KeyUsageFlags.CrlSign;
+                        X509KeyUsageFlags.DigitalSignature
+                        | X509KeyUsageFlags.NonRepudiation
+                        | X509KeyUsageFlags.KeyCertSign
+                        | X509KeyUsageFlags.CrlSign;
 
                     return ((ext.KeyUsages & ecdsaFlags) != 0);
                 }

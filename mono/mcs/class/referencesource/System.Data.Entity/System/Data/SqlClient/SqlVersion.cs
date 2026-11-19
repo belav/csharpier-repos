@@ -37,7 +37,7 @@ namespace System.Data.SqlClient
     }
 
     /// <summary>
-    /// This class is a simple utility class that determines the sql version from the 
+    /// This class is a simple utility class that determines the sql version from the
     /// connection
     /// </summary>
     internal static class SqlVersionUtils
@@ -50,9 +50,15 @@ namespace System.Data.SqlClient
         /// <returns>Sql Version for the current connection</returns>
         internal static SqlVersion GetSqlVersion(SqlConnection connection)
         {
-            System.Diagnostics.Debug.Assert(connection.State == ConnectionState.Open, "Expected an open connection");
-            int majorVersion = Int32.Parse(connection.ServerVersion.Substring(0, 2), CultureInfo.InvariantCulture);
-            if (majorVersion >= 10) 
+            System.Diagnostics.Debug.Assert(
+                connection.State == ConnectionState.Open,
+                "Expected an open connection"
+            );
+            int majorVersion = Int32.Parse(
+                connection.ServerVersion.Substring(0, 2),
+                CultureInfo.InvariantCulture
+            );
+            if (majorVersion >= 10)
             {
                 return SqlVersion.Sql10;
             }
@@ -69,7 +75,7 @@ namespace System.Data.SqlClient
 
         internal static string GetVersionHint(SqlVersion version)
         {
-            switch(version)
+            switch (version)
             {
                 case SqlVersion.Sql8:
                     return SqlProviderManifest.TokenSql8;
@@ -101,7 +107,7 @@ namespace System.Data.SqlClient
                         return SqlVersion.Sql10;
                 }
             }
-            
+
             throw EntityUtil.Argument(Strings.UnableToDetermineStoreVersion);
         }
 

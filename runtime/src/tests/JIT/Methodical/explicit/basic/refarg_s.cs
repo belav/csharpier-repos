@@ -11,7 +11,10 @@ namespace Test_refarg_s_cs
         protected char pad1 = 'z';
         public String mm = "aha";
 
-        public AA() { _self = this; }
+        public AA()
+        {
+            _self = this;
+        }
 
         private AA _self = null;
 

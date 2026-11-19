@@ -53,7 +53,10 @@ namespace System.Net.Http
         /// A result specifying a remote stream where the file will be written to and a location where the file can be
         /// accessed. It cannot be null and the stream must be writable.
         /// </returns>
-        public abstract RemoteStreamInfo GetRemoteStream(HttpContent parent, HttpContentHeaders headers);
+        public abstract RemoteStreamInfo GetRemoteStream(
+            HttpContent parent,
+            HttpContentHeaders headers
+        );
 
         /// <inheritdoc />
         public override Stream GetStream(HttpContent parent, HttpContentHeaders headers)
@@ -63,10 +66,19 @@ namespace System.Net.Http
                 RemoteStreamInfo remoteStreamInfo = GetRemoteStream(parent, headers);
                 if (remoteStreamInfo == null)
                 {
-                    throw Error.InvalidOperation(Properties.Resources.RemoteStreamInfoCannotBeNull,
-                        "GetRemoteStream", GetType().Name);
+                    throw Error.InvalidOperation(
+                        Properties.Resources.RemoteStreamInfoCannotBeNull,
+                        "GetRemoteStream",
+                        GetType().Name
+                    );
                 }
-                FileData.Add(new MultipartRemoteFileData(headers, remoteStreamInfo.Location, remoteStreamInfo.FileName));
+                FileData.Add(
+                    new MultipartRemoteFileData(
+                        headers,
+                        remoteStreamInfo.Location,
+                        remoteStreamInfo.FileName
+                    )
+                );
 
                 return remoteStreamInfo.RemoteStream;
             }
@@ -83,8 +95,11 @@ namespace System.Net.Http
             // In consistency with existing MultipartFormDataStreamProvider,
             // this method predates support for cancellation, and we need to make sure it is always invoked when
             // ExecutePostProcessingAsync is called for compatability.
-            return MultipartFormDataStreamProviderHelper.ReadFormDataAsync(Contents, FormData,
-                _cancellationToken);
+            return MultipartFormDataStreamProviderHelper.ReadFormDataAsync(
+                Contents,
+                FormData,
+                _cancellationToken
+            );
         }
 
         /// <summary>

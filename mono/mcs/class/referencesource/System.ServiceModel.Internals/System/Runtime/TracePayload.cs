@@ -12,11 +12,13 @@ namespace System.Runtime
         string extendedData;
         string hostReference;
 
-        public TracePayload(string serializedException,
+        public TracePayload(
+            string serializedException,
             string eventSource,
             string appDomainFriendlyName,
             string extendedData,
-            string hostReference)
+            string hostReference
+        )
         {
             this.serializedException = serializedException;
             this.eventSource = eventSource;
@@ -27,42 +29,27 @@ namespace System.Runtime
 
         public string SerializedException
         {
-            get
-            {
-                return this.serializedException;
-            }
+            get { return this.serializedException; }
         }
 
         public string EventSource
         {
-            get
-            {
-                return this.eventSource;
-            }
+            get { return this.eventSource; }
         }
 
         public string AppDomainFriendlyName
         {
-            get
-            {
-                return this.appDomainFriendlyName;
-            }
+            get { return this.appDomainFriendlyName; }
         }
 
         public string ExtendedData
         {
-            get
-            {
-                return this.extendedData;
-            }
+            get { return this.extendedData; }
         }
 
         public string HostReference
         {
-            get
-            {
-                return this.hostReference;
-            }
+            get { return this.hostReference; }
         }
     }
 }

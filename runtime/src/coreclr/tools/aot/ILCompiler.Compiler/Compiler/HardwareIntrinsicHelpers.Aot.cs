@@ -2,12 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
-using Internal.TypeSystem;
 using Internal.IL;
 using Internal.IL.Stubs;
 using Internal.JitInterface;
-
+using Internal.TypeSystem;
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler
@@ -23,10 +21,17 @@ namespace ILCompiler
         /// Generates IL for the IsSupported property that reads this information from a field initialized by the runtime
         /// at startup. Only works for intrinsics that the code generator can generate detection code for.
         /// </summary>
-        public static MethodIL EmitIsSupportedIL(MethodDesc method, FieldDesc isSupportedField, InstructionSet instructionSet)
+        public static MethodIL EmitIsSupportedIL(
+            MethodDesc method,
+            FieldDesc isSupportedField,
+            InstructionSet instructionSet
+        )
         {
             Debug.Assert(IsIsSupportedMethod(method));
-            Debug.Assert(isSupportedField.IsStatic && isSupportedField.FieldType.IsWellKnownType(WellKnownType.Int32));
+            Debug.Assert(
+                isSupportedField.IsStatic
+                    && isSupportedField.FieldType.IsWellKnownType(WellKnownType.Int32)
+            );
 
             int flag = 0;
 

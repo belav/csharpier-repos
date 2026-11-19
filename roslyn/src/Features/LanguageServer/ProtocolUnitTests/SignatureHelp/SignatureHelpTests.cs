@@ -16,15 +16,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SignatureHelp
 {
     public class SignatureHelpTests : AbstractLanguageServerProtocolTests
     {
-        public SignatureHelpTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-        {
-        }
+        public SignatureHelpTests(ITestOutputHelper testOutputHelper)
+            : base(testOutputHelper) { }
 
         [Theory, CombinatorialData]
         public async Task TestGetSignatureHelpAsync(bool mutatingLspWorkspace)
         {
             var markup =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -39,41 +38,63 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SignatureHelp
     }
 
 }";
-            await using var testLspServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace);
+            await using var testLspServer = await CreateTestLspServerAsync(
+                markup,
+                mutatingLspWorkspace
+            );
             var expected = new LSP.SignatureHelp()
             {
                 ActiveParameter = 0,
                 ActiveSignature = 0,
-                Signatures = [CreateSignatureInformation("int A.M2(string a)", "M2 is a method.", "a", "")]
+                Signatures =
+                [
+                    CreateSignatureInformation("int A.M2(string a)", "M2 is a method.", "a", ""),
+                ],
             };
 
-            var results = await RunGetSignatureHelpAsync(testLspServer, testLspServer.GetLocations("caret").Single());
+            var results = await RunGetSignatureHelpAsync(
+                testLspServer,
+                testLspServer.GetLocations("caret").Single()
+            );
             AssertJsonEquals(expected, results);
         }
 
-        private static async Task<LSP.SignatureHelp?> RunGetSignatureHelpAsync(TestLspServer testLspServer, LSP.Location caret)
+        private static async Task<LSP.SignatureHelp?> RunGetSignatureHelpAsync(
+            TestLspServer testLspServer,
+            LSP.Location caret
+        )
         {
-            return await testLspServer.ExecuteRequestAsync<LSP.TextDocumentPositionParams, LSP.SignatureHelp?>(
+            return await testLspServer.ExecuteRequestAsync<
+                LSP.TextDocumentPositionParams,
+                LSP.SignatureHelp?
+            >(
                 LSP.Methods.TextDocumentSignatureHelpName,
-                CreateTextDocumentPositionParams(caret), CancellationToken.None);
+                CreateTextDocumentPositionParams(caret),
+                CancellationToken.None
+            );
         }
 
-        private static LSP.SignatureInformation CreateSignatureInformation(string methodLabal, string methodDocumentation, string parameterLabel, string parameterDocumentation)
-            => new LSP.SignatureInformation()
+        private static LSP.SignatureInformation CreateSignatureInformation(
+            string methodLabal,
+            string methodDocumentation,
+            string parameterLabel,
+            string parameterDocumentation
+        ) =>
+            new LSP.SignatureInformation()
             {
                 Documentation = CreateMarkupContent(LSP.MarkupKind.PlainText, methodDocumentation),
                 Label = methodLabal,
-                Parameters =
-                [
-                    CreateParameterInformation(parameterLabel, parameterDocumentation)
-                ]
+                Parameters = [CreateParameterInformation(parameterLabel, parameterDocumentation)],
             };
 
-        private static LSP.ParameterInformation CreateParameterInformation(string parameter, string documentation)
-            => new LSP.ParameterInformation()
+        private static LSP.ParameterInformation CreateParameterInformation(
+            string parameter,
+            string documentation
+        ) =>
+            new LSP.ParameterInformation()
             {
                 Documentation = CreateMarkupContent(LSP.MarkupKind.PlainText, documentation),
-                Label = parameter
+                Label = parameter,
             };
     }
 }

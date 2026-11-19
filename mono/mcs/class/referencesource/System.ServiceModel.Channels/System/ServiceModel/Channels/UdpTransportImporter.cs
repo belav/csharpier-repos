@@ -15,7 +15,11 @@ namespace System.ServiceModel.Channels
 
         public UdpTransportImporter() { }
 
-        public void BeforeImport(WsdlNS.ServiceDescriptionCollection wsdlDocuments, Xml.Schema.XmlSchemaSet xmlSchemas, ICollection<Xml.XmlElement> policy)
+        public void BeforeImport(
+            WsdlNS.ServiceDescriptionCollection wsdlDocuments,
+            Xml.Schema.XmlSchemaSet xmlSchemas,
+            ICollection<Xml.XmlElement> policy
+        )
         {
             foreach (WsdlNS.ServiceDescription wsdl in wsdlDocuments)
             {
@@ -25,13 +29,24 @@ namespace System.ServiceModel.Channels
                     {
                         if (wsdlBinding != null && wsdlBinding.Extensions != null)
                         {
-                            WsdlNS.SoapBinding soapBinding = (WsdlNS.SoapBinding)wsdlBinding.Extensions.Find(typeof(WsdlNS.SoapBinding));
+                            WsdlNS.SoapBinding soapBinding = (WsdlNS.SoapBinding)
+                                wsdlBinding.Extensions.Find(typeof(WsdlNS.SoapBinding));
                             if (soapBinding != null)
                             {
                                 string transportUri = soapBinding.Transport;
-                                if (!string.IsNullOrEmpty(transportUri) && transportUri.Equals(UdpConstants.WsdlSoapUdpTransportUri, StringComparison.Ordinal))
+                                if (
+                                    !string.IsNullOrEmpty(transportUri)
+                                    && transportUri.Equals(
+                                        UdpConstants.WsdlSoapUdpTransportUri,
+                                        StringComparison.Ordinal
+                                    )
+                                )
                                 {
-                                    WsdlImporter.SoapInPolicyWorkaroundHelper.InsertAdHocPolicy(wsdlBinding, soapBinding.Transport, this.udpTransportUriKey);
+                                    WsdlImporter.SoapInPolicyWorkaroundHelper.InsertAdHocPolicy(
+                                        wsdlBinding,
+                                        soapBinding.Transport,
+                                        this.udpTransportUriKey
+                                    );
                                 }
                             }
                         }
@@ -43,9 +58,20 @@ namespace System.ServiceModel.Channels
         public void ImportPolicy(MetadataImporter importer, PolicyConversionContext context)
         {
             XmlQualifiedName wsdlBindingQName;
-            string transportUri = WsdlImporter.SoapInPolicyWorkaroundHelper.FindAdHocPolicy(context, this.udpTransportUriKey, out wsdlBindingQName);
+            string transportUri = WsdlImporter.SoapInPolicyWorkaroundHelper.FindAdHocPolicy(
+                context,
+                this.udpTransportUriKey,
+                out wsdlBindingQName
+            );
 
-            if (transportUri != null && transportUri.Equals(UdpConstants.WsdlSoapUdpTransportUri, StringComparison.Ordinal) && !context.BindingElements.Contains(typeof(TransportBindingElement)))
+            if (
+                transportUri != null
+                && transportUri.Equals(
+                    UdpConstants.WsdlSoapUdpTransportUri,
+                    StringComparison.Ordinal
+                )
+                && !context.BindingElements.Contains(typeof(TransportBindingElement))
+            )
             {
                 UdpTransportBindingElement transport = new UdpTransportBindingElement();
                 ((ITransportPolicyImport)transport).ImportPolicy(importer, context);
@@ -55,9 +81,7 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public void ImportContract(WsdlImporter importer, WsdlContractConversionContext context)
-        {
-        }
+        public void ImportContract(WsdlImporter importer, WsdlContractConversionContext context) { }
 
         public void ImportEndpoint(WsdlImporter importer, WsdlEndpointConversionContext context)
         {
@@ -71,8 +95,10 @@ namespace System.ServiceModel.Channels
                 throw FxTrace.Exception.ArgumentNull("context.Endpoint.Binding");
             }
 
-            BindingElementCollection bindingElements = context.Endpoint.Binding.CreateBindingElements();
-            TransportBindingElement transportBindingElement = bindingElements.Find<TransportBindingElement>();
+            BindingElementCollection bindingElements =
+                context.Endpoint.Binding.CreateBindingElements();
+            TransportBindingElement transportBindingElement =
+                bindingElements.Find<TransportBindingElement>();
             if (transportBindingElement is UdpTransportBindingElement)
             {
                 ImportEndpointAddress(context);
@@ -105,7 +131,9 @@ namespace System.ServiceModel.Channels
 
             if (context.WsdlPort != null)
             {
-                address = context.Endpoint.Address = WsdlImporter.WSAddressingHelper.ImportAddress(context.WsdlPort);
+                address = context.Endpoint.Address = WsdlImporter.WSAddressingHelper.ImportAddress(
+                    context.WsdlPort
+                );
             }
 
             if (address != null)

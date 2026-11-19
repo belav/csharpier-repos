@@ -14,13 +14,20 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 {
     internal static class Extensions
     {
-        public static IEnumerable<RudeEditDiagnosticDescription> ToDescription(this IEnumerable<RudeEditDiagnostic> diagnostics, SourceText newSource, bool includeFirstLines)
+        public static IEnumerable<RudeEditDiagnosticDescription> ToDescription(
+            this IEnumerable<RudeEditDiagnostic> diagnostics,
+            SourceText newSource,
+            bool includeFirstLines
+        )
         {
             return diagnostics.Select(d => new RudeEditDiagnosticDescription(
                 d.Kind,
                 d.Span == default ? null : newSource.ToString(d.Span),
                 d.Arguments,
-                firstLine: includeFirstLines ? newSource.Lines.GetLineFromPosition(d.Span.Start).ToString().Trim() : null));
+                firstLine: includeFirstLines
+                    ? newSource.Lines.GetLineFromPosition(d.Span.Start).ToString().Trim()
+                    : null
+            ));
         }
 
         private const string LineSeparator = "\r\n";

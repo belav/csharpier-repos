@@ -1,20 +1,11 @@
-﻿namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc
+{
+    public class SelectListItem
+    {
+        public bool Selected { get; set; }
 
-    public class SelectListItem {
+        public string Text { get; set; }
 
-        public bool Selected {
-            get;
-            set;
-        }
-
-        public string Text {
-            get;
-            set;
-        }
-
-        public string Value {
-            get;
-            set;
-        }
+        public string Value { get; set; }
     }
 }

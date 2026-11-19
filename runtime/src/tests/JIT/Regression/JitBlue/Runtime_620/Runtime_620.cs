@@ -23,7 +23,7 @@ namespace NormalizeTest
             {
                 Console.WriteLine(t);
             }
-            int d = ((int) t) / b;
+            int d = ((int)t) / b;
             return d;
         }
 
@@ -51,10 +51,11 @@ namespace NormalizeTest
             return c;
         }
 
-        struct S1 {
-            public long  l64;
+        struct S1
+        {
+            public long l64;
             public sbyte s8;
-            public byte  u8;
+            public byte u8;
         };
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -105,7 +106,7 @@ namespace NormalizeTest
             {
                 Console.WriteLine(t);
             }
-            int d = ((int) t) / b;
+            int d = ((int)t) / b;
             return d;
         }
 
@@ -133,9 +134,10 @@ namespace NormalizeTest
             return c;
         }
 
-        struct S2 {
-            public long   l64;
-            public short  s16;
+        struct S2
+        {
+            public long l64;
+            public short s16;
             public ushort u16;
         };
 
@@ -187,7 +189,7 @@ namespace NormalizeTest
             {
                 Console.WriteLine(t);
             }
-            long d = ((long) t) / b;
+            long d = ((long)t) / b;
             return d;
         }
 
@@ -215,9 +217,10 @@ namespace NormalizeTest
             return c;
         }
 
-        struct S3 {
+        struct S3
+        {
             public long l64;
-            public int  s32;
+            public int s32;
             public uint u32;
         };
 
@@ -264,7 +267,12 @@ namespace NormalizeTest
         {
             if (result != expected)
             {
-                Console.WriteLine("CheckInt - FAILED: {0} -- result {1}, expected {2}", id, result, expected);
+                Console.WriteLine(
+                    "CheckInt - FAILED: {0} -- result {1}, expected {2}",
+                    id,
+                    result,
+                    expected
+                );
                 testResult = -1;
             }
         }
@@ -273,7 +281,12 @@ namespace NormalizeTest
         {
             if (result != expected)
             {
-                Console.WriteLine("CheckLong - FAILED: {0} -- result {1}, expected {2}", id, result, expected);
+                Console.WriteLine(
+                    "CheckLong - FAILED: {0} -- result {1}, expected {2}",
+                    id,
+                    result,
+                    expected
+                );
                 testResult = -1;
             }
         }
@@ -282,120 +295,120 @@ namespace NormalizeTest
         public static int TestEntryPoint()
         {
             {
-                int    result1a = ByteTest1(-1,1);
+                int result1a = ByteTest1(-1, 1);
                 CheckInt("ByteTest1a", result1a, 0xFE);
-                
-                int    result1b = ByteTest1(-1,-1);
+
+                int result1b = ByteTest1(-1, -1);
                 CheckInt("ByteTest1b", result1b, -0xFE);
-                
-                sbyte   result2a = ByteTest2(-1,1);
-                CheckInt("ByteTest2a", (int) result2a, -1);
-                
-                sbyte  result2b = ByteTest2(-1,-1);
-                CheckInt("ByteTest2b", (int) result2b, 1);
-                
-                int    result3 = ByteTest3(0x7F,-1);
+
+                sbyte result2a = ByteTest2(-1, 1);
+                CheckInt("ByteTest2a", (int)result2a, -1);
+
+                sbyte result2b = ByteTest2(-1, -1);
+                CheckInt("ByteTest2b", (int)result2b, 1);
+
+                int result3 = ByteTest3(0x7F, -1);
                 CheckInt("ByteTest3", result3, 2);
-                
-                byte   result4 = ByteTest4(0x7F,-1);
-                CheckInt("ByteTest4", (int) result4, 0x81);
-                
-                int    resultF1a = ByteTestField1(-1,1);
+
+                byte result4 = ByteTest4(0x7F, -1);
+                CheckInt("ByteTest4", (int)result4, 0x81);
+
+                int resultF1a = ByteTestField1(-1, 1);
                 CheckInt("ByteTestField1a", resultF1a, 0xFE);
-                
-                int    resultF1b = ByteTestField1(-1,-1);
+
+                int resultF1b = ByteTestField1(-1, -1);
                 CheckInt("ByteTestField1b", resultF1b, -0xFE);
-                
-                sbyte  resultF2a = ByteTestField2(-1,1);
-                CheckInt("ByteTestField2a", (int) resultF2a, -1);
-                
-                sbyte  resultF2b = ByteTestField2(-1,-1);
-                CheckInt("ByteTestField2b", (int) resultF2b, 1);
-                
-                int    resultF3 = ByteTestField3(0x7F,-1);
+
+                sbyte resultF2a = ByteTestField2(-1, 1);
+                CheckInt("ByteTestField2a", (int)resultF2a, -1);
+
+                sbyte resultF2b = ByteTestField2(-1, -1);
+                CheckInt("ByteTestField2b", (int)resultF2b, 1);
+
+                int resultF3 = ByteTestField3(0x7F, -1);
                 CheckInt("ByteTestField3", resultF3, 2);
-                
-                byte   resultF4 = ByteTestField4(0x7F,-1);
-                CheckInt("ByteTestField4", (int) resultF4, 0x81);
+
+                byte resultF4 = ByteTestField4(0x7F, -1);
+                CheckInt("ByteTestField4", (int)resultF4, 0x81);
             }
             ////////////////////////////////////////////////////////////
             {
-                int    result1a = ShortTest1(-1,1);
+                int result1a = ShortTest1(-1, 1);
                 CheckInt("ShortTest1a", result1a, 0xFFFE);
-                
-                int    result1b = ShortTest1(-1,-1);
+
+                int result1b = ShortTest1(-1, -1);
                 CheckInt("ShortTest1b", result1b, -0xFFFE);
-                
-                short  result2a = ShortTest2(-1,1);
-                CheckInt("ShortTest2a", (int) result2a, -1);
-                
-                short  result2b = ShortTest2(-1,-1);
-                CheckInt("ShortTest2b", (int) result2b, 1);
-                
-                int    result3 = ShortTest3(0x7FFF,-1);
+
+                short result2a = ShortTest2(-1, 1);
+                CheckInt("ShortTest2a", (int)result2a, -1);
+
+                short result2b = ShortTest2(-1, -1);
+                CheckInt("ShortTest2b", (int)result2b, 1);
+
+                int result3 = ShortTest3(0x7FFF, -1);
                 CheckInt("ShortTest3", result3, 2);
-                
-                ushort result4 = ShortTest4(0x7FFF,-1);
-                CheckInt("ShortTest4", (int) result4, 0x8001);
-                
-                int    resultF1a = ShortTestField1(-1,1);
+
+                ushort result4 = ShortTest4(0x7FFF, -1);
+                CheckInt("ShortTest4", (int)result4, 0x8001);
+
+                int resultF1a = ShortTestField1(-1, 1);
                 CheckInt("ShortTestField1a", resultF1a, 0xFFFE);
-                
-                int    resultF1b = ShortTestField1(-1,-1);
+
+                int resultF1b = ShortTestField1(-1, -1);
                 CheckInt("ShortTestField1b", resultF1b, -0xFFFE);
-                
-                short  resultF2a = ShortTestField2(-1,1);
-                CheckInt("ShortTestField2a", (int) resultF2a, -1);
-                
-                short  resultF2b = ShortTestField2(-1,-1);
-                CheckInt("ShortTestField2b", (int) resultF2b, 1);
-                
-                int    resultF3 = ShortTestField3(0x7FFF,-1);
+
+                short resultF2a = ShortTestField2(-1, 1);
+                CheckInt("ShortTestField2a", (int)resultF2a, -1);
+
+                short resultF2b = ShortTestField2(-1, -1);
+                CheckInt("ShortTestField2b", (int)resultF2b, 1);
+
+                int resultF3 = ShortTestField3(0x7FFF, -1);
                 CheckInt("ShortTestField3", resultF3, 2);
-                
-                ushort resultF4 = ShortTestField4(0x7FFF,-1);
-                CheckInt("ShortTestField4", (int) resultF4, 0x8001);
+
+                ushort resultF4 = ShortTestField4(0x7FFF, -1);
+                CheckInt("ShortTestField4", (int)resultF4, 0x8001);
             }
             ////////////////////////////////////////////////////////////
             {
-                long    result1a = IntTest1(-1,1);
+                long result1a = IntTest1(-1, 1);
                 CheckLong("IntTest1a", result1a, 0xFFFFFFFE);
-                
-                long    result1b = IntTest1(-1,-1);
+
+                long result1b = IntTest1(-1, -1);
                 CheckLong("IntTest1b", result1b, -0xFFFFFFFE);
-                
-                int     result2a = IntTest2(-1,1);
-                CheckLong("IntTest2a", (long) result2a, -1);
-                
-                int     result2b = IntTest2(-1,-1);
-                CheckLong("IntTest2b", (long) result2b, 1);
-                
-                long    result3 = IntTest3(0x7FFFFFFF,-1);
+
+                int result2a = IntTest2(-1, 1);
+                CheckLong("IntTest2a", (long)result2a, -1);
+
+                int result2b = IntTest2(-1, -1);
+                CheckLong("IntTest2b", (long)result2b, 1);
+
+                long result3 = IntTest3(0x7FFFFFFF, -1);
                 CheckLong("IntTest3", result3, 2);
-                
-                uint result4 = IntTest4(0x7FFFFFFF,-1);
-                CheckLong("IntTest4", (long) result4, 0x80000001);
-                
-                long    resultF1a = IntTestField1(-1,1);
+
+                uint result4 = IntTest4(0x7FFFFFFF, -1);
+                CheckLong("IntTest4", (long)result4, 0x80000001);
+
+                long resultF1a = IntTestField1(-1, 1);
                 CheckLong("IntTestField1a", resultF1a, 0xFFFFFFFE);
-                
-                long    resultF1b = IntTestField1(-1,-1);
+
+                long resultF1b = IntTestField1(-1, -1);
                 CheckLong("IntTestField1b", resultF1b, -0xFFFFFFFE);
-                
-                int     resultF2a = IntTestField2(-1,1);
-                CheckLong("IntTestField2a", (long) resultF2a, -1);
-                
-                int     resultF2b = IntTestField2(-1,-1);
-                CheckLong("IntTestField2b", (long) resultF2b, 1);
-                
-                long    resultF3 = IntTestField3(0x7FFFFFFF,-1);
+
+                int resultF2a = IntTestField2(-1, 1);
+                CheckLong("IntTestField2a", (long)resultF2a, -1);
+
+                int resultF2b = IntTestField2(-1, -1);
+                CheckLong("IntTestField2b", (long)resultF2b, 1);
+
+                long resultF3 = IntTestField3(0x7FFFFFFF, -1);
                 CheckLong("IntTestField3", resultF3, 2);
-                
-                uint    resultF4 = IntTestField4(0x7FFFFFFF,-1);
-                CheckLong("IntTestField4", (long) resultF4, 0x80000001);
+
+                uint resultF4 = IntTestField4(0x7FFFFFFF, -1);
+                CheckLong("IntTestField4", (long)resultF4, 0x80000001);
             }
             ////////////////////////////////////////////////////////////
-            
+
             if (testResult == 100)
             {
                 Console.WriteLine("Test Passed");

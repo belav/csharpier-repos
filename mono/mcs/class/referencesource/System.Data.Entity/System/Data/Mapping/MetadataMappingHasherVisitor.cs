@@ -9,15 +9,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data.Metadata.Edm;
 using System.Data.Common;
 using System.Data.Common.Utils;
 using System.Data.Mapping;
+using System.Data.Metadata.Edm;
 using System.Diagnostics;
 using System.Globalization;
-
+using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping
 {
@@ -33,30 +32,45 @@ namespace System.Data.Mapping
         private MetadataMappingHasherVisitor(double mappingVersion)
         {
             m_MappingVersion = mappingVersion;
-            this.m_hashSourceBuilder = new CompressingHashBuilder(MetadataHelper.CreateMetadataHashAlgorithm(m_MappingVersion));
+            this.m_hashSourceBuilder = new CompressingHashBuilder(
+                MetadataHelper.CreateMetadataHashAlgorithm(m_MappingVersion)
+            );
         }
-        
+
         #region visitor method
         protected override void Visit(StorageEntityContainerMapping storageEntityContainerMapping)
         {
-            Debug.Assert(storageEntityContainerMapping != null, "storageEntityContainerMapping cannot be null!");
+            Debug.Assert(
+                storageEntityContainerMapping != null,
+                "storageEntityContainerMapping cannot be null!"
+            );
 
             // at the entry point of visitor, we setup the versions
-            Debug.Assert(m_MappingVersion == storageEntityContainerMapping.StorageMappingItemCollection.MappingVersion, "the original version and the mapping collection version are not the same");
-            this.m_MappingVersion = storageEntityContainerMapping.StorageMappingItemCollection.MappingVersion;
-            this.m_EdmVersion = storageEntityContainerMapping.StorageMappingItemCollection.EdmItemCollection.EdmVersion;
+            Debug.Assert(
+                m_MappingVersion
+                    == storageEntityContainerMapping.StorageMappingItemCollection.MappingVersion,
+                "the original version and the mapping collection version are not the same"
+            );
+            this.m_MappingVersion = storageEntityContainerMapping
+                .StorageMappingItemCollection
+                .MappingVersion;
+            this.m_EdmVersion = storageEntityContainerMapping
+                .StorageMappingItemCollection
+                .EdmItemCollection
+                .EdmVersion;
 
-            this.m_EdmItemCollection = storageEntityContainerMapping.StorageMappingItemCollection.EdmItemCollection;
+            this.m_EdmItemCollection = storageEntityContainerMapping
+                .StorageMappingItemCollection
+                .EdmItemCollection;
 
             int index;
             if (!this.AddObjectToSeenListAndHashBuilder(storageEntityContainerMapping, out index))
             {
-                // if this has been add to the seen list, then just 
+                // if this has been add to the seen list, then just
                 return;
             }
             if (this.m_itemsAlreadySeen.Count > 1)
             {
-
                 // this means user try another visit over SECM, this is allowed but all the previous visit all lost due to clean
                 // user can visit different SECM objects by using the same visitor to load the SECM object
                 this.Clean();
@@ -70,7 +84,10 @@ namespace System.Data.Mapping
 
             this.AddObjectContentToHashBuilder(storageEntityContainerMapping.Identity);
 
-            this.AddV2ObjectContentToHashBuilder(storageEntityContainerMapping.GenerateUpdateViews, this.m_MappingVersion);
+            this.AddV2ObjectContentToHashBuilder(
+                storageEntityContainerMapping.GenerateUpdateViews,
+                this.m_MappingVersion
+            );
 
             base.Visit(storageEntityContainerMapping);
 
@@ -90,7 +107,7 @@ namespace System.Data.Mapping
             this.AddObjectStartDumpToHashBuilder(entityContainer, index);
 
             #region Inner data visit
-            
+
             this.AddObjectContentToHashBuilder(entityContainer.Identity);
             // Name is covered by Identity
 
@@ -149,7 +166,10 @@ namespace System.Data.Mapping
 
             #region Inner data visit
 
-            this.AddV2ObjectContentToHashBuilder(storageMappingFragment.IsSQueryDistinct, this.m_MappingVersion);
+            this.AddV2ObjectContentToHashBuilder(
+                storageMappingFragment.IsSQueryDistinct,
+                this.m_MappingVersion
+            );
 
             base.Visit(storageMappingFragment);
 
@@ -157,7 +177,7 @@ namespace System.Data.Mapping
 
             this.AddObjectEndDumpToHashBuilder();
         }
-        
+
         protected override void Visit(StoragePropertyMapping storagePropertyMapping)
         {
             base.Visit(storagePropertyMapping);
@@ -181,6 +201,7 @@ namespace System.Data.Mapping
 
             this.AddObjectEndDumpToHashBuilder();
         }
+
         protected override void Visit(StorageComplexTypeMapping storageComplexTypeMapping)
         {
             int index;
@@ -199,8 +220,10 @@ namespace System.Data.Mapping
 
             this.AddObjectEndDumpToHashBuilder();
         }
-        
-        protected override void Visit(StorageConditionPropertyMapping storageConditionPropertyMapping)
+
+        protected override void Visit(
+            StorageConditionPropertyMapping storageConditionPropertyMapping
+        )
         {
             int index;
             if (!this.AddObjectToSeenListAndHashBuilder(storageConditionPropertyMapping, out index))
@@ -239,12 +262,12 @@ namespace System.Data.Mapping
 
             this.AddObjectEndDumpToHashBuilder();
         }
-        
+
         protected override void Visit(EntitySetBase entitySetBase)
         {
             base.Visit(entitySetBase);
         }
-        
+
         protected override void Visit(EntitySet entitySet)
         {
             int index;
@@ -261,7 +284,11 @@ namespace System.Data.Mapping
 
             base.Visit(entitySet);
 
-            foreach (var entityType in MetadataHelper.GetTypeAndSubtypesOf(entitySet.ElementType, this.m_EdmItemCollection, false).Where(type => type != entitySet.ElementType))
+            foreach (
+                var entityType in MetadataHelper
+                    .GetTypeAndSubtypesOf(entitySet.ElementType, this.m_EdmItemCollection, false)
+                    .Where(type => type != entitySet.ElementType)
+            )
             {
                 this.Visit(entityType);
             }
@@ -311,7 +338,7 @@ namespace System.Data.Mapping
             // FullName, Namespace and Name are all covered by Identity
 
             base.Visit(entityType);
- 
+
             #endregion
 
             this.AddObjectEndDumpToHashBuilder();
@@ -371,7 +398,7 @@ namespace System.Data.Mapping
             this.AddObjectStartDumpToHashBuilder(edmProperty, index);
 
             #region Inner data visit
-            // since the delaring type is fixed and referenced to the upper type, 
+            // since the delaring type is fixed and referenced to the upper type,
             // there is no need to hash this
             //this.AddObjectContentToHashBuilder(edmProperty.DeclaringType);
             this.AddObjectContentToHashBuilder(edmProperty.DefaultValue);
@@ -441,7 +468,7 @@ namespace System.Data.Mapping
 
             this.AddObjectEndDumpToHashBuilder();
         }
-        
+
         protected override void Visit(ReferentialConstraint referentialConstraint)
         {
             int index;
@@ -517,7 +544,7 @@ namespace System.Data.Mapping
         {
             base.Visit(edmType);
         }
-        
+
         protected override void Visit(EnumType enumType)
         {
             int index;
@@ -574,7 +601,7 @@ namespace System.Data.Mapping
 
             this.AddObjectEndDumpToHashBuilder();
         }
-        
+
         protected override void Visit(RefType refType)
         {
             int index;
@@ -634,7 +661,7 @@ namespace System.Data.Mapping
             // View Generation doesn't deal with functions
             // so just return;
         }
-        
+
         protected override void Visit(ComplexType complexType)
         {
             int index;
@@ -656,7 +683,7 @@ namespace System.Data.Mapping
 
             this.AddObjectEndDumpToHashBuilder();
         }
-        
+
         protected override void Visit(PrimitiveType primitiveType)
         {
             int index;
@@ -677,7 +704,7 @@ namespace System.Data.Mapping
 
             this.AddObjectEndDumpToHashBuilder();
         }
-        
+
         protected override void Visit(FunctionParameter functionParameter)
         {
             int index;
@@ -711,15 +738,14 @@ namespace System.Data.Mapping
 
         internal string HashValue
         {
-            get
-            {
-                return m_hashSourceBuilder.ComputeHash();
-            }
+            get { return m_hashSourceBuilder.ComputeHash(); }
         }
 
         private void Clean()
         {
-            this.m_hashSourceBuilder = new CompressingHashBuilder(MetadataHelper.CreateMetadataHashAlgorithm(m_MappingVersion));
+            this.m_hashSourceBuilder = new CompressingHashBuilder(
+                MetadataHelper.CreateMetadataHashAlgorithm(m_MappingVersion)
+            );
             this.m_instanceNumber = 0;
             this.m_itemsAlreadySeen = new Dictionary<object, int>();
         }
@@ -792,9 +818,11 @@ namespace System.Data.Mapping
                 if (formatContent != null)
                 {
                     // if the content is formattable, the following code made it culture invariant,
-                    // for instance, the int, "30,000" can be formatted to "30-000" if the user 
+                    // for instance, the int, "30,000" can be formatted to "30-000" if the user
                     // has a different language and region setting
-                    this.m_hashSourceBuilder.AppendLine(formatContent.ToString(null, CultureInfo.InvariantCulture));
+                    this.m_hashSourceBuilder.AppendLine(
+                        formatContent.ToString(null, CultureInfo.InvariantCulture)
+                    );
                 }
                 else
                 {
@@ -821,15 +849,20 @@ namespace System.Data.Mapping
             }
         }
 
-        internal static string GetMappingClosureHash(double mappingVersion, StorageEntityContainerMapping storageEntityContainerMapping)
+        internal static string GetMappingClosureHash(
+            double mappingVersion,
+            StorageEntityContainerMapping storageEntityContainerMapping
+        )
         {
-            Debug.Assert(storageEntityContainerMapping != null, "storageEntityContainerMapping is null!");
+            Debug.Assert(
+                storageEntityContainerMapping != null,
+                "storageEntityContainerMapping is null!"
+            );
 
             MetadataMappingHasherVisitor visitor = new MetadataMappingHasherVisitor(mappingVersion);
             visitor.Visit(storageEntityContainerMapping);
             return visitor.HashValue;
         }
         #endregion
-
     }
 }

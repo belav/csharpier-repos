@@ -50,13 +50,17 @@ namespace Microsoft.Web.Mvc
         {
             if (indexes.Length != 1)
             {
-                throw new ArgumentException(MvcResources.DynamicViewDataDictionary_SingleIndexerOnly);
+                throw new ArgumentException(
+                    MvcResources.DynamicViewDataDictionary_SingleIndexerOnly
+                );
             }
 
             string name = indexes[0] as string;
             if (name == null)
             {
-                throw new ArgumentException(MvcResources.DynamicViewDataDictionary_StringIndexerOnly);
+                throw new ArgumentException(
+                    MvcResources.DynamicViewDataDictionary_StringIndexerOnly
+                );
             }
 
             return GetValue(name, out result);

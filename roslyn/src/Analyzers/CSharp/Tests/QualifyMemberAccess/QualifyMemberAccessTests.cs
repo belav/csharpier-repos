@@ -17,27 +17,63 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsQualifyMemberAccess)]
-    public partial class QualifyMemberAccessTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class QualifyMemberAccessTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public QualifyMemberAccessTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpQualifyMemberAccessDiagnosticAnalyzer(), new CSharpQualifyMemberAccessCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpQualifyMemberAccessDiagnosticAnalyzer(),
+                new CSharpQualifyMemberAccessCodeFixProvider()
+            );
 
-        private Task TestAsyncWithOption(string code, string expected, PerLanguageOption2<CodeStyleOption2<bool>> option)
-            => TestAsyncWithOptionAndNotificationOption(code, expected, option, NotificationOption2.Error);
+        private Task TestAsyncWithOption(
+            string code,
+            string expected,
+            PerLanguageOption2<CodeStyleOption2<bool>> option
+        ) =>
+            TestAsyncWithOptionAndNotificationOption(
+                code,
+                expected,
+                option,
+                NotificationOption2.Error
+            );
 
-        private Task TestAsyncWithOptionAndNotificationOption(string code, string expected, PerLanguageOption2<CodeStyleOption2<bool>> option, NotificationOption2 notification)
-            => TestInRegularAndScriptAsync(code, expected, options: Option(option, true, notification));
+        private Task TestAsyncWithOptionAndNotificationOption(
+            string code,
+            string expected,
+            PerLanguageOption2<CodeStyleOption2<bool>> option,
+            NotificationOption2 notification
+        ) =>
+            TestInRegularAndScriptAsync(
+                code,
+                expected,
+                options: Option(option, true, notification)
+            );
 
-        private Task TestMissingAsyncWithOption(string code, PerLanguageOption2<CodeStyleOption2<bool>> option)
-            => TestMissingAsyncWithOptionAndNotificationOption(code, option, NotificationOption2.Error);
+        private Task TestMissingAsyncWithOption(
+            string code,
+            PerLanguageOption2<CodeStyleOption2<bool>> option
+        ) =>
+            TestMissingAsyncWithOptionAndNotificationOption(
+                code,
+                option,
+                NotificationOption2.Error
+            );
 
-        private Task TestMissingAsyncWithOptionAndNotificationOption(string code, PerLanguageOption2<CodeStyleOption2<bool>> option, NotificationOption2 notification)
-            => TestMissingInRegularAndScriptAsync(code, new TestParameters(options: Option(option, true, notification)));
+        private Task TestMissingAsyncWithOptionAndNotificationOption(
+            string code,
+            PerLanguageOption2<CodeStyleOption2<bool>> option,
+            NotificationOption2 notification
+        ) =>
+            TestMissingInRegularAndScriptAsync(
+                code,
+                new TestParameters(options: Option(option, true, notification))
+            );
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyFieldAccess_LHS()
@@ -65,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -94,7 +131,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -123,7 +161,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -152,7 +191,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -181,7 +221,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -216,7 +257,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28509")]
@@ -243,7 +285,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28509")]
@@ -270,7 +313,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -289,7 +333,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -307,7 +352,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28509")]
@@ -324,7 +370,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28509")]
@@ -341,7 +388,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28091")]
@@ -358,7 +406,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40242")]
@@ -378,7 +427,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40242")]
@@ -400,7 +450,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40242")]
@@ -422,7 +473,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -451,7 +503,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -480,7 +533,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40242")]
@@ -500,7 +554,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40242")]
@@ -522,7 +577,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40242")]
@@ -544,7 +600,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40242")]
@@ -582,7 +639,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40242")]
@@ -602,7 +660,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40242")]
@@ -624,7 +683,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40242")]
@@ -646,7 +706,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40242")]
@@ -684,7 +745,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -713,7 +775,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -742,7 +805,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -771,7 +835,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -806,7 +871,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -824,7 +890,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -842,7 +909,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -867,7 +935,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -890,7 +959,8 @@ CodeStyleOptions2.QualifyMethodAccess);
                         return this.M();
                     }
                 """,
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -913,7 +983,8 @@ CodeStyleOptions2.QualifyMethodAccess);
                         var s = this.M().ToString();
                     }
                 """,
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -936,7 +1007,8 @@ CodeStyleOptions2.QualifyMethodAccess);
                         return this.M()?.ToString();
                     }
                 """,
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -969,7 +1041,8 @@ CodeStyleOptions2.QualifyMethodAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -1002,7 +1075,8 @@ CodeStyleOptions2.QualifyMethodAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -1041,7 +1115,8 @@ CodeStyleOptions2.QualifyMethodAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -1057,7 +1132,8 @@ CodeStyleOptions2.QualifyMethodAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -1077,7 +1153,8 @@ CodeStyleOptions2.QualifyMethodAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28509")]
@@ -1094,7 +1171,8 @@ CodeStyleOptions2.QualifyMethodAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28509")]
@@ -1111,7 +1189,8 @@ CodeStyleOptions2.QualifyMethodAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28509")]
@@ -1128,7 +1207,8 @@ CodeStyleOptions2.QualifyMethodAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28509")]
@@ -1145,7 +1225,8 @@ CodeStyleOptions2.QualifyMethodAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28509")]
@@ -1162,7 +1243,8 @@ CodeStyleOptions2.QualifyMethodAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38043")]
@@ -1185,7 +1267,8 @@ CodeStyleOptions2.QualifyMethodAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38043")]
@@ -1205,7 +1288,8 @@ CodeStyleOptions2.QualifyMethodAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38043")]
@@ -1224,7 +1308,8 @@ CodeStyleOptions2.QualifyMethodAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/7587")]
@@ -1258,7 +1343,8 @@ CodeStyleOptions2.QualifyMethodAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyEventAccess);
+                CodeStyleOptions2.QualifyEventAccess
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/7587")]
@@ -1310,7 +1396,8 @@ CodeStyleOptions2.QualifyEventAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyEventAccess);
+                CodeStyleOptions2.QualifyEventAccess
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/7587")]
@@ -1344,7 +1431,8 @@ CodeStyleOptions2.QualifyEventAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyEventAccess);
+                CodeStyleOptions2.QualifyEventAccess
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/7587")]
@@ -1378,7 +1466,8 @@ CodeStyleOptions2.QualifyEventAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyEventAccess);
+                CodeStyleOptions2.QualifyEventAccess
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/7587")]
@@ -1412,7 +1501,8 @@ CodeStyleOptions2.QualifyEventAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyEventAccess);
+                CodeStyleOptions2.QualifyEventAccess
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/7587")]
@@ -1452,7 +1542,8 @@ CodeStyleOptions2.QualifyEventAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyEventAccess);
+                CodeStyleOptions2.QualifyEventAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -1476,7 +1567,8 @@ CodeStyleOptions2.QualifyEventAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyEventAccess);
+                CodeStyleOptions2.QualifyEventAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/7065")]
@@ -1496,7 +1588,8 @@ CodeStyleOptions2.QualifyEventAccess);
                     [|e|] += Handler;
                 } }
                 """,
-CodeStyleOptions2.QualifyEventAccess);
+                CodeStyleOptions2.QualifyEventAccess
+            );
         }
 
         [Fact]
@@ -1525,7 +1618,9 @@ CodeStyleOptions2.QualifyEventAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess, NotificationOption2.Silent);
+                CodeStyleOptions2.QualifyPropertyAccess,
+                NotificationOption2.Silent
+            );
         }
 
         [Fact]
@@ -1554,7 +1649,9 @@ CodeStyleOptions2.QualifyPropertyAccess, NotificationOption2.Silent);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess, NotificationOption2.Suggestion);
+                CodeStyleOptions2.QualifyPropertyAccess,
+                NotificationOption2.Suggestion
+            );
         }
 
         [Fact]
@@ -1583,7 +1680,9 @@ CodeStyleOptions2.QualifyPropertyAccess, NotificationOption2.Suggestion);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess, NotificationOption2.Warning);
+                CodeStyleOptions2.QualifyPropertyAccess,
+                NotificationOption2.Warning
+            );
         }
 
         [Fact]
@@ -1612,7 +1711,9 @@ CodeStyleOptions2.QualifyPropertyAccess, NotificationOption2.Warning);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess, NotificationOption2.Error);
+                CodeStyleOptions2.QualifyPropertyAccess,
+                NotificationOption2.Error
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/18839")]
@@ -1648,7 +1749,8 @@ CodeStyleOptions2.QualifyPropertyAccess, NotificationOption2.Error);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/15325")]
@@ -1669,7 +1771,8 @@ CodeStyleOptions2.QualifyMethodAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17711")]
@@ -1686,7 +1789,8 @@ CodeStyleOptions2.QualifyMethodAccess);
                     void M() { [|base.field|] = 0; }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17711")]
@@ -1703,7 +1807,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     protected override int Property { get { return [|base.Property|]; } }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17711")]
@@ -1720,7 +1825,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     protected override void M() { [|base.M()|]; }
                 }
                 """,
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17711")]
@@ -1741,7 +1847,8 @@ CodeStyleOptions2.QualifyMethodAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyEventAccess);
+                CodeStyleOptions2.QualifyEventAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21519")]
@@ -1755,7 +1862,8 @@ CodeStyleOptions2.QualifyEventAccess);
                     public static string Bar = nameof([|Foo|]);
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21519")]
@@ -1769,7 +1877,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     public string Bar = nameof([|Foo|]);
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21519")]
@@ -1786,7 +1895,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21519")]
@@ -1803,7 +1913,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21519")]
@@ -1822,7 +1933,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21519")]
@@ -1837,7 +1949,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     private string Field = nameof([|Bar|]);
                 }
                 """,
-CodeStyleOptions2.QualifyEventAccess);
+                CodeStyleOptions2.QualifyEventAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32093")]
@@ -1857,7 +1970,8 @@ CodeStyleOptions2.QualifyEventAccess);
                     {}
                 }
                 """,
-                CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21519")]
@@ -1878,7 +1992,8 @@ CodeStyleOptions2.QualifyEventAccess);
                     public string Bar { get => this.Foo; }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21519")]
@@ -1899,7 +2014,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     public string Bar { get { return this.Foo; } => Foo; }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21519")]
@@ -1920,7 +2036,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     public string Bar { get { return Foo; } => this.Foo; }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28509")]
@@ -1947,7 +2064,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28509")]
@@ -1974,7 +2092,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22776")]
@@ -1994,7 +2113,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22776")]
@@ -2014,7 +2134,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     }
                 }
                 """,
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact]
@@ -2049,7 +2170,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     }
                 }
                 """,
-                CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26893")]
@@ -2070,7 +2192,8 @@ CodeStyleOptions2.QualifyFieldAccess);
                     int Goo { get; set; }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26893")]
@@ -2091,7 +2214,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     int Goo { get; set; }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26893")]
@@ -2113,7 +2237,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     public int Goo { get; set; }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26893")]
@@ -2133,7 +2258,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     int Goo { [My(nameof([|Goo|]))]get; set; }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26893")]
@@ -2154,7 +2280,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
                     void M([My(nameof([|Goo|]))]int i) { }
                 }
                 """,
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
     }
 }

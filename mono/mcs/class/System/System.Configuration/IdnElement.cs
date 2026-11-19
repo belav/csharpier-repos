@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,51 +31,57 @@ using System;
 
 namespace System.Configuration
 {
-	public sealed class IdnElement : ConfigurationElement
-	{
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty enabled_prop;
+    public sealed class IdnElement : ConfigurationElement
+    {
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty enabled_prop;
 
-		static IdnElement ()
-		{
-			enabled_prop = new ConfigurationProperty ("enabled", typeof (UriIdnScope), UriIdnScope.None, ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (enabled_prop);
-		}
+        static IdnElement()
+        {
+            enabled_prop = new ConfigurationProperty(
+                "enabled",
+                typeof(UriIdnScope),
+                UriIdnScope.None,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
+            properties = new ConfigurationPropertyCollection();
+            properties.Add(enabled_prop);
+        }
 
-		internal const UriIdnScope EnabledDefaultValue = UriIdnScope.None;
+        internal const UriIdnScope EnabledDefaultValue = UriIdnScope.None;
 
-		public IdnElement ()
-		{
-		}
+        public IdnElement() { }
 
-		[ConfigurationPropertyAttribute("enabled", DefaultValue = UriIdnScope.None,
-					Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-		public UriIdnScope Enabled {
-			get { return (UriIdnScope) base [enabled_prop]; }
-			set { base [enabled_prop] = value; }
-		}
+        [ConfigurationPropertyAttribute(
+            "enabled",
+            DefaultValue = UriIdnScope.None,
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
+        public UriIdnScope Enabled
+        {
+            get { return (UriIdnScope)base[enabled_prop]; }
+            set { base[enabled_prop] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		public override bool Equals (object o)
-		{
-			IdnElement e = o as IdnElement;
-			if (e == null)
-				return false;
+        public override bool Equals(object o)
+        {
+            IdnElement e = o as IdnElement;
+            if (e == null)
+                return false;
 
-			return e.Enabled == Enabled;
-		}
+            return e.Enabled == Enabled;
+        }
 
-		public override int GetHashCode ()
-		{
-			return (int) Enabled ^ 0x7F;
-		}
-	}
-
+        public override int GetHashCode()
+        {
+            return (int)Enabled ^ 0x7F;
+        }
+    }
 }
 
 #endif
-

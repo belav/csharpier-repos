@@ -23,7 +23,8 @@ public class UniquifiedPropertyEventData : PropertyEventData
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         IReadOnlyProperty property,
-        string basePropertyName)
+        string basePropertyName
+    )
         : base(eventDefinition, messageGenerator, property)
     {
         BasePropertyName = basePropertyName;

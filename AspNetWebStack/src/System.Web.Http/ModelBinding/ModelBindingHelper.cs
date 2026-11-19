@@ -16,7 +16,10 @@ namespace System.Web.Http.ModelBinding
 {
     internal static class ModelBindingHelper
     {
-        private static readonly ConcurrentDictionary<Type, ModelBinderAttribute> _modelBinderAttributeCache = new ConcurrentDictionary<Type, ModelBinderAttribute>();
+        private static readonly ConcurrentDictionary<
+            Type,
+            ModelBinderAttribute
+        > _modelBinderAttributeCache = new ConcurrentDictionary<Type, ModelBinderAttribute>();
 
         internal static TModel CastOrDefault<TModel>(object model)
         {
@@ -57,13 +60,25 @@ namespace System.Web.Http.ModelBinding
             {
                 return prefix;
             }
-            return suffix.StartsWith("[", StringComparison.Ordinal) ? prefix + suffix : prefix + "." + suffix;
+            return suffix.StartsWith("[", StringComparison.Ordinal)
+                ? prefix + suffix
+                : prefix + "." + suffix;
         }
 
-        internal static IModelBinder GetPossibleBinderInstance(Type closedModelType, Type openModelType, Type openBinderType)
+        internal static IModelBinder GetPossibleBinderInstance(
+            Type closedModelType,
+            Type openModelType,
+            Type openBinderType
+        )
         {
-            Type[] typeArguments = TypeHelper.GetTypeArgumentsIfMatch(closedModelType, openModelType);
-            return (typeArguments != null) ? (IModelBinder)Activator.CreateInstance(openBinderType.MakeGenericType(typeArguments)) : null;
+            Type[] typeArguments = TypeHelper.GetTypeArgumentsIfMatch(
+                closedModelType,
+                openModelType
+            );
+            return (typeArguments != null)
+                ? (IModelBinder)
+                    Activator.CreateInstance(openBinderType.MakeGenericType(typeArguments))
+                : null;
         }
 
         internal static object[] RawValueToObjectArray(object rawValue)
@@ -92,17 +107,26 @@ namespace System.Web.Http.ModelBinding
             return new[] { rawValue };
         }
 
-        internal static void ReplaceEmptyStringWithNull(ModelMetadata modelMetadata, ref object model)
+        internal static void ReplaceEmptyStringWithNull(
+            ModelMetadata modelMetadata,
+            ref object model
+        )
         {
-            if (model is string &&
-                modelMetadata.ConvertEmptyStringToNull &&
-                String.IsNullOrWhiteSpace(model as string))
+            if (
+                model is string
+                && modelMetadata.ConvertEmptyStringToNull
+                && String.IsNullOrWhiteSpace(model as string)
+            )
             {
                 model = null;
             }
         }
 
-        internal static bool TryGetProviderFromAttribute(Type modelType, ModelBinderAttribute modelBinderAttribute, out ModelBinderProvider provider)
+        internal static bool TryGetProviderFromAttribute(
+            Type modelType,
+            ModelBinderAttribute modelBinderAttribute,
+            out ModelBinderProvider provider
+        )
         {
             Contract.Assert(modelType != null, "modelType cannot be null.");
             Contract.Assert(modelBinderAttribute != null, "modelBinderAttribute cannot be null");
@@ -117,27 +141,41 @@ namespace System.Web.Http.ModelBinding
             if (typeof(ModelBinderProvider).IsAssignableFrom(modelBinderAttribute.BinderType))
             {
                 // REVIEW: DI?
-                provider = (ModelBinderProvider)Activator.CreateInstance(modelBinderAttribute.BinderType);
+                provider = (ModelBinderProvider)
+                    Activator.CreateInstance(modelBinderAttribute.BinderType);
             }
             else if (typeof(IModelBinder).IsAssignableFrom(modelBinderAttribute.BinderType))
             {
-                Type closedBinderType =
-                    modelBinderAttribute.BinderType.IsGenericTypeDefinition
-                        ? modelBinderAttribute.BinderType.MakeGenericType(modelType.GetGenericArguments())
-                        : modelBinderAttribute.BinderType;
+                Type closedBinderType = modelBinderAttribute.BinderType.IsGenericTypeDefinition
+                    ? modelBinderAttribute.BinderType.MakeGenericType(
+                        modelType.GetGenericArguments()
+                    )
+                    : modelBinderAttribute.BinderType;
 
-                IModelBinder binderInstance = (IModelBinder)Activator.CreateInstance(closedBinderType);
-                provider = new SimpleModelBinderProvider(modelType, binderInstance) { SuppressPrefixCheck = modelBinderAttribute.SuppressPrefixCheck };
+                IModelBinder binderInstance = (IModelBinder)
+                    Activator.CreateInstance(closedBinderType);
+                provider = new SimpleModelBinderProvider(modelType, binderInstance)
+                {
+                    SuppressPrefixCheck = modelBinderAttribute.SuppressPrefixCheck,
+                };
             }
             else
             {
-                throw Error.InvalidOperation(SRResources.ModelBinderProviderCollection_InvalidBinderType, modelBinderAttribute.BinderType, typeof(ModelBinderProvider), typeof(IModelBinder));
+                throw Error.InvalidOperation(
+                    SRResources.ModelBinderProviderCollection_InvalidBinderType,
+                    modelBinderAttribute.BinderType,
+                    typeof(ModelBinderProvider),
+                    typeof(IModelBinder)
+                );
             }
 
             return true;
         }
 
-        internal static bool TryGetProviderFromAttributes(Type modelType, out ModelBinderProvider provider)
+        internal static bool TryGetProviderFromAttributes(
+            Type modelType,
+            out ModelBinderProvider provider
+        )
         {
             ModelBinderAttribute attr = GetModelBinderAttribute(modelType);
             if (attr == null)
@@ -154,7 +192,11 @@ namespace System.Web.Http.ModelBinding
             ModelBinderAttribute modelBinderAttribute;
             if (!_modelBinderAttributeCache.TryGetValue(modelType, out modelBinderAttribute))
             {
-                modelBinderAttribute = TypeDescriptorHelper.Get(modelType).GetAttributes().OfType<ModelBinderAttribute>().FirstOrDefault();
+                modelBinderAttribute = TypeDescriptorHelper
+                    .Get(modelType)
+                    .GetAttributes()
+                    .OfType<ModelBinderAttribute>()
+                    .FirstOrDefault();
                 _modelBinderAttributeCache.TryAdd(modelType, modelBinderAttribute);
             }
             return modelBinderAttribute;
@@ -169,27 +211,51 @@ namespace System.Web.Http.ModelBinding
 
             if (bindingContext.ModelMetadata == null)
             {
-                throw Error.Argument("bindingContext", SRResources.ModelBinderUtil_ModelMetadataCannotBeNull);
+                throw Error.Argument(
+                    "bindingContext",
+                    SRResources.ModelBinderUtil_ModelMetadataCannotBeNull
+                );
             }
         }
 
-        internal static void ValidateBindingContext(ModelBindingContext bindingContext, Type requiredType, bool allowNullModel)
+        internal static void ValidateBindingContext(
+            ModelBindingContext bindingContext,
+            Type requiredType,
+            bool allowNullModel
+        )
         {
             ValidateBindingContext(bindingContext);
 
             if (bindingContext.ModelType != requiredType)
             {
-                throw Error.Argument("bindingContext", SRResources.ModelBinderUtil_ModelTypeIsWrong, bindingContext.ModelType, requiredType);
+                throw Error.Argument(
+                    "bindingContext",
+                    SRResources.ModelBinderUtil_ModelTypeIsWrong,
+                    bindingContext.ModelType,
+                    requiredType
+                );
             }
 
             if (!allowNullModel && bindingContext.Model == null)
             {
-                throw Error.Argument("bindingContext", SRResources.ModelBinderUtil_ModelCannotBeNull, requiredType);
+                throw Error.Argument(
+                    "bindingContext",
+                    SRResources.ModelBinderUtil_ModelCannotBeNull,
+                    requiredType
+                );
             }
 
-            if (bindingContext.Model != null && !requiredType.IsInstanceOfType(bindingContext.Model))
+            if (
+                bindingContext.Model != null
+                && !requiredType.IsInstanceOfType(bindingContext.Model)
+            )
             {
-                throw Error.Argument("bindingContext", SRResources.ModelBinderUtil_ModelInstanceIsWrong, bindingContext.Model.GetType(), requiredType);
+                throw Error.Argument(
+                    "bindingContext",
+                    SRResources.ModelBinderUtil_ModelInstanceIsWrong,
+                    bindingContext.Model.GetType(),
+                    requiredType
+                );
             }
         }
     }

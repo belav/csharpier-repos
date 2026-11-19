@@ -56,11 +56,19 @@ namespace System.MemoryTests
             var left = new ReadOnlyMemory<int>(new int[0]);
             var right = new ReadOnlyMemory<int>(new int[0]);
 
-            ReadOnlyMemory<int> memoryFromNonEmptyArrayButWithZeroLength = new Memory<int>(new int[1] { 123 }).Slice(0, 0);
+            ReadOnlyMemory<int> memoryFromNonEmptyArrayButWithZeroLength = new Memory<int>(
+                new int[1] { 123 }
+            ).Slice(0, 0);
 
             Assert.NotEqual(left.GetHashCode(), right.GetHashCode());
-            Assert.NotEqual(left.GetHashCode(), memoryFromNonEmptyArrayButWithZeroLength.GetHashCode());
-            Assert.NotEqual(right.GetHashCode(), memoryFromNonEmptyArrayButWithZeroLength.GetHashCode());
+            Assert.NotEqual(
+                left.GetHashCode(),
+                memoryFromNonEmptyArrayButWithZeroLength.GetHashCode()
+            );
+            Assert.NotEqual(
+                right.GetHashCode(),
+                memoryFromNonEmptyArrayButWithZeroLength.GetHashCode()
+            );
 
             // Empty property hashcode is equal
             left = ReadOnlyMemory<int>.Empty;

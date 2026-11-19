@@ -14,7 +14,8 @@ internal static partial class Interop
             SafeCryptMsgHandle hCryptMsg,
             int dwFlags,
             MsgControlType dwCtrlType,
-            ref CMSG_CTRL_DECRYPT_PARA pvCtrlPara);
+            ref CMSG_CTRL_DECRYPT_PARA pvCtrlPara
+        );
 
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -22,6 +23,7 @@ internal static partial class Interop
             SafeCryptMsgHandle hCryptMsg,
             int dwFlags,
             MsgControlType dwCtrlType,
-            ref CMSG_CTRL_KEY_AGREE_DECRYPT_PARA pvCtrlPara);
+            ref CMSG_CTRL_KEY_AGREE_DECRYPT_PARA pvCtrlPara
+        );
     }
 }

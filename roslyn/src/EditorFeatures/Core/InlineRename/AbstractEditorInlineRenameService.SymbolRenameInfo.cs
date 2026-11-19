@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 IEnumerable<IRefactorNotifyService> refactorNotifyServices,
                 SymbolicRenameInfo info,
                 CodeCleanupOptionsProvider fallbackOptions,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 Contract.ThrowIfTrue(info.IsError);
                 this.CanRename = true;
@@ -70,7 +71,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
                 this.HasOverloads = RenameUtilities.GetOverloadedSymbols(this.RenameSymbol).Any();
 
-                this.TriggerSpan = GetReferenceEditSpan(new InlineRenameLocation(this.Document, info.TriggerToken.Span), info.TriggerText, cancellationToken);
+                this.TriggerSpan = GetReferenceEditSpan(
+                    new InlineRenameLocation(this.Document, info.TriggerToken.Span),
+                    info.TriggerText,
+                    cancellationToken
+                );
             }
 
             /// <summary>
@@ -86,7 +91,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             ///     - Compiler-generated EventHandler suffix       XEventHandler => X
             ///     - Compiler-generated get_ and set_ prefixes    get_X => X
             /// </summary>
-            public TextSpan GetReferenceEditSpan(InlineRenameLocation location, string triggerText, CancellationToken cancellationToken)
+            public TextSpan GetReferenceEditSpan(
+                InlineRenameLocation location,
+                string triggerText,
+                CancellationToken cancellationToken
+            )
             {
                 var searchName = this.RenameSymbol.Name;
                 if (this.IsRenamingAttributePrefix)
@@ -108,7 +117,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 return new TextSpan(location.TextSpan.Start + index, searchName.Length);
             }
 
-            public TextSpan? GetConflictEditSpan(InlineRenameLocation location, string triggerText, string replacementText, CancellationToken cancellationToken)
+            public TextSpan? GetConflictEditSpan(
+                InlineRenameLocation location,
+                string triggerText,
+                string replacementText,
+                CancellationToken cancellationToken
+            )
             {
                 var position = triggerText.LastIndexOf(replacementText, StringComparison.Ordinal);
 
@@ -116,7 +130,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 {
                     // We're only renaming the attribute prefix part.  We want to adjust the span of
                     // the reference we've found to only update the prefix portion.
-                    var index = triggerText.LastIndexOf(replacementText + AttributeSuffix, StringComparison.Ordinal);
+                    var index = triggerText.LastIndexOf(
+                        replacementText + AttributeSuffix,
+                        StringComparison.Ordinal
+                    );
                     position = index >= 0 ? index : position;
                 }
 
@@ -132,34 +149,66 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             public string FullDisplayName => RenameSymbol.ToDisplayString();
             public Glyph Glyph => RenameSymbol.GetGlyph();
 
-            public string GetFinalSymbolName(string replacementText)
-                => _info.GetFinalSymbolName(replacementText);
+            public string GetFinalSymbolName(string replacementText) =>
+                _info.GetFinalSymbolName(replacementText);
 
-            public async Task<IInlineRenameLocationSet> FindRenameLocationsAsync(SymbolRenameOptions options, CancellationToken cancellationToken)
+            public async Task<IInlineRenameLocationSet> FindRenameLocationsAsync(
+                SymbolRenameOptions options,
+                CancellationToken cancellationToken
+            )
             {
                 var solution = this.Document.Project.Solution;
-                var locations = await Renamer.FindRenameLocationsAsync(
-                    solution, this.RenameSymbol, options, _fallbackOptions, cancellationToken).ConfigureAwait(false);
+                var locations = await Renamer
+                    .FindRenameLocationsAsync(
+                        solution,
+                        this.RenameSymbol,
+                        options,
+                        _fallbackOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 return new InlineRenameLocationSet(this, locations);
             }
 
-            public bool TryOnBeforeGlobalSymbolRenamed(Workspace workspace, IEnumerable<DocumentId> changedDocumentIDs, string replacementText)
+            public bool TryOnBeforeGlobalSymbolRenamed(
+                Workspace workspace,
+                IEnumerable<DocumentId> changedDocumentIDs,
+                string replacementText
+            )
             {
-                return _refactorNotifyServices.TryOnBeforeGlobalSymbolRenamed(workspace, changedDocumentIDs, RenameSymbol,
-                    this.GetFinalSymbolName(replacementText), throwOnFailure: false);
+                return _refactorNotifyServices.TryOnBeforeGlobalSymbolRenamed(
+                    workspace,
+                    changedDocumentIDs,
+                    RenameSymbol,
+                    this.GetFinalSymbolName(replacementText),
+                    throwOnFailure: false
+                );
             }
 
-            public bool TryOnAfterGlobalSymbolRenamed(Workspace workspace, IEnumerable<DocumentId> changedDocumentIDs, string replacementText)
+            public bool TryOnAfterGlobalSymbolRenamed(
+                Workspace workspace,
+                IEnumerable<DocumentId> changedDocumentIDs,
+                string replacementText
+            )
             {
-                return _refactorNotifyServices.TryOnAfterGlobalSymbolRenamed(workspace, changedDocumentIDs, RenameSymbol,
-                    this.GetFinalSymbolName(replacementText), throwOnFailure: false);
+                return _refactorNotifyServices.TryOnAfterGlobalSymbolRenamed(
+                    workspace,
+                    changedDocumentIDs,
+                    RenameSymbol,
+                    this.GetFinalSymbolName(replacementText),
+                    throwOnFailure: false
+                );
             }
 
             public InlineRenameFileRenameInfo GetFileRenameInfo()
             {
-                if (RenameSymbol.Kind == SymbolKind.NamedType &&
-                    this.Document.Project.Solution.CanApplyChange(ApplyChangesKind.ChangeDocumentInfo))
+                if (
+                    RenameSymbol.Kind == SymbolKind.NamedType
+                    && this.Document.Project.Solution.CanApplyChange(
+                        ApplyChangesKind.ChangeDocumentInfo
+                    )
+                )
                 {
                     if (RenameSymbol.Locations.Length > 1)
                     {
@@ -169,8 +218,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     // Get the document that the symbol is defined in to compare
                     // the name with the symbol name. If they match allow
                     // rename file rename as part of the symbol rename
-                    var symbolSourceDocument = this.Document.Project.Solution.GetDocument(RenameSymbol.Locations.Single().SourceTree);
-                    if (symbolSourceDocument != null && WorkspacePathUtilities.TypeNameMatchesDocumentName(symbolSourceDocument, RenameSymbol.Name))
+                    var symbolSourceDocument = this.Document.Project.Solution.GetDocument(
+                        RenameSymbol.Locations.Single().SourceTree
+                    );
+                    if (
+                        symbolSourceDocument != null
+                        && WorkspacePathUtilities.TypeNameMatchesDocumentName(
+                            symbolSourceDocument,
+                            RenameSymbol.Name
+                        )
+                    )
                     {
                         return InlineRenameFileRenameInfo.Allowed;
                     }

@@ -14,6 +14,10 @@ namespace System.Web.WebPages
     {
         string DisplayModeId { get; }
         bool CanHandleContext(HttpContextBase httpContext);
-        DisplayInfo GetDisplayInfo(HttpContextBase httpContext, string virtualPath, Func<string, bool> virtualPathExists);
+        DisplayInfo GetDisplayInfo(
+            HttpContextBase httpContext,
+            string virtualPath,
+            Func<string, bool> virtualPathExists
+        );
     }
 }

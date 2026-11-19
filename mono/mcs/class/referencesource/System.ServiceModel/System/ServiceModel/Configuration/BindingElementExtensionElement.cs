@@ -2,15 +2,14 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------------------------
 
-
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Configuration;
     using System.Globalization;
+    using System.ServiceModel.Channels;
     using System.Xml;
-    
+
     public abstract class BindingElementExtensionElement : ServiceModelExtensionElement
     {
         public virtual void ApplyConfiguration(BindingElement bindingElement)
@@ -22,10 +21,7 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        public abstract Type BindingElementType
-        {
-            get;
-        }
+        public abstract Type BindingElementType { get; }
 
         protected internal abstract BindingElement CreateBindingElement();
 
@@ -37,10 +33,14 @@ namespace System.ServiceModel.Configuration
             }
             if (bindingElement.GetType() != this.BindingElementType)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("bindingElement",
-                    SR.GetString(SR.ConfigInvalidTypeForBindingElement,
-                    this.BindingElementType.ToString(),
-                    bindingElement.GetType().ToString()));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "bindingElement",
+                    SR.GetString(
+                        SR.ConfigInvalidTypeForBindingElement,
+                        this.BindingElementType.ToString(),
+                        bindingElement.GetType().ToString()
+                    )
+                );
             }
         }
     }

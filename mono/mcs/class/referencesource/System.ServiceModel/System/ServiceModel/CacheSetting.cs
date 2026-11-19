@@ -8,6 +8,6 @@ namespace System.ServiceModel
     {
         Default,
         AlwaysOn,
-        AlwaysOff
+        AlwaysOff,
     }
 }

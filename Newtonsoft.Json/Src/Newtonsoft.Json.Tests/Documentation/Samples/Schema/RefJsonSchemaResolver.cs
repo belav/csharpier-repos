@@ -24,11 +24,11 @@
 #endregion
 
 #pragma warning disable 618
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Schema
 {
@@ -40,7 +40,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Schema
             string schemaJson;
             JsonSchemaResolver resolver = new JsonSchemaResolver();
 
-            schemaJson = @"{
+            schemaJson =
+                @"{
               'id': 'person',
               'type': 'object',
               'properties': {
@@ -51,7 +52,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Schema
 
             JsonSchema personSchema = JsonSchema.Parse(schemaJson, resolver);
 
-            schemaJson = @"{
+            schemaJson =
+                @"{
               'id': 'employee',
               'type': 'object',
               'extends': {'$ref':'person'},
@@ -63,7 +65,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Schema
 
             JsonSchema employeeSchema = JsonSchema.Parse(schemaJson, resolver);
 
-            string json = @"{
+            string json =
+                @"{
               'name': 'James',
               'age': 29,
               'salary': 9000.01,

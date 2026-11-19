@@ -27,52 +27,91 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
     [UseExportProvider]
     public abstract class AbstractSuppressionAllCodeTests : IEqualityComparer<Diagnostic>
     {
-        protected abstract TestWorkspace CreateWorkspaceFromFile(string definition, ParseOptions parseOptions);
+        protected abstract TestWorkspace CreateWorkspaceFromFile(
+            string definition,
+            ParseOptions parseOptions
+        );
 
-        internal abstract Tuple<Analyzer, IConfigurationFixProvider> CreateDiagnosticProviderAndFixer(Workspace workspace);
+        internal abstract Tuple<
+            Analyzer,
+            IConfigurationFixProvider
+        > CreateDiagnosticProviderAndFixer(Workspace workspace);
 
-        protected Task TestPragmaAsync(string code, ParseOptions options, Func<string, bool> verifier)
+        protected Task TestPragmaAsync(
+            string code,
+            ParseOptions options,
+            Func<string, bool> verifier
+        )
         {
             var set = new HashSet<ValueTuple<SyntaxToken, SyntaxToken>>();
-            return TestPragmaOrAttributeAsync(code, options, pragma: true, digInto: n => true, verifier: verifier, fixChecker: c =>
-            {
-                var fix = (AbstractSuppressionCodeFixProvider.PragmaWarningCodeAction)c;
-                var tuple = ValueTuple.Create(fix.StartToken_TestOnly, fix.EndToken_TestOnly);
-                if (set.Contains(tuple))
+            return TestPragmaOrAttributeAsync(
+                code,
+                options,
+                pragma: true,
+                digInto: n => true,
+                verifier: verifier,
+                fixChecker: c =>
                 {
-                    return true;
-                }
+                    var fix = (AbstractSuppressionCodeFixProvider.PragmaWarningCodeAction)c;
+                    var tuple = ValueTuple.Create(fix.StartToken_TestOnly, fix.EndToken_TestOnly);
+                    if (set.Contains(tuple))
+                    {
+                        return true;
+                    }
 
-                set.Add(tuple);
-                return false;
-            });
+                    set.Add(tuple);
+                    return false;
+                }
+            );
         }
 
-        protected Task TestSuppressionWithAttributeAsync(string code, ParseOptions options, Func<SyntaxNode, bool> digInto, Func<string, bool> verifier)
+        protected Task TestSuppressionWithAttributeAsync(
+            string code,
+            ParseOptions options,
+            Func<SyntaxNode, bool> digInto,
+            Func<string, bool> verifier
+        )
         {
             var set = new HashSet<ISymbol>();
-            return TestPragmaOrAttributeAsync(code, options, pragma: false, digInto: digInto, verifier: verifier, fixChecker: c =>
-            {
-                var fix = (AbstractSuppressionCodeFixProvider.GlobalSuppressMessageCodeAction)c;
-                if (set.Contains(fix.TargetSymbol_TestOnly))
+            return TestPragmaOrAttributeAsync(
+                code,
+                options,
+                pragma: false,
+                digInto: digInto,
+                verifier: verifier,
+                fixChecker: c =>
                 {
-                    return true;
-                }
+                    var fix = (AbstractSuppressionCodeFixProvider.GlobalSuppressMessageCodeAction)c;
+                    if (set.Contains(fix.TargetSymbol_TestOnly))
+                    {
+                        return true;
+                    }
 
-                set.Add(fix.TargetSymbol_TestOnly);
-                return false;
-            });
+                    set.Add(fix.TargetSymbol_TestOnly);
+                    return false;
+                }
+            );
         }
 
         protected async Task TestPragmaOrAttributeAsync(
-            string code, ParseOptions options, bool pragma, Func<SyntaxNode, bool> digInto, Func<string, bool> verifier, Func<CodeAction, bool> fixChecker)
+            string code,
+            ParseOptions options,
+            bool pragma,
+            Func<SyntaxNode, bool> digInto,
+            Func<string, bool> verifier,
+            Func<CodeAction, bool> fixChecker
+        )
         {
             using (var workspace = CreateWorkspaceFromFile(code, options))
             {
                 var (analyzer, fixer) = CreateDiagnosticProviderAndFixer(workspace);
 
-                var analyzerReference = new AnalyzerImageReference(ImmutableArray.Create<DiagnosticAnalyzer>(analyzer));
-                workspace.TryApplyChanges(workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference }));
+                var analyzerReference = new AnalyzerImageReference(
+                    ImmutableArray.Create<DiagnosticAnalyzer>(analyzer)
+                );
+                workspace.TryApplyChanges(
+                    workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference })
+                );
 
                 var document = workspace.CurrentSolution.Projects.Single().Documents.Single();
                 var root = document.GetSyntaxRootAsync().GetAwaiter().GetResult();
@@ -80,7 +119,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
                 var descendants = root.DescendantNodesAndSelf(digInto).ToImmutableArray();
                 analyzer.AllNodes = descendants;
-                var diagnostics = await DiagnosticProviderTestUtilities.GetAllDiagnosticsAsync(workspace, document, root.FullSpan);
+                var diagnostics = await DiagnosticProviderTestUtilities.GetAllDiagnosticsAsync(
+                    workspace,
+                    document,
+                    root.FullSpan
+                );
 
                 foreach (var diagnostic in diagnostics)
                 {
@@ -89,7 +132,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                         continue;
                     }
 
-                    var fixes = fixer.GetFixesAsync(document, diagnostic.Location.SourceSpan, SpecializedCollections.SingletonEnumerable(diagnostic), CodeActionOptions.DefaultProvider, CancellationToken.None).GetAwaiter().GetResult();
+                    var fixes = fixer
+                        .GetFixesAsync(
+                            document,
+                            diagnostic.Location.SourceSpan,
+                            SpecializedCollections.SingletonEnumerable(diagnostic),
+                            CodeActionOptions.DefaultProvider,
+                            CancellationToken.None
+                        )
+                        .GetAwaiter()
+                        .GetResult();
                     if (fixes == null || fixes.Count() <= 0)
                     {
                         continue;
@@ -108,10 +160,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                     }
 
                     var operations = fix.GetOperationsAsync(
-                        document.Project.Solution, CodeAnalysisProgress.None, CancellationToken.None).GetAwaiter().GetResult();
+                            document.Project.Solution,
+                            CodeAnalysisProgress.None,
+                            CancellationToken.None
+                        )
+                        .GetAwaiter()
+                        .GetResult();
 
                     var applyChangesOperation = operations.OfType<ApplyChangesOperation>().Single();
-                    var newDocument = applyChangesOperation.ChangedSolution.Projects.Single().Documents.Single();
+                    var newDocument = applyChangesOperation
+                        .ChangedSolution.Projects.Single()
+                        .Documents.Single();
                     var newTree = newDocument.GetSyntaxTreeAsync().GetAwaiter().GetResult();
 
                     var newText = newTree.GetText().ToString();
@@ -127,22 +186,32 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         {
             if (pragma)
             {
-                return fixes.FirstOrDefault(f => f is AbstractSuppressionCodeFixProvider.PragmaWarningCodeAction);
+                return fixes.FirstOrDefault(f =>
+                    f is AbstractSuppressionCodeFixProvider.PragmaWarningCodeAction
+                );
             }
 
-            return fixes.OfType<AbstractSuppressionCodeFixProvider.GlobalSuppressMessageCodeAction>().FirstOrDefault();
+            return fixes
+                .OfType<AbstractSuppressionCodeFixProvider.GlobalSuppressMessageCodeAction>()
+                .FirstOrDefault();
         }
 
-        public bool Equals(Diagnostic x, Diagnostic y)
-            => x.Id == y.Id && x.Descriptor.Category == y.Descriptor.Category;
+        public bool Equals(Diagnostic x, Diagnostic y) =>
+            x.Id == y.Id && x.Descriptor.Category == y.Descriptor.Category;
 
-        public int GetHashCode(Diagnostic obj)
-            => Hash.Combine(obj.Id, obj.Descriptor.Category.GetHashCode());
+        public int GetHashCode(Diagnostic obj) =>
+            Hash.Combine(obj.Id, obj.Descriptor.Category.GetHashCode());
 
         internal class Analyzer : DiagnosticAnalyzer, IBuiltInAnalyzer
         {
-            private readonly DiagnosticDescriptor _descriptor =
-                new DiagnosticDescriptor("TestId", "Test", "Test", "Test", DiagnosticSeverity.Warning, isEnabledByDefault: true);
+            private readonly DiagnosticDescriptor _descriptor = new DiagnosticDescriptor(
+                "TestId",
+                "Test",
+                "Test",
+                "Test",
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true
+            );
 
             public bool IsHighPriority => false;
 
@@ -152,25 +221,23 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             {
-                get
-                {
-                    return ImmutableArray.Create(_descriptor);
-                }
+                get { return ImmutableArray.Create(_descriptor); }
             }
 
-            public DiagnosticAnalyzerCategory GetAnalyzerCategory()
-                => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
+            public DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+                DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
 
             public override void Initialize(AnalysisContext analysisContext)
             {
-                analysisContext.RegisterSyntaxTreeAction(
-                    context =>
+                analysisContext.RegisterSyntaxTreeAction(context =>
+                {
+                    foreach (var node in AllNodes)
                     {
-                        foreach (var node in AllNodes)
-                        {
-                            context.ReportDiagnostic(Diagnostic.Create(_descriptor, node.GetLocation()));
-                        }
-                    });
+                        context.ReportDiagnostic(
+                            Diagnostic.Create(_descriptor, node.GetLocation())
+                        );
+                    }
+                });
             }
         }
     }

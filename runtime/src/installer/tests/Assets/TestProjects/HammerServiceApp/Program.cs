@@ -7,7 +7,9 @@ namespace hammer
     {
         static void Main(string[] args)
         {
-            var asm = Assembly.Load("Location, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null");
+            var asm = Assembly.Load(
+                "Location, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+            );
             var location = asm.GetType("GPS.Location");
             var city = location.GetProperty("City");
             var cityName = city.GetValue(null);

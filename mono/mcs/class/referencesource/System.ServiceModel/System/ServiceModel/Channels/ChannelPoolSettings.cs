@@ -31,23 +31,29 @@ namespace System.ServiceModel.Channels
         [DefaultValue(typeof(TimeSpan), OneWayDefaults.IdleTimeoutString)]
         public TimeSpan IdleTimeout
         {
-            get
-            {
-                return this.idleTimeout;
-            }
-
+            get { return this.idleTimeout; }
             set
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.idleTimeout = value;
@@ -57,22 +63,29 @@ namespace System.ServiceModel.Channels
         [DefaultValue(typeof(TimeSpan), OneWayDefaults.LeaseTimeoutString)]
         public TimeSpan LeaseTimeout
         {
-            get
-            {
-                return leaseTimeout;
-            }
+            get { return leaseTimeout; }
             set
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.leaseTimeout = value;
@@ -82,16 +95,18 @@ namespace System.ServiceModel.Channels
         [DefaultValue(OneWayDefaults.MaxOutboundChannelsPerEndpoint)]
         public int MaxOutboundChannelsPerEndpoint
         {
-            get
-            {
-                return this.maxOutboundChannelsPerEndpoint;
-            }
+            get { return this.maxOutboundChannelsPerEndpoint; }
             set
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.ValueMustBePositive)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBePositive)
+                        )
+                    );
                 }
 
                 this.maxOutboundChannelsPerEndpoint = value;
@@ -120,7 +135,10 @@ namespace System.ServiceModel.Channels
                 return false;
             }
 
-            if (this.maxOutboundChannelsPerEndpoint != channelPoolSettings.maxOutboundChannelsPerEndpoint)
+            if (
+                this.maxOutboundChannelsPerEndpoint
+                != channelPoolSettings.maxOutboundChannelsPerEndpoint
+            )
             {
                 return false;
             }
@@ -130,9 +148,11 @@ namespace System.ServiceModel.Channels
 
         internal bool InternalShouldSerialize()
         {
-            return (this.maxOutboundChannelsPerEndpoint != OneWayDefaults.MaxOutboundChannelsPerEndpoint
-                    || this.idleTimeout != OneWayDefaults.IdleTimeout
-                    || this.leaseTimeout != OneWayDefaults.LeaseTimeout);
+            return (
+                this.maxOutboundChannelsPerEndpoint != OneWayDefaults.MaxOutboundChannelsPerEndpoint
+                || this.idleTimeout != OneWayDefaults.IdleTimeout
+                || this.leaseTimeout != OneWayDefaults.LeaseTimeout
+            );
         }
     }
 }

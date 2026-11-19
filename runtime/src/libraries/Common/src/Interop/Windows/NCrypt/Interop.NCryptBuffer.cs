@@ -13,15 +13,15 @@ internal static partial class Interop
         /// </summary>
         internal enum BufferType
         {
-            KdfHashAlgorithm = 0x00000000,              // KDF_HASH_ALGORITHM
-            KdfSecretPrepend = 0x00000001,              // KDF_SECRET_PREPEND
-            KdfSecretAppend = 0x00000002,               // KDF_SECRET_APPEND
-            KdfHmacKey = 0x00000003,                    // KDF_HMAC_KEY
-            KdfTlsLabel = 0x00000004,                   // KDF_TLS_PRF_LABEL
-            KdfTlsSeed = 0x00000005,                    // KDF_TLS_PRF_SEED
-            PkcsAlgOid = 0x00000029,                    // NCRYPTBUFFER_PKCS_ALG_OID,
-            PkcsAlgParam = 0x0000002A,                  // NCRYPTBUFFER_PKCS_ALG_PARAM,
-            PkcsSecret = 0x0000002E,                    // NCRYPTBUFFER_PKCS_SECRET,
+            KdfHashAlgorithm = 0x00000000, // KDF_HASH_ALGORITHM
+            KdfSecretPrepend = 0x00000001, // KDF_SECRET_PREPEND
+            KdfSecretAppend = 0x00000002, // KDF_SECRET_APPEND
+            KdfHmacKey = 0x00000003, // KDF_HMAC_KEY
+            KdfTlsLabel = 0x00000004, // KDF_TLS_PRF_LABEL
+            KdfTlsSeed = 0x00000005, // KDF_TLS_PRF_SEED
+            PkcsAlgOid = 0x00000029, // NCRYPTBUFFER_PKCS_ALG_OID,
+            PkcsAlgParam = 0x0000002A, // NCRYPTBUFFER_PKCS_ALG_PARAM,
+            PkcsSecret = 0x0000002E, // NCRYPTBUFFER_PKCS_SECRET,
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -37,7 +37,7 @@ internal static partial class Interop
         {
             public int ulVersion;
             public int cBuffers;
-            public IntPtr pBuffers;         // NCryptBuffer[cBuffers]
+            public IntPtr pBuffers; // NCryptBuffer[cBuffers]
         }
     }
 }

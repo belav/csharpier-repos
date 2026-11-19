@@ -43,8 +43,8 @@ namespace Microsoft.CodeAnalysis
         /// Create a new ProjectId instance.
         /// </summary>
         /// <param name="debugName">An optional name to make this id easier to recognize while debugging.</param>
-        public static ProjectId CreateNewId(string? debugName = null)
-            => new(Guid.NewGuid(), debugName);
+        public static ProjectId CreateNewId(string? debugName = null) =>
+            new(Guid.NewGuid(), debugName);
 
         public static ProjectId CreateFromSerialized(Guid id, string? debugName = null)
         {
@@ -58,30 +58,24 @@ namespace Microsoft.CodeAnalysis
 
         internal string? DebugName => _debugName;
 
-        private string GetDebuggerDisplay()
-            => string.Format("({0}, #{1} - {2})", this.GetType().Name, this.Id, _debugName);
+        private string GetDebuggerDisplay() =>
+            string.Format("({0}, #{1} - {2})", this.GetType().Name, this.Id, _debugName);
 
-        public override string ToString()
-            => GetDebuggerDisplay();
+        public override string ToString() => GetDebuggerDisplay();
 
-        public override bool Equals(object? obj)
-            => this.Equals(obj as ProjectId);
+        public override bool Equals(object? obj) => this.Equals(obj as ProjectId);
 
         public bool Equals(ProjectId? other)
         {
-            return
-                other is object &&
-                this.Id == other.Id;
+            return other is object && this.Id == other.Id;
         }
 
-        public static bool operator ==(ProjectId? left, ProjectId? right)
-            => EqualityComparer<ProjectId?>.Default.Equals(left, right);
+        public static bool operator ==(ProjectId? left, ProjectId? right) =>
+            EqualityComparer<ProjectId?>.Default.Equals(left, right);
 
-        public static bool operator !=(ProjectId? left, ProjectId? right)
-            => !(left == right);
+        public static bool operator !=(ProjectId? left, ProjectId? right) => !(left == right);
 
-        public override int GetHashCode()
-            => this.Id.GetHashCode();
+        public override int GetHashCode() => this.Id.GetHashCode();
 
         internal void WriteTo(ObjectWriter writer)
         {

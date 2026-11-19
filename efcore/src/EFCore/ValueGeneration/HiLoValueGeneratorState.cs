@@ -89,7 +89,8 @@ public class HiLoValueGeneratorState : IDisposable
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     public virtual async ValueTask<TValue> NextAsync<TValue>(
         Func<CancellationToken, Task<long>> getNewLowValue,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var newValue = GetNextValue();
 
@@ -123,8 +124,8 @@ public class HiLoValueGeneratorState : IDisposable
         return ConvertResult<TValue>(newValue);
     }
 
-    private static TValue ConvertResult<TValue>(HiLoValue newValue)
-        => (TValue)Convert.ChangeType(newValue.Low, typeof(TValue), CultureInfo.InvariantCulture);
+    private static TValue ConvertResult<TValue>(HiLoValue newValue) =>
+        (TValue)Convert.ChangeType(newValue.Low, typeof(TValue), CultureInfo.InvariantCulture);
 
     private HiLoValue GetNextValue()
     {
@@ -134,8 +135,9 @@ public class HiLoValueGeneratorState : IDisposable
         {
             originalValue = _currentValue;
             newValue = originalValue.NextValue();
-        }
-        while (Interlocked.CompareExchange(ref _currentValue, newValue, originalValue) != originalValue);
+        } while (
+            Interlocked.CompareExchange(ref _currentValue, newValue, originalValue) != originalValue
+        );
 
         return newValue;
     }
@@ -152,13 +154,11 @@ public class HiLoValueGeneratorState : IDisposable
 
         public long High { get; }
 
-        public HiLoValue NextValue()
-            => new(Low + 1, High);
+        public HiLoValue NextValue() => new(Low + 1, High);
     }
 
     /// <summary>
     ///     Releases the allocated resources for this instance.
     /// </summary>
-    public virtual void Dispose()
-        => _semaphoreSlim.Dispose();
+    public virtual void Dispose() => _semaphoreSlim.Dispose();
 }

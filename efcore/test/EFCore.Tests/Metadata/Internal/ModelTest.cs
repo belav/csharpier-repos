@@ -17,50 +17,74 @@ public class ModelTest
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => model.FinalizeModel()).Message);
+            Assert.Throws<InvalidOperationException>(() => model.FinalizeModel()).Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => model.DelayConventions()).Message);
+            Assert.Throws<InvalidOperationException>(() => model.DelayConventions()).Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => model.AddAnnotation("foo", "bar")).Message);
+            Assert
+                .Throws<InvalidOperationException>(() => model.AddAnnotation("foo", "bar"))
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => model.RemoveOwned(typeof(SpecialCustomer))).Message);
+            Assert
+                .Throws<InvalidOperationException>(() => model.RemoveOwned(typeof(SpecialCustomer)))
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => model.AddOwned(typeof(Order))).Message);
+            Assert.Throws<InvalidOperationException>(() => model.AddOwned(typeof(Order))).Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => model.AddShared(typeof(Order))).Message);
+            Assert.Throws<InvalidOperationException>(() => model.AddShared(typeof(Order))).Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => model.SetChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot)).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    model.SetChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot)
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => ((Model)model).SkipDetectChanges = false).Message);
+            Assert
+                .Throws<InvalidOperationException>(() => ((Model)model).SkipDetectChanges = false)
+                .Message
+        );
     }
 
     [ConditionalFact]
-    public void Snapshot_change_tracking_is_used_by_default()
-        => Assert.Equal(ChangeTrackingStrategy.Snapshot, CreateModel().GetChangeTrackingStrategy());
+    public void Snapshot_change_tracking_is_used_by_default() =>
+        Assert.Equal(ChangeTrackingStrategy.Snapshot, CreateModel().GetChangeTrackingStrategy());
 
     [ConditionalFact]
     public void Change_tracking_strategy_can_be_changed()
     {
         var model = CreateModel();
         model.SetChangeTrackingStrategy(ChangeTrackingStrategy.ChangingAndChangedNotifications);
-        Assert.Equal(ChangeTrackingStrategy.ChangingAndChangedNotifications, model.GetChangeTrackingStrategy());
+        Assert.Equal(
+            ChangeTrackingStrategy.ChangingAndChangedNotifications,
+            model.GetChangeTrackingStrategy()
+        );
 
         model.SetChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications);
-        Assert.Equal(ChangeTrackingStrategy.ChangedNotifications, model.GetChangeTrackingStrategy());
+        Assert.Equal(
+            ChangeTrackingStrategy.ChangedNotifications,
+            model.GetChangeTrackingStrategy()
+        );
     }
 
     [ConditionalFact]
@@ -149,9 +173,12 @@ public class ModelTest
 
         Assert.Equal(
             CoreStrings.AmbiguousSharedTypeEntityTypeName(typeof(Customer).DisplayName()),
-            Assert.Throws<InvalidOperationException>(
-                ()
-                    => model.AddEntityType(typeof(Customer).DisplayName(), typeof(Customer))).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    model.AddEntityType(typeof(Customer).DisplayName(), typeof(Customer))
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -170,8 +197,12 @@ public class ModelTest
             CoreStrings.EntityTypeInUseByReferencingForeignKey(
                 typeof(Customer).Name,
                 "{'" + Order.CustomerIdProperty.Name + "'}",
-                typeof(Order).Name),
-            Assert.Throws<InvalidOperationException>(() => model.RemoveEntityType(customerType.Name)).Message);
+                typeof(Order).Name
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => model.RemoveEntityType(customerType.Name))
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -184,8 +215,14 @@ public class ModelTest
         specialCustomerType.BaseType = customerType;
 
         Assert.Equal(
-            CoreStrings.EntityTypeInUseByDerived(typeof(Customer).Name, typeof(SpecialCustomer).Name),
-            Assert.Throws<InvalidOperationException>(() => model.RemoveEntityType(customerType.Name)).Message);
+            CoreStrings.EntityTypeInUseByDerived(
+                typeof(Customer).Name,
+                typeof(SpecialCustomer).Name
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => model.RemoveEntityType(customerType.Name))
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -195,7 +232,10 @@ public class ModelTest
 
         Assert.Equal(
             CoreStrings.InvalidEntityType(typeof(IReadOnlyList<int>)),
-            Assert.Throws<ArgumentException>(() => model.AddEntityType(typeof(IReadOnlyList<int>))).Message);
+            Assert
+                .Throws<ArgumentException>(() => model.AddEntityType(typeof(IReadOnlyList<int>)))
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -208,7 +248,10 @@ public class ModelTest
 
         Assert.Equal(
             CoreStrings.DuplicateEntityType(nameof(Customer)),
-            Assert.Throws<InvalidOperationException>(() => model.AddEntityType(typeof(Customer))).Message);
+            Assert
+                .Throws<InvalidOperationException>(() => model.AddEntityType(typeof(Customer)))
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -220,8 +263,15 @@ public class ModelTest
         model.AddEntityType(typeof(Customer));
 
         Assert.Equal(
-            CoreStrings.DuplicateEntityType(typeof(Customer).FullName + " (Dictionary<string, object>)"),
-            Assert.Throws<InvalidOperationException>(() => model.AddEntityType(typeof(Customer).FullName)).Message);
+            CoreStrings.DuplicateEntityType(
+                typeof(Customer).FullName + " (Dictionary<string, object>)"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    model.AddEntityType(typeof(Customer).FullName)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -234,7 +284,12 @@ public class ModelTest
 
         Assert.Equal(
             CoreStrings.CannotMarkShared(nameof(Customer)),
-            Assert.Throws<InvalidOperationException>(() => model.AddShared(typeof(Customer), ConfigurationSource.Explicit)).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    model.AddShared(typeof(Customer), ConfigurationSource.Explicit)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -278,7 +333,11 @@ public class ModelTest
         var entityType2 = model.AddEntityType(typeof(Order));
         var keyProperty = entityType1.AddProperty("Id", typeof(int));
         var fkProperty = entityType2.AddProperty("CustomerId", typeof(int));
-        var foreignKey = entityType2.AddForeignKey(fkProperty, entityType1.AddKey(keyProperty), entityType1);
+        var foreignKey = entityType2.AddForeignKey(
+            fkProperty,
+            entityType1.AddKey(keyProperty),
+            entityType1
+        );
 
         var referencingForeignKeys = entityType1.GetReferencingForeignKeys();
 
@@ -286,8 +345,7 @@ public class ModelTest
         Assert.Same(foreignKey, entityType1.GetReferencingForeignKeys().Single());
     }
 
-    private static IMutableModel CreateModel()
-        => new Model();
+    private static IMutableModel CreateModel() => new Model();
 
     private class Customer
     {
@@ -298,13 +356,13 @@ public class ModelTest
         public ICollection<Order> Orders { get; set; }
     }
 
-    private class SpecialCustomer : Customer
-    {
-    }
+    private class SpecialCustomer : Customer { }
 
     private class Order
     {
-        public static readonly PropertyInfo CustomerIdProperty = typeof(Order).GetProperty("CustomerId");
+        public static readonly PropertyInfo CustomerIdProperty = typeof(Order).GetProperty(
+            "CustomerId"
+        );
 
         public int Id { get; set; }
         public int CustomerId { get; set; }

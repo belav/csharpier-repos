@@ -15,10 +15,17 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             // Arrange
             ExpressionType expectedNodeType = ExpressionType.Add;
             Type expectedType = typeof(DateTime);
-            MethodInfo expectedMethod = typeof(DateTime).GetMethod("op_Addition", new Type[] { typeof(DateTime), typeof(TimeSpan) });
+            MethodInfo expectedMethod = typeof(DateTime).GetMethod(
+                "op_Addition",
+                new Type[] { typeof(DateTime), typeof(TimeSpan) }
+            );
 
             // Act
-            BinaryExpressionFingerprint fingerprint = new BinaryExpressionFingerprint(expectedNodeType, expectedType, expectedMethod);
+            BinaryExpressionFingerprint fingerprint = new BinaryExpressionFingerprint(
+                expectedNodeType,
+                expectedType,
+                expectedMethod
+            );
 
             // Assert
             Assert.Equal(expectedNodeType, fingerprint.NodeType);
@@ -32,11 +39,22 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             // Arrange
             ExpressionType nodeType = ExpressionType.Add;
             Type type = typeof(DateTime);
-            MethodInfo method = typeof(DateTime).GetMethod("op_Addition", new Type[] { typeof(DateTime), typeof(TimeSpan) });
+            MethodInfo method = typeof(DateTime).GetMethod(
+                "op_Addition",
+                new Type[] { typeof(DateTime), typeof(TimeSpan) }
+            );
 
             // Act
-            BinaryExpressionFingerprint fingerprint1 = new BinaryExpressionFingerprint(nodeType, type, method);
-            BinaryExpressionFingerprint fingerprint2 = new BinaryExpressionFingerprint(nodeType, type, method);
+            BinaryExpressionFingerprint fingerprint1 = new BinaryExpressionFingerprint(
+                nodeType,
+                type,
+                method
+            );
+            BinaryExpressionFingerprint fingerprint2 = new BinaryExpressionFingerprint(
+                nodeType,
+                type,
+                method
+            );
 
             // Assert
             Assert.Equal(fingerprint1, fingerprint2);
@@ -49,11 +67,21 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             // Arrange
             ExpressionType nodeType = ExpressionType.Add;
             Type type = typeof(DateTime);
-            MethodInfo method = typeof(DateTime).GetMethod("op_Addition", new Type[] { typeof(DateTime), typeof(TimeSpan) });
+            MethodInfo method = typeof(DateTime).GetMethod(
+                "op_Addition",
+                new Type[] { typeof(DateTime), typeof(TimeSpan) }
+            );
 
             // Act
-            BinaryExpressionFingerprint fingerprint1 = new BinaryExpressionFingerprint(nodeType, type, method);
-            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(nodeType, type);
+            BinaryExpressionFingerprint fingerprint1 = new BinaryExpressionFingerprint(
+                nodeType,
+                type,
+                method
+            );
+            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(
+                nodeType,
+                type
+            );
 
             // Assert
             Assert.NotEqual<ExpressionFingerprint>(fingerprint1, fingerprint2);
@@ -65,11 +93,22 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             // Arrange
             ExpressionType nodeType = ExpressionType.Add;
             Type type = typeof(DateTime);
-            MethodInfo method = typeof(DateTime).GetMethod("op_Addition", new Type[] { typeof(DateTime), typeof(TimeSpan) });
+            MethodInfo method = typeof(DateTime).GetMethod(
+                "op_Addition",
+                new Type[] { typeof(DateTime), typeof(TimeSpan) }
+            );
 
             // Act
-            BinaryExpressionFingerprint fingerprint1 = new BinaryExpressionFingerprint(nodeType, type, method);
-            BinaryExpressionFingerprint fingerprint2 = new BinaryExpressionFingerprint(nodeType, type, null /* method */);
+            BinaryExpressionFingerprint fingerprint1 = new BinaryExpressionFingerprint(
+                nodeType,
+                type,
+                method
+            );
+            BinaryExpressionFingerprint fingerprint2 = new BinaryExpressionFingerprint(
+                nodeType,
+                type,
+                null /* method */
+            );
 
             // Assert
             Assert.NotEqual(fingerprint1, fingerprint2);
@@ -81,11 +120,22 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             // Arrange
             ExpressionType nodeType = ExpressionType.Add;
             Type type = typeof(DateTime);
-            MethodInfo method = typeof(DateTime).GetMethod("op_Addition", new Type[] { typeof(DateTime), typeof(TimeSpan) });
+            MethodInfo method = typeof(DateTime).GetMethod(
+                "op_Addition",
+                new Type[] { typeof(DateTime), typeof(TimeSpan) }
+            );
 
             // Act
-            BinaryExpressionFingerprint fingerprint1 = new BinaryExpressionFingerprint(nodeType, type, method);
-            BinaryExpressionFingerprint fingerprint2 = new BinaryExpressionFingerprint(nodeType, typeof(object), method);
+            BinaryExpressionFingerprint fingerprint1 = new BinaryExpressionFingerprint(
+                nodeType,
+                type,
+                method
+            );
+            BinaryExpressionFingerprint fingerprint2 = new BinaryExpressionFingerprint(
+                nodeType,
+                typeof(object),
+                method
+            );
 
             // Assert
             Assert.NotEqual(fingerprint1, fingerprint2);

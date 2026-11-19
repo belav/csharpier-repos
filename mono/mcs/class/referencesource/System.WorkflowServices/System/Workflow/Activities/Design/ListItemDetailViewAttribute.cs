@@ -23,7 +23,5 @@ namespace System.Workflow.Activities.Design
             get { return viewType; }
             set { viewType = value; }
         }
-
     }
-
 }

@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-
 #if ASPNETWEBAPI
 using TActionDescriptor = System.Web.Http.Controllers.HttpActionDescriptor;
 using TRouteDictionary = System.Collections.Generic.IDictionary<string, object>;
@@ -31,18 +30,27 @@ namespace System.Web.Mvc.Routing
         string Template { get; set; }
 
         /// <summary>Gets or sets the route defaults.</summary>
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly",
-            Justification = "Null and empty values are legitimate, separate options when constructing a route.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "Null and empty values are legitimate, separate options when constructing a route."
+        )]
         TRouteDictionary Defaults { get; set; }
 
         /// <summary>Gets or sets the route constraints.</summary>
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly",
-            Justification = "Null and empty values are legitimate, separate options when constructing a route.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "Null and empty values are legitimate, separate options when constructing a route."
+        )]
         TRouteDictionary Constraints { get; set; }
 
         /// <summary>Gets or sets the route data tokens.</summary>
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly",
-            Justification = "Null and empty values are legitimate, separate options when constructing a route.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "Null and empty values are legitimate, separate options when constructing a route."
+        )]
         TRouteDictionary DataTokens { get; set; }
 
         /// <summary>Gets or sets the route order.</summary>

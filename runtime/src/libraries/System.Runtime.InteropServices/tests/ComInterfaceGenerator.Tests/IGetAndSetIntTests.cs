@@ -16,7 +16,6 @@ namespace ComInterfaceGenerator.Tests
 {
     public unsafe partial class IGetAndSetIntTests
     {
-
         [LibraryImport(NativeExportsNE.NativeExportsNE_Binary, EntryPoint = "new_get_and_set_int")]
         public static partial void* NewNativeObject();
 
@@ -24,7 +23,7 @@ namespace ComInterfaceGenerator.Tests
         internal static partial IGetAndSetInt NewNativeObjectWithMarshaller();
 
         [LibraryImport(NativeExportsNE.NativeExportsNE_Binary, EntryPoint = "new_get_and_set_int")]
-        [return:MarshalUsing(typeof(UniqueComInterfaceMarshaller<IGetAndSetInt>))]
+        [return: MarshalUsing(typeof(UniqueComInterfaceMarshaller<IGetAndSetInt>))]
         internal static partial IGetAndSetInt NewNativeObjectWithUniqueMarshaller();
 
         [Fact]

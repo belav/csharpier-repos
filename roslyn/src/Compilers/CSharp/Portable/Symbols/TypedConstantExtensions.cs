@@ -24,10 +24,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (constant.Kind == TypedConstantKind.Array)
             {
-                return "{" + string.Join(", ", constant.Values.Select(v => v.ToCSharpString())) + "}";
+                return "{"
+                    + string.Join(", ", constant.Values.Select(v => v.ToCSharpString()))
+                    + "}";
             }
 
-            if (constant.Kind == TypedConstantKind.Type || constant.TypeInternal!.SpecialType == SpecialType.System_Object)
+            if (
+                constant.Kind == TypedConstantKind.Type
+                || constant.TypeInternal!.SpecialType == SpecialType.System_Object
+            )
             {
                 Debug.Assert(constant.Value is object);
                 return "typeof(" + constant.Value.ToString() + ")";
@@ -40,7 +45,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             Debug.Assert(constant.ValueInternal is object);
-            return SymbolDisplay.FormatPrimitive(constant.ValueInternal, quoteStrings: true, useHexadecimalNumbers: false);
+            return SymbolDisplay.FormatPrimitive(
+                constant.ValueInternal,
+                quoteStrings: true,
+                useHexadecimalNumbers: false
+            );
         }
 
         // Decode the value of enum constant
@@ -49,22 +58,41 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(constant.Kind == TypedConstantKind.Enum);
 
             // Create a ConstantValue of enum underlying type
-            SpecialType splType = ((INamedTypeSymbol)constant.Type!).EnumUnderlyingType!.SpecialType;
+            SpecialType splType = ((INamedTypeSymbol)constant.Type!)
+                .EnumUnderlyingType!
+                .SpecialType;
             Debug.Assert(constant.ValueInternal is object);
             ConstantValue valueConstant = ConstantValue.Create(constant.ValueInternal, splType);
 
-            string typeName = constant.Type.ToDisplayString(SymbolDisplayFormat.QualifiedNameOnlyFormat);
+            string typeName = constant.Type.ToDisplayString(
+                SymbolDisplayFormat.QualifiedNameOnlyFormat
+            );
             if (valueConstant.IsUnsigned)
             {
-                return DisplayUnsignedEnumConstant(constant, splType, valueConstant.UInt64Value, typeName);
+                return DisplayUnsignedEnumConstant(
+                    constant,
+                    splType,
+                    valueConstant.UInt64Value,
+                    typeName
+                );
             }
             else
             {
-                return DisplaySignedEnumConstant(constant, splType, valueConstant.Int64Value, typeName);
+                return DisplaySignedEnumConstant(
+                    constant,
+                    splType,
+                    valueConstant.Int64Value,
+                    typeName
+                );
             }
         }
 
-        private static string DisplayUnsignedEnumConstant(TypedConstant constant, SpecialType specialType, ulong constantToDecode, string typeName)
+        private static string DisplayUnsignedEnumConstant(
+            TypedConstant constant,
+            SpecialType specialType,
+            ulong constantToDecode,
+            string typeName
+        )
         {
             Debug.Assert(constant.Kind == TypedConstantKind.Enum);
 
@@ -86,7 +114,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (field is object && field.HasConstantValue)
                 {
-                    ConstantValue memberConstant = ConstantValue.Create(field.ConstantValue, specialType);
+                    ConstantValue memberConstant = ConstantValue.Create(
+                        field.ConstantValue,
+                        specialType
+                    );
                     ulong memberValue = memberConstant.UInt64Value;
 
                     // Do we have an exact matching enum field
@@ -143,7 +174,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             return result;
         }
 
-        private static string DisplaySignedEnumConstant(TypedConstant constant, SpecialType specialType, long constantToDecode, string typeName)
+        private static string DisplaySignedEnumConstant(
+            TypedConstant constant,
+            SpecialType specialType,
+            long constantToDecode,
+            string typeName
+        )
         {
             Debug.Assert(constant.Kind == TypedConstantKind.Enum);
 
@@ -164,7 +200,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var field = member as IFieldSymbol;
                 if (field is object && field.HasConstantValue)
                 {
-                    ConstantValue memberConstant = ConstantValue.Create(field.ConstantValue, specialType);
+                    ConstantValue memberConstant = ConstantValue.Create(
+                        field.ConstantValue,
+                        specialType
+                    );
                     long memberValue = memberConstant.Int64Value;
 
                     // Do we have an exact matching enum field

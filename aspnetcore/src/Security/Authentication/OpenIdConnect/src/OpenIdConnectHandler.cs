@@ -456,8 +456,7 @@ public class OpenIdConnectHandler
             RedirectUri = BuildRedirectUri(Options.CallbackPath),
             Resource = Options.Resource,
             ResponseType = Options.ResponseType,
-            Prompt =
-                properties.GetParameter<string>(OpenIdConnectParameterNames.Prompt)
+            Prompt = properties.GetParameter<string>(OpenIdConnectParameterNames.Prompt)
                 ?? Options.Prompt,
             Scope = string.Join(
                 " ",
@@ -488,8 +487,7 @@ public class OpenIdConnectHandler
 
         // Add the 'max_age' parameter to the authentication request if MaxAge is not null.
         // See http://openid.net/specs/openid-connect-core-1_0.html#AuthRequest
-        var maxAge =
-            properties.GetParameter<TimeSpan?>(OpenIdConnectParameterNames.MaxAge)
+        var maxAge = properties.GetParameter<TimeSpan?>(OpenIdConnectParameterNames.MaxAge)
             ?? Options.MaxAge;
         if (maxAge.HasValue)
         {
@@ -1614,12 +1612,12 @@ public class OpenIdConnectHandler
         if (_configuration != null)
         {
             var issuer = new[] { _configuration.Issuer };
-            validationParameters.ValidIssuers =
-                validationParameters.ValidIssuers?.Concat(issuer) ?? issuer;
+            validationParameters.ValidIssuers = validationParameters.ValidIssuers?.Concat(issuer)
+                ?? issuer;
 
-            validationParameters.IssuerSigningKeys =
-                validationParameters.IssuerSigningKeys?.Concat(_configuration.SigningKeys)
-                ?? _configuration.SigningKeys;
+            validationParameters.IssuerSigningKeys = validationParameters.IssuerSigningKeys?.Concat(
+                _configuration.SigningKeys
+            ) ?? _configuration.SigningKeys;
         }
 
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -1689,12 +1687,12 @@ public class OpenIdConnectHandler
         else if (_configuration != null)
         {
             var issuer = new[] { _configuration.Issuer };
-            validationParameters.ValidIssuers =
-                validationParameters.ValidIssuers?.Concat(issuer) ?? issuer;
+            validationParameters.ValidIssuers = validationParameters.ValidIssuers?.Concat(issuer)
+                ?? issuer;
 
-            validationParameters.IssuerSigningKeys =
-                validationParameters.IssuerSigningKeys?.Concat(_configuration.SigningKeys)
-                ?? _configuration.SigningKeys;
+            validationParameters.IssuerSigningKeys = validationParameters.IssuerSigningKeys?.Concat(
+                _configuration.SigningKeys
+            ) ?? _configuration.SigningKeys;
         }
 
         var validationResult = await Options.TokenHandler.ValidateTokenAsync(

@@ -5,8 +5,8 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Security;
 
 public class Test
@@ -69,7 +69,10 @@ public class Test
                     {
                         Console.WriteLine("OOM");
                         Console.WriteLine("Heap size: {0}", GC.GetTotalMemory(false));
-                        Console.WriteLine("Trying to allocate array of size: {0}", Math.Pow(2, (i % power)));
+                        Console.WriteLine(
+                            "Trying to allocate array of size: {0}",
+                            Math.Pow(2, (i % power))
+                        );
                     }
                 }
                 else
@@ -82,4 +85,3 @@ public class Test
         return 100;
     }
 }
-

@@ -14,7 +14,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 /// </summary>
 public class SqlServerGeometryCollectionMethodTranslator : IMethodCallTranslator
 {
-    private static readonly MethodInfo Item = typeof(GeometryCollection).GetTypeInfo().GetRuntimeProperty("Item")!.GetMethod!;
+    private static readonly MethodInfo Item = typeof(GeometryCollection)
+        .GetTypeInfo()
+        .GetRuntimeProperty("Item")!
+        .GetMethod!;
     private readonly IRelationalTypeMappingSource _typeMappingSource;
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -26,7 +29,8 @@ public class SqlServerGeometryCollectionMethodTranslator : IMethodCallTranslator
     /// </summary>
     public SqlServerGeometryCollectionMethodTranslator(
         IRelationalTypeMappingSource typeMappingSource,
-        ISqlExpressionFactory sqlExpressionFactory)
+        ISqlExpressionFactory sqlExpressionFactory
+    )
     {
         _typeMappingSource = typeMappingSource;
         _sqlExpressionFactory = sqlExpressionFactory;
@@ -42,25 +46,24 @@ public class SqlServerGeometryCollectionMethodTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
-        if (Equals(method, Item)
-            && instance != null)
+        if (Equals(method, Item) && instance != null)
         {
             return _sqlExpressionFactory.Function(
                 instance,
                 "STGeometryN",
                 new[]
                 {
-                    _sqlExpressionFactory.Add(
-                        arguments[0],
-                        _sqlExpressionFactory.Constant(1))
+                    _sqlExpressionFactory.Add(arguments[0], _sqlExpressionFactory.Constant(1)),
                 },
                 nullable: true,
                 instancePropagatesNullability: true,
                 argumentsPropagateNullability: new[] { false },
                 method.ReturnType,
-                _typeMappingSource.FindMapping(typeof(Geometry), instance.TypeMapping!.StoreType));
+                _typeMappingSource.FindMapping(typeof(Geometry), instance.TypeMapping!.StoreType)
+            );
         }
 
         return null;

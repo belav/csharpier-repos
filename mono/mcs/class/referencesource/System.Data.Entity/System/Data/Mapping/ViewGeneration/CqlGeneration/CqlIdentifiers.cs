@@ -7,20 +7,18 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-
-using System.Data.Common.Utils;
-using System.Text;
 using System.Collections.Generic;
+using System.Data.Common.Utils;
 using System.Diagnostics;
 using System.Globalization;
+using System.Text;
+
 namespace System.Data.Mapping.ViewGeneration.Structures
 {
-
     // This class is responsible for ensuring unique aliases for _from0, etc
     // and block aliases T, T0, T1, etc
     internal class CqlIdentifiers : InternalBase
     {
-
         #region Constructor
         internal CqlIdentifiers()
         {
@@ -57,18 +55,25 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             return GetNonConflictingName("T", -1);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase"
+        )]
         internal void AddIdentifier(string identifier)
         {
             m_identifiers.Add(identifier.ToLower(CultureInfo.InvariantCulture));
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase"
+        )]
         private string GetNonConflictingName(string prefix, int number)
         {
             // Do a case sensitive search but return the string that uses the
             // original prefix
-            string result = number < 0 ? prefix : StringUtil.FormatInvariant("{0}{1}", prefix, number);
+            string result =
+                number < 0 ? prefix : StringUtil.FormatInvariant("{0}{1}", prefix, number);
             // Check if the prefix exists or not
             if (m_identifiers.Contains(result.ToLower(CultureInfo.InvariantCulture)) == false)
             {

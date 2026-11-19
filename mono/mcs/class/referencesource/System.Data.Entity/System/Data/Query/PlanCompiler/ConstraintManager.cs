@@ -9,22 +9,23 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Data.Common;
 using System.Data.Query.InternalTrees;
-using md=System.Data.Metadata.Edm;
+using System.Globalization;
+using md = System.Data.Metadata.Edm;
+
 //using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this class...
 
 // It is fine to use Debug.Assert in cases where you assert an obvious thing that is supposed
-// to prevent from simple mistakes during development (e.g. method argument validation 
-// in cases where it was you who created the variables or the variables had already been validated or 
-// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default 
-// "else" block is chosen why the new condition should be treated separately). This kind of asserts are 
-// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in 
-// the shipped product. 
-// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions 
+// to prevent from simple mistakes during development (e.g. method argument validation
+// in cases where it was you who created the variables or the variables had already been validated or
+// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default
+// "else" block is chosen why the new condition should be treated separately). This kind of asserts are
+// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in
+// the shipped product.
+// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions
 // about how the tree was built etc. - in these cases we probably want to throw an exception (this is
-// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct 
+// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct
 // or the tree was built/rewritten not the way we thought it was.
 // Use your judgment - if you rather remove an assert than ship it use Debug.Assert otherwise use
 // PlanCompiler.Assert.
@@ -44,12 +45,18 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// Return the left component of the pair
         /// </summary>
-        internal md.EntitySetBase Left { get { return m_left; } }
+        internal md.EntitySetBase Left
+        {
+            get { return m_left; }
+        }
 
         /// <summary>
         /// Return the right component of the pair
         /// </summary>
-        internal md.EntitySetBase Right { get { return m_right; } }
+        internal md.EntitySetBase Right
+        {
+            get { return m_right; }
+        }
 
         /// <summary>
         /// Equals
@@ -59,7 +66,9 @@ namespace System.Data.Query.PlanCompiler
         public override bool Equals(object obj)
         {
             ExtentPair other = obj as ExtentPair;
-            return (other != null) && other.Left.Equals(this.Left) && other.Right.Equals(this.Right);
+            return (other != null)
+                && other.Left.Equals(this.Left)
+                && other.Right.Equals(this.Right);
         }
 
         /// <summary>
@@ -96,21 +105,34 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// Parent key properties
         /// </summary>
-        internal List<string> ParentKeys { get { return m_parentKeys; } }
+        internal List<string> ParentKeys
+        {
+            get { return m_parentKeys; }
+        }
+
         /// <summary>
         /// Child key properties
         /// </summary>
-        internal List<string> ChildKeys { get { return m_childKeys; } }
+        internal List<string> ChildKeys
+        {
+            get { return m_childKeys; }
+        }
 
         /// <summary>
         /// Get the parent-child pair
         /// </summary>
-        internal ExtentPair Pair { get { return m_extentPair; } }
+        internal ExtentPair Pair
+        {
+            get { return m_extentPair; }
+        }
 
         /// <summary>
         /// Return the child rowcount
         /// </summary>
-        internal md.RelationshipMultiplicity ChildMultiplicity { get { return m_constraint.ToRole.RelationshipMultiplicity; } }
+        internal md.RelationshipMultiplicity ChildMultiplicity
+        {
+            get { return m_constraint.ToRole.RelationshipMultiplicity; }
+        }
 
         /// <summary>
         /// Get the corresponding parent (key) property, for a specific child (foreign key) property
@@ -126,7 +148,11 @@ namespace System.Data.Query.PlanCompiler
         #endregion
 
         #region constructors
-        internal ForeignKeyConstraint(md.RelationshipType relType, md.RelationshipSet relationshipSet, md.ReferentialConstraint constraint)
+        internal ForeignKeyConstraint(
+            md.RelationshipType relType,
+            md.RelationshipSet relationshipSet,
+            md.ReferentialConstraint constraint
+        )
         {
             md.AssociationSet assocSet = relationshipSet as md.AssociationSet;
             md.AssociationEndMember fromEnd = constraint.FromRole as md.AssociationEndMember;
@@ -139,8 +165,14 @@ namespace System.Data.Query.PlanCompiler
             }
 
             m_constraint = constraint;
-            md.EntitySet parent = System.Data.Common.Utils.MetadataHelper.GetEntitySetAtEnd(assocSet, fromEnd);// relationshipSet.GetRelationshipEndExtent(constraint.FromRole);
-            md.EntitySet child = System.Data.Common.Utils.MetadataHelper.GetEntitySetAtEnd(assocSet, toEnd);// relationshipSet.GetRelationshipEndExtent(constraint.ToRole);
+            md.EntitySet parent = System.Data.Common.Utils.MetadataHelper.GetEntitySetAtEnd(
+                assocSet,
+                fromEnd
+            ); // relationshipSet.GetRelationshipEndExtent(constraint.FromRole);
+            md.EntitySet child = System.Data.Common.Utils.MetadataHelper.GetEntitySetAtEnd(
+                assocSet,
+                toEnd
+            ); // relationshipSet.GetRelationshipEndExtent(constraint.ToRole);
             m_extentPair = new ExtentPair(parent, child);
             m_childKeys = new List<string>();
             foreach (md.EdmProperty prop in constraint.ToProperties)
@@ -154,7 +186,13 @@ namespace System.Data.Query.PlanCompiler
                 m_parentKeys.Add(prop.Name);
             }
 
-            PlanCompiler.Assert((md.RelationshipMultiplicity.ZeroOrOne == fromEnd.RelationshipMultiplicity || md.RelationshipMultiplicity.One == fromEnd.RelationshipMultiplicity), "from-end of relationship constraint cannot have multiplicity greater than 1");
+            PlanCompiler.Assert(
+                (
+                    md.RelationshipMultiplicity.ZeroOrOne == fromEnd.RelationshipMultiplicity
+                    || md.RelationshipMultiplicity.One == fromEnd.RelationshipMultiplicity
+                ),
+                "from-end of relationship constraint cannot have multiplicity greater than 1"
+            );
         }
         #endregion
 
@@ -210,8 +248,11 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="table2">child table ?</param>
         /// <param name="constraints">list of constraints ?</param>
         /// <returns>true if there is at least one constraint</returns>
-        internal bool IsParentChildRelationship(md.EntitySetBase table1, md.EntitySetBase table2,
-            out List<ForeignKeyConstraint> constraints)
+        internal bool IsParentChildRelationship(
+            md.EntitySetBase table1,
+            md.EntitySetBase table2,
+            out List<ForeignKeyConstraint> constraints
+        )
         {
             LoadRelationships(table1.EntityContainer);
             LoadRelationships(table2.EntityContainer);
@@ -242,7 +283,8 @@ namespace System.Data.Query.PlanCompiler
                 }
 
                 // Relationship sets can only contain relationships
-                md.RelationshipType relationshipType = (md.RelationshipType)relationshipSet.ElementType;
+                md.RelationshipType relationshipType = (md.RelationshipType)
+                    relationshipSet.ElementType;
                 md.AssociationType assocType = relationshipType as md.AssociationType;
 
                 //
@@ -256,8 +298,17 @@ namespace System.Data.Query.PlanCompiler
                 foreach (md.ReferentialConstraint constraint in assocType.ReferentialConstraints)
                 {
                     List<ForeignKeyConstraint> fkConstraintList;
-                    ForeignKeyConstraint fkConstraint = new ForeignKeyConstraint(relationshipType, relationshipSet, constraint);
-                    if (!m_parentChildRelationships.TryGetValue(fkConstraint.Pair, out fkConstraintList))
+                    ForeignKeyConstraint fkConstraint = new ForeignKeyConstraint(
+                        relationshipType,
+                        relationshipSet,
+                        constraint
+                    );
+                    if (
+                        !m_parentChildRelationships.TryGetValue(
+                            fkConstraint.Pair,
+                            out fkConstraintList
+                        )
+                    )
                     {
                         fkConstraintList = new List<ForeignKeyConstraint>();
                         m_parentChildRelationships[fkConstraint.Pair] = fkConstraintList;
@@ -292,7 +343,7 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// Is this relationship a binary relationship (ie) does it have exactly 2 end points?
-        /// 
+        ///
         /// This should ideally be a method supported by RelationType itself
         /// </summary>
         /// <param name="relationshipType"></param>
@@ -300,7 +351,7 @@ namespace System.Data.Query.PlanCompiler
         private static bool IsBinary(md.RelationshipType relationshipType)
         {
             int endCount = 0;
-            foreach(md.EdmMember member in relationshipType.Members)
+            foreach (md.EdmMember member in relationshipType.Members)
             {
                 if (member is md.RelationshipEndMember)
                 {

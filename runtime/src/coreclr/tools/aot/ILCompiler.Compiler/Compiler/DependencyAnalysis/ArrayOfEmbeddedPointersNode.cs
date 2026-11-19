@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-
 using Internal.Text;
 
 namespace ILCompiler.DependencyAnalysis
@@ -12,7 +11,8 @@ namespace ILCompiler.DependencyAnalysis
     /// Represents an array of pointers to symbols. <typeparamref name="TTarget"/> is the type
     /// of node each pointer within the vector points to.
     /// </summary>
-    public sealed class ArrayOfEmbeddedPointersNode<TTarget> : ArrayOfEmbeddedDataNode<EmbeddedPointerIndirectionNode<TTarget>>
+    public sealed class ArrayOfEmbeddedPointersNode<TTarget>
+        : ArrayOfEmbeddedDataNode<EmbeddedPointerIndirectionNode<TTarget>>
         where TTarget : ISortableSymbolNode
     {
         private int _nextId;
@@ -22,12 +22,15 @@ namespace ILCompiler.DependencyAnalysis
         /// Provides a callback mechanism for notification when an EmbeddedPointerIndirectionNode is marked and added to the
         /// parent ArrayOfEmbeddedPointersNode's internal list
         /// </summary>
-        public delegate void OnMarkedDelegate(EmbeddedPointerIndirectionNode<TTarget> embeddedObject);
+        public delegate void OnMarkedDelegate(
+            EmbeddedPointerIndirectionNode<TTarget> embeddedObject
+        );
 
         public ArrayOfEmbeddedPointersNode(string mangledName, IComparer<TTarget> nodeSorter)
             : base(
-                  mangledName,
-                  nodeSorter != null ? new PointerIndirectionNodeComparer(nodeSorter) : null)
+                mangledName,
+                nodeSorter != null ? new PointerIndirectionNodeComparer(nodeSorter) : null
+            )
         {
             _startSymbolMangledName = mangledName;
         }
@@ -51,7 +54,8 @@ namespace ILCompiler.DependencyAnalysis
 
         public override int ClassCode => (int)ObjectNodeOrder.ArrayOfEmbeddedPointersNode;
 
-        private sealed class PointerIndirectionNodeComparer : IComparer<EmbeddedPointerIndirectionNode<TTarget>>
+        private sealed class PointerIndirectionNodeComparer
+            : IComparer<EmbeddedPointerIndirectionNode<TTarget>>
         {
             private IComparer<TTarget> _innerComparer;
 
@@ -60,7 +64,10 @@ namespace ILCompiler.DependencyAnalysis
                 _innerComparer = innerComparer;
             }
 
-            public int Compare(EmbeddedPointerIndirectionNode<TTarget> x, EmbeddedPointerIndirectionNode<TTarget> y)
+            public int Compare(
+                EmbeddedPointerIndirectionNode<TTarget> x,
+                EmbeddedPointerIndirectionNode<TTarget> y
+            )
             {
                 return _innerComparer.Compare(x.Target, y.Target);
             }
@@ -70,13 +77,17 @@ namespace ILCompiler.DependencyAnalysis
         {
             protected ArrayOfEmbeddedPointersNode<TTarget> _parentNode;
 
-            public SimpleEmbeddedPointerIndirectionNode(ArrayOfEmbeddedPointersNode<TTarget> futureParent, TTarget target)
+            public SimpleEmbeddedPointerIndirectionNode(
+                ArrayOfEmbeddedPointersNode<TTarget> futureParent,
+                TTarget target
+            )
                 : base(target)
             {
                 _parentNode = futureParent;
             }
 
-            protected override string GetName(NodeFactory factory) => $"Embedded pointer to {Target.GetMangledName(factory.NameMangler)}";
+            protected override string GetName(NodeFactory factory) =>
+                $"Embedded pointer to {Target.GetMangledName(factory.NameMangler)}";
 
             protected override void OnMarked(NodeFactory factory)
             {
@@ -85,28 +96,35 @@ namespace ILCompiler.DependencyAnalysis
                 _parentNode.AddEmbeddedObject(this);
             }
 
-            public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory)
+            public override IEnumerable<DependencyListEntry> GetStaticDependencies(
+                NodeFactory factory
+            )
             {
                 return new[]
                 {
                     new DependencyListEntry(Target, "reloc"),
-                    new DependencyListEntry(_parentNode, "Pointer region")
+                    new DependencyListEntry(_parentNode, "Pointer region"),
                 };
             }
 
             public override int ClassCode => -66002498;
         }
 
-        private sealed class EmbeddedPointerIndirectionWithSymbolNode : SimpleEmbeddedPointerIndirectionNode, ISymbolDefinitionNode
+        private sealed class EmbeddedPointerIndirectionWithSymbolNode
+            : SimpleEmbeddedPointerIndirectionNode,
+                ISymbolDefinitionNode
         {
             private int _id;
 
-            public EmbeddedPointerIndirectionWithSymbolNode(ArrayOfEmbeddedPointersNode<TTarget> futureParent, TTarget target, int id)
+            public EmbeddedPointerIndirectionWithSymbolNode(
+                ArrayOfEmbeddedPointersNode<TTarget> futureParent,
+                TTarget target,
+                int id
+            )
                 : base(futureParent, target)
             {
                 _id = id;
             }
-
 
             int ISymbolNode.Offset => 0;
 
@@ -114,7 +132,10 @@ namespace ILCompiler.DependencyAnalysis
 
             public override void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
             {
-                sb.Append(nameMangler.CompilationUnitPrefix).Append(_parentNode._startSymbolMangledName).Append("_").Append(_id.ToStringInvariant());
+                sb.Append(nameMangler.CompilationUnitPrefix)
+                    .Append(_parentNode._startSymbolMangledName)
+                    .Append("_")
+                    .Append(_id.ToStringInvariant());
             }
         }
     }

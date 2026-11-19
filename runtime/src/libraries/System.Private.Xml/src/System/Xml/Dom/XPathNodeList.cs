@@ -104,7 +104,7 @@ namespace System.Xml
         public bool MoveNext()
         {
             _index++;
-            int count = _list.ReadUntil(_index + 1);   // read past for delete-node case
+            int count = _list.ReadUntil(_index + 1); // read past for delete-node case
             if (count - 1 < _index)
             {
                 return false;

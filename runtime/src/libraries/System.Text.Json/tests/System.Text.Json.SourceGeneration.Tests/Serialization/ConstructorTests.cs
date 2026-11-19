@@ -11,25 +11,19 @@ namespace System.Text.Json.SourceGeneration.Tests
     public sealed class ConstructorTests_Metadata_String : ConstructorTests_Metadata
     {
         public ConstructorTests_Metadata_String()
-            : base(new StringSerializerWrapper(ConstructorTestsContext_Metadata.Default))
-        {
-        }
+            : base(new StringSerializerWrapper(ConstructorTestsContext_Metadata.Default)) { }
     }
 
     public sealed class ConstructorTests_Metadata_AsyncStream : ConstructorTests_Metadata
     {
         public ConstructorTests_Metadata_AsyncStream()
-            : base(new AsyncStreamSerializerWrapper(ConstructorTestsContext_Metadata.Default))
-        {
-        }
+            : base(new AsyncStreamSerializerWrapper(ConstructorTestsContext_Metadata.Default)) { }
     }
 
     public abstract partial class ConstructorTests_Metadata : ConstructorTests
     {
         protected ConstructorTests_Metadata(JsonSerializerWrapper stringWrapper)
-            : base(stringWrapper)
-        {
-        }
+            : base(stringWrapper) { }
 
         [JsonSourceGenerationOptions(GenerationMode = JsonSourceGenerationMode.Metadata)]
         [JsonSerializable(typeof(PrivateParameterlessCtor))]
@@ -51,7 +45,9 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(PrivateParameterlessConstructor_PublicParameterizedCtor))]
         [JsonSerializable(typeof(PublicParameterizedCtor_WithAttribute))]
         [JsonSerializable(typeof(Struct_PublicParameterizedConstructor_WithAttribute))]
-        [JsonSerializable(typeof(PrivateParameterlessConstructor_PublicParameterizedCtor_WithAttribute))]
+        [JsonSerializable(
+            typeof(PrivateParameterlessConstructor_PublicParameterizedCtor_WithAttribute)
+        )]
         [JsonSerializable(typeof(MultiplePublicParameterizedCtor))]
         [JsonSerializable(typeof(MultiplePublicParameterizedCtor_Struct))]
         [JsonSerializable(typeof(MultiplePublicParameterizedCtor_WithAttribute))]
@@ -98,7 +94,9 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(Tuple<int, int, int, int, int, int, int>))]
         [JsonSerializable(typeof(Tuple<int, int, int, int, int, int, int, int>))]
         [JsonSerializable(typeof(Tuple<int, string, int, string, string, int, Point_3D_Struct>))]
-        [JsonSerializable(typeof(Tuple<int, string, int, string, string, int, Point_3D_Struct, int>))]
+        [JsonSerializable(
+            typeof(Tuple<int, string, int, string, string, int, Point_3D_Struct, int>)
+        )]
         [JsonSerializable(typeof(Point_3D[]))]
         [JsonSerializable(typeof(Struct_With_Ctor_With_64_Params))]
         [JsonSerializable(typeof(Class_With_Ctor_With_64_Params))]
@@ -106,10 +104,16 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(Struct_With_Ctor_With_65_Params))]
         [JsonSerializable(typeof(Parameterized_Person))]
         [JsonSerializable(typeof(BitVector32))]
-        [JsonSerializable(typeof(SimpleClassWithParameterizedCtor_GenericDictionary_JsonElementExt))]
+        [JsonSerializable(
+            typeof(SimpleClassWithParameterizedCtor_GenericDictionary_JsonElementExt)
+        )]
         [JsonSerializable(typeof(SimpleClassWithParameterizedCtor_GenericDictionary_ObjectExt))]
-        [JsonSerializable(typeof(SimpleClassWithParameterizedCtor_Derived_GenericIDictionary_JsonElementExt))]
-        [JsonSerializable(typeof(SimpleClassWithParameterizedCtor_Derived_GenericIDictionary_ObjectExt))]
+        [JsonSerializable(
+            typeof(SimpleClassWithParameterizedCtor_Derived_GenericIDictionary_JsonElementExt)
+        )]
+        [JsonSerializable(
+            typeof(SimpleClassWithParameterizedCtor_Derived_GenericIDictionary_ObjectExt)
+        )]
         [JsonSerializable(typeof(Point_MembersHave_JsonInclude))]
         [JsonSerializable(typeof(ClassWithFiveArgs_MembersHave_JsonNumberHandlingAttributes))]
         [JsonSerializable(typeof(Class_With_Parameters_Default_Values))]
@@ -130,7 +134,17 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(Parameterized_Person_ObjExtData))]
         [JsonSerializable(typeof(ClassWithStrings))]
         [JsonSerializable(typeof(Point_3D_Struct))]
-        [JsonSerializable(typeof(Tuple<SimpleTestClass, SimpleTestClass, SimpleTestClass, SimpleTestClass, SimpleTestClass, SimpleTestClass, SimpleTestClass>))]
+        [JsonSerializable(
+            typeof(Tuple<
+                SimpleTestClass,
+                SimpleTestClass,
+                SimpleTestClass,
+                SimpleTestClass,
+                SimpleTestClass,
+                SimpleTestClass,
+                SimpleTestClass
+            >)
+        )]
         [JsonSerializable(typeof(Employee))]
         [JsonSerializable(typeof(AgePoco))]
         [JsonSerializable(typeof(MyRecordWithUnboundCtorProperty))]
@@ -154,32 +168,25 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(TypeWithEnumParameters))]
         [JsonSerializable(typeof(ClassWithIgnoredPropertyDefaultParam))]
         [JsonSerializable(typeof(ClassWithCustomConverterOnCtorParameter))]
-        internal sealed partial class ConstructorTestsContext_Metadata : JsonSerializerContext
-        {
-        }
+        internal sealed partial class ConstructorTestsContext_Metadata : JsonSerializerContext { }
     }
 
     public sealed class ConstructorTests_Default_String : ConstructorTests_Default
     {
         public ConstructorTests_Default_String()
-            : base(new StringSerializerWrapper(ConstructorTestsContext_Default.Default))
-        {
-        }
+            : base(new StringSerializerWrapper(ConstructorTestsContext_Default.Default)) { }
     }
 
     public sealed class ConstructorTests_Default_AsyncStream : ConstructorTests_Default
     {
         public ConstructorTests_Default_AsyncStream()
-            : base(new AsyncStreamSerializerWrapper(ConstructorTestsContext_Default.Default))
-        {
-        }
+            : base(new AsyncStreamSerializerWrapper(ConstructorTestsContext_Default.Default)) { }
     }
 
     public abstract partial class ConstructorTests_Default : ConstructorTests_Metadata
     {
-        public ConstructorTests_Default(JsonSerializerWrapper jsonSerializer) : base(jsonSerializer)
-        {
-        }
+        public ConstructorTests_Default(JsonSerializerWrapper jsonSerializer)
+            : base(jsonSerializer) { }
 
         [JsonSerializable(typeof(PrivateParameterlessCtor))]
         [JsonSerializable(typeof(InternalParameterlessCtor))]
@@ -200,7 +207,9 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(PrivateParameterlessConstructor_PublicParameterizedCtor))]
         [JsonSerializable(typeof(PublicParameterizedCtor_WithAttribute))]
         [JsonSerializable(typeof(Struct_PublicParameterizedConstructor_WithAttribute))]
-        [JsonSerializable(typeof(PrivateParameterlessConstructor_PublicParameterizedCtor_WithAttribute))]
+        [JsonSerializable(
+            typeof(PrivateParameterlessConstructor_PublicParameterizedCtor_WithAttribute)
+        )]
         [JsonSerializable(typeof(MultiplePublicParameterizedCtor))]
         [JsonSerializable(typeof(MultiplePublicParameterizedCtor_Struct))]
         [JsonSerializable(typeof(MultiplePublicParameterizedCtor_WithAttribute))]
@@ -247,7 +256,9 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(Tuple<int, int, int, int, int, int, int>))]
         [JsonSerializable(typeof(Tuple<int, int, int, int, int, int, int, int>))]
         [JsonSerializable(typeof(Tuple<int, string, int, string, string, int, Point_3D_Struct>))]
-        [JsonSerializable(typeof(Tuple<int, string, int, string, string, int, Point_3D_Struct, int>))]
+        [JsonSerializable(
+            typeof(Tuple<int, string, int, string, string, int, Point_3D_Struct, int>)
+        )]
         [JsonSerializable(typeof(Point_3D[]))]
         [JsonSerializable(typeof(Struct_With_Ctor_With_64_Params))]
         [JsonSerializable(typeof(Class_With_Ctor_With_64_Params))]
@@ -255,10 +266,16 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(Struct_With_Ctor_With_65_Params))]
         [JsonSerializable(typeof(Parameterized_Person))]
         [JsonSerializable(typeof(BitVector32))]
-        [JsonSerializable(typeof(SimpleClassWithParameterizedCtor_GenericDictionary_JsonElementExt))]
+        [JsonSerializable(
+            typeof(SimpleClassWithParameterizedCtor_GenericDictionary_JsonElementExt)
+        )]
         [JsonSerializable(typeof(SimpleClassWithParameterizedCtor_GenericDictionary_ObjectExt))]
-        [JsonSerializable(typeof(SimpleClassWithParameterizedCtor_Derived_GenericIDictionary_JsonElementExt))]
-        [JsonSerializable(typeof(SimpleClassWithParameterizedCtor_Derived_GenericIDictionary_ObjectExt))]
+        [JsonSerializable(
+            typeof(SimpleClassWithParameterizedCtor_Derived_GenericIDictionary_JsonElementExt)
+        )]
+        [JsonSerializable(
+            typeof(SimpleClassWithParameterizedCtor_Derived_GenericIDictionary_ObjectExt)
+        )]
         [JsonSerializable(typeof(Point_MembersHave_JsonInclude))]
         [JsonSerializable(typeof(ClassWithFiveArgs_MembersHave_JsonNumberHandlingAttributes))]
         [JsonSerializable(typeof(Class_With_Parameters_Default_Values))]
@@ -279,7 +296,17 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(Parameterized_Person_ObjExtData))]
         [JsonSerializable(typeof(ClassWithStrings))]
         [JsonSerializable(typeof(Point_3D_Struct))]
-        [JsonSerializable(typeof(Tuple<SimpleTestClass, SimpleTestClass, SimpleTestClass, SimpleTestClass, SimpleTestClass, SimpleTestClass, SimpleTestClass>))]
+        [JsonSerializable(
+            typeof(Tuple<
+                SimpleTestClass,
+                SimpleTestClass,
+                SimpleTestClass,
+                SimpleTestClass,
+                SimpleTestClass,
+                SimpleTestClass,
+                SimpleTestClass
+            >)
+        )]
         [JsonSerializable(typeof(Employee))]
         [JsonSerializable(typeof(AgePoco))]
         [JsonSerializable(typeof(MyRecordWithUnboundCtorProperty))]
@@ -303,8 +330,6 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(TypeWithEnumParameters))]
         [JsonSerializable(typeof(ClassWithIgnoredPropertyDefaultParam))]
         [JsonSerializable(typeof(ClassWithCustomConverterOnCtorParameter))]
-        internal sealed partial class ConstructorTestsContext_Default : JsonSerializerContext
-        {
-        }
+        internal sealed partial class ConstructorTestsContext_Default : JsonSerializerContext { }
     }
 }

@@ -41,33 +41,49 @@ public class InterlockedExchange6
 
     public bool PosTest1()
     {
-        bool   retVal = true;
+        bool retVal = true;
         Int32 location;
         Int32 value;
         Int32 prevLocation;
         Int32 oldLocation;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest1: Int32 Interlocked.Exchange(Int32&,Int32)");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest1: Int32 Interlocked.Exchange(Int32&,Int32)"
+        );
 
         try
         {
-            for (int i=0; i<c_NUM_LOOPS; i++)
+            for (int i = 0; i < c_NUM_LOOPS; i++)
             {
-                value       = TestLibrary.Generator.GetInt32(-55);
-                location    = TestLibrary.Generator.GetInt32(-55);
-                prevLocation   = location;
-     
+                value = TestLibrary.Generator.GetInt32(-55);
+                location = TestLibrary.Generator.GetInt32(-55);
+                prevLocation = location;
+
                 oldLocation = Interlocked.Exchange(ref location, value);
 
                 if (!location.Equals(value))
                 {
-                    TestLibrary.TestFramework.LogError("001", "Interlocked.Exchange() did not do the exchange correctly: Expected(" + value + ") Actual(" + location + ")");
+                    TestLibrary.TestFramework.LogError(
+                        "001",
+                        "Interlocked.Exchange() did not do the exchange correctly: Expected("
+                            + value
+                            + ") Actual("
+                            + location
+                            + ")"
+                    );
                     retVal = false;
                 }
 
                 if (!oldLocation.Equals(prevLocation))
                 {
-                    TestLibrary.TestFramework.LogError("002", "Interlocked.Exchange() did not return the expected value: Expected(" + prevLocation + ") Actual(" + oldLocation + ")");
+                    TestLibrary.TestFramework.LogError(
+                        "002",
+                        "Interlocked.Exchange() did not return the expected value: Expected("
+                            + prevLocation
+                            + ") Actual("
+                            + oldLocation
+                            + ")"
+                    );
                     retVal = false;
                 }
             }
@@ -80,5 +96,4 @@ public class InterlockedExchange6
 
         return retVal;
     }
-
 }

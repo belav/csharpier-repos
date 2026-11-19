@@ -28,18 +28,32 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 Diagnostic diagnostic,
                 AbstractSuppressionCodeFixProvider fixer,
                 CodeActionOptionsProvider options,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
-                var compilation = await project.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
+                var compilation = await project
+                    .GetCompilationAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var attribute = diagnostic.GetSuppressionInfo(compilation).Attribute;
                 if (attribute != null)
                 {
                     return AttributeRemoveAction.Create(attribute, project, diagnostic, fixer);
                 }
-                else if (documentOpt != null && !SuppressionHelpers.IsSynthesizedExternalSourceDiagnostic(diagnostic))
+                else if (
+                    documentOpt != null
+                    && !SuppressionHelpers.IsSynthesizedExternalSourceDiagnostic(diagnostic)
+                )
                 {
-                    var formattingOptions = await documentOpt.GetSyntaxFormattingOptionsAsync(options, cancellationToken).ConfigureAwait(false);
-                    return PragmaRemoveAction.Create(suppressionTargetInfo, documentOpt, formattingOptions, diagnostic, fixer);
+                    var formattingOptions = await documentOpt
+                        .GetSyntaxFormattingOptionsAsync(options, cancellationToken)
+                        .ConfigureAwait(false);
+                    return PragmaRemoveAction.Create(
+                        suppressionTargetInfo,
+                        documentOpt,
+                        formattingOptions,
+                        diagnostic,
+                        fixer
+                    );
                 }
                 else
                 {
@@ -50,8 +64,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             protected RemoveSuppressionCodeAction(
                 Diagnostic diagnostic,
                 AbstractSuppressionCodeFixProvider fixer,
-                bool forFixMultipleContext = false)
-                : base(fixer, title: string.Format(FeaturesResources.Remove_Suppression_0, diagnostic.Id))
+                bool forFixMultipleContext = false
+            )
+                : base(
+                    fixer,
+                    title: string.Format(FeaturesResources.Remove_Suppression_0, diagnostic.Id)
+                )
             {
                 _diagnostic = diagnostic;
                 _forFixMultipleContext = forFixMultipleContext;
@@ -60,9 +78,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             public abstract RemoveSuppressionCodeAction CloneForFixMultipleContext();
             public abstract SyntaxTree SyntaxTreeToModify { get; }
 
-            public override string EquivalenceKey => FeaturesResources.Remove_Suppression + DiagnosticIdForEquivalenceKey;
-            protected override string DiagnosticIdForEquivalenceKey
-                => _forFixMultipleContext ? string.Empty : _diagnostic.Id;
+            public override string EquivalenceKey =>
+                FeaturesResources.Remove_Suppression + DiagnosticIdForEquivalenceKey;
+            protected override string DiagnosticIdForEquivalenceKey =>
+                _forFixMultipleContext ? string.Empty : _diagnostic.Id;
         }
     }
 }

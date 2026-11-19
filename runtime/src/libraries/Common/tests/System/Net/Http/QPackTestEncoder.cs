@@ -13,21 +13,32 @@ namespace System.Net.Test.Common
         public const int MaxVarIntLength = 6;
         public const int MaxPrefixLength = MaxVarIntLength * 2;
 
-        private const QPackFlags FlagsIndexMask = QPackFlags.StaticIndex | QPackFlags.DynamicIndex | QPackFlags.DynamicIndexPostBase;
+        private const QPackFlags FlagsIndexMask =
+            QPackFlags.StaticIndex | QPackFlags.DynamicIndex | QPackFlags.DynamicIndexPostBase;
 
         public static int EncodePrefix(Span<byte> buffer, int requiredInsertCount, int deltaBase)
         {
             int bytesWritten = 0;
 
             bytesWritten += EncodeInteger(buffer.Slice(bytesWritten), requiredInsertCount, 0, 0);
-            bytesWritten += EncodeInteger(buffer.Slice(bytesWritten), Math.Abs(deltaBase), deltaBase < 0 ? (byte)0x80 : (byte)0, 0x80);
+            bytesWritten += EncodeInteger(
+                buffer.Slice(bytesWritten),
+                Math.Abs(deltaBase),
+                deltaBase < 0 ? (byte)0x80 : (byte)0,
+                0x80
+            );
 
             return bytesWritten;
         }
 
-        public static int EncodeHeader(Span<byte> buffer, int nameValueIdx, QPackFlags flags = QPackFlags.StaticIndex)
+        public static int EncodeHeader(
+            Span<byte> buffer,
+            int nameValueIdx,
+            QPackFlags flags = QPackFlags.StaticIndex
+        )
         {
-            byte prefix, prefixMask;
+            byte prefix,
+                prefixMask;
 
             switch (flags & FlagsIndexMask)
             {
@@ -51,26 +62,36 @@ namespace System.Net.Test.Common
             return EncodeInteger(buffer, nameValueIdx, prefix, prefixMask);
         }
 
-        public static int EncodeHeader(Span<byte> buffer, int nameIdx, string value, Encoding valueEncoding, QPackFlags flags = QPackFlags.StaticIndex)
+        public static int EncodeHeader(
+            Span<byte> buffer,
+            int nameIdx,
+            string value,
+            Encoding valueEncoding,
+            QPackFlags flags = QPackFlags.StaticIndex
+        )
         {
-            byte prefix, prefixMask;
+            byte prefix,
+                prefixMask;
 
             switch (flags & FlagsIndexMask)
             {
                 case QPackFlags.StaticIndex:
                     prefix = 0b0101_0000;
                     prefixMask = 0b1111_0000;
-                    if (flags.HasFlag(QPackFlags.NeverIndexed)) prefix |= 0b0010_0000;
+                    if (flags.HasFlag(QPackFlags.NeverIndexed))
+                        prefix |= 0b0010_0000;
                     break;
                 case QPackFlags.DynamicIndex:
                     prefix = 0b0100_0000;
                     prefixMask = 0b1111_0000;
-                    if (flags.HasFlag(QPackFlags.NeverIndexed)) prefix |= 0b0010_0000;
+                    if (flags.HasFlag(QPackFlags.NeverIndexed))
+                        prefix |= 0b0010_0000;
                     break;
                 case QPackFlags.DynamicIndexPostBase:
                     prefix = 0b0000_0000;
                     prefixMask = 0b1111_1000;
-                    if (flags.HasFlag(QPackFlags.NeverIndexed)) prefix |= 0b0000_1000;
+                    if (flags.HasFlag(QPackFlags.NeverIndexed))
+                        prefix |= 0b0000_1000;
                     break;
                 default:
                     Debug.Fail($"Invalid {nameof(QPackFlags)}.");
@@ -78,12 +99,23 @@ namespace System.Net.Test.Common
             }
 
             int nameLen = EncodeInteger(buffer, nameIdx, prefix, prefixMask);
-            int valueLen = EncodeString(buffer.Slice(nameLen), value, valueEncoding, flags.HasFlag(QPackFlags.HuffmanEncodeValue));
+            int valueLen = EncodeString(
+                buffer.Slice(nameLen),
+                value,
+                valueEncoding,
+                flags.HasFlag(QPackFlags.HuffmanEncodeValue)
+            );
 
             return nameLen + valueLen;
         }
 
-        public static int EncodeHeader(Span<byte> buffer, string name, string value, Encoding valueEncoding, QPackFlags flags = QPackFlags.None)
+        public static int EncodeHeader(
+            Span<byte> buffer,
+            string name,
+            string value,
+            Encoding valueEncoding,
+            QPackFlags flags = QPackFlags.None
+        )
         {
             byte[] data = Encoding.ASCII.GetBytes(name);
             byte prefix;
@@ -118,12 +150,22 @@ namespace System.Net.Test.Common
             bytesGenerated += data.Length;
 
             // write value string.
-            bytesGenerated += EncodeString(buffer.Slice(bytesGenerated), value, valueEncoding, flags.HasFlag(QPackFlags.HuffmanEncodeValue));
+            bytesGenerated += EncodeString(
+                buffer.Slice(bytesGenerated),
+                value,
+                valueEncoding,
+                flags.HasFlag(QPackFlags.HuffmanEncodeValue)
+            );
 
             return bytesGenerated;
         }
 
-        public static int EncodeString(Span<byte> buffer, string value, Encoding valueEncoding, bool huffmanCoded = false)
+        public static int EncodeString(
+            Span<byte> buffer,
+            string value,
+            Encoding valueEncoding,
+            bool huffmanCoded = false
+        )
         {
             return HPackEncoder.EncodeString(value, valueEncoding, buffer, huffmanCoded);
         }
@@ -162,7 +204,12 @@ namespace System.Net.Test.Common
             else
             {
                 // Literal Header Field With Name Reference -- Index of any status present in the table can be used for reference
-                return EncodeHeader(buffer, s_statusIndex[100], statusCode.ToString(CultureInfo.InvariantCulture), valueEncoding: null);
+                return EncodeHeader(
+                    buffer,
+                    s_statusIndex[100],
+                    statusCode.ToString(CultureInfo.InvariantCulture),
+                    valueEncoding: null
+                );
             }
         }
     }
@@ -205,6 +252,6 @@ namespace System.Net.Test.Common
         /// <summary>
         /// Intermediaries (such as a proxy) must not index the value when forwarding the header.
         /// </summary>
-        NeverIndexed = 32
+        NeverIndexed = 32,
     }
 }

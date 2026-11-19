@@ -11,17 +11,24 @@ namespace System.Text.Json.Serialization
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryDataJsonConverter"/>.
         /// </summary>
-        public BinaryDataJsonConverter()
-        { }
+        public BinaryDataJsonConverter() { }
 
         /// <inheritdoc/>
-        public override BinaryData? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override BinaryData? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             return BinaryData.FromBytes(reader.GetBytesFromBase64());
         }
 
         /// <inheritdoc/>
-        public override void Write(Utf8JsonWriter writer, BinaryData value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            BinaryData value,
+            JsonSerializerOptions options
+        )
         {
             writer.WriteBase64StringValue(value.ToMemory().Span);
         }

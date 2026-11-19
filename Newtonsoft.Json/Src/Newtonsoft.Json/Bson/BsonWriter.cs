@@ -26,14 +26,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Text;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Utilities;
 #if HAVE_BIG_INTEGER
 using System.Numerics;
 #endif
-using System.Text;
-using Newtonsoft.Json.Utilities;
-using Newtonsoft.Json.Linq;
-using System.Globalization;
 
 #nullable disable
 
@@ -42,7 +42,9 @@ namespace Newtonsoft.Json.Bson
     /// <summary>
     /// Represents a writer that provides a fast, non-cached, forward-only way of generating BSON data.
     /// </summary>
-    [Obsolete("BSON reading and writing has been moved to its own package. See https://www.nuget.org/packages/Newtonsoft.Json.Bson for more details.")]
+    [Obsolete(
+        "BSON reading and writing has been moved to its own package. See https://www.nuget.org/packages/Newtonsoft.Json.Bson for more details."
+    )]
     public class BsonWriter : JsonWriter
     {
         private readonly BsonBinaryWriter _writer;
@@ -221,7 +223,14 @@ namespace Newtonsoft.Json.Bson
             {
                 if (token.Type != BsonType.Object && token.Type != BsonType.Array)
                 {
-                    throw JsonWriterException.Create(this, "Error writing {0} value. BSON must start with an Object or Array.".FormatWith(CultureInfo.InvariantCulture, token.Type), null);
+                    throw JsonWriterException.Create(
+                        this,
+                        "Error writing {0} value. BSON must start with an Object or Array.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            token.Type
+                        ),
+                        null
+                    );
                 }
 
                 _parent = token;
@@ -297,7 +306,11 @@ namespace Newtonsoft.Json.Bson
         {
             if (value > int.MaxValue)
             {
-                throw JsonWriterException.Create(this, "Value is too large to fit in a signed 32 bit integer. BSON does not support unsigned values.", null);
+                throw JsonWriterException.Create(
+                    this,
+                    "Value is too large to fit in a signed 32 bit integer. BSON does not support unsigned values.",
+                    null
+                );
             }
 
             base.WriteValue(value);
@@ -323,7 +336,11 @@ namespace Newtonsoft.Json.Bson
         {
             if (value > long.MaxValue)
             {
-                throw JsonWriterException.Create(this, "Value is too large to fit in a signed 64 bit integer. BSON does not support unsigned values.", null);
+                throw JsonWriterException.Create(
+                    this,
+                    "Value is too large to fit in a signed 64 bit integer. BSON does not support unsigned values.",
+                    null
+                );
             }
 
             base.WriteValue(value);

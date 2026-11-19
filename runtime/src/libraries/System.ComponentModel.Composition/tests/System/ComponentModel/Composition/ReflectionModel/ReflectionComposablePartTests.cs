@@ -42,7 +42,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             Assert.Throws<ArgumentNullException>("attributedPart", () =>
             {
-                new ReflectionComposablePart(PartDefinitionFactory.CreateAttributed(), (object)null);
+                new ReflectionComposablePart(
+                    PartDefinitionFactory.CreateAttributed(),
+                    (object)null
+                );
             });
         }
 
@@ -82,13 +85,18 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void Constructor1_Type_ShouldProduceValidObject()
         {
-            var part = new ReflectionComposablePart(PartDefinitionFactory.CreateAttributed(typeof(MyExport)));
+            var part = new ReflectionComposablePart(
+                PartDefinitionFactory.CreateAttributed(typeof(MyExport))
+            );
         }
 
         [Fact]
         public void Constructor1_Object_ShouldProduceValidObject()
         {
-            var part = new ReflectionComposablePart(PartDefinitionFactory.CreateAttributed(typeof(MyExport)), new MyExport());
+            var part = new ReflectionComposablePart(
+                PartDefinitionFactory.CreateAttributed(typeof(MyExport)),
+                new MyExport()
+            );
         }
 
         [Fact]
@@ -304,9 +312,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
             var import = part.ImportDefinitions.First();
 
             CompositionAssert.ThrowsPart(() =>
-           {
-               part.SetImport(import, CreateSimpleExports("21"));
-           });
+            {
+                part.SetImport(import, CreateSimpleExports("21"));
+            });
         }
 
         [Fact]
@@ -523,7 +531,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public class PropertyExporter
         {
             [Export]
-            public object Property { get { return new object(); } }
+            public object Property
+            {
+                get { return new object(); }
+            }
         }
 
         [PartNotDiscoverable]
@@ -542,9 +553,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         [PartNotDiscoverable]
         [Export]
-        public class TypeExporter
-        {
-        }
+        public class TypeExporter { }
 
         [Fact]
         public void GetExportedObjectAlwaysReturnsSameReference_ForProperty()
@@ -594,22 +603,16 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public class MethodWithoutContractName
         {
             [Export]
-            public void MethodWithoutContractNameNotAllowed()
-            {
-            }
+            public void MethodWithoutContractNameNotAllowed() { }
         }
 
-        public interface IContract
-        {
-        }
+        public interface IContract { }
 
         [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
         public class CustomImportAttributeInvalidTarget : ImportAttribute
         {
             public CustomImportAttributeInvalidTarget()
-                : base(typeof(IContract))
-            {
-            }
+                : base(typeof(IContract)) { }
         }
 
         [PartNotDiscoverable]
@@ -631,11 +634,18 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             var part = CreatePart(typeof(ImportWithCustomImport));
             Assert.Equal(1, part.ImportDefinitions.Count());
-            ContractBasedImportDefinition import = part.ImportDefinitions.First() as ContractBasedImportDefinition;
+            ContractBasedImportDefinition import =
+                part.ImportDefinitions.First() as ContractBasedImportDefinition;
             Assert.NotNull(import);
 
-            Assert.Equal(AttributedModelServices.GetContractName(typeof(IContract)), import.ContractName);
-            Assert.Equal(AttributedModelServices.GetTypeIdentity(typeof(IContract)), import.RequiredTypeIdentity);
+            Assert.Equal(
+                AttributedModelServices.GetContractName(typeof(IContract)),
+                import.ContractName
+            );
+            Assert.Equal(
+                AttributedModelServices.GetTypeIdentity(typeof(IContract)),
+                import.RequiredTypeIdentity
+            );
         }
 
         [Fact]
@@ -664,11 +674,18 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             var part = CreatePart(typeof(ImportManyWithCustomImportMany));
             Assert.Equal(1, part.ImportDefinitions.Count());
-            ContractBasedImportDefinition import = part.ImportDefinitions.First() as ContractBasedImportDefinition;
+            ContractBasedImportDefinition import =
+                part.ImportDefinitions.First() as ContractBasedImportDefinition;
             Assert.NotNull(import);
 
-            Assert.Equal(AttributedModelServices.GetContractName(typeof(IContract)), import.ContractName);
-            Assert.Equal(AttributedModelServices.GetTypeIdentity(typeof(IContract)), import.RequiredTypeIdentity);
+            Assert.Equal(
+                AttributedModelServices.GetContractName(typeof(IContract)),
+                import.ContractName
+            );
+            Assert.Equal(
+                AttributedModelServices.GetTypeIdentity(typeof(IContract)),
+                import.RequiredTypeIdentity
+            );
         }
 
         [Fact]
@@ -682,27 +699,23 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public class CustomImportingConstructorAttribute : ImportingConstructorAttribute
         {
             public CustomImportingConstructorAttribute()
-                : base()
-            {
-            }
+                : base() { }
         }
 
         [AttributeUsage(AttributeTargets.Constructor, AllowMultiple = true, Inherited = false)]
-        public class CustomImportingConstructorAllowMultipleAttribute : ImportingConstructorAttribute
+        public class CustomImportingConstructorAllowMultipleAttribute
+            : ImportingConstructorAttribute
         {
             public CustomImportingConstructorAllowMultipleAttribute()
-                : base()
-            {
-            }
+                : base() { }
         }
 
         [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-        public class CustomImportingConstructorInvalidTargetAttribute : ImportingConstructorAttribute
+        public class CustomImportingConstructorInvalidTargetAttribute
+            : ImportingConstructorAttribute
         {
             public CustomImportingConstructorInvalidTargetAttribute()
-                : base()
-            {
-            }
+                : base() { }
         }
 
         [PartNotDiscoverable]
@@ -717,7 +730,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             [CustomImportingConstructorAllowMultiple]
             [CustomImportingConstructorAllowMultiple]
-            ImportingConstructorWithCustomImportingConstructorAllowMultiple([Import] IContract argument) { }
+            ImportingConstructorWithCustomImportingConstructorAllowMultiple(
+                [Import] IContract argument
+            ) { }
         }
 
         [PartNotDiscoverable]
@@ -732,30 +747,48 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             var part = CreatePart(typeof(ImportingConstructorWithCustomImportingConstructor));
             Assert.Equal(1, part.ImportDefinitions.Count());
-            ContractBasedImportDefinition import = part.ImportDefinitions.First() as ContractBasedImportDefinition;
+            ContractBasedImportDefinition import =
+                part.ImportDefinitions.First() as ContractBasedImportDefinition;
             Assert.NotNull(import);
 
-            Assert.Equal(AttributedModelServices.GetContractName(typeof(IContract)), import.ContractName);
-            Assert.Equal(AttributedModelServices.GetTypeIdentity(typeof(IContract)), import.RequiredTypeIdentity);
+            Assert.Equal(
+                AttributedModelServices.GetContractName(typeof(IContract)),
+                import.ContractName
+            );
+            Assert.Equal(
+                AttributedModelServices.GetTypeIdentity(typeof(IContract)),
+                import.RequiredTypeIdentity
+            );
         }
 
         [Fact]
         public void ImportDefinitions_ImportingConstructorWithCustomAttributeImportingConstructorsWithAllowMultiple_ShouldNotThrowInvalidOperation()
         {
-            var part = CreatePart(typeof(ImportingConstructorWithCustomImportingConstructorAllowMultiple));
+            var part = CreatePart(
+                typeof(ImportingConstructorWithCustomImportingConstructorAllowMultiple)
+            );
 
             Assert.Equal(1, part.ImportDefinitions.Count());
-            ContractBasedImportDefinition import = part.ImportDefinitions.First() as ContractBasedImportDefinition;
+            ContractBasedImportDefinition import =
+                part.ImportDefinitions.First() as ContractBasedImportDefinition;
             Assert.NotNull(import);
 
-            Assert.Equal(AttributedModelServices.GetContractName(typeof(IContract)), import.ContractName);
-            Assert.Equal(AttributedModelServices.GetTypeIdentity(typeof(IContract)), import.RequiredTypeIdentity);
+            Assert.Equal(
+                AttributedModelServices.GetContractName(typeof(IContract)),
+                import.ContractName
+            );
+            Assert.Equal(
+                AttributedModelServices.GetTypeIdentity(typeof(IContract)),
+                import.RequiredTypeIdentity
+            );
         }
 
         [Fact]
         public void ImportDefinitions_ImportingConstructorWithCustomImportingConstructorInvalidTarget_ShouldbeIgnored()
         {
-            var part = CreatePart(typeof(ImportingConstructorWithCustomImportingConstructorInvalidTarget));
+            var part = CreatePart(
+                typeof(ImportingConstructorWithCustomImportingConstructorInvalidTarget)
+            );
             Assert.Equal(0, part.ImportDefinitions.Count());
         }
 

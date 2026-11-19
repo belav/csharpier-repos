@@ -34,8 +34,7 @@ internal sealed class HttpConnectionMiddleware<TContext>
     public Task OnConnectionAsync(ConnectionContext connectionContext)
     {
         var memoryPoolFeature = connectionContext.Features.Get<IMemoryPoolFeature>();
-        var protocols =
-            connectionContext.Features.Get<HttpProtocolsFeature>()?.HttpProtocols
+        var protocols = connectionContext.Features.Get<HttpProtocolsFeature>()?.HttpProtocols
             ?? _endpointDefaultProtocols;
         var metricContext = connectionContext
             .Features.GetRequiredFeature<IConnectionMetricsContextFeature>()

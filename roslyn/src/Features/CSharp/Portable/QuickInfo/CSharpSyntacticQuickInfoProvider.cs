@@ -22,22 +22,27 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
     internal class CSharpSyntacticQuickInfoProvider : CommonQuickInfoProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpSyntacticQuickInfoProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpSyntacticQuickInfoProvider() { }
 
         protected override Task<QuickInfoItem?> BuildQuickInfoAsync(
             QuickInfoContext context,
-            SyntaxToken token)
-            => Task.FromResult(BuildQuickInfo(token, context.CancellationToken));
+            SyntaxToken token
+        ) => Task.FromResult(BuildQuickInfo(token, context.CancellationToken));
 
         protected override Task<QuickInfoItem?> BuildQuickInfoAsync(
             CommonQuickInfoContext context,
-            SyntaxToken token)
-            => Task.FromResult(BuildQuickInfo(token, context.CancellationToken));
+            SyntaxToken token
+        ) => Task.FromResult(BuildQuickInfo(token, context.CancellationToken));
 
-        private static QuickInfoItem? BuildQuickInfo(SyntaxToken token, CancellationToken cancellationToken)
+        private static QuickInfoItem? BuildQuickInfo(
+            SyntaxToken token,
+            CancellationToken cancellationToken
+        )
         {
             switch (token.Kind())
             {
@@ -58,15 +63,20 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
         private static QuickInfoItem? BuildQuickInfoCloseBrace(SyntaxToken token)
         {
             // Don't show for interpolations
-            if (token.Parent is InterpolationSyntax interpolation &&
-                interpolation.CloseBraceToken == token)
+            if (
+                token.Parent is InterpolationSyntax interpolation
+                && interpolation.CloseBraceToken == token
+            )
             {
                 return null;
             }
 
             // Now check if we can find an open brace.
             var parent = token.Parent!;
-            var openBrace = parent.ChildNodesAndTokens().FirstOrDefault(n => n.Kind() == SyntaxKind.OpenBraceToken).AsToken();
+            var openBrace = parent
+                .ChildNodesAndTokens()
+                .FirstOrDefault(n => n.Kind() == SyntaxKind.OpenBraceToken)
+                .AsToken();
             if (openBrace.Kind() != SyntaxKind.OpenBraceToken)
             {
                 return null;
@@ -94,11 +104,19 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             return QuickInfoItem.Create(token.Span, relatedSpans: spans);
         }
 
-        private static bool IsScopeBlock(SyntaxNode node)
-            => node.IsKind(SyntaxKind.Block)
-                && node.Parent?.Kind() is SyntaxKind.Block or SyntaxKind.SwitchSection or SyntaxKind.GlobalStatement;
+        private static bool IsScopeBlock(SyntaxNode node) =>
+            node.IsKind(SyntaxKind.Block)
+            && node.Parent?.Kind()
+                is SyntaxKind.Block
+                    or SyntaxKind.SwitchSection
+                    or SyntaxKind.GlobalStatement;
 
-        private static void MarkInterestedSpanNearbyScopeBlock(SyntaxNode block, SyntaxToken openBrace, ref int spanStart, ref int spanEnd)
+        private static void MarkInterestedSpanNearbyScopeBlock(
+            SyntaxNode block,
+            SyntaxToken openBrace,
+            ref int spanStart,
+            ref int spanEnd
+        )
         {
             var searchListAbove = openBrace.LeadingTrivia.Reverse();
             if (TryFindFurthestNearbyComment(ref searchListAbove, out var nearbyComment))
@@ -116,7 +134,10 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             }
         }
 
-        private static bool TryFindFurthestNearbyComment<T>(ref T triviaSearchList, out SyntaxTrivia nearbyTrivia)
+        private static bool TryFindFurthestNearbyComment<T>(
+            ref T triviaSearchList,
+            out SyntaxTrivia nearbyTrivia
+        )
             where T : IEnumerable<SyntaxTrivia>
         {
             nearbyTrivia = default;
@@ -127,7 +148,11 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
                 {
                     nearbyTrivia = trivia;
                 }
-                else if (trivia.Kind() is not SyntaxKind.WhitespaceTrivia and not SyntaxKind.EndOfLineTrivia)
+                else if (
+                    trivia.Kind()
+                    is not SyntaxKind.WhitespaceTrivia
+                        and not SyntaxKind.EndOfLineTrivia
+                )
                 {
                     break;
                 }
@@ -136,7 +161,10 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             return nearbyTrivia.IsSingleOrMultiLineComment();
         }
 
-        private static QuickInfoItem? BuildQuickInfoDirectives(SyntaxToken token, CancellationToken cancellationToken)
+        private static QuickInfoItem? BuildQuickInfoDirectives(
+            SyntaxToken token,
+            CancellationToken cancellationToken
+        )
         {
             if (token.Parent is DirectiveTriviaSyntax directiveTrivia)
             {
@@ -144,11 +172,21 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
                 {
                     var regionStart = directiveTrivia.GetMatchingDirective(cancellationToken);
                     if (regionStart is not null)
-                        return QuickInfoItem.Create(token.Span, relatedSpans: ImmutableArray.Create(regionStart.Span));
+                        return QuickInfoItem.Create(
+                            token.Span,
+                            relatedSpans: ImmutableArray.Create(regionStart.Span)
+                        );
                 }
-                else if (directiveTrivia is ElifDirectiveTriviaSyntax or ElseDirectiveTriviaSyntax or EndIfDirectiveTriviaSyntax)
+                else if (
+                    directiveTrivia
+                    is ElifDirectiveTriviaSyntax
+                        or ElseDirectiveTriviaSyntax
+                        or EndIfDirectiveTriviaSyntax
+                )
                 {
-                    var matchingDirectives = directiveTrivia.GetMatchingConditionalDirectives(cancellationToken);
+                    var matchingDirectives = directiveTrivia.GetMatchingConditionalDirectives(
+                        cancellationToken
+                    );
                     var matchesBefore = matchingDirectives
                         .TakeWhile(d => d.SpanStart < directiveTrivia.SpanStart)
                         .Select(d => d.Span)

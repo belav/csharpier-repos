@@ -25,7 +25,9 @@ namespace System.ServiceProcess.Tests
                     {
                         if (object.ReferenceEquals(expectedException, actualException))
                         {
-                            testService.WriteStreamAsync(PipeMessageByteCode.ExceptionThrown).Wait();
+                            testService
+                                .WriteStreamAsync(PipeMessageByteCode.ExceptionThrown)
+                                .Wait();
                         }
                         else
                         {
@@ -65,7 +67,9 @@ namespace System.ServiceProcess.Tests
                 }
                 else
                 {
-                    Console.WriteLine("EROOR: Invalid Service verb. Only support create or delete.");
+                    Console.WriteLine(
+                        "EROOR: Invalid Service verb. Only support create or delete."
+                    );
                     return 2;
                 }
             }

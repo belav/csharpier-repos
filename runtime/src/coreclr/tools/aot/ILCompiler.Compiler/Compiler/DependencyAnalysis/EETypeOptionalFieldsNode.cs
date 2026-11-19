@@ -29,10 +29,12 @@ namespace ILCompiler.DependencyAnalysis
             sb.Append("__optionalfields_");
             _owner.AppendMangledName(nameMangler, sb);
         }
+
         public int Offset => 0;
         public override bool IsShareable => true;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override bool ShouldSkipEmittingObjectNode(NodeFactory factory)
         {

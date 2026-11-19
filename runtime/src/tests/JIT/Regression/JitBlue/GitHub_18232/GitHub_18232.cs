@@ -9,8 +9,14 @@ using Xunit;
 
 public class Program
 {
-    static int[,] s_1 = new int[1, 1] { { 42 } };
-    static ushort[,] s_2 = new ushort[,] { { 0 } };
+    static int[,] s_1 = new int[1, 1]
+    {
+        { 42 },
+    };
+    static ushort[,] s_2 = new ushort[,]
+    {
+        { 0 },
+    };
 
     [Fact]
     public static int TestEntryPoint()

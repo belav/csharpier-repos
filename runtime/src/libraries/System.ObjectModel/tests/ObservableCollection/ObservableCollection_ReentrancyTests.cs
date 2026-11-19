@@ -38,7 +38,10 @@ namespace System.Collections.ObjectModel.Tests
             bool handler2Called = false;
 
             var collection = new ObservableCollection<int>();
-            collection.CollectionChanged += (sender, e) => { handler1Called = true; };
+            collection.CollectionChanged += (sender, e) =>
+            {
+                handler1Called = true;
+            };
             collection.CollectionChanged += (sender, e) =>
             {
                 handler2Called = true;

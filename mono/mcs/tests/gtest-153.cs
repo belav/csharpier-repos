@@ -1,24 +1,24 @@
 public interface IBase
 {
-	void DoSomeThing();
+    void DoSomeThing();
 }
 
 public interface IExtended : IBase
 {
-	void DoSomeThingElse();
+    void DoSomeThingElse();
 }
 
-public class MyClass<T> where T: IExtended, new()
+public class MyClass<T>
+    where T : IExtended, new()
 {
-	public MyClass()
-	{
-		T instance = new T();
-		instance.DoSomeThing();
-	}
+    public MyClass()
+    {
+        T instance = new T();
+        instance.DoSomeThing();
+    }
 }
 
 class X
 {
-	public static void Main ()
-	{ }
+    public static void Main() { }
 }

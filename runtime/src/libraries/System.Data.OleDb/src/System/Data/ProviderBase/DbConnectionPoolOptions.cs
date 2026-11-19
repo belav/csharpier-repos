@@ -14,12 +14,13 @@ namespace System.Data.ProviderBase
         private readonly bool _useLoadBalancing;
 
         public DbConnectionPoolGroupOptions(
-                                        bool poolByIdentity,
-                                        int minPoolSize,
-                                        int maxPoolSize,
-                                        int creationTimeout,
-                                        int loadBalanceTimeout,
-                                        bool hasTransactionAffinity)
+            bool poolByIdentity,
+            int minPoolSize,
+            int maxPoolSize,
+            int creationTimeout,
+            int loadBalanceTimeout,
+            bool hasTransactionAffinity
+        )
         {
             _poolByIdentity = poolByIdentity;
             _minPoolSize = minPoolSize;

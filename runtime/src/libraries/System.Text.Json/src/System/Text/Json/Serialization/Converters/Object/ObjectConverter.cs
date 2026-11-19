@@ -9,26 +9,39 @@ namespace System.Text.Json.Serialization.Converters
 {
     internal abstract class ObjectConverter : JsonConverter<object?>
     {
-        private protected override ConverterStrategy GetDefaultConverterStrategy() => ConverterStrategy.Object;
+        private protected override ConverterStrategy GetDefaultConverterStrategy() =>
+            ConverterStrategy.Object;
 
         public ObjectConverter()
         {
             CanBePolymorphic = true;
         }
 
-        public sealed override object ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public sealed override object ReadAsPropertyName(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             ThrowHelper.ThrowNotSupportedException_DictionaryKeyTypeNotSupported(Type, this);
             return null!;
         }
 
-        internal sealed override object ReadAsPropertyNameCore(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        internal sealed override object ReadAsPropertyNameCore(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             ThrowHelper.ThrowNotSupportedException_DictionaryKeyTypeNotSupported(Type, this);
             return null!;
         }
 
-        public sealed override void Write(Utf8JsonWriter writer, object? value, JsonSerializerOptions options)
+        public sealed override void Write(
+            Utf8JsonWriter writer,
+            object? value,
+            JsonSerializerOptions options
+        )
         {
             if (value is null)
             {
@@ -40,12 +53,21 @@ namespace System.Text.Json.Serialization.Converters
             writer.WriteEndObject();
         }
 
-        public sealed override void WriteAsPropertyName(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
+        public sealed override void WriteAsPropertyName(
+            Utf8JsonWriter writer,
+            object value,
+            JsonSerializerOptions options
+        )
         {
             WriteAsPropertyNameCore(writer, value, options, isWritingExtensionDataProperty: false);
         }
 
-        internal sealed override void WriteAsPropertyNameCore(Utf8JsonWriter writer, object value, JsonSerializerOptions options, bool isWritingExtensionDataProperty)
+        internal sealed override void WriteAsPropertyNameCore(
+            Utf8JsonWriter writer,
+            object value,
+            JsonSerializerOptions options,
+            bool isWritingExtensionDataProperty
+        )
         {
             if (value is null)
             {
@@ -55,11 +77,19 @@ namespace System.Text.Json.Serialization.Converters
             Type runtimeType = value.GetType();
             if (runtimeType == Type)
             {
-                ThrowHelper.ThrowNotSupportedException_DictionaryKeyTypeNotSupported(runtimeType, this);
+                ThrowHelper.ThrowNotSupportedException_DictionaryKeyTypeNotSupported(
+                    runtimeType,
+                    this
+                );
             }
 
             JsonConverter runtimeConverter = options.GetConverterInternal(runtimeType);
-            runtimeConverter.WriteAsPropertyNameCoreAsObject(writer, value, options, isWritingExtensionDataProperty);
+            runtimeConverter.WriteAsPropertyNameCoreAsObject(
+                writer,
+                value,
+                options,
+                isWritingExtensionDataProperty
+            );
         }
     }
 
@@ -74,12 +104,19 @@ namespace System.Text.Json.Serialization.Converters
         // an accurate error message whenever deserialization is attempted.
         private readonly IJsonTypeInfoResolver _originatingResolver;
 
-        public SlimObjectConverter(IJsonTypeInfoResolver originatingResolver)
-            => _originatingResolver = originatingResolver;
+        public SlimObjectConverter(IJsonTypeInfoResolver originatingResolver) =>
+            _originatingResolver = originatingResolver;
 
-        public override object? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override object? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
-            ThrowHelper.ThrowNotSupportedException_NoMetadataForType(typeToConvert, _originatingResolver);
+            ThrowHelper.ThrowNotSupportedException_NoMetadataForType(
+                typeToConvert,
+                _originatingResolver
+            );
             return null;
         }
     }
@@ -96,7 +133,11 @@ namespace System.Text.Json.Serialization.Converters
             RequiresReadAhead = true;
         }
 
-        public override object? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override object? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (options.UnknownTypeHandling == JsonUnknownTypeHandling.JsonElement)
             {
@@ -107,7 +148,13 @@ namespace System.Text.Json.Serialization.Converters
             return JsonNodeConverter.Instance.Read(ref reader, typeToConvert, options);
         }
 
-        internal override bool OnTryRead(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options, scoped ref ReadStack state, out object? value)
+        internal override bool OnTryRead(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options,
+            scoped ref ReadStack state,
+            out object? value
+        )
         {
             object? referenceValue;
 
@@ -116,8 +163,15 @@ namespace System.Text.Json.Serialization.Converters
                 JsonElement element = JsonElement.ParseValue(ref reader);
 
                 // Edge case where we want to lookup for a reference when parsing into typeof(object)
-                if (options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.Preserve &&
-                    JsonSerializer.TryHandleReferenceFromJsonElement(ref reader, ref state, element, out referenceValue))
+                if (
+                    options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.Preserve
+                    && JsonSerializer.TryHandleReferenceFromJsonElement(
+                        ref reader,
+                        ref state,
+                        element,
+                        out referenceValue
+                    )
+                )
                 {
                     value = referenceValue;
                 }
@@ -133,8 +187,15 @@ namespace System.Text.Json.Serialization.Converters
 
             JsonNode? node = JsonNodeConverter.Instance.Read(ref reader, typeToConvert, options);
 
-            if (options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.Preserve &&
-                JsonSerializer.TryHandleReferenceFromJsonNode(ref reader, ref state, node, out referenceValue))
+            if (
+                options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.Preserve
+                && JsonSerializer.TryHandleReferenceFromJsonNode(
+                    ref reader,
+                    ref state,
+                    node,
+                    out referenceValue
+                )
+            )
             {
                 value = referenceValue;
             }

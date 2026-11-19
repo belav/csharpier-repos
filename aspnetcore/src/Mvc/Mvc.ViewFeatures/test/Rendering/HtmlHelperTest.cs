@@ -311,9 +311,8 @@ public class HtmlHelperTest
             + $" but this method requires a value of type '{typeof(ViewDataDictionary<BaseModel>).FullName}'.";
 
         // Act & Assert
-        var exception = Assert.Throws<ArgumentException>(
-            "viewContext",
-            () => helperToContextualize.Contextualize(viewContext)
+        var exception = Assert.Throws<ArgumentException>("viewContext", () =>
+            helperToContextualize.Contextualize(viewContext)
         );
         Assert.Contains(expectedMessage, exception.Message);
     }
@@ -335,9 +334,8 @@ public class HtmlHelperTest
             + $" but this method requires a value of type '{typeof(ViewDataDictionary<BaseModel>).FullName}'.";
 
         // Act & Assert
-        var exception = Assert.Throws<ArgumentException>(
-            "viewContext",
-            () => helperToContextualize.Contextualize(viewContext)
+        var exception = Assert.Throws<ArgumentException>("viewContext", () =>
+            helperToContextualize.Contextualize(viewContext)
         );
         Assert.Contains(expectedMessage, exception.Message);
     }

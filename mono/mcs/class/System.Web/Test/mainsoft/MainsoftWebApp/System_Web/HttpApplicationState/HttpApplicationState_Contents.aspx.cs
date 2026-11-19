@@ -30,61 +30,59 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web
 {
-	public class HttpApplicationState_Contents
-		: GHTBaseWeb 
-	{
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
+    public class HttpApplicationState_Contents : GHTBaseWeb
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, EventArgs e)
-		{
-			HtmlForm form1 = (HtmlForm) (HtmlForm)this.FindControl("Form1");
-			this.GHTTestBegin(form1);
-			this.GHTSubTestBegin("GHTSubTest1");
-			try
-			{
-				this.GHTSubTestAddResult(this.Application.Contents.GetType().ToString());
-				if (object.Equals(this.Application, this.Application.Contents))
-				{
-					this.GHTSubTestAddResult("Objects are equal");
-				}
-				else
-				{
-					this.GHTSubTestAddResult("Objects are not equal");
-				}
-			}
-			catch (Exception exception2)
-			{
-				// ProjectData.SetProjectError(exception2);
-				Exception exception1 = exception2;
-				this.GHTSubTestUnexpectedExceptionCaught(exception1);
-				// ProjectData.ClearProjectError();
-			}
-			this.GHTSubTestEnd();
-			this.GHTTestEnd();
-		}
- 
-	}
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
+
+        private void Page_Load(object sender, EventArgs e)
+        {
+            HtmlForm form1 = (HtmlForm)(HtmlForm)this.FindControl("Form1");
+            this.GHTTestBegin(form1);
+            this.GHTSubTestBegin("GHTSubTest1");
+            try
+            {
+                this.GHTSubTestAddResult(this.Application.Contents.GetType().ToString());
+                if (object.Equals(this.Application, this.Application.Contents))
+                {
+                    this.GHTSubTestAddResult("Objects are equal");
+                }
+                else
+                {
+                    this.GHTSubTestAddResult("Objects are not equal");
+                }
+            }
+            catch (Exception exception2)
+            {
+                // ProjectData.SetProjectError(exception2);
+                Exception exception1 = exception2;
+                this.GHTSubTestUnexpectedExceptionCaught(exception1);
+                // ProjectData.ClearProjectError();
+            }
+            this.GHTSubTestEnd();
+            this.GHTTestEnd();
+        }
+    }
 }

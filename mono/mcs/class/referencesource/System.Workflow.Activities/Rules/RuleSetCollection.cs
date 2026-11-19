@@ -14,12 +14,11 @@ namespace System.Workflow.Activities.Rules
         #region members and constructors
 
         private bool _runtimeInitialized;
+
         [NonSerialized]
         private object syncLock = new object();
 
-        public RuleSetCollection()
-        {
-        }
+        public RuleSetCollection() { }
 
         #endregion
 
@@ -37,7 +36,11 @@ namespace System.Workflow.Activities.Rules
 
             if (item.Name != null && item.Name.Length >= 0 && this.Contains(item.Name))
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.RuleSetExists, item.Name);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.RuleSetExists,
+                    item.Name
+                );
                 throw new ArgumentException(message);
             }
 
@@ -60,7 +63,7 @@ namespace System.Workflow.Activities.Rules
             base.SetItem(index, item);
         }
 
-        new public void Add(RuleSet item)
+        public new void Add(RuleSet item)
         {
             if (this._runtimeInitialized)
                 throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));
@@ -72,7 +75,11 @@ namespace System.Workflow.Activities.Rules
 
             if (null == item.Name)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.InvalidRuleSetName, "item.Name");
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.InvalidRuleSetName,
+                    "item.Name"
+                );
                 throw new ArgumentException(message);
             }
 
@@ -133,12 +140,17 @@ namespace System.Workflow.Activities.Rules
             {
                 foreach (RuleSet changedRuleSet in changedRuleSets)
                 {
-                    if ((originalRuleSets != null) && (originalRuleSets.Contains(changedRuleSet.Name)))
+                    if (
+                        (originalRuleSets != null)
+                        && (originalRuleSets.Contains(changedRuleSet.Name))
+                    )
                     {
                         RuleSet originalRuleSet = originalRuleSets[changedRuleSet.Name];
                         if (!originalRuleSet.Equals(changedRuleSet))
                         {
-                            listChanges.Add(new UpdatedRuleSetAction(originalRuleSet, changedRuleSet));
+                            listChanges.Add(
+                                new UpdatedRuleSetAction(originalRuleSet, changedRuleSet)
+                            );
                         }
                     }
                     else
@@ -151,7 +163,10 @@ namespace System.Workflow.Activities.Rules
             {
                 foreach (RuleSet originalRuleSet in originalRuleSets)
                 {
-                    if ((changedRuleSets == null) || (!changedRuleSets.Contains(originalRuleSet.Name)))
+                    if (
+                        (changedRuleSets == null)
+                        || (!changedRuleSets.Contains(originalRuleSet.Name))
+                    )
                     {
                         listChanges.Add(new RemovedRuleSetAction(originalRuleSet));
                     }

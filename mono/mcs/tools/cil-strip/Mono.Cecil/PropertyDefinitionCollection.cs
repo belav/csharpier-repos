@@ -29,110 +29,111 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
+namespace Mono.Cecil
+{
+    using System;
+    using System.Collections;
+    using Mono.Cecil.Cil;
 
-	using System;
-	using System.Collections;
+    internal sealed class PropertyDefinitionCollection : CollectionBase, IReflectionVisitable
+    {
+        TypeDefinition m_container;
 
-	using Mono.Cecil.Cil;
+        public PropertyDefinition this[int index]
+        {
+            get { return List[index] as PropertyDefinition; }
+            set { List[index] = value; }
+        }
 
-	internal sealed class PropertyDefinitionCollection : CollectionBase, IReflectionVisitable {
+        public TypeDefinition Container
+        {
+            get { return m_container; }
+        }
 
-		TypeDefinition m_container;
+        public PropertyDefinitionCollection(TypeDefinition container)
+        {
+            m_container = container;
+        }
 
-		public PropertyDefinition this [int index] {
-			get { return List [index] as PropertyDefinition; }
-			set { List [index] = value; }
-		}
+        public void Add(PropertyDefinition value)
+        {
+            Attach(value);
 
-		public TypeDefinition Container {
-			get { return m_container; }
-		}
+            List.Add(value);
+        }
 
-		public PropertyDefinitionCollection (TypeDefinition container)
-		{
-			m_container = container;
-		}
+        public new void Clear()
+        {
+            foreach (PropertyDefinition item in this)
+                Detach(item);
 
-		public void Add (PropertyDefinition value)
-		{
-			Attach (value);
+            base.Clear();
+        }
 
-			List.Add (value);
-		}
+        public bool Contains(PropertyDefinition value)
+        {
+            return List.Contains(value);
+        }
 
+        public int IndexOf(PropertyDefinition value)
+        {
+            return List.IndexOf(value);
+        }
 
-		public new void Clear ()
-		{
-			foreach (PropertyDefinition item in this)
-				Detach (item);
+        public void Insert(int index, PropertyDefinition value)
+        {
+            Attach(value);
 
-			base.Clear ();
-		}
+            List.Insert(index, value);
+        }
 
-		public bool Contains (PropertyDefinition value)
-		{
-			return List.Contains (value);
-		}
+        public void Remove(PropertyDefinition value)
+        {
+            List.Remove(value);
 
-		public int IndexOf (PropertyDefinition value)
-		{
-			return List.IndexOf (value);
-		}
+            Detach(value);
+        }
 
-		public void Insert (int index, PropertyDefinition value)
-		{
-			Attach (value);
+        public new void RemoveAt(int index)
+        {
+            PropertyDefinition item = this[index];
+            Remove(item);
+        }
 
-			List.Insert (index, value);
-		}
+        protected override void OnValidate(object o)
+        {
+            if (!(o is PropertyDefinition))
+                throw new ArgumentException(
+                    "Must be of type " + typeof(PropertyDefinition).FullName
+                );
+        }
 
-		public void Remove (PropertyDefinition value)
-		{
-			List.Remove (value);
+        public PropertyDefinition[] GetProperties(string name)
+        {
+            ArrayList ret = new ArrayList();
+            foreach (PropertyDefinition prop in this)
+                if (prop.Name == name)
+                    ret.Add(prop);
 
-			Detach (value);
-		}
+            return ret.ToArray(typeof(PropertyDefinition)) as PropertyDefinition[];
+        }
 
+        void Attach(MemberReference member)
+        {
+            if (member.DeclaringType != null)
+                throw new ReflectionException("Member already attached, clone it instead");
 
-		public new void RemoveAt (int index)
-		{
-			PropertyDefinition item = this [index];
-			Remove (item);
-		}
+            member.DeclaringType = m_container;
+        }
 
-		protected override void OnValidate (object o)
-		{
-			if (! (o is PropertyDefinition))
-				throw new ArgumentException ("Must be of type " + typeof (PropertyDefinition).FullName);
-		}
+        void Detach(MemberReference member)
+        {
+            member.DeclaringType = null;
+        }
 
-		public PropertyDefinition [] GetProperties (string name)
-		{
-			ArrayList ret = new ArrayList ();
-			foreach (PropertyDefinition prop in this)
-				if (prop.Name == name)
-					ret.Add (prop);
-
-			return ret.ToArray (typeof (PropertyDefinition)) as PropertyDefinition [];
-		}
-
-		void Attach (MemberReference member)
-		{
-			if (member.DeclaringType != null)
-				throw new ReflectionException ("Member already attached, clone it instead");
-
-			member.DeclaringType = m_container;
-		}
-
-		void Detach (MemberReference member)
-		{
-			member.DeclaringType = null;
-		}
-
-		public void Accept (IReflectionVisitor visitor)
-		{
-			visitor.VisitPropertyDefinitionCollection (this);
-		}
-	}
+        public void Accept(IReflectionVisitor visitor)
+        {
+            visitor.VisitPropertyDefinitionCollection(this);
+        }
+    }
 }

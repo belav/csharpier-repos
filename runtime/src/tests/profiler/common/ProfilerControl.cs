@@ -27,11 +27,16 @@ namespace Profiler.Tests
             client.AttachProfiler(TimeSpan.MaxValue, profilerGuid, profilerPath, null);
         }
 
-        public static EventPipeSession AttachEventPipeSessionToSelf(IEnumerable<EventPipeProvider> providers)
+        public static EventPipeSession AttachEventPipeSessionToSelf(
+            IEnumerable<EventPipeProvider> providers
+        )
         {
             int processId = Process.GetCurrentProcess().Id;
             DiagnosticsClient client = new DiagnosticsClient(processId);
-            return client.StartEventPipeSession(providers, /* requestRunDown */ false);
+            return client.StartEventPipeSession(
+                providers, /* requestRunDown */
+                false
+            );
         }
     }
 }

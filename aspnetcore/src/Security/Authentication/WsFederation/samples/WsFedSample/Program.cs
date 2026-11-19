@@ -17,16 +17,12 @@ public class Program
                 webHostBuilder
                     .UseKestrel(options =>
                     {
-                        options.Listen(
-                            IPAddress.Loopback,
-                            44307,
-                            listenOptions =>
-                            {
-                                // Configure SSL
-                                var serverCertificate = LoadCertificate();
-                                listenOptions.UseHttps(serverCertificate);
-                            }
-                        );
+                        options.Listen(IPAddress.Loopback, 44307, listenOptions =>
+                        {
+                            // Configure SSL
+                            var serverCertificate = LoadCertificate();
+                            listenOptions.UseHttps(serverCertificate);
+                        });
                     })
                     .UseContentRoot(Directory.GetCurrentDirectory())
                     .UseIISIntegration()

@@ -1,10 +1,10 @@
-﻿﻿// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using System.Globalization;
 
 namespace Sample
 {
@@ -15,7 +15,8 @@ namespace Sample
 
         public StringTask()
         {
-            measurements = new Measurement[] {
+            measurements = new Measurement[]
+            {
                 new NormalizeMeasurement(),
                 new IsNormalizedMeasurement(),
                 new NormalizeMeasurementASCII(),
@@ -36,10 +37,7 @@ namespace Sample
 
         public override Measurement[] Measurements
         {
-            get
-            {
-                return measurements;
-            }
+            get { return measurements; }
         }
 
         public abstract class StringMeasurement : BenchTask.Measurement
@@ -78,6 +76,7 @@ namespace Sample
         {
             protected new int len = 8 * 1024;
             public override string Name => "Normalize";
+
             public override void RunStep() => str.Normalize();
         }
 
@@ -85,6 +84,7 @@ namespace Sample
         {
             protected new int len = 8 * 1024;
             public override string Name => "IsNormalized";
+
             public override void RunStep() => str.IsNormalized();
         }
 
@@ -103,9 +103,10 @@ namespace Sample
         }
 
         public class NormalizeMeasurementASCII : ASCIIStringMeasurement
-        {        
+        {
             protected new int len = 8 * 1024;
             public override string Name => "Normalize ASCII";
+
             public override void RunStep() => str.Normalize();
         }
 
@@ -119,24 +120,28 @@ namespace Sample
                 InitializeString();
                 return Task.CompletedTask;
             }
+
             public override string Name => "TextInfo";
         }
 
         public class TextInfoToLower : TextInfoMeasurement
         {
             public override string Name => "TextInfo ToLower";
+
             public override void RunStep() => textInfo.ToLower(str);
         }
 
         public class TextInfoToUpper : TextInfoMeasurement
         {
             public override string Name => "TextInfo ToUpper";
+
             public override void RunStep() => textInfo.ToUpper(str);
         }
 
         public class TextInfoToTitleCase : TextInfoMeasurement
         {
             public override string Name => "TextInfo ToTileCase";
+
             public override void RunStep() => textInfo.ToTitleCase(str);
         }
 
@@ -155,18 +160,19 @@ namespace Sample
                 needleSameAsStrEnd = new string(new ArraySegment<char>(data, len - 10, 10));
                 needleSameAsStrStart = new string(new ArraySegment<char>(data, 0, 10));
                 // worst case: strings may differ only with the last/first char
-                char originalLastChar = data[len-1];
-                data[len-1] = (char)random.Next(0x80);
+                char originalLastChar = data[len - 1];
+                data[len - 1] = (char)random.Next(0x80);
                 strAsciiSuffix = new string(data);
-                int middleIdx = (int)(len/2);
-                data[len-1] = originalLastChar;
+                int middleIdx = (int)(len / 2);
+                data[len - 1] = originalLastChar;
                 data[0] = (char)random.Next(0x80);
                 strAsciiPrefix = new string(data);
             }
+
             public override string Name => "Strings Compare Base";
         }
 
-        public class StringCompareMeasurement :  StringsCompare
+        public class StringCompareMeasurement : StringsCompare
         {
             protected CultureInfo cultureInfo;
 
@@ -176,8 +182,11 @@ namespace Sample
                 InitializeStringsForComparison();
                 return Task.CompletedTask;
             }
+
             public override string Name => "String Compare";
-            public override void RunStep() => string.Compare(str, strAsciiSuffix, cultureInfo, CompareOptions.None);
+
+            public override void RunStep() =>
+                string.Compare(str, strAsciiSuffix, cultureInfo, CompareOptions.None);
         }
 
         public class StringEqualsMeasurement : StringsCompare
@@ -187,8 +196,11 @@ namespace Sample
                 InitializeStringsForComparison();
                 return Task.CompletedTask;
             }
+
             public override string Name => "String Equals";
-            public override void RunStep() => string.Equals(str, strAsciiSuffix, StringComparison.InvariantCulture);
+
+            public override void RunStep() =>
+                string.Equals(str, strAsciiSuffix, StringComparison.InvariantCulture);
         }
 
         public class CompareInfoCompareMeasurement : StringsCompare
@@ -201,7 +213,9 @@ namespace Sample
                 InitializeStringsForComparison();
                 return Task.CompletedTask;
             }
+
             public override string Name => "CompareInfo Compare";
+
             public override void RunStep() => compareInfo.Compare(str, strAsciiSuffix);
         }
 
@@ -215,7 +229,9 @@ namespace Sample
                 InitializeStringsForComparison();
                 return Task.CompletedTask;
             }
+
             public override string Name => "CompareInfo IsPrefix";
+
             public override void RunStep() => compareInfo.IsPrefix(str, strAsciiSuffix);
         }
 
@@ -229,7 +245,9 @@ namespace Sample
                 InitializeStringsForComparison();
                 return Task.CompletedTask;
             }
+
             public override string Name => "CompareInfo IsSuffix";
+
             public override void RunStep() => compareInfo.IsSuffix(str, strAsciiPrefix);
         }
 
@@ -243,7 +261,9 @@ namespace Sample
                 InitializeStringsForComparison();
                 return Task.CompletedTask;
             }
+
             public override string Name => "String StartsWith";
+
             public override void RunStep() => str.StartsWith(strAsciiSuffix, false, cultureInfo);
         }
 
@@ -257,7 +277,9 @@ namespace Sample
                 InitializeStringsForComparison();
                 return Task.CompletedTask;
             }
+
             public override string Name => "String EndsWith";
+
             public override void RunStep() => str.EndsWith(strAsciiPrefix, false, cultureInfo);
         }
 
@@ -271,8 +293,11 @@ namespace Sample
                 InitializeStringsForComparison();
                 return Task.CompletedTask;
             }
+
             public override string Name => "String IndexOf";
-            public override void RunStep() => compareInfo.IndexOf(str, needleSameAsStrEnd, CompareOptions.None);
+
+            public override void RunStep() =>
+                compareInfo.IndexOf(str, needleSameAsStrEnd, CompareOptions.None);
         }
 
         public class StringLastIndexOfMeasurement : StringsCompare
@@ -285,8 +310,11 @@ namespace Sample
                 InitializeStringsForComparison();
                 return Task.CompletedTask;
             }
+
             public override string Name => "String LastIndexOf";
-            public override void RunStep() => compareInfo.LastIndexOf(str, needleSameAsStrStart, CompareOptions.None);
+
+            public override void RunStep() =>
+                compareInfo.LastIndexOf(str, needleSameAsStrStart, CompareOptions.None);
         }
     }
 }

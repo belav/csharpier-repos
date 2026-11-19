@@ -12,7 +12,11 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     internal readonly struct DeclarationInfo
     {
-        internal DeclarationInfo(SyntaxNode declaredNode, ImmutableArray<SyntaxNode> executableCodeBlocks, ISymbol? declaredSymbol)
+        internal DeclarationInfo(
+            SyntaxNode declaredNode,
+            ImmutableArray<SyntaxNode> executableCodeBlocks,
+            ISymbol? declaredSymbol
+        )
         {
             Debug.Assert(declaredNode != null);
             Debug.Assert(!executableCodeBlocks.IsDefault);

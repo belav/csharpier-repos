@@ -10,7 +10,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 {
     internal static class CSharpInferredMemberNameSimplifier
     {
-        internal static bool CanSimplifyTupleElementName(ArgumentSyntax node, CSharpParseOptions parseOptions)
+        internal static bool CanSimplifyTupleElementName(
+            ArgumentSyntax node,
+            CSharpParseOptions parseOptions
+        )
         {
             // Tuple elements are arguments in a tuple expression
             if (node.NameColon == null || !node.Parent.IsKind(SyntaxKind.TupleExpression))
@@ -37,14 +40,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             return true;
         }
 
-        internal static bool CanSimplifyAnonymousTypeMemberName(AnonymousObjectMemberDeclaratorSyntax node)
+        internal static bool CanSimplifyAnonymousTypeMemberName(
+            AnonymousObjectMemberDeclaratorSyntax node
+        )
         {
             if (node.NameEquals == null)
             {
                 return false;
             }
 
-            if (RemovalCausesAmbiguity(((AnonymousObjectCreationExpressionSyntax)node.Parent!).Initializers, node))
+            if (
+                RemovalCausesAmbiguity(
+                    ((AnonymousObjectCreationExpressionSyntax)node.Parent!).Initializers,
+                    node
+                )
+            )
             {
                 return false;
             }
@@ -59,7 +69,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
         }
 
         // An explicit name cannot be removed if some other position would produce it as inferred name
-        private static bool RemovalCausesAmbiguity(SeparatedSyntaxList<ArgumentSyntax> arguments, ArgumentSyntax toRemove)
+        private static bool RemovalCausesAmbiguity(
+            SeparatedSyntaxList<ArgumentSyntax> arguments,
+            ArgumentSyntax toRemove
+        )
         {
             Contract.ThrowIfNull(toRemove.NameColon);
 
@@ -71,7 +84,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     continue;
                 }
 
-                if (argument.NameColon is null && argument.Expression.TryGetInferredMemberName()?.Equals(name) == true)
+                if (
+                    argument.NameColon is null
+                    && argument.Expression.TryGetInferredMemberName()?.Equals(name) == true
+                )
                 {
                     return true;
                 }
@@ -81,7 +97,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
         }
 
         // An explicit name cannot be removed if some other position would produce it as inferred name
-        private static bool RemovalCausesAmbiguity(SeparatedSyntaxList<AnonymousObjectMemberDeclaratorSyntax> initializers, AnonymousObjectMemberDeclaratorSyntax toRemove)
+        private static bool RemovalCausesAmbiguity(
+            SeparatedSyntaxList<AnonymousObjectMemberDeclaratorSyntax> initializers,
+            AnonymousObjectMemberDeclaratorSyntax toRemove
+        )
         {
             Contract.ThrowIfNull(toRemove.NameEquals);
 
@@ -93,7 +112,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     continue;
                 }
 
-                if (initializer.NameEquals is null && initializer.Expression.TryGetInferredMemberName()?.Equals(name) == true)
+                if (
+                    initializer.NameEquals is null
+                    && initializer.Expression.TryGetInferredMemberName()?.Equals(name) == true
+                )
                 {
                     return true;
                 }

@@ -16,7 +16,9 @@ namespace System.IdentityModel.Selectors
         // public constructors
         //
 
-        public InfoCardRSAPKCS1SignatureDeformatter() : base() { }
+        public InfoCardRSAPKCS1SignatureDeformatter()
+            : base() { }
+
         public InfoCardRSAPKCS1SignatureDeformatter(AsymmetricAlgorithm key)
             : base(key)
         {
@@ -41,10 +43,16 @@ namespace System.IdentityModel.Selectors
 
         public override bool VerifySignature(byte[] rgbHash, byte[] rgbSignature)
         {
-            if (!(m_strOID == null || m_rsaKey == null || rgbHash == null || rgbSignature == null)
-                && m_rsaKey is InfoCardRSACryptoProvider)
+            if (
+                !(m_strOID == null || m_rsaKey == null || rgbHash == null || rgbSignature == null)
+                && m_rsaKey is InfoCardRSACryptoProvider
+            )
             {
-                return ((InfoCardRSACryptoProvider)m_rsaKey).VerifyHash(rgbHash, m_strOID, rgbSignature);
+                return ((InfoCardRSACryptoProvider)m_rsaKey).VerifyHash(
+                    rgbHash,
+                    m_strOID,
+                    rgbSignature
+                );
             }
             else
             {

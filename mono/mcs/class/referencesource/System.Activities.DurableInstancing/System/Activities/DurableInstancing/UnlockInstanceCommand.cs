@@ -8,27 +8,17 @@ namespace System.Activities.DurableInstancing
 
     sealed class UnlockInstanceCommand : InstancePersistenceCommand
     {
-        public UnlockInstanceCommand() :
-            base(SqlWorkflowInstanceStoreConstants.DurableInstancingNamespace.GetName("UnlockInstance"))
-        {
-        }
+        public UnlockInstanceCommand()
+            : base(
+                SqlWorkflowInstanceStoreConstants.DurableInstancingNamespace.GetName(
+                    "UnlockInstance"
+                )
+            ) { }
 
-        public Guid InstanceId
-        {
-            get;
-            set;
-        }
+        public Guid InstanceId { get; set; }
 
-        public long InstanceVersion
-        {
-            get;
-            set;
-        }
+        public long InstanceVersion { get; set; }
 
-        public long SurrogateOwnerId
-        {
-            get;
-            set;
-        }
+        public long SurrogateOwnerId { get; set; }
     }
 }

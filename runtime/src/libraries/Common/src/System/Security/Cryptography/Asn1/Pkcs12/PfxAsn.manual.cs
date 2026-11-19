@@ -7,7 +7,6 @@ using System.Security.Cryptography.Asn1.Pkcs7;
 using System.Security.Cryptography.Pkcs;
 using System.Security.Cryptography.X509Certificates;
 using Internal.Cryptography;
-
 #if BUILDING_PKCS
 using Helpers = Internal.Cryptography.PkcsHelpers;
 #endif
@@ -20,9 +19,7 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
         private static ReadOnlySpan<char> EmptyPassword => ""; // don't use ReadOnlySpan<byte>.Empty because it will get confused with default.
         private static ReadOnlySpan<char> NullPassword => default;
 
-        internal bool VerifyMac(
-            ReadOnlySpan<char> macPassword,
-            ReadOnlySpan<byte> authSafeContents)
+        internal bool VerifyMac(ReadOnlySpan<char> macPassword, ReadOnlySpan<byte> authSafeContents)
         {
             Debug.Assert(MacData.HasValue);
 
@@ -55,7 +52,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
                     break;
                 default:
                     throw new CryptographicException(
-                        SR.Format(SR.Cryptography_UnknownHashAlgorithm, algorithmValue));
+                        SR.Format(SR.Cryptography_UnknownHashAlgorithm, algorithmValue)
+                    );
             }
 
             if (MacData.Value.Mac.Digest.Length != expectedOutputSize)
@@ -70,30 +68,37 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             byte[] derived = new byte[expectedOutputSize];
 #endif
 
-
-            int iterationCount =
-                PasswordBasedEncryption.NormalizeIterationCount(MacData.Value.IterationCount);
+            int iterationCount = PasswordBasedEncryption.NormalizeIterationCount(
+                MacData.Value.IterationCount
+            );
 
             Pkcs12Kdf.DeriveMacKey(
                 macPassword,
                 hashAlgorithm,
                 iterationCount,
                 MacData.Value.MacSalt.Span,
-                derived);
+                derived
+            );
 
             using (IncrementalHash hmac = IncrementalHash.CreateHMAC(hashAlgorithm, derived))
             {
                 hmac.AppendData(authSafeContents);
 
-                if (!hmac.TryGetHashAndReset(derived, out int bytesWritten) || bytesWritten != expectedOutputSize)
+                if (
+                    !hmac.TryGetHashAndReset(derived, out int bytesWritten)
+                    || bytesWritten != expectedOutputSize
+                )
                 {
-                    Debug.Fail($"TryGetHashAndReset wrote {bytesWritten} bytes when {expectedOutputSize} was expected");
+                    Debug.Fail(
+                        $"TryGetHashAndReset wrote {bytesWritten} bytes when {expectedOutputSize} was expected"
+                    );
                     throw new CryptographicException();
                 }
 
                 return CryptographicOperations.FixedTimeEquals(
                     derived,
-                    MacData.Value.Mac.Digest.Span);
+                    MacData.Value.Mac.Digest.Span
+                );
             }
         }
 
@@ -114,8 +119,13 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
                     throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
                 }
 
-                ReadOnlyMemory<byte> authSafeContents = Helpers.DecodeOctetStringAsMemory(AuthSafe.Content);
-                AsnValueReader outerAuthSafe = new AsnValueReader(authSafeContents.Span, AsnEncodingRules.BER); // RFC 7292 PDU says BER
+                ReadOnlyMemory<byte> authSafeContents = Helpers.DecodeOctetStringAsMemory(
+                    AuthSafe.Content
+                );
+                AsnValueReader outerAuthSafe = new AsnValueReader(
+                    authSafeContents.Span,
+                    AsnEncodingRules.BER
+                ); // RFC 7292 PDU says BER
                 AsnValueReader authSafeReader = outerAuthSafe.ReadSequence();
                 outerAuthSafe.ThrowIfNotEmpty();
 
@@ -123,7 +133,11 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
 
                 while (authSafeReader.HasData)
                 {
-                    ContentInfoAsn.Decode(ref authSafeReader, authSafeContents, out ContentInfoAsn contentInfo);
+                    ContentInfoAsn.Decode(
+                        ref authSafeReader,
+                        authSafeContents,
+                        out ContentInfoAsn contentInfo
+                    );
 
                     ReadOnlyMemory<byte> contentData;
                     ArraySegment<byte>? rentedData = null;
@@ -138,10 +152,15 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
                                 {
                                     // We will process at most one encryptedData ContentInfo. This is the most typical scenario where
                                     // certificates are stored in an encryptedData ContentInfo, and keys are shrouded in a data ContentInfo.
-                                    throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
+                                    throw new CryptographicException(
+                                        SR.Cryptography_Der_Invalid_Encoding
+                                    );
                                 }
 
-                                ArraySegment<byte> content = DecryptContentInfo(contentInfo, out uint iterations);
+                                ArraySegment<byte> content = DecryptContentInfo(
+                                    contentInfo,
+                                    out uint iterations
+                                );
                                 contentData = content;
                                 rentedData = content;
                                 hasSeenEncryptedInfo = true;
@@ -151,7 +170,9 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
                             {
                                 // Not a common scenario. It's not data or encryptedData, so they need to go through the
                                 // regular PKCS12 loader.
-                                throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
+                                throw new CryptographicException(
+                                    SR.Cryptography_Der_Invalid_Encoding
+                                );
                             }
                         }
                         else
@@ -159,7 +180,10 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
                             contentData = Helpers.DecodeOctetStringAsMemory(contentInfo.Content);
                         }
 
-                        AsnValueReader outerSafeBag = new AsnValueReader(contentData.Span, AsnEncodingRules.BER);
+                        AsnValueReader outerSafeBag = new AsnValueReader(
+                            contentData.Span,
+                            AsnEncodingRules.BER
+                        );
                         AsnValueReader safeBagReader = outerSafeBag.ReadSequence();
                         outerSafeBag.ThrowIfNotEmpty();
 
@@ -175,11 +199,15 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
                             // * Nested SafeContents _can_ do iterations, but Windows ignores it. So we will ignore it too.
                             if (bag.BagId == Oids.Pkcs12ShroudedKeyBag)
                             {
-                                AsnValueReader pkcs8ShroudedKeyReader = new AsnValueReader(bag.BagValue.Span, AsnEncodingRules.BER);
+                                AsnValueReader pkcs8ShroudedKeyReader = new AsnValueReader(
+                                    bag.BagValue.Span,
+                                    AsnEncodingRules.BER
+                                );
                                 EncryptedPrivateKeyInfoAsn.Decode(
                                     ref pkcs8ShroudedKeyReader,
                                     bag.BagValue,
-                                    out EncryptedPrivateKeyInfoAsn epki);
+                                    out EncryptedPrivateKeyInfoAsn epki
+                                );
 
                                 count += IterationsFromParameters(epki.EncryptionAlgorithm);
                             }
@@ -208,9 +236,15 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             }
         }
 
-        private static ArraySegment<byte> DecryptContentInfo(ContentInfoAsn contentInfo, out uint iterations)
+        private static ArraySegment<byte> DecryptContentInfo(
+            ContentInfoAsn contentInfo,
+            out uint iterations
+        )
         {
-            EncryptedDataAsn encryptedData = EncryptedDataAsn.Decode(contentInfo.Content, AsnEncodingRules.BER);
+            EncryptedDataAsn encryptedData = EncryptedDataAsn.Decode(
+                contentInfo.Content,
+                AsnEncodingRules.BER
+            );
 
             if (encryptedData.Version != 0 && encryptedData.Version != 2)
             {
@@ -228,7 +262,9 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
                 throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
             }
 
-            iterations = IterationsFromParameters(encryptedData.EncryptedContentInfo.ContentEncryptionAlgorithm);
+            iterations = IterationsFromParameters(
+                encryptedData.EncryptedContentInfo.ContentEncryptionAlgorithm
+            );
 
             // This encryptData is encrypted with more rounds than we are willing to process. Bail out of the whole thing.
             if (iterations > MaxIterationWork)
@@ -236,7 +272,11 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
                 throw new X509IterationCountExceededException();
             }
 
-            int encryptedValueLength = encryptedData.EncryptedContentInfo.EncryptedContent.Value.Length;
+            int encryptedValueLength = encryptedData
+                .EncryptedContentInfo
+                .EncryptedContent
+                .Value
+                .Length;
             byte[] destination = CryptoPool.Rent(encryptedValueLength);
             int written = 0;
 
@@ -249,11 +289,15 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
                         EmptyPassword,
                         default,
                         encryptedData.EncryptedContentInfo.EncryptedContent.Value.Span,
-                        destination);
+                        destination
+                    );
 
                     // When padding happens to be as expected (false-positive), we can detect gibberish and prevent unexpected failures later
                     // This extra check makes it so it's very unlikely we'll end up with false positive.
-                    AsnValueReader outerSafeBag = new AsnValueReader(destination.AsSpan(0, written), AsnEncodingRules.BER);
+                    AsnValueReader outerSafeBag = new AsnValueReader(
+                        destination.AsSpan(0, written),
+                        AsnEncodingRules.BER
+                    );
                     AsnValueReader safeBagReader = outerSafeBag.ReadSequence();
                     outerSafeBag.ThrowIfNotEmpty();
                 }
@@ -265,9 +309,13 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
                         NullPassword,
                         default,
                         encryptedData.EncryptedContentInfo.EncryptedContent.Value.Span,
-                        destination);
+                        destination
+                    );
 
-                    AsnValueReader outerSafeBag = new AsnValueReader(destination.AsSpan(0, written), AsnEncodingRules.BER);
+                    AsnValueReader outerSafeBag = new AsnValueReader(
+                        destination.AsSpan(0, written),
+                        AsnEncodingRules.BER
+                    );
                     AsnValueReader safeBagReader = outerSafeBag.ReadSequence();
                     outerSafeBag.ThrowIfNotEmpty();
                 }
@@ -295,7 +343,10 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
                         throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
                     }
 
-                    PBES2Params pbes2Params = PBES2Params.Decode(algorithmIdentifier.Parameters.Value, AsnEncodingRules.BER);
+                    PBES2Params pbes2Params = PBES2Params.Decode(
+                        algorithmIdentifier.Parameters.Value,
+                        AsnEncodingRules.BER
+                    );
 
                     // PBES2 only defines PKBDF2 for now. See RFC 8018 A.4
                     if (pbes2Params.KeyDerivationFunc.Algorithm != Oids.Pbkdf2)
@@ -308,7 +359,10 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
                         throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
                     }
 
-                    Pbkdf2Params pbkdf2Params = Pbkdf2Params.Decode(pbes2Params.KeyDerivationFunc.Parameters.Value, AsnEncodingRules.BER);
+                    Pbkdf2Params pbkdf2Params = Pbkdf2Params.Decode(
+                        pbes2Params.KeyDerivationFunc.Parameters.Value,
+                        AsnEncodingRules.BER
+                    );
 
                     if (pbkdf2Params.IterationCount < 0)
                     {
@@ -333,7 +387,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
 
                     PBEParameter pbeParameters = PBEParameter.Decode(
                         algorithmIdentifier.Parameters.Value,
-                        AsnEncodingRules.BER);
+                        AsnEncodingRules.BER
+                    );
 
                     if (pbeParameters.IterationCount < 0)
                     {

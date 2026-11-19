@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,61 +33,70 @@
 
 using System.Configuration;
 
-namespace System.Net.Configuration 
+namespace System.Net.Configuration
 {
-	public sealed class SocketElement : ConfigurationElement
-	{
-		#region Fields
+    public sealed class SocketElement : ConfigurationElement
+    {
+        #region Fields
 
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty alwaysUseCompletionPortsForAcceptProp;
-		static ConfigurationProperty alwaysUseCompletionPortsForConnectProp;
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty alwaysUseCompletionPortsForAcceptProp;
+        static ConfigurationProperty alwaysUseCompletionPortsForConnectProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		public SocketElement ()
-		{
-			alwaysUseCompletionPortsForAcceptProp = new ConfigurationProperty ("alwaysUseCompletionPortsForAccept", typeof (bool), false);
-			alwaysUseCompletionPortsForConnectProp = new ConfigurationProperty ("alwaysUseCompletionPortsForConnect", typeof (bool), false);
-			properties = new ConfigurationPropertyCollection ();
+        public SocketElement()
+        {
+            alwaysUseCompletionPortsForAcceptProp = new ConfigurationProperty(
+                "alwaysUseCompletionPortsForAccept",
+                typeof(bool),
+                false
+            );
+            alwaysUseCompletionPortsForConnectProp = new ConfigurationProperty(
+                "alwaysUseCompletionPortsForConnect",
+                typeof(bool),
+                false
+            );
+            properties = new ConfigurationPropertyCollection();
 
-			properties.Add (alwaysUseCompletionPortsForAcceptProp);
-			properties.Add (alwaysUseCompletionPortsForConnectProp);
-		}
+            properties.Add(alwaysUseCompletionPortsForAcceptProp);
+            properties.Add(alwaysUseCompletionPortsForConnectProp);
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		[ConfigurationProperty ("alwaysUseCompletionPortsForAccept", DefaultValue = "False")]
-		public bool AlwaysUseCompletionPortsForAccept {
-			get { return (bool) base [alwaysUseCompletionPortsForAcceptProp]; }
-			set { base [alwaysUseCompletionPortsForAcceptProp] = value; }
-		}
+        [ConfigurationProperty("alwaysUseCompletionPortsForAccept", DefaultValue = "False")]
+        public bool AlwaysUseCompletionPortsForAccept
+        {
+            get { return (bool)base[alwaysUseCompletionPortsForAcceptProp]; }
+            set { base[alwaysUseCompletionPortsForAcceptProp] = value; }
+        }
 
-		[ConfigurationProperty ("alwaysUseCompletionPortsForConnect", DefaultValue = "False")]
-		public bool AlwaysUseCompletionPortsForConnect {
-			get { return (bool) base [alwaysUseCompletionPortsForConnectProp]; }
-			set { base [alwaysUseCompletionPortsForConnectProp] = value; }
-		}
+        [ConfigurationProperty("alwaysUseCompletionPortsForConnect", DefaultValue = "False")]
+        public bool AlwaysUseCompletionPortsForConnect
+        {
+            get { return (bool)base[alwaysUseCompletionPortsForConnectProp]; }
+            set { base[alwaysUseCompletionPortsForConnectProp] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		[MonoTODO]
-		protected override void PostDeserialize ()
-		{
-		}
+        [MonoTODO]
+        protected override void PostDeserialize() { }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }
 
 #endif

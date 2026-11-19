@@ -1,5 +1,5 @@
 //
-// XmlTypeMapMemberAttribute.cs: 
+// XmlTypeMapMemberAttribute.cs:
 //
 // Author:
 //   Lluis Sanchez Gual (lluis@ximian.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,51 +33,51 @@ using System.Xml.Schema;
 
 namespace System.Xml.Serialization
 {
-	// XmlTypeMapMemberAttribute
-	// A member of a class that must be serialized as an attribute
+    // XmlTypeMapMemberAttribute
+    // A member of a class that must be serialized as an attribute
 
-	internal class XmlTypeMapMemberAttribute: XmlTypeMapMember
-	{
-		string _attributeName;
-		string _namespace = "";
-		XmlSchemaForm _form;
-		XmlTypeMapping _mappedType;
+    internal class XmlTypeMapMemberAttribute : XmlTypeMapMember
+    {
+        string _attributeName;
+        string _namespace = "";
+        XmlSchemaForm _form;
+        XmlTypeMapping _mappedType;
 
-		public XmlTypeMapMemberAttribute()
-		{
-		}
+        public XmlTypeMapMemberAttribute() { }
 
-		public string AttributeName
-		{
-			get { return _attributeName; }
-			set { _attributeName = value; }
-		}
+        public string AttributeName
+        {
+            get { return _attributeName; }
+            set { _attributeName = value; }
+        }
 
-		public string Namespace
-		{
-			get { return _namespace; }
-			set { _namespace = value; }
-		}
+        public string Namespace
+        {
+            get { return _namespace; }
+            set { _namespace = value; }
+        }
 
-		public string DataTypeNamespace
-		{
-			get 
-			{ 
-				if (_mappedType == null) return XmlSchema.Namespace;
-				else return _mappedType.Namespace;
-			}
-		}
+        public string DataTypeNamespace
+        {
+            get
+            {
+                if (_mappedType == null)
+                    return XmlSchema.Namespace;
+                else
+                    return _mappedType.Namespace;
+            }
+        }
 
-		public XmlSchemaForm Form 
-		{
-			get { return _form; }
-			set { _form = value; }
-		}
+        public XmlSchemaForm Form
+        {
+            get { return _form; }
+            set { _form = value; }
+        }
 
-		public XmlTypeMapping MappedType
-		{
-			get { return _mappedType; }
-			set { _mappedType = value; }
-		}
-	}
+        public XmlTypeMapping MappedType
+        {
+            get { return _mappedType; }
+            set { _mappedType = value; }
+        }
+    }
 }

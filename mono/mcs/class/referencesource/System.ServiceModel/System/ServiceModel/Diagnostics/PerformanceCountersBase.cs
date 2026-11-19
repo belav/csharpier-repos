@@ -7,45 +7,49 @@ namespace System.ServiceModel.Diagnostics
     using System.Diagnostics;
     using System.Diagnostics.PerformanceData;
     using System.Globalization;
+    using System.Linq;
     using System.Runtime;
     using System.Threading;
-    using System.Linq;
 
     abstract class PerformanceCountersBase : IDisposable
     {
-        internal abstract string InstanceName
-        {
-            get;
-        }
+        internal abstract string InstanceName { get; }
 
-        internal abstract string[] CounterNames
-        {
-            get;
-        }
+        internal abstract string[] CounterNames { get; }
 
-        internal abstract int PerfCounterStart
-        {
-            get;
-        }
+        internal abstract int PerfCounterStart { get; }
 
-        internal abstract int PerfCounterEnd
-        {
-            get;
-        }
+        internal abstract int PerfCounterEnd { get; }
 
         private static string GetInstanceNameWithHash(string instanceName, string fullInstanceName)
         {
-            return String.Format("{0}{1}", instanceName, StringUtil.GetNonRandomizedHashCode(fullInstanceName).ToString("X", CultureInfo.InvariantCulture));
+            return String.Format(
+                "{0}{1}",
+                instanceName,
+                StringUtil
+                    .GetNonRandomizedHashCode(fullInstanceName)
+                    .ToString("X", CultureInfo.InvariantCulture)
+            );
         }
 
-        protected static string EnsureUniqueInstanceName(string categoryName, string instanceName, string fullInstanceName)
+        protected static string EnsureUniqueInstanceName(
+            string categoryName,
+            string instanceName,
+            string fullInstanceName
+        )
         {
             if (String.IsNullOrEmpty(categoryName))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString("categoryName");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString(
+                    "categoryName"
+                );
             if (String.IsNullOrEmpty(instanceName))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString("instanceName");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString(
+                    "instanceName"
+                );
             if (String.IsNullOrEmpty(fullInstanceName))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString("fullInstanceName");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString(
+                    "fullInstanceName"
+                );
 
             try
             {
@@ -55,22 +59,32 @@ namespace System.ServiceModel.Diagnostics
                     return GetInstanceNameWithHash(instanceName, fullInstanceName);
                 }
             }
-            catch 
-            { 
+            catch
+            {
                 // If an exception is thrown, return the instance name without modification.
             }
 
             return instanceName;
         }
 
-        protected static string GetUniqueInstanceName(string categoryName, string instanceName, string fullInstanceName)
+        protected static string GetUniqueInstanceName(
+            string categoryName,
+            string instanceName,
+            string fullInstanceName
+        )
         {
             if (String.IsNullOrEmpty(categoryName))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString("categoryName");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString(
+                    "categoryName"
+                );
             if (String.IsNullOrEmpty(instanceName))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString("instanceName");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString(
+                    "instanceName"
+                );
             if (String.IsNullOrEmpty(fullInstanceName))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString("fullInstanceName");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString(
+                    "fullInstanceName"
+                );
 
             try
             {
@@ -86,14 +100,22 @@ namespace System.ServiceModel.Diagnostics
                 // If an exception is thrown, return the instance name without modification.
             }
 
-            return instanceName;            
+            return instanceName;
         }
 
         // remove count chars from string and add a 2 char hash code to beginning or end, as specified.
-        protected static string GetHashedString(string str, int startIndex, int count, bool hashAtEnd)
+        protected static string GetHashedString(
+            string str,
+            int startIndex,
+            int count,
+            bool hashAtEnd
+        )
         {
             string returnVal = str.Remove(startIndex, count);
-            string hash = ((uint)StringUtil.GetNonRandomizedHashCode(str) % 99).ToString("00", CultureInfo.InvariantCulture);
+            string hash = ((uint)StringUtil.GetNonRandomizedHashCode(str) % 99).ToString(
+                "00",
+                CultureInfo.InvariantCulture
+            );
             return hashAtEnd ? returnVal + hash : hash + returnVal;
         }
 
@@ -109,19 +131,18 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
 
-        // A CounterSetInstance is not disposed immediately when a service, endpoint or operation perf counter is disposed. Because messages 
-        // can be processed while a ServiceHost is being closed, and such messages can try to update perf counters data, resulting in AVs or 
-        // corruptions (see bug 249132 @ CSDMain). So instead of disposing a CounterSetInstance, we hold a WeakReference to it, until either 
+        // A CounterSetInstance is not disposed immediately when a service, endpoint or operation perf counter is disposed. Because messages
+        // can be processed while a ServiceHost is being closed, and such messages can try to update perf counters data, resulting in AVs or
+        // corruptions (see bug 249132 @ CSDMain). So instead of disposing a CounterSetInstance, we hold a WeakReference to it, until either
         // GC reclaims it or a new service/endpoint/operation perf counter is started with the same name (and re-uses the CounterSetInstance).
         // The CounterSetInstance finalizer will free up the perf counters memory, so we don't have a leak.
         protected class CounterSetInstanceCache
         {
             // instance name -> WeakReference of CounterSetInstance
-            private readonly Dictionary<string, WeakReference> cache = new Dictionary<string, WeakReference>();
+            private readonly Dictionary<string, WeakReference> cache =
+                new Dictionary<string, WeakReference>();
 
             /// <summary>
             /// Returns and removes the CounterSetInstance with the specified name from the cache. Returns null if not found.
@@ -135,7 +156,10 @@ namespace System.ServiceModel.Diagnostics
                     WeakReference wr;
                     if (this.cache.TryGetValue(instanceName, out wr))
                     {
-                        Fx.Assert(wr != null, "The values in 'availableCounterSetInstances' should not be null.");
+                        Fx.Assert(
+                            wr != null,
+                            "The values in 'availableCounterSetInstances' should not be null."
+                        );
                         this.cache.Remove(instanceName);
                         return (CounterSetInstance)wr.Target;
                     }

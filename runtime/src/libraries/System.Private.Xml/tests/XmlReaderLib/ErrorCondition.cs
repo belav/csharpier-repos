@@ -37,21 +37,51 @@ namespace System.Xml.Tests
             {
                 switch (param)
                 {
-                    case 1: ReaderHelper.Create((string)null); break;
-                    case 2: ReaderHelper.Create((TextReader)null); break;
-                    case 3: ReaderHelper.Create((Stream)null); break;
-                    case 4: ReaderHelper.Create((string)null, null); break;
-                    case 5: ReaderHelper.Create((TextReader)null, null); break;
-                    case 6: ReaderHelper.Create((Stream)null, null); break;
-                    case 7: ReaderHelper.Create((XmlReader)null, null); break;
-                    case 8: ReaderHelper.Create((Stream)null, null, (string)null); break;
-                    case 9: ReaderHelper.Create((Stream)null, null, (XmlParserContext)null); break;
-                    case 10: ReaderHelper.Create((string)null, null, null); break;
-                    case 11: ReaderHelper.Create((TextReader)null, null, (string)null); break;
-                    case 12: ReaderHelper.Create((TextReader)null, null, (XmlParserContext)null); break;
-                    case 13: new XmlNamespaceManager(null); break;
-                    case 14: XmlReader.IsName(null); break;
-                    case 15: XmlReader.IsNameToken(null); break;
+                    case 1:
+                        ReaderHelper.Create((string)null);
+                        break;
+                    case 2:
+                        ReaderHelper.Create((TextReader)null);
+                        break;
+                    case 3:
+                        ReaderHelper.Create((Stream)null);
+                        break;
+                    case 4:
+                        ReaderHelper.Create((string)null, null);
+                        break;
+                    case 5:
+                        ReaderHelper.Create((TextReader)null, null);
+                        break;
+                    case 6:
+                        ReaderHelper.Create((Stream)null, null);
+                        break;
+                    case 7:
+                        ReaderHelper.Create((XmlReader)null, null);
+                        break;
+                    case 8:
+                        ReaderHelper.Create((Stream)null, null, (string)null);
+                        break;
+                    case 9:
+                        ReaderHelper.Create((Stream)null, null, (XmlParserContext)null);
+                        break;
+                    case 10:
+                        ReaderHelper.Create((string)null, null, null);
+                        break;
+                    case 11:
+                        ReaderHelper.Create((TextReader)null, null, (string)null);
+                        break;
+                    case 12:
+                        ReaderHelper.Create((TextReader)null, null, (XmlParserContext)null);
+                        break;
+                    case 13:
+                        new XmlNamespaceManager(null);
+                        break;
+                    case 14:
+                        XmlReader.IsName(null);
+                        break;
+                    case 15:
+                        XmlReader.IsNameToken(null);
+                        break;
                     default:
                         return TEST_PASS;
                 }
@@ -62,23 +92,50 @@ namespace System.Xml.Tests
                 {
                     switch (param)
                     {
-                        case 1: ReaderHelper.Create((string)null); break;
-                        case 2: ReaderHelper.Create((TextReader)null); break;
-                        case 3: ReaderHelper.Create((Stream)null); break;
-                        case 4: ReaderHelper.Create((string)null, null); break;
-                        case 5: ReaderHelper.Create((TextReader)null, null); break;
-                        case 6: ReaderHelper.Create((Stream)null, null); break;
-                        case 7: ReaderHelper.Create((XmlReader)null, null); break;
-                        case 8: ReaderHelper.Create((Stream)null, null, (string)null); break;
-                        case 9: ReaderHelper.Create((Stream)null, null, (XmlParserContext)null); break;
-                        case 10: ReaderHelper.Create((string)null, null, null); break;
-                        case 11: ReaderHelper.Create((TextReader)null, null, (string)null); break;
-                        case 12: ReaderHelper.Create((TextReader)null, null, (XmlParserContext)null); break;
+                        case 1:
+                            ReaderHelper.Create((string)null);
+                            break;
+                        case 2:
+                            ReaderHelper.Create((TextReader)null);
+                            break;
+                        case 3:
+                            ReaderHelper.Create((Stream)null);
+                            break;
+                        case 4:
+                            ReaderHelper.Create((string)null, null);
+                            break;
+                        case 5:
+                            ReaderHelper.Create((TextReader)null, null);
+                            break;
+                        case 6:
+                            ReaderHelper.Create((Stream)null, null);
+                            break;
+                        case 7:
+                            ReaderHelper.Create((XmlReader)null, null);
+                            break;
+                        case 8:
+                            ReaderHelper.Create((Stream)null, null, (string)null);
+                            break;
+                        case 9:
+                            ReaderHelper.Create((Stream)null, null, (XmlParserContext)null);
+                            break;
+                        case 10:
+                            ReaderHelper.Create((string)null, null, null);
+                            break;
+                        case 11:
+                            ReaderHelper.Create((TextReader)null, null, (string)null);
+                            break;
+                        case 12:
+                            ReaderHelper.Create((TextReader)null, null, (XmlParserContext)null);
+                            break;
                         default:
                             return TEST_PASS;
                     }
                 }
-                catch (ArgumentNullException) { return TEST_PASS; }
+                catch (ArgumentNullException)
+                {
+                    return TEST_PASS;
+                }
             }
             catch (NullReferenceException)
             {
@@ -86,14 +143,23 @@ namespace System.Xml.Tests
                 {
                     switch (param)
                     {
-                        case 13: new XmlNamespaceManager(null); break;
-                        case 14: XmlReader.IsName(null); break;
-                        case 15: XmlReader.IsNameToken(null); break;
+                        case 13:
+                            new XmlNamespaceManager(null);
+                            break;
+                        case 14:
+                            XmlReader.IsName(null);
+                            break;
+                        case 15:
+                            XmlReader.IsNameToken(null);
+                            break;
                         default:
                             return TEST_PASS;
                     }
                 }
-                catch (NullReferenceException) { return TEST_PASS; }
+                catch (NullReferenceException)
+                {
+                    return TEST_PASS;
+                }
             }
             return TEST_FAIL;
         }
@@ -110,9 +176,15 @@ namespace System.Xml.Tests
             {
                 switch (param)
                 {
-                    case 1: ReaderHelper.Create(string.Empty); break;
-                    case 2: ReaderHelper.Create(string.Empty, null); break;
-                    case 3: ReaderHelper.Create(string.Empty, null, (XmlParserContext)null); break;
+                    case 1:
+                        ReaderHelper.Create(string.Empty);
+                        break;
+                    case 2:
+                        ReaderHelper.Create(string.Empty, null);
+                        break;
+                    case 3:
+                        ReaderHelper.Create(string.Empty, null, (XmlParserContext)null);
+                        break;
                 }
             }
             catch (ArgumentException)
@@ -121,12 +193,21 @@ namespace System.Xml.Tests
                 {
                     switch (param)
                     {
-                        case 1: ReaderHelper.Create(string.Empty); break;
-                        case 2: ReaderHelper.Create(string.Empty, null); break;
-                        case 3: ReaderHelper.Create(string.Empty, null, (XmlParserContext)null); break;
+                        case 1:
+                            ReaderHelper.Create(string.Empty);
+                            break;
+                        case 2:
+                            ReaderHelper.Create(string.Empty, null);
+                            break;
+                        case 3:
+                            ReaderHelper.Create(string.Empty, null, (XmlParserContext)null);
+                            break;
                     }
                 }
-                catch (ArgumentException) { return TEST_PASS; }
+                catch (ArgumentException)
+                {
+                    return TEST_PASS;
+                }
             }
             return TEST_FAIL;
         }
@@ -153,17 +234,36 @@ namespace System.Xml.Tests
             {
                 switch (param)
                 {
-                    case 2: ReaderHelper.Create(uri); break;
-                    case 3: ReaderHelper.Create(new StringReader("<a/>")); break;
-                    case 5: ReaderHelper.Create(uri, rs); break;
-                    case 6: ReaderHelper.Create(new StringReader("<a/>"), rs); break;
-                    case 7: ReaderHelper.Create(r, rs); break;
-                    case 10: ReaderHelper.Create(uri, rs, (XmlParserContext)null); break;
-                    case 11: ReaderHelper.Create(new StringReader("<a/>"), rs, uri); break;
-                    case 12: ReaderHelper.Create(new StringReader("<a/>"), rs, (XmlParserContext)null); break;
+                    case 2:
+                        ReaderHelper.Create(uri);
+                        break;
+                    case 3:
+                        ReaderHelper.Create(new StringReader("<a/>"));
+                        break;
+                    case 5:
+                        ReaderHelper.Create(uri, rs);
+                        break;
+                    case 6:
+                        ReaderHelper.Create(new StringReader("<a/>"), rs);
+                        break;
+                    case 7:
+                        ReaderHelper.Create(r, rs);
+                        break;
+                    case 10:
+                        ReaderHelper.Create(uri, rs, (XmlParserContext)null);
+                        break;
+                    case 11:
+                        ReaderHelper.Create(new StringReader("<a/>"), rs, uri);
+                        break;
+                    case 12:
+                        ReaderHelper.Create(new StringReader("<a/>"), rs, (XmlParserContext)null);
+                        break;
                 }
             }
-            catch (FileNotFoundException) { return (IsXsltReader()) ? TEST_PASS : TEST_FAIL; }
+            catch (FileNotFoundException)
+            {
+                return (IsXsltReader()) ? TEST_PASS : TEST_FAIL;
+            }
             return TEST_PASS;
         }
 
@@ -211,53 +311,141 @@ namespace System.Xml.Tests
         public int v2()
         {
             int param = (int)CurVariation.Param;
-            ReloadSource(new StringReader(@"<a xmlns:f='urn:foobar' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>" +
-                       "<b><c xsi:type='f:mytype'>some content</c></b></a>"));
+            ReloadSource(
+                new StringReader(
+                    @"<a xmlns:f='urn:foobar' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>"
+                        + "<b><c xsi:type='f:mytype'>some content</c></b></a>"
+                )
+            );
 
             string s = "";
             try
             {
                 switch (param)
                 {
-                    case 1: s = DataReader[null]; break;
-                    case 2: s = DataReader[null, null]; break;
-                    case 3: s = DataReader.GetAttribute(null); break;
-                    case 4: s = DataReader.GetAttribute(null, null); break;
-                    case 5: DataReader.MoveToAttribute(null); break;
-                    case 6: DataReader.MoveToAttribute(null, null); break;
-                    case 7: DataReader.ReadContentAsBase64(null, 0, 0); break;
-                    case 8: DataReader.ReadContentAsBinHex(null, 0, 0); break;
-                    case 9: DataReader.ReadElementContentAs(null, null, null, null); break;
-                    case 10: DataReader.ReadElementContentAs(null, null, "a", null); break;
-                    case 11: DataReader.ReadElementContentAsBase64(null, 0, 0); break;
-                    case 12: DataReader.ReadElementContentAsBinHex(null, 0, 0); break;
-                    case 13: DataReader.ReadElementContentAsBoolean(null, null); break;
-                    case 14: DataReader.ReadElementContentAsBoolean("a", null); break;
-                    case 17: DataReader.ReadElementContentAsDecimal(null, null); break;
-                    case 18: DataReader.ReadElementContentAsDecimal("a", null); break;
-                    case 19: DataReader.ReadElementContentAsDouble(null, null); break;
-                    case 20: DataReader.ReadElementContentAsDouble("a", null); break;
-                    case 21: DataReader.ReadElementContentAsFloat(null, null); break;
-                    case 22: DataReader.ReadElementContentAsFloat("a", null); break;
-                    case 23: DataReader.ReadElementContentAsInt(null, null); break;
-                    case 24: DataReader.ReadElementContentAsInt("a", null); break;
-                    case 25: DataReader.ReadElementContentAsLong(null, null); break;
-                    case 26: DataReader.ReadElementContentAsLong("a", null); break;
-                    case 27: DataReader.ReadElementContentAsObject(null, null); break;
-                    case 28: DataReader.ReadElementContentAsObject("a", null); break;
-                    case 29: DataReader.Read(); DataReader.ReadElementContentAsString(null, null); break;
-                    case 30: DataReader.Read(); DataReader.ReadElementContentAsString("a", null); break;
-                    case 31: DataReader.ReadToDescendant(null); break;
-                    case 32: DataReader.ReadToDescendant(null, null); break;
-                    case 33: DataReader.ReadToDescendant("a", null); break;
-                    case 34: DataReader.ReadToFollowing(null); break;
-                    case 35: DataReader.ReadToFollowing(null, null); break;
-                    case 36: DataReader.ReadToFollowing("a", null); break;
-                    case 37: DataReader.ReadToNextSibling(null); break;
-                    case 38: DataReader.ReadToNextSibling(null, null); break;
-                    case 39: DataReader.ReadToNextSibling("a", null); break;
-                    case 40: DataReader.Read(); DataReader.MoveToFirstAttribute(); DataReader.ReadValueChunk(null, 0, 0); break;
-                    case 41: DataReader.Read(); DataReader.MoveToFirstAttribute(); DataReader.ReadContentAs(null, null); break;
+                    case 1:
+                        s = DataReader[null];
+                        break;
+                    case 2:
+                        s = DataReader[null, null];
+                        break;
+                    case 3:
+                        s = DataReader.GetAttribute(null);
+                        break;
+                    case 4:
+                        s = DataReader.GetAttribute(null, null);
+                        break;
+                    case 5:
+                        DataReader.MoveToAttribute(null);
+                        break;
+                    case 6:
+                        DataReader.MoveToAttribute(null, null);
+                        break;
+                    case 7:
+                        DataReader.ReadContentAsBase64(null, 0, 0);
+                        break;
+                    case 8:
+                        DataReader.ReadContentAsBinHex(null, 0, 0);
+                        break;
+                    case 9:
+                        DataReader.ReadElementContentAs(null, null, null, null);
+                        break;
+                    case 10:
+                        DataReader.ReadElementContentAs(null, null, "a", null);
+                        break;
+                    case 11:
+                        DataReader.ReadElementContentAsBase64(null, 0, 0);
+                        break;
+                    case 12:
+                        DataReader.ReadElementContentAsBinHex(null, 0, 0);
+                        break;
+                    case 13:
+                        DataReader.ReadElementContentAsBoolean(null, null);
+                        break;
+                    case 14:
+                        DataReader.ReadElementContentAsBoolean("a", null);
+                        break;
+                    case 17:
+                        DataReader.ReadElementContentAsDecimal(null, null);
+                        break;
+                    case 18:
+                        DataReader.ReadElementContentAsDecimal("a", null);
+                        break;
+                    case 19:
+                        DataReader.ReadElementContentAsDouble(null, null);
+                        break;
+                    case 20:
+                        DataReader.ReadElementContentAsDouble("a", null);
+                        break;
+                    case 21:
+                        DataReader.ReadElementContentAsFloat(null, null);
+                        break;
+                    case 22:
+                        DataReader.ReadElementContentAsFloat("a", null);
+                        break;
+                    case 23:
+                        DataReader.ReadElementContentAsInt(null, null);
+                        break;
+                    case 24:
+                        DataReader.ReadElementContentAsInt("a", null);
+                        break;
+                    case 25:
+                        DataReader.ReadElementContentAsLong(null, null);
+                        break;
+                    case 26:
+                        DataReader.ReadElementContentAsLong("a", null);
+                        break;
+                    case 27:
+                        DataReader.ReadElementContentAsObject(null, null);
+                        break;
+                    case 28:
+                        DataReader.ReadElementContentAsObject("a", null);
+                        break;
+                    case 29:
+                        DataReader.Read();
+                        DataReader.ReadElementContentAsString(null, null);
+                        break;
+                    case 30:
+                        DataReader.Read();
+                        DataReader.ReadElementContentAsString("a", null);
+                        break;
+                    case 31:
+                        DataReader.ReadToDescendant(null);
+                        break;
+                    case 32:
+                        DataReader.ReadToDescendant(null, null);
+                        break;
+                    case 33:
+                        DataReader.ReadToDescendant("a", null);
+                        break;
+                    case 34:
+                        DataReader.ReadToFollowing(null);
+                        break;
+                    case 35:
+                        DataReader.ReadToFollowing(null, null);
+                        break;
+                    case 36:
+                        DataReader.ReadToFollowing("a", null);
+                        break;
+                    case 37:
+                        DataReader.ReadToNextSibling(null);
+                        break;
+                    case 38:
+                        DataReader.ReadToNextSibling(null, null);
+                        break;
+                    case 39:
+                        DataReader.ReadToNextSibling("a", null);
+                        break;
+                    case 40:
+                        DataReader.Read();
+                        DataReader.MoveToFirstAttribute();
+                        DataReader.ReadValueChunk(null, 0, 0);
+                        break;
+                    case 41:
+                        DataReader.Read();
+                        DataReader.MoveToFirstAttribute();
+                        DataReader.ReadContentAs(null, null);
+                        break;
                 }
             }
             catch (ArgumentNullException)
@@ -266,45 +454,120 @@ namespace System.Xml.Tests
                 {
                     switch (param)
                     {
-                        case 2: s = DataReader[null, null]; break;
-                        case 4: s = DataReader.GetAttribute(null, null); break;
-                        case 6: DataReader.MoveToAttribute(null, null); break;
-                        case 7: DataReader.ReadContentAsBase64(null, 0, 0); break;
-                        case 8: DataReader.ReadContentAsBinHex(null, 0, 0); break;
-                        case 9: DataReader.ReadElementContentAs(null, null, null, null); break;
-                        case 10: DataReader.ReadElementContentAs(null, null, "a", null); break;
-                        case 11: DataReader.ReadElementContentAsBase64(null, 0, 0); break;
-                        case 12: DataReader.ReadElementContentAsBinHex(null, 0, 0); break;
-                        case 13: DataReader.ReadElementContentAsBoolean(null, null); break;
-                        case 14: DataReader.ReadElementContentAsBoolean("a", null); break;
-                        case 17: DataReader.ReadElementContentAsDecimal(null, null); break;
-                        case 18: DataReader.ReadElementContentAsDecimal("a", null); break;
-                        case 19: DataReader.ReadElementContentAsDouble(null, null); break;
-                        case 20: DataReader.ReadElementContentAsDouble("a", null); break;
-                        case 21: DataReader.ReadElementContentAsFloat(null, null); break;
-                        case 22: DataReader.ReadElementContentAsFloat("a", null); break;
-                        case 23: DataReader.ReadElementContentAsInt(null, null); break;
-                        case 24: DataReader.ReadElementContentAsInt("a", null); break;
-                        case 25: DataReader.ReadElementContentAsLong(null, null); break;
-                        case 26: DataReader.ReadElementContentAsLong("a", null); break;
-                        case 27: DataReader.ReadElementContentAsObject(null, null); break;
-                        case 28: DataReader.ReadElementContentAsObject("a", null); break;
-                        case 29: DataReader.ReadElementContentAsString(null, null); break;
-                        case 30: DataReader.ReadElementContentAsString("a", null); break;
-                        case 31: DataReader.ReadToDescendant(null); break;
-                        case 32: DataReader.ReadToDescendant(null, null); break;
-                        case 33: DataReader.ReadToDescendant("a", null); break;
-                        case 34: DataReader.ReadToFollowing(null); break;
-                        case 35: DataReader.ReadToFollowing(null, null); break;
-                        case 36: DataReader.ReadToFollowing("a", null); break;
-                        case 37: DataReader.ReadToNextSibling(null); break;
-                        case 38: DataReader.ReadToNextSibling(null, null); break;
-                        case 39: DataReader.ReadToNextSibling("a", null); break;
-                        case 40: DataReader.ReadValueChunk(null, 0, 0); break;
-                        case 41: DataReader.ReadContentAs(null, null); break;
+                        case 2:
+                            s = DataReader[null, null];
+                            break;
+                        case 4:
+                            s = DataReader.GetAttribute(null, null);
+                            break;
+                        case 6:
+                            DataReader.MoveToAttribute(null, null);
+                            break;
+                        case 7:
+                            DataReader.ReadContentAsBase64(null, 0, 0);
+                            break;
+                        case 8:
+                            DataReader.ReadContentAsBinHex(null, 0, 0);
+                            break;
+                        case 9:
+                            DataReader.ReadElementContentAs(null, null, null, null);
+                            break;
+                        case 10:
+                            DataReader.ReadElementContentAs(null, null, "a", null);
+                            break;
+                        case 11:
+                            DataReader.ReadElementContentAsBase64(null, 0, 0);
+                            break;
+                        case 12:
+                            DataReader.ReadElementContentAsBinHex(null, 0, 0);
+                            break;
+                        case 13:
+                            DataReader.ReadElementContentAsBoolean(null, null);
+                            break;
+                        case 14:
+                            DataReader.ReadElementContentAsBoolean("a", null);
+                            break;
+                        case 17:
+                            DataReader.ReadElementContentAsDecimal(null, null);
+                            break;
+                        case 18:
+                            DataReader.ReadElementContentAsDecimal("a", null);
+                            break;
+                        case 19:
+                            DataReader.ReadElementContentAsDouble(null, null);
+                            break;
+                        case 20:
+                            DataReader.ReadElementContentAsDouble("a", null);
+                            break;
+                        case 21:
+                            DataReader.ReadElementContentAsFloat(null, null);
+                            break;
+                        case 22:
+                            DataReader.ReadElementContentAsFloat("a", null);
+                            break;
+                        case 23:
+                            DataReader.ReadElementContentAsInt(null, null);
+                            break;
+                        case 24:
+                            DataReader.ReadElementContentAsInt("a", null);
+                            break;
+                        case 25:
+                            DataReader.ReadElementContentAsLong(null, null);
+                            break;
+                        case 26:
+                            DataReader.ReadElementContentAsLong("a", null);
+                            break;
+                        case 27:
+                            DataReader.ReadElementContentAsObject(null, null);
+                            break;
+                        case 28:
+                            DataReader.ReadElementContentAsObject("a", null);
+                            break;
+                        case 29:
+                            DataReader.ReadElementContentAsString(null, null);
+                            break;
+                        case 30:
+                            DataReader.ReadElementContentAsString("a", null);
+                            break;
+                        case 31:
+                            DataReader.ReadToDescendant(null);
+                            break;
+                        case 32:
+                            DataReader.ReadToDescendant(null, null);
+                            break;
+                        case 33:
+                            DataReader.ReadToDescendant("a", null);
+                            break;
+                        case 34:
+                            DataReader.ReadToFollowing(null);
+                            break;
+                        case 35:
+                            DataReader.ReadToFollowing(null, null);
+                            break;
+                        case 36:
+                            DataReader.ReadToFollowing("a", null);
+                            break;
+                        case 37:
+                            DataReader.ReadToNextSibling(null);
+                            break;
+                        case 38:
+                            DataReader.ReadToNextSibling(null, null);
+                            break;
+                        case 39:
+                            DataReader.ReadToNextSibling("a", null);
+                            break;
+                        case 40:
+                            DataReader.ReadValueChunk(null, 0, 0);
+                            break;
+                        case 41:
+                            DataReader.ReadContentAs(null, null);
+                            break;
                     }
                 }
-                catch (ArgumentNullException) { return TEST_PASS; }
+                catch (ArgumentNullException)
+                {
+                    return TEST_PASS;
+                }
                 catch (InvalidOperationException)
                 {
                     if (IsSubtreeReader())
@@ -313,7 +576,10 @@ namespace System.Xml.Tests
             }
             catch (NotSupportedException)
             {
-                if (IsCustomReader() && (param == 7 || param == 8 || param == 11 || param == 12 || param == 40))
+                if (
+                    IsCustomReader()
+                    && (param == 7 || param == 8 || param == 11 || param == 12 || param == 40)
+                )
                     return TEST_PASS;
                 if ((IsCharCheckingReader() || IsXmlTextReader()) && param == 40)
                     return TEST_PASS;
@@ -325,18 +591,29 @@ namespace System.Xml.Tests
                 {
                     switch (param)
                     {
-                        case 1: s = DataReader[null]; break;
-                        case 3: s = DataReader.GetAttribute(null); break;
-                        case 5: DataReader.MoveToAttribute(null); break;
+                        case 1:
+                            s = DataReader[null];
+                            break;
+                        case 3:
+                            s = DataReader.GetAttribute(null);
+                            break;
+                        case 5:
+                            DataReader.MoveToAttribute(null);
+                            break;
                     }
                 }
-                catch (NullReferenceException) { return TEST_PASS; }
+                catch (NullReferenceException)
+                {
+                    return TEST_PASS;
+                }
             }
             finally
             {
                 DataReader.Close();
             }
-            return (IsCharCheckingReader() && (param == 7 || param == 8) || IsSubtreeReader()) ? TEST_PASS : TEST_FAIL;
+            return (IsCharCheckingReader() && (param == 7 || param == 8) || IsSubtreeReader())
+                ? TEST_PASS
+                : TEST_FAIL;
         }
 
         //[Variation("XmlReader[-1]",  Param = 1)]
@@ -354,12 +631,24 @@ namespace System.Xml.Tests
             {
                 switch (param)
                 {
-                    case 1: s = DataReader[-1]; break;
-                    case 2: s = DataReader[0]; break;
-                    case 3: s = DataReader.GetAttribute(-1); break;
-                    case 4: s = DataReader.GetAttribute(0); break;
-                    case 5: DataReader.MoveToAttribute(-1); break;
-                    case 6: DataReader.MoveToAttribute(0); break;
+                    case 1:
+                        s = DataReader[-1];
+                        break;
+                    case 2:
+                        s = DataReader[0];
+                        break;
+                    case 3:
+                        s = DataReader.GetAttribute(-1);
+                        break;
+                    case 4:
+                        s = DataReader.GetAttribute(0);
+                        break;
+                    case 5:
+                        DataReader.MoveToAttribute(-1);
+                        break;
+                    case 6:
+                        DataReader.MoveToAttribute(0);
+                        break;
                 }
             }
             catch (ArgumentOutOfRangeException)
@@ -368,15 +657,30 @@ namespace System.Xml.Tests
                 {
                     switch (param)
                     {
-                        case 1: s = DataReader[-1]; break;
-                        case 2: s = DataReader[0]; break;
-                        case 3: s = DataReader.GetAttribute(-1); break;
-                        case 4: s = DataReader.GetAttribute(0); break;
-                        case 5: DataReader.MoveToAttribute(-1); break;
-                        case 6: DataReader.MoveToAttribute(0); break;
+                        case 1:
+                            s = DataReader[-1];
+                            break;
+                        case 2:
+                            s = DataReader[0];
+                            break;
+                        case 3:
+                            s = DataReader.GetAttribute(-1);
+                            break;
+                        case 4:
+                            s = DataReader.GetAttribute(0);
+                            break;
+                        case 5:
+                            DataReader.MoveToAttribute(-1);
+                            break;
+                        case 6:
+                            DataReader.MoveToAttribute(0);
+                            break;
                     }
                 }
-                catch (ArgumentOutOfRangeException) { return TEST_PASS; }
+                catch (ArgumentOutOfRangeException)
+                {
+                    return TEST_PASS;
+                }
             }
             finally
             {
@@ -392,7 +696,8 @@ namespace System.Xml.Tests
             int param = (int)CurVariation.Param;
             string xml = @"<a>p:foo</a>";
             ReloadSource(new StringReader(xml));
-            DataReader.Read(); DataReader.Read();
+            DataReader.Read();
+            DataReader.Read();
             XmlNamespaceManager nsm = new XmlNamespaceManager(DataReader.NameTable);
             try
             {
@@ -410,7 +715,10 @@ namespace System.Xml.Tests
                     else
                         nsm.RemoveNamespace("p", null);
                 }
-                catch (ArgumentNullException) { return TEST_PASS; }
+                catch (ArgumentNullException)
+                {
+                    return TEST_PASS;
+                }
             }
             finally
             {
@@ -426,7 +734,8 @@ namespace System.Xml.Tests
             int param = (int)CurVariation.Param;
             string xml = @"<a>p:foo</a>";
             ReloadSource(new StringReader(xml));
-            DataReader.Read(); DataReader.Read();
+            DataReader.Read();
+            DataReader.Read();
             XmlNamespaceManager nsm = new XmlNamespaceManager(DataReader.NameTable);
             try
             {
@@ -444,7 +753,10 @@ namespace System.Xml.Tests
                     else
                         nsm.RemoveNamespace(null, "ns1");
                 }
-                catch (ArgumentNullException) { return TEST_PASS; }
+                catch (ArgumentNullException)
+                {
+                    return TEST_PASS;
+                }
             }
             finally
             {
@@ -458,8 +770,10 @@ namespace System.Xml.Tests
         {
             string xml = @"<a>p:foo</a>";
             ReloadSource(new StringReader(xml));
-            DataReader.Read(); DataReader.Read();
-            if (IsBinaryReader()) DataReader.Read();
+            DataReader.Read();
+            DataReader.Read();
+            if (IsBinaryReader())
+                DataReader.Read();
             XmlNamespaceManager nsm = new XmlNamespaceManager(DataReader.NameTable);
             nsm.AddNamespace("p", "ns1");
             try
@@ -472,7 +786,10 @@ namespace System.Xml.Tests
                 {
                     XmlQualifiedName qname = (XmlQualifiedName)DataReader.ReadContentAs(null, nsm);
                 }
-                catch (ArgumentNullException) { return TEST_PASS; }
+                catch (ArgumentNullException)
+                {
+                    return TEST_PASS;
+                }
                 catch (InvalidOperationException)
                 {
                     if (IsSubtreeReader())
@@ -491,7 +808,8 @@ namespace System.Xml.Tests
         {
             string xml = @"<a>p:foo</a>";
             ReloadSource(new StringReader(xml));
-            DataReader.Read(); DataReader.Read();
+            DataReader.Read();
+            DataReader.Read();
             XmlNamespaceManager nsm = new XmlNamespaceManager(DataReader.NameTable);
             try
             {
@@ -503,7 +821,10 @@ namespace System.Xml.Tests
                 {
                     nsm.AddNamespace("xml", "ns1");
                 }
-                catch (ArgumentException) { return TEST_PASS; }
+                catch (ArgumentException)
+                {
+                    return TEST_PASS;
+                }
             }
             finally
             {
@@ -515,8 +836,10 @@ namespace System.Xml.Tests
         //[Variation("Test Integrity of all values after Error")]
         public int V8()
         {
-            ReloadSourceStr(@"<a xmlns:f='urn:foobar' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>" +
-                       "<b><c xsi:type='f:mytype'>some content</c></b></a>");
+            ReloadSourceStr(
+                @"<a xmlns:f='urn:foobar' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>"
+                    + "<b><c xsi:type='f:mytype'>some content</c></b></a>"
+            );
             try
             {
                 DataReader.Read();
@@ -527,8 +850,18 @@ namespace System.Xml.Tests
             {
                 CError.Compare(DataReader.AttributeCount, 2, "AttributeCount");
                 CError.Compare(DataReader.BaseURI, string.Empty, "BaseURI");
-                CError.Compare(DataReader.CanReadBinaryContent, IsCustomReader() ? false : true, "CanReadBinaryContent");
-                CError.Compare(DataReader.CanReadValueChunk, (IsCharCheckingReader() || IsCustomReader() || IsXmlTextReader()) ? false : true, "CanReadValueChunk");
+                CError.Compare(
+                    DataReader.CanReadBinaryContent,
+                    IsCustomReader() ? false : true,
+                    "CanReadBinaryContent"
+                );
+                CError.Compare(
+                    DataReader.CanReadValueChunk,
+                    (IsCharCheckingReader() || IsCustomReader() || IsXmlTextReader())
+                        ? false
+                        : true,
+                    "CanReadValueChunk"
+                );
                 CError.Compare(DataReader.Depth, 1, "Depth");
                 CError.Compare(DataReader.EOF, false, "EOF");
                 CError.Compare(DataReader.HasAttributes, true, "HasAttributes");
@@ -541,11 +874,19 @@ namespace System.Xml.Tests
                 }
                 CError.Compare(DataReader.LocalName, "f", "LocalName");
                 CError.Compare(DataReader.Name, "xmlns:f", "Name");
-                CError.Compare(DataReader.NamespaceURI, "http://www.w3.org/2000/xmlns/", "NamespaceURI");
+                CError.Compare(
+                    DataReader.NamespaceURI,
+                    "http://www.w3.org/2000/xmlns/",
+                    "NamespaceURI"
+                );
                 CError.Compare(DataReader.NodeType, XmlNodeType.Attribute, "NodeType");
                 CError.Compare(DataReader.Prefix, "xmlns", "Prefix");
                 CError.Compare(DataReader.Read(), true, "Read");
-                CError.Compare(DataReader.ReadInnerXml(), "<c xsi:type=\"f:mytype\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">some content</c>", "ReadInnerXml");
+                CError.Compare(
+                    DataReader.ReadInnerXml(),
+                    "<c xsi:type=\"f:mytype\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">some content</c>",
+                    "ReadInnerXml"
+                );
                 CError.Compare(DataReader.ReadOuterXml(), string.Empty, "ReadOuterXml");
                 CError.Compare(DataReader.ReadState, ReadState.EndOfFile, "ReadState");
                 CError.Compare(DataReader.ReadToDescendant("b"), false, "ReadToDescendant");
@@ -555,13 +896,25 @@ namespace System.Xml.Tests
                 {
                     CError.Compare(DataReader.Settings.CheckCharacters, true, "CheckCharacters");
                     CError.Compare(DataReader.Settings.CloseInput, false, "CloseInput");
-                    CError.Compare(DataReader.Settings.ConformanceLevel, ConformanceLevel.Fragment, "ConformanceLevel");
+                    CError.Compare(
+                        DataReader.Settings.ConformanceLevel,
+                        ConformanceLevel.Fragment,
+                        "ConformanceLevel"
+                    );
                     CError.Compare(DataReader.Settings.IgnoreComments, false, "IgnoreComments");
-                    CError.Compare(DataReader.Settings.IgnoreProcessingInstructions, false, "IgnoreProcessingInstructions");
+                    CError.Compare(
+                        DataReader.Settings.IgnoreProcessingInstructions,
+                        false,
+                        "IgnoreProcessingInstructions"
+                    );
                     CError.Compare(DataReader.Settings.IgnoreWhitespace, false, "IgnoreWhitespace");
                     CError.Compare(DataReader.Settings.LineNumberOffset, 0, "LineNumberOffset");
                     CError.Compare(DataReader.Settings.LinePositionOffset, 0, "LinePositionOffset");
-                    CError.Compare(DataReader.Settings.MaxCharactersInDocument, 0L, "MaxCharactersInDocument");
+                    CError.Compare(
+                        DataReader.Settings.MaxCharactersInDocument,
+                        0L,
+                        "MaxCharactersInDocument"
+                    );
                     CError.Compare(DataReader.Settings.NameTable, null, "Settings.NameTable");
                 }
                 CError.Compare(DataReader.Value, string.Empty, "Value");
@@ -613,8 +966,16 @@ namespace System.Xml.Tests
 
             CError.Compare(DataReader.AttributeCount, 0, "AttributeCount");
             CError.Compare(DataReader.BaseURI, string.Empty, "BaseURI");
-            CError.Compare(DataReader.CanReadBinaryContent, IsCustomReader() ? false : true, "CanReadBinaryContent");
-            CError.Compare(DataReader.CanReadValueChunk, (IsCharCheckingReader() || IsCustomReader() || IsXmlTextReader()) ? false : true, "CanReadValueChunk");
+            CError.Compare(
+                DataReader.CanReadBinaryContent,
+                IsCustomReader() ? false : true,
+                "CanReadBinaryContent"
+            );
+            CError.Compare(
+                DataReader.CanReadValueChunk,
+                (IsCharCheckingReader() || IsCustomReader() || IsXmlTextReader()) ? false : true,
+                "CanReadValueChunk"
+            );
             CError.Compare(DataReader.Depth, 0, "Depth");
             CError.Compare(DataReader.EOF, IsSubtreeReader() ? true : false, "EOF");
             CError.Compare(DataReader.HasAttributes, false, "HasAttributes");
@@ -641,13 +1002,25 @@ namespace System.Xml.Tests
             {
                 CError.Compare(DataReader.Settings.CheckCharacters, true, "CheckCharacters");
                 CError.Compare(DataReader.Settings.CloseInput, false, "CloseInput");
-                CError.Compare(DataReader.Settings.ConformanceLevel, ConformanceLevel.Document, "ConformanceLevel");
+                CError.Compare(
+                    DataReader.Settings.ConformanceLevel,
+                    ConformanceLevel.Document,
+                    "ConformanceLevel"
+                );
                 CError.Compare(DataReader.Settings.IgnoreComments, false, "IgnoreComments");
-                CError.Compare(DataReader.Settings.IgnoreProcessingInstructions, false, "IgnoreProcessingInstructions");
+                CError.Compare(
+                    DataReader.Settings.IgnoreProcessingInstructions,
+                    false,
+                    "IgnoreProcessingInstructions"
+                );
                 CError.Compare(DataReader.Settings.IgnoreWhitespace, false, "IgnoreWhitespace");
                 CError.Compare(DataReader.Settings.LineNumberOffset, 0, "LineNumberOffset");
                 CError.Compare(DataReader.Settings.LinePositionOffset, 0, "LinePositionOffset");
-                CError.Compare(DataReader.Settings.MaxCharactersInDocument, 0L, "MaxCharactersInDocument");
+                CError.Compare(
+                    DataReader.Settings.MaxCharactersInDocument,
+                    0L,
+                    "MaxCharactersInDocument"
+                );
                 CError.Compare(DataReader.Settings.NameTable, null, "Settings.NameTable");
             }
             CError.Compare(DataReader.Value, string.Empty, "Value");
@@ -741,48 +1114,120 @@ namespace System.Xml.Tests
             int param = (int)CurVariation.Param;
             ReloadSource(new StringReader(xmlStr));
             DataReader.Read();
-            if (IsBinaryReader()) DataReader.Read();
+            if (IsBinaryReader())
+                DataReader.Read();
             string s = "";
             switch (param)
             {
-                case 1: s = DataReader[string.Empty]; return TEST_PASS;
-                case 2: s = DataReader[string.Empty, string.Empty]; return TEST_PASS;
-                case 3: s = DataReader.GetAttribute(string.Empty); return TEST_PASS;
-                case 4: s = DataReader.GetAttribute(string.Empty, string.Empty); return TEST_PASS;
-                case 5: DataReader.MoveToAttribute(string.Empty); return TEST_PASS;
-                case 6: DataReader.MoveToAttribute(string.Empty, string.Empty); return TEST_PASS;
-                case 10: DataReader.ReadElementContentAs(typeof(string), null, "a", string.Empty); return TEST_PASS;
-                case 28: DataReader.ReadElementContentAsObject("a", string.Empty); return TEST_PASS;
-                case 30: DataReader.ReadElementContentAsString("a", string.Empty); return TEST_PASS;
-                case 33: DataReader.ReadToDescendant("a", string.Empty); return TEST_PASS;
-                case 36: DataReader.ReadToFollowing("a", string.Empty); return TEST_PASS;
-                case 39: DataReader.ReadToNextSibling("a", string.Empty); return TEST_PASS;
+                case 1:
+                    s = DataReader[string.Empty];
+                    return TEST_PASS;
+                case 2:
+                    s = DataReader[string.Empty, string.Empty];
+                    return TEST_PASS;
+                case 3:
+                    s = DataReader.GetAttribute(string.Empty);
+                    return TEST_PASS;
+                case 4:
+                    s = DataReader.GetAttribute(string.Empty, string.Empty);
+                    return TEST_PASS;
+                case 5:
+                    DataReader.MoveToAttribute(string.Empty);
+                    return TEST_PASS;
+                case 6:
+                    DataReader.MoveToAttribute(string.Empty, string.Empty);
+                    return TEST_PASS;
+                case 10:
+                    DataReader.ReadElementContentAs(typeof(string), null, "a", string.Empty);
+                    return TEST_PASS;
+                case 28:
+                    DataReader.ReadElementContentAsObject("a", string.Empty);
+                    return TEST_PASS;
+                case 30:
+                    DataReader.ReadElementContentAsString("a", string.Empty);
+                    return TEST_PASS;
+                case 33:
+                    DataReader.ReadToDescendant("a", string.Empty);
+                    return TEST_PASS;
+                case 36:
+                    DataReader.ReadToFollowing("a", string.Empty);
+                    return TEST_PASS;
+                case 39:
+                    DataReader.ReadToNextSibling("a", string.Empty);
+                    return TEST_PASS;
             }
             try
             {
                 switch (param)
                 {
-                    case 9: DataReader.ReadElementContentAs(typeof(string), null, string.Empty, string.Empty); break;
-                    case 13: DataReader.ReadElementContentAsBoolean(string.Empty, string.Empty); break;
-                    case 14: DataReader.ReadElementContentAsBoolean("a", string.Empty); break;
-                    case 17: DataReader.ReadElementContentAsDecimal(string.Empty, string.Empty); break;
-                    case 18: DataReader.ReadElementContentAsDecimal("a", string.Empty); break;
-                    case 19: DataReader.ReadElementContentAsDouble(string.Empty, string.Empty); break;
-                    case 20: DataReader.ReadElementContentAsDouble("a", string.Empty); break;
-                    case 21: DataReader.ReadElementContentAsFloat(string.Empty, string.Empty); break;
-                    case 22: DataReader.ReadElementContentAsFloat("a", string.Empty); break;
-                    case 23: DataReader.ReadElementContentAsInt(string.Empty, string.Empty); break;
-                    case 24: DataReader.ReadElementContentAsInt("a", string.Empty); break;
-                    case 25: DataReader.ReadElementContentAsLong(string.Empty, string.Empty); break;
-                    case 26: DataReader.ReadElementContentAsLong("a", string.Empty); break;
-                    case 27: DataReader.ReadElementContentAsObject(string.Empty, string.Empty); break;
-                    case 29: DataReader.ReadElementContentAsString(string.Empty, string.Empty); break;
-                    case 31: DataReader.ReadToDescendant(string.Empty); break;
-                    case 32: DataReader.ReadToDescendant(string.Empty, string.Empty); break;
-                    case 34: DataReader.ReadToFollowing(string.Empty); break;
-                    case 35: DataReader.ReadToFollowing(string.Empty, string.Empty); break;
-                    case 37: DataReader.ReadToNextSibling(string.Empty); break;
-                    case 38: DataReader.ReadToNextSibling(string.Empty, string.Empty); break;
+                    case 9:
+                        DataReader.ReadElementContentAs(
+                            typeof(string),
+                            null,
+                            string.Empty,
+                            string.Empty
+                        );
+                        break;
+                    case 13:
+                        DataReader.ReadElementContentAsBoolean(string.Empty, string.Empty);
+                        break;
+                    case 14:
+                        DataReader.ReadElementContentAsBoolean("a", string.Empty);
+                        break;
+                    case 17:
+                        DataReader.ReadElementContentAsDecimal(string.Empty, string.Empty);
+                        break;
+                    case 18:
+                        DataReader.ReadElementContentAsDecimal("a", string.Empty);
+                        break;
+                    case 19:
+                        DataReader.ReadElementContentAsDouble(string.Empty, string.Empty);
+                        break;
+                    case 20:
+                        DataReader.ReadElementContentAsDouble("a", string.Empty);
+                        break;
+                    case 21:
+                        DataReader.ReadElementContentAsFloat(string.Empty, string.Empty);
+                        break;
+                    case 22:
+                        DataReader.ReadElementContentAsFloat("a", string.Empty);
+                        break;
+                    case 23:
+                        DataReader.ReadElementContentAsInt(string.Empty, string.Empty);
+                        break;
+                    case 24:
+                        DataReader.ReadElementContentAsInt("a", string.Empty);
+                        break;
+                    case 25:
+                        DataReader.ReadElementContentAsLong(string.Empty, string.Empty);
+                        break;
+                    case 26:
+                        DataReader.ReadElementContentAsLong("a", string.Empty);
+                        break;
+                    case 27:
+                        DataReader.ReadElementContentAsObject(string.Empty, string.Empty);
+                        break;
+                    case 29:
+                        DataReader.ReadElementContentAsString(string.Empty, string.Empty);
+                        break;
+                    case 31:
+                        DataReader.ReadToDescendant(string.Empty);
+                        break;
+                    case 32:
+                        DataReader.ReadToDescendant(string.Empty, string.Empty);
+                        break;
+                    case 34:
+                        DataReader.ReadToFollowing(string.Empty);
+                        break;
+                    case 35:
+                        DataReader.ReadToFollowing(string.Empty, string.Empty);
+                        break;
+                    case 37:
+                        DataReader.ReadToNextSibling(string.Empty);
+                        break;
+                    case 38:
+                        DataReader.ReadToNextSibling(string.Empty, string.Empty);
+                        break;
                 }
             }
             catch (ArgumentException)
@@ -791,30 +1236,80 @@ namespace System.Xml.Tests
                 {
                     switch (param)
                     {
-                        case 9: DataReader.ReadElementContentAs(typeof(string), null, string.Empty, string.Empty); break;
-                        case 13: DataReader.ReadElementContentAsBoolean(string.Empty, string.Empty); break;
-                        case 14: DataReader.ReadElementContentAsBoolean("a", string.Empty); break;
-                        case 17: DataReader.ReadElementContentAsDecimal(string.Empty, string.Empty); break;
-                        case 18: DataReader.ReadElementContentAsDecimal("a", string.Empty); break;
-                        case 19: DataReader.ReadElementContentAsDouble(string.Empty, string.Empty); break;
-                        case 20: DataReader.ReadElementContentAsDouble("a", string.Empty); break;
-                        case 21: DataReader.ReadElementContentAsFloat(string.Empty, string.Empty); break;
-                        case 22: DataReader.ReadElementContentAsFloat("a", string.Empty); break;
-                        case 23: DataReader.ReadElementContentAsInt(string.Empty, string.Empty); break;
-                        case 24: DataReader.ReadElementContentAsInt("a", string.Empty); break;
-                        case 25: DataReader.ReadElementContentAsLong(string.Empty, string.Empty); break;
-                        case 26: DataReader.ReadElementContentAsLong("a", string.Empty); break;
-                        case 27: DataReader.ReadElementContentAsObject(string.Empty, string.Empty); break;
-                        case 29: DataReader.ReadElementContentAsString(string.Empty, string.Empty); break;
-                        case 31: DataReader.ReadToDescendant(string.Empty); break;
-                        case 32: DataReader.ReadToDescendant(string.Empty, string.Empty); break;
-                        case 34: DataReader.ReadToFollowing(string.Empty); break;
-                        case 35: DataReader.ReadToFollowing(string.Empty, string.Empty); break;
-                        case 37: DataReader.ReadToNextSibling(string.Empty); break;
-                        case 38: DataReader.ReadToNextSibling(string.Empty, string.Empty); break;
+                        case 9:
+                            DataReader.ReadElementContentAs(
+                                typeof(string),
+                                null,
+                                string.Empty,
+                                string.Empty
+                            );
+                            break;
+                        case 13:
+                            DataReader.ReadElementContentAsBoolean(string.Empty, string.Empty);
+                            break;
+                        case 14:
+                            DataReader.ReadElementContentAsBoolean("a", string.Empty);
+                            break;
+                        case 17:
+                            DataReader.ReadElementContentAsDecimal(string.Empty, string.Empty);
+                            break;
+                        case 18:
+                            DataReader.ReadElementContentAsDecimal("a", string.Empty);
+                            break;
+                        case 19:
+                            DataReader.ReadElementContentAsDouble(string.Empty, string.Empty);
+                            break;
+                        case 20:
+                            DataReader.ReadElementContentAsDouble("a", string.Empty);
+                            break;
+                        case 21:
+                            DataReader.ReadElementContentAsFloat(string.Empty, string.Empty);
+                            break;
+                        case 22:
+                            DataReader.ReadElementContentAsFloat("a", string.Empty);
+                            break;
+                        case 23:
+                            DataReader.ReadElementContentAsInt(string.Empty, string.Empty);
+                            break;
+                        case 24:
+                            DataReader.ReadElementContentAsInt("a", string.Empty);
+                            break;
+                        case 25:
+                            DataReader.ReadElementContentAsLong(string.Empty, string.Empty);
+                            break;
+                        case 26:
+                            DataReader.ReadElementContentAsLong("a", string.Empty);
+                            break;
+                        case 27:
+                            DataReader.ReadElementContentAsObject(string.Empty, string.Empty);
+                            break;
+                        case 29:
+                            DataReader.ReadElementContentAsString(string.Empty, string.Empty);
+                            break;
+                        case 31:
+                            DataReader.ReadToDescendant(string.Empty);
+                            break;
+                        case 32:
+                            DataReader.ReadToDescendant(string.Empty, string.Empty);
+                            break;
+                        case 34:
+                            DataReader.ReadToFollowing(string.Empty);
+                            break;
+                        case 35:
+                            DataReader.ReadToFollowing(string.Empty, string.Empty);
+                            break;
+                        case 37:
+                            DataReader.ReadToNextSibling(string.Empty);
+                            break;
+                        case 38:
+                            DataReader.ReadToNextSibling(string.Empty, string.Empty);
+                            break;
                     }
                 }
-                catch (ArgumentException) { return TEST_PASS; }
+                catch (ArgumentException)
+                {
+                    return TEST_PASS;
+                }
             }
             catch (NotSupportedException)
             {
@@ -822,7 +1317,10 @@ namespace System.Xml.Tests
                     return TEST_PASS;
                 return TEST_FAIL;
             }
-            catch (FormatException) { return TEST_PASS; }
+            catch (FormatException)
+            {
+                return TEST_PASS;
+            }
             finally
             {
                 DataReader.Close();
@@ -869,8 +1367,12 @@ namespace System.Xml.Tests
         public int v14()
         {
             int param = (int)CurVariation.Param;
-            ReloadSource(new StringReader(@"<a xmlns:f='urn:foobar' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>" +
-                       "<b><c xsi:type='f:mytype'>some content</c></b></a>"));
+            ReloadSource(
+                new StringReader(
+                    @"<a xmlns:f='urn:foobar' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>"
+                        + "<b><c xsi:type='f:mytype'>some content</c></b></a>"
+                )
+            );
             char[] c = new char[1];
             byte[] b = new byte[1];
 
@@ -878,22 +1380,62 @@ namespace System.Xml.Tests
             {
                 switch (param)
                 {
-                    case 1: DataReader.ReadContentAsBase64(b, -1, 0); break;
-                    case 2: DataReader.ReadContentAsBinHex(b, -1, 0); break;
-                    case 3: DataReader.ReadContentAsBase64(b, 0, -1); break;
-                    case 4: DataReader.ReadContentAsBinHex(b, 0, -1); break;
-                    case 5: DataReader.ReadContentAsBase64(b, 0, 2); break;
-                    case 6: DataReader.ReadContentAsBinHex(b, 0, 2); break;
-                    case 7: DataReader.ReadElementContentAsBase64(b, -1, 0); break;
-                    case 8: DataReader.ReadElementContentAsBinHex(b, -1, 0); break;
-                    case 9: DataReader.Read(); DataReader.MoveToFirstAttribute(); DataReader.ReadValueChunk(c, 0, -1); break;
-                    case 10: DataReader.ReadElementContentAsBase64(b, 0, -10); break;
-                    case 11: DataReader.ReadElementContentAsBinHex(b, 0, -1); break;
-                    case 12: DataReader.Read(); DataReader.MoveToFirstAttribute(); DataReader.ReadValueChunk(c, 0, -1); break;
-                    case 13: DataReader.ReadElementContentAsBase64(b, 0, 2); break;
-                    case 14: DataReader.ReadElementContentAsBinHex(b, 0, 2); break;
-                    case 15: DataReader.Read(); DataReader.MoveToFirstAttribute(); DataReader.ReadValueChunk(c, 0, 2); break;
-                    case 16: DataReader.Read(); DataReader.MoveToFirstAttribute(); DataReader.ReadValueChunk(c, -1, 2); break;
+                    case 1:
+                        DataReader.ReadContentAsBase64(b, -1, 0);
+                        break;
+                    case 2:
+                        DataReader.ReadContentAsBinHex(b, -1, 0);
+                        break;
+                    case 3:
+                        DataReader.ReadContentAsBase64(b, 0, -1);
+                        break;
+                    case 4:
+                        DataReader.ReadContentAsBinHex(b, 0, -1);
+                        break;
+                    case 5:
+                        DataReader.ReadContentAsBase64(b, 0, 2);
+                        break;
+                    case 6:
+                        DataReader.ReadContentAsBinHex(b, 0, 2);
+                        break;
+                    case 7:
+                        DataReader.ReadElementContentAsBase64(b, -1, 0);
+                        break;
+                    case 8:
+                        DataReader.ReadElementContentAsBinHex(b, -1, 0);
+                        break;
+                    case 9:
+                        DataReader.Read();
+                        DataReader.MoveToFirstAttribute();
+                        DataReader.ReadValueChunk(c, 0, -1);
+                        break;
+                    case 10:
+                        DataReader.ReadElementContentAsBase64(b, 0, -10);
+                        break;
+                    case 11:
+                        DataReader.ReadElementContentAsBinHex(b, 0, -1);
+                        break;
+                    case 12:
+                        DataReader.Read();
+                        DataReader.MoveToFirstAttribute();
+                        DataReader.ReadValueChunk(c, 0, -1);
+                        break;
+                    case 13:
+                        DataReader.ReadElementContentAsBase64(b, 0, 2);
+                        break;
+                    case 14:
+                        DataReader.ReadElementContentAsBinHex(b, 0, 2);
+                        break;
+                    case 15:
+                        DataReader.Read();
+                        DataReader.MoveToFirstAttribute();
+                        DataReader.ReadValueChunk(c, 0, 2);
+                        break;
+                    case 16:
+                        DataReader.Read();
+                        DataReader.MoveToFirstAttribute();
+                        DataReader.ReadValueChunk(c, -1, 2);
+                        break;
                 }
             }
             catch (ArgumentOutOfRangeException)
@@ -902,32 +1444,73 @@ namespace System.Xml.Tests
                 {
                     switch (param)
                     {
-                        case 1: DataReader.ReadContentAsBase64(b, -1, 0); break;
-                        case 2: DataReader.ReadContentAsBinHex(b, -1, 0); break;
-                        case 3: DataReader.ReadContentAsBase64(b, 0, -1); break;
-                        case 4: DataReader.ReadContentAsBinHex(b, 0, -1); break;
-                        case 5: DataReader.ReadContentAsBase64(b, 0, 2); break;
-                        case 6: DataReader.ReadContentAsBinHex(b, 0, 2); break;
-                        case 7: DataReader.ReadElementContentAsBase64(b, -1, 0); break;
-                        case 8: DataReader.ReadElementContentAsBinHex(b, -1, 0); break;
-                        case 9: DataReader.ReadValueChunk(c, 0, -1); break;
-                        case 10: DataReader.ReadElementContentAsBase64(b, 0, -10); break;
-                        case 11: DataReader.ReadElementContentAsBinHex(b, 0, -1); break;
-                        case 12: DataReader.ReadValueChunk(c, 0, -1); break;
-                        case 13: DataReader.ReadElementContentAsBase64(b, 0, 2); break;
-                        case 14: DataReader.ReadElementContentAsBinHex(b, 0, 2); break;
-                        case 15: DataReader.ReadValueChunk(c, 0, 2); break;
-                        case 16: DataReader.ReadValueChunk(c, -1, 2); break;
+                        case 1:
+                            DataReader.ReadContentAsBase64(b, -1, 0);
+                            break;
+                        case 2:
+                            DataReader.ReadContentAsBinHex(b, -1, 0);
+                            break;
+                        case 3:
+                            DataReader.ReadContentAsBase64(b, 0, -1);
+                            break;
+                        case 4:
+                            DataReader.ReadContentAsBinHex(b, 0, -1);
+                            break;
+                        case 5:
+                            DataReader.ReadContentAsBase64(b, 0, 2);
+                            break;
+                        case 6:
+                            DataReader.ReadContentAsBinHex(b, 0, 2);
+                            break;
+                        case 7:
+                            DataReader.ReadElementContentAsBase64(b, -1, 0);
+                            break;
+                        case 8:
+                            DataReader.ReadElementContentAsBinHex(b, -1, 0);
+                            break;
+                        case 9:
+                            DataReader.ReadValueChunk(c, 0, -1);
+                            break;
+                        case 10:
+                            DataReader.ReadElementContentAsBase64(b, 0, -10);
+                            break;
+                        case 11:
+                            DataReader.ReadElementContentAsBinHex(b, 0, -1);
+                            break;
+                        case 12:
+                            DataReader.ReadValueChunk(c, 0, -1);
+                            break;
+                        case 13:
+                            DataReader.ReadElementContentAsBase64(b, 0, 2);
+                            break;
+                        case 14:
+                            DataReader.ReadElementContentAsBinHex(b, 0, 2);
+                            break;
+                        case 15:
+                            DataReader.ReadValueChunk(c, 0, 2);
+                            break;
+                        case 16:
+                            DataReader.ReadValueChunk(c, -1, 2);
+                            break;
                     }
                 }
-                catch (ArgumentOutOfRangeException) { return TEST_PASS; }
+                catch (ArgumentOutOfRangeException)
+                {
+                    return TEST_PASS;
+                }
             }
-            catch (NotSupportedException) { if (IsCustomReader() || IsCharCheckingReader() || IsXmlTextReader()) return TEST_PASS; }
+            catch (NotSupportedException)
+            {
+                if (IsCustomReader() || IsCharCheckingReader() || IsXmlTextReader())
+                    return TEST_PASS;
+            }
             finally
             {
                 DataReader.Close();
             }
-            return ((IsCharCheckingReader() && param >= 1 && param <= 6) || IsSubtreeReader()) ? TEST_PASS : TEST_FAIL;
+            return ((IsCharCheckingReader() && param >= 1 && param <= 6) || IsSubtreeReader())
+                ? TEST_PASS
+                : TEST_FAIL;
         }
 
         //[Variation(Desc = "DataReader.Settings.LineNumberOffset - readonly",  Param = 1)]
@@ -945,25 +1528,52 @@ namespace System.Xml.Tests
         //[Variation(Desc = "DataReader.Settings.DtdProcessing - readonly", Param = 13)]
         public int var15()
         {
-            if (IsCustomReader() || IsXmlTextReader()) return TEST_SKIPPED;
+            if (IsCustomReader() || IsXmlTextReader())
+                return TEST_SKIPPED;
             int param = (int)CurVariation.Param;
-            ReloadSource(new StringReader(@"<a xmlns:f='urn:foobar' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>" +
-                       "<b><c xsi:type='f:mytype'>some content</c></b></a>"));
+            ReloadSource(
+                new StringReader(
+                    @"<a xmlns:f='urn:foobar' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>"
+                        + "<b><c xsi:type='f:mytype'>some content</c></b></a>"
+                )
+            );
             try
             {
                 switch (param)
                 {
-                    case 1: DataReader.Settings.LineNumberOffset = -10; break;
-                    case 2: DataReader.Settings.LinePositionOffset = -10; break;
-                    case 3: DataReader.Settings.CheckCharacters = false; break;
-                    case 4: DataReader.Settings.CloseInput = false; break;
-                    case 5: DataReader.Settings.ConformanceLevel = ConformanceLevel.Fragment; break;
-                    case 6: DataReader.Settings.IgnoreComments = false; break;
-                    case 7: DataReader.Settings.IgnoreProcessingInstructions = false; break;
-                    case 8: DataReader.Settings.IgnoreWhitespace = false; break;
-                    case 9: DataReader.Settings.MaxCharactersInDocument = -10; break;
-                    case 12: DataReader.Settings.MaxCharactersFromEntities = -10; break;
-                    case 13: DataReader.Settings.DtdProcessing = (DtdProcessing)(-10); break;
+                    case 1:
+                        DataReader.Settings.LineNumberOffset = -10;
+                        break;
+                    case 2:
+                        DataReader.Settings.LinePositionOffset = -10;
+                        break;
+                    case 3:
+                        DataReader.Settings.CheckCharacters = false;
+                        break;
+                    case 4:
+                        DataReader.Settings.CloseInput = false;
+                        break;
+                    case 5:
+                        DataReader.Settings.ConformanceLevel = ConformanceLevel.Fragment;
+                        break;
+                    case 6:
+                        DataReader.Settings.IgnoreComments = false;
+                        break;
+                    case 7:
+                        DataReader.Settings.IgnoreProcessingInstructions = false;
+                        break;
+                    case 8:
+                        DataReader.Settings.IgnoreWhitespace = false;
+                        break;
+                    case 9:
+                        DataReader.Settings.MaxCharactersInDocument = -10;
+                        break;
+                    case 12:
+                        DataReader.Settings.MaxCharactersFromEntities = -10;
+                        break;
+                    case 13:
+                        DataReader.Settings.DtdProcessing = (DtdProcessing)(-10);
+                        break;
                 }
             }
             catch (XmlException)
@@ -972,20 +1582,45 @@ namespace System.Xml.Tests
                 {
                     switch (param)
                     {
-                        case 1: DataReader.Settings.LineNumberOffset = -10; break;
-                        case 2: DataReader.Settings.LinePositionOffset = -10; break;
-                        case 3: DataReader.Settings.CheckCharacters = false; break;
-                        case 4: DataReader.Settings.CloseInput = false; break;
-                        case 5: DataReader.Settings.ConformanceLevel = ConformanceLevel.Fragment; break;
-                        case 6: DataReader.Settings.IgnoreComments = false; break;
-                        case 7: DataReader.Settings.IgnoreProcessingInstructions = false; break;
-                        case 8: DataReader.Settings.IgnoreWhitespace = false; break;
-                        case 9: DataReader.Settings.MaxCharactersInDocument = -10; break;
-                        case 12: DataReader.Settings.MaxCharactersFromEntities = -10; break;
-                        case 13: DataReader.Settings.DtdProcessing = (DtdProcessing)(-10); break;
+                        case 1:
+                            DataReader.Settings.LineNumberOffset = -10;
+                            break;
+                        case 2:
+                            DataReader.Settings.LinePositionOffset = -10;
+                            break;
+                        case 3:
+                            DataReader.Settings.CheckCharacters = false;
+                            break;
+                        case 4:
+                            DataReader.Settings.CloseInput = false;
+                            break;
+                        case 5:
+                            DataReader.Settings.ConformanceLevel = ConformanceLevel.Fragment;
+                            break;
+                        case 6:
+                            DataReader.Settings.IgnoreComments = false;
+                            break;
+                        case 7:
+                            DataReader.Settings.IgnoreProcessingInstructions = false;
+                            break;
+                        case 8:
+                            DataReader.Settings.IgnoreWhitespace = false;
+                            break;
+                        case 9:
+                            DataReader.Settings.MaxCharactersInDocument = -10;
+                            break;
+                        case 12:
+                            DataReader.Settings.MaxCharactersFromEntities = -10;
+                            break;
+                        case 13:
+                            DataReader.Settings.DtdProcessing = (DtdProcessing)(-10);
+                            break;
                     }
                 }
-                catch (XmlException) { return TEST_PASS; }
+                catch (XmlException)
+                {
+                    return TEST_PASS;
+                }
             }
             return TEST_FAIL;
         }
@@ -1037,7 +1672,11 @@ namespace System.Xml.Tests
             int[] skipParams = new int[] { 1, 2, 3, 4, 5, 35, 36, 37, 38 };
             char[] chars = new char[3];
             string s = "";
-            ReloadSource(new StringReader("<elem0>123 $%^ 56789 abcdefg hij klmn opqrst  12345 uvw xy ^ z</elem0>"));
+            ReloadSource(
+                new StringReader(
+                    "<elem0>123 $%^ 56789 abcdefg hij klmn opqrst  12345 uvw xy ^ z</elem0>"
+                )
+            );
             DataReader.Read();
             DataReader.Close();
             try
@@ -1050,52 +1689,144 @@ namespace System.Xml.Tests
                 {
                     switch (param)
                     {
-                        case 1: CError.Compare(DataReader.ReadContentAsBase64(buffer, 0, 3), 0, "size"); break;
-                        case 2: CError.Compare(DataReader.ReadContentAsBinHex(buffer, 0, 3), 0, "size"); break;
-                        case 3: CError.Compare(DataReader.ReadElementContentAsBase64(buffer, 0, 3), 0, "size"); break;
-                        case 4: CError.Compare(DataReader.ReadElementContentAsBinHex(buffer, 0, 3), 0, "size"); break;
-                        case 5: CError.Compare(DataReader.ReadValueChunk(chars, 0, 3), 0, "size"); break;
-                        case 6: s = DataReader["a"]; return TEST_PASS;
-                        case 7: s = DataReader["a", "b"]; return TEST_PASS;
-                        case 8: s = DataReader.GetAttribute("a"); return TEST_PASS;
-                        case 9: s = DataReader.GetAttribute("a", "b"); return TEST_PASS;
-                        case 10: DataReader.MoveToAttribute("a"); return TEST_PASS;
-                        case 11: DataReader.MoveToAttribute("a", "b"); return TEST_PASS;
-                        case 12: DataReader.ReadElementContentAs(typeof(string), null, "a", "b"); return TEST_PASS;
-                        case 13: DataReader.ReadElementContentAsObject(); return TEST_PASS;
-                        case 14: DataReader.ReadElementContentAsString(); return TEST_PASS;
-                        case 15: DataReader.ReadToDescendant("a", "b"); return TEST_PASS;
-                        case 16: DataReader.ReadToFollowing("a", "b"); return TEST_PASS;
-                        case 17: DataReader.ReadToNextSibling("a", "b"); return TEST_PASS;
-                        case 18: DataReader.ReadElementContentAs(typeof(string), null); break;
-                        case 19: DataReader.ReadElementContentAsBoolean("a", "b"); break;
-                        case 20: DataReader.ReadElementContentAsBoolean(); break;
-                        case 23: DataReader.ReadElementContentAsDecimal("a", "b"); break;
-                        case 24: DataReader.ReadElementContentAsDecimal(); break;
-                        case 25: DataReader.ReadElementContentAsDouble("a", "b"); break;
-                        case 26: DataReader.ReadElementContentAsDouble(); break;
-                        case 27: DataReader.ReadElementContentAsFloat("a", "b"); break;
-                        case 28: DataReader.ReadElementContentAsFloat(); break;
-                        case 29: DataReader.ReadElementContentAsInt("a", "b"); break;
-                        case 30: DataReader.ReadElementContentAsInt(); break;
-                        case 31: DataReader.ReadElementContentAsLong(); break;
-                        case 32: DataReader.ReadElementContentAsLong("a", "b"); break;
-                        case 33: DataReader.ReadElementContentAsObject("a", "b"); break;
-                        case 34: DataReader.ReadElementContentAsString("a", "b"); break;
-                        case 35: DataReader.ReadToDescendant("a"); break;
-                        case 36: DataReader.ReadToFollowing("a"); break;
-                        case 37: DataReader.ReadToNextSibling("a"); break;
-                        case 38: DataReader.ReadAttributeValue(); break;
-                        case 39: DataReader.ResolveEntity(); break;
+                        case 1:
+                            CError.Compare(DataReader.ReadContentAsBase64(buffer, 0, 3), 0, "size");
+                            break;
+                        case 2:
+                            CError.Compare(DataReader.ReadContentAsBinHex(buffer, 0, 3), 0, "size");
+                            break;
+                        case 3:
+                            CError.Compare(
+                                DataReader.ReadElementContentAsBase64(buffer, 0, 3),
+                                0,
+                                "size"
+                            );
+                            break;
+                        case 4:
+                            CError.Compare(
+                                DataReader.ReadElementContentAsBinHex(buffer, 0, 3),
+                                0,
+                                "size"
+                            );
+                            break;
+                        case 5:
+                            CError.Compare(DataReader.ReadValueChunk(chars, 0, 3), 0, "size");
+                            break;
+                        case 6:
+                            s = DataReader["a"];
+                            return TEST_PASS;
+                        case 7:
+                            s = DataReader["a", "b"];
+                            return TEST_PASS;
+                        case 8:
+                            s = DataReader.GetAttribute("a");
+                            return TEST_PASS;
+                        case 9:
+                            s = DataReader.GetAttribute("a", "b");
+                            return TEST_PASS;
+                        case 10:
+                            DataReader.MoveToAttribute("a");
+                            return TEST_PASS;
+                        case 11:
+                            DataReader.MoveToAttribute("a", "b");
+                            return TEST_PASS;
+                        case 12:
+                            DataReader.ReadElementContentAs(typeof(string), null, "a", "b");
+                            return TEST_PASS;
+                        case 13:
+                            DataReader.ReadElementContentAsObject();
+                            return TEST_PASS;
+                        case 14:
+                            DataReader.ReadElementContentAsString();
+                            return TEST_PASS;
+                        case 15:
+                            DataReader.ReadToDescendant("a", "b");
+                            return TEST_PASS;
+                        case 16:
+                            DataReader.ReadToFollowing("a", "b");
+                            return TEST_PASS;
+                        case 17:
+                            DataReader.ReadToNextSibling("a", "b");
+                            return TEST_PASS;
+                        case 18:
+                            DataReader.ReadElementContentAs(typeof(string), null);
+                            break;
+                        case 19:
+                            DataReader.ReadElementContentAsBoolean("a", "b");
+                            break;
+                        case 20:
+                            DataReader.ReadElementContentAsBoolean();
+                            break;
+                        case 23:
+                            DataReader.ReadElementContentAsDecimal("a", "b");
+                            break;
+                        case 24:
+                            DataReader.ReadElementContentAsDecimal();
+                            break;
+                        case 25:
+                            DataReader.ReadElementContentAsDouble("a", "b");
+                            break;
+                        case 26:
+                            DataReader.ReadElementContentAsDouble();
+                            break;
+                        case 27:
+                            DataReader.ReadElementContentAsFloat("a", "b");
+                            break;
+                        case 28:
+                            DataReader.ReadElementContentAsFloat();
+                            break;
+                        case 29:
+                            DataReader.ReadElementContentAsInt("a", "b");
+                            break;
+                        case 30:
+                            DataReader.ReadElementContentAsInt();
+                            break;
+                        case 31:
+                            DataReader.ReadElementContentAsLong();
+                            break;
+                        case 32:
+                            DataReader.ReadElementContentAsLong("a", "b");
+                            break;
+                        case 33:
+                            DataReader.ReadElementContentAsObject("a", "b");
+                            break;
+                        case 34:
+                            DataReader.ReadElementContentAsString("a", "b");
+                            break;
+                        case 35:
+                            DataReader.ReadToDescendant("a");
+                            break;
+                        case 36:
+                            DataReader.ReadToFollowing("a");
+                            break;
+                        case 37:
+                            DataReader.ReadToNextSibling("a");
+                            break;
+                        case 38:
+                            DataReader.ReadAttributeValue();
+                            break;
+                        case 39:
+                            DataReader.ResolveEntity();
+                            break;
                     }
                 }
-                catch (NotSupportedException) { return TEST_PASS; }
-                catch (InvalidOperationException) { return TEST_PASS; }
-                catch (XmlException) { return TEST_PASS; }
+                catch (NotSupportedException)
+                {
+                    return TEST_PASS;
+                }
+                catch (InvalidOperationException)
+                {
+                    return TEST_PASS;
+                }
+                catch (XmlException)
+                {
+                    return TEST_PASS;
+                }
             }
             foreach (int p in skipParams)
             {
-                if (param == p) return TEST_PASS;
+                if (param == p)
+                    return TEST_PASS;
             }
             return TEST_FAIL;
         }

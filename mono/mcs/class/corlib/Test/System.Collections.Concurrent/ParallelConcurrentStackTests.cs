@@ -23,39 +23,37 @@
 //
 
 using System;
-using MonoTests.System.Threading.Tasks;
 using System.Collections.Concurrent;
-
+using MonoTests.System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace MonoTests.System.Collections.Concurrent
 {
-	
-	[TestFixture()]
-	public class ParallelConcurrentStackTests
-	{
-		ConcurrentStack<int> stack;
-		
-		[SetUpAttribute]
-		public void Setup()
-		{
-			stack = new ConcurrentStack<int>();
-		}
-		
-		[Test]
-		[Category ("MultiThreaded")]
-		public void CountTestCase()
-		{
-			const int numThread = 5;
-			ParallelTestHelper.ParallelAdder(stack, numThread);
-			Assert.AreEqual(10 * numThread, stack.Count, "#1");
-			int value;
-			stack.TryPeek(out value);
-			ParallelTestHelper.ParallelRemover(stack, numThread, 3);
-			Assert.AreEqual(10 * numThread - 3, stack.Count, "#2");
-			stack.Clear();
-			Assert.AreEqual(0, stack.Count, "#3");
-			Assert.IsTrue(stack.IsEmpty, "#4");
-		}
-	}
+    [TestFixture()]
+    public class ParallelConcurrentStackTests
+    {
+        ConcurrentStack<int> stack;
+
+        [SetUpAttribute]
+        public void Setup()
+        {
+            stack = new ConcurrentStack<int>();
+        }
+
+        [Test]
+        [Category("MultiThreaded")]
+        public void CountTestCase()
+        {
+            const int numThread = 5;
+            ParallelTestHelper.ParallelAdder(stack, numThread);
+            Assert.AreEqual(10 * numThread, stack.Count, "#1");
+            int value;
+            stack.TryPeek(out value);
+            ParallelTestHelper.ParallelRemover(stack, numThread, 3);
+            Assert.AreEqual(10 * numThread - 3, stack.Count, "#2");
+            stack.Clear();
+            Assert.AreEqual(0, stack.Count, "#3");
+            Assert.IsTrue(stack.IsEmpty, "#4");
+        }
+    }
 }

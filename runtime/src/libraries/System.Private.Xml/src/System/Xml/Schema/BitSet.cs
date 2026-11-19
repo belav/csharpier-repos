@@ -34,16 +34,13 @@ namespace System.Xml.Schema
 
         public bool this[int index]
         {
-            get
-            {
-                return Get(index);
-            }
+            get { return Get(index); }
         }
 
         public void Clear()
         {
             int bitsLength = _bits.Length;
-            for (int i = bitsLength; i-- > 0;)
+            for (int i = bitsLength; i-- > 0; )
             {
                 _bits[i] = 0;
             }
@@ -55,7 +52,6 @@ namespace System.Xml.Schema
             EnsureLength(nBitSlot + 1);
             _bits[nBitSlot] |= (uint)1 << (index & bitSlotMask);
         }
-
 
         public bool Get(int index)
         {
@@ -113,7 +109,7 @@ namespace System.Xml.Schema
             int bitsLength = _bits.Length;
             int setLength = other._bits.Length;
             int n = (bitsLength > setLength) ? setLength : bitsLength;
-            for (int i = n; i-- > 0;)
+            for (int i = n; i-- > 0; )
             {
                 _bits[i] &= other._bits[i];
             }
@@ -123,7 +119,6 @@ namespace System.Xml.Schema
             }
         }
 
-
         public void Or(BitSet other)
         {
             if (this == other)
@@ -132,7 +127,7 @@ namespace System.Xml.Schema
             }
             int setLength = other._bits.Length;
             EnsureLength(setLength);
-            for (int i = setLength; i-- > 0;)
+            for (int i = setLength; i-- > 0; )
             {
                 _bits[i] |= other._bits[i];
             }
@@ -141,13 +136,12 @@ namespace System.Xml.Schema
         public override int GetHashCode()
         {
             int h = 1234;
-            for (int i = _bits.Length; --i >= 0;)
+            for (int i = _bits.Length; --i >= 0; )
             {
                 h ^= unchecked((int)_bits[i] * (i + 1));
             }
             return (int)((h >> 32) ^ h);
         }
-
 
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
@@ -163,7 +157,7 @@ namespace System.Xml.Schema
                 int bitsLength = _bits.Length;
                 int setLength = other._bits.Length;
                 int n = (bitsLength > setLength) ? setLength : bitsLength;
-                for (int i = n; i-- > 0;)
+                for (int i = n; i-- > 0; )
                 {
                     if (_bits[i] != other._bits[i])
                     {
@@ -172,7 +166,7 @@ namespace System.Xml.Schema
                 }
                 if (bitsLength > n)
                 {
-                    for (int i = bitsLength; i-- > n;)
+                    for (int i = bitsLength; i-- > n; )
                     {
                         if (_bits[i] != 0)
                         {
@@ -182,7 +176,7 @@ namespace System.Xml.Schema
                 }
                 else
                 {
-                    for (int i = setLength; i-- > n;)
+                    for (int i = setLength; i-- > n; )
                     {
                         if (other._bits[i] != 0)
                         {
@@ -199,7 +193,6 @@ namespace System.Xml.Schema
         {
             return new BitSet(_count, (uint[])_bits.Clone());
         }
-
 
         public bool IsEmpty
         {

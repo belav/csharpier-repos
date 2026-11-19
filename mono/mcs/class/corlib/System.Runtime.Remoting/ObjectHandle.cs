@@ -20,10 +20,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,31 +34,31 @@
 //
 
 using System;
-using System.Runtime.Serialization;
-using System.Runtime.Remoting.Lifetime;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Lifetime;
+using System.Runtime.Serialization;
 
-namespace System.Runtime.Remoting {
+namespace System.Runtime.Remoting
+{
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public class ObjectHandle : MarshalByRefObject, IObjectHandle
+    {
+        private object _wrapped;
 
-	[ClassInterface(ClassInterfaceType.AutoDual)]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class ObjectHandle : MarshalByRefObject, IObjectHandle {
-		private object _wrapped;
-		
-		public ObjectHandle (object o)
-		{
-			_wrapped = o;
-		}
+        public ObjectHandle(object o)
+        {
+            _wrapped = o;
+        }
 
-		public override object InitializeLifetimeService ()
-		{
-			return base.InitializeLifetimeService ();
-		}
+        public override object InitializeLifetimeService()
+        {
+            return base.InitializeLifetimeService();
+        }
 
-		public object Unwrap ()
-		{
-			return _wrapped;
-		}
-	}
+        public object Unwrap()
+        {
+            return _wrapped;
+        }
+    }
 }
-

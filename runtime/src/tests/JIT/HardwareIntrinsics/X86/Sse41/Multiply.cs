@@ -5,24 +5,29 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace IntelHardwareIntrinsicTest._Sse41
 {
     public partial class Program
     {
-	[Fact]
+        [Fact]
         public static unsafe void Multiply()
         {
             int testResult = Pass;
 
             if (Sse41.IsSupported)
             {
-                using (TestTable<int, int, long> intTable = new TestTable<int, int, long>(new int[4] { 1, -5, 100, 0}, new int[4] { 22, -1, -50, 0}, new long[2]))
+                using (
+                    TestTable<int, int, long> intTable = new TestTable<int, int, long>(
+                        new int[4] { 1, -5, 100, 0 },
+                        new int[4] { 22, -1, -50, 0 },
+                        new long[2]
+                    )
+                )
                 {
-
                     var vi1 = Unsafe.Read<Vector128<int>>(intTable.inArray1Ptr);
                     var vi2 = Unsafe.Read<Vector128<int>>(intTable.inArray2Ptr);
                     var vi3 = Sse41.Multiply(vi1, vi2);
@@ -30,7 +35,10 @@ namespace IntelHardwareIntrinsicTest._Sse41
 
                     for (int i = 0; i < intTable.outArray.Length; i++)
                     {
-                        if (intTable.inArray1[i * 2] * intTable.inArray2[i * 2] != intTable.outArray[i])
+                        if (
+                            intTable.inArray1[i * 2] * intTable.inArray2[i * 2]
+                            != intTable.outArray[i]
+                        )
                         {
                             Console.WriteLine("SSE4.1 Multiply failed on int:");
                             foreach (var item in intTable.outArray)
@@ -46,7 +54,10 @@ namespace IntelHardwareIntrinsicTest._Sse41
             Assert.Equal(Pass, testResult);
         }
 
-        public unsafe struct TestTable<T1, T2, T3> : IDisposable where T1 : struct where T2 : struct where T3 : struct
+        public unsafe struct TestTable<T1, T2, T3> : IDisposable
+            where T1 : struct
+            where T2 : struct
+            where T3 : struct
         {
             public T1[] inArray1;
             public T2[] inArray2;
@@ -59,6 +70,7 @@ namespace IntelHardwareIntrinsicTest._Sse41
             GCHandle inHandle1;
             GCHandle inHandle2;
             GCHandle outHandle;
+
             public TestTable(T1[] a, T2[] b, T3[] c)
             {
                 this.inArray1 = a;
@@ -69,6 +81,7 @@ namespace IntelHardwareIntrinsicTest._Sse41
                 inHandle2 = GCHandle.Alloc(inArray2, GCHandleType.Pinned);
                 outHandle = GCHandle.Alloc(outArray, GCHandleType.Pinned);
             }
+
             public bool CheckResult(Func<T1, T2, T3, bool> check)
             {
                 for (int i = 0; i < inArray1.Length; i++)
@@ -88,6 +101,5 @@ namespace IntelHardwareIntrinsicTest._Sse41
                 outHandle.Free();
             }
         }
-
     }
 }

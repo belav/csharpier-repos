@@ -4,7 +4,8 @@
 namespace System.IdentityModel
 {
     // see SynchronizedPool<T> for a threadsafe implementation
-    class Pool<T> where T : class
+    class Pool<T>
+        where T : class
     {
         T[] items;
         int count;

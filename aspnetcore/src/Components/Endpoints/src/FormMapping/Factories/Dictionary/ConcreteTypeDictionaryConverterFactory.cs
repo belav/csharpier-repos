@@ -32,14 +32,12 @@ internal sealed class ConcreteTypeDictionaryConverterFactory<TDictionary, TKey, 
     public FormDataConverter CreateConverter(Type type, FormDataMapperOptions options)
     {
         // Resolve the element type converter
-        var keyConverter =
-            options.ResolveConverter<TKey>()
+        var keyConverter = options.ResolveConverter<TKey>()
             ?? throw new InvalidOperationException(
                 $"Unable to create converter for '{typeof(TDictionary).FullName}'."
             );
 
-        var valueConverter =
-            options.ResolveConverter<TValue>()
+        var valueConverter = options.ResolveConverter<TValue>()
             ?? throw new InvalidOperationException(
                 $"Unable to create converter for '{typeof(TDictionary).FullName}'."
             );

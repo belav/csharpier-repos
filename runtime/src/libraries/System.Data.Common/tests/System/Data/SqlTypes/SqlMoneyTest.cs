@@ -25,9 +25,9 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Xunit;
-using System.Xml;
 using System.Data.SqlTypes;
+using System.Xml;
+using Xunit;
 
 namespace System.Data.Tests.SqlTypes
 {
@@ -422,6 +422,7 @@ namespace System.Data.Tests.SqlTypes
 
             Assert.Throws<OverflowException>(() => (SqlMoney)SqlInt64.MaxValue);
         }
+
         [Fact]
         public void GetXsdTypeTest()
         {
@@ -432,7 +433,7 @@ namespace System.Data.Tests.SqlTypes
         [Fact]
         public void GetTdsValue()
         {
-            Assert.Equal(long.MaxValue,SqlMoney.MaxValue.GetTdsValue());
+            Assert.Equal(long.MaxValue, SqlMoney.MaxValue.GetTdsValue());
             Assert.Equal(long.MinValue, SqlMoney.MinValue.GetTdsValue());
             Assert.Equal((long)0, new SqlMoney(0).GetTdsValue());
             Assert.Throws<SqlNullValueException>(() => SqlMoney.Null.GetTdsValue());

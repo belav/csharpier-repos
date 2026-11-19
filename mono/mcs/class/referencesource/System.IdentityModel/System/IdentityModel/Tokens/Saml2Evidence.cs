@@ -14,7 +14,7 @@ namespace System.IdentityModel.Tokens
     /// </summary>
     /// <remarks>
     /// Contains one or more assertions or assertion references that the SAML
-    /// authority relied on in issuing the authorization decision. 
+    /// authority relied on in issuing the authorization decision.
     /// [Saml2Core, 2.7.4.3]
     /// </remarks>
     public class Saml2Evidence
@@ -26,9 +26,7 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Initializes a new instance of <see cref="Saml2Evidence"/> class.
         /// </summary>
-        public Saml2Evidence()
-        {
-        }
+        public Saml2Evidence() { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="Saml2Evidence"/> class from a <see cref="Saml2Assertion"/>.

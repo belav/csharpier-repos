@@ -19,11 +19,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultNavigateToPreviewServiceFactory()
-        {
-        }
+        public DefaultNavigateToPreviewServiceFactory() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => _singleton.Value;
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            _singleton.Value;
     }
 }

@@ -32,39 +32,41 @@ namespace System.Globalization
         UseLeapYearMonth = 0x00000002,
         UseSpacesInMonthNames = 0x00000004,
         UseHebrewParsing = 0x00000008,
-        UseSpacesInDayNames = 0x00000010,   // Has spaces or non-breaking space in the day names.
-        UseDigitPrefixInTokens = 0x00000020,   // Has token starting with numbers.
+        UseSpacesInDayNames = 0x00000010, // Has spaces or non-breaking space in the day names.
+        UseDigitPrefixInTokens = 0x00000020, // Has token starting with numbers.
     }
 
     internal enum CalendarId : ushort
     {
         UNINITIALIZED_VALUE = 0,
-        GREGORIAN = 1,     // Gregorian (localized) calendar
-        GREGORIAN_US = 2,     // Gregorian (U.S.) calendar
-        JAPAN = 3,     // Japanese Emperor Era calendar
-                       /* SSS_WARNINGS_OFF */
-        TAIWAN = 4,     // Taiwan Era calendar /* SSS_WARNINGS_ON */
-        KOREA = 5,     // Korean Tangun Era calendar
-        HIJRI = 6,     // Hijri (Arabic Lunar) calendar
-        THAI = 7,     // Thai calendar
-        HEBREW = 8,     // Hebrew (Lunar) calendar
-        GREGORIAN_ME_FRENCH = 9,     // Gregorian Middle East French calendar
-        GREGORIAN_ARABIC = 10,     // Gregorian Arabic calendar
-        GREGORIAN_XLIT_ENGLISH = 11,     // Gregorian Transliterated English calendar
+        GREGORIAN = 1, // Gregorian (localized) calendar
+        GREGORIAN_US = 2, // Gregorian (U.S.) calendar
+        JAPAN = 3, // Japanese Emperor Era calendar
+
+        /* SSS_WARNINGS_OFF */
+        TAIWAN = 4, // Taiwan Era calendar /* SSS_WARNINGS_ON */
+        KOREA = 5, // Korean Tangun Era calendar
+        HIJRI = 6, // Hijri (Arabic Lunar) calendar
+        THAI = 7, // Thai calendar
+        HEBREW = 8, // Hebrew (Lunar) calendar
+        GREGORIAN_ME_FRENCH = 9, // Gregorian Middle East French calendar
+        GREGORIAN_ARABIC = 10, // Gregorian Arabic calendar
+        GREGORIAN_XLIT_ENGLISH = 11, // Gregorian Transliterated English calendar
         GREGORIAN_XLIT_FRENCH = 12,
+
         // Note that all calendars after this point are MANAGED ONLY for now.
         JULIAN = 13,
         JAPANESELUNISOLAR = 14,
         CHINESELUNISOLAR = 15,
-        SAKA = 16,     // reserved to match Office but not implemented in our code
-        LUNAR_ETO_CHN = 17,     // reserved to match Office but not implemented in our code
-        LUNAR_ETO_KOR = 18,     // reserved to match Office but not implemented in our code
-        LUNAR_ETO_ROKUYOU = 19,     // reserved to match Office but not implemented in our code
+        SAKA = 16, // reserved to match Office but not implemented in our code
+        LUNAR_ETO_CHN = 17, // reserved to match Office but not implemented in our code
+        LUNAR_ETO_KOR = 18, // reserved to match Office but not implemented in our code
+        LUNAR_ETO_ROKUYOU = 19, // reserved to match Office but not implemented in our code
         KOREANLUNISOLAR = 20,
         TAIWANLUNISOLAR = 21,
         PERSIAN = 22,
         UMALQURA = 23,
-        LAST_CALENDAR = 23      // Last calendar ID
+        LAST_CALENDAR = 23, // Last calendar ID
     }
 
     internal sealed class DateTimeFormatInfoScanner
@@ -458,7 +460,10 @@ namespace System.Globalization
                         i++;
                         break;
                     default:
-                        if (_ymdFlags == FoundDatePattern.FoundYMDPatternFlag && !char.IsWhiteSpace(ch))
+                        if (
+                            _ymdFlags == FoundDatePattern.FoundYMDPatternFlag
+                            && !char.IsWhiteSpace(ch)
+                        )
                         {
                             // We are not seeing "." after YMD. Clear the flag.
                             _ymdFlags = FoundDatePattern.None;
@@ -536,11 +541,20 @@ namespace System.Globalization
         // the format flag.
         //
         ////////////////////////////////////////////////////////////////////////////
-        internal static FORMATFLAGS GetFormatFlagGenitiveMonth(string[] monthNames, string[] genitiveMonthNames, string[] abbrevMonthNames, string[] genitiveAbbrevMonthNames)
+        internal static FORMATFLAGS GetFormatFlagGenitiveMonth(
+            string[] monthNames,
+            string[] genitiveMonthNames,
+            string[] abbrevMonthNames,
+            string[] genitiveAbbrevMonthNames
+        )
         {
             // If we have different names in regular and genitive month names, use genitive month flag.
-            return (!monthNames.AsSpan().SequenceEqual(genitiveMonthNames) || !abbrevMonthNames.AsSpan().SequenceEqual(genitiveAbbrevMonthNames))
-                ? FORMATFLAGS.UseGenitiveMonth : 0;
+            return (
+                !monthNames.AsSpan().SequenceEqual(genitiveMonthNames)
+                || !abbrevMonthNames.AsSpan().SequenceEqual(genitiveAbbrevMonthNames)
+            )
+                ? FORMATFLAGS.UseGenitiveMonth
+                : 0;
         }
 
         ////////////////////////////////////////////////////////////////////////////
@@ -548,20 +562,31 @@ namespace System.Globalization
         // Scan the month names to see if spaces are used or start with a digit, and return the format flag
         //
         ////////////////////////////////////////////////////////////////////////////
-        internal static FORMATFLAGS GetFormatFlagUseSpaceInMonthNames(string[] monthNames, string[] genitveMonthNames, string[] abbrevMonthNames, string[] genetiveAbbrevMonthNames)
+        internal static FORMATFLAGS GetFormatFlagUseSpaceInMonthNames(
+            string[] monthNames,
+            string[] genitveMonthNames,
+            string[] abbrevMonthNames,
+            string[] genetiveAbbrevMonthNames
+        )
         {
             FORMATFLAGS formatFlags = 0;
-            formatFlags |= (ArrayElementsBeginWithDigit(monthNames) ||
-                    ArrayElementsBeginWithDigit(genitveMonthNames) ||
-                    ArrayElementsBeginWithDigit(abbrevMonthNames) ||
-                    ArrayElementsBeginWithDigit(genetiveAbbrevMonthNames)
-                    ? FORMATFLAGS.UseDigitPrefixInTokens : 0);
+            formatFlags |= (
+                ArrayElementsBeginWithDigit(monthNames)
+                || ArrayElementsBeginWithDigit(genitveMonthNames)
+                || ArrayElementsBeginWithDigit(abbrevMonthNames)
+                || ArrayElementsBeginWithDigit(genetiveAbbrevMonthNames)
+                    ? FORMATFLAGS.UseDigitPrefixInTokens
+                    : 0
+            );
 
-            formatFlags |= (ArrayElementsHaveSpace(monthNames) ||
-                    ArrayElementsHaveSpace(genitveMonthNames) ||
-                    ArrayElementsHaveSpace(abbrevMonthNames) ||
-                    ArrayElementsHaveSpace(genetiveAbbrevMonthNames)
-                    ? FORMATFLAGS.UseSpacesInMonthNames : 0);
+            formatFlags |= (
+                ArrayElementsHaveSpace(monthNames)
+                || ArrayElementsHaveSpace(genitveMonthNames)
+                || ArrayElementsHaveSpace(abbrevMonthNames)
+                || ArrayElementsHaveSpace(genetiveAbbrevMonthNames)
+                    ? FORMATFLAGS.UseSpacesInMonthNames
+                    : 0
+            );
             return formatFlags;
         }
 
@@ -570,11 +595,14 @@ namespace System.Globalization
         // Scan the day names and set the correct format flag.
         //
         ////////////////////////////////////////////////////////////////////////////
-        internal static FORMATFLAGS GetFormatFlagUseSpaceInDayNames(string[] dayNames, string[] abbrevDayNames)
+        internal static FORMATFLAGS GetFormatFlagUseSpaceInDayNames(
+            string[] dayNames,
+            string[] abbrevDayNames
+        )
         {
-            return (ArrayElementsHaveSpace(dayNames) ||
-                    ArrayElementsHaveSpace(abbrevDayNames))
-                    ? FORMATFLAGS.UseSpacesInDayNames : 0;
+            return (ArrayElementsHaveSpace(dayNames) || ArrayElementsHaveSpace(abbrevDayNames))
+                ? FORMATFLAGS.UseSpacesInDayNames
+                : 0;
         }
 
         ////////////////////////////////////////////////////////////////////////////
@@ -584,8 +612,9 @@ namespace System.Globalization
         ////////////////////////////////////////////////////////////////////////////
         internal static FORMATFLAGS GetFormatFlagUseHebrewCalendar(int calID)
         {
-            return calID == (int)CalendarId.HEBREW ?
-                FORMATFLAGS.UseHebrewParsing | FORMATFLAGS.UseLeapYearMonth : 0;
+            return calID == (int)CalendarId.HEBREW
+                ? FORMATFLAGS.UseHebrewParsing | FORMATFLAGS.UseLeapYearMonth
+                : 0;
         }
 
         //-----------------------------------------------------------------------------
@@ -655,8 +684,12 @@ namespace System.Globalization
                         // Skip known CJK month suffix.
                         // Starting with Windows 8, the CJK months for some cultures looks like: "1' \x6708'"
                         // instead of just "1\x6708"
-                        if (s[index] == '\'' && s[index + 1] == ' ' &&
-                            s[index + 2] == CJKMonthSuff && s[index + 3] == '\'')
+                        if (
+                            s[index] == '\''
+                            && s[index + 1] == ' '
+                            && s[index + 2] == CJKMonthSuff
+                            && s[index + 3] == '\''
+                        )
                         {
                             return false;
                         }

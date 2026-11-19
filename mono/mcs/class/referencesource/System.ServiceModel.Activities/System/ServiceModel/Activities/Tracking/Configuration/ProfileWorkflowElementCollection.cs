@@ -8,10 +8,13 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
     using System.Runtime;
 
     [Fx.Tag.XamlVisible(false)]
-    [ConfigurationCollection(typeof(ProfileWorkflowElement),
+    [ConfigurationCollection(
+        typeof(ProfileWorkflowElement),
         CollectionType = ConfigurationElementCollectionType.BasicMap,
-        AddItemName = TrackingConfigurationStrings.Workflow)]
-    public class ProfileWorkflowElementCollection : TrackingConfigurationCollection<ProfileWorkflowElement>
+        AddItemName = TrackingConfigurationStrings.Workflow
+    )]
+    public class ProfileWorkflowElementCollection
+        : TrackingConfigurationCollection<ProfileWorkflowElement>
     {
         protected override string ElementName
         {

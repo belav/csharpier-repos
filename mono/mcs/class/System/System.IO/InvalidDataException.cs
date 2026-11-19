@@ -13,34 +13,31 @@ using System.Runtime.Serialization;
 
 namespace System.IO
 {
-	[Serializable]
-	public sealed class InvalidDataException : SystemException
-	{
-		const int Result = unchecked ((int)0x80131503);
+    [Serializable]
+    public sealed class InvalidDataException : SystemException
+    {
+        const int Result = unchecked((int)0x80131503);
 
-		// Constructors
-		public InvalidDataException ()
-			: base (Locale.GetText ("Invalid data format."))
-		{
-			HResult = Result;
-		}
+        // Constructors
+        public InvalidDataException()
+            : base(Locale.GetText("Invalid data format."))
+        {
+            HResult = Result;
+        }
 
-		public InvalidDataException (string message)
-			: base (message)
-		{
-			HResult = Result;
-		}
+        public InvalidDataException(string message)
+            : base(message)
+        {
+            HResult = Result;
+        }
 
-		public InvalidDataException (string message, Exception innerException)
-			: base (message, innerException)
-		{
-			HResult = Result;
-		}
+        public InvalidDataException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+            HResult = Result;
+        }
 
-		private InvalidDataException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-		}
-	}
+        private InvalidDataException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
+    }
 }
-

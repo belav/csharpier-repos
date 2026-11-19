@@ -17,7 +17,8 @@ namespace System.Security.Cryptography
         private uint _flags;
         private bool _fPersistKeyInCsp;
 
-        public SafeProvHandle() : base(true)
+        public SafeProvHandle()
+            : base(true)
         {
             SetHandle(IntPtr.Zero);
             _containerName = null;
@@ -29,67 +30,40 @@ namespace System.Security.Cryptography
 
         internal string? ContainerName
         {
-            get
-            {
-                return _containerName;
-            }
-            set
-            {
-                _containerName = value;
-            }
+            get { return _containerName; }
+            set { _containerName = value; }
         }
 
         internal string? ProviderName
         {
-            get
-            {
-                return _providerName;
-            }
-            set
-            {
-                _providerName = value;
-            }
+            get { return _providerName; }
+            set { _providerName = value; }
         }
 
         internal int Types
         {
-            get
-            {
-                return _type;
-            }
-            set
-            {
-                _type = value;
-            }
+            get { return _type; }
+            set { _type = value; }
         }
 
         internal uint Flags
         {
-            get
-            {
-                return _flags;
-            }
-            set
-            {
-                _flags = value;
-            }
+            get { return _flags; }
+            set { _flags = value; }
         }
 
         internal bool PersistKeyInCsp
         {
-            get
-            {
-                return _fPersistKeyInCsp;
-            }
-            set
-            {
-                _fPersistKeyInCsp = value;
-            }
+            get { return _fPersistKeyInCsp; }
+            set { _fPersistKeyInCsp = value; }
         }
 
         internal static SafeProvHandle InvalidHandle
         {
-            get { return SafeHandleCache<SafeProvHandle>.GetInvalidHandle(() => new SafeProvHandle()); }
+            get
+            {
+                return SafeHandleCache<SafeProvHandle>.GetInvalidHandle(() => new SafeProvHandle());
+            }
         }
 
         protected override void Dispose(bool disposing)
@@ -103,13 +77,27 @@ namespace System.Security.Cryptography
         protected override bool ReleaseHandle()
         {
             // Make sure not to delete a key that we want to keep in the key container or an ephemeral key
-            if (!_fPersistKeyInCsp && 0 == (_flags & (uint)Interop.Advapi32.CryptAcquireContextFlags.CRYPT_VERIFYCONTEXT))
+            if (
+                !_fPersistKeyInCsp
+                && 0
+                    == (
+                        _flags & (uint)Interop.Advapi32.CryptAcquireContextFlags.CRYPT_VERIFYCONTEXT
+                    )
+            )
             {
                 // Delete the key container.
 
-                uint flags = (_flags & (uint)Interop.Advapi32.CryptAcquireContextFlags.CRYPT_MACHINE_KEYSET) | (uint)Interop.Advapi32.CryptAcquireContextFlags.CRYPT_DELETEKEYSET;
+                uint flags =
+                    (_flags & (uint)Interop.Advapi32.CryptAcquireContextFlags.CRYPT_MACHINE_KEYSET)
+                    | (uint)Interop.Advapi32.CryptAcquireContextFlags.CRYPT_DELETEKEYSET;
                 SafeProvHandle hIgnoredProv;
-                _ = Interop.Advapi32.CryptAcquireContext(out hIgnoredProv, _containerName, _providerName, _type, flags);
+                _ = Interop.Advapi32.CryptAcquireContext(
+                    out hIgnoredProv,
+                    _containerName,
+                    _providerName,
+                    _type,
+                    flags
+                );
                 hIgnoredProv.Dispose();
                 // Ignoring success result code as CryptAcquireContext is being called to delete a key container rather than acquire a context.
                 // If it fails, we can't do anything about it anyway as we're in a dispose method.

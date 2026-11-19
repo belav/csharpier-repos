@@ -35,7 +35,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
         internal static bool IsCompilerServerSupported => GetPipeName("") is object;
 
         /// <summary>
-        /// Create a build request for processing on the server. 
+        /// Create a build request for processing on the server.
         /// </summary>
         internal static BuildRequest CreateBuildRequest(
             Guid requestId,
@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             string workingDirectory,
             string? tempDirectory,
             string? keepAlive,
-            string? libDirectory)
+            string? libDirectory
+        )
         {
             Debug.Assert(workingDirectory is object);
 
@@ -56,13 +57,14 @@ namespace Microsoft.CodeAnalysis.CommandLine
                 compilerHash: BuildProtocolConstants.GetCommitHash() ?? "",
                 requestId: requestId,
                 keepAlive: keepAlive,
-                libDirectory: libDirectory);
+                libDirectory: libDirectory
+            );
         }
 
         /// <summary>
         /// Shutting down the server is an inherently racy operation.  The server can be started or stopped by
         /// external parties at any time.
-        /// 
+        ///
         /// This function will return success if at any time in the function the server is determined to no longer
         /// be running.
         /// </summary>
@@ -71,11 +73,12 @@ namespace Microsoft.CodeAnalysis.CommandLine
             int? timeoutOverride,
             bool waitForProcess,
             ICompilerServerLogger logger,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (wasServerRunning(pipeName) == false)
             {
-                // The server holds the mutex whenever it is running, if it's not open then the 
+                // The server holds the mutex whenever it is running, if it's not open then the
                 // server simply isn't running.
                 return true;
             }
@@ -84,15 +87,17 @@ namespace Microsoft.CodeAnalysis.CommandLine
             {
                 var request = BuildRequest.CreateShutdown();
 
-                // Don't create the server when sending a shutdown request. That would defeat the 
+                // Don't create the server when sending a shutdown request. That would defeat the
                 // purpose a bit.
                 var response = await RunServerBuildRequestAsync(
-                    request,
-                    pipeName,
-                    timeoutOverride,
-                    tryCreateServerFunc: (_, _) => false,
-                    logger,
-                    cancellationToken).ConfigureAwait(false);
+                        request,
+                        pipeName,
+                        timeoutOverride,
+                        tryCreateServerFunc: (_, _) => false,
+                        logger,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (response is ShutdownBuildResponse shutdownBuildResponse)
                 {
@@ -100,7 +105,9 @@ namespace Microsoft.CodeAnalysis.CommandLine
                     {
                         try
                         {
-                            var process = Process.GetProcessById(shutdownBuildResponse.ServerProcessId);
+                            var process = Process.GetProcessById(
+                                shutdownBuildResponse.ServerProcessId
+                            );
 #if NET5_0_OR_GREATER
                             await process.WaitForExitAsync(cancellationToken).ConfigureAwait(false);
 #else
@@ -122,7 +129,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
             catch (Exception)
             {
                 // If the server was in the process of shutting down when we connected then it's reasonable
-                // for an exception to happen.  If the mutex has shutdown at this point then the server 
+                // for an exception to happen.  If the mutex has shutdown at this point then the server
                 // is shut down.
                 return wasServerRunning(pipeName) == false;
             }
@@ -140,14 +147,17 @@ namespace Microsoft.CodeAnalysis.CommandLine
             string pipeName,
             string clientDirectory,
             ICompilerServerLogger logger,
-            CancellationToken cancellationToken)
-                => RunServerBuildRequestAsync(
-                    buildRequest,
-                    pipeName,
-                    timeoutOverride: null,
-                    tryCreateServerFunc: (pipeName, logger) => TryCreateServer(clientDirectory, pipeName, logger),
-                    logger,
-                    cancellationToken);
+            CancellationToken cancellationToken
+        ) =>
+            RunServerBuildRequestAsync(
+                buildRequest,
+                pipeName,
+                timeoutOverride: null,
+                tryCreateServerFunc: (pipeName, logger) =>
+                    TryCreateServer(clientDirectory, pipeName, logger),
+                logger,
+                cancellationToken
+            );
 
         internal static async Task<BuildResponse> RunServerBuildRequestAsync(
             BuildRequest buildRequest,
@@ -155,7 +165,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             int? timeoutOverride,
             Func<string, ICompilerServerLogger, bool> tryCreateServerFunc,
             ICompilerServerLogger logger,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(pipeName is object);
 
@@ -165,25 +176,34 @@ namespace Microsoft.CodeAnalysis.CommandLine
                 return new IncorrectHashBuildResponse();
             }
 
-            using var pipe = await tryConnectToServerAsync(pipeName, timeoutOverride, logger, tryCreateServerFunc, cancellationToken).ConfigureAwait(false);
+            using var pipe = await tryConnectToServerAsync(
+                    pipeName,
+                    timeoutOverride,
+                    logger,
+                    tryCreateServerFunc,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (pipe is null)
             {
                 return new CannotConnectResponse();
             }
             else
             {
-                return await tryRunRequestAsync(pipe, buildRequest, logger, cancellationToken).ConfigureAwait(false);
+                return await tryRunRequestAsync(pipe, buildRequest, logger, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
-            // This code uses a Mutex.WaitOne / ReleaseMutex pairing. Both of these calls must occur on the same thread 
-            // or an exception will be thrown. This code lives in a separate non-async function to help ensure this 
-            // invariant doesn't get invalidated in the future by an `await` being inserted. 
+            // This code uses a Mutex.WaitOne / ReleaseMutex pairing. Both of these calls must occur on the same thread
+            // or an exception will be thrown. This code lives in a separate non-async function to help ensure this
+            // invariant doesn't get invalidated in the future by an `await` being inserted.
             static Task<NamedPipeClientStream?> tryConnectToServerAsync(
                 string pipeName,
                 int? timeoutOverride,
                 ICompilerServerLogger logger,
                 Func<string, ICompilerServerLogger, bool> tryCreateServerFunc,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 var originalThreadId = Environment.CurrentManagedThreadId;
                 var timeoutNewProcess = timeoutOverride ?? TimeOutMsNewProcess;
@@ -231,7 +251,12 @@ namespace Microsoft.CodeAnalysis.CommandLine
 
                     if (wasServerRunning || tryCreateServerFunc(pipeName, logger))
                     {
-                        return TryConnectToServerAsync(pipeName, timeout, logger, cancellationToken);
+                        return TryConnectToServerAsync(
+                            pipeName,
+                            timeout,
+                            logger,
+                            cancellationToken
+                        );
                     }
                     else
                     {
@@ -247,19 +272,21 @@ namespace Microsoft.CodeAnalysis.CommandLine
                     catch (ApplicationException e)
                     {
                         var releaseThreadId = Environment.CurrentManagedThreadId;
-                        var message = $"ReleaseMutex failed. WaitOne Id: {originalThreadId} Release Id: {releaseThreadId}";
+                        var message =
+                            $"ReleaseMutex failed. WaitOne Id: {originalThreadId} Release Id: {releaseThreadId}";
                         throw new Exception(message, e);
                     }
                 }
             }
 
-            // Try and run the given BuildRequest on the server. If the request cannot be run then 
+            // Try and run the given BuildRequest on the server. If the request cannot be run then
             // an appropriate error response will be returned.
             static async Task<BuildResponse> tryRunRequestAsync(
                 NamedPipeClientStream pipeStream,
                 BuildRequest request,
                 ICompilerServerLogger logger,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 try
                 {
@@ -279,7 +306,12 @@ namespace Microsoft.CodeAnalysis.CommandLine
                 logger.Log($"Begin reading response for {request.RequestId}");
 
                 var responseTask = BuildResponse.ReadAsync(pipeStream, serverCts.Token);
-                var monitorTask = MonitorDisconnectAsync(pipeStream, request.RequestId, logger, serverCts.Token);
+                var monitorTask = MonitorDisconnectAsync(
+                    pipeStream,
+                    request.RequestId,
+                    logger,
+                    serverCts.Token
+                );
                 await Task.WhenAny(responseTask, monitorTask).ConfigureAwait(false);
 
                 logger.Log($"End reading response for {request.RequestId}");
@@ -295,7 +327,9 @@ namespace Microsoft.CodeAnalysis.CommandLine
                     catch (Exception e)
                     {
                         logger.LogException(e, $"Reading response for {request.RequestId}");
-                        response = new RejectedBuildResponse($"Error reading response: {e.Message}");
+                        response = new RejectedBuildResponse(
+                            $"Error reading response: {e.Message}"
+                        );
                     }
                 }
                 else
@@ -320,7 +354,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             PipeStream pipeStream,
             Guid requestId,
             ICompilerServerLogger logger,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             var buffer = Array.Empty<byte>();
 
@@ -329,13 +364,14 @@ namespace Microsoft.CodeAnalysis.CommandLine
                 try
                 {
                     // Wait a tenth of a second before trying again
-                    await Task.Delay(millisecondsDelay: 100, cancellationToken).ConfigureAwait(false);
+                    await Task.Delay(millisecondsDelay: 100, cancellationToken)
+                        .ConfigureAwait(false);
 
-                    await pipeStream.ReadAsync(buffer, 0, 0, cancellationToken).ConfigureAwait(false);
+                    await pipeStream
+                        .ReadAsync(buffer, 0, 0, cancellationToken)
+                        .ConfigureAwait(false);
                 }
-                catch (OperationCanceledException)
-                {
-                }
+                catch (OperationCanceledException) { }
                 catch (Exception e)
                 {
                     // It is okay for this call to fail.  Errors will be reflected in the
@@ -346,14 +382,15 @@ namespace Microsoft.CodeAnalysis.CommandLine
         }
 
         /// <summary>
-        /// Attempt to connect to the server and return a null <see cref="NamedPipeClientStream"/> if connection 
+        /// Attempt to connect to the server and return a null <see cref="NamedPipeClientStream"/> if connection
         /// failed. This method will throw on cancellation.
         /// </summary>
         internal static async Task<NamedPipeClientStream?> TryConnectToServerAsync(
             string pipeName,
             int timeoutMs,
             ICompilerServerLogger logger,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             NamedPipeClientStream? pipeStream = null;
             try
@@ -363,7 +400,12 @@ namespace Microsoft.CodeAnalysis.CommandLine
                 // The NamedPipeClientStream class handles the "\\.\pipe\" part for us.
                 logger.Log("Attempt to open named pipe '{0}'", pipeName);
 
-                pipeStream = NamedPipeUtil.CreateClient(".", pipeName, PipeDirection.InOut, PipeOptions.Asynchronous);
+                pipeStream = NamedPipeUtil.CreateClient(
+                    ".",
+                    pipeName,
+                    PipeDirection.InOut,
+                    PipeOptions.Asynchronous
+                );
                 cancellationToken.ThrowIfCancellationRequested();
 
                 logger.Log("Attempt to connect named pipe '{0}'", pipeName);
@@ -378,7 +420,11 @@ namespace Microsoft.CodeAnalysis.CommandLine
                     // To avoid this, we first force ourselves to a background thread using Task.Run.
                     // This ensures that the Task created by ConnectAsync will run on the default
                     // TaskScheduler (i.e., on a threadpool thread) which was the intent all along.
-                    await Task.Run(() => pipeStream.ConnectAsync(timeoutMs, cancellationToken), cancellationToken).ConfigureAwait(false);
+                    await Task.Run(
+                            () => pipeStream.ConnectAsync(timeoutMs, cancellationToken),
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
                 catch (Exception e) when (e is IOException || e is TimeoutException)
                 {
@@ -406,7 +452,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
 
                 return pipeStream;
             }
-            catch (Exception e) when (!(e is TaskCanceledException || e is OperationCanceledException))
+            catch (Exception e)
+                when (!(e is TaskCanceledException || e is OperationCanceledException))
             {
                 logger.LogException(e, "Exception while connecting to process");
                 pipeStream?.Dispose();
@@ -414,7 +461,11 @@ namespace Microsoft.CodeAnalysis.CommandLine
             }
         }
 
-        internal static (string processFilePath, string commandLineArguments, string toolFilePath) GetServerProcessInfo(string clientDir, string pipeName)
+        internal static (
+            string processFilePath,
+            string commandLineArguments,
+            string toolFilePath
+        ) GetServerProcessInfo(string clientDir, string pipeName)
         {
             var serverPathWithoutExtension = Path.Combine(clientDir, "VBCSCompiler");
             var commandLineArgs = $@"""-pipename:{pipeName}""";
@@ -422,12 +473,16 @@ namespace Microsoft.CodeAnalysis.CommandLine
         }
 
         /// <summary>
-        /// This will attempt to start a compiler server process using the executable inside the 
-        /// directory <paramref name="clientDirectory"/>. This returns "true" if starting the 
+        /// This will attempt to start a compiler server process using the executable inside the
+        /// directory <paramref name="clientDirectory"/>. This returns "true" if starting the
         /// compiler server process was successful, it does not state whether the server successfully
         /// started or not (it could crash on startup).
         /// </summary>
-        private static bool TryCreateServer(string clientDirectory, string pipeName, ICompilerServerLogger logger)
+        private static bool TryCreateServer(
+            string clientDirectory,
+            string pipeName,
+            ICompilerServerLogger logger
+        )
         {
             var serverInfo = GetServerProcessInfo(clientDirectory, pipeName);
 
@@ -454,7 +509,9 @@ namespace Microsoft.CodeAnalysis.CommandLine
 
                 logger.Log("Attempting to create process '{0}'", serverInfo.processFilePath);
 
-                var builder = new StringBuilder($@"""{serverInfo.processFilePath}"" {serverInfo.commandLineArguments}");
+                var builder = new StringBuilder(
+                    $@"""{serverInfo.processFilePath}"" {serverInfo.commandLineArguments}"
+                );
 
                 bool success = CreateProcess(
                     lpApplicationName: null,
@@ -466,17 +523,24 @@ namespace Microsoft.CodeAnalysis.CommandLine
                     lpEnvironment: NullPtr, // Inherit environment
                     lpCurrentDirectory: clientDirectory,
                     lpStartupInfo: ref startInfo,
-                    lpProcessInformation: out processInfo);
+                    lpProcessInformation: out processInfo
+                );
 
                 if (success)
                 {
-                    logger.Log("Successfully created process with process id {0}", processInfo.dwProcessId);
+                    logger.Log(
+                        "Successfully created process with process id {0}",
+                        processInfo.dwProcessId
+                    );
                     CloseHandle(processInfo.hProcess);
                     CloseHandle(processInfo.hThread);
                 }
                 else
                 {
-                    logger.LogError("Failed to create process. GetLastError={0}", Marshal.GetLastWin32Error());
+                    logger.LogError(
+                        "Failed to create process. GetLastError={0}",
+                        Marshal.GetLastWin32Error()
+                    );
                 }
                 return success;
             }
@@ -493,7 +557,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
                         RedirectStandardInput = true,
                         RedirectStandardOutput = true,
                         RedirectStandardError = true,
-                        CreateNoWindow = true
+                        CreateNoWindow = true,
                     };
 
                     Process.Start(startInfo);
@@ -526,12 +590,9 @@ namespace Microsoft.CodeAnalysis.CommandLine
             return GetPipeName(userName, isAdmin, clientDirectory);
         }
 
-        internal static string GetPipeName(
-            string userName,
-            bool isAdmin,
-            string clientDirectory)
+        internal static string GetPipeName(string userName, bool isAdmin, string clientDirectory)
         {
-            // Normalize away trailing slashes.  File APIs include / exclude this with no 
+            // Normalize away trailing slashes.  File APIs include / exclude this with no
             // discernable pattern.  Easiest to normalize it here vs. auditing every caller
             // of this method.
             clientDirectory = clientDirectory.TrimEnd(Path.DirectorySeparatorChar);
@@ -540,9 +601,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
             using (var sha = SHA256.Create())
             {
                 var bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(pipeNameInput));
-                return Convert.ToBase64String(bytes)
-                    .Replace("/", "_")
-                    .Replace("=", string.Empty);
+                return Convert.ToBase64String(bytes).Replace("/", "_").Replace("=", string.Empty);
             }
         }
 
@@ -562,8 +621,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
             }
             catch
             {
-                // In the case an exception occurred trying to open the Mutex then 
-                // the assumption is that it's not open. 
+                // In the case an exception occurred trying to open the Mutex then
+                // the assumption is that it's not open.
                 return false;
             }
         }
@@ -595,21 +654,19 @@ namespace Microsoft.CodeAnalysis.CommandLine
         /// <summary>
         /// Gets the value of the temporary path for the provided environment settings. This behavior
         /// is OS specific.
-        ///   - On Windows it seeks to emulate Path.GetTempPath as closely as possible with 
+        ///   - On Windows it seeks to emulate Path.GetTempPath as closely as possible with
         ///     provided working directory.
         /// </summary>
         internal static string? GetTempPath(string? workingDir)
         {
-            return PlatformInformation.IsUnix
-                ? getTempPathLinux()
-                : getTempPathWindows(workingDir);
+            return PlatformInformation.IsUnix ? getTempPathLinux() : getTempPathWindows(workingDir);
 
             static string? getTempPathLinux()
             {
                 // Unix temp path is fine: it does not use the working directory
                 // (it uses ${TMPDIR} if set, otherwise, it returns /tmp)
                 //
-                // https://github.com/dotnet/roslyn/issues/65415 tracks moving to a directory 
+                // https://github.com/dotnet/roslyn/issues/65415 tracks moving to a directory
                 // to a per user location.
                 return Path.GetTempPath();
             }
@@ -705,7 +762,12 @@ namespace Microsoft.CodeAnalysis.CommandLine
             {
                 try
                 {
-                    return new FileStream(GuardPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+                    return new FileStream(
+                        GuardPath,
+                        FileMode.OpenOrCreate,
+                        FileAccess.ReadWrite,
+                        FileShare.None
+                    );
                 }
                 catch (IOException)
                 {
@@ -732,7 +794,12 @@ namespace Microsoft.CodeAnalysis.CommandLine
             FileStream? stream = null;
             try
             {
-                stream = new FileStream(FilePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+                stream = new FileStream(
+                    FilePath,
+                    FileMode.OpenOrCreate,
+                    FileAccess.ReadWrite,
+                    FileShare.None
+                );
                 // On some targets, the file locking used to implement FileShare.None may not be
                 // atomic with opening/creating the file.   This creates a race window when another
                 // thread holds the lock and is just about to unlock: we may be able to open the
@@ -850,9 +917,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
                 {
                     UnlockFile();
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
             }
         }
     }
@@ -866,11 +931,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
 
         public ServerNamedMutex(string mutexName, out bool createdNew)
         {
-            Mutex = new Mutex(
-                initiallyOwned: true,
-                name: mutexName,
-                createdNew: out createdNew
-            );
+            Mutex = new Mutex(initiallyOwned: true, name: mutexName, createdNew: out createdNew);
             if (createdNew)
                 IsLocked = true;
         }
@@ -884,7 +945,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
             }
             catch
             {
-                // In the case an exception occurred trying to open the Mutex then 
+                // In the case an exception occurred trying to open the Mutex then
                 // the assumption is that it's not open.
                 return false;
             }

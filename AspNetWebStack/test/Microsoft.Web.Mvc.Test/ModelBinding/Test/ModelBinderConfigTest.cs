@@ -17,7 +17,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void GetUserResourceString_NullControllerContext_ReturnsNull()
         {
             // Act
-            string customResourceString = ModelBinderConfig.GetUserResourceString(null /* controllerContext */, "someResourceName", "someResourceClassKey");
+            string customResourceString = ModelBinderConfig.GetUserResourceString(
+                null /* controllerContext */
+                ,
+                "someResourceName",
+                "someResourceClassKey"
+            );
 
             // Assert
             Assert.Null(customResourceString);
@@ -30,7 +35,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             mockControllerContext.Setup(o => o.HttpContext).Returns((HttpContextBase)null);
 
             // Act
-            string customResourceString = ModelBinderConfig.GetUserResourceString(mockControllerContext.Object, "someResourceName", "someResourceClassKey");
+            string customResourceString = ModelBinderConfig.GetUserResourceString(
+                mockControllerContext.Object,
+                "someResourceName",
+                "someResourceClassKey"
+            );
 
             // Assert
             Assert.Null(customResourceString);
@@ -42,7 +51,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
 
             // Act
-            string customResourceString = ModelBinderConfig.GetUserResourceString(mockControllerContext.Object, "someResourceName", null /* resourceClassKey */);
+            string customResourceString = ModelBinderConfig.GetUserResourceString(
+                mockControllerContext.Object,
+                "someResourceName",
+                null /* resourceClassKey */
+            );
 
             // Assert
             mockControllerContext.Verify(o => o.HttpContext, Times.Never());
@@ -53,10 +66,22 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void GetUserResourceString_ValidResourceObject_ReturnsResourceString()
         {
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.Setup(o => o.HttpContext.GetGlobalResourceObject("someResourceClassKey", "someResourceName", CultureInfo.CurrentUICulture)).Returns("My custom resource string");
+            mockControllerContext
+                .Setup(o =>
+                    o.HttpContext.GetGlobalResourceObject(
+                        "someResourceClassKey",
+                        "someResourceName",
+                        CultureInfo.CurrentUICulture
+                    )
+                )
+                .Returns("My custom resource string");
 
             // Act
-            string customResourceString = ModelBinderConfig.GetUserResourceString(mockControllerContext.Object, "someResourceName", "someResourceClassKey");
+            string customResourceString = ModelBinderConfig.GetUserResourceString(
+                mockControllerContext.Object,
+                "someResourceName",
+                "someResourceClassKey"
+            );
 
             // Assert
             Assert.Equal("My custom resource string", customResourceString);
@@ -84,13 +109,26 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void TypeConversionErrorMessageProvider_DefaultValue()
         {
             // Arrange
-            ModelMetadata metadata = new ModelMetadata(new Mock<ModelMetadataProvider>().Object, null, null, typeof(int), "SomePropertyName");
+            ModelMetadata metadata = new ModelMetadata(
+                new Mock<ModelMetadataProvider>().Object,
+                null,
+                null,
+                typeof(int),
+                "SomePropertyName"
+            );
 
             // Act
-            string errorString = ModelBinderConfig.TypeConversionErrorMessageProvider(null, metadata, "some incoming value");
+            string errorString = ModelBinderConfig.TypeConversionErrorMessageProvider(
+                null,
+                metadata,
+                "some incoming value"
+            );
 
             // Assert
-            Assert.Equal("The value 'some incoming value' is not valid for SomePropertyName.", errorString);
+            Assert.Equal(
+                "The value 'some incoming value' is not valid for SomePropertyName.",
+                errorString
+            );
         }
 
         [Fact]
@@ -102,7 +140,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Act & assert
             try
             {
-                MemberHelper.TestPropertyWithDefaultInstance(wrapper, "TypeConversionErrorMessageProvider", (ModelBinderErrorMessageProvider)DummyErrorSelector);
+                MemberHelper.TestPropertyWithDefaultInstance(
+                    wrapper,
+                    "TypeConversionErrorMessageProvider",
+                    (ModelBinderErrorMessageProvider)DummyErrorSelector
+                );
             }
             finally
             {
@@ -114,10 +156,20 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void ValueRequiredErrorMessageProvider_DefaultValue()
         {
             // Arrange
-            ModelMetadata metadata = new ModelMetadata(new Mock<ModelMetadataProvider>().Object, null, null, typeof(int), "SomePropertyName");
+            ModelMetadata metadata = new ModelMetadata(
+                new Mock<ModelMetadataProvider>().Object,
+                null,
+                null,
+                typeof(int),
+                "SomePropertyName"
+            );
 
             // Act
-            string errorString = ModelBinderConfig.ValueRequiredErrorMessageProvider(null, metadata, "some incoming value");
+            string errorString = ModelBinderConfig.ValueRequiredErrorMessageProvider(
+                null,
+                metadata,
+                "some incoming value"
+            );
 
             // Assert
             Assert.Equal("A value is required.", errorString);
@@ -132,7 +184,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Act & assert
             try
             {
-                MemberHelper.TestPropertyWithDefaultInstance(wrapper, "ValueRequiredErrorMessageProvider", (ModelBinderErrorMessageProvider)DummyErrorSelector);
+                MemberHelper.TestPropertyWithDefaultInstance(
+                    wrapper,
+                    "ValueRequiredErrorMessageProvider",
+                    (ModelBinderErrorMessageProvider)DummyErrorSelector
+                );
             }
             finally
             {
@@ -140,7 +196,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             }
         }
 
-        private string DummyErrorSelector(ControllerContext controllerContext, ModelMetadata modelMetadata, object incomingValue)
+        private string DummyErrorSelector(
+            ControllerContext controllerContext,
+            ModelMetadata modelMetadata,
+            object incomingValue
+        )
         {
             throw new NotImplementedException();
         }

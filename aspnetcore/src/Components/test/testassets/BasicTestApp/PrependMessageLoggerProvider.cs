@@ -60,12 +60,8 @@ internal class PrependMessageLoggerProvider : ILoggerProvider
             Exception exception,
             Func<TState, Exception, string> formatter
         ) =>
-            _underlyingLogger.Log(
-                logLevel,
-                eventId,
-                state,
-                exception,
-                (state, exception) => $"[{_message}] {formatter(state, exception)}"
+            _underlyingLogger.Log(logLevel, eventId, state, exception, (state, exception) =>
+                $"[{_message}] {formatter(state, exception)}"
             );
     }
 }

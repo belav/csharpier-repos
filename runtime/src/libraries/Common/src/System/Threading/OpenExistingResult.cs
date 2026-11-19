@@ -12,6 +12,6 @@ namespace System.Threading
         Success,
         NameNotFound,
         PathNotFound,
-        NameInvalid
+        NameInvalid,
     }
 }

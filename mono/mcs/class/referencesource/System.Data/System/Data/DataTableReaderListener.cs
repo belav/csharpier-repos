@@ -1,27 +1,30 @@
 //------------------------------------------------------------------------------
 // <copyright file="DataTableReaderListener.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">Microsoft</owner>
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
-    using System.Data.Common;
     using System.Collections;
     using System.ComponentModel;
+    using System.Data.Common;
 
-    internal sealed class DataTableReaderListener {
-
+    internal sealed class DataTableReaderListener
+    {
         private DataTable currentDataTable = null;
-        private bool  isSubscribed = false;
+        private bool isSubscribed = false;
         private WeakReference readerWeak;
 
-        internal DataTableReaderListener(DataTableReader reader) {
+        internal DataTableReaderListener(DataTableReader reader)
+        {
             if (reader == null)
                 throw ExceptionBuilder.ArgumentNull("DataTableReader");
-            if (currentDataTable != null) {
+            if (currentDataTable != null)
+            {
                 UnSubscribeEvents();
             }
             this.readerWeak = new WeakReference(reader);
@@ -29,12 +32,14 @@ namespace System.Data {
             if (currentDataTable != null)
                 SubscribeEvents();
         }
-       
-        internal void CleanUp() {
+
+        internal void CleanUp()
+        {
             UnSubscribeEvents();
         }
 
-        internal void UpdataTable(DataTable datatable) {
+        internal void UpdataTable(DataTable datatable)
+        {
             if (datatable == null)
                 throw ExceptionBuilder.ArgumentNull("DataTable");
 
@@ -42,68 +47,85 @@ namespace System.Data {
             currentDataTable = datatable;
             SubscribeEvents();
         }
-        
-        private void SubscribeEvents() {
+
+        private void SubscribeEvents()
+        {
             if (currentDataTable == null)
                 return;
             if (isSubscribed)
                 return;
-            currentDataTable.Columns.ColumnPropertyChanged    += new CollectionChangeEventHandler(SchemaChanged);
-            currentDataTable.Columns.CollectionChanged         += new CollectionChangeEventHandler(SchemaChanged);
-           
-            currentDataTable.RowChanged    += new DataRowChangeEventHandler(DataChanged );
-            currentDataTable.RowDeleted    += new DataRowChangeEventHandler(DataChanged);
+            currentDataTable.Columns.ColumnPropertyChanged += new CollectionChangeEventHandler(
+                SchemaChanged
+            );
+            currentDataTable.Columns.CollectionChanged += new CollectionChangeEventHandler(
+                SchemaChanged
+            );
 
-            currentDataTable.TableCleared    += new DataTableClearEventHandler(DataTableCleared);
+            currentDataTable.RowChanged += new DataRowChangeEventHandler(DataChanged);
+            currentDataTable.RowDeleted += new DataRowChangeEventHandler(DataChanged);
+
+            currentDataTable.TableCleared += new DataTableClearEventHandler(DataTableCleared);
             isSubscribed = true;
         }
 
-        private void UnSubscribeEvents() {
+        private void UnSubscribeEvents()
+        {
             if (currentDataTable == null)
                 return;
             if (!isSubscribed)
                 return;
-            
-            currentDataTable.Columns.ColumnPropertyChanged    -= new CollectionChangeEventHandler(SchemaChanged);
-            currentDataTable.Columns.CollectionChanged         -= new CollectionChangeEventHandler(SchemaChanged);
 
-            currentDataTable.RowChanged    -= new DataRowChangeEventHandler(DataChanged );
-            currentDataTable.RowDeleted    -= new DataRowChangeEventHandler(DataChanged);
+            currentDataTable.Columns.ColumnPropertyChanged -= new CollectionChangeEventHandler(
+                SchemaChanged
+            );
+            currentDataTable.Columns.CollectionChanged -= new CollectionChangeEventHandler(
+                SchemaChanged
+            );
 
-            currentDataTable.TableCleared    -= new DataTableClearEventHandler(DataTableCleared);
+            currentDataTable.RowChanged -= new DataRowChangeEventHandler(DataChanged);
+            currentDataTable.RowDeleted -= new DataRowChangeEventHandler(DataChanged);
+
+            currentDataTable.TableCleared -= new DataTableClearEventHandler(DataTableCleared);
             isSubscribed = false;
         }
- 
 
-       private void DataTableCleared(object sender, DataTableClearEventArgs e) {
-           DataTableReader reader = (DataTableReader) readerWeak.Target;
-           if (reader != null) {
-               reader.DataTableCleared();
-           }
-           else {
-               UnSubscribeEvents();
-           }
-            
-       }
+        private void DataTableCleared(object sender, DataTableClearEventArgs e)
+        {
+            DataTableReader reader = (DataTableReader)readerWeak.Target;
+            if (reader != null)
+            {
+                reader.DataTableCleared();
+            }
+            else
+            {
+                UnSubscribeEvents();
+            }
+        }
 
-       private void SchemaChanged(object sender, CollectionChangeEventArgs e) {
-           DataTableReader reader = (DataTableReader) readerWeak.Target;
-           if (reader != null) {
-               reader.SchemaChanged();
-           }
-           else {
-               UnSubscribeEvents();
-           }
-       }
+        private void SchemaChanged(object sender, CollectionChangeEventArgs e)
+        {
+            DataTableReader reader = (DataTableReader)readerWeak.Target;
+            if (reader != null)
+            {
+                reader.SchemaChanged();
+            }
+            else
+            {
+                UnSubscribeEvents();
+            }
+        }
 
-       private void DataChanged( object sender, DataRowChangeEventArgs args ) {          
-           DataTableReader reader = (DataTableReader) readerWeak.Target;
-           if (reader != null) {
-               reader.DataChanged(args);
-           }
-           else {
-               UnSubscribeEvents();
-           }
-       }
+        private void DataChanged(object sender, DataRowChangeEventArgs args)
+        {
+            DataTableReader reader = (DataTableReader)readerWeak.Target;
+            if (reader != null)
+            {
+                reader.DataChanged(args);
+            }
+            else
+            {
+                UnSubscribeEvents();
+            }
+        }
     }
 }

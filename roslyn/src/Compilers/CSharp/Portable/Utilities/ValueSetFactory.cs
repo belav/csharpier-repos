@@ -11,25 +11,66 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// </summary>
     internal static partial class ValueSetFactory
     {
-        internal static readonly IValueSetFactory<byte> ForByte = NumericValueSetFactory<byte, ByteTC>.Instance;
-        internal static readonly IValueSetFactory<sbyte> ForSByte = NumericValueSetFactory<sbyte, SByteTC>.Instance;
-        internal static readonly IValueSetFactory<char> ForChar = NumericValueSetFactory<char, CharTC>.Instance;
-        internal static readonly IValueSetFactory<short> ForShort = NumericValueSetFactory<short, ShortTC>.Instance;
-        internal static readonly IValueSetFactory<ushort> ForUShort = NumericValueSetFactory<ushort, UShortTC>.Instance;
-        internal static readonly IValueSetFactory<int> ForInt = NumericValueSetFactory<int, IntTC>.Instance;
-        internal static readonly IValueSetFactory<uint> ForUInt = NumericValueSetFactory<uint, UIntTC>.Instance;
-        internal static readonly IValueSetFactory<long> ForLong = NumericValueSetFactory<long, LongTC>.Instance;
-        internal static readonly IValueSetFactory<ulong> ForULong = NumericValueSetFactory<ulong, ULongTC>.Instance;
+        internal static readonly IValueSetFactory<byte> ForByte = NumericValueSetFactory<
+            byte,
+            ByteTC
+        >.Instance;
+        internal static readonly IValueSetFactory<sbyte> ForSByte = NumericValueSetFactory<
+            sbyte,
+            SByteTC
+        >.Instance;
+        internal static readonly IValueSetFactory<char> ForChar = NumericValueSetFactory<
+            char,
+            CharTC
+        >.Instance;
+        internal static readonly IValueSetFactory<short> ForShort = NumericValueSetFactory<
+            short,
+            ShortTC
+        >.Instance;
+        internal static readonly IValueSetFactory<ushort> ForUShort = NumericValueSetFactory<
+            ushort,
+            UShortTC
+        >.Instance;
+        internal static readonly IValueSetFactory<int> ForInt = NumericValueSetFactory<
+            int,
+            IntTC
+        >.Instance;
+        internal static readonly IValueSetFactory<uint> ForUInt = NumericValueSetFactory<
+            uint,
+            UIntTC
+        >.Instance;
+        internal static readonly IValueSetFactory<long> ForLong = NumericValueSetFactory<
+            long,
+            LongTC
+        >.Instance;
+        internal static readonly IValueSetFactory<ulong> ForULong = NumericValueSetFactory<
+            ulong,
+            ULongTC
+        >.Instance;
         internal static readonly IValueSetFactory<bool> ForBool = BoolValueSetFactory.Instance;
-        internal static readonly IValueSetFactory<float> ForFloat = FloatingValueSetFactory<float, SingleTC>.Instance;
-        internal static readonly IValueSetFactory<double> ForDouble = FloatingValueSetFactory<double, DoubleTC>.Instance;
-        internal static readonly IValueSetFactory<string> ForString = EnumeratedValueSetFactory<string, StringTC>.Instance;
-        internal static readonly IValueSetFactory<decimal> ForDecimal = DecimalValueSetFactory.Instance;
+        internal static readonly IValueSetFactory<float> ForFloat = FloatingValueSetFactory<
+            float,
+            SingleTC
+        >.Instance;
+        internal static readonly IValueSetFactory<double> ForDouble = FloatingValueSetFactory<
+            double,
+            DoubleTC
+        >.Instance;
+        internal static readonly IValueSetFactory<string> ForString = EnumeratedValueSetFactory<
+            string,
+            StringTC
+        >.Instance;
+        internal static readonly IValueSetFactory<decimal> ForDecimal =
+            DecimalValueSetFactory.Instance;
         internal static readonly IValueSetFactory<int> ForNint = NintValueSetFactory.Instance;
         internal static readonly IValueSetFactory<uint> ForNuint = NuintValueSetFactory.Instance;
-        internal static readonly IValueSetFactory<int> ForLength = NonNegativeIntValueSetFactory.Instance;
+        internal static readonly IValueSetFactory<int> ForLength =
+            NonNegativeIntValueSetFactory.Instance;
 
-        public static IValueSetFactory? ForSpecialType(SpecialType specialType, bool isNative = false)
+        public static IValueSetFactory? ForSpecialType(
+            SpecialType specialType,
+            bool isNative = false
+        )
         {
             return specialType switch
             {

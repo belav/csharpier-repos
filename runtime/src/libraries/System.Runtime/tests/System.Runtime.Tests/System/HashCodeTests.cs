@@ -42,19 +42,111 @@ public static class HashCodeTests
         // n. Continue until "abcd0123efgh4567ijkl8901mnop2345qrst6789uvwx0123yzab".
 
         Theory(0x02cc5d05U);
-        Theory(0xa3643705U, 0x64636261U );
-        Theory(0x4603e94cU, 0x64636261U, 0x33323130U );
-        Theory(0xd8a1e80fU, 0x64636261U, 0x33323130U, 0x68676665U );
-        Theory(0x4b62a7cfU, 0x64636261U, 0x33323130U, 0x68676665U, 0x37363534U );
-        Theory(0xc33a7641U, 0x64636261U, 0x33323130U, 0x68676665U, 0x37363534U, 0x6c6b6a69U );
-        Theory(0x1a794705U, 0x64636261U, 0x33323130U, 0x68676665U, 0x37363534U, 0x6c6b6a69U, 0x31303938U );
-        Theory(0x4d79177dU, 0x64636261U, 0x33323130U, 0x68676665U, 0x37363534U, 0x6c6b6a69U, 0x31303938U, 0x706f6e6dU );
-        Theory(0x59d79205U, 0x64636261U, 0x33323130U, 0x68676665U, 0x37363534U, 0x6c6b6a69U, 0x31303938U, 0x706f6e6dU, 0x35343332U );
-        Theory(0x49585aaeU, 0x64636261U, 0x33323130U, 0x68676665U, 0x37363534U, 0x6c6b6a69U, 0x31303938U, 0x706f6e6dU, 0x35343332U, 0x74737271U );
-        Theory(0x2f005ff1U, 0x64636261U, 0x33323130U, 0x68676665U, 0x37363534U, 0x6c6b6a69U, 0x31303938U, 0x706f6e6dU, 0x35343332U, 0x74737271U, 0x39383736U );
-        Theory(0x0ce339bdU, 0x64636261U, 0x33323130U, 0x68676665U, 0x37363534U, 0x6c6b6a69U, 0x31303938U, 0x706f6e6dU, 0x35343332U, 0x74737271U, 0x39383736U, 0x78777675U );
-        Theory(0xb31bd2ffU, 0x64636261U, 0x33323130U, 0x68676665U, 0x37363534U, 0x6c6b6a69U, 0x31303938U, 0x706f6e6dU, 0x35343332U, 0x74737271U, 0x39383736U, 0x78777675U, 0x33323130U );
-        Theory(0xa821efa3U, 0x64636261U, 0x33323130U, 0x68676665U, 0x37363534U, 0x6c6b6a69U, 0x31303938U, 0x706f6e6dU, 0x35343332U, 0x74737271U, 0x39383736U, 0x78777675U, 0x33323130U, 0x62617a79U );
+        Theory(0xa3643705U, 0x64636261U);
+        Theory(0x4603e94cU, 0x64636261U, 0x33323130U);
+        Theory(0xd8a1e80fU, 0x64636261U, 0x33323130U, 0x68676665U);
+        Theory(0x4b62a7cfU, 0x64636261U, 0x33323130U, 0x68676665U, 0x37363534U);
+        Theory(0xc33a7641U, 0x64636261U, 0x33323130U, 0x68676665U, 0x37363534U, 0x6c6b6a69U);
+        Theory(
+            0x1a794705U,
+            0x64636261U,
+            0x33323130U,
+            0x68676665U,
+            0x37363534U,
+            0x6c6b6a69U,
+            0x31303938U
+        );
+        Theory(
+            0x4d79177dU,
+            0x64636261U,
+            0x33323130U,
+            0x68676665U,
+            0x37363534U,
+            0x6c6b6a69U,
+            0x31303938U,
+            0x706f6e6dU
+        );
+        Theory(
+            0x59d79205U,
+            0x64636261U,
+            0x33323130U,
+            0x68676665U,
+            0x37363534U,
+            0x6c6b6a69U,
+            0x31303938U,
+            0x706f6e6dU,
+            0x35343332U
+        );
+        Theory(
+            0x49585aaeU,
+            0x64636261U,
+            0x33323130U,
+            0x68676665U,
+            0x37363534U,
+            0x6c6b6a69U,
+            0x31303938U,
+            0x706f6e6dU,
+            0x35343332U,
+            0x74737271U
+        );
+        Theory(
+            0x2f005ff1U,
+            0x64636261U,
+            0x33323130U,
+            0x68676665U,
+            0x37363534U,
+            0x6c6b6a69U,
+            0x31303938U,
+            0x706f6e6dU,
+            0x35343332U,
+            0x74737271U,
+            0x39383736U
+        );
+        Theory(
+            0x0ce339bdU,
+            0x64636261U,
+            0x33323130U,
+            0x68676665U,
+            0x37363534U,
+            0x6c6b6a69U,
+            0x31303938U,
+            0x706f6e6dU,
+            0x35343332U,
+            0x74737271U,
+            0x39383736U,
+            0x78777675U
+        );
+        Theory(
+            0xb31bd2ffU,
+            0x64636261U,
+            0x33323130U,
+            0x68676665U,
+            0x37363534U,
+            0x6c6b6a69U,
+            0x31303938U,
+            0x706f6e6dU,
+            0x35343332U,
+            0x74737271U,
+            0x39383736U,
+            0x78777675U,
+            0x33323130U
+        );
+        Theory(
+            0xa821efa3U,
+            0x64636261U,
+            0x33323130U,
+            0x68676665U,
+            0x37363534U,
+            0x6c6b6a69U,
+            0x31303938U,
+            0x706f6e6dU,
+            0x35343332U,
+            0x74737271U,
+            0x39383736U,
+            0x78777675U,
+            0x33323130U,
+            0x62617a79U
+        );
     }
 
     [Fact]
@@ -130,7 +222,10 @@ public static class HashCodeTests
         // of Int32 values Add'd, as well as exactly how AddBytes partitions the incoming bytes.
         // If the implementation changes, this test may need to be updated accordingly.
 
-        FieldInfo lengthField = typeof(HashCode).GetField("_length", BindingFlags.Instance | BindingFlags.NonPublic);
+        FieldInfo lengthField = typeof(HashCode).GetField(
+            "_length",
+            BindingFlags.Instance | BindingFlags.NonPublic
+        );
         int expectedLength = 0;
         HashCode hc = default;
         for (int i = 1; i < 100; i++)
@@ -200,7 +295,6 @@ public static class HashCodeTests
             HashCode.Combine(1, 2, 3, 4, 5, 6),
             HashCode.Combine(1, 2, 3, 4, 5, 6, 7),
             HashCode.Combine(1, 2, 3, 4, 5, 6, 7, 8),
-
             HashCode.Combine(2),
             HashCode.Combine(2, 3),
             HashCode.Combine(2, 3, 4),
@@ -212,11 +306,12 @@ public static class HashCodeTests
         };
 
         for (int i = 0; i < hcs.Length; i++)
-            for (int j = 0; j < hcs.Length; j++)
-            {
-                if (i == j) continue;
-                Assert.NotEqual(hcs[i], hcs[j]);
-            }
+        for (int j = 0; j < hcs.Length; j++)
+        {
+            if (i == j)
+                continue;
+            Assert.NotEqual(hcs[i], hcs[j]);
+        }
     }
 
     [Fact]
@@ -350,6 +445,7 @@ public static class HashCodeTests
         public const int ConstantValue = 1234;
 
         public bool Equals(string x, string y) => false;
+
         public int GetHashCode(string obj) => ConstantValue;
     }
 

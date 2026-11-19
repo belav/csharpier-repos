@@ -7,6 +7,6 @@ namespace Microsoft.Web.Mvc.ModelBinding
     {
         Optional = 0,
         Never,
-        Required
+        Required,
     }
 }

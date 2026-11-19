@@ -16,21 +16,29 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.SpellCheck
 {
-    internal abstract class AbstractSpellCheckSpanService(char? escapeCharacter) : ISpellCheckSpanService
+    internal abstract class AbstractSpellCheckSpanService(char? escapeCharacter)
+        : ISpellCheckSpanService
     {
         private readonly char? _escapeCharacter = escapeCharacter;
 
-        public async Task<ImmutableArray<SpellCheckSpan>> GetSpansAsync(Document document, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<SpellCheckSpan>> GetSpansAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             return GetSpans();
 
             // Broken into its own method as it uses a ref-struct, which isn't allowed with the async call above.
             ImmutableArray<SpellCheckSpan> GetSpans()
             {
                 var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-                var classifier = document.GetRequiredLanguageService<ISyntaxClassificationService>();
-                var virtualCharService = document.GetRequiredLanguageService<IVirtualCharLanguageService>();
+                var classifier =
+                    document.GetRequiredLanguageService<ISyntaxClassificationService>();
+                var virtualCharService =
+                    document.GetRequiredLanguageService<IVirtualCharLanguageService>();
 
                 using var _ = ArrayBuilder<SpellCheckSpan>.GetInstance(out var spans);
 
@@ -46,9 +54,11 @@ namespace Microsoft.CodeAnalysis.SpellCheck
             ISyntaxFactsService syntaxFacts,
             ISyntaxClassificationService classifier,
             IVirtualCharLanguageService virtualCharService,
-            ArrayBuilder<SpellCheckSpan> spans)
+            ArrayBuilder<SpellCheckSpan> spans
+        )
         {
-            private readonly AbstractSpellCheckSpanService _spellCheckSpanService = spellCheckSpanService;
+            private readonly AbstractSpellCheckSpanService _spellCheckSpanService =
+                spellCheckSpanService;
             private readonly ISyntaxFactsService _syntaxFacts = syntaxFacts;
             private readonly ISyntaxKinds _syntaxKinds = syntaxFacts.SyntaxKinds;
             private readonly ISyntaxClassificationService _classifier = classifier;
@@ -84,26 +94,35 @@ namespace Microsoft.CodeAnalysis.SpellCheck
                 }
             }
 
-            private void ProcessToken(
-                SyntaxToken token,
-                CancellationToken cancellationToken)
+            private void ProcessToken(SyntaxToken token, CancellationToken cancellationToken)
             {
                 ProcessTriviaList(token.LeadingTrivia, cancellationToken);
 
                 if (_syntaxFacts.IsStringLiteral(token))
                 {
-                    AddStringSpans(token, canContainEscapes: !_syntaxFacts.IsVerbatimStringLiteral(token));
+                    AddStringSpans(
+                        token,
+                        canContainEscapes: !_syntaxFacts.IsVerbatimStringLiteral(token)
+                    );
                 }
                 else if (
-                    token.RawKind == _syntaxKinds.SingleLineRawStringLiteralToken ||
-                    token.RawKind == _syntaxKinds.MultiLineRawStringLiteralToken)
+                    token.RawKind == _syntaxKinds.SingleLineRawStringLiteralToken
+                    || token.RawKind == _syntaxKinds.MultiLineRawStringLiteralToken
+                )
                 {
                     AddStringSpans(token, canContainEscapes: false);
                 }
-                else if (token.RawKind == _syntaxKinds.InterpolatedStringTextToken &&
-                         token.Parent?.RawKind == _syntaxKinds.InterpolatedStringText)
+                else if (
+                    token.RawKind == _syntaxKinds.InterpolatedStringTextToken
+                    && token.Parent?.RawKind == _syntaxKinds.InterpolatedStringText
+                )
                 {
-                    AddStringSpans(token, canContainEscapes: !_syntaxFacts.IsVerbatimInterpolatedStringExpression(token.Parent.Parent));
+                    AddStringSpans(
+                        token,
+                        canContainEscapes: !_syntaxFacts.IsVerbatimInterpolatedStringExpression(
+                            token.Parent.Parent
+                        )
+                    );
                 }
                 else if (token.RawKind == _syntaxKinds.IdentifierToken)
                 {
@@ -128,9 +147,11 @@ namespace Microsoft.CodeAnalysis.SpellCheck
                 // Note: .Text on a string token is non-allocating.  It is captured at the time of token creation and
                 // held by the token.
                 var escapeChar = _spellCheckSpanService._escapeCharacter;
-                if (canContainEscapes &&
-                    escapeChar != null &&
-                    token.Text.AsSpan().IndexOf(escapeChar.Value) >= 0)
+                if (
+                    canContainEscapes
+                    && escapeChar != null
+                    && token.Text.AsSpan().IndexOf(escapeChar.Value) >= 0
+                )
                 {
                     AddStringSubSpans(token);
                 }
@@ -188,7 +209,12 @@ namespace Microsoft.CodeAnalysis.SpellCheck
                     }
 
                     if (!seenEscape)
-                        AddSpan(new SpellCheckSpan(TextSpan.FromBounds(spanStart, spanEnd), SpellCheckKind.String));
+                        AddSpan(
+                            new SpellCheckSpan(
+                                TextSpan.FromBounds(spanStart, spanEnd),
+                                SpellCheckKind.String
+                            )
+                        );
                 }
 
                 return;
@@ -240,7 +266,10 @@ namespace Microsoft.CodeAnalysis.SpellCheck
                 }
             }
 
-            private void ProcessTriviaList(SyntaxTriviaList triviaList, CancellationToken cancellationToken)
+            private void ProcessTriviaList(
+                SyntaxTriviaList triviaList,
+                CancellationToken cancellationToken
+            )
             {
                 foreach (var trivia in triviaList)
                     ProcessTrivia(trivia, cancellationToken);

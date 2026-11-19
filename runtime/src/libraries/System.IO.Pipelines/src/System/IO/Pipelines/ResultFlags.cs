@@ -8,6 +8,6 @@ namespace System.IO.Pipelines
     {
         None = 0x0,
         Canceled = 0x1,
-        Completed = 0x2
+        Completed = 0x2,
     }
 }

@@ -8,7 +8,12 @@ using System.Runtime.CompilerServices;
 public struct MyStruct<TRequest, TResponse>
 {
     int _id;
-    public MyStruct(int id) { _id = id; }
+
+    public MyStruct(int id)
+    {
+        _id = id;
+    }
+
     public override string ToString() => this.GetType().ToString() + " = " + _id;
 }
 
@@ -29,7 +34,8 @@ public sealed class MyStructWrapper<TRequest, TResponse>
 
 public abstract class BaseStructCreator
 {
-    public abstract MyStructWrapper<TRequest, TResponse> GetMyStructWrapper<TRequest, TResponse>() where TRequest : class;
+    public abstract MyStructWrapper<TRequest, TResponse> GetMyStructWrapper<TRequest, TResponse>()
+        where TRequest : class;
 }
 
 public class StructCreator : BaseStructCreator
@@ -38,7 +44,9 @@ public class StructCreator : BaseStructCreator
     {
         return new MyStructWrapper<TRequest, TResponse>(CreateCall<TRequest, TResponse>());
     }
-    protected virtual MyStruct<TRequest, TResponse> CreateCall<TRequest, TResponse>() where TRequest : class
+
+    protected virtual MyStruct<TRequest, TResponse> CreateCall<TRequest, TResponse>()
+        where TRequest : class
     {
         return new MyStruct<TRequest, TResponse>(123);
     }
@@ -61,13 +69,16 @@ public class Test_runtime_32848
         var wrapper = creator.GetMyStructWrapper<Exception, GenStruct<string>>();
         return wrapper.ToString();
     }
+
     public static int Main()
     {
-        Console.WriteLine("Expected: MyStruct`2[System.Exception,GenStruct`1[System.String]] = 456");
+        Console.WriteLine(
+            "Expected: MyStruct`2[System.Exception,GenStruct`1[System.String]] = 456"
+        );
 
         string result = RunTest();
         Console.WriteLine("Actual  : " + result);
-        
+
         string expected = "MyStruct`2[System.Exception,GenStruct`1[System.String]] = 456";
         return result == expected ? 100 : -1;
     }

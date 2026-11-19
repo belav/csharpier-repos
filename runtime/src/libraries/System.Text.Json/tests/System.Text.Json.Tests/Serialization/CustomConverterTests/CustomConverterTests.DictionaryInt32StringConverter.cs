@@ -14,7 +14,11 @@ namespace System.Text.Json.Serialization.Tests
         /// </summary>
         internal class DictionaryInt32StringConverter : JsonConverter<Dictionary<int, string>>
         {
-            public override Dictionary<int, string> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override Dictionary<int, string> Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (reader.TokenType != JsonTokenType.StartObject)
                 {
@@ -33,7 +37,9 @@ namespace System.Text.Json.Serialization.Tests
                     string keyAsString = reader.GetString();
                     if (!int.TryParse(keyAsString, out int keyAsInt))
                     {
-                        throw new JsonException($"Unable to convert \"{keyAsString}\" to System.Int32.");
+                        throw new JsonException(
+                            $"Unable to convert \"{keyAsString}\" to System.Int32."
+                        );
                     }
 
                     reader.Read();
@@ -45,7 +51,11 @@ namespace System.Text.Json.Serialization.Tests
                 throw new JsonException();
             }
 
-            public override void Write(Utf8JsonWriter writer, Dictionary<int, string> value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                Dictionary<int, string> value,
+                JsonSerializerOptions options
+            )
             {
                 writer.WriteStartObject();
 
@@ -66,7 +76,9 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
             options.Converters.Add(new DictionaryInt32StringConverter());
 
-            Dictionary<int, string> dictionary = JsonSerializer.Deserialize<Dictionary<int, string>>(json, options);
+            Dictionary<int, string> dictionary = JsonSerializer.Deserialize<
+                Dictionary<int, string>
+            >(json, options);
             Assert.Equal("ValueOne", dictionary[1]);
             Assert.Equal("ValueTwo", dictionary[2]);
 

@@ -1,16 +1,16 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>Microsoft</OWNER>
 using System;
+using System.Runtime;
+using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using System.Runtime.ConstrainedExecution;
-using System.Runtime.CompilerServices;
-using System.Runtime;
 using System.Security;
 
 namespace System.Threading
@@ -32,7 +32,7 @@ namespace System.Threading
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static bool Read(ref bool location)
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             var value = location;
@@ -45,7 +45,7 @@ namespace System.Threading
         [CLSCompliant(false)]
         public static sbyte Read(ref sbyte location)
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             var value = location;
@@ -57,7 +57,7 @@ namespace System.Threading
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static byte Read(ref byte location)
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             var value = location;
@@ -69,7 +69,7 @@ namespace System.Threading
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static short Read(ref short location)
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             var value = location;
@@ -82,7 +82,7 @@ namespace System.Threading
         [CLSCompliant(false)]
         public static ushort Read(ref ushort location)
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             var value = location;
@@ -94,7 +94,7 @@ namespace System.Threading
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static int Read(ref int location)
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             var value = location;
@@ -107,7 +107,7 @@ namespace System.Threading
         [CLSCompliant(false)]
         public static uint Read(ref uint location)
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             var value = location;
@@ -151,7 +151,7 @@ namespace System.Threading
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static IntPtr Read(ref IntPtr location)
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             var value = location;
@@ -164,7 +164,7 @@ namespace System.Threading
         [CLSCompliant(false)]
         public static UIntPtr Read(ref UIntPtr location)
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             var value = location;
@@ -176,7 +176,7 @@ namespace System.Threading
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static float Read(ref float location)
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             var value = location;
@@ -200,9 +200,10 @@ namespace System.Threading
         [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [SecuritySafeCritical] //the intrinsic implementation of this method contains unverifiable code
-        public static T Read<T>(ref T location) where T : class
+        public static T Read<T>(ref T location)
+            where T : class
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             var value = location;
@@ -210,14 +211,11 @@ namespace System.Threading
             return value;
         }
 
-
-
-
         [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static void Write(ref bool location, bool value)
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             Thread.MemoryBarrier();
@@ -229,7 +227,7 @@ namespace System.Threading
         [CLSCompliant(false)]
         public static void Write(ref sbyte location, sbyte value)
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             Thread.MemoryBarrier();
@@ -240,7 +238,7 @@ namespace System.Threading
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static void Write(ref byte location, byte value)
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             Thread.MemoryBarrier();
@@ -251,7 +249,7 @@ namespace System.Threading
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static void Write(ref short location, short value)
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             Thread.MemoryBarrier();
@@ -263,7 +261,7 @@ namespace System.Threading
         [CLSCompliant(false)]
         public static void Write(ref ushort location, ushort value)
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             Thread.MemoryBarrier();
@@ -274,7 +272,7 @@ namespace System.Threading
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static void Write(ref int location, int value)
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             Thread.MemoryBarrier();
@@ -286,7 +284,7 @@ namespace System.Threading
         [CLSCompliant(false)]
         public static void Write(ref uint location, uint value)
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             Thread.MemoryBarrier();
@@ -298,7 +296,7 @@ namespace System.Threading
         public static void Write(ref long location, long value)
         {
             //
-            // On 32-bit machines, we use this implementation, since an ordinary volatile write 
+            // On 32-bit machines, we use this implementation, since an ordinary volatile write
             // would not be atomic.
             //
             // On 64-bit machines, the VM will replace this with a more efficient implementation.
@@ -313,7 +311,7 @@ namespace System.Threading
         public static void Write(ref ulong location, ulong value)
         {
             //
-            // On 32-bit machines, we use this implementation, since an ordinary volatile write 
+            // On 32-bit machines, we use this implementation, since an ordinary volatile write
             // would not be atomic.
             //
             // On 64-bit machines, the VM will replace this with a more efficient implementation.
@@ -335,7 +333,7 @@ namespace System.Threading
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static void Write(ref IntPtr location, IntPtr value)
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             Thread.MemoryBarrier();
@@ -347,7 +345,7 @@ namespace System.Threading
         [CLSCompliant(false)]
         public static void Write(ref UIntPtr location, UIntPtr value)
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             Thread.MemoryBarrier();
@@ -358,7 +356,7 @@ namespace System.Threading
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static void Write(ref float location, float value)
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             Thread.MemoryBarrier();
@@ -370,7 +368,7 @@ namespace System.Threading
         public static void Write(ref double location, double value)
         {
             //
-            // On 32-bit machines, we use this implementation, since an ordinary volatile write 
+            // On 32-bit machines, we use this implementation, since an ordinary volatile write
             // would not be atomic.
             //
             // On 64-bit machines, the VM will replace this with a more efficient implementation.
@@ -381,9 +379,10 @@ namespace System.Threading
         [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [SecuritySafeCritical] //the intrinsic implementation of this method contains unverifiable code
-        public static void Write<T>(ref T location, T value) where T : class
+        public static void Write<T>(ref T location, T value)
+            where T : class
         {
-            // 
+            //
             // The VM will replace this with a more efficient implementation.
             //
             Thread.MemoryBarrier();

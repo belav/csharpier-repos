@@ -52,7 +52,9 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
             }
 
             var lexer = new Lexer(headerText);
-            using var _1 = ArrayBuilder<(int minValue, int maxValue)>.GetInstance(out var numberRangePairs);
+            using var _1 = ArrayBuilder<(int minValue, int maxValue)>.GetInstance(
+                out var numberRangePairs
+            );
             if (!TryCompilePathList(ref lexer, sb, parsingChoice: false, numberRangePairs))
             {
                 return false;
@@ -60,7 +62,11 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
 
             sb.Append('$');
             var pattern = sb.ToString();
-            matcher = new SectionMatcher(new Regex(pattern), headerText, numberRangePairs.ToImmutableArray());
+            matcher = new SectionMatcher(
+                new Regex(pattern),
+                headerText,
+                numberRangePairs.ToImmutableArray()
+            );
             return true;
         }
 
@@ -68,7 +74,8 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
             ref Lexer lexer,
             StringBuilder sb,
             bool parsingChoice,
-            ArrayBuilder<(int minValue, int maxValue)> numberRangePairs)
+            ArrayBuilder<(int minValue, int maxValue)> numberRangePairs
+        )
         {
             while (!lexer.IsDone)
             {
@@ -115,9 +122,13 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
                         else
                         {
                             var (numStart, numEnd) = numberRange.Value;
-                            if (int.TryParse(numStart, out var intStart) && int.TryParse(numEnd, out var intEnd))
+                            if (
+                                int.TryParse(numStart, out var intStart)
+                                && int.TryParse(numEnd, out var intEnd)
+                            )
                             {
-                                var pair = intStart < intEnd ? (intStart, intEnd) : (intEnd, intStart);
+                                var pair =
+                                    intStart < intEnd ? (intStart, intEnd) : (intEnd, intStart);
                                 numberRangePairs.Add(pair);
                                 // Group allowing any digit sequence. The validity will be checked outside of the regex
                                 sb.Append("(-?[0-9]+)");
@@ -167,8 +178,12 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
             }
 
             // The next two characters must be ".."
-            if (!lexer.TryEatCurrentCharacter(out var c) || c != '.' ||
-                !lexer.TryEatCurrentCharacter(out c) || c != '.')
+            if (
+                !lexer.TryEatCurrentCharacter(out var c)
+                || c != '.'
+                || !lexer.TryEatCurrentCharacter(out c)
+                || c != '.'
+            )
             {
                 lexer.Position = saved;
                 return null;
@@ -237,7 +252,8 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
         private static bool TryCompileChoice(
             ref Lexer lexer,
             StringBuilder sb,
-            ArrayBuilder<(int, int)> numberRangePairs)
+            ArrayBuilder<(int, int)> numberRangePairs
+        )
         {
             if (lexer.Lex() != TokenKind.OpenCurly)
             {

@@ -4,19 +4,21 @@
 namespace System.ServiceModel.Description
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
-    using System.ServiceModel;
     using System.Xml;
-    using System.Runtime.Serialization;
-    using System.Collections.ObjectModel;
 
     public class ServiceThrottlingBehavior : IServiceBehavior
     {
         //For V1: Default MaxConcurrentInstances should not enforce any throttle
         //But still it should not be set to Int32.MAX;
         //So compute default MaxInstances to be large enough to support MaxCalls & MaxSessions.
-        internal static int DefaultMaxConcurrentInstances = ServiceThrottle.DefaultMaxConcurrentCallsCpuCount + ServiceThrottle.DefaultMaxConcurrentSessionsCpuCount;
+        internal static int DefaultMaxConcurrentInstances =
+            ServiceThrottle.DefaultMaxConcurrentCallsCpuCount
+            + ServiceThrottle.DefaultMaxConcurrentSessionsCpuCount;
 
         int calls = ServiceThrottle.DefaultMaxConcurrentCallsCpuCount;
         int sessions = ServiceThrottle.DefaultMaxConcurrentSessionsCpuCount;
@@ -29,7 +31,11 @@ namespace System.ServiceModel.Description
             set
             {
                 if (value <= 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)
+                        )
+                    );
 
                 this.calls = value;
             }
@@ -41,7 +47,11 @@ namespace System.ServiceModel.Description
             set
             {
                 if (value <= 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)
+                        )
+                    );
 
                 this.sessions = value;
             }
@@ -72,25 +82,38 @@ namespace System.ServiceModel.Description
             set
             {
                 if (value <= 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)
+                        )
+                    );
 
                 this.instances = value;
                 this.maxInstanceSetExplicitly = true;
             }
         }
 
-        void IServiceBehavior.Validate(ServiceDescription description, ServiceHostBase serviceHostBase)
-        {
-        }
+        void IServiceBehavior.Validate(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        ) { }
 
-        void IServiceBehavior.AddBindingParameters(ServiceDescription description, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection parameters)
-        {
-        }
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters
+        ) { }
 
-        void IServiceBehavior.ApplyDispatchBehavior(ServiceDescription description, ServiceHostBase serviceHostBase)
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        )
         {
             if (serviceHostBase == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("serviceHostBase"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("serviceHostBase")
+                );
 
             ServiceThrottle serviceThrottle = serviceHostBase.ServiceThrottle;
             serviceThrottle.MaxConcurrentCalls = this.calls;
@@ -99,7 +122,8 @@ namespace System.ServiceModel.Description
 
             for (int i = 0; i < serviceHostBase.ChannelDispatchers.Count; i++)
             {
-                ChannelDispatcher channelDispatcher = serviceHostBase.ChannelDispatchers[i] as ChannelDispatcher;
+                ChannelDispatcher channelDispatcher =
+                    serviceHostBase.ChannelDispatchers[i] as ChannelDispatcher;
                 if (channelDispatcher != null)
                 {
                     channelDispatcher.ServiceThrottle = serviceThrottle;

@@ -3,14 +3,14 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Composition;
 using System.Collections.Generic;
+using System.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Options;
-using Microsoft.CodeAnalysis;
 
 namespace Microsoft.VisualStudio.LanguageServices.Options;
 
@@ -37,9 +37,9 @@ internal sealed class OptionNameMetadata
 {
     public string ConfigName { get; }
 
-    public OptionNameMetadata(IDictionary<string, object> data)
-        => ConfigName = (string)data[nameof(ExportVisualStudioStorageReadFallbackAttribute.ConfigName)];
+    public OptionNameMetadata(IDictionary<string, object> data) =>
+        ConfigName = (string)
+            data[nameof(ExportVisualStudioStorageReadFallbackAttribute.ConfigName)];
 
-    public OptionNameMetadata(string language)
-        => ConfigName = language;
+    public OptionNameMetadata(string language) => ConfigName = language;
 }

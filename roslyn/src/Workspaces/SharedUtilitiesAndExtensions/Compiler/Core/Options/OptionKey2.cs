@@ -5,7 +5,6 @@
 using System;
 using System.Diagnostics;
 using Roslyn.Utilities;
-
 #if CODE_STYLE
 using WorkspacesResources = Microsoft.CodeAnalysis.CodeStyleResources;
 #endif
@@ -31,7 +30,9 @@ namespace Microsoft.CodeAnalysis.Options
             Debug.Assert(option.IsPerLanguage);
             if (language == null)
             {
-                throw new ArgumentNullException(WorkspacesResources.A_language_name_must_be_specified_for_this_option);
+                throw new ArgumentNullException(
+                    WorkspacesResources.A_language_name_must_be_specified_for_this_option
+                );
             }
 
             this.Option = option ?? throw new ArgumentNullException(nameof(option));
@@ -52,9 +53,7 @@ namespace Microsoft.CodeAnalysis.Options
                 return "";
             }
 
-            var languageDisplay = Option.IsPerLanguage
-                ? $"({Language}) "
-                : string.Empty;
+            var languageDisplay = Option.IsPerLanguage ? $"({Language}) " : string.Empty;
 
             return languageDisplay + Option.ToString();
         }

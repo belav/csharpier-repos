@@ -19,13 +19,20 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                this.dataSources = new ReadOnlyCollection<CorrelationDataDescription>(new List<CorrelationDataDescription>(dataSources));
+                this.dataSources = new ReadOnlyCollection<CorrelationDataDescription>(
+                    new List<CorrelationDataDescription>(dataSources)
+                );
             }
         }
 
-        CorrelationDataSourceHelper(ICollection<CorrelationDataDescription> dataSource1, ICollection<CorrelationDataDescription> dataSource2)
+        CorrelationDataSourceHelper(
+            ICollection<CorrelationDataDescription> dataSource1,
+            ICollection<CorrelationDataDescription> dataSource2
+        )
         {
-            List<CorrelationDataDescription> newData = new List<CorrelationDataDescription>(dataSource1);
+            List<CorrelationDataDescription> newData = new List<CorrelationDataDescription>(
+                dataSource1
+            );
 
             foreach (CorrelationDataDescription correlationData in dataSource2)
             {
@@ -35,7 +42,10 @@ namespace System.ServiceModel.Channels
             this.dataSources = new ReadOnlyCollection<CorrelationDataDescription>(newData);
         }
 
-        public static ICorrelationDataSource Combine(ICorrelationDataSource dataSource1, ICorrelationDataSource dataSource2)
+        public static ICorrelationDataSource Combine(
+            ICorrelationDataSource dataSource1,
+            ICorrelationDataSource dataSource2
+        )
         {
             if (dataSource1 == null)
             {
@@ -47,7 +57,10 @@ namespace System.ServiceModel.Channels
                 return dataSource1;
             }
 
-            return new CorrelationDataSourceHelper(dataSource1.DataSources, dataSource2.DataSources);
+            return new CorrelationDataSourceHelper(
+                dataSource1.DataSources,
+                dataSource2.DataSources
+            );
         }
 
         ICollection<CorrelationDataDescription> ICorrelationDataSource.DataSources

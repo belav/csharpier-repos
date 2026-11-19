@@ -6,12 +6,11 @@ namespace Microsoft.EntityFrameworkCore.Design;
 public class OperationExceptionTest
 {
     [ConditionalFact]
-    public void OperationException_exposes_public_empty_constructor()
-        => new OperationException();
+    public void OperationException_exposes_public_empty_constructor() => new OperationException();
 
     [ConditionalFact]
-    public void OperationException_exposes_public_string_constructor()
-        => Assert.Equal("Foo", new OperationException("Foo").Message);
+    public void OperationException_exposes_public_string_constructor() =>
+        Assert.Equal("Foo", new OperationException("Foo").Message);
 
     [ConditionalFact]
     public void OperationException_exposes_public_string_and_inner_exception_constructor()

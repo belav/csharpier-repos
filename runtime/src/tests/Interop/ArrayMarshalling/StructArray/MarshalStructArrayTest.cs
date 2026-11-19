@@ -9,7 +9,6 @@ using Xunit;
 
 public static unsafe class MarshalStructArrayTest
 {
-
     [SkipOnMono("Mono doesn't support built-in COM interop, which this test requires")]
     [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
     public static void ArrayElementsInStructFreed()
@@ -25,13 +24,17 @@ public static unsafe class MarshalStructArrayTest
         // allow us to directly test with the custom release mechanism we have implemented without needing to do GC.Collect calls.
         object underlyingObject = new();
         SimpleComWrappers wrappers = new();
-        nint unk = wrappers.GetOrCreateComInterfaceForObject(underlyingObject, CreateComInterfaceFlags.CallerDefinedIUnknown);
+        nint unk = wrappers.GetOrCreateComInterfaceForObject(
+            underlyingObject,
+            CreateComInterfaceFlags.CallerDefinedIUnknown
+        );
         object builtinWrapper = Marshal.GetUniqueObjectForIUnknown(unk);
         Marshal.Release(unk);
-        
+
         StructWithObjectArrayField str = new() { objs = [builtinWrapper] };
 
-        IntPtr ptr = (IntPtr)NativeMemory.Alloc((nuint)Marshal.SizeOf<StructWithObjectArrayField>());
+        IntPtr ptr = (IntPtr)
+            NativeMemory.Alloc((nuint)Marshal.SizeOf<StructWithObjectArrayField>());
         Marshal.StructureToPtr(str, ptr, false);
         SimpleComWrappers.ReleaseCalled = false;
         Marshal.DestroyStructure<StructWithObjectArrayField>(ptr);
@@ -53,11 +56,13 @@ public struct StructWithObjectArrayField
 
 public sealed unsafe class SimpleComWrappers : ComWrappers
 {
-    private static readonly ComInterfaceEntry* customIUnknown = CreateCustomIUnknownInterfaceEntry();
+    private static readonly ComInterfaceEntry* customIUnknown =
+        CreateCustomIUnknownInterfaceEntry();
 
     private static ComInterfaceEntry* CreateCustomIUnknownInterfaceEntry()
     {
-        ComInterfaceEntry* entry = (ComInterfaceEntry*)NativeMemory.AllocZeroed((nuint)sizeof(ComInterfaceEntry));
+        ComInterfaceEntry* entry = (ComInterfaceEntry*)
+            NativeMemory.AllocZeroed((nuint)sizeof(ComInterfaceEntry));
         entry->IID = Guid.Parse("00000000-0000-0000-C000-000000000046");
         nint* vtable = (nint*)NativeMemory.Alloc((nuint)(sizeof(void*) * 3));
         GetIUnknownImpl(out vtable[0], out vtable[1], out _);
@@ -66,7 +71,11 @@ public sealed unsafe class SimpleComWrappers : ComWrappers
         return entry;
     }
 
-    protected override unsafe ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count)
+    protected override unsafe ComInterfaceEntry* ComputeVtables(
+        object obj,
+        CreateComInterfaceFlags flags,
+        out int count
+    )
     {
         Assert.True(flags.HasFlag(CreateComInterfaceFlags.CallerDefinedIUnknown));
         count = 1;

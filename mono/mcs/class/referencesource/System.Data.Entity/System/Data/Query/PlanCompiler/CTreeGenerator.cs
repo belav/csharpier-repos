@@ -10,19 +10,18 @@
 //using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this class...
 
 // It is fine to use Debug.Assert in cases where you assert an obvious thing that is supposed
-// to prevent from simple mistakes during development (e.g. method argument validation 
-// in cases where it was you who created the variables or the variables had already been validated or 
-// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default 
-// "else" block is chosen why the new condition should be treated separately). This kind of asserts are 
-// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in 
-// the shipped product. 
-// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions 
+// to prevent from simple mistakes during development (e.g. method argument validation
+// in cases where it was you who created the variables or the variables had already been validated or
+// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default
+// "else" block is chosen why the new condition should be treated separately). This kind of asserts are
+// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in
+// the shipped product.
+// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions
 // about how the tree was built etc. - in these cases we probably want to throw an exception (this is
-// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct 
+// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct
 // or the tree was built/rewritten not the way we thought it was.
 // Use your judgment - if you rather remove an assert than ship it use Debug.Assert otherwise use
 // PlanCompiler.Assert.
-
 
 namespace System.Data.Query.PlanCompiler
 {
@@ -70,12 +69,18 @@ namespace System.Data.Query.PlanCompiler
             /// <summary>
             /// Gets the Var tracked by this VarInfo instance
             /// </summary>
-            internal Var Var { get { return _var; } }
+            internal Var Var
+            {
+                get { return _var; }
+            }
 
             /// <summary>
             /// Gets the names, in order of use, that should be used to build DbPropertyExpression around an initial DbVariableReferenceExpression in order to build a DbExpression subtree that correctly references the tracked IQT Var
             /// </summary>
-            internal List<string> PropertyPath { get { return _propertyChain; } }
+            internal List<string> PropertyPath
+            {
+                get { return _propertyChain; }
+            }
 
             /// <summary>
             /// Constructs a new VarInfo instance that tracks the specified Var.
@@ -111,13 +116,15 @@ namespace System.Data.Query.PlanCompiler
             /// <summary>
             /// Constructs a new, empty VarInfoList.
             /// </summary>
-            internal VarInfoList() : base() { }
+            internal VarInfoList()
+                : base() { }
 
             /// <summary>
             /// Constructs a new VarInfoList that contains the specified VarInfo instances.
             /// </summary>
             /// <param name="elements"></param>
-            internal VarInfoList(IEnumerable<VarInfo> elements) : base(elements) { }
+            internal VarInfoList(IEnumerable<VarInfo> elements)
+                : base(elements) { }
 
             /// <summary>
             /// Prepends the specified property name to the property path of all VarInfo instances in this list.
@@ -179,8 +186,11 @@ namespace System.Data.Query.PlanCompiler
             /// <summary>
             /// Information (current binding name, property path) about the Vars logically published by the Publisher expression
             /// </summary>
-            internal VarInfoList PublishedVars { get { return _definedVars; } }
-            
+            internal VarInfoList PublishedVars
+            {
+                get { return _definedVars; }
+            }
+
             /// <summary>
             /// Implements the abstract IqtVarScope.TryResolveVar method. If the specified Var was published by this scope's DbExpression, it is mapped to a CQT DbExpression by calling CreateExpression on the VarInfo used to track it.
             /// </summary>
@@ -214,11 +224,18 @@ namespace System.Data.Query.PlanCompiler
         private class RelOpInfo : BindingScope
         {
             private readonly DbExpressionBinding _binding;
-            
-            internal RelOpInfo(string bindingName, DbExpression publisher, IEnumerable<VarInfo> publishedVars)
+
+            internal RelOpInfo(
+                string bindingName,
+                DbExpression publisher,
+                IEnumerable<VarInfo> publishedVars
+            )
                 : base(publishedVars)
             {
-                PlanCompiler.Assert(TypeSemantics.IsCollectionType(publisher.ResultType), "non-collection type used as RelOpInfo publisher");
+                PlanCompiler.Assert(
+                    TypeSemantics.IsCollectionType(publisher.ResultType),
+                    "non-collection type used as RelOpInfo publisher"
+                );
                 _binding = publisher.BindAs(bindingName);
             }
 
@@ -233,8 +250,11 @@ namespace System.Data.Query.PlanCompiler
             /// <summary>
             /// The CQT DbExpression that logically publishes the PublishedVars
             /// </summary>
-            internal DbExpression Publisher { get { return _binding.Expression; } }
-                        
+            internal DbExpression Publisher
+            {
+                get { return _binding.Expression; }
+            }
+
             /// <summary>
             /// Creates a new DbExpressionBinding that binds the publisher DbExpression under the binding name
             /// </summary>
@@ -251,28 +271,37 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Represents a collection of IQT Vars that were brought into scope by a DbExpression used in a DbGroupExpressionBinding. 
+        /// Represents a collection of IQT Vars that were brought into scope by a DbExpression used in a DbGroupExpressionBinding.
         /// </summary>
         private class GroupByScope : BindingScope
         {
             private readonly DbGroupExpressionBinding _binding;
             private bool _referenceGroup;
 
-            internal GroupByScope(DbGroupExpressionBinding binding, IEnumerable<VarInfo> publishedVars)
+            internal GroupByScope(
+                DbGroupExpressionBinding binding,
+                IEnumerable<VarInfo> publishedVars
+            )
                 : base(publishedVars)
             {
                 _binding = binding;
             }
-                
+
             /// <summary>
             /// Returns the DbGroupExpressionBinding that backs this group-by scope
             /// </summary>
             /// <returns>The new DbExpressionBinding</returns>
-            internal DbGroupExpressionBinding Binding { get { return _binding; } }
+            internal DbGroupExpressionBinding Binding
+            {
+                get { return _binding; }
+            }
 
             internal void SwitchToGroupReference()
             {
-                PlanCompiler.Assert(!_referenceGroup, "SwitchToGroupReference called more than once on the same GroupByScope?");
+                PlanCompiler.Assert(
+                    !_referenceGroup,
+                    "SwitchToGroupReference called more than once on the same GroupByScope?"
+                );
                 _referenceGroup = true;
             }
 
@@ -320,10 +349,12 @@ namespace System.Data.Query.PlanCompiler
 
         private Command _iqtCommand;
         private DbQueryCommandTree _queryTree;
-        private Dictionary<ParameterVar, DbParameterReferenceExpression> _addedParams = new Dictionary<ParameterVar, DbParameterReferenceExpression>();
+        private Dictionary<ParameterVar, DbParameterReferenceExpression> _addedParams =
+            new Dictionary<ParameterVar, DbParameterReferenceExpression>();
         private Stack<IqtVarScope> _bindingScopes = new Stack<IqtVarScope>();
         private Stack<VarDefScope> _varScopes = new Stack<VarDefScope>();
-        private Dictionary<DbExpression, RelOpInfo> _relOpState = new Dictionary<DbExpression, RelOpInfo>();
+        private Dictionary<DbExpression, RelOpInfo> _relOpState =
+            new Dictionary<DbExpression, RelOpInfo>();
 
         private AliasGenerator _applyAliases = new AliasGenerator("Apply");
         private AliasGenerator _distinctAliases = new AliasGenerator("Distinct");
@@ -356,7 +387,11 @@ namespace System.Data.Query.PlanCompiler
         {
             _iqtCommand = itree;
             DbExpression queryExpression = VisitNode(toConvert);
-            _queryTree = DbQueryCommandTree.FromValidExpression(itree.MetadataWorkspace, DataSpace.SSpace, queryExpression);
+            _queryTree = DbQueryCommandTree.FromValidExpression(
+                itree.MetadataWorkspace,
+                DataSpace.SSpace,
+                queryExpression
+            );
         }
         #endregion
 
@@ -368,7 +403,7 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="expr">The DbExpression on which to Assert</param>
         private void AssertRelOp(DbExpression expr)
         {
-            PlanCompiler.Assert(_relOpState.ContainsKey(expr),"not a relOp expression?");
+            PlanCompiler.Assert(_relOpState.ContainsKey(expr), "not a relOp expression?");
         }
 
         /// <summary>
@@ -402,7 +437,10 @@ namespace System.Data.Query.PlanCompiler
         private RelOpInfo VisitAsRelOp(Node inputNode)
         {
             // Assert that the Op is actually a RelOp before attempting to use it
-            PlanCompiler.Assert(inputNode.Op is RelOp, "Non-RelOp used as DbExpressionBinding Input");
+            PlanCompiler.Assert(
+                inputNode.Op is RelOp,
+                "Non-RelOp used as DbExpressionBinding Input"
+            );
 
             //
             // Visit the Op. This Visit method of this class that actually processes the Op will
@@ -424,7 +462,12 @@ namespace System.Data.Query.PlanCompiler
         #region Var Scope Maintenance
         private void PushExpressionBindingScope(RelOpInfo inputState)
         {
-            PlanCompiler.Assert(inputState != null && inputState.PublisherName != null && inputState.PublishedVars != null , "Invalid RelOpInfo produced by DbExpressionBinding Input");
+            PlanCompiler.Assert(
+                inputState != null
+                    && inputState.PublisherName != null
+                    && inputState.PublishedVars != null,
+                "Invalid RelOpInfo produced by DbExpressionBinding Input"
+            );
             _bindingScopes.Push(inputState);
         }
 
@@ -466,11 +509,17 @@ namespace System.Data.Query.PlanCompiler
         {
             if (wasPushed)
             {
-                PlanCompiler.Assert(_bindingScopes.Count > 0, "ExitExpressionBindingScope called on empty ExpressionBindingScope stack");
+                PlanCompiler.Assert(
+                    _bindingScopes.Count > 0,
+                    "ExitExpressionBindingScope called on empty ExpressionBindingScope stack"
+                );
 
                 RelOpInfo bindingScope = (RelOpInfo)_bindingScopes.Pop();
 
-                PlanCompiler.Assert(bindingScope == scope, "ExitExpressionBindingScope called on incorrect expression");
+                PlanCompiler.Assert(
+                    bindingScope == scope,
+                    "ExitExpressionBindingScope called on incorrect expression"
+                );
             }
         }
 
@@ -488,8 +537,10 @@ namespace System.Data.Query.PlanCompiler
 
             // Generate the GroupVarName, and rebind the Input Vars under that name
             string groupVarName = string.Format(CultureInfo.InvariantCulture, "{0}Group", varName);
-            
-            DbGroupExpressionBinding newBinding = inputInfo.CreateBinding().Expression.GroupBindAs(varName, groupVarName);
+
+            DbGroupExpressionBinding newBinding = inputInfo
+                .CreateBinding()
+                .Expression.GroupBindAs(varName, groupVarName);
             GroupByScope newScope = new GroupByScope(newBinding, inputInfo.PublishedVars);
             _bindingScopes.Push(newScope);
             return newScope;
@@ -497,11 +548,17 @@ namespace System.Data.Query.PlanCompiler
 
         private void ExitGroupByScope(GroupByScope scope)
         {
-            PlanCompiler.Assert(_bindingScopes.Count > 0, "ExitGroupByScope called on empty ExpressionBindingScope stack");
+            PlanCompiler.Assert(
+                _bindingScopes.Count > 0,
+                "ExitGroupByScope called on empty ExpressionBindingScope stack"
+            );
 
             GroupByScope groupScope = (GroupByScope)_bindingScopes.Pop();
 
-            PlanCompiler.Assert(groupScope == scope, "ExitGroupByScope called on incorrect expression");
+            PlanCompiler.Assert(
+                groupScope == scope,
+                "ExitGroupByScope called on incorrect expression"
+            );
         }
 
         /// <summary>
@@ -525,7 +582,10 @@ namespace System.Data.Query.PlanCompiler
             foreach (Node childNode in varDefNodes)
             {
                 VarDefOp defOp = childNode.Op as VarDefOp;
-                PlanCompiler.Assert(defOp != null, "VarDefListOp contained non-VarDefOp child node");
+                PlanCompiler.Assert(
+                    defOp != null,
+                    "VarDefListOp contained non-VarDefOp child node"
+                );
                 PlanCompiler.Assert(defOp.Var is ComputedVar, "VarDefOp defined non-Computed Var");
 
                 varDefs.Add(defOp.Var, VisitNode(childNode.Child0));
@@ -546,16 +606,22 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="varDefListNode">The Node that references the VarDefListOp. Its children will be used as the basis of the new VarDefScope</param>
         private void EnterVarDefListScope(Node varDefListNode)
         {
-            PlanCompiler.Assert(varDefListNode.Op is VarDefListOp, "EnterVarDefListScope called with non-VarDefListOp");
+            PlanCompiler.Assert(
+                varDefListNode.Op is VarDefListOp,
+                "EnterVarDefListScope called with non-VarDefListOp"
+            );
             EnterVarDefScope(varDefListNode.Children);
         }
-        
+
         /// <summary>
         /// Asserts that the top of the scope stack is actually a VarDefScope, and then pops it to remove the locally defined Vars from scope.
         /// </summary>
         private void ExitVarDefScope()
         {
-            PlanCompiler.Assert(_varScopes.Count > 0, "ExitVarDefScope called on empty VarDefScope stack");
+            PlanCompiler.Assert(
+                _varScopes.Count > 0,
+                "ExitVarDefScope called on empty VarDefScope stack"
+            );
             _varScopes.Pop();
         }
 
@@ -631,7 +697,15 @@ namespace System.Data.Query.PlanCompiler
                 }
             }
 
-            PlanCompiler.Assert(retExpr != null, string.Format(CultureInfo.InvariantCulture, "Unresolvable Var used in Command: VarType={0}, Id={1}", Enum.GetName(typeof(VarType), referencedVar.VarType), referencedVar.Id));
+            PlanCompiler.Assert(
+                retExpr != null,
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Unresolvable Var used in Command: VarType={0}, Id={1}",
+                    Enum.GetName(typeof(VarType), referencedVar.VarType),
+                    referencedVar.Id
+                )
+            );
             return retExpr;
         }
         #endregion
@@ -644,7 +718,14 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="n">The Node on which to Assert</param>
         private static void AssertBinary(Node n)
         {
-            PlanCompiler.Assert(2 == n.Children.Count, string.Format(CultureInfo.InvariantCulture, "Non-Binary {0} encountered", n.Op.GetType().Name));
+            PlanCompiler.Assert(
+                2 == n.Children.Count,
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Non-Binary {0} encountered",
+                    n.Op.GetType().Name
+                )
+            );
         }
 
         private DbExpression VisitChild(Node n, int index)
@@ -703,7 +784,9 @@ namespace System.Data.Query.PlanCompiler
             // Create a "true=true" for "true" predicates,
             // Create a "true=false" expression for false predicates
             //
-            return DbExpressionBuilder.True.Equal(op.IsTrue ? DbExpressionBuilder.True : DbExpressionBuilder.False);
+            return DbExpressionBuilder.True.Equal(
+                op.IsTrue ? DbExpressionBuilder.True : DbExpressionBuilder.False
+            );
         }
 
         public override DbExpression Visit(FunctionOp op, Node n)
@@ -786,7 +869,14 @@ namespace System.Data.Query.PlanCompiler
             }
 
             // The result DbExpression will only be null if a new OpType is added and this code is not updated
-            PlanCompiler.Assert(resultExpr != null, string.Format(CultureInfo.InvariantCulture, "ArithmeticOp OpType not recognized: {0}", Enum.GetName(typeof(OpType), op.OpType)));
+            PlanCompiler.Assert(
+                resultExpr != null,
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "ArithmeticOp OpType not recognized: {0}",
+                    Enum.GetName(typeof(OpType), op.OpType)
+                )
+            );
             return resultExpr;
         }
 
@@ -804,13 +894,16 @@ namespace System.Data.Query.PlanCompiler
             int caseCount = n.Children.Count;
 
             // Verify the assumption made that at least one case is present.
-            PlanCompiler.Assert(caseCount > 1, "Invalid CaseOp: At least 2 child Nodes (1 When/Then pair) must be present");
+            PlanCompiler.Assert(
+                caseCount > 1,
+                "Invalid CaseOp: At least 2 child Nodes (1 When/Then pair) must be present"
+            );
 
             List<DbExpression> whens = new List<DbExpression>();
             List<DbExpression> thens = new List<DbExpression>();
             DbExpression elseExpr = null;
 
-            if(0 == n.Children.Count % 2)
+            if (0 == n.Children.Count % 2)
             {
                 // If the number of child Nodes is divisible by 2, it is assumed that they are When/Then pairs without the optional Else Node.
                 // The Else DbExpression defaults to a properly typed DbNullExpression.
@@ -825,7 +918,7 @@ namespace System.Data.Query.PlanCompiler
             }
 
             // Convert the When/Then Nodes in pairs until the number of converted Nodes is equal to the number of Nodes that contribute to the When/Then pairs.
-            for(int idx = 0; idx < caseCount; idx += 2)
+            for (int idx = 0; idx < caseCount; idx += 2)
             {
                 whens.Add(VisitChild(n, idx));
                 thens.Add(VisitChild(n, idx + 1));
@@ -894,7 +987,14 @@ namespace System.Data.Query.PlanCompiler
             }
 
             // The result DbExpression will only be null if a new OpType is added and this code is not updated
-            PlanCompiler.Assert(compExpr != null, string.Format(CultureInfo.InvariantCulture, "ComparisonOp OpType not recognized: {0}", Enum.GetName(typeof(OpType), op.OpType)));
+            PlanCompiler.Assert(
+                compExpr != null,
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "ComparisonOp OpType not recognized: {0}",
+                    Enum.GetName(typeof(OpType), op.OpType)
+                )
+            );
             return compExpr;
         }
 
@@ -953,7 +1053,14 @@ namespace System.Data.Query.PlanCompiler
             }
 
             // The result DbExpression will only be null if a new OpType is added and this code is not updated
-            PlanCompiler.Assert(condExpr != null, string.Format(CultureInfo.InvariantCulture, "ConditionalOp OpType not recognized: {0}", Enum.GetName(typeof(OpType), op.OpType)));
+            PlanCompiler.Assert(
+                condExpr != null,
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "ConditionalOp OpType not recognized: {0}",
+                    Enum.GetName(typeof(OpType), op.OpType)
+                )
+            );
             return condExpr;
         }
 
@@ -964,11 +1071,7 @@ namespace System.Data.Query.PlanCompiler
             // Node's first, second and third child nodes providing the
             // Input, Pattern and Escape expressions.
             //
-            return DbExpressionBuilder.Like(
-                    VisitChild(n, 0),
-                    VisitChild(n, 1),
-                    VisitChild(n, 2)
-                );
+            return DbExpressionBuilder.Like(VisitChild(n, 0), VisitChild(n, 1), VisitChild(n, 2));
         }
 
         public override DbExpression Visit(AggregateOp op, Node n)
@@ -980,6 +1083,7 @@ namespace System.Data.Query.PlanCompiler
             PlanCompiler.Assert(false, "AggregateOp encountered outside of GroupByOp");
             throw EntityUtil.NotSupported(System.Data.Entity.Strings.Iqt_CTGen_UnexpectedAggregate);
         }
+
         public override DbExpression Visit(NavigateOp op, Node n)
         {
             // we should never see this Op
@@ -991,6 +1095,7 @@ namespace System.Data.Query.PlanCompiler
             // We should never see this Op - should have been eliminated in NTE
             throw EntityUtil.NotSupported();
         }
+
         public override DbExpression Visit(NewInstanceOp op, Node n)
         {
             // We should never see this Op - should have been eliminated in NTE
@@ -1047,7 +1152,7 @@ namespace System.Data.Query.PlanCompiler
         /// <returns></returns>
         public override DbExpression Visit(SoftCastOp op, Node n)
         {
-            // Microsoft 9/21/06 - temporarily removing check here 
+            // Microsoft 9/21/06 - temporarily removing check here
             //  because the assert wrongly fails in some cases where the types are promotable,
             //  but the facets are not.  Put this back when that issue is solved.
             //
@@ -1091,7 +1196,8 @@ namespace System.Data.Query.PlanCompiler
             AssertRelOp(inputExpr);
             ConsumeRelOp(inputExpr);
 
-            DbElementExpression elementExpr = DbExpressionBuilder.CreateElementExpressionUnwrapSingleProperty(inputExpr);
+            DbElementExpression elementExpr =
+                DbExpressionBuilder.CreateElementExpressionUnwrapSingleProperty(inputExpr);
             return elementExpr;
         }
 
@@ -1127,8 +1233,12 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="defaultAliasGenerator">the default alias generator</param>
         /// <param name="alreadyUsedNames">list of already used names</param>
         /// <returns></returns>
-        private static string GenerateNameForVar(Var projectedVar, Dictionary<string, AliasGenerator> aliasMap,
-            AliasGenerator defaultAliasGenerator, Dictionary<string, string> alreadyUsedNames)
+        private static string GenerateNameForVar(
+            Var projectedVar,
+            Dictionary<string, AliasGenerator> aliasMap,
+            AliasGenerator defaultAliasGenerator,
+            Dictionary<string, string> alreadyUsedNames
+        )
         {
             string columnName;
             AliasGenerator aliasGenerator;
@@ -1147,7 +1257,7 @@ namespace System.Data.Query.PlanCompiler
                 else
                 {
                     //
-                    // Column name collides with another name in the same row. 
+                    // Column name collides with another name in the same row.
                     // Use the alias-generator to generate a new name
                     //
                     columnName = aliasGenerator.Next();
@@ -1187,7 +1297,18 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="sourceInfo"></param>
         /// <param name="outputVars"></param>
         /// <returns></returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1309:UseOrdinalStringComparison", MessageId = "System.Collections.Generic.Dictionary`2<System.String,System.String>.#ctor(System.Collections.Generic.IEqualityComparer`1<System.String>)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1309:UseOrdinalStringComparison", MessageId = "System.Collections.Generic.Dictionary`2<System.String,System.Data.Common.Utils.AliasGenerator>.#ctor(System.Collections.Generic.IEqualityComparer`1<System.String>)")]
+        [
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Globalization",
+                "CA1309:UseOrdinalStringComparison",
+                MessageId = "System.Collections.Generic.Dictionary`2<System.String,System.String>.#ctor(System.Collections.Generic.IEqualityComparer`1<System.String>)"
+            ),
+            System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Globalization",
+                "CA1309:UseOrdinalStringComparison",
+                MessageId = "System.Collections.Generic.Dictionary`2<System.String,System.Data.Common.Utils.AliasGenerator>.#ctor(System.Collections.Generic.IEqualityComparer`1<System.String>)"
+            )
+        ]
         private DbExpression CreateProject(RelOpInfo sourceInfo, IEnumerable<Var> outputVars)
         {
             //
@@ -1203,13 +1324,23 @@ namespace System.Data.Query.PlanCompiler
             // The list of column name/DbExpression pairs is built to use later when constructing the projection expression.
             //
             VarInfoList projectedInfo = new VarInfoList();
-            List<KeyValuePair<string, DbExpression>> projectedCols = new List<KeyValuePair<string, DbExpression>>();
+            List<KeyValuePair<string, DbExpression>> projectedCols =
+                new List<KeyValuePair<string, DbExpression>>();
             AliasGenerator colGen = new AliasGenerator("C");
-            Dictionary<string, AliasGenerator> aliasMap = new Dictionary<string, AliasGenerator>(StringComparer.InvariantCultureIgnoreCase);
-            Dictionary<string, string> alreadyUsedAliases = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
+            Dictionary<string, AliasGenerator> aliasMap = new Dictionary<string, AliasGenerator>(
+                StringComparer.InvariantCultureIgnoreCase
+            );
+            Dictionary<string, string> alreadyUsedAliases = new Dictionary<string, string>(
+                StringComparer.InvariantCultureIgnoreCase
+            );
             foreach (Var projectedVar in outputVars)
             {
-                string columnName = GenerateNameForVar(projectedVar, aliasMap, colGen, alreadyUsedAliases);
+                string columnName = GenerateNameForVar(
+                    projectedVar,
+                    aliasMap,
+                    colGen,
+                    alreadyUsedAliases
+                );
 
                 DbExpression columnValue = ResolveVar(projectedVar);
                 projectedCols.Add(new KeyValuePair<string, DbExpression>(columnName, columnValue));
@@ -1224,8 +1355,10 @@ namespace System.Data.Query.PlanCompiler
             // previously constructed column names and Expressions to define the shape of the resulting row. The Input is bound
             // under the Var publisher name specified by its RelOpInfo, which will be a unique name based on the type of RelOp it was converted from.
             //
-            DbExpression retExpr = sourceInfo.CreateBinding().Project(DbExpressionBuilder.NewRow(projectedCols));
-                
+            DbExpression retExpr = sourceInfo
+                .CreateBinding()
+                .Project(DbExpressionBuilder.NewRow(projectedCols));
+
             //
             // Publish the Vars produced by the new DbProjectExpression:
             // PublisherName: The next Project alias.
@@ -1281,7 +1414,10 @@ namespace System.Data.Query.PlanCompiler
             // This distinction is handled in the common GetTableVars method shared by ScanTableOp and
             // UnnestOp Visitor pattern methods.
             //
-            PlanCompiler.Assert(op.Table.TableMetadata.Extent != null, "Invalid TableMetadata used in ScanTableOp - no Extent specified");
+            PlanCompiler.Assert(
+                op.Table.TableMetadata.Extent != null,
+                "Invalid TableMetadata used in ScanTableOp - no Extent specified"
+            );
 
             //
             // We don't expect to see any view expressions here
@@ -1292,7 +1428,7 @@ namespace System.Data.Query.PlanCompiler
 
             // ScanTable converts to ExtentExpression
             DbExpression retExpr = op.Table.TableMetadata.Extent.Scan();
-            
+
             //
             // Publish the Vars that are logically produced by the ExtentExpression:
             // PublisherName: The next Extent alias
@@ -1319,8 +1455,10 @@ namespace System.Data.Query.PlanCompiler
         {
             // support Unnest(VarDef(input)) -> input
             // where input is presumed to have a collection type (e.g. TVF)
-            PlanCompiler.Assert(n.Child0.Op.OpType == OpType.VarDef, 
-                "an unnest's child must be a VarDef");
+            PlanCompiler.Assert(
+                n.Child0.Op.OpType == OpType.VarDef,
+                "an unnest's child must be a VarDef"
+            );
 
             // get input (first child of VarDef)
             Node input = n.Child0.Child0;
@@ -1329,8 +1467,10 @@ namespace System.Data.Query.PlanCompiler
             DbExpression expr = input.Op.Accept(this, input);
 
             // verify that the result is actually a collection
-            PlanCompiler.Assert(expr.ResultType.EdmType.BuiltInTypeKind == BuiltInTypeKind.CollectionType,
-                "the input to unnest must yield a collection after plan compilation");
+            PlanCompiler.Assert(
+                expr.ResultType.EdmType.BuiltInTypeKind == BuiltInTypeKind.CollectionType,
+                "the input to unnest must yield a collection after plan compilation"
+            );
 
             // collect table vars for the unnest
             VarInfoList outputVars = GetTableVars(op.Table);
@@ -1368,18 +1508,21 @@ namespace System.Data.Query.PlanCompiler
             // under the Var publisher name specified by its RelOpInfo, which will be a unique name based on the type of RelOp it was converted from.
             //
             DbExpression constExpr = DbExpressionBuilder.Constant(1);
-            List<KeyValuePair<string, DbExpression>> projectedCols = new List<KeyValuePair<string, DbExpression>>();
+            List<KeyValuePair<string, DbExpression>> projectedCols =
+                new List<KeyValuePair<string, DbExpression>>();
             projectedCols.Add(new KeyValuePair<string, DbExpression>("C0", constExpr));
 
-            DbExpression retExpr = sourceInfo.CreateBinding().Project(DbExpressionBuilder.NewRow(projectedCols));
-                
+            DbExpression retExpr = sourceInfo
+                .CreateBinding()
+                .Project(DbExpressionBuilder.NewRow(projectedCols));
+
             // Publish the Vars produced by the new DbProjectExpression:
             // PublisherName: The next Project alias.
             // PublishedVars: The PublishedVars of the Project are those specified in the VarSet of the ProjectOp, reachable using the generated column names.
             //
             PublishRelOp(_projectAliases.Next(), retExpr, new VarInfoList());
 
-            // remove the Input's Vars from scope, unbinding the Input's VarInfos. 
+            // remove the Input's Vars from scope, unbinding the Input's VarInfos.
             ExitExpressionBindingScope(sourceInfo);
 
             RelOpInfo relOpInfo = ConsumeRelOp(retExpr);
@@ -1387,13 +1530,13 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Build up a Project Op with exactly the Vars that we want. If the input is 
-        /// a Project already, piggyback on it, and get the Vars we want. Otherwise, 
+        /// Build up a Project Op with exactly the Vars that we want. If the input is
+        /// a Project already, piggyback on it, and get the Vars we want. Otherwise,
         /// create a new ProjectOp, and define the specified Vars
-        /// 
+        ///
         /// Note that the ProjectOp's output (element) type will be a record with the fields
         /// in exactly the order specified by the projectionVars argument
-        /// 
+        ///
         /// </summary>
         /// <param name="relOpNode">the input relOpNode to cap with a Project</param>
         /// <param name="projectionVars">List of vars we are interested in</param>
@@ -1403,7 +1546,7 @@ namespace System.Data.Query.PlanCompiler
             DbExpression retExpr = null;
 
             //
-            // If the input is a ProjectOp, then simply invoke the ProjectOp handler, but 
+            // If the input is a ProjectOp, then simply invoke the ProjectOp handler, but
             // use the requested Vars instead
             //
             ProjectOp projectOp = relOpNode.Op as ProjectOp;
@@ -1430,7 +1573,7 @@ namespace System.Data.Query.PlanCompiler
                 //
                 retExpr = CreateProject(sourceInfo, projectionVars);
 
-                // remove the Input's Vars from scope, unbinding the Input's VarInfos. 
+                // remove the Input's Vars from scope, unbinding the Input's VarInfos.
                 ExitExpressionBindingScope(sourceInfo);
             }
 
@@ -1488,7 +1631,10 @@ namespace System.Data.Query.PlanCompiler
             // Visit the Predicate with the Input Var(s) in scope and assert that the predicate is valid
             //
             DbExpression predicateExpr = VisitNode(n.Child1);
-            PlanCompiler.Assert(TypeSemantics.IsPrimitiveType(predicateExpr.ResultType, PrimitiveTypeKind.Boolean), "Invalid FilterOp Predicate (non-ScalarOp or non-Boolean result)");
+            PlanCompiler.Assert(
+                TypeSemantics.IsPrimitiveType(predicateExpr.ResultType, PrimitiveTypeKind.Boolean),
+                "Invalid FilterOp Predicate (non-ScalarOp or non-Boolean result)"
+            );
 
             //
             // Create a new DbFilterExpression with the converted Input and Predicate.
@@ -1535,12 +1681,19 @@ namespace System.Data.Query.PlanCompiler
                 DbExpression keyExpression = ResolveVar(sortKey.Var);
                 if (!string.IsNullOrEmpty(sortKey.Collation))
                 {
-
-                    sortClause = (sortKey.AscendingSort ? keyExpression.ToSortClause(sortKey.Collation) : keyExpression.ToSortClauseDescending(sortKey.Collation));
+                    sortClause = (
+                        sortKey.AscendingSort
+                            ? keyExpression.ToSortClause(sortKey.Collation)
+                            : keyExpression.ToSortClauseDescending(sortKey.Collation)
+                    );
                 }
                 else
                 {
-                    sortClause = (sortKey.AscendingSort ? keyExpression.ToSortClause() : keyExpression.ToSortClauseDescending());
+                    sortClause = (
+                        sortKey.AscendingSort
+                            ? keyExpression.ToSortClause()
+                            : keyExpression.ToSortClauseDescending()
+                    );
                 }
 
                 sortClauses.Add(sortClause);
@@ -1556,12 +1709,12 @@ namespace System.Data.Query.PlanCompiler
             //
             RelOpInfo inputInfo = EnterExpressionBindingScope(n.Child0);
             PlanCompiler.Assert(!n.HasChild1, "SortOp can have only one child");
-            
+
             //
             // Visit the SortKeys with the Input's Vars in scope and create the DbSortExpression
             //
             DbExpression retExpr = inputInfo.CreateBinding().Sort(VisitSortKeys(op.Keys));
-            
+
             //
             // Remove the Input's Vars from scope
             //
@@ -1576,7 +1729,11 @@ namespace System.Data.Query.PlanCompiler
             return retExpr;
         }
 
-        private DbExpression CreateLimitExpression(DbExpression argument, DbExpression limit, bool withTies)
+        private DbExpression CreateLimitExpression(
+            DbExpression argument,
+            DbExpression limit,
+            bool withTies
+        )
         {
             PlanCompiler.Assert(!withTies, "Limit with Ties is not currently supported");
             return argument.Limit(limit);
@@ -1589,12 +1746,18 @@ namespace System.Data.Query.PlanCompiler
             string alias = null;
             bool nullSkip = (OpType.Null == n.Child1.Op.OpType);
             bool nullLimit = (OpType.Null == n.Child2.Op.OpType);
-            PlanCompiler.Assert(!nullSkip || !nullLimit, "ConstrainedSortOp with no Skip Count and no Limit?");
+            PlanCompiler.Assert(
+                !nullSkip || !nullLimit,
+                "ConstrainedSortOp with no Skip Count and no Limit?"
+            );
             if (op.Keys.Count == 0)
             {
                 // Without SortKeys, this ConstrainedSortOp must represent a Limit operation applied to the input.
-                PlanCompiler.Assert(nullSkip, "ConstrainedSortOp without SortKeys cannot have Skip Count");
-                
+                PlanCompiler.Assert(
+                    nullSkip,
+                    "ConstrainedSortOp without SortKeys cannot have Skip Count"
+                );
+
                 //
                 // Visit the input Node and retrieve its RelOpInfo
                 //
@@ -1605,7 +1768,11 @@ namespace System.Data.Query.PlanCompiler
                 // Create the DbLimitExpression using the converted form of the input Node's Child2 Node (the Limit Node)
                 // together with the input DbExpression created above.
                 //
-                retExpr = this.CreateLimitExpression(inputExpr, this.VisitNode(n.Child2), op.WithTies);
+                retExpr = this.CreateLimitExpression(
+                    inputExpr,
+                    this.VisitNode(n.Child2),
+                    op.WithTies
+                );
                 alias = _limitAliases.Next();
             }
             else
@@ -1627,12 +1794,11 @@ namespace System.Data.Query.PlanCompiler
                 if (!nullSkip && !nullLimit)
                 {
                     // Limit(Skip(input))
-                    retExpr =
-                        this.CreateLimitExpression(
-                            inputInfo.CreateBinding().Skip(sortOrder, VisitChild(n, 1)),
-                            VisitChild(n, 2),
-                            op.WithTies
-                        );
+                    retExpr = this.CreateLimitExpression(
+                        inputInfo.CreateBinding().Skip(sortOrder, VisitChild(n, 1)),
+                        VisitChild(n, 2),
+                        op.WithTies
+                    );
                     alias = _limitAliases.Next();
                 }
                 else if (!nullSkip && nullLimit)
@@ -1644,12 +1810,11 @@ namespace System.Data.Query.PlanCompiler
                 else if (nullSkip && !nullLimit)
                 {
                     // Limit(Sort(input))
-                    retExpr =
-                        this.CreateLimitExpression(
-                            inputInfo.CreateBinding().Sort(sortOrder), 
-                            VisitChild(n, 2),
-                            op.WithTies
-                        );
+                    retExpr = this.CreateLimitExpression(
+                        inputInfo.CreateBinding().Sort(sortOrder),
+                        VisitChild(n, 2),
+                        op.WithTies
+                    );
                     alias = _limitAliases.Next();
                 }
             }
@@ -1687,7 +1852,8 @@ namespace System.Data.Query.PlanCompiler
             // of all output Vars and removing each Key Var as it is processed.
             //
             AliasGenerator keyAliases = new AliasGenerator("K");
-            List<KeyValuePair<string, DbExpression>> keyExprs = new List<KeyValuePair<string, DbExpression>>();
+            List<KeyValuePair<string, DbExpression>> keyExprs =
+                new List<KeyValuePair<string, DbExpression>>();
             List<Var> outputAggVars = new List<Var>(op.Outputs);
             foreach (Var keyVar in op.Keys)
             {
@@ -1697,7 +1863,9 @@ namespace System.Data.Query.PlanCompiler
                 // Track the Name/DbExpression pairs for use later in CreateGroupByExpression.
                 //
                 string keyColName = keyAliases.Next();
-                keyExprs.Add(new KeyValuePair<string, DbExpression>(keyColName, ResolveVar(keyVar)));
+                keyExprs.Add(
+                    new KeyValuePair<string, DbExpression>(keyColName, ResolveVar(keyVar))
+                );
 
                 //
                 // Create a new VarInfo to track this key Var. To begin with it is reachable through
@@ -1732,21 +1900,33 @@ namespace System.Data.Query.PlanCompiler
 
             // Build the map of Var to Aggregate. The Aggregates VarDefListOp Node child of the GroupByOp's Node is
             // processed here to build the map. This is the only location in an IQT Command where an AggregateOp is valid.
-            Dictionary<Var, DbAggregate> aggMap = new Dictionary<Var,DbAggregate>();
+            Dictionary<Var, DbAggregate> aggMap = new Dictionary<Var, DbAggregate>();
             Node aggRootNode = n.Child2;
-            PlanCompiler.Assert(aggRootNode.Op is VarDefListOp, "Invalid Aggregates VarDefListOp Node encountered in GroupByOp");
+            PlanCompiler.Assert(
+                aggRootNode.Op is VarDefListOp,
+                "Invalid Aggregates VarDefListOp Node encountered in GroupByOp"
+            );
             foreach (Node aggVarDefNode in aggRootNode.Children)
             {
                 VarDefOp aggVarDef = aggVarDefNode.Op as VarDefOp;
-                PlanCompiler.Assert(aggVarDef != null, "Non-VarDefOp Node encountered as child of Aggregates VarDefListOp Node");
+                PlanCompiler.Assert(
+                    aggVarDef != null,
+                    "Non-VarDefOp Node encountered as child of Aggregates VarDefListOp Node"
+                );
 
                 Var aggVar = aggVarDef.Var;
-                PlanCompiler.Assert(aggVar is ComputedVar, "Non-ComputedVar encountered in Aggregate VarDefOp");
+                PlanCompiler.Assert(
+                    aggVar is ComputedVar,
+                    "Non-ComputedVar encountered in Aggregate VarDefOp"
+                );
 
                 Node aggOpNode = aggVarDefNode.Child0;
                 DbExpression aggDef = VisitNode(aggOpNode.Child0);
                 AggregateOp funcAggOp = aggOpNode.Op as AggregateOp;
-                PlanCompiler.Assert(funcAggOp != null, "Non-Aggregate Node encountered as child of Aggregate VarDefOp Node");
+                PlanCompiler.Assert(
+                    funcAggOp != null,
+                    "Non-Aggregate Node encountered as child of Aggregate VarDefOp Node"
+                );
                 DbFunctionAggregate newFuncAgg;
                 if (funcAggOp.IsDistinctAggregate)
                 {
@@ -1757,10 +1937,12 @@ namespace System.Data.Query.PlanCompiler
                     newFuncAgg = funcAggOp.AggFunc.Aggregate(aggDef);
                 }
 
-                PlanCompiler.Assert(outputAggVars.Contains(aggVar), "Defined aggregate Var not in Output Aggregate Vars list?");
+                PlanCompiler.Assert(
+                    outputAggVars.Contains(aggVar),
+                    "Defined aggregate Var not in Output Aggregate Vars list?"
+                );
 
                 aggMap.Add(aggVar, newFuncAgg);
-
             }
 
             //
@@ -1777,8 +1959,9 @@ namespace System.Data.Query.PlanCompiler
             // result is a list of name CQT Aggregates that can be used in the call to CreateGroupByExpression.
             //
             AliasGenerator aggAliases = new AliasGenerator("A");
-            List<KeyValuePair<string, DbAggregate>> aggregates = new List<KeyValuePair<string, DbAggregate>>();
-            foreach(Var aggVar in outputAggVars)
+            List<KeyValuePair<string, DbAggregate>> aggregates =
+                new List<KeyValuePair<string, DbAggregate>>();
+            foreach (Var aggVar in outputAggVars)
             {
                 // Generate a new column name for the Aggregate that will be prefixed with 'A'.
                 string aggColName = aggAliases.Next();
@@ -1818,13 +2001,13 @@ namespace System.Data.Query.PlanCompiler
         #region JoinOp Conversions - CrossJoinOp, InnerJoinOp, FullOuterJoinOp, LeftOuterJoinOp
         /// <summary>
         /// Massages the input to a join node.
-        /// 
+        ///
         /// If the input is a Filter(ScanTable), we throw in a dummy project over
         /// this input. This projectOp simply looks at the "referenced" columns of
         /// the table, and uses those as the projection Vars
         /// Otherwise, sqlgen does not really know which columns are referenced, and
         /// ends up adding a projection with all columns of the table.
-        /// 
+        ///
         /// NOTE: We may want to do this for Apply as well
         /// </summary>
         /// <param name="joinInputNode">one of the inputs to the join node</param>
@@ -1833,7 +2016,10 @@ namespace System.Data.Query.PlanCompiler
         {
             RelOpInfo relOpInfo;
 
-            if (joinInputNode.Op.OpType == OpType.Filter && joinInputNode.Child0.Op.OpType == OpType.ScanTable)
+            if (
+                joinInputNode.Op.OpType == OpType.Filter
+                && joinInputNode.Child0.Op.OpType == OpType.ScanTable
+            )
             {
                 ScanTableOp scanTableOp = (ScanTableOp)joinInputNode.Child0.Op;
                 //
@@ -1874,7 +2060,7 @@ namespace System.Data.Query.PlanCompiler
             // the left Input should not be visible to the right Input of the same join.
             //
             RelOpInfo leftInfo = VisitJoinInput(joinNode.Child0);
-            
+
             // Do the same for the right Input to the join.
             RelOpInfo rightInfo = VisitJoinInput(joinNode.Child1);
 
@@ -2009,7 +2195,7 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="applyKind">The CQT DbExpressionKind that corresponds to the ApplyOp (DbExpressionKind.CrossApply for CrossApplyOp, DbExpressionKind.OuterApply for OuterApplyOp)</param>
         /// <returns>A new CqtResult containing a DbApplyExpression with the correct ApplyType</returns>
         private DbExpression VisitApply(Node applyNode, DbExpressionKind applyKind)
-        {            
+        {
             //
             // Visit the Input and bring its Vars into scope for the Apply
             //
@@ -2023,7 +2209,8 @@ namespace System.Data.Query.PlanCompiler
             DbExpression retExpr = DbExpressionBuilder.CreateApplyExpressionByKind(
                 applyKind,
                 inputInfo.CreateBinding(),
-                applyInfo.CreateBinding());
+                applyInfo.CreateBinding()
+            );
 
             //
             // Unbind the Apply Vars by calling ExitExpressionBindingScope and indicating that the specified scope was not pushed onto the scope stack.
@@ -2112,7 +2299,7 @@ namespace System.Data.Query.PlanCompiler
                 //
                 // Build up the list of Vars that we want as the output for this argument.
                 // The "outputVars" argument defines the order in which we need the outputs
-                // 
+                //
                 foreach (Var v in outputVars)
                 {
                     projectionVars.Add(argVars[v]);
@@ -2135,7 +2322,12 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="alias">Alias to use when publishing the SetOp's Vars</param>
         /// <param name="setOpBuilder">Callback to construct the SetOp DbExpression from the left and right arguments</param>
         /// <returns>The DbExpression equivalent of the SetOp</returns>
-        private DbExpression VisitSetOp(SetOp op, Node n, AliasGenerator alias, Func<DbExpression, DbExpression, DbExpression> setOpExpressionBuilder)
+        private DbExpression VisitSetOp(
+            SetOp op,
+            Node n,
+            AliasGenerator alias,
+            Func<DbExpression, DbExpression, DbExpression> setOpExpressionBuilder
+        )
         {
             //
             // To be convertible to a CQT Except/Intersect/DbUnionAllExpression, the SetOp must have exactly 2 arguments.
@@ -2153,14 +2345,16 @@ namespace System.Data.Query.PlanCompiler
             // by the SetOp must be prepended with the names of the record type's columns as
             // they are tracked up the tree by VarInfo instances.
             //
-            CollectionType outputType = TypeHelpers.GetEdmType<CollectionType>(TypeHelpers.GetCommonTypeUsage(left.ResultType, right.ResultType));
+            CollectionType outputType = TypeHelpers.GetEdmType<CollectionType>(
+                TypeHelpers.GetCommonTypeUsage(left.ResultType, right.ResultType)
+            );
             IEnumerator<EdmProperty> properties = null;
             RowType outputElementType = null;
             if (TypeHelpers.TryGetEdmType<RowType>(outputType.TypeUsage, out outputElementType))
             {
                 properties = outputElementType.Properties.GetEnumerator();
             }
-            
+
             //
             // The published Vars of the DbExpression produced from the SetOp must be its Output Vars.
             // These Output Vars are mapped to the Vars of each of the SetOp's arguments using an array
@@ -2215,7 +2409,7 @@ namespace System.Data.Query.PlanCompiler
         public override DbExpression Visit(DistinctOp op, Node n)
         {
             //
-            // Build a projection above the input that gets the "keys" of the 
+            // Build a projection above the input that gets the "keys" of the
             // DistinctOp.
             //
             RelOpInfo sourceInfo = BuildProjection(n.Child0, op.Keys);
@@ -2231,7 +2425,7 @@ namespace System.Data.Query.PlanCompiler
             // PublishedVars: The PublishedVars of the Distinct are the same (rebound) Vars published by its input
             //
             PublishRelOp(_distinctAliases.Next(), distinctExpr, sourceInfo.PublishedVars);
-            
+
             return distinctExpr;
         }
 
@@ -2277,7 +2471,9 @@ namespace System.Data.Query.PlanCompiler
             DbElementExpression elementExpr = inputExpr.Element();
             List<DbExpression> collectionElements = new List<DbExpression>();
             collectionElements.Add(elementExpr);
-            DbNewInstanceExpression collectionExpr = DbExpressionBuilder.NewCollection(collectionElements);
+            DbNewInstanceExpression collectionExpr = DbExpressionBuilder.NewCollection(
+                collectionElements
+            );
             PublishRelOp(_elementAliases.Next(), collectionExpr, inputInfo.PublishedVars);
 
             return collectionExpr;
@@ -2292,7 +2488,9 @@ namespace System.Data.Query.PlanCompiler
         /// <returns>CQT expression</returns>
         public override DbExpression Visit(SingleRowTableOp op, Node n)
         {
-            DbNewInstanceExpression collectionExpr = DbExpressionBuilder.NewCollection(new [] { DbExpressionBuilder.Constant(1) });
+            DbNewInstanceExpression collectionExpr = DbExpressionBuilder.NewCollection(
+                new[] { DbExpressionBuilder.Constant(1) }
+            );
             PublishRelOp(_singleRowTableAliases.Next(), collectionExpr, new VarInfoList());
             return collectionExpr;
         }
@@ -2317,7 +2515,9 @@ namespace System.Data.Query.PlanCompiler
             // If this method is called a VarDefListOp exists in an invalid location in the IQT
             //
             PlanCompiler.Assert(false, "Unexpected VarDefListOp");
-            throw EntityUtil.NotSupported(System.Data.Entity.Strings.Iqt_CTGen_UnexpectedVarDefList);
+            throw EntityUtil.NotSupported(
+                System.Data.Entity.Strings.Iqt_CTGen_UnexpectedVarDefList
+            );
         }
         #endregion
 
@@ -2355,7 +2555,7 @@ namespace System.Data.Query.PlanCompiler
 
             //
             // Build a Projection over the input with exactly the Vars that we want
-            // 
+            //
             RelOpInfo sourceInfo = BuildProjection(n.Child0, op.Outputs);
 
             return sourceInfo.Publisher;
@@ -2365,6 +2565,7 @@ namespace System.Data.Query.PlanCompiler
         {
             throw EntityUtil.NotSupported();
         }
+
         public override DbExpression Visit(MultiStreamNestOp op, Node n)
         {
             throw EntityUtil.NotSupported();

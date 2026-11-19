@@ -1,5 +1,5 @@
 //
-// BinaryFormatterTest.cs - Unit tests for 
+// BinaryFormatterTest.cs - Unit tests for
 //	System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,60 +28,172 @@
 //
 
 using System;
-using System.IO;
 using System.Globalization;
+using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Globalization {
+namespace MonoTests.System.Globalization
+{
+    [TestFixture]
+    public class DaylightTimeTest
+    {
+        [Test]
+        public void Constructor()
+        {
+            DaylightTime dt = new DaylightTime(
+                DateTime.MinValue,
+                DateTime.MaxValue,
+                TimeSpan.MinValue
+            );
+            Assert.AreEqual(DateTime.MinValue, dt.Start, "Start");
+            Assert.AreEqual(DateTime.MaxValue, dt.End, "End");
+            Assert.AreEqual(TimeSpan.MinValue, dt.Delta, "Delta");
+        }
 
-	[TestFixture]
-	public class DaylightTimeTest {
+        [Test]
+        public void SerializationRoundtrip()
+        {
+            DaylightTime dt = new DaylightTime(
+                DateTime.MinValue,
+                DateTime.MaxValue,
+                TimeSpan.MinValue
+            );
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream();
+            bf.Serialize(ms, dt);
 
-		[Test]
-		public void Constructor ()
-		{
-			DaylightTime dt = new DaylightTime (DateTime.MinValue, DateTime.MaxValue, TimeSpan.MinValue);
-			Assert.AreEqual (DateTime.MinValue, dt.Start, "Start");
-			Assert.AreEqual (DateTime.MaxValue, dt.End, "End");
-			Assert.AreEqual (TimeSpan.MinValue, dt.Delta, "Delta");
-		}
+            ms.Position = 0;
+            DaylightTime clone = (DaylightTime)bf.Deserialize(ms);
 
-		[Test]
-		public void SerializationRoundtrip ()
-		{
-			DaylightTime dt = new DaylightTime (DateTime.MinValue, DateTime.MaxValue, TimeSpan.MinValue);
-			BinaryFormatter bf = new BinaryFormatter ();
-			MemoryStream ms = new MemoryStream ();
-			bf.Serialize (ms, dt);
+            Assert.AreEqual(clone.Start, dt.Start, "Start");
+            Assert.AreEqual(clone.End, dt.End, "End");
+            Assert.AreEqual(clone.Delta, dt.Delta, "Delta");
+        }
 
-			ms.Position = 0;
-			DaylightTime clone = (DaylightTime) bf.Deserialize (ms);
+        private static byte[] serialized_daylighttime =
+        {
+            0x0,
+            0x1,
+            0x0,
+            0x0,
+            0x0,
+            0xFF,
+            0xFF,
+            0xFF,
+            0xFF,
+            0x1,
+            0x0,
+            0x0,
+            0x0,
+            0x0,
+            0x0,
+            0x0,
+            0x0,
+            0x4,
+            0x1,
+            0x0,
+            0x0,
+            0x0,
+            0x21,
+            0x53,
+            0x79,
+            0x73,
+            0x74,
+            0x65,
+            0x6D,
+            0x2E,
+            0x47,
+            0x6C,
+            0x6F,
+            0x62,
+            0x61,
+            0x6C,
+            0x69,
+            0x7A,
+            0x61,
+            0x74,
+            0x69,
+            0x6F,
+            0x6E,
+            0x2E,
+            0x44,
+            0x61,
+            0x79,
+            0x6C,
+            0x69,
+            0x67,
+            0x68,
+            0x74,
+            0x54,
+            0x69,
+            0x6D,
+            0x65,
+            0x3,
+            0x0,
+            0x0,
+            0x0,
+            0x6,
+            0x5F,
+            0x73,
+            0x74,
+            0x61,
+            0x72,
+            0x74,
+            0x4,
+            0x5F,
+            0x65,
+            0x6E,
+            0x64,
+            0x6,
+            0x5F,
+            0x64,
+            0x65,
+            0x6C,
+            0x74,
+            0x61,
+            0x0,
+            0x0,
+            0x0,
+            0xD,
+            0xD,
+            0xC,
+            0x0,
+            0x0,
+            0x0,
+            0x0,
+            0x0,
+            0x0,
+            0x0,
+            0x0,
+            0xFF,
+            0x3F,
+            0x37,
+            0xF4,
+            0x75,
+            0x28,
+            0xCA,
+            0x2B,
+            0x0,
+            0x0,
+            0x0,
+            0x0,
+            0x0,
+            0x0,
+            0x0,
+            0x80,
+            0xB,
+        };
 
-			Assert.AreEqual (clone.Start, dt.Start, "Start");
-			Assert.AreEqual (clone.End, dt.End, "End");
-			Assert.AreEqual (clone.Delta, dt.Delta, "Delta");
-		}
-
-		static private byte[] serialized_daylighttime = {
-			0x0, 0x1, 0x0, 0x0, 0x0, 0xFF, 0xFF, 0xFF, 0xFF, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x4, 0x1, 0x0, 0x0, 
-			0x0, 0x21, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6D, 0x2E, 0x47, 0x6C, 0x6F, 0x62, 0x61, 0x6C, 0x69, 0x7A, 0x61, 
-			0x74, 0x69, 0x6F, 0x6E, 0x2E, 0x44, 0x61, 0x79, 0x6C, 0x69, 0x67, 0x68, 0x74, 0x54, 0x69, 0x6D, 0x65, 0x3, 
-			0x0, 0x0, 0x0, 0x6, 0x5F, 0x73, 0x74, 0x61, 0x72, 0x74, 0x4, 0x5F, 0x65, 0x6E, 0x64, 0x6, 0x5F, 0x64, 0x65, 
-			0x6C, 0x74, 0x61, 0x0, 0x0, 0x0, 0xD, 0xD, 0xC, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xFF, 0x3F, 0x37, 
-			0xF4, 0x75, 0x28, 0xCA, 0x2B, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x80, 0xB
-		};
-
-		[Test]
-		public void DeserializeKnownValue ()
-		{
-			MemoryStream ms = new MemoryStream (serialized_daylighttime);
-			BinaryFormatter bf = new BinaryFormatter ();
-			DaylightTime dt = (DaylightTime) bf.Deserialize (ms);
-			Assert.AreEqual (DateTime.MinValue, dt.Start, "Start");
-			Assert.AreEqual (DateTime.MaxValue, dt.End, "End");
-			Assert.AreEqual (TimeSpan.MinValue, dt.Delta, "Delta");
-		}
-	}
+        [Test]
+        public void DeserializeKnownValue()
+        {
+            MemoryStream ms = new MemoryStream(serialized_daylighttime);
+            BinaryFormatter bf = new BinaryFormatter();
+            DaylightTime dt = (DaylightTime)bf.Deserialize(ms);
+            Assert.AreEqual(DateTime.MinValue, dt.Start, "Start");
+            Assert.AreEqual(DateTime.MaxValue, dt.End, "End");
+            Assert.AreEqual(TimeSpan.MinValue, dt.Delta, "Delta");
+        }
+    }
 }

@@ -6,12 +6,14 @@ namespace System.Diagnostics.CodeAnalysis
     /// <summary>
     /// Indicates that the specified member requires assembly files to be on disk.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Constructor |
-                    AttributeTargets.Event |
-                    AttributeTargets.Method |
-                    AttributeTargets.Property,
-                    Inherited = false,
-                    AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Constructor
+            | AttributeTargets.Event
+            | AttributeTargets.Method
+            | AttributeTargets.Property,
+        Inherited = false,
+        AllowMultiple = false
+    )]
 #if SYSTEM_PRIVATE_CORELIB
     public
 #else

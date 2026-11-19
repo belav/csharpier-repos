@@ -10,7 +10,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests.TestUtilities
     internal sealed class TestableCompilerServerLogger : ICompilerServerLogger
     {
         public bool IsLogging { get; set; }
-        public Action<string> LogFunc { get; set; } = delegate { throw new InvalidOperationException(); };
+        public Action<string> LogFunc { get; set; } =
+            delegate
+            {
+                throw new InvalidOperationException();
+            };
 
         public void Log(string message) => LogFunc(message);
     }

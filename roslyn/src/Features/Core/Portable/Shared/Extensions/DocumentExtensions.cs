@@ -24,42 +24,68 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static class DocumentExtensions
     {
-        public static async Task<Document> ReplaceNodeAsync<TNode>(this Document document, TNode oldNode, TNode newNode, CancellationToken cancellationToken)
+        public static async Task<Document> ReplaceNodeAsync<TNode>(
+            this Document document,
+            TNode oldNode,
+            TNode newNode,
+            CancellationToken cancellationToken
+        )
             where TNode : SyntaxNode
         {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             return document.ReplaceNode(root, oldNode, newNode);
         }
 
-        public static Document ReplaceNodeSynchronously<TNode>(this Document document, TNode oldNode, TNode newNode, CancellationToken cancellationToken)
+        public static Document ReplaceNodeSynchronously<TNode>(
+            this Document document,
+            TNode oldNode,
+            TNode newNode,
+            CancellationToken cancellationToken
+        )
             where TNode : SyntaxNode
         {
             var root = document.GetRequiredSyntaxRootSynchronously(cancellationToken);
             return document.ReplaceNode(root, oldNode, newNode);
         }
 
-        public static Document ReplaceNode<TNode>(this Document document, SyntaxNode root, TNode oldNode, TNode newNode)
+        public static Document ReplaceNode<TNode>(
+            this Document document,
+            SyntaxNode root,
+            TNode oldNode,
+            TNode newNode
+        )
             where TNode : SyntaxNode
         {
-            Debug.Assert(document.GetRequiredSyntaxRootSynchronously(CancellationToken.None) == root);
+            Debug.Assert(
+                document.GetRequiredSyntaxRootSynchronously(CancellationToken.None) == root
+            );
             var newRoot = root.ReplaceNode(oldNode, newNode);
             return document.WithSyntaxRoot(newRoot);
         }
 
-        public static async Task<Document> ReplaceNodesAsync(this Document document,
+        public static async Task<Document> ReplaceNodesAsync(
+            this Document document,
             IEnumerable<SyntaxNode> nodes,
             Func<SyntaxNode, SyntaxNode, SyntaxNode> computeReplacementNode,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var newRoot = root.ReplaceNodes(nodes, computeReplacementNode);
             return document.WithSyntaxRoot(newRoot);
         }
 
-        public static async Task<ImmutableArray<T>> GetUnionItemsFromDocumentAndLinkedDocumentsAsync<T>(
+        public static async Task<
+            ImmutableArray<T>
+        > GetUnionItemsFromDocumentAndLinkedDocumentsAsync<T>(
             this Document document,
             IEqualityComparer<T> comparer,
-            Func<Document, Task<ImmutableArray<T>>> getItemsWorker)
+            Func<Document, Task<ImmutableArray<T>>> getItemsWorker
+        )
         {
             var totalItems = new HashSet<T>(comparer);
 
@@ -68,7 +94,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             foreach (var linkedDocumentId in document.GetLinkedDocumentIds())
             {
-                values = await getItemsWorker(document.Project.Solution.GetRequiredDocument(linkedDocumentId)).ConfigureAwait(false);
+                values = await getItemsWorker(
+                        document.Project.Solution.GetRequiredDocument(linkedDocumentId)
+                    )
+                    .ConfigureAwait(false);
                 totalItems.AddRange(values.NullToEmpty());
             }
 
@@ -78,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static async Task<bool> IsValidContextForDocumentOrLinkedDocumentsAsync(
             this Document document,
             Func<Document, CancellationToken, Task<bool>> contextChecker,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (await contextChecker(document, cancellationToken).ConfigureAwait(false))
             {
@@ -104,15 +134,27 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// will only be used if the user hasn't specified a preference.
         /// </summary>
         public static async Task<ImmutableArray<NamingRule>> GetNamingRulesAsync(
-            this Document document, NamingStylePreferencesProvider fallbackOptions, CancellationToken cancellationToken)
+            this Document document,
+            NamingStylePreferencesProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var options = await document.GetNamingStylePreferencesAsync(fallbackOptions, cancellationToken).ConfigureAwait(false);
+            var options = await document
+                .GetNamingStylePreferencesAsync(fallbackOptions, cancellationToken)
+                .ConfigureAwait(false);
             return options.CreateRules().NamingRules.AddRange(FallbackNamingRules.Default);
         }
 
-        public static async Task<NamingRule> GetApplicableNamingRuleAsync(this Document document, ISymbol symbol, NamingStylePreferencesProvider fallbackOptions, CancellationToken cancellationToken)
+        public static async Task<NamingRule> GetApplicableNamingRuleAsync(
+            this Document document,
+            ISymbol symbol,
+            NamingStylePreferencesProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var rules = await document.GetNamingRulesAsync(fallbackOptions, cancellationToken).ConfigureAwait(false);
+            var rules = await document
+                .GetNamingRulesAsync(fallbackOptions, cancellationToken)
+                .ConfigureAwait(false);
             foreach (var rule in rules)
             {
                 if (rule.SymbolSpecification.AppliesTo(symbol))
@@ -123,9 +165,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         }
 
         public static async Task<NamingRule> GetApplicableNamingRuleAsync(
-            this Document document, SymbolKind symbolKind, Accessibility accessibility, NamingStylePreferencesProvider fallbackOptions, CancellationToken cancellationToken)
+            this Document document,
+            SymbolKind symbolKind,
+            Accessibility accessibility,
+            NamingStylePreferencesProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var rules = await document.GetNamingRulesAsync(fallbackOptions, cancellationToken).ConfigureAwait(false);
+            var rules = await document
+                .GetNamingRulesAsync(fallbackOptions, cancellationToken)
+                .ConfigureAwait(false);
             foreach (var rule in rules)
             {
                 if (rule.SymbolSpecification.AppliesTo(symbolKind, accessibility))
@@ -136,9 +185,17 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         }
 
         public static async Task<NamingRule> GetApplicableNamingRuleAsync(
-            this Document document, SymbolKindOrTypeKind kind, DeclarationModifiers modifiers, Accessibility? accessibility, NamingStylePreferencesProvider fallbackOptions, CancellationToken cancellationToken)
+            this Document document,
+            SymbolKindOrTypeKind kind,
+            DeclarationModifiers modifiers,
+            Accessibility? accessibility,
+            NamingStylePreferencesProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var rules = await document.GetNamingRulesAsync(fallbackOptions, cancellationToken).ConfigureAwait(false);
+            var rules = await document
+                .GetNamingRulesAsync(fallbackOptions, cancellationToken)
+                .ConfigureAwait(false);
             foreach (var rule in rules)
             {
                 if (rule.SymbolSpecification.AppliesTo(kind, modifiers, accessibility))

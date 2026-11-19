@@ -4,11 +4,11 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.Threading;
-    using System.ServiceModel;
-    using System.ServiceModel.Channels;
     using System.Collections;
     using System.Collections.Generic;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.Threading;
 
     internal class ThreadSafeMessageFilterTable<FilterData> : IMessageFilterTable<FilterData>
     {
@@ -141,7 +141,7 @@ namespace System.ServiceModel.Dispatcher
 
         //
         // IDictionary<MessageFilter,FilterData> methods
-        //   
+        //
 
         public FilterData this[MessageFilter key]
         {
@@ -217,12 +217,16 @@ namespace System.ServiceModel.Dispatcher
             {
                 lock (this.syncRoot)
                 {
-                    return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.table).IsReadOnly;
+                    return (
+                        (ICollection<KeyValuePair<MessageFilter, FilterData>>)this.table
+                    ).IsReadOnly;
                 }
             }
         }
 
-        void ICollection<KeyValuePair<MessageFilter, FilterData>>.Add(KeyValuePair<MessageFilter, FilterData> item)
+        void ICollection<KeyValuePair<MessageFilter, FilterData>>.Add(
+            KeyValuePair<MessageFilter, FilterData> item
+        )
         {
             lock (this.syncRoot)
             {
@@ -230,27 +234,41 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        bool ICollection<KeyValuePair<MessageFilter, FilterData>>.Contains(KeyValuePair<MessageFilter, FilterData> item)
+        bool ICollection<KeyValuePair<MessageFilter, FilterData>>.Contains(
+            KeyValuePair<MessageFilter, FilterData> item
+        )
         {
             lock (this.syncRoot)
             {
-                return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.table).Contains(item);
+                return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.table).Contains(
+                    item
+                );
             }
         }
 
-        void ICollection<KeyValuePair<MessageFilter, FilterData>>.CopyTo(KeyValuePair<MessageFilter, FilterData>[] array, int arrayIndex)
+        void ICollection<KeyValuePair<MessageFilter, FilterData>>.CopyTo(
+            KeyValuePair<MessageFilter, FilterData>[] array,
+            int arrayIndex
+        )
         {
             lock (this.syncRoot)
             {
-                ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.table).CopyTo(array, arrayIndex);
+                ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.table).CopyTo(
+                    array,
+                    arrayIndex
+                );
             }
         }
 
-        bool ICollection<KeyValuePair<MessageFilter, FilterData>>.Remove(KeyValuePair<MessageFilter, FilterData> item)
+        bool ICollection<KeyValuePair<MessageFilter, FilterData>>.Remove(
+            KeyValuePair<MessageFilter, FilterData> item
+        )
         {
             lock (this.syncRoot)
             {
-                return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.table).Remove(item);
+                return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.table).Remove(
+                    item
+                );
             }
         }
 
@@ -262,11 +280,15 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        IEnumerator<KeyValuePair<MessageFilter, FilterData>> IEnumerable<KeyValuePair<MessageFilter, FilterData>>.GetEnumerator()
+        IEnumerator<KeyValuePair<MessageFilter, FilterData>> IEnumerable<
+            KeyValuePair<MessageFilter, FilterData>
+        >.GetEnumerator()
         {
             lock (this.syncRoot)
             {
-                return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.table).GetEnumerator();
+                return (
+                    (ICollection<KeyValuePair<MessageFilter, FilterData>>)this.table
+                ).GetEnumerator();
             }
         }
 

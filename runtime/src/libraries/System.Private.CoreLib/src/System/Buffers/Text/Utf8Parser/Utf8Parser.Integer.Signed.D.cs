@@ -5,7 +5,11 @@ namespace System.Buffers.Text
 {
     public static partial class Utf8Parser
     {
-        private static bool TryParseSByteD(ReadOnlySpan<byte> source, out sbyte value, out int bytesConsumed)
+        private static bool TryParseSByteD(
+            ReadOnlySpan<byte> source,
+            out sbyte value,
+            out int bytesConsumed
+        )
         {
             if (source.Length < 1)
                 goto FalseExit;
@@ -79,18 +83,22 @@ namespace System.Buffers.Text
                 goto FalseExit;
             }
 
-        FalseExit:
+            FalseExit:
             bytesConsumed = default;
             value = default;
             return false;
 
-        Done:
+            Done:
             bytesConsumed = index;
             value = (sbyte)(answer * sign);
             return true;
         }
 
-        private static bool TryParseInt16D(ReadOnlySpan<byte> source, out short value, out int bytesConsumed)
+        private static bool TryParseInt16D(
+            ReadOnlySpan<byte> source,
+            out short value,
+            out int bytesConsumed
+        )
         {
             if (source.Length < 1)
                 goto FalseExit;
@@ -180,18 +188,22 @@ namespace System.Buffers.Text
                 goto FalseExit;
             }
 
-        FalseExit:
+            FalseExit:
             bytesConsumed = default;
             value = default;
             return false;
 
-        Done:
+            Done:
             bytesConsumed = index;
             value = (short)(answer * sign);
             return true;
         }
 
-        private static bool TryParseInt32D(ReadOnlySpan<byte> source, out int value, out int bytesConsumed)
+        private static bool TryParseInt32D(
+            ReadOnlySpan<byte> source,
+            out int value,
+            out int bytesConsumed
+        )
         {
             if (source.Length < 1)
                 goto FalseExit;
@@ -323,18 +335,22 @@ namespace System.Buffers.Text
                 goto FalseExit;
             }
 
-        FalseExit:
+            FalseExit:
             bytesConsumed = default;
             value = default;
             return false;
 
-        Done:
+            Done:
             bytesConsumed = index;
             value = answer * sign;
             return true;
         }
 
-        private static bool TryParseInt64D(ReadOnlySpan<byte> source, out long value, out int bytesConsumed)
+        private static bool TryParseInt64D(
+            ReadOnlySpan<byte> source,
+            out long value,
+            out int bytesConsumed
+        )
         {
             long sign = 0; // 0 if the value is positive, -1 if the value is negative
             int idx = 0;
@@ -345,9 +361,15 @@ namespace System.Buffers.Text
             nuint firstChar;
             while (true)
             {
-                if ((uint)idx >= (uint)source.Length) { goto FalseExit; }
+                if ((uint)idx >= (uint)source.Length)
+                {
+                    goto FalseExit;
+                }
                 firstChar = (uint)source[idx] - '0';
-                if ((uint)firstChar <= 9) { break; }
+                if ((uint)firstChar <= 9)
+                {
+                    break;
+                }
 
                 // We saw something that wasn't a digit. If it's a '+' or a '-',
                 // we'll set the 'sign' value appropriately and resume the "read
@@ -387,9 +409,15 @@ namespace System.Buffers.Text
 
                 while (true)
                 {
-                    if ((uint)idx >= (uint)source.Length) { break; } // EOF
+                    if ((uint)idx >= (uint)source.Length)
+                    {
+                        break;
+                    } // EOF
                     nuint nextChar = (uint)source[idx] - '0';
-                    if ((uint)nextChar > 9) { break; } // not a digit
+                    if ((uint)nextChar > 9)
+                    {
+                        break;
+                    } // not a digit
                     parsedValue = parsedValue * 10 + nextChar;
                     idx++;
                 }
@@ -398,9 +426,15 @@ namespace System.Buffers.Text
             {
                 while (true)
                 {
-                    if ((uint)idx >= (uint)source.Length) { break; } // EOF
+                    if ((uint)idx >= (uint)source.Length)
+                    {
+                        break;
+                    } // EOF
                     nuint nextChar = (uint)source[idx] - '0';
-                    if ((uint)nextChar > 9) { break; } // not a digit
+                    if ((uint)nextChar > 9)
+                    {
+                        break;
+                    } // not a digit
                     idx++;
 
                     // The const below is the smallest unsigned x for which "x * 10 + 9"
@@ -447,7 +481,7 @@ namespace System.Buffers.Text
             value = ((long)parsedValue ^ sign) - sign;
             return true;
 
-        FalseExit:
+            FalseExit:
             bytesConsumed = 0;
             value = default;
             return false;

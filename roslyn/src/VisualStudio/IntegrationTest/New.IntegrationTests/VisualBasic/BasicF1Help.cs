@@ -18,14 +18,13 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicF1Help()
-            : base(nameof(BasicF1Help))
-        {
-        }
+            : base(nameof(BasicF1Help)) { }
 
         [IdeFact]
         private async Task F1Help()
         {
-            var text = @"
+            var text =
+                @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -49,13 +48,19 @@ End Module";
             await VerifyAsync("From", "vb.QueryFrom", HangMitigatingCancellationToken);
             await VerifyAsync("+=", "vb.+=", HangMitigatingCancellationToken);
             await VerifyAsync("Nothing", "vb.Nothing", HangMitigatingCancellationToken);
-
         }
 
-        private async Task VerifyAsync(string word, string expectedKeyword, CancellationToken cancellationToken)
+        private async Task VerifyAsync(
+            string word,
+            string expectedKeyword,
+            CancellationToken cancellationToken
+        )
         {
             await TestServices.Editor.PlaceCaretAsync(word, charsOffset: -1, cancellationToken);
-            Assert.Contains(expectedKeyword, await TestServices.Editor.GetF1KeywordsAsync(cancellationToken));
+            Assert.Contains(
+                expectedKeyword,
+                await TestServices.Editor.GetF1KeywordsAsync(cancellationToken)
+            );
         }
     }
 }

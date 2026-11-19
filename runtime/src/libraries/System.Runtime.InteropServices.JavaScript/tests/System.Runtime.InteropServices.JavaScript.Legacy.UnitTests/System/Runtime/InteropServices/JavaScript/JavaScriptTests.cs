@@ -45,7 +45,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             maxValue = (int)mathMax.Call(null, 5, 6, 2, 3, 7);
             Assert.Equal(7, maxValue);
 
-            Function mathMin = (Function)((JSObject)Runtime.GetGlobalObject("Math")).GetObjectProperty("min");
+            Function mathMin = (Function)
+                ((JSObject)Runtime.GetGlobalObject("Math")).GetObjectProperty("min");
             Assert.True(mathMin != null, "math.min != null");
 
             var minValue = (int)mathMin.Apply(null, new object[] { 5, 6, 2, 3, 7 });
@@ -61,7 +62,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             await Task.Delay(1);
 
-            var bagFn = new Function(@"
+            var bagFn = new Function(
+                @"
                     var same = {
                         x:1
                     };
@@ -73,7 +75,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                         e:same,
                         f:same
                     });
-                ");
+                "
+            );
 
             for (int attempt = 0; attempt < 100_000; attempt++)
             {
@@ -89,7 +92,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                     var x = new byte[100 + attempt / 100];
                     if (attempt % 1000 == 0)
                     {
-                        Utils.InvokeJS("if (globalThis.gc) globalThis.gc();");// needs v8 flag --expose-gc
+                        Utils.InvokeJS("if (globalThis.gc) globalThis.gc();"); // needs v8 flag --expose-gc
                         GC.Collect();
                     }
                 }
@@ -105,7 +108,11 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             await Task.Delay(1);
 
-            var makeRangeIterator = new Function("start", "end", "step", @"
+            var makeRangeIterator = new Function(
+                "start",
+                "end",
+                "step",
+                @"
                     let nextIndex = start;
                     let iterationCount = 0;
 
@@ -122,7 +129,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                        }
                     };
                     return rangeIterator;
-                ");
+                "
+            );
 
             const int count = 500;
             for (int attempt = 0; attempt < 100; attempt++)
@@ -182,10 +190,13 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public static void RoundtripCSDate()
         {
-            var factory = new Function("dummy", @"
+            var factory = new Function(
+                "dummy",
+                @"
                 return {
                     dummy:dummy,
-                }");
+                }"
+            );
             var date = new DateTime(2021, 01, 01, 12, 34, 45);
 
             var obj = (JSObject)factory.Call(null, date);
@@ -196,20 +207,21 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public static void RoundtripJSDate()
         {
-            var factory = new Function(@"
+            var factory = new Function(
+                @"
                 var dummy = new Date(2021, 00, 01, 12, 34, 45, 567);
                 return {
                     dummy:dummy,
                     check:(value) => {
                         return value.valueOf()==dummy.valueOf() ? 1 : 0;
                     },
-                }");
+                }"
+            );
             var obj = (JSObject)factory.Call();
 
             var date = (DateTime)obj.GetObjectProperty("dummy");
             var check = (int)obj.Invoke("check", date);
             Assert.Equal(1, check);
         }
-
     }
 }

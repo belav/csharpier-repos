@@ -3,28 +3,34 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
-namespace System.Data.Linq.SqlClient {
+namespace System.Data.Linq.SqlClient
+{
 #if PERFORMANCE_BUILD
-    class PerfTimer {
+    class PerfTimer
+    {
         long startTime;
         long stopTime;
         long frequency;
 
-        public PerfTimer() {
+        public PerfTimer()
+        {
             QueryPerformanceFrequency(out frequency);
         }
 
-        public void Start() {
+        public void Start()
+        {
             Thread.Sleep(0);
             QueryPerformanceCounter(out startTime);
         }
 
-        public void Stop() {
+        public void Stop()
+        {
             QueryPerformanceCounter(out stopTime);
         }
 
-        public long Duration {
-            get { return (long)( 1000000.0 * (double)(stopTime - startTime) / (double) frequency ); }
+        public long Duration
+        {
+            get { return (long)(1000000.0 * (double)(stopTime - startTime) / (double)frequency); }
         }
 
         [System.Runtime.InteropServices.DllImport("Kernel32.dll")]

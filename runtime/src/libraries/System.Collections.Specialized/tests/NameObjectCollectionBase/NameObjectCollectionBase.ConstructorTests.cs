@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System.Collections;
+using Xunit;
 
 namespace System.Collections.Specialized.Tests
 {
@@ -12,7 +12,10 @@ namespace System.Collections.Specialized.Tests
         public void Constructor_Provider_Comparer()
         {
 #pragma warning disable CS0618 // Type or member is obsolete
-            MyNameObjectCollection coll = new MyNameObjectCollection(CaseInsensitiveHashCodeProvider.Default, CaseInsensitiveComparer.Default);
+            MyNameObjectCollection coll = new MyNameObjectCollection(
+                CaseInsensitiveHashCodeProvider.Default,
+                CaseInsensitiveComparer.Default
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
             coll.Add(null, null);
             Assert.Equal(1, coll.Count);
@@ -24,7 +27,11 @@ namespace System.Collections.Specialized.Tests
         public void Constructor_Int_Provider_Comparer()
         {
 #pragma warning disable CS0618 // Type or member is obsolete
-            MyNameObjectCollection coll = new MyNameObjectCollection(5, CaseInsensitiveHashCodeProvider.DefaultInvariant, CaseInsensitiveComparer.DefaultInvariant);
+            MyNameObjectCollection coll = new MyNameObjectCollection(
+                5,
+                CaseInsensitiveHashCodeProvider.DefaultInvariant,
+                CaseInsensitiveComparer.DefaultInvariant
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
             coll.Add("a", new Foo("1"));
             int i = 0;
@@ -35,6 +42,5 @@ namespace System.Collections.Specialized.Tests
             }
             Assert.Equal(1, i);
         }
-
     }
 }

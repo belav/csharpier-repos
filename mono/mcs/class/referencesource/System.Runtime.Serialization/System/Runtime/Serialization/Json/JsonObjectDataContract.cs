@@ -4,21 +4,22 @@
 
 namespace System.Runtime.Serialization.Json
 {
+    using System.Globalization;
+    using System.Runtime.Serialization;
     using System.Xml;
 #if !MONO
     using System.ServiceModel;
 #endif
-    using System.Runtime.Serialization;
-    using System.Globalization;
 
     class JsonObjectDataContract : JsonDataContract
     {
         public JsonObjectDataContract(DataContract traditionalDataContract)
-            : base(traditionalDataContract)
-        {
-        }
+            : base(traditionalDataContract) { }
 
-        public override object ReadJsonValueCore(XmlReaderDelegator jsonReader, XmlObjectSerializerReadContextComplexJson context)
+        public override object ReadJsonValueCore(
+            XmlReaderDelegator jsonReader,
+            XmlObjectSerializerReadContextComplexJson context
+        )
         {
             object obj;
             string contentMode = jsonReader.GetAttribute(JsonGlobals.typeString);
@@ -45,10 +46,17 @@ namespace System.Runtime.Serialization.Json
                     break;
                 case JsonGlobals.arrayString:
                     // Read as object array
-                    return DataContractJsonSerializer.ReadJsonValue(DataContract.GetDataContract(Globals.TypeOfObjectArray), jsonReader, context);
+                    return DataContractJsonSerializer.ReadJsonValue(
+                        DataContract.GetDataContract(Globals.TypeOfObjectArray),
+                        jsonReader,
+                        context
+                    );
                 default:
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.JsonUnexpectedAttributeValue, contentMode)));
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.GetString(SR.JsonUnexpectedAttributeValue, contentMode)
+                        )
+                    );
             }
 
             if (context != null)
@@ -58,29 +66,61 @@ namespace System.Runtime.Serialization.Json
             return obj;
         }
 
-        public override void WriteJsonValueCore(XmlWriterDelegator jsonWriter, object obj, XmlObjectSerializerWriteContextComplexJson context, RuntimeTypeHandle declaredTypeHandle)
+        public override void WriteJsonValueCore(
+            XmlWriterDelegator jsonWriter,
+            object obj,
+            XmlObjectSerializerWriteContextComplexJson context,
+            RuntimeTypeHandle declaredTypeHandle
+        )
         {
-            jsonWriter.WriteAttributeString(null, JsonGlobals.typeString, null, JsonGlobals.objectString);
+            jsonWriter.WriteAttributeString(
+                null,
+                JsonGlobals.typeString,
+                null,
+                JsonGlobals.objectString
+            );
         }
 
         internal static object ParseJsonNumber(string value, out TypeCode objectTypeCode)
         {
             if (value == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(System.Runtime.Serialization.SR.GetString(System.Runtime.Serialization.SR.XmlInvalidConversion, value, Globals.TypeOfInt)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        System.Runtime.Serialization.SR.GetString(
+                            System.Runtime.Serialization.SR.XmlInvalidConversion,
+                            value,
+                            Globals.TypeOfInt
+                        )
+                    )
+                );
             }
 
             if (value.IndexOfAny(JsonGlobals.floatingPointCharacters) == -1)
             {
                 int intValue;
-                if (Int32.TryParse(value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out intValue))
+                if (
+                    Int32.TryParse(
+                        value,
+                        NumberStyles.Float,
+                        NumberFormatInfo.InvariantInfo,
+                        out intValue
+                    )
+                )
                 {
                     objectTypeCode = TypeCode.Int32;
                     return intValue;
                 }
 
                 long longValue;
-                if (Int64.TryParse(value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out longValue))
+                if (
+                    Int64.TryParse(
+                        value,
+                        NumberStyles.Float,
+                        NumberFormatInfo.InvariantInfo,
+                        out longValue
+                    )
+                )
                 {
                     objectTypeCode = TypeCode.Int64;
                     return longValue;
@@ -88,7 +128,14 @@ namespace System.Runtime.Serialization.Json
             }
 
             decimal decimalValue;
-            if (Decimal.TryParse(value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimalValue))
+            if (
+                Decimal.TryParse(
+                    value,
+                    NumberStyles.Float,
+                    NumberFormatInfo.InvariantInfo,
+                    out decimalValue
+                )
+            )
             {
                 objectTypeCode = TypeCode.Decimal;
 

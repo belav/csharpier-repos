@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.MimeXmlBinding.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,33 +31,41 @@
 using System.Web.Services.Configuration;
 using System.Xml.Serialization;
 
-namespace System.Web.Services.Description {
-	[XmlFormatExtension ("mimeXml", "http://schemas.xmlsoap.org/wsdl/mime/", typeof (MimePart), typeof (InputBinding), typeof (OutputBinding))]
-	public sealed class MimeXmlBinding : ServiceDescriptionFormatExtension {
+namespace System.Web.Services.Description
+{
+    [XmlFormatExtension(
+        "mimeXml",
+        "http://schemas.xmlsoap.org/wsdl/mime/",
+        typeof(MimePart),
+        typeof(InputBinding),
+        typeof(OutputBinding)
+    )]
+    public sealed class MimeXmlBinding : ServiceDescriptionFormatExtension
+    {
+        #region Fields
 
-		#region Fields
+        string part;
 
-		string part;
+        #endregion // Fields
 
-		#endregion // Fields
+        #region Constructors
 
-		#region Constructors
-		
-		public MimeXmlBinding ()
-		{
-			part = String.Empty;
-		}
-		
-		#endregion // Constructors
+        public MimeXmlBinding()
+        {
+            part = String.Empty;
+        }
 
-		#region Properties
+        #endregion // Constructors
 
-		[XmlAttribute ("part")]
-		public string Part {
-			get { return part; }
-			set { part = value; }
-		}
-		
-		#endregion // Properties
-	}
+        #region Properties
+
+        [XmlAttribute("part")]
+        public string Part
+        {
+            get { return part; }
+            set { part = value; }
+        }
+
+        #endregion // Properties
+    }
 }

@@ -15,7 +15,9 @@ namespace System.ComponentModel.Tests
         {
             if (!Services.TryGetValue(serviceType, out object value))
             {
-                throw new NotImplementedException("Unrecognized service: " + serviceType.ToString());
+                throw new NotImplementedException(
+                    "Unrecognized service: " + serviceType.ToString()
+                );
             }
 
             return value;

@@ -7,6 +7,6 @@ namespace System.CodeDom
     {
         In,
         Out,
-        Ref
+        Ref,
     }
 }

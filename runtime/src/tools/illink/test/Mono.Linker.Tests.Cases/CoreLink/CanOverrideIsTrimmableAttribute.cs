@@ -4,33 +4,27 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.CoreLink
 {
-	[SetupLinkerDefaultActionAttribute ("copy")]
-	[SetupLinkerAction ("link", "test")]
-	[SetupLinkerAction ("copy", "trimmable")]
-	[SetupLinkerAction ("link", "nontrimmable")]
+    [SetupLinkerDefaultActionAttribute("copy")]
+    [SetupLinkerAction("link", "test")]
+    [SetupLinkerAction("copy", "trimmable")]
+    [SetupLinkerAction("link", "nontrimmable")]
+    [SetupCompileBefore("trimmable.dll", new[] { "Dependencies/TrimmableAssembly.cs" })]
+    [SetupCompileBefore("nontrimmable.dll", new[] { "Dependencies/NonTrimmableAssembly.cs" })]
+    [KeptAllTypesAndMembersInAssembly("trimmable.dll")]
+    [KeptMemberInAssembly("nontrimmable.dll", typeof(NonTrimmableAssembly), "Used()")]
+    [RemovedMemberInAssembly("nontrimmable.dll", typeof(NonTrimmableAssembly), "Unused()")]
+    public class CanOverrideIsTrimmableAttribute
+    {
+        public static void Main()
+        {
+            Used();
+            TrimmableAssembly.Used();
+            NonTrimmableAssembly.Used();
+        }
 
-	[SetupCompileBefore ("trimmable.dll", new[] { "Dependencies/TrimmableAssembly.cs" })]
-	[SetupCompileBefore ("nontrimmable.dll", new[] { "Dependencies/NonTrimmableAssembly.cs" })]
+        [Kept]
+        public static void Used() { }
 
-	[KeptAllTypesAndMembersInAssembly ("trimmable.dll")]
-	[KeptMemberInAssembly ("nontrimmable.dll", typeof (NonTrimmableAssembly), "Used()")]
-	[RemovedMemberInAssembly ("nontrimmable.dll", typeof (NonTrimmableAssembly), "Unused()")]
-	public class CanOverrideIsTrimmableAttribute
-	{
-		public static void Main ()
-		{
-			Used ();
-			TrimmableAssembly.Used ();
-			NonTrimmableAssembly.Used ();
-		}
-
-		[Kept]
-		public static void Used ()
-		{
-		}
-
-		public static void Unused ()
-		{
-		}
-	}
+        public static void Unused() { }
+    }
 }

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,62 +29,77 @@
 using System.Collections.Specialized;
 using System.Globalization;
 
-namespace System.Net.NetworkInformation {
-	class MibTcpStatistics : TcpStatistics
-	{
-		StringDictionary dic;
+namespace System.Net.NetworkInformation
+{
+    class MibTcpStatistics : TcpStatistics
+    {
+        StringDictionary dic;
 
-		public MibTcpStatistics (StringDictionary dic)
-		{
-			this.dic = dic;
-		}
+        public MibTcpStatistics(StringDictionary dic)
+        {
+            this.dic = dic;
+        }
 
-		long Get (string name)
-		{
-			return dic [name] != null ? long.Parse (dic [name], NumberFormatInfo.InvariantInfo) : 0;
-		}
+        long Get(string name)
+        {
+            return dic[name] != null ? long.Parse(dic[name], NumberFormatInfo.InvariantInfo) : 0;
+        }
 
-		public override long ConnectionsAccepted {
-			get { return Get ("PassiveOpens"); }
-		}
-		public override long ConnectionsInitiated {
-			get { return Get ("ActiveOpens"); }
-		}
-		public override long CumulativeConnections {
-			get { return Get ("NumConns"); }
-		}
-		public override long CurrentConnections {
-			get { return Get ("CurrEstab"); }
-		}
-		public override long ErrorsReceived {
-			get { return Get ("InErrs"); }
-		}
-		public override long FailedConnectionAttempts {
-			get { return Get ("AttemptFails"); }
-		}
-		public override long MaximumConnections {
-			get { return Get ("MaxConn"); }
-		}
-		public override long MaximumTransmissionTimeout {
-			get { return Get ("RtoMax"); }
-		}
-		public override long MinimumTransmissionTimeout {
-			get { return Get ("RtoMin"); }
-		}
-		public override long ResetConnections {
-			get { return Get ("EstabResets"); }
-		}
-		public override long ResetsSent {
-			get { return Get ("OutRsts"); }
-		}
-		public override long SegmentsReceived {
-			get { return Get ("InSegs"); }
-		}
-		public override long SegmentsResent {
-			get { return Get ("RetransSegs"); }
-		}
-		public override long SegmentsSent {
-			get { return Get ("OutSegs"); }
-		}
-	}
+        public override long ConnectionsAccepted
+        {
+            get { return Get("PassiveOpens"); }
+        }
+        public override long ConnectionsInitiated
+        {
+            get { return Get("ActiveOpens"); }
+        }
+        public override long CumulativeConnections
+        {
+            get { return Get("NumConns"); }
+        }
+        public override long CurrentConnections
+        {
+            get { return Get("CurrEstab"); }
+        }
+        public override long ErrorsReceived
+        {
+            get { return Get("InErrs"); }
+        }
+        public override long FailedConnectionAttempts
+        {
+            get { return Get("AttemptFails"); }
+        }
+        public override long MaximumConnections
+        {
+            get { return Get("MaxConn"); }
+        }
+        public override long MaximumTransmissionTimeout
+        {
+            get { return Get("RtoMax"); }
+        }
+        public override long MinimumTransmissionTimeout
+        {
+            get { return Get("RtoMin"); }
+        }
+        public override long ResetConnections
+        {
+            get { return Get("EstabResets"); }
+        }
+        public override long ResetsSent
+        {
+            get { return Get("OutRsts"); }
+        }
+        public override long SegmentsReceived
+        {
+            get { return Get("InSegs"); }
+        }
+        public override long SegmentsResent
+        {
+            get { return Get("RetransSegs"); }
+        }
+        public override long SegmentsSent
+        {
+            get { return Get("OutSegs"); }
+        }
+    }
 }

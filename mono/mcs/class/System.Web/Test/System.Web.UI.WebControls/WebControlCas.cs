@@ -1,5 +1,5 @@
 //
-// WebControlCas.cs 
+// WebControlCas.cs
 //	- CAS unit tests for System.Web.UI.WebControls.WebControl
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,56 +27,60 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
 using MonoTests.System.Web.UI.WebControls;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI.WebControls {
+namespace MonoCasTests.System.Web.UI.WebControls
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class WebControlCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            WebControlTest unit = new WebControlTest();
+            unit.Constructors();
+            unit.StyleCreation();
+            unit.Defaults();
+            unit.Assignment();
+            unit.Methods();
+            unit.CopyEnabled();
+            unit.RenderClientId();
+            unit.ViewState();
+            unit.RenderBeginTag_TagOnly();
+            unit.RenderBeginTag_Attributes();
+            unit.RenderBeginTag_Style();
+            unit.EmptyStringTag();
+            unit.NullStringTag();
+            unit.UnknownTag();
+            unit.EnabledViewState();
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class WebControlCas: AspNetHostingMinimal {
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			WebControlTest unit = new WebControlTest ();
-			unit.Constructors ();
-			unit.StyleCreation ();
-			unit.Defaults ();
-			unit.Assignment ();
-			unit.Methods ();
-			unit.CopyEnabled ();
-			unit.RenderClientId ();
-			unit.ViewState ();
-			unit.RenderBeginTag_TagOnly ();
-			unit.RenderBeginTag_Attributes ();
-			unit.RenderBeginTag_Style ();
-			unit.EmptyStringTag ();
-			unit.NullStringTag ();
-			unit.UnknownTag ();
-			unit.EnabledViewState ();
-		}
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
+        {
+            ConstructorInfo ci = this.Type.GetConstructor(
+                new Type[1] { typeof(HtmlTextWriterTag) }
+            );
+            Assert.IsNotNull(ci, ".ctor(HtmlTextWriterTag)");
+            return ci.Invoke(new object[1] { HtmlTextWriterTag.A });
+        }
 
-		// LinkDemand 
-
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (HtmlTextWriterTag) });
-			Assert.IsNotNull (ci, ".ctor(HtmlTextWriterTag)");
-			return ci.Invoke (new object[1] { HtmlTextWriterTag.A });
-		}
-
-		public override Type Type {
-			get { return typeof (WebControl); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(WebControl); }
+        }
+    }
 }

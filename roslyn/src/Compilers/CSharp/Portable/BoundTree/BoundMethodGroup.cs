@@ -19,23 +19,37 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupResult lookupResult,
             BoundMethodGroupFlags flags,
             Binder binder,
-            bool hasErrors = false)
-            : this(syntax, typeArgumentsOpt, name, methods, lookupResult.SingleSymbolOrDefault, lookupResult.Error, flags, functionType: GetFunctionType(binder, syntax), receiverOpt, lookupResult.Kind, hasErrors)
+            bool hasErrors = false
+        )
+            : this(
+                syntax,
+                typeArgumentsOpt,
+                name,
+                methods,
+                lookupResult.SingleSymbolOrDefault,
+                lookupResult.Error,
+                flags,
+                functionType: GetFunctionType(binder, syntax),
+                receiverOpt,
+                lookupResult.Kind,
+                hasErrors
+            )
         {
             FunctionType?.SetExpression(this);
         }
 
         private static FunctionTypeSymbol? GetFunctionType(Binder binder, SyntaxNode syntax)
         {
-            return FunctionTypeSymbol.CreateIfFeatureEnabled(syntax, binder, static (binder, expr) => binder.GetMethodGroupDelegateType((BoundMethodGroup)expr));
+            return FunctionTypeSymbol.CreateIfFeatureEnabled(
+                syntax,
+                binder,
+                static (binder, expr) => binder.GetMethodGroupDelegateType((BoundMethodGroup)expr)
+            );
         }
 
         public MemberAccessExpressionSyntax? MemberAccessExpressionSyntax
         {
-            get
-            {
-                return this.Syntax as MemberAccessExpressionSyntax;
-            }
+            get { return this.Syntax as MemberAccessExpressionSyntax; }
         }
 
         public SyntaxNode NameSyntax
@@ -71,10 +85,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public bool SearchExtensionMethods
         {
-            get
-            {
-                return (this.Flags & BoundMethodGroupFlags.SearchExtensionMethods) != 0;
-            }
+            get { return (this.Flags & BoundMethodGroupFlags.SearchExtensionMethods) != 0; }
         }
     }
 }

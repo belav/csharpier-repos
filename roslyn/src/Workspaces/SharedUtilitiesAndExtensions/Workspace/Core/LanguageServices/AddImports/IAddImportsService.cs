@@ -19,35 +19,69 @@ namespace Microsoft.CodeAnalysis.AddImport
 {
     internal interface IAddImportsService : ILanguageService
     {
-        AddImportPlacementOptions GetAddImportOptions(IOptionsReader configOptions, bool allowInHiddenRegions, AddImportPlacementOptions? fallbackOptions);
+        AddImportPlacementOptions GetAddImportOptions(
+            IOptionsReader configOptions,
+            bool allowInHiddenRegions,
+            AddImportPlacementOptions? fallbackOptions
+        );
 
         /// <summary>
         /// Returns true if the tree already has an existing import syntactically equivalent to
         /// <paramref name="import"/> in scope at <paramref name="contextLocation"/>.  This includes
         /// global imports for VB.
         /// </summary>
-        bool HasExistingImport(Compilation compilation, SyntaxNode root, SyntaxNode? contextLocation, SyntaxNode import, SyntaxGenerator generator);
+        bool HasExistingImport(
+            Compilation compilation,
+            SyntaxNode root,
+            SyntaxNode? contextLocation,
+            SyntaxNode import,
+            SyntaxGenerator generator
+        );
 
         /// <summary>
         /// Given a context location in a provided syntax tree, returns the appropriate container
         /// that <paramref name="import"/> should be added to.
         /// </summary>
-        SyntaxNode GetImportContainer(SyntaxNode root, SyntaxNode? contextLocation, SyntaxNode import, AddImportPlacementOptions options);
+        SyntaxNode GetImportContainer(
+            SyntaxNode root,
+            SyntaxNode? contextLocation,
+            SyntaxNode import,
+            AddImportPlacementOptions options
+        );
 
         SyntaxNode AddImports(
-            Compilation compilation, SyntaxNode root, SyntaxNode? contextLocation,
-            IEnumerable<SyntaxNode> newImports, SyntaxGenerator generator, AddImportPlacementOptions options, CancellationToken cancellationToken);
+            Compilation compilation,
+            SyntaxNode root,
+            SyntaxNode? contextLocation,
+            IEnumerable<SyntaxNode> newImports,
+            SyntaxGenerator generator,
+            AddImportPlacementOptions options,
+            CancellationToken cancellationToken
+        );
     }
 
     internal static class IAddImportServiceExtensions
     {
         public static SyntaxNode AddImport(
-            this IAddImportsService service, Compilation compilation, SyntaxNode root,
-            SyntaxNode contextLocation, SyntaxNode newImport, SyntaxGenerator generator, AddImportPlacementOptions options,
-            CancellationToken cancellationToken)
+            this IAddImportsService service,
+            Compilation compilation,
+            SyntaxNode root,
+            SyntaxNode contextLocation,
+            SyntaxNode newImport,
+            SyntaxGenerator generator,
+            AddImportPlacementOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            return service.AddImports(compilation, root, contextLocation,
-                SpecializedCollections.SingletonEnumerable(newImport), generator, options, cancellationToken);
+            return service.AddImports(
+                compilation,
+                root,
+                contextLocation,
+                SpecializedCollections.SingletonEnumerable(newImport),
+                generator,
+                options,
+                cancellationToken
+            );
         }
     }
 }

@@ -38,7 +38,6 @@ namespace System.Security.AccessControl.Tests
             Guid inheritedObjectAceType;
             //case 1, no Ace
 
-
             revision = 127;
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
@@ -47,14 +46,19 @@ namespace System.Security.AccessControl.Tests
             systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
             Assert.True(TestRemoveInheritedAces(systemAcl));
 
-
             //case 2, only have explicit Ace
             revision = 0;
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
             //199 has all AceFlags except InheritOnly and Inherited
-            gAce = new CommonAce((AceFlags)199, AceQualifier.SystemAudit, 1,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)), false, null);
+            gAce = new CommonAce(
+                (AceFlags)199,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             isContainer = false;
             isDS = false;
@@ -66,26 +70,47 @@ namespace System.Security.AccessControl.Tests
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
             //215 has all AceFlags except InheritOnly
-            gAce = new CommonAce((AceFlags)215, AceQualifier.SystemAudit, 1,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)), false, null);
+            gAce = new CommonAce(
+                (AceFlags)215,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             isContainer = false;
             isDS = false;
             systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
             Assert.True(TestRemoveInheritedAces(systemAcl));
 
-
             //case 4, have one explicit Ace and one inherited Ace
             revision = 255;
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
             //199 has all AceFlags except InheritOnly and Inherited
-            gAce = new CommonAce((AceFlags)199, AceQualifier.SystemAudit, 1,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")), false, null);
+            gAce = new CommonAce(
+                (AceFlags)199,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             //215 has all AceFlags except InheritOnly
-            gAce = new CommonAce((AceFlags)215, AceQualifier.SystemAudit, 1,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+            gAce = new CommonAce(
+                (AceFlags)215,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(1, gAce);
             isContainer = true;
             isDS = false;
@@ -97,13 +122,29 @@ namespace System.Security.AccessControl.Tests
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
             //215 has all AceFlags except InheritOnly
-            gAce = new CommonAce((AceFlags)215, AceQualifier.SystemAudit, 1,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")), false, null);
+            gAce = new CommonAce(
+                (AceFlags)215,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             sid = "BA";
             //16 has Inherited
-            gAce = new CommonAce((AceFlags)16, AceQualifier.SystemAudit, 1,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+            gAce = new CommonAce(
+                (AceFlags)16,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             isContainer = true;
             isDS = false;
@@ -132,8 +173,12 @@ namespace System.Security.AccessControl.Tests
             aceFlag = (AceFlags)223; //all flags ored together
             accessMask = 1;
             compoundAceType = CompoundAceType.Impersonation;
-            gAce = new CompoundAce(aceFlag, accessMask, compoundAceType,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)));
+            gAce = new CompoundAce(
+                aceFlag,
+                accessMask,
+                compoundAceType,
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid))
+            );
             rawAcl.InsertAce(0, gAce);
             isContainer = true;
             isDS = false;
@@ -147,17 +192,26 @@ namespace System.Security.AccessControl.Tests
             aceFlag = (AceFlags)223; //all flags ored together
             aceQualifier = AceQualifier.SystemAudit;
             accessMask = 1;
-            objectAceFlag = ObjectAceFlags.ObjectAceTypePresent | ObjectAceFlags.InheritedObjectAceTypePresent;
+            objectAceFlag =
+                ObjectAceFlags.ObjectAceTypePresent | ObjectAceFlags.InheritedObjectAceTypePresent;
             objectAceType = new Guid("11111111-1111-1111-1111-111111111111");
             inheritedObjectAceType = new Guid("22222222-2222-2222-2222-222222222222");
-            gAce = new ObjectAce(aceFlag, aceQualifier, accessMask,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)), objectAceFlag, objectAceType, inheritedObjectAceType, false, null);
+            gAce = new ObjectAce(
+                aceFlag,
+                aceQualifier,
+                accessMask,
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
+                objectAceFlag,
+                objectAceType,
+                inheritedObjectAceType,
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             isContainer = true;
             isDS = true;
             systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
             Assert.True(TestRemoveInheritedAces(systemAcl));
-
         }
 
         private static bool TestRemoveInheritedAces(SystemAcl systemAcl)
@@ -172,6 +226,5 @@ namespace System.Security.AccessControl.Tests
             }
             return true;
         }
-
     }
 }

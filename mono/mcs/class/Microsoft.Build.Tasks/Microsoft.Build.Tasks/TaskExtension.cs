@@ -26,19 +26,17 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
-	public abstract class TaskExtension : Task {
+namespace Microsoft.Build.Tasks
+{
+    public abstract class TaskExtension : Task
+    {
+        internal TaskExtension() { }
 
-		internal TaskExtension ()
-		{
-		}
-
-		public new TaskLoggingHelper Log {
-			get { return base.Log; }
-		}
-	}
+        public new TaskLoggingHelper Log
+        {
+            get { return base.Log; }
+        }
+    }
 }
-

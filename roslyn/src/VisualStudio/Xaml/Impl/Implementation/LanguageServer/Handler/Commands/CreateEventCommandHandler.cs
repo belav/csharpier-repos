@@ -29,9 +29,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CreateEventCommandHandler()
-        {
-        }
+        public CreateEventCommandHandler() { }
 
         public override string Command => StringConstants.CreateEventHandlerCommand;
 
@@ -39,10 +37,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 
         public override bool RequiresLSPSolution => true;
 
-        public override TextDocumentIdentifier GetTextDocumentIdentifier(ExecuteCommandParams request)
-            => ((JToken)request.Arguments.First()).ToObject<TextDocumentIdentifier>()!;
+        public override TextDocumentIdentifier GetTextDocumentIdentifier(
+            ExecuteCommandParams request
+        ) => ((JToken)request.Arguments.First()).ToObject<TextDocumentIdentifier>()!;
 
-        public override async Task<object> HandleRequestAsync(ExecuteCommandParams request, RequestContext context, CancellationToken cancellationToken)
+        public override async Task<object> HandleRequestAsync(
+            ExecuteCommandParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(request.Arguments);
 
@@ -61,8 +64,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             // request.Arguments has two argument for CreateEventHandlerCommand
             // Arguments[0]: TextDocumentIdentifier
             // Arguments[1]: XamlEventDescription
-            var arguments = new object[] { ((JToken)request.Arguments[1]).ToObject<XamlEventDescription>() };
-            return await commandService.ExecuteCommandAsync(document, request.Command, arguments, cancellationToken).ConfigureAwait(false);
+            var arguments = new object[]
+            {
+                ((JToken)request.Arguments[1]).ToObject<XamlEventDescription>(),
+            };
+            return await commandService
+                .ExecuteCommandAsync(document, request.Command, arguments, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 }

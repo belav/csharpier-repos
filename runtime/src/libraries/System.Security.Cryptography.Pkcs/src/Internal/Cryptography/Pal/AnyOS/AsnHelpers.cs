@@ -16,24 +16,30 @@ namespace Internal.Cryptography.Pal.AnyOS
     internal static class AsnHelpers
     {
         internal static SubjectIdentifierOrKey ToSubjectIdentifierOrKey(
-            this OriginatorIdentifierOrKeyAsn originator)
+            this OriginatorIdentifierOrKeyAsn originator
+        )
         {
             if (originator.IssuerAndSerialNumber.HasValue)
             {
-                var name = new X500DistinguishedName(originator.IssuerAndSerialNumber.Value.Issuer.ToArray());
+                var name = new X500DistinguishedName(
+                    originator.IssuerAndSerialNumber.Value.Issuer.ToArray()
+                );
 
                 return new SubjectIdentifierOrKey(
                     SubjectIdentifierOrKeyType.IssuerAndSerialNumber,
                     new X509IssuerSerial(
                         name.Name,
-                        originator.IssuerAndSerialNumber.Value.SerialNumber.Span.ToBigEndianHex()));
+                        originator.IssuerAndSerialNumber.Value.SerialNumber.Span.ToBigEndianHex()
+                    )
+                );
             }
 
             if (originator.SubjectKeyIdentifier.HasValue)
             {
                 return new SubjectIdentifierOrKey(
                     SubjectIdentifierOrKeyType.SubjectKeyIdentifier,
-                    originator.SubjectKeyIdentifier.Value.Span.ToBigEndianHex());
+                    originator.SubjectKeyIdentifier.Value.Span.ToBigEndianHex()
+                );
             }
 
             if (originator.OriginatorKey.HasValue)
@@ -44,7 +50,9 @@ namespace Internal.Cryptography.Pal.AnyOS
                     SubjectIdentifierOrKeyType.PublicKeyInfo,
                     new PublicKeyInfo(
                         originatorKey.Algorithm.ToPresentationObject(),
-                        originatorKey.PublicKey.ToArray()));
+                        originatorKey.PublicKey.ToArray()
+                    )
+                );
             }
 
             Debug.Fail("Unknown SubjectIdentifierOrKey state");
@@ -59,77 +67,85 @@ namespace Internal.Cryptography.Pal.AnyOS
             switch (asn.Algorithm)
             {
                 case Oids.Rc2Cbc:
+                {
+                    if (asn.Parameters == null)
                     {
-                        if (asn.Parameters == null)
-                        {
-                            keyLength = 0;
-                            break;
-                        }
-
-                        Rc2CbcParameters rc2Params = Rc2CbcParameters.Decode(
-                            asn.Parameters.Value,
-                            AsnEncodingRules.BER);
-
-                        int keySize = rc2Params.GetEffectiveKeyBits();
-
-                        // These are the only values .NET Framework would set.
-                        switch (keySize)
-                        {
-                            case 40:
-                            case 56:
-                            case 64:
-                            case 128:
-                                keyLength = keySize;
-                                break;
-                            default:
-                                keyLength = 0;
-                                break;
-                        }
-
+                        keyLength = 0;
                         break;
                     }
-                case Oids.Rc4:
+
+                    Rc2CbcParameters rc2Params = Rc2CbcParameters.Decode(
+                        asn.Parameters.Value,
+                        AsnEncodingRules.BER
+                    );
+
+                    int keySize = rc2Params.GetEffectiveKeyBits();
+
+                    // These are the only values .NET Framework would set.
+                    switch (keySize)
                     {
-                        if (asn.Parameters == null)
-                        {
+                        case 40:
+                        case 56:
+                        case 64:
+                        case 128:
+                            keyLength = keySize;
+                            break;
+                        default:
                             keyLength = 0;
                             break;
-                        }
+                    }
 
-                        int saltLen = 0;
+                    break;
+                }
+                case Oids.Rc4:
+                {
+                    if (asn.Parameters == null)
+                    {
+                        keyLength = 0;
+                        break;
+                    }
 
-                        try
+                    int saltLen = 0;
+
+                    try
+                    {
+                        AsnReader reader = new AsnReader(
+                            asn.Parameters.Value,
+                            AsnEncodingRules.BER
+                        );
+
+                        // DER NULL is considered the same as not present.
+                        // No call to ReadNull() is necessary because the serializer already verified that
+                        // there's no data after the [AnyValue] value.
+                        if (reader.PeekTag() != Asn1Tag.Null)
                         {
-                            AsnReader reader = new AsnReader(asn.Parameters.Value, AsnEncodingRules.BER);
-
-                            // DER NULL is considered the same as not present.
-                            // No call to ReadNull() is necessary because the serializer already verified that
-                            // there's no data after the [AnyValue] value.
-                            if (reader.PeekTag() != Asn1Tag.Null)
+                            if (
+                                reader.TryReadPrimitiveOctetString(
+                                    out ReadOnlyMemory<byte> contents
+                                )
+                            )
                             {
-                                if (reader.TryReadPrimitiveOctetString(out ReadOnlyMemory<byte> contents))
-                                {
-                                    saltLen = contents.Length;
-                                }
-                                else
-                                {
-                                    Span<byte> salt = stackalloc byte[KeyLengths.Rc4Max_128Bit / 8];
+                                saltLen = contents.Length;
+                            }
+                            else
+                            {
+                                Span<byte> salt = stackalloc byte[KeyLengths.Rc4Max_128Bit / 8];
 
-                                    if (!reader.TryReadOctetString(salt, out saltLen))
-                                    {
-                                        throw new CryptographicException();
-                                    }
+                                if (!reader.TryReadOctetString(salt, out saltLen))
+                                {
+                                    throw new CryptographicException();
                                 }
                             }
                         }
-                        catch (AsnContentException e)
-                        {
-                            throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding, e);
-                        }
-
-                        keyLength = KeyLengths.Rc4Max_128Bit - 8 * saltLen;
-                        break;
                     }
+                    catch (AsnContentException e)
+                    {
+                        throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding, e);
+                    }
+
+                    keyLength = KeyLengths.Rc4Max_128Bit - 8 * saltLen;
+                    break;
+                }
                 case Oids.DesCbc:
                     keyLength = KeyLengths.Des_64Bit;
                     break;
@@ -150,7 +166,7 @@ namespace Internal.Cryptography.Pal.AnyOS
 
             return new AlgorithmIdentifier(new Oid(asn.Algorithm), keyLength)
             {
-                Parameters = parameters
+                Parameters = parameters,
             };
         }
     }

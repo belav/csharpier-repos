@@ -13,23 +13,47 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue;
 
 internal sealed class SimpleMemberBody(SyntaxNode node) : AbstractSimpleMemberBody(node)
 {
-    public override SyntaxNode FindStatementAndPartner(TextSpan span, MemberBody? partnerDeclarationBody, out SyntaxNode? partnerStatement, out int statementPart)
-        => CSharpEditAndContinueAnalyzer.FindStatementAndPartner(
+    public override SyntaxNode FindStatementAndPartner(
+        TextSpan span,
+        MemberBody? partnerDeclarationBody,
+        out SyntaxNode? partnerStatement,
+        out int statementPart
+    ) =>
+        CSharpEditAndContinueAnalyzer.FindStatementAndPartner(
             span,
             body: Node,
             partnerBody: ((SimpleMemberBody?)partnerDeclarationBody)?.Node,
             out partnerStatement,
-            out statementPart);
+            out statementPart
+        );
 
-    public override StateMachineInfo GetStateMachineInfo()
-        => new(
+    public override StateMachineInfo GetStateMachineInfo() =>
+        new(
             IsAsync: SyntaxUtilities.IsAsyncDeclaration(Node.Parent!),
             IsIterator: SyntaxUtilities.IsIterator(Node),
-            HasSuspensionPoints: SyntaxUtilities.GetSuspensionPoints(Node).Any());
+            HasSuspensionPoints: SyntaxUtilities.GetSuspensionPoints(Node).Any()
+        );
 
-    public override Match<SyntaxNode>? ComputeSingleRootMatch(DeclarationBody newBody, IEnumerable<KeyValuePair<SyntaxNode, SyntaxNode>>? knownMatches)
-        => CSharpEditAndContinueAnalyzer.ComputeBodyMatch(Node, ((SimpleMemberBody)newBody).Node, knownMatches);
+    public override Match<SyntaxNode>? ComputeSingleRootMatch(
+        DeclarationBody newBody,
+        IEnumerable<KeyValuePair<SyntaxNode, SyntaxNode>>? knownMatches
+    ) =>
+        CSharpEditAndContinueAnalyzer.ComputeBodyMatch(
+            Node,
+            ((SimpleMemberBody)newBody).Node,
+            knownMatches
+        );
 
-    public override bool TryMatchActiveStatement(DeclarationBody newBody, SyntaxNode oldStatement, ref int statementPart, [NotNullWhen(true)] out SyntaxNode? newStatement)
-        => CSharpEditAndContinueAnalyzer.TryMatchActiveStatement(Node, ((SimpleMemberBody)newBody).Node, oldStatement, out newStatement);
+    public override bool TryMatchActiveStatement(
+        DeclarationBody newBody,
+        SyntaxNode oldStatement,
+        ref int statementPart,
+        [NotNullWhen(true)] out SyntaxNode? newStatement
+    ) =>
+        CSharpEditAndContinueAnalyzer.TryMatchActiveStatement(
+            Node,
+            ((SimpleMemberBody)newBody).Node,
+            oldStatement,
+            out newStatement
+        );
 }

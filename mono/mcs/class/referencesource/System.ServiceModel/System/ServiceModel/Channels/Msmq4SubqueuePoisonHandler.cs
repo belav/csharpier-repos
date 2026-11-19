@@ -15,8 +15,7 @@ namespace System.ServiceModel.Channels
             this.receiver = receiver;
         }
 
-        public void Open()
-        { }
+        public void Open() { }
 
         public bool CheckAndHandlePoisonMessage(MsmqMessageProperty messageProperty)
         {
@@ -52,15 +51,19 @@ namespace System.ServiceModel.Channels
                     break;
                 case ReceiveErrorHandling.Reject:
                     this.receiver.DropOrRejectReceivedMessage(messageProperty, true);
-                    MsmqDiagnostics.PoisonMessageRejected(messageProperty.MessageId, this.receiver.InstanceId);
+                    MsmqDiagnostics.PoisonMessageRejected(
+                        messageProperty.MessageId,
+                        this.receiver.InstanceId
+                    );
                     break;
                 default:
-                    Fx.Assert("System.ServiceModel.Channels.Msmq4PoisonHandler.FinalDisposition(): (unexpected ReceiveErrorHandling)");
+                    Fx.Assert(
+                        "System.ServiceModel.Channels.Msmq4PoisonHandler.FinalDisposition(): (unexpected ReceiveErrorHandling)"
+                    );
                     break;
             }
         }
 
-        public void Dispose()
-        { }
+        public void Dispose() { }
     }
 }

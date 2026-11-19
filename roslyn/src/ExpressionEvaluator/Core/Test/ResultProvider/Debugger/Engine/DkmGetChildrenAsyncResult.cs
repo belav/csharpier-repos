@@ -15,7 +15,10 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
 {
     public struct DkmGetChildrenAsyncResult
     {
-        public DkmGetChildrenAsyncResult(DkmEvaluationResult[] InitialChildren, DkmEvaluationResultEnumContext EnumContext)
+        public DkmGetChildrenAsyncResult(
+            DkmEvaluationResult[] InitialChildren,
+            DkmEvaluationResultEnumContext EnumContext
+        )
             : this()
         {
             if (InitialChildren == null)
@@ -33,7 +36,10 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
 
         public static DkmGetChildrenAsyncResult CreateErrorResult(Exception exception)
         {
-            return new DkmGetChildrenAsyncResult(new DkmEvaluationResult[0], EnumContext: null) { Exception = exception };
+            return new DkmGetChildrenAsyncResult(new DkmEvaluationResult[0], EnumContext: null)
+            {
+                Exception = exception,
+            };
         }
     }
 }

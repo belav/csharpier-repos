@@ -11,7 +11,8 @@ public class B : A { }
 
 public abstract class C { }
 
-public abstract class C<CTParam> : C where CTParam : A { }
+public abstract class C<CTParam> : C
+    where CTParam : A { }
 
 public class D : C<B> { }
 
@@ -25,8 +26,7 @@ public abstract class E
 public class E<ETParam> : E
     where ETParam : A
 {
-    private readonly F<C<ETParam>> components =
-        new F<C<ETParam>>();
+    private readonly F<C<ETParam>> components = new F<C<ETParam>>();
 
     internal override Type NamedObjectType => typeof(ETParam);
 
@@ -37,29 +37,26 @@ public class E<ETParam> : E
     }
 }
 
-public class F<FTParam> where FTParam : class
+public class F<FTParam>
+    where FTParam : class
 {
     private readonly HashSet<Type> componentTypes = new HashSet<Type>();
 
     private readonly Dictionary<Type, Func<FTParam>> componentFactories =
         new Dictionary<Type, Func<FTParam>>();
 
-    public void Register<FRegMethodParamHaha>()   // F<C<B>>.Register<D>
-        where FRegMethodParamHaha : class, FTParam, new()
-    {
-    }
+    public void Register<FRegMethodParamHaha>() // F<C<B>>.Register<D>
+        where FRegMethodParamHaha : class, FTParam, new() { }
 }
 
 public class G
 {
-    private readonly Dictionary<Type, E> subcontainersByNamedObjectType =
-        new Dictionary<Type, E>();
+    private readonly Dictionary<Type, E> subcontainersByNamedObjectType = new Dictionary<Type, E>();
 
-    private readonly Dictionary<Type, E> subcontainersByRegisteredType =
-        new Dictionary<Type, E>();
+    private readonly Dictionary<Type, E> subcontainersByRegisteredType = new Dictionary<Type, E>();
 
     public E<ETParam> RegisterNamedObjectType<ETParam>()
-    where ETParam : A
+        where ETParam : A
     {
         return RegisterSubcontainer(new E<ETParam>());
     }
@@ -76,7 +73,7 @@ public class G
         where GRegMethodParam1 : A
         where GRegMethodParam2 : C<GRegMethodParam1>, new()
     {
-        GetSubcontainerFor<GRegMethodParam1>().Register<GRegMethodParam2>();  // E<B>.Reg<D>
+        GetSubcontainerFor<GRegMethodParam1>().Register<GRegMethodParam2>(); // E<B>.Reg<D>
     }
 
     public E<GGetSebMethodParam> GetSubcontainerFor<GGetSebMethodParam>()

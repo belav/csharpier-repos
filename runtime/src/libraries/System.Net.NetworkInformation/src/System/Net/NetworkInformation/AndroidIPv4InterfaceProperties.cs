@@ -15,10 +15,15 @@ namespace System.Net.NetworkInformation
 
         public override int Mtu { get; }
 
-        public override bool IsAutomaticPrivateAddressingActive => throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
-        public override bool IsAutomaticPrivateAddressingEnabled => throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
-        public override bool IsDhcpEnabled => throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
-        public override bool IsForwardingEnabled => throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
-        public override bool UsesWins => throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+        public override bool IsAutomaticPrivateAddressingActive =>
+            throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+        public override bool IsAutomaticPrivateAddressingEnabled =>
+            throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+        public override bool IsDhcpEnabled =>
+            throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+        public override bool IsForwardingEnabled =>
+            throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+        public override bool UsesWins =>
+            throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
     }
 }

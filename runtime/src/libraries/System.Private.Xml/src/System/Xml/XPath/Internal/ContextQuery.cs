@@ -14,9 +14,10 @@ namespace MS.Internal.Xml.XPath
             this.count = 0;
         }
 
-        protected ContextQuery(ContextQuery other) : base(other)
+        protected ContextQuery(ContextQuery other)
+            : base(other)
         {
-            this.contextNode = other.contextNode;   // Don't need to clone here
+            this.contextNode = other.contextNode; // Don't need to clone here
         }
 
         public override void Reset()
@@ -24,7 +25,10 @@ namespace MS.Internal.Xml.XPath
             count = 0;
         }
 
-        public override XPathNavigator? Current { get { return contextNode; } }
+        public override XPathNavigator? Current
+        {
+            get { return contextNode; }
+        }
 
         public override object Evaluate(XPathNodeIterator context)
         {
@@ -48,11 +52,32 @@ namespace MS.Internal.Xml.XPath
             return current;
         }
 
-        public override XPathNodeIterator Clone() { return new ContextQuery(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new ContextQuery(this);
+        }
 
-        public override XPathResultType StaticType { get { return XPathResultType.NodeSet; } }
-        public override int CurrentPosition { get { return count; } }
-        public override int Count { get { return 1; } }
-        public override QueryProps Properties { get { return QueryProps.Merge | QueryProps.Cached | QueryProps.Position | QueryProps.Count; } }
+        public override XPathResultType StaticType
+        {
+            get { return XPathResultType.NodeSet; }
+        }
+        public override int CurrentPosition
+        {
+            get { return count; }
+        }
+        public override int Count
+        {
+            get { return 1; }
+        }
+        public override QueryProps Properties
+        {
+            get
+            {
+                return QueryProps.Merge
+                    | QueryProps.Cached
+                    | QueryProps.Position
+                    | QueryProps.Count;
+            }
+        }
     }
 }

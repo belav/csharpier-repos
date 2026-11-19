@@ -29,14 +29,20 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [Fact]
         public void NullDisplayTextResourceType_Set_GetReturnsExpected()
         {
-            var attribute = new DisplayFormatAttribute { NullDisplayTextResourceType = typeof(FakeResourceType) };
+            var attribute = new DisplayFormatAttribute
+            {
+                NullDisplayTextResourceType = typeof(FakeResourceType),
+            };
             Assert.Equal(typeof(FakeResourceType), attribute.NullDisplayTextResourceType);
         }
 
         [Fact]
         public void GetNullDisplayText_ValidResource_ReturnsExpected()
         {
-            var attribute = new DisplayFormatAttribute { NullDisplayTextResourceType = typeof(FakeResourceType) };
+            var attribute = new DisplayFormatAttribute
+            {
+                NullDisplayTextResourceType = typeof(FakeResourceType),
+            };
 
             attribute.NullDisplayText = "Resource1";
             Assert.Equal(FakeResourceType.Resource1, attribute.GetNullDisplayText());
@@ -53,17 +59,23 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [InlineData(typeof(FakeResourceType), "PrivateInstanceProperty")]
         [InlineData(typeof(FakeResourceType), "ProtectedInstanceProperty")]
         [InlineData(typeof(FakeResourceType), nameof(FakeResourceType.InternalInstanceProperty))]
-        [InlineData(typeof(FakeResourceType), nameof(FakeResourceType.ProtectedInternalInstanceProperty))]
+        [InlineData(
+            typeof(FakeResourceType),
+            nameof(FakeResourceType.ProtectedInternalInstanceProperty)
+        )]
         [InlineData(typeof(FakeResourceType), nameof(FakeResourceType.SetOnlyProperty))]
         [InlineData(typeof(FakeResourceType), nameof(FakeResourceType.PrivateGetProperty))]
         [InlineData(typeof(FakeResourceType), "NonPublicGetProperty")]
         [InlineData(typeof(string), "foo")]
-        public void GetNullDisplayText_InvalidResourceType_ThrowsInvalidOperationException(Type nullDisplayTextResourceType, string nullDisplayText)
+        public void GetNullDisplayText_InvalidResourceType_ThrowsInvalidOperationException(
+            Type nullDisplayTextResourceType,
+            string nullDisplayText
+        )
         {
             var attribute = new DisplayFormatAttribute
             {
                 NullDisplayTextResourceType = nullDisplayTextResourceType,
-                NullDisplayText = nullDisplayText
+                NullDisplayText = nullDisplayText,
             };
             Assert.Throws<InvalidOperationException>(() => attribute.GetNullDisplayText());
         }
@@ -88,7 +100,10 @@ namespace System.ComponentModel.DataAnnotations.Tests
             protected internal string ProtectedInternalInstanceProperty => "InstanceProperty";
             internal string InternalInstanceProperty => "InstanceProperty";
 
-            public static string SetOnlyProperty { set => Assert.NotNull(value); }
+            public static string SetOnlyProperty
+            {
+                set => Assert.NotNull(value);
+            }
             public string PrivateGetProperty { private get; set; }
             private static string NonPublicGetProperty => "NonPublicGetProperty";
 

@@ -4,10 +4,10 @@
 
 namespace System.ServiceModel.Activities.Tracking.Configuration
 {
-    using System.Configuration;
-    using System.Runtime;
     using System.Activities.Tracking;
+    using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime;
 
     [Fx.Tag.XamlVisible(false)]
     public class BookmarkResumptionQueryElement : TrackingQueryElement
@@ -21,19 +21,34 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
                 if (this.properties == null)
                 {
                     ConfigurationPropertyCollection properties = base.Properties;
-                    properties.Add(new ConfigurationProperty(TrackingConfigurationStrings.Name, typeof(System.String), "*", null, new System.Configuration.StringValidator(0, 2147483647, null), System.Configuration.ConfigurationPropertyOptions.IsKey));
+                    properties.Add(
+                        new ConfigurationProperty(
+                            TrackingConfigurationStrings.Name,
+                            typeof(System.String),
+                            "*",
+                            null,
+                            new System.Configuration.StringValidator(0, 2147483647, null),
+                            System.Configuration.ConfigurationPropertyOptions.IsKey
+                        )
+                    );
                     this.properties = properties;
                 }
                 return this.properties;
             }
         }
 
-        [ConfigurationProperty(TrackingConfigurationStrings.Name, IsKey = true,
-            DefaultValue = TrackingConfigurationStrings.StarWildcard)]
+        [ConfigurationProperty(
+            TrackingConfigurationStrings.Name,
+            IsKey = true,
+            DefaultValue = TrackingConfigurationStrings.StarWildcard
+        )]
         [StringValidator(MinLength = 0)]
-        [SuppressMessage(FxCop.Category.Configuration, FxCop.Rule.ConfigurationValidatorAttributeRule,
+        [SuppressMessage(
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationValidatorAttributeRule,
             MessageId = "System.ServiceModel.Activities.Tracking.Configuration.BookmarkResumptionQueryElement.Name",
-            Justification = "StringValidator verifies minimum size")]
+            Justification = "StringValidator verifies minimum size"
+        )]
         public string Name
         {
             get { return (string)base[TrackingConfigurationStrings.Name]; }
@@ -42,10 +57,7 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
 
         protected override TrackingQuery NewTrackingQuery()
         {
-            return new BookmarkResumptionQuery
-                {
-                    Name = this.Name
-                };
+            return new BookmarkResumptionQuery { Name = this.Name };
         }
     }
 }

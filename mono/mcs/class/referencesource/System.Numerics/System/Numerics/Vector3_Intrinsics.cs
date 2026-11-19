@@ -17,10 +17,12 @@ namespace System.Numerics
         /// The X component of the vector.
         /// </summary>
         public Single X;
+
         /// <summary>
         /// The Y component of the vector.
         /// </summary>
         public Single Y;
+
         /// <summary>
         /// The Z component of the vector.
         /// </summary>
@@ -32,14 +34,16 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The element to fill the vector with.</param>
         [JitIntrinsic]
-        public Vector3(Single value) : this(value, value, value) { }
+        public Vector3(Single value)
+            : this(value, value, value) { }
 
         /// <summary>
         /// Constructs a Vector3 from the given Vector2 and a third value.
         /// </summary>
         /// <param name="value">The Vector to extract X and Y components from.</param>
         /// <param name="z">The Z component.</param>
-        public Vector3(Vector2 value, float z) : this(value.X, value.Y, z) { }
+        public Vector3(Vector2 value, float z)
+            : this(value.X, value.Y, z) { }
 
         /// <summary>
         /// Constructs a vector with the given individual elements.
@@ -84,11 +88,15 @@ namespace System.Numerics
             }
             if (index < 0 || index >= array.Length)
             {
-                throw new ArgumentOutOfRangeException(SR.GetString("Arg_ArgumentOutOfRangeException", index));
+                throw new ArgumentOutOfRangeException(
+                    SR.GetString("Arg_ArgumentOutOfRangeException", index)
+                );
             }
             if ((array.Length - index) < 3)
             {
-                throw new ArgumentException(SR.GetString("Arg_ElementsInSourceIsGreaterThanDestination", index));
+                throw new ArgumentException(
+                    SR.GetString("Arg_ElementsInSourceIsGreaterThanDestination", index)
+                );
             }
             array[index] = X;
             array[index + 1] = Y;
@@ -103,9 +111,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public bool Equals(Vector3 other)
         {
-            return X == other.X &&
-                   Y == other.Y &&
-                   Z == other.Z;
+            return X == other.X && Y == other.Y && Z == other.Z;
         }
         #endregion Public Instance Methods
 
@@ -120,9 +126,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Dot(Vector3 vector1, Vector3 vector2)
         {
-            return vector1.X * vector2.X +
-                   vector1.Y * vector2.Y +
-                   vector1.Z * vector2.Z;
+            return vector1.X * vector2.X + vector1.Y * vector2.Y + vector1.Z * vector2.Z;
         }
 
         /// <summary>
@@ -137,7 +141,8 @@ namespace System.Numerics
             return new Vector3(
                 (value1.X < value2.X) ? value1.X : value2.X,
                 (value1.Y < value2.Y) ? value1.Y : value2.Y,
-                (value1.Z < value2.Z) ? value1.Z : value2.Z);
+                (value1.Z < value2.Z) ? value1.Z : value2.Z
+            );
         }
 
         /// <summary>
@@ -153,7 +158,8 @@ namespace System.Numerics
             return new Vector3(
                 (value1.X > value2.X) ? value1.X : value2.X,
                 (value1.Y > value2.Y) ? value1.Y : value2.Y,
-                (value1.Z > value2.Z) ? value1.Z : value2.Z);
+                (value1.Z > value2.Z) ? value1.Z : value2.Z
+            );
         }
 
         /// <summary>
@@ -177,7 +183,11 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 SquareRoot(Vector3 value)
         {
-            return new Vector3((Single)Math.Sqrt(value.X), (Single)Math.Sqrt(value.Y), (Single)Math.Sqrt(value.Z));
+            return new Vector3(
+                (Single)Math.Sqrt(value.X),
+                (Single)Math.Sqrt(value.Y),
+                (Single)Math.Sqrt(value.Z)
+            );
         }
         #endregion Public Static Methods
 
@@ -272,10 +282,7 @@ namespace System.Numerics
         {
             float invDiv = 1.0f / value2;
 
-            return new Vector3(
-                value1.X * invDiv,
-                value1.Y * invDiv,
-                value1.Z * invDiv);
+            return new Vector3(value1.X * invDiv, value1.Y * invDiv, value1.Z * invDiv);
         }
 
         /// <summary>
@@ -299,9 +306,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator ==(Vector3 left, Vector3 right)
         {
-            return (left.X == right.X &&
-                    left.Y == right.Y &&
-                    left.Z == right.Z);
+            return (left.X == right.X && left.Y == right.Y && left.Z == right.Z);
         }
 
         /// <summary>
@@ -313,9 +318,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator !=(Vector3 left, Vector3 right)
         {
-            return (left.X != right.X ||
-                    left.Y != right.Y ||
-                    left.Z != right.Z);
+            return (left.X != right.X || left.Y != right.Y || left.Z != right.Z);
         }
         #endregion Public Static Operators
     }

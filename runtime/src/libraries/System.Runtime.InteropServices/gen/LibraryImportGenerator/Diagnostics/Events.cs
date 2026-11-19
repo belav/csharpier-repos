@@ -19,8 +19,7 @@ namespace Microsoft.Interop.Diagnostics
         private const int StartSourceGenerationEventId = 1;
         private const int StopSourceGenerationEventId = StartSourceGenerationEventId + 1;
 
-        private Events()
-        { }
+        private Events() { }
 
         /// <summary>
         /// Utility function that wraps emitting start/stop events for the source generation event.
@@ -42,7 +41,11 @@ namespace Microsoft.Interop.Diagnostics
         /// Indicates the interop's DllImport Roslyn Source Generator has started source generation.
         /// </summary>
         /// <param name="methodCount">The number of methods being generated</param>
-        [Event(StartSourceGenerationEventId, Level = EventLevel.Informational, Keywords = Keywords.SourceGeneration)]
+        [Event(
+            StartSourceGenerationEventId,
+            Level = EventLevel.Informational,
+            Keywords = Keywords.SourceGeneration
+        )]
         public void SourceGenerationStart(int methodCount)
         {
             WriteEvent(StartSourceGenerationEventId, methodCount);
@@ -51,7 +54,11 @@ namespace Microsoft.Interop.Diagnostics
         /// <summary>
         /// Indicates the interop's DllImport Roslyn Source Generator has stopped source generation.
         /// </summary>
-        [Event(StopSourceGenerationEventId, Level = EventLevel.Informational, Keywords = Keywords.SourceGeneration)]
+        [Event(
+            StopSourceGenerationEventId,
+            Level = EventLevel.Informational,
+            Keywords = Keywords.SourceGeneration
+        )]
         public void SourceGenerationStop()
         {
             WriteEvent(StopSourceGenerationEventId);
@@ -60,6 +67,7 @@ namespace Microsoft.Interop.Diagnostics
         private sealed class StartStopEvent : IDisposable
         {
             public StartStopEvent(int methodCount) => Logger.SourceGenerationStart(methodCount);
+
             public void Dispose() => Logger.SourceGenerationStop();
         }
     }

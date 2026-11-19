@@ -13,66 +13,64 @@ using Xunit;
 
 namespace Test_singleRefField_cs
 {
-public struct MB8
-{
-    public object foo;
-}
-
-public class Repro
-{
-    private int _state = 1;
-
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    public virtual int Use(MB8 mb8, string s)
+    public struct MB8
     {
-        return 2;
+        public object foo;
     }
 
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    private int Use(MB8 mb8, int i, string s)
+    public class Repro
     {
-        return 2;
-    }
+        private int _state = 1;
 
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    private void Use(MB8 mb8)
-    {
-    }
-
-    private Repro[] _preExecutionDelegates = Array.Empty<Repro>();
-
-    private int Bug(MB8 mb8, string V_2)
-    {
-        if (V_2 == null)
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public virtual int Use(MB8 mb8, string s)
         {
-            throw new ArgumentNullException(nameof(V_2));
+            return 2;
         }
-        _state = 2;
-        int loc0 = 0;
-        foreach (Repro loc1 in _preExecutionDelegates)
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private int Use(MB8 mb8, int i, string s)
         {
-            if (loc1 != null)
+            return 2;
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private void Use(MB8 mb8) { }
+
+        private Repro[] _preExecutionDelegates = Array.Empty<Repro>();
+
+        private int Bug(MB8 mb8, string V_2)
+        {
+            if (V_2 == null)
             {
-                loc0 = loc1.Use(mb8, V_2);
+                throw new ArgumentNullException(nameof(V_2));
             }
-            if (loc0 != 0)
-                break;
+            _state = 2;
+            int loc0 = 0;
+            foreach (Repro loc1 in _preExecutionDelegates)
+            {
+                if (loc1 != null)
+                {
+                    loc0 = loc1.Use(mb8, V_2);
+                }
+                if (loc0 != 0)
+                    break;
+            }
+            if (loc0 == 1)
+            {
+                Use(mb8); // No retval
+            }
+            else if (loc0 == 2)
+            {
+                Use(mb8, 0, V_2); // Pop
+            }
+            return loc0;
         }
-        if (loc0 == 1)
-        {
-            Use(mb8); // No retval
-        }
-        else if (loc0 == 2)
-        {
-            Use(mb8, 0, V_2); // Pop
-        }
-        return loc0;
-    }
 
-    [Fact]
-    public static void TestEntryPoint()
-    {
-        new Repro().Bug(new MB8(), "Test");
+        [Fact]
+        public static void TestEntryPoint()
+        {
+            new Repro().Bug(new MB8(), "Test");
+        }
     }
-}
 }

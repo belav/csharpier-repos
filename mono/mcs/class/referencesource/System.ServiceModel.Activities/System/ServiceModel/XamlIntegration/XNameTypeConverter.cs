@@ -10,22 +10,29 @@ namespace System.ServiceModel.XamlIntegration
     using System.Runtime;
     using System.Xaml;
     using System.Xml.Linq;
-      
+
     internal static class XNameTypeConverterHelper
     {
         public static bool CanConvertFrom(Type sourceType)
         {
             return sourceType == typeof(string);
         }
+
         public static object ConvertFrom(ITypeDescriptorContext context, object value)
         {
             return XNameTypeConverterHelper.ConvertFromHelper(context, value);
         }
+
         public static bool CanConvertTo(Type destinationType)
         {
             return destinationType == typeof(string);
         }
-        public static object ConvertTo(ITypeDescriptorContext context, object value, Type destinationType)
+
+        public static object ConvertTo(
+            ITypeDescriptorContext context,
+            object value,
+            Type destinationType
+        )
         {
             return XNameTypeConverterHelper.ConvertToHelper(context, value, destinationType);
         }
@@ -62,7 +69,8 @@ namespace System.ServiceModel.XamlIntegration
             }
 
             int indexOfColon = stringValue.IndexOf(':');
-            string prefix, localName;
+            string prefix,
+                localName;
             if (indexOfColon >= 0)
             {
                 prefix = stringValue.Substring(0, indexOfColon);
@@ -77,20 +85,27 @@ namespace System.ServiceModel.XamlIntegration
             string ns = resolver.GetNamespace(prefix);
             if (ns == null)
             {
-                throw FxTrace.Exception.AsError(new FormatException(SRCore.CouldNotResolveNamespacePrefix(prefix)));                
+                throw FxTrace.Exception.AsError(
+                    new FormatException(SRCore.CouldNotResolveNamespacePrefix(prefix))
+                );
             }
 
             return XName.Get(localName, ns);
         }
 
-        internal static object ConvertToHelper(ITypeDescriptorContext context, object value, Type destinationType)
+        internal static object ConvertToHelper(
+            ITypeDescriptorContext context,
+            object value,
+            Type destinationType
+        )
         {
             XName name = value as XName;
             if (destinationType == typeof(string) && name != null)
             {
                 if (context != null)
                 {
-                    var lookupPrefix = (INamespacePrefixLookup)context.GetService(typeof(INamespacePrefixLookup));
+                    var lookupPrefix = (INamespacePrefixLookup)
+                        context.GetService(typeof(INamespacePrefixLookup));
                     if (lookupPrefix != null)
                     {
                         string prefix = lookupPrefix.LookupPrefix(name.Namespace.NamespaceName);

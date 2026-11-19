@@ -4,8 +4,6 @@ using System.ComponentModel;
 
 namespace MonoTests.Common
 {
-	[ReadOnly (true)]
-	class FooReadOnly : FooWithDefaults
-	{
-	}
+    [ReadOnly(true)]
+    class FooReadOnly : FooWithDefaults { }
 }

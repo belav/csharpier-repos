@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.Port.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,61 +32,60 @@ using System.Web.Services.Configuration;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace System.Web.Services.Description 
+namespace System.Web.Services.Description
 {
-	[XmlFormatExtensionPoint ("Extensions")]
-	public sealed class Port :
-		NamedItem
-	{
-		#region Fields
+    [XmlFormatExtensionPoint("Extensions")]
+    public sealed class Port : NamedItem
+    {
+        #region Fields
 
-		XmlQualifiedName binding;
-		ServiceDescriptionFormatExtensionCollection extensions;
-		Service service;
+        XmlQualifiedName binding;
+        ServiceDescriptionFormatExtensionCollection extensions;
+        Service service;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
-		
-		public Port ()
-		{
-			binding = null;
-			extensions = new ServiceDescriptionFormatExtensionCollection (this);
-			service = null;
-		}
-		
-		#endregion // Constructors
+        #region Constructors
 
-		#region Properties
+        public Port()
+        {
+            binding = null;
+            extensions = new ServiceDescriptionFormatExtensionCollection(this);
+            service = null;
+        }
 
-		[XmlAttribute ("binding")]
-		public XmlQualifiedName Binding {
-			get { return binding; }
-			set { binding = value; }
-		}
+        #endregion // Constructors
 
-		[XmlIgnore]
-		public 
-		override
-		ServiceDescriptionFormatExtensionCollection Extensions { 	
-			get { return extensions; }
-		}
+        #region Properties
 
+        [XmlAttribute("binding")]
+        public XmlQualifiedName Binding
+        {
+            get { return binding; }
+            set { binding = value; }
+        }
 
-//		[XmlIgnore]
-		public Service Service {
-			get { return service; }
-		}
+        [XmlIgnore]
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get { return extensions; }
+        }
 
-		#endregion // Properties
+        //		[XmlIgnore]
+        public Service Service
+        {
+            get { return service; }
+        }
 
-		#region Methods
+        #endregion // Properties
 
-		internal void SetParent (Service service) 
-		{
-			this.service = service;
-		}
+        #region Methods
 
-		#endregion
-	}
+        internal void SetParent(Service service)
+        {
+            this.service = service;
+        }
+
+        #endregion
+    }
 }

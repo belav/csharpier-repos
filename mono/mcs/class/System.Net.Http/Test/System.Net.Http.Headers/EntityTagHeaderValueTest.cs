@@ -29,107 +29,110 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using NUnit.Framework;
 using System.Net.Http.Headers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Net.Http.Headers
 {
-	[TestFixture]
-	public class EntityTagHeaderValueTest
-	{
-		[Test]
-		public void Ctor_InvalidArguments ()
-		{
-			try {
-				new EntityTagHeaderValue (null);
-				Assert.Fail ("#1");
-			} catch (ArgumentException) {
-			}
+    [TestFixture]
+    public class EntityTagHeaderValueTest
+    {
+        [Test]
+        public void Ctor_InvalidArguments()
+        {
+            try
+            {
+                new EntityTagHeaderValue(null);
+                Assert.Fail("#1");
+            }
+            catch (ArgumentException) { }
 
-			try {
-				new EntityTagHeaderValue ("a");
-				Assert.Fail ("#2");
-			} catch (FormatException) {
-			}
-		}
+            try
+            {
+                new EntityTagHeaderValue("a");
+                Assert.Fail("#2");
+            }
+            catch (FormatException) { }
+        }
 
-		[Test]
-		public void Equals ()
-		{
-			var tfhv = new EntityTagHeaderValue ("\"abc\"");
-			Assert.AreEqual (tfhv, new EntityTagHeaderValue ("\"abc\""), "#1");
-			Assert.AreNotEqual (tfhv, new EntityTagHeaderValue ("\"AbC\""), "#2");
-			Assert.AreNotEqual (tfhv, new EntityTagHeaderValue ("\"AA\""), "#3");
-		}
+        [Test]
+        public void Equals()
+        {
+            var tfhv = new EntityTagHeaderValue("\"abc\"");
+            Assert.AreEqual(tfhv, new EntityTagHeaderValue("\"abc\""), "#1");
+            Assert.AreNotEqual(tfhv, new EntityTagHeaderValue("\"AbC\""), "#2");
+            Assert.AreNotEqual(tfhv, new EntityTagHeaderValue("\"AA\""), "#3");
+        }
 
-		[Test]
-		public void Parse ()
-		{
-			var res = EntityTagHeaderValue.Parse ("\"c\"");
-			Assert.AreEqual ("\"c\"", res.Tag, "#1");
-			Assert.IsFalse (res.IsWeak, "#2");
-			Assert.AreEqual ("\"c\"", res.ToString (), "#3");
+        [Test]
+        public void Parse()
+        {
+            var res = EntityTagHeaderValue.Parse("\"c\"");
+            Assert.AreEqual("\"c\"", res.Tag, "#1");
+            Assert.IsFalse(res.IsWeak, "#2");
+            Assert.AreEqual("\"c\"", res.ToString(), "#3");
 
-			res = EntityTagHeaderValue.Parse ("W/ \"mm\"");
-			Assert.AreEqual ("\"mm\"", res.Tag, "#11");
-			Assert.IsTrue (res.IsWeak, "#12");
-			Assert.AreEqual ("W/\"mm\"", res.ToString (), "#13");
+            res = EntityTagHeaderValue.Parse("W/ \"mm\"");
+            Assert.AreEqual("\"mm\"", res.Tag, "#11");
+            Assert.IsTrue(res.IsWeak, "#12");
+            Assert.AreEqual("W/\"mm\"", res.ToString(), "#13");
 
+            res = EntityTagHeaderValue.Parse("\"\\\"123\\\"\"");
+            Assert.AreEqual("\"\\\"123\\\"\"", res.Tag, "#21");
+            Assert.IsFalse(res.IsWeak, "#22");
+            Assert.AreEqual("\"\\\"123\\\"\"", res.ToString(), "#23");
+        }
 
-			res = EntityTagHeaderValue.Parse ("\"\\\"123\\\"\"");
-			Assert.AreEqual ("\"\\\"123\\\"\"", res.Tag, "#21");
-			Assert.IsFalse (res.IsWeak, "#22");
-			Assert.AreEqual ("\"\\\"123\\\"\"", res.ToString (), "#23");
-		}
+        [Test]
+        public void Parse_Invalid()
+        {
+            try
+            {
+                EntityTagHeaderValue.Parse(null);
+                Assert.Fail("#1");
+            }
+            catch (FormatException) { }
 
-		[Test]
-		public void Parse_Invalid ()
-		{
-			try {
-				EntityTagHeaderValue.Parse (null);
-				Assert.Fail ("#1");
-			} catch (FormatException) {
-			}
+            try
+            {
+                EntityTagHeaderValue.Parse("  ");
+                Assert.Fail("#2");
+            }
+            catch (FormatException) { }
 
-			try {
-				EntityTagHeaderValue.Parse ("  ");
-				Assert.Fail ("#2");
-			} catch (FormatException) {
-			}
+            try
+            {
+                EntityTagHeaderValue.Parse("W / \"a\"");
+                Assert.Fail("#3");
+            }
+            catch (FormatException) { }
+        }
 
-			try {
-				EntityTagHeaderValue.Parse ("W / \"a\"");
-				Assert.Fail ("#3");
-			} catch (FormatException) {
-			}
-		}
+        [Test]
+        public void Properties()
+        {
+            var etv = new EntityTagHeaderValue("\"tag\"", true);
+            Assert.AreEqual("\"tag\"", etv.Tag, "#1");
+            Assert.IsTrue(etv.IsWeak, "#2");
 
+            Assert.AreEqual("*", EntityTagHeaderValue.Any.Tag, "#3");
+            Assert.IsFalse(EntityTagHeaderValue.Any.IsWeak, "#4");
+        }
 
-		[Test]
-		public void Properties ()
-		{
-			var etv = new EntityTagHeaderValue ("\"tag\"", true);
-			Assert.AreEqual ("\"tag\"", etv.Tag, "#1");
-			Assert.IsTrue (etv.IsWeak, "#2");
+        [Test]
+        public void TryParse()
+        {
+            EntityTagHeaderValue res;
+            Assert.IsTrue(EntityTagHeaderValue.TryParse("\"\"", out res), "#1");
+            Assert.AreEqual("\"\"", res.Tag, "#2");
+        }
 
-			Assert.AreEqual ("*", EntityTagHeaderValue.Any.Tag, "#3");
-			Assert.IsFalse (EntityTagHeaderValue.Any.IsWeak, "#4");
-		}
-
-		[Test]
-		public void TryParse ()
-		{
-			EntityTagHeaderValue res;
-			Assert.IsTrue (EntityTagHeaderValue.TryParse ("\"\"", out res), "#1");
-			Assert.AreEqual ("\"\"", res.Tag, "#2");
-		}
-
-		[Test]
-		public void TryParse_Invalid ()
-		{
-			EntityTagHeaderValue res;
-			Assert.IsFalse (EntityTagHeaderValue.TryParse ("", out res), "#1");
-			Assert.IsNull (res, "#2");
-		}
-	}
+        [Test]
+        public void TryParse_Invalid()
+        {
+            EntityTagHeaderValue res;
+            Assert.IsFalse(EntityTagHeaderValue.TryParse("", out res), "#1");
+            Assert.IsNull(res, "#2");
+        }
+    }
 }

@@ -5,8 +5,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.ComponentModel.Design;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -64,10 +64,14 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
     {
         TestServices ITextViewWindowInProcess.TestServices => TestServices;
 
-        Task<IWpfTextView> ITextViewWindowInProcess.GetActiveTextViewAsync(CancellationToken cancellationToken)
-            => GetActiveTextViewAsync(cancellationToken);
+        Task<IWpfTextView> ITextViewWindowInProcess.GetActiveTextViewAsync(
+            CancellationToken cancellationToken
+        ) => GetActiveTextViewAsync(cancellationToken);
 
-        async Task<ITextBuffer?> ITextViewWindowInProcess.GetBufferContainingCaretAsync(IWpfTextView view, CancellationToken cancellationToken)
+        async Task<ITextBuffer?> ITextViewWindowInProcess.GetBufferContainingCaretAsync(
+            IWpfTextView view,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             return view.GetBufferContainingCaret();
@@ -78,10 +82,15 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var shell = await GetRequiredGlobalServiceAsync<SVsShell, IVsShell>(cancellationToken);
-            if (shell.IsPackageLoaded(DefGuidList.guidEditorPkg, out var editorPackage) == VSConstants.S_OK)
+            if (
+                shell.IsPackageLoaded(DefGuidList.guidEditorPkg, out var editorPackage)
+                == VSConstants.S_OK
+            )
             {
                 var asyncPackage = (AsyncPackage)editorPackage;
-                var collection = asyncPackage.GetPropertyValue<JoinableTaskCollection>("JoinableTaskCollection");
+                var collection = asyncPackage.GetPropertyValue<JoinableTaskCollection>(
+                    "JoinableTaskCollection"
+                );
                 await collection.JoinTillEmptyAsync(cancellationToken);
             }
         }
@@ -141,13 +150,21 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             return bufferPosition.Snapshot.GetText();
         }
 
-        public async Task ReplaceTextAsync(string oldText, string newText, CancellationToken cancellationToken)
+        public async Task ReplaceTextAsync(
+            string oldText,
+            string newText,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var view = await TestServices.Editor.GetActiveTextViewAsync(cancellationToken);
             await SelectTextInCurrentDocumentAsync(oldText, cancellationToken);
-            var replacementSpan = new SnapshotSpan(view.TextSnapshot, view.Selection.Start.Position, view.Selection.End.Position - view.Selection.Start.Position);
+            var replacementSpan = new SnapshotSpan(
+                view.TextSnapshot,
+                view.Selection.Start.Position,
+                view.Selection.End.Position - view.Selection.Start.Position
+            );
             view.TextBuffer.Replace(replacementSpan, newText);
         }
 
@@ -207,7 +224,10 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             view.Caret.MoveTo(point);
         }
 
-        public async Task SetMultiSelectionAsync(ImmutableArray<TextSpan> positions, CancellationToken cancellationToken)
+        public async Task SetMultiSelectionAsync(
+            ImmutableArray<TextSpan> positions,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -216,7 +236,13 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             var subjectBuffer = view.GetBufferContainingCaret();
             Assumes.Present(subjectBuffer);
 
-            view.SetMultiSelection(positions.Select(p => new SnapshotSpan(subjectBuffer.CurrentSnapshot, p.Start, p.Length)));
+            view.SetMultiSelection(
+                positions.Select(p => new SnapshotSpan(
+                    subjectBuffer.CurrentSnapshot,
+                    p.Start,
+                    p.Length
+                ))
+            );
         }
 
         public async Task SetSelectionAsync(TextSpan span, CancellationToken cancellationToken)
@@ -227,13 +253,32 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
 
             var subjectBuffer = view.GetBufferContainingCaret();
             Assumes.Present(subjectBuffer);
-            view.SetSelection(new SnapshotSpan(subjectBuffer.CurrentSnapshot, span.Start, span.Length));
+            view.SetSelection(
+                new SnapshotSpan(subjectBuffer.CurrentSnapshot, span.Start, span.Length)
+            );
         }
 
-        public async Task SelectTextInCurrentDocumentAsync(string text, CancellationToken cancellationToken)
+        public async Task SelectTextInCurrentDocumentAsync(
+            string text,
+            CancellationToken cancellationToken
+        )
         {
-            await this.PlaceCaretAsync(text, charsOffset: -1, occurrence: 0, extendSelection: false, selectBlock: false, cancellationToken);
-            await this.PlaceCaretAsync(text, charsOffset: 0, occurrence: 0, extendSelection: true, selectBlock: false, cancellationToken);
+            await this.PlaceCaretAsync(
+                text,
+                charsOffset: -1,
+                occurrence: 0,
+                extendSelection: false,
+                selectBlock: false,
+                cancellationToken
+            );
+            await this.PlaceCaretAsync(
+                text,
+                charsOffset: 0,
+                occurrence: 0,
+                extendSelection: true,
+                selectBlock: false,
+                cancellationToken
+            );
         }
 
         public async Task DeleteTextAsync(string text, CancellationToken cancellationToken)
@@ -244,52 +289,80 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
 
         public async Task PasteAsync(string text, CancellationToken cancellationToken)
         {
-            var provider = await TestServices.Shell.GetComponentModelServiceAsync<IAsynchronousOperationListenerProvider>(cancellationToken);
-            var waiter = (IAsynchronousOperationWaiter)provider.GetListener(FeatureAttribute.AddImportsOnPaste);
+            var provider =
+                await TestServices.Shell.GetComponentModelServiceAsync<IAsynchronousOperationListenerProvider>(
+                    cancellationToken
+                );
+            var waiter = (IAsynchronousOperationWaiter)
+                provider.GetListener(FeatureAttribute.AddImportsOnPaste);
 
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync([FeatureAttribute.Workspace, FeatureAttribute.SolutionCrawlerLegacy], cancellationToken);
+            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
+                [FeatureAttribute.Workspace, FeatureAttribute.SolutionCrawlerLegacy],
+                cancellationToken
+            );
             Clipboard.SetText(text);
-            await TestServices.Shell.ExecuteCommandAsync(VSConstants.VSStd97CmdID.Paste, cancellationToken);
+            await TestServices.Shell.ExecuteCommandAsync(
+                VSConstants.VSStd97CmdID.Paste,
+                cancellationToken
+            );
 
             await waiter.ExpeditedWaitAsync();
         }
 
-        public async Task<ClassificationSpan[]> GetLightBulbPreviewClassificationsAsync(string menuText, CancellationToken cancellationToken)
+        public async Task<ClassificationSpan[]> GetLightBulbPreviewClassificationsAsync(
+            string menuText,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var view = await GetActiveTextViewAsync(cancellationToken);
             var broker = await GetComponentModelServiceAsync<ILightBulbBroker>(cancellationToken);
-            var classifierAggregatorService = await GetComponentModelServiceAsync<IViewClassifierAggregatorService>(cancellationToken);
+            var classifierAggregatorService =
+                await GetComponentModelServiceAsync<IViewClassifierAggregatorService>(
+                    cancellationToken
+                );
 
-            await LightBulbHelper.WaitForLightBulbSessionAsync(TestServices, broker, view, cancellationToken).ConfigureAwait(true);
+            await LightBulbHelper
+                .WaitForLightBulbSessionAsync(TestServices, broker, view, cancellationToken)
+                .ConfigureAwait(true);
 
             var bufferType = view.TextBuffer.ContentType.DisplayName;
             if (!broker.IsLightBulbSessionActive(view))
             {
-                throw new Exception($"No Active Smart Tags in View!  Buffer content type='{bufferType}'");
+                throw new Exception(
+                    $"No Active Smart Tags in View!  Buffer content type='{bufferType}'"
+                );
             }
 
             var activeSession = broker.GetSession(view);
             if (activeSession == null || !activeSession.IsExpanded)
             {
-                throw new InvalidOperationException($"No expanded light bulb session found after View.ShowSmartTag.  Buffer content type='{bufferType}'");
+                throw new InvalidOperationException(
+                    $"No expanded light bulb session found after View.ShowSmartTag.  Buffer content type='{bufferType}'"
+                );
             }
 
             if (!string.IsNullOrEmpty(menuText))
             {
 #pragma warning disable CS0618 // Type or member is obsolete
-                if (activeSession.TryGetSuggestedActionSets(out var actionSets) != QuerySuggestedActionCompletionStatus.Completed)
+                if (
+                    activeSession.TryGetSuggestedActionSets(out var actionSets)
+                    != QuerySuggestedActionCompletionStatus.Completed
+                )
                 {
                     actionSets = Array.Empty<SuggestedActionSet>();
                 }
 #pragma warning restore CS0618 // Type or member is obsolete
 
-                var set = actionSets.SelectMany(s => s.Actions).FirstOrDefault(a => a.DisplayText == menuText);
+                var set = actionSets
+                    .SelectMany(s => s.Actions)
+                    .FirstOrDefault(a => a.DisplayText == menuText);
                 if (set == null)
                 {
                     throw new InvalidOperationException(
-                        $"ISuggestionAction '{menuText}' not found.  Buffer content type='{bufferType}'");
+                        $"ISuggestionAction '{menuText}' not found.  Buffer content type='{bufferType}'"
+                    );
                 }
 
                 IWpfTextView? preview = null;
@@ -297,18 +370,32 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                 if (pane is UserControl control)
                 {
                     var container = control.FindName("PreviewDockPanel") as DockPanel;
-                    var host = container.FindDescendants<UIElement>().OfType<IWpfTextViewHost>().LastOrDefault();
+                    var host = container
+                        .FindDescendants<UIElement>()
+                        .OfType<IWpfTextViewHost>()
+                        .LastOrDefault();
                     preview = host?.TextView;
                 }
 
                 if (preview == null)
                 {
-                    throw new InvalidOperationException(string.Format("Could not find light bulb preview.  Buffer content type={0}", bufferType));
+                    throw new InvalidOperationException(
+                        string.Format(
+                            "Could not find light bulb preview.  Buffer content type={0}",
+                            bufferType
+                        )
+                    );
                 }
 
                 activeSession.Collapse();
                 var classifier = classifierAggregatorService.GetClassifier(preview);
-                var classifiedSpans = classifier.GetClassificationSpans(new SnapshotSpan(preview.TextBuffer.CurrentSnapshot, 0, preview.TextBuffer.CurrentSnapshot.Length));
+                var classifiedSpans = classifier.GetClassificationSpans(
+                    new SnapshotSpan(
+                        preview.TextBuffer.CurrentSnapshot,
+                        0,
+                        preview.TextBuffer.CurrentSnapshot.Length
+                    )
+                );
                 return classifiedSpans.ToArray();
             }
 
@@ -316,7 +403,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             return Array.Empty<ClassificationSpan>();
         }
 
-        public async Task<string[]> GetCurrentClassificationsAsync(CancellationToken cancellationToken)
+        public async Task<string[]> GetCurrentClassificationsAsync(
+            CancellationToken cancellationToken
+        )
         {
             IClassifier? classifier = null;
             try
@@ -325,13 +414,20 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                 var selectionSpan = textView.Selection.StreamSelectionSpan.SnapshotSpan;
                 if (selectionSpan.Length == 0)
                 {
-                    var textStructureNavigatorSelectorService = await TestServices.Shell.GetComponentModelServiceAsync<ITextStructureNavigatorSelectorService>(cancellationToken);
+                    var textStructureNavigatorSelectorService =
+                        await TestServices.Shell.GetComponentModelServiceAsync<ITextStructureNavigatorSelectorService>(
+                            cancellationToken
+                        );
                     selectionSpan = textStructureNavigatorSelectorService
                         .GetTextStructureNavigator(textView.TextBuffer)
-                        .GetExtentOfWord(selectionSpan.Start).Span;
+                        .GetExtentOfWord(selectionSpan.Start)
+                        .Span;
                 }
 
-                var classifierAggregatorService = await TestServices.Shell.GetComponentModelServiceAsync<IViewClassifierAggregatorService>(cancellationToken);
+                var classifierAggregatorService =
+                    await TestServices.Shell.GetComponentModelServiceAsync<IViewClassifierAggregatorService>(
+                        cancellationToken
+                    );
                 classifier = classifierAggregatorService.GetClassifier(textView);
                 var classifiedSpans = classifier.GetClassificationSpans(selectionSpan);
                 return classifiedSpans.Select(x => x.ClassificationType.Classification).ToArray();
@@ -350,7 +446,10 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var view = await TestServices.Editor.GetActiveTextViewAsync(cancellationToken);
-            return (int)Math.Ceiling(view.ViewportWidth / Math.Max(view.FormattedLineSource.ColumnWidth, 1));
+            return (int)
+                Math.Ceiling(
+                    view.ViewportWidth / Math.Max(view.FormattedLineSource.ColumnWidth, 1)
+                );
         }
 
         public async Task ActivateAsync(CancellationToken cancellationToken)
@@ -374,26 +473,39 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var textView = await GetActiveTextViewAsync(cancellationToken);
-            return await IsUseSuggestionModeOnAsync(forDebuggerTextView: IsDebuggerTextView(textView), cancellationToken);
+            return await IsUseSuggestionModeOnAsync(
+                forDebuggerTextView: IsDebuggerTextView(textView),
+                cancellationToken
+            );
         }
 
-        public async Task<bool> IsUseSuggestionModeOnAsync(bool forDebuggerTextView, CancellationToken cancellationToken)
+        public async Task<bool> IsUseSuggestionModeOnAsync(
+            bool forDebuggerTextView,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var editorOptionsFactory = await GetComponentModelServiceAsync<IEditorOptionsFactoryService>(cancellationToken);
+            var editorOptionsFactory =
+                await GetComponentModelServiceAsync<IEditorOptionsFactoryService>(
+                    cancellationToken
+                );
             var options = editorOptionsFactory.GlobalOptions;
 
             EditorOptionKey<bool> optionKey;
             bool defaultOption;
             if (forDebuggerTextView)
             {
-                optionKey = new EditorOptionKey<bool>(PredefinedCompletionNames.SuggestionModeInDebuggerCompletionOptionName);
+                optionKey = new EditorOptionKey<bool>(
+                    PredefinedCompletionNames.SuggestionModeInDebuggerCompletionOptionName
+                );
                 defaultOption = true;
             }
             else
             {
-                optionKey = new EditorOptionKey<bool>(PredefinedCompletionNames.SuggestionModeInCompletionOptionName);
+                optionKey = new EditorOptionKey<bool>(
+                    PredefinedCompletionNames.SuggestionModeInCompletionOptionName
+                );
                 defaultOption = false;
             }
 
@@ -410,65 +522,105 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var textView = await GetActiveTextViewAsync(cancellationToken);
-            await SetUseSuggestionModeAsync(forDebuggerTextView: IsDebuggerTextView(textView), value, cancellationToken);
+            await SetUseSuggestionModeAsync(
+                forDebuggerTextView: IsDebuggerTextView(textView),
+                value,
+                cancellationToken
+            );
         }
 
-        public async Task SetUseSuggestionModeAsync(bool forDebuggerTextView, bool value, CancellationToken cancellationToken)
+        public async Task SetUseSuggestionModeAsync(
+            bool forDebuggerTextView,
+            bool value,
+            CancellationToken cancellationToken
+        )
         {
             if (await IsUseSuggestionModeOnAsync(forDebuggerTextView, cancellationToken) != value)
             {
-                await TestServices.Shell.ExecuteCommandAsync(VSConstants.VSStd2KCmdID.ToggleConsumeFirstCompletionMode, cancellationToken);
-                if (await IsUseSuggestionModeOnAsync(forDebuggerTextView, cancellationToken) != value)
+                await TestServices.Shell.ExecuteCommandAsync(
+                    VSConstants.VSStd2KCmdID.ToggleConsumeFirstCompletionMode,
+                    cancellationToken
+                );
+                if (
+                    await IsUseSuggestionModeOnAsync(forDebuggerTextView, cancellationToken)
+                    != value
+                )
                 {
-                    throw new InvalidOperationException($"{nameof(WellKnownCommands.Edit)}.{nameof(WellKnownCommands.Edit.ToggleCompletionMode)} did not leave the editor in the expected state.");
+                    throw new InvalidOperationException(
+                        $"{nameof(WellKnownCommands.Edit)}.{nameof(WellKnownCommands.Edit.ToggleCompletionMode)} did not leave the editor in the expected state."
+                    );
                 }
             }
         }
 
-        public Task<ImmutableArray<TagSpan<IErrorTag>>> GetErrorTagsAsync(CancellationToken cancellationToken)
+        public Task<ImmutableArray<TagSpan<IErrorTag>>> GetErrorTagsAsync(
+            CancellationToken cancellationToken
+        )
         {
             return GetTagsAsync<IErrorTag>(cancellationToken);
         }
 
-        public async Task<ImmutableArray<TagSpan<ITextMarkerTag>>> GetRenameTagsAsync(CancellationToken cancellationToken)
+        public async Task<ImmutableArray<TagSpan<ITextMarkerTag>>> GetRenameTagsAsync(
+            CancellationToken cancellationToken
+        )
         {
             await TestServices.Workspace.WaitForRenameAsync(cancellationToken);
             var tags = await GetTagsAsync<ITextMarkerTag>(cancellationToken);
-            return tags.WhereAsArray(tag => tag.Tag.Type == RenameFieldBackgroundAndBorderTag.TagId);
+            return tags.WhereAsArray(tag =>
+                tag.Tag.Type == RenameFieldBackgroundAndBorderTag.TagId
+            );
         }
 
-        public async Task<ImmutableArray<TagSpan<TTag>>> GetTagsAsync<TTag>(CancellationToken cancellationToken)
+        public async Task<ImmutableArray<TagSpan<TTag>>> GetTagsAsync<TTag>(
+            CancellationToken cancellationToken
+        )
             where TTag : ITag
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             var view = await GetActiveTextViewAsync(cancellationToken);
-            var viewTagAggregatorFactory = await GetComponentModelServiceAsync<IViewTagAggregatorFactoryService>(cancellationToken);
+            var viewTagAggregatorFactory =
+                await GetComponentModelServiceAsync<IViewTagAggregatorFactoryService>(
+                    cancellationToken
+                );
 
             var aggregator = viewTagAggregatorFactory.CreateTagAggregator<TTag>(view);
             var tags = aggregator
                 .GetTags(new SnapshotSpan(view.TextSnapshot, 0, view.TextSnapshot.Length))
                 .Cast<IMappingTagSpan<ITag>>();
 
-            return tags.SelectAsArray(tag => (new TagSpan<TTag>(tag.Span.GetSpans(view.TextBuffer).Single(), (TTag)tag.Tag)));
+            return tags.SelectAsArray(tag =>
+                (new TagSpan<TTag>(tag.Span.GetSpans(view.TextBuffer).Single(), (TTag)tag.Tag))
+            );
         }
 
-        private static bool IsDebuggerTextView(ITextView textView)
-            => textView.Roles.Contains("DEBUGVIEW");
+        private static bool IsDebuggerTextView(ITextView textView) =>
+            textView.Roles.Contains("DEBUGVIEW");
 
-        public async Task<ImmutableArray<string>> GetF1KeywordsAsync(CancellationToken cancellationToken)
+        public async Task<ImmutableArray<string>> GetF1KeywordsAsync(
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var vsView = await GetActiveVsTextViewAsync(cancellationToken);
             ErrorHandler.ThrowOnFailure(vsView.GetBuffer(out var textLines));
-            ErrorHandler.ThrowOnFailure(textLines.GetLanguageServiceID(out var languageServiceGuid));
+            ErrorHandler.ThrowOnFailure(
+                textLines.GetLanguageServiceID(out var languageServiceGuid)
+            );
 
-            var languageService = await ((AsyncServiceProvider)AsyncServiceProvider.GlobalProvider).QueryServiceAsync(languageServiceGuid).WithCancellation(cancellationToken);
+            var languageService = await ((AsyncServiceProvider)AsyncServiceProvider.GlobalProvider)
+                .QueryServiceAsync(languageServiceGuid)
+                .WithCancellation(cancellationToken);
             Assumes.Present(languageService);
 
             var languageContextProvider = (IVsLanguageContextProvider)languageService;
-            var monitorUserContext = await GetRequiredGlobalServiceAsync<SVsMonitorUserContext, IVsMonitorUserContext>(cancellationToken);
-            ErrorHandler.ThrowOnFailure(monitorUserContext.CreateEmptyContext(out var emptyUserContext));
+            var monitorUserContext = await GetRequiredGlobalServiceAsync<
+                SVsMonitorUserContext,
+                IVsMonitorUserContext
+            >(cancellationToken);
+            ErrorHandler.ThrowOnFailure(
+                monitorUserContext.CreateEmptyContext(out var emptyUserContext)
+            );
             ErrorHandler.ThrowOnFailure(vsView.GetCaretPos(out var line, out var column));
 
             var span = new TextManager.Interop.TextSpan()
@@ -479,12 +631,31 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                 iEndIndex = column,
             };
 
-            ErrorHandler.ThrowOnFailure(languageContextProvider.UpdateLanguageContext(dwHint: 0, textLines, [span], emptyUserContext));
-            ErrorHandler.ThrowOnFailure(emptyUserContext.CountAttributes("keyword", fIncludeChildren: Convert.ToInt32(true), out var count));
+            ErrorHandler.ThrowOnFailure(
+                languageContextProvider.UpdateLanguageContext(
+                    dwHint: 0,
+                    textLines,
+                    [span],
+                    emptyUserContext
+                )
+            );
+            ErrorHandler.ThrowOnFailure(
+                emptyUserContext.CountAttributes(
+                    "keyword",
+                    fIncludeChildren: Convert.ToInt32(true),
+                    out var count
+                )
+            );
             var results = ImmutableArray.CreateBuilder<string>(count);
             for (var i = 0; i < count; i++)
             {
-                emptyUserContext.GetAttribute(i, "keyword", fIncludeChildren: Convert.ToInt32(true), pbstrName: out _, out var value);
+                emptyUserContext.GetAttribute(
+                    i,
+                    "keyword",
+                    fIncludeChildren: Convert.ToInt32(true),
+                    pbstrName: out _,
+                    out var value
+                );
                 results.Add(value);
             }
 
@@ -493,43 +664,74 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
 
         #region Navigation bars
 
-        public async Task ExpandNavigationBarAsync(NavigationBarDropdownKind index, CancellationToken cancellationToken)
+        public async Task ExpandNavigationBarAsync(
+            NavigationBarDropdownKind index,
+            CancellationToken cancellationToken
+        )
         {
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.NavigationBar, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.NavigationBar,
+                cancellationToken
+            );
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var view = await GetActiveTextViewAsync(cancellationToken);
-            var combobox = (await GetNavigationBarComboBoxesAsync(view, cancellationToken))[(int)index];
+            var combobox = (await GetNavigationBarComboBoxesAsync(view, cancellationToken))[
+                (int)index
+            ];
             FocusManager.SetFocusedElement(FocusManager.GetFocusScope(combobox), combobox);
             combobox.IsDropDownOpen = true;
         }
 
-        public async Task<ImmutableArray<string>> GetNavigationBarItemsAsync(NavigationBarDropdownKind index, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<string>> GetNavigationBarItemsAsync(
+            NavigationBarDropdownKind index,
+            CancellationToken cancellationToken
+        )
         {
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.NavigationBar, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.NavigationBar,
+                cancellationToken
+            );
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var view = await GetActiveTextViewAsync(cancellationToken);
-            var combobox = (await GetNavigationBarComboBoxesAsync(view, cancellationToken))[(int)index];
+            var combobox = (await GetNavigationBarComboBoxesAsync(view, cancellationToken))[
+                (int)index
+            ];
             return combobox.Items.OfType<object>().SelectAsArray(i => $"{i}");
         }
 
-        public async Task<string?> GetNavigationBarSelectionAsync(NavigationBarDropdownKind index, CancellationToken cancellationToken)
+        public async Task<string?> GetNavigationBarSelectionAsync(
+            NavigationBarDropdownKind index,
+            CancellationToken cancellationToken
+        )
         {
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.NavigationBar, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.NavigationBar,
+                cancellationToken
+            );
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var view = await GetActiveTextViewAsync(cancellationToken);
-            var combobox = (await GetNavigationBarComboBoxesAsync(view, cancellationToken))[(int)index];
+            var combobox = (await GetNavigationBarComboBoxesAsync(view, cancellationToken))[
+                (int)index
+            ];
             return combobox.SelectedItem?.ToString();
         }
 
-        public async Task SelectNavigationBarItemAsync(NavigationBarDropdownKind index, string item, CancellationToken cancellationToken)
+        public async Task SelectNavigationBarItemAsync(
+            NavigationBarDropdownKind index,
+            string item,
+            CancellationToken cancellationToken
+        )
         {
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.NavigationBar, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.NavigationBar,
+                cancellationToken
+            );
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -550,10 +752,17 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             await TestServices.Input.SendAsync(VirtualKeyCode.RETURN, cancellationToken);
 
             // Navigation and/or code generation following selection is tracked under FeatureAttribute.NavigationBar
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.NavigationBar, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.NavigationBar,
+                cancellationToken
+            );
         }
 
-        public async Task<int> GetNavigationBarItemIndexAsync(NavigationBarDropdownKind index, string item, CancellationToken cancellationToken)
+        public async Task<int> GetNavigationBarItemIndexAsync(
+            NavigationBarDropdownKind index,
+            string item,
+            CancellationToken cancellationToken
+        )
         {
             var items = await GetNavigationBarItemsAsync(index, cancellationToken);
             return items.IndexOf(item);
@@ -567,7 +776,10 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             return (await GetNavigationBarMarginAsync(view, cancellationToken)) is not null;
         }
 
-        private async Task<List<ComboBox>> GetNavigationBarComboBoxesAsync(IWpfTextView textView, CancellationToken cancellationToken)
+        private async Task<List<ComboBox>> GetNavigationBarComboBoxesAsync(
+            IWpfTextView textView,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -575,11 +787,17 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             return margin.GetFieldValue<List<ComboBox>>("_combos");
         }
 
-        private async Task<UIElement?> GetNavigationBarMarginAsync(IWpfTextView textView, CancellationToken cancellationToken)
+        private async Task<UIElement?> GetNavigationBarMarginAsync(
+            IWpfTextView textView,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var editorAdaptersFactoryService = await GetComponentModelServiceAsync<IVsEditorAdaptersFactoryService>(cancellationToken);
+            var editorAdaptersFactoryService =
+                await GetComponentModelServiceAsync<IVsEditorAdaptersFactoryService>(
+                    cancellationToken
+                );
             var viewAdapter = editorAdaptersFactoryService.GetViewAdapter(textView);
             Assumes.Present(viewAdapter);
 
@@ -623,7 +841,8 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                 IOleServiceProvider? oleServiceProvider = null;
                 try
                 {
-                    oleServiceProvider = Marshal.GetObjectForIUnknown(ppvSite) as IOleServiceProvider;
+                    oleServiceProvider =
+                        Marshal.GetObjectForIUnknown(ppvSite) as IOleServiceProvider;
                 }
                 finally
                 {
@@ -637,7 +856,16 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
 
                 var guidService = typeof(SVsWindowFrame).GUID;
                 riid = typeof(IVsWindowFrame).GUID;
-                if (ErrorHandler.Failed(oleServiceProvider.QueryService(ref guidService, ref riid, out var ppvObject)) || ppvObject == IntPtr.Zero)
+                if (
+                    ErrorHandler.Failed(
+                        oleServiceProvider.QueryService(
+                            ref guidService,
+                            ref riid,
+                            out var ppvObject
+                        )
+                    )
+                    || ppvObject == IntPtr.Zero
+                )
                 {
                     return null;
                 }
@@ -653,7 +881,10 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                 }
 
                 riid = typeof(IVsCodeWindow).GUID;
-                if (ErrorHandler.Failed(frame.QueryViewInterface(ref riid, out ppvObject)) || ppvObject == IntPtr.Zero)
+                if (
+                    ErrorHandler.Failed(frame.QueryViewInterface(ref riid, out ppvObject))
+                    || ppvObject == IntPtr.Zero
+                )
                 {
                     return null;
                 }
@@ -693,7 +924,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             broker.DismissAllSessions(view);
         }
 
-        public async Task<Completion> GetCurrentCompletionItemAsync(CancellationToken cancellationToken)
+        public async Task<Completion> GetCurrentCompletionItemAsync(
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -704,7 +937,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             var sessions = broker.GetSessions(view);
             if (sessions.Count != 1)
             {
-                throw new InvalidOperationException($"Expected exactly one session in the completion list, but found {sessions.Count}");
+                throw new InvalidOperationException(
+                    $"Expected exactly one session in the completion list, but found {sessions.Count}"
+                );
             }
 
             var selectedCompletionSet = sessions[0].SelectedCompletionSet;
@@ -724,7 +959,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             if (view is null)
                 return false;
 
-            var broker = await TestServices.Shell.GetComponentModelServiceAsync<ICompletionBroker>(cancellationToken);
+            var broker = await TestServices.Shell.GetComponentModelServiceAsync<ICompletionBroker>(
+                cancellationToken
+            );
             return broker.IsCompletionActive(view);
         }
 
@@ -732,7 +969,10 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            await TestServices.Shell.ExecuteCommandAsync(WellKnownCommands.Edit.ParameterInfo, cancellationToken);
+            await TestServices.Shell.ExecuteCommandAsync(
+                WellKnownCommands.Edit.ParameterInfo,
+                cancellationToken
+            );
             await WaitForSignatureHelpAsync(cancellationToken);
         }
 
@@ -740,7 +980,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         {
             await WaitForSignatureHelpAsync(cancellationToken);
             var view = await GetActiveTextViewAsync(cancellationToken);
-            var broker = await GetComponentModelServiceAsync<ISignatureHelpBroker>(cancellationToken);
+            var broker = await GetComponentModelServiceAsync<ISignatureHelpBroker>(
+                cancellationToken
+            );
             return broker.IsSignatureHelpActive(view);
         }
 
@@ -751,21 +993,38 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             var view = await GetActiveTextViewAsync(cancellationToken);
 
             var broker = await GetComponentModelServiceAsync<ILightBulbBroker>(cancellationToken);
-            return (await GetLightBulbActionsAsync(broker, view, cancellationToken)).Select(a => a.DisplayText).ToArray();
+            return (await GetLightBulbActionsAsync(broker, view, cancellationToken))
+                .Select(a => a.DisplayText)
+                .ToArray();
         }
 
-        public async Task<bool> ApplyLightBulbActionAsync(string actionName, FixAllScope? fixAllScope, bool blockUntilComplete, CancellationToken cancellationToken)
+        public async Task<bool> ApplyLightBulbActionAsync(
+            string actionName,
+            FixAllScope? fixAllScope,
+            bool blockUntilComplete,
+            CancellationToken cancellationToken
+        )
         {
-            var lightBulbAction = GetLightBulbApplicationAction(actionName, fixAllScope, blockUntilComplete);
+            var lightBulbAction = GetLightBulbApplicationAction(
+                actionName,
+                fixAllScope,
+                blockUntilComplete
+            );
 
-            var listenerProvider = await GetComponentModelServiceAsync<IAsynchronousOperationListenerProvider>(cancellationToken);
+            var listenerProvider =
+                await GetComponentModelServiceAsync<IAsynchronousOperationListenerProvider>(
+                    cancellationToken
+                );
             var listener = listenerProvider.GetListener(FeatureAttribute.LightBulb);
 
             var task = JoinableTaskFactory.RunAsync(async () =>
             {
                 using var _ = listener.BeginAsyncOperation(nameof(ApplyLightBulbActionAsync));
 
-                await JoinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
+                await JoinableTaskFactory.SwitchToMainThreadAsync(
+                    alwaysYield: true,
+                    cancellationToken
+                );
 
                 var activeTextView = await GetActiveTextViewAsync(cancellationToken);
                 return await lightBulbAction(activeTextView, cancellationToken);
@@ -781,15 +1040,23 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             return true;
         }
 
-        private Func<IWpfTextView, CancellationToken, Task<bool>> GetLightBulbApplicationAction(string actionName, FixAllScope? fixAllScope, bool willBlockUntilComplete)
+        private Func<IWpfTextView, CancellationToken, Task<bool>> GetLightBulbApplicationAction(
+            string actionName,
+            FixAllScope? fixAllScope,
+            bool willBlockUntilComplete
+        )
         {
             return async (view, cancellationToken) =>
             {
                 await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-                var broker = await GetComponentModelServiceAsync<ILightBulbBroker>(cancellationToken);
+                var broker = await GetComponentModelServiceAsync<ILightBulbBroker>(
+                    cancellationToken
+                );
 
-                var actions = (await GetLightBulbActionsAsync(broker, view, cancellationToken)).ToArray();
+                var actions = (
+                    await GetLightBulbActionsAsync(broker, view, cancellationToken)
+                ).ToArray();
                 var action = actions.FirstOrDefault(a => a.DisplayText == actionName);
 
                 if (action == null)
@@ -802,28 +1069,40 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
 
                     var bufferType = view.TextBuffer.ContentType.DisplayName;
                     throw new InvalidOperationException(
-                        $"ISuggestedAction {actionName} not found.  Buffer content type={bufferType}\r\nActions: {sb}");
+                        $"ISuggestedAction {actionName} not found.  Buffer content type={bufferType}\r\nActions: {sb}"
+                    );
                 }
 
                 if (fixAllScope != null)
                 {
                     if (!action.HasActionSets)
                     {
-                        throw new InvalidOperationException($"Suggested action '{action.DisplayText}' does not support FixAllOccurrences.");
+                        throw new InvalidOperationException(
+                            $"Suggested action '{action.DisplayText}' does not support FixAllOccurrences."
+                        );
                     }
 
                     var actionSetsForAction = await action.GetActionSetsAsync(cancellationToken);
-                    var fixAllAction = await GetFixAllSuggestedActionAsync(actionSetsForAction!, fixAllScope.Value, cancellationToken);
+                    var fixAllAction = await GetFixAllSuggestedActionAsync(
+                        actionSetsForAction!,
+                        fixAllScope.Value,
+                        cancellationToken
+                    );
                     if (fixAllAction == null)
                     {
-                        throw new InvalidOperationException($"Unable to find FixAll in {fixAllScope} code fix for suggested action '{action.DisplayText}'.");
+                        throw new InvalidOperationException(
+                            $"Unable to find FixAll in {fixAllScope} code fix for suggested action '{action.DisplayText}'."
+                        );
                     }
 
                     action = fixAllAction;
 
-                    if (willBlockUntilComplete
+                    if (
+                        willBlockUntilComplete
                         && action is AbstractFixAllSuggestedAction fixAllSuggestedAction
-                        && fixAllSuggestedAction.CodeAction is AbstractFixAllCodeAction fixAllCodeAction)
+                        && fixAllSuggestedAction.CodeAction
+                            is AbstractFixAllCodeAction fixAllCodeAction
+                    )
                     {
                         // Ensure the preview changes dialog will not be shown. Since the operation 'willBlockUntilComplete',
                         // the caller would not be able to interact with the preview changes dialog, and the tests would
@@ -844,8 +1123,13 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                     return true;
 
                 broker.DismissSession(view);
-                var threadOperationExecutor = await GetComponentModelServiceAsync<IUIThreadOperationExecutor>(cancellationToken);
-                var guardedOperations = await GetComponentModelServiceAsync<IGuardedOperations2>(cancellationToken);
+                var threadOperationExecutor =
+                    await GetComponentModelServiceAsync<IUIThreadOperationExecutor>(
+                        cancellationToken
+                    );
+                var guardedOperations = await GetComponentModelServiceAsync<IGuardedOperations2>(
+                    cancellationToken
+                );
                 threadOperationExecutor.Execute(
                     title: "Execute Suggested Action",
                     defaultDescription: Accelerator.StripAccelerators(action.DisplayText, '_'),
@@ -856,35 +1140,53 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                         guardedOperations.CallExtensionPoint(
                             errorSource: suggestedAction,
                             call: () => suggestedAction.Invoke(context),
-                            exceptionGuardFilter: e => e is not OperationCanceledException);
-                    });
+                            exceptionGuardFilter: e => e is not OperationCanceledException
+                        );
+                    }
+                );
 
                 return true;
             };
         }
 
-        private async Task<IEnumerable<ISuggestedAction>> GetLightBulbActionsAsync(ILightBulbBroker broker, IWpfTextView view, CancellationToken cancellationToken)
+        private async Task<IEnumerable<ISuggestedAction>> GetLightBulbActionsAsync(
+            ILightBulbBroker broker,
+            IWpfTextView view,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             if (!broker.IsLightBulbSessionActive(view))
             {
                 var bufferType = view.TextBuffer.ContentType.DisplayName;
-                throw new Exception($"No light bulb session in View!  Buffer content type={bufferType}");
+                throw new Exception(
+                    $"No light bulb session in View!  Buffer content type={bufferType}"
+                );
             }
 
             var activeSession = broker.GetSession(view);
             if (activeSession == null)
             {
                 var bufferType = view.TextBuffer.ContentType.DisplayName;
-                throw new InvalidOperationException($"No expanded light bulb session found after View.ShowSmartTag.  Buffer content type={bufferType}");
+                throw new InvalidOperationException(
+                    $"No expanded light bulb session found after View.ShowSmartTag.  Buffer content type={bufferType}"
+                );
             }
 
-            var actionSets = await LightBulbHelper.WaitForItemsAsync(TestServices, broker, view, cancellationToken);
+            var actionSets = await LightBulbHelper.WaitForItemsAsync(
+                TestServices,
+                broker,
+                view,
+                cancellationToken
+            );
             return await SelectActionsAsync(actionSets, cancellationToken);
         }
 
-        private async Task<IEnumerable<ISuggestedAction>> SelectActionsAsync(IEnumerable<SuggestedActionSet> actionSets, CancellationToken cancellationToken)
+        private async Task<IEnumerable<ISuggestedAction>> SelectActionsAsync(
+            IEnumerable<SuggestedActionSet> actionSets,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -901,8 +1203,13 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                             actions.Add(action);
                             if (action.HasActionSets)
                             {
-                                var nestedActionSets = await action.GetActionSetsAsync(cancellationToken);
-                                var nestedActions = await SelectActionsAsync(nestedActionSets!, cancellationToken);
+                                var nestedActionSets = await action.GetActionSetsAsync(
+                                    cancellationToken
+                                );
+                                var nestedActions = await SelectActionsAsync(
+                                    nestedActionSets!,
+                                    cancellationToken
+                                );
                                 actions.AddRange(nestedActions);
                             }
                         }
@@ -913,7 +1220,11 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             return actions;
         }
 
-        private async Task<AbstractFixAllSuggestedAction?> GetFixAllSuggestedActionAsync(IEnumerable<SuggestedActionSet> actionSets, FixAllScope fixAllScope, CancellationToken cancellationToken)
+        private async Task<AbstractFixAllSuggestedAction?> GetFixAllSuggestedActionAsync(
+            IEnumerable<SuggestedActionSet> actionSets,
+            FixAllScope fixAllScope,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -923,7 +1234,8 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                 {
                     if (action is AbstractFixAllSuggestedAction fixAllSuggestedAction)
                     {
-                        var fixAllCodeAction = fixAllSuggestedAction.CodeAction as AbstractFixAllCodeAction;
+                        var fixAllCodeAction =
+                            fixAllSuggestedAction.CodeAction as AbstractFixAllCodeAction;
                         if (fixAllCodeAction?.FixAllState?.Scope == fixAllScope)
                         {
                             return fixAllSuggestedAction;
@@ -933,7 +1245,11 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                     if (action.HasActionSets)
                     {
                         var nestedActionSets = await action.GetActionSetsAsync(cancellationToken);
-                        var fixAllCodeAction = await GetFixAllSuggestedActionAsync(nestedActionSets!, fixAllScope, cancellationToken);
+                        var fixAllCodeAction = await GetFixAllSuggestedActionAsync(
+                            nestedActionSets!,
+                            fixAllScope,
+                            cancellationToken
+                        );
                         if (fixAllCodeAction != null)
                         {
                             return fixAllCodeAction;
@@ -975,11 +1291,15 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             var view = await GetActiveTextViewAsync(cancellationToken);
 
             await WaitForSignatureHelpAsync(cancellationToken);
-            var broker = await GetComponentModelServiceAsync<ISignatureHelpBroker>(cancellationToken);
+            var broker = await GetComponentModelServiceAsync<ISignatureHelpBroker>(
+                cancellationToken
+            );
             var sessions = broker.GetSessions(view);
             if (sessions.Count != 1)
             {
-                throw new InvalidOperationException($"Expected exactly one session in the signature help, but found {sessions.Count}");
+                throw new InvalidOperationException(
+                    $"Expected exactly one session in the signature help, but found {sessions.Count}"
+                );
             }
 
             return sessions[0].SelectedSignature;
@@ -987,94 +1307,161 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
 
         public async Task GoToDefinitionAsync(CancellationToken cancellationToken)
         {
-            await TestServices.Shell.ExecuteCommandAsync(VSConstants.VSStd97CmdID.GotoDefn, cancellationToken);
+            await TestServices.Shell.ExecuteCommandAsync(
+                VSConstants.VSStd97CmdID.GotoDefn,
+                cancellationToken
+            );
             await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                [FeatureAttribute.Workspace, FeatureAttribute.NavigateTo, FeatureAttribute.GoToDefinition],
-                cancellationToken);
+                [
+                    FeatureAttribute.Workspace,
+                    FeatureAttribute.NavigateTo,
+                    FeatureAttribute.GoToDefinition,
+                ],
+                cancellationToken
+            );
         }
 
         public async Task GoToBaseAsync(CancellationToken cancellationToken)
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            await TestServices.Shell.ExecuteCommandAsync(EditorConstants.EditorCommandID.GoToBase, cancellationToken);
+            await TestServices.Shell.ExecuteCommandAsync(
+                EditorConstants.EditorCommandID.GoToBase,
+                cancellationToken
+            );
 
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.Workspace, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.Workspace,
+                cancellationToken
+            );
 
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.GoToBase, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.GoToBase,
+                cancellationToken
+            );
             await TestServices.Editor.WaitForEditorOperationsAsync(cancellationToken);
         }
 
-        public async Task ConfigureAsyncNavigation(AsyncNavigationKind kind, CancellationToken cancellationToken)
+        public async Task ConfigureAsyncNavigation(
+            AsyncNavigationKind kind,
+            CancellationToken cancellationToken
+        )
         {
             Func<CancellationToken, Task>? delayHook = kind switch
             {
                 AsyncNavigationKind.Default => null,
-                AsyncNavigationKind.Synchronous => static cancellationToken => Task.Delay(Timeout.InfiniteTimeSpan, cancellationToken),
+                AsyncNavigationKind.Synchronous => static cancellationToken =>
+                    Task.Delay(Timeout.InfiniteTimeSpan, cancellationToken),
                 AsyncNavigationKind.Asynchronous => static _ => Task.CompletedTask,
                 _ => throw ExceptionUtilities.UnexpectedValue(kind),
             };
 
-            var componentModelService = await GetRequiredGlobalServiceAsync<SComponentModel, IComponentModel>(cancellationToken);
-            var commandHandlers = componentModelService.DefaultExportProvider.GetExports<ICommandHandler, NameMetadata>();
-            var goToImplementation = (GoToImplementationCommandHandler)commandHandlers.Single(handler => handler.Metadata.Name == PredefinedCommandHandlerNames.GoToImplementation).Value;
+            var componentModelService = await GetRequiredGlobalServiceAsync<
+                SComponentModel,
+                IComponentModel
+            >(cancellationToken);
+            var commandHandlers = componentModelService.DefaultExportProvider.GetExports<
+                ICommandHandler,
+                NameMetadata
+            >();
+            var goToImplementation = (GoToImplementationCommandHandler)
+                commandHandlers
+                    .Single(handler =>
+                        handler.Metadata.Name == PredefinedCommandHandlerNames.GoToImplementation
+                    )
+                    .Value;
             goToImplementation.GetTestAccessor().DelayHook = delayHook;
 
-            var goToBase = (GoToBaseCommandHandler)commandHandlers.Single(handler => handler.Metadata.Name == PredefinedCommandHandlerNames.GoToBase).Value;
+            var goToBase = (GoToBaseCommandHandler)
+                commandHandlers
+                    .Single(handler =>
+                        handler.Metadata.Name == PredefinedCommandHandlerNames.GoToBase
+                    )
+                    .Value;
             goToBase.GetTestAccessor().DelayHook = delayHook;
         }
 
         public async Task GoToImplementationAsync(CancellationToken cancellationToken)
         {
-            await TestServices.Shell.ExecuteCommandAsync(WellKnownCommands.Edit.GoToImplementation, cancellationToken);
+            await TestServices.Shell.ExecuteCommandAsync(
+                WellKnownCommands.Edit.GoToImplementation,
+                cancellationToken
+            );
             await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
                 [FeatureAttribute.Workspace, FeatureAttribute.GoToImplementation],
-                cancellationToken);
+                cancellationToken
+            );
         }
 
-        public async Task<ImmutableArray<(bool Collapsed, TextSpan Span)>> GetOutliningSpansAsync(CancellationToken cancellationToken)
+        public async Task<ImmutableArray<(bool Collapsed, TextSpan Span)>> GetOutliningSpansAsync(
+            CancellationToken cancellationToken
+        )
         {
             await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
                 [FeatureAttribute.Workspace, FeatureAttribute.Outlining],
-                cancellationToken);
+                cancellationToken
+            );
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var componentModelService = await GetRequiredGlobalServiceAsync<SComponentModel, IComponentModel>(cancellationToken);
+            var componentModelService = await GetRequiredGlobalServiceAsync<
+                SComponentModel,
+                IComponentModel
+            >(cancellationToken);
             var view = await GetActiveTextViewAsync(cancellationToken);
-            var manager = componentModelService.GetService<IOutliningManagerService>().GetOutliningManager(view);
+            var manager = componentModelService
+                .GetService<IOutliningManagerService>()
+                .GetOutliningManager(view);
             var span = new SnapshotSpan(view.TextSnapshot, 0, view.TextSnapshot.Length);
             var regions = manager.GetAllRegions(span);
             return regions
-                    .OrderBy(s => s.Extent.GetStartPoint(view.TextSnapshot))
-                    .SelectAsArray(r =>
-                    {
-                        var span = r.Extent.GetSpan(view.TextSnapshot);
-                        return (r.IsCollapsed, TextSpan.FromBounds(span.Start.Position, span.End.Position));
-                    });
+                .OrderBy(s => s.Extent.GetStartPoint(view.TextSnapshot))
+                .SelectAsArray(r =>
+                {
+                    var span = r.Extent.GetSpan(view.TextSnapshot);
+                    return (
+                        r.IsCollapsed,
+                        TextSpan.FromBounds(span.Start.Position, span.End.Position)
+                    );
+                });
         }
 
         public Task FormatDocumentAsync(CancellationToken cancellationToken)
         {
-            return TestServices.Shell.ExecuteCommandAsync(VSConstants.VSStd2KCmdID.FORMATDOCUMENT, cancellationToken);
+            return TestServices.Shell.ExecuteCommandAsync(
+                VSConstants.VSStd2KCmdID.FORMATDOCUMENT,
+                cancellationToken
+            );
         }
 
         public Task FormatSelectionAsync(CancellationToken cancellationToken)
         {
-            return TestServices.Shell.ExecuteCommandAsync(VSConstants.VSStd2KCmdID.FORMATSELECTION, cancellationToken);
+            return TestServices.Shell.ExecuteCommandAsync(
+                VSConstants.VSStd2KCmdID.FORMATSELECTION,
+                cancellationToken
+            );
         }
 
         private async Task WaitForSignatureHelpAsync(CancellationToken cancellationToken)
         {
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.SignatureHelp, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.SignatureHelp,
+                cancellationToken
+            );
         }
 
         private async Task WaitForCompletionSetAsync(CancellationToken cancellationToken)
         {
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.CompletionSet, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.CompletionSet,
+                cancellationToken
+            );
         }
 
-        public async Task AddWinFormButtonAsync(string buttonName, CancellationToken cancellationToken)
+        public async Task AddWinFormButtonAsync(
+            string buttonName,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -1098,7 +1485,8 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             try
             {
                 var mainForm = (System.Windows.Forms.Form)designerHost.RootComponent;
-                var newControl = (System.Windows.Forms.Button)designerHost.CreateComponent(typeof(System.Windows.Forms.Button), buttonName);
+                var newControl = (System.Windows.Forms.Button)
+                    designerHost.CreateComponent(typeof(System.Windows.Forms.Button), buttonName);
                 newControl.Parent = mainForm;
                 await waitHandle.WaitAsync(cancellationToken);
             }
@@ -1108,7 +1496,10 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             }
         }
 
-        public async Task DeleteWinFormButtonAsync(string buttonName, CancellationToken cancellationToken)
+        public async Task DeleteWinFormButtonAsync(
+            string buttonName,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -1140,10 +1531,27 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             }
         }
 
-        public Task EditWinFormButtonPropertyAsync(string buttonName, string propertyName, string propertyValue, CancellationToken cancellationToken)
-            => EditWinFormButtonPropertyAsync(buttonName, propertyName, propertyValue, propertyTypeName: null, cancellationToken);
+        public Task EditWinFormButtonPropertyAsync(
+            string buttonName,
+            string propertyName,
+            string propertyValue,
+            CancellationToken cancellationToken
+        ) =>
+            EditWinFormButtonPropertyAsync(
+                buttonName,
+                propertyName,
+                propertyValue,
+                propertyTypeName: null,
+                cancellationToken
+            );
 
-        public async Task EditWinFormButtonPropertyAsync(string buttonName, string propertyName, string propertyValue, string? propertyTypeName, CancellationToken cancellationToken)
+        public async Task EditWinFormButtonPropertyAsync(
+            string buttonName,
+            string propertyName,
+            string propertyValue,
+            string? propertyTypeName,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -1206,7 +1614,12 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             }
         }
 
-        public async Task EditWinFormButtonEventAsync(string buttonName, string eventName, string eventHandlerName, CancellationToken cancellationToken)
+        public async Task EditWinFormButtonEventAsync(
+            string buttonName,
+            string eventName,
+            string eventHandlerName,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -1229,9 +1642,12 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             try
             {
                 var button = designerHost.Container.Components[buttonName];
-                var eventBindingService = (IEventBindingService)button.Site.GetService(typeof(IEventBindingService));
+                var eventBindingService = (IEventBindingService)
+                    button.Site.GetService(typeof(IEventBindingService));
                 var events = TypeDescriptor.GetEvents(button);
-                var eventProperty = eventBindingService.GetEventProperty(events.Find(eventName, ignoreCase: true));
+                var eventProperty = eventBindingService.GetEventProperty(
+                    events.Find(eventName, ignoreCase: true)
+                );
                 eventProperty.SetValue(button, eventHandlerName);
 
                 await waitHandle.WaitAsync(cancellationToken);
@@ -1242,7 +1658,11 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             }
         }
 
-        public async Task<string?> GetWinFormButtonPropertyValueAsync(string buttonName, string propertyName, CancellationToken cancellationToken)
+        public async Task<string?> GetWinFormButtonPropertyValueAsync(
+            string buttonName,
+            string propertyName,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 

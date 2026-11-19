@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 //
 //  GacMembershipCondition.cs
@@ -12,15 +12,19 @@
 //  Implementation of membership condition for being in the Gac
 //
 
-namespace System.Security.Policy {
+namespace System.Security.Policy
+{
     using System;
     using System.Collections;
-    using System.Globalization;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class GacMembershipCondition : IMembershipCondition, IConstantMembershipCondition, IReportMatchMembershipCondition
+    public sealed class GacMembershipCondition
+        : IMembershipCondition,
+            IConstantMembershipCondition,
+            IReportMatchMembershipCondition
     {
         //------------------------------------------------------
         //
@@ -28,9 +32,7 @@ namespace System.Security.Policy {
         //
         //------------------------------------------------------
 
-        public GacMembershipCondition()
-        {
-        }
+        public GacMembershipCondition() { }
 
         //------------------------------------------------------
         //
@@ -38,7 +40,7 @@ namespace System.Security.Policy {
         //
         //------------------------------------------------------
 
-        public bool Check( Evidence evidence )
+        public bool Check(Evidence evidence)
         {
             object usedEvidence = null;
             return (this as IReportMatchMembershipCondition).Check(evidence, out usedEvidence);
@@ -61,33 +63,39 @@ namespace System.Security.Policy {
 
         public SecurityElement ToXml()
         {
-            return ToXml( null );
+            return ToXml(null);
         }
 
-        public void FromXml( SecurityElement e )
+        public void FromXml(SecurityElement e)
         {
-            FromXml( e, null );
+            FromXml(e, null);
         }
 
-        public SecurityElement ToXml( PolicyLevel level )
+        public SecurityElement ToXml(PolicyLevel level)
         {
-            SecurityElement root = new SecurityElement( "IMembershipCondition" );
-            System.Security.Util.XMLUtil.AddClassAttribute( root, this.GetType(), this.GetType().FullName );
-            root.AddAttribute( "version", "1" );
+            SecurityElement root = new SecurityElement("IMembershipCondition");
+            System.Security.Util.XMLUtil.AddClassAttribute(
+                root,
+                this.GetType(),
+                this.GetType().FullName
+            );
+            root.AddAttribute("version", "1");
             return root;
         }
 
-        public void FromXml( SecurityElement e, PolicyLevel level )
+        public void FromXml(SecurityElement e, PolicyLevel level)
         {
             if (e == null)
                 throw new ArgumentNullException("e");
 
-            if (!e.Tag.Equals( "IMembershipCondition" ))
-                throw new ArgumentException( Environment.GetResourceString( "Argument_MembershipConditionElement" ) );
+            if (!e.Tag.Equals("IMembershipCondition"))
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_MembershipConditionElement")
+                );
             Contract.EndContractBlock();
         }
 
-        public override bool Equals( Object o )
+        public override bool Equals(Object o)
         {
             GacMembershipCondition that = (o as GacMembershipCondition);
             if (that != null)
@@ -102,7 +110,7 @@ namespace System.Security.Policy {
 
         public override String ToString()
         {
-            return Environment.GetResourceString( "GAC_ToString" );
+            return Environment.GetResourceString("GAC_ToString");
         }
     }
 }

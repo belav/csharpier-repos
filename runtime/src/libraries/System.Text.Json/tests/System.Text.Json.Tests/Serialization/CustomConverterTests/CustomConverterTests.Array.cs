@@ -16,7 +16,11 @@ namespace System.Text.Json.Serialization.Tests
         {
             public LongArrayConverter() { }
 
-            public override long[] Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override long[] Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 string json = reader.GetString();
 
@@ -35,7 +39,11 @@ namespace System.Text.Json.Serialization.Tests
                 return list.ToArray();
             }
 
-            public override void Write(Utf8JsonWriter writer, long[] value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                long[] value,
+                JsonSerializerOptions options
+            )
             {
                 var builder = new StringBuilder();
 
@@ -76,7 +84,9 @@ namespace System.Text.Json.Serialization.Tests
             string json = $"\"{long.MaxValue}0\"";
 
             var options = new JsonSerializerOptions { Converters = { new LongArrayConverter() } };
-            JsonException ex = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<long[]>(json, options));
+            JsonException ex = Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<long[]>(json, options)
+            );
 
             Assert.Null(ex.InnerException);
             Assert.Equal("$", ex.Path);
@@ -111,14 +121,18 @@ namespace System.Text.Json.Serialization.Tests
         [Theory]
         [InlineData(typeof(ProxyClassConverter))]
         [InlineData(typeof(ProxyClassWithConstructorConverter))]
-        public static async Task ClassWithProxyConverter_WorksWithAsyncDeserialization(Type converterType)
+        public static async Task ClassWithProxyConverter_WorksWithAsyncDeserialization(
+            Type converterType
+        )
         {
             // Regression test for https://github.com/dotnet/runtime/issues/74108
 
             const int Count = 1000;
 
             var stream = new MemoryStream();
-            var data = Enumerable.Range(1, Count).Select(_ => new { OtherValue = "otherValue", Value = "value" });
+            var data = Enumerable
+                .Range(1, Count)
+                .Select(_ => new { OtherValue = "otherValue", Value = "value" });
             await JsonSerializer.SerializeAsync(stream, data);
             stream.Position = 0;
 
@@ -127,7 +141,10 @@ namespace System.Text.Json.Serialization.Tests
                 Converters = { (JsonConverter)Activator.CreateInstance(converterType) },
             };
 
-            PocoWithValue[] result = await JsonSerializer.DeserializeAsync<PocoWithValue[]>(stream, options);
+            PocoWithValue[] result = await JsonSerializer.DeserializeAsync<PocoWithValue[]>(
+                stream,
+                options
+            );
             Assert.Equal(Count, result.Length);
             Assert.All(result, entry => Assert.Equal("value", entry.Value));
         }
@@ -144,38 +161,57 @@ namespace System.Text.Json.Serialization.Tests
 
         class ProxyClassConverter : JsonConverter<PocoWithValue>
         {
-            private JsonConverter<ProxyClass> GetConverter(JsonSerializerOptions options)
-                => (JsonConverter<ProxyClass>)options.GetConverter(typeof(ProxyClass));
+            private JsonConverter<ProxyClass> GetConverter(JsonSerializerOptions options) =>
+                (JsonConverter<ProxyClass>)options.GetConverter(typeof(ProxyClass));
 
-            public override PocoWithValue? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override PocoWithValue? Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 var proxy = GetConverter(options).Read(ref reader, typeof(ProxyClass), options);
                 return new PocoWithValue { Value = proxy.Value };
             }
 
-            public override void Write(Utf8JsonWriter writer, PocoWithValue value, JsonSerializerOptions options)
-                => throw new NotImplementedException();
+            public override void Write(
+                Utf8JsonWriter writer,
+                PocoWithValue value,
+                JsonSerializerOptions options
+            ) => throw new NotImplementedException();
         }
 
         class ProxyClassWithConstructor
         {
             public ProxyClassWithConstructor(string? value) => Value = value;
+
             public string? Value { get; }
         }
 
         class ProxyClassWithConstructorConverter : JsonConverter<PocoWithValue>
         {
-            private JsonConverter<ProxyClassWithConstructor> GetConverter(JsonSerializerOptions options)
-                => (JsonConverter<ProxyClassWithConstructor>)options.GetConverter(typeof(ProxyClassWithConstructor));
+            private JsonConverter<ProxyClassWithConstructor> GetConverter(
+                JsonSerializerOptions options
+            ) =>
+                (JsonConverter<ProxyClassWithConstructor>)
+                    options.GetConverter(typeof(ProxyClassWithConstructor));
 
-            public override PocoWithValue? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override PocoWithValue? Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
-                var proxy = GetConverter(options).Read(ref reader, typeof(ProxyClassWithConstructor), options);
+                var proxy = GetConverter(options)
+                    .Read(ref reader, typeof(ProxyClassWithConstructor), options);
                 return new PocoWithValue { Value = proxy.Value };
             }
 
-            public override void Write(Utf8JsonWriter writer, PocoWithValue value, JsonSerializerOptions options)
-                => throw new NotImplementedException();
+            public override void Write(
+                Utf8JsonWriter writer,
+                PocoWithValue value,
+                JsonSerializerOptions options
+            ) => throw new NotImplementedException();
         }
     }
 }

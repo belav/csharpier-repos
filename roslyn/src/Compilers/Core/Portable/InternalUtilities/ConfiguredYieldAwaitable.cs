@@ -24,19 +24,21 @@ namespace Roslyn.Utilities
             _continueOnCapturedContext = continueOnCapturedContext;
         }
 
-        public ConfiguredYieldAwaiter GetAwaiter()
-            => new ConfiguredYieldAwaiter(_awaitable.GetAwaiter(), _continueOnCapturedContext);
+        public ConfiguredYieldAwaiter GetAwaiter() =>
+            new ConfiguredYieldAwaiter(_awaitable.GetAwaiter(), _continueOnCapturedContext);
 
-        public readonly struct ConfiguredYieldAwaiter
-            : INotifyCompletion, ICriticalNotifyCompletion
+        public readonly struct ConfiguredYieldAwaiter : INotifyCompletion, ICriticalNotifyCompletion
         {
-            private static readonly WaitCallback s_runContinuation =
-                static continuation => ((Action)continuation!)();
+            private static readonly WaitCallback s_runContinuation = static continuation =>
+                ((Action)continuation!)();
 
             private readonly YieldAwaitable.YieldAwaiter _awaiter;
             private readonly bool _continueOnCapturedContext;
 
-            public ConfiguredYieldAwaiter(YieldAwaitable.YieldAwaiter awaiter, bool continueOnCapturedContext)
+            public ConfiguredYieldAwaiter(
+                YieldAwaitable.YieldAwaiter awaiter,
+                bool continueOnCapturedContext
+            )
             {
                 _awaiter = awaiter;
                 _continueOnCapturedContext = continueOnCapturedContext;
@@ -44,8 +46,7 @@ namespace Roslyn.Utilities
 
             public bool IsCompleted => _awaiter.IsCompleted;
 
-            public void GetResult()
-                => _awaiter.GetResult();
+            public void GetResult() => _awaiter.GetResult();
 
             public void OnCompleted(Action continuation)
             {

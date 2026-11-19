@@ -34,7 +34,14 @@ namespace System.DirectoryServices.Protocols
                 return true;
             }
 
-            return (code == ResultCode.AliasDereferencingProblem || code == ResultCode.InappropriateAuthentication || code == ResultCode.SortControlMissing || code == ResultCode.OffsetRangeError || code == ResultCode.VirtualListViewError || code == ResultCode.Other);
+            return (
+                code == ResultCode.AliasDereferencingProblem
+                || code == ResultCode.InappropriateAuthentication
+                || code == ResultCode.SortControlMissing
+                || code == ResultCode.OffsetRangeError
+                || code == ResultCode.VirtualListViewError
+                || code == ResultCode.Other
+            );
         }
 
         internal static IntPtr AllocHGlobalIntPtrArray(int size)

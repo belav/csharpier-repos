@@ -7,7 +7,8 @@ namespace System.Net.Mime
 {
     internal sealed class Base64Encoder : ByteEncoder
     {
-        private static ReadOnlySpan<byte> Base64EncodeMap => "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="u8;
+        private static ReadOnlySpan<byte> Base64EncodeMap =>
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="u8;
 
         //the number of bytes needed to encode three bytes
         private const int SizeOfBase64EncodedBlock = 4;
@@ -29,6 +30,7 @@ namespace System.Net.Mime
             _writeState = writeStateInfo;
             _lineLength = lineLength;
         }
+
         protected override bool HasSpecialEncodingForCRLF => false;
 
         // no special encoding of CRLF in Base64. this method will not be used
@@ -83,10 +85,13 @@ namespace System.Net.Mime
                 return false;
             }
 
-            int numberOfBlocksToAppend = numberOfBytesInNewBlock / 3 + (numberOfBytesInNewBlock % 3 == 0 ? 0 : 1);
-            int numberOfCharsToAppend = numberOfCharsLeftInCurrentBlock + numberOfBlocksToAppend * SizeOfBase64EncodedBlock;
+            int numberOfBlocksToAppend =
+                numberOfBytesInNewBlock / 3 + (numberOfBytesInNewBlock % 3 == 0 ? 0 : 1);
+            int numberOfCharsToAppend =
+                numberOfCharsLeftInCurrentBlock + numberOfBlocksToAppend * SizeOfBase64EncodedBlock;
 
-            return WriteState.CurrentLineLength + numberOfCharsToAppend + _writeState.FooterLength > _lineLength;
+            return WriteState.CurrentLineLength + numberOfCharsToAppend + _writeState.FooterLength
+                > _lineLength;
         }
 
         protected override int GetCodepointSize(string value, int i)

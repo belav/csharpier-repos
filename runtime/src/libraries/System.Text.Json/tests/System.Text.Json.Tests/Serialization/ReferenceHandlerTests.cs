@@ -7,26 +7,34 @@ namespace System.Text.Json.Serialization.Tests
 {
     public sealed class ReferenceHandlerTestsDynamic_String : ReferenceHandlerTests
     {
-        public ReferenceHandlerTestsDynamic_String() : base(JsonSerializerWrapper.StringSerializer) { }
+        public ReferenceHandlerTestsDynamic_String()
+            : base(JsonSerializerWrapper.StringSerializer) { }
     }
 
     public sealed class ReferenceHandlerTestsDynamic_AsyncStream : ReferenceHandlerTests
     {
-        public ReferenceHandlerTestsDynamic_AsyncStream() : base(JsonSerializerWrapper.AsyncStreamSerializer) { }
+        public ReferenceHandlerTestsDynamic_AsyncStream()
+            : base(JsonSerializerWrapper.AsyncStreamSerializer) { }
     }
 
-    public sealed class ReferenceHandlerTestsDynamic_AsyncStreamWithSmallBuffer : ReferenceHandlerTests
+    public sealed class ReferenceHandlerTestsDynamic_AsyncStreamWithSmallBuffer
+        : ReferenceHandlerTests
     {
-        public ReferenceHandlerTestsDynamic_AsyncStreamWithSmallBuffer() : base(JsonSerializerWrapper.AsyncStreamSerializerWithSmallBuffer) { }
+        public ReferenceHandlerTestsDynamic_AsyncStreamWithSmallBuffer()
+            : base(JsonSerializerWrapper.AsyncStreamSerializerWithSmallBuffer) { }
     }
 
-    public sealed class ReferenceHandlerTestsDynamic_IgnoreCycles_String : ReferenceHandlerTests_IgnoreCycles
+    public sealed class ReferenceHandlerTestsDynamic_IgnoreCycles_String
+        : ReferenceHandlerTests_IgnoreCycles
     {
-        public ReferenceHandlerTestsDynamic_IgnoreCycles_String() : base(JsonSerializerWrapper.StringSerializer) { }
+        public ReferenceHandlerTestsDynamic_IgnoreCycles_String()
+            : base(JsonSerializerWrapper.StringSerializer) { }
     }
 
-    public sealed class ReferenceHandlerTestsDynamic_IgnoreCycles_AsyncStream : ReferenceHandlerTests_IgnoreCycles
+    public sealed class ReferenceHandlerTestsDynamic_IgnoreCycles_AsyncStream
+        : ReferenceHandlerTests_IgnoreCycles
     {
-        public ReferenceHandlerTestsDynamic_IgnoreCycles_AsyncStream() : base(JsonSerializerWrapper.AsyncStreamSerializer) { }
+        public ReferenceHandlerTestsDynamic_IgnoreCycles_AsyncStream()
+            : base(JsonSerializerWrapper.AsyncStreamSerializer) { }
     }
 }

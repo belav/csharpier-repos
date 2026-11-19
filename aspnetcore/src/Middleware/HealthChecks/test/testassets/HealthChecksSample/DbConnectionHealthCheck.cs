@@ -13,8 +13,8 @@ public abstract class DbConnectionHealthCheck : IHealthCheck
 
     protected DbConnectionHealthCheck(string connectionString, string testQuery)
     {
-        ConnectionString =
-            connectionString ?? throw new ArgumentNullException(nameof(connectionString));
+        ConnectionString = connectionString
+            ?? throw new ArgumentNullException(nameof(connectionString));
         TestQuery = testQuery;
     }
 

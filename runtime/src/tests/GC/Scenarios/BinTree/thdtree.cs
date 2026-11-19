@@ -7,17 +7,16 @@
  *      Each thread in turn adds and deletes thousands of nodes from the binary tree.
  */
 
-namespace DefaultNamespace {
-    using System.Threading;
+namespace DefaultNamespace
+{
     using System;
     using System.IO;
+    using System.Threading;
 
     public class ThdTree
     {
-
-        public static int Main (System.String[] Args)
+        public static int Main(System.String[] Args)
         {
-
             Console.Out.WriteLine("Test should return with ExitCode 100 ...");
             // sync console output Console.SetOut(TextWriter.Synchronized(Console.Out));
 
@@ -25,7 +24,7 @@ namespace DefaultNamespace {
 
             if (Args.Length == 1)
             {
-                if (!Int32.TryParse( Args[0], out iNofThread ))
+                if (!Int32.TryParse(Args[0], out iNofThread))
                 {
                     iNofThread = 2;
                 }
@@ -37,13 +36,12 @@ namespace DefaultNamespace {
 
             TreeThread Mv_LLTree;
 
-            int[] count = {10000, -5000, 3000, -6000, 0, 15000, 0, 10000,0,100,100};
+            int[] count = { 10000, -5000, 3000, -6000, 0, 15000, 0, 10000, 0, 100, 100 };
             for (int i = 0; i < iNofThread; i++)
             {
                 Mv_LLTree = new TreeThread(i, TreeType.Normal, count);
             }
             return 100;
         }
-
     }
 }

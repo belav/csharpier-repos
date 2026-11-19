@@ -12,6 +12,7 @@ namespace System.Runtime.InteropServices.JavaScript
     public abstract class JSType
     {
         internal JSType() { }
+
         /// <summary>
         /// Asserts that a JavaScript function should have no return value.
         /// </summary>
@@ -96,7 +97,8 @@ namespace System.Runtime.InteropServices.JavaScript
         /// Marshal as a copy of the JavaScript <see href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</see> or <see href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/TypedArray">TypedArray</see> type.
         /// </summary>
         /// <typeparam name="T">The type of array element.</typeparam>
-        public sealed class Array<T> : JSType where T : JSType
+        public sealed class Array<T> : JSType
+            where T : JSType
         {
             internal Array() { }
         }
@@ -105,7 +107,8 @@ namespace System.Runtime.InteropServices.JavaScript
         /// Marshal as JavaScript <see href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</see> type.
         /// </summary>
         /// <typeparam name="T">The type of marshalled result value.</typeparam>
-        public sealed class Promise<T> : JSType where T : JSType
+        public sealed class Promise<T> : JSType
+            where T : JSType
         {
             internal Promise() { }
         }
@@ -122,7 +125,8 @@ namespace System.Runtime.InteropServices.JavaScript
         /// Marshal as JavaScript <see href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</see> type.
         /// </summary>
         /// <typeparam name="T">The type of marshaled parameter or result.</typeparam>
-        public sealed class Function<T> : JSType where T : JSType
+        public sealed class Function<T> : JSType
+            where T : JSType
         {
             internal Function() { }
         }
@@ -132,7 +136,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// </summary>
         /// <typeparam name="T1">The type of marshaled parameter or result.</typeparam>
         /// <typeparam name="T2">Type of marshaled parameter.</typeparam>
-        public sealed class Function<T1, T2> : JSType where T1 : JSType where T2 : JSType
+        public sealed class Function<T1, T2> : JSType
+            where T1 : JSType
+            where T2 : JSType
         {
             internal Function() { }
         }
@@ -143,7 +149,10 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <typeparam name="T1">The type of marshaled parameter or result.</typeparam>
         /// <typeparam name="T2">Type of marshaled parameter.</typeparam>
         /// <typeparam name="T3">Type of marshaled parameter.</typeparam>
-        public sealed class Function<T1, T2, T3> : JSType where T1 : JSType where T2 : JSType where T3 : JSType
+        public sealed class Function<T1, T2, T3> : JSType
+            where T1 : JSType
+            where T2 : JSType
+            where T3 : JSType
         {
             internal Function() { }
         }
@@ -155,7 +164,11 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <typeparam name="T2">Type of marshaled parameter.</typeparam>
         /// <typeparam name="T3">Type of marshaled parameter.</typeparam>
         /// <typeparam name="T4">Type of marshaled parameter.</typeparam>
-        public sealed class Function<T1, T2, T3, T4> : JSType where T1 : JSType where T2 : JSType where T3 : JSType where T4 : JSType
+        public sealed class Function<T1, T2, T3, T4> : JSType
+            where T1 : JSType
+            where T2 : JSType
+            where T3 : JSType
+            where T4 : JSType
         {
             internal Function() { }
         }

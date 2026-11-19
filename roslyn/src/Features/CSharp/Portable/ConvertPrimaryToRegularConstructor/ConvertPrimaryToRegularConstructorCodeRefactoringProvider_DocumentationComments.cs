@@ -16,21 +16,33 @@ using static SyntaxFactory;
 
 internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringProvider
 {
-    private static SyntaxTrivia GetDocComment(SyntaxTriviaList trivia)
-        => trivia.LastOrDefault(t => t.IsSingleLineDocComment());
+    private static SyntaxTrivia GetDocComment(SyntaxTriviaList trivia) =>
+        trivia.LastOrDefault(t => t.IsSingleLineDocComment());
 
-    private static DocumentationCommentTriviaSyntax? GetDocCommentStructure(SyntaxTrivia trivia)
-        => (DocumentationCommentTriviaSyntax?)trivia.GetStructure();
+    private static DocumentationCommentTriviaSyntax? GetDocCommentStructure(SyntaxTrivia trivia) =>
+        (DocumentationCommentTriviaSyntax?)trivia.GetStructure();
 
-    private static bool IsXmlElement(XmlNodeSyntax node, string name, [NotNullWhen(true)] out XmlElementSyntax? element)
+    private static bool IsXmlElement(
+        XmlNodeSyntax node,
+        string name,
+        [NotNullWhen(true)] out XmlElementSyntax? element
+    )
     {
-        element = node is XmlElementSyntax { StartTag.Name.LocalName.ValueText: var elementName } xmlElement && elementName == name
-            ? xmlElement
-            : null;
+        element =
+            node
+                is XmlElementSyntax
+                {
+                    StartTag.Name.LocalName.ValueText: var elementName
+                } xmlElement
+            && elementName == name
+                ? xmlElement
+                : null;
         return element != null;
     }
 
-    private static TypeDeclarationSyntax RemoveParamXmlElements(TypeDeclarationSyntax typeDeclaration)
+    private static TypeDeclarationSyntax RemoveParamXmlElements(
+        TypeDeclarationSyntax typeDeclaration
+    )
     {
         var triviaList = typeDeclaration.GetLeadingTrivia();
         var trivia = GetDocComment(triviaList);
@@ -53,8 +65,15 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
             }
         }
 
-        if (content.All(c => c is XmlTextSyntax xmlText && xmlText.TextTokens.All(
-                t => t.Kind() == SyntaxKind.XmlTextLiteralNewLineToken || string.IsNullOrWhiteSpace(t.Text))))
+        if (
+            content.All(c =>
+                c is XmlTextSyntax xmlText
+                && xmlText.TextTokens.All(t =>
+                    t.Kind() == SyntaxKind.XmlTextLiteralNewLineToken
+                    || string.IsNullOrWhiteSpace(t.Text)
+                )
+            )
+        )
         {
             // Nothing but param nodes.  Just remove all the doc comments entirely.
             var triviaIndex = triviaList.IndexOf(trivia);
@@ -82,10 +101,17 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
 
             var tokens = xmlText.TextTokens;
             var lastIndex = tokens.Count;
-            if (lastIndex - 1 >= 0 && tokens[lastIndex - 1].Kind() == SyntaxKind.XmlTextLiteralToken && string.IsNullOrWhiteSpace(tokens[lastIndex - 1].Text))
+            if (
+                lastIndex - 1 >= 0
+                && tokens[lastIndex - 1].Kind() == SyntaxKind.XmlTextLiteralToken
+                && string.IsNullOrWhiteSpace(tokens[lastIndex - 1].Text)
+            )
                 lastIndex--;
 
-            if (lastIndex - 1 >= 0 && tokens[lastIndex - 1].Kind() == SyntaxKind.XmlTextLiteralNewLineToken)
+            if (
+                lastIndex - 1 >= 0
+                && tokens[lastIndex - 1].Kind() == SyntaxKind.XmlTextLiteralNewLineToken
+            )
                 lastIndex--;
 
             if (lastIndex == tokens.Count)
@@ -106,7 +132,10 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
         }
     }
 
-    private static ConstructorDeclarationSyntax WithTypeDeclarationParamDocComments(TypeDeclarationSyntax typeDeclaration, ConstructorDeclarationSyntax constructor)
+    private static ConstructorDeclarationSyntax WithTypeDeclarationParamDocComments(
+        TypeDeclarationSyntax typeDeclaration,
+        ConstructorDeclarationSyntax constructor
+    )
     {
         // Now move the param tags on the type decl over to the constructor.
         var triviaList = typeDeclaration.GetLeadingTrivia();
@@ -124,19 +153,29 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
                     content.Add(node);
 
                     // if the param tag is followed with a newline, then preserve that when transferring over.
-                    if (i + 1 < docComment.Content.Count && IsDocCommentNewLine(docComment.Content[i + 1]))
+                    if (
+                        i + 1 < docComment.Content.Count
+                        && IsDocCommentNewLine(docComment.Content[i + 1])
+                    )
                         content.Add(docComment.Content[i + 1]);
                 }
             }
 
             if (content.Count > 0)
             {
-                if (!content[0].GetLeadingTrivia().Any(SyntaxKind.DocumentationCommentExteriorTrivia))
+                if (
+                    !content[0]
+                        .GetLeadingTrivia()
+                        .Any(SyntaxKind.DocumentationCommentExteriorTrivia)
+                )
                     content[0] = content[0].WithLeadingTrivia(DocumentationCommentExterior("/// "));
 
                 content[^1] = content[^1].WithTrailingTrivia(EndOfLine(""));
 
-                var finalTrivia = DocumentationCommentTrivia(SyntaxKind.SingleLineDocumentationCommentTrivia, List(content));
+                var finalTrivia = DocumentationCommentTrivia(
+                    SyntaxKind.SingleLineDocumentationCommentTrivia,
+                    List(content)
+                );
                 return constructor.WithLeadingTrivia(Trivia(finalTrivia));
             }
         }
@@ -154,7 +193,10 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
             if (textToken.Kind() == SyntaxKind.XmlTextLiteralNewLineToken)
                 continue;
 
-            if (textToken.Kind() == SyntaxKind.XmlTextLiteralToken && string.IsNullOrWhiteSpace(textToken.Text))
+            if (
+                textToken.Kind() == SyntaxKind.XmlTextLiteralToken
+                && string.IsNullOrWhiteSpace(textToken.Text)
+            )
                 continue;
 
             return false;

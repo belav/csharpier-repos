@@ -81,9 +81,7 @@ namespace System.Collections.Generic
         ///  The specified <paramref name="initialCapacity"/> was negative.
         /// </exception>
         public PriorityQueue(int initialCapacity)
-            : this(initialCapacity, comparer: null)
-        {
-        }
+            : this(initialCapacity, comparer: null) { }
 
         /// <summary>
         ///  Initializes a new instance of the <see cref="PriorityQueue{TElement, TPriority}"/> class
@@ -132,9 +130,7 @@ namespace System.Collections.Generic
         ///  which is generally faster than enqueuing individual elements sequentially.
         /// </remarks>
         public PriorityQueue(IEnumerable<(TElement Element, TPriority Priority)> items)
-            : this(items, comparer: null)
-        {
-        }
+            : this(items, comparer: null) { }
 
         /// <summary>
         ///  Initializes a new instance of the <see cref="PriorityQueue{TElement, TPriority}"/> class
@@ -153,7 +149,10 @@ namespace System.Collections.Generic
         ///  Constructs the heap using a heapify operation,
         ///  which is generally faster than enqueuing individual elements sequentially.
         /// </remarks>
-        public PriorityQueue(IEnumerable<(TElement Element, TPriority Priority)> items, IComparer<TPriority>? comparer)
+        public PriorityQueue(
+            IEnumerable<(TElement Element, TPriority Priority)> items,
+            IComparer<TPriority>? comparer
+        )
         {
             ArgumentNullException.ThrowIfNull(items);
 
@@ -183,7 +182,8 @@ namespace System.Collections.Generic
         ///  The enumeration does not order items by priority, since that would require N * log(N) time and N space.
         ///  Items are instead enumerated following the internal array heap layout.
         /// </remarks>
-        public UnorderedItemsCollection UnorderedItems => _unorderedItems ??= new UnorderedItemsCollection(this);
+        public UnorderedItemsCollection UnorderedItems =>
+            _unorderedItems ??= new UnorderedItemsCollection(this);
 
         /// <summary>
         ///  Adds the specified element with associated priority to the <see cref="PriorityQueue{TElement, TPriority}"/>.
@@ -307,7 +307,10 @@ namespace System.Collections.Generic
         ///  <see langword="true"/> if the element is successfully removed;
         ///  <see langword="false"/> if the <see cref="PriorityQueue{TElement, TPriority}"/> is empty.
         /// </returns>
-        public bool TryDequeue([MaybeNullWhen(false)] out TElement element, [MaybeNullWhen(false)] out TPriority priority)
+        public bool TryDequeue(
+            [MaybeNullWhen(false)] out TElement element,
+            [MaybeNullWhen(false)] out TPriority priority
+        )
         {
             if (_size != 0)
             {
@@ -333,7 +336,10 @@ namespace System.Collections.Generic
         ///  <see langword="true"/> if there is a minimal element;
         ///  <see langword="false"/> if the <see cref="PriorityQueue{TElement, TPriority}"/> is empty.
         /// </returns>
-        public bool TryPeek([MaybeNullWhen(false)] out TElement element, [MaybeNullWhen(false)] out TPriority priority)
+        public bool TryPeek(
+            [MaybeNullWhen(false)] out TElement element,
+            [MaybeNullWhen(false)] out TPriority priority
+        )
         {
             if (_size != 0)
             {
@@ -462,8 +468,10 @@ namespace System.Collections.Generic
             ArgumentNullException.ThrowIfNull(elements);
 
             int count;
-            if (elements is ICollection<TElement> collection &&
-                (count = collection.Count) > _nodes.Length - _size)
+            if (
+                elements is ICollection<TElement> collection
+                && (count = collection.Count) > _nodes.Length - _size
+            )
             {
                 Grow(checked(_size + count));
             }
@@ -520,7 +528,8 @@ namespace System.Collections.Generic
             TElement element,
             [MaybeNullWhen(false)] out TElement removedElement,
             [MaybeNullWhen(false)] out TPriority priority,
-            IEqualityComparer<TElement>? equalityComparer = null)
+            IEqualityComparer<TElement>? equalityComparer = null
+        )
         {
             int index = FindIndex(element, equalityComparer);
             if (index < 0)
@@ -623,14 +632,16 @@ namespace System.Collections.Generic
 
             // Allow the queue to grow to maximum possible capacity (~2G elements) before encountering overflow.
             // Note that this check works even when _nodes.Length overflowed thanks to the (uint) cast
-            if ((uint)newcapacity > Array.MaxLength) newcapacity = Array.MaxLength;
+            if ((uint)newcapacity > Array.MaxLength)
+                newcapacity = Array.MaxLength;
 
             // Ensure minimum growth is respected.
             newcapacity = Math.Max(newcapacity, _nodes.Length + MinimumGrow);
 
             // If the computed capacity is still less than specified, set to the original argument.
             // Capacities exceeding Array.MaxLength will be surfaced as OutOfMemoryException by Array.Resize.
-            if (newcapacity < minCapacity) newcapacity = minCapacity;
+            if (newcapacity < minCapacity)
+                newcapacity = minCapacity;
 
             Array.Resize(ref _nodes, newcapacity);
         }
@@ -704,7 +715,10 @@ namespace System.Collections.Generic
         /// <summary>
         /// Moves a node up in the tree to restore heap order.
         /// </summary>
-        private void MoveUpDefaultComparer((TElement Element, TPriority Priority) node, int nodeIndex)
+        private void MoveUpDefaultComparer(
+            (TElement Element, TPriority Priority) node,
+            int nodeIndex
+        )
         {
             // Instead of swapping items all the way to the root, we will perform
             // a similar optimization as in the insertion sort.
@@ -736,7 +750,10 @@ namespace System.Collections.Generic
         /// <summary>
         /// Moves a node up in the tree to restore heap order.
         /// </summary>
-        private void MoveUpCustomComparer((TElement Element, TPriority Priority) node, int nodeIndex)
+        private void MoveUpCustomComparer(
+            (TElement Element, TPriority Priority) node,
+            int nodeIndex
+        )
         {
             // Instead of swapping items all the way to the root, we will perform
             // a similar optimization as in the insertion sort.
@@ -769,7 +786,10 @@ namespace System.Collections.Generic
         /// <summary>
         /// Moves a node down in the tree to restore heap order.
         /// </summary>
-        private void MoveDownDefaultComparer((TElement Element, TPriority Priority) node, int nodeIndex)
+        private void MoveDownDefaultComparer(
+            (TElement Element, TPriority Priority) node,
+            int nodeIndex
+        )
         {
             // The node to move down will not actually be swapped every time.
             // Rather, values on the affected path will be moved up, thus leaving a free spot
@@ -792,7 +812,10 @@ namespace System.Collections.Generic
                 while (++i < childIndexUpperBound)
                 {
                     (TElement Element, TPriority Priority) nextChild = nodes[i];
-                    if (Comparer<TPriority>.Default.Compare(nextChild.Priority, minChild.Priority) < 0)
+                    if (
+                        Comparer<TPriority>.Default.Compare(nextChild.Priority, minChild.Priority)
+                        < 0
+                    )
                     {
                         minChild = nextChild;
                         minChildIndex = i;
@@ -817,7 +840,10 @@ namespace System.Collections.Generic
         /// <summary>
         /// Moves a node down in the tree to restore heap order.
         /// </summary>
-        private void MoveDownCustomComparer((TElement Element, TPriority Priority) node, int nodeIndex)
+        private void MoveDownCustomComparer(
+            (TElement Element, TPriority Priority) node,
+            int nodeIndex
+        )
         {
             // The node to move down will not actually be swapped every time.
             // Rather, values on the affected path will be moved up, thus leaving a free spot
@@ -873,7 +899,10 @@ namespace System.Collections.Generic
             // Currently the JIT doesn't optimize direct EqualityComparer<T>.Default.Equals
             // calls for reference types, so we want to cache the comparer instance instead.
             // TODO https://github.com/dotnet/runtime/issues/10050: Update if this changes in the future.
-            if (typeof(TElement).IsValueType && equalityComparer == EqualityComparer<TElement>.Default)
+            if (
+                typeof(TElement).IsValueType
+                && equalityComparer == EqualityComparer<TElement>.Default
+            )
             {
                 for (int i = 0; i < nodes.Length; i++)
                 {
@@ -927,11 +956,14 @@ namespace System.Collections.Generic
         /// </summary>
         [DebuggerDisplay("Count = {Count}")]
         [DebuggerTypeProxy(typeof(PriorityQueueDebugView<,>))]
-        public sealed class UnorderedItemsCollection : IReadOnlyCollection<(TElement Element, TPriority Priority)>, ICollection
+        public sealed class UnorderedItemsCollection
+            : IReadOnlyCollection<(TElement Element, TPriority Priority)>,
+                ICollection
         {
             internal readonly PriorityQueue<TElement, TPriority> _queue;
 
-            internal UnorderedItemsCollection(PriorityQueue<TElement, TPriority> queue) => _queue = queue;
+            internal UnorderedItemsCollection(PriorityQueue<TElement, TPriority> queue) =>
+                _queue = queue;
 
             public int Count => _queue._size;
             object ICollection.SyncRoot => this;
@@ -953,7 +985,11 @@ namespace System.Collections.Generic
 
                 if (index < 0 || index > array.Length)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(index), index, SR.ArgumentOutOfRange_IndexMustBeLessOrEqual);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(index),
+                        index,
+                        SR.ArgumentOutOfRange_IndexMustBeLessOrEqual
+                    );
                 }
 
                 if (array.Length - index < _queue._size)
@@ -1049,11 +1085,16 @@ namespace System.Collections.Generic
             /// <returns>An <see cref="Enumerator"/> for the <see cref="UnorderedItems"/>.</returns>
             public Enumerator GetEnumerator() => new Enumerator(_queue);
 
-            IEnumerator<(TElement Element, TPriority Priority)> IEnumerable<(TElement Element, TPriority Priority)>.GetEnumerator() =>
-                _queue.Count == 0 ? EnumerableHelpers.GetEmptyEnumerator<(TElement Element, TPriority Priority)>() :
-                GetEnumerator();
+            IEnumerator<(TElement Element, TPriority Priority)> IEnumerable<(
+                TElement Element,
+                TPriority Priority
+            )>.GetEnumerator() =>
+                _queue.Count == 0
+                    ? EnumerableHelpers.GetEmptyEnumerator<(TElement Element, TPriority Priority)>()
+                    : GetEnumerator();
 
-            IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable<(TElement Element, TPriority Priority)>)this).GetEnumerator();
+            IEnumerator IEnumerable.GetEnumerator() =>
+                ((IEnumerable<(TElement Element, TPriority Priority)>)this).GetEnumerator();
         }
     }
 }

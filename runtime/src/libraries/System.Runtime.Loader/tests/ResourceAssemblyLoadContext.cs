@@ -10,14 +10,15 @@ namespace System.Runtime.Loader.Tests
     public enum LoadBy
     {
         Path,
-        Stream
+        Stream,
     }
 
     public class ResourceAssemblyLoadContext : AssemblyLoadContext
     {
         public LoadBy LoadBy { get; set; }
 
-        public ResourceAssemblyLoadContext(bool isCollectible = false) : base(isCollectible)
+        public ResourceAssemblyLoadContext(bool isCollectible = false)
+            : base(isCollectible)
         {
             LoadBy = LoadBy.Path;
         }
@@ -27,7 +28,9 @@ namespace System.Runtime.Loader.Tests
         {
             string assembly = assemblyName.Name + ".dll";
             var currentAsm = typeof(ResourceAssemblyLoadContext).GetTypeInfo().Assembly;
-            var asmStream = currentAsm.GetManifestResourceStream("System.Runtime.Loader.Tests." + assembly);
+            var asmStream = currentAsm.GetManifestResourceStream(
+                "System.Runtime.Loader.Tests." + assembly
+            );
 
             if (asmStream == null)
             {

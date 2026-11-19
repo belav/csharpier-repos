@@ -19,19 +19,26 @@ namespace System.Diagnostics.Metrics
         /// <param name="version">The version of the <see cref="Meter" />.</param>
         /// <param name="tags">The tags to associate with the <see cref="Meter" />.</param>
         /// <returns>A <see cref="Meter" /> with the specified <paramref name="name" />, <paramref name="version" />, and <paramref name="tags" />.</returns>
-        public static Meter Create(this IMeterFactory meterFactory, string name, string? version = null, IEnumerable<KeyValuePair<string, object?>>? tags = null)
+        public static Meter Create(
+            this IMeterFactory meterFactory,
+            string name,
+            string? version = null,
+            IEnumerable<KeyValuePair<string, object?>>? tags = null
+        )
         {
             if (meterFactory is null)
             {
                 throw new ArgumentNullException(nameof(meterFactory));
             }
 
-            return meterFactory.Create(new MeterOptions(name)
-            {
-                Version = version,
-                Tags = tags,
-                Scope = meterFactory
-            });
+            return meterFactory.Create(
+                new MeterOptions(name)
+                {
+                    Version = version,
+                    Tags = tags,
+                    Scope = meterFactory,
+                }
+            );
         }
     }
 }
