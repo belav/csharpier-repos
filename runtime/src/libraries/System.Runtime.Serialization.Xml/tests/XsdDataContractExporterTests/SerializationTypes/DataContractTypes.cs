@@ -7,7 +7,6 @@ using System.Runtime.Serialization;
     ClrNamespace = "SerializableTypes.XsdDataContractExporterTests.More"
 )]
 
-
 #if UseSeparateAssemblyNamespace
 namespace SerializableTypes.XsdDataContractExporterTests.More
 #else

@@ -34,7 +34,6 @@ using System.Security.Permissions;
     Target = "System.Dynamic"
 )]
 
-
 #else
 [assembly: SuppressMessage(
     "Microsoft.Design",
@@ -42,7 +41,6 @@ using System.Security.Permissions;
     Scope = "namespace",
     Target = "Microsoft.Scripting"
 )]
-
 
 #endif
 
