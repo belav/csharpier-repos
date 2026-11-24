@@ -10,7 +10,6 @@ using System.Text.Json.Serialization.Metadata;
 
 [assembly: MetadataUpdateHandler(typeof(JsonSerializerOptionsUpdateHandler))]
 
-
 #pragma warning disable IDE0060
 
 namespace System.Text.Json

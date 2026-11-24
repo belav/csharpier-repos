@@ -8,7 +8,6 @@ using System.Xml.Serialization;
 
 [assembly: AllowPartiallyTrustedCallers]
 
-
 #if UseSeparateAssemblyNamespace
 namespace SerializableTypes.XsdDataContractExporterTests
 #else
